@@ -1567,3 +1567,22 @@ details p,details ul {
 @media(max-width:760px){.home-habits{grid-template-columns:1fr;gap:22px;margin-top:30px}}
 @media(max-width:760px){.home-directions .editorial-promo:last-child .promo-copy h2{max-width:none}}
 .home-directions .direction-home > img {object-position:right top}
+
+/* Real catalog photography - contain the complete packaging */
+.real-product-image {background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.real-product-image img {display:block;width:100%;height:100%;object-fit:contain;max-height:100%;padding:22px;box-sizing:border-box}
+.product-card .real-product-image img {padding:36px 22px 20px}
+.detail-image.real-product-image img {padding:35px}
+.cart-row .real-product-image img {padding:5px}
+.retail-label {display:block;font-size:11px;line-height:1.5;color:var(--muted);margin:8px 0 3px}
+.retail-note,.detail-copy .retail-note {font-size:12px;line-height:1.7;color:var(--muted);margin:0 0 18px}
+.food-catalog-note {font-size:12px;line-height:1.6;color:var(--muted);margin:12px 0 25px}
+@media(max-width:600px) {.product-card .real-product-image img {padding:32px 9px 12px}.detail-image.real-product-image img {padding:20px}}
+
+.real-product-card .product-tag {max-width:calc(100% - 58px);font-size:10px;line-height:1.4}
+
+.food-filters{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:24px;flex-wrap:wrap}
+.food-types{display:flex;gap:8px;flex-wrap:wrap}
+.food-brand{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted)}
+.food-brand select{font:inherit;color:#252621;background:#fff;border:1px solid #deded9;border-radius:9px;padding:10px 30px 10px 12px;max-width:220px}
+@media(max-width:600px){.food-filters{gap:16px}.food-brand{width:100%}.food-brand select{flex:1;max-width:none}.food-types .pill{padding:9px 15px}}

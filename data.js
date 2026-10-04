@@ -1,30 +1,10 @@
+import { waterBalconyProducts } from './water-balcony-products.js';
+import { foodProducts } from './food-products.js?v=20261004-2';
+import { accessoryProducts } from './accessory-products.js';
+
 export const categories = ["Корм", "Наполнитель", "Игрушки", "Аксессуары", "Миски и поилки", "Переноски", "Окна и балконы", "Уход", "Подарочные наборы"];
 
-export const products = [
-  {
-    "id": "salmon",
-    "name": "Корм с лососем для кошек",
-    "category": "Корм",
-    "pet": "cat",
-    "price": 24.9,
-    "image": 0,
-    "tag": "Бестселлер",
-    "line": "CatManDog · Everyday nutrition",
-    "sizes": [
-      "2 кг",
-      "400 г",
-      "3 кг"
-    ],
-    "description": "Полнорационный сухой корм для взрослых кошек Лосось, рис и тщательно подобранные ингредиенты для ежедневного рациона Для тех, кто любит привычный вкус в красивой упаковке",
-    "details": [
-      "Для взрослых кошек от 1 года",
-      "Основной ингредиент - лосось",
-      "Хранить в сухом прохладном месте; после вскрытия плотно закрывать упаковку"
-    ],
-    "optionLabel": "Упаковка",
-    "old": 29.9,
-    "isNew": false
-  },
+const demoProducts = [
   {
     "id": "bowl",
     "name": "Керамическая миска Pebble",
@@ -177,115 +157,6 @@ export const products = [
     ],
     "optionLabel": "Размер",
     "isNew": false
-  },
-  {
-    "id": "chicken",
-    "name": "Корм с курицей Everyday",
-    "category": "Корм",
-    "pet": "cat",
-    "price": 14.9,
-    "image": 8,
-    "tag": "На каждый день",
-    "line": "CatManDog · Everyday nutrition",
-    "sizes": [
-      "1 кг",
-      "2 кг"
-    ],
-    "description": "Простой повседневный рацион с курицей для взрослых кошек Понятный базовый выбор для регулярного кормления, когда любимый вкус уже найден",
-    "details": [
-      "Для взрослых кошек от 1 года",
-      "Сухой полнорационный корм с курицей",
-      "Переходите на новый корм постепенно; оставляйте доступ к свежей воде"
-    ],
-    "optionLabel": "Упаковка",
-    "isNew": false
-  },
-  {
-    "id": "kitten",
-    "name": "Корм для котят Junior",
-    "category": "Корм",
-    "pet": "cat",
-    "price": 18.9,
-    "image": 9,
-    "tag": "Для маленьких",
-    "line": "CatManDog · Little beginnings",
-    "sizes": [
-      "400 г",
-      "1,5 кг"
-    ],
-    "description": "Сухой корм с небольшими гранулами для первых месяцев самостоятельного питания Продуманная упаковка для знакомства котёнка с ежедневным домашним ритуалом",
-    "details": [
-      "Для котят от 2 до 12 месяцев",
-      "Мелкие гранулы; порцию подбирайте по возрасту и весу",
-      "Храните закрытую упаковку в сухом прохладном месте"
-    ],
-    "optionLabel": "Упаковка",
-    "isNew": false
-  },
-  {
-    "id": "turkey",
-    "name": "Корм с индейкой Gentle",
-    "category": "Корм",
-    "pet": "cat",
-    "price": 27.9,
-    "image": 10,
-    "tag": "Премиальная линейка",
-    "line": "CatManDog · Thoughtful nutrition",
-    "sizes": [
-      "1,5 кг",
-      "3 кг"
-    ],
-    "description": "Рацион с индейкой для взрослых кошек, которым хочется предложить новый вкус Аккуратная формула и удобная упаковка для вашей повседневной заботы",
-    "details": [
-      "Полнорационный сухой корм для взрослых кошек",
-      "Основной мясной ингредиент - индейка",
-      "Не является лечебным рационом; вводите новый корм постепенно"
-    ],
-    "optionLabel": "Упаковка",
-    "isNew": false
-  },
-  {
-    "id": "wet-dinner",
-    "name": "Влажный корм Dinner",
-    "category": "Корм",
-    "pet": "cat",
-    "price": 3.9,
-    "image": 11,
-    "tag": "Маленькая радость",
-    "line": "CatManDog · Dinner rituals",
-    "sizes": [
-      "85 г",
-      "6 × 85 г"
-    ],
-    "description": "Нежные кусочки в соусе для приятного ужина Порционный пауч удобно взять в поездку или добавить к привычному ежедневному меню",
-    "details": [
-      "Влажный корм для взрослых кошек",
-      "Порционная упаковка; следуйте норме кормления на упаковке",
-      "После вскрытия храните в холодильнике и используйте в течение суток"
-    ],
-    "optionLabel": "Упаковка",
-    "isNew": false
-  },
-  {
-    "id": "treat-box",
-    "name": "Набор лакомств Little Joys",
-    "category": "Корм",
-    "pet": "cat",
-    "price": 15.9,
-    "image": 12,
-    "tag": "В подарок",
-    "line": "CatManDog · Little joys",
-    "sizes": [
-      "Набор из 3 упаковок"
-    ],
-    "description": "Маленький подарок большому любимцу Три пакетика кошачьих лакомств в аккуратной коробке с лентой - для знакомства с разными вкусами и особенных моментов",
-    "details": [
-      "Три вкуса по 30 г в подарочной коробке",
-      "Дополнительное угощение, не замена основному рациону",
-      "Храните пакетики закрытыми; порцию учитывайте в суточном рационе"
-    ],
-    "optionLabel": "Комплектация",
-    "isNew": true
   },
   {
     "id": "mineral-litter",
@@ -712,7 +583,8 @@ export const products = [
       "После вскрытия хранить в холодильнике и использовать в течение суток"
     ],
     "optionLabel": "Упаковка",
-    "isNew": true
+    "isNew": true,
+    "catalogHidden": true
   },
   {
     "id": "crunchy-treats",
@@ -733,7 +605,8 @@ export const products = [
       "Храните закрытым в сухом прохладном месте"
     ],
     "optionLabel": "Упаковка",
-    "isNew": true
+    "isNew": true,
+    "catalogHidden": true
   },
   {
     "id": "pure-treats",
@@ -754,7 +627,8 @@ export const products = [
       "Вводите новый вкус маленькими порциями; храните упаковку плотно закрытой"
     ],
     "optionLabel": "Упаковка",
-    "isNew": true
+    "isNew": true,
+    "catalogHidden": true
   },
   {
     "id": "halloween-bandana",
@@ -889,6 +763,16 @@ export const products = [
     "gift": "personal"
   }
 ];
+
+// Preserve gift components until the gift assortment is researched separately
+const waterBalconyReplacedIds = new Set(['fountain', 'balcony-net', 'window-hammock', 'mesh']);
+const waterBalconyEANs = new Set(waterBalconyProducts.map(p => p.ean).filter(Boolean));
+const enrichedWaterBalconyProducts = waterBalconyProducts.map(p => {
+  const alternative = accessoryProducts.find(a => a.ean && a.ean === p.ean);
+  return alternative ? { ...p, alternativeSuppliers: [...(p.alternativeSuppliers || []), alternative.supplier] } : p;
+});
+export const products = [...foodProducts, ...enrichedWaterBalconyProducts, ...accessoryProducts.filter(p => !p.ean || !waterBalconyEANs.has(p.ean)), ...demoProducts.filter(p => !waterBalconyReplacedIds.has(p.id)).map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)];
+export const catalogProducts = products.filter(p => !p.catalogHidden);
 
 export const articles = [
  {id:'home',section:'Дом и безопасность',title:'Дом, в котором хорошо всем',summary:'Маленькие изменения, которые делают пространство удобнее для вас и питомца',time:'5 минут',image:'hero',body:['У каждого питомца должно быть своё спокойное место: мягкая лежанка, доступ к воде и возможность уединиться Поставьте миску вдали от прохода, а лежанку - там, где нет сквозняка','Уберите провода и бытовую химию из зоны доступа Для кошек особенно важны надёжно закрытые окна и безопасные зоны на балконе При выборе сетки учитывайте материал и способ крепления','Начните с одного изменения и понаблюдайте, как питомец реагирует Знакомые запахи и постепенное привыкание помогают сделать новое пространство комфортным']},

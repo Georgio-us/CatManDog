@@ -1,4 +1,4 @@
-import { products } from './data.js';
+import { products } from './data.js?v=20261004-2';
 
 export const activeHomeGroups = [
   { title: 'Свой этаж у окна', text: 'Наблюдать за птицами, ловить солнце и отдыхать выше пола', ids: ['window-hammock'] },

@@ -1,4 +1,4 @@
-import { products } from './data.js';
+import { products } from './data.js?v=20261004-2';
 
 const toys = ['mouse', 'rope', 'rabbit'];
 const treats = ['creamy-treats', 'crunchy-treats', 'pure-treats'];
