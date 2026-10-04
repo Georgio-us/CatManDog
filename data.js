@@ -1,6 +1,8 @@
 import { waterBalconyProducts } from './water-balcony-products.js';
 import { foodProducts } from './food-products.js?v=20261004-2';
 import { accessoryProducts } from './accessory-products.js';
+import { heybopetProducts } from './heybopet-products.js';
+import { faireProducts } from './faire-products.js';
 
 export const categories = ["Корм", "Наполнитель", "Игрушки", "Аксессуары", "Миски и поилки", "Переноски", "Окна и балконы", "Уход", "Подарочные наборы"];
 
@@ -771,7 +773,17 @@ const enrichedWaterBalconyProducts = waterBalconyProducts.map(p => {
   const alternative = accessoryProducts.find(a => a.ean && a.ean === p.ean);
   return alternative ? { ...p, alternativeSuppliers: [...(p.alternativeSuppliers || []), alternative.supplier] } : p;
 });
-export const products = [...foodProducts, ...enrichedWaterBalconyProducts, ...accessoryProducts.filter(p => !p.ean || !waterBalconyEANs.has(p.ean)), ...demoProducts.filter(p => !waterBalconyReplacedIds.has(p.id)).map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)];
+const heybopetFamilyNames = {
+  'heybopet-feeder': 'Heybo Pet - автокормушка без камеры',
+  'heybopet-camera-feeder': 'Heybo Pet - автокормушка с камерой'
+};
+const catalogHeybopetProducts = heybopetProducts.map(p => ({ ...p, name: heybopetFamilyNames[p.id] || p.name }));
+const faireFamilyNames = {
+  'faire-foggy-dog-sushi': 'The Foggy Dog - суши-игрушки для кошек',
+  'faire-justcool-cat-a6': 'Just Cool Design - мини-принты с котами A6'
+};
+const catalogFaireProducts = faireProducts.map(p => ({ ...p, name: faireFamilyNames[p.id] || p.name }));
+export const products = [...foodProducts, ...enrichedWaterBalconyProducts, ...accessoryProducts.filter(p => !p.ean || !waterBalconyEANs.has(p.ean)), ...catalogHeybopetProducts, ...catalogFaireProducts, ...demoProducts.filter(p => !waterBalconyReplacedIds.has(p.id)).map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)];
 export const catalogProducts = products.filter(p => !p.catalogHidden);
 
 export const articles = [
