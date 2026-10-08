@@ -1,0 +1,175 @@
+/* Pet account - scoped components, sharing the storefront tokens and controls */
+.pet-account, .pet-onboarding { padding-bottom: 30px; }
+.pet-account svg, .pet-onboarding svg { width: 20px; height: 20px; flex-shrink: 0; }
+.pet-local-note { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 11px; margin: 0 0 24px; }
+.pet-local-note svg { width: 15px; height: 15px; }
+.pet-account-layout { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 44px; }
+.pet-sidebar { border-right: 1px solid var(--line); padding-right: 24px; }
+.pet-account-brand { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 750; margin-bottom: 24px; }
+.pet-switcher { display: grid; gap: 8px; }
+.pet-switcher button { display: flex; align-items: center; gap: 12px; min-width: 0; text-align: left; padding: 10px; border-radius: 12px; background: transparent; font-weight: 650; }
+.pet-switcher button.active { background: #eff2e9; }
+.pet-switcher button > span:nth-child(2) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pet-switcher button > svg { width: 15px; margin-left: auto; }
+.pet-avatar { width: 64px; height: 64px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0; }
+.pet-avatar-sage { background: #e6ebdc; color: #687557; }
+.pet-avatar-peach { background: #f4e6dc; color: #9b765c; }
+.pet-avatar svg { width: 39px; height: 39px; stroke-width: 1.35; }
+.pet-switcher .pet-avatar { width: 38px; height: 38px; }
+.pet-switcher .pet-avatar svg { width: 27px; height: 27px; }
+.pet-add, .pet-exit { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); background: transparent; }
+.pet-add { padding: 16px 10px; }
+.pet-navigation { display: grid; gap: 5px; border-top: 1px solid var(--line); padding-top: 22px; margin-top: 12px; }
+.pet-navigation a { display: flex; align-items: center; gap: 12px; padding: 12px 10px; border-radius: 10px; font-size: 13px; color: var(--muted); }
+.pet-navigation a[aria-current="page"] { background: var(--ink); color: white; font-weight: 650; }
+.pet-navigation a:hover { background: var(--surface); color: var(--ink); }
+.pet-exit { margin-top: 30px; padding: 10px; }
+.pet-sidebar-note { color: #96978f; font-size: 11px; margin: 30px 10px; }
+.pet-account-content { min-width: 0; }
+.pet-eyebrow { display: block; text-transform: uppercase; letter-spacing: 1.5px; font-size: 10px; color: var(--muted); margin-bottom: 12px; }
+.pet-welcome { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin: 0 0 30px; }
+.pet-welcome h1, .pet-page-head h1 { font-size: clamp(32px, 3.7vw, 52px); letter-spacing: -1.8px; overflow-wrap: anywhere; }
+.pet-welcome p, .pet-page-head p { margin-top: 13px; color: var(--muted); font-size: 14px; }
+.pet-welcome > .pet-avatar { width: 90px; height: 90px; }
+.pet-welcome > .pet-avatar svg { width: 58px; height: 58px; }
+.pet-stat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 28px; }
+.pet-stat-grid a { display: flex; flex-direction: column; background: #f5f5f1; border-radius: 16px; padding: 21px; }
+.pet-stat-grid a:last-child { background: #f0f4e4; }
+.pet-stat-grid span { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
+.pet-stat-grid strong { font-size: 31px; line-height: 1.3; margin: 15px 0 9px; letter-spacing: -1px; }
+.pet-stat-grid small { font-size: 11px; color: var(--muted); overflow-wrap: anywhere; }
+.pet-dashboard-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+.pet-panel { border: 1px solid var(--line); border-radius: 18px; padding: 26px; min-width: 0; }
+.pet-panel h2 { font-size: 21px; letter-spacing: -.6px; line-height: 1.3; }
+.pet-panel-head { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 24px; }
+.pet-panel-head .text-link { font-size: 11px; flex-shrink: 0; }
+.pet-order-head { display: flex; justify-content: space-between; gap: 12px; align-items: start; margin-bottom: 20px; }
+.pet-order-head strong, .pet-order-head span { display: block; font-size: 12px; }
+.pet-order-head div > span { color: var(--muted); font-size: 11px; margin-top: 4px; }
+.pet-status { background: #f6eee3; color: #886a41; border-radius: 99px; padding: 5px 9px; font-size: 10px; }
+.pet-status-delivered { background: #edf2e7; color: #647651; }
+.pet-order-products { display: grid; gap: 12px; }
+.pet-order-products a { display: flex; gap: 13px; align-items: center; min-width: 0; }
+.pet-order-products .product-image { width: 58px; height: 64px; flex-shrink: 0; border-radius: 8px; background-color: var(--surface); }
+.pet-order-products .real-product-image img { padding: 5px; }
+.pet-order-products span { font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.pet-order-products small { display: block; font-size: 10px; color: var(--muted); margin-top: 4px; }
+.pet-order-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); padding-top: 16px; margin-top: 20px; }
+.pet-order-bottom > strong { white-space: nowrap; }
+.pet-small-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 9px 12px; border-radius: 99px; border: 1px solid var(--line); background: white; font-size: 11px; }
+.pet-small-button svg { width: 15px; height: 15px; }
+.pet-caption { color: var(--muted); font-size: 10px; line-height: 1.7; margin-top: 16px; }
+.pet-reminder { display: flex; gap: 12px; align-items: center; padding: 17px 0; border-bottom: 1px solid var(--line); }
+.pet-reminder > div { min-width: 0; flex: 1; }
+.pet-reminder strong { font-size: 12px; font-weight: 600; display: block; overflow-wrap: anywhere; }
+.pet-reminder span { display: block; font-size: 11px; color: var(--muted); margin-top: 3px; }
+.pet-reminder-done strong { text-decoration: line-through; color: var(--muted); }
+.pet-check, .pet-round-link { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: var(--surface); border-radius: 50%; flex-shrink: 0; }
+.pet-check[aria-pressed="true"] { background: #e6edd8; }
+.pet-round-link { margin-left: auto; background: transparent; }
+.pet-check svg, .pet-round-link svg { width: 16px; height: 16px; }
+.pet-inline-link { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; margin-top: 22px; }
+.pet-inline-link svg { width: 15px; }
+.pet-muted { color: var(--muted); font-size: 13px; margin-top: 20px; }
+.pet-profile-summary { display: flex; gap: 20px; align-items: center; margin-top: 24px; background: #fafaf7; }
+.pet-profile-summary > div { min-width: 0; flex: 1; }
+.pet-profile-summary h2 { overflow-wrap: anywhere; }
+.pet-profile-summary p { font-size: 12px; color: var(--muted); margin-top: 7px; }
+.pet-profile-summary .text-link { flex-shrink: 0; font-size: 11px; }
+.pet-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.pet-chips span { padding: 4px 9px; font-size: 10px; background: #ebeee5; border-radius: 99px; }
+.pet-page-head { margin-bottom: 30px; }
+.pet-order-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.pet-order-grid .pet-order { border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+.pet-form { display: grid; gap: 22px; }
+.pet-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.pet-field { display: flex; flex-direction: column; gap: 8px; font-size: 12px; font-weight: 600; min-width: 0; }
+.pet-field > span { color: var(--muted); font-size: 10px; font-weight: 400; }
+.pet-field small { font-weight: 400; color: var(--muted); line-height: 1.6; }
+.pet-field input, .pet-field select, .pet-field textarea { width: 100%; min-width: 0; font-size: 13px; font-weight: 400; color: var(--ink); border: 1px solid #dfdfd8; border-radius: 9px; background: white; padding: 12px; }
+.pet-field textarea { resize: vertical; }
+.pet-field-wide { grid-column: 1 / -1; }
+.pet-preferences, .pet-notifications { border: 0; padding: 0; margin: 0; min-width: 0; }
+.pet-preferences legend, .pet-notifications legend { font-size: 13px; font-weight: 650; margin-bottom: 9px; }
+.pet-preferences p { font-size: 11px; color: var(--muted); margin-bottom: 14px; }
+.pet-preferences > div { display: flex; flex-wrap: wrap; gap: 8px; }
+.pet-preferences label { cursor: pointer; position: relative; }
+.pet-preferences input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.pet-preferences span { display: block; border: 1px solid var(--line); padding: 8px 12px; border-radius: 99px; font-size: 11px; }
+.pet-preferences input:checked + span { background: #eef2e6; border-color: #8a9a70; }
+.pet-preferences input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 3px; }
+.pet-notifications label { display: flex; align-items: center; gap: 10px; font-size: 12px; padding: 11px 0; }
+.pet-notifications input { accent-color: var(--ink); width: 17px; height: 17px; }
+.pet-form-error { color: #a24438; font-size: 12px; }
+.pet-form-error:empty { display: none; }
+.pet-form .button, .pet-onboarding-form .button { justify-self: start; }
+.pet-empty { padding: 24px 0; text-align: center; }
+.pet-empty > svg { width: 33px; height: 33px; color: #a2ad92; margin-bottom: 17px; }
+.pet-empty h3 { font-size: 17px; }
+.pet-empty p { color: var(--muted); font-size: 12px; margin: 12px 0 20px; }
+.pet-empty .button { font-size: 12px; min-height: 42px; }
+.pet-perk-icon { width: 49px; height: 49px; display: grid; place-items: center; background: #edf1e4; border-radius: 50%; margin-bottom: 20px; }
+.pet-perk > p { color: var(--muted); font-size: 13px; margin: 15px 0 22px; }
+.pet-perk .pet-small-button { margin-top: 16px; }
+.pet-success { display: flex; gap: 8px; align-items: center; color: #596e39; font-size: 11px; }
+.pet-success svg { width: 16px; }
+.pet-gift-banner { display: flex; align-items: center; justify-content: space-between; gap: 20px; border-radius: 18px; padding: 28px; margin-top: 24px; background: var(--lime); }
+.pet-gift-banner h2 { font-size: 25px; letter-spacing: -.7px; }
+.pet-gift-banner p { margin-top: 10px; font-size: 12px; }
+.pet-onboarding-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); gap: 65px; align-items: start; }
+.pet-onboarding-grid h1 { font-size: clamp(35px, 4vw, 58px); line-height: 1.15; letter-spacing: -2px; }
+.pet-intro-copy { margin: 20px 0 26px; font-size: 14px; color: var(--muted); max-width: 450px; }
+.pet-onboarding-form { display: grid; gap: 22px; }
+.pet-form-hint { color: var(--muted); font-size: 10px; }
+.pet-demo-link { display: inline-block; margin-top: 22px; background: transparent; }
+.pet-onboarding-story { position: sticky; top: 30px; min-height: 690px; border-radius: 20px; overflow: hidden; background: #efeee9; }
+.pet-onboarding-story img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 83% center; }
+.pet-onboarding-story::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, #f0eee9 0%, #f0eee9e6 20%, #f0eee900 65%); }
+.pet-onboarding-story > div { position: relative; z-index: 1; padding: 38px; }
+.pet-onboarding-story h2 { font-size: 44px; line-height: 1.1; letter-spacing: -1.7px; }
+.pet-onboarding-story p { margin-top: 22px; color: var(--muted); font-size: 13px; line-height: 1.9; }
+
+@media (max-width: 1050px) {
+  .pet-account-layout { grid-template-columns: 190px minmax(0, 1fr); gap: 26px; }
+  .pet-sidebar { padding-right: 16px; }
+  .pet-dashboard-grid, .pet-order-grid { grid-template-columns: minmax(0, 1fr); }
+  .pet-stat-grid a { padding: 16px; }
+  .pet-stat-grid span { font-size: 11px; }
+  .pet-onboarding-grid { gap: 30px; }
+  .pet-onboarding-story { min-height: 640px; }
+}
+@media (max-width: 760px) {
+  .pet-account-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .pet-sidebar { border-right: 0; border-bottom: 1px solid var(--line); padding: 0 0 15px; }
+  .pet-account-brand { margin-bottom: 16px; }
+  .pet-switcher { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pet-switcher button { max-width: 100%; padding: 8px 12px; }
+  .pet-add { padding: 12px 0; }
+  .pet-navigation { display: flex; overflow-x: auto; margin-top: 0; padding-top: 13px; }
+  .pet-navigation a { white-space: nowrap; flex-shrink: 0; font-size: 11px; padding: 10px 12px; }
+  .pet-navigation svg { width: 16px; height: 16px; }
+  .pet-exit { margin-top: 14px; padding: 0; font-size: 11px; }
+  .pet-sidebar-note { display: none; }
+  .pet-welcome { gap: 14px; }
+  .pet-welcome h1, .pet-page-head h1 { font-size: 33px; letter-spacing: -1.2px; }
+  .pet-welcome p, .pet-page-head p { font-size: 12px; }
+  .pet-welcome > .pet-avatar { width: 60px; height: 60px; }
+  .pet-welcome > .pet-avatar svg { width: 38px; height: 38px; }
+  .pet-stat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .pet-stat-grid a { padding: 12px; }
+  .pet-stat-grid span { flex-direction: column; align-items: start; gap: 9px; font-size: 10px; min-height: 60px; }
+  .pet-stat-grid strong { font-size: 26px; }
+  .pet-stat-grid small { font-size: 9px; }
+  .pet-panel { padding: 20px; }
+  .pet-panel h2 { font-size: 19px; }
+  .pet-panel-head { gap: 10px; }
+  .pet-profile-summary { flex-wrap: wrap; gap: 14px; }
+  .pet-profile-summary > div { flex-basis: calc(100% - 80px); }
+  .pet-form-grid { grid-template-columns: minmax(0, 1fr); }
+  .pet-onboarding-grid { grid-template-columns: minmax(0, 1fr); }
+  .pet-onboarding-story { display: none; }
+  .pet-onboarding-grid h1 { font-size: 37px; letter-spacing: -1.3px; }
+  .pet-onboarding-form { padding: 20px; }
+  .pet-gift-banner { padding: 23px; }
+  .pet-local-note { font-size: 10px; align-items: start; }
+}
