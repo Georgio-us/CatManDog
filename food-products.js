@@ -10,7 +10,10 @@ export const foodProducts = [
     "weight": "2 кг",
     "packageWeightKg": 2,
     "image": {
-      "src": "assets/food/rc-sterilised.jpg",
+      "src": "assets/food/editorial/rc-sterilised-v1.png",
+      "presentation": "editorial",
+      "originalSrc": "assets/food/rc-sterilised.jpg",
+      "generated": true,
       "alt": "Royal Canin Sterilised 37 - упаковка 2 кг"
     },
     "tag": "Для стерилизованных",
@@ -425,7 +428,10 @@ export const foodProducts = [
     "weight": "85 г",
     "packageWeightKg": 0.085,
     "image": {
-      "src": "assets/food/rc-wet.jpg",
+      "src": "assets/food/editorial/rc-wet-v1.png",
+      "presentation": "editorial",
+      "originalSrc": "assets/food/rc-wet.jpg",
+      "generated": true,
       "alt": "Royal Canin Sterilised in Gravy - упаковка 85 г"
     },
     "tag": "Влажный · в соусе",
@@ -591,7 +597,10 @@ export const foodProducts = [
     "weight": "2 кг",
     "packageWeightKg": 2,
     "image": {
-      "src": "assets/food/rc-kitten.jpg",
+      "src": "assets/food/editorial/rc-kitten-v1.png",
+      "presentation": "editorial",
+      "originalSrc": "assets/food/rc-kitten.jpg",
+      "generated": true,
       "alt": "Royal Canin Kitten Sterilised - упаковка 2 кг"
     },
     "tag": "Для стерилизованных котят",
@@ -704,7 +713,10 @@ export const foodProducts = [
     "weight": "2 кг",
     "packageWeightKg": 2,
     "image": {
-      "src": "assets/food/rc-digestive.jpg",
+      "src": "assets/food/editorial/rc-digestive-v1.png",
+      "presentation": "editorial",
+      "originalSrc": "assets/food/rc-digestive.jpg",
+      "generated": true,
       "alt": "Royal Canin Digestive Care - упаковка 2 кг"
     },
     "tag": "Чувствительное пищеварение",

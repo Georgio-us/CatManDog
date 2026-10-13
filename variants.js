@@ -18,7 +18,9 @@ export function canBuy(sku) {
 export function catalogPrice(product) {
   const variants = snapshots(product);
   const prices = variants.map(storefrontPrice);
-  return { amount: Math.min(...prices), from: variants.length > 1, demo: variants.some(isDemoPrice) };
+  const amount = Math.min(...prices);
+  const pricedSku = variants.find(v => storefrontPrice(v) === amount && !isDemoPrice(v)) || variants.find(v => storefrontPrice(v) === amount);
+  return { amount, from: variants.length > 1, demo: isDemoPrice(pricedSku) };
 }
 export function normalizeCart(items, products) {
   if (!Array.isArray(items)) return [];

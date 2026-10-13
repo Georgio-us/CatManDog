@@ -1,0 +1,1728 @@
+{
+  "discovery": [
+    {
+      "name": "Caldo para gatos Creamy Broth",
+      "url": "https://catit.es/products/caldo-para-gatos-creamy-broth",
+      "packEvidence": [],
+      "variants": [
+        {
+          "id": 58284004868428,
+          "title": "Pollo e hígado / Pack de 4",
+          "price": "3.84",
+          "sku": "44595",
+          "available": true
+        },
+        {
+          "id": 58284004901196,
+          "title": "Pollo y pato / Pack de 4",
+          "price": "3.84",
+          "sku": "44596",
+          "available": true
+        },
+        {
+          "id": 58284004933964,
+          "title": "Atún y cangrejo / Pack de 4",
+          "price": "3.84",
+          "sku": "44597",
+          "available": true
+        },
+        {
+          "id": 58284004966732,
+          "title": "Atún y salmón / Pack de 4",
+          "price": "3.84",
+          "sku": "44598",
+          "available": true
+        },
+        {
+          "id": 58284004999500,
+          "title": "Pollo / Pack de 12",
+          "price": "11.99",
+          "sku": "44599",
+          "available": true
+        },
+        {
+          "id": 58284005032268,
+          "title": "Atún / Pack de 12",
+          "price": "11.99",
+          "sku": "44600",
+          "available": false
+        }
+      ]
+    },
+    {
+      "name": "Puré suave y cremoso Catit Creamy Bisque",
+      "url": "https://catit.es/products/pure-suave-y-cremoso-catit-creamy-bisque",
+      "packEvidence": [],
+      "variants": [
+        {
+          "id": 58283755405644,
+          "title": "Pollo e hígado / Pack de 4",
+          "price": "3.39",
+          "sku": "44589",
+          "available": true
+        },
+        {
+          "id": 58283755438412,
+          "title": "Pollo y pato / Pack de 4",
+          "price": "3.39",
+          "sku": "44590",
+          "available": true
+        },
+        {
+          "id": 58283755471180,
+          "title": "Atún y cangrejo / Pack de 4",
+          "price": "3.39",
+          "sku": "44591",
+          "available": true
+        },
+        {
+          "id": 58283755503948,
+          "title": "Atún y salmón / Pack de 4",
+          "price": "3.39",
+          "sku": "44592",
+          "available": true
+        },
+        {
+          "id": 58283755536716,
+          "title": "Pollo / Pack de 12",
+          "price": "10.99",
+          "sku": "44593",
+          "available": true
+        },
+        {
+          "id": 58283755569484,
+          "title": "Atún / Pack de 12",
+          "price": "10.99",
+          "sku": "44594",
+          "available": false
+        }
+      ]
+    },
+    {
+      "name": "Snacks Catit Creamy Bitz",
+      "url": "https://catit.es/products/snacks-catit-creamy-bitz",
+      "packEvidence": [],
+      "variants": [
+        {
+          "id": 57640257945932,
+          "title": "Pollo con pato",
+          "price": "3.99",
+          "sku": "44581",
+          "available": true
+        },
+        {
+          "id": 57640257978700,
+          "title": "Pollo con vieira",
+          "price": "3.99",
+          "sku": "44582",
+          "available": true
+        },
+        {
+          "id": 57640258011468,
+          "title": "Salmón con gambas",
+          "price": "3.99",
+          "sku": "44583",
+          "available": true
+        },
+        {
+          "id": 57640258044236,
+          "title": "Atún con cangrejo",
+          "price": "3.99",
+          "sku": "44584",
+          "available": true
+        },
+        {
+          "id": 57640258077004,
+          "title": "Pack variado",
+          "price": "7.99",
+          "sku": "44585",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "Creamy con Superalimentos",
+      "url": "https://catit.es/products/creamy-con-superalimentos",
+      "packEvidence": [
+        "enciales. Delicioso solo o como aderezo de comida seca. Contiene 4 tubos de Catit Creamy con Superalimentos. Mix Pack contiene 2 tubos de pollo con",
+        "ne 4 tubos de Catit Creamy con Superalimentos. Mix Pack contiene 2 tubos de pollo con coco y col rizada, 2 tubos de cordero con quinoa y chía, 2 tu",
+        "entos. Mix Pack contiene 2 tubos de pollo con coco y col rizada, 2 tubos de cordero con quinoa y chía, 2 tubos de salmón con quinoa y espirulina, y",
+        "llo con coco y col rizada, 2 tubos de cordero con quinoa y chía, 2 tubos de salmón con quinoa y espirulina, y 2 tubos de atún con coco y wakame.",
+        " con quinoa y chía, 2 tubos de salmón con quinoa y espirulina, y 2 tubos de atún con coco y wakame."
+      ],
+      "variants": [
+        {
+          "id": 52978054725964,
+          "title": "Pollo Con Coco Y Kale",
+          "price": "2.99",
+          "sku": "44425",
+          "available": true
+        },
+        {
+          "id": 57298189943116,
+          "title": "Cordero con Quinoa y Semillas de Chía",
+          "price": "2.99",
+          "sku": "44426",
+          "available": true
+        },
+        {
+          "id": 57298189975884,
+          "title": "Salmón con Quinoa y Espirulina",
+          "price": "2.99",
+          "sku": "44427",
+          "available": true
+        },
+        {
+          "id": 46886734594380,
+          "title": "Atún con Coco y Wakame",
+          "price": "2.99",
+          "sku": "44428",
+          "available": true
+        },
+        {
+          "id": 52978054824268,
+          "title": "Paquete múltiple surtido",
+          "price": "5.10",
+          "sku": "44430",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "Cuchara Catit Creamy",
+      "url": "https://catit.es/products/cuchara-catit-creamy",
+      "packEvidence": [],
+      "variants": [
+        {
+          "id": 47617320255820,
+          "title": "Pack de 1",
+          "price": "2.99",
+          "sku": "43856",
+          "available": true
+        },
+        {
+          "id": 47617319665996,
+          "title": "Pack de 3",
+          "price": "7.99",
+          "sku": "43857",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "Snacks para gatos Catit Creamy – 50 Tubos",
+      "url": "https://catit.es/products/snacks-para-gatos-catit-creamy-50-tubos",
+      "packEvidence": [
+        "da seca. Alto en proteínas, rico en aminoácidos. El multipack de 50 tubos de Catit Creamy contiene: 15 de Pollo, 10 de Pollo con Cordero, 10 de Salm"
+      ],
+      "variants": [
+        {
+          "id": 46886734365004,
+          "title": "Pollo",
+          "price": "19.99",
+          "sku": "44461",
+          "available": true
+        },
+        {
+          "id": 46886734397772,
+          "title": "Pollo y Cordero",
+          "price": "19.99",
+          "sku": "44462",
+          "available": true
+        },
+        {
+          "id": 46886734430540,
+          "title": "Salmón y Gambas",
+          "price": "19.99",
+          "sku": "44463",
+          "available": true
+        },
+        {
+          "id": 46886734463308,
+          "title": "Atún",
+          "price": "19.99",
+          "sku": "44464",
+          "available": true
+        },
+        {
+          "id": 47097612730700,
+          "title": "Multipack",
+          "price": "19.99",
+          "sku": "44460",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "Snacks para gatos Catit Creamy – Bote de 80 Tubos",
+      "url": "https://catit.es/products/snacks-para-gatos-catit-creamy-bote-de-80-tubos",
+      "packEvidence": [
+        "es esenciales. Alto en proteínas y rico en aminoácidos. Contiene 80 tubos de Catit Creamy. Delicioso para comer solo o como topping o aderezo para e",
+        "r solo o como topping o aderezo para el pienso. El pack contiene 20 tubos de cada uno de los siguientes sabores: Pollo, Pollo y Cordero, Salmón y Ga"
+      ],
+      "variants": [
+        {
+          "id": 46887474037068,
+          "title": "Default Title",
+          "price": "29.99",
+          "sku": "44492",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "Plato de Corazón Catit Creamy",
+      "url": "https://catit.es/products/plato-de-corazon-catit-creamy",
+      "packEvidence": [],
+      "variants": [
+        {
+          "id": 46887062765900,
+          "title": "Default Title",
+          "price": "2.99",
+          "sku": "43861",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "Feeding Mat Catit Creamy",
+      "url": "https://catit.es/products/feeding-mat-catit-creamy",
+      "packEvidence": [],
+      "variants": [
+        {
+          "id": 46887061094732,
+          "title": "Default Title",
+          "price": "4.99",
+          "sku": "43749",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "Snacks para gatos Catit Creamy – 15 Tubos",
+      "url": "https://catit.es/products/snacks-para-gatos-catit-creamy-15-tubos",
+      "packEvidence": [
+        "da seca. Alto en proteínas, rico en aminoácidos. El multipack de 15 tubos de Catit Creamy contiene: 4 de Pollo, 4 de Pollo con Cordero, 3 de Salmón "
+      ],
+      "variants": [
+        {
+          "id": 46886734790988,
+          "title": "Pollo",
+          "price": "6.99",
+          "sku": "44455",
+          "available": true
+        },
+        {
+          "id": 46886734823756,
+          "title": "Pollo y Cordero",
+          "price": "6.99",
+          "sku": "44456",
+          "available": true
+        },
+        {
+          "id": 46886734856524,
+          "title": "Salmón y Gambas",
+          "price": "6.99",
+          "sku": "44457",
+          "available": true
+        },
+        {
+          "id": 46886734889292,
+          "title": "Atún",
+          "price": "6.99",
+          "sku": "44458",
+          "available": true
+        },
+        {
+          "id": 47103951110476,
+          "title": "Multipack",
+          "price": "6.35",
+          "sku": "44459",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "Snacks para gatos Catit Creamy – 4 Tubos",
+      "url": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos",
+      "packEvidence": [],
+      "variants": [
+        {
+          "id": 46886734659916,
+          "title": "Pollo",
+          "price": "1.99",
+          "sku": "44451",
+          "available": true
+        },
+        {
+          "id": 46886734692684,
+          "title": "Pollo y Cordero",
+          "price": "1.99",
+          "sku": "44452",
+          "available": true
+        },
+        {
+          "id": 46886734725452,
+          "title": "Salmón y Gambas",
+          "price": "1.99",
+          "sku": "44453",
+          "available": true
+        },
+        {
+          "id": 46886734758220,
+          "title": "Atún",
+          "price": "1.99",
+          "sku": "44454",
+          "available": true
+        },
+        {
+          "id": 57301944172876,
+          "title": "Pollo con Pavo",
+          "price": "1.99",
+          "sku": "44629",
+          "available": true
+        },
+        {
+          "id": 57301944205644,
+          "title": "Pollo con Pato",
+          "price": "1.99",
+          "sku": "44630",
+          "available": true
+        },
+        {
+          "id": 57301944238412,
+          "title": "Atún con Sardinas",
+          "price": "1.99",
+          "sku": "44631",
+          "available": true
+        },
+        {
+          "id": 57301944271180,
+          "title": "Atún con Cangrejo",
+          "price": "1.99",
+          "sku": "44632",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "PurrPuree Value Pack - Pollo y Fibra (40 sobres x 15g)",
+      "url": "https://kitcat.es/products/purrpuree-value-pack-pollo-y-fibra",
+      "packEvidence": [
+        "y especificaciones Cada sobre contiene 4 tubitos individuales de 15 g. Apto para gatos de todas las edades, desde 8 semanas. Puede darse a diari"
+      ],
+      "variants": [
+        {
+          "id": 47166406787402,
+          "title": "Default Title",
+          "price": "24.95",
+          "sku": "KC-1414",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "PurrPuree Value Pack - Atún y Salmón (40 sobres x 15g)",
+      "url": "https://kitcat.es/products/purrpuree-value-pack-atun-y-salmon-40-sobres-x-15g",
+      "packEvidence": [
+        " ceniza bruta 0,67%, humedad 87,60%. Energía metabólica: 35 kcal/100g. Para gatos a partir de 2 meses de edad. 🌟 Características clave ✅ Ingredi",
+        "y especificaciones Cada sobre contiene 4 tubitos individuales de 15 g. Apto para gatos de todas las edades, desde 8 semanas. Puede darse a diari"
+      ],
+      "variants": [
+        {
+          "id": 48038079037770,
+          "title": "Default Title",
+          "price": "24.95",
+          "sku": "KC-1438",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "Pack PurrPuree (12 uds)",
+      "url": "https://kitcat.es/products/pack-degustacion-purrpuree",
+      "packEvidence": [],
+      "variants": [
+        {
+          "id": 29215805669479,
+          "title": "Default Title",
+          "price": "32.49",
+          "sku": "KCPP0080008",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "Pack FreezeBites (11 uds)",
+      "url": "https://kitcat.es/products/pack-degustacion-freezebites",
+      "packEvidence": [
+        "s. EL PACK CONTIENE: 2x FreezeBites Atún15g 2x FreezeBites Pollo 15g 2x FreezeBites Pato 15g 1x FreezeBites Hígado de Pollo 20g 1x FreezeBites ",
+        "FreezeBites Atún15g 2x FreezeBites Pollo 15g 2x FreezeBites Pato 15g 1x FreezeBites Hígado de Pollo 20g 1x FreezeBites Hígado de Pato 20g 1x Fr",
+        "Pollo 15g 2x FreezeBites Pato 15g 1x FreezeBites Hígado de Pollo 20g 1x FreezeBites Hígado de Pato 20g 1x FreezeBites Camarones 10g 1x FreezeBi",
+        "1x FreezeBites Hígado de Pollo 20g 1x FreezeBites Hígado de Pato 20g 1x FreezeBites Camarones 10g 1x FreezeBites Bacalao 15g 1x FreezeBites Sal",
+        "o 20g 1x FreezeBites Hígado de Pato 20g 1x FreezeBites Camarones 10g 1x FreezeBites Bacalao 15g 1x FreezeBites Salmón15g *Si algún producto no ",
+        " de Pato 20g 1x FreezeBites Camarones 10g 1x FreezeBites Bacalao 15g 1x FreezeBites Salmón15g *Si algún producto no estuviera disponible, lo su"
+      ],
+      "variants": [
+        {
+          "id": 40584764686505,
+          "title": "Default Title",
+          "price": "21.49",
+          "sku": "KCFB0060006",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "Pack FilletFresh (18 uds)",
+      "url": "https://kitcat.es/products/pack-degustacion-filletfresh",
+      "packEvidence": [],
+      "variants": [
+        {
+          "id": 38646412869801,
+          "title": "Default Title",
+          "price": "37.49",
+          "sku": "KCFF0050005",
+          "available": false
+        }
+      ]
+    },
+    {
+      "name": "PurrPuree Value Pack - Atún y Fibra Hairball Control (40 sobres x 15g)",
+      "url": "https://kitcat.es/products/valuepack-snack-gatos-atun-fibra",
+      "packEvidence": [
+        "y especificaciones Cada sobre contiene 4 tubitos individuales de 15 g. Apto para gatos de todas las edades, desde 8 semanas. Puede darse a diari"
+      ],
+      "variants": [
+        {
+          "id": 41087277498537,
+          "title": "Default Title",
+          "price": "24.95",
+          "sku": "KC-1407",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "PurrPuree Value Pack - Pollo y Salmón (40 sobres x 15g)",
+      "url": "https://kitcat.es/products/valuepack-snack-gatos-pollo-y-salmon",
+      "packEvidence": [
+        "y especificaciones Cada sobre contiene 4 tubitos individuales de 15 g. Apto para gatos de todas las edades, desde 8 semanas. Puede darse a diari"
+      ],
+      "variants": [
+        {
+          "id": 41087280644265,
+          "title": "Default Title",
+          "price": "24.95",
+          "sku": "KC-1421",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "FreezeBites Salmón 15g - Snack Liofilizado",
+      "url": "https://kitcat.es/products/freezebites-salmon",
+      "packEvidence": [
+        ". Pienso complementario para gatos. Energía metabólica: 436 kcal/100g. Uso y Especificaciones Recomendado para gatos de más de 2 meses de edad. "
+      ],
+      "variants": [
+        {
+          "id": 40584726905001,
+          "title": "Default Title",
+          "price": "2.15",
+          "sku": "KC-7007",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "FreezeBites Pollo 15g - Snack Liofilizado",
+      "url": "https://kitcat.es/products/freezebites-pollo",
+      "packEvidence": [
+        ". Pienso complementario para gatos. Energía metabólica: 354kcal /100g. Uso y Especificaciones Recomendado para gatos de más de 2 meses de edad. "
+      ],
+      "variants": [
+        {
+          "id": 40584724709545,
+          "title": "Default Title",
+          "price": "2.15",
+          "sku": "KC-6963",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "FreezeBites Pato 15g - Snack Liofilizado",
+      "url": "https://kitcat.es/products/freezebites-pato",
+      "packEvidence": [
+        ". Pienso complementario para gatos. Energía metabólica: 342 kcal/100g. Uso y Especificaciones Recomendado para gatos de más de 2 meses de edad. "
+      ],
+      "variants": [
+        {
+          "id": 40584721268905,
+          "title": "Default Title",
+          "price": "2.15",
+          "sku": "KC-7021",
+          "available": false
+        }
+      ]
+    },
+    {
+      "name": "FreezeBites Hígado de Pollo 20g - Snack Liofilizado",
+      "url": "https://kitcat.es/products/freezebites-higado-pollo",
+      "packEvidence": [
+        ". Pienso complementario para gatos. Energía metabólica: 374 kcal/100g. Uso y Especificaciones Recomendado para gatos de más de 2 meses de edad. "
+      ],
+      "variants": [
+        {
+          "id": 40584710029481,
+          "title": "Default Title",
+          "price": "2.15",
+          "sku": "KC-6970",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "FreezeBites Hígado de Pato 20g - Snack Liofilizado",
+      "url": "https://kitcat.es/products/freezebites-higado-pato",
+      "packEvidence": [
+        ". Pienso complementario para gatos. Energía metabólica: 374kcal /100g. Uso y Especificaciones Recomendado para gatos de más de 2 meses de edad. "
+      ],
+      "variants": [
+        {
+          "id": 40584610971817,
+          "title": "Default Title",
+          "price": "2.15",
+          "sku": "KC-7038",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "FreezeBites Camarones 10g - Snack Liofilizado",
+      "url": "https://kitcat.es/products/freezebites-camarones",
+      "packEvidence": [
+        "s 2% Cenizas brutas 12% Humedad 6% Energía metabólica 344 kcal / 100 g Nota: Pienso complementario para gatos. 📝 Uso y especificaciones 🐱 Edad re"
+      ],
+      "variants": [
+        {
+          "id": 40584468660393,
+          "title": "Default Title",
+          "price": "2.15",
+          "sku": "KC-7014",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "FreezeBites Bacalao 15g - Snack Liofilizado",
+      "url": "https://kitcat.es/products/freezebites-bacalao",
+      "packEvidence": [
+        ". Pienso complementario para gatos. Energía metabólica: 406kcal /100g. Uso y Especificaciones Recomendado para gatos de más de 2 meses de edad. "
+      ],
+      "variants": [
+        {
+          "id": 40584390607017,
+          "title": "Default Title",
+          "price": "2.15",
+          "sku": "KC-6987",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "FreezeBites Atún 15g - Snack Liofilizado",
+      "url": "https://kitcat.es/products/freezebites-atun",
+      "packEvidence": [
+        ". Pienso complementario para gatos. Energía metabólica: 353 kcal/100g. Uso y Especificaciones Recomendado para gatos de más de 2 meses de edad. "
+      ],
+      "variants": [
+        {
+          "id": 40584374059177,
+          "title": "Default Title",
+          "price": "2.15",
+          "sku": "KC-6994",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "FilletFresh - Lomo de Atún y Fibra",
+      "url": "https://kitcat.es/products/filletfresh-atun-fibra",
+      "packEvidence": [
+        "utas 0.06% Ceniza bruta 2.00% Humedad 69.10% Energía 112.79 kcal/100g Nota de transparencia: En Kit Cat nos gusta ofrecerte la información compl",
+        "ecto para cualquier momento del día. Tamaño: cada sobre contiene 30 g . 💙 Añadir al carrito"
+      ],
+      "variants": [
+        {
+          "id": 6986985439262,
+          "title": "Default Title",
+          "price": "1.82",
+          "sku": "KC-829",
+          "available": false
+        }
+      ]
+    },
+    {
+      "name": "FilletFresh - Pollo y Pescado Ahumado",
+      "url": "https://kitcat.es/products/filletfresh-pollo-pescado-ahumado",
+      "packEvidence": [
+        "utas 0.14% Ceniza bruta 0.86% Humedad 68.10% Energía 112.75 kcal/100g Nota de transparencia: En Kit Cat nos gusta ofrecerte la información compl",
+        "ecto para cualquier momento del día. Tamaño: cada sobre contiene 30 g . 💙 Añadir al carrito"
+      ],
+      "variants": [
+        {
+          "id": 6987037343774,
+          "title": "Default Title",
+          "price": "1.82",
+          "sku": "KC-799",
+          "available": false
+        }
+      ]
+    },
+    {
+      "name": "FilletFresh - Pollo a la Parrilla",
+      "url": "https://kitcat.es/products/filletfresh-pollo-parrilla",
+      "packEvidence": [
+        "utas 0.08% Ceniza bruta 1.10% Humedad 64.30% Energía 136.72 kcal/100g Nota de transparencia: En Kit Cat nos gusta ofrecerte la información compl",
+        "ecto para cualquier momento del día. Tamaño: cada sobre contiene 30 g . 💙 Añadir al carrito"
+      ],
+      "variants": [
+        {
+          "id": 6987007918110,
+          "title": "Default Title",
+          "price": "1.82",
+          "sku": "KC-775",
+          "available": false
+        }
+      ]
+    },
+    {
+      "name": "FilletFresh - Lomo de Pollo y Fibra",
+      "url": "https://kitcat.es/products/filletfresh-pollo-fibra",
+      "packEvidence": [
+        "utas 0.11% Ceniza bruta 1.20% Humedad 68.90% Energía 112.79 kcal/100g Nota de transparencia: En Kit Cat nos gusta ofrecerte la información compl",
+        "ecto para cualquier momento del día. Tamaño: cada sobre contiene 30 g . 💙 Añadir al carrito"
+      ],
+      "variants": [
+        {
+          "id": 32141678084199,
+          "title": "Default Title",
+          "price": "1.82",
+          "sku": "KC-805",
+          "available": false
+        }
+      ]
+    },
+    {
+      "name": "FilletFresh - Lomo de Atún y Pescado Ahumado",
+      "url": "https://kitcat.es/products/filletfresh-atun-pescado-ahumado",
+      "packEvidence": [
+        "utas 0.06% Ceniza bruta 1.50% Humedad 67.90% Energía 136.66 kcal/100g Nota de transparencia: En Kit Cat nos gusta ofrecerte la información compl",
+        "ecto para cualquier momento del día. Tamaño: cada sobre contiene 30 g . 💙 Añadir al carrito"
+      ],
+      "variants": [
+        {
+          "id": 32141671465063,
+          "title": "Default Title",
+          "price": "1.82",
+          "sku": "KC-812",
+          "available": false
+        }
+      ]
+    },
+    {
+      "name": "FilletFresh - Caballa a la Parrilla",
+      "url": "https://kitcat.es/products/filletfresh-caballa-parrilla",
+      "packEvidence": [
+        "ceites y grasas brutas 13.40% Humedad 56.70% Energía 212.78 kcal/100g 🐾 Un premio marino irresistible Con FilletFresh Caballa a la Parrilla ofre",
+        "ofreces un snack natural, sabroso y lleno de nutrientes. Tamaño: 30 g por sobre. 💙 Añadir al carrito"
+      ],
+      "variants": [
+        {
+          "id": 6986921738270,
+          "title": "Default Title",
+          "price": "1.82",
+          "sku": "KC-782",
+          "available": false
+        }
+      ]
+    },
+    {
+      "name": "PurrPuree PLUS - FUNCIONAL - Pollo (Joint Care) 60g (4x15g)",
+      "url": "https://kitcat.es/products/purrpureeplus-snack-gatos-pollo-joint-care",
+      "packEvidence": [],
+      "variants": [
+        {
+          "id": 32141613236327,
+          "title": "Default Title",
+          "price": "2.95",
+          "sku": "KC-3246",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "PurrPuree PLUS - FUNCIONAL - Pollo (Collagen Care) 60g (4x15g)",
+      "url": "https://kitcat.es/products/snack-purr-puree-plus-pollo-collagen-care",
+      "packEvidence": [
+        "eniza bruta 0.26%, humedad 87.40% Energía metabólica: 43.98 kcal/100g. Para gatos a partir de 2 meses de edad. 🌟 Características clave ✅ Ingredi",
+        "y especificaciones Cada sobre contiene 4 tubitos individuales de 15 g. Apto para gatos de todas las edades, desde 8 semanas. Puede darse a diari"
+      ],
+      "variants": [
+        {
+          "id": 32141598294119,
+          "title": "Default Title",
+          "price": "2.95",
+          "sku": "KC-3239",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "PurrPuree - Atún y Vieiras 60g (4x15g)",
+      "url": "https://kitcat.es/products/purrpuree-snack-gatos-atun-vieiras",
+      "packEvidence": [
+        "iza bruta 0.61%, humedad 87.40% Energía metabólica : 114,04 kcal/100g. Para gatos a partir de 2 meses de edad. 🌟 Características clave ✅ Ingredi",
+        "y especificaciones Cada sobre contiene 4 tubitos individuales de 15 g. Apto para gatos de todas las edades, desde 8 semanas. Puede darse a diari"
+      ],
+      "variants": [
+        {
+          "id": 32141589971047,
+          "title": "Default Title",
+          "price": "2.85",
+          "sku": "KC-867",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "PurrPuree - Pollo y Pescado Ahumado 60g (4x15g)",
+      "url": "https://kitcat.es/products/purrpuree-snack-gatos-pollo-pescado-ahumado",
+      "packEvidence": [
+        "niza bruta 0.33%, humedad 86.10% Energía metabólica: 119,18 kcal/100g. Para gatos a partir de 2 meses de edad. 🌟 Características clave ✅ Ingredi",
+        "y especificaciones Cada sobre contiene 4 tubitos individuales de 15 g. Apto para gatos de todas las edades, desde 8 semanas. Puede darse a diari"
+      ],
+      "variants": [
+        {
+          "id": 32141554548839,
+          "title": "Default Title",
+          "price": "2.85",
+          "sku": "KC-898",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "PurrPuree - Pollo y Fibra (Hairball Control) 60g (4x15g)",
+      "url": "https://kitcat.es/products/purrpuree-snack-gatos-pollo-fibra-hairball-control",
+      "packEvidence": [
+        "niza bruta 0,31%, humedad 86,20%. Energía metabólica: 47,95 kcal/100g. Para gatos a partir de 2 meses de edad. 🌟 Características clave ✅ Ingredi",
+        "y especificaciones Cada sobre contiene 4 tubitos individuales de 15 g. Apto para gatos de todas las edades, desde 8 semanas. Puede darse a diari"
+      ],
+      "variants": [
+        {
+          "id": 6986676731934,
+          "title": "Default Title",
+          "price": "2.85",
+          "sku": "KC-881",
+          "available": false
+        }
+      ]
+    },
+    {
+      "name": "PurrPuree PLUS - FUNCIONAL - Atún (Urinary Care) 60g (4x15g)",
+      "url": "https://kitcat.es/products/purrpureeplus-snack-gatos-atun-urinary-care",
+      "packEvidence": [
+        " ceniza bruta 0,46%, humedad 87,10%. Energía metabólica: 46 kcal/100g. Para gatos a partir de 2 meses de edad. 🌟 Características clave ✅ Ingredi",
+        "y especificaciones Cada sobre contiene 4 tubitos individuales de 15 g. Apto para gatos de todas las edades, desde 8 semanas. Puede darse a diari"
+      ],
+      "variants": [
+        {
+          "id": 6986548379678,
+          "title": "Default Title",
+          "price": "2.95",
+          "sku": "KC-3253",
+          "available": false
+        }
+      ]
+    },
+    {
+      "name": "PurrPuree PLUS - FUNCIONAL - Atún (Skin & Coat) 60g (4x15g)",
+      "url": "https://kitcat.es/products/purrpureeplus-snack-gatos-atun-skin-coat",
+      "packEvidence": [
+        "niza bruta 0,52%, humedad 87,00%. Energía metabólica: 46.01 kcal/100g. Para gatos a partir de 2 meses de edad. 🌟 Características clave ✅ Ingredi",
+        "y especificaciones Cada sobre contiene 4 tubitos individuales de 15 g. Apto para gatos de todas las edades, desde 8 semanas. Puede darse a diari"
+      ],
+      "variants": [
+        {
+          "id": 6986499260446,
+          "title": "Default Title",
+          "price": "2.95",
+          "sku": "KC-3260",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "PurrPuree - Atún y Salmón 60g (4x15g)",
+      "url": "https://kitcat.es/products/purrpuree-snack-gatos-atun-salmon",
+      "packEvidence": [
+        "niza bruta 0,67%, humedad 87,60%. Energía metabólica: 43,99 kcal/100g. Para gatos a partir de 2 meses de edad. 🌟 Características clave ✅ Ingredi",
+        "y especificaciones Cada sobre contiene 4 tubitos individuales de 15 g. Apto para gatos de todas las edades, desde 8 semanas. Puede darse a diari"
+      ],
+      "variants": [
+        {
+          "id": 6986621222942,
+          "title": "Default Title",
+          "price": "2.85",
+          "sku": "KC-836",
+          "available": true
+        }
+      ]
+    }
+  ],
+  "offers": [
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 50 Tubos - Pollo",
+      "quantity": 50,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "50 × 10 г",
+      "priceEUR": 19.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-50-tubos?variant=46886734365004",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-50-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44461",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 50 Tubos - Pollo y Cordero",
+      "quantity": 50,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "50 × 10 г",
+      "priceEUR": 19.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-50-tubos?variant=46886734397772",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-50-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44462",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 50 Tubos - Salmón y Gambas",
+      "quantity": 50,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "50 × 10 г",
+      "priceEUR": 19.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-50-tubos?variant=46886734430540",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-50-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44463",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 50 Tubos - Atún",
+      "quantity": 50,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "50 × 10 г",
+      "priceEUR": 19.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-50-tubos?variant=46886734463308",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-50-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44464",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 50 Tubos - Multipack",
+      "quantity": 50,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "50 × 10 г",
+      "priceEUR": 19.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-50-tubos?variant=47097612730700",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-50-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44460",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – Bote de 80 Tubos",
+      "quantity": 80,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "80 × 10 г",
+      "priceEUR": 29.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-bote-de-80-tubos?variant=46887474037068",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-bote-de-80-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44492",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0610/3285/7753/files/44492-Catit-Creamy-Gift-Jar-80-Tubes-Packaging-Front-EU-1.jpg?v=1776254087",
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 15 Tubos - Pollo",
+      "quantity": 15,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "15 × 10 г",
+      "priceEUR": 6.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-15-tubos?variant=46886734790988",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-15-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44455",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 15 Tubos - Pollo y Cordero",
+      "quantity": 15,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "15 × 10 г",
+      "priceEUR": 6.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-15-tubos?variant=46886734823756",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-15-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44456",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 15 Tubos - Salmón y Gambas",
+      "quantity": 15,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "15 × 10 г",
+      "priceEUR": 6.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-15-tubos?variant=46886734856524",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-15-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44457",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 15 Tubos - Atún",
+      "quantity": 15,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "15 × 10 г",
+      "priceEUR": 6.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-15-tubos?variant=46886734889292",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-15-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44458",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 15 Tubos - Multipack",
+      "quantity": 15,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "15 × 10 г",
+      "priceEUR": 6.35,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-15-tubos?variant=47103951110476",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-15-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44459",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 4 Tubos - Pollo",
+      "quantity": 4,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "4 × 10 г",
+      "priceEUR": 1.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos?variant=46886734659916",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44451",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 4 Tubos - Pollo y Cordero",
+      "quantity": 4,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "4 × 10 г",
+      "priceEUR": 1.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos?variant=46886734692684",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44452",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 4 Tubos - Salmón y Gambas",
+      "quantity": 4,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "4 × 10 г",
+      "priceEUR": 1.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos?variant=46886734725452",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44453",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 4 Tubos - Atún",
+      "quantity": 4,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "4 × 10 г",
+      "priceEUR": 1.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos?variant=46886734758220",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44454",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 4 Tubos - Pollo con Pavo",
+      "quantity": 4,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "4 × 10 г",
+      "priceEUR": 1.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos?variant=57301944172876",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44629",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 4 Tubos - Pollo con Pato",
+      "quantity": 4,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "4 × 10 г",
+      "priceEUR": 1.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos?variant=57301944205644",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44630",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 4 Tubos - Atún con Sardinas",
+      "quantity": 4,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "4 × 10 г",
+      "priceEUR": 1.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos?variant=57301944238412",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44631",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Catit",
+      "name": "Snacks para gatos Catit Creamy – 4 Tubos - Atún con Cangrejo",
+      "quantity": 4,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "4 × 10 г",
+      "priceEUR": 1.99,
+      "currency": "EUR",
+      "sourceUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos?variant=57301944271180",
+      "familyUrl": "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos",
+      "retailer": "Catit España - официальный магазин",
+      "retailerSku": "44632",
+      "gtin": null,
+      "imageUrl": null,
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "FreezeBites Salmón 15g - Snack Liofilizado",
+      "quantity": 1,
+      "amount": 15.0,
+      "unit": "g",
+      "packLabel": "1 × 15 г",
+      "priceEUR": 2.15,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/freezebites-salmon?variant=40584726905001",
+      "familyUrl": "https://kitcat.es/products/freezebites-salmon",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-7007",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/products/freezebites-salmon.jpg?v=1622731561",
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "FreezeBites Pollo 15g - Snack Liofilizado",
+      "quantity": 1,
+      "amount": 15.0,
+      "unit": "g",
+      "packLabel": "1 × 15 г",
+      "priceEUR": 2.15,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/freezebites-pollo?variant=40584724709545",
+      "familyUrl": "https://kitcat.es/products/freezebites-pollo",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-6963",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/products/freezebite-pollo-kit-cat.jpg?v=1622731450",
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "FreezeBites Pato 15g - Snack Liofilizado",
+      "quantity": 1,
+      "amount": 15.0,
+      "unit": "g",
+      "packLabel": "1 × 15 г",
+      "priceEUR": 2.15,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/freezebites-pato?variant=40584721268905",
+      "familyUrl": "https://kitcat.es/products/freezebites-pato",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-7021",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/products/freezebites-pato-kit-cat.jpg?v=1622731227",
+      "availability": "OutOfStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "FreezeBites Hígado de Pollo 20g - Snack Liofilizado",
+      "quantity": 1,
+      "amount": 20.0,
+      "unit": "g",
+      "packLabel": "1 × 20 г",
+      "priceEUR": 2.15,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/freezebites-higado-pollo?variant=40584710029481",
+      "familyUrl": "https://kitcat.es/products/freezebites-higado-pollo",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-6970",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/products/freezebites-higado-de-pollo-kit-cat.jpg?v=1622731046",
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "FreezeBites Hígado de Pato 20g - Snack Liofilizado",
+      "quantity": 1,
+      "amount": 20.0,
+      "unit": "g",
+      "packLabel": "1 × 20 г",
+      "priceEUR": 2.15,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/freezebites-higado-pato?variant=40584610971817",
+      "familyUrl": "https://kitcat.es/products/freezebites-higado-pato",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-7038",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/products/freeze-bites-higado-de-pato.jpg?v=1622730916",
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "FreezeBites Camarones 10g - Snack Liofilizado",
+      "quantity": 1,
+      "amount": 10.0,
+      "unit": "g",
+      "packLabel": "1 × 10 г",
+      "priceEUR": 2.15,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/freezebites-camarones?variant=40584468660393",
+      "familyUrl": "https://kitcat.es/products/freezebites-camarones",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-7014",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/products/snack-freezebites-camarones.jpg?v=1622730785",
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "FreezeBites Bacalao 15g - Snack Liofilizado",
+      "quantity": 1,
+      "amount": 15.0,
+      "unit": "g",
+      "packLabel": "1 × 15 г",
+      "priceEUR": 2.15,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/freezebites-bacalao?variant=40584390607017",
+      "familyUrl": "https://kitcat.es/products/freezebites-bacalao",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-6987",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/products/snack-liofilizado-freezebites-bacalao.jpg?v=1622730630",
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "FreezeBites Atún 15g - Snack Liofilizado",
+      "quantity": 1,
+      "amount": 15.0,
+      "unit": "g",
+      "packLabel": "1 × 15 г",
+      "priceEUR": 2.15,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/freezebites-atun?variant=40584374059177",
+      "familyUrl": "https://kitcat.es/products/freezebites-atun",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-6994",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/products/snack-freezebites-atun.jpg?v=1622730153",
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "PurrPuree PLUS - FUNCIONAL - Pollo (Joint Care) 60g (4x15g)",
+      "quantity": 4,
+      "amount": 15.0,
+      "unit": "g",
+      "packLabel": "4 × 15 г",
+      "priceEUR": 2.95,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/purrpureeplus-snack-gatos-pollo-joint-care?variant=32141613236327",
+      "familyUrl": "https://kitcat.es/products/purrpureeplus-snack-gatos-pollo-joint-care",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-3246",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/files/6_9e21d42e-292f-4dd0-91d2-cd5411efbda3.png?v=1710318816",
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "PurrPuree PLUS - FUNCIONAL - Pollo (Collagen Care) 60g (4x15g)",
+      "quantity": 4,
+      "amount": 15.0,
+      "unit": "g",
+      "packLabel": "4 × 15 г",
+      "priceEUR": 2.95,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/snack-purr-puree-plus-pollo-collagen-care?variant=32141598294119",
+      "familyUrl": "https://kitcat.es/products/snack-purr-puree-plus-pollo-collagen-care",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-3239",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/files/8_75aa8722-ba27-4272-ad1d-0a75bebff7cc.png?v=1710318868",
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "PurrPuree - Atún y Vieiras 60g (4x15g)",
+      "quantity": 4,
+      "amount": 15.0,
+      "unit": "g",
+      "packLabel": "4 × 15 г",
+      "priceEUR": 2.85,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/purrpuree-snack-gatos-atun-vieiras?variant=32141589971047",
+      "familyUrl": "https://kitcat.es/products/purrpuree-snack-gatos-atun-vieiras",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-867",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/files/3_e037d877-cbfe-4086-89e8-23de04e3c1bf.png?v=1710318722",
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "PurrPuree - Pollo y Pescado Ahumado 60g (4x15g)",
+      "quantity": 4,
+      "amount": 15.0,
+      "unit": "g",
+      "packLabel": "4 × 15 г",
+      "priceEUR": 2.85,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/purrpuree-snack-gatos-pollo-pescado-ahumado?variant=32141554548839",
+      "familyUrl": "https://kitcat.es/products/purrpuree-snack-gatos-pollo-pescado-ahumado",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-898",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/files/1_b0962bb1-a822-4f72-babc-f9ba977a984d.png?v=1710318652",
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "PurrPuree - Pollo y Fibra (Hairball Control) 60g (4x15g)",
+      "quantity": 4,
+      "amount": 15.0,
+      "unit": "g",
+      "packLabel": "4 × 15 г",
+      "priceEUR": 2.85,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/purrpuree-snack-gatos-pollo-fibra-hairball-control?variant=6986676731934",
+      "familyUrl": "https://kitcat.es/products/purrpuree-snack-gatos-pollo-fibra-hairball-control",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-881",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/files/2.png?v=1710318689",
+      "availability": "OutOfStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "PurrPuree PLUS - FUNCIONAL - Atún (Urinary Care) 60g (4x15g)",
+      "quantity": 4,
+      "amount": 15.0,
+      "unit": "g",
+      "packLabel": "4 × 15 г",
+      "priceEUR": 2.95,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/purrpureeplus-snack-gatos-atun-urinary-care?variant=6986548379678",
+      "familyUrl": "https://kitcat.es/products/purrpureeplus-snack-gatos-atun-urinary-care",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-3253",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/files/5.png?v=1710318783",
+      "availability": "OutOfStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "PurrPuree PLUS - FUNCIONAL - Atún (Skin & Coat) 60g (4x15g)",
+      "quantity": 4,
+      "amount": 15.0,
+      "unit": "g",
+      "packLabel": "4 × 15 г",
+      "priceEUR": 2.95,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/purrpureeplus-snack-gatos-atun-skin-coat?variant=6986499260446",
+      "familyUrl": "https://kitcat.es/products/purrpureeplus-snack-gatos-atun-skin-coat",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-3260",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/files/7_73c56ba3-4f0d-46b3-a13d-74f4c6dea749.png?v=1710318839",
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    },
+    {
+      "brand": "Kit Cat",
+      "name": "PurrPuree - Atún y Salmón 60g (4x15g)",
+      "quantity": 4,
+      "amount": 15.0,
+      "unit": "g",
+      "packLabel": "4 × 15 г",
+      "priceEUR": 2.85,
+      "currency": "EUR",
+      "sourceUrl": "https://kitcat.es/products/purrpuree-snack-gatos-atun-salmon?variant=6986621222942",
+      "familyUrl": "https://kitcat.es/products/purrpuree-snack-gatos-atun-salmon",
+      "retailer": "Kit Cat España - официальный магазин",
+      "retailerSku": "KC-836",
+      "gtin": null,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/2466/4555/files/4.png?v=1710318756",
+      "availability": "InStock",
+      "evidenceType": "live_public_shop_catalogue",
+      "currencyEvidence": "Испанская витрина магазина отображает цены в EUR",
+      "packEvidence": "Название продукта подтверждает количество, вес стика 10 г для европейского Catit Creamy подтверждён производителем",
+      "checkedOn": "2026-10-13",
+      "purchasePrice": null,
+      "shippingIncluded": false,
+      "deliveredToValenciaEUR": null
+    }
+  ]
+}

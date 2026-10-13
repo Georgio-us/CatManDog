@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Royal Canin Instinctive Gravy",
+    "brand": "Royal Canin",
+    "quantity": 12,
+    "grams": 85,
+    "priceEUR": 20.75,
+    "currency": "EUR",
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/instinctive-gravy-4059",
+    "familyUrl": "https://www.royalcanin.com/es/cats/products/retail-products/instinctive-gravy-4059",
+    "retailer": "Royal Canin - официальный магазин",
+    "availability": "not_verified",
+    "evidenceType": "web_index_product_page",
+    "checkedOn": "2026-10-13",
+    "purchasePrice": null,
+    "evidence": "Официальная испанская карточка: Tamaño 12x85 g, Compra única 20,75 €, подписка 18,68 € не включена в сравнение"
+  }
+]

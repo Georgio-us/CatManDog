@@ -1,0 +1,42 @@
+[
+  {
+    "brand": "GimCat",
+    "name": "GimCat Soft Extra Malta",
+    "category": "Мальт-пасты и снеки",
+    "quantity": 1,
+    "amount": 50,
+    "unit": "g",
+    "priceEUR": 5.47,
+    "currency": "EUR",
+    "retailer": "Miscota",
+    "sourceUrl": "https://www.miscota.es/gatos/gimcat/pr-503241",
+    "familyUrl": "https://www.miscota.es/gatos/gimcat/pr-503241",
+    "availability": "not_verified",
+    "evidenceType": "web_index_product_page",
+    "checkedOn": "2026-10-13",
+    "purchasePrice": null,
+    "shippingIncluded": false,
+    "deliveredToValenciaEUR": null,
+    "evidence": "Прочитанная поисковая карточка Miscota: 50 GR 5,47 €, индекс обновлялся в прошлом месяце"
+  },
+  {
+    "brand": "GimCat",
+    "name": "GimCat Soft Extra Malta",
+    "category": "Мальт-пасты и снеки",
+    "quantity": 1,
+    "amount": 200,
+    "unit": "g",
+    "priceEUR": 14.20,
+    "currency": "EUR",
+    "retailer": "Miscota",
+    "sourceUrl": "https://www.miscota.es/gatos/gimcat/pr-503241",
+    "familyUrl": "https://www.miscota.es/gatos/gimcat/pr-503241",
+    "availability": "not_verified",
+    "evidenceType": "web_index_product_page",
+    "checkedOn": "2026-10-13",
+    "purchasePrice": null,
+    "shippingIncluded": false,
+    "deliveredToValenciaEUR": null,
+    "evidence": "Прочитанная поисковая карточка Miscota: 200 GR 14,20 €, индекс обновлялся в прошлом месяце"
+  }
+]

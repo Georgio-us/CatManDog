@@ -1,0 +1,3065 @@
+{
+  "updatedOn": "2026-10-13",
+  "scope": "Wet cat food, confirmed publicly priced Spanish references plus separate manufacturer appendix",
+  "brandCounts": {
+    "Royal Canin": 52,
+    "Hill's": 57,
+    "Advance": 14,
+    "Leonardo": 41,
+    "Acana": 6
+  },
+  "notes": [
+    "Исследованы публичные каталоги и розничные предложения на 13 октября 2026, это база для выбора, а не подтверждённый закупочный ассортимент",
+    "Рецептура и текстура учитываются отдельно, ассорти не считается отдельной рецептурой",
+    "Указан вес одной банки или пакетика и количество единиц в предложении, цена мультипака не выдаётся за цену одиночной упаковки",
+    "Минимум относится к найденным предложениям, абсолютный минимум рынка и цена с доставкой в Валенсию не подтверждены",
+    "Цены Miscota прочитаны через веб-индекс, прямые страницы возвращали защитную страницу, такие цены не помечены как живые",
+    "Amazon: воспроизводимые цены по точным влажным SKU не подтверждены, пустые значения сохранены",
+    "Orijen: влажная линейка подтверждена в американском каталоге, покупка в испанской рознице не подтверждена, вынесена отдельно",
+    "Напитки, Churu и кремовые лакомства не включены в основную линейку влажных кормов",
+    "Закупочные цены пустые, розничные наблюдения не заменяют закупочную цену",
+    "Автоматическая сверка бренда, веса и GTIN объединяет карточки магазинов, не объединяет разные текстуры по похожему названию",
+    "Официальные страницы без сопоставленной розничной карточки сохранены в приложении, покрытие каталога не заявляется как исчерпывающее"
+  ],
+  "recipes": [
+    {
+      "id": "royalcanin-8d039848",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Adult Sensory Feel salsa sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-adult-sensory-feel-salsa-sobre-para-gatos/ROY1519000_M.html",
+        "https://www.tiendanimal.es/royal-canin-adult-sensory-feel-salsa-sobre-para-gatos/ROY1519000_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-659556dc",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Adult Sensory Smell salsa sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-adult-sensory-smell-salsa-sobre-para-gatos/ROY1517000_M.html",
+        "https://www.tiendanimal.es/royal-canin-adult-sensory-smell-salsa-sobre-para-gatos/ROY1517000_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-a510d4e9",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Adult Sensory Taste salsa sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-adult-sensory-taste-salsa-sobre-para-gatos/ROY1518000_M.html",
+        "https://www.tiendanimal.es/royal-canin-adult-sensory-taste-salsa-sobre-para-gatos/ROY1518000_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-5c2e58b7",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Adult Veterinary Urinary mousse sobre para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-adult-veterinary-urinary-mousse-sobre-para-gatos/ROY1254000BOX_M.html",
+        "https://www.tiendanimal.es/royal-canin-adult-veterinary-urinary-mousse-sobre-para-gatos/ROY1254000BOX_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-f2600773",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Ageing 11+ Comida Húmeda en gelatina para gatos senior",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/royal-canin-ageing-11_-comida-humeda-en-gelatina-para-gatos-senior/ROY420040_M.html",
+        "https://www.tiendanimal.es/royal-canin-ageing-11-comida-humeda-en-gelatina-para-gatos-senior/ROY420040_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-96e21d56",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Ageing 11+ sobre en salsa para gatos senior",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/royal-canin-ageing-11_-sobre-en-salsa-para-gatos-senior/ROY385025_M.html",
+        "https://www.tiendanimal.es/royal-canin-ageing-11-sobre-en-salsa-para-gatos-senior/ROY385025_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-d861a238",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Ageing 15+ Comida Húmeda en salsa para gatos senior",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/royal-canin-ageing-15_-comida-humeda-en-salsa-para-gatos-senior/ROY420050_M.html",
+        "https://www.tiendanimal.es/royal-canin-ageing-15-comida-humeda-en-salsa-para-gatos-senior/ROY420050_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-6168e429",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Appetite Control Care salsa sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-appetite-control-care-salsa-sobre-para-gatos/ROY1466000_M.html",
+        "https://www.tiendanimal.es/royal-canin-appetite-control-care-salsa-sobre-para-gatos/ROY1466000_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-e34b38d7",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Care Digestive Mousse Lata para gatos adultos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-care-digestive-mousse-lata-para-gatos-adultos/ROY424130_M.html",
+        "https://www.tiendanimal.es/royal-canin-care-digestive-mousse-lata-para-gatos-adultos/ROY424130_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-0eae4742",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Care Light Weight Mousse Lata para gatos adultos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-care-light-weight-mousse-lata-para-gatos-adultos/ROY424050_M.html",
+        "https://www.tiendanimal.es/royal-canin-care-light-weight-mousse-lata-para-gatos-adultos/ROY424050_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-99cd69dd",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Digestive Sensitive sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-digestive-sensitive-sobre-para-gatos/ROY382025_M.html",
+        "https://www.tiendanimal.es/royal-canin-digestive-sensitive-sobre-para-gatos/ROY382025_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-676d439a",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Feline Persian Adult sobres para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-feline-persian-adult-sobres-para-gatos/ROY00117_M.html",
+        "https://www.tiendanimal.es/royal-canin-feline-persian-adult-sobres-para-gatos/ROY00117_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-21678889",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Feline Sterilised Salsa sobres para gato",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-feline-sterilised-salsa-sobres-para-gato/ROY390024_M.html",
+        "https://www.tiendanimal.es/royal-canin-feline-sterilised-salsa-sobres-para-gato/ROY390024_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-5dbd7826",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Hair and Skin sobre en salsa para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-hair-and-skin-sobre-en-salsa-para-gatos/ROY380526_M.html",
+        "https://www.tiendanimal.es/royal-canin-hair-and-skin-sobre-en-salsa-para-gatos/ROY380526_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-9f8011d7",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Hairball Care Sobre en Gelatina para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-hairball-care-sobre-en-gelatina-para-gatos/ROY310680_M.html",
+        "https://www.tiendanimal.es/royal-canin-hairball-care-sobre-en-gelatina-para-gatos/ROY310680_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-0a55a9ec",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Hairball sobre en salsa para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-hairball-sobre-en-salsa-para-gatos/ROY391025_M.html",
+        "https://www.tiendanimal.es/royal-canin-hairball-sobre-en-salsa-para-gatos/ROY391025_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-a85257e1",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Indoor Sterilised sobre en gelatina para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-indoor-sterilised-sobre-en-gelatina-para-gatos/ROY1288000_M.html",
+        "https://www.tiendanimal.es/royal-canin-indoor-sterilised-sobre-en-gelatina-para-gatos/ROY1288000_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-77b93f1a",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Indoor Sterilised sobre en salsa para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-indoor-sterilised-sobre-en-salsa-para-gatos/ROY1278000_M.html",
+        "https://www.tiendanimal.es/royal-canin-indoor-sterilised-sobre-en-salsa-para-gatos/ROY1278000_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-1fdaaee6",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Instinctive Gravy",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.royalcanin.com/es/cats/products/retail-products/instinctive-gravy-4059"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-78dac31b",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Instinctive gelatina sobres para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-instinctive-gelatina-sobres-para-gatos/ROY379305_M.html",
+        "https://www.tiendanimal.es/royal-canin-instinctive-gelatina-sobres-para-gatos/ROY379305_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-11fd4a79",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Instinctive paté sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-instinctive-pate-sobre-para-gatos/ROY379404_M.html",
+        "https://www.tiendanimal.es/royal-canin-instinctive-pate-sobre-para-gatos/ROY379404_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-b348c5c6",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Intense Beauty gelatina sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-intense-beauty-gelatina-sobre-para-gatos/ROY380825_M.html",
+        "https://www.tiendanimal.es/royal-canin-intense-beauty-gelatina-sobre-para-gatos/ROY380825_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-04439e9c",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Kitten Sterilised gelatina para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-kitten-sterilised-gelatina-para-gatos/ROY378324_M.html",
+        "https://www.tiendanimal.es/royal-canin-kitten-sterilised-gelatina-para-gatos/ROY378324_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-7f8c2e4e",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Kitten paté sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-kitten-pate-sobre-para-gatos/ROY378924_M.html",
+        "https://www.tiendanimal.es/royal-canin-kitten-pate-sobre-para-gatos/ROY378924_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-93e8aeca",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Kitten sobre en salsa para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-kitten-sobre-en-salsa-para-gatos/ROY378526_M.html",
+        "https://www.tiendanimal.es/royal-canin-kitten-sobre-en-salsa-para-gatos/ROY378526_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-92ee61fb",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Maine Coon sobres para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-maine-coon-sobres-para-gatos/ROY00121_M.html",
+        "https://www.tiendanimal.es/royal-canin-maine-coon-sobres-para-gatos/ROY00121_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-c1fbc2a8",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Mature Consult Balance Paté sobre para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/royal-canin-mature-consult-balance-pate-sobre-para-gatos/ROY1503001_M.html",
+        "https://www.tiendanimal.es/royal-canin-mature-consult-balance-pate-sobre-para-gatos/ROY1503001_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-5536b29b",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Mother & Baby mousse latas para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        195
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-mother_baby-mousse-latas-para-gatos/ROY377808_M.html",
+        "https://www.tiendanimal.es/royal-canin-mother-baby-mousse-latas-para-gatos/ROY377808_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-a78036ba",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Nutrition Appetite Control Care gelatina para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-nutrition-appetite-control-care-gelatina-para-gatos/ROY1467000_M.html",
+        "https://www.tiendanimal.es/royal-canin-nutrition-appetite-control-care-gelatina-para-gatos/ROY1467000_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-1a4d5753",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Renal Buey sobre para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-renal-buey-sobre-para-gatos/ROY364104BOX_M.html",
+        "https://www.tiendanimal.es/royal-canin-renal-buey-sobre-para-gatos/ROY364104BOX_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-e29af258",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Renal Pescado sobre para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.tiendanimal.es/royal-canin-renal-pescado-sobre-para-gatos/ROY364027BOX_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-b96b1ee0",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Renal pollo sobre para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-renal-pollo-sobre-para-gatos/ROY364204BOX_M.html",
+        "https://www.tiendanimal.es/royal-canin-renal-pollo-sobre-para-gatos/ROY364204BOX_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-d3493c23",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Senior 7+ Instinctive sobres para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/royal-canin-senior-7_-instinctive-sobres-para-gatos/ROY383025_M.html",
+        "https://www.tiendanimal.es/royal-canin-senior-7-instinctive-sobres-para-gatos/ROY383025_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-7a630289",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Senior Consult Stage 2 sobre para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.tiendanimal.es/royal-canin-senior-consult-stage-2-sobre-para-gatos/ROY621627_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-ce70b2a8",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Skin & Coat sobre en salsa para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-skin_coat-sobre-en-salsa-para-gatos/ROY44219_M.html",
+        "https://www.tiendanimal.es/royal-canin-skin-coat-sobre-en-salsa-para-gatos/ROY44219_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-c23304f8",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Sobre en Salsa British Shorthair Adult",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-sobre-en-salsa-british-shorthair-adult/ROY398621_M.html",
+        "https://www.tiendanimal.es/royal-canin-sobre-en-salsa-british-shorthair-adult/ROY398621_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-aad6d1bc",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Sterilised Paté sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-sterilised-pate-sobre-para-gatos/ROY390424_M.html",
+        "https://www.tiendanimal.es/royal-canin-sterilised-pate-sobre-para-gatos/ROY390424_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-6542b0c4",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Sterilised gelatina sobres para gato",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-sterilised-gelatina-sobres-para-gato/ROY390324_M.html",
+        "https://www.tiendanimal.es/royal-canin-sterilised-gelatina-sobres-para-gato/ROY390324_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-7661a067",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Ultra Light gelatina sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-ultra-light-gelatina-sobre-para-gatos/ROY380324_M.html",
+        "https://www.tiendanimal.es/royal-canin-ultra-light-gelatina-sobre-para-gatos/ROY380324_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-47767475",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Ultra Light sobres para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-ultra-light-sobres-para-gatos/ROY380026_M.html",
+        "https://www.tiendanimal.es/royal-canin-ultra-light-sobres-para-gatos/ROY380026_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-da9b039e",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Urinary Care Sobre en Gelatina para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.tiendanimal.es/royal-canin-urinary-care-sobre-en-gelatina-para-gatos/ROY310460_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-b298cb91",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Veterinary Diet  Urinary S/O sobres para gato",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.tiendanimal.es/royal-canin-veterinary-diet--urinary-s%2Fo-sobres-para-gato/ROY4032001BOX_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-8ffe447c",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Veterinary Diet Diabetic sobres para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-diet-diabetic-sobres-para-gatos/ROYDIABDOGBOX_M.html",
+        "https://www.tiendanimal.es/royal-canin-veterinary-diet-diabetic-sobres-para-gatos/ROYDIABDOGBOX_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-db40d730",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Veterinary Gastrointestinal Moderate Calorie sobre para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.tiendanimal.es/royal-canin-veterinary-gastrointestinal-moderate-calorie-sobre-para-gatos/ROY364507_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-dce3f76e",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Veterinary Gastrointestinal Mousse lata para gatitos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        195
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-gastrointestinal-mousse-lata-para-gatitos/ROY1227000_M.html",
+        "https://www.tiendanimal.es/royal-canin-veterinary-gastrointestinal-mousse-lata-para-gatitos/ROY1227000_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-f055ffce",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Veterinary Gastrointestinal sobre en salsa para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.tiendanimal.es/royal-canin-veterinary-gastrointestinal-sobre-en-salsa-para-gatos/ROY4039001BOX_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-475d5e2b",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Veterinary Neutered Carne sobre en salsa para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-neutered-carne-sobre-en-salsa-para-gatos/ROY4088001BOX_M.html",
+        "https://www.tiendanimal.es/royal-canin-veterinary-neutered-carne-sobre-en-salsa-para-gatos/ROY4088001BOX_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-3e9915b4",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Veterinary Recovery lata para perros y gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        195
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-recovery-lata-para-perros-y-gatos/ROY346521_M.html",
+        "https://www.tiendanimal.es/royal-canin-veterinary-recovery-lata-para-perros-y-gatos/ROY346521_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-86568be1",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Veterinary Renal Mousse sobre para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-renal-mousse-sobre-para-gatos/ROY1246000_M.html",
+        "https://www.tiendanimal.es/royal-canin-veterinary-renal-mousse-sobre-para-gatos/ROY1246000_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-8ae2a1d3",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Veterinary Satiety sobres en salsa para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-veterinary-satiety-sobres-en-salsa-para-gatos/ROY1070000BOX_M.html",
+        "https://www.tiendanimal.es/royal-canin-veterinary-satiety-sobres-en-salsa-para-gatos/ROY1070000BOX_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-955edaaa",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Veterinary Sensitivity Control Pollo y Arroz sobre en salsa",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.tiendanimal.es/royal-canin-veterinary-sensitivity-control-pollo-y-arroz-sobre-en-salsa/ROY4035001BOX_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "royalcanin-97849099",
+      "brand": "Royal Canin",
+      "name": "Royal Canin Veterinary Urinary Moderate Calorie sobres para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-veterinary-urinary-moderate-calorie-sobres-para-gatos/ROYURISOBOX_M.html",
+        "https://www.tiendanimal.es/royal-canin-veterinary-urinary-moderate-calorie-sobres-para-gatos/ROYURISOBOX_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-2e88710b",
+      "brand": "Hill's",
+      "name": "Hill's Presciption Diet Urinary Stress c/d Estofado de Pollo con Vegetales lata para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        82
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-presciption-diet-urinary-stress-c_d-estofado-de-pollo-con-vegetales-lata-para-gatos/HBG43193_M.html",
+        "https://www.tiendanimal.es/hills-presciption-diet-urinary-stress-c%2Fd-estofado-de-pollo-con-vegetales-lata-para-gatos/HBG43193_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-84c83496",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Digestive Care i/d Gatos Estofado de Pollo y Verduras lata",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        82
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-digestive-care-i_d-gatos-estofado-de-pollo-y-verduras-lata/HIL606342_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-digestive-care-i%2Fd-gatos-estofado-de-pollo-y-verduras-lata/HIL606342_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-43f33709",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Digestive Care i/d Gatos Pollo lata",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        156
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-digestive-care-i_d-gatos-pollo-lata/HIL4628YT_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-digestive-care-i%2Fd-gatos-pollo-lata/HIL4628YT_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-fcae66af",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Digestive Care i/d Pollo en salsa sobre para gatos Multipack",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.tiendanimal.es/hills-prescription-diet-digestive-care-i%2Fd-pollo-en-salsa-sobre-para-gatos-multipack/HIL605726_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-5d47b053",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Early Stage Kidney Care k/d Pollo sobre en salsa para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-early-stage-kidney-care-k_d-pollo-sobre-en-salsa-para-gatos/HIL603571BOX_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-early-stage-kidney-care-k%2Fd-pollo-sobre-en-salsa-para-gatos/HIL603571BOX_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-741ce6ac",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Feline Estofado con Pollo y Verduras para Gatos Adultos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        82
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-feline-estofado-con-pollo-y-verduras-para-gatos-adultos/HIL608464_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-feline-estofado-con-pollo-y-verduras-para-gatos-adultos/HIL608464_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-3e2a1a71",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Feline GI Biome Digestive Care Pollo y Verduras Sobre en salsa",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-feline-gi-biome-digestive-care-pollo-y-verduras-sobre-en-salsa/HIL607212_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-feline-gi-biome-digestive-care-pollo-y-verduras-sobre-en-salsa/HIL607212_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-4e422946",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Food Sensitives lata z/d para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        156
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-food-sensitives-lata-z_d-para-gatos/HIL5661YT_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-food-sensitives-lata-z%2Fd-para-gatos/HIL5661YT_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-455d9020",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Gastrointestinal Biome Estofado de Pollo lata para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        82
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-gastrointestinal-biome-estofado-de-pollo-lata-para-gatos/HIL604420_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-gastrointestinal-biome-estofado-de-pollo-lata-para-gatos/HIL604420_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-ff59af26",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet I/D Digestive Care Kitten Lata Pollo para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-i_d-digestive-care-kitten-lata-pollo-para-gatos/HIL609418_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-i%2Fd-digestive-care-kitten-lata-pollo-para-gatos/HIL609418_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-93eb5a88",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Kidney Care k/d Pollo lata para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        156
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-kidney-care-k_d-pollo-lata-para-gatos/HIL605649_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-kidney-care-k%2Fd-pollo-lata-para-gatos/HIL605649_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-0637713f",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Kidney Care k/d Pollo sobre para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.tiendanimal.es/hills-prescription-diet-kidney-care-k%2Fd-pollo-sobre-para-gatos/HIL1187U_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-35883719",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Kidney Care k/d estofado de pollo y vegetales lata para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        82
+      ],
+      "sourceUrls": [
+        "https://www.tiendanimal.es/hills-prescription-diet-kidney-care-k%2Fd-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603880_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-59c92e72",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Metabolic + Mobility Pollo Sobres para gatos - Multipack",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-metabolic_mobility-pollo-sobres-para-gatos---multipack/HIL609956BOX_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-39b05056",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Metabolic Estofado de Pollo y Vegetales lata para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        82
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-metabolic-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603882_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-metabolic-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603882_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-d365388e",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Metabolic Feline Pouches Pollo para gato - Multipack",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-prescription-diet-metabolic-feline-pouches-pollo-para-gato---multipack/HIL3438U_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-metabolic-feline-pouches-pollo-para-gato---multipack/HIL3438U_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-0295886f",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Metabolic Mousse de Pollo lata para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-metabolic-mousse-de-pollo-lata-para-gatos/HIL608824_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-957babc5",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Thyroid Care y/d Pollo lata para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        156
+      ],
+      "sourceUrls": [
+        "https://www.tiendanimal.es/hills-prescription-diet-thyroid-care-y%2Fd-pollo-lata-para-gatos/HIL1496YT_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-fde8dc60",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Urgent Care a/d Mousse de Pollo lata para perros y gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        200
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/hill_s-prescription-diet-urgent-care-a_d-mousse-de-pollo-lata-para-perros-y-gatos/HIL608305_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-urgent-care-a%2Fd-mousse-de-pollo-lata-para-perros-y-gatos/HIL608305_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-a11884d0",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Urinary Care c/d Pollo lata para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        156
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-urinary-care-c_d-pollo-lata-para-gatos/HIL9451YT_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-urinary-care-c%2Fd-pollo-lata-para-gatos/HIL9451YT_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-e9c06900",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Urinary Care c/d Pollo sobre para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-urinary-care-c_d-pollo-sobre-para-gatos/HIL1188U_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-urinary-care-c%2Fd-pollo-sobre-para-gatos/HIL1188U_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-5870554d",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Urinary Care s/d Pollo Sobre en Salsa para gatos - Pack 12",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-urinary-care-s_d-pollo-sobre-en-salsa-para-gatos-%E2%80%93-pack-12/HIL607213_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-urinary-care-s%2Fd-pollo-sobre-en-salsa-para-gatos-%E2%80%93-pack-12/HIL607213_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-61fa56ea",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet Urinary Stress + Metabolic Pollo sobre para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.tiendanimal.es/hills-prescription-diet-urinary-stress-metabolic-pollo-sobre-para-gatos/HIL605411BOX_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-4ade1f05",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet a/d Mousse de Pollo Lata para perros y gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-a_d-mousse-de-pollo-lata-para-perros-y-gatos/HIL610099_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-a%2Fd-mousse-de-pollo-lata-para-perros-y-gatos/HIL610099_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-21a67454",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet c/d Cuidado Urinario Estrés Estofado de Atún lata para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        82
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-c_d-cuidado-urinario-estres-estofado-de-atun-lata-para-gatos/HIL605865_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-c%2Fd-cuidado-urinario-estres-estofado-de-atun-lata-para-gatos/HIL605865_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-a93b1999",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet c/d Multicare Mousse de Pollo lata para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-c_d-multicare-mousse-de-pollo-lata-para-gatos/HIL608821_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-c%2Fd-multicare-mousse-de-pollo-lata-para-gatos/HIL608821_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-f2f234bf",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet c/d Urinary Care Pollo lata para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        82
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-c_d-urinary-care-pollo-lata-para-gatos/HBG43191_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-c%2Fd-urinary-care-pollo-lata-para-gatos/HBG43191_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-868091cf",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet i/d Mousse de Pollo lata para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85,
+        200
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-i_d-mousse-de-pollo-lata-para-gatos/HIL608827_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-b35fc3b5",
+      "brand": "Hill's",
+      "name": "Hill's Prescription Diet k/d + Mobility j/d Pollo sobre para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-k_d_mobility-j_d-pollo-sobre-para-gatos/HIL10743U_M.html",
+        "https://www.tiendanimal.es/hills-prescription-diet-k%2Fd-mobility-j%2Fd-pollo-sobre-para-gatos/HIL10743U_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-e2a61dad",
+      "brand": "Hill's",
+      "name": "Hill's Prescription k/d Diet Kidney Care Salmón sobre en salsa para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-k_d-diet-kidney-care-salmon-sobre-en-salsa-para-gatos/HIL1884U_M.html",
+        "https://www.tiendanimal.es/hills-prescription-k%2Fd-diet-kidney-care-salmon-sobre-en-salsa-para-gatos/HIL1884U_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-c2b38601",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Adult Mousse de Pollo lata para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-mousse-de-pollo-lata-para-gatos/HIL609245_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-adult-mousse-de-pollo-lata-para-gatos/HIL609245_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-9c575b67",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Adult Mousse de Salmón lata para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-mousse-de-salmon-lata-para-gatos/HIL609246_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-adult-mousse-de-salmon-lata-para-gatos/HIL609246_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-ee5bc575",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Adult Pavo sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-pavo-sobre-para-gatos/HIL2107PZ_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-adult-pavo-sobre-para-gatos/HIL2107PZ_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-eb23f10b",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Adult Perfect Digestion Pollo comida húmeda para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-perfect-digestion-pollo-comida-humeda-para-gatos/HIL606444_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-adult-perfect-digestion-pollo-comida-humeda-para-gatos/HIL606444_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-a115862f",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Adult Pescado sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-pescado-sobre-para-gatos/HIL2105PZ_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-adult-pescado-sobre-para-gatos/HIL2105PZ_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-bb9a38e6",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Adult Pollo sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-pollo-sobre-para-gatos/HIL2104PZ_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-adult-pollo-sobre-para-gatos/HIL2104PZ_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-d6890546",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Adult Pollo, Pescado Azul y Vacuno en Salsa sobre para gatos",
+      "kind": "assortment",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-adult-pollo_-pescado-azul-y-vacuno-en-salsa-sobre-para-gatos/HIL604010_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-adult-pollo-pescado-azul-y-vacuno-en-salsa-sobre-para-gatos/HIL604010_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-bd4b65b0",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Adult Sterilised Mousse de Salmón para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-sterilised-mousse-de-salmon-para-gatos/HIL609249_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-adult-sterilised-mousse-de-salmon-para-gatos/HIL609249_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-2d92e01b",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Adult Sterilised Mousse de pollo lata para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-sterilised-mousse-de-pollo-lata-para-gatos/HIL609248_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-adult-sterilised-mousse-de-pollo-lata-para-gatos/HIL609248_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-8ae14cbf",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Adult Ternera Sobre en Salsa para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-ternera-sobre-en-salsa-para-gatos/HIL2106PZ_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-adult-ternera-sobre-en-salsa-para-gatos/HIL2106PZ_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-9795b719",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Kitten Pavo en Salsa sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-pavo-en-salsa-sobre-para-gatos/HIL2114PZ_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-kitten-pavo-en-salsa-sobre-para-gatos/HIL2114PZ_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-184b871c",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Kitten Pescado Azul sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-pescado-azul-sobre-para-gatos/HIL2113PZ_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-kitten-pescado-azul-sobre-para-gatos/HIL2113PZ_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-581247f6",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Kitten Pollo sobre en salsa",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-pollo-sobre-en-salsa/HIL2112PZ_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-kitten-pollo-sobre-en-salsa/HIL2112PZ_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-71b606c4",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Kitten Pollo y Pavo en Salsa sobre para gatos",
+      "kind": "assortment",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-kitten-pollo-y-pavo-en-salsa-sobre-para-gatos/HIL604032_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-kitten-pollo-y-pavo-en-salsa-sobre-para-gatos/HIL604032_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-178db5ef",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Kitten y Mother Mousse de Pollo y Pavo lata para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-y-mother-mousse-de-pollo-y-pavo-lata-para-gatos/HIL608058_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-kitten-y-mother-mousse-de-pollo-y-pavo-lata-para-gatos/HIL608058_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-237aca66",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Light Adult Pescado Azul y Pollo en Salsa sobre para gatos",
+      "kind": "assortment",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-light-adult-pescado-azul-y-pollo-en-salsa-sobre-para-gatos/HIL604019_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-light-adult-pescado-azul-y-pollo-en-salsa-sobre-para-gatos/HIL604019_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-66637f63",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Mature Mousse de Pollo lata para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/hill_s-science-plan-mature-mousse-de-pollo-lata-para-gatos/HIL609247_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-52ebd066",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Mature Sterilised Mousse de Pollo para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/hill_s-science-plan-mature-sterilised-mousse-de-pollo-para-gatos/HIL609250_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-mature-sterilised-mousse-de-pollo-para-gatos/HIL609250_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-52c3af05",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Perfect Weight Salmón y Pollo sobre para gatos - Multipack",
+      "kind": "assortment",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-perfect-weight-salmon-y-pollo-sobre-para-gatos---multipack/HIL10034V-2_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-perfect-weight-salmon-y-pollo-sobre-para-gatos---multipack/HIL10034V-2_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-cfe706a6",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Senior Vitality Pollo y Salmón Sobre en salsa para gatos",
+      "kind": "assortment",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-senior-vitality-pollo-y-salmon-sobre-en-salsa-para-gatos/HIL605260_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-senior-vitality-pollo-y-salmon-sobre-en-salsa-para-gatos/HIL605260_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-71f6c1c2",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Sterilised Adult Pollo y Salmón en Salsa sobre para gatos",
+      "kind": "assortment",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-sterilised-adult-pollo-y-salmon-en-salsa-sobre-para-gatos/HIL607317_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-sterilised-adult-pollo-y-salmon-en-salsa-sobre-para-gatos/HIL607317_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-9f8e8fdf",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Sterilised Carne y Pescado sobre para gatos Multipack",
+      "kind": "assortment",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-sterilised-carne-y-pescado-sobre-para-gatos-multipack/HIL604014_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-sterilised-carne-y-pescado-sobre-para-gatos-multipack/HIL604014_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-b35bf2eb",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Sterilised Young Adult Pavo Sobre en Salsa para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-sterilised-young-adult-pavo-sobre-en-salsa-para-gatos/HIL604013_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-sterilised-young-adult-pavo-sobre-en-salsa-para-gatos/HIL604013_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-461a6d98",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Sterilised Young Adult Trucha Sobre en Salsa para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-sterilised-young-adult-trucha-sobre-en-salsa-para-gatos/HIL604011_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-sterilised-young-adult-trucha-sobre-en-salsa-para-gatos/HIL604011_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-d4410891",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Sterilized Young Adult Pollo sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-sterilized-young-adult-pollo-sobre-para-gatos/HIL1941PZ_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-sterilized-young-adult-pollo-sobre-para-gatos/HIL1941PZ_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-595b883e",
+      "brand": "Hill's",
+      "name": "Hill's Science Plan Sterilized Young Adult Salmón sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-sterilized-young-adult-salmon-sobre-para-gatos/HIL1942PZ_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-sterilized-young-adult-salmon-sobre-para-gatos/HIL1942PZ_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "hills-aea119a2",
+      "brand": "Hill's",
+      "name": "Hill’s Prescription Diet Gastrointestinal Biome Stress estofado lata para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        82
+      ],
+      "sourceUrls": [
+        "https://www.tiendanimal.es/hills-prescription-diet-gastrointestinal-biome-stress-estofado-lata-para-gatos/HIL608830_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "advance-06d9acb9",
+      "brand": "Advance",
+      "name": "Advance Adult Bocaditos con Pollo en salsa sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-adult-bocaditos-con-pollo-en-salsa-sobre-para-gatos/ADV964528_M.html",
+        "https://www.tiendanimal.es/advance-adult-bocaditos-con-pollo-en-salsa-sobre-para-gatos/ADV964528_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "advance-56a888bd",
+      "brand": "Advance",
+      "name": "Advance Adult Sterilized Pavo en salsa sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-adult-sterilized-pavo-en-salsa-sobre-para-gatos/ADV964529_M.html",
+        "https://www.tiendanimal.es/advance-adult-sterilized-pavo-en-salsa-sobre-para-gatos/ADV964529_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "advance-d687ca7d",
+      "brand": "Advance",
+      "name": "Advance Delicatessen Atún en Salsa Sobres para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-delicatessen-atun-en-salsa-sobres-para-gatos/ADV969045_M.html",
+        "https://www.tiendanimal.es/advance-delicatessen-atun-en-salsa-sobres-para-gatos/ADV969045_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "advance-95923f62",
+      "brand": "Advance",
+      "name": "Advance Delicatessen Pavo en Salsa Sobres para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-delicatessen-pavo-en-salsa-sobres-para-gatos/ADV969046_M.html",
+        "https://www.tiendanimal.es/advance-delicatessen-pavo-en-salsa-sobres-para-gatos/ADV969046_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "advance-48db10e3",
+      "brand": "Advance",
+      "name": "Advance Delicatessen Pollo en Salsa Sobres para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-delicatessen-pollo-en-salsa-sobres-para-gatos/ADV969036_M.html",
+        "https://www.tiendanimal.es/advance-delicatessen-pollo-en-salsa-sobres-para-gatos/ADV969036_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "advance-652cf312",
+      "brand": "Advance",
+      "name": "Advance Delicatessen Salmón en Salsa Sobres para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-delicatessen-salmon-en-salsa-sobres-para-gatos/ADV969044_M.html",
+        "https://www.tiendanimal.es/advance-delicatessen-salmon-en-salsa-sobres-para-gatos/ADV969044_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "advance-fafa9032",
+      "brand": "Advance",
+      "name": "Advance Gastroenteric Pollo sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/alimentacion-gato/85-g-advance-gastroenteric-pollo-sobre-para-gatos/ADV925978.html",
+        "https://www.tiendanimal.es/advance-gastroenteric-pollo-sobre-para-gatos/ADV925978_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "advance-eb954ea7",
+      "brand": "Advance",
+      "name": "Advance Kitten Pavo en salsa sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-kitten-pavo-en-salsa-sobre-para-gatos/ADV964527_M.html",
+        "https://www.tiendanimal.es/advance-kitten-pavo-en-salsa-sobre-para-gatos/ADV964527_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "advance-2996b2c4",
+      "brand": "Advance",
+      "name": "Advance Kitten Pollo en salsa sobre para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-kitten-pollo-en-salsa-sobre-para-gatos/ADV964526_M.html",
+        "https://www.tiendanimal.es/advance-kitten-pollo-en-salsa-sobre-para-gatos/ADV964526_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "advance-dd162181",
+      "brand": "Advance",
+      "name": "Advance Recovery Sobre para perros y gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        100
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-humeda/advance-recovery-sobre-para-perros-y-gatos/ADV925970_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "advance-703db95b",
+      "brand": "Advance",
+      "name": "Advance Renal Pollo y Cerdo sobre para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-renal-pollo-y-cerdo-sobre-para-gatos/ADV925976_M.html",
+        "https://www.tiendanimal.es/advance-renal-pollo-y-cerdo-sobre-para-gatos/ADV925976_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "advance-ae0f356b",
+      "brand": "Advance",
+      "name": "Advance Sterilized Adult Bacalao sobres para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-sterilized-adult-bacalao-sobres-para-gatos/ADV964530_M.html",
+        "https://www.tiendanimal.es/advance-sterilized-adult-bacalao-sobres-para-gatos/ADV964530_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "advance-fde0cd46",
+      "brand": "Advance",
+      "name": "Advance Veterinary Diets Urinary sobre para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-veterinary-diets-urinary-sobre-para-gatos/ADV925974_M.html",
+        "https://www.tiendanimal.es/advance-veterinary-diets-urinary-sobre-para-gatos/ADV925974_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "advance-8ccc9ae4",
+      "brand": "Advance",
+      "name": "Advance Veterinary Diets Weight Balance Sobre para gatos",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/advance-veterinary-diets-weight-balance-sobre-para-gatos/ADV925971_M.html",
+        "https://www.tiendanimal.es/advance-veterinary-diets-weight-balance-sobre-para-gatos/ADV925971_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-2a3637d3",
+      "brand": "Leonardo",
+      "name": "LEONARDO Extra Filete Arenque",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-arenque-extra-filete-6-x-200-g",
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-arenque-extra-filete-6-x-400-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-6a36e950",
+      "brand": "Leonardo",
+      "name": "LEONARDO Extra Filete Cordero",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-cordero-extra-filete-6-x-200-g",
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-cordero-extra-filete-6-x-400-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-47d1fcc0",
+      "brand": "Leonardo",
+      "name": "LEONARDO Extra Filete Pavo",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-pavo-extra-filete-6-x-200-g",
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-pavo-extra-filete-6-x-400-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-49ae1018",
+      "brand": "Leonardo",
+      "name": "LEONARDO Extra Filete Pollo",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-pollo-extra-filete-6-x-200-g",
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-pollo-extra-filete-6-x-400-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-b251d533",
+      "brand": "Leonardo",
+      "name": "LEONARDO Extra Filete Salmón",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-salmon-extra-filete-6-x-200-g",
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-salmon-extra-filete-6-x-400-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-ead26978",
+      "brand": "Leonardo",
+      "name": "LEONARDO Extra Filete con Venado",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-con-venado-extra-filete-6-x-200-g",
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-con-venado-extra-filete-6-x-400-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-6e2daf53",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Ave + Huevo",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-ave-huevo-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-d451fe16",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Búfalo + Arándanos azules",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-bufalo-arandanos-azules-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-ee08de93",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Conejo + Cranberries",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-conejo-cranberries-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-b22ec952",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Cordero + Cranberries",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-cordero-cranberries-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-d30c0db6",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Faisán + Cranberries",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-faisan-cranberries-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-bf1e18d3",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Kitten puro en Ave",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-kitten-puro-en-ave-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-6073bc52",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Menú de carne",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-menu-de-carne-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-6d413fe3",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Pato + Queso",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-pato-queso-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-e56198a8",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Pescado + Gambas",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-pescado-gambas-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-3e65b946",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Puro en Pavo",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-pavo-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-c90d6fff",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Puro en Pollo",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-pollo-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-cec6d7b8",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Puro en Ternera",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-ternera-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-04d3623d",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Senior puro en Pollo",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-senior-puro-en-pollo-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-a8fa1682",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Senior puro en Ternera",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-senior-puro-en-ternera-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-ce1bb081",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Ternera + Verdura",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-ternera-verdura-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-e16b56c6",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Trucha + Catnip",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-trucha-catnip-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-fa83dd83",
+      "brand": "Leonardo",
+      "name": "LEONARDO Finest Selection Venado + Arándanos azules",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-venado-arandanos-azules-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-bcfaec2c",
+      "brand": "Leonardo",
+      "name": "LEONARDO Pulled Beef Beef",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        70
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-pulled-beef-beef-with-extra-pulled-beef-16-x-70-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-244fbf75",
+      "brand": "Leonardo",
+      "name": "LEONARDO Pulled Beef Chicken",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        70
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-pulled-beef-chicken-with-extra-pulled-beef-16-x-70-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-e1551323",
+      "brand": "Leonardo",
+      "name": "LEONARDO Pulled Beef Duck",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        70
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-pulled-beef-duck-with-extra-pulled-beef-16-x-70-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-707b57a4",
+      "brand": "Leonardo",
+      "name": "LEONARDO Pulled Beef Lamb",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        70
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-pulled-beef-lamb-with-extra-pulled-beef-16-x-70-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-1fe1a310",
+      "brand": "Leonardo",
+      "name": "LEONARDO Pulled Beef Turkey",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        70
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-pulled-beef-turkey-with-extra-pulled-beef-16-x-70-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-85c26e29",
+      "brand": "Leonardo",
+      "name": "LEONARDO Quality Selection Kitten",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400,
+        800
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-kitten-rico-en-ave-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-kitten-rico-en-ave-6-x-400-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-kitten-rico-en-ave-6-x-800-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-e950030e",
+      "brand": "Leonardo",
+      "name": "LEONARDO Quality Selection Puro en ave",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400,
+        800
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-puro-en-ave-6-x-200-g",
+        "https://es.leonardo-catfood.com/leonardo-puro-en-ave-6-x-400-g",
+        "https://es.leonardo-catfood.com/leonardo-puro-en-ave-6-x-800-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-d1038e4a",
+      "brand": "Leonardo",
+      "name": "LEONARDO Quality Selection Rico en apetitosa ternera",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400,
+        800
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-apetitosa-ternera-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-apetitosa-ternera-6-x-400-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-apetitosa-ternera-6-x-800-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-90918afc",
+      "brand": "Leonardo",
+      "name": "LEONARDO Quality Selection Rico en exquisito conejo",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-conejo-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-conejo-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-cb293103",
+      "brand": "Leonardo",
+      "name": "LEONARDO Quality Selection Rico en exquisito pescado marino",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400,
+        800
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-pescado-marino-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-pescado-marino-6-x-400-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-pescado-marino-6-x-800-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-910731e6",
+      "brand": "Leonardo",
+      "name": "LEONARDO Quality Selection Rico en sabroso hígado",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-higado-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-higado-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-3a2a0be9",
+      "brand": "Leonardo",
+      "name": "LEONARDO Quality Selection Rico en sabroso pato",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400,
+        800
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-pato-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-pato-6-x-400-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-pato-6-x-800-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-25e027e9",
+      "brand": "Leonardo",
+      "name": "LEONARDO Superior Selection Caballo con calabacín",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-caballo-con-calabacin-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-caballo-con-calabacin-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-4a011626",
+      "brand": "Leonardo",
+      "name": "LEONARDO Superior Selection Cordero con ave & calabaza",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-cordero-con-ave-calabaza-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-cordero-con-ave-calabaza-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-46821738",
+      "brand": "Leonardo",
+      "name": "LEONARDO Superior Selection Pato con pollo & zanahorias",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-pato-con-pollo-zanahorias-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-pato-con-pollo-zanahorias-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-b63a54dd",
+      "brand": "Leonardo",
+      "name": "LEONARDO Superior Selection Pavo con trucha & cranberries",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-pavo-con-trucha-cranberries-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-pavo-con-trucha-cranberries-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-1f85f0d3",
+      "brand": "Leonardo",
+      "name": "LEONARDO Superior Selection Pollo con espinacas",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-pollo-con-espinacas-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-pollo-con-espinacas-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "leonardo-127ba3d8",
+      "brand": "Leonardo",
+      "name": "LEONARDO Superior Selection Vacuno con venado & boniato",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-vacuno-con-venado-boniato-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-vacuno-con-venado-boniato-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "acana-c58f94cd",
+      "brand": "Acana",
+      "name": "Acana Premium Paté Atún y Pollo lata para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-atun-y-pollo-lata-para-gatos/ACAAWT_M.html",
+        "https://www.tiendanimal.es/acana-premium-pate-atun-y-pollo-lata-para-gatos/ACAAWT_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "acana-ded3686b",
+      "brand": "Acana",
+      "name": "Acana Premium Paté Cordero lata para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-cordero-lata-para-gatos/ACAAWL_M.html",
+        "https://www.tiendanimal.es/acana-premium-pate-cordero-lata-para-gatos/ACAAWL_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "acana-0544e2e9",
+      "brand": "Acana",
+      "name": "Acana Premium Paté Pollo lata para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-pollo-lata-para-gatos/ACAAWC_M.html",
+        "https://www.tiendanimal.es/acana-premium-pate-pollo-lata-para-gatos/ACAAWC_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "acana-265a9eae",
+      "brand": "Acana",
+      "name": "Acana Premium Paté Pollo y Pescado lata para gatitos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-pollo-y-pescado-lata-para-gatitos/ACAAWK_M.html",
+        "https://www.tiendanimal.es/acana-premium-pate-pollo-y-pescado-lata-para-gatitos/ACAAWK_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "acana-21da5951",
+      "brand": "Acana",
+      "name": "Acana Premium Paté Salmón y Pollo lata para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-salmon-y-pollo-lata-para-gatos/ACAAWS_M.html",
+        "https://www.tiendanimal.es/acana-premium-pate-salmon-y-pollo-lata-para-gatos/ACAAWS_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    },
+    {
+      "id": "acana-3a7cb68b",
+      "brand": "Acana",
+      "name": "Acana Premium Paté Ternera lata para gatos",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-ternera-lata-para-gatos/ACAAWB_M.html",
+        "https://www.tiendanimal.es/acana-premium-pate-ternera-lata-para-gatos/ACAAWB_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation"
+    }
+  ],
+  "internationalReferences": [
+    {
+      "sourceUrl": "https://www.orijenpetfoods.com/en-US/cats/cat-food/chicken-and-salmon-entr%C3%A9e-wet-kitten-food/ds-wet-cat-food-chicken-salmon-kitten-recipe.html",
+      "title": "Chicken & Salmon Entrée Wet Kitten Food Wet Cat Food",
+      "packEvidence": [
+        "f water; approximate value. Our raw ingredients are frozen at their peak freshness. Available Sizes 3oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ingredients",
+        ", sodium selenite, potassium iodide], choline chloride. (ME CALCULATED) 1292 kcal/kg, 110 kcal/can (3oz, 85g) ORIJEN® Chicken & Salmon Entrée in Bone Broth Kitten Food is formulated to meet the nutritional levels established by the AAFCO Cat F",
+        "ium selenite, potassium iodide], choline chloride. (ME CALCULATED) 1292 kcal/kg, 110 kcal/can (3oz, 85g) ORIJEN® Chicken & Salmon Entrée in Bone Broth Kitten Food is formulated to meet the nutritional levels established by the AAFCO Cat Food N"
+      ],
+      "checkedOn": "2026-10-13",
+      "region": "US",
+      "purchasePrice": null
+    },
+    {
+      "sourceUrl": "https://www.orijenpetfoods.com/en-US/cats/cat-food/chunks-and-shreds%2C-beef-and-tuna-entr%C3%A9e/ori-chunks-beef-tuna.html",
+      "title": "Chunks & Shreds, Beef & Tuna Entrée Wet Cat Food",
+      "packEvidence": [
+        "edients. 1 Exclusive of water. 2 Produced in a facility that also processes grains. Available Sizes 3oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ingredients",
+        "ide, biotin, vitamin B12 supplement, vitamin D3 supplement. ME Calculated: 849 kcal/kg, 72 kcal per 3oz can ORIJEN Chunks & Shreds Beef & Liver Entrée in Bone Broth Complete Adult Cat Food is formulated to meet the nutritional levels establish"
+      ],
+      "checkedOn": "2026-10-13",
+      "region": "US",
+      "purchasePrice": null
+    },
+    {
+      "sourceUrl": "https://www.orijenpetfoods.com/en-US/cats/cat-food/chunks-and-shreds%2C-chicken-and-tuna-recipe-for-kittens/ori-chunks-chicken-tuna-for-kittens.html",
+      "title": "Chunks & Shreds, Chicken & Tuna Recipe for Kittens Wet Cat Food",
+      "packEvidence": [
+        "edients. 1 Exclusive of water. 2 Produced in a facility that also processes grains. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ing",
+        "s. 1 Exclusive of water. 2 Produced in a facility that also processes grains. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ingredients",
+        "ide, biotin, vitamin B12 supplement, vitamin D3 supplement. ME Calculated: 987 kcal/kg, 84 kcal per 3oz. or 153 kcals per 5.5oz ORIJEN Chunks Chicken & Tuna Entrée in Bone Broth Complete Kitten Food is formulated to meet the nutritional levels",
+        "12 supplement, vitamin D3 supplement. ME Calculated: 987 kcal/kg, 84 kcal per 3oz. or 153 kcals per 5.5oz ORIJEN Chunks Chicken & Tuna Entrée in Bone Broth Complete Kitten Food is formulated to meet the nutritional levels established by the AAFC"
+      ],
+      "checkedOn": "2026-10-13",
+      "region": "US",
+      "purchasePrice": null
+    },
+    {
+      "sourceUrl": "https://www.orijenpetfoods.com/en-US/cats/cat-food/chunks-and-shreds%2C-duck-and-liver-entr%C3%A9e/ori-chunks-duck-liver.html",
+      "title": "Chunks & Shreds, Duck & Liver Entrée Wet Cat Food",
+      "packEvidence": [
+        "edients. 1 Exclusive of water. 2 Produced in a facility that also processes grains. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ing",
+        "s. 1 Exclusive of water. 2 Produced in a facility that also processes grains. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ingredients",
+        "ide, biotin, vitamin B12 supplement, vitamin D3 supplement. ME Calculated: 814 kcal/kg, 69 kcal per 3oz can, 126 kcal per 5.5oz can ORIJEN Chunks & Shreds Duck & Liver Entrée in Bone Broth Complete Adult Cat Food is formulated to meet the nutr",
+        "12 supplement, vitamin D3 supplement. ME Calculated: 814 kcal/kg, 69 kcal per 3oz can, 126 kcal per 5.5oz can ORIJEN Chunks & Shreds Duck & Liver Entrée in Bone Broth Complete Adult Cat Food is formulated to meet the nutritional levels establish"
+      ],
+      "checkedOn": "2026-10-13",
+      "region": "US",
+      "purchasePrice": null
+    },
+    {
+      "sourceUrl": "https://www.orijenpetfoods.com/en-US/cats/cat-food/chunks-and-shreds%2C-original-entr%C3%A9e/ori-chunks-original.html",
+      "title": "Chunks & Shreds, Original Entrée Wet Cat Food",
+      "packEvidence": [
+        "edients. 1 Exclusive of water. 2 Produced in a facility that also processes grains. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ing",
+        "s. 1 Exclusive of water. 2 Produced in a facility that also processes grains. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ingredients",
+        "ide, biotin, vitamin B12 supplement, vitamin D3 supplement. ME Calculated: 767 kcal/kg, 65 kcal per 3oz can, 119 kcals per 5.5oz can ORIJEN Chunks & Shreds Original Entrée in Bone Broth Complete Adult Cat Food is formulated to meet the nutriti",
+        "2 supplement, vitamin D3 supplement. ME Calculated: 767 kcal/kg, 65 kcal per 3oz can, 119 kcals per 5.5oz can ORIJEN Chunks & Shreds Original Entrée in Bone Broth Complete Adult Cat Food is formulated to meet the nutritional levels established b"
+      ],
+      "checkedOn": "2026-10-13",
+      "region": "US",
+      "purchasePrice": null
+    },
+    {
+      "sourceUrl": "https://www.orijenpetfoods.com/en-US/cats/cat-food/chunks-and-shreds%2C-regional-red-entr%C3%A9e/ori-chunks-regional-red.html",
+      "title": "Chunks & Shreds, Regional Red Entrée Wet Cat Food",
+      "packEvidence": [
+        "edients. 1 Exclusive of water. 2 Produced in a facility that also processes grains. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ing",
+        "s. 1 Exclusive of water. 2 Produced in a facility that also processes grains. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ingredients",
+        "ide, biotin, vitamin B12 supplement, vitamin D3 supplement. ME Calculated: 847 kcal/kg, 72 kcal per 3oz can, 131 kcals per 5.5oz can ORIJEN Chunks & Shreds Regional Red Entrée in Bone Broth Complete Adult Cat Food is formulated to meet the nut",
+        "2 supplement, vitamin D3 supplement. ME Calculated: 847 kcal/kg, 72 kcal per 3oz can, 131 kcals per 5.5oz can ORIJEN Chunks & Shreds Regional Red Entrée in Bone Broth Complete Adult Cat Food is formulated to meet the nutritional levels establish"
+      ],
+      "checkedOn": "2026-10-13",
+      "region": "US",
+      "purchasePrice": null
+    },
+    {
+      "sourceUrl": "https://www.orijenpetfoods.com/en-US/cats/cat-food/chunks-and-shreds%2C-salmon-and-chicken-entr%C3%A9e/ori-chunks-salmon-chicken.html",
+      "title": "Chunks & Shreds, Salmon & Chicken Entrée Wet Cat Food",
+      "packEvidence": [
+        "edients. 1 Exclusive of water. 2 Produced in a facility that also processes grains. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ing",
+        "s. 1 Exclusive of water. 2 Produced in a facility that also processes grains. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ingredients",
+        "ide, biotin, vitamin B12 supplement, vitamin D3 supplement. ME Calculated: 808 kcal/kg, 69 kcal per 3oz can, 125 kcal per 5.5oz can ORIJEN Chunks & Shreds Salmon & Chicken Entrée in Bone Broth Complete Adult Cat Food is formulated to meet the ",
+        "12 supplement, vitamin D3 supplement. ME Calculated: 808 kcal/kg, 69 kcal per 3oz can, 125 kcal per 5.5oz can ORIJEN Chunks & Shreds Salmon & Chicken Entrée in Bone Broth Complete Adult Cat Food is formulated to meet the nutritional levels estab"
+      ],
+      "checkedOn": "2026-10-13",
+      "region": "US",
+      "purchasePrice": null
+    },
+    {
+      "sourceUrl": "https://www.orijenpetfoods.com/en-US/cats/cat-food/duck-and-chicken-entree-wet-cat-food/ds-wet-cat-food-duck-chicken-recipe.html",
+      "title": "Duck & Chicken Entree Wet Cat Food Wet Cat Food",
+      "packEvidence": [
+        "f water; approximate value. Our raw ingredients are frozen at their peak freshness. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ing",
+        "r; approximate value. Our raw ingredients are frozen at their peak freshness. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ingredients",
+        "te, sodium selenite, potassium iodide], choline chloride. (ME CALCULATED) 975 kcal/kg, 82 kcal/can (3oz, 85g) or 156kcal/can (5.5oz, 155g) ORIJEN® Duck & Chicken Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional levels ",
+        "odium selenite, potassium iodide], choline chloride. (ME CALCULATED) 975 kcal/kg, 82 kcal/can (3oz, 85g) or 156kcal/can (5.5oz, 155g) ORIJEN® Duck & Chicken Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional levels estab",
+        "sium iodide], choline chloride. (ME CALCULATED) 975 kcal/kg, 82 kcal/can (3oz, 85g) or 156kcal/can (5.5oz, 155g) ORIJEN® Duck & Chicken Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional levels established by the AAFCO Cat",
+        "dide], choline chloride. (ME CALCULATED) 975 kcal/kg, 82 kcal/can (3oz, 85g) or 156kcal/can (5.5oz, 155g) ORIJEN® Duck & Chicken Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional levels established by the AAFCO Cat Food "
+      ],
+      "checkedOn": "2026-10-13",
+      "region": "US",
+      "purchasePrice": null
+    },
+    {
+      "sourceUrl": "https://www.orijenpetfoods.com/en-US/cats/cat-food/original-entr%C3%A9e-wet-cat-food/ds-wet-cat-food-original.html",
+      "title": "Original Entrée Wet Cat Food Wet Cat Food",
+      "packEvidence": [
+        "lue. Our raw ingredients are frozen at their peak freshness. Compare ORIJEN Recipes Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ing",
+        "ur raw ingredients are frozen at their peak freshness. Compare ORIJEN Recipes Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ingredients",
+        "e, sodium selenite, potassium iodide], choline chloride. (ME CALCULATED) 1156 kcal/kg, 98 kcal/can (3oz, 85g) or 180kcal/can (5.5oz, 155g) ORIJEN® Original Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional levels establ",
+        "dium selenite, potassium iodide], choline chloride. (ME CALCULATED) 1156 kcal/kg, 98 kcal/can (3oz, 85g) or 180kcal/can (5.5oz, 155g) ORIJEN® Original Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional levels established",
+        "ium iodide], choline chloride. (ME CALCULATED) 1156 kcal/kg, 98 kcal/can (3oz, 85g) or 180kcal/can (5.5oz, 155g) ORIJEN® Original Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional levels established by the AAFCO Cat Food ",
+        "ide], choline chloride. (ME CALCULATED) 1156 kcal/kg, 98 kcal/can (3oz, 85g) or 180kcal/can (5.5oz, 155g) ORIJEN® Original Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional levels established by the AAFCO Cat Food Nutrie"
+      ],
+      "checkedOn": "2026-10-13",
+      "region": "US",
+      "purchasePrice": null
+    },
+    {
+      "sourceUrl": "https://www.orijenpetfoods.com/en-US/cats/cat-food/orijen-wet-cat-food-p%C3%A2t%C3%A9%2C-variety-pack/ds-ori-wet-food-pate-variety-pack.html",
+      "title": "ORIJEN Wet Cat Food Pâté, Variety Pack Wet Cat Food",
+      "packEvidence": [
+        "that also processes grains. Our included raw ingredients are delivered frozen. Available Sizes 12 x 3oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ingredients"
+      ],
+      "checkedOn": "2026-10-13",
+      "region": "US",
+      "purchasePrice": null
+    },
+    {
+      "sourceUrl": "https://www.orijenpetfoods.com/en-US/cats/cat-food/regional-red-entr%C3%A9e-wet-cat-food/ds-wet-cat-food-regional-red.html",
+      "title": "Regional Red Entrée Wet Cat Food Wet Cat Food",
+      "packEvidence": [
+        "f water; approximate value. Our raw ingredients are frozen at their peak freshness. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ing",
+        "r; approximate value. Our raw ingredients are frozen at their peak freshness. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ingredients",
+        ", sodium selenite, potassium iodide], choline chloride. (ME CALCULATED) 1251 kcal/kg, 107 kcal/can (3oz, 85g) or 196kcal/can (5.5oz, 155g) ORIJEN® REGIONAL RED® Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional levels e",
+        "ium selenite, potassium iodide], choline chloride. (ME CALCULATED) 1251 kcal/kg, 107 kcal/can (3oz, 85g) or 196kcal/can (5.5oz, 155g) ORIJEN® REGIONAL RED® Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional levels establ",
+        "um iodide], choline chloride. (ME CALCULATED) 1251 kcal/kg, 107 kcal/can (3oz, 85g) or 196kcal/can (5.5oz, 155g) ORIJEN® REGIONAL RED® Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional levels established by the AAFCO Cat ",
+        "de], choline chloride. (ME CALCULATED) 1251 kcal/kg, 107 kcal/can (3oz, 85g) or 196kcal/can (5.5oz, 155g) ORIJEN® REGIONAL RED® Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional levels established by the AAFCO Cat Food N"
+      ],
+      "checkedOn": "2026-10-13",
+      "region": "US",
+      "purchasePrice": null
+    },
+    {
+      "sourceUrl": "https://www.orijenpetfoods.com/en-US/cats/cat-food/tuna%2C-salmon-and-beef-entr%C3%A9e-wet-cat-food/ds-wet-cat-food-tuna-salmon-beef-recipe.html",
+      "title": "Tuna, Salmon & Beef Entrée Wet Cat Food Wet Cat Food",
+      "packEvidence": [
+        "f water; approximate value. Our raw ingredients are frozen at their peak freshness. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ing",
+        "r; approximate value. Our raw ingredients are frozen at their peak freshness. Available Sizes 3oz / 5.5oz kg lbs *Retailer’s stock may vary. Sizes subject to availability in market. Please contact retailer to confirm their inventory. Ingredients",
+        "e, sodium selenite, potassium iodide], choline chloride. (ME CALCULATED) 1059 kcal/kg, 90 kcal/can (3oz, 85g) or 165kcal/can (5.5oz, 155g) ORIJEN® Tuna, Salmon, & Beef Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional l",
+        "dium selenite, potassium iodide], choline chloride. (ME CALCULATED) 1059 kcal/kg, 90 kcal/can (3oz, 85g) or 165kcal/can (5.5oz, 155g) ORIJEN® Tuna, Salmon, & Beef Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional levels",
+        "ium iodide], choline chloride. (ME CALCULATED) 1059 kcal/kg, 90 kcal/can (3oz, 85g) or 165kcal/can (5.5oz, 155g) ORIJEN® Tuna, Salmon, & Beef Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional levels established by the AAF",
+        "ide], choline chloride. (ME CALCULATED) 1059 kcal/kg, 90 kcal/can (3oz, 85g) or 165kcal/can (5.5oz, 155g) ORIJEN® Tuna, Salmon, & Beef Entrée in Bone Broth Adult Cat Food is formulated to meet the nutritional levels established by the AAFCO Cat"
+      ],
+      "checkedOn": "2026-10-13",
+      "region": "US",
+      "purchasePrice": null
+    }
+  ]
+}

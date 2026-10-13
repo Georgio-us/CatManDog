@@ -1,8 +1,8 @@
 import { createUsefulUI } from './useful.js?v=2';
 import { createAccountUI } from './account.js?v=3';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, isDemoPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js';
-import { accessoryDetail } from './accessory-ui.js';
-import { categories, products, catalogProducts, articles } from './data.js?v=20261004-2';
+import { accessoryDetail } from './accessory-ui.js?v=rc-range-2';
+import { categories, products, catalogProducts, articles } from './data.js?v=rc-range-2';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js';
 
 import { homeDirections, activeHomeLanding } from './collections.js';
@@ -34,7 +34,7 @@ function updateHeader(){const count=cart.reduce((n,x)=>n+x.qty,0);document.query
 function route(){const raw=location.hash.slice(1)||'/';const [path,query]=raw.split('?');return {path,params:new URLSearchParams(query)};}
 function imageStyle(index){if(typeof index==='string')return `background-image:url('${index}');background-size:cover;background-position:center`; const tile=index%8;return `--px:${(tile%4)*100/3}%;--py:${Math.floor(tile/4)*100}%;--product-sheet:url('assets/products-cats-${Math.floor(index/8)+1}.png')`;}
 const categoryLabel = name => name === 'Наполнитель' ? 'Наполнители и лотки' : name;
-function imageBlock(index,extra=''){if(index && typeof index==='object')return `<div class="product-image real-product-image ${extra}"><img src="${escape(index.src)}" alt="${escape(index.alt)}" loading="lazy" decoding="async"></div>`;return `<div class="product-image ${extra}" style="${imageStyle(index)}"></div>`;}
+function imageBlock(index,extra=''){if(index && typeof index==='object')return `<div class="product-image real-product-image ${index.presentation==='editorial'?'editorial-product-image ':''}${extra}"><img src="${escape(index.src)}" alt="${escape(index.alt)}" loading="lazy" decoding="async"></div>`;return `<div class="product-image ${extra}" style="${imageStyle(index)}"></div>`;}
 function crumbs(title){return `<div class="breadcrumbs"><a href="#/">Главная</a><span>/</span><span>${escape(title)}</span></div>`;}
 function card(p){
   const pricing=catalogPrice(p);

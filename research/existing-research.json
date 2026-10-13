@@ -1,0 +1,879 @@
+{
+  "sources": [
+    "ACCESSORY-SOURCING.md",
+    "WATER-BALCONY-SOURCING.md",
+    "FAIRE-SOURCING.md"
+  ],
+  "everyday": [
+    {
+      "id": "fountain",
+      "name": "Catit PIXI - фонтан со стальной чашей",
+      "brand": "Catit",
+      "category": "Миски и поилки",
+      "packaging": "2,5 л · белый",
+      "ean": "022517437209",
+      "sourceUrls": [
+        "https://hagen.es/products/fuente-pixi-de-acero-inoxidable"
+      ],
+      "supplier": {
+        "name": "Hagen España",
+        "url": "https://hagen.es/products/fuente-pixi-de-acero-inoxidable",
+        "sku": "43720",
+        "catalogName": "Catit PIXI - фонтан со стальной чашей",
+        "checkedAt": "2026-10-04",
+        "professionalUrl": "https://hagen.es/pages/alta-profesionales",
+        "minimumOrderStatus": "pending"
+      },
+      "retailPrice": {
+        "amount": 43.99,
+        "currency": "EUR",
+        "status": "temporary",
+        "sourceName": "Hagen España · PVPR",
+        "sourceUrl": "https://hagen.es/products/fuente-pixi-de-acero-inoxidable",
+        "checkedAt": "2026-10-04",
+        "type": "recommended",
+        "market": "ES",
+        "basis": "Published recommended retail price, not Shopify internal price"
+      },
+      "priceKind": "unconfirmed",
+      "purchasePrice": null,
+      "document": "WATER-BALCONY-SOURCING.md"
+    },
+    {
+      "id": "catit-pixi-smart",
+      "name": "Catit PIXI Smart - умный фонтан",
+      "brand": "Catit",
+      "category": "Миски и поилки",
+      "packaging": "2 л · белый",
+      "ean": "022517437513",
+      "sourceUrls": [
+        "https://hagen.es/products/fuente-inteligente-pixi"
+      ],
+      "supplier": {
+        "name": "Hagen España",
+        "url": "https://hagen.es/products/fuente-inteligente-pixi",
+        "sku": "43751",
+        "catalogName": "Catit PIXI Smart - умный фонтан",
+        "checkedAt": "2026-10-04",
+        "professionalUrl": "https://hagen.es/pages/alta-profesionales",
+        "minimumOrderStatus": "pending"
+      },
+      "retailPrice": {
+        "amount": 109.99,
+        "currency": "EUR",
+        "status": "temporary",
+        "sourceName": "Hagen España · PVPR",
+        "sourceUrl": "https://hagen.es/products/fuente-inteligente-pixi",
+        "checkedAt": "2026-10-04",
+        "type": "recommended",
+        "market": "ES",
+        "basis": "Published recommended retail price, not Shopify internal price"
+      },
+      "priceKind": "unconfirmed",
+      "purchasePrice": null,
+      "document": "WATER-BALCONY-SOURCING.md"
+    },
+    {
+      "id": "catit-pixi-wireless",
+      "name": "Catit PIXI UVC - фонтан без проводов",
+      "brand": "Catit",
+      "category": "Миски и поилки",
+      "packaging": "5 л · сталь",
+      "ean": "022517437612",
+      "sourceUrls": [
+        "https://hagen.es/products/fuente-catit-pixi-sin-cables-de-acero-inoxidable"
+      ],
+      "supplier": {
+        "name": "Hagen España",
+        "url": "https://hagen.es/products/fuente-catit-pixi-sin-cables-de-acero-inoxidable",
+        "sku": "43761",
+        "catalogName": "Catit PIXI UVC - фонтан без проводов",
+        "checkedAt": "2026-10-04",
+        "professionalUrl": "https://hagen.es/pages/alta-profesionales",
+        "minimumOrderStatus": "pending",
+        "publicAvailability": "out_of_stock"
+      },
+      "retailPrice": {
+        "amount": 69.99,
+        "currency": "EUR",
+        "status": "temporary",
+        "sourceName": "Hagen España · PVPR",
+        "sourceUrl": "https://hagen.es/products/fuente-catit-pixi-sin-cables-de-acero-inoxidable",
+        "checkedAt": "2026-10-04",
+        "type": "recommended",
+        "market": "ES",
+        "basis": "Published recommended retail price, not Shopify internal price"
+      },
+      "priceKind": "unconfirmed",
+      "purchasePrice": null,
+      "document": "WATER-BALCONY-SOURCING.md"
+    },
+    {
+      "id": "catit-pixi-easy-clean",
+      "name": "Catit PIXI Easy Clean - фонтан",
+      "brand": "Catit",
+      "category": "Миски и поилки",
+      "packaging": "2,25 л · бордовый",
+      "ean": "022517436936",
+      "sourceUrls": [
+        "https://hagen.es/products/fuente-catit-pixi-easy-clean"
+      ],
+      "supplier": {
+        "name": "Hagen España",
+        "url": "https://hagen.es/products/fuente-catit-pixi-easy-clean",
+        "sku": "43693",
+        "catalogName": "Catit PIXI Easy Clean - фонтан",
+        "checkedAt": "2026-10-04",
+        "professionalUrl": "https://hagen.es/pages/alta-profesionales",
+        "minimumOrderStatus": "pending"
+      },
+      "retailPrice": {
+        "amount": 41.99,
+        "currency": "EUR",
+        "status": "temporary",
+        "sourceName": "Hagen España · PVPR",
+        "sourceUrl": "https://hagen.es/products/fuente-catit-pixi-easy-clean",
+        "checkedAt": "2026-10-04",
+        "type": "recommended",
+        "market": "ES",
+        "basis": "Published recommended retail price, not Shopify internal price"
+      },
+      "priceKind": "unconfirmed",
+      "purchasePrice": null,
+      "document": "WATER-BALCONY-SOURCING.md"
+    },
+    {
+      "id": "catit-pixi-filters-3",
+      "name": "Catit PIXI - сменные фильтры",
+      "brand": "Catit",
+      "category": "Миски и поилки",
+      "packaging": "3 шт",
+      "ean": "022517437216",
+      "sourceUrls": [
+        "https://hagen.es/products/filtro-para-fuentes-pixi"
+      ],
+      "supplier": {
+        "name": "Hagen España",
+        "url": "https://hagen.es/products/filtro-para-fuentes-pixi",
+        "sku": "43721",
+        "catalogName": "Catit PIXI - сменные фильтры",
+        "checkedAt": "2026-10-04",
+        "professionalUrl": "https://hagen.es/pages/alta-profesionales",
+        "minimumOrderStatus": "pending"
+      },
+      "retailPrice": {
+        "amount": 7.02,
+        "currency": "EUR",
+        "status": "temporary",
+        "sourceName": "Hagen España · PVPR",
+        "sourceUrl": "https://hagen.es/products/filtro-para-fuentes-pixi",
+        "checkedAt": "2026-10-04",
+        "type": "recommended",
+        "market": "ES",
+        "basis": "Published recommended retail price, not Shopify internal price"
+      },
+      "priceKind": "unconfirmed",
+      "purchasePrice": null,
+      "document": "WATER-BALCONY-SOURCING.md"
+    },
+    {
+      "id": "balcony-net",
+      "name": "Trixie - армированная сетка для балкона",
+      "brand": "Trixie",
+      "category": "Окна и балконы",
+      "packaging": "4 × 3 м · оливковый",
+      "ean": "4011905442938",
+      "sourceUrls": [
+        "https://www.trixie.es/Red-Protectora-Reforzada"
+      ],
+      "supplier": {
+        "name": "Grupo Trixder · Trixie España",
+        "url": "https://www.trixie.es/Red-Protectora-Reforzada",
+        "sku": "44293",
+        "catalogName": "Trixie - армированная сетка для балкона",
+        "checkedAt": "2026-10-04",
+        "professionalUrl": "https://grupotrixder.com/?ObjectPath=/Shops/Trixder/Categories/Registro",
+        "minimumOrderStatus": "pending"
+      },
+      "retailPrice": {
+        "amount": 37.49,
+        "currency": "EUR",
+        "status": "temporary",
+        "sourceName": "Zooplus España",
+        "sourceUrl": "https://www.zooplus.es/shop/tienda_gatos/redes_gateras_gatos/redes_gatos/redes/106341",
+        "checkedAt": "2026-10-04",
+        "type": "retail",
+        "market": "ES",
+        "basis": "Public single-item price including VAT, no conditional coupon, excluding delivery"
+      },
+      "priceKind": "unconfirmed",
+      "purchasePrice": null,
+      "document": "WATER-BALCONY-SOURCING.md"
+    },
+    {
+      "id": "trixie-balcony-rail",
+      "name": "Trixie - стойка с зажимом для перил",
+      "brand": "Trixie",
+      "category": "Окна и балконы",
+      "packaging": "1-2 м · зажим до 3,5 см",
+      "ean": "4011905044132",
+      "sourceUrls": [
+        "https://www.trixie.es/Abrazadera-Barandilla"
+      ],
+      "supplier": {
+        "name": "Grupo Trixder · Trixie España",
+        "url": "https://www.trixie.es/Abrazadera-Barandilla",
+        "sku": "4413",
+        "catalogName": "Trixie - стойка с зажимом для перил",
+        "checkedAt": "2026-10-04",
+        "professionalUrl": "https://grupotrixder.com/?ObjectPath=/Shops/Trixder/Categories/Registro",
+        "minimumOrderStatus": "pending"
+      },
+      "retailPrice": {
+        "amount": 28.49,
+        "currency": "EUR",
+        "status": "temporary",
+        "sourceName": "MisMascotas España",
+        "sourceUrl": "https://www.mismascotas.es/587-proteccion-seguridad-gatos?q=Marca-TRIXIE",
+        "checkedAt": "2026-10-04",
+        "type": "retail",
+        "market": "ES",
+        "basis": "Public single-item price including VAT, no conditional coupon, excluding delivery"
+      },
+      "priceKind": "unconfirmed",
+      "purchasePrice": null,
+      "document": "WATER-BALCONY-SOURCING.md"
+    },
+    {
+      "id": "window-hammock",
+      "name": "Trixie - оконная лежанка на присосках",
+      "brand": "Trixie",
+      "category": "Окна и балконы",
+      "packaging": "50 × 30 см · серый",
+      "ean": "04011905432090",
+      "sourceUrls": [
+        "https://www.trixie.es/Alfombrilla-para-el-cristal-de-la-ventana"
+      ],
+      "supplier": {
+        "name": "Grupo Trixder · Trixie España",
+        "url": "https://www.trixie.es/Alfombrilla-para-el-cristal-de-la-ventana",
+        "sku": "43209",
+        "catalogName": "Trixie - оконная лежанка на присосках",
+        "checkedAt": "2026-10-04",
+        "professionalUrl": "https://grupotrixder.com/?ObjectPath=/Shops/Trixder/Categories/Registro",
+        "minimumOrderStatus": "pending"
+      },
+      "retailPrice": {
+        "amount": 45.99,
+        "currency": "EUR",
+        "status": "temporary",
+        "sourceName": "Trixie Balear · IVA incl",
+        "sourceUrl": "https://www.trixiebalear.es/shop/category/gatos-1710/rascadores-1812?order=name+asc",
+        "checkedAt": "2026-10-04",
+        "type": "retail",
+        "market": "ES",
+        "basis": "Public single-item price including VAT, no conditional coupon, excluding delivery"
+      },
+      "priceKind": "unconfirmed",
+      "purchasePrice": null,
+      "document": "WATER-BALCONY-SOURCING.md"
+    },
+    {
+      "id": "trixie-balcony-chair",
+      "name": "Trixie STRONG - шезлонг для кошки",
+      "brand": "Trixie",
+      "category": "Окна и балконы",
+      "packaging": "33 × 37 × 51 см · серый",
+      "ean": "04011905851372",
+      "sourceUrls": [
+        "https://www.trixie.es/Silla-de-playa"
+      ],
+      "supplier": {
+        "name": "Grupo Trixder · Trixie España",
+        "url": "https://www.trixie.es/Silla-de-playa",
+        "sku": "43205",
+        "catalogName": "Trixie STRONG - шезлонг для кошки",
+        "checkedAt": "2026-10-04",
+        "professionalUrl": "https://grupotrixder.com/?ObjectPath=/Shops/Trixder/Categories/Registro",
+        "minimumOrderStatus": "pending"
+      },
+      "retailPrice": {
+        "amount": 29.99,
+        "currency": "EUR",
+        "status": "temporary",
+        "sourceName": "TRIXIE · официальный магазин Германии",
+        "sourceUrl": "https://trixie.shop/products/outdoor-strandstuhl-fur-katzen",
+        "checkedAt": "2026-10-04",
+        "type": "retail",
+        "market": "DE",
+        "basis": "Public single-item price including VAT, no conditional coupon, excluding delivery"
+      },
+      "priceKind": "unconfirmed",
+      "purchasePrice": null,
+      "document": "WATER-BALCONY-SOURCING.md"
+    },
+    {
+      "id": "kong-scrunchie",
+      "name": "KONG Cat Active Scrunchie",
+      "brand": "KONG",
+      "category": "Игрушки",
+      "packaging": "1 шт",
+      "ean": null,
+      "sourceUrls": [
+        "https://luceronutricare.com/juguetes-gatos-kong/kong-cat-active-scrunchie/"
+      ],
+      "supplier": {
+        "name": "Distribuciones Lucero",
+        "url": "https://luceronutricare.com/juguetes-gatos-kong/kong-cat-active-scrunchie/",
+        "sku": "V55JU04625",
+        "catalogName": "KONG CAT ACTIVE SCRUNCHIE",
+        "checkedAt": "2026-10-04"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "ACCESSORY-SOURCING.md"
+    },
+    {
+      "id": "kong-cork-feather",
+      "name": "KONG Cat Cork с пером",
+      "brand": "KONG",
+      "category": "Игрушки",
+      "packaging": "Cork с пером",
+      "ean": null,
+      "sourceUrls": [
+        "https://luceronutricare.com/juguetes-gatos-kong/kong-cat-corcho-con-pluma-2/"
+      ],
+      "supplier": {
+        "name": "Distribuciones Lucero",
+        "url": "https://luceronutricare.com/juguetes-gatos-kong/kong-cat-corcho-con-pluma-2/",
+        "sku": "V55JU03686",
+        "catalogName": "KONG CAT CORCHO CON PLUMA",
+        "checkedAt": "2026-10-04"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "ACCESSORY-SOURCING.md"
+    },
+    {
+      "id": "kong-caterpillar",
+      "name": "KONG Cat - цветная гусеница",
+      "brand": "KONG",
+      "category": "Игрушки",
+      "packaging": "1 шт",
+      "ean": null,
+      "sourceUrls": [
+        "https://luceronutricare.com/juguetes-gatos-kong/kong-cat-gusano-de-colores/"
+      ],
+      "supplier": {
+        "name": "Distribuciones Lucero",
+        "url": "https://luceronutricare.com/juguetes-gatos-kong/kong-cat-gusano-de-colores/",
+        "sku": "V55JU04660",
+        "catalogName": "KONG CAT GUSANO DE COLORES",
+        "checkedAt": "2026-10-04"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "ACCESSORY-SOURCING.md"
+    },
+    {
+      "id": "kong-noodles",
+      "name": "KONG Crackles Noodles",
+      "brand": "KONG",
+      "category": "Игрушки",
+      "packaging": "1 шт",
+      "ean": null,
+      "sourceUrls": [
+        "https://luceronutricare.com/juguetes-gatos-kong/kong-crackcles-noodles-2/"
+      ],
+      "supplier": {
+        "name": "Distribuciones Lucero",
+        "url": "https://luceronutricare.com/juguetes-gatos-kong/kong-crackcles-noodles-2/",
+        "sku": "V55JU04722",
+        "catalogName": "Kong Crackcles Noodles",
+        "checkedAt": "2026-10-04"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "ACCESSORY-SOURCING.md"
+    },
+    {
+      "id": "kong-sardine",
+      "name": "KONG - сардина с эластичным креплением",
+      "brand": "KONG",
+      "category": "Игрушки",
+      "packaging": "7 × 5 × 2 см",
+      "ean": null,
+      "sourceUrls": [
+        "https://luceronutricare.com/juguetes-gatos-kong/sardina-con-sujeccion-elastica-7x5x2-cm-2/"
+      ],
+      "supplier": {
+        "name": "Distribuciones Lucero",
+        "url": "https://luceronutricare.com/juguetes-gatos-kong/sardina-con-sujeccion-elastica-7x5x2-cm-2/",
+        "sku": "V55JU04710",
+        "catalogName": "KONG SARDINA CON SUJECCIÓN ELÁSTICA 7x5x2 cm",
+        "checkedAt": "2026-10-04"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "ACCESSORY-SOURCING.md"
+    },
+    {
+      "id": "catit-mini-flower",
+      "name": "Catit Mini Flower Fountain",
+      "brand": "Catit",
+      "category": "Миски и поилки",
+      "packaging": "1,5 л",
+      "ean": "022517437353",
+      "sourceUrls": [
+        "https://piensosmari.es/fuentes/4095066-catit-mini-flower-fountain-15l-022517437353.html"
+      ],
+      "supplier": {
+        "name": "Piensos Marí",
+        "url": "https://piensosmari.es/fuentes/4095066-catit-mini-flower-fountain-15l-022517437353.html",
+        "sku": "18111212",
+        "catalogName": "Catit Mini Flower Fountain, 1,5L·",
+        "checkedAt": "2026-10-04"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "ACCESSORY-SOURCING.md"
+    },
+    {
+      "id": "catit-flower",
+      "name": "Catit Flower Fountain",
+      "brand": "Catit",
+      "category": "Миски и поилки",
+      "packaging": "3 л",
+      "ean": "022517437421",
+      "sourceUrls": [
+        "https://piensosmari.es/fuentes/4095071-catit-flower-fountain-3l-022517437421.html"
+      ],
+      "supplier": {
+        "name": "Piensos Marí",
+        "url": "https://piensosmari.es/fuentes/4095071-catit-flower-fountain-3l-022517437421.html",
+        "sku": "18113163",
+        "catalogName": "Catit Flower Fountain, 3L·",
+        "checkedAt": "2026-10-04"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "ACCESSORY-SOURCING.md"
+    },
+    {
+      "id": "catit-flower-mat",
+      "name": "Catit Flower - силиконовый коврик",
+      "brand": "Catit",
+      "category": "Аксессуары",
+      "packaging": "Зелёный",
+      "ean": "022517440100",
+      "sourceUrls": [
+        "https://piensosmari.es/fuentes/4097554-catit-mantel-de-silicona-flor-verde-022517440100.html"
+      ],
+      "supplier": {
+        "name": "Piensos Marí",
+        "url": "https://piensosmari.es/fuentes/4097554-catit-mantel-de-silicona-flor-verde-022517440100.html",
+        "sku": "18114469",
+        "catalogName": "Catit Mantel de Silicona Flor, Verde·",
+        "checkedAt": "2026-10-04"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "ACCESSORY-SOURCING.md"
+    },
+    {
+      "id": "dashi-pixie",
+      "name": "Dashi Pixie с кошачьей мятой",
+      "brand": "Dashi",
+      "category": "Игрушки",
+      "packaging": "1 шт",
+      "ean": "5600969118225",
+      "sourceUrls": [
+        "https://piensosmari.es/novedades/4095146-dashi-cat-toy-pixie-5600969118225.html"
+      ],
+      "supplier": {
+        "name": "Piensos Marí",
+        "url": "https://piensosmari.es/novedades/4095146-dashi-cat-toy-pixie-5600969118225.html",
+        "sku": "18411059",
+        "catalogName": "Dashi Toy Pixie juguete para Gato",
+        "checkedAt": "2026-10-04"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "ACCESSORY-SOURCING.md"
+    },
+    {
+      "id": "tarhong-meow",
+      "name": "TarHong Black & White Meow",
+      "brand": "TarHong",
+      "category": "Миски и поилки",
+      "packaging": "355 мл",
+      "ean": null,
+      "sourceUrls": [
+        "https://almapet.es/?product=black-and-white-meow-bowl-355ml"
+      ],
+      "supplier": {
+        "name": "Almapet",
+        "url": "https://almapet.es/?product=black-and-white-meow-bowl-355ml",
+        "sku": "TARBLAWHIME",
+        "catalogName": "Black & White Meow bowl 355ml",
+        "checkedAt": "2026-10-04"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "ACCESSORY-SOURCING.md"
+    },
+    {
+      "id": "tarhong-boho",
+      "name": "TarHong Boho - миска-тарелка",
+      "brand": "TarHong",
+      "category": "Миски и поилки",
+      "packaging": "200 мл",
+      "ean": null,
+      "sourceUrls": [
+        "https://almapet.es/?product=boho-plato-200ml"
+      ],
+      "supplier": {
+        "name": "Almapet",
+        "url": "https://almapet.es/?product=boho-plato-200ml",
+        "sku": "TARBOHOPLA200",
+        "catalogName": "Boho plato 200ml.",
+        "checkedAt": "2026-10-04"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "ACCESSORY-SOURCING.md"
+    },
+    {
+      "id": "tarhong-flower-cat",
+      "name": "TarHong Flower & Cat",
+      "brand": "TarHong",
+      "category": "Миски и поилки",
+      "packaging": "355 мл",
+      "ean": null,
+      "sourceUrls": [
+        "https://almapet.es/?product=flower-and-cat-bowl-355ml"
+      ],
+      "supplier": {
+        "name": "Almapet",
+        "url": "https://almapet.es/?product=flower-and-cat-bowl-355ml",
+        "sku": "TARFLOCATBO",
+        "catalogName": "Flower & cat bowl 355ml",
+        "checkedAt": "2026-10-04"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "ACCESSORY-SOURCING.md"
+    }
+  ],
+  "gifts": [
+    {
+      "id": "faire-greenpaws-refillable-dafmm24zr9",
+      "name": "greenPAWS TIGRE - перезаполняемая игрушка",
+      "brand": "greenPAWS",
+      "category": "Игрушки",
+      "packaging": "10 × 8 × 2,5 см",
+      "ean": null,
+      "sourceUrls": [
+        "https://www.faire.com/fr/product/p_dafmm24zr9"
+      ],
+      "supplier": {
+        "name": "Faire - greenPAWS",
+        "type": "b2b_marketplace",
+        "url": "https://www.faire.com/fr/product/p_dafmm24zr9",
+        "sku": null,
+        "catalogId": "p_dafmm24zr9",
+        "catalogName": "TIGRE | Jouet pour chat à l'herbe à chat lavable et rechargeable à acheter en B2B pour votre magasin – Faire",
+        "checkedAt": "2026-10-04",
+        "wholesalePriceStatus": "account_required",
+        "minimumOrderStatus": "pending",
+        "shipsFrom": "Belgique"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "FAIRE-SOURCING.md"
+    },
+    {
+      "id": "faire-greenpaws-refill-zux9be76dn",
+      "name": "greenPAWS - кошачья мята и валериана 30 г",
+      "brand": "greenPAWS",
+      "category": "Игрушки",
+      "packaging": "30 г",
+      "ean": null,
+      "sourceUrls": [
+        "https://www.faire.com/nl/product/p_zux9be76dn"
+      ],
+      "supplier": {
+        "name": "Faire - greenPAWS",
+        "type": "b2b_marketplace",
+        "url": "https://www.faire.com/nl/product/p_zux9be76dn",
+        "sku": null,
+        "catalogId": "p_zux9be76dn",
+        "catalogName": "Wholsale Biologische catnip | gekweekt in Europa voor je winkel - Faire",
+        "checkedAt": "2026-10-04",
+        "wholesalePriceStatus": "account_required",
+        "minimumOrderStatus": "pending",
+        "shipsFrom": "België"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "FAIRE-SOURCING.md"
+    },
+    {
+      "id": "faire-foggy-dog-sushi-ep6itv80",
+      "name": "The Foggy Dog Sushi Cat Toy - Prawn Nigiri",
+      "brand": "The Foggy Dog",
+      "category": "Игрушки",
+      "packaging": "3 × 2 дюйма",
+      "ean": null,
+      "sourceUrls": [
+        "https://www.faire.com/product/p_ep6itv80"
+      ],
+      "supplier": {
+        "name": "Faire - The Foggy Dog",
+        "type": "b2b_marketplace",
+        "url": "https://www.faire.com/product/p_ep6itv80",
+        "sku": "CAT-112",
+        "catalogId": "p_ep6itv80",
+        "catalogName": "Wholesale Sushi Cat Toy, Prawn Nigiri for your store - Faire",
+        "checkedAt": "2026-10-04",
+        "wholesalePriceStatus": "account_required",
+        "minimumOrderStatus": "pending",
+        "shipsFrom": "United States"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "FAIRE-SOURCING.md"
+    },
+    {
+      "id": "faire-foggy-dog-sushi-dxv0xmcs",
+      "name": "The Foggy Dog Sushi Cat Toy - California Roll",
+      "brand": "The Foggy Dog",
+      "category": "Игрушки",
+      "packaging": "3 × 2 дюйма",
+      "ean": null,
+      "sourceUrls": [
+        "https://www.faire.com/product/p_dxv0xmcs"
+      ],
+      "supplier": {
+        "name": "Faire - The Foggy Dog",
+        "type": "b2b_marketplace",
+        "url": "https://www.faire.com/product/p_dxv0xmcs",
+        "sku": "CAT-115",
+        "catalogId": "p_dxv0xmcs",
+        "catalogName": "Wholesale Sushi Cat Toy, California Roll for your store - Faire",
+        "checkedAt": "2026-10-04",
+        "wholesalePriceStatus": "account_required",
+        "minimumOrderStatus": "pending",
+        "shipsFrom": "United States"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "FAIRE-SOURCING.md"
+    },
+    {
+      "id": "faire-foggy-dog-sushi-5uszghxs02",
+      "name": "The Foggy Dog Sushi Cat Toy - Salmon Nigiri",
+      "brand": "The Foggy Dog",
+      "category": "Игрушки",
+      "packaging": "3 × 2 дюйма",
+      "ean": null,
+      "sourceUrls": [
+        "https://www.faire.com/product/p_5uszghxs02"
+      ],
+      "supplier": {
+        "name": "Faire - The Foggy Dog",
+        "type": "b2b_marketplace",
+        "url": "https://www.faire.com/product/p_5uszghxs02",
+        "sku": "CAT-133",
+        "catalogId": "p_5uszghxs02",
+        "catalogName": "Wholesale Sushi Cat Toy, Salmon Nigiri for your store - Faire",
+        "checkedAt": "2026-10-04",
+        "wholesalePriceStatus": "account_required",
+        "minimumOrderStatus": "pending",
+        "shipsFrom": "United States"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "FAIRE-SOURCING.md"
+    },
+    {
+      "id": "faire-simply-b-happy-cat-tpsyfnsktv",
+      "name": "Simply B Vermont Happy Cat - подарочная банка",
+      "brand": "Simply B Vermont",
+      "category": "Игрушки",
+      "packaging": "1 набор",
+      "ean": null,
+      "sourceUrls": [
+        "https://www.faire.com/product/p_tpsyfnsktv"
+      ],
+      "supplier": {
+        "name": "Faire - Simply B Vermont",
+        "type": "b2b_marketplace",
+        "url": "https://www.faire.com/product/p_tpsyfnsktv",
+        "sku": "HAP",
+        "catalogId": "p_tpsyfnsktv",
+        "catalogName": "Wholesale Happy Cat, Catnip Infused Felted Balls Gift Tin for your store - Faire",
+        "checkedAt": "2026-10-04",
+        "wholesalePriceStatus": "account_required",
+        "minimumOrderStatus": "pending",
+        "shipsFrom": "United States"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "FAIRE-SOURCING.md"
+    },
+    {
+      "id": "faire-pearhead-ornament-2u4sudz0rb",
+      "name": "Pearhead - рождественское украшение с фото и отпечатком",
+      "brand": "Pearhead",
+      "category": "Аксессуары",
+      "packaging": "1 набор",
+      "ean": null,
+      "sourceUrls": [
+        "https://www.faire.com/product/p_2u4sudz0rb"
+      ],
+      "supplier": {
+        "name": "Faire - Pearhead",
+        "type": "b2b_marketplace",
+        "url": "https://www.faire.com/product/p_2u4sudz0rb",
+        "sku": "50008",
+        "catalogId": "p_2u4sudz0rb",
+        "catalogName": "Wholesale Double-Sided Photo & Pawprint Christmas Ornament Kit for your store - Faire",
+        "checkedAt": "2026-10-04",
+        "wholesalePriceStatus": "account_required",
+        "minimumOrderStatus": "pending",
+        "shipsFrom": "United States"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "FAIRE-SOURCING.md"
+    },
+    {
+      "id": "faire-egg-cloud-cat-see8z22mfe",
+      "name": "Egg Back Home Cloud Mug - Cat Dad 500 мл",
+      "brand": "Egg Back Home",
+      "category": "Аксессуары",
+      "packaging": "500 мл",
+      "ean": "5600808382725",
+      "sourceUrls": [
+        "https://www.faire.com/product/p_see8z22mfe"
+      ],
+      "supplier": {
+        "name": "Faire - Egg Back Home",
+        "type": "b2b_marketplace",
+        "url": "https://www.faire.com/product/p_see8z22mfe",
+        "sku": "2497-10H11D-MT-CB-CD",
+        "catalogId": "p_see8z22mfe",
+        "catalogName": "Wholesale Cloud Mug 500ml Cat Dad for your store - Faire",
+        "checkedAt": "2026-10-04",
+        "wholesalePriceStatus": "account_required",
+        "minimumOrderStatus": "pending",
+        "shipsFrom": "Poland"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "FAIRE-SOURCING.md"
+    },
+    {
+      "id": "faire-justcool-cat-a6-h2rs3xhzt2",
+      "name": "Just Cool Design Two Cats - мини-принт A6",
+      "brand": "Just Cool Design",
+      "category": "Аксессуары",
+      "packaging": "A6",
+      "ean": null,
+      "sourceUrls": [
+        "https://www.faire.com/product/p_h2rs3xhzt2"
+      ],
+      "supplier": {
+        "name": "Faire - Just Cool Design",
+        "type": "b2b_marketplace",
+        "url": "https://www.faire.com/product/p_h2rs3xhzt2",
+        "sku": "463-A6",
+        "catalogId": "p_h2rs3xhzt2",
+        "catalogName": "Wholesale Two Cats | A6 Illustration Card | Mini Art Print for your store - Faire",
+        "checkedAt": "2026-10-04",
+        "wholesalePriceStatus": "account_required",
+        "minimumOrderStatus": "pending",
+        "shipsFrom": "Spain"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "FAIRE-SOURCING.md"
+    },
+    {
+      "id": "faire-justcool-cat-a6-8gek774e6z",
+      "name": "Just Cool Design Born to Be Wild - мини-принт A6",
+      "brand": "Just Cool Design",
+      "category": "Аксессуары",
+      "packaging": "A6",
+      "ean": null,
+      "sourceUrls": [
+        "https://www.faire.com/product/p_8gek774e6z"
+      ],
+      "supplier": {
+        "name": "Faire - Just Cool Design",
+        "type": "b2b_marketplace",
+        "url": "https://www.faire.com/product/p_8gek774e6z",
+        "sku": "262-A6",
+        "catalogId": "p_8gek774e6z",
+        "catalogName": "Wholesale Born to Be Wild | A6 Cat Illustration Card | Mini Art Print for your store - Faire",
+        "checkedAt": "2026-10-04",
+        "wholesalePriceStatus": "account_required",
+        "minimumOrderStatus": "pending",
+        "shipsFrom": "Spain"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "FAIRE-SOURCING.md"
+    },
+    {
+      "id": "faire-cat-box-gingerbread-3jy7vpk4e2",
+      "name": "Cat in the Box Gingerloaf House - пряничный домик",
+      "brand": "Cat in the Box LLC",
+      "category": "Аксессуары",
+      "packaging": "1 домик",
+      "ean": null,
+      "sourceUrls": [
+        "https://www.faire.com/product/p_3jy7vpk4e2/"
+      ],
+      "supplier": {
+        "name": "Faire - Cat in the Box LLC",
+        "type": "b2b_marketplace",
+        "url": "https://www.faire.com/product/p_3jy7vpk4e2/",
+        "sku": "GINGERLOAF HOUSE",
+        "catalogId": "p_3jy7vpk4e2",
+        "catalogName": "Wholesale Holiday Gingerbread Cardboard Box Playhouse For Cats for your store - Faire",
+        "checkedAt": "2026-10-04",
+        "wholesalePriceStatus": "account_required",
+        "minimumOrderStatus": "pending",
+        "shipsFrom": "United States"
+      },
+      "retailPrice": null,
+      "priceKind": "pending",
+      "purchasePrice": null,
+      "document": "FAIRE-SOURCING.md"
+    }
+  ]
+}

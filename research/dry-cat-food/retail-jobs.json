@@ -1,0 +1,898 @@
+[
+  {
+    "recipeId": "acana-03",
+    "url": "https://www.tiendanimal.es/acana-homestead-harvest-pienso-para-gatos/ACAAHC00_M.html",
+    "expectedTitle": "4.5 kg Acana Homestead Harvest pienso para gatos"
+  },
+  {
+    "recipeId": "acana-03",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/acana-homestead-harvest-pienso-para-gatos/ACAAHC00_M.html",
+    "expectedTitle": "4.5 kg Acana Homestead Harvest pienso para gatos"
+  },
+  {
+    "recipeId": "acana-04",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/acana-bountiful-pienso-para-gatos/ACAABC00_M.html",
+    "expectedTitle": "4.5 kg Acana Bountiful pienso para gatos"
+  },
+  {
+    "recipeId": "acana-04",
+    "url": "https://www.tiendanimal.es/acana-bountiful-pienso-para-gatos/ACAABC00_M.html",
+    "expectedTitle": "4.5 kg Acana Bountiful pienso para gatos"
+  },
+  {
+    "recipeId": "acana-01",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/acana-first-feast-pienso-para-gatitos/ACAAFC00_M.html",
+    "expectedTitle": "1.8 kg Acana First Feast pienso para gatitos"
+  },
+  {
+    "recipeId": "acana-01",
+    "url": "https://www.tiendanimal.es/acana-first-feast-pienso-para-gatitos/ACAAFC00_M.html",
+    "expectedTitle": "1.8 kg Acana First Feast pienso para gatitos"
+  },
+  {
+    "recipeId": "acana-02",
+    "url": "https://www.tiendanimal.es/acana-indoor-entree-pienso-para-gatos-de-interior/ACAAIC00_M.html",
+    "expectedTitle": "4.5 kg Acana Entrée pienso para gatos de interior"
+  },
+  {
+    "recipeId": "acana-05",
+    "url": "https://www.tiendanimal.es/acana-hp-wild-prairie-pienso-para-gatos-y-gatitos/ACAAWC02_M.html",
+    "expectedTitle": "Acana Wild Prairie, Pienso Holistico para gatos"
+  },
+  {
+    "recipeId": "acana-07",
+    "url": "https://www.tiendanimal.es/acana-hp-pacifica-pienso-para-gatos-y-gatitos/ACAAPC02_M.html",
+    "expectedTitle": "Pienso Acana PACIFICA para Gatos"
+  },
+  {
+    "recipeId": "orijen-03",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/sin-cereales/orijen-six-fish-pienso-para-gatos-y-gatitos/ORJOFC07_M.html",
+    "expectedTitle": "5.4 kg Orijen Six Fish pienso para gatos"
+  },
+  {
+    "recipeId": "orijen-03",
+    "url": "https://www.tiendanimal.es/orijen-six-fish-pienso-para-gatos-y-gatitos/ORJOFC07_M.html",
+    "expectedTitle": "5.4 kg Orijen Six Fish pienso para gatos"
+  },
+  {
+    "recipeId": "orijen-02",
+    "url": "https://www.tiendanimal.es/orijen-fit-trim-pienso-para-gatos/ORJOFTC01_M.html",
+    "expectedTitle": "5.4 kg Orijen Fit&Trim pienso para gatos"
+  },
+  {
+    "recipeId": "orijen-04",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/sin-cereales/orijen-regional-red-pienso-para-gatos-y-gatitos/ORJ9227_M.html",
+    "expectedTitle": "5.4 kg Orijen Regional Red pienso para gatos"
+  },
+  {
+    "recipeId": "orijen-04",
+    "url": "https://www.tiendanimal.es/orijen-regional-red-pienso-para-gatos-y-gatitos/ORJ9227_M.html",
+    "expectedTitle": "5.4 kg Orijen Regional Red pienso para gatos"
+  },
+  {
+    "recipeId": "orijen-01",
+    "url": "https://www.tiendanimal.es/orijen-original-pienso-para-gatos-y-gatitos/ORJOC07_M.html",
+    "expectedTitle": "5.4 kg Orijen Original pienso para gatos y gatitos"
+  },
+  {
+    "recipeId": "orijen-05",
+    "url": "https://www.tiendanimal.es/orijen-guardian-8-pienso-para-gatos/ORJOGC00_M.html",
+    "expectedTitle": "4.5 kg Orijen Guardián 8 Pienso para gatos"
+  },
+  {
+    "recipeId": "orijen-05",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/orijen-guardian-8-pienso-para-gatos/ORJOGC00_M.html",
+    "expectedTitle": "4.5 kg Orijen Guardián 8 Pienso para gatos"
+  },
+  {
+    "recipeId": "advance-05",
+    "url": "https://www.tiendanimal.es/advance-sensitive-sterilized-salmon-y-arroz-pienso-para-gatos/ADV578110_M.html",
+    "expectedTitle": "10 kg Advance Sensitive Sterilized Salmón y Arroz pienso para gatos"
+  },
+  {
+    "recipeId": "advance-01",
+    "url": "https://www.tiendanimal.es/advance-adult-pollo-y-arroz-pienso-para-gatos/ADV531119_M.html",
+    "expectedTitle": "Pienso para gatos Advance Feline Adult Pollo y arroz"
+  },
+  {
+    "recipeId": "advance-02",
+    "url": "https://www.kiwoko.com/gatos/especial-gatito/pienso-para-gatitos/advance-pollo-y-arroz-pienso-para-gatitos/ADV530119_M.html",
+    "expectedTitle": "10 kg Advance Pollo y Arroz pienso para gatitos"
+  },
+  {
+    "recipeId": "advance-02",
+    "url": "https://www.tiendanimal.es/advance-pollo-y-arroz-pienso-para-gatitos/ADV530119_M.html",
+    "expectedTitle": "10 kg Advance Pollo y Arroz pienso para gatitos"
+  },
+  {
+    "recipeId": "advance-03",
+    "url": "https://www.tiendanimal.es/advance-adult-sterilized-pavo-y-cebada-pienso-para-gatos/ADV577119_M.html",
+    "expectedTitle": "12 kg (10 + 2 ¡gratis!) Advance Adult Sterilized Pavo y Cebada pienso para gatos"
+  },
+  {
+    "recipeId": "advance-06",
+    "url": "https://www.tiendanimal.es/advance-sterilized-hairball-pavo-y-cebada-pienso-para-gatos/ADV921864_M.html",
+    "expectedTitle": "Pienso para gatos esterilizados Advance Sterelized Hairball"
+  },
+  {
+    "recipeId": "hills-03",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/hill_s-science-plan-sterilised-pienso-pollo-para-gatos-adultos-esterilizados/HIL9351DA_M.html",
+    "expectedTitle": "15 kg Hill's Science Plan Sterilised Adult Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-03",
+    "url": "https://www.tiendanimal.es/hill_s-science-plan-sterilised-pienso-pollo-para-gatos-adultos-esterilizados/HIL9351DA_M.html",
+    "expectedTitle": "15 kg Hill's Science Plan Sterilised Adult Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "advance-03",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/advance-adult-sterilized-pavo-y-cebada-pienso-para-gatos/ADV577119_M.html",
+    "expectedTitle": "12 kg (10 + 2 ¡gratis!) Advance Adult Sterilized Pavo y Cebada pienso para gatos"
+  },
+  {
+    "recipeId": "advance-07",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/advance-junior-sterilized-pienso-para-gatos/ADV500921_M.html",
+    "expectedTitle": "1.5 kg Advance Junior Sterilized pienso para gatos"
+  },
+  {
+    "recipeId": "advance-07",
+    "url": "https://www.tiendanimal.es/advance-junior-sterilized-pienso-para-gatos/ADV500921_M.html",
+    "expectedTitle": "1.5 kg Advance Junior Sterilized pienso para gatos"
+  },
+  {
+    "recipeId": "hills-02",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/hill_s-science-plan-adult-pienso-cordero-y-arroz-para-gatos/HIL5144M_M.html",
+    "expectedTitle": "10 kg Hill's Science Plan Adult Cordero pienso para gatos"
+  },
+  {
+    "recipeId": "hills-02",
+    "url": "https://www.tiendanimal.es/hill_s-science-plan-adult-pienso-cordero-y-arroz-para-gatos/HIL5144M_M.html",
+    "expectedTitle": "10 kg Hill's Science Plan Adult Cordero pienso para gatos"
+  },
+  {
+    "recipeId": "hills-11",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/hill_s-science-plan-perfect-digestion-adult-pollo-pienso-para-gatos/HIL605955_M.html",
+    "expectedTitle": "7 kg Hill's Science Plan Perfect Digestion Adult Pollo Pienso para gatos"
+  },
+  {
+    "recipeId": "hills-11",
+    "url": "https://www.tiendanimal.es/hill_s-science-plan-perfect-digestion-adult-pollo-pienso-para-gatos/HIL605955_M.html",
+    "expectedTitle": "7 kg Hill's Science Plan Perfect Digestion Adult Pollo Pienso para gatos"
+  },
+  {
+    "recipeId": "hills-07",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/hill_s-science-plan-sterilised-kitten-pollo-pienso-para-gatos/HIL607265_M.html",
+    "expectedTitle": "3 kg Hill's Science Plan Sterilised Kitten Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-07",
+    "url": "https://www.tiendanimal.es/hill_s-science-plan-sterilised-kitten-pollo-pienso-para-gatos/HIL607265_M.html",
+    "expectedTitle": "3 kg Hill's Science Plan Sterilised Kitten Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-06",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/hill_s-science-plan-alimento-pienso-pollo--para-gatitos/HIL5197X_M.html",
+    "expectedTitle": "7 kg Hill's Science Plan Kitten Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-06",
+    "url": "https://www.tiendanimal.es/hill_s-science-plan-alimento-pienso-pollo--para-gatitos/HIL5197X_M.html",
+    "expectedTitle": "7 kg Hill's Science Plan Kitten Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-09",
+    "url": "https://www.tiendanimal.es/hills-science-plan-light-pienso-pollo-para-gatos-adultos/HIL7520DA_M.html",
+    "expectedTitle": "10 kg Hill's Science Plan Light Adult Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-10",
+    "url": "https://www.tiendanimal.es/hills-science-plan-perfect-weight-adult-pollo-pienso-para-gatos/HIL3673V_M.html",
+    "expectedTitle": "7 kg Hill's Science Plan Perfect Weight Adult pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-10",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/hill_s-science-plan-perfect-weight-adult-pollo-pienso-para-gatos/HIL3673V_M.html",
+    "expectedTitle": "7 kg Hill's Science Plan Perfect Weight Adult pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-10",
+    "url": "https://www.tiendanimal.es/hill_s-science-plan-perfect-weight-adult-pollo-pienso-para-gatos/HIL3673V_M.html",
+    "expectedTitle": "7 kg Hill's Science Plan Perfect Weight Adult pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-11",
+    "url": "https://www.tiendanimal.es/hills-science-plan-perfect-digestion-adult-pollo-pienso-para-gatos/HIL605955_M.html",
+    "expectedTitle": "Pienso Hill's SP Perfect Digestion para gatos"
+  },
+  {
+    "recipeId": "hills-15",
+    "url": "https://www.tiendanimal.es/hills-science-plan-adult-hairball-y-perfect-coat-pollo-pienso-para-gatos/HIL608547_M.html",
+    "expectedTitle": "7 kg Hill's Science Plan Adult Hairball y Perfect Coat Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-15",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/bolas-de-pelo/hill_s-science-plan-adult-hairball-y-perfect-coat-pollo-pienso-para-gatos/HIL608547_M.html",
+    "expectedTitle": "7 kg Hill's Science Plan Adult Hairball y Perfect Coat Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-15",
+    "url": "https://www.tiendanimal.es/hill_s-science-plan-adult-hairball-y-perfect-coat-pollo-pienso-para-gatos/HIL608547_M.html",
+    "expectedTitle": "7 kg Hill's Science Plan Adult Hairball y Perfect Coat Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-16",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/hipoalergenico/hill_s-science-plan-adult-hypoallergenic-huevo-e-insecto-pienso-para-gatos/HIL607869_M.html",
+    "expectedTitle": "1.5 kg Hill's Science Plan Adult Hypoallergenic Huevo e Insecto pienso para gatos"
+  },
+  {
+    "recipeId": "hills-16",
+    "url": "https://www.tiendanimal.es/hill_s-science-plan-adult-hypoallergenic-huevo-e-insecto-pienso-para-gatos/HIL607869_M.html",
+    "expectedTitle": "1.5 kg Hill's Science Plan Adult Hypoallergenic Huevo e Insecto pienso para gatos"
+  },
+  {
+    "recipeId": "hills-16",
+    "url": "https://www.tiendanimal.es/hills-science-plan-adult-hypoallergenic-huevo-e-insecto-pienso-para-gatos/HIL607869_M.html",
+    "expectedTitle": "1.5 kg Hill's Science Plan Adult Hypoallergenic Huevo e Insecto pienso para gatos"
+  },
+  {
+    "recipeId": "hills-14",
+    "url": "https://www.tiendanimal.es/hills-urinary-pollo-pienso-para-gatos/HIL10231U_M.html",
+    "expectedTitle": "1.5 kg Hill's Urinary Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-13",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/hill_s-adult-science-plan-sensitive-stomach-pollo-pienso-para-gatos/HIL7619DA_M.html",
+    "expectedTitle": "1.5 kg Hill's Adult Science Plan Sensitive Stomach Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-13",
+    "url": "https://www.tiendanimal.es/hill_s-adult-science-plan-sensitive-stomach-pollo-pienso-para-gatos/HIL7619DA_M.html",
+    "expectedTitle": "1.5 kg Hill's Adult Science Plan Sensitive Stomach Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-17",
+    "url": "https://www.tiendanimal.es/hills-science-plan-pienso-pollo-para-gatos-seniors/HIL2232DA_M.html",
+    "expectedTitle": "1.5 kg Hill's Science Plan Senior 11+ Pollo Pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-01",
+    "url": "https://www.tiendanimal.es/royal-canin-regular-sterilised-37-pienso-para-gatos/ROY319130_M.html",
+    "expectedTitle": "12 kg (10 + 2 kg ¡gratis!) Royal Canin Regular Sterilised 37 pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-06",
+    "url": "https://www.tiendanimal.es/royal-canin-mother-babycat-pienso-para-gatos/ROY310715_M.html",
+    "expectedTitle": "Royal Canin Mother & Babycat pienso para gatito"
+  },
+  {
+    "recipeId": "royalcanin-05",
+    "url": "https://www.tiendanimal.es/royal-canin-kitten-sterilised-pienso-para-gatos/ROY316210_M.html",
+    "expectedTitle": "Royal Canin Kitten Sterilised pienso para gatito"
+  },
+  {
+    "recipeId": "royalcanin-11",
+    "url": "https://www.tiendanimal.es/royal-canin-adult-light-weight-care-pienso-para-gatos/ROY318613_M.html",
+    "expectedTitle": "Royal Canin Light weight Care pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-11",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-adult-light-weight-care-pienso-para-gatos/ROY318613_M.html",
+    "expectedTitle": "8 kg Royal Canin Adult Light Weight Care pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-13",
+    "url": "https://www.tiendanimal.es/royal-canin-adult-maine-coon-pienso-para-gatos/ROY309338_M.html",
+    "expectedTitle": "Royal Canin Maine Coon pienso para gato adulto"
+  },
+  {
+    "recipeId": "royalcanin-12",
+    "url": "https://www.tiendanimal.es/royal-canin-adult-7-regular-sterilised-pienso-para-gatos/ROY316512_M.html",
+    "expectedTitle": "10 kg Royal Canin Sterilised 7+ pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-13",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/royal-canin-adult-maine-coon-pienso-para-gatos/ROY309338_M.html",
+    "expectedTitle": "10 kg Royal Canin Adult Maine Coon pienso para gatos"
+  },
+  {
+    "recipeId": "hills-03",
+    "url": "https://www.tiendanimal.es/hills-science-plan-sterilised-pienso-pollo-para-gatos-adultos-esterilizados/HIL9351DA_M.html",
+    "expectedTitle": "15 kg Hill's Science Plan Sterilised Adult Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-15",
+    "url": "https://www.tiendanimal.es/royal-canin-adult-british-shorthair-pienso-para-gatos/ROY309560_M.html",
+    "expectedTitle": "Royal Canin British Shorthair pienso para gato adulto"
+  },
+  {
+    "recipeId": "royalcanin-09",
+    "url": "https://www.tiendanimal.es/royal-canin-regular-sensible-33-pienso-para-gatos/ROY318027_M.html",
+    "expectedTitle": "Royal Canin Sensible 33"
+  },
+  {
+    "recipeId": "acana-08",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/sin-cereales/acana-highest-protein-indoor-pollo-salmon-y-trucha-pienso-para-gatos/ACA01521K01800_M.html",
+    "expectedTitle": "1.8 kg Acana Highest Protein Indoor Pollo Salmón y Trucha Pienso para gatos"
+  },
+  {
+    "recipeId": "acana-08",
+    "url": "https://www.tiendanimal.es/acana-highest-protein-indoor-pollo-salmon-y-trucha-pienso-para-gatos/ACA01521K01800_M.html",
+    "expectedTitle": "1.8 kg Acana Highest Protein Indoor Pollo Salmón y Trucha Pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-02",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/bolas-de-pelo/royal-canin-regular-fit-32-pienso-para-gatos/ROY315112_M.html",
+    "expectedTitle": "10 kg Royal Canin Regular Fit 32 pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-02",
+    "url": "https://www.tiendanimal.es/royal-canin-regular-fit-32-pienso-para-gatos/ROY315112_M.html",
+    "expectedTitle": "10 kg Royal Canin Regular Fit 32 pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-04",
+    "url": "https://www.kiwoko.com/gatos/especial-gatito/pienso-para-gatitos/royal-canin-kitten-pienso-para-gatos/ROY310910_M.html",
+    "expectedTitle": "10 kg Royal Canin Kitten pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-04",
+    "url": "https://www.tiendanimal.es/royal-canin-kitten-pienso-para-gatos/ROY310910_M.html",
+    "expectedTitle": "10 kg Royal Canin Kitten pienso para gatos"
+  },
+  {
+    "recipeId": "leonardo-01",
+    "url": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-duck-0-25-kg",
+    "expectedTitle": "fresh Meat Fresh Duck",
+    "expectedGrams": 250
+  },
+  {
+    "recipeId": "leonardo-01",
+    "url": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-duck-1-5-kg",
+    "expectedTitle": "fresh Meat Fresh Duck",
+    "expectedGrams": 1500
+  },
+  {
+    "recipeId": "leonardo-01",
+    "url": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-duck-4-kg",
+    "expectedTitle": "fresh Meat Fresh Duck",
+    "expectedGrams": 4000
+  },
+  {
+    "recipeId": "leonardo-02",
+    "url": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-beef-0-25-kg",
+    "expectedTitle": "fresh Meat Fresh Beef",
+    "expectedGrams": 250
+  },
+  {
+    "recipeId": "leonardo-02",
+    "url": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-beef-1-5-kg",
+    "expectedTitle": "fresh Meat Fresh Beef",
+    "expectedGrams": 1500
+  },
+  {
+    "recipeId": "leonardo-02",
+    "url": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-beef-4-kg",
+    "expectedTitle": "fresh Meat Fresh Beef",
+    "expectedGrams": 4000
+  },
+  {
+    "recipeId": "leonardo-03",
+    "url": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-salmon-0-25-kg",
+    "expectedTitle": "fresh Meat Fresh Salmon",
+    "expectedGrams": 250
+  },
+  {
+    "recipeId": "leonardo-03",
+    "url": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-salmon-1-5-kg",
+    "expectedTitle": "fresh Meat Fresh Salmon",
+    "expectedGrams": 1500
+  },
+  {
+    "recipeId": "leonardo-03",
+    "url": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-salmon-4-kg",
+    "expectedTitle": "fresh Meat Fresh Salmon",
+    "expectedGrams": 4000
+  },
+  {
+    "recipeId": "leonardo-04",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-complete-32-16-0-3-kg",
+    "expectedTitle": "Adult Complete 32/16",
+    "expectedGrams": 300
+  },
+  {
+    "recipeId": "leonardo-04",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-complete-32-16-1-8-kg",
+    "expectedTitle": "Adult Complete 32/16",
+    "expectedGrams": 1800
+  },
+  {
+    "recipeId": "leonardo-04",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-complete-32-16-7-5-kg",
+    "expectedTitle": "Adult Complete 32/16",
+    "expectedGrams": 7500
+  },
+  {
+    "recipeId": "leonardo-04",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-complete-32-16-15-kg",
+    "expectedTitle": "Adult Complete 32/16",
+    "expectedGrams": 15000
+  },
+  {
+    "recipeId": "leonardo-05",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-duck-0-3-kg",
+    "expectedTitle": "Adult Duck",
+    "expectedGrams": 300
+  },
+  {
+    "recipeId": "leonardo-05",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-duck-1-8-kg",
+    "expectedTitle": "Adult Duck",
+    "expectedGrams": 1800
+  },
+  {
+    "recipeId": "leonardo-05",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-duck-7-5-kg",
+    "expectedTitle": "Adult Duck",
+    "expectedGrams": 7500
+  },
+  {
+    "recipeId": "leonardo-05",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-duck-15-kg",
+    "expectedTitle": "Adult Duck",
+    "expectedGrams": 15000
+  },
+  {
+    "recipeId": "leonardo-06",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-fish-0-3-kg",
+    "expectedTitle": "Adult Fish",
+    "expectedGrams": 300
+  },
+  {
+    "recipeId": "leonardo-06",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-fish-1-8-kg",
+    "expectedTitle": "Adult Fish",
+    "expectedGrams": 1800
+  },
+  {
+    "recipeId": "leonardo-06",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-fish-7-5-kg",
+    "expectedTitle": "Adult Fish",
+    "expectedGrams": 7500
+  },
+  {
+    "recipeId": "leonardo-06",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-fish-15-kg",
+    "expectedTitle": "Adult Fish",
+    "expectedGrams": 15000
+  },
+  {
+    "recipeId": "leonardo-07",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-lamb-0-3-kg",
+    "expectedTitle": "Adult Lamb",
+    "expectedGrams": 300
+  },
+  {
+    "recipeId": "leonardo-07",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-lamb-1-8-kg",
+    "expectedTitle": "Adult Lamb",
+    "expectedGrams": 1800
+  },
+  {
+    "recipeId": "leonardo-07",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-lamb-7-5-kg",
+    "expectedTitle": "Adult Lamb",
+    "expectedGrams": 7500
+  },
+  {
+    "recipeId": "leonardo-07",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-lamb-15-kg",
+    "expectedTitle": "Adult Lamb",
+    "expectedGrams": 15000
+  },
+  {
+    "recipeId": "leonardo-08",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-light-sterilised-0-3-kg",
+    "expectedTitle": "Adult Light & Sterilised",
+    "expectedGrams": 300
+  },
+  {
+    "recipeId": "leonardo-08",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-light-sterilised-1-8-kg",
+    "expectedTitle": "Adult Light & Sterilised",
+    "expectedGrams": 1800
+  },
+  {
+    "recipeId": "leonardo-08",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-light-sterilised-7-5-kg",
+    "expectedTitle": "Adult Light & Sterilised",
+    "expectedGrams": 7500
+  },
+  {
+    "recipeId": "leonardo-09",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-gf-poultry-0-3-kg",
+    "expectedTitle": "Adult GF Poultry",
+    "expectedGrams": 300
+  },
+  {
+    "recipeId": "leonardo-09",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-gf-poultry-1-8-kg",
+    "expectedTitle": "Adult GF Poultry",
+    "expectedGrams": 1800
+  },
+  {
+    "recipeId": "leonardo-09",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-gf-poultry-7-5-kg",
+    "expectedTitle": "Adult GF Poultry",
+    "expectedGrams": 7500
+  },
+  {
+    "recipeId": "leonardo-10",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-gf-salmon-0-3-kg",
+    "expectedTitle": "Adult GF Salmon",
+    "expectedGrams": 300
+  },
+  {
+    "recipeId": "leonardo-10",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-gf-salmon-1-8-kg",
+    "expectedTitle": "Adult GF Salmon",
+    "expectedGrams": 1800
+  },
+  {
+    "recipeId": "leonardo-10",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-gf-salmon-7-5-kg",
+    "expectedTitle": "Adult GF Salmon",
+    "expectedGrams": 7500
+  },
+  {
+    "recipeId": "leonardo-11",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-gf-maxi-0-3-kg",
+    "expectedTitle": "Adult GF Maxi",
+    "expectedGrams": 300
+  },
+  {
+    "recipeId": "leonardo-11",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-gf-maxi-1-8-kg",
+    "expectedTitle": "Adult GF Maxi",
+    "expectedGrams": 1800
+  },
+  {
+    "recipeId": "leonardo-11",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-gf-maxi-7-5-kg",
+    "expectedTitle": "Adult GF Maxi",
+    "expectedGrams": 7500
+  },
+  {
+    "recipeId": "leonardo-11",
+    "url": "https://es.leonardo-catfood.com/leonardo-adult-gf-maxi-15-kg",
+    "expectedTitle": "Adult GF Maxi",
+    "expectedGrams": 15000
+  },
+  {
+    "recipeId": "leonardo-12",
+    "url": "https://es.leonardo-catfood.com/leonardo-kitten-0-3-kg",
+    "expectedTitle": "Kitten",
+    "expectedGrams": 300
+  },
+  {
+    "recipeId": "leonardo-12",
+    "url": "https://es.leonardo-catfood.com/leonardo-kitten-1-8-kg",
+    "expectedTitle": "Kitten",
+    "expectedGrams": 1800
+  },
+  {
+    "recipeId": "leonardo-12",
+    "url": "https://es.leonardo-catfood.com/leonardo-kitten-7-5-kg",
+    "expectedTitle": "Kitten",
+    "expectedGrams": 7500
+  },
+  {
+    "recipeId": "leonardo-13",
+    "url": "https://es.leonardo-catfood.com/leonardo-kitten-gf-0-3-kg",
+    "expectedTitle": "Kitten GF",
+    "expectedGrams": 300
+  },
+  {
+    "recipeId": "leonardo-13",
+    "url": "https://es.leonardo-catfood.com/leonardo-kitten-gf-1-8-kg",
+    "expectedTitle": "Kitten GF",
+    "expectedGrams": 1800
+  },
+  {
+    "recipeId": "leonardo-13",
+    "url": "https://es.leonardo-catfood.com/leonardo-kitten-gf-7-5-kg",
+    "expectedTitle": "Kitten GF",
+    "expectedGrams": 7500
+  },
+  {
+    "recipeId": "leonardo-14",
+    "url": "https://es.leonardo-catfood.com/leonardo-kitten-granula-start-1-kg",
+    "expectedTitle": "Kitten Granula-Start",
+    "expectedGrams": 1000
+  },
+  {
+    "recipeId": "leonardo-14",
+    "url": "https://es.leonardo-catfood.com/leonardo-kitten-granula-start-5-kg",
+    "expectedTitle": "Kitten Granula-Start",
+    "expectedGrams": 5000
+  },
+  {
+    "recipeId": "leonardo-15",
+    "url": "https://es.leonardo-catfood.com/leonardo-senior-0-3-kg",
+    "expectedTitle": "Senior",
+    "expectedGrams": 300
+  },
+  {
+    "recipeId": "leonardo-15",
+    "url": "https://es.leonardo-catfood.com/leonardo-senior-1-8-kg",
+    "expectedTitle": "Senior",
+    "expectedGrams": 1800
+  },
+  {
+    "recipeId": "leonardo-15",
+    "url": "https://es.leonardo-catfood.com/leonardo-senior-7-5-kg",
+    "expectedTitle": "Senior",
+    "expectedGrams": 7500
+  },
+  {
+    "recipeId": "leonardo-16",
+    "url": "https://es.leonardo-catfood.com/leonardo-senior-gf-0-3-kg",
+    "expectedTitle": "Senior GF",
+    "expectedGrams": 300
+  },
+  {
+    "recipeId": "leonardo-16",
+    "url": "https://es.leonardo-catfood.com/leonardo-senior-gf-1-8-kg",
+    "expectedTitle": "Senior GF",
+    "expectedGrams": 1800
+  },
+  {
+    "recipeId": "leonardo-16",
+    "url": "https://es.leonardo-catfood.com/leonardo-senior-gf-7-5-kg",
+    "expectedTitle": "Senior GF",
+    "expectedGrams": 7500
+  },
+  {
+    "recipeId": "hills-04",
+    "url": "https://www.tiendanimal.es/hills-science-plan-sterilised-pienso-salmon-para-gatos-esterilizados/HIL608886_M.html",
+    "expectedTitle": "Hill Science Plan Sterilised Adult Salmón"
+  },
+  {
+    "recipeId": "hills-08",
+    "url": "https://www.miscota.es/gatos/hills/mature-adult-sterilised-cat-pollo",
+    "expectedTitle": "Hill Sterilised Mature Adult 7+"
+  },
+  {
+    "recipeId": "acana-06",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/sin-cereales/acana-hp-grasslands-pienso-para-gatos-y-gatitos/ACAAGC00_M.html",
+    "expectedTitle": "Acana HP Grasslands pienso para gatos y gatitos"
+  },
+  {
+    "recipeId": "acana-06",
+    "url": "https://www.tiendanimal.es/acana-hp-grasslands-pienso-para-gatos-y-gatitos/ACAAGC00_M.html",
+    "expectedTitle": "Acana HP Grasslands pienso para gatos y gatitos"
+  },
+  {
+    "recipeId": "orijen-06",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/orijen-kitten-aves-y-pescado-pienso-para-gatos/ORJOKC00_M.html",
+    "expectedTitle": "Orijen Kitten Aves y Pescado pienso para gatos"
+  },
+  {
+    "recipeId": "orijen-06",
+    "url": "https://www.tiendanimal.es/orijen-kitten-aves-y-pescado-pienso-para-gatos/ORJOKC00_M.html",
+    "expectedTitle": "Orijen Kitten Aves y Pescado pienso para gatos"
+  },
+  {
+    "recipeId": "advance-04",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/advance-sensitive-adult-salmon-y-arroz-pienso-para-gatos/ADV532119_M.html",
+    "expectedTitle": "Advance Sensitive Adult Salmón y Arroz pienso para gatos"
+  },
+  {
+    "recipeId": "advance-04",
+    "url": "https://www.tiendanimal.es/advance-sensitive-adult-salmon-y-arroz-pienso-para-gatos/ADV532119_M.html",
+    "expectedTitle": "Advance Sensitive Adult Salmón y Arroz pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-14",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/bolas-de-pelo/royal-canin-persian-pienso-para-gato-adulto-persa/ROY306813_M.html",
+    "expectedTitle": "Royal Canin Persian pienso para gato adulto persa"
+  },
+  {
+    "recipeId": "royalcanin-14",
+    "url": "https://www.tiendanimal.es/royal-canin-persian-pienso-para-gato-adulto-persa/ROY306813_M.html",
+    "expectedTitle": "Royal Canin Persian pienso para gato adulto persa"
+  },
+  {
+    "recipeId": "royalcanin-10",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-urinary-pienso-para-gatos/ROY307312_M.html",
+    "expectedTitle": "Royal Canin Urinary pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-10",
+    "url": "https://www.tiendanimal.es/royal-canin-urinary-pienso-para-gatos/ROY307312_M.html",
+    "expectedTitle": "Royal Canin Urinary pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-08",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/royal-canin-adult-digestive-pienso-para-gatos/ROY317012_M.html",
+    "expectedTitle": "Royal Canin Adult Digestive pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-08",
+    "url": "https://www.tiendanimal.es/royal-canin-adult-digestive-pienso-para-gatos/ROY317012_M.html",
+    "expectedTitle": "Royal Canin Adult Digestive pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-07",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/bolas-de-pelo/royal-canin-intense-hairball-pienso-para-gatos/ROY313529_M.html",
+    "expectedTitle": "Royal Canin Intense Hairball pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-07",
+    "url": "https://www.tiendanimal.es/royal-canin-intense-hairball-pienso-para-gatos/ROY313529_M.html",
+    "expectedTitle": "Royal Canin Intense Hairball pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-03",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/bolas-de-pelo/royal-canin-home-life-indoor-27-pienso-para-gatos/ROY312362_M.html",
+    "expectedTitle": "Royal Canin Home Life Indoor 27 pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-03",
+    "url": "https://www.tiendanimal.es/royal-canin-home-life-indoor-27-pienso-para-gatos/ROY312362_M.html",
+    "expectedTitle": "Royal Canin Home Life Indoor 27 pienso para gatos"
+  },
+  {
+    "recipeId": "hills-04",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/hill_s-science-plan-sterilised-pienso-salmon-para-gatos/HIL9352DA_M.html",
+    "expectedTitle": "Hill's Science Plan Sterilised pienso salmón para gatos"
+  },
+  {
+    "recipeId": "hills-04",
+    "url": "https://www.tiendanimal.es/hill_s-science-plan-sterilised-pienso-salmon-para-gatos/HIL9352DA_M.html",
+    "expectedTitle": "Hill's Science Plan Sterilised pienso salmón para gatos"
+  },
+  {
+    "recipeId": "hills-01",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/hill_s-science-plan-adult-pienso-pollo-para-gatos/HIL4296M_M.html",
+    "expectedTitle": "hills-01",
+    "expectedGrams": null
+  },
+  {
+    "recipeId": "hills-01",
+    "url": "https://www.tiendanimal.es/hill_s-science-plan-adult-pienso-pollo-para-gatos/HIL4296M_M.html",
+    "expectedTitle": "hills-01"
+  },
+  {
+    "recipeId": "hills-08",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/hill_s-science-plan-mature-sterilised-piendo-pollo-para-gatos-esterilizados/HIL9360DA_M.html",
+    "expectedTitle": "hills-08",
+    "expectedGrams": null
+  },
+  {
+    "recipeId": "hills-08",
+    "url": "https://www.tiendanimal.es/hill_s-science-plan-mature-sterilised-piendo-pollo-para-gatos-esterilizados/HIL9360DA_M.html",
+    "expectedTitle": "hills-08"
+  },
+  {
+    "recipeId": "leonardo-15",
+    "url": "https://es.leonardo-catfood.com/leonardo-senior-1-8-kg",
+    "expectedTitle": "leonardo-15",
+    "expectedGrams": 1800
+  },
+  {
+    "recipeId": "hills-08",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/hill_s-science-plan-mature-sterilised-piendo-pollo-para-gatos-esterilizados/HIL9353DA_M.html",
+    "expectedTitle": "hills-08"
+  },
+  {
+    "recipeId": "hills-08",
+    "url": "https://www.tiendanimal.es/hill_s-science-plan-mature-sterilised-piendo-pollo-para-gatos-esterilizados/HIL9353DA_M.html",
+    "expectedTitle": "hills-08"
+  },
+  {
+    "recipeId": "hills-05",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/hill_s-science-plan-sterilised-pienso-pato-para-gatos-adultos-esterilizados/HIL46650_M.html",
+    "expectedTitle": "hills-05"
+  },
+  {
+    "recipeId": "hills-05",
+    "url": "https://www.tiendanimal.es/hill_s-science-plan-sterilised-pienso-pato-para-gatos-adultos-esterilizados/HIL46650_M.html",
+    "expectedTitle": "hills-05"
+  },
+  {
+    "recipeId": "advance-08",
+    "url": "https://www.farmaciasdirect.es/products/advance-feline-senior10-esterilizado-pollo-15kg",
+    "expectedTitle": "Advance Senior +10 Esterilizado Pollo 1,5Kg",
+    "expectedGrams": 1500
+  },
+  {
+    "recipeId": "acana-02",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/acana-indoor-entree-pienso-para-gatos-de-interior/ACAAIC00_M.html",
+    "expectedTitle": "4.5 kg Acana Entrée pienso para gatos de interior"
+  },
+  {
+    "recipeId": "acana-05",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/acana-hp-wild-prairie-pienso-para-gatos-y-gatitos/ACAAWC02_M.html",
+    "expectedTitle": "Acana Wild Prairie, Pienso Holistico para gatos"
+  },
+  {
+    "recipeId": "acana-07",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/acana-hp-pacifica-pienso-para-gatos-y-gatitos/ACAAPC02_M.html",
+    "expectedTitle": "Pienso Acana PACIFICA para Gatos"
+  },
+  {
+    "recipeId": "orijen-02",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/orijen-fit-trim-pienso-para-gatos/ORJOFTC01_M.html",
+    "expectedTitle": "5.4 kg Orijen Fit&Trim pienso para gatos"
+  },
+  {
+    "recipeId": "orijen-01",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/orijen-original-pienso-para-gatos-y-gatitos/ORJOC07_M.html",
+    "expectedTitle": "5.4 kg Orijen Original pienso para gatos y gatitos"
+  },
+  {
+    "recipeId": "advance-05",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/advance-sensitive-sterilized-salmon-y-arroz-pienso-para-gatos/ADV578110_M.html",
+    "expectedTitle": "10 kg Advance Sensitive Sterilized Salmón y Arroz pienso para gatos"
+  },
+  {
+    "recipeId": "advance-01",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/advance-adult-pollo-y-arroz-pienso-para-gatos/ADV531119_M.html",
+    "expectedTitle": "Pienso para gatos Advance Feline Adult Pollo y arroz"
+  },
+  {
+    "recipeId": "advance-06",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/advance-sterilized-hairball-pavo-y-cebada-pienso-para-gatos/ADV921864_M.html",
+    "expectedTitle": "Pienso para gatos esterilizados Advance Sterelized Hairball"
+  },
+  {
+    "recipeId": "hills-09",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/hills-science-plan-light-pienso-pollo-para-gatos-adultos/HIL7520DA_M.html",
+    "expectedTitle": "10 kg Hill's Science Plan Light Adult Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-14",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/hills-urinary-pollo-pienso-para-gatos/HIL10231U_M.html",
+    "expectedTitle": "1.5 kg Hill's Urinary Pollo pienso para gatos"
+  },
+  {
+    "recipeId": "hills-17",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/hills-science-plan-pienso-pollo-para-gatos-seniors/HIL2232DA_M.html",
+    "expectedTitle": "1.5 kg Hill's Science Plan Senior 11+ Pollo Pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-01",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/royal-canin-regular-sterilised-37-pienso-para-gatos/ROY319130_M.html",
+    "expectedTitle": "12 kg (10 + 2 kg ¡gratis!) Royal Canin Regular Sterilised 37 pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-06",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/royal-canin-mother-babycat-pienso-para-gatos/ROY310715_M.html",
+    "expectedTitle": "Royal Canin Mother & Babycat pienso para gatito"
+  },
+  {
+    "recipeId": "royalcanin-05",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/royal-canin-kitten-sterilised-pienso-para-gatos/ROY316210_M.html",
+    "expectedTitle": "Royal Canin Kitten Sterilised pienso para gatito"
+  },
+  {
+    "recipeId": "royalcanin-12",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/royal-canin-adult-7-regular-sterilised-pienso-para-gatos/ROY316512_M.html",
+    "expectedTitle": "10 kg Royal Canin Sterilised 7+ pienso para gatos"
+  },
+  {
+    "recipeId": "royalcanin-15",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/royal-canin-adult-british-shorthair-pienso-para-gatos/ROY309560_M.html",
+    "expectedTitle": "Royal Canin British Shorthair pienso para gato adulto"
+  },
+  {
+    "recipeId": "royalcanin-09",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/royal-canin-regular-sensible-33-pienso-para-gatos/ROY318027_M.html",
+    "expectedTitle": "Royal Canin Sensible 33"
+  },
+  {
+    "recipeId": "royalcanin-01",
+    "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/royal-canin-regular-sterilised-37-pienso-para-gatos/ROY319130_M.html",
+    "expectedTitle": "Royal Canin Regular Sterilised 37"
+  }
+]

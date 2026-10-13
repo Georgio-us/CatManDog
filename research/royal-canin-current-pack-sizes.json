@@ -1,0 +1,267 @@
+[
+  {
+    "recipeId": "royalcanin-01",
+    "name": "Sterilised 37",
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/sterilised-37-2537",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "checkedOn": "2026-10-13",
+    "originalResearchWeightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ]
+  },
+  {
+    "recipeId": "royalcanin-02",
+    "name": "Fit 32",
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/fit-32-2520",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "checkedOn": "2026-10-13",
+    "originalResearchWeightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ]
+  },
+  {
+    "recipeId": "royalcanin-03",
+    "name": "Indoor 27",
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/indoor-27-2529",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "checkedOn": "2026-10-13",
+    "originalResearchWeightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ]
+  },
+  {
+    "recipeId": "royalcanin-04",
+    "name": "Kitten",
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/kitten-2522",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "checkedOn": "2026-10-13",
+    "originalResearchWeightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ]
+  },
+  {
+    "recipeId": "royalcanin-05",
+    "name": "Kitten Sterilised",
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/kitten-sterilised-2562",
+    "weightsGrams": [
+      400,
+      2000,
+      3500
+    ],
+    "checkedOn": "2026-10-13",
+    "originalResearchWeightsGrams": [
+      400,
+      2000,
+      3500
+    ]
+  },
+  {
+    "recipeId": "royalcanin-06",
+    "name": "Mother & Babycat",
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/mother-&-babycat-2544",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "checkedOn": "2026-10-13",
+    "originalResearchWeightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ]
+  },
+  {
+    "recipeId": "royalcanin-07",
+    "name": "Hairball Care",
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/hairball-care-2534",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "checkedOn": "2026-10-13",
+    "originalResearchWeightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ]
+  },
+  {
+    "recipeId": "royalcanin-08",
+    "name": "Digestive Care",
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/digestive-care-2555",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "checkedOn": "2026-10-13",
+    "originalResearchWeightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ]
+  },
+  {
+    "recipeId": "royalcanin-09",
+    "name": "Sensible 33",
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/sensible-33-2521",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "checkedOn": "2026-10-13",
+    "originalResearchWeightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ]
+  },
+  {
+    "recipeId": "royalcanin-10",
+    "name": "Urinary Care",
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/urinary-care-1800",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "checkedOn": "2026-10-13",
+    "originalResearchWeightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ]
+  },
+  {
+    "recipeId": "royalcanin-11",
+    "name": "Light Weight Care",
+    "sourceUrl": "https://www.tiendanimal.es/royal-canin-adult-light-weight-care-pienso-para-gatos/ROY318613_M.html",
+    "weightsGrams": [
+      1500,
+      3000,
+      8000
+    ],
+    "checkedOn": "2026-10-13",
+    "originalResearchWeightsGrams": [
+      400,
+      2000,
+      3500,
+      10000
+    ]
+  },
+  {
+    "recipeId": "royalcanin-12",
+    "name": "Sterilised 7+",
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/sterilised-7%2B-2560",
+    "weightsGrams": [
+      400,
+      1500,
+      3500,
+      10000
+    ],
+    "checkedOn": "2026-10-13",
+    "originalResearchWeightsGrams": [
+      400,
+      1500,
+      3500,
+      10000
+    ]
+  },
+  {
+    "recipeId": "royalcanin-13",
+    "name": "Maine Coon Adult",
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/maine-coon-adult-2550",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "checkedOn": "2026-10-13",
+    "originalResearchWeightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ]
+  },
+  {
+    "recipeId": "royalcanin-14",
+    "name": "Persian Adult",
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/persian-adult-2552",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "checkedOn": "2026-10-13",
+    "originalResearchWeightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ]
+  },
+  {
+    "recipeId": "royalcanin-15",
+    "name": "British Shorthair Adult",
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/british-shorthair-adult-2557",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "checkedOn": "2026-10-13",
+    "originalResearchWeightsGrams": [
+      4000,
+      10000
+    ]
+  }
+]

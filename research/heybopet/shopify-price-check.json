@@ -1,0 +1,74 @@
+[
+  {
+    "url": "https://eu.neakasa.com/es/products/m1-lite-self-cleaning-cat-litter-box.js",
+    "title": "Caja de arena autolimpiable de cubierta abierta Neakasa M1 Plus Lite",
+    "variants": [
+      {
+        "title": "M1 Plus Lite",
+        "price": 29999,
+        "available": true,
+        "sku": "m1liteplus-lite-eu"
+      },
+      {
+        "title": "M1 Plus Lite + Step",
+        "price": 33999,
+        "available": true,
+        "sku": "m1liteplus-eu+step-white"
+      },
+      {
+        "title": "M1 Plus Lite + AirStep (Antirrastreo y purificación)",
+        "price": 34999,
+        "available": true,
+        "sku": "airstep-white+m1liteplus-eu"
+      }
+    ]
+  },
+  {
+    "url": "https://eu.neakasa.com/es/products/neakasa-m1-cat-litter-box.js",
+    "title": "Arenero para gatos autolimpiable de cubierta abierta Neakasa M1 Plus",
+    "variants": [
+      {
+        "title": "M1 Plus",
+        "price": 37999,
+        "available": true,
+        "sku": "m1plus-eu-grey"
+      },
+      {
+        "title": "M1 Plus + Paso (Antiseguimiento)",
+        "price": 39999,
+        "available": true,
+        "sku": "m1plus-eu+step-grey"
+      },
+      {
+        "title": "M1 Plus + AirStep (Antirrastreo y purificador)",
+        "price": 41999,
+        "available": true,
+        "sku": "airstep-white+m1plus-eu"
+      }
+    ]
+  },
+  {
+    "url": "https://store.imou.com/es-es/products/comedores-inteligentes-para-mascotas-pf1.js",
+    "title": "Dispensador de comida para gatos automático de 4L con cámara de 360° y 4MP PF1",
+    "variants": [
+      {
+        "title": "PF1",
+        "price": 9099,
+        "available": true,
+        "sku": "PET-PF1"
+      }
+    ]
+  },
+  {
+    "url": "https://petifo.es/products/pawhut-4l-pet-feeder-camera-app.js",
+    "title": "Comedero automático para mascotas de 4 L con cámara y aplicación PawHut",
+    "variants": [
+      {
+        "title": "4 L con cámara",
+        "price": 22900,
+        "available": true,
+        "sku": "D08-103V90WT"
+      }
+    ]
+  }
+]

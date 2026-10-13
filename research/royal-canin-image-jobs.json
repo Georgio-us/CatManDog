@@ -1,0 +1,126 @@
+{
+  "mode": "built-in image_gen",
+  "completed": [
+    {
+      "id": "royalcanin-02",
+      "slug": "rc-fit",
+      "name": "Fit 32",
+      "notes": "Ivory bag with red Regular FIT 32 semicircle label and printed ginger cat walking with tail up",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the exact Royal Canin packaging reference; input image 2 is ONLY the approved studio style and composition reference. Reconstruct input 1's packaging at high detail, preserving the red crown and ROYAL CANIN logo, exact recipe identity, printed cat imagery, colored label, layout and distinctive bag shape. Match input 2's seamless warm light-gray studio background and tabletop, quiet gradient, large soft upper-left softbox, restrained contact shadow beneath and right, matte-satin laminated bag material. One upright sealed bag centered, frontal with slight left gusset visible, complete top and base, approximately 86 percent of square image height, elegant space at sides. Preserve original major text from input 1, no new claims or invented certification, no added package weight if not visible in source. No props, extra objects, loose kibble, bowls, extra living animals, CatManDog logo, watermark, border, pedestal, dramatic contrast or harsh reflections. Exact product: Royal Canin Fit 32 dry cat food. Ivory bag with red Regular FIT 32 semicircle label and printed ginger cat walking with tail up. One final image.",
+      "generatedPath": "assets/food/editorial/rc-fit-v1.png",
+      "referencePath": "assets/food/references/royal-canin/royalcanin-02.jpg",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-ddb1d527-48e2-4566-817e-39ee79be5fc7.png"
+    },
+    {
+      "id": "royalcanin-03",
+      "slug": "rc-indoor",
+      "name": "Indoor 27",
+      "notes": "Ivory bag with blue Home Life INDOOR 27 semicircle and printed spotted gray cat stretching",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the exact Royal Canin packaging reference; input image 2 is ONLY the approved studio style and composition reference. Reconstruct input 1's packaging at high detail, preserving the red crown and ROYAL CANIN logo, exact recipe identity, printed cat imagery, colored label, layout and distinctive bag shape. Match input 2's seamless warm light-gray studio background and tabletop, quiet gradient, large soft upper-left softbox, restrained contact shadow beneath and right, matte-satin laminated bag material. One upright sealed bag centered, frontal with slight left gusset visible, complete top and base, approximately 86 percent of square image height, elegant space at sides. Preserve original major text from input 1, no new claims or invented certification, no added package weight if not visible in source. No props, extra objects, loose kibble, bowls, extra living animals, CatManDog logo, watermark, border, pedestal, dramatic contrast or harsh reflections. Exact product: Royal Canin Indoor 27 dry cat food. Ivory bag with blue Home Life INDOOR 27 semicircle and printed spotted gray cat stretching. One final image.",
+      "generatedPath": "assets/food/editorial/rc-indoor-v1.png",
+      "referencePath": "assets/food/references/royal-canin/royalcanin-03.jpg",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-60a7e284-65f8-4496-aee6-3d6eea97e359.png"
+    },
+    {
+      "id": "royalcanin-04",
+      "slug": "rc-kitten-regular",
+      "name": "Kitten",
+      "notes": "Pink bag with KITTEN label, Up to 12 months, printed fluffy colorpoint kitten. Not Kitten Sterilised",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the exact Royal Canin packaging reference; input image 2 is ONLY the approved studio style and composition reference. Reconstruct input 1's packaging at high detail, preserving the red crown and ROYAL CANIN logo, exact recipe identity, printed cat imagery, colored label, layout and distinctive bag shape. Match input 2's seamless warm light-gray studio background and tabletop, quiet gradient, large soft upper-left softbox, restrained contact shadow beneath and right, matte-satin laminated bag material. One upright sealed bag centered, frontal with slight left gusset visible, complete top and base, approximately 86 percent of square image height, elegant space at sides. Preserve original major text from input 1, no new claims or invented certification, no added package weight if not visible in source. No props, extra objects, loose kibble, bowls, extra living animals, CatManDog logo, watermark, border, pedestal, dramatic contrast or harsh reflections. Exact product: Royal Canin Kitten dry cat food. Pink bag with KITTEN label, Up to 12 months, printed fluffy colorpoint kitten. Not Kitten Sterilised. One final image.",
+      "generatedPath": "assets/food/editorial/rc-kitten-regular-v1.png",
+      "referencePath": "assets/food/references/royal-canin/royalcanin-04.jpg",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-41f54b95-69a4-41df-a9d2-d7675a3d892e.png"
+    },
+    {
+      "id": "royalcanin-06",
+      "slug": "rc-mother-babycat",
+      "name": "Mother & Babycat",
+      "notes": "Pink bag with MOTHER & BABYCAT label, 1-4 months, printed colorpoint mother cat and small pale kitten",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the exact Royal Canin packaging reference; input image 2 is ONLY the approved studio style and composition reference. Reconstruct input 1's packaging at high detail, preserving the red crown and ROYAL CANIN logo, exact recipe identity, printed cat imagery, colored label, layout and distinctive bag shape. Match input 2's seamless warm light-gray studio background and tabletop, quiet gradient, large soft upper-left softbox, restrained contact shadow beneath and right, matte-satin laminated bag material. One upright sealed bag centered, frontal with slight left gusset visible, complete top and base, approximately 86 percent of square image height, elegant space at sides. Preserve original major text from input 1, no new claims or invented certification, no added package weight if not visible in source. No props, extra objects, loose kibble, bowls, extra living animals, CatManDog logo, watermark, border, pedestal, dramatic contrast or harsh reflections. Exact product: Royal Canin Mother & Babycat dry cat food. Pink bag with MOTHER & BABYCAT label, 1-4 months, printed colorpoint mother cat and small pale kitten. One final image.",
+      "generatedPath": "assets/food/editorial/rc-mother-babycat-v1.png",
+      "referencePath": "assets/food/references/royal-canin/royalcanin-06.jpg",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-14e95276-aa28-4650-9129-35c8fc08d159.png"
+    },
+    {
+      "id": "royalcanin-07",
+      "slug": "rc-hairball",
+      "name": "Hairball Care",
+      "notes": "Preserve original CARE HAIRBALL label and color scheme",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the exact Royal Canin packaging reference; input image 2 is ONLY the approved studio style and composition reference. Reconstruct input 1's packaging at high detail, preserving the red crown and ROYAL CANIN logo, exact recipe identity, printed cat imagery, colored label, layout and distinctive bag shape. Match input 2's seamless warm light-gray studio background and tabletop, quiet gradient, large soft upper-left softbox, restrained contact shadow beneath and right, matte-satin laminated bag material. One upright sealed bag centered, frontal with slight left gusset visible, complete top and base, approximately 86 percent of square image height, elegant space at sides. Preserve original major text from input 1, no new claims or invented certification, no added package weight if not visible in source. No props, extra objects, loose kibble, bowls, extra living animals, CatManDog logo, watermark, border, pedestal, dramatic contrast or harsh reflections. Exact product: Royal Canin Hairball Care dry cat food. Preserve original CARE HAIRBALL label and color scheme. One final image.",
+      "generatedPath": "assets/food/editorial/rc-hairball-v1.png",
+      "referencePath": "assets/food/references/royal-canin/royalcanin-07.jpg",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-14c425c7-fcfc-4fec-beb7-863e5dbf9947.png"
+    },
+    {
+      "id": "royalcanin-09",
+      "slug": "rc-sensible",
+      "name": "Sensible 33",
+      "notes": "Preserve exact SENSIBLE 33 recipe and label",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the exact Royal Canin packaging reference; input image 2 is ONLY the approved studio style and composition reference. Reconstruct input 1's packaging at high detail, preserving the red crown and ROYAL CANIN logo, exact recipe identity, printed cat imagery, colored label, layout and distinctive bag shape. Match input 2's seamless warm light-gray studio background and tabletop, quiet gradient, large soft upper-left softbox, restrained contact shadow beneath and right, matte-satin laminated bag material. One upright sealed bag centered, frontal with slight left gusset visible, complete top and base, approximately 86 percent of square image height, elegant space at sides. Preserve original major text from input 1, no new claims or invented certification, no added package weight if not visible in source. No props, extra objects, loose kibble, bowls, extra living animals, CatManDog logo, watermark, border, pedestal, dramatic contrast or harsh reflections. Exact product: Royal Canin Sensible 33 dry cat food. Preserve exact SENSIBLE 33 recipe and label. One final image.",
+      "generatedPath": "assets/food/editorial/rc-sensible-v1.png",
+      "referencePath": "assets/food/references/royal-canin/royalcanin-09.jpg",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-415a0883-0812-45b8-b140-914e1d182165.png"
+    },
+    {
+      "id": "royalcanin-10",
+      "slug": "rc-urinary",
+      "name": "Urinary Care",
+      "notes": "CARE URINARY retail formula, NOT Urinary S/O veterinary diet",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the exact Royal Canin packaging reference; input image 2 is ONLY the approved studio style and composition reference. Reconstruct input 1's packaging at high detail, preserving the red crown and ROYAL CANIN logo, exact recipe identity, printed cat imagery, colored label, layout and distinctive bag shape. Match input 2's seamless warm light-gray studio background and tabletop, quiet gradient, large soft upper-left softbox, restrained contact shadow beneath and right, matte-satin laminated bag material. One upright sealed bag centered, frontal with slight left gusset visible, complete top and base, approximately 86 percent of square image height, elegant space at sides. Preserve original major text from input 1, no new claims or invented certification, no added package weight if not visible in source. No props, extra objects, loose kibble, bowls, extra living animals, CatManDog logo, watermark, border, pedestal, dramatic contrast or harsh reflections. Exact product: Royal Canin Urinary Care dry cat food. CARE URINARY retail formula, NOT Urinary S/O veterinary diet. One final image.",
+      "generatedPath": "assets/food/editorial/rc-urinary-v1.png",
+      "referencePath": "assets/food/references/royal-canin/royalcanin-10.jpg",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-a9d68521-6d41-4072-8b35-87fed56b692d.png"
+    },
+    {
+      "id": "royalcanin-11",
+      "slug": "rc-light",
+      "name": "Light Weight Care",
+      "notes": "Charcoal and ivory bag with blue CARE LIGHT WEIGHT label, printed ginger cat lower left, original 90% claim from reference. Preserve source packaging rather than changing cat to gray",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the exact Royal Canin packaging reference; input image 2 is ONLY the approved studio style and composition reference. Reconstruct input 1's packaging at high detail, preserving the red crown and ROYAL CANIN logo, exact recipe identity, printed cat imagery, colored label, layout and distinctive bag shape. Match input 2's seamless warm light-gray studio background and tabletop, quiet gradient, large soft upper-left softbox, restrained contact shadow beneath and right, matte-satin laminated bag material. One upright sealed bag centered, frontal with slight left gusset visible, complete top and base, approximately 86 percent of square image height, elegant space at sides. Preserve original major text from input 1, no new claims or invented certification, no added package weight if not visible in source. No props, extra objects, loose kibble, bowls, extra living animals, CatManDog logo, watermark, border, pedestal, dramatic contrast or harsh reflections. Exact product: Royal Canin Light Weight Care dry cat food. Charcoal and ivory bag with blue CARE LIGHT WEIGHT label, printed ginger cat lower left, original 90% claim from reference. Preserve source packaging rather than changing cat to gray. One final image.",
+      "generatedPath": "assets/food/editorial/rc-light-v1.png",
+      "referencePath": "assets/food/references/royal-canin/royalcanin-11.jpg",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-d411bfc5-c58d-44bb-baa5-e574e8615b5d.png"
+    },
+    {
+      "id": "royalcanin-12",
+      "slug": "rc-sterilised-senior",
+      "name": "Sterilised 7+",
+      "notes": "Preserve STERILISED 7+ senior recipe, do NOT substitute Sterilised 37",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the exact Royal Canin packaging reference; input image 2 is ONLY the approved studio style and composition reference. Reconstruct input 1's packaging at high detail, preserving the red crown and ROYAL CANIN logo, exact recipe identity, printed cat imagery, colored label, layout and distinctive bag shape. Match input 2's seamless warm light-gray studio background and tabletop, quiet gradient, large soft upper-left softbox, restrained contact shadow beneath and right, matte-satin laminated bag material. One upright sealed bag centered, frontal with slight left gusset visible, complete top and base, approximately 86 percent of square image height, elegant space at sides. Preserve original major text from input 1, no new claims or invented certification, no added package weight if not visible in source. No props, extra objects, loose kibble, bowls, extra living animals, CatManDog logo, watermark, border, pedestal, dramatic contrast or harsh reflections. Exact product: Royal Canin Sterilised 7+ dry cat food. Preserve STERILISED 7+ senior recipe, do NOT substitute Sterilised 37. One final image.",
+      "generatedPath": "assets/food/editorial/rc-sterilised-senior-v1.png",
+      "referencePath": "assets/food/references/royal-canin/royalcanin-12.jpg",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-d33a4e4b-0f9f-4c19-a413-ed42f5d77d93.png"
+    },
+    {
+      "id": "royalcanin-13",
+      "slug": "rc-maine-coon",
+      "name": "Maine Coon Adult",
+      "notes": "Breed formula MAINE COON ADULT, preserve distinctive long-haired cat",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the exact Royal Canin packaging reference; input image 2 is ONLY the approved studio style and composition reference. Reconstruct input 1's packaging at high detail, preserving the red crown and ROYAL CANIN logo, exact recipe identity, printed cat imagery, colored label, layout and distinctive bag shape. Match input 2's seamless warm light-gray studio background and tabletop, quiet gradient, large soft upper-left softbox, restrained contact shadow beneath and right, matte-satin laminated bag material. One upright sealed bag centered, frontal with slight left gusset visible, complete top and base, approximately 86 percent of square image height, elegant space at sides. Preserve original major text from input 1, no new claims or invented certification, no added package weight if not visible in source. No props, extra objects, loose kibble, bowls, extra living animals, CatManDog logo, watermark, border, pedestal, dramatic contrast or harsh reflections. Exact product: Royal Canin Maine Coon Adult dry cat food. Breed formula MAINE COON ADULT, preserve distinctive long-haired cat. One final image.",
+      "generatedPath": "assets/food/editorial/rc-maine-coon-v1.png",
+      "referencePath": "assets/food/references/royal-canin/royalcanin-13.jpg",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-068eae44-0c65-496f-b8d0-5a091ddce724.png"
+    },
+    {
+      "id": "royalcanin-14",
+      "slug": "rc-persian",
+      "name": "Persian Adult",
+      "notes": "Breed formula PERSIAN ADULT, preserve printed Persian cat",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the exact Royal Canin packaging reference; input image 2 is ONLY the approved studio style and composition reference. Reconstruct input 1's packaging at high detail, preserving the red crown and ROYAL CANIN logo, exact recipe identity, printed cat imagery, colored label, layout and distinctive bag shape. Match input 2's seamless warm light-gray studio background and tabletop, quiet gradient, large soft upper-left softbox, restrained contact shadow beneath and right, matte-satin laminated bag material. One upright sealed bag centered, frontal with slight left gusset visible, complete top and base, approximately 86 percent of square image height, elegant space at sides. Preserve original major text from input 1, no new claims or invented certification, no added package weight if not visible in source. No props, extra objects, loose kibble, bowls, extra living animals, CatManDog logo, watermark, border, pedestal, dramatic contrast or harsh reflections. Exact product: Royal Canin Persian Adult dry cat food. Breed formula PERSIAN ADULT, preserve printed Persian cat. One final image.",
+      "generatedPath": "assets/food/editorial/rc-persian-v1.png",
+      "referencePath": "assets/food/references/royal-canin/royalcanin-14.jpg",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-81ffdf7e-55c6-49b1-84c3-0f49a7f7dbbe.png"
+    },
+    {
+      "id": "royalcanin-15",
+      "slug": "rc-british",
+      "name": "British Shorthair Adult",
+      "notes": "Breed formula BRITISH SHORTHAIR ADULT, preserve printed gray British Shorthair cat",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the exact Royal Canin packaging reference; input image 2 is ONLY the approved studio style and composition reference. Reconstruct input 1's packaging at high detail, preserving the red crown and ROYAL CANIN logo, exact recipe identity, printed cat imagery, colored label, layout and distinctive bag shape. Match input 2's seamless warm light-gray studio background and tabletop, quiet gradient, large soft upper-left softbox, restrained contact shadow beneath and right, matte-satin laminated bag material. One upright sealed bag centered, frontal with slight left gusset visible, complete top and base, approximately 86 percent of square image height, elegant space at sides. Preserve original major text from input 1, no new claims or invented certification, no added package weight if not visible in source. No props, extra objects, loose kibble, bowls, extra living animals, CatManDog logo, watermark, border, pedestal, dramatic contrast or harsh reflections. Exact product: Royal Canin British Shorthair Adult dry cat food. Breed formula BRITISH SHORTHAIR ADULT, preserve printed gray British Shorthair cat. One final image.",
+      "generatedPath": "assets/food/editorial/rc-british-v1.png",
+      "referencePath": "assets/food/references/royal-canin/royalcanin-15.jpg",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-f33dd2e1-3da7-4268-a368-9054fbb5ddc9.png"
+    }
+  ],
+  "pending": []
+}

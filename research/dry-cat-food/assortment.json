@@ -1,0 +1,938 @@
+{
+  "scope": "Только сухой корм для кошек, все согласованные рецептуры сохранены",
+  "brandCounts": {
+    "Acana": 8,
+    "Orijen": 6,
+    "Advance": 8,
+    "Hill's": 17,
+    "Royal Canin": 15,
+    "Leonardo": 16
+  },
+  "notes": [
+    "Orijen Original Cat 17 кг подтверждён производителем, розничное наличие в Испании не подтверждено",
+    "Hill's Sterilised Adult Duck: у производителя 1,5/3 кг, у Miscota встречается 7 кг, дополнительная упаковка требует проверки версии",
+    "Advance Sterilized Adult: встречается обозначение 1,585 кг на официальном сайте и 1,5 кг в рознице, не объединять без проверки",
+    "Royal Canin British Shorthair: сохранены 4/10 кг с текущего испанского сайта, другие размеры не исключены"
+  ],
+  "recipes": [
+    {
+      "id": "acana-01",
+      "brand": "Acana",
+      "name": "First Feast",
+      "weightsGrams": [
+        340,
+        1800
+      ],
+      "sourceUrl": "https://emea.acana.com/es-ES/para-gatos",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "acana-02",
+      "brand": "Acana",
+      "name": "Indoor Entrée",
+      "weightsGrams": [
+        340,
+        1800,
+        4500
+      ],
+      "sourceUrl": "https://emea.acana.com/es-ES/para-gatos",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "acana-03",
+      "brand": "Acana",
+      "name": "Homestead Harvest",
+      "weightsGrams": [
+        340,
+        1800,
+        4500
+      ],
+      "sourceUrl": "https://emea.acana.com/es-ES/para-gatos",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "acana-04",
+      "brand": "Acana",
+      "name": "Bountiful Catch",
+      "weightsGrams": [
+        1800,
+        4500
+      ],
+      "sourceUrl": "https://emea.acana.com/es-ES/para-gatos",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "acana-05",
+      "brand": "Acana",
+      "name": "Wild Prairie",
+      "weightsGrams": [
+        340,
+        1800,
+        4500
+      ],
+      "sourceUrl": "https://emea.acana.com/es-ES/para-gatos",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "acana-06",
+      "brand": "Acana",
+      "name": "Grasslands",
+      "weightsGrams": [
+        340,
+        1800,
+        4500
+      ],
+      "sourceUrl": "https://emea.acana.com/es-ES/para-gatos",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "acana-07",
+      "brand": "Acana",
+      "name": "Pacifica",
+      "weightsGrams": [
+        340,
+        1800,
+        4500
+      ],
+      "sourceUrl": "https://emea.acana.com/es-ES/para-gatos",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "acana-08",
+      "brand": "Acana",
+      "name": "Highest Protein Indoor Cat",
+      "weightsGrams": [
+        1800,
+        4500
+      ],
+      "sourceUrl": "https://emea.acana.com/es-ES/para-gatos",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "orijen-01",
+      "brand": "Orijen",
+      "name": "Original Cat",
+      "weightsGrams": [
+        340,
+        1800,
+        5400,
+        17000
+      ],
+      "sourceUrl": "https://emea.orijenpetfoods.com/es-ES/cats/cat-food",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "orijen-02",
+      "brand": "Orijen",
+      "name": "Fit & Trim",
+      "weightsGrams": [
+        340,
+        1800,
+        5400
+      ],
+      "sourceUrl": "https://emea.orijenpetfoods.com/es-ES/cats/cat-food",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "orijen-03",
+      "brand": "Orijen",
+      "name": "Six Fish",
+      "weightsGrams": [
+        340,
+        1800,
+        5400
+      ],
+      "sourceUrl": "https://emea.orijenpetfoods.com/es-ES/cats/cat-food",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "orijen-04",
+      "brand": "Orijen",
+      "name": "Regional Red",
+      "weightsGrams": [
+        340,
+        1800,
+        5400
+      ],
+      "sourceUrl": "https://emea.orijenpetfoods.com/es-ES/cats/cat-food",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "orijen-05",
+      "brand": "Orijen",
+      "name": "Guardian 8",
+      "weightsGrams": [
+        340,
+        1800,
+        4500
+      ],
+      "sourceUrl": "https://emea.orijenpetfoods.com/es-ES/cats/cat-food",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "orijen-06",
+      "brand": "Orijen",
+      "name": "Kitten",
+      "weightsGrams": [
+        340,
+        1800
+      ],
+      "sourceUrl": "https://emea.orijenpetfoods.com/es-ES/cats/cat-food",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "advance-01",
+      "brand": "Advance",
+      "name": "Adult Chicken & Rice",
+      "weightsGrams": [
+        1500,
+        3000,
+        6000,
+        10000
+      ],
+      "sourceUrl": "https://www.advance-affinity.com/es/es/gato/comida-gato",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "advance-02",
+      "brand": "Advance",
+      "name": "Kitten Chicken & Rice",
+      "weightsGrams": [
+        400,
+        1500,
+        3000,
+        10000
+      ],
+      "sourceUrl": "https://www.advance-affinity.com/es/es/gato/comida-gato",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "advance-03",
+      "brand": "Advance",
+      "name": "Sterilized Adult Turkey & Barley",
+      "weightsGrams": [
+        400,
+        1500,
+        3000,
+        6000,
+        10000
+      ],
+      "sourceUrl": "https://www.advance-affinity.com/es/es/gato/comida-gato",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "advance-04",
+      "brand": "Advance",
+      "name": "Sensitive Care Salmon & Rice",
+      "weightsGrams": [
+        3000,
+        10000
+      ],
+      "sourceUrl": "https://www.advance-affinity.com/es/es/gato/comida-gato",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "advance-05",
+      "brand": "Advance",
+      "name": "Sensitive Care Sterilized Salmon & Barley",
+      "weightsGrams": [
+        1500,
+        3000,
+        10000
+      ],
+      "sourceUrl": "https://www.advance-affinity.com/es/es/gato/comida-gato",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "advance-06",
+      "brand": "Advance",
+      "name": "Sterilized Hairball Turkey",
+      "weightsGrams": [
+        1500,
+        3000,
+        10000
+      ],
+      "sourceUrl": "https://www.advance-affinity.com/es/es/gato/comida-gato",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "advance-07",
+      "brand": "Advance",
+      "name": "Sterilized Junior Chicken",
+      "weightsGrams": [
+        1500,
+        10000
+      ],
+      "sourceUrl": "https://www.advance-affinity.com/es/es/gato/comida-gato",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "advance-08",
+      "brand": "Advance",
+      "name": "Vitality Sterilized Senior +10",
+      "weightsGrams": [
+        1500,
+        10000
+      ],
+      "sourceUrl": "https://www.advance-affinity.com/es/es/gato/comida-gato",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-01",
+      "brand": "Hill's",
+      "name": "Science Plan Adult Chicken",
+      "weightsGrams": [
+        300,
+        1500,
+        3000,
+        7000,
+        10000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-adult-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-02",
+      "brand": "Hill's",
+      "name": "Science Plan Adult Lamb",
+      "weightsGrams": [
+        1500,
+        10000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-adult-lamb-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-03",
+      "brand": "Hill's",
+      "name": "Science Plan Sterilised Cat Adult Chicken",
+      "weightsGrams": [
+        300,
+        1500,
+        3000,
+        7000,
+        10000,
+        15000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-sterilised-cat-young-adult-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-04",
+      "brand": "Hill's",
+      "name": "Science Plan Sterilised Cat Adult Salmon",
+      "weightsGrams": [
+        300,
+        1500,
+        3000,
+        7000,
+        10000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-sterilised-cat-adult-salmon-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-05",
+      "brand": "Hill's",
+      "name": "Science Plan Sterilised Cat Adult Duck",
+      "weightsGrams": [
+        1500,
+        3000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-sterilised-cat-young-adult-duck-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-06",
+      "brand": "Hill's",
+      "name": "Science Plan Kitten Chicken",
+      "weightsGrams": [
+        300,
+        1500,
+        3000,
+        7000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-kitten-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-07",
+      "brand": "Hill's",
+      "name": "Science Plan Sterilised Kitten Chicken",
+      "weightsGrams": [
+        1500,
+        3000,
+        7000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-sterilised-cat-kitten-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-08",
+      "brand": "Hill's",
+      "name": "Science Plan Sterilised Cat Mature Adult 7+ Chicken",
+      "weightsGrams": [
+        1500
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-mature-adult-7-sterilised-cat-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-09",
+      "brand": "Hill's",
+      "name": "Science Plan Light Adult Chicken",
+      "weightsGrams": [
+        1500,
+        3000,
+        7000,
+        10000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-adult-light-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-10",
+      "brand": "Hill's",
+      "name": "Science Plan Perfect Weight Adult Chicken",
+      "weightsGrams": [
+        1500,
+        2500,
+        7000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-adult-perfect-weight-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-11",
+      "brand": "Hill's",
+      "name": "Science Plan Perfect Digestion Adult Chicken & Brown Rice",
+      "weightsGrams": [
+        1500,
+        3000,
+        7000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-adult-perfect-digestion-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-12",
+      "brand": "Hill's",
+      "name": "Science Plan Perfect Digestion Kitten Chicken & Brown Rice",
+      "weightsGrams": [
+        1500
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-kitten-perfect-digestion-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-13",
+      "brand": "Hill's",
+      "name": "Science Plan Sensitive Stomach & Skin Adult Chicken",
+      "weightsGrams": [
+        1500
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-adult-sensitive-stomach-skin-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-14",
+      "brand": "Hill's",
+      "name": "Science Plan Urinary Health Adult Chicken",
+      "weightsGrams": [
+        1500
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-adult-urinary-health-sterilised-cat-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-15",
+      "brand": "Hill's",
+      "name": "Science Plan Hairball & Perfect Coat Adult Chicken",
+      "weightsGrams": [
+        1500,
+        7000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-adult-hairbal-and-perfect-coat-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-16",
+      "brand": "Hill's",
+      "name": "Science Plan Hypoallergenic Adult Egg & Insect Protein",
+      "weightsGrams": [
+        1500,
+        7000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-adult-hypoallergenic-egg-insect-protein-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "hills-17",
+      "brand": "Hill's",
+      "name": "Science Plan Senior 11+ Healthy Ageing Chicken",
+      "weightsGrams": [
+        1500
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-senior-11-healthy-ageing-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "royalcanin-01",
+      "brand": "Royal Canin",
+      "name": "Sterilised 37",
+      "weightsGrams": [
+        400,
+        2000,
+        4000,
+        10000
+      ],
+      "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/sterilised-37-2537",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "royalcanin-02",
+      "brand": "Royal Canin",
+      "name": "Fit 32",
+      "weightsGrams": [
+        400,
+        2000,
+        4000,
+        10000
+      ],
+      "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/fit-32-2520",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "royalcanin-03",
+      "brand": "Royal Canin",
+      "name": "Indoor 27",
+      "weightsGrams": [
+        400,
+        2000,
+        4000,
+        10000
+      ],
+      "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/indoor-27-2529",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "royalcanin-04",
+      "brand": "Royal Canin",
+      "name": "Kitten",
+      "weightsGrams": [
+        400,
+        2000,
+        4000,
+        10000
+      ],
+      "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/kitten-2522",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "royalcanin-05",
+      "brand": "Royal Canin",
+      "name": "Kitten Sterilised",
+      "weightsGrams": [
+        400,
+        2000,
+        3500
+      ],
+      "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/kitten-sterilised-2562",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "royalcanin-06",
+      "brand": "Royal Canin",
+      "name": "Mother & Babycat",
+      "weightsGrams": [
+        400,
+        2000,
+        4000,
+        10000
+      ],
+      "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/mother-&-babycat-2544",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "royalcanin-07",
+      "brand": "Royal Canin",
+      "name": "Hairball Care",
+      "weightsGrams": [
+        400,
+        2000,
+        4000,
+        10000
+      ],
+      "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/hairball-care-2534",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "royalcanin-08",
+      "brand": "Royal Canin",
+      "name": "Digestive Care",
+      "weightsGrams": [
+        400,
+        2000,
+        4000,
+        10000
+      ],
+      "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/digestive-care-2555",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "royalcanin-09",
+      "brand": "Royal Canin",
+      "name": "Sensible 33",
+      "weightsGrams": [
+        400,
+        2000,
+        4000,
+        10000
+      ],
+      "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/sensible-33-2521",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "royalcanin-10",
+      "brand": "Royal Canin",
+      "name": "Urinary Care",
+      "weightsGrams": [
+        400,
+        2000,
+        4000,
+        10000
+      ],
+      "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/urinary-care-1800",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "royalcanin-11",
+      "brand": "Royal Canin",
+      "name": "Light Weight Care",
+      "weightsGrams": [
+        400,
+        2000,
+        3500,
+        10000
+      ],
+      "sourceUrl": "https://www.tiendanimal.es/royal-canin-adult-light-weight-care-pienso-para-gatos/ROY318613_M.html",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "royalcanin-12",
+      "brand": "Royal Canin",
+      "name": "Sterilised 7+",
+      "weightsGrams": [
+        400,
+        1500,
+        3500,
+        10000
+      ],
+      "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/sterilised-7%2B-2560",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "royalcanin-13",
+      "brand": "Royal Canin",
+      "name": "Maine Coon Adult",
+      "weightsGrams": [
+        400,
+        2000,
+        4000,
+        10000
+      ],
+      "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/maine-coon-adult-2550",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "royalcanin-14",
+      "brand": "Royal Canin",
+      "name": "Persian Adult",
+      "weightsGrams": [
+        400,
+        2000,
+        4000,
+        10000
+      ],
+      "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/persian-adult-2552",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "royalcanin-15",
+      "brand": "Royal Canin",
+      "name": "British Shorthair Adult",
+      "weightsGrams": [
+        4000,
+        10000
+      ],
+      "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/british-shorthair-adult-2557",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-01",
+      "brand": "Leonardo",
+      "name": "fresh Meat Fresh Duck",
+      "weightsGrams": [
+        250,
+        1500,
+        4000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-02",
+      "brand": "Leonardo",
+      "name": "fresh Meat Fresh Beef",
+      "weightsGrams": [
+        250,
+        1500,
+        4000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-03",
+      "brand": "Leonardo",
+      "name": "fresh Meat Fresh Salmon",
+      "weightsGrams": [
+        250,
+        1500,
+        4000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-04",
+      "brand": "Leonardo",
+      "name": "Adult Complete 32/16",
+      "weightsGrams": [
+        300,
+        1800,
+        7500,
+        15000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-05",
+      "brand": "Leonardo",
+      "name": "Adult Duck",
+      "weightsGrams": [
+        300,
+        1800,
+        7500,
+        15000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-06",
+      "brand": "Leonardo",
+      "name": "Adult Fish",
+      "weightsGrams": [
+        300,
+        1800,
+        7500,
+        15000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-07",
+      "brand": "Leonardo",
+      "name": "Adult Lamb",
+      "weightsGrams": [
+        300,
+        1800,
+        7500,
+        15000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-08",
+      "brand": "Leonardo",
+      "name": "Adult Light & Sterilised",
+      "weightsGrams": [
+        300,
+        1800,
+        7500
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-09",
+      "brand": "Leonardo",
+      "name": "Adult GF Poultry",
+      "weightsGrams": [
+        300,
+        1800,
+        7500
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-10",
+      "brand": "Leonardo",
+      "name": "Adult GF Salmon",
+      "weightsGrams": [
+        300,
+        1800,
+        7500
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-11",
+      "brand": "Leonardo",
+      "name": "Adult GF Maxi",
+      "weightsGrams": [
+        300,
+        1800,
+        7500,
+        15000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-12",
+      "brand": "Leonardo",
+      "name": "Kitten",
+      "weightsGrams": [
+        300,
+        1800,
+        7500
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-13",
+      "brand": "Leonardo",
+      "name": "Kitten GF",
+      "weightsGrams": [
+        300,
+        1800,
+        7500
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-14",
+      "brand": "Leonardo",
+      "name": "Kitten Granula-Start",
+      "weightsGrams": [
+        1000,
+        5000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-15",
+      "brand": "Leonardo",
+      "name": "Senior",
+      "weightsGrams": [
+        300,
+        1800,
+        7500
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    },
+    {
+      "id": "leonardo-16",
+      "brand": "Leonardo",
+      "name": "Senior GF",
+      "weightsGrams": [
+        300,
+        1800,
+        7500
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null
+    }
+  ]
+}

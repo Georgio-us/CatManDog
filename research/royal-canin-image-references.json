@@ -1,0 +1,239 @@
+[
+  {
+    "id": "royalcanin-01",
+    "brand": "Royal Canin",
+    "name": "Sterilised 37",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/sterilised-37-2537",
+    "recipeVerifiedOn": "2026-10-11",
+    "purchasePrice": null,
+    "referenceUrl": "https://marspetcareaprimocdn.petcare.global/cd9a054c-ee77-4adb-8c2a-b24900071afb/cd9a054c-ee77-4adb-8c2a-b24900071afb_DownloadAsJpg.jpg",
+    "referencePath": "assets/food/references/royal-canin/royalcanin-01.jpg"
+  },
+  {
+    "id": "royalcanin-02",
+    "brand": "Royal Canin",
+    "name": "Fit 32",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/fit-32-2520",
+    "recipeVerifiedOn": "2026-10-11",
+    "purchasePrice": null,
+    "referenceUrl": "https://marspetcareaprimocdn.petcare.global/d00b96be-3063-4140-ac03-b378009a2c3a/d00b96be-3063-4140-ac03-b378009a2c3a_DownloadAsJpg.jpg",
+    "referencePath": "assets/food/references/royal-canin/royalcanin-02.jpg"
+  },
+  {
+    "id": "royalcanin-03",
+    "brand": "Royal Canin",
+    "name": "Indoor 27",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/indoor-27-2529",
+    "recipeVerifiedOn": "2026-10-11",
+    "purchasePrice": null,
+    "referenceUrl": "https://marspetcareaprimocdn.petcare.global/6e85bfb2-2a80-4d09-800d-b3aa00a4ebfc/6e85bfb2-2a80-4d09-800d-b3aa00a4ebfc_DownloadAsJpg.jpg",
+    "referencePath": "assets/food/references/royal-canin/royalcanin-03.jpg"
+  },
+  {
+    "id": "royalcanin-04",
+    "brand": "Royal Canin",
+    "name": "Kitten",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/kitten-2522",
+    "recipeVerifiedOn": "2026-10-11",
+    "purchasePrice": null,
+    "referenceUrl": "https://marspetcareaprimocdn.petcare.global/ec90bc07-3283-4ac5-bd62-b20b003776d5/ec90bc07-3283-4ac5-bd62-b20b003776d5_DownloadAsJpg.jpg",
+    "referencePath": "assets/food/references/royal-canin/royalcanin-04.jpg"
+  },
+  {
+    "id": "royalcanin-05",
+    "brand": "Royal Canin",
+    "name": "Kitten Sterilised",
+    "weightsGrams": [
+      400,
+      2000,
+      3500
+    ],
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/kitten-sterilised-2562",
+    "recipeVerifiedOn": "2026-10-11",
+    "purchasePrice": null,
+    "referenceUrl": "https://cdn.royalcanin-weshare-online.io/tOcoB38BaPOZra8qANLX/v25/rc-spt-dry-kittenster-mv-2-es-es",
+    "referencePath": "assets/food/references/royal-canin/royalcanin-05.jpg"
+  },
+  {
+    "id": "royalcanin-06",
+    "brand": "Royal Canin",
+    "name": "Mother & Babycat",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/mother-&-babycat-2544",
+    "recipeVerifiedOn": "2026-10-11",
+    "purchasePrice": null,
+    "referenceUrl": "https://cdn.royalcanin-weshare-online.io/uOc_B38BaPOZra8qlNI4/v53/rc-spt-dry-babycat-mv-2-es-es",
+    "referencePath": "assets/food/references/royal-canin/royalcanin-06.jpg"
+  },
+  {
+    "id": "royalcanin-07",
+    "brand": "Royal Canin",
+    "name": "Hairball Care",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/hairball-care-2534",
+    "recipeVerifiedOn": "2026-10-11",
+    "purchasePrice": null,
+    "referenceUrl": "https://marspetcareaprimocdn.petcare.global/23c87388-76e1-49d0-81e3-b42500c5b199/23c87388-76e1-49d0-81e3-b42500c5b199_DownloadAsJpg.jpg",
+    "referencePath": "assets/food/references/royal-canin/royalcanin-07.jpg"
+  },
+  {
+    "id": "royalcanin-08",
+    "brand": "Royal Canin",
+    "name": "Digestive Care",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/digestive-care-2555",
+    "recipeVerifiedOn": "2026-10-11",
+    "purchasePrice": null,
+    "referenceUrl": "https://marspetcareaprimocdn.petcare.global/00dd09d3-2929-406b-b022-b42400bc3cb9/00dd09d3-2929-406b-b022-b42400bc3cb9_DownloadAsJpg.jpg",
+    "referencePath": "assets/food/references/royal-canin/royalcanin-08.jpg"
+  },
+  {
+    "id": "royalcanin-09",
+    "brand": "Royal Canin",
+    "name": "Sensible 33",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/sensible-33-2521",
+    "recipeVerifiedOn": "2026-10-11",
+    "purchasePrice": null,
+    "referenceUrl": "https://marspetcareaprimocdn.petcare.global/3a19d773-b0bc-47b9-8853-b37900712f28/3a19d773-b0bc-47b9-8853-b37900712f28_DownloadAsJpg.jpg",
+    "referencePath": "assets/food/references/royal-canin/royalcanin-09.jpg"
+  },
+  {
+    "id": "royalcanin-10",
+    "brand": "Royal Canin",
+    "name": "Urinary Care",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/urinary-care-1800",
+    "recipeVerifiedOn": "2026-10-11",
+    "purchasePrice": null,
+    "referenceUrl": "https://cdn.royalcanin-weshare-online.io/xVYCqoQBBKJuub5qQfEn/v273/fcn22-urinary-care-dry-packshot-b1",
+    "referencePath": "assets/food/references/royal-canin/royalcanin-10.jpg"
+  },
+  {
+    "id": "royalcanin-11",
+    "brand": "Royal Canin",
+    "name": "Light Weight Care",
+    "weightsGrams": [
+      400,
+      2000,
+      3500,
+      10000
+    ],
+    "sourceUrl": "https://www.tiendanimal.es/royal-canin-adult-light-weight-care-pienso-para-gatos/ROY318613_M.html",
+    "recipeVerifiedOn": "2026-10-11",
+    "purchasePrice": null,
+    "referenceUrl": "https://www.tiendanimal.es/dw/image/v2/BDLQ_PRD/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw7dd74b48/images/nuevo_Royal-Canin-Adult-Light-Weight-Care-pienso-para-gatos_ROY318613_M_1.jpg?sw=780&sh=780&sm=fit&q=85",
+    "referencePath": "assets/food/references/royal-canin/royalcanin-11.jpg"
+  },
+  {
+    "id": "royalcanin-12",
+    "brand": "Royal Canin",
+    "name": "Sterilised 7+",
+    "weightsGrams": [
+      400,
+      1500,
+      3500,
+      10000
+    ],
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/sterilised-7%2B-2560",
+    "recipeVerifiedOn": "2026-10-11",
+    "purchasePrice": null,
+    "referenceUrl": "https://marspetcareaprimocdn.petcare.global/461132d4-a040-4682-8e39-b3d2015dadf1/461132d4-a040-4682-8e39-b3d2015dadf1_DownloadAsJpg.jpg",
+    "referencePath": "assets/food/references/royal-canin/royalcanin-12.jpg"
+  },
+  {
+    "id": "royalcanin-13",
+    "brand": "Royal Canin",
+    "name": "Maine Coon Adult",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/maine-coon-adult-2550",
+    "recipeVerifiedOn": "2026-10-11",
+    "purchasePrice": null,
+    "referenceUrl": "https://marspetcareaprimocdn.petcare.global/b66cd0fb-c08d-4304-ab5f-b377014cda76/b66cd0fb-c08d-4304-ab5f-b377014cda76_DownloadAsJpg.jpg",
+    "referencePath": "assets/food/references/royal-canin/royalcanin-13.jpg"
+  },
+  {
+    "id": "royalcanin-14",
+    "brand": "Royal Canin",
+    "name": "Persian Adult",
+    "weightsGrams": [
+      400,
+      2000,
+      4000,
+      10000
+    ],
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/persian-adult-2552",
+    "recipeVerifiedOn": "2026-10-11",
+    "purchasePrice": null,
+    "referenceUrl": "https://marspetcareaprimocdn.petcare.global/07a1fa03-31d3-47e9-94f6-b2490007b362/07a1fa03-31d3-47e9-94f6-b2490007b362_DownloadAsJpg.jpg",
+    "referencePath": "assets/food/references/royal-canin/royalcanin-14.jpg"
+  },
+  {
+    "id": "royalcanin-15",
+    "brand": "Royal Canin",
+    "name": "British Shorthair Adult",
+    "weightsGrams": [
+      4000,
+      10000
+    ],
+    "sourceUrl": "https://www.royalcanin.com/es/cats/products/retail-products/british-shorthair-adult-2557",
+    "recipeVerifiedOn": "2026-10-11",
+    "purchasePrice": null,
+    "referenceUrl": "https://marspetcareaprimocdn.petcare.global/9428bd90-4035-49ad-b278-b379010aa960/9428bd90-4035-49ad-b278-b379010aa960_DownloadAsJpg.jpg",
+    "referencePath": "assets/food/references/royal-canin/royalcanin-15.jpg"
+  }
+]

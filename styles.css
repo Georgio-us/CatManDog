@@ -889,22 +889,29 @@ button:hover:not(:disabled) {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: var(--product-image-fit, contain);
   max-height: 100%;
-  padding: 22px;
+  padding: var(--product-image-padding, 22px);
   box-sizing: border-box;
 }
 
 .product-card .real-product-image img {
-  padding: 36px 22px 20px;
+  padding: var(--product-image-padding, 36px 22px 20px);
 }
 
 .detail-image.real-product-image img {
-  padding: 35px;
+  padding: var(--product-image-padding, 35px);
 }
 
 .cart-row .real-product-image img {
-  padding: 5px;
+  padding: var(--product-image-padding, 5px);
+}
+
+/* Studio assets already include product spacing and the background */
+.editorial-product-image {
+  --product-image-padding: 0px;
+  --product-image-fit: cover;
+  background: #d9d9d9;
 }
 
 .retail-note {
@@ -2850,11 +2857,11 @@ details .text-link {
 
 @media(max-width:600px) {
   .product-card .real-product-image img {
-    padding: 32px 9px 12px;
+    padding: var(--product-image-padding, 32px 9px 12px);
   }
 
   .detail-image.real-product-image img {
-    padding: 20px;
+    padding: var(--product-image-padding, 20px);
   }
 
   .food-filters {
