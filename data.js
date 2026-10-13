@@ -1,10 +1,12 @@
 import { waterBalconyProducts } from './water-balcony-products.js';
 import { foodProducts as originalFoodProducts } from './food-products.js?v=rc-editorial-1';
 import { expandRoyalCaninFood } from './royal-canin-products.js?v=rc-range-2';
-const foodProducts = expandRoyalCaninFood(originalFoodProducts);
+import { expandPriorityFood } from './priority-food-products.js?v=priority-food-1';
 import { accessoryProducts } from './accessory-products.js';
 import { heybopetProducts } from './heybopet-products.js';
 import { faireProducts } from './faire-products.js';
+
+const foodProducts = expandPriorityFood(expandRoyalCaninFood(originalFoodProducts));
 
 export const categories = ["Корм", "Наполнитель", "Игрушки", "Аксессуары", "Миски и поилки", "Переноски", "Окна и балконы", "Уход", "Подарочные наборы"];
 
