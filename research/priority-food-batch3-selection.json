@@ -1,0 +1,490 @@
+{
+  "scope": "Third batch: remaining 11 dry recipes plus 13 wet recipes",
+  "recipes": [
+    {
+      "id": "leonardo-04",
+      "brand": "Leonardo",
+      "name": "Adult Complete 32/16",
+      "weightsGrams": [
+        300,
+        1800,
+        7500,
+        15000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "leonardo-complete",
+      "tag": "Для взрослых кошек",
+      "foodType": "dry"
+    },
+    {
+      "id": "leonardo-06",
+      "brand": "Leonardo",
+      "name": "Adult Fish",
+      "weightsGrams": [
+        300,
+        1800,
+        7500,
+        15000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "leonardo-fish",
+      "tag": "Для взрослых кошек",
+      "foodType": "dry"
+    },
+    {
+      "id": "leonardo-07",
+      "brand": "Leonardo",
+      "name": "Adult Lamb",
+      "weightsGrams": [
+        300,
+        1800,
+        7500,
+        15000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "leonardo-lamb",
+      "tag": "Для взрослых кошек",
+      "foodType": "dry"
+    },
+    {
+      "id": "leonardo-13",
+      "brand": "Leonardo",
+      "name": "Kitten GF",
+      "weightsGrams": [
+        300,
+        1800,
+        7500
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "leonardo-kitten-gf",
+      "tag": "Для котят",
+      "foodType": "dry"
+    },
+    {
+      "id": "leonardo-14",
+      "brand": "Leonardo",
+      "name": "Kitten Granula-Start",
+      "weightsGrams": [
+        1000,
+        5000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "leonardo-granula-start",
+      "tag": "Для котят",
+      "foodType": "dry"
+    },
+    {
+      "id": "hills-02",
+      "brand": "Hill's",
+      "name": "Science Plan Adult Lamb",
+      "weightsGrams": [
+        1500,
+        10000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-adult-lamb-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "hills-adult-lamb",
+      "tag": "Для взрослых кошек",
+      "foodType": "dry"
+    },
+    {
+      "id": "hills-06",
+      "brand": "Hill's",
+      "name": "Science Plan Kitten Chicken",
+      "weightsGrams": [
+        300,
+        1500,
+        3000,
+        7000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-kitten-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "hills-kitten-regular",
+      "tag": "Для котят",
+      "foodType": "dry"
+    },
+    {
+      "id": "hills-09",
+      "brand": "Hill's",
+      "name": "Science Plan Light Adult Chicken",
+      "weightsGrams": [
+        1500,
+        3000,
+        7000,
+        10000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-adult-light-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "hills-light",
+      "tag": "Контроль веса",
+      "foodType": "dry"
+    },
+    {
+      "id": "hills-10",
+      "brand": "Hill's",
+      "name": "Science Plan Perfect Weight Adult Chicken",
+      "weightsGrams": [
+        1500,
+        2500,
+        7000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-adult-perfect-weight-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "hills-perfect-weight",
+      "tag": "Контроль веса",
+      "foodType": "dry"
+    },
+    {
+      "id": "hills-12",
+      "brand": "Hill's",
+      "name": "Science Plan Perfect Digestion Kitten Chicken & Brown Rice",
+      "weightsGrams": [
+        1500
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-kitten-perfect-digestion-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "hills-kitten-digestion",
+      "tag": "Для котят",
+      "foodType": "dry"
+    },
+    {
+      "id": "hills-16",
+      "brand": "Hill's",
+      "name": "Science Plan Hypoallergenic Adult Egg & Insect Protein",
+      "weightsGrams": [
+        1500,
+        7000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-adult-hypoallergenic-egg-insect-protein-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "hills-hypoallergenic",
+      "tag": "Hypoallergenic",
+      "foodType": "dry"
+    },
+    {
+      "id": "leonardo-49ae1018",
+      "brand": "Leonardo",
+      "name": "Extra Filet Chicken",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-pollo-extra-filete-6-x-200-g",
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-pollo-extra-filete-6-x-400-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "leonardo-chicken",
+      "researchName": "LEONARDO Extra Filete Pollo",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-extra-filete-pollo-extra-filete-6-x-200-g",
+      "tag": "Курица",
+      "foodType": "wet",
+      "existingProductId": "leonardo-chicken",
+      "existingImage": {
+        "src": "assets/food/leonardo-chicken.jpg",
+        "alt": "Leonardo Extra Filet Chicken - упаковка 200 г"
+      },
+      "existingImageSource": {
+        "name": "LEONARDO",
+        "pageUrl": "https://es.leonardo-catfood.com/leonardo-extra-filete-pollo-extra-filete-6-x-200-g",
+        "url": "https://d23dsm0lnesl7r.cloudfront.net/media/68/f1/3c/1771314262/bl-ef-huhn-200g-front.jpg?ts=1771314262",
+        "match": "Manufacturer image explicitly names exact package weight"
+      }
+    },
+    {
+      "id": "leonardo-47d1fcc0",
+      "brand": "Leonardo",
+      "name": "Extra Filet Turkey",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-pavo-extra-filete-6-x-200-g",
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-pavo-extra-filete-6-x-400-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "leonardo-turkey",
+      "researchName": "LEONARDO Extra Filete Pavo",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-extra-filete-pavo-extra-filete-6-x-200-g",
+      "tag": "Индейка",
+      "foodType": "wet",
+      "existingProductId": "leonardo-turkey",
+      "existingImage": {
+        "src": "assets/food/leonardo-turkey.jpg",
+        "alt": "Leonardo Extra Filet Turkey - упаковка 200 г"
+      },
+      "existingImageSource": {
+        "name": "LEONARDO",
+        "pageUrl": "https://es.leonardo-catfood.com/leonardo-extra-filete-pavo-extra-filete-6-x-200-g",
+        "url": "https://d23dsm0lnesl7r.cloudfront.net/media/6d/2c/ab/1771314262/bl-ef-truthahn-200g-front.jpg?ts=1771314262",
+        "match": "Manufacturer image explicitly names exact package weight"
+      }
+    },
+    {
+      "id": "leonardo-b251d533",
+      "brand": "Leonardo",
+      "name": "Extra Filet Salmon",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-salmon-extra-filete-6-x-200-g",
+        "https://es.leonardo-catfood.com/leonardo-extra-filete-salmon-extra-filete-6-x-400-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "leonardo-wet-salmon",
+      "researchName": "LEONARDO Extra Filete Salmón",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-extra-filete-salmon-extra-filete-6-x-200-g",
+      "tag": "Лосось",
+      "foodType": "wet"
+    },
+    {
+      "id": "leonardo-bf1e18d3",
+      "brand": "Leonardo",
+      "name": "Finest Selection Kitten Poultry",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-kitten-puro-en-ave-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "leonardo-wet-kitten",
+      "researchName": "LEONARDO Finest Selection Kitten puro en Ave",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-kitten-puro-en-ave-16-x-85-g-es",
+      "tag": "Для котят",
+      "foodType": "wet"
+    },
+    {
+      "id": "leonardo-ee08de93",
+      "brand": "Leonardo",
+      "name": "Finest Selection Rabbit & Cranberries",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-conejo-cranberries-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "leonardo-wet-rabbit",
+      "researchName": "LEONARDO Finest Selection Conejo + Cranberries",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-conejo-cranberries-16-x-85-g-es",
+      "tag": "Кролик и клюква",
+      "foodType": "wet"
+    },
+    {
+      "id": "acana-c58f94cd",
+      "brand": "Acana",
+      "name": "Premium Paté Tuna & Chicken",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-atun-y-pollo-lata-para-gatos/ACAAWT_M.html",
+        "https://www.tiendanimal.es/acana-premium-pate-atun-y-pollo-lata-para-gatos/ACAAWT_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "acana-wet-tuna",
+      "researchName": "Acana Premium Paté Atún y Pollo lata para gatos",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-atun-y-pollo-lata-para-gatos/ACAAWT_M.html",
+      "tag": "Паштет",
+      "foodType": "wet"
+    },
+    {
+      "id": "acana-ded3686b",
+      "brand": "Acana",
+      "name": "Premium Paté Lamb",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-cordero-lata-para-gatos/ACAAWL_M.html",
+        "https://www.tiendanimal.es/acana-premium-pate-cordero-lata-para-gatos/ACAAWL_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "acana-wet-lamb",
+      "researchName": "Acana Premium Paté Cordero lata para gatos",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-cordero-lata-para-gatos/ACAAWL_M.html",
+      "tag": "Паштет",
+      "foodType": "wet"
+    },
+    {
+      "id": "acana-21da5951",
+      "brand": "Acana",
+      "name": "Premium Paté Salmon & Chicken",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-salmon-y-pollo-lata-para-gatos/ACAAWS_M.html",
+        "https://www.tiendanimal.es/acana-premium-pate-salmon-y-pollo-lata-para-gatos/ACAAWS_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "acana-wet-salmon",
+      "researchName": "Acana Premium Paté Salmón y Pollo lata para gatos",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-salmon-y-pollo-lata-para-gatos/ACAAWS_M.html",
+      "tag": "Паштет",
+      "foodType": "wet"
+    },
+    {
+      "id": "acana-3a7cb68b",
+      "brand": "Acana",
+      "name": "Premium Paté Beef",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-ternera-lata-para-gatos/ACAAWB_M.html",
+        "https://www.tiendanimal.es/acana-premium-pate-ternera-lata-para-gatos/ACAAWB_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "acana-wet-beef",
+      "researchName": "Acana Premium Paté Ternera lata para gatos",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-ternera-lata-para-gatos/ACAAWB_M.html",
+      "tag": "Паштет",
+      "foodType": "wet"
+    },
+    {
+      "id": "advance-06d9acb9",
+      "brand": "Advance",
+      "name": "Adult Chicken - в соусе",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-adult-bocaditos-con-pollo-en-salsa-sobre-para-gatos/ADV964528_M.html",
+        "https://www.tiendanimal.es/advance-adult-bocaditos-con-pollo-en-salsa-sobre-para-gatos/ADV964528_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "advance-wet-adult",
+      "researchName": "Advance Adult Bocaditos con Pollo en salsa sobre para gatos",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-adult-bocaditos-con-pollo-en-salsa-sobre-para-gatos/ADV964528_M.html",
+      "tag": "В соусе",
+      "foodType": "wet"
+    },
+    {
+      "id": "advance-eb954ea7",
+      "brand": "Advance",
+      "name": "Kitten Turkey - в соусе",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-kitten-pavo-en-salsa-sobre-para-gatos/ADV964527_M.html",
+        "https://www.tiendanimal.es/advance-kitten-pavo-en-salsa-sobre-para-gatos/ADV964527_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "advance-wet-kitten",
+      "researchName": "Advance Kitten Pavo en salsa sobre para gatos",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-kitten-pavo-en-salsa-sobre-para-gatos/ADV964527_M.html",
+      "tag": "Для котят",
+      "foodType": "wet"
+    },
+    {
+      "id": "hills-bd4b65b0",
+      "brand": "Hill's",
+      "name": "Science Plan Sterilised Adult Salmon Mousse",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-sterilised-mousse-de-salmon-para-gatos/HIL609249_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-adult-sterilised-mousse-de-salmon-para-gatos/HIL609249_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "hills-wet-mousse-salmon",
+      "researchName": "Hill's Science Plan Adult Sterilised Mousse de Salmón para gatos",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-sterilised-mousse-de-salmon-para-gatos/HIL609249_M.html",
+      "tag": "Для стерилизованных",
+      "foodType": "wet"
+    },
+    {
+      "id": "hills-581247f6",
+      "brand": "Hill's",
+      "name": "Science Plan Kitten Chicken - в соусе",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-pollo-sobre-en-salsa/HIL2112PZ_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-kitten-pollo-sobre-en-salsa/HIL2112PZ_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "hills-wet-kitten",
+      "researchName": "Hill's Science Plan Kitten Pollo sobre en salsa",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-pollo-sobre-en-salsa/HIL2112PZ_M.html",
+      "tag": "Для котят",
+      "foodType": "wet"
+    }
+  ]
+}

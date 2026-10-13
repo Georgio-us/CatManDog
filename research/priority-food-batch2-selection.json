@@ -1,0 +1,402 @@
+{
+  "scope": "Second batch: 21 dry and 3 wet cat food recipes",
+  "recipes": [
+    {
+      "id": "leonardo-01",
+      "brand": "Leonardo",
+      "name": "fresh Meat Fresh Duck",
+      "weightsGrams": [
+        250,
+        1500,
+        4000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "leonardo-fresh-duck",
+      "tag": "Fresh Meat",
+      "foodType": "dry"
+    },
+    {
+      "id": "leonardo-03",
+      "brand": "Leonardo",
+      "name": "fresh Meat Fresh Salmon",
+      "weightsGrams": [
+        250,
+        1500,
+        4000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "leonardo-fresh-salmon",
+      "tag": "Fresh Meat",
+      "foodType": "dry"
+    },
+    {
+      "id": "leonardo-05",
+      "brand": "Leonardo",
+      "name": "Adult Duck",
+      "weightsGrams": [
+        300,
+        1800,
+        7500,
+        15000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "leonardo-adult-duck",
+      "tag": "С уткой",
+      "foodType": "dry"
+    },
+    {
+      "id": "leonardo-11",
+      "brand": "Leonardo",
+      "name": "Adult GF Maxi",
+      "weightsGrams": [
+        300,
+        1800,
+        7500,
+        15000
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "leonardo-maxi",
+      "tag": "Крупные гранулы",
+      "foodType": "dry"
+    },
+    {
+      "id": "leonardo-15",
+      "brand": "Leonardo",
+      "name": "Senior",
+      "weightsGrams": [
+        300,
+        1800,
+        7500
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "leonardo-senior",
+      "tag": "Для старших кошек",
+      "foodType": "dry"
+    },
+    {
+      "id": "leonardo-16",
+      "brand": "Leonardo",
+      "name": "Senior GF",
+      "weightsGrams": [
+        300,
+        1800,
+        7500
+      ],
+      "sourceUrl": "https://es.leonardo-catfood.com/productos/alimento-seco",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "leonardo-senior-gf",
+      "tag": "Senior без злаков",
+      "foodType": "dry"
+    },
+    {
+      "id": "hills-01",
+      "brand": "Hill's",
+      "name": "Science Plan Adult Chicken",
+      "weightsGrams": [
+        300,
+        1500,
+        3000,
+        7000,
+        10000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-adult-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "hills-adult-chicken",
+      "tag": "Для взрослых кошек",
+      "foodType": "dry"
+    },
+    {
+      "id": "hills-04",
+      "brand": "Hill's",
+      "name": "Science Plan Sterilised Cat Adult Salmon",
+      "weightsGrams": [
+        300,
+        1500,
+        3000,
+        7000,
+        10000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-sterilised-cat-adult-salmon-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "hills-ster-salmon",
+      "tag": "Для стерилизованных",
+      "foodType": "dry"
+    },
+    {
+      "id": "hills-05",
+      "brand": "Hill's",
+      "name": "Science Plan Sterilised Cat Adult Duck",
+      "weightsGrams": [
+        1500,
+        3000
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-sterilised-cat-young-adult-duck-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "hills-ster-duck",
+      "tag": "Для стерилизованных",
+      "foodType": "dry"
+    },
+    {
+      "id": "hills-08",
+      "brand": "Hill's",
+      "name": "Science Plan Sterilised Cat Mature Adult 7+ Chicken",
+      "weightsGrams": [
+        1500
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-mature-adult-7-sterilised-cat-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "hills-mature-ster",
+      "tag": "Возраст 7+",
+      "foodType": "dry"
+    },
+    {
+      "id": "hills-13",
+      "brand": "Hill's",
+      "name": "Science Plan Sensitive Stomach & Skin Adult Chicken",
+      "weightsGrams": [
+        1500
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-adult-sensitive-stomach-skin-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "hills-sensitive",
+      "tag": "Stomach & Skin",
+      "foodType": "dry"
+    },
+    {
+      "id": "hills-17",
+      "brand": "Hill's",
+      "name": "Science Plan Senior 11+ Healthy Ageing Chicken",
+      "weightsGrams": [
+        1500
+      ],
+      "sourceUrl": "https://www.hillspet.es/cat-food/science-plan-senior-11-healthy-ageing-chicken-dry",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "hills-senior11",
+      "tag": "Возраст 11+",
+      "foodType": "dry"
+    },
+    {
+      "id": "advance-01",
+      "brand": "Advance",
+      "name": "Adult Chicken & Rice",
+      "weightsGrams": [
+        1500,
+        3000,
+        6000,
+        10000
+      ],
+      "sourceUrl": "https://www.advance-affinity.com/es/es/gato/comida-gato",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "advance-adult",
+      "tag": "Для взрослых кошек",
+      "foodType": "dry"
+    },
+    {
+      "id": "advance-04",
+      "brand": "Advance",
+      "name": "Sensitive Care Salmon & Rice",
+      "weightsGrams": [
+        3000,
+        10000
+      ],
+      "sourceUrl": "https://www.advance-affinity.com/es/es/gato/comida-gato",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "advance-sensitive-adult",
+      "tag": "Sensitive Care",
+      "foodType": "dry"
+    },
+    {
+      "id": "advance-07",
+      "brand": "Advance",
+      "name": "Sterilized Junior Chicken",
+      "weightsGrams": [
+        1500,
+        10000
+      ],
+      "sourceUrl": "https://www.advance-affinity.com/es/es/gato/comida-gato",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "advance-junior",
+      "tag": "Sterilized Junior",
+      "foodType": "dry"
+    },
+    {
+      "id": "advance-08",
+      "brand": "Advance",
+      "name": "Vitality Sterilized Senior +10",
+      "weightsGrams": [
+        1500,
+        10000
+      ],
+      "sourceUrl": "https://www.advance-affinity.com/es/es/gato/comida-gato",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "advance-senior",
+      "tag": "Возраст 10+",
+      "foodType": "dry"
+    },
+    {
+      "id": "acana-03",
+      "brand": "Acana",
+      "name": "Homestead Harvest",
+      "weightsGrams": [
+        340,
+        1800,
+        4500
+      ],
+      "sourceUrl": "https://emea.acana.com/es-ES/para-gatos",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "acana-homestead",
+      "tag": "Homestead Harvest",
+      "foodType": "dry"
+    },
+    {
+      "id": "acana-04",
+      "brand": "Acana",
+      "name": "Bountiful Catch",
+      "weightsGrams": [
+        1800,
+        4500
+      ],
+      "sourceUrl": "https://emea.acana.com/es-ES/para-gatos",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "acana-bountiful",
+      "tag": "Bountiful Catch",
+      "foodType": "dry"
+    },
+    {
+      "id": "acana-08",
+      "brand": "Acana",
+      "name": "Highest Protein Indoor Cat",
+      "weightsGrams": [
+        1800,
+        4500
+      ],
+      "sourceUrl": "https://emea.acana.com/es-ES/para-gatos",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "acana-hp-indoor",
+      "tag": "Для домашних кошек",
+      "foodType": "dry"
+    },
+    {
+      "id": "orijen-04",
+      "brand": "Orijen",
+      "name": "Regional Red",
+      "weightsGrams": [
+        340,
+        1800,
+        5400
+      ],
+      "sourceUrl": "https://emea.orijenpetfoods.com/es-ES/cats/cat-food",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "orijen-regional-red",
+      "tag": "Regional Red",
+      "foodType": "dry"
+    },
+    {
+      "id": "orijen-05",
+      "brand": "Orijen",
+      "name": "Guardian 8",
+      "weightsGrams": [
+        340,
+        1800,
+        4500
+      ],
+      "sourceUrl": "https://emea.orijenpetfoods.com/es-ES/cats/cat-food",
+      "recipeVerifiedOn": "2026-10-11",
+      "purchasePrice": null,
+      "productId": "orijen-guardian8",
+      "tag": "Guardian 8",
+      "foodType": "dry"
+    },
+    {
+      "id": "advance-56a888bd",
+      "brand": "Advance",
+      "name": "Adult Sterilized Turkey - в соусе",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-adult-sterilized-pavo-en-salsa-sobre-para-gatos/ADV964529_M.html",
+        "https://www.tiendanimal.es/advance-adult-sterilized-pavo-en-salsa-sobre-para-gatos/ADV964529_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "advance-wet-ster-turkey",
+      "researchName": "Advance Adult Sterilized Pavo en salsa sobre para gatos",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-adult-sterilized-pavo-en-salsa-sobre-para-gatos/ADV964529_M.html",
+      "tag": "Для стерилизованных",
+      "foodType": "wet"
+    },
+    {
+      "id": "acana-265a9eae",
+      "brand": "Acana",
+      "name": "Premium Paté Kitten Chicken & Fish",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-pollo-y-pescado-lata-para-gatitos/ACAAWK_M.html",
+        "https://www.tiendanimal.es/acana-premium-pate-pollo-y-pescado-lata-para-gatitos/ACAAWK_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "acana-wet-kitten",
+      "researchName": "Acana Premium Paté Pollo y Pescado lata para gatitos",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-pollo-y-pescado-lata-para-gatitos/ACAAWK_M.html",
+      "tag": "Для котят",
+      "foodType": "wet"
+    },
+    {
+      "id": "acana-0544e2e9",
+      "brand": "Acana",
+      "name": "Premium Paté Chicken",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-pollo-lata-para-gatos/ACAAWC_M.html",
+        "https://www.tiendanimal.es/acana-premium-pate-pollo-lata-para-gatos/ACAAWC_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "productId": "acana-wet-chicken",
+      "researchName": "Acana Premium Paté Pollo lata para gatos",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-pollo-lata-para-gatos/ACAAWC_M.html",
+      "tag": "Паштет",
+      "foodType": "wet"
+    }
+  ]
+}

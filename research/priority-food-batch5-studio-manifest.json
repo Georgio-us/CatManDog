@@ -1,0 +1,786 @@
+{
+  "toolMode": "built-in image_gen",
+  "scope": "24 wet foods - 10 Leonardo, 9 Hills, 5 Advance",
+  "originalImagesRetained": true,
+  "displayEncoding": {
+    "format": "WebP",
+    "quality": 95,
+    "resize": false
+  },
+  "assets": [
+    {
+      "id": "leonardo-c90d6fff",
+      "brand": "Leonardo",
+      "name": "Finest Selection Pure Chicken",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-pollo-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Finest Selection Puro en Pollo",
+      "productId": "leonardo-wet-pure-chicken",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-pollo-16-x-85-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм",
+      "referencePath": "assets/food/references/priority-batch5/leonardo-c90d6fff.jpg",
+      "referenceUrl": "https://d23dsm0lnesl7r.cloudfront.net/media/e5/c3/23/1777277171/bl-fs-huhn-pur-85g-front-es.jpg?ts=1777277171",
+      "referenceSource": "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-pollo-16-x-85-g-es",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Leonardo Finest Selection Pure Chicken",
+      "generatedPath": "assets/food/editorial/leonardo-wet-pure-chicken-v1.png",
+      "displayPath": "assets/food/editorial/leonardo-wet-pure-chicken-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-f8c7fd48-b5a4-4c5e-aa27-bd033eb3488c.png"
+    },
+    {
+      "id": "leonardo-cec6d7b8",
+      "brand": "Leonardo",
+      "name": "Finest Selection Pure Beef",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-ternera-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Finest Selection Puro en Ternera",
+      "productId": "leonardo-wet-pure-beef",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-ternera-16-x-85-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм",
+      "referencePath": "assets/food/references/priority-batch5/leonardo-cec6d7b8.jpg",
+      "referenceUrl": "https://d23dsm0lnesl7r.cloudfront.net/media/8b/4c/fc/1777277172/bl-fs-rind-pur-85g-front-es.jpg?ts=1777277172",
+      "referenceSource": "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-ternera-16-x-85-g-es",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Leonardo Finest Selection Pure Beef",
+      "generatedPath": "assets/food/editorial/leonardo-wet-pure-beef-v1.png",
+      "displayPath": "assets/food/editorial/leonardo-wet-pure-beef-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-b9a795d5-8c81-43ce-b08c-186d2666653c.png"
+    },
+    {
+      "id": "leonardo-04d3623d",
+      "brand": "Leonardo",
+      "name": "Finest Selection Senior Pure Chicken",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-senior-puro-en-pollo-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Finest Selection Senior puro en Pollo",
+      "productId": "leonardo-wet-senior-chicken",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-senior-puro-en-pollo-16-x-85-g-es",
+      "foodType": "wet",
+      "tag": "Для старших кошек",
+      "referencePath": "assets/food/references/priority-batch5/leonardo-04d3623d.jpg",
+      "referenceUrl": "https://d23dsm0lnesl7r.cloudfront.net/media/27/7c/42/1777277171/bl-fs-senior-huhn-pur-85g-front-es.jpg?ts=1777277171",
+      "referenceSource": "https://es.leonardo-catfood.com/leonardo-finest-selection-senior-puro-en-pollo-16-x-85-g-es",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Leonardo Finest Selection Senior Pure Chicken",
+      "generatedPath": "assets/food/editorial/leonardo-wet-senior-chicken-v1.png",
+      "displayPath": "assets/food/editorial/leonardo-wet-senior-chicken-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-81cf4c96-deb4-41f0-87e2-4b91fcf66451.png"
+    },
+    {
+      "id": "leonardo-a8fa1682",
+      "brand": "Leonardo",
+      "name": "Finest Selection Senior Pure Beef",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-senior-puro-en-ternera-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Finest Selection Senior puro en Ternera",
+      "productId": "leonardo-wet-senior-beef",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-senior-puro-en-ternera-16-x-85-g-es",
+      "foodType": "wet",
+      "tag": "Для старших кошек",
+      "referencePath": "assets/food/references/priority-batch5/leonardo-a8fa1682.jpg",
+      "referenceUrl": "https://d23dsm0lnesl7r.cloudfront.net/media/c2/30/8f/1777277171/bl-fs-senior-kalb-pur-85g-front-es.jpg?ts=1777277171",
+      "referenceSource": "https://es.leonardo-catfood.com/leonardo-finest-selection-senior-puro-en-ternera-16-x-85-g-es",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Leonardo Finest Selection Senior Pure Beef",
+      "generatedPath": "assets/food/editorial/leonardo-wet-senior-beef-v1.png",
+      "displayPath": "assets/food/editorial/leonardo-wet-senior-beef-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-9f952a6e-d0bb-4a84-9c1a-fa66745a1015.png"
+    },
+    {
+      "id": "leonardo-ce1bb081",
+      "brand": "Leonardo",
+      "name": "Finest Selection Beef & Vegetables",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-ternera-verdura-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Finest Selection Ternera + Verdura",
+      "productId": "leonardo-wet-beef-vegetables",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-ternera-verdura-16-x-85-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм",
+      "referencePath": "assets/food/references/priority-batch5/leonardo-ce1bb081.jpg",
+      "referenceUrl": "https://d23dsm0lnesl7r.cloudfront.net/media/10/2b/65/1777277172/bl-fs-kalb-gemuese-85g-front-es.jpg?ts=1777277172",
+      "referenceSource": "https://es.leonardo-catfood.com/leonardo-finest-selection-ternera-verdura-16-x-85-g-es",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Leonardo Finest Selection Beef & Vegetables",
+      "generatedPath": "assets/food/editorial/leonardo-wet-beef-vegetables-v1.png",
+      "displayPath": "assets/food/editorial/leonardo-wet-beef-vegetables-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-50450971-5706-419f-abf4-d17e0acc34f6.png"
+    },
+    {
+      "id": "leonardo-3e65b946",
+      "brand": "Leonardo",
+      "name": "Finest Selection Pure Turkey",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-pavo-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Finest Selection Puro en Pavo",
+      "productId": "leonardo-wet-pure-turkey",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-pavo-16-x-85-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм",
+      "referencePath": "assets/food/references/priority-batch5/leonardo-3e65b946.jpg",
+      "referenceUrl": "https://d23dsm0lnesl7r.cloudfront.net/media/59/c8/d2/1777277171/bl-fs-truthahn-pur-85g-front-es.jpg?ts=1777277171",
+      "referenceSource": "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-pavo-16-x-85-g-es",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Leonardo Finest Selection Pure Turkey",
+      "generatedPath": "assets/food/editorial/leonardo-wet-pure-turkey-v1.png",
+      "displayPath": "assets/food/editorial/leonardo-wet-pure-turkey-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-8d637936-a236-4a15-b8de-f0de80983409.png"
+    },
+    {
+      "id": "leonardo-bcfaec2c",
+      "brand": "Leonardo",
+      "name": "Pulled Beef Beef",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        70
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-pulled-beef-beef-with-extra-pulled-beef-16-x-70-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Pulled Beef Beef",
+      "productId": "leonardo-wet-pulled-beef",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-pulled-beef-beef-with-extra-pulled-beef-16-x-70-g",
+      "foodType": "wet",
+      "tag": "Влажный корм",
+      "referencePath": "assets/food/references/priority-batch5/leonardo-bcfaec2c.jpg",
+      "referenceUrl": "https://d23dsm0lnesl7r.cloudfront.net/media/b6/39/ff/1722338286/bl-pouch-pulled-beef-beef-70g-front.jpg?ts=1722339306",
+      "referenceSource": "https://es.leonardo-catfood.com/leonardo-pulled-beef-beef-with-extra-pulled-beef-16-x-70-g",
+      "referenceGrams": 70,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Leonardo Pulled Beef Beef",
+      "generatedPath": "assets/food/editorial/leonardo-wet-pulled-beef-v1.png",
+      "displayPath": "assets/food/editorial/leonardo-wet-pulled-beef-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-84d8e1a4-45ed-4c1a-a442-0971273fbaf0.png"
+    },
+    {
+      "id": "leonardo-e16b56c6",
+      "brand": "Leonardo",
+      "name": "Finest Selection Trout & Catnip",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-trucha-catnip-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Finest Selection Trucha + Catnip",
+      "productId": "leonardo-wet-trout-catnip",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-trucha-catnip-16-x-85-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм",
+      "referencePath": "assets/food/references/priority-batch5/leonardo-e16b56c6.jpg",
+      "referenceUrl": "https://d23dsm0lnesl7r.cloudfront.net/media/f5/01/dc/1777277173/bl-fs-forelle-catnip-85g-front-es.jpg?ts=1777277173",
+      "referenceSource": "https://es.leonardo-catfood.com/leonardo-finest-selection-trucha-catnip-16-x-85-g-es",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Leonardo Finest Selection Trout & Catnip",
+      "generatedPath": "assets/food/editorial/leonardo-wet-trout-catnip-v1.png",
+      "displayPath": "assets/food/editorial/leonardo-wet-trout-catnip-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-d31b7f4c-1ad2-4885-ac81-35b12ba09421.png"
+    },
+    {
+      "id": "leonardo-fa83dd83",
+      "brand": "Leonardo",
+      "name": "Finest Selection Venison & Blueberries",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-finest-selection-venado-arandanos-azules-16-x-85-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Finest Selection Venado + Arándanos azules",
+      "productId": "leonardo-wet-venison-blueberries",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-venado-arandanos-azules-16-x-85-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм",
+      "referencePath": "assets/food/references/priority-batch5/leonardo-fa83dd83.jpg",
+      "referenceUrl": "https://d23dsm0lnesl7r.cloudfront.net/media/b8/8b/cc/1777277171/bl-fs-wild-heidelbeeren-85g-front-es.jpg?ts=1777277171",
+      "referenceSource": "https://es.leonardo-catfood.com/leonardo-finest-selection-venado-arandanos-azules-16-x-85-g-es",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Leonardo Finest Selection Venison & Blueberries",
+      "generatedPath": "assets/food/editorial/leonardo-wet-venison-blueberries-v1.png",
+      "displayPath": "assets/food/editorial/leonardo-wet-venison-blueberries-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-b5e3a94e-4915-48d8-a47d-158a0b836673.png"
+    },
+    {
+      "id": "hills-8ae14cbf",
+      "brand": "Hill's",
+      "name": "Science Plan Adult Beef - в соусе",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-ternera-sobre-en-salsa-para-gatos/HIL2106PZ_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-adult-ternera-sobre-en-salsa-para-gatos/HIL2106PZ_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Adult Ternera Sobre en Salsa para gatos",
+      "productId": "hills-wet-adult-beef",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-ternera-sobre-en-salsa-para-gatos/HIL2106PZ_M.html",
+      "foodType": "wet",
+      "tag": "Влажный корм",
+      "referencePath": "assets/food/references/priority-batch5/hills-8ae14cbf.jpg",
+      "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwf2e4ea59/images/comida_humeda_gatos_hills_bolsitas_adult_ternera_HIL2106PZ_M_02.jpg",
+      "referenceSource": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-adult-ternera-sobre-en-salsa-para-gatos/HIL2106PZ.html",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Hill's Science Plan Adult Beef - в соусе",
+      "generatedPath": "assets/food/editorial/hills-wet-adult-beef-v1.png",
+      "displayPath": "assets/food/editorial/hills-wet-adult-beef-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-178ffa6b-a802-4728-b61b-448576499128.png"
+    },
+    {
+      "id": "leonardo-244fbf75",
+      "brand": "Leonardo",
+      "name": "Pulled Beef Chicken",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        70
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-pulled-beef-chicken-with-extra-pulled-beef-16-x-70-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Pulled Beef Chicken",
+      "productId": "leonardo-wet-pulled-chicken",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-pulled-beef-chicken-with-extra-pulled-beef-16-x-70-g",
+      "foodType": "wet",
+      "tag": "Влажный корм",
+      "referencePath": "assets/food/references/priority-batch5/leonardo-244fbf75.jpg",
+      "referenceUrl": "https://d23dsm0lnesl7r.cloudfront.net/media/7f/bc/ae/1722338286/bl-pouch-pulled-beef-chicken-70g-front.jpg?ts=1722339344",
+      "referenceSource": "https://es.leonardo-catfood.com/leonardo-pulled-beef-chicken-with-extra-pulled-beef-16-x-70-g",
+      "referenceGrams": 70,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Leonardo Pulled Beef Chicken",
+      "generatedPath": "assets/food/editorial/leonardo-wet-pulled-chicken-v1.png",
+      "displayPath": "assets/food/editorial/leonardo-wet-pulled-chicken-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-6545ab0b-7d2f-4144-b855-59b7128655aa.png"
+    },
+    {
+      "id": "hills-bb9a38e6",
+      "brand": "Hill's",
+      "name": "Science Plan Adult Chicken - в соусе",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-pollo-sobre-para-gatos/HIL2104PZ_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-adult-pollo-sobre-para-gatos/HIL2104PZ_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Adult Pollo sobre para gatos",
+      "productId": "hills-wet-adult-chicken",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-pollo-sobre-para-gatos/HIL2104PZ_M.html",
+      "foodType": "wet",
+      "tag": "Влажный корм",
+      "referencePath": "assets/food/references/priority-batch5/hills-bb9a38e6.jpg",
+      "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw212607f2/images/comida_humeda_gatos_hills_bolsitas_adult_pollo_HIL2104PZ_M_02.jpg",
+      "referenceSource": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-adult-pollo-sobre-para-gatos/HIL2104PZ.html",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Hill's Science Plan Adult Chicken - в соусе",
+      "generatedPath": "assets/food/editorial/hills-wet-adult-chicken-v1.png",
+      "displayPath": "assets/food/editorial/hills-wet-adult-chicken-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-4a2ceac6-315a-4e34-a7ff-4b0490724a79.png"
+    },
+    {
+      "id": "hills-184b871c",
+      "brand": "Hill's",
+      "name": "Science Plan Kitten Ocean Fish - в соусе",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-pescado-azul-sobre-para-gatos/HIL2113PZ_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-kitten-pescado-azul-sobre-para-gatos/HIL2113PZ_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Kitten Pescado Azul sobre para gatos",
+      "productId": "hills-wet-kitten-fish",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-pescado-azul-sobre-para-gatos/HIL2113PZ_M.html",
+      "foodType": "wet",
+      "tag": "Для котят",
+      "referencePath": "assets/food/references/priority-batch5/hills-184b871c.jpg",
+      "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw0cd4422c/images/comida_humeda_gatos_hills_bolsitas_kitten_ocean_fish_HIL2113PZ_M_02.jpg",
+      "referenceSource": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-kitten-pescado-azul-sobre-para-gatos/HIL2113PZ.html",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Hill's Science Plan Kitten Ocean Fish - в соусе. Remove all retailer annotations OUTSIDE the physical package, including GATOS MAYORES, con POLLO banners and border. Preserve exact physical label.",
+      "generatedPath": "assets/food/editorial/hills-wet-kitten-fish-v1.png",
+      "displayPath": "assets/food/editorial/hills-wet-kitten-fish-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-4becdc77-40a3-4c09-82d1-63a5c662d301.png"
+    },
+    {
+      "id": "hills-9795b719",
+      "brand": "Hill's",
+      "name": "Science Plan Kitten Turkey - в соусе",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-pavo-en-salsa-sobre-para-gatos/HIL2114PZ_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-kitten-pavo-en-salsa-sobre-para-gatos/HIL2114PZ_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Kitten Pavo en Salsa sobre para gatos",
+      "productId": "hills-wet-kitten-turkey",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-pavo-en-salsa-sobre-para-gatos/HIL2114PZ_M.html",
+      "foodType": "wet",
+      "tag": "Для котят",
+      "referencePath": "assets/food/references/priority-batch5/hills-9795b719.jpg",
+      "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwf212f409/images/hills_comida_humeda_gato_kitten_turkey_HIL2114PZ_1.jpg",
+      "referenceSource": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-kitten-pavo-en-salsa-sobre-para-gatos/HIL2114PZ.html",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Hill's Science Plan Kitten Turkey - в соусе. Remove all retailer annotations OUTSIDE the physical package, including GATOS MAYORES, con POLLO banners and border. Preserve exact physical label.",
+      "generatedPath": "assets/food/editorial/hills-wet-kitten-turkey-v1.png",
+      "displayPath": "assets/food/editorial/hills-wet-kitten-turkey-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-87816cbf-e1c5-4d97-b1e4-882c5bde2062.png"
+    },
+    {
+      "id": "hills-178db5ef",
+      "brand": "Hill's",
+      "name": "Science Plan Kitten & Mother Chicken & Turkey Mousse",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-y-mother-mousse-de-pollo-y-pavo-lata-para-gatos/HIL608058_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-kitten-y-mother-mousse-de-pollo-y-pavo-lata-para-gatos/HIL608058_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Kitten y Mother Mousse de Pollo y Pavo lata para gatos",
+      "productId": "hills-wet-kitten-mother",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-y-mother-mousse-de-pollo-y-pavo-lata-para-gatos/HIL608058_M.html",
+      "foodType": "wet",
+      "tag": "Для котят",
+      "referencePath": "assets/food/references/priority-batch5/hills-178db5ef.jpg",
+      "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw0d5b57c2/images/Hill's_SciencePlan_Kitten_Mother_Mousse_Pollo_Pavo_Lata_gatos_HIL608058_M_2.jpg",
+      "referenceSource": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-kitten-y-mother-mousse-de-pollo-y-pavo-lata-para-gatos/HIL608058.html",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Hill's Science Plan Kitten & Mother Chicken & Turkey Mousse. Remove all retailer annotations OUTSIDE the physical package, including GATOS MAYORES, con POLLO banners and border. Preserve exact physical label.",
+      "generatedPath": "assets/food/editorial/hills-wet-kitten-mother-v1.png",
+      "displayPath": "assets/food/editorial/hills-wet-kitten-mother-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-91624a5c-d0e4-4a4e-95f8-0257abf59cb6.png"
+    },
+    {
+      "id": "hills-66637f63",
+      "brand": "Hill's",
+      "name": "Science Plan Mature Chicken Mousse",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/hill_s-science-plan-mature-mousse-de-pollo-lata-para-gatos/HIL609247_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Mature Mousse de Pollo lata para gatos",
+      "productId": "hills-wet-mature-chicken",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/hill_s-science-plan-mature-mousse-de-pollo-lata-para-gatos/HIL609247_M.html",
+      "foodType": "wet",
+      "tag": "Для старших кошек",
+      "referencePath": "assets/food/references/priority-batch5/hills-66637f63.jpg",
+      "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwc0ef41e8/images/Hill's_Science_Plan_Mature_Mousse_Pollo_lata_gatos_HIL609247_M.jpg",
+      "referenceSource": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-mature-mousse-de-pollo-lata-para-gatos/HIL609247.html",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Hill's Science Plan Mature Chicken Mousse. Remove all retailer annotations OUTSIDE the physical package, including GATOS MAYORES, con POLLO banners and border. Preserve exact physical label.",
+      "generatedPath": "assets/food/editorial/hills-wet-mature-chicken-v1.png",
+      "displayPath": "assets/food/editorial/hills-wet-mature-chicken-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-dc60ed0c-4170-4aa7-86b3-6f7b418f678b.png"
+    },
+    {
+      "id": "hills-52ebd066",
+      "brand": "Hill's",
+      "name": "Science Plan Mature Sterilised Chicken Mousse",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/hill_s-science-plan-mature-sterilised-mousse-de-pollo-para-gatos/HIL609250_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-mature-sterilised-mousse-de-pollo-para-gatos/HIL609250_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Mature Sterilised Mousse de Pollo para gatos",
+      "productId": "hills-wet-mature-sterilised",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/hill_s-science-plan-mature-sterilised-mousse-de-pollo-para-gatos/HIL609250_M.html",
+      "foodType": "wet",
+      "tag": "Для старших кошек",
+      "referencePath": "assets/food/references/priority-batch5/hills-52ebd066.jpg",
+      "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwcf77ab3b/images/Hill's_Science_Plan_Mature_Sterilised_Mousse_Pollo_gatos_HIL609250_M.jpg",
+      "referenceSource": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-mature-sterilised-mousse-de-pollo-para-gatos/HIL609250.html",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Hill's Science Plan Mature Sterilised Chicken Mousse. Remove all retailer annotations OUTSIDE the physical package, including GATOS MAYORES, con POLLO banners and border. Preserve exact physical label.",
+      "generatedPath": "assets/food/editorial/hills-wet-mature-sterilised-v1.png",
+      "displayPath": "assets/food/editorial/hills-wet-mature-sterilised-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-f2a8859b-37fb-453d-b7a3-2457a16ef8b1.png"
+    },
+    {
+      "id": "hills-b35bf2eb",
+      "brand": "Hill's",
+      "name": "Science Plan Sterilised Young Adult Turkey - в соусе",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-sterilised-young-adult-pavo-sobre-en-salsa-para-gatos/HIL604013_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-sterilised-young-adult-pavo-sobre-en-salsa-para-gatos/HIL604013_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Sterilised Young Adult Pavo Sobre en Salsa para gatos",
+      "productId": "hills-wet-sterilised-turkey",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-sterilised-young-adult-pavo-sobre-en-salsa-para-gatos/HIL604013_M.html",
+      "foodType": "wet",
+      "tag": "Для стерилизованных",
+      "referencePath": "assets/food/references/priority-batch5/hills-b35bf2eb.jpg",
+      "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw25c19ae2/images/Hill's_Science_Plan_Sterilized_Young_Adult_Pavo_Sobre_Salsa_gatos_HIL604013_M.jpg",
+      "referenceSource": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-sterilised-young-adult-pavo-sobre-en-salsa-para-gatos/HIL604013.html",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Hill's Science Plan Sterilised Young Adult Turkey - в соусе. Remove all retailer annotations OUTSIDE the physical package, including GATOS MAYORES, con POLLO banners and border. Preserve exact physical label.",
+      "generatedPath": "assets/food/editorial/hills-wet-sterilised-turkey-v1.png",
+      "displayPath": "assets/food/editorial/hills-wet-sterilised-turkey-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-fd5534fe-8c7d-4f69-aa73-9bd3bdffbe3b.png"
+    },
+    {
+      "id": "advance-dd162181",
+      "brand": "Advance",
+      "name": "Veterinary Diets Recovery",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        100
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-humeda/advance-recovery-sobre-para-perros-y-gatos/ADV925970_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Advance Recovery Sobre para perros y gatos",
+      "productId": "advance-wet-recovery",
+      "sourceUrl": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-humeda/advance-recovery-sobre-para-perros-y-gatos/ADV925970_M.html",
+      "foodType": "wet",
+      "tag": "Ветеринарная диета",
+      "referencePath": "assets/food/references/priority-batch5/advance-dd162181.jpg",
+      "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwae76415b/images/Advance_Recovery_Sobre_perros_gatos_ADV925970_M.jpg",
+      "referenceSource": "https://www.kiwoko.com/alimentacion-perro/100-g-advance-recovery-sobre-para-perros-y-gatos/ADV925970.html",
+      "referenceGrams": 100,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Advance Veterinary Diets Recovery",
+      "generatedPath": "assets/food/editorial/advance-wet-recovery-v1.png",
+      "displayPath": "assets/food/editorial/advance-wet-recovery-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-15eef115-c9b9-4baa-b67d-deef0153f441.png"
+    },
+    {
+      "id": "advance-fde0cd46",
+      "brand": "Advance",
+      "name": "Veterinary Diets Urinary",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-veterinary-diets-urinary-sobre-para-gatos/ADV925974_M.html",
+        "https://www.tiendanimal.es/advance-veterinary-diets-urinary-sobre-para-gatos/ADV925974_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Advance Veterinary Diets Urinary sobre para gatos",
+      "productId": "advance-wet-urinary",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-veterinary-diets-urinary-sobre-para-gatos/ADV925974_M.html",
+      "foodType": "wet",
+      "tag": "Ветеринарная диета",
+      "referencePath": "assets/food/references/priority-batch5/advance-fde0cd46.jpg",
+      "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw563be800/images/Advance_Veterinary_Diets_Urinary_Sobre_gatos_ADV925974_M.jpg",
+      "referenceSource": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-veterinary-diets-urinary-sobre-para-gatos/ADV925974.html",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Advance Veterinary Diets Urinary",
+      "generatedPath": "assets/food/editorial/advance-wet-urinary-v1.png",
+      "displayPath": "assets/food/editorial/advance-wet-urinary-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-fb6e3e3f-ae54-409b-9a5c-05f9b99cefc3.png"
+    },
+    {
+      "id": "advance-8ccc9ae4",
+      "brand": "Advance",
+      "name": "Veterinary Diets Weight Balance",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/advance-veterinary-diets-weight-balance-sobre-para-gatos/ADV925971_M.html",
+        "https://www.tiendanimal.es/advance-veterinary-diets-weight-balance-sobre-para-gatos/ADV925971_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Advance Veterinary Diets Weight Balance Sobre para gatos",
+      "productId": "advance-wet-weight-balance",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/advance-veterinary-diets-weight-balance-sobre-para-gatos/ADV925971_M.html",
+      "foodType": "wet",
+      "tag": "Ветеринарная диета",
+      "referencePath": "assets/food/references/priority-batch5/advance-8ccc9ae4.jpg",
+      "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw4d3aeaf4/images/Advance_Veterinary_Diets_WeightBalance_Sobre_gatos_ADV925971_M.jpg",
+      "referenceSource": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-advance-veterinary-diets-weight-balance-sobre-para-gatos/ADV925971.html",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Advance Veterinary Diets Weight Balance",
+      "generatedPath": "assets/food/editorial/advance-wet-weight-balance-v1.png",
+      "displayPath": "assets/food/editorial/advance-wet-weight-balance-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-05fb0f68-03ab-49b2-9624-c15d13ffe24d.png"
+    },
+    {
+      "id": "advance-703db95b",
+      "brand": "Advance",
+      "name": "Veterinary Diets Renal Chicken & Pork",
+      "kind": "recipe",
+      "segment": "Ветеринарный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-renal-pollo-y-cerdo-sobre-para-gatos/ADV925976_M.html",
+        "https://www.tiendanimal.es/advance-renal-pollo-y-cerdo-sobre-para-gatos/ADV925976_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Advance Renal Pollo y Cerdo sobre para gatos",
+      "productId": "advance-wet-renal",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-renal-pollo-y-cerdo-sobre-para-gatos/ADV925976_M.html",
+      "foodType": "wet",
+      "tag": "Ветеринарная диета",
+      "referencePath": "assets/food/references/priority-batch5/advance-703db95b.jpg",
+      "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwe1106335/images/Advance_Renal_PolloCerdo_Sobre_gatos_ADV925976_M.jpg",
+      "referenceSource": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-renal-pollo-y-cerdo-sobre-para-gatos/ADV925976.html",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Advance Veterinary Diets Renal Chicken & Pork",
+      "generatedPath": "assets/food/editorial/advance-wet-renal-v1.png",
+      "displayPath": "assets/food/editorial/advance-wet-renal-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-887320e7-4b44-4b1f-bacf-6a6b9b009854.png"
+    },
+    {
+      "id": "advance-ae0f356b",
+      "brand": "Advance",
+      "name": "Sterilized Adult Cod",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-sterilized-adult-bacalao-sobres-para-gatos/ADV964530_M.html",
+        "https://www.tiendanimal.es/advance-sterilized-adult-bacalao-sobres-para-gatos/ADV964530_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Advance Sterilized Adult Bacalao sobres para gatos",
+      "productId": "advance-wet-sterilised-cod",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-sterilized-adult-bacalao-sobres-para-gatos/ADV964530_M.html",
+      "foodType": "wet",
+      "tag": "Влажный корм",
+      "referencePath": "assets/food/references/priority-batch5/advance-ae0f356b.jpg",
+      "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwb668df14/images/new_comida_humeda_gatos_advance_affinity_bacalao_ADV964530_M.jpg",
+      "referenceSource": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-sterilized-adult-bacalao-sobres-para-gatos/ADV964530.html",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Advance Sterilized Adult Cod",
+      "generatedPath": "assets/food/editorial/advance-wet-sterilised-cod-v1.png",
+      "displayPath": "assets/food/editorial/advance-wet-sterilised-cod-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-9c1bd560-13eb-463d-9c75-9837b20e65e7.png"
+    },
+    {
+      "id": "hills-461a6d98",
+      "brand": "Hill's",
+      "name": "Science Plan Sterilised Young Adult Trout - в соусе",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-sterilised-young-adult-trucha-sobre-en-salsa-para-gatos/HIL604011_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-sterilised-young-adult-trucha-sobre-en-salsa-para-gatos/HIL604011_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Sterilised Young Adult Trucha Sobre en Salsa para gatos",
+      "productId": "hills-wet-sterilised-trout",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-sterilised-young-adult-trucha-sobre-en-salsa-para-gatos/HIL604011_M.html",
+      "foodType": "wet",
+      "tag": "Для стерилизованных",
+      "referencePath": "assets/food/references/priority-batch5/hills-461a6d98.jpg",
+      "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwa417630c/images/hills_comida_humeda_gato_sterilised_adult_cat_HIL604011_1.jpg",
+      "referenceSource": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-sterilised-young-adult-trucha-sobre-en-salsa-para-gatos/HIL604011.html",
+      "referenceGrams": 85,
+      "referenceTitle": null,
+      "referenceType": "retailer_exact_recipe",
+      "prompt": "Use case: product-mockup. Create one square, exceptionally sharp photorealistic premium ecommerce studio photograph for CatManDog. Input image 1 is the EXACT wet-food packaging and recipe reference. Input image 2 is ONLY the approved studio backdrop, lighting, composition and scale reference. Reconstruct image 1 faithfully in high detail: original brand logo, exact recipe name, printed cat and ingredients artwork, packaging colors, original label layout and silhouette. Preserve major text from image 1 in its original language; do not translate the printed label or invent claims, certifications or other branding. Match input 2's seamless warm light-gray studio background and tabletop, subtle quiet gradient, soft upper-left softbox, restrained contact shadow below and right. One sealed single package centered, complete top and base, nearly frontal, realistic printed metal can or matte foil pouch as appropriate to image 1. Legible label, realistic seams and restrained folds. For a pouch use about 86 percent of frame height. For a metal can keep original height-to-diameter ratio and about 75 percent of frame width, with gray breathing room above and below, no stretching into a tall cylinder. Preserve pull tab and metal lid for cans. No dry-food bags, living animals outside printed label, props, bowls, loose food, watermark, border, extra captions, pedestal, retailer overlays, promo text, multipack boxes or multiple packages. Do not copy Royal Canin branding from image 2. Omit package-weight numbers; do not add weight text, so photo represents verified sizes of this recipe. One final image. Exact subject: Hill's Science Plan Sterilised Young Adult Trout - в соусе",
+      "generatedPath": "assets/food/editorial/hills-wet-sterilised-trout-v1.png",
+      "displayPath": "assets/food/editorial/hills-wet-sterilised-trout-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-94500426-11bc-4e0a-9c9f-fe1e7b4ba79a.png"
+    }
+  ],
+  "validation": {
+    "assets": 24,
+    "catalogFoodRecipes": 186,
+    "allFoodImagesEditorial": true,
+    "viewports": [
+      390,
+      1440
+    ],
+    "checks": [
+      "All catalog images loaded",
+      "Brand filters",
+      "Price row alignment",
+      "No horizontal overflow",
+      "Pack selection and cart including Recovery and Pulled Beef",
+      "Previous product sourcing data preserved"
+    ],
+    "publication": "local only"
+  }
+}

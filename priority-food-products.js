@@ -2679,6 +2679,7852 @@ const recipes = [
         }
       }
     ]
+  },
+  {
+    "id": "leonardo-fresh-duck",
+    "existingId": null,
+    "researchRecipeId": "leonardo-01",
+    "name": "Leonardo fresh Meat Duck",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Fresh Meat",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-fresh-duck-1500g",
+    "description": "Сухой корм для кошек Leonardo fresh Meat Duck",
+    "details": [
+      "Сухой корм для кошек",
+      "Fresh Meat",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-fresh-duck-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/leonardo-01.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo fresh Meat Duck"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-duck-1-5-kg",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/f2/d5/1f/1619622861/Leonardo-Fresh-Duck-1_5kg-front.png?ts=1620631753"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/productos/alimento-seco"
+    },
+    "variants": [
+      {
+        "id": "leonardo-fresh-duck-250g",
+        "label": "250 г",
+        "weight": "250 г",
+        "packageWeightKg": 0.25,
+        "sizes": [
+          "250 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-fresh-duck-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-fresh-duck-4000g",
+        "label": "4 кг",
+        "weight": "4 кг",
+        "packageWeightKg": 4.0,
+        "sizes": [
+          "4 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-fresh-salmon",
+    "existingId": null,
+    "researchRecipeId": "leonardo-03",
+    "name": "Leonardo fresh Meat Salmon",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Fresh Meat",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-fresh-salmon-1500g",
+    "description": "Сухой корм для кошек Leonardo fresh Meat Salmon",
+    "details": [
+      "Сухой корм для кошек",
+      "Fresh Meat",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-fresh-salmon-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/leonardo-03.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo fresh Meat Salmon"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-salmon-1-5-kg",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/6f/ac/25/1619622861/Leonardo-Fresh-Salmon-1_5kg-front.png?ts=1620631753"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/productos/alimento-seco"
+    },
+    "variants": [
+      {
+        "id": "leonardo-fresh-salmon-250g",
+        "label": "250 г",
+        "weight": "250 г",
+        "packageWeightKg": 0.25,
+        "sizes": [
+          "250 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-fresh-salmon-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-fresh-salmon-4000g",
+        "label": "4 кг",
+        "weight": "4 кг",
+        "packageWeightKg": 4.0,
+        "sizes": [
+          "4 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-adult-duck",
+    "existingId": null,
+    "researchRecipeId": "leonardo-05",
+    "name": "Leonardo Adult Duck",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "С уткой",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-adult-duck-1800g",
+    "description": "Сухой корм для кошек Leonardo Adult Duck",
+    "details": [
+      "Сухой корм для кошек",
+      "С уткой",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-adult-duck-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/leonardo-05.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Adult Duck"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-adult-duck-1-8-kg",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/80/e9/74/1712578703/bl-adult-duck-1-8kg-front.png?ts=1712817448"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/productos/alimento-seco"
+    },
+    "variants": [
+      {
+        "id": "leonardo-adult-duck-300g",
+        "label": "300 г",
+        "weight": "300 г",
+        "packageWeightKg": 0.3,
+        "sizes": [
+          "300 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-adult-duck-1800g",
+        "label": "1,8 кг",
+        "weight": "1,8 кг",
+        "packageWeightKg": 1.8,
+        "sizes": [
+          "1,8 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-adult-duck-7500g",
+        "label": "7,5 кг",
+        "weight": "7,5 кг",
+        "packageWeightKg": 7.5,
+        "sizes": [
+          "7,5 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-adult-duck-15000g",
+        "label": "15 кг",
+        "weight": "15 кг",
+        "packageWeightKg": 15.0,
+        "sizes": [
+          "15 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-maxi",
+    "existingId": null,
+    "researchRecipeId": "leonardo-11",
+    "name": "Leonardo Adult GF Maxi",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Крупные гранулы",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-maxi-1800g",
+    "description": "Сухой корм для кошек Leonardo Adult GF Maxi",
+    "details": [
+      "Сухой корм для кошек",
+      "Крупные гранулы",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-maxi-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/leonardo-11.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Adult GF Maxi"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-adult-gf-maxi-1-8-kg",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/b6/28/40/1717140106/bl-adult-gf-maxi-1-8kg-front.png?ts=1738060340"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/productos/alimento-seco"
+    },
+    "variants": [
+      {
+        "id": "leonardo-maxi-300g",
+        "label": "300 г",
+        "weight": "300 г",
+        "packageWeightKg": 0.3,
+        "sizes": [
+          "300 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-maxi-1800g",
+        "label": "1,8 кг",
+        "weight": "1,8 кг",
+        "packageWeightKg": 1.8,
+        "sizes": [
+          "1,8 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-maxi-7500g",
+        "label": "7,5 кг",
+        "weight": "7,5 кг",
+        "packageWeightKg": 7.5,
+        "sizes": [
+          "7,5 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-maxi-15000g",
+        "label": "15 кг",
+        "weight": "15 кг",
+        "packageWeightKg": 15.0,
+        "sizes": [
+          "15 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-senior",
+    "existingId": null,
+    "researchRecipeId": "leonardo-15",
+    "name": "Leonardo Senior",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для старших кошек",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-senior-1800g",
+    "description": "Сухой корм для кошек Leonardo Senior",
+    "details": [
+      "Сухой корм для кошек",
+      "Для старших кошек",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-senior-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/leonardo-15.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Senior"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-senior-1-8-kg",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/21/28/88/1712578445/bl-senior-1-8kg-front.png?ts=1712817448"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/productos/alimento-seco"
+    },
+    "variants": [
+      {
+        "id": "leonardo-senior-300g",
+        "label": "300 г",
+        "weight": "300 г",
+        "packageWeightKg": 0.3,
+        "sizes": [
+          "300 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-senior-1800g",
+        "label": "1,8 кг",
+        "weight": "1,8 кг",
+        "packageWeightKg": 1.8,
+        "sizes": [
+          "1,8 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-senior-7500g",
+        "label": "7,5 кг",
+        "weight": "7,5 кг",
+        "packageWeightKg": 7.5,
+        "sizes": [
+          "7,5 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-senior-gf",
+    "existingId": null,
+    "researchRecipeId": "leonardo-16",
+    "name": "Leonardo Senior GF",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Senior без злаков",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-senior-gf-1800g",
+    "description": "Сухой корм для кошек Leonardo Senior GF",
+    "details": [
+      "Сухой корм для кошек",
+      "Senior без злаков",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-senior-gf-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/leonardo-16.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Senior GF"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-senior-gf-1-8-kg",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/19/4f/21/1717134885/bl-senior-gf-1-8kg-front.png?ts=1717134885"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/productos/alimento-seco"
+    },
+    "variants": [
+      {
+        "id": "leonardo-senior-gf-300g",
+        "label": "300 г",
+        "weight": "300 г",
+        "packageWeightKg": 0.3,
+        "sizes": [
+          "300 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-senior-gf-1800g",
+        "label": "1,8 кг",
+        "weight": "1,8 кг",
+        "packageWeightKg": 1.8,
+        "sizes": [
+          "1,8 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-senior-gf-7500g",
+        "label": "7,5 кг",
+        "weight": "7,5 кг",
+        "packageWeightKg": 7.5,
+        "sizes": [
+          "7,5 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "hills-adult-chicken",
+    "existingId": null,
+    "researchRecipeId": "hills-01",
+    "name": "Hill’s Science Plan Adult Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для взрослых кошек",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-adult-chicken-1500g",
+    "description": "Сухой корм для кошек Hill’s Science Plan Adult Chicken",
+    "details": [
+      "Сухой корм для кошек",
+      "Для взрослых кошек",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-adult-chicken-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/hills-01.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Adult Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/1.5-kg-hill_s-science-plan-adult-pollo-pienso-para-gatos/HIL8736DA.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw3ec5b2e6/images/neww_pienso_gatos_hills_adult_pollo_HIL4296M_1.jpg"
+    },
+    "productSource": {
+      "name": "Hill’s",
+      "kind": "manufacturer",
+      "url": "https://www.hillspet.es/cat-food/science-plan-adult-chicken-dry"
+    },
+    "variants": [
+      {
+        "id": "hills-adult-chicken-300g",
+        "label": "300 г",
+        "weight": "300 г",
+        "packageWeightKg": 0.3,
+        "sizes": [
+          "300 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "hills-adult-chicken-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": 19.39,
+        "priceStatus": "temporary",
+        "ean": "052742030814",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 19.39,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/1.5-kg-hill_s-science-plan-adult-pollo-pienso-para-gatos/HIL8736DA.html",
+          "checkedAt": "2026-10-11T13:11:22+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "hills-adult-chicken-3000g",
+        "label": "3 кг",
+        "weight": "3 кг",
+        "packageWeightKg": 3.0,
+        "sizes": [
+          "3 кг"
+        ],
+        "price": 33.39,
+        "priceStatus": "temporary",
+        "ean": "052742030838",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 33.39,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/3-kg-hill_s-science-plan-adult-pollo-pienso-para-gatos/HIL4294M.html",
+          "checkedAt": "2026-10-11T13:11:22+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "hills-adult-chicken-7000g",
+        "label": "7 кг",
+        "weight": "7 кг",
+        "packageWeightKg": 7.0,
+        "sizes": [
+          "7 кг"
+        ],
+        "price": 72.49,
+        "priceStatus": "temporary",
+        "ean": "052742022840",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 72.49,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/7-kg-hill_s-science-plan-adult-pollo-pienso-para-gatos/HIL45434.html",
+          "checkedAt": "2026-10-11T13:11:22+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "hills-adult-chicken-10000g",
+        "label": "10 кг",
+        "weight": "10 кг",
+        "packageWeightKg": 10.0,
+        "sizes": [
+          "10 кг"
+        ],
+        "price": 80.99,
+        "priceStatus": "temporary",
+        "ean": "052742024417",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 80.99,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/10-kg-hill_s-science-plan-adult-pollo-pienso-para-gatos/HIL4296M.html",
+          "checkedAt": "2026-10-11T13:11:22+00:00",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-ster-salmon",
+    "existingId": null,
+    "researchRecipeId": "hills-04",
+    "name": "Hill’s Science Plan Sterilised Cat Adult Salmon",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для стерилизованных",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-ster-salmon-1500g",
+    "description": "Сухой корм для кошек Hill’s Science Plan Sterilised Cat Adult Salmon",
+    "details": [
+      "Сухой корм для кошек",
+      "Для стерилизованных",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-ster-salmon-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/hills-04.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Sterilised Cat Adult Salmon"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/1.5-kg-hill_s-science-plan-sterilised-young-adult-atun-pienso-para-gatos/HIL608878.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwaa445e53/images/comida_gatos_hills_adult_sterilised_salmon_HIL9352DA_M_1.jpg"
+    },
+    "productSource": {
+      "name": "Hill’s",
+      "kind": "manufacturer",
+      "url": "https://www.hillspet.es/cat-food/science-plan-sterilised-cat-adult-salmon-dry"
+    },
+    "variants": [
+      {
+        "id": "hills-ster-salmon-300g",
+        "label": "300 г",
+        "weight": "300 г",
+        "packageWeightKg": 0.3,
+        "sizes": [
+          "300 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "hills-ster-salmon-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": 25.89,
+        "priceStatus": "temporary",
+        "ean": "052742071336",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 25.89,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/1.5-kg-hill_s-science-plan-sterilised-young-adult-atun-pienso-para-gatos/HIL608878.html",
+          "checkedAt": "2026-10-11T13:11:21+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "hills-ster-salmon-3000g",
+        "label": "3 кг",
+        "weight": "3 кг",
+        "packageWeightKg": 3.0,
+        "sizes": [
+          "3 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "hills-ster-salmon-7000g",
+        "label": "7 кг",
+        "weight": "7 кг",
+        "packageWeightKg": 7.0,
+        "sizes": [
+          "7 кг"
+        ],
+        "price": 91.49,
+        "priceStatus": "temporary",
+        "ean": "052742071329",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 91.49,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/7-kg-hills-science-plan-sterilised-adult-salmon-pienso-para-gatos/HIL608885.html",
+          "checkedAt": "2026-10-11T13:09:47+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "hills-ster-salmon-10000g",
+        "label": "10 кг",
+        "weight": "10 кг",
+        "packageWeightKg": 10.0,
+        "sizes": [
+          "10 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "hills-ster-duck",
+    "existingId": null,
+    "researchRecipeId": "hills-05",
+    "name": "Hill’s Science Plan Sterilised Cat Adult Duck",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для стерилизованных",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-ster-duck-1500g",
+    "description": "Сухой корм для кошек Hill’s Science Plan Sterilised Cat Adult Duck",
+    "details": [
+      "Сухой корм для кошек",
+      "Для стерилизованных",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-ster-duck-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/hills-05.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Sterilised Cat Adult Duck"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/1.5-kg-hill_s-science-plan-sterilised-young-adult-pato-pienso-para-gatos/HIL46650.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw98eeb159/images/new_Hill-s-Science-Plan-Sterilised-Young-Adult-Pato-pienso-para-gatos_HIL46650_M_2.jpg"
+    },
+    "productSource": {
+      "name": "Hill’s",
+      "kind": "manufacturer",
+      "url": "https://www.hillspet.es/cat-food/science-plan-sterilised-cat-young-adult-duck-dry"
+    },
+    "variants": [
+      {
+        "id": "hills-ster-duck-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": 19.39,
+        "priceStatus": "temporary",
+        "ean": "052742035970",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 19.39,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/1.5-kg-hill_s-science-plan-sterilised-young-adult-pato-pienso-para-gatos/HIL46650.html",
+          "checkedAt": "2026-10-11T13:12:34+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "hills-ster-duck-3000g",
+        "label": "3 кг",
+        "weight": "3 кг",
+        "packageWeightKg": 3.0,
+        "sizes": [
+          "3 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "hills-mature-ster",
+    "existingId": null,
+    "researchRecipeId": "hills-08",
+    "name": "Hill’s Science Plan Sterilised Cat Mature Adult 7+ Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Возраст 7+",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-mature-ster-1500g",
+    "description": "Сухой корм для кошек Hill’s Science Plan Sterilised Cat Mature Adult 7+ Chicken",
+    "details": [
+      "Сухой корм для кошек",
+      "Возраст 7+",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-mature-ster-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/hills-08.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Sterilised Cat Mature Adult 7+ Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/1.5-kg-hill_s-science-plan-sterilised-mature-adult-pollo-pienso-para-gatos/HIL9353DA.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw5d8f22a9/images/comida_gatos_hills_mature_sterilised_pollo_newpack_HIL9353DA_M_1.jpg"
+    },
+    "productSource": {
+      "name": "Hill’s",
+      "kind": "manufacturer",
+      "url": "https://www.hillspet.es/cat-food/science-plan-mature-adult-7-sterilised-cat-chicken-dry"
+    },
+    "variants": [
+      {
+        "id": "hills-mature-ster-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": 22.09,
+        "priceStatus": "temporary",
+        "ean": "052742935300",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 22.09,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/1.5-kg-hill_s-science-plan-sterilised-mature-adult-pollo-pienso-para-gatos/HIL9353DA.html",
+          "checkedAt": "2026-10-11T13:12:34+00:00",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-sensitive",
+    "existingId": null,
+    "researchRecipeId": "hills-13",
+    "name": "Hill’s Science Plan Sensitive Stomach & Skin Adult Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Stomach & Skin",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-sensitive-1500g",
+    "description": "Сухой корм для кошек Hill’s Science Plan Sensitive Stomach & Skin Adult Chicken",
+    "details": [
+      "Сухой корм для кошек",
+      "Stomach & Skin",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-sensitive-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/hills-13.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Sensitive Stomach & Skin Adult Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/1.5-kg-hill_s-adult-science-plan-sensitive-stomach-pollo-pienso-para-gatos/HIL604072.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw88ff684b/images/hills_pienso_gato_sensitive_stomach_HIL7619DA_1.jpg"
+    },
+    "productSource": {
+      "name": "Hill’s",
+      "kind": "manufacturer",
+      "url": "https://www.hillspet.es/cat-food/science-plan-adult-sensitive-stomach-skin-chicken-dry"
+    },
+    "variants": [
+      {
+        "id": "hills-sensitive-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": 25.39,
+        "priceStatus": "temporary",
+        "ean": "052742017242",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 25.39,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/1.5-kg-hill_s-adult-science-plan-sensitive-stomach-pollo-pienso-para-gatos/HIL604072.html",
+          "checkedAt": "2026-10-11T13:09:23+00:00",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-senior11",
+    "existingId": null,
+    "researchRecipeId": "hills-17",
+    "name": "Hill’s Science Plan Senior 11+ Healthy Ageing Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Возраст 11+",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-senior11-1500g",
+    "description": "Сухой корм для кошек Hill’s Science Plan Senior 11+ Healthy Ageing Chicken",
+    "details": [
+      "Сухой корм для кошек",
+      "Возраст 11+",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-senior11-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/hills-17.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Senior 11+ Healthy Ageing Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.tiendanimal.es/1.5-kg-hills-science-plan-senior-11-pollo-pienso-para-gatos/HIL2232DA.html",
+      "url": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw033a5f4a/images/CHnew_Hill-s-Science-Plan-Senior-11--Pollo-Pienso-para-gatos_HIL2232DA_M_2.jpg"
+    },
+    "productSource": {
+      "name": "Hill’s",
+      "kind": "manufacturer",
+      "url": "https://www.hillspet.es/cat-food/science-plan-senior-11-healthy-ageing-chicken-dry"
+    },
+    "variants": [
+      {
+        "id": "hills-senior11-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": 21.69,
+        "priceStatus": "temporary",
+        "ean": "052742023311",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 21.69,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/1.5-kg-hills-science-plan-senior-11-pollo-pienso-para-gatos/HIL2232DA.html",
+          "checkedAt": "2026-10-11T13:09:24+00:00",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-adult",
+    "existingId": null,
+    "researchRecipeId": "advance-01",
+    "name": "Advance Adult Chicken & Rice",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для взрослых кошек",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-adult-1500g",
+    "description": "Сухой корм для кошек Advance Adult Chicken & Rice",
+    "details": [
+      "Сухой корм для кошек",
+      "Для взрослых кошек",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-adult-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/advance-01.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Adult Chicken & Rice"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.tiendanimal.es/1.5-kg-advance-adult-pollo-y-arroz-para-gatos/ADV531211.html",
+      "url": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw1c842213/images/comida_gatos_advance_affinity_adult_pollo_arroz_52054_M_1kg.jpg"
+    },
+    "productSource": {
+      "name": "Advance",
+      "kind": "manufacturer",
+      "url": "https://www.advance-affinity.com/es/es/gato/comida-gato"
+    },
+    "variants": [
+      {
+        "id": "advance-adult-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": 14.69,
+        "priceStatus": "temporary",
+        "ean": "8410650151946",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 14.69,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/1.5-kg-advance-adult-pollo-y-arroz-para-gatos/ADV531211.html",
+          "checkedAt": "2026-10-11T13:09:19+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "advance-adult-3000g",
+        "label": "3 кг",
+        "weight": "3 кг",
+        "packageWeightKg": 3.0,
+        "sizes": [
+          "3 кг"
+        ],
+        "price": 22.69,
+        "priceStatus": "temporary",
+        "ean": "8410650151595",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 22.69,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/3-kg-advance-adult-pollo-y-arroz-para-gatos/ADV573311.html",
+          "checkedAt": "2026-10-11T13:09:19+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "advance-adult-6000g",
+        "label": "6 кг",
+        "weight": "6 кг",
+        "packageWeightKg": 6.0,
+        "sizes": [
+          "6 кг"
+        ],
+        "price": 46.59,
+        "priceStatus": "temporary",
+        "ean": "8410650589428",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 46.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/6-kg-advance-adult-pollo-y-arroz-para-gatos/ADV966396.html",
+          "checkedAt": "2026-10-11T13:09:19+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "advance-adult-10000g",
+        "label": "10 кг",
+        "weight": "10 кг",
+        "packageWeightKg": 10.0,
+        "sizes": [
+          "10 кг"
+        ],
+        "price": 54.99,
+        "priceStatus": "temporary",
+        "ean": "8410650239170",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 54.99,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/10-kg-advance-adult-pollo-y-arroz-para-gatos/ADV573511.html",
+          "checkedAt": "2026-10-11T13:09:19+00:00",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-sensitive-adult",
+    "existingId": null,
+    "researchRecipeId": "advance-04",
+    "name": "Advance Sensitive Care Salmon & Rice",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Sensitive Care",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-sensitive-adult-3000g",
+    "description": "Сухой корм для кошек Advance Sensitive Care Salmon & Rice",
+    "details": [
+      "Сухой корм для кошек",
+      "Sensitive Care",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-sensitive-adult-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/advance-04.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Sensitive Care Salmon & Rice"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/3-kg-advance-sensitive-adult-salmon-y-arroz-pienso-para-gatos/ADV922073.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw731a45df/images/comida_gatos_advance_affinity_adult_salmon_arroz_52059_M_3kg.png"
+    },
+    "productSource": {
+      "name": "Advance",
+      "kind": "manufacturer",
+      "url": "https://www.advance-affinity.com/es/es/gato/comida-gato"
+    },
+    "variants": [
+      {
+        "id": "advance-sensitive-adult-3000g",
+        "label": "3 кг",
+        "weight": "3 кг",
+        "packageWeightKg": 3.0,
+        "sizes": [
+          "3 кг"
+        ],
+        "price": 26.19,
+        "priceStatus": "temporary",
+        "ean": "8410650151656",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 26.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/3-kg-advance-sensitive-adult-salmon-y-arroz-pienso-para-gatos/ADV922073.html",
+          "checkedAt": "2026-10-11T13:11:19+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "advance-sensitive-adult-10000g",
+        "label": "10 кг",
+        "weight": "10 кг",
+        "packageWeightKg": 10.0,
+        "sizes": [
+          "10 кг"
+        ],
+        "price": 48.29,
+        "priceStatus": "temporary",
+        "ean": "8410650239194",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 48.29,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/10-kg-advance-sensitive-adult-salmon-y-arroz-pienso-para-gatos/ADV574510.html",
+          "checkedAt": "2026-10-11T13:11:19+00:00",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-junior",
+    "existingId": null,
+    "researchRecipeId": "advance-07",
+    "name": "Advance Sterilized Junior Chicken",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Sterilized Junior",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-junior-1500g",
+    "description": "Сухой корм для кошек Advance Sterilized Junior Chicken",
+    "details": [
+      "Сухой корм для кошек",
+      "Sterilized Junior",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-junior-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/advance-07.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Sterilized Junior Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/1.5-kg-advance-junior-sterilized-pienso-para-gatos/ADV500921.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw508991fd/images/comida_gatos_advance_affinity_junior_sterilized_ADV500823_M_AB24_1.jpg"
+    },
+    "productSource": {
+      "name": "Advance",
+      "kind": "manufacturer",
+      "url": "https://www.advance-affinity.com/es/es/gato/comida-gato"
+    },
+    "variants": [
+      {
+        "id": "advance-junior-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": 18.19,
+        "priceStatus": "temporary",
+        "ean": "8410650174501",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 18.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/1.5-kg-advance-junior-sterilized-pienso-para-gatos/ADV500921.html",
+          "checkedAt": "2026-10-11T13:09:20+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "advance-junior-10000g",
+        "label": "10 кг",
+        "weight": "10 кг",
+        "packageWeightKg": 10.0,
+        "sizes": [
+          "10 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "advance-senior",
+    "existingId": null,
+    "researchRecipeId": "advance-08",
+    "name": "Advance Vitality Sterilized Senior +10",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Возраст 10+",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-senior-1500g",
+    "description": "Сухой корм для кошек Advance Vitality Sterilized Senior +10",
+    "details": [
+      "Сухой корм для кошек",
+      "Возраст 10+",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-senior-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/advance-08.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Vitality Sterilized Senior +10"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.farmaciasdirect.es/products/advance-feline-senior10-esterilizado-pollo-15kg",
+      "url": "https://cdn.shopify.com/s/files/1/0835/5138/7966/files/advance-feline-senior10-esterilizado-pollo-15kg-320582.webp?v=1785322879"
+    },
+    "productSource": {
+      "name": "Advance",
+      "kind": "manufacturer",
+      "url": "https://www.advance-affinity.com/es/es/gato/comida-gato"
+    },
+    "variants": [
+      {
+        "id": "advance-senior-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": 14.5,
+        "priceStatus": "temporary",
+        "ean": "8410650173917",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 14.5,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Farmaciasdirect",
+          "sourceUrl": "https://www.farmaciasdirect.es/products/advance-feline-senior10-esterilizado-pollo-15kg",
+          "checkedAt": "2026-10-11T13:12:35+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "advance-senior-10000g",
+        "label": "10 кг",
+        "weight": "10 кг",
+        "packageWeightKg": 10.0,
+        "sizes": [
+          "10 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "acana-homestead",
+    "existingId": null,
+    "researchRecipeId": "acana-03",
+    "name": "Acana Homestead Harvest",
+    "brand": "Acana",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Homestead Harvest",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "acana-homestead-1800g",
+    "description": "Сухой корм для кошек Acana Homestead Harvest",
+    "details": [
+      "Сухой корм для кошек",
+      "Homestead Harvest",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/acana-homestead-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/acana-03.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Acana Homestead Harvest"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.tiendanimal.es/1.8-kg-acana-homestead-harvest-pienso-para-gatos/ACAAHC01.html",
+      "url": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw8b4f3e05/images/comida_gato_acana_natural_ACAAHC00_01_4kg.jpg"
+    },
+    "productSource": {
+      "name": "Acana",
+      "kind": "manufacturer",
+      "url": "https://emea.acana.com/es-ES/para-gatos"
+    },
+    "variants": [
+      {
+        "id": "acana-homestead-340g",
+        "label": "340 г",
+        "weight": "340 г",
+        "packageWeightKg": 0.34,
+        "sizes": [
+          "340 г"
+        ],
+        "price": 5.49,
+        "priceStatus": "temporary",
+        "ean": "064992714345",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 5.49,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/340-g-acana-homestead-harvest-pienso-para-gatos/ACAAHC00.html",
+          "checkedAt": "2026-10-11T13:09:16+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "acana-homestead-1800g",
+        "label": "1,8 кг",
+        "weight": "1,8 кг",
+        "packageWeightKg": 1.8,
+        "sizes": [
+          "1,8 кг"
+        ],
+        "price": 22.19,
+        "priceStatus": "temporary",
+        "ean": "064992714369",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 22.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/1.8-kg-acana-homestead-harvest-pienso-para-gatos/ACAAHC01.html",
+          "checkedAt": "2026-10-11T13:09:16+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "acana-homestead-4500g",
+        "label": "4,5 кг",
+        "weight": "4,5 кг",
+        "packageWeightKg": 4.5,
+        "sizes": [
+          "4,5 кг"
+        ],
+        "price": 46.29,
+        "priceStatus": "temporary",
+        "ean": "064992714376",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 46.29,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/4.5-kg-acana-homestead-harvest-pienso-para-gatos/ACAAHC04.html",
+          "checkedAt": "2026-10-11T13:09:16+00:00",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "acana-bountiful",
+    "existingId": null,
+    "researchRecipeId": "acana-04",
+    "name": "Acana Bountiful Catch",
+    "brand": "Acana",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Bountiful Catch",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "acana-bountiful-1800g",
+    "description": "Сухой корм для кошек Acana Bountiful Catch",
+    "details": [
+      "Сухой корм для кошек",
+      "Bountiful Catch",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/acana-bountiful-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/acana-04.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Acana Bountiful Catch"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/1.8-kg-acana-bountiful-pienso-para-gatos/ACAABC01.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw4d01f912/images/comida_gatos_acana_bountiful_ACAABC00_M_01_4kg.jpg"
+    },
+    "productSource": {
+      "name": "Acana",
+      "kind": "manufacturer",
+      "url": "https://emea.acana.com/es-ES/para-gatos"
+    },
+    "variants": [
+      {
+        "id": "acana-bountiful-1800g",
+        "label": "1,8 кг",
+        "weight": "1,8 кг",
+        "packageWeightKg": 1.8,
+        "sizes": [
+          "1,8 кг"
+        ],
+        "price": 22.19,
+        "priceStatus": "temporary",
+        "ean": "064992714437",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 22.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/1.8-kg-acana-bountiful-pienso-para-gatos/ACAABC01.html",
+          "checkedAt": "2026-10-11T13:09:16+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "acana-bountiful-4500g",
+        "label": "4,5 кг",
+        "weight": "4,5 кг",
+        "packageWeightKg": 4.5,
+        "sizes": [
+          "4,5 кг"
+        ],
+        "price": 46.69,
+        "priceStatus": "temporary",
+        "ean": "064992714444",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 46.69,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/4.5-kg-acana-bountiful-pienso-para-gatos/ACAABC04.html",
+          "checkedAt": "2026-10-11T13:09:16+00:00",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "acana-hp-indoor",
+    "existingId": null,
+    "researchRecipeId": "acana-08",
+    "name": "Acana Highest Protein Indoor Cat",
+    "brand": "Acana",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для домашних кошек",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "acana-hp-indoor-1800g",
+    "description": "Сухой корм для кошек Acana Highest Protein Indoor Cat",
+    "details": [
+      "Сухой корм для кошек",
+      "Для домашних кошек",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/acana-hp-indoor-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/acana-08.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Acana Highest Protein Indoor Cat"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/1.8-kg-acana-highest-protein-indoor-pollo-salmon-y-trucha-pienso-para-gatos/ACA01521K01800.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwf23a5a69/images/acana_hp_gato_pollo_salmon_ACA01521K01800_1.jpg"
+    },
+    "productSource": {
+      "name": "Acana",
+      "kind": "manufacturer",
+      "url": "https://emea.acana.com/es-ES/para-gatos"
+    },
+    "variants": [
+      {
+        "id": "acana-hp-indoor-1800g",
+        "label": "1,8 кг",
+        "weight": "1,8 кг",
+        "packageWeightKg": 1.8,
+        "sizes": [
+          "1,8 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "acana-hp-indoor-4500g",
+        "label": "4,5 кг",
+        "weight": "4,5 кг",
+        "packageWeightKg": 4.5,
+        "sizes": [
+          "4,5 кг"
+        ],
+        "price": 55.99,
+        "priceStatus": "temporary",
+        "ean": "064992723989",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 55.99,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/4.5-kg-acana-highest-protein-indoor-pollo-salmon-y-trucha-pienso-para-gatos/ACA01521K04500.html",
+          "checkedAt": "2026-10-11T13:09:25+00:00",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "orijen-regional-red",
+    "existingId": null,
+    "researchRecipeId": "orijen-04",
+    "name": "Orijen Regional Red",
+    "brand": "Orijen",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Regional Red",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "orijen-regional-red-1800g",
+    "description": "Сухой корм для кошек Orijen Regional Red",
+    "details": [
+      "Сухой корм для кошек",
+      "Regional Red",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/orijen-regional-red-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/orijen-04.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Orijen Regional Red"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/1.8-kg-orijen-regional-red-pienso-para-gatos/ORJ9227.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw595bcef1/images/pienso_gatos_orijen_carne_ORJ9227_M_01.jpg"
+    },
+    "productSource": {
+      "name": "Orijen",
+      "kind": "manufacturer",
+      "url": "https://emea.orijenpetfoods.com/es-ES/cats/cat-food"
+    },
+    "variants": [
+      {
+        "id": "orijen-regional-red-340g",
+        "label": "340 г",
+        "weight": "340 г",
+        "packageWeightKg": 0.34,
+        "sizes": [
+          "340 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "orijen-regional-red-1800g",
+        "label": "1,8 кг",
+        "weight": "1,8 кг",
+        "packageWeightKg": 1.8,
+        "sizes": [
+          "1,8 кг"
+        ],
+        "price": 38.99,
+        "priceStatus": "temporary",
+        "ean": "064992282189",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 38.99,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/1.8-kg-orijen-regional-red-pienso-para-gatos/ORJ9227.html",
+          "checkedAt": "2026-10-11T13:09:18+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "orijen-regional-red-5400g",
+        "label": "5,4 кг",
+        "weight": "5,4 кг",
+        "packageWeightKg": 5.4,
+        "sizes": [
+          "5,4 кг"
+        ],
+        "price": 84.99,
+        "priceStatus": "temporary",
+        "ean": "064992282547",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 84.99,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/5.4-kg-orijen-regional-red-pienso-para-gatos/ORJOORC05.html",
+          "checkedAt": "2026-10-11T13:09:18+00:00",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "orijen-guardian8",
+    "existingId": null,
+    "researchRecipeId": "orijen-05",
+    "name": "Orijen Guardian 8",
+    "brand": "Orijen",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Guardian 8",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "orijen-guardian8-1800g",
+    "description": "Сухой корм для кошек Orijen Guardian 8",
+    "details": [
+      "Сухой корм для кошек",
+      "Guardian 8",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/orijen-guardian8-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/orijen-05.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Orijen Guardian 8"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.tiendanimal.es/1.8-kg-orijen-guardian-8-pienso-para-gatos/ORJOGC01.html",
+      "url": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwcfd199f2/images/pienso_perros_origen_guardian_8_ORJOGC00.jpg"
+    },
+    "productSource": {
+      "name": "Orijen",
+      "kind": "manufacturer",
+      "url": "https://emea.orijenpetfoods.com/es-ES/cats/cat-food"
+    },
+    "variants": [
+      {
+        "id": "orijen-guardian8-340g",
+        "label": "340 г",
+        "weight": "340 г",
+        "packageWeightKg": 0.34,
+        "sizes": [
+          "340 г"
+        ],
+        "price": 9.79,
+        "priceStatus": "temporary",
+        "ean": "064992718893",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 9.79,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/340-g-orijen-guardian-8-pienso-para-gatos/ORJOGC00.html",
+          "checkedAt": "2026-10-11T13:09:18+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "orijen-guardian8-1800g",
+        "label": "1,8 кг",
+        "weight": "1,8 кг",
+        "packageWeightKg": 1.8,
+        "sizes": [
+          "1,8 кг"
+        ],
+        "price": 36.69,
+        "priceStatus": "temporary",
+        "ean": "064992718916",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 36.69,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/1.8-kg-orijen-guardian-8-pienso-para-gatos/ORJOGC01.html",
+          "checkedAt": "2026-10-11T13:09:18+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "orijen-guardian8-4500g",
+        "label": "4,5 кг",
+        "weight": "4,5 кг",
+        "packageWeightKg": 4.5,
+        "sizes": [
+          "4,5 кг"
+        ],
+        "price": 66.59,
+        "priceStatus": "temporary",
+        "ean": "064992718930",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 66.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/4.5-kg-orijen-guardian-8-pienso-para-gatos/ORJOGC04.html",
+          "checkedAt": "2026-10-11T13:09:18+00:00",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-wet-ster-turkey",
+    "existingId": null,
+    "researchRecipeId": "advance-56a888bd",
+    "name": "Advance Adult Sterilized Turkey - в соусе",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для стерилизованных",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-wet-ster-turkey-85g",
+    "description": "Влажный корм для кошек Advance Adult Sterilized Turkey - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Для стерилизованных",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-wet-ster-turkey-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/advance-56a888bd.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Adult Sterilized Turkey - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-adult-sterilized-pavo-en-salsa-sobre-para-gatos/ADV964529.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw406f8e14/images/new_comida_humeda_gato_advance_sterilized_pavo_ADV964529_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-adult-sterilized-pavo-en-salsa-sobre-para-gatos/ADV964529_M.html"
+    },
+    "variants": [
+      {
+        "id": "advance-wet-ster-turkey-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.29,
+        "priceStatus": "temporary",
+        "ean": "8410650564470",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.29,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-adult-sterilized-pavo-en-salsa-sobre-para-gatos/ADV964529.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "acana-wet-kitten",
+    "existingId": null,
+    "researchRecipeId": "acana-265a9eae",
+    "name": "Acana Premium Paté Kitten Chicken & Fish",
+    "brand": "Acana",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для котят",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "acana-wet-kitten-85g",
+    "description": "Влажный корм для кошек Acana Premium Paté Kitten Chicken & Fish",
+    "details": [
+      "Влажный корм для кошек",
+      "Для котят",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/acana-wet-kitten-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/acana-265a9eae.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Acana Premium Paté Kitten Chicken & Fish"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-acana-premium-pate-pollo-y-pescado-lata-para-gatitos/ACAAWK.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwa15aa536/images/acana_gatos_pate_pollo_pescado_ACAAWK.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-pollo-y-pescado-lata-para-gatitos/ACAAWK_M.html"
+    },
+    "variants": [
+      {
+        "id": "acana-wet-kitten-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.39,
+        "priceStatus": "temporary",
+        "ean": "064992719791",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.39,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-acana-premium-pate-pollo-y-pescado-lata-para-gatitos/ACAAWK.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "acana-wet-chicken",
+    "existingId": null,
+    "researchRecipeId": "acana-0544e2e9",
+    "name": "Acana Premium Paté Chicken",
+    "brand": "Acana",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Паштет",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "acana-wet-chicken-85g",
+    "description": "Влажный корм для кошек Acana Premium Paté Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Паштет",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/acana-wet-chicken-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch2/acana-0544e2e9.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Acana Premium Paté Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-acana-premium-pate-pollo-lata-para-gatos/ACAAWC.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwbe576f0b/images/acana_gatos_pate_pollo_ACAAWC.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-pollo-lata-para-gatos/ACAAWC_M.html"
+    },
+    "variants": [
+      {
+        "id": "acana-wet-chicken-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.39,
+        "priceStatus": "temporary",
+        "ean": "064992719760",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.39,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-acana-premium-pate-pollo-lata-para-gatos/ACAAWC.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "leonardo-complete",
+    "existingId": null,
+    "researchRecipeId": "leonardo-04",
+    "name": "Leonardo Adult Complete 32/16",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для взрослых кошек",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-complete-1800g",
+    "description": "Сухой корм для кошек Leonardo Adult Complete 32/16",
+    "details": [
+      "Сухой корм для кошек",
+      "Для взрослых кошек",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-complete-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/leonardo-04.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Adult Complete 32/16"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-adult-complete-32-16-1-8-kg",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/7f/fa/e6/1712578740/bl-adult-complete-1-8kg-front.png?ts=1712817448"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/productos/alimento-seco"
+    },
+    "variants": [
+      {
+        "id": "leonardo-complete-300g",
+        "label": "300 г",
+        "weight": "300 г",
+        "packageWeightKg": 0.3,
+        "sizes": [
+          "300 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-complete-1800g",
+        "label": "1,8 кг",
+        "weight": "1,8 кг",
+        "packageWeightKg": 1.8,
+        "sizes": [
+          "1,8 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-complete-7500g",
+        "label": "7,5 кг",
+        "weight": "7,5 кг",
+        "packageWeightKg": 7.5,
+        "sizes": [
+          "7,5 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-complete-15000g",
+        "label": "15 кг",
+        "weight": "15 кг",
+        "packageWeightKg": 15.0,
+        "sizes": [
+          "15 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-fish",
+    "existingId": null,
+    "researchRecipeId": "leonardo-06",
+    "name": "Leonardo Adult Fish",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для взрослых кошек",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-fish-1800g",
+    "description": "Сухой корм для кошек Leonardo Adult Fish",
+    "details": [
+      "Сухой корм для кошек",
+      "Для взрослых кошек",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-fish-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/leonardo-06.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Adult Fish"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-adult-fish-1-8-kg",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/0e/5b/06/1712578667/bl-adult-fish-1-8kg-front.png?ts=1712817448"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/productos/alimento-seco"
+    },
+    "variants": [
+      {
+        "id": "leonardo-fish-300g",
+        "label": "300 г",
+        "weight": "300 г",
+        "packageWeightKg": 0.3,
+        "sizes": [
+          "300 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-fish-1800g",
+        "label": "1,8 кг",
+        "weight": "1,8 кг",
+        "packageWeightKg": 1.8,
+        "sizes": [
+          "1,8 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-fish-7500g",
+        "label": "7,5 кг",
+        "weight": "7,5 кг",
+        "packageWeightKg": 7.5,
+        "sizes": [
+          "7,5 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-fish-15000g",
+        "label": "15 кг",
+        "weight": "15 кг",
+        "packageWeightKg": 15.0,
+        "sizes": [
+          "15 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-lamb",
+    "existingId": null,
+    "researchRecipeId": "leonardo-07",
+    "name": "Leonardo Adult Lamb",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для взрослых кошек",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-lamb-1800g",
+    "description": "Сухой корм для кошек Leonardo Adult Lamb",
+    "details": [
+      "Сухой корм для кошек",
+      "Для взрослых кошек",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-lamb-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/leonardo-07.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Adult Lamb"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-adult-lamb-1-8-kg",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/dc/be/67/1712578590/bl-adult-lamb-1-8kg-front.png?ts=1712817448"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/productos/alimento-seco"
+    },
+    "variants": [
+      {
+        "id": "leonardo-lamb-300g",
+        "label": "300 г",
+        "weight": "300 г",
+        "packageWeightKg": 0.3,
+        "sizes": [
+          "300 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-lamb-1800g",
+        "label": "1,8 кг",
+        "weight": "1,8 кг",
+        "packageWeightKg": 1.8,
+        "sizes": [
+          "1,8 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-lamb-7500g",
+        "label": "7,5 кг",
+        "weight": "7,5 кг",
+        "packageWeightKg": 7.5,
+        "sizes": [
+          "7,5 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-lamb-15000g",
+        "label": "15 кг",
+        "weight": "15 кг",
+        "packageWeightKg": 15.0,
+        "sizes": [
+          "15 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-kitten-gf",
+    "existingId": null,
+    "researchRecipeId": "leonardo-13",
+    "name": "Leonardo Kitten GF",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для котят",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-kitten-gf-1800g",
+    "description": "Сухой корм для кошек Leonardo Kitten GF",
+    "details": [
+      "Сухой корм для кошек",
+      "Для котят",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-kitten-gf-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/leonardo-13.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Kitten GF"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-kitten-gf-1-8-kg",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/a6/06/88/1717135786/bl-kitten-gf-1-8kg-front.png?ts=1738060365"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/productos/alimento-seco"
+    },
+    "variants": [
+      {
+        "id": "leonardo-kitten-gf-300g",
+        "label": "300 г",
+        "weight": "300 г",
+        "packageWeightKg": 0.3,
+        "sizes": [
+          "300 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-kitten-gf-1800g",
+        "label": "1,8 кг",
+        "weight": "1,8 кг",
+        "packageWeightKg": 1.8,
+        "sizes": [
+          "1,8 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-kitten-gf-7500g",
+        "label": "7,5 кг",
+        "weight": "7,5 кг",
+        "packageWeightKg": 7.5,
+        "sizes": [
+          "7,5 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-granula-start",
+    "existingId": null,
+    "researchRecipeId": "leonardo-14",
+    "name": "Leonardo Kitten Granula-Start",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для котят",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-granula-start-1000g",
+    "description": "Сухой корм для кошек Leonardo Kitten Granula-Start",
+    "details": [
+      "Сухой корм для кошек",
+      "Для котят",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-granula-start-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/leonardo-14.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Kitten Granula-Start"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-kitten-granula-start-1-kg",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/b5/60/05/1687329359/bl-kitten-granula-starter-5kg.png?ts=1687329380"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/productos/alimento-seco"
+    },
+    "variants": [
+      {
+        "id": "leonardo-granula-start-1000g",
+        "label": "1 кг",
+        "weight": "1 кг",
+        "packageWeightKg": 1.0,
+        "sizes": [
+          "1 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-granula-start-5000g",
+        "label": "5 кг",
+        "weight": "5 кг",
+        "packageWeightKg": 5.0,
+        "sizes": [
+          "5 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "hills-adult-lamb",
+    "existingId": null,
+    "researchRecipeId": "hills-02",
+    "name": "Hill’s Science Plan Adult Lamb",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для взрослых кошек",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-adult-lamb-1500g",
+    "description": "Сухой корм для кошек Hill’s Science Plan Adult Lamb",
+    "details": [
+      "Сухой корм для кошек",
+      "Для взрослых кошек",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-adult-lamb-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/hills-02.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Adult Lamb"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/10-kg-hill_s-science-plan-adult-cordero-pienso-para-gatos/HIL5144M.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwc32d0e05/images/Hill-s-Science-Plan-Adult-Cordero-pienso-para-gatos_HIL5144M_M_1.jpg"
+    },
+    "productSource": {
+      "name": "Hill’s",
+      "kind": "manufacturer",
+      "url": "https://www.hillspet.es/cat-food/science-plan-adult-lamb-dry"
+    },
+    "variants": [
+      {
+        "id": "hills-adult-lamb-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "hills-adult-lamb-10000g",
+        "label": "10 кг",
+        "weight": "10 кг",
+        "packageWeightKg": 10.0,
+        "sizes": [
+          "10 кг"
+        ],
+        "price": 81.99,
+        "priceStatus": "temporary",
+        "ean": "052742024394",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 81.99,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/10-kg-hill_s-science-plan-adult-cordero-pienso-para-gatos/HIL5144M.html",
+          "checkedAt": "2026-10-11T13:09:21+00:00",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-kitten-regular",
+    "existingId": null,
+    "researchRecipeId": "hills-06",
+    "name": "Hill’s Science Plan Kitten Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для котят",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-kitten-regular-1500g",
+    "description": "Сухой корм для кошек Hill’s Science Plan Kitten Chicken",
+    "details": [
+      "Сухой корм для кошек",
+      "Для котят",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-kitten-regular-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/hills-06.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Kitten Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/1.5-kg-hill_s-science-plan-kitten-pollo-pienso-para-gatos/HIL8735V.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwf6e18d1e/images/comida_gatos_hills_kitten_pollo_newpack_HIL5197X_M_1.jpg"
+    },
+    "productSource": {
+      "name": "Hill’s",
+      "kind": "manufacturer",
+      "url": "https://www.hillspet.es/cat-food/science-plan-kitten-chicken-dry"
+    },
+    "variants": [
+      {
+        "id": "hills-kitten-regular-300g",
+        "label": "300 г",
+        "weight": "300 г",
+        "packageWeightKg": 0.3,
+        "sizes": [
+          "300 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "hills-kitten-regular-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": 22.09,
+        "priceStatus": "temporary",
+        "ean": "052742023649",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 22.09,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/1.5-kg-hill_s-science-plan-kitten-pollo-pienso-para-gatos/HIL8735V.html",
+          "checkedAt": "2026-10-11T13:09:21+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "hills-kitten-regular-3000g",
+        "label": "3 кг",
+        "weight": "3 кг",
+        "packageWeightKg": 3.0,
+        "sizes": [
+          "3 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "hills-kitten-regular-7000g",
+        "label": "7 кг",
+        "weight": "7 кг",
+        "packageWeightKg": 7.0,
+        "sizes": [
+          "7 кг"
+        ],
+        "price": 67.99,
+        "priceStatus": "temporary",
+        "ean": "052742023731",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 67.99,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/7-kg-hill_s-science-plan-kitten-pollo-pienso-para-gatos/HIL46627.html",
+          "checkedAt": "2026-10-11T13:09:21+00:00",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-light",
+    "existingId": null,
+    "researchRecipeId": "hills-09",
+    "name": "Hill’s Science Plan Light Adult Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Контроль веса",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-light-1500g",
+    "description": "Сухой корм для кошек Hill’s Science Plan Light Adult Chicken",
+    "details": [
+      "Сухой корм для кошек",
+      "Контроль веса",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-light-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/hills-09.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Light Adult Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.tiendanimal.es/1.5-kg-hills-science-plan-light-adult-pollo-pienso-para-gatos/HIL7520DA.html",
+      "url": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw1098731a/images/comida_gatos_hills_adult_light_pollo_newpack_HIL7520DA_M_1.jpg"
+    },
+    "productSource": {
+      "name": "Hill’s",
+      "kind": "manufacturer",
+      "url": "https://www.hillspet.es/cat-food/science-plan-adult-light-chicken-dry"
+    },
+    "variants": [
+      {
+        "id": "hills-light-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": 23.89,
+        "priceStatus": "temporary",
+        "ean": "052742752006",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 23.89,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/1.5-kg-hills-science-plan-light-adult-pollo-pienso-para-gatos/HIL7520DA.html",
+          "checkedAt": "2026-10-11T13:09:22+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "hills-light-3000g",
+        "label": "3 кг",
+        "weight": "3 кг",
+        "packageWeightKg": 3.0,
+        "sizes": [
+          "3 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "hills-light-7000g",
+        "label": "7 кг",
+        "weight": "7 кг",
+        "packageWeightKg": 7.0,
+        "sizes": [
+          "7 кг"
+        ],
+        "price": 75.99,
+        "priceStatus": "temporary",
+        "ean": "052742023014",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 75.99,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/7-kg-hills-science-plan-light-adult-pollo-pienso-para-gatos/HIL45431.html",
+          "checkedAt": "2026-10-11T13:09:22+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "hills-light-10000g",
+        "label": "10 кг",
+        "weight": "10 кг",
+        "packageWeightKg": 10.0,
+        "sizes": [
+          "10 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "hills-perfect-weight",
+    "existingId": null,
+    "researchRecipeId": "hills-10",
+    "name": "Hill’s Science Plan Perfect Weight Adult Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Контроль веса",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-perfect-weight-1500g",
+    "description": "Сухой корм для кошек Hill’s Science Plan Perfect Weight Adult Chicken",
+    "details": [
+      "Сухой корм для кошек",
+      "Контроль веса",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-perfect-weight-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/hills-10.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Perfect Weight Adult Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.tiendanimal.es/1.5-kg-hills-science-plan-perfect-weight-adult-pollo-pienso-para-gatos/HIL3673V.html",
+      "url": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw4405b737/images/hills_pienso_gato_perfect_weight_HIL3673V_1.jpg"
+    },
+    "productSource": {
+      "name": "Hill’s",
+      "kind": "manufacturer",
+      "url": "https://www.hillspet.es/cat-food/science-plan-adult-perfect-weight-chicken-dry"
+    },
+    "variants": [
+      {
+        "id": "hills-perfect-weight-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": 24.99,
+        "priceStatus": "temporary",
+        "ean": "052742367309",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 24.99,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/1.5-kg-hills-science-plan-perfect-weight-adult-pollo-pienso-para-gatos/HIL3673V.html",
+          "checkedAt": "2026-10-11T13:09:22+00:00",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "hills-perfect-weight-2500g",
+        "label": "2,5 кг",
+        "weight": "2,5 кг",
+        "packageWeightKg": 2.5,
+        "sizes": [
+          "2,5 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "hills-perfect-weight-7000g",
+        "label": "7 кг",
+        "weight": "7 кг",
+        "packageWeightKg": 7.0,
+        "sizes": [
+          "7 кг"
+        ],
+        "price": 69.99,
+        "priceStatus": "temporary",
+        "ean": "052742024523",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 69.99,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/7-kg-hills-science-plan-perfect-weight-adult-pollo-pienso-para-gatos/HIL45425.html",
+          "checkedAt": "2026-10-11T13:09:22+00:00",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-kitten-digestion",
+    "existingId": null,
+    "researchRecipeId": "hills-12",
+    "name": "Hill’s Science Plan Perfect Digestion Kitten Chicken & Brown Rice",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для котят",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-kitten-digestion-1500g",
+    "description": "Сухой корм для кошек Hill’s Science Plan Perfect Digestion Kitten Chicken & Brown Rice",
+    "details": [
+      "Сухой корм для кошек",
+      "Для котят",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-kitten-digestion-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/hills-12.png",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Perfect Digestion Kitten Chicken & Brown Rice"
+    },
+    "imageSource": {
+      "name": "Hill’s",
+      "pageUrl": "https://www.hillspet.es/cat-food/science-plan-kitten-perfect-digestion-dry",
+      "url": "https://pxmshare.colgatepalmolive.com/PNG_2000/e-TJN7EIwgNaGHF7ikjAk.png"
+    },
+    "productSource": {
+      "name": "Hill’s",
+      "kind": "manufacturer",
+      "url": "https://www.hillspet.es/cat-food/science-plan-kitten-perfect-digestion-dry"
+    },
+    "variants": [
+      {
+        "id": "hills-kitten-digestion-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "hills-hypoallergenic",
+    "existingId": null,
+    "researchRecipeId": "hills-16",
+    "name": "Hill’s Science Plan Hypoallergenic Adult Egg & Insect Protein",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "dry",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Hypoallergenic",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-hypoallergenic-1500g",
+    "description": "Сухой корм для кошек Hill’s Science Plan Hypoallergenic Adult Egg & Insect Protein",
+    "details": [
+      "Сухой корм для кошек",
+      "Hypoallergenic",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-hypoallergenic-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/hills-16.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Hypoallergenic Adult Egg & Insect Protein"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/1.5-kg-hill_s-science-plan-adult-hypoallergenic-huevo-e-insecto-pienso-para-gatos/HIL607869.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwf9159dfc/images/comida_humeda_gatos_hills_science_plan_hypoallergenic_adult_huevo_insecto_HIL607869_0.jpg"
+    },
+    "productSource": {
+      "name": "Hill’s",
+      "kind": "manufacturer",
+      "url": "https://www.hillspet.es/cat-food/science-plan-adult-hypoallergenic-egg-insect-protein-dry"
+    },
+    "variants": [
+      {
+        "id": "hills-hypoallergenic-1500g",
+        "label": "1,5 кг",
+        "weight": "1,5 кг",
+        "packageWeightKg": 1.5,
+        "sizes": [
+          "1,5 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "hills-hypoallergenic-7000g",
+        "label": "7 кг",
+        "weight": "7 кг",
+        "packageWeightKg": 7.0,
+        "sizes": [
+          "7 кг"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-chicken",
+    "existingId": "leonardo-chicken",
+    "researchRecipeId": "leonardo-49ae1018",
+    "name": "Leonardo Extra Filet Chicken",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": false,
+    "prioritySelection": true,
+    "tag": "Курица",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-chicken-200g",
+    "description": "Влажный корм для кошек Leonardo Extra Filet Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Курица",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-chicken-v1.webp",
+      "originalSrc": "assets/food/leonardo-chicken.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Extra Filet Chicken"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-extra-filete-pollo-extra-filete-6-x-200-g",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/68/f1/3c/1771314262/bl-ef-huhn-200g-front.jpg?ts=1771314262"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-extra-filete-pollo-extra-filete-6-x-200-g"
+    },
+    "variants": [
+      {
+        "id": "leonardo-chicken-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-chicken-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-turkey",
+    "existingId": "leonardo-turkey",
+    "researchRecipeId": "leonardo-47d1fcc0",
+    "name": "Leonardo Extra Filet Turkey",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": false,
+    "prioritySelection": true,
+    "tag": "Индейка",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-turkey-200g",
+    "description": "Влажный корм для кошек Leonardo Extra Filet Turkey",
+    "details": [
+      "Влажный корм для кошек",
+      "Индейка",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-turkey-v1.webp",
+      "originalSrc": "assets/food/leonardo-turkey.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Extra Filet Turkey"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-extra-filete-pavo-extra-filete-6-x-200-g",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/6d/2c/ab/1771314262/bl-ef-truthahn-200g-front.jpg?ts=1771314262"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-extra-filete-pavo-extra-filete-6-x-200-g"
+    },
+    "variants": [
+      {
+        "id": "leonardo-turkey-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-turkey-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-salmon",
+    "existingId": null,
+    "researchRecipeId": "leonardo-b251d533",
+    "name": "Leonardo Extra Filet Salmon",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Лосось",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-salmon-200g",
+    "description": "Влажный корм для кошек Leonardo Extra Filet Salmon",
+    "details": [
+      "Влажный корм для кошек",
+      "Лосось",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-salmon-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/leonardo-b251d533.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Extra Filet Salmon"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-extra-filete-salmon-extra-filete-6-x-200-g",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/5b/e8/1d/1771314262/bl-ef-lachs-200g-front.jpg?ts=1771314262"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-extra-filete-salmon-extra-filete-6-x-200-g"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-salmon-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-salmon-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-kitten",
+    "existingId": null,
+    "researchRecipeId": "leonardo-bf1e18d3",
+    "name": "Leonardo Finest Selection Kitten Poultry",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для котят",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-kitten-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Kitten Poultry",
+    "details": [
+      "Влажный корм для кошек",
+      "Для котят",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-kitten-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/leonardo-bf1e18d3.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Kitten Poultry"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-kitten-puro-en-ave-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/17/g0/1f/1777277171/bl-fs-kitten-gefluegel-pur-85g-front-es.jpg?ts=1777277171"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-kitten-puro-en-ave-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-kitten-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-rabbit",
+    "existingId": null,
+    "researchRecipeId": "leonardo-ee08de93",
+    "name": "Leonardo Finest Selection Rabbit & Cranberries",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Кролик и клюква",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-rabbit-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Rabbit & Cranberries",
+    "details": [
+      "Влажный корм для кошек",
+      "Кролик и клюква",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-rabbit-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/leonardo-ee08de93.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Rabbit & Cranberries"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-conejo-cranberries-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/4d/e8/86/1777277170/bl-fs-kaninchen-cranberries-85g-front-es.jpg?ts=1777277170"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-conejo-cranberries-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-rabbit-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "acana-wet-tuna",
+    "existingId": null,
+    "researchRecipeId": "acana-c58f94cd",
+    "name": "Acana Premium Paté Tuna & Chicken",
+    "brand": "Acana",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Паштет",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "acana-wet-tuna-85g",
+    "description": "Влажный корм для кошек Acana Premium Paté Tuna & Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Паштет",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/acana-wet-tuna-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/acana-c58f94cd.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Acana Premium Paté Tuna & Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-acana-premium-pate-atun-y-pollo-lata-para-gatos/ACAAWT.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwf6fc2314/images/acana_gatos_pate_atun_pollo_ACAAWT.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-atun-y-pollo-lata-para-gatos/ACAAWT_M.html"
+    },
+    "variants": [
+      {
+        "id": "acana-wet-tuna-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.39,
+        "priceStatus": "temporary",
+        "ean": "064992719807",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.39,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-acana-premium-pate-atun-y-pollo-lata-para-gatos/ACAAWT.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "acana-wet-lamb",
+    "existingId": null,
+    "researchRecipeId": "acana-ded3686b",
+    "name": "Acana Premium Paté Lamb",
+    "brand": "Acana",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Паштет",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "acana-wet-lamb-85g",
+    "description": "Влажный корм для кошек Acana Premium Paté Lamb",
+    "details": [
+      "Влажный корм для кошек",
+      "Паштет",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/acana-wet-lamb-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/acana-ded3686b.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Acana Premium Paté Lamb"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-acana-premium-pate-cordero-lata-para-gatos/ACAAWL.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwd923b2b9/images/acana_gatos_pate_cordero_ACAAWL.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-cordero-lata-para-gatos/ACAAWL_M.html"
+    },
+    "variants": [
+      {
+        "id": "acana-wet-lamb-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.39,
+        "priceStatus": "temporary",
+        "ean": "064992719784",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.39,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-acana-premium-pate-cordero-lata-para-gatos/ACAAWL.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "acana-wet-salmon",
+    "existingId": null,
+    "researchRecipeId": "acana-21da5951",
+    "name": "Acana Premium Paté Salmon & Chicken",
+    "brand": "Acana",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Паштет",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "acana-wet-salmon-85g",
+    "description": "Влажный корм для кошек Acana Premium Paté Salmon & Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Паштет",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/acana-wet-salmon-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/acana-21da5951.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Acana Premium Paté Salmon & Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-acana-premium-pate-salmon-con-pollo-lata-para-gatos/ACAAWS.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw9adc2a93/images/acana_gatos_pate_salmon_pollo_ACAAWS.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-salmon-y-pollo-lata-para-gatos/ACAAWS_M.html"
+    },
+    "variants": [
+      {
+        "id": "acana-wet-salmon-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.39,
+        "priceStatus": "temporary",
+        "ean": "064992719814",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.39,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-acana-premium-pate-salmon-con-pollo-lata-para-gatos/ACAAWS.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "acana-wet-beef",
+    "existingId": null,
+    "researchRecipeId": "acana-3a7cb68b",
+    "name": "Acana Premium Paté Beef",
+    "brand": "Acana",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Паштет",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "acana-wet-beef-85g",
+    "description": "Влажный корм для кошек Acana Premium Paté Beef",
+    "details": [
+      "Влажный корм для кошек",
+      "Паштет",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/acana-wet-beef-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/acana-3a7cb68b.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Acana Premium Paté Beef"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-acana-premium-pate-ternera-lata-para-gatos/ACAAWB.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwd84a25a5/images/acana_gatos_pate_ternera_ACAAWB.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/acana-premium-pate-ternera-lata-para-gatos/ACAAWB_M.html"
+    },
+    "variants": [
+      {
+        "id": "acana-wet-beef-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.39,
+        "priceStatus": "temporary",
+        "ean": "064992719777",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.39,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-acana-premium-pate-ternera-lata-para-gatos/ACAAWB.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-wet-adult",
+    "existingId": null,
+    "researchRecipeId": "advance-06d9acb9",
+    "name": "Advance Adult Chicken - в соусе",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "В соусе",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-wet-adult-85g",
+    "description": "Влажный корм для кошек Advance Adult Chicken - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "В соусе",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-wet-adult-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/advance-06d9acb9.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Adult Chicken - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-adult-bocaditos-con-pollo-en-salsa-sobre-para-gatos/ADV964528.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw2d33ad1a/images/new_Advance_Adult_Bocaditos_Pollo_salsa_sobre_para_gatos_ADV964528_M_1.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-adult-bocaditos-con-pollo-en-salsa-sobre-para-gatos/ADV964528_M.html"
+    },
+    "variants": [
+      {
+        "id": "advance-wet-adult-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.29,
+        "priceStatus": "temporary",
+        "ean": "8410650564463",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.29,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-adult-bocaditos-con-pollo-en-salsa-sobre-para-gatos/ADV964528.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-wet-kitten",
+    "existingId": null,
+    "researchRecipeId": "advance-eb954ea7",
+    "name": "Advance Kitten Turkey - в соусе",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для котят",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-wet-kitten-85g",
+    "description": "Влажный корм для кошек Advance Kitten Turkey - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Для котят",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-wet-kitten-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/advance-eb954ea7.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Kitten Turkey - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-kitten-pavo-en-salsa-sobre-para-gatos%C2%A0/ADV964527.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw15fad480/images/new_Advance_Kitten_Pavo_en_salsa_sobre_para_gatitos_ADV964527_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-kitten-pavo-en-salsa-sobre-para-gatos/ADV964527_M.html"
+    },
+    "variants": [
+      {
+        "id": "advance-wet-kitten-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.29,
+        "priceStatus": "temporary",
+        "ean": "8410650564456",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.29,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-kitten-pavo-en-salsa-sobre-para-gatos%C2%A0/ADV964527.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-mousse-salmon",
+    "existingId": null,
+    "researchRecipeId": "hills-bd4b65b0",
+    "name": "Hill’s Science Plan Sterilised Adult Salmon Mousse",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для стерилизованных",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-mousse-salmon-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Sterilised Adult Salmon Mousse",
+    "details": [
+      "Влажный корм для кошек",
+      "Для стерилизованных",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-mousse-salmon-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/hills-bd4b65b0.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Sterilised Adult Salmon Mousse"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-adult-sterilised-mousse-de-salmon-para-gatos/HIL609249.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw97dbe706/images/Hill's_Science_Plan_Adult_Sterilised_Mousse_Salmón_gatos_HIL609249_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-sterilised-mousse-de-salmon-para-gatos/HIL609249_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-mousse-salmon-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742076867",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-adult-sterilised-mousse-de-salmon-para-gatos/HIL609249.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-kitten",
+    "existingId": null,
+    "researchRecipeId": "hills-581247f6",
+    "name": "Hill’s Science Plan Kitten Chicken - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для котят",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-kitten-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Kitten Chicken - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Для котят",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-kitten-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch3/hills-581247f6.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Kitten Chicken - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-kitten-pollo-sobre-en-salsa-para-gatitos/HIL2112PZ.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw82ac85f6/images/comida_humeda_gatos_hills_bolsitas_kitten_pollo_HIL2112PZ_M_02.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-pollo-sobre-en-salsa/HIL2112PZ_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-kitten-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742083353",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-kitten-pollo-sobre-en-salsa-para-gatitos/HIL2112PZ.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-herring",
+    "existingId": null,
+    "researchRecipeId": "leonardo-2a3637d3",
+    "name": "Leonardo Extra Filet Herring",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Сельдь",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-herring-200g",
+    "description": "Влажный корм для кошек Leonardo Extra Filet Herring",
+    "details": [
+      "Влажный корм для кошек",
+      "Сельдь",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-herring-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/leonardo-2a3637d3.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Extra Filet Herring"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-extra-filete-arenque-extra-filete-6-x-200-g",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/9d/93/a7/1771314263/bl-ef-hering-200g-front.jpg?ts=1771314263"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-extra-filete-arenque-extra-filete-6-x-200-g"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-herring-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-herring-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-lamb",
+    "existingId": null,
+    "researchRecipeId": "leonardo-6a36e950",
+    "name": "Leonardo Extra Filet Lamb",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ягнёнок",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-lamb-200g",
+    "description": "Влажный корм для кошек Leonardo Extra Filet Lamb",
+    "details": [
+      "Влажный корм для кошек",
+      "Ягнёнок",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-lamb-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/leonardo-6a36e950.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Extra Filet Lamb"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-extra-filete-cordero-extra-filete-6-x-200-g",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/dd/68/74/1771314262/bl-ef-lamm-200g-front.jpg?ts=1771314262"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-extra-filete-cordero-extra-filete-6-x-200-g"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-lamb-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-lamb-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-venison",
+    "existingId": null,
+    "researchRecipeId": "leonardo-ead26978",
+    "name": "Leonardo Extra Filet Venison",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Оленина",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-venison-200g",
+    "description": "Влажный корм для кошек Leonardo Extra Filet Venison",
+    "details": [
+      "Влажный корм для кошек",
+      "Оленина",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-venison-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/leonardo-ead26978.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Extra Filet Venison"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-extra-filete-con-venado-extra-filete-6-x-200-g",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/89/8a/37/1771314262/bl-ef-wild-200g-front.jpg?ts=1771314262"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-extra-filete-con-venado-extra-filete-6-x-200-g"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-venison-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-venison-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-poultry-egg",
+    "existingId": null,
+    "researchRecipeId": "leonardo-6e2daf53",
+    "name": "Leonardo Finest Selection Poultry & Egg",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Птица и яйцо",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-poultry-egg-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Poultry & Egg",
+    "details": [
+      "Влажный корм для кошек",
+      "Птица и яйцо",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-poultry-egg-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/leonardo-6e2daf53.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Poultry & Egg"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-ave-huevo-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/4b/75/45/1777277171/bl-fs-gefluegel-ei-85g-front-es.jpg?ts=1777277171"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-ave-huevo-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-poultry-egg-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-buffalo",
+    "existingId": null,
+    "researchRecipeId": "leonardo-d451fe16",
+    "name": "Leonardo Finest Selection Buffalo & Blueberries",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Буйвол и черника",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-buffalo-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Buffalo & Blueberries",
+    "details": [
+      "Влажный корм для кошек",
+      "Буйвол и черника",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-buffalo-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/leonardo-d451fe16.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Buffalo & Blueberries"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-bufalo-arandanos-azules-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/2c/83/d1/1777277171/bl-fs-bueffel-blaubeeren-85g-front-es.jpg?ts=1777277171"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-bufalo-arandanos-azules-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-buffalo-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-lamb-cranberry",
+    "existingId": null,
+    "researchRecipeId": "leonardo-b22ec952",
+    "name": "Leonardo Finest Selection Lamb & Cranberries",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ягнёнок и клюква",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-lamb-cranberry-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Lamb & Cranberries",
+    "details": [
+      "Влажный корм для кошек",
+      "Ягнёнок и клюква",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-lamb-cranberry-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/leonardo-b22ec952.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Lamb & Cranberries"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-cordero-cranberries-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/06/a9/fd/1777277170/bl-fs-lamm-cranberries-85g-front-es.jpg?ts=1777277170"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-cordero-cranberries-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-lamb-cranberry-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-pheasant",
+    "existingId": null,
+    "researchRecipeId": "leonardo-d30c0db6",
+    "name": "Leonardo Finest Selection Pheasant & Cranberries",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Фазан и клюква",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-pheasant-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Pheasant & Cranberries",
+    "details": [
+      "Влажный корм для кошек",
+      "Фазан и клюква",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-pheasant-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/leonardo-d30c0db6.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Pheasant & Cranberries"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-faisan-cranberries-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/c1/b6/49/1777277172/bl-fs-fasan-cranberries-85g-front-es.jpg?ts=1777277172"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-faisan-cranberries-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-pheasant-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-meat-menu",
+    "existingId": null,
+    "researchRecipeId": "leonardo-6073bc52",
+    "name": "Leonardo Finest Selection Meat Menu",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Мясное меню",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-meat-menu-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Meat Menu",
+    "details": [
+      "Влажный корм для кошек",
+      "Мясное меню",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-meat-menu-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/leonardo-6073bc52.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Meat Menu"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-menu-de-carne-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/8d/a8/dc/1777277171/bl-fs-fleischmenue-85g-front-es.jpg?ts=1777277171"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-menu-de-carne-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-meat-menu-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-duck-cheese",
+    "existingId": null,
+    "researchRecipeId": "leonardo-6d413fe3",
+    "name": "Leonardo Finest Selection Duck & Cheese",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Утка и сыр",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-duck-cheese-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Duck & Cheese",
+    "details": [
+      "Влажный корм для кошек",
+      "Утка и сыр",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-duck-cheese-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/leonardo-6d413fe3.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Duck & Cheese"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-pato-queso-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/a4/f1/c3/1777277171/bl-fs-ente-kaese-85g-front-es.jpg?ts=1777277171"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-pato-queso-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-duck-cheese-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-fish-shrimp",
+    "existingId": null,
+    "researchRecipeId": "leonardo-e56198a8",
+    "name": "Leonardo Finest Selection Fish & Shrimps",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Рыба и креветки",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-fish-shrimp-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Fish & Shrimps",
+    "details": [
+      "Влажный корм для кошек",
+      "Рыба и креветки",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-fish-shrimp-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/leonardo-e56198a8.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Fish & Shrimps"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-pescado-gambas-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/f6/8e/15/1777277172/bl-fs-fisch-shrimps-85g-front-es.jpg?ts=1777277172"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-pescado-gambas-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-fish-shrimp-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "hills-wet",
+    "existingId": "hills-wet",
+    "researchRecipeId": "hills-d4410891",
+    "name": "Hill’s Science Plan Sterilised Young Adult Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": false,
+    "prioritySelection": true,
+    "tag": "Для стерилизованных",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Sterilised Young Adult Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Для стерилизованных",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-v1.webp",
+      "originalSrc": "assets/food/hills-wet.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Sterilised Young Adult Chicken"
+    },
+    "imageSource": {
+      "name": "Kiwoko",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-sterilized-young-adult-pollo-sobre-para-gatos/HIL1941PZ.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwac07f3cb/images/CHnew_Hill-s-Science-Plan-Sterilized-Young-Adult-Pollo-sobre-para-gatos_HIL1941PZ_M_02.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-sterilized-young-adult-pollo-sobre-para-gatos/HIL1941PZ_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742083780",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-sterilized-young-adult-pollo-sobre-para-gatos/HIL1941PZ.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-adult-chicken-mousse",
+    "existingId": null,
+    "researchRecipeId": "hills-c2b38601",
+    "name": "Hill’s Science Plan Adult Chicken Mousse",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Мусс",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-adult-chicken-mousse-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Adult Chicken Mousse",
+    "details": [
+      "Влажный корм для кошек",
+      "Мусс",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-adult-chicken-mousse-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/hills-c2b38601.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Adult Chicken Mousse"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-adult-mousse-de-pollo-lata-para-gatos/HIL609245.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw73174a5c/images/Hills_lata_pollo_gato_HIL609245_2.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-mousse-de-pollo-lata-para-gatos/HIL609245_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-adult-chicken-mousse-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.09,
+        "priceStatus": "temporary",
+        "ean": "052742076843",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.09,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-adult-mousse-de-pollo-lata-para-gatos/HIL609245.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-adult-salmon-mousse",
+    "existingId": null,
+    "researchRecipeId": "hills-9c575b67",
+    "name": "Hill’s Science Plan Adult Salmon Mousse",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Мусс",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-adult-salmon-mousse-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Adult Salmon Mousse",
+    "details": [
+      "Влажный корм для кошек",
+      "Мусс",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-adult-salmon-mousse-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/hills-9c575b67.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Adult Salmon Mousse"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-adult-mousse-de-salmon-lata-para-gatos/HIL609246.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwf8eebf05/images/Hill's_Science_Plan_Adult_Mousse_Salmón_gatos_HIL609246_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-mousse-de-salmon-lata-para-gatos/HIL609246_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-adult-salmon-mousse-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.09,
+        "priceStatus": "temporary",
+        "ean": "052742076881",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.09,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-adult-mousse-de-salmon-lata-para-gatos/HIL609246.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-turkey",
+    "existingId": null,
+    "researchRecipeId": "hills-ee5bc575",
+    "name": "Hill’s Science Plan Adult Turkey - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "В соусе",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-turkey-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Adult Turkey - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "В соусе",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-turkey-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/hills-ee5bc575.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Adult Turkey - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-adult-pavo-sobre-para-gatos/HIL2107PZ.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwd987988d/images/Hill's_Science_Plan_Adult_Pavo_Sobre_gatos_HIL2107PZ_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-pavo-sobre-para-gatos/HIL2107PZ_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-turkey-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742083155",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-adult-pavo-sobre-para-gatos/HIL2107PZ.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-digestion",
+    "existingId": null,
+    "researchRecipeId": "hills-eb23f10b",
+    "name": "Hill’s Science Plan Adult Perfect Digestion Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Пищеварение",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-digestion-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Adult Perfect Digestion Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Пищеварение",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-digestion-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/hills-eb23f10b.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Adult Perfect Digestion Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-adult-perfect-digestion-pollo-comida-humeda-para-gatos/HIL606444.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw1a1455f7/images/hills_comida_humeda_gato_perfect_digestion_adult_1_HIL6064441_1.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-perfect-digestion-pollo-comida-humeda-para-gatos/HIL606444_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-digestion-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742047867",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-adult-perfect-digestion-pollo-comida-humeda-para-gatos/HIL606444.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-fish",
+    "existingId": null,
+    "researchRecipeId": "hills-a115862f",
+    "name": "Hill’s Science Plan Adult Ocean Fish - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "В соусе",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-fish-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Adult Ocean Fish - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "В соусе",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-fish-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/hills-a115862f.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Adult Ocean Fish - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-adult-pescado-sobre-para-gatos/HIL2105PZ.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw40fe51a5/images/Hill's_Science_Plan_Adult_Pescado_Sobre_gatos_HIL2105PZ_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-pescado-sobre-para-gatos/HIL2105PZ_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-fish-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742083346",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-adult-pescado-sobre-para-gatos/HIL2105PZ.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-ster-chicken-mousse",
+    "existingId": null,
+    "researchRecipeId": "hills-2d92e01b",
+    "name": "Hill’s Science Plan Sterilised Adult Chicken Mousse",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для стерилизованных",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-ster-chicken-mousse-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Sterilised Adult Chicken Mousse",
+    "details": [
+      "Влажный корм для кошек",
+      "Для стерилизованных",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-ster-chicken-mousse-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/hills-2d92e01b.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Sterilised Adult Chicken Mousse"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-adult-sterilised-mousse-de-pollo-lata-para-gatos/HIL609248.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw966c20a4/images/Hill's_Science_Plan_Adult_Sterilised_Mousse_pollo_gatos_HIL609248_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-sterilised-mousse-de-pollo-lata-para-gatos/HIL609248_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-ster-chicken-mousse-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742076942",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-adult-sterilised-mousse-de-pollo-lata-para-gatos/HIL609248.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-senior-vitality",
+    "existingId": null,
+    "researchRecipeId": "hills-cfe706a6",
+    "name": "Hill’s Science Plan Senior Vitality Chicken & Salmon",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для старших кошек",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-senior-vitality-1020g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Senior Vitality Chicken & Salmon",
+    "details": [
+      "Влажный корм для кошек",
+      "Для старших кошек",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-senior-vitality-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/hills-cfe706a6.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Senior Vitality Chicken & Salmon"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-hill_s-science-plan-senior-vitality-pollo-y-salmon-sobre-en-salsa-para-gatos/HIL605260.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw7bd3db19/images/hills_comida_humeda_gato_senior_vitality_multipack_HIL605260_1.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-senior-vitality-pollo-y-salmon-sobre-en-salsa-para-gatos/HIL605260_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-senior-vitality-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 19.59,
+        "priceStatus": "temporary",
+        "ean": "052742015705",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 19.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-hill_s-science-plan-senior-vitality-pollo-y-salmon-sobre-en-salsa-para-gatos/HIL605260.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-wet-deli-tuna",
+    "existingId": null,
+    "researchRecipeId": "advance-d687ca7d",
+    "name": "Advance Delicatessen Tuna - в соусе",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "В соусе",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-wet-deli-tuna-85g",
+    "description": "Влажный корм для кошек Advance Delicatessen Tuna - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "В соусе",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-wet-deli-tuna-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/advance-d687ca7d.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Delicatessen Tuna - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-advance-delicatessen-atun-en-salsa-sobres-para-gatos/ADV969045.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw7ff8d634/images/Advance_Delicatessen_humeda_ADV969045_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-delicatessen-atun-en-salsa-sobres-para-gatos/ADV969045_M.html"
+    },
+    "variants": [
+      {
+        "id": "advance-wet-deli-tuna-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.29,
+        "priceStatus": "temporary",
+        "ean": "8410650638997",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.29,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-advance-delicatessen-atun-en-salsa-sobres-para-gatos/ADV969045.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-wet-deli-turkey",
+    "existingId": null,
+    "researchRecipeId": "advance-95923f62",
+    "name": "Advance Delicatessen Turkey - в соусе",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "В соусе",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-wet-deli-turkey-85g",
+    "description": "Влажный корм для кошек Advance Delicatessen Turkey - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "В соусе",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-wet-deli-turkey-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/advance-95923f62.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Delicatessen Turkey - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-advance-delicatessen-pavo-en-salsa-sobres-para-gatos/ADV969046.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw003d4755/images/Advance_Delicatessen_humeda_ADV969046_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-delicatessen-pavo-en-salsa-sobres-para-gatos/ADV969046_M.html"
+    },
+    "variants": [
+      {
+        "id": "advance-wet-deli-turkey-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.29,
+        "priceStatus": "temporary",
+        "ean": "8410650639000",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.29,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-advance-delicatessen-pavo-en-salsa-sobres-para-gatos/ADV969046.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-wet-deli-chicken",
+    "existingId": null,
+    "researchRecipeId": "advance-48db10e3",
+    "name": "Advance Delicatessen Chicken - в соусе",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "В соусе",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-wet-deli-chicken-85g",
+    "description": "Влажный корм для кошек Advance Delicatessen Chicken - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "В соусе",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-wet-deli-chicken-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/advance-48db10e3.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Delicatessen Chicken - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-advance-delicatessen-pollo-en-salsa-sobres-para-gatos/ADV969036.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwb7e440dd/images/Advance_Delicatessen_humeda_ADV969036_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-delicatessen-pollo-en-salsa-sobres-para-gatos/ADV969036_M.html"
+    },
+    "variants": [
+      {
+        "id": "advance-wet-deli-chicken-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.29,
+        "priceStatus": "temporary",
+        "ean": "8410650638904",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.29,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-advance-delicatessen-pollo-en-salsa-sobres-para-gatos/ADV969036.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-wet-deli-salmon",
+    "existingId": null,
+    "researchRecipeId": "advance-652cf312",
+    "name": "Advance Delicatessen Salmon - в соусе",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "В соусе",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-wet-deli-salmon-85g",
+    "description": "Влажный корм для кошек Advance Delicatessen Salmon - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "В соусе",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-wet-deli-salmon-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/advance-652cf312.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Delicatessen Salmon - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-advance-delicatessen-salmon-en-salsa-sobres-para-gatos/ADV969044.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw7e6092e6/images/Advance_Delicatessen_humeda_ADV969044_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-delicatessen-salmon-en-salsa-sobres-para-gatos/ADV969044_M.html"
+    },
+    "variants": [
+      {
+        "id": "advance-wet-deli-salmon-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.29,
+        "priceStatus": "temporary",
+        "ean": "8410650638980",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.29,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-advance-delicatessen-salmon-en-salsa-sobres-para-gatos/ADV969044.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-wet",
+    "existingId": "advance-wet",
+    "researchRecipeId": "advance-fafa9032",
+    "name": "Advance Veterinary Diets Gastroenteric Chicken",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": false,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-wet-85g",
+    "description": "Влажный корм для кошек Advance Veterinary Diets Gastroenteric Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-wet-v1.webp",
+      "originalSrc": "assets/food/advance-wet.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Veterinary Diets Gastroenteric Chicken"
+    },
+    "imageSource": {
+      "name": "Kiwoko",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-gastroenteric-pollo-sobre-para-gatos/ADV925978.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw26ff02f4/images/Advance_Gastroenteric_Pollo_sobre_gatos_ADV925978_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-gastroenteric-pollo-sobre-para-gatos/ADV925978.html"
+    },
+    "variants": [
+      {
+        "id": "advance-wet-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "advance-wet-kitten-chicken",
+    "existingId": null,
+    "researchRecipeId": "advance-2996b2c4",
+    "name": "Advance Kitten Chicken - в соусе",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для котят",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-wet-kitten-chicken-85g",
+    "description": "Влажный корм для кошек Advance Kitten Chicken - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Для котят",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-wet-kitten-chicken-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch4/advance-2996b2c4.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Kitten Chicken - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-kitten-pollo-en-salsa-sobre-para-gatos%C2%A0/ADV964526.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw8b36b535/images/new_comida_humeda_gatito_advance_affinity_kitten_pollo_salsa_ADV9645226_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-kitten-pollo-en-salsa-sobre-para-gatos/ADV964526_M.html"
+    },
+    "variants": [
+      {
+        "id": "advance-wet-kitten-chicken-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.29,
+        "priceStatus": "temporary",
+        "ean": "8410650564449",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.29,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-kitten-pollo-en-salsa-sobre-para-gatos%C2%A0/ADV964526.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-pure-turkey",
+    "existingId": null,
+    "researchRecipeId": "leonardo-3e65b946",
+    "name": "Leonardo Finest Selection Pure Turkey",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-pure-turkey-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Pure Turkey",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-pure-turkey-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/leonardo-3e65b946.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Pure Turkey"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-pavo-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/59/c8/d2/1777277171/bl-fs-truthahn-pur-85g-front-es.jpg?ts=1777277171"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-pavo-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-pure-turkey-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-pure-chicken",
+    "existingId": null,
+    "researchRecipeId": "leonardo-c90d6fff",
+    "name": "Leonardo Finest Selection Pure Chicken",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-pure-chicken-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Pure Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-pure-chicken-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/leonardo-c90d6fff.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Pure Chicken"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-pollo-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/e5/c3/23/1777277171/bl-fs-huhn-pur-85g-front-es.jpg?ts=1777277171"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-pollo-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-pure-chicken-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-pure-beef",
+    "existingId": null,
+    "researchRecipeId": "leonardo-cec6d7b8",
+    "name": "Leonardo Finest Selection Pure Beef",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-pure-beef-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Pure Beef",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-pure-beef-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/leonardo-cec6d7b8.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Pure Beef"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-ternera-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/8b/4c/fc/1777277172/bl-fs-rind-pur-85g-front-es.jpg?ts=1777277172"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-puro-en-ternera-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-pure-beef-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-senior-chicken",
+    "existingId": null,
+    "researchRecipeId": "leonardo-04d3623d",
+    "name": "Leonardo Finest Selection Senior Pure Chicken",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для старших кошек",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-senior-chicken-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Senior Pure Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Для старших кошек",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-senior-chicken-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/leonardo-04d3623d.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Senior Pure Chicken"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-senior-puro-en-pollo-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/27/7c/42/1777277171/bl-fs-senior-huhn-pur-85g-front-es.jpg?ts=1777277171"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-senior-puro-en-pollo-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-senior-chicken-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-senior-beef",
+    "existingId": null,
+    "researchRecipeId": "leonardo-a8fa1682",
+    "name": "Leonardo Finest Selection Senior Pure Beef",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для старших кошек",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-senior-beef-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Senior Pure Beef",
+    "details": [
+      "Влажный корм для кошек",
+      "Для старших кошек",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-senior-beef-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/leonardo-a8fa1682.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Senior Pure Beef"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-senior-puro-en-ternera-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/c2/30/8f/1777277171/bl-fs-senior-kalb-pur-85g-front-es.jpg?ts=1777277171"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-senior-puro-en-ternera-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-senior-beef-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-beef-vegetables",
+    "existingId": null,
+    "researchRecipeId": "leonardo-ce1bb081",
+    "name": "Leonardo Finest Selection Beef & Vegetables",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-beef-vegetables-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Beef & Vegetables",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-beef-vegetables-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/leonardo-ce1bb081.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Beef & Vegetables"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-ternera-verdura-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/10/2b/65/1777277172/bl-fs-kalb-gemuese-85g-front-es.jpg?ts=1777277172"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-ternera-verdura-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-beef-vegetables-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-trout-catnip",
+    "existingId": null,
+    "researchRecipeId": "leonardo-e16b56c6",
+    "name": "Leonardo Finest Selection Trout & Catnip",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-trout-catnip-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Trout & Catnip",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-trout-catnip-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/leonardo-e16b56c6.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Trout & Catnip"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-trucha-catnip-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/f5/01/dc/1777277173/bl-fs-forelle-catnip-85g-front-es.jpg?ts=1777277173"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-trucha-catnip-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-trout-catnip-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-venison-blueberries",
+    "existingId": null,
+    "researchRecipeId": "leonardo-fa83dd83",
+    "name": "Leonardo Finest Selection Venison & Blueberries",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-venison-blueberries-85g",
+    "description": "Влажный корм для кошек Leonardo Finest Selection Venison & Blueberries",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-venison-blueberries-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/leonardo-fa83dd83.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Finest Selection Venison & Blueberries"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-finest-selection-venado-arandanos-azules-16-x-85-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/b8/8b/cc/1777277171/bl-fs-wild-heidelbeeren-85g-front-es.jpg?ts=1777277171"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-finest-selection-venado-arandanos-azules-16-x-85-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-venison-blueberries-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-pulled-beef",
+    "existingId": null,
+    "researchRecipeId": "leonardo-bcfaec2c",
+    "name": "Leonardo Pulled Beef Beef",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-pulled-beef-70g",
+    "description": "Влажный корм для кошек Leonardo Pulled Beef Beef",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-pulled-beef-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/leonardo-bcfaec2c.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Pulled Beef Beef"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-pulled-beef-beef-with-extra-pulled-beef-16-x-70-g",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/b6/39/ff/1722338286/bl-pouch-pulled-beef-beef-70g-front.jpg?ts=1722339306"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-pulled-beef-beef-with-extra-pulled-beef-16-x-70-g"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-pulled-beef-70g",
+        "label": "70 г",
+        "weight": "70 г",
+        "packageWeightKg": 0.07,
+        "sizes": [
+          "70 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-pulled-chicken",
+    "existingId": null,
+    "researchRecipeId": "leonardo-244fbf75",
+    "name": "Leonardo Pulled Beef Chicken",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-pulled-chicken-70g",
+    "description": "Влажный корм для кошек Leonardo Pulled Beef Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-pulled-chicken-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/leonardo-244fbf75.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Pulled Beef Chicken"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-pulled-beef-chicken-with-extra-pulled-beef-16-x-70-g",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/7f/bc/ae/1722338286/bl-pouch-pulled-beef-chicken-70g-front.jpg?ts=1722339344"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-pulled-beef-chicken-with-extra-pulled-beef-16-x-70-g"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-pulled-chicken-70g",
+        "label": "70 г",
+        "weight": "70 г",
+        "packageWeightKg": 0.07,
+        "sizes": [
+          "70 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-adult-chicken",
+    "existingId": null,
+    "researchRecipeId": "hills-bb9a38e6",
+    "name": "Hill’s Science Plan Adult Chicken - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-adult-chicken-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Adult Chicken - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-adult-chicken-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/hills-bb9a38e6.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Adult Chicken - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-adult-pollo-sobre-para-gatos/HIL2104PZ.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw212607f2/images/comida_humeda_gatos_hills_bolsitas_adult_pollo_HIL2104PZ_M_02.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-pollo-sobre-para-gatos/HIL2104PZ_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-adult-chicken-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742083339",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-adult-pollo-sobre-para-gatos/HIL2104PZ.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-adult-beef",
+    "existingId": null,
+    "researchRecipeId": "hills-8ae14cbf",
+    "name": "Hill’s Science Plan Adult Beef - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-adult-beef-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Adult Beef - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-adult-beef-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/hills-8ae14cbf.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Adult Beef - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-adult-ternera-sobre-en-salsa-para-gatos/HIL2106PZ.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwf2e4ea59/images/comida_humeda_gatos_hills_bolsitas_adult_ternera_HIL2106PZ_M_02.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-adult-ternera-sobre-en-salsa-para-gatos/HIL2106PZ_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-adult-beef-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742083179",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-adult-ternera-sobre-en-salsa-para-gatos/HIL2106PZ.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-kitten-turkey",
+    "existingId": null,
+    "researchRecipeId": "hills-9795b719",
+    "name": "Hill’s Science Plan Kitten Turkey - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для котят",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-kitten-turkey-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Kitten Turkey - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Для котят",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-kitten-turkey-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/hills-9795b719.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Kitten Turkey - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-kitten-pavo-en-salsa-sobre-para-gatos/HIL2114PZ.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwf212f409/images/hills_comida_humeda_gato_kitten_turkey_HIL2114PZ_1.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-pavo-en-salsa-sobre-para-gatos/HIL2114PZ_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-kitten-turkey-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742083452",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-kitten-pavo-en-salsa-sobre-para-gatos/HIL2114PZ.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-kitten-fish",
+    "existingId": null,
+    "researchRecipeId": "hills-184b871c",
+    "name": "Hill’s Science Plan Kitten Ocean Fish - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для котят",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-kitten-fish-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Kitten Ocean Fish - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Для котят",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-kitten-fish-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/hills-184b871c.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Kitten Ocean Fish - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-kitten-pescado-azul-sobre-para-gatos/HIL2113PZ.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw0cd4422c/images/comida_humeda_gatos_hills_bolsitas_kitten_ocean_fish_HIL2113PZ_M_02.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-pescado-azul-sobre-para-gatos/HIL2113PZ_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-kitten-fish-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742083469",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-kitten-pescado-azul-sobre-para-gatos/HIL2113PZ.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-kitten-mother",
+    "existingId": null,
+    "researchRecipeId": "hills-178db5ef",
+    "name": "Hill’s Science Plan Kitten & Mother Chicken & Turkey Mousse",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для котят",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-kitten-mother-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Kitten & Mother Chicken & Turkey Mousse",
+    "details": [
+      "Влажный корм для кошек",
+      "Для котят",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-kitten-mother-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/hills-178db5ef.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Kitten & Mother Chicken & Turkey Mousse"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-kitten-y-mother-mousse-de-pollo-y-pavo-lata-para-gatos/HIL608058.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw0d5b57c2/images/Hill's_SciencePlan_Kitten_Mother_Mousse_Pollo_Pavo_Lata_gatos_HIL608058_M_2.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-kitten-y-mother-mousse-de-pollo-y-pavo-lata-para-gatos/HIL608058_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-kitten-mother-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742064215",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-kitten-y-mother-mousse-de-pollo-y-pavo-lata-para-gatos/HIL608058.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-mature-chicken",
+    "existingId": null,
+    "researchRecipeId": "hills-66637f63",
+    "name": "Hill’s Science Plan Mature Chicken Mousse",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для старших кошек",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-mature-chicken-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Mature Chicken Mousse",
+    "details": [
+      "Влажный корм для кошек",
+      "Для старших кошек",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-mature-chicken-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/hills-66637f63.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Mature Chicken Mousse"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-mature-mousse-de-pollo-lata-para-gatos/HIL609247.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwc0ef41e8/images/Hill's_Science_Plan_Mature_Mousse_Pollo_lata_gatos_HIL609247_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/hill_s-science-plan-mature-mousse-de-pollo-lata-para-gatos/HIL609247_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-mature-chicken-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.09,
+        "priceStatus": "temporary",
+        "ean": "052742076928",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.09,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-mature-mousse-de-pollo-lata-para-gatos/HIL609247.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-mature-sterilised",
+    "existingId": null,
+    "researchRecipeId": "hills-52ebd066",
+    "name": "Hill’s Science Plan Mature Sterilised Chicken Mousse",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для старших кошек",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-mature-sterilised-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Mature Sterilised Chicken Mousse",
+    "details": [
+      "Влажный корм для кошек",
+      "Для старших кошек",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-mature-sterilised-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/hills-52ebd066.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Mature Sterilised Chicken Mousse"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-mature-sterilised-mousse-de-pollo-para-gatos/HIL609250.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwcf77ab3b/images/Hill's_Science_Plan_Mature_Sterilised_Mousse_Pollo_gatos_HIL609250_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/hill_s-science-plan-mature-sterilised-mousse-de-pollo-para-gatos/HIL609250_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-mature-sterilised-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742076904",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-science-plan-mature-sterilised-mousse-de-pollo-para-gatos/HIL609250.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-sterilised-turkey",
+    "existingId": null,
+    "researchRecipeId": "hills-b35bf2eb",
+    "name": "Hill’s Science Plan Sterilised Young Adult Turkey - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для стерилизованных",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-sterilised-turkey-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Sterilised Young Adult Turkey - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Для стерилизованных",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-sterilised-turkey-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/hills-b35bf2eb.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Sterilised Young Adult Turkey - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-sterilised-young-adult-pavo-sobre-en-salsa-para-gatos/HIL604013.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw25c19ae2/images/Hill's_Science_Plan_Sterilized_Young_Adult_Pavo_Sobre_Salsa_gatos_HIL604013_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-sterilised-young-adult-pavo-sobre-en-salsa-para-gatos/HIL604013_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-sterilised-turkey-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742083384",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-sterilised-young-adult-pavo-sobre-en-salsa-para-gatos/HIL604013.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-sterilised-trout",
+    "existingId": null,
+    "researchRecipeId": "hills-461a6d98",
+    "name": "Hill’s Science Plan Sterilised Young Adult Trout - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для стерилизованных",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-sterilised-trout-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Sterilised Young Adult Trout - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Для стерилизованных",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-sterilised-trout-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/hills-461a6d98.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Sterilised Young Adult Trout - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-sterilised-young-adult-trucha-sobre-en-salsa-para-gatos/HIL604011.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwa417630c/images/hills_comida_humeda_gato_sterilised_adult_cat_HIL604011_1.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-sterilised-young-adult-trucha-sobre-en-salsa-para-gatos/HIL604011_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-sterilised-trout-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742083445",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-sterilised-young-adult-trucha-sobre-en-salsa-para-gatos/HIL604011.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-wet-recovery",
+    "existingId": null,
+    "researchRecipeId": "advance-dd162181",
+    "name": "Advance Veterinary Diets Recovery",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-wet-recovery-100g",
+    "description": "Влажный корм для кошек Advance Veterinary Diets Recovery",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-wet-recovery-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/advance-dd162181.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Veterinary Diets Recovery"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-perro/100-g-advance-recovery-sobre-para-perros-y-gatos/ADV925970.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwae76415b/images/Advance_Recovery_Sobre_perros_gatos_ADV925970_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-humeda/advance-recovery-sobre-para-perros-y-gatos/ADV925970_M.html"
+    },
+    "variants": [
+      {
+        "id": "advance-wet-recovery-100g",
+        "label": "100 г",
+        "weight": "100 г",
+        "packageWeightKg": 0.1,
+        "sizes": [
+          "100 г"
+        ],
+        "price": 1.79,
+        "priceStatus": "temporary",
+        "ean": "8410650259703",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.79,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-perro/100-g-advance-recovery-sobre-para-perros-y-gatos/ADV925970.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-wet-renal",
+    "existingId": null,
+    "researchRecipeId": "advance-703db95b",
+    "name": "Advance Veterinary Diets Renal Chicken & Pork",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-wet-renal-85g",
+    "description": "Влажный корм для кошек Advance Veterinary Diets Renal Chicken & Pork",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-wet-renal-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/advance-703db95b.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Veterinary Diets Renal Chicken & Pork"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-renal-pollo-y-cerdo-sobre-para-gatos/ADV925976.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwe1106335/images/Advance_Renal_PolloCerdo_Sobre_gatos_ADV925976_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-renal-pollo-y-cerdo-sobre-para-gatos/ADV925976_M.html"
+    },
+    "variants": [
+      {
+        "id": "advance-wet-renal-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.49,
+        "priceStatus": "temporary",
+        "ean": "8410650259765",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.49,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-renal-pollo-y-cerdo-sobre-para-gatos/ADV925976.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-wet-sterilised-cod",
+    "existingId": null,
+    "researchRecipeId": "advance-ae0f356b",
+    "name": "Advance Sterilized Adult Cod",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-wet-sterilised-cod-85g",
+    "description": "Влажный корм для кошек Advance Sterilized Adult Cod",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-wet-sterilised-cod-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/advance-ae0f356b.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Sterilized Adult Cod"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-sterilized-adult-bacalao-sobres-para-gatos/ADV964530.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwb668df14/images/new_comida_humeda_gatos_advance_affinity_bacalao_ADV964530_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-sterilized-adult-bacalao-sobres-para-gatos/ADV964530_M.html"
+    },
+    "variants": [
+      {
+        "id": "advance-wet-sterilised-cod-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.29,
+        "priceStatus": "temporary",
+        "ean": "8410650564487",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.29,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-sterilized-adult-bacalao-sobres-para-gatos/ADV964530.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-wet-urinary",
+    "existingId": null,
+    "researchRecipeId": "advance-fde0cd46",
+    "name": "Advance Veterinary Diets Urinary",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-wet-urinary-85g",
+    "description": "Влажный корм для кошек Advance Veterinary Diets Urinary",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-wet-urinary-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/advance-fde0cd46.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Veterinary Diets Urinary"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-veterinary-diets-urinary-sobre-para-gatos/ADV925974.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw563be800/images/Advance_Veterinary_Diets_Urinary_Sobre_gatos_ADV925974_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-veterinary-diets-urinary-sobre-para-gatos/ADV925974_M.html"
+    },
+    "variants": [
+      {
+        "id": "advance-wet-urinary-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.49,
+        "priceStatus": "temporary",
+        "ean": "8410650259741",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.49,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-advance-veterinary-diets-urinary-sobre-para-gatos/ADV925974.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "advance-wet-weight-balance",
+    "existingId": null,
+    "researchRecipeId": "advance-8ccc9ae4",
+    "name": "Advance Veterinary Diets Weight Balance",
+    "brand": "Advance",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "advance-wet-weight-balance-85g",
+    "description": "Влажный корм для кошек Advance Veterinary Diets Weight Balance",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/advance-wet-weight-balance-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch5/advance-8ccc9ae4.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Advance Veterinary Diets Weight Balance"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-advance-veterinary-diets-weight-balance-sobre-para-gatos/ADV925971.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw4d3aeaf4/images/Advance_Veterinary_Diets_WeightBalance_Sobre_gatos_ADV925971_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/advance-veterinary-diets-weight-balance-sobre-para-gatos/ADV925971_M.html"
+    },
+    "variants": [
+      {
+        "id": "advance-wet-weight-balance-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 1.49,
+        "priceStatus": "temporary",
+        "ean": "8410650259727",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 1.49,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-advance-veterinary-diets-weight-balance-sobre-para-gatos/ADV925971.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
   }
 ];
 
@@ -2686,7 +10532,7 @@ export function expandPriorityFood(existingProducts) {
   const expanded = recipes.map(({ existingId, variants, ...recipe }) => {
     const previous = existingProducts.find(p => p.id === existingId);
     const base = { ...recipe, ...previous, image: recipe.image, researchRecipeId: recipe.researchRecipeId,
-      foodType: 'dry', prioritySelection: true, optionLabel: 'Фасовка' };
+      foodType: recipe.foodType, prioritySelection: true, optionLabel: 'Фасовка' };
     const packs = variants.map(v => {
       const keepsOriginal = previous?.packageWeightKg === v.packageWeightKg;
       return { ...base, ...v, line: base.brand + ' · ' + v.weight,

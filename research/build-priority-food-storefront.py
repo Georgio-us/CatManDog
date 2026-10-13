@@ -1,28 +1,38 @@
-"""Build the approved 24-recipe dry-food selection without changing sourcing facts"""
+"""Build the approved priority food selections without changing sourcing facts"""
 import json
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
 selection=json.loads((ROOT/'research/priority-dry-food-selection.json').read_text())['recipes']
 refs=json.loads((ROOT/'research/priority-dry-food-references.json').read_text())
 retail=json.loads((ROOT/'research/dry-cat-food/retail-prices.json').read_text())
+batches=sorted((ROOT/'research').glob('priority-food-batch*-selection.json'), key=lambda p:int(p.stem.split('-')[2].removeprefix('batch')))
+for batch in batches:
+ selection += json.loads(batch.read_text())['recipes']
+ refs += json.loads(batch.with_name(batch.name.replace('-selection','-references')).read_text())
+if batches:
+ retail['skus'] += json.loads((ROOT/'research/wet-cat-food/retail-prices.json').read_text())['skus']
 def weight(g):return (str(g/1000).rstrip('0').rstrip('.').replace('.',',')+' кг') if g>=1000 else str(g)+' г'
 configs=[]
 for r in selection:
  pid=r['productId'];ref=next(i for i in refs if i['id']==r['id']);image='assets/food/editorial/'+pid+'-v1.webp'
  if not (ROOT/image).exists():raise FileNotFoundError(image)
  variants=[]
+ pack_quantity=r.get('packQuantity',1)
  for g in r['weightsGrams']:
   sku=next((s for s in retail['skus'] if s['recipeId']==r['id'] and s['grams']==g),None)
-  offers=[o for o in (sku or {}).get('offers',[]) if o.get('quantity')==1 and o.get('priceEUR') and not o.get('supersededByLiveOffer') and o.get('availability')=='InStock']
+  offers=[o for o in (sku or {}).get('offers',[]) if o.get('quantity')==pack_quantity and o.get('priceEUR') and not o.get('supersededByLiveOffer') and o.get('availability')=='InStock']
   offers.sort(key=lambda o:o['priceEUR']);o=offers[0] if offers else None
   if g==17000 and not o:continue
-  variants.append({'id':pid+'-'+str(g)+'g','label':weight(g),'weight':weight(g),'packageWeightKg':g/1000,'sizes':[weight(g)],'price':o['priceEUR'] if o else None,'priceStatus':'temporary' if o else 'pending','ean':o.get('gtin') if o else None,'supplier':None,'purchasePrice':None,'purchasePriceStatus':'pending','availabilityStatus':'pending','retailPrice':{'amount':o['priceEUR'],'currency':'EUR','status':'temporary','sourceName':o['retailer'],'sourceUrl':o['sourceUrl'],'checkedAt':o.get('checkedAt'),'shippingIncluded':False} if o else None})
- name=r['name']
+  pack_label=str(pack_quantity)+' x '+weight(g) if pack_quantity>1 else weight(g)
+  variants.append({'id':pid+'-'+str(g*pack_quantity)+'g','label':pack_label,'weight':pack_label,'packageWeightKg':g*pack_quantity/1000,'sizes':[pack_label],'price':o['priceEUR'] if o else None,'priceStatus':'temporary' if o else 'pending','ean':o.get('gtin') if o else None,'supplier':None,'purchasePrice':None,'purchasePriceStatus':'pending','availabilityStatus':'pending','retailPrice':{'amount':o['priceEUR'],'currency':'EUR','status':'temporary','sourceName':o['retailer'],'sourceUrl':o['sourceUrl'],'checkedAt':o.get('checkedAt',o.get('checkedOn')),'shippingIncluded':False} if o else None})
+ name=r['name'].replace('fresh Meat Fresh ', 'fresh Meat ') if 'foodType' in r else r['name']
+ food_type=r.get('foodType','dry')
+ food_label='Влажный корм' if food_type=='wet' else 'Сухой корм'
  if r['id']=='advance-05':name='Sensitive Care Sterilized Salmon'
  brand='Hill’s' if r['brand']=="Hill's" else r['brand']
  default=next((v['id'] for v in variants if v['packageWeightKg'] in [1.5,1.8,3]),variants[0]['id'])
  vet=r['tag']=='Ветеринарная диета'
- configs.append({'id':pid,'existingId':r.get('existingProductId'),'researchRecipeId':r['id'],'name':brand+' '+name,'brand':brand,'category':'Корм','pet':'cat','foodType':'dry','isReal':True,'isNew':not bool(r.get('existingProductId')),'prioritySelection':True,'tag':r['tag'],'segment':'veterinary' if vet else 'everyday','optionLabel':'Фасовка','defaultVariantId':default,'description':'Сухой корм для кошек '+brand+' '+name,'details':['Сухой корм для кошек',r['tag'],'Фасовку выберите перед добавлением в корзину','Норму кормления смотрите на упаковке','Свежая вода всегда должна быть в свободном доступе']+(['Ветеринарная диета - применение по рекомендации ветеринарного врача'] if vet else []),'purchasePrice':None,'purchasePriceStatus':'pending','availabilityStatus':'pending','image':{'src':image,'originalSrc':ref['referencePath'],'presentation':'editorial','generated':True,'alt':brand+' '+name},'imageSource':{'name':brand if 'leonardo-catfood' in str(ref['referenceSource']) else (ref.get('existingImageSource') or {}).get('name','Каталог испанской розницы'),'pageUrl':ref['referenceSource'],'url':ref['referenceUrl']},'productSource':{'name':brand,'kind':'supplier' if 'piensosmari' in r['sourceUrl'] else 'manufacturer','url':r['sourceUrl']},'variants':variants})
+ configs.append({'id':pid,'existingId':r.get('existingProductId'),'researchRecipeId':r['id'],'name':brand+' '+name,'brand':brand,'category':'Корм','pet':'cat','foodType':food_type,'isReal':True,'isNew':not bool(r.get('existingProductId')),'prioritySelection':True,'tag':r['tag'],'segment':'veterinary' if vet else 'everyday','optionLabel':'Фасовка','defaultVariantId':default,'description':food_label+' для кошек '+brand+' '+name,'details':[food_label+' для кошек',r['tag'],'Фасовку выберите перед добавлением в корзину','Норму кормления смотрите на упаковке','Свежая вода всегда должна быть в свободном доступе']+(['Ветеринарная диета - применение по рекомендации ветеринарного врача'] if vet else []),'purchasePrice':None,'purchasePriceStatus':'pending','availabilityStatus':'pending','image':{'src':image,'originalSrc':ref['referencePath'],'presentation':'editorial','generated':True,'alt':brand+' '+name},'imageSource':{'name':brand if any(domain in str(ref['referenceSource']) for domain in ['leonardo-catfood','hillspet','acana.com','orijenpetfoods','advance-affinity']) else (ref.get('existingImageSource') or {}).get('name','Каталог испанской розницы'),'pageUrl':ref['referenceSource'],'url':ref['referenceUrl']},'productSource':{'name':'Каталог испанской розницы' if any(domain in r['sourceUrl'] for domain in ['kiwoko.com','tiendanimal.es','miscota.es']) else brand,'kind':'supplier' if 'piensosmari' in r['sourceUrl'] else 'retailer' if any(domain in r['sourceUrl'] for domain in ['kiwoko.com','tiendanimal.es','miscota.es']) else 'manufacturer','url':r['sourceUrl']},'variants':variants})
 script='''// Generated by research/build-priority-food-storefront.py from the approved selection
 const recipes = RECIPE_DATA;
 
@@ -30,7 +40,7 @@ export function expandPriorityFood(existingProducts) {
   const expanded = recipes.map(({ existingId, variants, ...recipe }) => {
     const previous = existingProducts.find(p => p.id === existingId);
     const base = { ...recipe, ...previous, image: recipe.image, researchRecipeId: recipe.researchRecipeId,
-      foodType: 'dry', prioritySelection: true, optionLabel: 'Фасовка' };
+      foodType: recipe.foodType, prioritySelection: true, optionLabel: 'Фасовка' };
     const packs = variants.map(v => {
       const keepsOriginal = previous?.packageWeightKg === v.packageWeightKg;
       return { ...base, ...v, line: base.brand + ' · ' + v.weight,
