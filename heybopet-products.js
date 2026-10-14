@@ -1,4 +1,4 @@
-// Exact Heybo Pet models grouped into editorial families - quotation and availability pending
+// Exact Heybo Pet models with studio images - public retail prices pending
 export const heybopetProducts = [
   {
     "id": "heybopet-faucet-fountain",
@@ -10,8 +10,11 @@ export const heybopetProducts = [
     "price": null,
     "priceStatus": "pending",
     "image": {
-      "src": "assets/heybopet/heybopet-hbhd-pwf-fc30l-water-fountain-b2b-wholesale-oem-odm-image-01.png",
-      "alt": "Heybo Pet HBHD-PWF-FC30L"
+      "src": "assets/heybopet/editorial/hbhd-pwf-fc30l-v1.webp",
+      "alt": "Heybo Pet HBHD-PWF-FC30L",
+      "presentation": "editorial",
+      "generated": true,
+      "originalSrc": "assets/heybopet/heybopet-hbhd-pwf-fc30l-water-fountain-b2b-wholesale-oem-odm-image-01.png"
     },
     "tag": "Умный уход",
     "line": "Heybo Pet · FC30L - 3 л",
@@ -94,8 +97,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbhd-pwf-fc30l-water-fountain-b2b-wholesale-oem-odm-image-01.png",
-          "alt": "Heybo Pet HBHD-PWF-FC30L"
+          "src": "assets/heybopet/editorial/hbhd-pwf-fc30l-v1.webp",
+          "alt": "Heybo Pet HBHD-PWF-FC30L",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbhd-pwf-fc30l-water-fountain-b2b-wholesale-oem-odm-image-01.png"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · FC30L - 3 л",
@@ -176,8 +182,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbhd-pwf-r32l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg",
-          "alt": "Heybo Pet HBHD-PWF-R32L"
+          "src": "assets/heybopet/editorial/hbhd-pwf-r32l-v1.webp",
+          "alt": "Heybo Pet HBHD-PWF-R32L",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbhd-pwf-r32l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · R32L - 3,2 л",
@@ -259,8 +268,11 @@ export const heybopetProducts = [
     "price": null,
     "priceStatus": "pending",
     "image": {
-      "src": "assets/heybopet/heybopet-hbhd-pwf-sssb30l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg",
-      "alt": "Heybo Pet HBHD-PWF-SSSB30L"
+      "src": "assets/heybopet/editorial/hbhd-pwf-sssb30l-v1.webp",
+      "alt": "Heybo Pet HBHD-PWF-SSSB30L",
+      "presentation": "editorial",
+      "generated": true,
+      "originalSrc": "assets/heybopet/heybopet-hbhd-pwf-sssb30l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
     },
     "tag": "Умный уход",
     "line": "Heybo Pet · SSSB30L - 3 л",
@@ -343,8 +355,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbhd-pwf-sssb30l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg",
-          "alt": "Heybo Pet HBHD-PWF-SSSB30L"
+          "src": "assets/heybopet/editorial/hbhd-pwf-sssb30l-v1.webp",
+          "alt": "Heybo Pet HBHD-PWF-SSSB30L",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbhd-pwf-sssb30l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · SSSB30L - 3 л",
@@ -427,8 +442,11 @@ export const heybopetProducts = [
     "price": null,
     "priceStatus": "pending",
     "image": {
-      "src": "assets/heybopet/heybopet-hbhd-iwf-32-water-fountain-b2b-wholesale-oem-odm-image-01.jpg",
-      "alt": "Heybo Pet HBHD-IWF-32"
+      "src": "assets/heybopet/editorial/hbhd-iwf-32-v1.webp",
+      "alt": "Heybo Pet HBHD-IWF-32",
+      "presentation": "editorial",
+      "generated": true,
+      "originalSrc": "assets/heybopet/heybopet-hbhd-iwf-32-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
     },
     "tag": "Умный уход",
     "line": "Heybo Pet · IWF-32 - 3,2 л",
@@ -511,8 +529,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbhd-iwf-32-water-fountain-b2b-wholesale-oem-odm-image-01.jpg",
-          "alt": "Heybo Pet HBHD-IWF-32"
+          "src": "assets/heybopet/editorial/hbhd-iwf-32-v1.webp",
+          "alt": "Heybo Pet HBHD-IWF-32",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbhd-iwf-32-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · IWF-32 - 3,2 л",
@@ -593,8 +614,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbhq-pwf-sf032l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg",
-          "alt": "Heybo Pet HBHQ-PWF-SF032L"
+          "src": "assets/heybopet/editorial/hbhq-pwf-sf032l-v1.webp",
+          "alt": "Heybo Pet HBHQ-PWF-SF032L",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbhq-pwf-sf032l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · SF032L - 3,2 л",
@@ -677,8 +701,11 @@ export const heybopetProducts = [
     "price": null,
     "priceStatus": "pending",
     "image": {
-      "src": "assets/heybopet/heybopet-hbzyh-pfw-04lr-feeder-b2b-wholesale-oem-odm-image-01.jpg",
-      "alt": "Heybo Pet HBZYH-PFW-04LR"
+      "src": "assets/heybopet/editorial/hbzyh-pfw-04lr-v2.webp",
+      "alt": "Heybo Pet HBZYH-PFW-04LR",
+      "presentation": "editorial",
+      "generated": true,
+      "originalSrc": "assets/heybopet/heybopet-hbzyh-pfw-04lr-feeder-b2b-wholesale-oem-odm-image-01.jpg"
     },
     "tag": "Умный уход",
     "line": "Heybo Pet · 04LR - 4 л",
@@ -762,8 +789,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbzyh-pfw-04lr-feeder-b2b-wholesale-oem-odm-image-01.jpg",
-          "alt": "Heybo Pet HBZYH-PFW-04LR"
+          "src": "assets/heybopet/editorial/hbzyh-pfw-04lr-v2.webp",
+          "alt": "Heybo Pet HBZYH-PFW-04LR",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbzyh-pfw-04lr-feeder-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · 04LR - 4 л",
@@ -845,8 +875,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbjh-pfv-5lb-feeder-b2b-wholesale-oem-odm-image-01.jpg",
-          "alt": "Heybo Pet HBJH-PFV-5LB"
+          "src": "assets/heybopet/editorial/hbjh-pfv-5lb-v1.webp",
+          "alt": "Heybo Pet HBJH-PFV-5LB",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbjh-pfv-5lb-feeder-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · 5LB - 7 л",
@@ -929,8 +962,11 @@ export const heybopetProducts = [
     "price": null,
     "priceStatus": "pending",
     "image": {
-      "src": "assets/heybopet/heybopet-hbjh-pfv-4l-feeder-b2b-wholesale-oem-odm-image-01.jpg",
-      "alt": "Heybo Pet HBJH-PFV-4L"
+      "src": "assets/heybopet/editorial/hbjh-pfv-4l-v1.webp",
+      "alt": "Heybo Pet HBJH-PFV-4L",
+      "presentation": "editorial",
+      "generated": true,
+      "originalSrc": "assets/heybopet/heybopet-hbjh-pfv-4l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
     },
     "tag": "Камера",
     "line": "Heybo Pet · PFV-4L - 4 л · камера",
@@ -1013,8 +1049,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbjh-pfv-4l-feeder-b2b-wholesale-oem-odm-image-01.jpg",
-          "alt": "Heybo Pet HBJH-PFV-4L"
+          "src": "assets/heybopet/editorial/hbjh-pfv-4l-v1.webp",
+          "alt": "Heybo Pet HBJH-PFV-4L",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbjh-pfv-4l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Камера",
         "line": "Heybo Pet · PFV-4L - 4 л · камера",
@@ -1095,8 +1134,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbzh-pfv-45l-feeder-b2b-wholesale-oem-odm-image-01.jpg",
-          "alt": "Heybo Pet HBZH-PFV-45L"
+          "src": "assets/heybopet/editorial/hbzh-pfv-45l-v1.webp",
+          "alt": "Heybo Pet HBZH-PFV-45L",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbzh-pfv-45l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Камера",
         "line": "Heybo Pet · PFV-45L - 4,5 л · камера",
@@ -1177,8 +1219,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbjh-pfv-7l-feeder-b2b-wholesale-oem-odm-image-01.jpg",
-          "alt": "Heybo Pet HBJH-PFV-7L"
+          "src": "assets/heybopet/editorial/hbjh-pfv-7l-v1.webp",
+          "alt": "Heybo Pet HBJH-PFV-7L",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbjh-pfv-7l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Камера",
         "line": "Heybo Pet · PFV-7L - 7 л · камера",
@@ -1261,8 +1306,11 @@ export const heybopetProducts = [
     "price": null,
     "priceStatus": "pending",
     "image": {
-      "src": "assets/heybopet/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-01.jpg",
-      "alt": "Heybo Pet HBZH-PFW-7L"
+      "src": "assets/heybopet/editorial/hbzh-pfw-7l-v1.webp",
+      "alt": "Heybo Pet HBZH-PFW-7L",
+      "presentation": "editorial",
+      "generated": true,
+      "originalSrc": "assets/heybopet/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
     },
     "tag": "Умный уход",
     "line": "Heybo Pet · PFW-7L - 7 л · две миски",
@@ -1345,8 +1393,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-01.jpg",
-          "alt": "Heybo Pet HBZH-PFW-7L"
+          "src": "assets/heybopet/editorial/hbzh-pfw-7l-v1.webp",
+          "alt": "Heybo Pet HBZH-PFW-7L",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · PFW-7L - 7 л · две миски",
@@ -1422,15 +1473,18 @@ export const heybopetProducts = [
   {
     "id": "heybopet-open-litter-box",
     "label": "ICB-20 - Open",
-    "name": "Heybo Pet - открытый автоматический лоток",
+    "name": "Heybo Pet - автоматический лоток",
     "brand": "Heybo Pet",
     "category": "Лотки и гигиена",
     "pet": "cat",
     "price": null,
     "priceStatus": "pending",
     "image": {
-      "src": "assets/heybopet/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-01.jpg",
-      "alt": "Heybo Pet HBZH-ICB-20"
+      "src": "assets/heybopet/editorial/hbzh-icb-20-v1.webp",
+      "alt": "Heybo Pet HBZH-ICB-20",
+      "presentation": "editorial",
+      "generated": true,
+      "originalSrc": "assets/heybopet/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
     },
     "tag": "Автоматическая очистка",
     "line": "Heybo Pet · ICB-20 - Open",
@@ -1507,15 +1561,18 @@ export const heybopetProducts = [
       {
         "id": "heybopet-hbzh-icb-20",
         "label": "ICB-20 - Open",
-        "name": "Heybo Pet - открытый автоматический лоток",
+        "name": "Heybo Pet - автоматический лоток ICB-20",
         "brand": "Heybo Pet",
         "category": "Лотки и гигиена",
         "pet": "cat",
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-01.jpg",
-          "alt": "Heybo Pet HBZH-ICB-20"
+          "src": "assets/heybopet/editorial/hbzh-icb-20-v1.webp",
+          "alt": "Heybo Pet HBZH-ICB-20",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Автоматическая очистка",
         "line": "Heybo Pet · ICB-20 - Open",
@@ -1590,15 +1647,18 @@ export const heybopetProducts = [
       {
         "id": "heybopet-hbzh-icb-15",
         "label": "ICB-15 - Lite",
-        "name": "Heybo Pet - автоматический лоток Lite",
+        "name": "Heybo Pet - автоматический лоток ICB-15",
         "brand": "Heybo Pet",
         "category": "Лотки и гигиена",
         "pet": "cat",
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbzh-icb-15-litter-box-b2b-wholesale-oem-odm-image-01.jpg",
-          "alt": "Heybo Pet HBZH-ICB-15"
+          "src": "assets/heybopet/editorial/hbzh-icb-15-v1.webp",
+          "alt": "Heybo Pet HBZH-ICB-15",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbzh-icb-15-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Автоматическая очистка",
         "line": "Heybo Pet · ICB-15 - Lite",
@@ -1672,15 +1732,18 @@ export const heybopetProducts = [
       {
         "id": "heybopet-hbzh-icb-16",
         "label": "ICB-16 - Standard",
-        "name": "Heybo Pet - автоматический лоток Standard",
+        "name": "Heybo Pet - автоматический лоток ICB-16",
         "brand": "Heybo Pet",
         "category": "Лотки и гигиена",
         "pet": "cat",
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbzh-icb-16-litter-box-b2b-wholesale-oem-odm-image-01.jpg",
-          "alt": "Heybo Pet HBZH-ICB-16"
+          "src": "assets/heybopet/editorial/hbzh-icb-16-v1.webp",
+          "alt": "Heybo Pet HBZH-ICB-16",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbzh-icb-16-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Автоматическая очистка",
         "line": "Heybo Pet · ICB-16 - Standard",
@@ -1754,15 +1817,18 @@ export const heybopetProducts = [
       {
         "id": "heybopet-hbzh-icb-21",
         "label": "ICB-21 - Pro",
-        "name": "Heybo Pet - открытый автоматический лоток Pro",
+        "name": "Heybo Pet - автоматический лоток ICB-21",
         "brand": "Heybo Pet",
         "category": "Лотки и гигиена",
         "pet": "cat",
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbzh-icb-21-litter-box-b2b-wholesale-oem-odm-image-01.jpg",
-          "alt": "Heybo Pet HBZH-ICB-21"
+          "src": "assets/heybopet/editorial/hbzh-icb-21-v1.webp",
+          "alt": "Heybo Pet HBZH-ICB-21",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbzh-icb-21-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Автоматическая очистка",
         "line": "Heybo Pet · ICB-21 - Pro",
@@ -1838,15 +1904,18 @@ export const heybopetProducts = [
       {
         "id": "heybopet-hbzh-icb-19",
         "label": "ICB-19 - XL",
-        "name": "Heybo Pet - автоматический лоток XL",
+        "name": "Heybo Pet - автоматический лоток ICB-19",
         "brand": "Heybo Pet",
         "category": "Лотки и гигиена",
         "pet": "cat",
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-06.jpg",
-          "alt": "Heybo Pet HBZH-ICB-19"
+          "src": "assets/heybopet/editorial/hbzh-icb-19-v1.webp",
+          "alt": "Heybo Pet HBZH-ICB-19",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-06.jpg"
         },
         "tag": "Автоматическая очистка",
         "line": "Heybo Pet · ICB-19 - XL",
@@ -1922,15 +1991,18 @@ export const heybopetProducts = [
       {
         "id": "heybopet-hbzh-icb-24",
         "label": "ICB-24 - XL Pro",
-        "name": "Heybo Pet - открытый автоматический лоток XL Pro",
+        "name": "Heybo Pet - автоматический лоток ICB-24",
         "brand": "Heybo Pet",
         "category": "Лотки и гигиена",
         "pet": "cat",
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/heybopet-hbzh-icb-24-litter-box-b2b-wholesale-oem-odm-image-01.jpg",
-          "alt": "Heybo Pet HBZH-ICB-24"
+          "src": "assets/heybopet/editorial/hbzh-icb-24-v1.webp",
+          "alt": "Heybo Pet HBZH-ICB-24",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/heybopet-hbzh-icb-24-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Автоматическая очистка",
         "line": "Heybo Pet · ICB-24 - XL Pro",
@@ -2000,6 +2072,476 @@ export const heybopetProducts = [
           ],
           "status": "manufacturer_claim",
           "sourceUrl": "https://www.heybopet.com/es/products/hbzh-icb-24-open-top-smart-cat-litter-box"
+        }
+      }
+    ]
+  },
+  {
+    "id": "heybopet-hair-removal-litter-box",
+    "name": "Heybo Pet - закрытый лоток со щётками",
+    "category": "Лотки и гигиена",
+    "description": "Закрытый лоток со щётками у входа и ступенькой для сбора наполнителя",
+    "details": [
+      "Размер лотка: 52 x 45 x 42 см",
+      "Щётки у входа",
+      "Обычный лоток без автоматической самоочистки"
+    ],
+    "model": "HBZH-HRC-01",
+    "manufacturerSku": "HBZH-HRC-01",
+    "brand": "Heybo Pet",
+    "pet": "cat",
+    "isReal": true,
+    "isNew": true,
+    "price": null,
+    "priceStatus": "pending",
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "tag": "Обычный закрытый лоток",
+    "line": "Heybo Pet · HBZH-HRC-01",
+    "sizes": [
+      "HBZH-HRC-01"
+    ],
+    "optionLabel": "Модель",
+    "supplier": {
+      "name": "Heybo Pet",
+      "url": "https://www.heybopet.com/es/products/hbzh-hrc-01-hair-removal-cat-litter-box",
+      "sku": "HBZH-HRC-01"
+    },
+    "productSource": {
+      "name": "Heybo Pet",
+      "url": "https://www.heybopet.com/es/products/hbzh-hrc-01-hair-removal-cat-litter-box",
+      "kind": "manufacturer"
+    },
+    "imageSource": {
+      "name": "Heybo Pet",
+      "pageUrl": "https://www.heybopet.com/es/products/hbzh-hrc-01-hair-removal-cat-litter-box",
+      "url": "https://www.heybopet.com/images/products/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
+    },
+    "retailPrice": {
+      "amount": null,
+      "currency": "EUR",
+      "status": "pending",
+      "sourceName": "Heybo Pet",
+      "sourceUrl": "https://www.heybopet.com/es/products/hbzh-hrc-01-hair-removal-cat-litter-box"
+    },
+    "image": {
+      "src": "assets/heybopet/editorial/hbzh-hrc-01-v1.webp",
+      "alt": "Heybo Pet HBZH-HRC-01",
+      "presentation": "editorial",
+      "generated": true,
+      "originalSrc": "assets/heybopet/references/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
+    },
+    "defaultVariantId": "heybopet-hair-removal-litter-box-model",
+    "variants": [
+      {
+        "id": "heybopet-hair-removal-litter-box-model",
+        "name": "Heybo Pet - закрытый лоток со щётками",
+        "category": "Лотки и гигиена",
+        "description": "Закрытый лоток со щётками у входа и ступенькой для сбора наполнителя",
+        "details": [
+          "Размер лотка: 52 x 45 x 42 см",
+          "Щётки у входа",
+          "Обычный лоток без автоматической самоочистки"
+        ],
+        "model": "HBZH-HRC-01",
+        "manufacturerSku": "HBZH-HRC-01",
+        "brand": "Heybo Pet",
+        "pet": "cat",
+        "isReal": true,
+        "isNew": true,
+        "price": null,
+        "priceStatus": "pending",
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "tag": "Обычный закрытый лоток",
+        "line": "Heybo Pet · HBZH-HRC-01",
+        "sizes": [
+          "HBZH-HRC-01"
+        ],
+        "optionLabel": "Модель",
+        "supplier": {
+          "name": "Heybo Pet",
+          "url": "https://www.heybopet.com/es/products/hbzh-hrc-01-hair-removal-cat-litter-box",
+          "sku": "HBZH-HRC-01"
+        },
+        "productSource": {
+          "name": "Heybo Pet",
+          "url": "https://www.heybopet.com/es/products/hbzh-hrc-01-hair-removal-cat-litter-box",
+          "kind": "manufacturer"
+        },
+        "imageSource": {
+          "name": "Heybo Pet",
+          "pageUrl": "https://www.heybopet.com/es/products/hbzh-hrc-01-hair-removal-cat-litter-box",
+          "url": "https://www.heybopet.com/images/products/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
+        },
+        "retailPrice": {
+          "amount": null,
+          "currency": "EUR",
+          "status": "pending",
+          "sourceName": "Heybo Pet",
+          "sourceUrl": "https://www.heybopet.com/es/products/hbzh-hrc-01-hair-removal-cat-litter-box"
+        },
+        "label": "HBZH-HRC-01",
+        "image": {
+          "src": "assets/heybopet/editorial/hbzh-hrc-01-v1.webp",
+          "alt": "Heybo Pet HBZH-HRC-01",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/references/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "heybopet-protective-liner",
+    "name": "Heybo Pet - защитный вкладыш для лотка",
+    "category": "Лотки и гигиена",
+    "description": "Защитный вкладыш для лотка Heybo Pet",
+    "details": [
+      "Совместимость с моделью лотка уточняется",
+      "Уход по инструкции производителя"
+    ],
+    "model": "heybopet-MAT-001",
+    "manufacturerSku": "heybopet-MAT-001",
+    "brand": "Heybo Pet",
+    "pet": "cat",
+    "isReal": true,
+    "isNew": true,
+    "price": null,
+    "priceStatus": "pending",
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "tag": "Коврик под лоток",
+    "line": "Heybo Pet · heybopet-MAT-001",
+    "sizes": [
+      "heybopet-MAT-001"
+    ],
+    "optionLabel": "Модель",
+    "supplier": {
+      "name": "Heybo Pet",
+      "url": "https://www.heybopet.com/es/products/heybopet-waterproof-bottom-mat-accessories",
+      "sku": "heybopet-MAT-001"
+    },
+    "productSource": {
+      "name": "Heybo Pet",
+      "url": "https://www.heybopet.com/es/products/heybopet-waterproof-bottom-mat-accessories",
+      "kind": "manufacturer"
+    },
+    "imageSource": {
+      "name": "Heybo Pet",
+      "pageUrl": "https://www.heybopet.com/es/products/heybopet-waterproof-bottom-mat-accessories",
+      "url": "https://www.heybopet.com/images/products/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-01.png"
+    },
+    "retailPrice": {
+      "amount": null,
+      "currency": "EUR",
+      "status": "pending",
+      "sourceName": "Heybo Pet",
+      "sourceUrl": "https://www.heybopet.com/es/products/heybopet-waterproof-bottom-mat-accessories"
+    },
+    "image": {
+      "src": "assets/heybopet/editorial/mat-001-v1.webp",
+      "alt": "Heybo Pet heybopet-MAT-001",
+      "presentation": "editorial",
+      "generated": true,
+      "originalSrc": "assets/heybopet/references/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-01.png"
+    },
+    "defaultVariantId": "heybopet-protective-liner-model",
+    "variants": [
+      {
+        "id": "heybopet-protective-liner-model",
+        "name": "Heybo Pet - защитный вкладыш для лотка",
+        "category": "Лотки и гигиена",
+        "description": "Защитный вкладыш для лотка Heybo Pet",
+        "details": [
+          "Совместимость с моделью лотка уточняется",
+          "Уход по инструкции производителя"
+        ],
+        "model": "heybopet-MAT-001",
+        "manufacturerSku": "heybopet-MAT-001",
+        "brand": "Heybo Pet",
+        "pet": "cat",
+        "isReal": true,
+        "isNew": true,
+        "price": null,
+        "priceStatus": "pending",
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "tag": "Коврик под лоток",
+        "line": "Heybo Pet · heybopet-MAT-001",
+        "sizes": [
+          "heybopet-MAT-001"
+        ],
+        "optionLabel": "Модель",
+        "supplier": {
+          "name": "Heybo Pet",
+          "url": "https://www.heybopet.com/es/products/heybopet-waterproof-bottom-mat-accessories",
+          "sku": "heybopet-MAT-001"
+        },
+        "productSource": {
+          "name": "Heybo Pet",
+          "url": "https://www.heybopet.com/es/products/heybopet-waterproof-bottom-mat-accessories",
+          "kind": "manufacturer"
+        },
+        "imageSource": {
+          "name": "Heybo Pet",
+          "pageUrl": "https://www.heybopet.com/es/products/heybopet-waterproof-bottom-mat-accessories",
+          "url": "https://www.heybopet.com/images/products/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-01.png"
+        },
+        "retailPrice": {
+          "amount": null,
+          "currency": "EUR",
+          "status": "pending",
+          "sourceName": "Heybo Pet",
+          "sourceUrl": "https://www.heybopet.com/es/products/heybopet-waterproof-bottom-mat-accessories"
+        },
+        "label": "heybopet-MAT-001",
+        "image": {
+          "src": "assets/heybopet/editorial/mat-001-v1.webp",
+          "alt": "Heybo Pet heybopet-MAT-001",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/references/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-01.png"
+        }
+      }
+    ]
+  },
+  {
+    "id": "heybopet-drying-cabinet",
+    "name": "Heybo Pet - сушильный бокс",
+    "category": "Уход",
+    "description": "Бокс для сушки питомца после ухода",
+    "details": [
+      "Материал корпуса: ABS и PC",
+      "Питание: AC 110-240 В",
+      "Используйте по инструкции производителя"
+    ],
+    "model": "HBZH-PDB-HG100",
+    "manufacturerSku": "HBZH-PDB-HG100",
+    "brand": "Heybo Pet",
+    "pet": "cat",
+    "isReal": true,
+    "isNew": true,
+    "price": null,
+    "priceStatus": "pending",
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "tag": "Сушильный бокс для животных",
+    "line": "Heybo Pet · HBZH-PDB-HG100",
+    "sizes": [
+      "HBZH-PDB-HG100"
+    ],
+    "optionLabel": "Модель",
+    "supplier": {
+      "name": "Heybo Pet",
+      "url": "https://www.heybopet.com/es/products/hbzh-pdb-hg100-smart-pet-drying-cabinet",
+      "sku": "HBZH-PDB-HG100"
+    },
+    "productSource": {
+      "name": "Heybo Pet",
+      "url": "https://www.heybopet.com/es/products/hbzh-pdb-hg100-smart-pet-drying-cabinet",
+      "kind": "manufacturer"
+    },
+    "imageSource": {
+      "name": "Heybo Pet",
+      "pageUrl": "https://www.heybopet.com/es/products/hbzh-pdb-hg100-smart-pet-drying-cabinet",
+      "url": "https://www.heybopet.com/images/products/heybopet-hbzh-pdb-hg100-drying-cabinet-b2b-wholesale-oem-odm-image-01.jpg"
+    },
+    "retailPrice": {
+      "amount": null,
+      "currency": "EUR",
+      "status": "pending",
+      "sourceName": "Heybo Pet",
+      "sourceUrl": "https://www.heybopet.com/es/products/hbzh-pdb-hg100-smart-pet-drying-cabinet"
+    },
+    "image": {
+      "src": "assets/heybopet/editorial/hbzh-pdb-hg100-v1.webp",
+      "alt": "Heybo Pet HBZH-PDB-HG100",
+      "presentation": "editorial",
+      "generated": true,
+      "originalSrc": "assets/heybopet/references/heybopet-hbzh-pdb-hg100-drying-cabinet-b2b-wholesale-oem-odm-image-01.jpg"
+    },
+    "defaultVariantId": "heybopet-drying-cabinet-model",
+    "variants": [
+      {
+        "id": "heybopet-drying-cabinet-model",
+        "name": "Heybo Pet - сушильный бокс",
+        "category": "Уход",
+        "description": "Бокс для сушки питомца после ухода",
+        "details": [
+          "Материал корпуса: ABS и PC",
+          "Питание: AC 110-240 В",
+          "Используйте по инструкции производителя"
+        ],
+        "model": "HBZH-PDB-HG100",
+        "manufacturerSku": "HBZH-PDB-HG100",
+        "brand": "Heybo Pet",
+        "pet": "cat",
+        "isReal": true,
+        "isNew": true,
+        "price": null,
+        "priceStatus": "pending",
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "tag": "Сушильный бокс для животных",
+        "line": "Heybo Pet · HBZH-PDB-HG100",
+        "sizes": [
+          "HBZH-PDB-HG100"
+        ],
+        "optionLabel": "Модель",
+        "supplier": {
+          "name": "Heybo Pet",
+          "url": "https://www.heybopet.com/es/products/hbzh-pdb-hg100-smart-pet-drying-cabinet",
+          "sku": "HBZH-PDB-HG100"
+        },
+        "productSource": {
+          "name": "Heybo Pet",
+          "url": "https://www.heybopet.com/es/products/hbzh-pdb-hg100-smart-pet-drying-cabinet",
+          "kind": "manufacturer"
+        },
+        "imageSource": {
+          "name": "Heybo Pet",
+          "pageUrl": "https://www.heybopet.com/es/products/hbzh-pdb-hg100-smart-pet-drying-cabinet",
+          "url": "https://www.heybopet.com/images/products/heybopet-hbzh-pdb-hg100-drying-cabinet-b2b-wholesale-oem-odm-image-01.jpg"
+        },
+        "retailPrice": {
+          "amount": null,
+          "currency": "EUR",
+          "status": "pending",
+          "sourceName": "Heybo Pet",
+          "sourceUrl": "https://www.heybopet.com/es/products/hbzh-pdb-hg100-smart-pet-drying-cabinet"
+        },
+        "label": "HBZH-PDB-HG100",
+        "image": {
+          "src": "assets/heybopet/editorial/hbzh-pdb-hg100-v1.webp",
+          "alt": "Heybo Pet HBZH-PDB-HG100",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/references/heybopet-hbzh-pdb-hg100-drying-cabinet-b2b-wholesale-oem-odm-image-01.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "heybopet-fresh-food-cooker",
+    "name": "Heybo Pet - прибор для приготовления корма",
+    "category": "Миски и поилки",
+    "description": "Прибор для измельчения, смешивания и приготовления пищи",
+    "details": [
+      "Измельчение, смешивание и приготовление",
+      "Материалы: пищевая нержавеющая сталь и ABS",
+      "Подключение Wi-Fi 2,4 ГГц, Tuya"
+    ],
+    "model": "HBZH-FFC-01",
+    "manufacturerSku": "HBZH-FFC-01",
+    "brand": "Heybo Pet",
+    "pet": "cat",
+    "isReal": true,
+    "isNew": true,
+    "price": null,
+    "priceStatus": "pending",
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "tag": "Прибор для приготовления свежей еды",
+    "line": "Heybo Pet · HBZH-FFC-01",
+    "sizes": [
+      "HBZH-FFC-01"
+    ],
+    "optionLabel": "Модель",
+    "supplier": {
+      "name": "Heybo Pet",
+      "url": "https://www.heybopet.com/es/products/hbzh-ffc-01-fresh-food-cooker",
+      "sku": "HBZH-FFC-01"
+    },
+    "productSource": {
+      "name": "Heybo Pet",
+      "url": "https://www.heybopet.com/es/products/hbzh-ffc-01-fresh-food-cooker",
+      "kind": "manufacturer"
+    },
+    "imageSource": {
+      "name": "Heybo Pet",
+      "pageUrl": "https://www.heybopet.com/es/products/hbzh-ffc-01-fresh-food-cooker",
+      "url": "https://www.heybopet.com/images/products/heybopet-hbzh-ffc-01-fresh-food-cooker-b2b-wholesale-oem-odm-image-01.png"
+    },
+    "retailPrice": {
+      "amount": null,
+      "currency": "EUR",
+      "status": "pending",
+      "sourceName": "Heybo Pet",
+      "sourceUrl": "https://www.heybopet.com/es/products/hbzh-ffc-01-fresh-food-cooker"
+    },
+    "image": {
+      "src": "assets/heybopet/editorial/hbzh-ffc-01-v1.webp",
+      "alt": "Heybo Pet HBZH-FFC-01",
+      "presentation": "editorial",
+      "generated": true,
+      "originalSrc": "assets/heybopet/references/heybopet-hbzh-ffc-01-fresh-food-cooker-b2b-wholesale-oem-odm-image-01.png"
+    },
+    "defaultVariantId": "heybopet-fresh-food-cooker-model",
+    "variants": [
+      {
+        "id": "heybopet-fresh-food-cooker-model",
+        "name": "Heybo Pet - прибор для приготовления корма",
+        "category": "Миски и поилки",
+        "description": "Прибор для измельчения, смешивания и приготовления пищи",
+        "details": [
+          "Измельчение, смешивание и приготовление",
+          "Материалы: пищевая нержавеющая сталь и ABS",
+          "Подключение Wi-Fi 2,4 ГГц, Tuya"
+        ],
+        "model": "HBZH-FFC-01",
+        "manufacturerSku": "HBZH-FFC-01",
+        "brand": "Heybo Pet",
+        "pet": "cat",
+        "isReal": true,
+        "isNew": true,
+        "price": null,
+        "priceStatus": "pending",
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "tag": "Прибор для приготовления свежей еды",
+        "line": "Heybo Pet · HBZH-FFC-01",
+        "sizes": [
+          "HBZH-FFC-01"
+        ],
+        "optionLabel": "Модель",
+        "supplier": {
+          "name": "Heybo Pet",
+          "url": "https://www.heybopet.com/es/products/hbzh-ffc-01-fresh-food-cooker",
+          "sku": "HBZH-FFC-01"
+        },
+        "productSource": {
+          "name": "Heybo Pet",
+          "url": "https://www.heybopet.com/es/products/hbzh-ffc-01-fresh-food-cooker",
+          "kind": "manufacturer"
+        },
+        "imageSource": {
+          "name": "Heybo Pet",
+          "pageUrl": "https://www.heybopet.com/es/products/hbzh-ffc-01-fresh-food-cooker",
+          "url": "https://www.heybopet.com/images/products/heybopet-hbzh-ffc-01-fresh-food-cooker-b2b-wholesale-oem-odm-image-01.png"
+        },
+        "retailPrice": {
+          "amount": null,
+          "currency": "EUR",
+          "status": "pending",
+          "sourceName": "Heybo Pet",
+          "sourceUrl": "https://www.heybopet.com/es/products/hbzh-ffc-01-fresh-food-cooker"
+        },
+        "label": "HBZH-FFC-01",
+        "image": {
+          "src": "assets/heybopet/editorial/hbzh-ffc-01-v1.webp",
+          "alt": "Heybo Pet HBZH-FFC-01",
+          "presentation": "editorial",
+          "generated": true,
+          "originalSrc": "assets/heybopet/references/heybopet-hbzh-ffc-01-fresh-food-cooker-b2b-wholesale-oem-odm-image-01.png"
         }
       }
     ]
