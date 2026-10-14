@@ -10525,6 +10525,4104 @@ const recipes = [
         }
       }
     ]
+  },
+  {
+    "id": "leonardo-wet-pulled-duck",
+    "existingId": null,
+    "researchRecipeId": "leonardo-e1551323",
+    "name": "Leonardo Pulled Beef Duck",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-pulled-duck-70g",
+    "description": "Влажный корм для кошек Leonardo Pulled Beef Duck",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-pulled-duck-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-e1551323.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Pulled Beef Duck"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-pulled-beef-duck-with-extra-pulled-beef-16-x-70-g",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/63/a9/fb/1722338287/bl-pouch-pulled-beef-duck-70g-front.jpg?ts=1722339376"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-pulled-beef-duck-with-extra-pulled-beef-16-x-70-g"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-pulled-duck-70g",
+        "label": "70 г",
+        "weight": "70 г",
+        "packageWeightKg": 0.07,
+        "sizes": [
+          "70 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-pulled-lamb",
+    "existingId": null,
+    "researchRecipeId": "leonardo-707b57a4",
+    "name": "Leonardo Pulled Beef Lamb",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-pulled-lamb-70g",
+    "description": "Влажный корм для кошек Leonardo Pulled Beef Lamb",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-pulled-lamb-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-707b57a4.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Pulled Beef Lamb"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-pulled-beef-lamb-with-extra-pulled-beef-16-x-70-g",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/6b/d0/a5/1722338287/bl-pouch-pulled-beef-lamb-70g-front.jpg?ts=1722339404"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-pulled-beef-lamb-with-extra-pulled-beef-16-x-70-g"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-pulled-lamb-70g",
+        "label": "70 г",
+        "weight": "70 г",
+        "packageWeightKg": 0.07,
+        "sizes": [
+          "70 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-pulled-turkey",
+    "existingId": null,
+    "researchRecipeId": "leonardo-1fe1a310",
+    "name": "Leonardo Pulled Beef Turkey",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-pulled-turkey-70g",
+    "description": "Влажный корм для кошек Leonardo Pulled Beef Turkey",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-pulled-turkey-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-1fe1a310.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Pulled Beef Turkey"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-pulled-beef-turkey-with-extra-pulled-beef-16-x-70-g",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/23/4e/e3/1722338286/bl-pouch-pulled-beef-turkey-70g-front.jpg?ts=1722339435"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-pulled-beef-turkey-with-extra-pulled-beef-16-x-70-g"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-pulled-turkey-70g",
+        "label": "70 г",
+        "weight": "70 г",
+        "packageWeightKg": 0.07,
+        "sizes": [
+          "70 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-quality-kitten",
+    "existingId": null,
+    "researchRecipeId": "leonardo-85c26e29",
+    "name": "Leonardo Quality Selection Kitten",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для котят",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-quality-kitten-200g",
+    "description": "Влажный корм для кошек Leonardo Quality Selection Kitten",
+    "details": [
+      "Влажный корм для кошек",
+      "Для котят",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-quality-kitten-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-85c26e29.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Quality Selection Kitten"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-quality-selection-kitten-rico-en-ave-6-x-200-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/50/4d/7c/1754398445/bl-qs-kitten-200g-front-es.jpg?ts=1754398445"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-quality-selection-kitten-rico-en-ave-6-x-200-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-quality-kitten-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-quality-kitten-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-quality-kitten-800g",
+        "label": "800 г",
+        "weight": "800 г",
+        "packageWeightKg": 0.8,
+        "sizes": [
+          "800 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-quality-poultry",
+    "existingId": null,
+    "researchRecipeId": "leonardo-e950030e",
+    "name": "Leonardo Quality Selection Poultry",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-quality-poultry-200g",
+    "description": "Влажный корм для кошек Leonardo Quality Selection Poultry",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-quality-poultry-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-e950030e.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Quality Selection Poultry"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-puro-en-ave-6-x-200-g",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/c0/2f/9b/1754398445/bl-qs-gefluegel-200g-front-es.jpg?ts=1754398445"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-puro-en-ave-6-x-200-g"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-quality-poultry-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-quality-poultry-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-quality-poultry-800g",
+        "label": "800 г",
+        "weight": "800 г",
+        "packageWeightKg": 0.8,
+        "sizes": [
+          "800 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-quality-beef",
+    "existingId": null,
+    "researchRecipeId": "leonardo-d1038e4a",
+    "name": "Leonardo Quality Selection Beef",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-quality-beef-200g",
+    "description": "Влажный корм для кошек Leonardo Quality Selection Beef",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-quality-beef-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-d1038e4a.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Quality Selection Beef"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-apetitosa-ternera-6-x-200-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/04/8d/9f/1754398445/bl-qs-rind-200g-front-es.jpg?ts=1754398445"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-apetitosa-ternera-6-x-200-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-quality-beef-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-quality-beef-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-quality-beef-800g",
+        "label": "800 г",
+        "weight": "800 г",
+        "packageWeightKg": 0.8,
+        "sizes": [
+          "800 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-quality-rabbit",
+    "existingId": null,
+    "researchRecipeId": "leonardo-90918afc",
+    "name": "Leonardo Quality Selection Rabbit",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-quality-rabbit-200g",
+    "description": "Влажный корм для кошек Leonardo Quality Selection Rabbit",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-quality-rabbit-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-90918afc.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Quality Selection Rabbit"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-conejo-6-x-200-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/11/4f/77/1754398445/bl-qs-kaninchen-200g-front-es.jpg?ts=1754398445"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-conejo-6-x-200-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-quality-rabbit-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-quality-rabbit-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-quality-ocean-fish",
+    "existingId": null,
+    "researchRecipeId": "leonardo-cb293103",
+    "name": "Leonardo Quality Selection Ocean Fish",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-quality-ocean-fish-200g",
+    "description": "Влажный корм для кошек Leonardo Quality Selection Ocean Fish",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-quality-ocean-fish-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-cb293103.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Quality Selection Ocean Fish"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-pescado-marino-6-x-200-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/ae/25/7c/1754398445/bl-qs-seefisch-200g-front-es.jpg?ts=1754398445"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-pescado-marino-6-x-200-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-quality-ocean-fish-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-quality-ocean-fish-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-quality-ocean-fish-800g",
+        "label": "800 г",
+        "weight": "800 г",
+        "packageWeightKg": 0.8,
+        "sizes": [
+          "800 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-quality-liver",
+    "existingId": null,
+    "researchRecipeId": "leonardo-910731e6",
+    "name": "Leonardo Quality Selection Liver",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-quality-liver-200g",
+    "description": "Влажный корм для кошек Leonardo Quality Selection Liver",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-quality-liver-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-910731e6.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Quality Selection Liver"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-higado-6-x-200-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/8a/60/6a/1754398445/bl-qs-leber-200g-front-es.jpg?ts=1754398445"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-higado-6-x-200-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-quality-liver-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-quality-liver-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-quality-duck",
+    "existingId": null,
+    "researchRecipeId": "leonardo-3a2a0be9",
+    "name": "Leonardo Quality Selection Duck",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-quality-duck-200g",
+    "description": "Влажный корм для кошек Leonardo Quality Selection Duck",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-quality-duck-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-3a2a0be9.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Quality Selection Duck"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-pato-6-x-200-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/66/72/b8/1754398445/bl-qs-ente-200g-front-es.jpg?ts=1754398445"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-pato-6-x-200-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-quality-duck-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-quality-duck-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-quality-duck-800g",
+        "label": "800 г",
+        "weight": "800 г",
+        "packageWeightKg": 0.8,
+        "sizes": [
+          "800 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-superior-horse",
+    "existingId": null,
+    "researchRecipeId": "leonardo-25e027e9",
+    "name": "Leonardo Superior Selection Horse & Courgette",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-superior-horse-200g",
+    "description": "Влажный корм для кошек Leonardo Superior Selection Horse & Courgette",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-superior-horse-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-25e027e9.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Superior Selection Horse & Courgette"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-superior-selection-caballo-con-calabacin-6-x-200-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/5f/ca/f0/1754398391/bl-sup-pferd-200g-front-es.jpg?ts=1754398391"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-superior-selection-caballo-con-calabacin-6-x-200-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-superior-horse-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-superior-horse-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-superior-lamb",
+    "existingId": null,
+    "researchRecipeId": "leonardo-4a011626",
+    "name": "Leonardo Superior Selection Lamb, Poultry & Pumpkin",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-superior-lamb-200g",
+    "description": "Влажный корм для кошек Leonardo Superior Selection Lamb, Poultry & Pumpkin",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-superior-lamb-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-4a011626.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Superior Selection Lamb, Poultry & Pumpkin"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-superior-selection-cordero-con-ave-calabaza-6-x-200-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/8e/f8/f8/1754398391/bl-sup-lamm-200g-front-es.jpg?ts=1754398391"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-superior-selection-cordero-con-ave-calabaza-6-x-200-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-superior-lamb-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-superior-lamb-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-superior-duck",
+    "existingId": null,
+    "researchRecipeId": "leonardo-46821738",
+    "name": "Leonardo Superior Selection Duck, Chicken & Carrots",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-superior-duck-200g",
+    "description": "Влажный корм для кошек Leonardo Superior Selection Duck, Chicken & Carrots",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-superior-duck-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-46821738.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Superior Selection Duck, Chicken & Carrots"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-superior-selection-pato-con-pollo-zanahorias-6-x-200-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/98/44/dd/1754398392/bl-sup-ente-200g-front-es.jpg?ts=1754398392"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-superior-selection-pato-con-pollo-zanahorias-6-x-200-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-superior-duck-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-superior-duck-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-superior-turkey",
+    "existingId": null,
+    "researchRecipeId": "leonardo-b63a54dd",
+    "name": "Leonardo Superior Selection Turkey, Trout & Cranberries",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-superior-turkey-200g",
+    "description": "Влажный корм для кошек Leonardo Superior Selection Turkey, Trout & Cranberries",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-superior-turkey-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-b63a54dd.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Superior Selection Turkey, Trout & Cranberries"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-superior-selection-pavo-con-trucha-cranberries-6-x-200-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/76/e9/42/1754398391/bl-sup-truthahn-200g-front-es.jpg?ts=1754398391"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-superior-selection-pavo-con-trucha-cranberries-6-x-200-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-superior-turkey-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-superior-turkey-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-superior-chicken",
+    "existingId": null,
+    "researchRecipeId": "leonardo-1f85f0d3",
+    "name": "Leonardo Superior Selection Chicken & Spinach",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-superior-chicken-200g",
+    "description": "Влажный корм для кошек Leonardo Superior Selection Chicken & Spinach",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-superior-chicken-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-1f85f0d3.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Superior Selection Chicken & Spinach"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-superior-selection-pollo-con-espinacas-6-x-200-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/8a/4d/af/1754398393/bl-sup-huhn-200g-front-es.jpg?ts=1754398393"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-superior-selection-pollo-con-espinacas-6-x-200-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-superior-chicken-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-superior-chicken-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "leonardo-wet-superior-beef",
+    "existingId": null,
+    "researchRecipeId": "leonardo-127ba3d8",
+    "name": "Leonardo Superior Selection Beef, Venison & Sweet Potato",
+    "brand": "Leonardo",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Влажный корм",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "leonardo-wet-superior-beef-200g",
+    "description": "Влажный корм для кошек Leonardo Superior Selection Beef, Venison & Sweet Potato",
+    "details": [
+      "Влажный корм для кошек",
+      "Влажный корм",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/leonardo-wet-superior-beef-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/leonardo-127ba3d8.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Leonardo Superior Selection Beef, Venison & Sweet Potato"
+    },
+    "imageSource": {
+      "name": "Leonardo",
+      "pageUrl": "https://es.leonardo-catfood.com/leonardo-superior-selection-vacuno-con-venado-boniato-6-x-200-g-es",
+      "url": "https://d23dsm0lnesl7r.cloudfront.net/media/52/74/5e/1754398392/bl-sup-rind-200g-front-es.jpg?ts=1754398392"
+    },
+    "productSource": {
+      "name": "Leonardo",
+      "kind": "manufacturer",
+      "url": "https://es.leonardo-catfood.com/leonardo-superior-selection-vacuno-con-venado-boniato-6-x-200-g-es"
+    },
+    "variants": [
+      {
+        "id": "leonardo-wet-superior-beef-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      },
+      {
+        "id": "leonardo-wet-superior-beef-400g",
+        "label": "400 г",
+        "weight": "400 г",
+        "packageWeightKg": 0.4,
+        "sizes": [
+          "400 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-adult-mix",
+    "existingId": null,
+    "researchRecipeId": "hills-d6890546",
+    "name": "Hill’s Science Plan Adult Chicken, Ocean Fish & Beef",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ассорти",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-adult-mix-1020g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Adult Chicken, Ocean Fish & Beef",
+    "details": [
+      "Влажный корм для кошек",
+      "Ассорти",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-adult-mix-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/hills-d6890546.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Adult Chicken, Ocean Fish & Beef"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-hill_s-science-plan-adult-pollo_-pescado-azul-y-vacuno-en-salsa-sobre-para-gatos/HIL604010.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw7c236649/images/hills_comida_humeda_gato_1_a_6_chicken_HIL604010_1.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-adult-pollo_-pescado-azul-y-vacuno-en-salsa-sobre-para-gatos/HIL604010_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-adult-mix-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 18.89,
+        "priceStatus": "temporary",
+        "ean": "052742211800",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 18.89,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-hill_s-science-plan-adult-pollo_-pescado-azul-y-vacuno-en-salsa-sobre-para-gatos/HIL604010.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-kitten-mix",
+    "existingId": null,
+    "researchRecipeId": "hills-71b606c4",
+    "name": "Hill’s Science Plan Kitten Chicken & Turkey",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для котят",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-kitten-mix-1020g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Kitten Chicken & Turkey",
+    "details": [
+      "Влажный корм для кошек",
+      "Для котят",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-kitten-mix-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/hills-71b606c4.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Kitten Chicken & Turkey"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-hill_s-science-plan-kitten-pollo-y-pavo-en-salsa-sobre-para-gatos/HIL604032.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw61ac38e4/images/hills_comida_humeda_gato_kitten_chicken_HIL604032_1.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-kitten-pollo-y-pavo-en-salsa-sobre-para-gatos/HIL604032_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-kitten-mix-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 18.09,
+        "priceStatus": "temporary",
+        "ean": "052742211602",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 18.09,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-hill_s-science-plan-kitten-pollo-y-pavo-en-salsa-sobre-para-gatos/HIL604032.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-light-mix",
+    "existingId": null,
+    "researchRecipeId": "hills-237aca66",
+    "name": "Hill’s Science Plan Light Adult Ocean Fish & Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ассорти",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-light-mix-1020g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Light Adult Ocean Fish & Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Ассорти",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-light-mix-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/hills-237aca66.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Light Adult Ocean Fish & Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-hill_s-science-plan-light-adult-pescado-azul-y-pollo-en-salsa-sobre-para-gatos/HIL604019.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw17db9c43/images/hills_comida_humeda_gato_light_adult_HIL604019_1.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-light-adult-pescado-azul-y-pollo-en-salsa-sobre-para-gatos/HIL604019_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-light-mix-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 20.29,
+        "priceStatus": "temporary",
+        "ean": "052742211909",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 20.29,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-hill_s-science-plan-light-adult-pescado-azul-y-pollo-en-salsa-sobre-para-gatos/HIL604019.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-perfect-weight-mix",
+    "existingId": null,
+    "researchRecipeId": "hills-52c3af05",
+    "name": "Hill’s Science Plan Perfect Weight Salmon & Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ассорти",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-perfect-weight-mix-1020g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Perfect Weight Salmon & Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Ассорти",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-perfect-weight-mix-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/hills-52c3af05.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Perfect Weight Salmon & Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-perfect-weight-salmon-y-pollo-sobre-para-gatos--12/HIL10034V-2.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw93840f81/images/hills_comida_humeda_gato_perfect_weight_HIL10034V_1.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-perfect-weight-salmon-y-pollo-sobre-para-gatos---multipack/HIL10034V-2_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-perfect-weight-mix-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 19.49,
+        "priceStatus": "temporary",
+        "ean": "052742000589",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 19.49,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/12-sobres-x-85-g-hills-perfect-weight-salmon-y-pollo-sobre-para-gatos--12/HIL10034V-2.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-sterilised-mix",
+    "existingId": null,
+    "researchRecipeId": "hills-71f6c1c2",
+    "name": "Hill’s Science Plan Sterilised Adult Chicken & Salmon",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для стерилизованных",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-sterilised-mix-1020g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Sterilised Adult Chicken & Salmon",
+    "details": [
+      "Влажный корм для кошек",
+      "Для стерилизованных",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-sterilised-mix-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/hills-71f6c1c2.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Sterilised Adult Chicken & Salmon"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-hill_s-science-plan-sterilised-adult-pollo-y-salmon-en-salsa-sobre-para-gatos/HIL607317.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwe9672867/images/hills_comida_humeda_gato_sterilised_cat_multipack_HIL607317_1.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-sterilised-adult-pollo-y-salmon-en-salsa-sobre-para-gatos/HIL607317_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-sterilised-mix-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 15.59,
+        "priceStatus": "temporary",
+        "ean": "052742194301",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 15.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-hill_s-science-plan-sterilised-adult-pollo-y-salmon-en-salsa-sobre-para-gatos/HIL607317.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-sterilised-meat-fish",
+    "existingId": null,
+    "researchRecipeId": "hills-9f8e8fdf",
+    "name": "Hill’s Science Plan Sterilised Meat & Fish",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для стерилизованных",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-sterilised-meat-fish-1020g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Sterilised Meat & Fish",
+    "details": [
+      "Влажный корм для кошек",
+      "Для стерилизованных",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-sterilised-meat-fish-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/hills-9f8e8fdf.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Sterilised Meat & Fish"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-science-plan-sterilised-carne-y-pescado-sobre-para-gatos-/HIL604014.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw651094dd/images/hills_comida_humeda_gato_multipack_sterilised_HIL604014_1.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-sterilised-carne-y-pescado-sobre-para-gatos-multipack/HIL604014_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-sterilised-meat-fish-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 16.19,
+        "priceStatus": "temporary",
+        "ean": "052742376608",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 16.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/12-sobres-x-85-g-hills-science-plan-sterilised-carne-y-pescado-sobre-para-gatos-/HIL604014.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-sterilised-salmon",
+    "existingId": null,
+    "researchRecipeId": "hills-595b883e",
+    "name": "Hill’s Science Plan Sterilised Young Adult Salmon - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Для стерилизованных",
+    "segment": "everyday",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-sterilised-salmon-85g",
+    "description": "Влажный корм для кошек Hill’s Science Plan Sterilised Young Adult Salmon - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Для стерилизованных",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-sterilised-salmon-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/hills-595b883e.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Science Plan Sterilised Young Adult Salmon - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-sterilized-young-adult-salmon-sobre-para-gatos/HIL1942PZ.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw1dc4dc8a/images/Hill's_Science_Plan_Sterilized_Young_Adult_Salmon_Sobre_gatos_HIL1942PZ_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-sterilized-young-adult-salmon-sobre-para-gatos/HIL1942PZ_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-sterilised-salmon-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.19,
+        "priceStatus": "temporary",
+        "ean": "052742083247",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/85-g-hill_s-science-plan-sterilized-young-adult-salmon-sobre-para-gatos/HIL1942PZ.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-cd-stress-chicken-stew",
+    "existingId": null,
+    "researchRecipeId": "hills-2e88710b",
+    "name": "Hill’s Prescription Diet c/d Urinary Stress Chicken & Vegetables Stew",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-cd-stress-chicken-stew-82g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet c/d Urinary Stress Chicken & Vegetables Stew",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-cd-stress-chicken-stew-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch6/hills-2e88710b.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet c/d Urinary Stress Chicken & Vegetables Stew"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/82-g-hill%E2%80%99s-presciption-diet-urinary-stress-c_d-estofado-de-pollo-con-vegetales-lata-para-gatos/HBG43193.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwd989e738/images/lata_comida_humeda_gato_hills_estofado_cd_urinary_HBG43193.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-presciption-diet-urinary-stress-c_d-estofado-de-pollo-con-vegetales-lata-para-gatos/HBG43193_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-cd-stress-chicken-stew-82g",
+        "label": "82 г",
+        "weight": "82 г",
+        "packageWeightKg": 0.082,
+        "sizes": [
+          "82 г"
+        ],
+        "price": 2.59,
+        "priceStatus": "temporary",
+        "ean": "052742021522",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/82-g-hill%E2%80%99s-presciption-diet-urinary-stress-c_d-estofado-de-pollo-con-vegetales-lata-para-gatos/HBG43193.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-84c83496",
+    "existingId": null,
+    "researchRecipeId": "hills-84c83496",
+    "name": "Hill’s Prescription Diet i/d Digestive Care Chicken & Vegetables Stew",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-84c83496-82g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet i/d Digestive Care Chicken & Vegetables Stew",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-84c83496-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-84c83496.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet i/d Digestive Care Chicken & Vegetables Stew"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/82-g-hill_s-prescription-diet-digestive-care-i_d-gatos-estofado-de-pollo-y-verduras-lata/HIL606342.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw3963b575/images/comida_humeda_gato_hills_prescription_diet_digestive_care_pollo_vegetales_HIL606342.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-digestive-care-i_d-gatos-estofado-de-pollo-y-verduras-lata/HIL606342_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-84c83496-82g",
+        "label": "82 г",
+        "weight": "82 г",
+        "packageWeightKg": 0.082,
+        "sizes": [
+          "82 г"
+        ],
+        "price": 2.59,
+        "priceStatus": "temporary",
+        "ean": "052742039893",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/82-g-hill_s-prescription-diet-digestive-care-i_d-gatos-estofado-de-pollo-y-verduras-lata/HIL606342.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-43f33709",
+    "existingId": null,
+    "researchRecipeId": "hills-43f33709",
+    "name": "Hill’s Prescription Diet i/d Digestive Care Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-43f33709-156g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet i/d Digestive Care Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-43f33709-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-43f33709.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet i/d Digestive Care Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/156-g-hill_s-prescription-diet-digestive-care-i_d-gatos-pollo-lata/HIL4628YT.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwf97120cc/images/comida_humeda_gatos_hills_prescription_diet_digestion_care_id_pollo_HIL4628YT_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-digestive-care-i_d-gatos-pollo-lata/HIL4628YT_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-43f33709-156g",
+        "label": "156 г",
+        "weight": "156 г",
+        "packageWeightKg": 0.156,
+        "sizes": [
+          "156 г"
+        ],
+        "price": 3.59,
+        "priceStatus": "temporary",
+        "ean": "052742039916",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 3.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/156-g-hill_s-prescription-diet-digestive-care-i_d-gatos-pollo-lata/HIL4628YT.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-fcae66af",
+    "existingId": null,
+    "researchRecipeId": "hills-fcae66af",
+    "name": "Hill’s Prescription Diet i/d Digestive Care Chicken - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-fcae66af-1020g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet i/d Digestive Care Chicken - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-fcae66af-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-fcae66af.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet i/d Digestive Care Chicken - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.tiendanimal.es/12-sobres-x-85-g-hills-prescription-diet-digestive-care-i%2Fd-pollo-en-salsa-sobre-para-gatos-/HIL605726.html",
+      "url": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw8dc07cde/images/comida_humeda_gatos_hills_bolsitas_prescription_diet_metabolic_weight_management_i_d_HIL1189M_box.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.tiendanimal.es/hills-prescription-diet-digestive-care-i%2Fd-pollo-en-salsa-sobre-para-gatos-multipack/HIL605726_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-fcae66af-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 19.49,
+        "priceStatus": "temporary",
+        "ean": "052742040745",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 19.49,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/12-sobres-x-85-g-hills-prescription-diet-digestive-care-i%2Fd-pollo-en-salsa-sobre-para-gatos-/HIL605726.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-5d47b053",
+    "existingId": null,
+    "researchRecipeId": "hills-5d47b053",
+    "name": "Hill’s Prescription Diet k/d Early Stage Kidney Care Chicken - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-5d47b053-1020g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet k/d Early Stage Kidney Care Chicken - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-5d47b053-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-5d47b053.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet k/d Early Stage Kidney Care Chicken - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-diet-early-stage-kidney-care-k_d-pollo-sobre-en-salsa-para-gatos/HIL603571BOX.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwc21f1c64/images/comida_humeda_gato_hills_early_stage_kidney_care_pollo_HIL603571BOX_box.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-early-stage-kidney-care-k_d-pollo-sobre-en-salsa-para-gatos/HIL603571BOX_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-5d47b053-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 19.99,
+        "priceStatus": "temporary",
+        "ean": "052742301013",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 19.99,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-diet-early-stage-kidney-care-k_d-pollo-sobre-en-salsa-para-gatos/HIL603571BOX.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-741ce6ac",
+    "existingId": null,
+    "researchRecipeId": "hills-741ce6ac",
+    "name": "Hill’s Prescription Diet ON-Care Chicken & Vegetables Stew",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-741ce6ac-82g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet ON-Care Chicken & Vegetables Stew",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-741ce6ac-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-741ce6ac.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet ON-Care Chicken & Vegetables Stew"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/82-g-hill_s-prescription-diet-feline-estofado-con-pollo-y-verduras-para-gatos-adultos/HIL608464.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw209ee391/images/hills_pd_estofado_pollo_careon_gatos_HIL608464.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-feline-estofado-con-pollo-y-verduras-para-gatos-adultos/HIL608464_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-741ce6ac-82g",
+        "label": "82 г",
+        "weight": "82 г",
+        "packageWeightKg": 0.082,
+        "sizes": [
+          "82 г"
+        ],
+        "price": 2.59,
+        "priceStatus": "temporary",
+        "ean": "052742048154",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/82-g-hill_s-prescription-diet-feline-estofado-con-pollo-y-verduras-para-gatos-adultos/HIL608464.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-3e2a1a71",
+    "existingId": null,
+    "researchRecipeId": "hills-3e2a1a71",
+    "name": "Hill’s Prescription Diet Gastrointestinal Biome Chicken - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-3e2a1a71-85g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet Gastrointestinal Biome Chicken - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-3e2a1a71-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-3e2a1a71.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet Gastrointestinal Biome Chicken - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-hill_s-prescription-diet-feline-gi-biome-digestive-care-pollo-y-verduras-sobre-en-salsa/HIL607212.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw591eb7ee/images/comida_humeda_gatos_hills_prescription_diet_feline_gi_digestive_care_pollo_verduras_salsa_HIL607212_JN23_1.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-feline-gi-biome-digestive-care-pollo-y-verduras-sobre-en-salsa/HIL607212_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-3e2a1a71-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-4e422946",
+    "existingId": null,
+    "researchRecipeId": "hills-4e422946",
+    "name": "Hill’s Prescription Diet z/d Food Sensitivities",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-4e422946-156g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet z/d Food Sensitivities",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-4e422946-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-4e422946.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet z/d Food Sensitivities"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/156-g-hill_s-prescription-diet-food-sensitives-lata-z_d-para-gatos/HIL5661YT.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwed770078/images/pienso_perros_hills_prescritpion_diet_food_sensitivities_zd_HIL8018M_M_JL23_1.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-food-sensitives-lata-z_d-para-gatos/HIL5661YT_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-4e422946-156g",
+        "label": "156 г",
+        "weight": "156 г",
+        "packageWeightKg": 0.156,
+        "sizes": [
+          "156 г"
+        ],
+        "price": 3.59,
+        "priceStatus": "temporary",
+        "ean": "052742039756",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 3.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/156-g-hill_s-prescription-diet-food-sensitives-lata-z_d-para-gatos/HIL5661YT.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-455d9020",
+    "existingId": null,
+    "researchRecipeId": "hills-455d9020",
+    "name": "Hill’s Prescription Diet Gastrointestinal Biome Chicken Stew",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-455d9020-82g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet Gastrointestinal Biome Chicken Stew",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-455d9020-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-455d9020.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet Gastrointestinal Biome Chicken Stew"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/82-g-hill_s-prescription-diet-gastrointestinal-biome-estofado-de-pollo-lata-para-gatos/HIL604420.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwad95e744/images/comida_humeda_gatos_hills_gatroitestinal_biome_HIL604420_M_JL23_1.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-gastrointestinal-biome-estofado-de-pollo-lata-para-gatos/HIL604420_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-455d9020-82g",
+        "label": "82 г",
+        "weight": "82 г",
+        "packageWeightKg": 0.082,
+        "sizes": [
+          "82 г"
+        ],
+        "price": 2.59,
+        "priceStatus": "temporary",
+        "ean": "052742065076",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/82-g-hill_s-prescription-diet-gastrointestinal-biome-estofado-de-pollo-lata-para-gatos/HIL604420.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-ff59af26",
+    "existingId": null,
+    "researchRecipeId": "hills-ff59af26",
+    "name": "Hill’s Prescription Diet i/d Digestive Care Kitten Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-ff59af26-85g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet i/d Digestive Care Kitten Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-ff59af26-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-ff59af26.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet i/d Digestive Care Kitten Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-latas-x-85-g-hill_s-prescription-diet-i_d-digestive-care-kitten-lata-pollo-para-gatos/HIL609418.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw3924dc23/images/hills_pd_digestivo_gato_HIL609418_1.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-i_d-digestive-care-kitten-lata-pollo-para-gatos/HIL609418_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-ff59af26-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-93eb5a88",
+    "existingId": null,
+    "researchRecipeId": "hills-93eb5a88",
+    "name": "Hill’s Prescription Diet k/d Kidney Care Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-93eb5a88-156g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet k/d Kidney Care Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-93eb5a88-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-93eb5a88.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet k/d Kidney Care Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/156-g-hill_s-prescription-diet-kidney-care-k_d-pollo-lata-para-gatos/HIL605649.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw4607ac9b/images/comida_humeda_gatos_hills_prescription_diet_kidney_care_kd_pollo_HIL605649[1].jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-kidney-care-k_d-pollo-lata-para-gatos/HIL605649_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-93eb5a88-156g",
+        "label": "156 г",
+        "weight": "156 г",
+        "packageWeightKg": 0.156,
+        "sizes": [
+          "156 г"
+        ],
+        "price": 3.59,
+        "priceStatus": "temporary",
+        "ean": "052742048833",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 3.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/156-g-hill_s-prescription-diet-kidney-care-k_d-pollo-lata-para-gatos/HIL605649.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-0637713f",
+    "existingId": null,
+    "researchRecipeId": "hills-0637713f",
+    "name": "Hill’s Prescription Diet k/d Kidney Care Chicken - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-0637713f-1020g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet k/d Kidney Care Chicken - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-0637713f-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-0637713f.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet k/d Kidney Care Chicken - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.tiendanimal.es/12-sobres-x-85-g-hills-prescription-diet-kidney-care-k%2Fd-pollo-sobre-para-gatos/HIL1187U.html",
+      "url": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw2fb4d9df/images/comida_humeda_gatos_hills_bolsitas_prescription_diet_kidney_care_kd_HIL1187M_box.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.tiendanimal.es/hills-prescription-diet-kidney-care-k%2Fd-pollo-sobre-para-gatos/HIL1187U_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-0637713f-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 20.59,
+        "priceStatus": "temporary",
+        "ean": "052742118710",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 20.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/12-sobres-x-85-g-hills-prescription-diet-kidney-care-k%2Fd-pollo-sobre-para-gatos/HIL1187U.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-35883719",
+    "existingId": null,
+    "researchRecipeId": "hills-35883719",
+    "name": "Hill’s Prescription Diet k/d Kidney Care Chicken & Vegetables Stew",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-35883719-82g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet k/d Kidney Care Chicken & Vegetables Stew",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-35883719-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-35883719.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet k/d Kidney Care Chicken & Vegetables Stew"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.tiendanimal.es/82-g-hills-prescription-diet-kidney-care-k%2Fd-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603880.html",
+      "url": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw72203fba/images/gatos_comida_humeda_kd_estofado_pollo_hills_prescription_diet_HIL603880_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.tiendanimal.es/hills-prescription-diet-kidney-care-k%2Fd-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603880_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-35883719-82g",
+        "label": "82 г",
+        "weight": "82 г",
+        "packageWeightKg": 0.082,
+        "sizes": [
+          "82 г"
+        ],
+        "price": 2.59,
+        "priceStatus": "temporary",
+        "ean": "052742021607",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/82-g-hills-prescription-diet-kidney-care-k%2Fd-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603880.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-59c92e72",
+    "existingId": null,
+    "researchRecipeId": "hills-59c92e72",
+    "name": "Hill’s Prescription Diet Metabolic + Mobility Chicken - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-59c92e72-85g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet Metabolic + Mobility Chicken - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-59c92e72-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-59c92e72.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet Metabolic + Mobility Chicken - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-hill_s-prescription-diet-metabolic_mobility-pollo-sobres-para-gatos---multipack/HIL609956BOX.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwc269bbc5/images/Hill's_Prescription_Diet_Metabolic_Mobility_Pollo_Sobres_gatos_Multipack_HIL609956BOX_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-metabolic_mobility-pollo-sobres-para-gatos---multipack/HIL609956BOX_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-59c92e72-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": null,
+        "priceStatus": "pending",
+        "ean": null,
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": null
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-39b05056",
+    "existingId": null,
+    "researchRecipeId": "hills-39b05056",
+    "name": "Hill’s Prescription Diet Metabolic Chicken & Vegetables Stew",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-39b05056-82g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet Metabolic Chicken & Vegetables Stew",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-39b05056-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-39b05056.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet Metabolic Chicken & Vegetables Stew"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/perros_new/alimentacion/comida-humeda/82-g-hill_s-prescription-diet-metabolic-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603882.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw0791933b/images/comida_humeda_gatos_hills_prescription_diet_metabolic_estofado_HIL603882.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-metabolic-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603882_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-39b05056-82g",
+        "label": "82 г",
+        "weight": "82 г",
+        "packageWeightKg": 0.082,
+        "sizes": [
+          "82 г"
+        ],
+        "price": 2.59,
+        "priceStatus": "temporary",
+        "ean": "052742021645",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/perros_new/alimentacion/comida-humeda/82-g-hill_s-prescription-diet-metabolic-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603882.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-d365388e",
+    "existingId": null,
+    "researchRecipeId": "hills-d365388e",
+    "name": "Hill’s Prescription Diet Metabolic Chicken - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-d365388e-1020g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet Metabolic Chicken - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-d365388e-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-d365388e.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet Metabolic Chicken - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-diet-metabolic-feline-pouches-para-gato-/HIL3438UBOX.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwc6ca6f8d/images/Hill's_Presciption_Diet_Metabolic_Feline_Pouches_gato_multipack_HIL3438U_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-prescription-diet-metabolic-feline-pouches-pollo-para-gato---multipack/HIL3438U_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-d365388e-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 19.99,
+        "priceStatus": "temporary",
+        "ean": "052742343808",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 19.99,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-diet-metabolic-feline-pouches-para-gato-/HIL3438UBOX.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-0295886f",
+    "existingId": null,
+    "researchRecipeId": "hills-0295886f",
+    "name": "Hill’s Prescription Diet Metabolic Chicken Mousse",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-0295886f-85g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet Metabolic Chicken Mousse",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-0295886f-v3.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-0295886f.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet Metabolic Chicken Mousse"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-prescription-diet-metabolic-mousse-de-pollo-lata-para-gatos/HIL608824.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwab9a0809/images/Hill's_Prescription_Diet_Metabolic_Mouse_Pollo_lata_gatos_HIL608824_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-metabolic-mousse-de-pollo-lata-para-gatos/HIL608824_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-0295886f-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.09,
+        "priceStatus": "temporary",
+        "ean": "052742070926",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.09,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-prescription-diet-metabolic-mousse-de-pollo-lata-para-gatos/HIL608824.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-957babc5",
+    "existingId": null,
+    "researchRecipeId": "hills-957babc5",
+    "name": "Hill’s Prescription Diet y/d Thyroid Care Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-957babc5-156g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet y/d Thyroid Care Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-957babc5-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-957babc5.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet y/d Thyroid Care Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.tiendanimal.es/156-g-hills-prescription-diet-thyroid-care-y%2Fd-pollo-lata-para-gatos/HIL1496YT.html",
+      "url": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw1ec27896/images/comida_humeda_gatos_hills_prescription_diet_thyroid_care_yd_pollo_HIL1496YT_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.tiendanimal.es/hills-prescription-diet-thyroid-care-y%2Fd-pollo-lata-para-gatos/HIL1496YT_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-957babc5-156g",
+        "label": "156 г",
+        "weight": "156 г",
+        "packageWeightKg": 0.156,
+        "sizes": [
+          "156 г"
+        ],
+        "price": 3.59,
+        "priceStatus": "temporary",
+        "ean": "052742149608",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 3.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/156-g-hills-prescription-diet-thyroid-care-y%2Fd-pollo-lata-para-gatos/HIL1496YT.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-fde8dc60",
+    "existingId": null,
+    "researchRecipeId": "hills-fde8dc60",
+    "name": "Hill’s Prescription Diet a/d Urgent Care Chicken Mousse",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-fde8dc60-200g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet a/d Urgent Care Chicken Mousse",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-fde8dc60-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-fde8dc60.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet a/d Urgent Care Chicken Mousse"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/perros_new/alimentacion/comida-humeda/200-g-hill_s-prescription-diet-urgent-care-a_d-mousse-de-pollo-lata-para-perros-y-gatos/HIL608305.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwc341d15b/images/comida_humeda_perros_gatos_hills_prescription_diet_urgent_care_ad_mousse_pollo_HIL608305_0.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/hill_s-prescription-diet-urgent-care-a_d-mousse-de-pollo-lata-para-perros-y-gatos/HIL608305_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-fde8dc60-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": 3.79,
+        "priceStatus": "temporary",
+        "ean": "052742067254",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 3.79,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/perros_new/alimentacion/comida-humeda/200-g-hill_s-prescription-diet-urgent-care-a_d-mousse-de-pollo-lata-para-perros-y-gatos/HIL608305.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-a11884d0",
+    "existingId": null,
+    "researchRecipeId": "hills-a11884d0",
+    "name": "Hill’s Prescription Diet c/d Urinary Care Chicken",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-a11884d0-156g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet c/d Urinary Care Chicken",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-a11884d0-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-a11884d0.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet c/d Urinary Care Chicken"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/156-g-hill_s-prescription-diet-urinary-care-c_d-pollo-lata-para-gatos/HIL9451YT.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwa8ea1c65/images/comida_humeda_gatos_hills_prescription_diet_urinary_care_cd_pollo_HIL9451YT_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-urinary-care-c_d-pollo-lata-para-gatos/HIL9451YT_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-a11884d0-156g",
+        "label": "156 г",
+        "weight": "156 г",
+        "packageWeightKg": 0.156,
+        "sizes": [
+          "156 г"
+        ],
+        "price": 3.59,
+        "priceStatus": "temporary",
+        "ean": "052742945101",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 3.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/156-g-hill_s-prescription-diet-urinary-care-c_d-pollo-lata-para-gatos/HIL9451YT.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-e9c06900",
+    "existingId": null,
+    "researchRecipeId": "hills-e9c06900",
+    "name": "Hill’s Prescription Diet c/d Urinary Care Chicken - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-e9c06900-1020g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet c/d Urinary Care Chicken - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-e9c06900-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-e9c06900.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet c/d Urinary Care Chicken - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-diet-urinary-care-c_d-pollo-sobre-para-gatos/HIL1188U.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwfd65da0b/images/comida_humeda_gatos_hills_urinary_care_HIL1188U_boxing.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-urinary-care-c_d-pollo-sobre-para-gatos/HIL1188U_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-e9c06900-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 20.69,
+        "priceStatus": "temporary",
+        "ean": "052742118819",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 20.69,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-diet-urinary-care-c_d-pollo-sobre-para-gatos/HIL1188U.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-5870554d",
+    "existingId": null,
+    "researchRecipeId": "hills-5870554d",
+    "name": "Hill’s Prescription Diet s/d Urinary Care Chicken - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-5870554d-1020g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet s/d Urinary Care Chicken - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-5870554d-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-5870554d.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet s/d Urinary Care Chicken - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-diet-urinary-care-s_d-pollo-sobre-en-salsa-para-gatos-12/HIL607213.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw073da0ae/images/comida_humeda_gato_hills_prescription_diet_urinary_care_sd_pollo_salsa_HIL607213_2.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-urinary-care-s_d-pollo-sobre-en-salsa-para-gatos-%E2%80%93-pack-12/HIL607213_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-5870554d-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 20.89,
+        "priceStatus": "temporary",
+        "ean": "052742053790",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 20.89,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-diet-urinary-care-s_d-pollo-sobre-en-salsa-para-gatos-12/HIL607213.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-61fa56ea",
+    "existingId": null,
+    "researchRecipeId": "hills-61fa56ea",
+    "name": "Hill’s Prescription Diet Urinary Stress + Metabolic Chicken - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-61fa56ea-1020g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet Urinary Stress + Metabolic Chicken - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-61fa56ea-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-61fa56ea.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet Urinary Stress + Metabolic Chicken - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.tiendanimal.es/12-sobres-x-85-g-hills-prescription-diet-urinary-stress-metabolic-pollo-sobre-para-gatos/HIL605411BOX.html",
+      "url": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwd4aa49da/images/Hills_prescription_diet_urinary_weight_care_HIL605411BOX_M_box.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.tiendanimal.es/hills-prescription-diet-urinary-stress-metabolic-pollo-sobre-para-gatos/HIL605411BOX_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-61fa56ea-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 20.69,
+        "priceStatus": "temporary",
+        "ean": "052742038537",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 20.69,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/12-sobres-x-85-g-hills-prescription-diet-urinary-stress-metabolic-pollo-sobre-para-gatos/HIL605411BOX.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-4ade1f05",
+    "existingId": null,
+    "researchRecipeId": "hills-4ade1f05",
+    "name": "Hill’s Prescription Diet a/d Chicken Mousse",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-4ade1f05-85g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet a/d Chicken Mousse",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-4ade1f05-v2.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-4ade1f05.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet a/d Chicken Mousse"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-prescription-diet-a_d-mousse-de-pollo-lata-para-perros-y-gatos/HIL610099.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw8fff9f76/images/Hill's_Prescription_Diet_a_d_Mousse_Pollo_Lata_perros_gatos_HIL610099_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-a_d-mousse-de-pollo-lata-para-perros-y-gatos/HIL610099_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-4ade1f05-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.09,
+        "priceStatus": "temporary",
+        "ean": "052742087306",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.09,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-prescription-diet-a_d-mousse-de-pollo-lata-para-perros-y-gatos/HIL610099.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-21a67454",
+    "existingId": null,
+    "researchRecipeId": "hills-21a67454",
+    "name": "Hill’s Prescription Diet c/d Urinary Stress Tuna Stew",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-21a67454-82g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet c/d Urinary Stress Tuna Stew",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-21a67454-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-21a67454.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet c/d Urinary Stress Tuna Stew"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/82-g-hill_s-prescription-diet-c_d-cuidado-urinario-estres-estofado-de-atun-lata-para-gatos/HIL605865.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw468abd9e/images/comida_humeda_perros_hills_pd_cd_cuidado_urinario_estres_estofado_atun_HIL605865.jpg[1].jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-c_d-cuidado-urinario-estres-estofado-de-atun-lata-para-gatos/HIL605865_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-21a67454-82g",
+        "label": "82 г",
+        "weight": "82 г",
+        "packageWeightKg": 0.082,
+        "sizes": [
+          "82 г"
+        ],
+        "price": 2.59,
+        "priceStatus": "temporary",
+        "ean": "052742048529",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/82-g-hill_s-prescription-diet-c_d-cuidado-urinario-estres-estofado-de-atun-lata-para-gatos/HIL605865.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-a93b1999",
+    "existingId": null,
+    "researchRecipeId": "hills-a93b1999",
+    "name": "Hill’s Prescription Diet c/d Multicare Chicken Mousse",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-a93b1999-85g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet c/d Multicare Chicken Mousse",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-a93b1999-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-a93b1999.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet c/d Multicare Chicken Mousse"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-prescription-diet-c_d-multicare-mousse-de-pollo-lata-para-gatos/HIL608821.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw1bf9fb49/images/Hill's_Prescription_Diet_c_d_Multicare_Mousse_Pollo_lata_gatos_HIL608821_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-c_d-multicare-mousse-de-pollo-lata-para-gatos/HIL608821_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-a93b1999-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.09,
+        "priceStatus": "temporary",
+        "ean": "052742070766",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.09,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-prescription-diet-c_d-multicare-mousse-de-pollo-lata-para-gatos/HIL608821.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-f2f234bf",
+    "existingId": null,
+    "researchRecipeId": "hills-f2f234bf",
+    "name": "Hill’s Prescription Diet c/d Urinary Care Chicken & Vegetables Stew",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-f2f234bf-82g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet c/d Urinary Care Chicken & Vegetables Stew",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-f2f234bf-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-f2f234bf.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet c/d Urinary Care Chicken & Vegetables Stew"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/82-g-hill%E2%80%99s-prescription-diet-c_d-urinary-care-pollo-lata-para-gatos/HBG43191.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwed5b8b01/images/new_Hills_comida_humeda_Urinary_Care_para_gatos_HBG43191.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-c_d-urinary-care-pollo-lata-para-gatos/HBG43191_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-f2f234bf-82g",
+        "label": "82 г",
+        "weight": "82 г",
+        "packageWeightKg": 0.082,
+        "sizes": [
+          "82 г"
+        ],
+        "price": 2.59,
+        "priceStatus": "temporary",
+        "ean": "052742021508",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/82-g-hill%E2%80%99s-prescription-diet-c_d-urinary-care-pollo-lata-para-gatos/HBG43191.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-868091cf",
+    "existingId": null,
+    "researchRecipeId": "hills-868091cf",
+    "name": "Hill’s Prescription Diet i/d Chicken Mousse",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-868091cf-85g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet i/d Chicken Mousse",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-868091cf-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-868091cf.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet i/d Chicken Mousse"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-prescription-diet-i_d-mousse-de-pollo-lata-para-gatos/HIL608827.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw122bc5f6/images/Hill's_Prescription_Diet_i_d_Mousse_Pollo_lata_gatos_HIL608827_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-i_d-mousse-de-pollo-lata-para-gatos/HIL608827_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-868091cf-85g",
+        "label": "85 г",
+        "weight": "85 г",
+        "packageWeightKg": 0.085,
+        "sizes": [
+          "85 г"
+        ],
+        "price": 2.09,
+        "priceStatus": "temporary",
+        "ean": "052742070803",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.09,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-prescription-diet-i_d-mousse-de-pollo-lata-para-gatos/HIL608827.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      },
+      {
+        "id": "hills-wet-868091cf-200g",
+        "label": "200 г",
+        "weight": "200 г",
+        "packageWeightKg": 0.2,
+        "sizes": [
+          "200 г"
+        ],
+        "price": 4.09,
+        "priceStatus": "temporary",
+        "ean": "052742070902",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 4.09,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/200-g-hill_s-prescription-diet-i_d-mousse-de-pollo-lata-para-gatos/HIL608828.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-b35fc3b5",
+    "existingId": null,
+    "researchRecipeId": "hills-b35fc3b5",
+    "name": "Hill’s Prescription Diet k/d + Mobility j/d Chicken - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-b35fc3b5-1020g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet k/d + Mobility j/d Chicken - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-b35fc3b5-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-b35fc3b5.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet k/d + Mobility j/d Chicken - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-diet-k_d_mobility-j_d-pollo-sobre-para-gatos/HIL10743UBOX.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw6d4ef2ea/images/Hills_comida_humeda_salud_renal_para_gatos_HIL10743U_box.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-k_d_mobility-j_d-pollo-sobre-para-gatos/HIL10743U_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-b35fc3b5-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 20.59,
+        "priceStatus": "temporary",
+        "ean": "052742011561",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 20.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-diet-k_d_mobility-j_d-pollo-sobre-para-gatos/HIL10743UBOX.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-e2a61dad",
+    "existingId": null,
+    "researchRecipeId": "hills-e2a61dad",
+    "name": "Hill’s Prescription Diet k/d Kidney Care Salmon - в соусе",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-e2a61dad-1020g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet k/d Kidney Care Salmon - в соусе",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-e2a61dad-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-e2a61dad.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet k/d Kidney Care Salmon - в соусе"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-k_d-diet-kidney-care-salmon-sobre-en-salsa-para-gatos/HIL1884U.html",
+      "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw492a92fb/images/comida_humeda_gato_hills_prescription_diet_kidney_care_salmon_HIL1884U_box.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-k_d-diet-kidney-care-salmon-sobre-en-salsa-para-gatos/HIL1884U_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-e2a61dad-1020g",
+        "label": "12 x 85 г",
+        "weight": "12 x 85 г",
+        "packageWeightKg": 1.02,
+        "sizes": [
+          "12 x 85 г"
+        ],
+        "price": 20.59,
+        "priceStatus": "temporary",
+        "ean": "052742188416",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 20.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Kiwoko",
+          "sourceUrl": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-k_d-diet-kidney-care-salmon-sobre-en-salsa-para-gatos/HIL1884U.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "hills-wet-aea119a2",
+    "existingId": null,
+    "researchRecipeId": "hills-aea119a2",
+    "name": "Hill’s Prescription Diet Gastrointestinal Biome Stress Stew",
+    "brand": "Hill’s",
+    "category": "Корм",
+    "pet": "cat",
+    "foodType": "wet",
+    "isReal": true,
+    "isNew": true,
+    "prioritySelection": true,
+    "tag": "Ветеринарная диета",
+    "segment": "veterinary",
+    "optionLabel": "Фасовка",
+    "defaultVariantId": "hills-wet-aea119a2-82g",
+    "description": "Влажный корм для кошек Hill’s Prescription Diet Gastrointestinal Biome Stress Stew",
+    "details": [
+      "Влажный корм для кошек",
+      "Ветеринарная диета",
+      "Фасовку выберите перед добавлением в корзину",
+      "Норму кормления смотрите на упаковке",
+      "Свежая вода всегда должна быть в свободном доступе",
+      "Ветеринарная диета - применение по рекомендации ветеринарного врача"
+    ],
+    "purchasePrice": null,
+    "purchasePriceStatus": "pending",
+    "availabilityStatus": "pending",
+    "image": {
+      "src": "assets/food/editorial/hills-wet-aea119a2-v1.webp",
+      "originalSrc": "assets/food/references/priority-batch7/hills-aea119a2.jpg",
+      "presentation": "editorial",
+      "generated": true,
+      "alt": "Hill’s Prescription Diet Gastrointestinal Biome Stress Stew"
+    },
+    "imageSource": {
+      "name": "Каталог испанской розницы",
+      "pageUrl": "https://www.tiendanimal.es/82-g-hills-prescription-diet-gastrointestinal-biome-stress-estofado-lata-para-gatos/HIL608830.html",
+      "url": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw65177167/images/hills_comida_humeda_gastro_perro_HIL608830_M.jpg"
+    },
+    "productSource": {
+      "name": "Каталог испанской розницы",
+      "kind": "retailer",
+      "url": "https://www.tiendanimal.es/hills-prescription-diet-gastrointestinal-biome-stress-estofado-lata-para-gatos/HIL608830_M.html"
+    },
+    "variants": [
+      {
+        "id": "hills-wet-aea119a2-82g",
+        "label": "82 г",
+        "weight": "82 г",
+        "packageWeightKg": 0.082,
+        "sizes": [
+          "82 г"
+        ],
+        "price": 2.59,
+        "priceStatus": "temporary",
+        "ean": "052742070957",
+        "supplier": null,
+        "purchasePrice": null,
+        "purchasePriceStatus": "pending",
+        "availabilityStatus": "pending",
+        "retailPrice": {
+          "amount": 2.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "sourceName": "Tiendanimal",
+          "sourceUrl": "https://www.tiendanimal.es/82-g-hills-prescription-diet-gastrointestinal-biome-stress-estofado-lata-para-gatos/HIL608830.html",
+          "checkedAt": "2026-10-13",
+          "shippingIncluded": false
+        }
+      }
+    ]
   }
 ];
 

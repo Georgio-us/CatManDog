@@ -1,0 +1,2420 @@
+{
+  "selectedOn": "2026-10-14",
+  "scope": "Compact image shortlist, retained full research unchanged",
+  "status": "selected_for_image_production",
+  "totalImageLimit": 55,
+  "fullResearchProductFamilies": 146,
+  "notes": [
+    "Это редакционная подборка, а не рейтинг продаж",
+    "Одно изображение на семейство товара или модель техники",
+    "Фасовки сохраняются вариантами, не создают отдельные изображения",
+    "Окончательная публичная витрина пока не определена",
+    "Исходный ресёрч из 146 позиций сохранён без изменений",
+    "Закупочные цены не заполняются",
+    "В кремовых лакомствах 6 Churu, 3 Catit, 1 Vitakraft"
+  ],
+  "manufacturerCrossChecks": [
+    "https://inabafoods-europe.com/products/pet-type/cat/main-ingredient/tuna/",
+    "https://inabafoods-europe.com/products/pet-type/cat/life-stage/kitten/",
+    "https://www.catit.com/es/productos/snacks/creamy-na/",
+    "https://www.gimborn.eu/user/pages/01.startseite/CATALOGUE%20EN%202026.pdf?g-1da95b00="
+  ],
+  "groups": [
+    {
+      "key": "creamy",
+      "name": "Кремовые лакомства",
+      "imageLimit": 10,
+      "products": [
+        {
+          "id": "tc-0707caf730",
+          "name": "Churu Snack Cremoso de Pollo para gatos",
+          "brand": "Churu",
+          "category": "Кремовые лакомства",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/churu-snack-cremoso-de-pollo-para-gatos/URUN0103_M.html",
+            "https://www.miscota.es/gatos/inaba/churu-receta-de-pollo",
+            "https://www.tiendanimal.es/churu-snack-cremoso-de-pollo-para-gatos/URUN0103_M.html"
+          ],
+          "gtins": [
+            "8859387700698"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Churu - курица",
+          "presentations": [
+            {
+              "id": "tc-0707caf730-4x14g",
+              "productId": "tc-0707caf730",
+              "brand": "Churu",
+              "name": "Churu Snack Cremoso de Pollo para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 4,
+              "amount": 14.0,
+              "unit": "g",
+              "totalAmount": 56.0,
+              "purchasePrice": null,
+              "retailerCount": 3,
+              "minimumObservedEUR": 3.25,
+              "meanObservedEUR": 3.74,
+              "maximumObservedEUR": 3.99,
+              "minimumLiveListedInStockEUR": 3.99,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-0707caf730-8x14g",
+              "productId": "tc-0707caf730",
+              "brand": "Churu",
+              "name": "Churu Snack Cremoso de Pollo para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 8,
+              "amount": 14.0,
+              "unit": "g",
+              "totalAmount": 112.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 7.82,
+              "meanObservedEUR": 7.82,
+              "maximumObservedEUR": 7.82,
+              "minimumLiveListedInStockEUR": 7.82,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-0707caf730-16x14g",
+              "productId": "tc-0707caf730",
+              "brand": "Churu",
+              "name": "Churu Snack Cremoso de Pollo para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 16,
+              "amount": 14.0,
+              "unit": "g",
+              "totalAmount": 224.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 10.64,
+              "meanObservedEUR": 12.98,
+              "maximumObservedEUR": 15.32,
+              "minimumLiveListedInStockEUR": 10.64,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-4e50c58957",
+          "name": "Churu Snack Cremoso de Atún para gatos",
+          "brand": "Churu",
+          "category": "Кремовые лакомства",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/churu-snack-cremoso-de-atun-para-gatos/URUN0101_M.html",
+            "https://www.miscota.es/gatos/inaba/churu-receta-de-atun",
+            "https://www.tiendanimal.es/churu-snack-cremoso-de-atun-para-gatos/URUN0101_M.html"
+          ],
+          "gtins": [
+            "8859387700674"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Churu - тунец",
+          "presentations": [
+            {
+              "id": "tc-4e50c58957-4x14g",
+              "productId": "tc-4e50c58957",
+              "brand": "Churu",
+              "name": "Churu Snack Cremoso de Atún para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 4,
+              "amount": 14.0,
+              "unit": "g",
+              "totalAmount": 56.0,
+              "purchasePrice": null,
+              "retailerCount": 3,
+              "minimumObservedEUR": 3.25,
+              "meanObservedEUR": 3.48,
+              "maximumObservedEUR": 3.59,
+              "minimumLiveListedInStockEUR": 3.59,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-4e50c58957-8x14g",
+              "productId": "tc-4e50c58957",
+              "brand": "Churu",
+              "name": "Churu Snack Cremoso de Atún para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 8,
+              "amount": 14.0,
+              "unit": "g",
+              "totalAmount": 112.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 7.04,
+              "meanObservedEUR": 7.04,
+              "maximumObservedEUR": 7.04,
+              "minimumLiveListedInStockEUR": 7.04,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-4e50c58957-16x14g",
+              "productId": "tc-4e50c58957",
+              "brand": "Churu",
+              "name": "Churu Snack Cremoso de Atún para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 16,
+              "amount": 14.0,
+              "unit": "g",
+              "totalAmount": 224.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 9.57,
+              "meanObservedEUR": 11.68,
+              "maximumObservedEUR": 13.79,
+              "minimumLiveListedInStockEUR": 9.57,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-768abf17c2",
+          "name": "Churu Snack Cremoso de Atún con Vieira para gatos",
+          "brand": "Churu",
+          "category": "Кремовые лакомства",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/churu-snack-cremoso-de-atun-con-vieira-para-gatos/URUN0104_M.html",
+            "https://www.tiendanimal.es/churu-snack-cremoso-de-atun-con-vieira-para-gatos/URUN0104_M.html"
+          ],
+          "gtins": [
+            "8859387700704"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Churu - тунец с гребешком",
+          "presentations": [
+            {
+              "id": "tc-768abf17c2-4x14g",
+              "productId": "tc-768abf17c2",
+              "brand": "Churu",
+              "name": "Churu Snack Cremoso de Atún con Vieira para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 4,
+              "amount": 14.0,
+              "unit": "g",
+              "totalAmount": 56.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 3.59,
+              "meanObservedEUR": 3.59,
+              "maximumObservedEUR": 3.59,
+              "minimumLiveListedInStockEUR": 3.59,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-768abf17c2-8x14g",
+              "productId": "tc-768abf17c2",
+              "brand": "Churu",
+              "name": "Churu Snack Cremoso de Atún con Vieira para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 8,
+              "amount": 14.0,
+              "unit": "g",
+              "totalAmount": 112.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 7.04,
+              "meanObservedEUR": 7.04,
+              "maximumObservedEUR": 7.04,
+              "minimumLiveListedInStockEUR": 7.04,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-768abf17c2-16x14g",
+              "productId": "tc-768abf17c2",
+              "brand": "Churu",
+              "name": "Churu Snack Cremoso de Atún con Vieira para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 16,
+              "amount": 14.0,
+              "unit": "g",
+              "totalAmount": 224.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 9.57,
+              "meanObservedEUR": 11.68,
+              "maximumObservedEUR": 13.79,
+              "minimumLiveListedInStockEUR": 9.57,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-dc3d6d94c2",
+          "name": "Churu Snack Cremoso de Pollo con Queso para gatos",
+          "brand": "Churu",
+          "category": "Кремовые лакомства",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/churu-snack-cremoso-de-pollo-con-queso-para-gatos/URUN0107_M.html",
+            "https://www.miscota.es/gatos/inaba/churu-receta-de-pollo-con-queso",
+            "https://www.tiendanimal.es/churu-snack-cremoso-de-pollo-con-queso-para-gatos/URUN0107_M.html"
+          ],
+          "gtins": [
+            "8859387700735"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Churu - курица с сыром",
+          "presentations": [
+            {
+              "id": "tc-dc3d6d94c2-4x14g",
+              "productId": "tc-dc3d6d94c2",
+              "brand": "Churu",
+              "name": "Churu Snack Cremoso de Pollo con Queso para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 4,
+              "amount": 14.0,
+              "unit": "g",
+              "totalAmount": 56.0,
+              "purchasePrice": null,
+              "retailerCount": 3,
+              "minimumObservedEUR": 3.25,
+              "meanObservedEUR": 3.48,
+              "maximumObservedEUR": 3.59,
+              "minimumLiveListedInStockEUR": 3.59,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-dc3d6d94c2-8x14g",
+              "productId": "tc-dc3d6d94c2",
+              "brand": "Churu",
+              "name": "Churu Snack Cremoso de Pollo con Queso para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 8,
+              "amount": 14.0,
+              "unit": "g",
+              "totalAmount": 112.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 7.04,
+              "meanObservedEUR": 7.04,
+              "maximumObservedEUR": 7.04,
+              "minimumLiveListedInStockEUR": 7.04,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-dc3d6d94c2-16x14g",
+              "productId": "tc-dc3d6d94c2",
+              "brand": "Churu",
+              "name": "Churu Snack Cremoso de Pollo con Queso para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 16,
+              "amount": 14.0,
+              "unit": "g",
+              "totalAmount": 224.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 9.57,
+              "meanObservedEUR": 11.68,
+              "maximumObservedEUR": 13.79,
+              "minimumLiveListedInStockEUR": 9.57,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-713f42fb9a",
+          "name": "Churu Snack Cremoso Pollo para gatitos",
+          "brand": "Churu",
+          "category": "Кремовые лакомства",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/churu-snack-cremoso-pollo-para-gatitos/URUEU692_M.html",
+            "https://www.tiendanimal.es/churu-snack-cremoso-pollo-para-gatitos/URUEU692_M.html"
+          ],
+          "gtins": [
+            "4262365730589"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Churu Kitten - курица",
+          "presentations": [
+            {
+              "id": "tc-713f42fb9a-4x14g",
+              "productId": "tc-713f42fb9a",
+              "brand": "Churu",
+              "name": "Churu Snack Cremoso Pollo para gatitos",
+              "category": "Кремовые лакомства",
+              "quantity": 4,
+              "amount": 14.0,
+              "unit": "g",
+              "totalAmount": 56.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 3.29,
+              "meanObservedEUR": 3.29,
+              "maximumObservedEUR": 3.29,
+              "minimumLiveListedInStockEUR": 3.29,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-4b391892b7",
+          "name": "Churu Hairball Control Salmón para gatos",
+          "brand": "Churu",
+          "category": "Кремовые лакомства",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/churu-hairball-control-salmon-para-gatos/URUEU677_M.html",
+            "https://www.tiendanimal.es/churu-hairball-control-salmon-para-gatos/URUEU677_M.html"
+          ],
+          "gtins": [
+            "4262365732651"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Churu Hairball Control - лосось",
+          "presentations": [
+            {
+              "id": "tc-4b391892b7-4x14g",
+              "productId": "tc-4b391892b7",
+              "brand": "Churu",
+              "name": "Churu Hairball Control Salmón para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 4,
+              "amount": 14.0,
+              "unit": "g",
+              "totalAmount": 56.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 3.29,
+              "meanObservedEUR": 3.29,
+              "maximumObservedEUR": 3.29,
+              "minimumLiveListedInStockEUR": 3.29,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-82b5e1f561",
+          "name": "Catit Creamy Snack Líquido de Pollo, Cordero para gatos",
+          "brand": "Catit",
+          "category": "Кремовые лакомства",
+          "sourceUrls": [
+            "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos",
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/catit-creamy-snack-liquido-de-pollo_-cordero-para-gatos/CAI44452_M.html",
+            "https://www.tiendanimal.es/catit-creamy-snack-liquido-de-pollo-cordero-para-gatos/CAI44452_M.html"
+          ],
+          "gtins": [
+            "022517444528"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Catit Creamy - курица с ягнёнком",
+          "presentations": [
+            {
+              "id": "tc-82b5e1f561-4x10g",
+              "productId": "tc-82b5e1f561",
+              "brand": "Catit",
+              "name": "Catit Creamy Snack Líquido de Pollo, Cordero para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 4,
+              "amount": 10.0,
+              "unit": "g",
+              "totalAmount": 40.0,
+              "purchasePrice": null,
+              "retailerCount": 3,
+              "minimumObservedEUR": 1.99,
+              "meanObservedEUR": 2.12,
+              "maximumObservedEUR": 2.19,
+              "minimumLiveListedInStockEUR": 1.99,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-c4fc3a3e21",
+          "name": "Catit Creamy Snack Líquido de Salmón con Gambas para gatos",
+          "brand": "Catit",
+          "category": "Кремовые лакомства",
+          "sourceUrls": [
+            "https://catit.es/products/snacks-para-gatos-catit-creamy-4-tubos",
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/catit-creamy-snack-liquido-de-salmon-con-gambas-para-gatos/CAI44453_M.html",
+            "https://www.tiendanimal.es/catit-creamy-snack-liquido-de-salmon-con-gambas-para-gatos/CAI44453_M.html"
+          ],
+          "gtins": [
+            "022517444535"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Catit Creamy - лосось с креветками",
+          "presentations": [
+            {
+              "id": "tc-c4fc3a3e21-4x10g",
+              "productId": "tc-c4fc3a3e21",
+              "brand": "Catit",
+              "name": "Catit Creamy Snack Líquido de Salmón con Gambas para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 4,
+              "amount": 10.0,
+              "unit": "g",
+              "totalAmount": 40.0,
+              "purchasePrice": null,
+              "retailerCount": 3,
+              "minimumObservedEUR": 1.99,
+              "meanObservedEUR": 2.12,
+              "maximumObservedEUR": 2.19,
+              "minimumLiveListedInStockEUR": 1.99,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-0e0e3831a6",
+          "name": "Catit Creamy Multipack Snack liquido para gatos",
+          "brand": "Catit",
+          "category": "Кремовые лакомства",
+          "sourceUrls": [
+            "https://www.tiendanimal.es/catit-creamy-multipack-snack-liquido-para-gatos/MRK000219275_M.html"
+          ],
+          "gtins": [
+            "0022517444597",
+            "0022517444603"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Catit Creamy - ассорти",
+          "presentations": [
+            {
+              "id": "tc-0e0e3831a6-15x10g",
+              "productId": "tc-0e0e3831a6",
+              "brand": "Catit",
+              "name": "Catit Creamy Multipack Snack liquido para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 15,
+              "amount": 10.0,
+              "unit": "g",
+              "totalAmount": 150.0,
+              "purchasePrice": null,
+              "retailerCount": 1,
+              "minimumObservedEUR": 5.81,
+              "meanObservedEUR": 5.81,
+              "maximumObservedEUR": 5.81,
+              "minimumLiveListedInStockEUR": 5.81,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-0e0e3831a6-50x10g",
+              "productId": "tc-0e0e3831a6",
+              "brand": "Catit",
+              "name": "Catit Creamy Multipack Snack liquido para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 50,
+              "amount": 10.0,
+              "unit": "g",
+              "totalAmount": 500.0,
+              "purchasePrice": null,
+              "retailerCount": 1,
+              "minimumObservedEUR": 16.14,
+              "meanObservedEUR": 16.14,
+              "maximumObservedEUR": 16.14,
+              "minimumLiveListedInStockEUR": 16.14,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-24dd160a68",
+          "name": "Vitakraft Liquid Snack Pollo y Taurina para gatos",
+          "brand": "Vitakraft",
+          "category": "Кремовые лакомства",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/vitakraft-liquid-snack-pollo-y-taurina-para-gatos/VIT16424_M.html",
+            "https://www.tiendanimal.es/vitakraft-liquid-snack-pollo-y-taurina-para-gatos/VIT16424_M.html"
+          ],
+          "gtins": [
+            "4008293416582",
+            "7610376164249"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Vitakraft Liquid Snack - курица с таурином",
+          "presentations": [
+            {
+              "id": "tc-24dd160a68-6x15g",
+              "productId": "tc-24dd160a68",
+              "brand": "Vitakraft",
+              "name": "Vitakraft Liquid Snack Pollo y Taurina para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 6,
+              "amount": 15.0,
+              "unit": "g",
+              "totalAmount": 90.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 2.29,
+              "meanObservedEUR": 2.29,
+              "maximumObservedEUR": 2.29,
+              "minimumLiveListedInStockEUR": 2.29,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-24dd160a68-24x15g",
+              "productId": "tc-24dd160a68",
+              "brand": "Vitakraft",
+              "name": "Vitakraft Liquid Snack Pollo y Taurina para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 24,
+              "amount": 15.0,
+              "unit": "g",
+              "totalAmount": 360.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 8.79,
+              "meanObservedEUR": 8.79,
+              "maximumObservedEUR": 8.79,
+              "minimumLiveListedInStockEUR": 8.79,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-24dd160a68-36x15g",
+              "productId": "tc-24dd160a68",
+              "brand": "Vitakraft",
+              "name": "Vitakraft Liquid Snack Pollo y Taurina para gatos",
+              "category": "Кремовые лакомства",
+              "quantity": 36,
+              "amount": 15.0,
+              "unit": "g",
+              "totalAmount": 540.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 12.92,
+              "meanObservedEUR": 12.92,
+              "maximumObservedEUR": 12.92,
+              "minimumLiveListedInStockEUR": 12.92,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "malt",
+      "name": "Мальт-пасты и снеки",
+      "imageLimit": 4,
+      "products": [
+        {
+          "id": "tc-84ace3f3f7",
+          "name": "GimCat Soft Extra Malta",
+          "brand": "GimCat",
+          "category": "Мальт-пасты и снеки",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/maltas-y-hierbas/malta/gimcat-soft-extra-malta/GIM68696_M.html",
+            "https://www.miscota.es/gatos/gimcat/pr-503241",
+            "https://www.tiendanimal.es/gimcat-soft-extra-malta/GIM68696_M.html"
+          ],
+          "gtins": [
+            "4002064407364",
+            "4002064407517",
+            "4002064407524",
+            "4002064417127"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "GimCat Malt-Soft Extra",
+          "presentations": [
+            {
+              "id": "tc-84ace3f3f7-1x20g",
+              "productId": "tc-84ace3f3f7",
+              "brand": "GimCat",
+              "name": "GimCat Soft Extra Malta",
+              "category": "Мальт-пасты и снеки",
+              "quantity": 1,
+              "amount": 20.0,
+              "unit": "g",
+              "totalAmount": 20.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 3.19,
+              "meanObservedEUR": 3.19,
+              "maximumObservedEUR": 3.19,
+              "minimumLiveListedInStockEUR": 3.19,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-84ace3f3f7-1x50g",
+              "productId": "tc-84ace3f3f7",
+              "brand": "GimCat",
+              "name": "GimCat Soft Extra Malta",
+              "category": "Мальт-пасты и снеки",
+              "quantity": 1,
+              "amount": 50.0,
+              "unit": "g",
+              "totalAmount": 50.0,
+              "purchasePrice": null,
+              "retailerCount": 3,
+              "minimumObservedEUR": 4.39,
+              "meanObservedEUR": 4.75,
+              "maximumObservedEUR": 5.47,
+              "minimumLiveListedInStockEUR": 4.39,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-84ace3f3f7-1x100g",
+              "productId": "tc-84ace3f3f7",
+              "brand": "GimCat",
+              "name": "GimCat Soft Extra Malta",
+              "category": "Мальт-пасты и снеки",
+              "quantity": 1,
+              "amount": 100.0,
+              "unit": "g",
+              "totalAmount": 100.0,
+              "purchasePrice": null,
+              "retailerCount": 3,
+              "minimumObservedEUR": 8.09,
+              "meanObservedEUR": 8.43,
+              "maximumObservedEUR": 9.11,
+              "minimumLiveListedInStockEUR": 8.09,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-84ace3f3f7-1x200g",
+              "productId": "tc-84ace3f3f7",
+              "brand": "GimCat",
+              "name": "GimCat Soft Extra Malta",
+              "category": "Мальт-пасты и снеки",
+              "quantity": 1,
+              "amount": 200.0,
+              "unit": "g",
+              "totalAmount": 200.0,
+              "purchasePrice": null,
+              "retailerCount": 3,
+              "minimumObservedEUR": 13.99,
+              "meanObservedEUR": 14.06,
+              "maximumObservedEUR": 14.2,
+              "minimumLiveListedInStockEUR": 13.99,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-b5a74b28d5",
+          "name": "Beaphar Pasta de Malta para gatos",
+          "brand": "Beaphar",
+          "category": "Мальт-пасты и снеки",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/maltas-y-hierbas/malta/beaphar-pasta-de-malta-para-gatos/BEA12964_M.html",
+            "https://www.miscota.es/gatos/beaphar/pasta-de-malta-para-gato",
+            "https://www.tiendanimal.es/beaphar-pasta-de-malta-para-gatos/BEA12964_M.html"
+          ],
+          "gtins": [
+            "8711231129478"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Beaphar - мальт-паста",
+          "presentations": [
+            {
+              "id": "tc-b5a74b28d5-1x100g",
+              "productId": "tc-b5a74b28d5",
+              "brand": "Beaphar",
+              "name": "Beaphar Pasta de Malta para gatos",
+              "category": "Мальт-пасты и снеки",
+              "quantity": 1,
+              "amount": 100.0,
+              "unit": "g",
+              "totalAmount": 100.0,
+              "purchasePrice": null,
+              "retailerCount": 3,
+              "minimumObservedEUR": 6.65,
+              "meanObservedEUR": 9.81,
+              "maximumObservedEUR": 11.39,
+              "minimumLiveListedInStockEUR": 11.39,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-636d6973f1",
+          "name": "Vetoquinol Malta Bezopet para gatos",
+          "brand": "Vetoquinol",
+          "category": "Мальт-пасты и снеки",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/maltas-y-hierbas/malta/vetoquinol-malta-bezopet-para-gatos/VET407881_M.html",
+            "https://www.tiendanimal.es/vetoquinol-malta-bezopet-para-gatos/VET407881_M.html"
+          ],
+          "gtins": [
+            "3605874367432"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Vetoquinol Bezopet",
+          "presentations": [
+            {
+              "id": "tc-636d6973f1-1x120g",
+              "productId": "tc-636d6973f1",
+              "brand": "Vetoquinol",
+              "name": "Vetoquinol Malta Bezopet para gatos",
+              "category": "Мальт-пасты и снеки",
+              "quantity": 1,
+              "amount": 120.0,
+              "unit": "g",
+              "totalAmount": 120.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 10.99,
+              "meanObservedEUR": 10.99,
+              "maximumObservedEUR": 10.99,
+              "minimumLiveListedInStockEUR": 10.99,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-629d7d8db7",
+          "name": "GimCat Nutri Malt Bites snacks para gatos",
+          "brand": "GimCat",
+          "category": "Мальт-пасты и снеки",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/maltas-y-hierbas/malta/gimcat-nutri-malt-bites-snacks-para-gatos/GIM78702_M.html",
+            "https://www.tiendanimal.es/gimcat-nutri-malt-bites-snacks-para-gatos/GIM78702_M.html"
+          ],
+          "gtins": [
+            "4002064427065"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "GimCat Nutri Malt Bites",
+          "presentations": [
+            {
+              "id": "tc-629d7d8db7-1x40g",
+              "productId": "tc-629d7d8db7",
+              "brand": "GimCat",
+              "name": "GimCat Nutri Malt Bites snacks para gatos",
+              "category": "Мальт-пасты и снеки",
+              "quantity": 1,
+              "amount": 40.0,
+              "unit": "g",
+              "totalAmount": 40.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 2.19,
+              "meanObservedEUR": 2.19,
+              "maximumObservedEUR": 2.19,
+              "minimumLiveListedInStockEUR": 2.19,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "oil",
+      "name": "Масла для кожи и шерсти",
+      "imageLimit": 2,
+      "products": [
+        {
+          "id": "tc-7934eaf44b",
+          "name": "Beaphar Aceite de Salmón para perros y gatos",
+          "brand": "Beaphar",
+          "category": "Масла для кожи и шерсти",
+          "sourceUrls": [
+            "https://www.miscota.es/perros/beaphar/pr-49041",
+            "https://www.tiendanimal.es/beaphar-aceite-de-salmon-para-perros-y-gatos/BEA11283_M.html"
+          ],
+          "gtins": [
+            "8711231112951"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Beaphar - лососевое масло",
+          "presentations": [
+            {
+              "id": "tc-7934eaf44b-1x425ml",
+              "productId": "tc-7934eaf44b",
+              "brand": "Beaphar",
+              "name": "Beaphar Aceite de Salmón para perros y gatos",
+              "category": "Масла для кожи и шерсти",
+              "quantity": 1,
+              "amount": 425.0,
+              "unit": "ml",
+              "totalAmount": 425.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 19.19,
+              "meanObservedEUR": 21.83,
+              "maximumObservedEUR": 24.47,
+              "minimumLiveListedInStockEUR": 19.19,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-0c0460f2f4",
+          "name": "Pro Plan Skin & Coat + Aceite de Salmón Noruego para gatos",
+          "brand": "Pro Plan",
+          "category": "Масла для кожи и шерсти",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/higiene-para-gatos/salud-del-gato/suplementos-y-vitaminas/pro-plan-skin_coat_aceite-de-salmon-noruego-para-gatos/PRO12505765_M.html"
+          ],
+          "gtins": [
+            "8445290020574"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Pro Plan Skin & Coat+ - лососевое масло",
+          "presentations": [
+            {
+              "id": "tc-0c0460f2f4-1x150ml",
+              "productId": "tc-0c0460f2f4",
+              "brand": "Pro Plan",
+              "name": "Pro Plan Skin & Coat + Aceite de Salmón Noruego para gatos",
+              "category": "Масла для кожи и шерсти",
+              "quantity": 1,
+              "amount": 150.0,
+              "unit": "ml",
+              "totalAmount": 150.0,
+              "purchasePrice": null,
+              "retailerCount": 1,
+              "minimumObservedEUR": 12.29,
+              "meanObservedEUR": 12.29,
+              "maximumObservedEUR": 12.29,
+              "minimumLiveListedInStockEUR": 12.29,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "snacks",
+      "name": "Снеки и деликатесы",
+      "imageLimit": 6,
+      "products": [
+        {
+          "id": "tc-0ed7b07305",
+          "name": "Churu Bites Bocaditos de Pollo para gatos",
+          "brand": "Churu",
+          "category": "Мягкие и хрустящие снеки",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/churu-bites-bocaditos-de-pollo-para-gatos/URUN1724_M.html",
+            "https://www.tiendanimal.es/churu-bites-bocaditos-de-pollo-para-gatos/URUN1724_M.html"
+          ],
+          "gtins": [
+            "18859387700824"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Churu Bites - курица",
+          "presentations": [
+            {
+              "id": "tc-0ed7b07305-3x10g",
+              "productId": "tc-0ed7b07305",
+              "brand": "Churu",
+              "name": "Churu Bites Bocaditos de Pollo para gatos",
+              "category": "Мягкие и хрустящие снеки",
+              "quantity": 3,
+              "amount": 10.0,
+              "unit": "g",
+              "totalAmount": 30.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 3.39,
+              "meanObservedEUR": 3.39,
+              "maximumObservedEUR": 3.39,
+              "minimumLiveListedInStockEUR": 3.39,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-0ed7b07305-12x10g",
+              "productId": "tc-0ed7b07305",
+              "brand": "Churu",
+              "name": "Churu Bites Bocaditos de Pollo para gatos",
+              "category": "Мягкие и хрустящие снеки",
+              "quantity": 12,
+              "amount": 10.0,
+              "unit": "g",
+              "totalAmount": 120.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 13.02,
+              "meanObservedEUR": 13.02,
+              "maximumObservedEUR": 13.02,
+              "minimumLiveListedInStockEUR": 13.02,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-f617e6e32b",
+          "name": "Vitakraft Cat Yums Bocaditos de Pollo para gatos",
+          "brand": "Vitakraft",
+          "category": "Мягкие и хрустящие снеки",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/vitakraft-cat-yums-bocaditos-de-pollo-para-gatos/VIT31531_M.html",
+            "https://www.tiendanimal.es/vitakraft-cat-yums-bocaditos-de-pollo-para-gatos/VIT31531_M.html"
+          ],
+          "gtins": [
+            "4008239315311"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Vitakraft Cat Yums - курица",
+          "presentations": [
+            {
+              "id": "tc-f617e6e32b-1x40g",
+              "productId": "tc-f617e6e32b",
+              "brand": "Vitakraft",
+              "name": "Vitakraft Cat Yums Bocaditos de Pollo para gatos",
+              "category": "Мягкие и хрустящие снеки",
+              "quantity": 1,
+              "amount": 40.0,
+              "unit": "g",
+              "totalAmount": 40.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 1.59,
+              "meanObservedEUR": 1.59,
+              "maximumObservedEUR": 1.59,
+              "minimumLiveListedInStockEUR": 1.59,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-f617e6e32b-4x40g",
+              "productId": "tc-f617e6e32b",
+              "brand": "Vitakraft",
+              "name": "Vitakraft Cat Yums Bocaditos de Pollo para gatos",
+              "category": "Мягкие и хрустящие снеки",
+              "quantity": 4,
+              "amount": 40.0,
+              "unit": "g",
+              "totalAmount": 160.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 6.11,
+              "meanObservedEUR": 6.11,
+              "maximumObservedEUR": 6.11,
+              "minimumLiveListedInStockEUR": 6.11,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-f617e6e32b-6x40g",
+              "productId": "tc-f617e6e32b",
+              "brand": "Vitakraft",
+              "name": "Vitakraft Cat Yums Bocaditos de Pollo para gatos",
+              "category": "Мягкие и хрустящие снеки",
+              "quantity": 6,
+              "amount": 40.0,
+              "unit": "g",
+              "totalAmount": 240.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 8.97,
+              "meanObservedEUR": 8.97,
+              "maximumObservedEUR": 8.97,
+              "minimumLiveListedInStockEUR": 8.97,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-719843e78f",
+          "name": "GimCat Bocaditos Nutri Pockets de queso para gatos",
+          "brand": "GimCat",
+          "category": "Мягкие и хрустящие снеки",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/crujientes/gimcat-bocaditos-nutri-pockets-de-queso-para-gatos/GIM78609_M.html",
+            "https://www.tiendanimal.es/gimcat-bocaditos-nutri-pockets-de-queso-para-gatos/GIM78609_M.html"
+          ],
+          "gtins": [
+            "4002064400716"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "GimCat Nutri Pockets - сыр",
+          "presentations": [
+            {
+              "id": "tc-719843e78f-1x60g",
+              "productId": "tc-719843e78f",
+              "brand": "GimCat",
+              "name": "GimCat Bocaditos Nutri Pockets de queso para gatos",
+              "category": "Мягкие и хрустящие снеки",
+              "quantity": 1,
+              "amount": 60.0,
+              "unit": "g",
+              "totalAmount": 60.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 2.19,
+              "meanObservedEUR": 2.19,
+              "maximumObservedEUR": 2.19,
+              "minimumLiveListedInStockEUR": 2.19,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-b121011ccc",
+          "name": "Applaws Lomo de Atún snack para gatos",
+          "brand": "Applaws",
+          "category": "Мясные и рыбные деликатесы",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/naturales/applaws-lomo-de-atun-snack-para-gatos/APL9504CE-A_M.html",
+            "https://www.miscota.es/gatos/applaws/snack-para-gatos-lomo-de-atun",
+            "https://www.tiendanimal.es/applaws-lomo-de-atun-snack-para-gatos/APL9504CE-A_M.html"
+          ],
+          "gtins": [
+            "5060333434649"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Applaws - филе тунца",
+          "presentations": [
+            {
+              "id": "tc-b121011ccc-1x30g",
+              "productId": "tc-b121011ccc",
+              "brand": "Applaws",
+              "name": "Applaws Lomo de Atún snack para gatos",
+              "category": "Мясные и рыбные деликатесы",
+              "quantity": 1,
+              "amount": 30.0,
+              "unit": "g",
+              "totalAmount": 30.0,
+              "purchasePrice": null,
+              "retailerCount": 3,
+              "minimumObservedEUR": 1.99,
+              "meanObservedEUR": 2.06,
+              "maximumObservedEUR": 2.09,
+              "minimumLiveListedInStockEUR": 2.09,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-b121011ccc-2x30g",
+              "productId": "tc-b121011ccc",
+              "brand": "Applaws",
+              "name": "Applaws Lomo de Atún snack para gatos",
+              "category": "Мясные и рыбные деликатесы",
+              "quantity": 2,
+              "amount": 30.0,
+              "unit": "g",
+              "totalAmount": 60.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 4.1,
+              "meanObservedEUR": 4.1,
+              "maximumObservedEUR": 4.1,
+              "minimumLiveListedInStockEUR": 4.1,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-b121011ccc-4x30g",
+              "productId": "tc-b121011ccc",
+              "brand": "Applaws",
+              "name": "Applaws Lomo de Atún snack para gatos",
+              "category": "Мясные и рыбные деликатесы",
+              "quantity": 4,
+              "amount": 30.0,
+              "unit": "g",
+              "totalAmount": 120.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 6.27,
+              "meanObservedEUR": 7.15,
+              "maximumObservedEUR": 8.03,
+              "minimumLiveListedInStockEUR": 6.27,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-b121011ccc-6x30g",
+              "productId": "tc-b121011ccc",
+              "brand": "Applaws",
+              "name": "Applaws Lomo de Atún snack para gatos",
+              "category": "Мясные и рыбные деликатесы",
+              "quantity": 6,
+              "amount": 30.0,
+              "unit": "g",
+              "totalAmount": 180.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 11.79,
+              "meanObservedEUR": 11.79,
+              "maximumObservedEUR": 11.79,
+              "minimumLiveListedInStockEUR": 11.79,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-06a4db0143",
+          "name": "Kit Cat FreezeBites Pollo Snack Liofilizado para gatos",
+          "brand": "Kit Cat",
+          "category": "Мясные и рыбные деликатесы",
+          "sourceUrls": [
+            "https://kitcat.es/products/freezebites-pollo",
+            "https://www.miscota.es/gatos/kit-cat/freezebites-de-pollo",
+            "https://www.tiendanimal.es/kit-cat-freezebites-pollo-snack-liofilizado-para-gatos/KTCKC6963_M.html"
+          ],
+          "gtins": [
+            "671875796963"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Kit Cat FreezeBites - курица",
+          "presentations": [
+            {
+              "id": "tc-06a4db0143-1x15g",
+              "productId": "tc-06a4db0143",
+              "brand": "Kit Cat",
+              "name": "Kit Cat FreezeBites Pollo Snack Liofilizado para gatos",
+              "category": "Мясные и рыбные деликатесы",
+              "quantity": 1,
+              "amount": 15.0,
+              "unit": "g",
+              "totalAmount": 15.0,
+              "purchasePrice": null,
+              "retailerCount": 3,
+              "minimumObservedEUR": 2.15,
+              "meanObservedEUR": 2.17,
+              "maximumObservedEUR": 2.19,
+              "minimumLiveListedInStockEUR": 2.15,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-06a4db0143-4x15g",
+              "productId": "tc-06a4db0143",
+              "brand": "Kit Cat",
+              "name": "Kit Cat FreezeBites Pollo Snack Liofilizado para gatos",
+              "category": "Мясные и рыбные деликатесы",
+              "quantity": 4,
+              "amount": 15.0,
+              "unit": "g",
+              "totalAmount": 60.0,
+              "purchasePrice": null,
+              "retailerCount": 1,
+              "minimumObservedEUR": null,
+              "meanObservedEUR": null,
+              "maximumObservedEUR": null,
+              "minimumLiveListedInStockEUR": null,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-1877f4a340",
+          "name": "FreezeBites Salmón 15g - Snack Liofilizado",
+          "brand": "Kit Cat",
+          "category": "Мясные и рыбные деликатесы",
+          "sourceUrls": [
+            "https://kitcat.es/products/freezebites-salmon"
+          ],
+          "gtins": [],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Kit Cat FreezeBites - лосось",
+          "presentations": [
+            {
+              "id": "tc-1877f4a340-1x15g",
+              "productId": "tc-1877f4a340",
+              "brand": "Kit Cat",
+              "name": "FreezeBites Salmón 15g - Snack Liofilizado",
+              "category": "Мясные и рыбные деликатесы",
+              "quantity": 1,
+              "amount": 15.0,
+              "unit": "g",
+              "totalAmount": 15.0,
+              "purchasePrice": null,
+              "retailerCount": 1,
+              "minimumObservedEUR": 2.15,
+              "meanObservedEUR": 2.15,
+              "maximumObservedEUR": 2.15,
+              "minimumLiveListedInStockEUR": 2.15,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "toppers",
+      "name": "Супы и мясные топперы",
+      "imageLimit": 6,
+      "products": [
+        {
+          "id": "tc-61ec2b29f1",
+          "name": "Churu Broth Sopa de Pollo con Vieira para gatos",
+          "brand": "Churu",
+          "category": "Супы и мясные топперы",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/natural/churu-broth-sopa-de-pollo-con-vieira-para-gatos/URUN0828_M.html",
+            "https://www.tiendanimal.es/churu-broth-sopa-de-pollo-con-vieira-para-gatos/URUN0828_M.html"
+          ],
+          "gtins": [
+            "4262365738271"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Churu Broth - курица с гребешком",
+          "presentations": [
+            {
+              "id": "tc-61ec2b29f1-1x40g",
+              "productId": "tc-61ec2b29f1",
+              "brand": "Churu",
+              "name": "Churu Broth Sopa de Pollo con Vieira para gatos",
+              "category": "Супы и мясные топперы",
+              "quantity": 1,
+              "amount": 40.0,
+              "unit": "g",
+              "totalAmount": 40.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 1.29,
+              "meanObservedEUR": 1.29,
+              "maximumObservedEUR": 1.29,
+              "minimumLiveListedInStockEUR": 1.29,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-db3fbe95f1",
+          "name": "Churu Stew Estofado de Pollo para gatos",
+          "brand": "Churu",
+          "category": "Супы и мясные топперы",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/natural/churu-stew-estofado-de-pollo-para-gatos/URUN0842_M.html",
+            "https://www.tiendanimal.es/churu-stew-estofado-de-pollo-para-gatos/URUN0842_M.html"
+          ],
+          "gtins": [
+            "4262365738424"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Churu Stew - курица",
+          "presentations": [
+            {
+              "id": "tc-db3fbe95f1-1x40g",
+              "productId": "tc-db3fbe95f1",
+              "brand": "Churu",
+              "name": "Churu Stew Estofado de Pollo para gatos",
+              "category": "Супы и мясные топперы",
+              "quantity": 1,
+              "amount": 40.0,
+              "unit": "g",
+              "totalAmount": 40.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 1.49,
+              "meanObservedEUR": 1.49,
+              "maximumObservedEUR": 1.49,
+              "minimumLiveListedInStockEUR": 1.49,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-57f941fe4f",
+          "name": "Ciao Broth Sopa Pollo y Atún para gatos",
+          "brand": "Ciao",
+          "category": "Супы и мясные топперы",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/ciao-broth-sopa-pollo-y-atun-para-gatos/URUEU826_M.html",
+            "https://www.tiendanimal.es/ciao-broth-sopa-pollo-y-atun-para-gatos/URUEU826_M.html"
+          ],
+          "gtins": [
+            "4262365738264"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Ciao Broth - курица с тунцом",
+          "presentations": [
+            {
+              "id": "tc-57f941fe4f-1x40g",
+              "productId": "tc-57f941fe4f",
+              "brand": "Ciao",
+              "name": "Ciao Broth Sopa Pollo y Atún para gatos",
+              "category": "Супы и мясные топперы",
+              "quantity": 1,
+              "amount": 40.0,
+              "unit": "g",
+              "totalAmount": 40.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 1.39,
+              "meanObservedEUR": 1.39,
+              "maximumObservedEUR": 1.39,
+              "minimumLiveListedInStockEUR": 1.39,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-0206d66a70",
+          "name": "Dashi Delights Lata Atún para gatos",
+          "brand": "Dashi Delights",
+          "category": "Супы и мясные топперы",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/dashi-delights-lata-atun-para-gatos/URUEU857_M.html",
+            "https://www.tiendanimal.es/dashi-delights-lata-atun-para-gatos/URUEU857_M.html"
+          ],
+          "gtins": [
+            "4262365731937"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Dashi Delights - тунец",
+          "presentations": [
+            {
+              "id": "tc-0206d66a70-1x70g",
+              "productId": "tc-0206d66a70",
+              "brand": "Dashi Delights",
+              "name": "Dashi Delights Lata Atún para gatos",
+              "category": "Супы и мясные топперы",
+              "quantity": 1,
+              "amount": 70.0,
+              "unit": "g",
+              "totalAmount": 70.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 1.99,
+              "meanObservedEUR": 1.99,
+              "maximumObservedEUR": 1.99,
+              "minimumLiveListedInStockEUR": 1.99,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-5da4b0e874",
+          "name": "Dashi Delights Snack Cremoso Pollo y Copos de Bonito tarrina para gatos",
+          "brand": "Dashi Delights",
+          "category": "Супы и мясные топперы",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/complementos-alimenticios/dashi-delights-snack-cremoso-pollo-y-copos-de-bonito-tarrina-para-gatos/URUEU867_M.html",
+            "https://www.tiendanimal.es/dashi-delights-snack-cremoso-pollo-y-copos-de-bonito-tarrina-para-gatos/URUEU867_M.html"
+          ],
+          "gtins": [
+            "4262365730657"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Dashi Delights - курица с хлопьями бонито",
+          "presentations": [
+            {
+              "id": "tc-5da4b0e874-1x70g",
+              "productId": "tc-5da4b0e874",
+              "brand": "Dashi Delights",
+              "name": "Dashi Delights Snack Cremoso Pollo y Copos de Bonito tarrina para gatos",
+              "category": "Супы и мясные топперы",
+              "quantity": 1,
+              "amount": 70.0,
+              "unit": "g",
+              "totalAmount": 70.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 2.19,
+              "meanObservedEUR": 2.19,
+              "maximumObservedEUR": 2.19,
+              "minimumLiveListedInStockEUR": 2.19,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-185b159101",
+          "name": "Dashi Delights Snack Cremoso Pollo y Salmón tarrina para gatos",
+          "brand": "Dashi Delights",
+          "category": "Супы и мясные топперы",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/complementos-alimenticios/dashi-delights-snack-cremoso-pollo-y-salmon-tarrina-para-gatos/URUEU868_M.html",
+            "https://www.tiendanimal.es/dashi-delights-snack-cremoso-pollo-y-salmon-tarrina-para-gatos/URUEU868_M.html"
+          ],
+          "gtins": [
+            "4262365730664"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Dashi Delights - курица с лососем",
+          "presentations": [
+            {
+              "id": "tc-185b159101-1x70g",
+              "productId": "tc-185b159101",
+              "brand": "Dashi Delights",
+              "name": "Dashi Delights Snack Cremoso Pollo y Salmón tarrina para gatos",
+              "category": "Супы и мясные топперы",
+              "quantity": 1,
+              "amount": 70.0,
+              "unit": "g",
+              "totalAmount": 70.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 1.79,
+              "meanObservedEUR": 1.79,
+              "maximumObservedEUR": 1.79,
+              "minimumLiveListedInStockEUR": 1.79,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "care",
+      "name": "Добавки, трава и уход за зубами",
+      "imageLimit": 6,
+      "products": [
+        {
+          "id": "tc-157b188bba",
+          "name": "Pro Plan Veterinary Diets FortiFlora Probiótico para gatos",
+          "brand": "Pro Plan",
+          "category": "Пробиотики",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/higiene-para-gatos/salud-del-gato/salud-digestiva-y-probioticos/pro-plan-veterinary-diets-fortiflora-probiotico-para-gatos/PVDCATFORBOX_M.html"
+          ],
+          "gtins": [
+            "8445290040923"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Pro Plan FortiFlora - пробиотик",
+          "presentations": [
+            {
+              "id": "tc-157b188bba-30x1g",
+              "productId": "tc-157b188bba",
+              "brand": "Pro Plan",
+              "name": "Pro Plan Veterinary Diets FortiFlora Probiótico para gatos",
+              "category": "Пробиотики",
+              "quantity": 30,
+              "amount": 1.0,
+              "unit": "g",
+              "totalAmount": 30.0,
+              "purchasePrice": null,
+              "retailerCount": 1,
+              "minimumObservedEUR": 30.99,
+              "meanObservedEUR": 30.99,
+              "maximumObservedEUR": 30.99,
+              "minimumLiveListedInStockEUR": 30.99,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-5477267745",
+          "name": "GimCat Taurina en Pasta",
+          "brand": "GimCat",
+          "category": "Другие пищевые добавки",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/higiene-para-gatos/salud-del-gato/suplementos-y-vitaminas/gimcat-taurina-en-pasta/GIM78613_M.html"
+          ],
+          "gtins": [
+            "4002064402109"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "GimCat - паста с таурином",
+          "presentations": [
+            {
+              "id": "tc-5477267745-1x50g",
+              "productId": "tc-5477267745",
+              "brand": "GimCat",
+              "name": "GimCat Taurina en Pasta",
+              "category": "Другие пищевые добавки",
+              "quantity": 1,
+              "amount": 50.0,
+              "unit": "g",
+              "totalAmount": 50.0,
+              "purchasePrice": null,
+              "retailerCount": 1,
+              "minimumObservedEUR": 5.99,
+              "meanObservedEUR": 5.99,
+              "maximumObservedEUR": 5.99,
+              "minimumLiveListedInStockEUR": 5.99,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-bfbb53d6d1",
+          "name": "GimCat Hierba Gatera en Bandeja",
+          "brand": "GimCat",
+          "category": "Кошачья трава",
+          "sourceUrls": [
+            "https://www.tiendanimal.es/gimcat-hierba-gatera-en-bandeja/GIM68784_M.html"
+          ],
+          "gtins": [
+            "4002064407005"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "GimCat - трава в лотке",
+          "presentations": [
+            {
+              "id": "tc-bfbb53d6d1-1x150g",
+              "productId": "tc-bfbb53d6d1",
+              "brand": "GimCat",
+              "name": "GimCat Hierba Gatera en Bandeja",
+              "category": "Кошачья трава",
+              "quantity": 1,
+              "amount": 150.0,
+              "unit": "g",
+              "totalAmount": 150.0,
+              "purchasePrice": null,
+              "retailerCount": 1,
+              "minimumObservedEUR": 3.19,
+              "meanObservedEUR": 3.19,
+              "maximumObservedEUR": 3.19,
+              "minimumLiveListedInStockEUR": 3.19,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-2b64c192f5",
+          "name": "Dentalife Snack Dentales Pollo para gatos",
+          "brand": "Dentalife",
+          "category": "Уход за зубами",
+          "sourceUrls": [
+            "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/salud-dental/dentalife-snack-dentales-pollo-para-gatos/DLI12384415_M.html",
+            "https://www.tiendanimal.es/dentalife-snack-dentales-pollo-para-gatos/DLI12384415_M.html"
+          ],
+          "gtins": [
+            "7613036724135"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Dentalife - дентальные снеки с курицей",
+          "presentations": [
+            {
+              "id": "tc-2b64c192f5-1x40g",
+              "productId": "tc-2b64c192f5",
+              "brand": "Dentalife",
+              "name": "Dentalife Snack Dentales Pollo para gatos",
+              "category": "Уход за зубами",
+              "quantity": 1,
+              "amount": 40.0,
+              "unit": "g",
+              "totalAmount": 40.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 1.99,
+              "meanObservedEUR": 2.04,
+              "maximumObservedEUR": 2.09,
+              "minimumLiveListedInStockEUR": 1.99,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-2b64c192f5-4x40g",
+              "productId": "tc-2b64c192f5",
+              "brand": "Dentalife",
+              "name": "Dentalife Snack Dentales Pollo para gatos",
+              "category": "Уход за зубами",
+              "quantity": 4,
+              "amount": 40.0,
+              "unit": "g",
+              "totalAmount": 160.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 7.64,
+              "meanObservedEUR": 7.83,
+              "maximumObservedEUR": 8.03,
+              "minimumLiveListedInStockEUR": 7.64,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-2b64c192f5-6x40g",
+              "productId": "tc-2b64c192f5",
+              "brand": "Dentalife",
+              "name": "Dentalife Snack Dentales Pollo para gatos",
+              "category": "Уход за зубами",
+              "quantity": 6,
+              "amount": 40.0,
+              "unit": "g",
+              "totalAmount": 240.0,
+              "purchasePrice": null,
+              "retailerCount": 2,
+              "minimumObservedEUR": 9.4,
+              "meanObservedEUR": 10.31,
+              "maximumObservedEUR": 11.22,
+              "minimumLiveListedInStockEUR": 9.4,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-ea417c8cdd",
+          "name": "PlaqueOff Polvo Antisarro para higiene bucal de perros y gatos",
+          "brand": "PlaqueOff",
+          "category": "Уход за зубами",
+          "sourceUrls": [
+            "https://www.kiwoko.com/perros/higiene-para-perros/salud-del-perro/dentadura/plaqueoff-polvo-antisarro-para-higiene-bucal-de-perros-y-gatos/SWEFP0320_M.html"
+          ],
+          "gtins": [
+            "7350055513066",
+            "7350055513516"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "PlaqueOff - порошок для ухода за зубами",
+          "presentations": [
+            {
+              "id": "tc-ea417c8cdd-1x40g",
+              "productId": "tc-ea417c8cdd",
+              "brand": "PlaqueOff",
+              "name": "PlaqueOff Polvo Antisarro para higiene bucal de perros y gatos",
+              "category": "Уход за зубами",
+              "quantity": 1,
+              "amount": 40.0,
+              "unit": "g",
+              "totalAmount": 40.0,
+              "purchasePrice": null,
+              "retailerCount": 1,
+              "minimumObservedEUR": 17.99,
+              "meanObservedEUR": 17.99,
+              "maximumObservedEUR": 17.99,
+              "minimumLiveListedInStockEUR": 17.99,
+              "minimumDeliveredToValenciaEUR": null
+            },
+            {
+              "id": "tc-ea417c8cdd-1x60g",
+              "productId": "tc-ea417c8cdd",
+              "brand": "PlaqueOff",
+              "name": "PlaqueOff Polvo Antisarro para higiene bucal de perros y gatos",
+              "category": "Уход за зубами",
+              "quantity": 1,
+              "amount": 60.0,
+              "unit": "g",
+              "totalAmount": 60.0,
+              "purchasePrice": null,
+              "retailerCount": 1,
+              "minimumObservedEUR": 18.99,
+              "meanObservedEUR": 18.99,
+              "maximumObservedEUR": 18.99,
+              "minimumLiveListedInStockEUR": 18.99,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        },
+        {
+          "id": "tc-b85b72cc24",
+          "name": "Beaphar Gel Dental para perros y gatos",
+          "brand": "Beaphar",
+          "category": "Уход за зубами",
+          "sourceUrls": [
+            "https://www.kiwoko.com/perros/higiene-para-perros/salud-del-perro/dentadura/beaphar-gel-dental-para-perros-y-gatos/BEA15685_M.html"
+          ],
+          "gtins": [
+            "8711231156856"
+          ],
+          "purchasePrice": null,
+          "priority": null,
+          "displayName": "Beaphar - зубной гель",
+          "presentations": [
+            {
+              "id": "tc-b85b72cc24-1x100g",
+              "productId": "tc-b85b72cc24",
+              "brand": "Beaphar",
+              "name": "Beaphar Gel Dental para perros y gatos",
+              "category": "Уход за зубами",
+              "quantity": 1,
+              "amount": 100.0,
+              "unit": "g",
+              "totalAmount": 100.0,
+              "purchasePrice": null,
+              "retailerCount": 1,
+              "minimumObservedEUR": 7.49,
+              "meanObservedEUR": 7.49,
+              "maximumObservedEUR": 7.49,
+              "minimumLiveListedInStockEUR": 7.49,
+              "minimumDeliveredToValenciaEUR": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "heybopet",
+      "name": "Heybo Pet",
+      "imageLimit": 21,
+      "products": [
+        {
+          "model": "HBZH-ICB-20",
+          "category": "Лотки",
+          "type": "Автоматический лоток",
+          "subtype": "Базовая модель открытой серии",
+          "nameOriginal": "Arenero Inteligente de Techo Abierto HBZH-ICB-20",
+          "nameCatalogue": "HBZH-ICB-20 Open-Top Smart Cat Litter Box",
+          "difference": "Tuya Smart, очистка и опорожнение наполнителя",
+          "capacityDeclared": null,
+          "specificationsDeclared": {
+            "Power Input": "AC 100-240V / DC 5V 1A",
+            "Connectivity": "Dual WiFi 2.4GHz (Tuya)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbzh-icb-20-open-top-smart-cat-litter-box",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-01.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-02.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-03.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-04.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-05.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-06.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-07.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-08.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-09.png"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [
+            "Dual WiFi 2.4GHz не подтверждает поддержку диапазона 5 ГГц"
+          ],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBZH-ICB-21",
+          "category": "Лотки",
+          "type": "Автоматический лоток",
+          "subtype": "Pro",
+          "nameOriginal": "Arenero Inteligente de Techo Abierto HBZH-ICB-21 Pro",
+          "nameCatalogue": "HBZH-ICB-21 Open-Top Smart Cat Litter Box Pro",
+          "difference": "Обновлённый механизм очистки, увеличенный контейнер отходов",
+          "capacityDeclared": null,
+          "specificationsDeclared": {
+            "Noise Level": "<35dB operation",
+            "Power Input": "AC 100-240V / DC 5V 1A",
+            "Connectivity": "Dual WiFi 2.4GHz (Tuya)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbzh-icb-21-open-top-smart-cat-litter-box",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-21-litter-box-b2b-wholesale-oem-odm-image-01.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-21-litter-box-b2b-wholesale-oem-odm-image-02.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-21-litter-box-b2b-wholesale-oem-odm-image-03.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-21-litter-box-b2b-wholesale-oem-odm-image-04.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-21-litter-box-b2b-wholesale-oem-odm-image-05.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-21-litter-box-b2b-wholesale-oem-odm-image-06.png"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [
+            "Dual WiFi 2.4GHz не подтверждает поддержку диапазона 5 ГГц"
+          ],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBZH-ICB-15",
+          "category": "Лотки",
+          "type": "Автоматический лоток",
+          "subtype": "Lite, компактная модель",
+          "nameOriginal": "Arenero Inteligente de Techo Abierto HBZH-ICB-15",
+          "nameCatalogue": "HBZH-ICB-15 Open-Top Smart Cat Litter Box",
+          "difference": "Компактная конструкция, Tuya Smart",
+          "capacityDeclared": null,
+          "specificationsDeclared": {
+            "Power Input": "AC 100-240V / DC 5V 1A",
+            "Connectivity": "WiFi 2.4GHz (Tuya)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbzh-icb-15-open-top-smart-cat-litter-box",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-15-litter-box-b2b-wholesale-oem-odm-image-01.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-15-litter-box-b2b-wholesale-oem-odm-image-02.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-15-litter-box-b2b-wholesale-oem-odm-image-03.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-15-litter-box-b2b-wholesale-oem-odm-image-04.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-15-litter-box-b2b-wholesale-oem-odm-image-05.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-15-litter-box-b2b-wholesale-oem-odm-image-06.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-15-litter-box-b2b-wholesale-oem-odm-image-07.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-15-litter-box-b2b-wholesale-oem-odm-image-08.jpg"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [
+            "Открытая конструкция заявлена производителем, соответствие конкретных фотографий и конструкции требует уточнения"
+          ],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBZYH-PFW-04LR",
+          "category": "Кормушки",
+          "type": "Автоматическая кормушка",
+          "subtype": "Одна миска, без заявленной камеры",
+          "nameOriginal": "Comedero Inteligente para Mascotas HBZYH-PFW-04LR",
+          "nameCatalogue": "HBZYH-PFW-04LR Smart Pet Feeder",
+          "difference": "4 л, Tuya Smart, до 4 кормлений в день",
+          "capacityDeclared": "4L",
+          "specificationsDeclared": {
+            "Capacity": "4L",
+            "Meals": "4 meals/day, max 9 servings/meal",
+            "Bowl Material": "304 Stainless Steel",
+            "Connectivity": "WiFi 2.4GHz (Tuya)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbzyh-pfw-04lr-smart-pet-feeder",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbzyh-pfw-04lr-feeder-b2b-wholesale-oem-odm-image-01.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzyh-pfw-04lr-feeder-b2b-wholesale-oem-odm-image-02.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzyh-pfw-04lr-feeder-b2b-wholesale-oem-odm-image-03.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzyh-pfw-04lr-feeder-b2b-wholesale-oem-odm-image-04.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzyh-pfw-04lr-feeder-b2b-wholesale-oem-odm-image-05.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzyh-pfw-04lr-feeder-b2b-wholesale-oem-odm-image-06.jpg"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBZH-ICB-24",
+          "category": "Лотки",
+          "type": "Автоматический лоток",
+          "subtype": "XL Pro",
+          "nameOriginal": "Arenero Inteligente de Techo Abierto HBZH-ICB-24",
+          "nameCatalogue": "HBZH-ICB-24 Open-Top Smart Cat Litter Box",
+          "difference": "Управление и журнал данных через Tuya Smart",
+          "capacityDeclared": null,
+          "specificationsDeclared": {
+            "Power Input": "AC 100-240V / DC 5V 1A",
+            "Connectivity": "Dual WiFi 2.4GHz (Tuya)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbzh-icb-24-open-top-smart-cat-litter-box",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-24-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [
+            "Dual WiFi 2.4GHz не подтверждает поддержку диапазона 5 ГГц"
+          ],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBZH-HRC-01",
+          "category": "Лотки",
+          "type": "Обычный закрытый лоток",
+          "subtype": "Вход с щётками для шерсти",
+          "nameOriginal": "HBZH-HRC-01 Arenero para Gatos con Eliminación de Pelo Suelto",
+          "nameCatalogue": "HBZH-HRC-01 Hair Removal Cat Litter Box",
+          "difference": "Щётки на входе и ступенька для сбора наполнителя, 3 цвета",
+          "capacityDeclared": null,
+          "specificationsDeclared": {
+            "Litter Box Size": "52 x 45 x 42 cm",
+            "Step Size": "35 x 44 x 8 cm",
+            "Hair Removal Gate Size": "21 x 27 x 2.5 cm",
+            "Colors": "3 colors available"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbzh-hrc-01-hair-removal-cat-litter-box",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-01.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-02.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-03.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-04.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-05.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-06.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-07.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-08.jpg"
+          ],
+          "existingInCatManDog": false,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [
+            "Самоочистка не заявлена в предметном описании, не относить к автоматическим лоткам",
+            "SEO-заголовок и общий Product Type ошибочно относят модель к автоматическим и открытым лоткам"
+          ],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "heybopet-MAT-001",
+          "category": "Аксессуары",
+          "type": "Коврик под лоток",
+          "subtype": "Защита поверхности и сбор наполнителя",
+          "nameOriginal": "Alfombrilla Inferior para Arenero Inteligente heybopet",
+          "nameCatalogue": "heybopet Smart Litter Box Bottom Mat",
+          "difference": "Водостойкая поверхность, противоскользящая основа",
+          "capacityDeclared": null,
+          "specificationsDeclared": {
+            "Material": "Waterproof, Odor-Resistant",
+            "Features": "Triple-Proof (Water/Slip/Odor)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/heybopet-waterproof-bottom-mat-accessories",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-01.png",
+            "https://www.heybopet.com/images/products/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-02.png",
+            "https://www.heybopet.com/images/products/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-03.png",
+            "https://www.heybopet.com/images/products/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-04.png",
+            "https://www.heybopet.com/images/products/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-05.png"
+          ],
+          "existingInCatManDog": false,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBZH-ICB-19",
+          "category": "Лотки",
+          "type": "Автоматический лоток",
+          "subtype": "XL",
+          "nameOriginal": "HBZH-ICB-19 Caja de Arena Inteligente Abierta para Gatos",
+          "nameCatalogue": "HBZH-ICB-19 Open-Top Smart Cat Litter Box",
+          "difference": "Заявлен для 2-3 кошек, выдвижной контейнер отходов",
+          "capacityDeclared": "XL (2–3 cats)",
+          "specificationsDeclared": {
+            "Capacity": "XL (2–3 cats)",
+            "Power Input": "AC 100-240V / DC 5V 1A",
+            "Connectivity": "Dual WiFi 2.4GHz (Tuya)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbzh-icb-19-open-top-smart-cat-litter-box",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-06.jpg",
+            "https://www.heybopet.com/images/products/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-07.jpg",
+            "https://www.heybopet.com/images/products/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-08.jpg",
+            "https://www.heybopet.com/images/products/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-09.jpg",
+            "https://www.heybopet.com/images/products/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-10.jpg",
+            "https://www.heybopet.com/images/products/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-11.jpg",
+            "https://www.heybopet.com/images/products/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-12.jpg",
+            "https://www.heybopet.com/images/products/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-13.jpg"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [
+            "Открытая конструкция заявлена производителем, соответствие конкретных фотографий и конструкции требует уточнения",
+            "Dual WiFi 2.4GHz не подтверждает поддержку диапазона 5 ГГц",
+            "В галерее есть файлы с кодом MAT-001 - перед публикацией проверить соответствие фотографий модели"
+          ],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBZH-ICB-16",
+          "category": "Лотки",
+          "type": "Автоматический лоток",
+          "subtype": "Standard",
+          "nameOriginal": "HBZH-ICB-16 Caja de Arena Inteligente Abierta para Gatos",
+          "nameCatalogue": "HBZH-ICB-16 Open-Top Smart Cat Litter Box",
+          "difference": "Стандартная модель открытой серии с Tuya Smart",
+          "capacityDeclared": null,
+          "specificationsDeclared": {
+            "Power Input": "AC 100-240V / DC 5V 1A",
+            "Connectivity": "WiFi 2.4GHz (Tuya)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbzh-icb-16-open-top-smart-cat-litter-box",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbzh-icb-16-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBHD-PWF-FC30L",
+          "category": "Поилки",
+          "type": "Фонтан-поилка",
+          "subtype": "Струя из крана, LED-окно",
+          "nameOriginal": "Fuente de Agua para Mascotas HBHD-PWF-FC30L",
+          "nameCatalogue": "HBHD-PWF-FC30L Stainless Steel Pet Water Fountain",
+          "difference": "3 л, сталь 304, тройная фильтрация",
+          "capacityDeclared": "3.0L",
+          "specificationsDeclared": {
+            "Capacity": "3.0L",
+            "Material": "304 Food-Grade Stainless Steel",
+            "Filtration": "Triple-stage",
+            "Noise Level": "<25dB",
+            "Water Level": "LED backlit transparent window"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbhd-pwf-fc30l-stainless-steel-pet-water-fountain",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbhd-pwf-fc30l-water-fountain-b2b-wholesale-oem-odm-image-01.png"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBHD-IWF-32",
+          "category": "Поилки",
+          "type": "Фонтан-поилка с приложением",
+          "subtype": "Tuya Smart",
+          "nameOriginal": "Fuente de Agua para Mascotas de Acero Inoxidable HBHD-IWF-32",
+          "nameCatalogue": "HBHD-IWF-32 Stainless Steel Pet Water Fountain",
+          "difference": "3,2 л, сталь 304, тройная фильтрация, мониторинг уровня воды",
+          "capacityDeclared": "3.2L",
+          "specificationsDeclared": {
+            "Capacity": "3.2L",
+            "Material": "304 Stainless Steel",
+            "Filtration": "Triple-stage",
+            "Noise Level": "<25dB",
+            "Connectivity": "WiFi 2.4GHz (Tuya)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbhd-iwf-32-stainless-steel-pet-water-fountain",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbhd-iwf-32-water-fountain-b2b-wholesale-oem-odm-image-01.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-iwf-32-water-fountain-b2b-wholesale-oem-odm-image-02.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-iwf-32-water-fountain-b2b-wholesale-oem-odm-image-03.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-iwf-32-water-fountain-b2b-wholesale-oem-odm-image-04.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-iwf-32-water-fountain-b2b-wholesale-oem-odm-image-05.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-iwf-32-water-fountain-b2b-wholesale-oem-odm-image-06.jpg"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBHD-PWF-R32L",
+          "category": "Поилки",
+          "type": "Фонтан-поилка",
+          "subtype": "Струя из крана",
+          "nameOriginal": "Fuente de Agua para Mascotas de Acero Inoxidable HBHD-PWF-R32L",
+          "nameCatalogue": "HBHD-PWF-R32L Stainless Steel Pet Water Fountain",
+          "difference": "3,2 л, нержавеющая сталь, разборная конструкция",
+          "capacityDeclared": "3.2L",
+          "specificationsDeclared": {
+            "Capacity": "3.2L",
+            "Material": "Stainless Steel",
+            "Flow Type": "Faucet design",
+            "Connectivity": "WiFi 2.4GHz (Tuya)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbhd-pwf-r32l-stainless-steel-pet-water-fountain",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbhd-pwf-r32l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-pwf-r32l-water-fountain-b2b-wholesale-oem-odm-image-02.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-pwf-r32l-water-fountain-b2b-wholesale-oem-odm-image-03.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-pwf-r32l-water-fountain-b2b-wholesale-oem-odm-image-04.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-pwf-r32l-water-fountain-b2b-wholesale-oem-odm-image-05.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-pwf-r32l-water-fountain-b2b-wholesale-oem-odm-image-06.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-pwf-r32l-water-fountain-b2b-wholesale-oem-odm-image-07.jpg"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [
+            "В структурированной спецификации указана Tuya, но список основных функций не описывает управление через приложение - уточнить конфигурацию"
+          ],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBHD-PWF-SSSB30L",
+          "category": "Поилки",
+          "type": "Фонтан-поилка",
+          "subtype": "Квадратная, индукционное питание",
+          "nameOriginal": "Fuente de Agua para Mascotas de Acero Inoxidable HBHD-PWF-SSSB30L",
+          "nameCatalogue": "HBHD-PWF-SSSB30L Stainless Steel Pet Water Fountain",
+          "difference": "3 л, нержавеющая сталь, угольный фильтр",
+          "capacityDeclared": "3.0L",
+          "specificationsDeclared": {
+            "Capacity": "3.0L",
+            "Material": "Stainless Steel",
+            "Power": "Wireless induction"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbhd-pwf-sssb30l-stainless-steel-pet-water-fountain",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbhd-pwf-sssb30l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-pwf-sssb30l-water-fountain-b2b-wholesale-oem-odm-image-02.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-pwf-sssb30l-water-fountain-b2b-wholesale-oem-odm-image-03.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-pwf-sssb30l-water-fountain-b2b-wholesale-oem-odm-image-04.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-pwf-sssb30l-water-fountain-b2b-wholesale-oem-odm-image-05.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-pwf-sssb30l-water-fountain-b2b-wholesale-oem-odm-image-06.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhd-pwf-sssb30l-water-fountain-b2b-wholesale-oem-odm-image-07.jpg"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [
+            "Индукционная передача питания не подтверждает наличие батареи или автономную работу"
+          ],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBHQ-PWF-SF032L",
+          "category": "Поилки",
+          "type": "Фонтан-поилка с приложением",
+          "subtype": "Серия SF",
+          "nameOriginal": "Fuente de Agua para Mascotas de Acero Inoxidable HBHQ-PWF-SF032L",
+          "nameCatalogue": "HBHQ-PWF-SF032L Stainless Steel Pet Water Fountain",
+          "difference": "3,2 л, нержавеющая сталь, тройная фильтрация, Tuya Smart",
+          "capacityDeclared": "3.2L",
+          "specificationsDeclared": {
+            "Capacity": "3.2L",
+            "Material": "Premium Stainless Steel",
+            "Connectivity": "WiFi 2.4GHz (Tuya)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbhq-pwf-sf032l-stainless-steel-pet-water-fountain",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbhq-pwf-sf032l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbhq-pwf-sf032l-water-fountain-b2b-wholesale-oem-odm-image-02.webp",
+            "https://www.heybopet.com/images/products/heybopet-hbhq-pwf-sf032l-water-fountain-b2b-wholesale-oem-odm-image-03.webp",
+            "https://www.heybopet.com/images/products/heybopet-hbhq-pwf-sf032l-water-fountain-b2b-wholesale-oem-odm-image-04.webp",
+            "https://www.heybopet.com/images/products/heybopet-hbhq-pwf-sf032l-water-fountain-b2b-wholesale-oem-odm-image-05.webp",
+            "https://www.heybopet.com/images/products/heybopet-hbhq-pwf-sf032l-water-fountain-b2b-wholesale-oem-odm-image-06.webp"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBJH-PFV-4L",
+          "category": "Кормушки",
+          "type": "Автоматическая кормушка с камерой",
+          "subtype": "Встроенная HD-камера",
+          "nameOriginal": "Comedero Inteligente para Mascotas HBJH-PFV-4L",
+          "nameCatalogue": "HBJH-PFV-4L Smart Pet Feeder",
+          "difference": "4 л, Tuya Smart, программирование порций",
+          "capacityDeclared": "4L",
+          "specificationsDeclared": {
+            "Capacity": "4L",
+            "Camera": "HD built-in",
+            "Connectivity": "WiFi 2.4GHz (Tuya)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbjh-pfv-4l-smart-pet-feeder",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-4l-feeder-b2b-wholesale-oem-odm-image-01.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-4l-feeder-b2b-wholesale-oem-odm-image-02.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-4l-feeder-b2b-wholesale-oem-odm-image-03.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-4l-feeder-b2b-wholesale-oem-odm-image-04.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-4l-feeder-b2b-wholesale-oem-odm-image-05.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-4l-feeder-b2b-wholesale-oem-odm-image-06.jpg"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBJH-PFV-5LB",
+          "category": "Кормушки",
+          "type": "Автоматическая кормушка",
+          "subtype": "Одна миска, без заявленной камеры",
+          "nameOriginal": "HBJH-PFV-5LB Alimentador Inteligente para Mascotas",
+          "nameCatalogue": "HBJH-PFV-5LB Smart Pet Feeder",
+          "difference": "7 л, Tuya Smart, отсек для влагопоглотителя",
+          "capacityDeclared": "7L",
+          "specificationsDeclared": {
+            "Capacity": "7L",
+            "Connectivity": "WiFi 2.4GHz (Tuya)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbjh-pfv-5lb-smart-pet-feeder",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-5lb-feeder-b2b-wholesale-oem-odm-image-01.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-5lb-feeder-b2b-wholesale-oem-odm-image-02.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-5lb-feeder-b2b-wholesale-oem-odm-image-03.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-5lb-feeder-b2b-wholesale-oem-odm-image-04.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-5lb-feeder-b2b-wholesale-oem-odm-image-05.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-5lb-feeder-b2b-wholesale-oem-odm-image-06.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-5lb-feeder-b2b-wholesale-oem-odm-image-07.jpg"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [
+            "Объём в спецификации - 7 л, не 5 л, код модели не является обозначением вместимости",
+            "Камера в этой карточке не заявлена"
+          ],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBJH-PFV-7L",
+          "category": "Кормушки",
+          "type": "Автоматическая кормушка с камерой",
+          "subtype": "Pro, встроенная HD-камера",
+          "nameOriginal": "Dispensador Inteligente de Comida para Mascotas HBJH-PFV-7L",
+          "nameCatalogue": "HBJH-PFV-7L Smart Pet Feeder",
+          "difference": "7 л, Tuya Smart, программирование порций",
+          "capacityDeclared": "7L",
+          "specificationsDeclared": {
+            "Capacity": "7L",
+            "Camera": "HD built-in",
+            "Material": "Eco-friendly ABS",
+            "Connectivity": "WiFi 2.4GHz (Tuya)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbjh-pfv-7l-smart-pet-feeder",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-7l-feeder-b2b-wholesale-oem-odm-image-01.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-7l-feeder-b2b-wholesale-oem-odm-image-02.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-7l-feeder-b2b-wholesale-oem-odm-image-03.png",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-7l-feeder-b2b-wholesale-oem-odm-image-04.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-7l-feeder-b2b-wholesale-oem-odm-image-05.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-7l-feeder-b2b-wholesale-oem-odm-image-06.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbjh-pfv-7l-feeder-b2b-wholesale-oem-odm-image-07.jpg"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBZH-PDB-HG100",
+          "category": "Сушка и уход",
+          "type": "Сушильный бокс для животных",
+          "subtype": "Закрытая камера с контролем температуры",
+          "nameOriginal": "HBZH-PDB-HG100 Gabinete Inteligente para Secado de Mascotas",
+          "nameCatalogue": "HBZH-PDB-HG100 Smart Pet Drying Cabinet",
+          "difference": "ABS+PC, питание AC 110-240 В",
+          "capacityDeclared": null,
+          "specificationsDeclared": {
+            "Material": "ABS+PC",
+            "Power Input": "AC 110-240V"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbzh-pdb-hg100-smart-pet-drying-cabinet",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pdb-hg100-drying-cabinet-b2b-wholesale-oem-odm-image-01.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pdb-hg100-drying-cabinet-b2b-wholesale-oem-odm-image-02.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pdb-hg100-drying-cabinet-b2b-wholesale-oem-odm-image-03.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pdb-hg100-drying-cabinet-b2b-wholesale-oem-odm-image-04.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pdb-hg100-drying-cabinet-b2b-wholesale-oem-odm-image-05.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pdb-hg100-drying-cabinet-b2b-wholesale-oem-odm-image-06.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pdb-hg100-drying-cabinet-b2b-wholesale-oem-odm-image-07.jpg"
+          ],
+          "existingInCatManDog": false,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [
+            "В общей сводке указаны CE/FCC/RoHS, в списке функций упомянута CE, подтверждающие документы не проверены"
+          ],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBZH-PFV-45L",
+          "category": "Кормушки",
+          "type": "Автоматическая кормушка с камерой",
+          "subtype": "Встроенная HD-камера",
+          "nameOriginal": "HBZH-PFV-45L Comedero Inteligente para Mascotas con Cámara",
+          "nameCatalogue": "HBZH-PFV-45L Smart Pet Feeder with Camera",
+          "difference": "4,5 л, Tuya Smart, миска из стали 304",
+          "capacityDeclared": "4.5L",
+          "specificationsDeclared": {
+            "Capacity": "4.5L",
+            "Camera": "HD built-in",
+            "Material": "Food-grade ABS",
+            "Bowl Material": "304 Stainless Steel",
+            "Connectivity": "WiFi 2.4GHz (Tuya)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbzh-pfv-45l-smart-pet-feeder-with-camera",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pfv-45l-feeder-b2b-wholesale-oem-odm-image-01.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pfv-45l-feeder-b2b-wholesale-oem-odm-image-02.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pfv-45l-feeder-b2b-wholesale-oem-odm-image-03.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pfv-45l-feeder-b2b-wholesale-oem-odm-image-04.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pfv-45l-feeder-b2b-wholesale-oem-odm-image-05.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pfv-45l-feeder-b2b-wholesale-oem-odm-image-06.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pfv-45l-feeder-b2b-wholesale-oem-odm-image-07.jpg"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [
+            "Объём - 4,5 л, не 45 л"
+          ],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBZH-PFW-7L",
+          "category": "Кормушки",
+          "type": "Автоматическая кормушка с двумя мисками",
+          "subtype": "Две миски",
+          "nameOriginal": "HBZH-PFW-7L Comedero Inteligente para Mascotas",
+          "nameCatalogue": "HBZH-PFW-7L Smart Pet Feeder",
+          "difference": "7 л, миски из стали 304, Tuya Smart",
+          "capacityDeclared": "7L (~4kg food)",
+          "specificationsDeclared": {
+            "Capacity": "7L (~4kg food)",
+            "Bowl": "Double bowl",
+            "Bowl Material": "304 Stainless Steel",
+            "Connectivity": "WiFi 2.4GHz (Tuya)"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbzh-pfw-7l-smart-pet-feeder",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-01.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-02.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-03.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-04.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-05.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-06.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-07.jpg",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-08.jpg"
+          ],
+          "existingInCatManDog": true,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [],
+          "verifiedOn": "2026-10-12"
+        },
+        {
+          "model": "HBZH-FFC-01",
+          "category": "Приготовление еды",
+          "type": "Прибор для приготовления свежей еды",
+          "subtype": "Измельчение, смешивание и приготовление",
+          "nameOriginal": "Cocina Inteligente de Alimentos Frescos HBZH-FFC-01",
+          "nameCatalogue": "HBZH-FFC-01 Smart Pet Fresh Food Cooker",
+          "difference": "Низкотемпературное приготовление, Wi-Fi 2,4 ГГц, Tuya",
+          "capacityDeclared": null,
+          "specificationsDeclared": {
+            "Cooking Method": "Low-temperature precise thermal cooking",
+            "Functions": "Chopping, Grinding, Mixing, Cooking",
+            "Connectivity": "WiFi 2.4GHz (Tuya)",
+            "Material": "Food-grade Stainless Steel & ABS"
+          },
+          "sourceUrl": "https://www.heybopet.com/es/products/hbzh-ffc-01-fresh-food-cooker",
+          "imageSourceUrls": [
+            "https://www.heybopet.com/images/products/heybopet-hbzh-ffc-01-fresh-food-cooker-b2b-wholesale-oem-odm-image-01.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-ffc-01-fresh-food-cooker-b2b-wholesale-oem-odm-image-02.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-ffc-01-fresh-food-cooker-b2b-wholesale-oem-odm-image-03.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-ffc-01-fresh-food-cooker-b2b-wholesale-oem-odm-image-04.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-ffc-01-fresh-food-cooker-b2b-wholesale-oem-odm-image-05.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-ffc-01-fresh-food-cooker-b2b-wholesale-oem-odm-image-06.png",
+            "https://www.heybopet.com/images/products/heybopet-hbzh-ffc-01-fresh-food-cooker-b2b-wholesale-oem-odm-image-07.png"
+          ],
+          "existingInCatManDog": false,
+          "retailPrice": null,
+          "purchasePrice": null,
+          "quotationStatus": "awaiting_supplier",
+          "priority": null,
+          "notes": [
+            "Числовая вместимость и диапазон температур не найдены в опубликованной спецификации"
+          ],
+          "verifiedOn": "2026-10-12"
+        }
+      ]
+    }
+  ]
+}

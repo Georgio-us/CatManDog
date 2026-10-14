@@ -1,0 +1,843 @@
+[
+  {
+    "id": "hills-84c83496",
+    "brand": "Hill's",
+    "name": "Prescription Diet i/d Digestive Care Chicken & Vegetables Stew",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      82
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-digestive-care-i_d-gatos-estofado-de-pollo-y-verduras-lata/HIL606342_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-digestive-care-i%2Fd-gatos-estofado-de-pollo-y-verduras-lata/HIL606342_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Digestive Care i/d Gatos Estofado de Pollo y Verduras lata",
+    "productId": "hills-wet-84c83496",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-digestive-care-i_d-gatos-estofado-de-pollo-y-verduras-lata/HIL606342_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-84c83496.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw3963b575/images/comida_humeda_gato_hills_prescription_diet_digestive_care_pollo_vegetales_HIL606342.jpg",
+    "referenceSource": "https://www.kiwoko.com/alimentacion-gato/82-g-hill_s-prescription-diet-digestive-care-i_d-gatos-estofado-de-pollo-y-verduras-lata/HIL606342.html",
+    "referenceGrams": 82,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-43f33709",
+    "brand": "Hill's",
+    "name": "Prescription Diet i/d Digestive Care Chicken",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      156
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-digestive-care-i_d-gatos-pollo-lata/HIL4628YT_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-digestive-care-i%2Fd-gatos-pollo-lata/HIL4628YT_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Digestive Care i/d Gatos Pollo lata",
+    "productId": "hills-wet-43f33709",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-digestive-care-i_d-gatos-pollo-lata/HIL4628YT_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-43f33709.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwf97120cc/images/comida_humeda_gatos_hills_prescription_diet_digestion_care_id_pollo_HIL4628YT_M.jpg",
+    "referenceSource": "https://www.kiwoko.com/alimentacion-gato/156-g-hill_s-prescription-diet-digestive-care-i_d-gatos-pollo-lata/HIL4628YT.html",
+    "referenceGrams": 156,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-fcae66af",
+    "brand": "Hill's",
+    "name": "Prescription Diet i/d Digestive Care Chicken - в соусе",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85
+    ],
+    "sourceUrls": [
+      "https://www.tiendanimal.es/hills-prescription-diet-digestive-care-i%2Fd-pollo-en-salsa-sobre-para-gatos-multipack/HIL605726_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Digestive Care i/d Pollo en salsa sobre para gatos Multipack",
+    "productId": "hills-wet-fcae66af",
+    "sourceUrl": "https://www.tiendanimal.es/hills-prescription-diet-digestive-care-i%2Fd-pollo-en-salsa-sobre-para-gatos-multipack/HIL605726_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-fcae66af.jpg",
+    "referenceUrl": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw8dc07cde/images/comida_humeda_gatos_hills_bolsitas_prescription_diet_metabolic_weight_management_i_d_HIL1189M_box.jpg",
+    "referenceSource": "https://www.tiendanimal.es/12-sobres-x-85-g-hills-prescription-diet-digestive-care-i%2Fd-pollo-en-salsa-sobre-para-gatos-/HIL605726.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe",
+    "packQuantity": 12
+  },
+  {
+    "id": "hills-5d47b053",
+    "brand": "Hill's",
+    "name": "Prescription Diet k/d Early Stage Kidney Care Chicken - в соусе",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-early-stage-kidney-care-k_d-pollo-sobre-en-salsa-para-gatos/HIL603571BOX_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-early-stage-kidney-care-k%2Fd-pollo-sobre-en-salsa-para-gatos/HIL603571BOX_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Early Stage Kidney Care k/d Pollo sobre en salsa para gatos",
+    "productId": "hills-wet-5d47b053",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-early-stage-kidney-care-k_d-pollo-sobre-en-salsa-para-gatos/HIL603571BOX_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-5d47b053.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwc21f1c64/images/comida_humeda_gato_hills_early_stage_kidney_care_pollo_HIL603571BOX_box.jpg",
+    "referenceSource": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-diet-early-stage-kidney-care-k_d-pollo-sobre-en-salsa-para-gatos/HIL603571BOX.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe",
+    "packQuantity": 12
+  },
+  {
+    "id": "hills-741ce6ac",
+    "brand": "Hill's",
+    "name": "Prescription Diet ON-Care Chicken & Vegetables Stew",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      82
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-feline-estofado-con-pollo-y-verduras-para-gatos-adultos/HIL608464_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-feline-estofado-con-pollo-y-verduras-para-gatos-adultos/HIL608464_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Feline Estofado con Pollo y Verduras para Gatos Adultos",
+    "productId": "hills-wet-741ce6ac",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-feline-estofado-con-pollo-y-verduras-para-gatos-adultos/HIL608464_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-741ce6ac.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw209ee391/images/hills_pd_estofado_pollo_careon_gatos_HIL608464.jpg",
+    "referenceSource": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/82-g-hill_s-prescription-diet-feline-estofado-con-pollo-y-verduras-para-gatos-adultos/HIL608464.html",
+    "referenceGrams": 82,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-3e2a1a71",
+    "brand": "Hill's",
+    "name": "Prescription Diet Gastrointestinal Biome Chicken - в соусе",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-feline-gi-biome-digestive-care-pollo-y-verduras-sobre-en-salsa/HIL607212_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-feline-gi-biome-digestive-care-pollo-y-verduras-sobre-en-salsa/HIL607212_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Feline GI Biome Digestive Care Pollo y Verduras Sobre en salsa",
+    "productId": "hills-wet-3e2a1a71",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-feline-gi-biome-digestive-care-pollo-y-verduras-sobre-en-salsa/HIL607212_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-3e2a1a71.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw591eb7ee/images/comida_humeda_gatos_hills_prescription_diet_feline_gi_digestive_care_pollo_verduras_salsa_HIL607212_JN23_1.jpg",
+    "referenceSource": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-hill_s-prescription-diet-feline-gi-biome-digestive-care-pollo-y-verduras-sobre-en-salsa/HIL607212.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-4e422946",
+    "brand": "Hill's",
+    "name": "Prescription Diet z/d Food Sensitivities",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      156
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-food-sensitives-lata-z_d-para-gatos/HIL5661YT_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-food-sensitives-lata-z%2Fd-para-gatos/HIL5661YT_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Food Sensitives lata z/d para gatos",
+    "productId": "hills-wet-4e422946",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-food-sensitives-lata-z_d-para-gatos/HIL5661YT_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-4e422946.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwed770078/images/pienso_perros_hills_prescritpion_diet_food_sensitivities_zd_HIL8018M_M_JL23_1.jpg",
+    "referenceSource": "https://www.kiwoko.com/alimentacion-gato/156-g-hill_s-prescription-diet-food-sensitives-lata-z_d-para-gatos/HIL5661YT.html",
+    "referenceGrams": 156,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-455d9020",
+    "brand": "Hill's",
+    "name": "Prescription Diet Gastrointestinal Biome Chicken Stew",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      82
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-gastrointestinal-biome-estofado-de-pollo-lata-para-gatos/HIL604420_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-gastrointestinal-biome-estofado-de-pollo-lata-para-gatos/HIL604420_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Gastrointestinal Biome Estofado de Pollo lata para gatos",
+    "productId": "hills-wet-455d9020",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-gastrointestinal-biome-estofado-de-pollo-lata-para-gatos/HIL604420_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-455d9020.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwad95e744/images/comida_humeda_gatos_hills_gatroitestinal_biome_HIL604420_M_JL23_1.jpg",
+    "referenceSource": "https://www.kiwoko.com/alimentacion-gato/82-g-hill_s-prescription-diet-gastrointestinal-biome-estofado-de-pollo-lata-para-gatos/HIL604420.html",
+    "referenceGrams": 82,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-ff59af26",
+    "brand": "Hill's",
+    "name": "Prescription Diet i/d Digestive Care Kitten Chicken",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-i_d-digestive-care-kitten-lata-pollo-para-gatos/HIL609418_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-i%2Fd-digestive-care-kitten-lata-pollo-para-gatos/HIL609418_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet I/D Digestive Care Kitten Lata Pollo para gatos",
+    "productId": "hills-wet-ff59af26",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-i_d-digestive-care-kitten-lata-pollo-para-gatos/HIL609418_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-ff59af26.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw3924dc23/images/hills_pd_digestivo_gato_HIL609418_1.jpg",
+    "referenceSource": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-latas-x-85-g-hill_s-prescription-diet-i_d-digestive-care-kitten-lata-pollo-para-gatos/HIL609418.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-93eb5a88",
+    "brand": "Hill's",
+    "name": "Prescription Diet k/d Kidney Care Chicken",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      156
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-kidney-care-k_d-pollo-lata-para-gatos/HIL605649_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-kidney-care-k%2Fd-pollo-lata-para-gatos/HIL605649_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Kidney Care k/d Pollo lata para gatos",
+    "productId": "hills-wet-93eb5a88",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-kidney-care-k_d-pollo-lata-para-gatos/HIL605649_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-93eb5a88.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw4607ac9b/images/comida_humeda_gatos_hills_prescription_diet_kidney_care_kd_pollo_HIL605649[1].jpg",
+    "referenceSource": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/156-g-hill_s-prescription-diet-kidney-care-k_d-pollo-lata-para-gatos/HIL605649.html",
+    "referenceGrams": 156,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-0637713f",
+    "brand": "Hill's",
+    "name": "Prescription Diet k/d Kidney Care Chicken - в соусе",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85
+    ],
+    "sourceUrls": [
+      "https://www.tiendanimal.es/hills-prescription-diet-kidney-care-k%2Fd-pollo-sobre-para-gatos/HIL1187U_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Kidney Care k/d Pollo sobre para gatos",
+    "productId": "hills-wet-0637713f",
+    "sourceUrl": "https://www.tiendanimal.es/hills-prescription-diet-kidney-care-k%2Fd-pollo-sobre-para-gatos/HIL1187U_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-0637713f.jpg",
+    "referenceUrl": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw2fb4d9df/images/comida_humeda_gatos_hills_bolsitas_prescription_diet_kidney_care_kd_HIL1187M_box.jpg",
+    "referenceSource": "https://www.tiendanimal.es/12-sobres-x-85-g-hills-prescription-diet-kidney-care-k%2Fd-pollo-sobre-para-gatos/HIL1187U.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe",
+    "packQuantity": 12
+  },
+  {
+    "id": "hills-35883719",
+    "brand": "Hill's",
+    "name": "Prescription Diet k/d Kidney Care Chicken & Vegetables Stew",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      82
+    ],
+    "sourceUrls": [
+      "https://www.tiendanimal.es/hills-prescription-diet-kidney-care-k%2Fd-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603880_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Kidney Care k/d estofado de pollo y vegetales lata para gatos",
+    "productId": "hills-wet-35883719",
+    "sourceUrl": "https://www.tiendanimal.es/hills-prescription-diet-kidney-care-k%2Fd-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603880_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-35883719.jpg",
+    "referenceUrl": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw72203fba/images/gatos_comida_humeda_kd_estofado_pollo_hills_prescription_diet_HIL603880_M.jpg",
+    "referenceSource": "https://www.tiendanimal.es/82-g-hills-prescription-diet-kidney-care-k%2Fd-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603880.html",
+    "referenceGrams": 82,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-59c92e72",
+    "brand": "Hill's",
+    "name": "Prescription Diet Metabolic + Mobility Chicken - в соусе",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-metabolic_mobility-pollo-sobres-para-gatos---multipack/HIL609956BOX_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Metabolic + Mobility Pollo Sobres para gatos - Multipack",
+    "productId": "hills-wet-59c92e72",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-metabolic_mobility-pollo-sobres-para-gatos---multipack/HIL609956BOX_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-59c92e72.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwc269bbc5/images/Hill's_Prescription_Diet_Metabolic_Mobility_Pollo_Sobres_gatos_Multipack_HIL609956BOX_M.jpg",
+    "referenceSource": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-hill_s-prescription-diet-metabolic_mobility-pollo-sobres-para-gatos---multipack/HIL609956BOX.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-39b05056",
+    "brand": "Hill's",
+    "name": "Prescription Diet Metabolic Chicken & Vegetables Stew",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      82
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-metabolic-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603882_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-metabolic-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603882_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Metabolic Estofado de Pollo y Vegetales lata para gatos",
+    "productId": "hills-wet-39b05056",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-metabolic-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603882_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-39b05056.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw0791933b/images/comida_humeda_gatos_hills_prescription_diet_metabolic_estofado_HIL603882.jpg",
+    "referenceSource": "https://www.kiwoko.com/perros_new/alimentacion/comida-humeda/82-g-hill_s-prescription-diet-metabolic-estofado-de-pollo-y-vegetales-lata-para-gatos/HIL603882.html",
+    "referenceGrams": 82,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-d365388e",
+    "brand": "Hill's",
+    "name": "Prescription Diet Metabolic Chicken - в соусе",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-prescription-diet-metabolic-feline-pouches-pollo-para-gato---multipack/HIL3438U_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-metabolic-feline-pouches-pollo-para-gato---multipack/HIL3438U_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Metabolic Feline Pouches Pollo para gato - Multipack",
+    "productId": "hills-wet-d365388e",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-prescription-diet-metabolic-feline-pouches-pollo-para-gato---multipack/HIL3438U_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-d365388e.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwc6ca6f8d/images/Hill's_Presciption_Diet_Metabolic_Feline_Pouches_gato_multipack_HIL3438U_M.jpg",
+    "referenceSource": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-diet-metabolic-feline-pouches-para-gato-/HIL3438UBOX.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe",
+    "packQuantity": 12
+  },
+  {
+    "id": "hills-0295886f",
+    "brand": "Hill's",
+    "name": "Prescription Diet Metabolic Chicken Mousse",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-metabolic-mousse-de-pollo-lata-para-gatos/HIL608824_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Metabolic Mousse de Pollo lata para gatos",
+    "productId": "hills-wet-0295886f",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-metabolic-mousse-de-pollo-lata-para-gatos/HIL608824_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-0295886f.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwab9a0809/images/Hill's_Prescription_Diet_Metabolic_Mouse_Pollo_lata_gatos_HIL608824_M.jpg",
+    "referenceSource": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-prescription-diet-metabolic-mousse-de-pollo-lata-para-gatos/HIL608824.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-957babc5",
+    "brand": "Hill's",
+    "name": "Prescription Diet y/d Thyroid Care Chicken",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      156
+    ],
+    "sourceUrls": [
+      "https://www.tiendanimal.es/hills-prescription-diet-thyroid-care-y%2Fd-pollo-lata-para-gatos/HIL1496YT_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Thyroid Care y/d Pollo lata para gatos",
+    "productId": "hills-wet-957babc5",
+    "sourceUrl": "https://www.tiendanimal.es/hills-prescription-diet-thyroid-care-y%2Fd-pollo-lata-para-gatos/HIL1496YT_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-957babc5.jpg",
+    "referenceUrl": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw1ec27896/images/comida_humeda_gatos_hills_prescription_diet_thyroid_care_yd_pollo_HIL1496YT_M.jpg",
+    "referenceSource": "https://www.tiendanimal.es/156-g-hills-prescription-diet-thyroid-care-y%2Fd-pollo-lata-para-gatos/HIL1496YT.html",
+    "referenceGrams": 156,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-fde8dc60",
+    "brand": "Hill's",
+    "name": "Prescription Diet a/d Urgent Care Chicken Mousse",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      200
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/hill_s-prescription-diet-urgent-care-a_d-mousse-de-pollo-lata-para-perros-y-gatos/HIL608305_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-urgent-care-a%2Fd-mousse-de-pollo-lata-para-perros-y-gatos/HIL608305_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Urgent Care a/d Mousse de Pollo lata para perros y gatos",
+    "productId": "hills-wet-fde8dc60",
+    "sourceUrl": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/hill_s-prescription-diet-urgent-care-a_d-mousse-de-pollo-lata-para-perros-y-gatos/HIL608305_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-fde8dc60.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwc341d15b/images/comida_humeda_perros_gatos_hills_prescription_diet_urgent_care_ad_mousse_pollo_HIL608305_0.jpg",
+    "referenceSource": "https://www.kiwoko.com/perros_new/alimentacion/comida-humeda/200-g-hill_s-prescription-diet-urgent-care-a_d-mousse-de-pollo-lata-para-perros-y-gatos/HIL608305.html",
+    "referenceGrams": 200,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-a11884d0",
+    "brand": "Hill's",
+    "name": "Prescription Diet c/d Urinary Care Chicken",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      156
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-urinary-care-c_d-pollo-lata-para-gatos/HIL9451YT_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-urinary-care-c%2Fd-pollo-lata-para-gatos/HIL9451YT_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Urinary Care c/d Pollo lata para gatos",
+    "productId": "hills-wet-a11884d0",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-urinary-care-c_d-pollo-lata-para-gatos/HIL9451YT_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-a11884d0.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwa8ea1c65/images/comida_humeda_gatos_hills_prescription_diet_urinary_care_cd_pollo_HIL9451YT_M.jpg",
+    "referenceSource": "https://www.kiwoko.com/alimentacion-gato/156-g-hill_s-prescription-diet-urinary-care-c_d-pollo-lata-para-gatos/HIL9451YT.html",
+    "referenceGrams": 156,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-e9c06900",
+    "brand": "Hill's",
+    "name": "Prescription Diet c/d Urinary Care Chicken - в соусе",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-urinary-care-c_d-pollo-sobre-para-gatos/HIL1188U_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-urinary-care-c%2Fd-pollo-sobre-para-gatos/HIL1188U_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Urinary Care c/d Pollo sobre para gatos",
+    "productId": "hills-wet-e9c06900",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-urinary-care-c_d-pollo-sobre-para-gatos/HIL1188U_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-e9c06900.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwfd65da0b/images/comida_humeda_gatos_hills_urinary_care_HIL1188U_boxing.jpg",
+    "referenceSource": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-diet-urinary-care-c_d-pollo-sobre-para-gatos/HIL1188U.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe",
+    "packQuantity": 12
+  },
+  {
+    "id": "hills-5870554d",
+    "brand": "Hill's",
+    "name": "Prescription Diet s/d Urinary Care Chicken - в соусе",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-urinary-care-s_d-pollo-sobre-en-salsa-para-gatos-%E2%80%93-pack-12/HIL607213_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-urinary-care-s%2Fd-pollo-sobre-en-salsa-para-gatos-%E2%80%93-pack-12/HIL607213_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Urinary Care s/d Pollo Sobre en Salsa para gatos - Pack 12",
+    "productId": "hills-wet-5870554d",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-urinary-care-s_d-pollo-sobre-en-salsa-para-gatos-%E2%80%93-pack-12/HIL607213_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-5870554d.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw073da0ae/images/comida_humeda_gato_hills_prescription_diet_urinary_care_sd_pollo_salsa_HIL607213_2.jpg",
+    "referenceSource": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-diet-urinary-care-s_d-pollo-sobre-en-salsa-para-gatos-12/HIL607213.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe",
+    "packQuantity": 12
+  },
+  {
+    "id": "hills-61fa56ea",
+    "brand": "Hill's",
+    "name": "Prescription Diet Urinary Stress + Metabolic Chicken - в соусе",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85
+    ],
+    "sourceUrls": [
+      "https://www.tiendanimal.es/hills-prescription-diet-urinary-stress-metabolic-pollo-sobre-para-gatos/HIL605411BOX_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet Urinary Stress + Metabolic Pollo sobre para gatos",
+    "productId": "hills-wet-61fa56ea",
+    "sourceUrl": "https://www.tiendanimal.es/hills-prescription-diet-urinary-stress-metabolic-pollo-sobre-para-gatos/HIL605411BOX_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-61fa56ea.jpg",
+    "referenceUrl": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwd4aa49da/images/Hills_prescription_diet_urinary_weight_care_HIL605411BOX_M_box.jpg",
+    "referenceSource": "https://www.tiendanimal.es/12-sobres-x-85-g-hills-prescription-diet-urinary-stress-metabolic-pollo-sobre-para-gatos/HIL605411BOX.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe",
+    "packQuantity": 12
+  },
+  {
+    "id": "hills-4ade1f05",
+    "brand": "Hill's",
+    "name": "Prescription Diet a/d Chicken Mousse",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-a_d-mousse-de-pollo-lata-para-perros-y-gatos/HIL610099_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-a%2Fd-mousse-de-pollo-lata-para-perros-y-gatos/HIL610099_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet a/d Mousse de Pollo Lata para perros y gatos",
+    "productId": "hills-wet-4ade1f05",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-a_d-mousse-de-pollo-lata-para-perros-y-gatos/HIL610099_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-4ade1f05.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw8fff9f76/images/Hill's_Prescription_Diet_a_d_Mousse_Pollo_Lata_perros_gatos_HIL610099_M.jpg",
+    "referenceSource": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-prescription-diet-a_d-mousse-de-pollo-lata-para-perros-y-gatos/HIL610099.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-21a67454",
+    "brand": "Hill's",
+    "name": "Prescription Diet c/d Urinary Stress Tuna Stew",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      82
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-c_d-cuidado-urinario-estres-estofado-de-atun-lata-para-gatos/HIL605865_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-c%2Fd-cuidado-urinario-estres-estofado-de-atun-lata-para-gatos/HIL605865_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet c/d Cuidado Urinario Estrés Estofado de Atún lata para gatos",
+    "productId": "hills-wet-21a67454",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-c_d-cuidado-urinario-estres-estofado-de-atun-lata-para-gatos/HIL605865_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-21a67454.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw468abd9e/images/comida_humeda_perros_hills_pd_cd_cuidado_urinario_estres_estofado_atun_HIL605865.jpg[1].jpg",
+    "referenceSource": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/82-g-hill_s-prescription-diet-c_d-cuidado-urinario-estres-estofado-de-atun-lata-para-gatos/HIL605865.html",
+    "referenceGrams": 82,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-a93b1999",
+    "brand": "Hill's",
+    "name": "Prescription Diet c/d Multicare Chicken Mousse",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-c_d-multicare-mousse-de-pollo-lata-para-gatos/HIL608821_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-c%2Fd-multicare-mousse-de-pollo-lata-para-gatos/HIL608821_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet c/d Multicare Mousse de Pollo lata para gatos",
+    "productId": "hills-wet-a93b1999",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-c_d-multicare-mousse-de-pollo-lata-para-gatos/HIL608821_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-a93b1999.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw1bf9fb49/images/Hill's_Prescription_Diet_c_d_Multicare_Mousse_Pollo_lata_gatos_HIL608821_M.jpg",
+    "referenceSource": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-prescription-diet-c_d-multicare-mousse-de-pollo-lata-para-gatos/HIL608821.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-f2f234bf",
+    "brand": "Hill's",
+    "name": "Prescription Diet c/d Urinary Care Chicken & Vegetables Stew",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      82
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-c_d-urinary-care-pollo-lata-para-gatos/HBG43191_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-c%2Fd-urinary-care-pollo-lata-para-gatos/HBG43191_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet c/d Urinary Care Pollo lata para gatos",
+    "productId": "hills-wet-f2f234bf",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-c_d-urinary-care-pollo-lata-para-gatos/HBG43191_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-f2f234bf.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwed5b8b01/images/new_Hills_comida_humeda_Urinary_Care_para_gatos_HBG43191.jpg",
+    "referenceSource": "https://www.kiwoko.com/alimentacion-gato/82-g-hill%E2%80%99s-prescription-diet-c_d-urinary-care-pollo-lata-para-gatos/HBG43191.html",
+    "referenceGrams": 82,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-868091cf",
+    "brand": "Hill's",
+    "name": "Prescription Diet i/d Chicken Mousse",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85,
+      200
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-i_d-mousse-de-pollo-lata-para-gatos/HIL608827_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet i/d Mousse de Pollo lata para gatos",
+    "productId": "hills-wet-868091cf",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-i_d-mousse-de-pollo-lata-para-gatos/HIL608827_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-868091cf.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw122bc5f6/images/Hill's_Prescription_Diet_i_d_Mousse_Pollo_lata_gatos_HIL608827_M.jpg",
+    "referenceSource": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/85-g-hill_s-prescription-diet-i_d-mousse-de-pollo-lata-para-gatos/HIL608827.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  },
+  {
+    "id": "hills-b35fc3b5",
+    "brand": "Hill's",
+    "name": "Prescription Diet k/d + Mobility j/d Chicken - в соусе",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-k_d_mobility-j_d-pollo-sobre-para-gatos/HIL10743U_M.html",
+      "https://www.tiendanimal.es/hills-prescription-diet-k%2Fd-mobility-j%2Fd-pollo-sobre-para-gatos/HIL10743U_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription Diet k/d + Mobility j/d Pollo sobre para gatos",
+    "productId": "hills-wet-b35fc3b5",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-k_d_mobility-j_d-pollo-sobre-para-gatos/HIL10743U_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-b35fc3b5.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw6d4ef2ea/images/Hills_comida_humeda_salud_renal_para_gatos_HIL10743U_box.jpg",
+    "referenceSource": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-diet-k_d_mobility-j_d-pollo-sobre-para-gatos/HIL10743UBOX.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe",
+    "packQuantity": 12
+  },
+  {
+    "id": "hills-e2a61dad",
+    "brand": "Hill's",
+    "name": "Prescription Diet k/d Kidney Care Salmon - в соусе",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      85
+    ],
+    "sourceUrls": [
+      "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-k_d-diet-kidney-care-salmon-sobre-en-salsa-para-gatos/HIL1884U_M.html",
+      "https://www.tiendanimal.es/hills-prescription-k%2Fd-diet-kidney-care-salmon-sobre-en-salsa-para-gatos/HIL1884U_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill's Prescription k/d Diet Kidney Care Salmón sobre en salsa para gatos",
+    "productId": "hills-wet-e2a61dad",
+    "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-k_d-diet-kidney-care-salmon-sobre-en-salsa-para-gatos/HIL1884U_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-e2a61dad.jpg",
+    "referenceUrl": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw492a92fb/images/comida_humeda_gato_hills_prescription_diet_kidney_care_salmon_HIL1884U_box.jpg",
+    "referenceSource": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-hill_s-prescription-k_d-diet-kidney-care-salmon-sobre-en-salsa-para-gatos/HIL1884U.html",
+    "referenceGrams": 85,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe",
+    "packQuantity": 12
+  },
+  {
+    "id": "hills-aea119a2",
+    "brand": "Hill's",
+    "name": "Prescription Diet Gastrointestinal Biome Stress Stew",
+    "kind": "recipe",
+    "segment": "Ветеринарный",
+    "weightsGrams": [
+      82
+    ],
+    "sourceUrls": [
+      "https://www.tiendanimal.es/hills-prescription-diet-gastrointestinal-biome-stress-estofado-lata-para-gatos/HIL608830_M.html"
+    ],
+    "purchasePrice": null,
+    "retailPrice": null,
+    "availabilityStatus": "requires_confirmation",
+    "researchName": "Hill’s Prescription Diet Gastrointestinal Biome Stress estofado lata para gatos",
+    "productId": "hills-wet-aea119a2",
+    "sourceUrl": "https://www.tiendanimal.es/hills-prescription-diet-gastrointestinal-biome-stress-estofado-lata-para-gatos/HIL608830_M.html",
+    "foodType": "wet",
+    "tag": "Ветеринарная диета",
+    "referencePath": "assets/food/references/priority-batch7/hills-aea119a2.jpg",
+    "referenceUrl": "https://www.tiendanimal.es/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw65177167/images/hills_comida_humeda_gastro_perro_HIL608830_M.jpg",
+    "referenceSource": "https://www.tiendanimal.es/82-g-hills-prescription-diet-gastrointestinal-biome-stress-estofado-lata-para-gatos/HIL608830.html",
+    "referenceGrams": 82,
+    "referenceTitle": null,
+    "referenceType": "retailer_exact_recipe"
+  }
+]

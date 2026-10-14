@@ -2,7 +2,7 @@ import { createUsefulUI } from './useful.js?v=2';
 import { createAccountUI } from './account.js?v=3';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, isDemoPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js';
 import { accessoryDetail } from './accessory-ui.js?v=rc-range-2';
-import { categories, products, catalogProducts, articles } from './data.js?v=priority-food-5';
+import { categories, products, catalogProducts, articles } from './data.js?v=priority-food-7';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js';
 
 import { homeDirections, activeHomeLanding } from './collections.js';

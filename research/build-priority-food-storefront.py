@@ -14,7 +14,7 @@ if batches:
 def weight(g):return (str(g/1000).rstrip('0').rstrip('.').replace('.',',')+' кг') if g>=1000 else str(g)+' г'
 configs=[]
 for r in selection:
- pid=r['productId'];ref=next(i for i in refs if i['id']==r['id']);image='assets/food/editorial/'+pid+'-v1.webp'
+ pid=r['productId'];ref=next(i for i in refs if i['id']==r['id']);image='assets/food/editorial/'+pid+'-v'+str(r.get('editorialVersion',1))+'.webp'
  if not (ROOT/image).exists():raise FileNotFoundError(image)
  variants=[]
  pack_quantity=r.get('packQuantity',1)

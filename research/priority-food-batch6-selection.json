@@ -1,0 +1,565 @@
+{
+  "scope": "Sixth batch: 24 wet foods - final 16 Leonardo, 8 Hills",
+  "recipes": [
+    {
+      "id": "leonardo-e1551323",
+      "brand": "Leonardo",
+      "name": "Pulled Beef Duck",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        70
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-pulled-beef-duck-with-extra-pulled-beef-16-x-70-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Pulled Beef Duck",
+      "productId": "leonardo-wet-pulled-duck",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-pulled-beef-duck-with-extra-pulled-beef-16-x-70-g",
+      "foodType": "wet",
+      "tag": "Влажный корм"
+    },
+    {
+      "id": "leonardo-707b57a4",
+      "brand": "Leonardo",
+      "name": "Pulled Beef Lamb",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        70
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-pulled-beef-lamb-with-extra-pulled-beef-16-x-70-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Pulled Beef Lamb",
+      "productId": "leonardo-wet-pulled-lamb",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-pulled-beef-lamb-with-extra-pulled-beef-16-x-70-g",
+      "foodType": "wet",
+      "tag": "Влажный корм"
+    },
+    {
+      "id": "leonardo-1fe1a310",
+      "brand": "Leonardo",
+      "name": "Pulled Beef Turkey",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        70
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-pulled-beef-turkey-with-extra-pulled-beef-16-x-70-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Pulled Beef Turkey",
+      "productId": "leonardo-wet-pulled-turkey",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-pulled-beef-turkey-with-extra-pulled-beef-16-x-70-g",
+      "foodType": "wet",
+      "tag": "Влажный корм"
+    },
+    {
+      "id": "leonardo-85c26e29",
+      "brand": "Leonardo",
+      "name": "Quality Selection Kitten",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400,
+        800
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-kitten-rico-en-ave-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-kitten-rico-en-ave-6-x-400-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-kitten-rico-en-ave-6-x-800-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Quality Selection Kitten",
+      "productId": "leonardo-wet-quality-kitten",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-quality-selection-kitten-rico-en-ave-6-x-200-g-es",
+      "foodType": "wet",
+      "tag": "Для котят"
+    },
+    {
+      "id": "leonardo-e950030e",
+      "brand": "Leonardo",
+      "name": "Quality Selection Poultry",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400,
+        800
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-puro-en-ave-6-x-200-g",
+        "https://es.leonardo-catfood.com/leonardo-puro-en-ave-6-x-400-g",
+        "https://es.leonardo-catfood.com/leonardo-puro-en-ave-6-x-800-g"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Quality Selection Puro en ave",
+      "productId": "leonardo-wet-quality-poultry",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-puro-en-ave-6-x-200-g",
+      "foodType": "wet",
+      "tag": "Влажный корм"
+    },
+    {
+      "id": "leonardo-d1038e4a",
+      "brand": "Leonardo",
+      "name": "Quality Selection Beef",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400,
+        800
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-apetitosa-ternera-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-apetitosa-ternera-6-x-400-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-apetitosa-ternera-6-x-800-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Quality Selection Rico en apetitosa ternera",
+      "productId": "leonardo-wet-quality-beef",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-apetitosa-ternera-6-x-200-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм"
+    },
+    {
+      "id": "leonardo-90918afc",
+      "brand": "Leonardo",
+      "name": "Quality Selection Rabbit",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-conejo-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-conejo-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Quality Selection Rico en exquisito conejo",
+      "productId": "leonardo-wet-quality-rabbit",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-conejo-6-x-200-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм"
+    },
+    {
+      "id": "leonardo-cb293103",
+      "brand": "Leonardo",
+      "name": "Quality Selection Ocean Fish",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400,
+        800
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-pescado-marino-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-pescado-marino-6-x-400-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-pescado-marino-6-x-800-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Quality Selection Rico en exquisito pescado marino",
+      "productId": "leonardo-wet-quality-ocean-fish",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-exquisito-pescado-marino-6-x-200-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм"
+    },
+    {
+      "id": "leonardo-910731e6",
+      "brand": "Leonardo",
+      "name": "Quality Selection Liver",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-higado-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-higado-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Quality Selection Rico en sabroso hígado",
+      "productId": "leonardo-wet-quality-liver",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-higado-6-x-200-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм"
+    },
+    {
+      "id": "leonardo-3a2a0be9",
+      "brand": "Leonardo",
+      "name": "Quality Selection Duck",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400,
+        800
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-pato-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-pato-6-x-400-g-es",
+        "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-pato-6-x-800-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Quality Selection Rico en sabroso pato",
+      "productId": "leonardo-wet-quality-duck",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-quality-selection-rico-en-sabroso-pato-6-x-200-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм"
+    },
+    {
+      "id": "leonardo-25e027e9",
+      "brand": "Leonardo",
+      "name": "Superior Selection Horse & Courgette",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-caballo-con-calabacin-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-caballo-con-calabacin-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Superior Selection Caballo con calabacín",
+      "productId": "leonardo-wet-superior-horse",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-superior-selection-caballo-con-calabacin-6-x-200-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм"
+    },
+    {
+      "id": "leonardo-4a011626",
+      "brand": "Leonardo",
+      "name": "Superior Selection Lamb, Poultry & Pumpkin",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-cordero-con-ave-calabaza-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-cordero-con-ave-calabaza-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Superior Selection Cordero con ave & calabaza",
+      "productId": "leonardo-wet-superior-lamb",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-superior-selection-cordero-con-ave-calabaza-6-x-200-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм"
+    },
+    {
+      "id": "leonardo-46821738",
+      "brand": "Leonardo",
+      "name": "Superior Selection Duck, Chicken & Carrots",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-pato-con-pollo-zanahorias-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-pato-con-pollo-zanahorias-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Superior Selection Pato con pollo & zanahorias",
+      "productId": "leonardo-wet-superior-duck",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-superior-selection-pato-con-pollo-zanahorias-6-x-200-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм"
+    },
+    {
+      "id": "leonardo-b63a54dd",
+      "brand": "Leonardo",
+      "name": "Superior Selection Turkey, Trout & Cranberries",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-pavo-con-trucha-cranberries-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-pavo-con-trucha-cranberries-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Superior Selection Pavo con trucha & cranberries",
+      "productId": "leonardo-wet-superior-turkey",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-superior-selection-pavo-con-trucha-cranberries-6-x-200-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм"
+    },
+    {
+      "id": "leonardo-1f85f0d3",
+      "brand": "Leonardo",
+      "name": "Superior Selection Chicken & Spinach",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-pollo-con-espinacas-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-pollo-con-espinacas-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Superior Selection Pollo con espinacas",
+      "productId": "leonardo-wet-superior-chicken",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-superior-selection-pollo-con-espinacas-6-x-200-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм"
+    },
+    {
+      "id": "leonardo-127ba3d8",
+      "brand": "Leonardo",
+      "name": "Superior Selection Beef, Venison & Sweet Potato",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        200,
+        400
+      ],
+      "sourceUrls": [
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-vacuno-con-venado-boniato-6-x-200-g-es",
+        "https://es.leonardo-catfood.com/leonardo-superior-selection-vacuno-con-venado-boniato-6-x-400-g-es"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "LEONARDO Superior Selection Vacuno con venado & boniato",
+      "productId": "leonardo-wet-superior-beef",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-superior-selection-vacuno-con-venado-boniato-6-x-200-g-es",
+      "foodType": "wet",
+      "tag": "Влажный корм"
+    },
+    {
+      "id": "hills-d6890546",
+      "brand": "Hill's",
+      "name": "Science Plan Adult Chicken, Ocean Fish & Beef",
+      "kind": "assortment",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-adult-pollo_-pescado-azul-y-vacuno-en-salsa-sobre-para-gatos/HIL604010_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-adult-pollo-pescado-azul-y-vacuno-en-salsa-sobre-para-gatos/HIL604010_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Adult Pollo, Pescado Azul y Vacuno en Salsa sobre para gatos",
+      "productId": "hills-wet-adult-mix",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-adult-pollo_-pescado-azul-y-vacuno-en-salsa-sobre-para-gatos/HIL604010_M.html",
+      "foodType": "wet",
+      "tag": "Ассорти",
+      "packQuantity": 12,
+      "packNote": "Ассорти 12 x 85 г"
+    },
+    {
+      "id": "hills-71b606c4",
+      "brand": "Hill's",
+      "name": "Science Plan Kitten Chicken & Turkey",
+      "kind": "assortment",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-kitten-pollo-y-pavo-en-salsa-sobre-para-gatos/HIL604032_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-kitten-pollo-y-pavo-en-salsa-sobre-para-gatos/HIL604032_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Kitten Pollo y Pavo en Salsa sobre para gatos",
+      "productId": "hills-wet-kitten-mix",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-kitten-pollo-y-pavo-en-salsa-sobre-para-gatos/HIL604032_M.html",
+      "foodType": "wet",
+      "tag": "Для котят",
+      "packQuantity": 12,
+      "packNote": "Ассорти 12 x 85 г"
+    },
+    {
+      "id": "hills-237aca66",
+      "brand": "Hill's",
+      "name": "Science Plan Light Adult Ocean Fish & Chicken",
+      "kind": "assortment",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-light-adult-pescado-azul-y-pollo-en-salsa-sobre-para-gatos/HIL604019_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-light-adult-pescado-azul-y-pollo-en-salsa-sobre-para-gatos/HIL604019_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Light Adult Pescado Azul y Pollo en Salsa sobre para gatos",
+      "productId": "hills-wet-light-mix",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-light-adult-pescado-azul-y-pollo-en-salsa-sobre-para-gatos/HIL604019_M.html",
+      "foodType": "wet",
+      "tag": "Ассорти",
+      "packQuantity": 12,
+      "packNote": "Ассорти 12 x 85 г"
+    },
+    {
+      "id": "hills-52c3af05",
+      "brand": "Hill's",
+      "name": "Science Plan Perfect Weight Salmon & Chicken",
+      "kind": "assortment",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-perfect-weight-salmon-y-pollo-sobre-para-gatos---multipack/HIL10034V-2_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-perfect-weight-salmon-y-pollo-sobre-para-gatos---multipack/HIL10034V-2_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Perfect Weight Salmón y Pollo sobre para gatos - Multipack",
+      "productId": "hills-wet-perfect-weight-mix",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-perfect-weight-salmon-y-pollo-sobre-para-gatos---multipack/HIL10034V-2_M.html",
+      "foodType": "wet",
+      "tag": "Ассорти",
+      "packQuantity": 12,
+      "packNote": "Ассорти 12 x 85 г"
+    },
+    {
+      "id": "hills-71f6c1c2",
+      "brand": "Hill's",
+      "name": "Science Plan Sterilised Adult Chicken & Salmon",
+      "kind": "assortment",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-sterilised-adult-pollo-y-salmon-en-salsa-sobre-para-gatos/HIL607317_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-sterilised-adult-pollo-y-salmon-en-salsa-sobre-para-gatos/HIL607317_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Sterilised Adult Pollo y Salmón en Salsa sobre para gatos",
+      "productId": "hills-wet-sterilised-mix",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-sterilised-adult-pollo-y-salmon-en-salsa-sobre-para-gatos/HIL607317_M.html",
+      "foodType": "wet",
+      "tag": "Для стерилизованных",
+      "packQuantity": 12,
+      "packNote": "Ассорти 12 x 85 г"
+    },
+    {
+      "id": "hills-9f8e8fdf",
+      "brand": "Hill's",
+      "name": "Science Plan Sterilised Meat & Fish",
+      "kind": "assortment",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-sterilised-carne-y-pescado-sobre-para-gatos-multipack/HIL604014_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-sterilised-carne-y-pescado-sobre-para-gatos-multipack/HIL604014_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Sterilised Carne y Pescado sobre para gatos Multipack",
+      "productId": "hills-wet-sterilised-meat-fish",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-sterilised-carne-y-pescado-sobre-para-gatos-multipack/HIL604014_M.html",
+      "foodType": "wet",
+      "tag": "Для стерилизованных",
+      "packQuantity": 12,
+      "packNote": "Ассорти 12 x 85 г"
+    },
+    {
+      "id": "hills-595b883e",
+      "brand": "Hill's",
+      "name": "Science Plan Sterilised Young Adult Salmon - в соусе",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        85
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-sterilized-young-adult-salmon-sobre-para-gatos/HIL1942PZ_M.html",
+        "https://www.tiendanimal.es/hills-science-plan-sterilized-young-adult-salmon-sobre-para-gatos/HIL1942PZ_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Science Plan Sterilized Young Adult Salmón sobre para gatos",
+      "productId": "hills-wet-sterilised-salmon",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-science-plan-sterilized-young-adult-salmon-sobre-para-gatos/HIL1942PZ_M.html",
+      "foodType": "wet",
+      "tag": "Для стерилизованных"
+    },
+    {
+      "id": "hills-2e88710b",
+      "brand": "Hill's",
+      "name": "Prescription Diet c/d Urinary Stress Chicken & Vegetables Stew",
+      "kind": "recipe",
+      "segment": "Повседневный",
+      "weightsGrams": [
+        82
+      ],
+      "sourceUrls": [
+        "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-presciption-diet-urinary-stress-c_d-estofado-de-pollo-con-vegetales-lata-para-gatos/HBG43193_M.html",
+        "https://www.tiendanimal.es/hills-presciption-diet-urinary-stress-c%2Fd-estofado-de-pollo-con-vegetales-lata-para-gatos/HBG43193_M.html"
+      ],
+      "purchasePrice": null,
+      "retailPrice": null,
+      "availabilityStatus": "requires_confirmation",
+      "researchName": "Hill's Presciption Diet Urinary Stress c/d Estofado de Pollo con Vegetales lata para gatos",
+      "productId": "hills-wet-cd-stress-chicken-stew",
+      "sourceUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-presciption-diet-urinary-stress-c_d-estofado-de-pollo-con-vegetales-lata-para-gatos/HBG43193_M.html",
+      "foodType": "wet",
+      "tag": "Ветеринарная диета"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import { waterBalconyProducts } from './water-balcony-products.js';
 import { foodProducts as originalFoodProducts } from './food-products.js?v=rc-editorial-1';
 import { expandRoyalCaninFood } from './royal-canin-products.js?v=rc-range-2';
-import { expandPriorityFood } from './priority-food-products.js?v=priority-food-5';
+import { expandPriorityFood } from './priority-food-products.js?v=priority-food-7';
 import { accessoryProducts } from './accessory-products.js';
 import { heybopetProducts } from './heybopet-products.js';
 import { faireProducts } from './faire-products.js';
