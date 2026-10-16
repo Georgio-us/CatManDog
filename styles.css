@@ -319,18 +319,16 @@ button:hover:not(:disabled) {
 }
 
 .brand {
-  font-size: 32px;
-  font-weight: 800;
-  letter-spacing: -1.8px;
-  white-space: nowrap;
-  line-height: 1;
+  display: block;
+  flex: none;
+  width: 140px;
 }
 
-.brand-dot {
-  font-size: 12px;
-  vertical-align: top;
-  margin-left: 3px;
-  letter-spacing: 0;
+.brand picture,
+.brand img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .header nav {
@@ -423,7 +421,7 @@ button:hover:not(:disabled) {
 }
 
 .footer .brand {
-  font-size: 29px;
+  width: 155px;
 }
 
 .footer p {
@@ -2082,7 +2080,7 @@ details .text-link {
   }
 
   .brand {
-    font-size: 28px;
+    width: 120px;
   }
 
   .header-actions {
@@ -2215,7 +2213,7 @@ details .text-link {
   }
 
   .brand {
-    font-size: 27px;
+    width: 145px;
   }
 
   .header-actions {
@@ -2893,7 +2891,7 @@ details .text-link {
   }
 
   .brand {
-    font-size: 22px;
+    width: 120px;
   }
 
   .header-actions {
