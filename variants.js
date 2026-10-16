@@ -13,7 +13,7 @@ export const isDemoPrice = sku => !!sku && confirmedPrice(sku) === null;
 // Keep sourcing prices untouched; the storefront uses an explicit demo price
 export const storefrontPrice = sku => sku ? confirmedPrice(sku) ?? DEMO_PRICE : null;
 export function canBuy(sku) {
-  return storefrontPrice(sku) !== null && !['unavailable','out-of-stock','outOfStock','discontinued'].includes(sku.availabilityStatus);
+  return storefrontPrice(sku) !== null && !sku.storefrontRetired && !['unavailable','out-of-stock','outOfStock','discontinued'].includes(sku.availabilityStatus);
 }
 export function catalogPrice(product) {
   const variants = snapshots(product);

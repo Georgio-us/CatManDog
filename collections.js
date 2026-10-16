@@ -1,9 +1,9 @@
-import { products } from './data.js?v=20261004-2';
+import { catalogProducts } from './data.js?v=catalog-cleanup-1';
 
 export const activeHomeGroups = [
-  { title: 'Свой этаж у окна', text: 'Наблюдать за птицами, ловить солнце и отдыхать выше пола', ids: ['window-hammock'] },
-  { title: 'Потянуться и поточить когти', text: 'Напольная когтеточка: поставили в любимом месте, переставили вместе с мебелью', ids: ['scratch-arch'] },
-  { title: 'Охота прямо в гостиной', text: 'Движение и маленькие задачи для любопытного кота - без изменений в квартире', ids: ['rope', 'puzzle'] }
+  { title: 'Свой этаж у окна', text: 'Подбираем реальные товары для окон и балконов - этот раздел появится в каталоге позже', ids: [] },
+  { title: 'Потянуться и поточить когти', text: 'Напольная когтеточка: поставили в любимом месте, переставили вместе с мебелью', ids: ['yagu-7502810', 'yagu-7515812', 'yagu-7515817'] },
+  { title: 'Охота прямо в гостиной', text: 'Движение и маленькие задачи для любопытного кота - без изменений в квартире', ids: ['yagu-7517046', 'yagu-7514629'] }
 ];
 
 export function homeDirections(icon) {
@@ -16,7 +16,7 @@ export function homeDirections(icon) {
 export function activeHomeLanding({ crumbs, card, icon }) {
   return `<div class="page active-home-page">${crumbs('Дом для активного кота')}
     <section class="active-home-intro"><div><span class="eyebrow">CatManDog · Home, their way</span><h1 class="page-title">Его маленький мир<br>В вашей квартире</h1><p class="lead">Коту нужно играть, точить когти и наблюдать за жизнью сверху Для этого можно обойтись без отверстий в стенах: место у окна, напольная когтеточка и игры, которые легко забрать при переезде</p><div class="home-benefits"><span>Без сверления стен</span><span>Можно переставить</span><span>Можно забрать с собой</span></div></div><img src="assets/active-home-promo.png" alt="Кошка наблюдает из окна на лежанке с присосками"></section>
-    <section class="home-product-group active-home-products"><div class="section-head"><div><h2>Для его домашних приключений</h2><p>Четыре простых способа сделать привычную квартиру интереснее</p></div></div><div class="product-grid">${activeHomeGroups.flatMap(group=>group.ids).map(id=>card(products.find(p=>p.id===id))).join('')}</div></section>
+    <section class="home-product-group active-home-products"><div class="section-head"><div><h2>Для его домашних приключений</h2><p>Когтеточки и игрушки, которые легко переставить и забрать при переезде</p></div></div><div class="product-grid">${activeHomeGroups.flatMap(group=>group.ids).map(id=>catalogProducts.find(p=>p.id===id)).filter(Boolean).map(card).join('')}</div></section>
     <div class="home-habits">${activeHomeGroups.map(group=>`<article><h3>${group.title}</h3><p>${group.text}</p></article>`).join('')}</div>
     <div class="home-fitting-note"><h2>Под вашу квартиру Под вашего кота</h2><p>Для оконной лежанки нужно подходящее гладкое стекло: проверьте крепления и допустимую нагрузку по инструкции Когтеточку можно поставить рядом с любимым местом отдыха, а для игр оставить свободный участок пола</p><a class="text-link" href="#/catalog">Весь каталог ${icon('arrow')}</a></div>
   </div>`;

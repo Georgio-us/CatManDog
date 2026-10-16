@@ -1,3 +1,4 @@
+import { applyCatalogPolicy } from './catalog-policy.js';
 import { waterBalconyProducts } from './water-balcony-products.js';
 import { foodProducts as originalFoodProducts } from './food-products.js?v=rc-editorial-1';
 import { expandRoyalCaninFood } from './royal-canin-products.js?v=rc-range-2';
@@ -6,6 +7,7 @@ import { accessoryProducts } from './accessory-products.js';
 import { heybopetProducts } from './heybopet-products.js?v=studio-1';
 import { treatsCareProducts } from './treats-care-products.js?v=studio-1';
 import { faireProducts } from './faire-products.js';
+import { yaguProducts, expandYaguCare } from './yagu-products.js?v=yagu-studio-2';
 import { ownatProducts } from './ownat-products.js?v=ownat-studio-1';
 
 const foodProducts = [...expandPriorityFood(expandRoyalCaninFood(originalFoodProducts)), ...ownatProducts];
@@ -789,7 +791,7 @@ const faireFamilyNames = {
   'faire-justcool-cat-a6': 'Just Cool Design - мини-принты с котами A6'
 };
 const catalogFaireProducts = faireProducts.map(p => ({ ...p, name: faireFamilyNames[p.id] || p.name }));
-export const products = [...foodProducts, ...treatsCareProducts, ...enrichedWaterBalconyProducts, ...accessoryProducts.filter(p => !p.ean || !waterBalconyEANs.has(p.ean)), ...catalogHeybopetProducts, ...catalogFaireProducts, ...demoProducts.filter(p => !waterBalconyReplacedIds.has(p.id)).map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)];
+export const products = applyCatalogPolicy([...foodProducts, ...expandYaguCare(treatsCareProducts), ...yaguProducts, ...enrichedWaterBalconyProducts, ...accessoryProducts.filter(p => !p.ean || !waterBalconyEANs.has(p.ean)), ...catalogHeybopetProducts, ...catalogFaireProducts, ...demoProducts.filter(p => !waterBalconyReplacedIds.has(p.id)).map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)]);
 export const catalogProducts = products.filter(p => !p.catalogHidden);
 
 export const articles = [
