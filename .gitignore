@@ -6,3 +6,7 @@ node_modules/
 *.log
 __pycache__/
 *.pyc
+
+# Private supplier documents and purchasing price reviews stay local
+research/supplier-files/
+research/supplier-cats/

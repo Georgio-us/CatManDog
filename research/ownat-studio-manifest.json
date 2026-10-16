@@ -1,0 +1,129 @@
+{
+  "toolMode": "built-in image_gen",
+  "createdAt": "2026-10-16",
+  "scope": "11 Ownat cat recipes, shared by 33 supplier-listed pack variants",
+  "note": "AI studio visuals based on official recipe packaging; package weights remain variant data, not inferred from generic bag photos",
+  "images": [
+    {
+      "slug": "classic-kitten-gato-es",
+      "name": "OWNAT CLASSIC KITTEN (CAT)",
+      "referencePath": "assets/food/ownat/classic-kitten-gato-es.webp",
+      "referenceUrl": "https://www.ownat.com/cdnassets/Kitten-1328x1500px_l.webp",
+      "referenceSource": "https://www.ownat.com/classic-kitten-gato-es",
+      "prompt": "Use case: product-mockup. Edit target: image 1, the official Ownat cat food bag. Style reference only: image 2, approved CatManDog studio image. Keep the exact Ownat packaging: bag shape and proportions, printed cat, Ownat logo, original colors, artwork, recipe name, material, folds, typography and all readable label markings. Change the white backdrop into a seamless warm light-gray studio background and tabletop matching image 2, with a subtle gray gradient, soft upper-left studio lighting and a natural restrained contact shadow beneath/right. One complete sealed bag centered, around 83-85 percent of square image height, generous clean gray breathing room on every edge. Preserve existing slight three-quarter bag orientation. Sharp premium ecommerce photography, realistic printed packaging. No loose food or ingredients, no people, no live animals outside printed label, no props, no annotations, no added badges or claims, no extra bags, no pedestal, no border, no watermark. Do not copy any Royal Canin branding or product shape from image 2. No invented package weight if source doesn't show one. Exact product: OWNAT CLASSIC KITTEN (CAT)",
+      "generatedPath": "assets/food/ownat/editorial/classic-kitten-gato-es-v1.png",
+      "displayPath": "assets/food/ownat/editorial/classic-kitten-gato-es-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-125d98a0-9ad6-4de1-888f-a386f4f8c083.png"
+    },
+    {
+      "slug": "classic-daily-care-gato-es",
+      "name": "OWNAT CLASSIC DAILY CARE (CAT)",
+      "referencePath": "assets/food/ownat/classic-daily-care-gato-es.webp",
+      "referenceUrl": "https://www.ownat.com/cdnassets/Daily-Care-1328x1500px_l.webp",
+      "referenceSource": "https://www.ownat.com/classic-daily-care-gato-es",
+      "prompt": "Use case: product-mockup. Edit target: image 1, the official Ownat cat food bag. Style reference only: image 2, approved CatManDog studio image. Keep the exact Ownat packaging: bag shape and proportions, printed cat, Ownat logo, original colors, artwork, recipe name, material, folds, typography and all readable label markings. Change the white backdrop into a seamless warm light-gray studio background and tabletop matching image 2, with a subtle gray gradient, soft upper-left studio lighting and a natural restrained contact shadow beneath/right. One complete sealed bag centered, around 83-85 percent of square image height, generous clean gray breathing room on every edge. Preserve existing slight three-quarter bag orientation. Sharp premium ecommerce photography, realistic printed packaging. No loose food or ingredients, no people, no live animals outside printed label, no props, no annotations, no added badges or claims, no extra bags, no pedestal, no border, no watermark. Do not copy any Royal Canin branding or product shape from image 2. No invented package weight if source doesn't show one. Exact product: OWNAT CLASSIC DAILY CARE (CAT)",
+      "generatedPath": "assets/food/ownat/editorial/classic-daily-care-gato-es-v1.png",
+      "displayPath": "assets/food/ownat/editorial/classic-daily-care-gato-es-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-a31e8e7a-0611-41a6-8826-05465b2d6850.png"
+    },
+    {
+      "slug": "classic-fish-gato-es",
+      "name": "OWNAT CLASSIC FISH (CAT)",
+      "referencePath": "assets/food/ownat/classic-fish-gato-es.webp",
+      "referenceUrl": "https://www.ownat.com/cdnassets/Fish-cat-1328x1500px_l.webp",
+      "referenceSource": "https://www.ownat.com/classic-fish-gato-es",
+      "prompt": "Use case: product-mockup. Edit target: image 1, the official Ownat cat food bag. Style reference only: image 2, approved CatManDog studio image. Keep the exact Ownat packaging: bag shape and proportions, printed cat, Ownat logo, original colors, artwork, recipe name, material, folds, typography and all readable label markings. Change the white backdrop into a seamless warm light-gray studio background and tabletop matching image 2, with a subtle gray gradient, soft upper-left studio lighting and a natural restrained contact shadow beneath/right. One complete sealed bag centered, around 83-85 percent of square image height, generous clean gray breathing room on every edge. Preserve existing slight three-quarter bag orientation. Sharp premium ecommerce photography, realistic printed packaging. No loose food or ingredients, no people, no live animals outside printed label, no props, no annotations, no added badges or claims, no extra bags, no pedestal, no border, no watermark. Do not copy any Royal Canin branding or product shape from image 2. No invented package weight if source doesn't show one. Exact product: OWNAT CLASSIC FISH (CAT)",
+      "generatedPath": "assets/food/ownat/editorial/classic-fish-gato-es-v1.png",
+      "displayPath": "assets/food/ownat/editorial/classic-fish-gato-es-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-66b1e4a1-69d8-44e1-b166-1dfec5290aa3.png"
+    },
+    {
+      "slug": "classic-light-gato-es",
+      "name": "OWNAT CLASSIC LIGHT (CAT)",
+      "referencePath": "assets/food/ownat/classic-light-gato-es.webp",
+      "referenceUrl": "https://www.ownat.com/cdnassets/Light-cat-1328x1500px_l.webp",
+      "referenceSource": "https://www.ownat.com/classic-light-gato-es",
+      "prompt": "Use case: product-mockup. Edit target: image 1, the official Ownat cat food bag. Style reference only: image 2, approved CatManDog studio image. Keep the exact Ownat packaging: bag shape and proportions, printed cat, Ownat logo, original colors, artwork, recipe name, material, folds, typography and all readable label markings. Change the white backdrop into a seamless warm light-gray studio background and tabletop matching image 2, with a subtle gray gradient, soft upper-left studio lighting and a natural restrained contact shadow beneath/right. One complete sealed bag centered, around 83-85 percent of square image height, generous clean gray breathing room on every edge. Preserve existing slight three-quarter bag orientation. Sharp premium ecommerce photography, realistic printed packaging. No loose food or ingredients, no people, no live animals outside printed label, no props, no annotations, no added badges or claims, no extra bags, no pedestal, no border, no watermark. Do not copy any Royal Canin branding or product shape from image 2. No invented package weight if source doesn't show one. Exact product: OWNAT CLASSIC LIGHT (CAT)",
+      "generatedPath": "assets/food/ownat/editorial/classic-light-gato-es-v1.png",
+      "displayPath": "assets/food/ownat/editorial/classic-light-gato-es-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-2a882e81-42a7-48bb-813c-317d2449b00a.png"
+    },
+    {
+      "slug": "classic-hairball-gato-es",
+      "name": "OWNAT CLASSIC HAIRBALL (CAT)",
+      "referencePath": "assets/food/ownat/classic-hairball-gato-es.webp",
+      "referenceUrl": "https://www.ownat.com/cdnassets/Hairball-1328x1500px_l.webp",
+      "referenceSource": "https://www.ownat.com/classic-hairball-gato-es",
+      "prompt": "Use case: product-mockup. Edit target: image 1, the official Ownat cat food bag. Style reference only: image 2, approved CatManDog studio image. Keep the exact Ownat packaging: bag shape and proportions, printed cat, Ownat logo, original colors, artwork, recipe name, material, folds, typography and all readable label markings. Change the white backdrop into a seamless warm light-gray studio background and tabletop matching image 2, with a subtle gray gradient, soft upper-left studio lighting and a natural restrained contact shadow beneath/right. One complete sealed bag centered, around 83-85 percent of square image height, generous clean gray breathing room on every edge. Preserve existing slight three-quarter bag orientation. Sharp premium ecommerce photography, realistic printed packaging. No loose food or ingredients, no people, no live animals outside printed label, no props, no annotations, no added badges or claims, no extra bags, no pedestal, no border, no watermark. Do not copy any Royal Canin branding or product shape from image 2. No invented package weight if source doesn't show one. Exact product: OWNAT CLASSIC HAIRBALL (CAT)",
+      "generatedPath": "assets/food/ownat/editorial/classic-hairball-gato-es-v1.png",
+      "displayPath": "assets/food/ownat/editorial/classic-hairball-gato-es-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-c4a9fc13-63ab-483f-840b-4e2676277455.png"
+    },
+    {
+      "slug": "classic-sterilized-gato-es",
+      "name": "OWNAT CLASSIC STERILIZED (CAT)",
+      "referencePath": "assets/food/ownat/classic-sterilized-gato-es.webp",
+      "referenceUrl": "https://www.ownat.com/cdnassets/Sterilized-1328x1500px_l.webp",
+      "referenceSource": "https://www.ownat.com/classic-sterilized-gato-es",
+      "prompt": "Use case: product-mockup. Edit target: image 1, the official Ownat cat food bag. Style reference only: image 2, approved CatManDog studio image. Keep the exact Ownat packaging: bag shape and proportions, printed cat, Ownat logo, original colors, artwork, recipe name, material, folds, typography and all readable label markings. Change the white backdrop into a seamless warm light-gray studio background and tabletop matching image 2, with a subtle gray gradient, soft upper-left studio lighting and a natural restrained contact shadow beneath/right. One complete sealed bag centered, around 83-85 percent of square image height, generous clean gray breathing room on every edge. Preserve existing slight three-quarter bag orientation. Sharp premium ecommerce photography, realistic printed packaging. No loose food or ingredients, no people, no live animals outside printed label, no props, no annotations, no added badges or claims, no extra bags, no pedestal, no border, no watermark. Do not copy any Royal Canin branding or product shape from image 2. No invented package weight if source doesn't show one. Exact product: OWNAT CLASSIC STERILIZED (CAT)",
+      "generatedPath": "assets/food/ownat/editorial/classic-sterilized-gato-es-v1.png",
+      "displayPath": "assets/food/ownat/editorial/classic-sterilized-gato-es-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-f02df0e4-3b9f-4a6b-b669-e0c9e643fd4d.png"
+    },
+    {
+      "slug": "gf-just-adult-chicken-cat",
+      "name": "OWNAT GF JUST ADULT CHICKEN (CAT)",
+      "referencePath": "assets/food/ownat/gf-just-adult-chicken-cat.jpg",
+      "referenceUrl": "https://www.ownat.com/gf-just-adult-chicken-cat",
+      "referenceSource": "https://www.ownat.com/cdnassets/ow-just-grain-free-adult-chicken-cat-saco-front_l.jpg",
+      "prompt": "undefinedOWNAT GF JUST ADULT CHICKEN (CAT)",
+      "generatedPath": "assets/food/ownat/editorial/gf-just-adult-chicken-cat-v1.png",
+      "displayPath": "assets/food/ownat/editorial/gf-just-adult-chicken-cat-v1.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-f1dc2ebb-dd99-48d3-b950-539eaf3ed0b8.png"
+    },
+    {
+      "slug": "gf-just-sterilized-cat",
+      "name": "OWNAT GF JUST STERILIZED (CAT)",
+      "referencePath": "assets/food/ownat/gf-just-sterilized-cat.jpg",
+      "referenceUrl": "https://www.ownat.com/gf-just-sterilized-cat",
+      "referenceSource": "https://www.ownat.com/cdnassets/ow-just-grain-free-sterilized-saco-front_l.jpg",
+      "prompt": "Create a SQUARE 1:1 ecommerce studio photograph. Image 1 defines the square format, warm gray seamless background, soft shadows and composition. Image 2 defines the exact Ownat product bag packaging to photograph. Preserve image 2 packaging design, wording, logos, ingredient illustration, cat and landscape, colors and proportions. Show ONE COMPLETE bag centered, occupying only 78 percent of square image height. Leave clear gray margin above and below, no cropping at all. Match image 1 background and natural contact shadow. No Royal Canin branding, no props, no extra bags. Product: OWNAT GF JUST STERILIZED (CAT)",
+      "generatedPath": "assets/food/ownat/editorial/gf-just-sterilized-cat-v2.png",
+      "displayPath": "assets/food/ownat/editorial/gf-just-sterilized-cat-v2.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-7bf14f50-fbe6-4f57-bb1b-540826e70057.png"
+    },
+    {
+      "slug": "gf-just-sterilized-fish-gato",
+      "name": "OWNAT GF JUST STERILIZED FISH (CAT)",
+      "referencePath": "assets/food/ownat/gf-just-sterilized-fish-gato.jpg",
+      "referenceUrl": "https://www.ownat.com/gf-just-sterilized-fish-gato",
+      "referenceSource": "https://www.ownat.com/cdnassets/ow-just-sterilized-fish-saco-front_l.jpg",
+      "prompt": "Create a SQUARE 1:1 ecommerce studio photograph. Image 1 defines the square format, warm gray seamless background, soft shadows and composition. Image 2 defines the exact Ownat product bag packaging to photograph. Preserve image 2 packaging design, wording, logos, ingredient illustration, cat and landscape, colors and proportions. Show ONE COMPLETE bag centered, occupying only 78 percent of square image height. Leave clear gray margin above and below, no cropping at all. Match image 1 background and natural contact shadow. No Royal Canin branding, no props, no extra bags. Product: OWNAT GF JUST STERILIZED FISH (CAT)",
+      "generatedPath": "assets/food/ownat/editorial/gf-just-sterilized-fish-gato-v2.png",
+      "displayPath": "assets/food/ownat/editorial/gf-just-sterilized-fish-gato-v2.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-f562c0ec-0663-45dc-ac3e-b510084a80bd.png"
+    },
+    {
+      "slug": "author-fresh-oily-fish-poultry-cat",
+      "name": "OWNAT AUTHOR FRESH OILY FISH & POULTRY (CAT)",
+      "referencePath": "assets/food/ownat/author-fresh-oily-fish-poultry-cat.jpg",
+      "referenceUrl": "https://www.ownat.com/author-fresh-oily-fish-poultry-cat",
+      "referenceSource": "https://www.ownat.com/cdnassets/Fresh-Oily-Fish--Poultry_l.jpg",
+      "prompt": "Create a SQUARE 1:1 premium ecommerce studio photograph. Image 1 defines exact square format, clearly GRAY seamless studio background and gray tabletop, soft shadows and composition. Image 2 defines ONLY the exact Ownat product bag artwork. The background MUST be gray like image 1, NOT white like image 2. Preserve image 2 bag design, lettering, logo, ingredients illustration and package colors. Remove the floating star-shaped promotional badge OUTSIDE the bag. Preserve labels printed on bag. Show ONE COMPLETE bag centered occupying 78 percent of square image height with generous gray margins above/below. Soft upper-left lighting and natural contact shadow. No cropping, props or Royal Canin branding. Product: OWNAT AUTHOR FRESH OILY FISH & POULTRY (CAT)",
+      "generatedPath": "assets/food/ownat/editorial/author-fresh-oily-fish-poultry-cat-v2.png",
+      "displayPath": "assets/food/ownat/editorial/author-fresh-oily-fish-poultry-cat-v2.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-63a33640-7673-428f-b27f-e58f616db98a.png"
+    },
+    {
+      "slug": "author-sterilized-fresh-chicken-gato",
+      "name": "OWNAT AUTHOR GF STERILIZED FRESH CHICKEN (CAT)",
+      "referencePath": "assets/food/ownat/author-sterilized-fresh-chicken-gato.jpg",
+      "referenceUrl": "https://www.ownat.com/author-sterilized-fresh-chicken-gato",
+      "referenceSource": "https://www.ownat.com/cdnassets/Author-Sterilized-Fresh-Chicken-v2_l.jpg",
+      "prompt": "Create a SQUARE 1:1 premium ecommerce studio photograph. Image 1 defines exact square format, clearly GRAY seamless studio background and gray tabletop, soft shadows and composition. Image 2 defines ONLY the exact Ownat product bag artwork. The background MUST be gray like image 1, NOT white like image 2. Preserve image 2 bag design, lettering, logo, ingredients illustration and package colors. Remove the floating star-shaped promotional badge OUTSIDE the bag. Preserve labels printed on bag. Show ONE COMPLETE bag centered occupying 78 percent of square image height with generous gray margins above/below. Soft upper-left lighting and natural contact shadow. No cropping, props or Royal Canin branding. Product: OWNAT AUTHOR GF STERILIZED FRESH CHICKEN (CAT)",
+      "generatedPath": "assets/food/ownat/editorial/author-sterilized-fresh-chicken-gato-v2.png",
+      "displayPath": "assets/food/ownat/editorial/author-sterilized-fresh-chicken-gato-v2.webp",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-ddae3e0f-a901-4db4-92ce-36f8e3207706.png"
+    }
+  ]
+}

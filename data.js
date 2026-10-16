@@ -6,8 +6,9 @@ import { accessoryProducts } from './accessory-products.js';
 import { heybopetProducts } from './heybopet-products.js?v=studio-1';
 import { treatsCareProducts } from './treats-care-products.js?v=studio-1';
 import { faireProducts } from './faire-products.js';
+import { ownatProducts } from './ownat-products.js?v=ownat-studio-1';
 
-const foodProducts = expandPriorityFood(expandRoyalCaninFood(originalFoodProducts));
+const foodProducts = [...expandPriorityFood(expandRoyalCaninFood(originalFoodProducts)), ...ownatProducts];
 
 export const categories = ["Корм", "Лакомства", "Наполнитель", "Игрушки", "Аксессуары", "Миски и поилки", "Переноски", "Окна и балконы", "Уход", "Подарочные наборы"];
 
