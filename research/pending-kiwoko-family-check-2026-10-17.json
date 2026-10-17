@@ -1,0 +1,1283 @@
+{
+  "checkedAt": "2026-10-17",
+  "scope": "Manually selected family pages; exact pack and recipe still require review",
+  "results": [
+    {
+      "productId": "acana-grasslands",
+      "catalogName": "Acana Grasslands Cat",
+      "pending": [
+        {
+          "id": "acana-grasslands-340g",
+          "label": "340 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Acana HP Grasslands pienso para gatos y gatitos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/sin-cereales/acana-hp-grasslands-pienso-para-gatos-y-gatitos/ACAAGC00_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Acana HP Grasslands pienso para gatos y gatitos",
+          "sku": "ACAAGC02",
+          "gtin": "064992714710",
+          "url": "https://www.kiwoko.com/alimentacion-gato/1.8-kg-acana-grasslands-pienso-para-gatos/ACAAGC02.html",
+          "priceEUR": 29.69,
+          "availability": "InStock"
+        },
+        {
+          "name": "Acana HP Grasslands pienso para gatos y gatitos",
+          "sku": "ACAAGC07",
+          "gtin": "064992714727",
+          "url": "https://www.kiwoko.com/alimentacion-gato/4.5-kg-acana-grasslands-pienso-para-gatos/ACAAGC07.html",
+          "priceEUR": 53.89,
+          "availability": "InStock"
+        },
+        {
+          "name": "Acana HP Grasslands pienso para gatos y gatitos",
+          "sku": "ACAAGC07_B2",
+          "gtin": "64992714727",
+          "url": "https://www.kiwoko.com/alimentacion-gato/2-x-4.5-kg-acana-grasslands-pienso-para-gatos-%C2%A1pack-ahorro/ACAAGC07_B2.html",
+          "priceEUR": 105.62,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "acana-indoor",
+      "catalogName": "Acana Indoor Entrée",
+      "pending": [
+        {
+          "id": "acana-indoor-340g",
+          "label": "340 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Acana Indoor Entrée pienso para gatos de interior",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/hipoalergenico/acana-indoor-entree-pienso-para-gatos-de-interior/ACAAIC00_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Acana Indoor Entrée pienso para gatos de interior",
+          "sku": "ACAAIC01",
+          "gtin": "064992714505",
+          "url": "https://www.kiwoko.com/alimentacion-gato/1.8-kg-acana-indoor-entree-pienso-para-gatos-de-interior/ACAAIC01.html",
+          "priceEUR": 20.99,
+          "availability": "InStock"
+        },
+        {
+          "name": "Acana Indoor Entrée pienso para gatos de interior",
+          "sku": "ACAAIC04",
+          "gtin": "064992714512",
+          "url": "https://www.kiwoko.com/alimentacion-gato/4.5-kg-acana-entree-pienso-para-gatos-de-interior/ACAAIC04.html",
+          "priceEUR": 43.49,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "acana-pacifica",
+      "catalogName": "Acana Pacifica",
+      "pending": [
+        {
+          "id": "acana-pacifica-340g",
+          "label": "340 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Acana HP Pacífica pienso para gatos y gatitos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/sin-cereales/acana-hp-pacifica-pienso-para-gatos-y-gatitos/ACAAPC02_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Acana HP Pacífica pienso para gatos y gatitos",
+          "sku": "ACAAPC02",
+          "gtin": "064992714642",
+          "url": "https://www.kiwoko.com/alimentacion-gato/1.8-kg-acana-pacifica-pienso-para-gatos/ACAAPC02.html",
+          "priceEUR": 29.69,
+          "availability": "InStock"
+        },
+        {
+          "name": "Acana HP Pacífica pienso para gatos y gatitos",
+          "sku": "ACAAPC07",
+          "gtin": "064992714659",
+          "url": "https://www.kiwoko.com/alimentacion-gato/4.5-kg-acana-pacifica-pienso-para-gatos/ACAAPC07.html",
+          "priceEUR": 50.89,
+          "availability": "InStock"
+        },
+        {
+          "name": "Acana HP Pacífica pienso para gatos y gatitos",
+          "sku": "ACAAPC07_B2",
+          "gtin": "64992714659",
+          "url": "https://www.kiwoko.com/alimentacion-gato/2-x-4.5-kg-acana-pacifica-pienso-para-gatos-%C2%A1pack-ahorro/ACAAPC07_B2.html",
+          "priceEUR": 99.74,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "acana-wild-prairie",
+      "catalogName": "Acana Wild Prairie",
+      "pending": [
+        {
+          "id": "acana-wild-prairie-340g",
+          "label": "340 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Acana HP Wild Prairie pienso para gatos y gatitos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/acana-hp-wild-prairie-pienso-para-gatos-y-gatitos/ACAAWC02_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Acana HP Wild Prairie pienso para gatos y gatitos",
+          "sku": "ACAAWC02",
+          "gtin": "064992714574",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/1.8-kg-acana-wild-prairie-pienso-para-gatos/ACAAWC02.html",
+          "priceEUR": 29.09,
+          "availability": "InStock"
+        },
+        {
+          "name": "Acana HP Wild Prairie pienso para gatos y gatitos",
+          "sku": "ACAAWC02_B2",
+          "gtin": "64992714574",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/2-x-1.8-kg-acana-wild-prairie-pienso-para-gatos-%C2%A1pack-ahorro/ACAAWC02_B2.html",
+          "priceEUR": 57.02,
+          "availability": "InStock"
+        },
+        {
+          "name": "Acana HP Wild Prairie pienso para gatos y gatitos",
+          "sku": "ACAAWC07",
+          "gtin": "064992714581",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/4.5-kg-acana-wild-prairie-pienso-para-gatos/ACAAWC07.html",
+          "priceEUR": 49.99,
+          "availability": "InStock"
+        },
+        {
+          "name": "Acana HP Wild Prairie pienso para gatos y gatitos",
+          "sku": "ACAAWC07_B2",
+          "gtin": "64992714581",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/2-x-4.5-kg-acana-wild-prairie-pienso-para-gatos-%C2%A1pack-ahorro/ACAAWC07_B2.html",
+          "priceEUR": 97.98,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "advance-hairball",
+      "catalogName": "Advance Sterilized Hairball Turkey",
+      "pending": [
+        {
+          "id": "advance-hairball-10000g",
+          "label": "10 кг",
+          "ean": null
+        }
+      ],
+      "familyName": "Advance Sterilized Hairball Pavo y Cebada pienso para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/bolas-de-pelo/advance-sterilized-hairball-pavo-y-cebada-pienso-para-gatos/ADV921864_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Advance Sterilized Hairball Pavo y Cebada pienso para gatos",
+          "sku": "ADV921864",
+          "gtin": "8410650218649",
+          "url": "https://www.kiwoko.com/alimentacion-gato/1.5-kg-advance-sterilized-hairball-pavo-y-cebada-pienso-para-gatos/ADV921864.html",
+          "priceEUR": 15.89,
+          "availability": "InStock"
+        },
+        {
+          "name": "Advance Sterilized Hairball Pavo y Cebada pienso para gatos",
+          "sku": "ADV923915",
+          "gtin": "8410650239156",
+          "url": "https://www.kiwoko.com/alimentacion-gato/3-kg-advance-sterilized-hairball-pavo-y-cebada-pienso-para-gatos/ADV923915.html",
+          "priceEUR": 28.19,
+          "availability": "InStock"
+        },
+        {
+          "name": "Advance Sterilized Hairball Pavo y Cebada pienso para gatos",
+          "sku": "ADV921865",
+          "gtin": "8410650218656",
+          "url": "https://www.kiwoko.com/alimentacion-gato/10-kg-advance-sterilized-hairball-pavo-y-cebada-pienso-para-gatos/ADV921865.html",
+          "priceEUR": 49.99,
+          "availability": "OutOfStock"
+        },
+        {
+          "name": "Advance Sterilized Hairball Pavo y Cebada pienso para gatos",
+          "sku": "ADV921865_B2",
+          "gtin": "8410650218656",
+          "url": "https://www.kiwoko.com/alimentacion-gato/2-x-10-kg-advance-sterilized-hairball-pavo-y-cebada-pienso-para-gatos-%C2%A1pack-ahorro/ADV921865_B2.html",
+          "priceEUR": 97.98,
+          "availability": "OutOfStock"
+        },
+        {
+          "name": "Advance Sterilized Hairball Pavo y Cebada pienso para gatos",
+          "sku": "ADV968860",
+          "gtin": "8410650634784",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/12-kg-_10_2-kg-%C2%A1gratis_-advance-sterilized-hairball-pavo-y-cebada-pienso-para-gatos/ADV968860.html",
+          "priceEUR": 49.99,
+          "availability": "InStock"
+        },
+        {
+          "name": "Advance Sterilized Hairball Pavo y Cebada pienso para gatos",
+          "sku": "ADV968860_B2",
+          "gtin": "8410650634784",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/24-kg-_20_4-kg-%C2%A1gratis_-advance-sterilized-hairball-pavo-y-cebada-pienso-para-gatos-%C2%A1pack-ahorro/ADV968860_B2.html",
+          "priceEUR": 99.98,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "advance-junior",
+      "catalogName": "Advance Sterilized Junior Chicken",
+      "pending": [
+        {
+          "id": "advance-junior-10000g",
+          "label": "10 кг",
+          "ean": null
+        }
+      ],
+      "familyName": "Advance Junior Sterilized pienso para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/advance-junior-sterilized-pienso-para-gatos/ADV500921_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Advance Junior Sterilized pienso para gatos",
+          "sku": "ADV500921",
+          "gtin": "8410650174501",
+          "url": "https://www.kiwoko.com/alimentacion-gato/1.5-kg-advance-junior-sterilized-pienso-para-gatos/ADV500921.html",
+          "priceEUR": 18.19,
+          "availability": "InStock"
+        },
+        {
+          "name": "Advance Junior Sterilized pienso para gatos",
+          "sku": "ADV500921_B2",
+          "gtin": "8410650174501",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/2-x-1.5-kg-advance-junior-sterilized-pienso-para-gatos-%C2%A1pack-ahorro/ADV500921_B2.html",
+          "priceEUR": 35.65,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "advance-sterilised",
+      "catalogName": "Advance Sterilized Adult Turkey & Barley",
+      "pending": [
+        {
+          "id": "advance-sterilised-10000g",
+          "label": "10 кг",
+          "ean": null
+        }
+      ],
+      "familyName": "Advance Adult Sterilized Pavo y Cebada pienso para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/advance-adult-sterilized-pavo-y-cebada-pienso-para-gatos/ADV577119_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Advance Adult Sterilized Pavo y Cebada pienso para gatos",
+          "sku": "ADV577119",
+          "gtin": "8410650160467",
+          "url": "https://www.kiwoko.com/alimentacion-gato/400-g-advance-adult-sterilized-pavo-y-cebada-pienso-para-gatos/ADV577119.html",
+          "priceEUR": 4.99,
+          "availability": "InStock"
+        },
+        {
+          "name": "Advance Adult Sterilized Pavo y Cebada pienso para gatos",
+          "sku": "ADV577219",
+          "gtin": "8410650160474",
+          "url": "https://www.kiwoko.com/alimentacion-gato/1.5-kg-advance-adult-sterilized-pavo-y-cebada-pienso-para-gatos/ADV577219.html",
+          "priceEUR": 15.09,
+          "availability": "InStock"
+        },
+        {
+          "name": "Advance Adult Sterilized Pavo y Cebada pienso para gatos",
+          "sku": "ADV577311",
+          "gtin": "8410650162270",
+          "url": "https://www.kiwoko.com/alimentacion-gato/3-kg-advance-adult-sterilized-pavo-y-cebada-pienso-para-gatos/ADV577311.html",
+          "priceEUR": 22.79,
+          "availability": "InStock"
+        },
+        {
+          "name": "Advance Adult Sterilized Pavo y Cebada pienso para gatos",
+          "sku": "ADV966397",
+          "gtin": "8410650589411",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/6-kg-advance-adult-sterilized-pavo-y-cebada-pienso-para-gatos/ADV966397.html",
+          "priceEUR": 41.19,
+          "availability": "InStock"
+        },
+        {
+          "name": "Advance Adult Sterilized Pavo y Cebada pienso para gatos",
+          "sku": "ADV577510",
+          "gtin": "8410650239392",
+          "url": "https://www.kiwoko.com/alimentacion-gato/10-kg-advance-adult-sterilized-pavo-y-cebada-pienso-para-gatos/ADV577510.html",
+          "priceEUR": 53.99,
+          "availability": "OutOfStock"
+        },
+        {
+          "name": "Advance Adult Sterilized Pavo y Cebada pienso para gatos",
+          "sku": "ADV577510_B2",
+          "gtin": "8410650239392",
+          "url": "https://www.kiwoko.com/alimentacion-gato/2-x-10-kg-advance-adult-sterilized-pavo-y-cebada-pienso-para-gatos-%C2%A1pack-ahorro/ADV577510_B2.html",
+          "priceEUR": 105.82,
+          "availability": "OutOfStock"
+        },
+        {
+          "name": "Advance Adult Sterilized Pavo y Cebada pienso para gatos",
+          "sku": "ADV968858",
+          "gtin": "8410650634760",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/12-kg-_10_2-%C2%A1gratis_-advance-adult-sterilized-pavo-y-cebada-pienso-para-gatos/ADV968858.html",
+          "priceEUR": 53.99,
+          "availability": "InStock"
+        },
+        {
+          "name": "Advance Adult Sterilized Pavo y Cebada pienso para gatos",
+          "sku": "ADV968858_B2",
+          "gtin": "8410650634760",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/24-kg-_20_4-kg-%C2%A1gratis_-advance-adult-sterilized-pavo-y-cebada-pienso-para-gatos-%C2%A1pack-ahorro/ADV968858_B2.html",
+          "priceEUR": 107.98,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "hills-kitten",
+      "catalogName": "Hill’s Science Plan Sterilised Kitten Chicken",
+      "pending": [
+        {
+          "id": "hills-kitten-7000g",
+          "label": "7 кг",
+          "ean": null
+        }
+      ],
+      "familyName": "Hill's Science Plan Sterilised Kitten Pollo pienso para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/hill_s-science-plan-sterilised-kitten-pollo-pienso-para-gatos/HIL607265_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Hill's Science Plan Sterilised Kitten Pollo pienso para gatos",
+          "sku": "HIL607265",
+          "gtin": "052742053592",
+          "url": "https://www.kiwoko.com/alimentacion-gato/1.5-kg-hill_s-science-plan-sterilised-kitten-pollo-pienso-para-gatos/HIL607265.html",
+          "priceEUR": 25.89,
+          "availability": "InStock"
+        },
+        {
+          "name": "Hill's Science Plan Sterilised Kitten Pollo pienso para gatos",
+          "sku": "HIL607268",
+          "gtin": "052742053516",
+          "url": "https://www.kiwoko.com/alimentacion-gato/3-kg-hill_s-science-plan-sterilised-kitten-pollo-pienso-para-gatos/HIL607268.html",
+          "priceEUR": 42.39,
+          "availability": "InStock"
+        },
+        {
+          "name": "Hill's Science Plan Sterilised Kitten Pollo pienso para gatos",
+          "sku": "HIL607293",
+          "gtin": "052742053639",
+          "url": "https://www.kiwoko.com/alimentacion-gato/7-kg-hill_s-science-plan-sterilised-kitten-pollo-pienso-para-gatos/HIL607293.html",
+          "priceEUR": 78.49,
+          "availability": "OutOfStock"
+        }
+      ]
+    },
+    {
+      "productId": "hills-light",
+      "catalogName": "Hill’s Science Plan Light Adult Chicken",
+      "pending": [
+        {
+          "id": "hills-light-3000g",
+          "label": "3 кг",
+          "ean": null
+        },
+        {
+          "id": "hills-light-10000g",
+          "label": "10 кг",
+          "ean": null
+        }
+      ],
+      "familyName": "Hill's Science Plan Light pienso pollo para gatos adultos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/hill_s-science-plan-light-pienso-pollo-para-gatos-adultos/HIL7520DA_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Hill's Science Plan Light pienso pollo para gatos adultos",
+          "sku": "HIL7520DA",
+          "gtin": "052742752006",
+          "url": "https://www.kiwoko.com/alimentacion-gato/1.5-kg-hill_s-science-plan-light-adult-pollo-pienso-para-gatos/HIL7520DA.html",
+          "priceEUR": 22.99,
+          "availability": "InStock"
+        },
+        {
+          "name": "Hill's Science Plan Light pienso pollo para gatos adultos",
+          "sku": "HIL45431",
+          "gtin": "052742023014",
+          "url": "https://www.kiwoko.com/alimentacion-gato/7-kg-hill_s-science-plan-light-adult-pollo-pienso-para-gatos/HIL45431.html",
+          "priceEUR": 75.99,
+          "availability": "InStock"
+        },
+        {
+          "name": "Hill's Science Plan Light pienso pollo para gatos adultos",
+          "sku": "HIL4216M",
+          "gtin": "052742024332",
+          "url": "https://www.kiwoko.com/alimentacion-gato/10-kg-hill_s-science-plan-light-adult-pollo-pienso-para-gatos/HIL4216M.html",
+          "priceEUR": 81.99,
+          "availability": "OutOfStock"
+        }
+      ]
+    },
+    {
+      "productId": "hills-ster-salmon",
+      "catalogName": "Hill’s Science Plan Sterilised Cat Adult Salmon",
+      "pending": [
+        {
+          "id": "hills-ster-salmon-300g",
+          "label": "300 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Hill's Science Plan Sterilised pienso salmón para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/hill_s-science-plan-sterilised-pienso-salmon-para-gatos/HIL9352DA_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Hill's Science Plan Sterilised pienso salmón para gatos",
+          "sku": "HIL608878",
+          "gtin": "052742071336",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/1.5-kg-hill_s-science-plan-sterilised-young-adult-atun-pienso-para-gatos/HIL608878.html",
+          "priceEUR": 25.89,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "hills-wet-3e2a1a71",
+      "catalogName": "Hill’s Prescription Diet Gastrointestinal Biome Chicken - в соусе",
+      "pending": [
+        {
+          "id": "hills-wet-3e2a1a71-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Hill's Prescription Diet Feline GI Biome Digestive Care Pollo y Verduras Sobre en salsa",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-feline-gi-biome-digestive-care-pollo-y-verduras-sobre-en-salsa/HIL607212_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Hill's Prescription Diet Feline GI Biome Digestive Care Pollo y Verduras Sobre en salsa",
+          "sku": "HIL607212",
+          "gtin": "052742053806",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-hill_s-prescription-diet-feline-gi-biome-digestive-care-pollo-y-verduras-sobre-en-salsa/HIL607212.html",
+          "priceEUR": 18.89,
+          "availability": "InStock"
+        },
+        {
+          "name": "Hill's Prescription Diet Feline GI Biome Digestive Care Pollo y Verduras Sobre en salsa",
+          "sku": "HIL607212_B2",
+          "gtin": "52742053806",
+          "url": "https://www.kiwoko.com/alimentacion-gato/24-sobres-x-85-g-hill_s-prescription-diet-feline-gi-biome-digestive-care-pollo-y-verduras-sobre-en-salsa-%C2%A1pack-ahorro/HIL607212_B2.html",
+          "priceEUR": 35.14,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "hills-wet-ff59af26",
+      "catalogName": "Hill’s Prescription Diet i/d Digestive Care Kitten Chicken",
+      "pending": [
+        {
+          "id": "hills-wet-ff59af26-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Hill's Prescription Diet I/D Digestive Care Kitten Lata Pollo para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-i_d-digestive-care-kitten-lata-pollo-para-gatos/HIL609418_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Hill's Prescription Diet I/D Digestive Care Kitten Lata Pollo para gatos",
+          "sku": "HIL609418",
+          "gtin": "052742079318",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-latas-x-85-g-hill_s-prescription-diet-i_d-digestive-care-kitten-lata-pollo-para-gatos/HIL609418.html",
+          "priceEUR": 29.09,
+          "availability": "InStock"
+        },
+        {
+          "name": "Hill's Prescription Diet I/D Digestive Care Kitten Lata Pollo para gatos",
+          "sku": "HIL609418_P2_B24",
+          "gtin": "52742079318",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/24-latas-x-85-g-hill_s-prescription-diet-i_d-digestive-care-kitten-lata-pollo-para-gatos-%C2%A1pack-ahorro/HIL609418_P2_B24.html",
+          "priceEUR": 54.11,
+          "availability": "InStock"
+        },
+        {
+          "name": "Hill's Prescription Diet I/D Digestive Care Kitten Lata Pollo para gatos",
+          "sku": "HIL609418_P4_B48",
+          "gtin": "52742079318",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/48-latas-x-85-g-hill_s-prescription-diet-i_d-digestive-care-kitten-lata-pollo-para-gatos-%C2%A1pack-ahorro/HIL609418_P4_B48.html",
+          "priceEUR": 105.89,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "orijen-regional-red",
+      "catalogName": "Orijen Regional Red",
+      "pending": [
+        {
+          "id": "orijen-regional-red-340g",
+          "label": "340 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Orijen Regional Red pienso para gatos y gatitos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/sin-cereales/orijen-regional-red-pienso-para-gatos-y-gatitos/ORJ9227_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Orijen Regional Red pienso para gatos y gatitos",
+          "sku": "ORJ9227",
+          "gtin": "064992282189",
+          "url": "https://www.kiwoko.com/alimentacion-gato/1.8-kg-orijen-regional-red-pienso-para-gatos/ORJ9227.html",
+          "priceEUR": 38.99,
+          "availability": "InStock"
+        },
+        {
+          "name": "Orijen Regional Red pienso para gatos y gatitos",
+          "sku": "ORJOORC05",
+          "gtin": "064992282547",
+          "url": "https://www.kiwoko.com/alimentacion-gato/5.4-kg-orijen-regional-red-pienso-para-gatos/ORJOORC05.html",
+          "priceEUR": 84.99,
+          "availability": "InStock"
+        },
+        {
+          "name": "Orijen Regional Red pienso para gatos y gatitos",
+          "sku": "ORJOORC05_B2",
+          "gtin": "64992282547",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/2-x-5.4-kg-orijen-regional-red-pienso-para-gatos-%C2%A1pack-ahorro/ORJOORC05_B2.html",
+          "priceEUR": 166.58,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "orijen-six-fish",
+      "catalogName": "Orijen Six Fish",
+      "pending": [
+        {
+          "id": "orijen-six-fish-340g",
+          "label": "340 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Orijen Six Fish pienso para gatos y gatitos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/sin-cereales/orijen-six-fish-pienso-para-gatos-y-gatitos/ORJOFC07_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Orijen Six Fish pienso para gatos y gatitos",
+          "sku": "ORJOFC02",
+          "gtin": "064992281182",
+          "url": "https://www.kiwoko.com/alimentacion-gato/1.8-kg-orijen-six-fish-pienso-para-gatos/ORJOFC02.html",
+          "priceEUR": 33.69,
+          "availability": "InStock"
+        },
+        {
+          "name": "Orijen Six Fish pienso para gatos y gatitos",
+          "sku": "ORJOFC07",
+          "gtin": "064992281540",
+          "url": "https://www.kiwoko.com/alimentacion-gato/5.4-kg-orijen-six-fish-pienso-para-gatos/ORJOFC07.html",
+          "priceEUR": 69.99,
+          "availability": "InStock"
+        },
+        {
+          "name": "Orijen Six Fish pienso para gatos y gatitos",
+          "sku": "ORJOFC07_B2",
+          "gtin": "64992281540",
+          "url": "https://www.kiwoko.com/alimentacion-gato/2-x-5.4-kg-orijen-six-fish-pienso-para-gatos-%C2%A1pack-ahorro/ORJOFC07_B2.html",
+          "priceEUR": 137.18,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "rc-british",
+      "catalogName": "Royal Canin British Shorthair Adult",
+      "pending": [
+        {
+          "id": "rc-british-400g",
+          "label": "400 г",
+          "ean": null
+        },
+        {
+          "id": "rc-british-4000g",
+          "label": "4 кг",
+          "ean": null
+        }
+      ],
+      "familyName": "Royal Canin Adult British Shorthair pienso para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-adult-british-shorthair-pienso-para-gatos/ROY309560_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Royal Canin Adult British Shorthair pienso para gatos",
+          "sku": "ROY309528",
+          "gtin": "3182550756419",
+          "url": "https://www.kiwoko.com/alimentacion-gato/2-kg-royal-canin-adult-british-shorthair-pienso-para-gatos/ROY309528.html",
+          "priceEUR": 34.59,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Adult British Shorthair pienso para gatos",
+          "sku": "ROY309528_B2",
+          "gtin": "3182550756419",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/2-x-2-kg-royal-canin-adult-british-shorthair-pienso-para-gatos-%C2%A1pack-ahorro/ROY309528_B2.html",
+          "priceEUR": 67.8,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Adult British Shorthair pienso para gatos",
+          "sku": "ROY309560",
+          "gtin": "3182550756464",
+          "url": "https://www.kiwoko.com/alimentacion-gato/10-kg-royal-canin-adult-british-shorthair-pienso-para-gatos/ROY309560.html",
+          "priceEUR": 105.99,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Adult British Shorthair pienso para gatos",
+          "sku": "ROY309560_B2",
+          "gtin": "3182550756464",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/2-x-10-kg-royal-canin-adult-british-shorthair-pienso-para-gatos-%C2%A1pack-ahorro/ROY309560_B2.html",
+          "priceEUR": 207.74,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "rc-fit",
+      "catalogName": "Royal Canin Fit 32",
+      "pending": [
+        {
+          "id": "rc-fit-400g",
+          "label": "400 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Royal Canin Regular Fit 32 pienso para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/bolas-de-pelo/royal-canin-regular-fit-32-pienso-para-gatos/ROY315112_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Royal Canin Regular Fit 32 pienso para gatos",
+          "sku": "ROY315128",
+          "gtin": "3182550702201",
+          "url": "https://www.kiwoko.com/alimentacion-gato/2-kg-royal-canin-regular-fit-32-pienso-para-gatos/ROY315128.html",
+          "priceEUR": 25.39,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Regular Fit 32 pienso para gatos",
+          "sku": "ROY315136",
+          "gtin": "3182550702225",
+          "url": "https://www.kiwoko.com/alimentacion-gato/4-kg-royal-canin-regular-fit-32-pienso-para-gatos/ROY315136.html",
+          "priceEUR": 41.29,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Regular Fit 32 pienso para gatos",
+          "sku": "ROY315160",
+          "gtin": "3182550702249",
+          "url": "https://www.kiwoko.com/alimentacion-gato/10-kg-royal-canin-regular-fit-32-pienso-para-gatos/ROY315160.html",
+          "priceEUR": 77.99,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Regular Fit 32 pienso para gatos",
+          "sku": "ROY315160_B2",
+          "gtin": "3182550702249",
+          "url": "https://www.kiwoko.com/alimentacion-gato/2-x-10-kg-royal-canin-regular-fit-32-pienso-para-gatos-%C2%A1pack-ahorro/ROY315160_B2.html",
+          "priceEUR": 152.86,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Regular Fit 32 pienso para gatos",
+          "sku": "ROY2520620",
+          "gtin": "3182550708364",
+          "url": "https://www.kiwoko.com/alimentacion-gato/12-kg-_10_2-kg-%C2%A1gratis_-royal-canin-regular-fit-32-pienso-para-gatos/ROY2520620.html",
+          "priceEUR": 86.99,
+          "availability": "OutOfStock"
+        },
+        {
+          "name": "Royal Canin Regular Fit 32 pienso para gatos",
+          "sku": "ROY2520620_B2",
+          "gtin": "3182550708364",
+          "url": "https://www.kiwoko.com/alimentacion-gato/2-x-12-kg-_10_2-kg-%C2%A1gratis_-royal-canin-regular-fit-32-pienso-para-gatos-%C2%A1pack-ahorro/ROY2520620_B2.html",
+          "priceEUR": 170.5,
+          "availability": "OutOfStock"
+        }
+      ]
+    },
+    {
+      "productId": "rc-kitten-regular",
+      "catalogName": "Royal Canin Kitten",
+      "pending": [
+        {
+          "id": "rc-kitten-regular-400g",
+          "label": "400 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Royal Canin Kitten pienso para gatitos",
+      "familyUrl": "https://www.kiwoko.com/gatos/especial-gatito/pienso-para-gatitos/royal-canin-kitten-pienso-para-gatitos/ROY310910_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Royal Canin Kitten pienso para gatitos",
+          "sku": "ROY310930",
+          "gtin": "3182550702423",
+          "url": "https://www.kiwoko.com/alimentacion-gato/2-kg-royal-canin-kitten-pienso-para-gatos/ROY310930.html",
+          "priceEUR": 24.39,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Kitten pienso para gatitos",
+          "sku": "ROY310930_B2",
+          "gtin": "3182550702423",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/2-x-2-kg-royal-canin-kitten-pienso-para-gatos-%C2%A1pack-ahorro/ROY310930_B2.html",
+          "priceEUR": 47.8,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Kitten pienso para gatitos",
+          "sku": "ROY310945",
+          "gtin": "3182550702447",
+          "url": "https://www.kiwoko.com/alimentacion-gato/4-kg-royal-canin-kitten-pienso-para-gatos/ROY310945.html",
+          "priceEUR": 54.49,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Kitten pienso para gatitos",
+          "sku": "ROY310945_B2",
+          "gtin": "3182550702447",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/2-x-4-kg-royal-canin-kitten-pienso-para-gatos-%C2%A1pack-ahorro/ROY310945_B2.html",
+          "priceEUR": 106.8,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Kitten pienso para gatitos",
+          "sku": "ROY310960",
+          "gtin": "3182550702973",
+          "url": "https://www.kiwoko.com/alimentacion-gato/10-kg-royal-canin-kitten-pienso-para-gatos/ROY310960.html",
+          "priceEUR": 90.49,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Kitten pienso para gatitos",
+          "sku": "ROY310960_B2",
+          "gtin": "3182550702973",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/2-x-10-kg-royal-canin-kitten-pienso-para-gatos-%C2%A1pack-ahorro/ROY310960_B2.html",
+          "priceEUR": 177.36,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "rc-maine-coon",
+      "catalogName": "Royal Canin Maine Coon Adult",
+      "pending": [
+        {
+          "id": "rc-maine-coon-400g",
+          "label": "400 г",
+          "ean": null
+        },
+        {
+          "id": "rc-maine-coon-2000g",
+          "label": "2 кг",
+          "ean": null
+        }
+      ],
+      "familyName": "Royal Canin Adult Maine Coon pienso para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/royal-canin-adult-maine-coon-pienso-para-gatos/ROY309338_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Royal Canin Adult Maine Coon pienso para gatos",
+          "sku": "ROY309338",
+          "gtin": "3182550710657",
+          "url": "https://www.kiwoko.com/alimentacion-gato/4-kg-royal-canin-adult-maine-coon-pienso-para-gatos/ROY309338.html",
+          "priceEUR": 59.49,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Adult Maine Coon pienso para gatos",
+          "sku": "ROY309361",
+          "gtin": "3182550710664",
+          "url": "https://www.kiwoko.com/alimentacion-gato/10-kg-royal-canin-adult-maine-coon-pienso-para-gatos/ROY309361.html",
+          "priceEUR": 93.99,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Adult Maine Coon pienso para gatos",
+          "sku": "ROY309361_B2",
+          "gtin": "3182550710664",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/pienso/2-x-10-kg-royal-canin-adult-maine-coon-pienso-para-gatos-%C2%A1pack-ahorro/ROY309361_B2.html",
+          "priceEUR": 184.22,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "royalcanin-1fdaaee6",
+      "catalogName": "Royal Canin Instinctive Gravy",
+      "pending": [
+        {
+          "id": "royalcanin-1fdaaee6-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Royal Canin Instinctive sobres en salsa para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-instinctive-sobres-en-salsa-para-gatos/ROY379026_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Royal Canin Instinctive sobres en salsa para gatos",
+          "sku": "ROY379026",
+          "gtin": "9003579308936",
+          "url": "https://www.kiwoko.com/alimentacion-gato/85-g-royal-canin-instinctive-sobres-en-salsa-para-gatos/ROY379026.html",
+          "priceEUR": 1.49,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Instinctive sobres en salsa para gatos",
+          "sku": "ROY379026_B12",
+          "gtin": "9003579308936",
+          "url": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85g-royal-canin-instinctive-sobres-en-salsa-para-gatos-%C2%A1pack-ahorro/ROY379026_B12.html",
+          "priceEUR": 17.52,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Instinctive sobres en salsa para gatos",
+          "sku": "ROY379026_B24",
+          "gtin": "9003579308936",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/24-sobres-x-85-g-royal-canin-instinctive-sobres-en-salsa-para-gatos-%C2%A1pack-ahorro/ROY379026_B24.html",
+          "priceEUR": 34.33,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Instinctive sobres en salsa para gatos",
+          "sku": "ROY379026_B48",
+          "gtin": "9003579308936",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/48-sobres-x-85-g-royal-canin-instinctive-sobres-en-salsa-para-gatos-%C2%A1pack-ahorro/ROY379026_B48.html",
+          "priceEUR": 67.23,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "royalcanin-5c2e58b7",
+      "catalogName": "Royal Canin Urinary S/O - паштет",
+      "pending": [
+        {
+          "id": "royalcanin-5c2e58b7-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Royal Canin Veterinary Diet  Urinary S/O sobres para gato",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-diet--urinary-s_o-sobres-para-gato/ROY4032001BOX_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Royal Canin Veterinary Diet  Urinary S/O sobres para gato",
+          "sku": "ROY4032001BOX",
+          "gtin": "9003579010044",
+          "url": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-royal-canin-veterinary-diet--urinary-s_o-sobres-para-gato/ROY4032001BOX.html",
+          "priceEUR": 28.59,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Veterinary Diet  Urinary S/O sobres para gato",
+          "sku": "ROY4032001BOX_P2_B24",
+          "gtin": "9003579010044",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/24-sobres-x-85-g-royal-canin-veterinary-diet--urinary-s_o-sobres-para-gato-%C2%A1pack-ahorro/ROY4032001BOX_P2_B24.html",
+          "priceEUR": 54.89,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Veterinary Diet  Urinary S/O sobres para gato",
+          "sku": "ROY4032001BOX_P4_B48",
+          "gtin": "9003579010044",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/48-sobres-x-85-g-royal-canin-veterinary-diet--urinary-s_o-sobres-para-gato-%C2%A1pack-ahorro/ROY4032001BOX_P4_B48.html",
+          "priceEUR": 107.5,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "royalcanin-86568be1",
+      "catalogName": "Royal Canin Renal Mousse",
+      "pending": [
+        {
+          "id": "royalcanin-86568be1-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Royal Canin Veterinary Renal Mousse sobre para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-renal-mousse-sobre-para-gatos/ROY1246000_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Royal Canin Veterinary Renal Mousse sobre para gatos",
+          "sku": "ROY1246000BOX",
+          "gtin": "9003579015902",
+          "url": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-royal-canin-veterinary-renal-mousse-sobre-para-gatos/ROY1246000BOX.html",
+          "priceEUR": 23.09,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal Mousse sobre para gatos",
+          "sku": "ROY1246000BOX_P2_B24",
+          "gtin": "9003579015902",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/24-sobres-x-85-g-royal-canin-veterinary-renal-mousse-sobre-para-gatos-%C2%A1pack-ahorro/ROY1246000BOX_P2_B24.html",
+          "priceEUR": 44.33,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal Mousse sobre para gatos",
+          "sku": "ROY1246000BOX_P4_B48",
+          "gtin": "9003579015902",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/48-sobres-x-85-g-royal-canin-veterinary-renal-mousse-sobre-para-gatos-%C2%A1pack-ahorro/ROY1246000BOX_P4_B48.html",
+          "priceEUR": 86.82,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "royalcanin-8ffe447c",
+      "catalogName": "Royal Canin Diabetic - соус",
+      "pending": [
+        {
+          "id": "royalcanin-8ffe447c-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Royal Canin Veterinary Diet Diabetic sobres para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-diet-diabetic-sobres-para-gatos/ROYDIABDOGBOX_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Royal Canin Veterinary Diet Diabetic sobres para gatos",
+          "sku": "ROYDIABDOGBOX",
+          "gtin": "9003579011980",
+          "url": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-royal-canin-veterinary-diet-diabetic-sobres-para-gatos/ROYDIABDOGBOX.html",
+          "priceEUR": 28.59,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Veterinary Diet Diabetic sobres para gatos",
+          "sku": "ROYDIABDOGBOX_P2_B24",
+          "gtin": "9003579011980",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/24-sobres-x-85-g-royal-canin-veterinary-diet-diabetic-sobres-para-gatos-%C2%A1pack-ahorro/ROYDIABDOGBOX_P2_B24.html",
+          "priceEUR": 54.89,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Veterinary Diet Diabetic sobres para gatos",
+          "sku": "ROYDIABDOGBOX_P4_B48",
+          "gtin": "9003579011980",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/48-sobres-x-85-g-royal-canin-veterinary-diet-diabetic-sobres-para-gatos-%C2%A1pack-ahorro/ROYDIABDOGBOX_P4_B48.html",
+          "priceEUR": 107.5,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "royalcanin-955edaaa",
+      "catalogName": "Royal Canin Sensitivity Control Chicken & Rice - соус",
+      "pending": [
+        {
+          "id": "royalcanin-955edaaa-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Royal Canin Veterinary Sensitivity Control Pollo y Arroz sobre en salsa",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-sensitivity-control-pollo-y-arroz-sobre-en-salsa/ROY4035001BOX_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Royal Canin Veterinary Sensitivity Control Pollo y Arroz sobre en salsa",
+          "sku": "ROY4035001BOX",
+          "gtin": "9003579011423",
+          "url": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-royal-canin-veterinary-sensitivity-control-pollo-y-arroz-sobre-en-salsa/ROY4035001BOX.html",
+          "priceEUR": 27.99,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Veterinary Sensitivity Control Pollo y Arroz sobre en salsa",
+          "sku": "ROY4035001BOX_P2_B24",
+          "gtin": "9003579011423",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/24-sobres-x-85-g-royal-canin-veterinary-sensitivity-control-pollo-y-arroz-sobre-en-salsa-%C2%A1pack-ahorro/ROY4035001BOX_P2_B24.html",
+          "priceEUR": 53.74,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Veterinary Sensitivity Control Pollo y Arroz sobre en salsa",
+          "sku": "ROY4035001BOX_P4_B48",
+          "gtin": "9003579011423",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/48-sobres-x-85-g-royal-canin-veterinary-sensitivity-control-pollo-y-arroz-sobre-en-salsa-%C2%A1pack-ahorro/ROY4035001BOX_P4_B48.html",
+          "priceEUR": 105.24,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "royalcanin-c1fbc2a8",
+      "catalogName": "Royal Canin Mature Consult Balance - паштет",
+      "pending": [
+        {
+          "id": "royalcanin-c1fbc2a8-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Royal Canin Mature Consult Balance Paté sobre para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/royal-canin-mature-consult-balance-pate-sobre-para-gatos/ROY1503001_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Royal Canin Mature Consult Balance Paté sobre para gatos",
+          "sku": "ROY1503001",
+          "gtin": "9003579015728",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/12-sobres-x-85-g-royal-canin-mature-consult-balance-pate-sobre-para-gatos/ROY1503001.html",
+          "priceEUR": 19.19,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "royalcanin-ce70b2a8",
+      "catalogName": "Royal Canin Skin & Coat - соус",
+      "pending": [
+        {
+          "id": "royalcanin-ce70b2a8-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Royal Canin Skin & Coat sobre en salsa para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-skin_coat-sobre-en-salsa-para-gatos/ROY44219_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Royal Canin Skin & Coat sobre en salsa para gatos",
+          "sku": "ROY44219",
+          "gtin": "9003579011522",
+          "url": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-royal-canin-skin_coat-sobre-en-salsa-para-gatos/ROY44219.html",
+          "priceEUR": 34.59,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Skin & Coat sobre en salsa para gatos",
+          "sku": "ROY44219_P2_B24",
+          "gtin": "9003579011522",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/24-sobres-x-85-g-royal-canin-skin_coat-sobre-en-salsa-para-gatos-%C2%A1pack-ahorro/ROY44219_P2_B24.html",
+          "priceEUR": 66.41,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Skin & Coat sobre en salsa para gatos",
+          "sku": "ROY44219_P4_B48",
+          "gtin": "9003579011522",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/48-sobres-x-85-g-royal-canin-skin_coat-sobre-en-salsa-para-gatos-%C2%A1pack-ahorro/ROY44219_P4_B48.html",
+          "priceEUR": 130.06,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "royalcanin-db40d730",
+      "catalogName": "Royal Canin Gastrointestinal Moderate Calorie - соус",
+      "pending": [
+        {
+          "id": "royalcanin-db40d730-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "familyName": "Royal Canin Veterinary Gastrointestinal Moderate Calorie sobre para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-gastrointestinal-moderate-calorie-sobre-para-gatos/ROY364507_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Royal Canin Veterinary Gastrointestinal Moderate Calorie sobre para gatos",
+          "sku": "ROY4009001BOX",
+          "gtin": "9003579013601",
+          "url": "https://www.kiwoko.com/alimentacion-gato/12-sobres-x-85-g-royal-canin-veterinary-gastrointestinal-moderate-calorie-sobre-para-gatos/ROY4009001BOX.html",
+          "priceEUR": 29.09,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Veterinary Gastrointestinal Moderate Calorie sobre para gatos",
+          "sku": "ROY4009001BOX_P2_B24",
+          "gtin": "9003579013601",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/24-sobres-x-85-g-royal-canin-veterinary-gastrointestinal-moderate-calorie-sobre-para-gatos-%C2%A1pack-ahorro/ROY4009001BOX_P2_B24.html",
+          "priceEUR": 55.85,
+          "availability": "InStock"
+        },
+        {
+          "name": "Royal Canin Veterinary Gastrointestinal Moderate Calorie sobre para gatos",
+          "sku": "ROY4009001BOX_P4_B48",
+          "gtin": "9003579013601",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/48-sobres-x-85-g-royal-canin-veterinary-gastrointestinal-moderate-calorie-sobre-para-gatos-%C2%A1pack-ahorro/ROY4009001BOX_P4_B48.html",
+          "priceEUR": 109.38,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "tc-0c0460f2f4",
+      "catalogName": "Pro Plan Skin & Coat+ - лососевое масло",
+      "pending": [
+        {
+          "id": "tc-0c0460f2f4-reference-pack",
+          "label": "150 мл",
+          "ean": "8445290020574"
+        }
+      ],
+      "familyName": "Pro Plan Skin & Coat + Aceite de Salmón Noruego para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/higiene-para-gatos/salud-del-gato/suplementos-y-vitaminas/pro-plan-skin_coat_aceite-de-salmon-noruego-para-gatos/PRO12505765_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Pro Plan Skin & Coat + Aceite de Salmón Noruego para gatos",
+          "sku": "PRO12505765",
+          "gtin": "8445290020574",
+          "url": "https://www.kiwoko.com/alimentacion-perro/150-ml-pro-plan-skin_coat_aceite-de-salmon-noruego-para-gatos/PRO12505765.html",
+          "priceEUR": 12.29,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "tc-f617e6e32b",
+      "catalogName": "Vitakraft Cat Yums - курица",
+      "pending": [
+        {
+          "id": "tc-f617e6e32b-reference-pack",
+          "label": "40 г",
+          "ean": "4008239315311"
+        }
+      ],
+      "familyName": "Vitakraft Cat Yums Bocaditos de Pollo para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/vitakraft-cat-yums-bocaditos-de-pollo-para-gatos/VIT31531_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Vitakraft Cat Yums Bocaditos de Pollo para gatos",
+          "sku": "VIT31531",
+          "gtin": "4008239315311",
+          "url": "https://www.kiwoko.com/alimentacion-gato/40-g-vitakraft-cat-yums-bocaditos-de-pollo-para-gatos/VIT31531.html",
+          "priceEUR": 1.59,
+          "availability": "OutOfStock"
+        },
+        {
+          "name": "Vitakraft Cat Yums Bocaditos de Pollo para gatos",
+          "sku": "VIT31531_B4",
+          "gtin": "4008239315311",
+          "url": "https://www.kiwoko.com/gatos_new/alimentacion/snacks/4-bolsitas-x-40-g-vitakraft-cat-yums-bocaditos-de-pollo-para-gatos-%C2%A1pack-ahorro/VIT31531_B4.html",
+          "priceEUR": 6.11,
+          "availability": "OutOfStock"
+        },
+        {
+          "name": "Vitakraft Cat Yums Bocaditos de Pollo para gatos",
+          "sku": "VIT31531_B6",
+          "gtin": "4008239315311",
+          "url": "https://www.kiwoko.com/alimentacion-gato/6-bolsitas-x-40-g-vitakraft-cat-yums-bocaditos-de-pollo-para-gatos-%C2%A1pack-ahorro/VIT31531_B6.html",
+          "priceEUR": 8.97,
+          "availability": "OutOfStock"
+        }
+      ]
+    },
+    {
+      "productId": "yagu-2170001",
+      "catalogName": "Sanicat Classic - впитывающий наполнитель",
+      "pending": [
+        {
+          "id": "yagu-2170001-catalog-pack",
+          "label": "10 л / 6,25 кг"
+        }
+      ],
+      "familyName": "Sanicat Classic Arena absorbente sin perfume para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/arenas-y-accesorios/arenas/absorbentes/sanicat-classic-arena-absorbente-sin-perfume-para-gatos/SAN80142_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Sanicat Classic Arena absorbente sin perfume para gatos",
+          "sku": "SAN80142",
+          "gtin": "8411514805906",
+          "url": "https://www.kiwoko.com/higiene-gato/10-l-sanicat-classic-arena/SAN80142.html",
+          "priceEUR": 11.39,
+          "availability": "InStock"
+        },
+        {
+          "name": "Sanicat Classic Arena absorbente sin perfume para gatos",
+          "sku": "SAN80142_B2",
+          "gtin": "8411514805906",
+          "url": "https://www.kiwoko.com/higiene-gato/2-x-10-l-sanicat-classic-arena-%C2%A1pack-ahorro/SAN80142_B2.html",
+          "priceEUR": 22.32,
+          "availability": "InStock"
+        },
+        {
+          "name": "Sanicat Classic Arena absorbente sin perfume para gatos",
+          "sku": "SANPSANCSUM016L21",
+          "gtin": "8411514805913",
+          "url": "https://www.kiwoko.com/higiene-gato/16-l-sanicat-classic-arena/SANPSANCSUM016L21.html",
+          "priceEUR": 10.99,
+          "availability": "InStock"
+        },
+        {
+          "name": "Sanicat Classic Arena absorbente sin perfume para gatos",
+          "sku": "SANPSANCSUM016L21_B2",
+          "gtin": "8411514805913",
+          "url": "https://www.kiwoko.com/higiene-gato/2-x-16-l-sanicat-classic-arena-%C2%A1pack-ahorro/SANPSANCSUM016L21_B2.html",
+          "priceEUR": 21.54,
+          "availability": "InStock"
+        }
+      ]
+    },
+    {
+      "productId": "yagu-2170014",
+      "catalogName": "Sanicat Natura Activa - растительный наполнитель",
+      "pending": [
+        {
+          "id": "yagu-2170014-catalog-pack",
+          "label": "10 л"
+        }
+      ],
+      "familyName": "Sanicat Natura Activa Recycled Arena para gatos",
+      "familyUrl": "https://www.kiwoko.com/gatos/arenas-y-accesorios/arenas/biodegradables/sanicat-natura-activa-recycled-arena-para-gatos/SAN23080090_M.html",
+      "httpStatus": 200,
+      "variants": [
+        {
+          "name": "Sanicat Natura Activa Recycled Arena para gatos",
+          "sku": "SAN23080090",
+          "gtin": "8411514806309",
+          "url": "https://www.kiwoko.com/gatos_new/salud-e-higiene/arenas/10-l-sanicat-natura-activa-recycled-arena-para-gatos/SAN23080090.html",
+          "priceEUR": 14.49,
+          "availability": "InStock"
+        },
+        {
+          "name": "Sanicat Natura Activa Recycled Arena para gatos",
+          "sku": "SAN23080090_B2",
+          "gtin": "8411514806309",
+          "url": "https://www.kiwoko.com/higiene-gato/2-x-10-l-sanicat-natura-activa-recycled-arena-para-gatos-%C2%A1pack-ahorro/SAN23080090_B2.html",
+          "priceEUR": 28.4,
+          "availability": "InStock"
+        }
+      ]
+    }
+  ]
+}

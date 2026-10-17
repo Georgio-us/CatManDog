@@ -1,0 +1,806 @@
+{
+  "checkedAt": "2026-10-17",
+  "scope": "Manually reviewed exact single-pack public retailer offers",
+  "items": [
+    {
+      "variantId": "royalcanin-1fdaaee6-85g",
+      "retailer": "Kiwoko",
+      "amount": 1.49,
+      "url": "https://www.kiwoko.com/alimentacion-gato/85-g-royal-canin-instinctive-sobres-en-salsa-para-gatos/ROY379026.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "ROY379026",
+      "gtin": "9003579308936",
+      "evidence": "Live Kiwoko ProductGroup JSON-LD: exact Gravy 85 g single pouch, InStock"
+    },
+    {
+      "variantId": "yagu-2170001-catalog-pack",
+      "retailer": "Kiwoko",
+      "amount": 11.39,
+      "url": "https://www.kiwoko.com/higiene-gato/10-l-sanicat-classic-arena/SAN80142.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "SAN80142",
+      "gtin": "8411514805906",
+      "evidence": "Live Kiwoko ProductGroup JSON-LD: Sanicat Classic unscented absorbent 10 L single bag, InStock"
+    },
+    {
+      "variantId": "yagu-2170014-catalog-pack",
+      "retailer": "Kiwoko",
+      "amount": 14.49,
+      "url": "https://www.kiwoko.com/gatos_new/salud-e-higiene/arenas/10-l-sanicat-natura-activa-recycled-arena-para-gatos/SAN23080090.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "SAN23080090",
+      "gtin": "8411514806309",
+      "evidence": "Live Kiwoko ProductGroup JSON-LD: Sanicat Natura Activa Recycled 10 L single bag, InStock"
+    },
+    {
+      "variantId": "leonardo-chicken-400g",
+      "retailer": "Miscota",
+      "amount": 4.19,
+      "url": "https://www.miscota.es/gatos/leonardo/comida-humeda-pollo-extra-filete-gatos",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-turkey-400g",
+      "retailer": "Miscota",
+      "amount": 4.19,
+      "url": "https://www.miscota.es/gatos/leonardo/comida-humeda-pavo-extra-filete-gatos",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-salmon-200g",
+      "retailer": "Miscota",
+      "amount": 2.77,
+      "url": "https://www.miscota.es/gatos/leonardo/comida-humeda-extra-salmon-filete-gatos",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-salmon-400g",
+      "retailer": "Miscota",
+      "amount": 4.19,
+      "url": "https://www.miscota.es/gatos/leonardo/comida-humeda-extra-salmon-filete-gatos",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-kitten-85g",
+      "retailer": "Miscota",
+      "amount": 1.59,
+      "url": "https://www.miscota.es/gatos/leonardo/pouches-gato-kitten-17817",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-meat-menu-85g",
+      "retailer": "Miscota",
+      "amount": 1.59,
+      "url": "https://www.miscota.es/gatos/leonardo/pouches-gato-men-carne-17821",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-lamb-200g",
+      "retailer": "Miscota",
+      "amount": 2.79,
+      "url": "https://www.miscota.es/gatos/leonardo/latas-cordero-filete",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-lamb-400g",
+      "retailer": "Miscota",
+      "amount": 4.19,
+      "url": "https://www.miscota.es/gatos/leonardo/latas-cordero-filete",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-venison-200g",
+      "retailer": "Miscota",
+      "amount": 2.69,
+      "url": "https://www.miscota.es/gatos/leonardo/comida-humeda-venado-extra-filete-gatos",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-quality-kitten-800g",
+      "retailer": "Miscota",
+      "amount": 4.59,
+      "url": "https://www.miscota.es/gatos/leonardo/pr-521846",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-quality-poultry-800g",
+      "retailer": "Miscota",
+      "amount": 4.59,
+      "url": "https://www.miscota.es/gatos/leonardo/comida-humeda-puro-ave-gatos",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-quality-beef-200g",
+      "retailer": "Miscota",
+      "amount": 1.89,
+      "url": "https://www.miscota.es/gatos/leonardo/pr-520387",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-quality-beef-400g",
+      "retailer": "Miscota",
+      "amount": 2.99,
+      "url": "https://www.miscota.es/gatos/leonardo/pr-520387",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-quality-beef-800g",
+      "retailer": "Miscota",
+      "amount": 4.59,
+      "url": "https://www.miscota.es/gatos/leonardo/pr-520387",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-quality-duck-400g",
+      "retailer": "Miscota",
+      "amount": 2.99,
+      "url": "https://www.miscota.es/gatos/leonardo/comida-humeda-rico-pato-gatos",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-pure-turkey-85g",
+      "retailer": "Miscota",
+      "amount": 1.5,
+      "url": "https://www.miscota.es/gatos/leonardo/pr-520952",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-pure-chicken-85g",
+      "retailer": "Miscota",
+      "amount": 1.59,
+      "url": "https://www.miscota.es/gatos/leonardo/pr-520953",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-superior-horse-400g",
+      "retailer": "Miscota",
+      "amount": 4.19,
+      "url": "https://www.miscota.es/gatos/leonardo/comida-humeda-superior-caballo9-calabacin-gatos",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-superior-duck-200g",
+      "retailer": "Miscota",
+      "amount": 2.29,
+      "url": "https://www.miscota.es/gatos/leonardo/comida-humeda-superior-pato-pollo-zanahoria-gatos",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-superior-duck-400g",
+      "retailer": "Miscota",
+      "amount": 3.59,
+      "url": "https://www.miscota.es/gatos/leonardo/comida-humeda-superior-pato-pollo-zanahoria-gatos",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-superior-chicken-200g",
+      "retailer": "Miscota",
+      "amount": 2.26,
+      "url": "https://www.miscota.es/gatos/leonardo/comida-humeda-superior-pollo-espinacas-gatos",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-superior-chicken-400g",
+      "retailer": "Miscota",
+      "amount": 3.59,
+      "url": "https://www.miscota.es/gatos/leonardo/comida-humeda-superior-pollo-espinacas-gatos",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-superior-beef-200g",
+      "retailer": "Miscota",
+      "amount": 2.26,
+      "url": "https://www.miscota.es/gatos/leonardo/comida-humeda-superior-ternera-tenado-boniato-gatos",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "leonardo-wet-superior-beef-400g",
+      "retailer": "Miscota",
+      "amount": 3.59,
+      "url": "https://www.miscota.es/gatos/leonardo/comida-humeda-superior-ternera-tenado-boniato-gatos",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Public Miscota product page: matching Leonardo recipe and explicitly listed single-pack format with standard consumer price; multipack tiers excluded"
+    },
+    {
+      "variantId": "yagu-2170001-catalog-pack",
+      "retailer": "MisMascotas",
+      "amount": 19.01,
+      "url": "https://www.mismascotas.es/products/sanicat-classic",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "2170001",
+      "gtin": "8411514805906",
+      "evidence": "Live MisMascotas Product JSON-LD: exact supplier SKU and same EAN as Kiwoko 10 L, InStock, tax included"
+    },
+    {
+      "variantId": "yagu-2170004-catalog-pack",
+      "retailer": "MisMascotas",
+      "amount": 22.77,
+      "url": "https://www.mismascotas.es/products/sanicat-bentonita-aglomerante-clumping",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "2170004",
+      "gtin": "8411514805814",
+      "evidence": "Live MisMascotas Product JSON-LD: exact supplier SKU, 10 L, InStock, IVA incluido"
+    },
+    {
+      "variantId": "yagu-2170005-catalog-pack",
+      "retailer": "MisMascotas",
+      "amount": 26.05,
+      "url": "https://www.mismascotas.es/arenas-gatos/18495-sanicat-bentonita-gold.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "2170005",
+      "gtin": null,
+      "evidence": "Live MisMascotas Product JSON-LD: exact supplier SKU, 6 L, InStock, tax included"
+    },
+    {
+      "variantId": "yagu-9235071-catalog-pack",
+      "retailer": "MisMascotas",
+      "amount": 8.99,
+      "url": "https://www.mismascotas.es/products/mp-paleta-para-gatos",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "9235071",
+      "gtin": null,
+      "evidence": "Live MisMascotas Product JSON-LD: exact Moderna supplier SKU 9235071, InStock, taxes included"
+    },
+    {
+      "variantId": "tc-0c0460f2f4-reference-pack",
+      "retailer": "Kiwoko",
+      "amount": 12.29,
+      "url": "https://www.kiwoko.com/alimentacion-perro/150-ml-pro-plan-skin_coat_aceite-de-salmon-noruego-para-gatos/PRO12505765.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "PRO12505765",
+      "gtin": "8445290020574",
+      "evidence": "Live Kiwoko ProductGroup JSON-LD: exact 150 ml cat supplement and matching catalog EAN, InStock"
+    },
+    {
+      "variantId": "acana-grasslands-340g",
+      "retailer": "Allypets",
+      "amount": 5.95,
+      "url": "https://allypets.com/piensos-para-perros/3857-acana-feline-adult-grasslands-340-gr-064992714697.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Live itemprop price 5.95, schema InStock, tax-included label, exact Acana Grasslands Cat 340 g"
+    },
+    {
+      "variantId": "acana-wild-prairie-340g",
+      "retailer": "Allypets",
+      "amount": 5.95,
+      "url": "https://allypets.com/gatos/9889-acana-wild-prairie-cat-340-gr-064992714550.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Live itemprop price 5.95, schema InStock, tax-included label, exact Acana Wild Prairie Cat 340 g"
+    },
+    {
+      "variantId": "acana-pacifica-340g",
+      "retailer": "Allypets",
+      "amount": 5.95,
+      "url": "https://allypets.com/piensos-para-gatos/9887-acana-pacifica-cat-340-gr-064992714628.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Live itemprop price 5.95, schema InStock, tax-included label, exact Acana Pacifica Cat 340 g"
+    },
+    {
+      "variantId": "orijen-original-340g",
+      "retailer": "Allypets",
+      "amount": 6.87,
+      "url": "https://allypets.com/orijen-pienso-gatos/9433-orijen-feline-original-cat-340gr-064992280345.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Live itemprop price 6.87, schema InStock, tax-included label, exact Orijen Original Cat 340 g"
+    },
+    {
+      "variantId": "orijen-six-fish-340g",
+      "retailer": "Allypets",
+      "amount": 6.87,
+      "url": "https://allypets.com/orijen-pienso-gatos/9411-orijen-6-fish-cat-340-gr-064992281342.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Live itemprop price 6.87, schema InStock, tax-included label, exact Orijen Six Fish Cat 340 g"
+    },
+    {
+      "variantId": "acana-indoor-340g",
+      "retailer": "Barakaldo Vet Shop",
+      "amount": 4.99,
+      "url": "https://www.barakaldotiendaveterinaria.es/acana-indoor-cat.html#/gramos-340_gr",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Live 340 g variant microdata, 4.99 tax included, inventory quantity 22"
+    },
+    {
+      "variantId": "orijen-regional-red-340g",
+      "retailer": "Barakaldo Vet Shop",
+      "amount": 6.45,
+      "url": "https://www.barakaldotiendaveterinaria.es/orijen-regional-red-cat.html#/gramos-340_gr",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Live 340 g variant microdata, 6.45 tax included, inventory quantity 63"
+    },
+    {
+      "variantId": "rc-fit-400g",
+      "retailer": "Bitiba",
+      "amount": 5.99,
+      "url": "https://www.bitiba.es/shop/gatos/pienso/royal_canin_pienso_gatos/adulto/381186?activeVariant=381186.15",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "381186.15",
+      "gtin": null,
+      "evidence": "Live Bitiba DataLayer selected variant 400 g, one-time price 5.99 EUR, out_stock=false; retailer states all prices include IVA"
+    },
+    {
+      "variantId": "rc-kitten-regular-400g",
+      "retailer": "Bitiba",
+      "amount": 6.49,
+      "url": "https://www.bitiba.es/shop/gatos/pienso/royal_canin_pienso_gatos/royal_canin_pienso_gatitos/381233?activeVariant=381233.18",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "381233.18",
+      "gtin": null,
+      "evidence": "Live Bitiba DataLayer selected variant 400 g, one-time price 6.49 EUR, out_stock=false; retailer states all prices include IVA"
+    },
+    {
+      "variantId": "rc-urinary-400g",
+      "retailer": "Bitiba",
+      "amount": 8.49,
+      "url": "https://www.bitiba.es/shop/gatos/pienso/royal_canin_pienso_gatos/royal_canin_special_care_pienso_gatos/470434?activeVariant=470434.2",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "470434.2",
+      "gtin": null,
+      "evidence": "Live Bitiba DataLayer selected variant 400 g, one-time price 8.49 EUR, out_stock=false; retailer states all prices include IVA"
+    },
+    {
+      "variantId": "rc-maine-coon-2000g",
+      "retailer": "Bitiba",
+      "amount": 30.99,
+      "url": "https://www.bitiba.es/shop/gatos/pienso/royal_canin_pienso_gatos/royal_canin_breed_gatos/381179?activeVariant=381179.17",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "381179.17",
+      "gtin": null,
+      "evidence": "Live Bitiba DataLayer selected variant 2 kg, one-time price 30.99 EUR, out_stock=false; retailer states all prices include IVA"
+    },
+    {
+      "variantId": "rc-british-4000g",
+      "retailer": "Bitiba",
+      "amount": 44.99,
+      "url": "https://www.bitiba.es/shop/gatos/pienso/royal_canin_pienso_gatos/royal_canin_breed_gatos/381178?activeVariant=381178.7",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "381178.7",
+      "gtin": null,
+      "evidence": "Live Bitiba DataLayer selected variant 4 kg, one-time price 44.99 EUR, out_stock=false; retailer states all prices include IVA"
+    },
+    {
+      "variantId": "hills-light-3000g",
+      "retailer": "Bitiba",
+      "amount": 32.49,
+      "url": "https://www.bitiba.es/shop/gatos/pienso/hills_feline_pienso_gatos/hills_feline_light_pienso_gatos/380585?activeVariant=380585.15",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "380585.15",
+      "gtin": null,
+      "evidence": "Live Bitiba DataLayer variant 3 kg, one-time price 32.49 EUR, out_stock=false; retailer states all prices include IVA"
+    },
+    {
+      "variantId": "hills-kitten-regular-3000g",
+      "retailer": "Bitiba",
+      "amount": 30.99,
+      "url": "https://www.bitiba.es/shop/gatos/pienso/hills_feline_pienso_gatos/hills_feline_pienso_gatitos/380634?activeVariant=380634.16",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "380634.16",
+      "gtin": null,
+      "evidence": "Live Bitiba DataLayer variant 3 kg, one-time price 30.99 EUR, out_stock=false; retailer states all prices include IVA"
+    },
+    {
+      "variantId": "rc-maine-coon-400g",
+      "retailer": "Royal Canin",
+      "amount": 8.5,
+      "url": "https://www.royalcanin.com/es/cats/products/retail-products/maine-coon-adult-2550?ean=1-3182550710633",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "1-3182550710633",
+      "gtin": "3182550710633",
+      "evidence": "Live official Royal Canin Product JSON-LD, Maine Coon Adult 400 g, 8.50 EUR, InStock, consumer checkout price"
+    },
+    {
+      "variantId": "rc-british-400g",
+      "retailer": "Royal Canin",
+      "amount": 8.5,
+      "url": "https://www.royalcanin.com/es/cats/products/retail-products/british-shorthair-adult-2557?ean=1-3182550756402",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "1-3182550756402",
+      "gtin": "3182550756402",
+      "evidence": "Live official Royal Canin Product JSON-LD, British Shorthair Adult 400 g, 8.50 EUR, InStock, consumer checkout price"
+    },
+    {
+      "variantId": "leonardo-wet-pulled-chicken-70g",
+      "retailer": "Peluchos Mascotas",
+      "amount": 1.55,
+      "url": "https://www.peluchosmascotas.es/alimento-humedo/leonardo-pulled-beef-pollo-con-ternera-70-gr/",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": null,
+      "evidence": "Live Product JSON-LD exact 70 g recipe, price 1.55 EUR, InStock, valueAddedTaxIncluded=true"
+    },
+    {
+      "variantId": "leonardo-wet-superior-lamb-200g",
+      "retailer": "Mascota Planet",
+      "amount": 1.8,
+      "url": "https://www.mascotaplanet.com/comprar-leonardo-superior-selection-cordero-con-ave-y-calabaza-lata-200g-para-gatos.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": "4002633755551",
+      "evidence": "Live exact Superior Selection Lamb with Poultry & Pumpkin 200 g, displayed total IVA incluido 1.80 EUR and add-to-cart"
+    },
+    {
+      "variantId": "leonardo-wet-superior-lamb-400g",
+      "retailer": "Bruno&Henry",
+      "amount": 3.3,
+      "url": "https://brunoandhenry.com/product/leonardo-superior-selection-cordero-pollo-calabaza/",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "29243",
+      "gtin": null,
+      "evidence": "Live exact 400 g WooCommerce variation 29243, display_price 3.30 EUR, is_in_stock=true; Product JSON-LD valueAddedTaxIncluded=true"
+    },
+    {
+      "variantId": "tc-f617e6e32b-reference-pack",
+      "retailer": "Miscota",
+      "amount": 1.48,
+      "url": "https://www.miscota.es/gatos/vitakraft/cat-yums-pollo-con-hierba-gatera-40-gr",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "4008239315311",
+      "gtin": "4008239315311",
+      "evidence": "Live retailer page: matching EAN, 40 g Chicken with Cat Grass, standard single-pack consumer price 1.48 EUR, delivery 24-48 hours"
+    },
+    {
+      "variantId": "tc-7934eaf44b-reference-pack",
+      "retailer": "SuperPiensos",
+      "amount": 11.99,
+      "url": "https://www.superpiensos.com/aceite-de-salmon-bea11283",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "BEA11295",
+      "gtin": "8711231112951",
+      "evidence": "Live exact Beaphar salmon oil 425 ml EAN, InStock; product:pretax_price:amount 10.90 EUR and product:price:amount 11.99 EUR"
+    },
+    {
+      "variantId": "tc-06a4db0143-reference-pack",
+      "retailer": "Miscota",
+      "amount": 2.19,
+      "url": "https://www.miscota.es/gatos/kit-cat/freezebites-de-pollo",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "671875796963",
+      "gtin": "671875796963",
+      "evidence": "Live retailer page: exact FreezeBites chicken 15 g EAN, standard single-pack consumer price 2.19 EUR, delivery 24-48 hours"
+    },
+    {
+      "variantId": "tc-1877f4a340-reference-pack",
+      "retailer": "Miscota",
+      "amount": 2.15,
+      "url": "https://www.miscota.es/gatos/kit-cat/freezebites-de-salmon",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "671875797007",
+      "gtin": "671875797007",
+      "evidence": "Live retailer page: exact FreezeBites salmon 15 g, standard single-pack consumer price 2.15 EUR, delivery 24-48 hours"
+    },
+    {
+      "variantId": "advance-hairball-10000g",
+      "retailer": "Zooplus",
+      "amount": 49.49,
+      "url": "https://www.zooplus.es/shop/tienda_gatos/pienso_gatos/affinity_advance/sterilized/579062?activeVariant=579062.0",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "579062.0",
+      "gtin": "8410650218656",
+      "evidence": "Live selected 10 kg Advance Sterilized Hairball with turkey; Zooplus variant_price one-time 49.49 EUR, out_stock=false; Zooplus prices include IVA"
+    },
+    {
+      "variantId": "advance-junior-10000g",
+      "retailer": "Zooplus",
+      "amount": 61.99,
+      "url": "https://www.zooplus.es/shop/tienda_gatos/pienso_gatos/affinity_advance/kitten/407551?activeVariant=407551.4",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "407551.4",
+      "gtin": null,
+      "evidence": "Live selected 10 kg Advance Sterilized Junior with chicken; Zooplus variant_price one-time 61.99 EUR, out_stock=false; Zooplus prices include IVA"
+    },
+    {
+      "variantId": "advance-senior-10000g",
+      "retailer": "Zooplus",
+      "amount": 61.99,
+      "url": "https://www.zooplus.es/shop/tienda_gatos/pienso_gatos/affinity_advance/sterilized/738970?activeVariant=738970.0",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "738970.0",
+      "gtin": null,
+      "evidence": "Live selected 10 kg Advance Sterilized Senior +10 with chicken; Zooplus variant_price one-time 61.99 EUR, out_stock=false; Zooplus prices include IVA"
+    },
+    {
+      "variantId": "hills-light-10000g",
+      "retailer": "Zooplus",
+      "amount": 77.99,
+      "url": "https://www.zooplus.es/shop/tienda_gatos/pienso_gatos/hills_science_plan/hills_light/55496?activeVariant=55496.16",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "55496.16",
+      "gtin": "052742024332",
+      "evidence": "Live selected 10 kg Hill's Science Plan Adult Light chicken; Zooplus variant_price one-time 77.99 EUR, out_stock=false; Zooplus prices include IVA"
+    },
+    {
+      "variantId": "hills-adult-chicken-300g",
+      "retailer": "PerroGato",
+      "amount": 5.84,
+      "url": "https://www.perrogato.net/hills-feline/253-hills-feline-adult-pollo-comida-para-gatos.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "16078",
+      "gtin": null,
+      "evidence": "Live exact Hill's Science Plan Feline Adult chicken selected 300 g combination 5039, quantity 100, displayed 5.84 EUR IVA incluido, InStock"
+    },
+    {
+      "variantId": "hills-kitten-digestion-1500g",
+      "retailer": "Petness",
+      "amount": 21.19,
+      "url": "https://petness.es/gatos/hills/science-plan-kitten-perfect-digestion-para-gatos-con-pollo-arroz",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "PTN-ES-052742053448",
+      "gtin": "052742053448",
+      "evidence": "Live exact Hill's Science Plan Kitten Perfect Digestion chicken and brown rice 1.5 kg, Product microdata 21.19 EUR InStock, add-to-cart enabled, delivery from 26 October"
+    },
+    {
+      "variantId": "tc-61ec2b29f1-reference-pack",
+      "retailer": "Qanimals",
+      "amount": 1.2,
+      "url": "https://www.qanimals.com/producto/churu-cat-broth-pollo-con-vieira-para-gatos-40g/",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": "4262365738271",
+      "evidence": "Live exact Churu Broth chicken with scallop 40 g EAN, 1.20 EUR consumer price, Hay existencias, add-to-cart"
+    },
+    {
+      "variantId": "tc-ea417c8cdd-reference-pack",
+      "retailer": "Farmaciasdirect",
+      "amount": 16.8,
+      "url": "https://www.farmaciasdirect.es/products/plaqueoff-polvo-60-gr",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "PL3516",
+      "gtin": "7350055513516",
+      "evidence": "Live exact PlaqueOff powder 60 g SKU PL3516, add-to-cart 16.80 EUR; purchase terms explicitly state all displayed prices include IVA"
+    },
+    {
+      "variantId": "tc-ea417c8cdd-reference-pack",
+      "retailer": "RioVet",
+      "amount": 22.92,
+      "url": "https://riovet.es/producto/plaqueoff-polvo-60-gr/",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": "7350055513516",
+      "evidence": "Live exact PlaqueOff powder 60 g EAN, 22.92 EUR, Hay existencias; store purchase terms state displayed prices include IVA"
+    },
+    {
+      "variantId": "tc-24dd160a68-reference-pack",
+      "retailer": "Zooplus",
+      "amount": 2.19,
+      "url": "https://www.zooplus.es/shop/tienda_gatos/snacks_gatos/vitakraft_gatos/275068?activeVariant=275068.0",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "275068.0",
+      "gtin": null,
+      "evidence": "Live matching Vitakraft Liquid Snack chicken and taurine 6 x 15 g, one-time price 2.19 EUR, out_stock=false; Zooplus EAN 7610376164249 differs from catalog Kiwoko EAN 4008293416582 for the same recipe/pack"
+    },
+    {
+      "variantId": "tc-185b159101-reference-pack",
+      "retailer": "Patitas&co",
+      "amount": 1.99,
+      "url": "https://patitasco.com/comida-humeda-gatos/inaba-dashi-delight-pollo-con-salmon-gatos.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "70 g (1332)",
+      "gtin": "4262365730664",
+      "evidence": "Live exact Dashi Delights chicken with salmon 70 g EAN, In stock quantity 304, consumer price 1.99 EUR IVA incluido"
+    },
+    {
+      "variantId": "tc-57f941fe4f-reference-pack",
+      "retailer": "Patitas&co",
+      "amount": 1.29,
+      "url": "https://patitasco.com/comida-humeda-gatos/churu-ciao-caldo-de-pollo-con-atun-para-gatos.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "40 g (1281)",
+      "gtin": "4262365738264",
+      "evidence": "Live exact Ciao Broth chicken with tuna 40 g EAN, In stock quantity 643, consumer price 1.29 EUR IVA incluido"
+    },
+    {
+      "variantId": "tc-bfbb53d6d1-reference-pack",
+      "retailer": "Kiwoko",
+      "amount": 3.19,
+      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/maltas-y-hierbas/gimcat-hierba-gatera-en-bandeja/GIM68784_M.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "GIM68784",
+      "gtin": "4002064407005",
+      "evidence": "Live exact GimCat grass tray EAN, 150 g, ProductGroup JSON-LD price 3.19 EUR InStock"
+    },
+    {
+      "variantId": "tc-bfbb53d6d1-reference-pack",
+      "retailer": "Tiendanimal",
+      "amount": 3.19,
+      "url": "https://www.tiendanimal.es/gimcat-hierba-gatera-en-bandeja/GIM68784_M.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "GIM68784",
+      "gtin": "4002064407005",
+      "evidence": "Live exact GimCat grass tray EAN, 150 g, ProductGroup JSON-LD price 3.19 EUR InStock"
+    },
+    {
+      "variantId": "advance-sterilised-10000g",
+      "retailer": "Bitiba",
+      "amount": 48.49,
+      "url": "https://www.bitiba.es/shop/gatos/pienso/affinity_advance_pienso_gatos/advance_sterilised/375085?activeVariant=375085.8",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "375085.8",
+      "gtin": "8410650239392",
+      "evidence": "Live selected 10 kg Advance Sterilized Adult turkey and barley, Bitiba variant_price one-time 48.49 EUR, out_stock=false; retailer states all prices include IVA"
+    },
+    {
+      "variantId": "yagu-7517046-catalog-pack",
+      "retailer": "TodoMascota.es",
+      "amount": 5.15,
+      "url": "https://todomascota.es/gatos/6299-cana-yute-y-plumas-duva-para-gatos-5414365196530.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "7517046 / TMES6299v8689",
+      "gtin": "5414365196530",
+      "evidence": "Live exact Duvo supplier SKU 7517046 and EAN 5414365196530, single unit, Product JSON-LD price 5.15 EUR InStock, visible impuestos incl."
+    },
+    {
+      "variantId": "yagu-7514634-catalog-pack",
+      "retailer": "MisMascotas",
+      "amount": 4.86,
+      "url": "https://www.mismascotas.es/products/duvo-juguete-gato-eco-cana-hongo-multicolor-9-x-16-5-x-40-cm-41728?variant=57986202534270",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "YA-41728",
+      "gtin": "5414365420192",
+      "evidence": "Live exact Duvo Eco Caña Hongo multicolor 9 x 16.5 x 40 cm, retailer EAN 5414365420192, Shopify available=true, visible IVA incluido; retailer uses its own SKU YA-41728 rather than Yagu catalog code"
+    },
+    {
+      "variantId": "yagu-7514629-catalog-pack",
+      "retailer": "MisMascotas",
+      "amount": 3.27,
+      "url": "https://www.mismascotas.es/products/duvo-juguete-gato-eco-pescado-azul-y-gris-13-5-x-4-5-x-3-cm-41723?variant=57986203025790",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "YA-41723",
+      "gtin": "5414365420093",
+      "evidence": "Live exact Duvo Eco Pescado azul y gris 13.5 x 4.5 x 3 cm, retailer EAN 5414365420093, Shopify available=true, visible IVA incluido; retailer uses its own SKU YA-41723 rather than Yagu catalog code"
+    },
+    {
+      "variantId": "yagu-7514626-catalog-pack",
+      "retailer": "MisMascotas",
+      "amount": 3.27,
+      "url": "https://www.mismascotas.es/products/duvo-juguete-gato-eco-raton-azul-y-gris-8-5-x-4-5-x-6-cm-41720?variant=57986203124094",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "YA-41720",
+      "gtin": "5414365420031",
+      "evidence": "Live exact Duvo Eco Raton azul y gris 8.5 x 4.5 x 6 cm, retailer EAN 5414365420031, Shopify available=true, visible IVA incluido; retailer uses its own SKU YA-41720 rather than Yagu catalog code"
+    },
+    {
+      "variantId": "yagu-7517019-catalog-pack",
+      "retailer": "Miscota",
+      "amount": 1.99,
+      "url": "https://www.miscota.es/gatos/duvoplus/juguete-gato-surtido-ratones-2-uni-6-x-5-x-3-cm",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "94685 / 5414365116217",
+      "gtin": "5414365116217",
+      "evidence": "Live exact Duvo assortment of two mice 6 x 5 x 3 cm, EAN 5414365116217, single 2-unit pack, consumer price 1.99 EUR, product variation no_stock=false and InStock"
+    },
+    {
+      "variantId": "heybopet-hbhd-pwf-fc30l",
+      "retailer": "Mundo Fauna",
+      "amount": 34.95,
+      "url": "https://www.mundofauna.es/es/inicio/4398-bebedero-fuente-de-agua-para-mascotas-.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "FC30L",
+      "gtin": null,
+      "evidence": "Live exact Heybo model HBHD-PWF-FC30L, product schema price 34.95 EUR InStock, PrestaShop quantity 2, displayed IVA incluido and display_prices_tax_incl=true. Retailer internal tax rate is 2%; verify at checkout before final selling-price decision."
+    },
+    {
+      "variantId": "yagu-7552371-catalog-pack",
+      "retailer": "TodoMascota.es",
+      "amount": 10.54,
+      "url": "https://todomascota.es/gatos/5981-pedestal-con-raton-juguete-aleatorio-duvo-para-gatos-5413794523719.html",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "7552371 / TMES5981v8695",
+      "gtin": "5413794523719",
+      "evidence": "Live exact Duvo supplier SKU 7552371 and EAN 5413794523719, Product JSON-LD price 10.54 EUR InStock, visible impuestos incl."
+    },
+    {
+      "variantId": "yagu-7517019-catalog-pack",
+      "retailer": "Petness",
+      "amount": 1.89,
+      "url": "https://petness.es/gatos/duvoplus/juguete-gato-surtido-ratones-2-uni-6-x-5-x-3-cm",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "94685 / 5414365116217",
+      "gtin": "5414365116217",
+      "evidence": "Live exact Duvo two-mouse pack 6 x 5 x 3 cm EAN 5414365116217, 1.89 EUR, selected variation no_stock=false and InStock; Petness /tc says all prices include IVA"
+    },
+    {
+      "variantId": "royalcanin-475d5e2b-85g",
+      "retailer": "Animal Sapiens",
+      "amount": 1.23,
+      "url": "https://animalsapiens.cat/products/royal-canin-neutered-balance-sobre-85gr",
+      "checkedAt": "2026-10-17",
+      "retailerSku": "250100115643",
+      "gtin": null,
+      "evidence": "Live Shopify product JSON: single Royal Canin Neutered Balance pouch weight 85 g, available=true, price €1.23; cart drawer says Impuestos incluidos. Retailer barcode 9003579015643 is reused for 12 x 85 g outer box elsewhere, so it is not asserted as single-pouch GTIN."
+    },
+    {
+      "variantId": "yagu-7502810-catalog-pack",
+      "retailer": "ParaPerrosyGatos",
+      "amount": 123.99,
+      "url": "https://www.paraperrosygatos.es/products/rascador-gato-tower-marron-36-x-35-x-70-cm",
+      "checkedAt": "2026-10-17",
+      "retailerSku": null,
+      "gtin": "5414365059613",
+      "evidence": "Live Shopify product JSON: Duvo Tower, brown variant 36 x 35 x 70 cm, barcode 5414365059613, available=true, €123.99; retailer FAQ https://www.paraperrosygatos.es/pages/preguntas-frecuentes says product prices include IVA."
+    }
+  ]
+}

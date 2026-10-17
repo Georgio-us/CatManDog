@@ -1997,13 +1997,13 @@ export const treatsCareProducts = [
       "originalSrc": "assets/treats-care/references/tc-61ec2b29f1.jpg"
     },
     "productSource": {
-      "name": "Kiwoko",
-      "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/40-g-churu-broth-sopa-de-pollo-con-salmon-sobre-para-gatos/URUN0828.html",
+      "name": "Qanimals",
+      "url": "https://www.qanimals.com/producto/churu-cat-broth-pollo-con-vieira-para-gatos-40g/",
       "kind": "retailer"
     },
     "imageSource": {
       "name": "Kiwoko",
-      "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/40-g-churu-broth-sopa-de-pollo-con-salmon-sobre-para-gatos/URUN0828.html",
+      "pageUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/natural/churu-broth-sopa-de-pollo-con-vieiras-sobre-para-gatos/URUN0827_M.html",
       "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw93922402/images/new_comida_humeda_gatos_churu_broth_sopa_pollo_vieiras_URUN0827.jpg"
     },
     "defaultVariantId": "tc-61ec2b29f1-reference-pack",
@@ -2045,13 +2045,13 @@ export const treatsCareProducts = [
           "originalSrc": "assets/treats-care/references/tc-61ec2b29f1.jpg"
         },
         "productSource": {
-          "name": "Kiwoko",
-          "url": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/40-g-churu-broth-sopa-de-pollo-con-salmon-sobre-para-gatos/URUN0828.html",
+          "name": "Qanimals",
+          "url": "https://www.qanimals.com/producto/churu-cat-broth-pollo-con-vieira-para-gatos-40g/",
           "kind": "retailer"
         },
         "imageSource": {
           "name": "Kiwoko",
-          "pageUrl": "https://www.kiwoko.com/gatos_new/alimentacion/comida-humeda/40-g-churu-broth-sopa-de-pollo-con-salmon-sobre-para-gatos/URUN0828.html",
+          "pageUrl": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/natural/churu-broth-sopa-de-pollo-con-vieiras-sobre-para-gatos/URUN0827_M.html",
           "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dw93922402/images/new_comida_humeda_gatos_churu_broth_sopa_pollo_vieiras_URUN0827.jpg"
         },
         "label": "40 г"
@@ -2967,7 +2967,7 @@ export const treatsCareProducts = [
       "Используйте по инструкции на упаковке производителя",
       "Для кошек"
     ],
-    "ean": "7350055513066",
+    "ean": "7350055513516",
     "packageWeightKg": 0.06,
     "image": {
       "src": "assets/treats-care/editorial/tc-ea417c8cdd-v1.webp",
@@ -2977,12 +2977,12 @@ export const treatsCareProducts = [
       "originalSrc": "assets/treats-care/references/tc-ea417c8cdd-60g.webp"
     },
     "productSource": {
-      "name": "Kiwoko",
+      "name": "Farmaciasdirect",
       "url": "https://www.farmaciasdirect.es/products/plaqueoff-polvo-60-gr",
       "kind": "retailer"
     },
     "imageSource": {
-      "name": "Kiwoko",
+      "name": "Farmaciasdirect",
       "pageUrl": "https://www.farmaciasdirect.es/products/plaqueoff-polvo-60-gr",
       "url": "https://cdn.shopify.com/s/files/1/0835/5138/7966/files/plaqueoff-polvo-60-gr.webp?v=1785321255"
     },
@@ -3015,7 +3015,7 @@ export const treatsCareProducts = [
           "Используйте по инструкции на упаковке производителя",
           "Для кошек"
         ],
-        "ean": "7350055513066",
+        "ean": "7350055513516",
         "packageWeightKg": 0.06,
         "image": {
           "src": "assets/treats-care/editorial/tc-ea417c8cdd-v1.webp",
@@ -3025,12 +3025,12 @@ export const treatsCareProducts = [
           "originalSrc": "assets/treats-care/references/tc-ea417c8cdd-60g.webp"
         },
         "productSource": {
-          "name": "Kiwoko",
+          "name": "Farmaciasdirect",
           "url": "https://www.farmaciasdirect.es/products/plaqueoff-polvo-60-gr",
           "kind": "retailer"
         },
         "imageSource": {
-          "name": "Kiwoko",
+          "name": "Farmaciasdirect",
           "pageUrl": "https://www.farmaciasdirect.es/products/plaqueoff-polvo-60-gr",
           "url": "https://cdn.shopify.com/s/files/1/0835/5138/7966/files/plaqueoff-polvo-60-gr.webp?v=1785321255"
         },

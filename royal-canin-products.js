@@ -5280,8 +5280,8 @@ const recipes = [
       "url": "https://www.kiwoko.com/on/demandware.static/-/Sites-kiwoko-master-catalog/default/dwd0c9e233/images/comida_humeda_gatos_royal_canin_veterinary_neutered_ROY4088001.jpg"
     },
     "productSource": {
-      "name": "Каталог испанской розницы",
-      "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-neutered-carne-sobre-en-salsa-para-gatos/ROY4088001BOX_M.html",
+      "name": "Animal Sapiens",
+      "url": "https://animalsapiens.cat/products/royal-canin-neutered-balance-sobre-85gr",
       "kind": "retailer"
     },
     "defaultVariantId": "royalcanin-475d5e2b-85g",

@@ -1,0 +1,2250 @@
+{
+  "checkedAt": "2026-10-17",
+  "scope": "50 formerly demo-priced dry Leonardo pack variants plus 2 previously priced variants, covering all 52 dry Leonardo variants visible in CatManDog",
+  "method": "Public Spanish consumer retail prices for exact recipe and single pack, checked 2026-10-17. LEONARDO product:price metadata, visible Miscota single-unit offers, and Amazon.es exact-pack product pages with add-to-cart availability. Kiwoko site search was checked but no exact Leonardo offer could be confirmed. Exclude multipacks, subscriptions, coupons, historic prices, supplier quotations and shipping. Prices include IVA.",
+  "taxPolicySourceUrl": "https://es.leonardo-catfood.com/leonardo-caja-de-prueba-alimento-humedo",
+  "selectedPriceRule": "Display the highest verified public consumer price for the exact recipe and single pack among LEONARDO, Miscota and Amazon.es; Kiwoko contributes only when an exact offer is found. This remains a temporary market reference, not a CatManDog selling price or purchase price.",
+  "items": [
+    {
+      "variantId": "leonardo-poultry-300g",
+      "productName": "Leonardo Adult GF Poultry",
+      "packLabel": "300 г",
+      "packGrams": 300,
+      "retailPriceEUR": 12.35,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CSFXS475",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 12.35,
+          "sourceUrl": "https://www.amazon.es/dp/B0CSFXS475",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 5.19,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-gf-poultry-0-3-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 300,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-poultry-1800g",
+      "productName": "Leonardo Adult GF Poultry",
+      "packLabel": "1,8 кг",
+      "packGrams": 1800,
+      "retailPriceEUR": 28.5,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CSFZYLZT",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 21.82,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-129798",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1800,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "evidence": "visible product page single-unit price"
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 28.5,
+          "sourceUrl": "https://www.amazon.es/dp/B0CSFZYLZT",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1800,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 21.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-gf-poultry-1-8-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1800,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es",
+      "previousCatalogPriceEUR": 25.91
+    },
+    {
+      "variantId": "leonardo-poultry-7500g",
+      "productName": "Leonardo Adult GF Poultry",
+      "packLabel": "7,5 кг",
+      "packGrams": 7500,
+      "retailPriceEUR": 65.55,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CSFWVJX1",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 65.55,
+          "sourceUrl": "https://www.amazon.es/dp/B0CSFWVJX1",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 54.49,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-gf-poultry-7-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 7500,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-salmon-300g",
+      "productName": "Leonardo Adult GF Salmon",
+      "packLabel": "300 г",
+      "packGrams": 300,
+      "retailPriceEUR": 10.32,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B01MXI5EW8",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 10.32,
+          "sourceUrl": "https://www.amazon.es/dp/B01MXI5EW8",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "Sólo queda(n) 3 en stock.",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 5.19,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-gf-salmon-0-3-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 300,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es",
+      "previousCatalogPriceEUR": 5.19
+    },
+    {
+      "variantId": "leonardo-salmon-1800g",
+      "productName": "Leonardo Adult GF Salmon",
+      "packLabel": "1,8 кг",
+      "packGrams": 1800,
+      "retailPriceEUR": 24.39,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-129799",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 24.39,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-129799",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1800,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 21.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-gf-salmon-1-8-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1800,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-salmon-7500g",
+      "productName": "Leonardo Adult GF Salmon",
+      "packLabel": "7,5 кг",
+      "packGrams": 7500,
+      "retailPriceEUR": 62.98,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-129799",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 62.98,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-129799",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 57.0,
+          "sourceUrl": "https://www.amazon.es/dp/B01I9EVHC8",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 54.49,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-gf-salmon-7-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 7500,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-light-300g",
+      "productName": "Leonardo Adult Light & Sterilised",
+      "packLabel": "300 г",
+      "packGrams": 300,
+      "retailPriceEUR": 8.95,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0D2RMF39M",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 8.95,
+          "sourceUrl": "https://www.amazon.es/dp/B0D2RMF39M",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 3.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-light-sterilised-0-3-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 300,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-light-1800g",
+      "productName": "Leonardo Adult Light & Sterilised",
+      "packLabel": "1,8 кг",
+      "packGrams": 1800,
+      "retailPriceEUR": 19.79,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "LEONARDO - испанский магазин бренда",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-light-sterilised-1-8-kg",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified",
+      "competitorOffers": [],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 19.79,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-light-sterilised-1-8-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1800,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "LEONARDO"
+    },
+    {
+      "variantId": "leonardo-light-7500g",
+      "productName": "Leonardo Adult Light & Sterilised",
+      "packLabel": "7,5 кг",
+      "packGrams": 7500,
+      "retailPriceEUR": 58.8,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CY9JKB61",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 58.8,
+          "sourceUrl": "https://www.amazon.es/dp/B0CY9JKB61",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 44.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-light-sterilised-7-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 7500,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-kitten-300g",
+      "productName": "Leonardo Kitten",
+      "packLabel": "300 г",
+      "packGrams": 300,
+      "retailPriceEUR": 4.22,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-520391",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 4.22,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-520391",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 3.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-kitten-0-3-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 300,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-kitten-1800g",
+      "productName": "Leonardo Kitten",
+      "packLabel": "1,8 кг",
+      "packGrams": 1800,
+      "retailPriceEUR": 27.54,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CS9PH56J",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 27.54,
+          "sourceUrl": "https://www.amazon.es/dp/B0CS9PH56J",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1800,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 20.69,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-kitten-1-8-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1800,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-kitten-7500g",
+      "productName": "Leonardo Kitten",
+      "packLabel": "7,5 кг",
+      "packGrams": 7500,
+      "retailPriceEUR": 59.84,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CS9Q4T3Q",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 57.38,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-520391",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 59.84,
+          "sourceUrl": "https://www.amazon.es/dp/B0CS9Q4T3Q",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 46.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-kitten-7-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 7500,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-fresh-beef-250g",
+      "productName": "Leonardo fresh Meat Fresh Beef",
+      "packLabel": "250 г",
+      "packGrams": 250,
+      "retailPriceEUR": 8.9,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B095CQ9WNQ",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 5.39,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-520394",
+          "checkedAt": "2026-10-17",
+          "packGrams": 250,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 8.9,
+          "sourceUrl": "https://www.amazon.es/dp/B095CQ9WNQ",
+          "checkedAt": "2026-10-17",
+          "packGrams": 250,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 4.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-beef-0-25-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 250,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-fresh-beef-1500g",
+      "productName": "Leonardo fresh Meat Fresh Beef",
+      "packLabel": "1,5 кг",
+      "packGrams": 1500,
+      "retailPriceEUR": 33.15,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CSSZDHF7",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 33.15,
+          "sourceUrl": "https://www.amazon.es/dp/B0CSSZDHF7",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1500,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 22.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-beef-1-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1500,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-fresh-beef-4000g",
+      "productName": "Leonardo fresh Meat Fresh Beef",
+      "packLabel": "4 кг",
+      "packGrams": 4000,
+      "retailPriceEUR": 49.4,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CSSWMJ35",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 48.56,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-520394",
+          "checkedAt": "2026-10-17",
+          "packGrams": 4000,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 49.4,
+          "sourceUrl": "https://www.amazon.es/dp/B0CSSWMJ35",
+          "checkedAt": "2026-10-17",
+          "packGrams": 4000,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 44.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-beef-4-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 4000,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-fresh-duck-250g",
+      "productName": "Leonardo fresh Meat Duck",
+      "packLabel": "250 г",
+      "packGrams": 250,
+      "retailPriceEUR": 12.35,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CSG1C9CR",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 5.6,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-520393",
+          "checkedAt": "2026-10-17",
+          "packGrams": 250,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 12.35,
+          "sourceUrl": "https://www.amazon.es/dp/B0CSG1C9CR",
+          "checkedAt": "2026-10-17",
+          "packGrams": 250,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 4.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-duck-0-25-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 250,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-fresh-duck-1500g",
+      "productName": "Leonardo fresh Meat Duck",
+      "packLabel": "1,5 кг",
+      "packGrams": 1500,
+      "retailPriceEUR": 30.4,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CSFZXTTX",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 26.32,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-520393",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1500,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 30.4,
+          "sourceUrl": "https://www.amazon.es/dp/B0CSFZXTTX",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1500,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 22.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-duck-1-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1500,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-fresh-duck-4000g",
+      "productName": "Leonardo fresh Meat Duck",
+      "packLabel": "4 кг",
+      "packGrams": 4000,
+      "retailPriceEUR": 51.3,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CSG2KZ6H",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 51.3,
+          "sourceUrl": "https://www.amazon.es/dp/B0CSG2KZ6H",
+          "checkedAt": "2026-10-17",
+          "packGrams": 4000,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 44.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-duck-4-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 4000,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-fresh-salmon-250g",
+      "productName": "Leonardo fresh Meat Salmon",
+      "packLabel": "250 г",
+      "packGrams": 250,
+      "retailPriceEUR": 5.36,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-520392",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 5.36,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-520392",
+          "checkedAt": "2026-10-17",
+          "packGrams": 250,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 4.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-salmon-0-25-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 250,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-fresh-salmon-1500g",
+      "productName": "Leonardo fresh Meat Salmon",
+      "packLabel": "1,5 кг",
+      "packGrams": 1500,
+      "retailPriceEUR": 29.45,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CSG53LQG",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 25.14,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-520392",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1500,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 29.45,
+          "sourceUrl": "https://www.amazon.es/dp/B0CSG53LQG",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1500,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 22.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-salmon-1-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1500,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-fresh-salmon-4000g",
+      "productName": "Leonardo fresh Meat Salmon",
+      "packLabel": "4 кг",
+      "packGrams": 4000,
+      "retailPriceEUR": 49.4,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CSG5JFHM",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 48.56,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-520392",
+          "checkedAt": "2026-10-17",
+          "packGrams": 4000,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 49.4,
+          "sourceUrl": "https://www.amazon.es/dp/B0CSG5JFHM",
+          "checkedAt": "2026-10-17",
+          "packGrams": 4000,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 44.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-fresh-meat-fresh-salmon-4-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 4000,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-adult-duck-300g",
+      "productName": "Leonardo Adult Duck",
+      "packLabel": "300 г",
+      "packGrams": 300,
+      "retailPriceEUR": 8.8,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0D2RNSTVQ",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 4.14,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-adult-de-pato-para-gatos-519890",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 8.8,
+          "sourceUrl": "https://www.amazon.es/dp/B0D2RNSTVQ",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "Sólo queda(n) 3 en stock.",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 3.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-duck-0-3-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 300,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-adult-duck-1800g",
+      "productName": "Leonardo Adult Duck",
+      "packLabel": "1,8 кг",
+      "packGrams": 1800,
+      "retailPriceEUR": 20.58,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-adult-de-pato-para-gatos-519890",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 20.58,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-adult-de-pato-para-gatos-519890",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1800,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 19.79,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-duck-1-8-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1800,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-adult-duck-7500g",
+      "productName": "Leonardo Adult Duck",
+      "packLabel": "7,5 кг",
+      "packGrams": 7500,
+      "retailPriceEUR": 54.54,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/gatos/leonardo/adult-pato-129795",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 54.54,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/adult-pato-129795",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 48.5,
+          "sourceUrl": "https://www.amazon.es/dp/B01I9F0U3Y",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "Sólo queda(n) 5 en stock.",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 44.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-duck-7-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 7500,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-adult-duck-15000g",
+      "productName": "Leonardo Adult Duck",
+      "packLabel": "15 кг",
+      "packGrams": 15000,
+      "retailPriceEUR": 94.99,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/gatos/leonardo/adult-pato-129795",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 94.99,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/adult-pato-129795",
+          "checkedAt": "2026-10-17",
+          "packGrams": 15000,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 87.59,
+          "sourceUrl": "https://www.amazon.es/dp/B0CY9N1CS7",
+          "checkedAt": "2026-10-17",
+          "packGrams": 15000,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 78.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-duck-15-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 15000,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-maxi-300g",
+      "productName": "Leonardo Adult GF Maxi",
+      "packLabel": "300 г",
+      "packGrams": 300,
+      "retailPriceEUR": 10.63,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B075X19W1V",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 10.63,
+          "sourceUrl": "https://www.amazon.es/dp/B075X19W1V",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "Sólo queda(n) 1 en stock.",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 5.19,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-gf-maxi-0-3-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 300,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-maxi-1800g",
+      "productName": "Leonardo Adult GF Maxi",
+      "packLabel": "1,8 кг",
+      "packGrams": 1800,
+      "retailPriceEUR": 29.55,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B01MSB2E6T",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 29.55,
+          "sourceUrl": "https://www.amazon.es/dp/B01MSB2E6T",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1800,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 21.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-gf-maxi-1-8-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1800,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-maxi-7500g",
+      "productName": "Leonardo Adult GF Maxi",
+      "packLabel": "7,5 кг",
+      "packGrams": 7500,
+      "retailPriceEUR": 66.4,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CSFWV5YN",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 66.4,
+          "sourceUrl": "https://www.amazon.es/dp/B0CSFWV5YN",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 54.49,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-gf-maxi-7-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 7500,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-maxi-15000g",
+      "productName": "Leonardo Adult GF Maxi",
+      "packLabel": "15 кг",
+      "packGrams": 15000,
+      "retailPriceEUR": 97.49,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "LEONARDO - испанский магазин бренда",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-gf-maxi-15-kg",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 95.67,
+          "sourceUrl": "https://www.amazon.es/dp/B01NBYEP5W",
+          "checkedAt": "2026-10-17",
+          "packGrams": 15000,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 97.49,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-gf-maxi-15-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 15000,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "LEONARDO"
+    },
+    {
+      "variantId": "leonardo-senior-300g",
+      "productName": "Leonardo Senior",
+      "packLabel": "300 г",
+      "packGrams": 300,
+      "retailPriceEUR": 8.65,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0D2RNN1PL",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 4.22,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-senior-para-gatos-519897",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 8.65,
+          "sourceUrl": "https://www.amazon.es/dp/B0D2RNN1PL",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 3.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-senior-0-3-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 300,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-senior-1800g",
+      "productName": "Leonardo Senior",
+      "packLabel": "1,8 кг",
+      "packGrams": 1800,
+      "retailPriceEUR": 21.18,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-senior-para-gatos-519897",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 21.18,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-senior-para-gatos-519897",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1800,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 20.69,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-senior-1-8-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1800,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-senior-7500g",
+      "productName": "Leonardo Senior",
+      "packLabel": "7,5 кг",
+      "packGrams": 7500,
+      "retailPriceEUR": 55.92,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/pr-129802",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 55.92,
+          "sourceUrl": "https://www.miscota.es/pr-129802",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 49.8,
+          "sourceUrl": "https://www.amazon.es/dp/B01I9DMUAM",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 46.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-senior-7-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 7500,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-senior-gf-300g",
+      "productName": "Leonardo Senior GF",
+      "packLabel": "300 г",
+      "packGrams": 300,
+      "retailPriceEUR": 9.07,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0D2RNVHZ8",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 9.07,
+          "sourceUrl": "https://www.amazon.es/dp/B0D2RNVHZ8",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 5.19,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-senior-gf-0-3-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 300,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-senior-gf-1800g",
+      "productName": "Leonardo Senior GF",
+      "packLabel": "1,8 кг",
+      "packGrams": 1800,
+      "retailPriceEUR": 21.99,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "LEONARDO - испанский магазин бренда",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-senior-gf-1-8-kg",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified",
+      "competitorOffers": [],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 21.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-senior-gf-1-8-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1800,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "LEONARDO"
+    },
+    {
+      "variantId": "leonardo-senior-gf-7500g",
+      "productName": "Leonardo Senior GF",
+      "packLabel": "7,5 кг",
+      "packGrams": 7500,
+      "retailPriceEUR": 57.25,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0D2RNMZ4L",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 57.25,
+          "sourceUrl": "https://www.amazon.es/dp/B0D2RNMZ4L",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 54.49,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-senior-gf-7-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 7500,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-complete-300g",
+      "productName": "Leonardo Adult Complete 32/16",
+      "packLabel": "300 г",
+      "packGrams": 300,
+      "retailPriceEUR": 11.4,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CS9N2R3T",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 3.62,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-521584",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 11.4,
+          "sourceUrl": "https://www.amazon.es/dp/B0CS9N2R3T",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 3.29,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-complete-32-16-0-3-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 300,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-complete-1800g",
+      "productName": "Leonardo Adult Complete 32/16",
+      "packLabel": "1,8 кг",
+      "packGrams": 1800,
+      "retailPriceEUR": 22.79,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CS9P8NYT",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 16.26,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-521584",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1800,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 22.79,
+          "sourceUrl": "https://www.amazon.es/dp/B0CS9P8NYT",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1800,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 16.19,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-complete-32-16-1-8-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1800,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-complete-7500g",
+      "productName": "Leonardo Adult Complete 32/16",
+      "packLabel": "7,5 кг",
+      "packGrams": 7500,
+      "retailPriceEUR": 46.26,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0CY9KYK38",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 45.54,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-521584",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 46.26,
+          "sourceUrl": "https://www.amazon.es/dp/B0CY9KYK38",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 41.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-complete-32-16-7-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 7500,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-complete-15000g",
+      "productName": "Leonardo Adult Complete 32/16",
+      "packLabel": "15 кг",
+      "packGrams": 15000,
+      "retailPriceEUR": 78.7,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-521584",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 78.7,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-521584",
+          "checkedAt": "2026-10-17",
+          "packGrams": 15000,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 67.44,
+          "sourceUrl": "https://www.amazon.es/dp/B01LXX3SSI",
+          "checkedAt": "2026-10-17",
+          "packGrams": 15000,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "Sólo queda(n) 4 en stock.",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 67.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-complete-32-16-15-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 15000,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-fish-300g",
+      "productName": "Leonardo Adult Fish",
+      "packLabel": "300 г",
+      "packGrams": 300,
+      "retailPriceEUR": 4.19,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-519891",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 4.19,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-519891",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 3.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-fish-0-3-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 300,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-fish-1800g",
+      "productName": "Leonardo Adult Fish",
+      "packLabel": "1,8 кг",
+      "packGrams": 1800,
+      "retailPriceEUR": 20.59,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-519891",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 20.59,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-519891",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1800,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 19.79,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-fish-1-8-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1800,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-fish-7500g",
+      "productName": "Leonardo Adult Fish",
+      "packLabel": "7,5 кг",
+      "packGrams": 7500,
+      "retailPriceEUR": 54.54,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-519891",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 54.54,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-519891",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 48.17,
+          "sourceUrl": "https://www.amazon.es/dp/B01I9DUF6I",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 44.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-fish-7-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 7500,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-fish-15000g",
+      "productName": "Leonardo Adult Fish",
+      "packLabel": "15 кг",
+      "packGrams": 15000,
+      "retailPriceEUR": 94.96,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-519891",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 94.96,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-519891",
+          "checkedAt": "2026-10-17",
+          "packGrams": 15000,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 78.79,
+          "sourceUrl": "https://www.amazon.es/dp/B01LYCHQL3",
+          "checkedAt": "2026-10-17",
+          "packGrams": 15000,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 78.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-fish-15-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 15000,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-lamb-300g",
+      "productName": "Leonardo Adult Lamb",
+      "packLabel": "300 г",
+      "packGrams": 300,
+      "retailPriceEUR": 8.77,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0D2RR8W1B",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 4.38,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-adult-de-cordero-para-gatos-519910",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 8.77,
+          "sourceUrl": "https://www.amazon.es/dp/B0D2RR8W1B",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "Sólo queda(n) 1 en stock (hay más unidades en camino).",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 4.09,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-lamb-0-3-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 300,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-lamb-1800g",
+      "productName": "Leonardo Adult Lamb",
+      "packLabel": "1,8 кг",
+      "packGrams": 1800,
+      "retailPriceEUR": 20.69,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "LEONARDO - испанский магазин бренда",
+      "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-lamb-1-8-kg",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified",
+      "competitorOffers": [],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 20.69,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-lamb-1-8-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1800,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "LEONARDO"
+    },
+    {
+      "variantId": "leonardo-lamb-7500g",
+      "productName": "Leonardo Adult Lamb",
+      "packLabel": "7,5 кг",
+      "packGrams": 7500,
+      "retailPriceEUR": 61.78,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-adult-de-cordero-para-gatos-519910",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 61.78,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-adult-de-cordero-para-gatos-519910",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 46.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-lamb-7-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 7500,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-lamb-15000g",
+      "productName": "Leonardo Adult Lamb",
+      "packLabel": "15 кг",
+      "packGrams": 15000,
+      "retailPriceEUR": 84.5,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B01N149FHU",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 84.5,
+          "sourceUrl": "https://www.amazon.es/dp/B01N149FHU",
+          "checkedAt": "2026-10-17",
+          "packGrams": 15000,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 82.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-lamb-15-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 15000,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-kitten-gf-300g",
+      "productName": "Leonardo Kitten GF",
+      "packLabel": "300 г",
+      "packGrams": 300,
+      "retailPriceEUR": 11.38,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0BPY41NK7",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 5.39,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-kitten-grain-free-para-gatitos",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 11.38,
+          "sourceUrl": "https://www.amazon.es/dp/B0BPY41NK7",
+          "checkedAt": "2026-10-17",
+          "packGrams": 300,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "Sólo queda(n) 5 en stock.",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 4.79,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-kitten-gf-0-3-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 300,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-kitten-gf-1800g",
+      "productName": "Leonardo Kitten GF",
+      "packLabel": "1,8 кг",
+      "packGrams": 1800,
+      "retailPriceEUR": 24.3,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B0D2RN9FHC",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 23.19,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-kitten-grain-free-para-gatitos",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1800,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 24.3,
+          "sourceUrl": "https://www.amazon.es/dp/B0D2RN9FHC",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1800,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 20.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-kitten-gf-1-8-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1800,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-kitten-gf-7500g",
+      "productName": "Leonardo Kitten GF",
+      "packLabel": "7,5 кг",
+      "packGrams": 7500,
+      "retailPriceEUR": 58.72,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Miscota",
+      "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-kitten-grain-free-para-gatitos",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "visible product page single-unit price",
+      "competitorOffers": [
+        {
+          "retailer": "Miscota",
+          "priceEUR": 58.72,
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-kitten-grain-free-para-gatitos",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "evidence": "visible product page single-unit price",
+          "taxIncluded": true,
+          "shippingIncluded": false
+        },
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 49.95,
+          "sourceUrl": "https://www.amazon.es/dp/B0BPY2ZX52",
+          "checkedAt": "2026-10-17",
+          "packGrams": 7500,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "Sólo queda(n) 2 en stock.",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 50.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-kitten-gf-7-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 7500,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Miscota"
+    },
+    {
+      "variantId": "leonardo-granula-start-1000g",
+      "productName": "Leonardo Kitten Granula-Start",
+      "packLabel": "1 кг",
+      "packGrams": 1000,
+      "retailPriceEUR": 17.66,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B07LB6SNVP",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 17.66,
+          "sourceUrl": "https://www.amazon.es/dp/B07LB6SNVP",
+          "checkedAt": "2026-10-17",
+          "packGrams": 1000,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "En stock",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 14.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-kitten-granula-start-1-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 1000,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    },
+    {
+      "variantId": "leonardo-granula-start-5000g",
+      "productName": "Leonardo Kitten Granula-Start",
+      "packLabel": "5 кг",
+      "packGrams": 5000,
+      "retailPriceEUR": 50.84,
+      "currency": "EUR",
+      "priceStatus": "temporary",
+      "sourceName": "Amazon.es",
+      "sourceUrl": "https://www.amazon.es/dp/B06XT1KR3L",
+      "checkedAt": "2026-10-17",
+      "taxIncluded": true,
+      "shippingIncluded": false,
+      "sourceEvidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available",
+      "competitorOffers": [
+        {
+          "retailer": "Amazon.es",
+          "priceEUR": 50.84,
+          "sourceUrl": "https://www.amazon.es/dp/B06XT1KR3L",
+          "checkedAt": "2026-10-17",
+          "packGrams": 5000,
+          "taxIncluded": true,
+          "shippingIncluded": false,
+          "availability": "Sólo queda(n) 3 en stock (hay más unidades en camino).",
+          "evidence": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
+      ],
+      "manufacturerOffer": {
+        "retailer": "LEONARDO",
+        "priceEUR": 40.99,
+        "sourceUrl": "https://es.leonardo-catfood.com/leonardo-kitten-granula-start-5-kg",
+        "checkedAt": "2026-10-17",
+        "packGrams": 5000,
+        "taxIncluded": true,
+        "shippingIncluded": false,
+        "evidence": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+      },
+      "selectedRetailer": "Amazon.es"
+    }
+  ],
+  "retailerSearches": [
+    {
+      "retailer": "Kiwoko",
+      "sourceUrl": "https://www.kiwoko.com/busqueda?q=Leonardo",
+      "checkedAt": "2026-10-17",
+      "result": "no_exact_offer_confirmed",
+      "evidence": "The search redirected to the general dry cat food category; no Leonardo product price was shown"
+    }
+  ],
+  "comparisonCoverage": {
+    "LEONARDO": 52,
+    "Miscota": 32,
+    "Amazon.es": 41,
+    "Kiwoko": 0
+  }
+}

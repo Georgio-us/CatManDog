@@ -1072,6 +1072,59 @@ button:hover:not(:disabled) {
   margin: 0 0 18px;
 }
 
+.retail-research {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 0 0 20px;
+}
+
+.retail-research h2 {
+  font-size: 15px;
+  margin: 0 0 7px;
+}
+
+.retail-research-range {
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 5px;
+}
+
+.retail-research-note {
+  color: var(--muted);
+  font-size: 11px;
+  margin: 0 0 10px;
+}
+
+.retail-research ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.retail-research li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+}
+
+.retail-research li > span {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.retail-research li > a {
+  justify-self: start;
+}
+
+.retail-research li small {
+  grid-column: 1 / -1;
+  color: var(--muted);
+}
+
 .food-catalog-note {
   font-size: 12px;
   line-height: 1.6;
@@ -1388,6 +1441,30 @@ button:hover:not(:disabled) {
   gap: 24px;
 }
 
+.journal-section-head .eyebrow {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.journal-intro {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.article-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.article-card:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 5px;
+  border-radius: 14px;
+}
+
 .article-photo {
   height: 240px;
   overflow: hidden;
@@ -1396,9 +1473,15 @@ button:hover:not(:disabled) {
 }
 
 .article-photo img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform var(--motion-duration,.3s);
+}
+
+.article-card:hover .article-photo img {
+  transform: scale(1.035);
 }
 
 .article-photo.product-image {
@@ -1426,6 +1509,23 @@ button:hover:not(:disabled) {
   line-height: 1.7;
 }
 
+.article-card-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 17px;
+  font-size: 12px;
+  font-weight: 600;
+  border-bottom: 1px solid currentColor;
+}
+
+.article-card-cue svg {
+  width: 15px;
+  height: 15px;
+}
+
 .article-card:hover h3 {
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -1441,30 +1541,6 @@ button:hover:not(:disabled) {
   justify-content: space-between;
   gap: 30px;
 }
-.journal-section-head .eyebrow {
-  display: block;
-  margin-bottom: 8px;
-}
-
-.journal-intro {
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.55;
-}
-
-.article-card {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-}
-
-.article-card:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 5px;
-  border-radius: 14px;
-}
-
 
 .brand-story h2 {
   font-size: 34px;
@@ -1473,15 +1549,9 @@ button:hover:not(:disabled) {
 
 .brand-story p {
   max-width: 360px;
-  display: block;
   color: var(--muted);
   font-size: 14px;
   margin-bottom: 17px;
-  transition: transform var(--motion-duration,.3s);
-}
-
-.article-card:hover .article-photo img {
-  transform: scale(1.035);
 }
 
 .pet-tabs {
@@ -1509,23 +1579,6 @@ details p {
 details ul {
   font-size: 13px;
   color: var(--muted);
-.article-card-cue {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  align-self: flex-start;
-  margin-top: auto;
-  padding-top: 17px;
-  font-size: 12px;
-  font-weight: 600;
-  border-bottom: 1px solid currentColor;
-}
-
-.article-card-cue svg {
-  width: 15px;
-  height: 15px;
-}
-
   margin-top: 15px;
 }
 
@@ -1598,6 +1651,7 @@ details ul {
   background-size: var(--category-size, 400% 200%);
   background-position: var(--px) var(--py);
   background-repeat: no-repeat;
+  border-radius: var(--category-radius, 0);
   transition: transform var(--motion-duration,.3s);
 }
 
@@ -1651,7 +1705,6 @@ details ul {
   font-weight: 500;
   line-height: 1.16;
   letter-spacing: -1px;
-  border-radius: var(--category-radius, 0);
 }
 
 .promo-copy p {

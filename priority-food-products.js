@@ -53,14 +53,25 @@ const recipes = [
         "sizes": [
           "300 г"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 8.95,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 8.95,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0D2RMF39M",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-light-1800g",
@@ -70,14 +81,25 @@ const recipes = [
         "sizes": [
           "1,8 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 19.79,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 19.79,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "LEONARDO - испанский магазин бренда",
+          "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-light-sterilised-1-8-kg",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+        }
       },
       {
         "id": "leonardo-light-7500g",
@@ -87,14 +109,25 @@ const recipes = [
         "sizes": [
           "7,5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 58.8,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 58.8,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CY9JKB61",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       }
     ]
   },
@@ -151,14 +184,25 @@ const recipes = [
         "sizes": [
           "300 г"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 12.35,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 12.35,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CSFXS475",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-poultry-1800g",
@@ -168,14 +212,25 @@ const recipes = [
         "sizes": [
           "1,8 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 28.5,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 28.5,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CSFZYLZT",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-poultry-7500g",
@@ -185,14 +240,25 @@ const recipes = [
         "sizes": [
           "7,5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 65.55,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 65.55,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CSFWVJX1",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       }
     ]
   },
@@ -249,14 +315,25 @@ const recipes = [
         "sizes": [
           "300 г"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 10.32,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 10.32,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B01MXI5EW8",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-salmon-1800g",
@@ -266,14 +343,25 @@ const recipes = [
         "sizes": [
           "1,8 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 24.39,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 24.39,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-129799",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       },
       {
         "id": "leonardo-salmon-7500g",
@@ -283,14 +371,25 @@ const recipes = [
         "sizes": [
           "7,5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 62.98,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 62.98,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-129799",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       }
     ]
   },
@@ -347,14 +446,25 @@ const recipes = [
         "sizes": [
           "300 г"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 4.22,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 4.22,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-520391",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       },
       {
         "id": "leonardo-kitten-1800g",
@@ -364,14 +474,25 @@ const recipes = [
         "sizes": [
           "1,8 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 27.54,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 27.54,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CS9PH56J",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-kitten-7500g",
@@ -381,14 +502,25 @@ const recipes = [
         "sizes": [
           "7,5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 59.84,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 59.84,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CS9Q4T3Q",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       }
     ]
   },
@@ -445,14 +577,25 @@ const recipes = [
         "sizes": [
           "250 г"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 8.9,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 8.9,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B095CQ9WNQ",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-fresh-beef-1500g",
@@ -462,14 +605,25 @@ const recipes = [
         "sizes": [
           "1,5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 33.15,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 33.15,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CSSZDHF7",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-fresh-beef-4000g",
@@ -479,14 +633,25 @@ const recipes = [
         "sizes": [
           "4 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 49.4,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 49.4,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CSSWMJ35",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       }
     ]
   },
@@ -2733,14 +2898,25 @@ const recipes = [
         "sizes": [
           "250 г"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 12.35,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 12.35,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CSG1C9CR",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-fresh-duck-1500g",
@@ -2750,14 +2926,25 @@ const recipes = [
         "sizes": [
           "1,5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 30.4,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 30.4,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CSFZXTTX",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-fresh-duck-4000g",
@@ -2767,14 +2954,25 @@ const recipes = [
         "sizes": [
           "4 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 51.3,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 51.3,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CSG2KZ6H",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       }
     ]
   },
@@ -2831,14 +3029,25 @@ const recipes = [
         "sizes": [
           "250 г"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 5.36,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 5.36,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-520392",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       },
       {
         "id": "leonardo-fresh-salmon-1500g",
@@ -2848,14 +3057,25 @@ const recipes = [
         "sizes": [
           "1,5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 29.45,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 29.45,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CSG53LQG",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-fresh-salmon-4000g",
@@ -2865,14 +3085,25 @@ const recipes = [
         "sizes": [
           "4 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 49.4,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 49.4,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CSG5JFHM",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       }
     ]
   },
@@ -2929,14 +3160,25 @@ const recipes = [
         "sizes": [
           "300 г"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 8.8,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 8.8,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0D2RNSTVQ",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-adult-duck-1800g",
@@ -2946,14 +3188,25 @@ const recipes = [
         "sizes": [
           "1,8 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 20.58,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 20.58,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-adult-de-pato-para-gatos-519890",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       },
       {
         "id": "leonardo-adult-duck-7500g",
@@ -2963,14 +3216,25 @@ const recipes = [
         "sizes": [
           "7,5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 54.54,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 54.54,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/adult-pato-129795",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       },
       {
         "id": "leonardo-adult-duck-15000g",
@@ -2980,14 +3244,25 @@ const recipes = [
         "sizes": [
           "15 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 94.99,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 94.99,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/adult-pato-129795",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       }
     ]
   },
@@ -3044,14 +3319,25 @@ const recipes = [
         "sizes": [
           "300 г"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 10.63,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 10.63,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B075X19W1V",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-maxi-1800g",
@@ -3061,14 +3347,25 @@ const recipes = [
         "sizes": [
           "1,8 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 29.55,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 29.55,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B01MSB2E6T",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-maxi-7500g",
@@ -3078,14 +3375,25 @@ const recipes = [
         "sizes": [
           "7,5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 66.4,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 66.4,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CSFWV5YN",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-maxi-15000g",
@@ -3095,14 +3403,25 @@ const recipes = [
         "sizes": [
           "15 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 97.49,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 97.49,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "LEONARDO - испанский магазин бренда",
+          "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-gf-maxi-15-kg",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+        }
       }
     ]
   },
@@ -3159,14 +3478,25 @@ const recipes = [
         "sizes": [
           "300 г"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 8.65,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 8.65,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0D2RNN1PL",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-senior-1800g",
@@ -3176,14 +3506,25 @@ const recipes = [
         "sizes": [
           "1,8 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 21.18,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 21.18,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-senior-para-gatos-519897",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       },
       {
         "id": "leonardo-senior-7500g",
@@ -3193,14 +3534,25 @@ const recipes = [
         "sizes": [
           "7,5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 55.92,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 55.92,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/pr-129802",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       }
     ]
   },
@@ -3257,14 +3609,25 @@ const recipes = [
         "sizes": [
           "300 г"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 9.07,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 9.07,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0D2RNVHZ8",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-senior-gf-1800g",
@@ -3274,14 +3637,25 @@ const recipes = [
         "sizes": [
           "1,8 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 21.99,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 21.99,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "LEONARDO - испанский магазин бренда",
+          "sourceUrl": "https://es.leonardo-catfood.com/leonardo-senior-gf-1-8-kg",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+        }
       },
       {
         "id": "leonardo-senior-gf-7500g",
@@ -3291,14 +3665,25 @@ const recipes = [
         "sizes": [
           "7,5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 57.25,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 57.25,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0D2RNMZ4L",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       }
     ]
   },
@@ -5154,14 +5539,25 @@ const recipes = [
         "sizes": [
           "300 г"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 11.4,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 11.4,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CS9N2R3T",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-complete-1800g",
@@ -5171,14 +5567,25 @@ const recipes = [
         "sizes": [
           "1,8 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 22.79,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 22.79,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CS9P8NYT",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-complete-7500g",
@@ -5188,14 +5595,25 @@ const recipes = [
         "sizes": [
           "7,5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 46.26,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 46.26,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0CY9KYK38",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-complete-15000g",
@@ -5205,14 +5623,25 @@ const recipes = [
         "sizes": [
           "15 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 78.7,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 78.7,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-521584",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       }
     ]
   },
@@ -5269,14 +5698,25 @@ const recipes = [
         "sizes": [
           "300 г"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 4.19,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 4.19,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-519891",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       },
       {
         "id": "leonardo-fish-1800g",
@@ -5286,14 +5726,25 @@ const recipes = [
         "sizes": [
           "1,8 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 20.59,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 20.59,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-519891",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       },
       {
         "id": "leonardo-fish-7500g",
@@ -5303,14 +5754,25 @@ const recipes = [
         "sizes": [
           "7,5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 54.54,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 54.54,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-519891",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       },
       {
         "id": "leonardo-fish-15000g",
@@ -5320,14 +5782,25 @@ const recipes = [
         "sizes": [
           "15 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 94.96,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 94.96,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pr-519891",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       }
     ]
   },
@@ -5384,14 +5857,25 @@ const recipes = [
         "sizes": [
           "300 г"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 8.77,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 8.77,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0D2RR8W1B",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-lamb-1800g",
@@ -5401,14 +5885,25 @@ const recipes = [
         "sizes": [
           "1,8 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 20.69,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 20.69,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "LEONARDO - испанский магазин бренда",
+          "sourceUrl": "https://es.leonardo-catfood.com/leonardo-adult-lamb-1-8-kg",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "public product:price metadata for exact product page and pack; product availability and checkout not verified"
+        }
       },
       {
         "id": "leonardo-lamb-7500g",
@@ -5418,14 +5913,25 @@ const recipes = [
         "sizes": [
           "7,5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 61.78,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 61.78,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-adult-de-cordero-para-gatos-519910",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       },
       {
         "id": "leonardo-lamb-15000g",
@@ -5435,14 +5941,25 @@ const recipes = [
         "sizes": [
           "15 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 84.5,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 84.5,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B01N149FHU",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       }
     ]
   },
@@ -5499,14 +6016,25 @@ const recipes = [
         "sizes": [
           "300 г"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 11.38,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 11.38,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0BPY41NK7",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-kitten-gf-1800g",
@@ -5516,14 +6044,25 @@ const recipes = [
         "sizes": [
           "1,8 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 24.3,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 24.3,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B0D2RN9FHC",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-kitten-gf-7500g",
@@ -5533,14 +6072,25 @@ const recipes = [
         "sizes": [
           "7,5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 58.72,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 58.72,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Miscota",
+          "sourceUrl": "https://www.miscota.es/gatos/leonardo/pienso-kitten-grain-free-para-gatitos",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "visible product page single-unit price"
+        }
       }
     ]
   },
@@ -5597,14 +6147,25 @@ const recipes = [
         "sizes": [
           "1 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 17.66,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 17.66,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B07LB6SNVP",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       },
       {
         "id": "leonardo-granula-start-5000g",
@@ -5614,14 +6175,25 @@ const recipes = [
         "sizes": [
           "5 кг"
         ],
-        "price": null,
-        "priceStatus": "pending",
+        "price": 50.84,
+        "priceStatus": "temporary",
         "ean": null,
         "supplier": null,
         "purchasePrice": null,
         "purchasePriceStatus": "pending",
         "availabilityStatus": "pending",
-        "retailPrice": null
+        "retailPrice": {
+          "amount": 50.84,
+          "currency": "EUR",
+          "status": "temporary",
+          "type": "retail",
+          "taxIncluded": true,
+          "sourceName": "Amazon.es",
+          "sourceUrl": "https://www.amazon.es/dp/B06XT1KR3L",
+          "checkedAt": "2026-10-17",
+          "shippingIncluded": false,
+          "basis": "exact recipe and single-pack product title, visible consumer price, add-to-cart available"
+        }
       }
     ]
   },
@@ -14633,9 +15205,11 @@ export function expandPriorityFood(existingProducts) {
       foodType: recipe.foodType, prioritySelection: true, optionLabel: 'Фасовка' };
     const packs = variants.map(v => {
       const keepsOriginal = previous?.packageWeightKg === v.packageWeightKg;
+      const reviewedRetail = v.retailPrice?.type === 'retail';
       return { ...base, ...v, line: base.brand + ' · ' + v.weight,
-        ...(keepsOriginal ? { price: previous.price, priceStatus: previous.priceStatus, ean: previous.ean,
-          supplier: previous.supplier, retailPrice: previous.retailPrice } : {}) };
+        ...(keepsOriginal ? { price: reviewedRetail ? v.price : previous.price,
+          priceStatus: reviewedRetail ? v.priceStatus : previous.priceStatus, ean: previous.ean,
+          supplier: previous.supplier, retailPrice: reviewedRetail ? v.retailPrice : previous.retailPrice } : {}) };
     });
     const originalPack = previous && packs.find(v => v.packageWeightKg === previous.packageWeightKg);
     const selected = originalPack || packs.find(v => v.id === recipe.defaultVariantId) || packs[0];

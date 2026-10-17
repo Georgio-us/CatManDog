@@ -1,0 +1,193 @@
+{
+  "checkedAt": "2026-10-17",
+  "results": [
+    {
+      "variantId": "yagu-7500815-catalog-pack",
+      "supplierSku": "7500815",
+      "status": "checked",
+      "productName": "Duvo Hierba Natural para Gatos 70 g",
+      "variantName": "Default Title",
+      "retailerSku": "YA-7500815",
+      "amount": 6.62,
+      "available": true,
+      "url": "https://www.mismascotas.es/products/duvo-hierba-natural-para-gatos-70-gr?variant=57558391259518",
+      "taxLabel": true
+    },
+    {
+      "variantId": "yagu-9235142-catalog-pack",
+      "supplierSku": "9235142",
+      "status": "checked",
+      "productName": "Moderna Recycled Bandeja Maryloo con Tapa Large 50 x 38 x 10,8 cm",
+      "variantName": "GRIS",
+      "retailerSku": "YA-9235142",
+      "amount": 15.42,
+      "available": true,
+      "url": "https://www.mismascotas.es/products/moderna-recycled-bandeja-maryloo-con-tapa-large-50-x-38-x-108-cm?variant=58006609002878",
+      "taxLabel": true
+    },
+    {
+      "variantId": "yagu-9235121-catalog-pack",
+      "supplierSku": "9235121",
+      "status": "checked",
+      "productName": "Moderna Recycled Gatera Smart Cat",
+      "variantName": "GRIS",
+      "retailerSku": "YA-9235121",
+      "amount": 23.12,
+      "available": true,
+      "url": "https://www.mismascotas.es/products/moderna-recycled-gatera-smart-cat?variant=58006607036798",
+      "taxLabel": true
+    },
+    {
+      "variantId": "yagu-9235036-catalog-pack",
+      "supplierSku": "9235036",
+      "status": "checked",
+      "productName": "Moderna casa para gatos CatConcept con cojín y rascador",
+      "variantName": "Default Title",
+      "retailerSku": "YA-9235036",
+      "amount": 97.48,
+      "available": true,
+      "url": "https://www.mismascotas.es/products/moderna-casa-gato-catconcept-con-cojin-y-rascador?variant=57558429663614",
+      "taxLabel": true
+    },
+    {
+      "variantId": "yagu-9235123-catalog-pack",
+      "supplierSku": "9235123",
+      "status": "checked",
+      "productName": "Moderna Recycled Paleta Gatos Handy",
+      "variantName": "GRIS",
+      "retailerSku": "YA-9235123",
+      "amount": 1.95,
+      "available": true,
+      "url": "https://www.mismascotas.es/products/moderna-recycled-paleta-gatos-handy?variant=58006607069566",
+      "taxLabel": true
+    },
+    {
+      "variantId": "yagu-9235038-catalog-pack",
+      "supplierSku": "9235038",
+      "status": "checked",
+      "productName": "Moderna Comedero Trendy Dinner Gato Cats In Love 210 ml",
+      "variantName": "Default Title",
+      "retailerSku": "YA-9235038",
+      "amount": 6.61,
+      "available": true,
+      "url": "https://www.mismascotas.es/products/moderna-comedero-trendy-dinner-gato-cats-in-love-210-ml?variant=57558438904190",
+      "taxLabel": true
+    },
+    {
+      "variantId": "yagu-9235044-catalog-pack",
+      "supplierSku": "9235044",
+      "status": "not_found",
+      "candidates": []
+    },
+    {
+      "variantId": "yagu-7845778-catalog-pack",
+      "supplierSku": "7845778",
+      "status": "checked",
+      "productName": "EBI Fuente para Gatos Cascade",
+      "variantName": "BEIGE 1.5 L 22 x 15 CM",
+      "retailerSku": "YA-7845778",
+      "amount": 56.02,
+      "available": true,
+      "url": "https://www.mismascotas.es/products/ebi-fuente-para-gatos-cascade?variant=58002875384190",
+      "taxLabel": true
+    },
+    {
+      "variantId": "yagu-7815320-catalog-pack",
+      "supplierSku": "7815320",
+      "status": "checked",
+      "productName": "EBI Filtro Carbon Fuente para Gatos Mango y Cascade",
+      "variantName": "Default Title",
+      "retailerSku": "YA-7815320",
+      "amount": 7.2,
+      "available": true,
+      "url": "https://www.mismascotas.es/products/ebi-filtro-carbon-fuente-para-gatos-mango-y-cascade?variant=57558403776894",
+      "taxLabel": true
+    },
+    {
+      "variantId": "yagu-7502810-catalog-pack",
+      "supplierSku": "7502810",
+      "status": "not_found",
+      "candidates": []
+    },
+    {
+      "variantId": "yagu-7515812-catalog-pack",
+      "supplierSku": "7515812",
+      "status": "checked",
+      "productName": "Duvo Rascador Gato Poste Sole Gris 30 x 30 x 45 cm",
+      "variantName": "Default Title",
+      "retailerSku": "YA-7515812",
+      "amount": 23.76,
+      "available": true,
+      "url": "https://www.mismascotas.es/products/duvo-rascador-gato-poste-sole-gris-30-x-30-x-45-cm-46228?variant=57986184020350",
+      "taxLabel": true
+    },
+    {
+      "variantId": "yagu-7515817-catalog-pack",
+      "supplierSku": "7515817",
+      "status": "checked",
+      "productName": "Duvo Rascador Gato Túnel Square Beige 30 x 30 x 28 cm",
+      "variantName": "Default Title",
+      "retailerSku": "YA-7515817",
+      "amount": 43.52,
+      "available": true,
+      "url": "https://www.mismascotas.es/products/duvo-rascador-gato-tunel-square-beige-30-x-30-x-28-cm-46233?variant=57986184085886",
+      "taxLabel": true
+    },
+    {
+      "variantId": "yagu-7515988-catalog-pack",
+      "supplierSku": "7515988",
+      "status": "checked",
+      "productName": "Duvo Alfombra Goma Lamer Forma Gato Lila 18 x 16 x 1 cm",
+      "variantName": "Default Title",
+      "retailerSku": "YA-7515988",
+      "amount": 6.78,
+      "available": true,
+      "url": "https://www.mismascotas.es/products/duvo-alfombra-goma-lamer-forma-gato-lila-18-x-16-x-1-cm-46775?variant=57986148696446",
+      "taxLabel": true
+    },
+    {
+      "variantId": "yagu-7517019-catalog-pack",
+      "supplierSku": "7517019",
+      "status": "not_found",
+      "candidates": [
+        "Duvo Surtido de ratones (2 unid.)"
+      ]
+    },
+    {
+      "variantId": "yagu-7552371-catalog-pack",
+      "supplierSku": "7552371",
+      "status": "not_found",
+      "candidates": []
+    },
+    {
+      "variantId": "yagu-7517046-catalog-pack",
+      "supplierSku": "7517046",
+      "status": "checked",
+      "productName": "Duvo Juguete Gato Caña Yute y Plumas 35 x 14 x 4.5 cm",
+      "variantName": "Default Title",
+      "retailerSku": "YA-7517046",
+      "amount": 6.33,
+      "available": false,
+      "url": "https://www.mismascotas.es/products/duvo-juguete-gato-cana-yute-y-plumas-35-x-14-x-4-5-cm-27043?variant=57986157838718",
+      "taxLabel": true
+    },
+    {
+      "variantId": "yagu-7514634-catalog-pack",
+      "supplierSku": "7514634",
+      "status": "not_found",
+      "candidates": []
+    },
+    {
+      "variantId": "yagu-7514629-catalog-pack",
+      "supplierSku": "7514629",
+      "status": "not_found",
+      "candidates": []
+    },
+    {
+      "variantId": "yagu-7514626-catalog-pack",
+      "supplierSku": "7514626",
+      "status": "not_found",
+      "candidates": []
+    }
+  ]
+}

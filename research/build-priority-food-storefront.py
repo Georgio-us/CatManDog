@@ -5,6 +5,12 @@ ROOT=Path(__file__).resolve().parent.parent
 selection=json.loads((ROOT/'research/priority-dry-food-selection.json').read_text())['recipes']
 refs=json.loads((ROOT/'research/priority-dry-food-references.json').read_text())
 retail=json.loads((ROOT/'research/dry-cat-food/retail-prices.json').read_text())
+reviewed_retail={row['variantId']:row for row in json.loads((ROOT/'research/leonardo-dry-retail-2026-10-17.json').read_text())['items']}
+for row in reviewed_retail.values():
+ offers=[row['manufacturerOffer'],*row['competitorOffers']]
+ highest=max(offers,key=lambda offer:offer['priceEUR'])
+ if row['retailPriceEUR']!=highest['priceEUR'] or row['sourceUrl']!=highest['sourceUrl']:
+  raise ValueError(f"Retail selection does not match highest exact-pack offer: {row['variantId']}")
 batches=sorted((ROOT/'research').glob('priority-food-batch*-selection.json'), key=lambda p:int(p.stem.split('-')[2].removeprefix('batch')))
 for batch in batches:
  selection += json.loads(batch.read_text())['recipes']
@@ -24,7 +30,11 @@ for r in selection:
   offers.sort(key=lambda o:o['priceEUR']);o=offers[0] if offers else None
   if g==17000 and not o:continue
   pack_label=str(pack_quantity)+' x '+weight(g) if pack_quantity>1 else weight(g)
-  variants.append({'id':pid+'-'+str(g*pack_quantity)+'g','label':pack_label,'weight':pack_label,'packageWeightKg':g*pack_quantity/1000,'sizes':[pack_label],'price':o['priceEUR'] if o else None,'priceStatus':'temporary' if o else 'pending','ean':o.get('gtin') if o else None,'supplier':None,'purchasePrice':None,'purchasePriceStatus':'pending','availabilityStatus':'pending','retailPrice':{'amount':o['priceEUR'],'currency':'EUR','status':'temporary','sourceName':o['retailer'],'sourceUrl':o['sourceUrl'],'checkedAt':o.get('checkedAt',o.get('checkedOn')),'shippingIncluded':False} if o else None})
+  variant_id=pid+'-'+str(g*pack_quantity)+'g'
+  reviewed=reviewed_retail.get(variant_id)
+  price=reviewed['retailPriceEUR'] if reviewed else o['priceEUR'] if o else None
+  retail_price={'amount':price,'currency':'EUR','status':'temporary','type':'retail','taxIncluded':True,'sourceName':reviewed['sourceName'],'sourceUrl':reviewed['sourceUrl'],'checkedAt':reviewed['checkedAt'],'shippingIncluded':False,'basis':reviewed['sourceEvidence']} if reviewed else {'amount':o['priceEUR'],'currency':'EUR','status':'temporary','sourceName':o['retailer'],'sourceUrl':o['sourceUrl'],'checkedAt':o.get('checkedAt',o.get('checkedOn')),'shippingIncluded':False} if o else None
+  variants.append({'id':variant_id,'label':pack_label,'weight':pack_label,'packageWeightKg':g*pack_quantity/1000,'sizes':[pack_label],'price':price,'priceStatus':'temporary' if price is not None else 'pending','ean':o.get('gtin') if o else None,'supplier':None,'purchasePrice':None,'purchasePriceStatus':'pending','availabilityStatus':'pending','retailPrice':retail_price})
  name=r['name'].replace('fresh Meat Fresh ', 'fresh Meat ') if 'foodType' in r else r['name']
  food_type=r.get('foodType','dry')
  food_label='Влажный корм' if food_type=='wet' else 'Сухой корм'
@@ -43,9 +53,11 @@ export function expandPriorityFood(existingProducts) {
       foodType: recipe.foodType, prioritySelection: true, optionLabel: 'Фасовка' };
     const packs = variants.map(v => {
       const keepsOriginal = previous?.packageWeightKg === v.packageWeightKg;
+      const reviewedRetail = v.retailPrice?.type === 'retail';
       return { ...base, ...v, line: base.brand + ' · ' + v.weight,
-        ...(keepsOriginal ? { price: previous.price, priceStatus: previous.priceStatus, ean: previous.ean,
-          supplier: previous.supplier, retailPrice: previous.retailPrice } : {}) };
+        ...(keepsOriginal ? { price: reviewedRetail ? v.price : previous.price,
+          priceStatus: reviewedRetail ? v.priceStatus : previous.priceStatus, ean: previous.ean,
+          supplier: previous.supplier, retailPrice: reviewedRetail ? v.retailPrice : previous.retailPrice } : {}) };
     });
     const originalPack = previous && packs.find(v => v.packageWeightKg === previous.packageWeightKg);
     const selected = originalPack || packs.find(v => v.id === recipe.defaultVariantId) || packs[0];

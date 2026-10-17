@@ -1,0 +1,93 @@
+{
+  "checkedAt": "2026-10-17",
+  "results": [
+    {
+      "variantId": "hills-ster-salmon-300g",
+      "format": "300 g",
+      "productName": "Hill's Sterilised Young Adult - Pienso para gato joven esterilizado - Salmón",
+      "quantity": 6,
+      "availability": "https://schema.org/InStock",
+      "visiblePriceEUR": 4.09,
+      "url": "https://goldpet.es/pienso/33857-45607-hill-s-sterilised-young-adult-pienso-para-gato-joven-esterilizado-salmon.html#/204-cantidad-300_g",
+      "taxLabel": true,
+      "selectedAttributeId": 45607
+    },
+    {
+      "variantId": "hills-ster-duck-3000g",
+      "format": "3 kg",
+      "productName": "Hill's Joven Adulto Esterilizado - Pienso para gatos jóvenes esterilizados - Pato",
+      "quantity": 4,
+      "availability": "https://schema.org/InStock",
+      "visiblePriceEUR": 29.92,
+      "url": "https://goldpet.es/pienso/25777-21872-hill-s-joven-adulto-esterilizado-pienso-para-gatos-jovenes-esterilizados-pato.html#/534-cantidad-3_kg",
+      "taxLabel": true,
+      "selectedAttributeId": 21872
+    },
+    {
+      "variantId": "hills-adult-lamb-1500g",
+      "format": "1,5 kg",
+      "productName": "Hill's Adult - Pienso para gatos - Cordero",
+      "quantity": 3,
+      "availability": "https://schema.org/InStock",
+      "visiblePriceEUR": 15.57,
+      "url": "https://goldpet.es/pienso/2796-38346-hill-s-adult-pienso-para-gatos-cordero.html#/532-cantidad-15_kg",
+      "taxLabel": true,
+      "selectedAttributeId": 38346
+    },
+    {
+      "variantId": "hills-hypoallergenic-1500g",
+      "format": "1,5 kg",
+      "productName": "Hill's Hypoallergenic Adult - Pienso para gatos con alergias - Huevo e insecto",
+      "quantity": 1,
+      "availability": "https://schema.org/InStock",
+      "visiblePriceEUR": 20.08,
+      "url": "https://goldpet.es/pienso/33604-43856-hill-s-hypoallergenic-adult-pienso-para-gatos-con-alergias-huevo-e-insecto.html#/532-cantidad-15_kg",
+      "taxLabel": true,
+      "selectedAttributeId": 43856
+    },
+    {
+      "variantId": "hills-hypoallergenic-7000g",
+      "format": "7 kg",
+      "productName": "Hill's Hypoallergenic Adult - Pienso para gatos con alergias - Huevo e insecto",
+      "quantity": 2,
+      "availability": "https://schema.org/InStock",
+      "visiblePriceEUR": 63.13,
+      "url": "https://goldpet.es/pienso/33604-43858-hill-s-hypoallergenic-adult-pienso-para-gatos-con-alergias-huevo-e-insecto.html#/585-cantidad-7_kg",
+      "taxLabel": true,
+      "selectedAttributeId": 43858
+    },
+    {
+      "variantId": "hills-wet-3e2a1a71-85g",
+      "format": "85 g",
+      "productName": "Hill's PD Gastrointestinal Biome i/d - Alimento digestivo para gatos en salsa - Pollo",
+      "quantity": 90,
+      "availability": "https://schema.org/InStock",
+      "visiblePriceEUR": 1.63,
+      "url": "https://goldpet.es/linea-veterinaria/34543-50671-hill-s-pd-gastrointestinal-biome-id-alimento-digestivo-para-gatos-en-salsa-pollo.html#/212-cantidad-85_g",
+      "taxLabel": true,
+      "selectedAttributeId": 50671
+    },
+    {
+      "variantId": "hills-wet-ff59af26-85g",
+      "format": "85 g",
+      "productName": "Hill's PD Digestive Care i/d Kitten - Alimento en salsa para gatitos con problemas digestivos - Pollo",
+      "quantity": 23,
+      "availability": "https://schema.org/InStock",
+      "visiblePriceEUR": 1.63,
+      "url": "https://goldpet.es/linea-veterinaria/35053-52693-hill-s-pd-digestive-care-i-d-kitten-alimento-en-salsa-para-gatitos-con-problemas-digestivos-pollo.html#/212-cantidad-85_g",
+      "taxLabel": true,
+      "selectedAttributeId": 52693
+    },
+    {
+      "variantId": "hills-wet-59c92e72-85g",
+      "format": "85 g",
+      "productName": "Hill's PD Metabolic + Mobility - Alimento en salsa para gato para control de peso - Pollo",
+      "quantity": 21,
+      "availability": "https://schema.org/InStock",
+      "visiblePriceEUR": 1.5,
+      "url": "https://goldpet.es/linea-veterinaria/35687-56634-hill-s-pd-metabolic-mobility-alimento-en-salsa-para-gato-para-control-de-peso-pollo.html#/212-cantidad-85_g",
+      "taxLabel": true,
+      "selectedAttributeId": 56634
+    }
+  ]
+}

@@ -1,4 +1,6 @@
 import { applyCatalogPolicy } from './catalog-policy.js';
+import { applyRetailUpdates } from './retail-updates.js?v=retail-coverage-1';
+import { applyProvisionalPrices } from './provisional-prices.js';
 import { waterBalconyProducts } from './water-balcony-products.js';
 import { foodProducts as originalFoodProducts } from './food-products.js?v=rc-editorial-1';
 import { expandRoyalCaninFood } from './royal-canin-products.js?v=rc-range-2';
@@ -800,7 +802,7 @@ const mergeCategory = product => {
     ...(product.variants ? { variants: product.variants.map(variant => ({ ...variant, category: mergedCategory(variant.category) })) } : {})
   };
 };
-export const products = applyCatalogPolicy([...foodProducts, ...expandYaguCare(treatsCareProducts), ...yaguProducts, ...enrichedWaterBalconyProducts, ...accessoryProducts.filter(p => !p.ean || !waterBalconyEANs.has(p.ean)), ...catalogHeybopetProducts, ...catalogFaireProducts, ...demoProducts.filter(p => !waterBalconyReplacedIds.has(p.id)).map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)]).map(mergeCategory);
+export const products = applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy([...foodProducts, ...expandYaguCare(treatsCareProducts), ...yaguProducts, ...enrichedWaterBalconyProducts, ...accessoryProducts.filter(p => !p.ean || !waterBalconyEANs.has(p.ean)), ...catalogHeybopetProducts, ...catalogFaireProducts, ...demoProducts.filter(p => !waterBalconyReplacedIds.has(p.id)).map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)]).map(mergeCategory)));
 export const catalogProducts = products.filter(p => !p.catalogHidden);
 
 export const articles = [

@@ -1,0 +1,2699 @@
+{
+  "checkedAt": "2026-10-17",
+  "scope": "Search candidates only, not price verification",
+  "results": [
+    {
+      "id": "acana-grasslands",
+      "name": "Acana Grasslands Cat",
+      "brand": "Acana",
+      "pending": [
+        {
+          "id": "acana-grasslands-340g",
+          "label": "340 г",
+          "ean": null
+        }
+      ],
+      "query": "Acana Grasslands Cat",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Acana HP Grasslands pienso para gatos y gatitos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/sin-cereales/acana-hp-grasslands-pienso-para-gatos-y-gatitos/ACAAGC00_M.html"
+        },
+        {
+          "name": "Acana HP Grasslands pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-natural/acana-hp-grasslands-pienso-para-perros/ACAAG02_M.html"
+        }
+      ]
+    },
+    {
+      "id": "acana-indoor",
+      "name": "Acana Indoor Entrée",
+      "brand": "Acana",
+      "pending": [
+        {
+          "id": "acana-indoor-340g",
+          "label": "340 г",
+          "ean": null
+        }
+      ],
+      "query": "Acana Indoor Entrée",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Acana Indoor Entrée pienso para gatos de interior",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/hipoalergenico/acana-indoor-entree-pienso-para-gatos-de-interior/ACAAIC00_M.html"
+        }
+      ]
+    },
+    {
+      "id": "acana-pacifica",
+      "name": "Acana Pacifica",
+      "brand": "Acana",
+      "pending": [
+        {
+          "id": "acana-pacifica-340g",
+          "label": "340 г",
+          "ean": null
+        }
+      ],
+      "query": "Acana Pacifica",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Acana HP Pacífica pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-natural/acana-hp-pacifica-pienso-para-perros/ACAAP02_M.html"
+        },
+        {
+          "name": "Acana HP Pacífica pienso para gatos y gatitos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/sin-cereales/acana-hp-pacifica-pienso-para-gatos-y-gatitos/ACAAPC02_M.html"
+        }
+      ]
+    },
+    {
+      "id": "acana-wild-prairie",
+      "name": "Acana Wild Prairie",
+      "brand": "Acana",
+      "pending": [
+        {
+          "id": "acana-wild-prairie-340g",
+          "label": "340 г",
+          "ean": null
+        }
+      ],
+      "query": "Acana Wild Prairie",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Acana HP Wild Prairie pienso para gatos y gatitos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/acana-hp-wild-prairie-pienso-para-gatos-y-gatitos/ACAAWC02_M.html"
+        },
+        {
+          "name": "Acana HP Wild Prairie pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-natural/acana-hp-wild-prairie-pienso-para-perros/ACAAW00_M.html"
+        }
+      ]
+    },
+    {
+      "id": "advance-sterilised",
+      "name": "Advance Sterilized Adult Turkey & Barley",
+      "brand": "Advance",
+      "pending": [
+        {
+          "id": "advance-sterilised-10000g",
+          "label": "10 кг",
+          "ean": null
+        }
+      ],
+      "query": "Advance Sterilized Adult Turkey & Barley",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Advance Adult Sterilized Pavo y Cebada pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/advance-adult-sterilized-pavo-y-cebada-pienso-para-gatos/ADV577119_M.html"
+        },
+        {
+          "name": "Advance Veterinary Diets Urinary Sterilized Low Calorie pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/advance-veterinary-diets-urinary-sterilized-low-calorie-pienso-para-gatos/ADV924021_M.html"
+        },
+        {
+          "name": "Advance Sterilized Adult Bacalao sobres para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-sterilized-adult-bacalao-sobres-para-gatos/ADV964530_M.html"
+        },
+        {
+          "name": "Advance Adult Sterilized Pavo en salsa sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/advance-adult-sterilized-pavo-en-salsa-sobre-para-gatos/ADV964529_M.html"
+        }
+      ]
+    },
+    {
+      "id": "advance-hairball",
+      "name": "Advance Sterilized Hairball Turkey",
+      "brand": "Advance",
+      "pending": [
+        {
+          "id": "advance-hairball-10000g",
+          "label": "10 кг",
+          "ean": null
+        }
+      ],
+      "query": "Advance Sterilized Hairball Turkey",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Advance Sterilized Hairball Pavo y Cebada pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/bolas-de-pelo/advance-sterilized-hairball-pavo-y-cebada-pienso-para-gatos/ADV921864_M.html"
+        }
+      ]
+    },
+    {
+      "id": "advance-junior",
+      "name": "Advance Sterilized Junior Chicken",
+      "brand": "Advance",
+      "pending": [
+        {
+          "id": "advance-junior-10000g",
+          "label": "10 кг",
+          "ean": null
+        }
+      ],
+      "query": "Advance Sterilized Junior Chicken",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Advance Junior Sterilized pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/advance-junior-sterilized-pienso-para-gatos/ADV500921_M.html"
+        }
+      ]
+    },
+    {
+      "id": "advance-senior",
+      "name": "Advance Vitality Sterilized Senior +10",
+      "brand": "Advance",
+      "pending": [
+        {
+          "id": "advance-senior-10000g",
+          "label": "10 кг",
+          "ean": null
+        }
+      ],
+      "query": "Advance Vitality Sterilized Senior +10",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Advance Active Defense Maxi Senior Vitality Pollo y Arroz pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-perros-seniores/advance-active-defense-maxi-senior-vitality-pollo-y-arroz-pienso-para-perros/ADV560511_M.html"
+        },
+        {
+          "name": "Advance Active Defense Mini Adult Pollo y Arroz pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-de-pollo/advance-active-defense-mini-adult-pollo-y-arroz-pienso-para-perros/ADV502110_M.html"
+        },
+        {
+          "name": "Advance Active Defense Mini Sensitive Salmón y Arroz pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-de-pescado/advance-active-defense-mini-sensitive-salmon-y-arroz-pienso-para-perros/ADV921514_M.html"
+        },
+        {
+          "name": "Advance Active Defense Medium Maxi Sensitive Salmón y Arroz pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-de-pescado/advance-active-defense-medium-maxi-sensitive-salmon-y-arroz-pienso-para-perros/ADV524319_M.html"
+        },
+        {
+          "name": "Advance Active Defense Maxi Adult pollo y arroz pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-razas-grandes/advance-active-defense-maxi-adult-pollo-y-arroz-pienso-para-perros/ADV500316_M.html"
+        },
+        {
+          "name": "Advance Active Defense Medium Adult Pollo y Arroz pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-de-pollo/advance-active-defense-medium-adult-pollo-y-arroz-pienso-para-perros/ADV508319_M.html"
+        }
+      ]
+    },
+    {
+      "id": "tc-7934eaf44b",
+      "name": "Beaphar - лососевое масло",
+      "brand": "Beaphar",
+      "pending": [
+        {
+          "id": "tc-7934eaf44b-reference-pack",
+          "label": "425 мл",
+          "ean": "8711231112951"
+        }
+      ],
+      "query": "Beaphar",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Beaphar Multi Fresh Brisa Marina Neutralizador de olores para gatos",
+          "url": "https://www.kiwoko.com/gatos/arenas-y-accesorios/limpieza-y-accesorios/anti-olores/beaphar-multi-fresh-brisa-marina-neutralizador-de-olores-para-gatos/BEA15232_M.html"
+        },
+        {
+          "name": "Beaphar Fiprotec Pipetas Antiparasitarias para gatos",
+          "url": "https://www.kiwoko.com/gatos/higiene-para-gatos/antiparasitarios/pipetas/beaphar-fiprotec-pipetas-antiparasitarias-para-gatos/BEA16390_M.html"
+        },
+        {
+          "name": "Beaphar No Stress Difusor y Recambio Relajantes para gatos",
+          "url": "https://www.kiwoko.com/gatos/higiene-para-gatos/salud-del-gato/antiestres/beaphar-no-stress-difusor-y-recambio-relajantes-para-gatos/BEA14897_M.html"
+        },
+        {
+          "name": "Beaphar Pasta Dental  Menta  Perejil para Perros y Gatos",
+          "url": "https://www.kiwoko.com/gatos/higiene-para-gatos/salud-del-gato/dentadura/beaphar-pasta-dental--menta--perejil-para-perros-y-gatos/BEA1000501_M.html"
+        },
+        {
+          "name": "Beaphar Gel Dental para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/higiene-para-perros/salud-del-perro/dentadura/beaphar-gel-dental-para-perros-y-gatos/BEA15685_M.html"
+        },
+        {
+          "name": "Beaphar Neutralizador de olores para roedores",
+          "url": "https://www.kiwoko.com/roedores/higiene-y-limpieza/beaphar-neutralizador-de-olores-para-roedores/BEA15384_M.html"
+        },
+        {
+          "name": "Beaphar Cepillo Dental de Bambú para Perros y Gatos",
+          "url": "https://www.kiwoko.com/gatos/higiene-para-gatos/salud-del-gato/dentadura/beaphar-cepillo-dental-de-bambu-para-perros-y-gatos/BEA1000504_M.html"
+        },
+        {
+          "name": "Beaphar CatComfort Excellence Difusor de Feromonas para gatos",
+          "url": "https://www.kiwoko.com/gatos/higiene-para-gatos/salud-del-gato/antiestres/beaphar-catcomfort-excellence-difusor-de-feromonas-para-gatos/BEA12106_M.html"
+        }
+      ]
+    },
+    {
+      "id": "tc-61ec2b29f1",
+      "name": "Churu Broth - курица с гребешком",
+      "brand": "Churu",
+      "pending": [
+        {
+          "id": "tc-61ec2b29f1-reference-pack",
+          "label": "40 г",
+          "ean": "4262365738271"
+        }
+      ],
+      "query": "Churu Broth",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Churu Snack Líquido Variedades de Atún con Marisco para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/churu-snack-liquido-variedades-de-atun-con-marisco-para-gatos/URUEU125_M.html"
+        },
+        {
+          "name": "Churu Variedades de Pollo con Ternera Snack Líquido para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/churu-variedades-de-pollo-con-ternera-snack-liquido-para-gatos/URUEU128_M.html"
+        },
+        {
+          "name": "Churu Snack Líquido Variedades de Pollo para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/churu-snack-liquido-variedades-de-pollo-para-gatos/URUEU127_M.html"
+        },
+        {
+          "name": "Churu Snack Líquido Variedades de Atún para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/churu-snack-liquido-variedades-de-atun-para-gatos/URUEU124_M.html"
+        },
+        {
+          "name": "Churu Variedades de Marisco Snack Líquido para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/churu-variedades-de-marisco-snack-liquido-para-gatos/URUEU126_M.html"
+        },
+        {
+          "name": "Churu Snack Líquido Variedades de Atún con Marisco para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/churu-snack-liquido-variedades-de-atun-con-marisco-para-gatos/URUEU125_M.html"
+        },
+        {
+          "name": "Churu Variedades de Pollo con Ternera Snack Líquido para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/churu-variedades-de-pollo-con-ternera-snack-liquido-para-gatos/URUEU128_M.html"
+        },
+        {
+          "name": "Churu Snack Líquido Variedades de Pollo para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/churu-snack-liquido-variedades-de-pollo-para-gatos/URUEU127_M.html"
+        }
+      ]
+    },
+    {
+      "id": "tc-57f941fe4f",
+      "name": "Ciao Broth - курица с тунцом",
+      "brand": "Ciao",
+      "pending": [
+        {
+          "id": "tc-57f941fe4f-reference-pack",
+          "label": "40 г",
+          "ean": "4262365738264"
+        }
+      ],
+      "query": "Ciao Broth - курица с тунцом",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Ciano Aqua Led 60 Negro acuario con luz led, filtro y calentador",
+          "url": "https://www.kiwoko.com/peces/acuarios-y-peceras/acuarios/medianos-_50-y-100l_/ciano-aqua-led-60-negro-acuario-con-luz-led_-filtro-y-calentador/CIA24444_M.html"
+        },
+        {
+          "name": "Ciano Aqua Led 60 Blanco acuario con luz led, filtro y calentador",
+          "url": "https://www.kiwoko.com/peces/acuarios-y-peceras/acuarios/medianos-_50-y-100l_/ciano-aqua-led-60-blanco-acuario-con-luz-led_-filtro-y-calentador/CIA24445_M.html"
+        },
+        {
+          "name": "Ciano Pack Recambio Filtración para Acuarios",
+          "url": "https://www.kiwoko.com/peces/acuarios-y-peceras/filtros-y-bombas/interior/ciano-pack-recambio-filtracion-para-acuarios/CIA24434_M.html"
+        },
+        {
+          "name": "Ciano M CF80 Esponja de Recambio para acuarios ",
+          "url": "https://www.kiwoko.com/peces/accesorios-para-acuario/filtros/material-filtrante/ciano-m-cf80-esponja-de-recambio-para-acuarios-/CIA24409_M.html"
+        },
+        {
+          "name": "Ciano CF80 Filtro Interior de 3 Niveles para acuarios",
+          "url": "https://www.kiwoko.com/peces/accesorios-para-acuario/filtros/filtro-interior/ciano-cf80-filtro-interior-de-3-niveles-para-acuarios/CIA24401_M.html"
+        }
+      ]
+    },
+    {
+      "id": "tc-185b159101",
+      "name": "Dashi Delights - курица с лососем",
+      "brand": "Dashi Delights",
+      "pending": [
+        {
+          "id": "tc-185b159101-reference-pack",
+          "label": "70 г",
+          "ean": "4262365730664"
+        }
+      ],
+      "query": "Dashi Delights - курица с лососем",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Dashi Delights Snack Cremoso Pollo tarrina para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/complementos-alimenticios/dashi-delights-snack-cremoso-pollo-tarrina-para-gatos/URUEU864_M.html"
+        },
+        {
+          "name": "Dashi Delights Lata Atún y Bonito para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/dashi-delights-lata-atun-y-bonito-para-gatos/URUEU859_M.html"
+        },
+        {
+          "name": "Dashi Delights Snack Cremoso Pollo y Queso tarrina para gatos ",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/complementos-alimenticios/dashi-delights-snack-cremoso-pollo-y-queso-tarrina-para-gatos-/URUEU866_M.html"
+        },
+        {
+          "name": "Dashi Delights Lata Atún y Salmón para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/dashi-delights-lata-atun-y-salmon-para-gatos/URUEU860_M.html"
+        },
+        {
+          "name": "Dashi Delights Lata Atún para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/dashi-delights-lata-atun-para-gatos/URUEU857_M.html"
+        },
+        {
+          "name": "Dashi Delights Snack Cremoso Pollo con Atún y Vieira tarrina para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/complementos-alimenticios/dashi-delights-snack-cremoso-pollo-con-atun-y-vieira-tarrina-para-gatos/URUEU863_M.html"
+        },
+        {
+          "name": "Dashi Delights Snack Cremoso Pollo y Vieira tarrina para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/complementos-alimenticios/dashi-delights-snack-cremoso-pollo-y-vieira-tarrina-para-gatos/URUEU865_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-7515988",
+      "name": "Duvo+ - коврик для вылизывания",
+      "brand": "Duvo+",
+      "pending": [
+        {
+          "id": "yagu-7515988-catalog-pack",
+          "label": "Lila - 18 × 16 × 1 см"
+        }
+      ],
+      "query": "Duvoplus коврик для вылизывания",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Duvoplus Carrito de Paseo 4 ruedas para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-4-ruedas-para-perros-y-gatos/DUV1717061_M.html"
+        },
+        {
+          "name": "Duvoplus Láser 7 en 1 juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-laser/duvoplus-laser-7-en-1-juguete-para-gatos/DUV12844_M.html"
+        },
+        {
+          "name": "Duvoplus Carrito de Paseo Deluxe para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-deluxe-para-perros-y-gatos/DUV11298_M.html"
+        },
+        {
+          "name": "Duvoplus Foobler Azul pelota para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/juguetes-para-perros/porta-golosinas/duvoplus-foobler-azul-pelota-para-perros/DUV171431_M.html"
+        },
+        {
+          "name": "Duvoplus Catch’n Play Pez de juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-catnip/duvoplus-catch%E2%80%99n-play-pez-de-juguete-para-gatos/DUV12843_M.html"
+        },
+        {
+          "name": "Duvoplus Canicross Neopreno Correa para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/paseo/correas/correas-extensibles/duvoplus-canicross-neopreno-correa-para-perros/DUV11804_M.html"
+        },
+        {
+          "name": "Duvoplus Cromo Jaula de Metal Extra fuerte para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/casetas-para-perros/jaulas/duvoplus-cromo-jaula-de-metal-extra-fuerte-para-perros/DUV780470_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-7552371",
+      "name": "Duvo+ - мышка на пружинной подставке",
+      "brand": "Duvo+",
+      "pending": [
+        {
+          "id": "yagu-7552371-catalog-pack",
+          "label": "25 × 16 × 16 см"
+        }
+      ],
+      "query": "Duvoplus мышка на пружинной подставке",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Duvoplus Carrito de Paseo 4 ruedas para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-4-ruedas-para-perros-y-gatos/DUV1717061_M.html"
+        },
+        {
+          "name": "Duvoplus Láser 7 en 1 juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-laser/duvoplus-laser-7-en-1-juguete-para-gatos/DUV12844_M.html"
+        },
+        {
+          "name": "Duvoplus Carrito de Paseo Deluxe para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-deluxe-para-perros-y-gatos/DUV11298_M.html"
+        },
+        {
+          "name": "Duvoplus Foobler Azul pelota para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/juguetes-para-perros/porta-golosinas/duvoplus-foobler-azul-pelota-para-perros/DUV171431_M.html"
+        },
+        {
+          "name": "Duvoplus Catch’n Play Pez de juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-catnip/duvoplus-catch%E2%80%99n-play-pez-de-juguete-para-gatos/DUV12843_M.html"
+        },
+        {
+          "name": "Duvoplus Canicross Neopreno Correa para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/paseo/correas/correas-extensibles/duvoplus-canicross-neopreno-correa-para-perros/DUV11804_M.html"
+        },
+        {
+          "name": "Duvoplus Cromo Jaula de Metal Extra fuerte para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/casetas-para-perros/jaulas/duvoplus-cromo-jaula-de-metal-extra-fuerte-para-perros/DUV780470_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-7517019",
+      "name": "Duvo+ - набор игрушечных мышек",
+      "brand": "Duvo+",
+      "pending": [
+        {
+          "id": "yagu-7517019-catalog-pack",
+          "label": "2 шт - 6 × 5 × 3 см"
+        }
+      ],
+      "query": "Duvoplus набор игрушечных мышек",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Duvoplus Carrito de Paseo 4 ruedas para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-4-ruedas-para-perros-y-gatos/DUV1717061_M.html"
+        },
+        {
+          "name": "Duvoplus Láser 7 en 1 juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-laser/duvoplus-laser-7-en-1-juguete-para-gatos/DUV12844_M.html"
+        },
+        {
+          "name": "Duvoplus Carrito de Paseo Deluxe para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-deluxe-para-perros-y-gatos/DUV11298_M.html"
+        },
+        {
+          "name": "Duvoplus Foobler Azul pelota para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/juguetes-para-perros/porta-golosinas/duvoplus-foobler-azul-pelota-para-perros/DUV171431_M.html"
+        },
+        {
+          "name": "Duvoplus Catch’n Play Pez de juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-catnip/duvoplus-catch%E2%80%99n-play-pez-de-juguete-para-gatos/DUV12843_M.html"
+        },
+        {
+          "name": "Duvoplus Canicross Neopreno Correa para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/paseo/correas/correas-extensibles/duvoplus-canicross-neopreno-correa-para-perros/DUV11804_M.html"
+        },
+        {
+          "name": "Duvoplus Cromo Jaula de Metal Extra fuerte para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/casetas-para-perros/jaulas/duvoplus-cromo-jaula-de-metal-extra-fuerte-para-perros/DUV780470_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-7500815",
+      "name": "Duvo+ - трава для кошек",
+      "brand": "Duvo+",
+      "pending": [
+        {
+          "id": "yagu-7500815-catalog-pack",
+          "label": "100 г"
+        }
+      ],
+      "query": "Duvoplus трава для кошек",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Duvoplus Carrito de Paseo 4 ruedas para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-4-ruedas-para-perros-y-gatos/DUV1717061_M.html"
+        },
+        {
+          "name": "Duvoplus Láser 7 en 1 juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-laser/duvoplus-laser-7-en-1-juguete-para-gatos/DUV12844_M.html"
+        },
+        {
+          "name": "Duvoplus Carrito de Paseo Deluxe para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-deluxe-para-perros-y-gatos/DUV11298_M.html"
+        },
+        {
+          "name": "Duvoplus Foobler Azul pelota para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/juguetes-para-perros/porta-golosinas/duvoplus-foobler-azul-pelota-para-perros/DUV171431_M.html"
+        },
+        {
+          "name": "Duvoplus Catch’n Play Pez de juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-catnip/duvoplus-catch%E2%80%99n-play-pez-de-juguete-para-gatos/DUV12843_M.html"
+        },
+        {
+          "name": "Duvoplus Canicross Neopreno Correa para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/paseo/correas/correas-extensibles/duvoplus-canicross-neopreno-correa-para-perros/DUV11804_M.html"
+        },
+        {
+          "name": "Duvoplus Cromo Jaula de Metal Extra fuerte para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/casetas-para-perros/jaulas/duvoplus-cromo-jaula-de-metal-extra-fuerte-para-perros/DUV780470_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-7517046",
+      "name": "Duvo+ - удочка с джутом и перьями",
+      "brand": "Duvo+",
+      "pending": [
+        {
+          "id": "yagu-7517046-catalog-pack",
+          "label": "35 × 14 × 4,5 см"
+        }
+      ],
+      "query": "Duvoplus удочка с джутом и перьями",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Duvoplus Carrito de Paseo 4 ruedas para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-4-ruedas-para-perros-y-gatos/DUV1717061_M.html"
+        },
+        {
+          "name": "Duvoplus Láser 7 en 1 juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-laser/duvoplus-laser-7-en-1-juguete-para-gatos/DUV12844_M.html"
+        },
+        {
+          "name": "Duvoplus Carrito de Paseo Deluxe para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-deluxe-para-perros-y-gatos/DUV11298_M.html"
+        },
+        {
+          "name": "Duvoplus Foobler Azul pelota para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/juguetes-para-perros/porta-golosinas/duvoplus-foobler-azul-pelota-para-perros/DUV171431_M.html"
+        },
+        {
+          "name": "Duvoplus Catch’n Play Pez de juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-catnip/duvoplus-catch%E2%80%99n-play-pez-de-juguete-para-gatos/DUV12843_M.html"
+        },
+        {
+          "name": "Duvoplus Canicross Neopreno Correa para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/paseo/correas/correas-extensibles/duvoplus-canicross-neopreno-correa-para-perros/DUV11804_M.html"
+        },
+        {
+          "name": "Duvoplus Cromo Jaula de Metal Extra fuerte para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/casetas-para-perros/jaulas/duvoplus-cromo-jaula-de-metal-extra-fuerte-para-perros/DUV780470_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-7514626",
+      "name": "Duvo+ Eco - игрушка-мышка",
+      "brand": "Duvo+",
+      "pending": [
+        {
+          "id": "yagu-7514626-catalog-pack",
+          "label": "8,5 × 4,5 × 6 см"
+        }
+      ],
+      "query": "Duvo+ Eco - игрушка-мышка",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Duvoplus Carrito de Paseo 4 ruedas para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-4-ruedas-para-perros-y-gatos/DUV1717061_M.html"
+        },
+        {
+          "name": "Duvoplus Láser 7 en 1 juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-laser/duvoplus-laser-7-en-1-juguete-para-gatos/DUV12844_M.html"
+        },
+        {
+          "name": "Duvoplus Carrito de Paseo Deluxe para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-deluxe-para-perros-y-gatos/DUV11298_M.html"
+        },
+        {
+          "name": "Duvoplus Foobler Azul pelota para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/juguetes-para-perros/porta-golosinas/duvoplus-foobler-azul-pelota-para-perros/DUV171431_M.html"
+        },
+        {
+          "name": "Duvoplus Catch’n Play Pez de juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-catnip/duvoplus-catch%E2%80%99n-play-pez-de-juguete-para-gatos/DUV12843_M.html"
+        },
+        {
+          "name": "Duvoplus Canicross Neopreno Correa para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/paseo/correas/correas-extensibles/duvoplus-canicross-neopreno-correa-para-perros/DUV11804_M.html"
+        },
+        {
+          "name": "Duvoplus Cromo Jaula de Metal Extra fuerte para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/casetas-para-perros/jaulas/duvoplus-cromo-jaula-de-metal-extra-fuerte-para-perros/DUV780470_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-7514629",
+      "name": "Duvo+ Eco - игрушка-рыбка",
+      "brand": "Duvo+",
+      "pending": [
+        {
+          "id": "yagu-7514629-catalog-pack",
+          "label": "13,5 × 4,5 × 3 см"
+        }
+      ],
+      "query": "Duvo+ Eco - игрушка-рыбка",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Duvoplus Carrito de Paseo 4 ruedas para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-4-ruedas-para-perros-y-gatos/DUV1717061_M.html"
+        },
+        {
+          "name": "Duvoplus Láser 7 en 1 juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-laser/duvoplus-laser-7-en-1-juguete-para-gatos/DUV12844_M.html"
+        },
+        {
+          "name": "Duvoplus Carrito de Paseo Deluxe para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-deluxe-para-perros-y-gatos/DUV11298_M.html"
+        },
+        {
+          "name": "Duvoplus Foobler Azul pelota para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/juguetes-para-perros/porta-golosinas/duvoplus-foobler-azul-pelota-para-perros/DUV171431_M.html"
+        },
+        {
+          "name": "Duvoplus Catch’n Play Pez de juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-catnip/duvoplus-catch%E2%80%99n-play-pez-de-juguete-para-gatos/DUV12843_M.html"
+        },
+        {
+          "name": "Duvoplus Canicross Neopreno Correa para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/paseo/correas/correas-extensibles/duvoplus-canicross-neopreno-correa-para-perros/DUV11804_M.html"
+        },
+        {
+          "name": "Duvoplus Cromo Jaula de Metal Extra fuerte para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/casetas-para-perros/jaulas/duvoplus-cromo-jaula-de-metal-extra-fuerte-para-perros/DUV780470_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-7514634",
+      "name": "Duvo+ Eco Hongo - удочка-дразнилка",
+      "brand": "Duvo+",
+      "pending": [
+        {
+          "id": "yagu-7514634-catalog-pack",
+          "label": "9 × 16,5 × 40 см"
+        }
+      ],
+      "query": "Duvo+ Eco Hongo - удочка-дразнилка",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Duvoplus Carrito de Paseo 4 ruedas para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-4-ruedas-para-perros-y-gatos/DUV1717061_M.html"
+        },
+        {
+          "name": "Duvoplus Láser 7 en 1 juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-laser/duvoplus-laser-7-en-1-juguete-para-gatos/DUV12844_M.html"
+        },
+        {
+          "name": "Duvoplus Carrito de Paseo Deluxe para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-deluxe-para-perros-y-gatos/DUV11298_M.html"
+        },
+        {
+          "name": "Duvoplus Foobler Azul pelota para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/juguetes-para-perros/porta-golosinas/duvoplus-foobler-azul-pelota-para-perros/DUV171431_M.html"
+        },
+        {
+          "name": "Duvoplus Catch’n Play Pez de juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-catnip/duvoplus-catch%E2%80%99n-play-pez-de-juguete-para-gatos/DUV12843_M.html"
+        },
+        {
+          "name": "Duvoplus Canicross Neopreno Correa para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/paseo/correas/correas-extensibles/duvoplus-canicross-neopreno-correa-para-perros/DUV11804_M.html"
+        },
+        {
+          "name": "Duvoplus Cromo Jaula de Metal Extra fuerte para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/casetas-para-perros/jaulas/duvoplus-cromo-jaula-de-metal-extra-fuerte-para-perros/DUV780470_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-7515812",
+      "name": "Duvo+ Sole - когтеточка-столбик",
+      "brand": "Duvo+",
+      "pending": [
+        {
+          "id": "yagu-7515812-catalog-pack",
+          "label": "30 × 30 × 45 см"
+        }
+      ],
+      "query": "Duvo+ Sole - когтеточка-столбик",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Duvoplus Carrito de Paseo 4 ruedas para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-4-ruedas-para-perros-y-gatos/DUV1717061_M.html"
+        },
+        {
+          "name": "Duvoplus Láser 7 en 1 juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-laser/duvoplus-laser-7-en-1-juguete-para-gatos/DUV12844_M.html"
+        },
+        {
+          "name": "Duvoplus Carrito de Paseo Deluxe para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-deluxe-para-perros-y-gatos/DUV11298_M.html"
+        },
+        {
+          "name": "Duvoplus Foobler Azul pelota para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/juguetes-para-perros/porta-golosinas/duvoplus-foobler-azul-pelota-para-perros/DUV171431_M.html"
+        },
+        {
+          "name": "Duvoplus Catch’n Play Pez de juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-catnip/duvoplus-catch%E2%80%99n-play-pez-de-juguete-para-gatos/DUV12843_M.html"
+        },
+        {
+          "name": "Duvoplus Canicross Neopreno Correa para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/paseo/correas/correas-extensibles/duvoplus-canicross-neopreno-correa-para-perros/DUV11804_M.html"
+        },
+        {
+          "name": "Duvoplus Cromo Jaula de Metal Extra fuerte para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/casetas-para-perros/jaulas/duvoplus-cromo-jaula-de-metal-extra-fuerte-para-perros/DUV780470_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-7515817",
+      "name": "Duvo+ Square - туннель-когтеточка",
+      "brand": "Duvo+",
+      "pending": [
+        {
+          "id": "yagu-7515817-catalog-pack",
+          "label": "30 × 30 × 28 см"
+        }
+      ],
+      "query": "Duvo+ Square - туннель-когтеточка",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Duvoplus Carrito de Paseo 4 ruedas para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-4-ruedas-para-perros-y-gatos/DUV1717061_M.html"
+        },
+        {
+          "name": "Duvoplus Láser 7 en 1 juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-laser/duvoplus-laser-7-en-1-juguete-para-gatos/DUV12844_M.html"
+        },
+        {
+          "name": "Duvoplus Carrito de Paseo Deluxe para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-deluxe-para-perros-y-gatos/DUV11298_M.html"
+        },
+        {
+          "name": "Duvoplus Foobler Azul pelota para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/juguetes-para-perros/porta-golosinas/duvoplus-foobler-azul-pelota-para-perros/DUV171431_M.html"
+        },
+        {
+          "name": "Duvoplus Catch’n Play Pez de juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-catnip/duvoplus-catch%E2%80%99n-play-pez-de-juguete-para-gatos/DUV12843_M.html"
+        },
+        {
+          "name": "Duvoplus Canicross Neopreno Correa para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/paseo/correas/correas-extensibles/duvoplus-canicross-neopreno-correa-para-perros/DUV11804_M.html"
+        },
+        {
+          "name": "Duvoplus Cromo Jaula de Metal Extra fuerte para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/casetas-para-perros/jaulas/duvoplus-cromo-jaula-de-metal-extra-fuerte-para-perros/DUV780470_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-7502810",
+      "name": "Duvo+ Tower - когтеточка-башня",
+      "brand": "Duvo+",
+      "pending": [
+        {
+          "id": "yagu-7502810-catalog-pack",
+          "label": "Marrón - 36 × 35 × 70 см"
+        }
+      ],
+      "query": "Duvo+ Tower - когтеточка-башня",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Duvoplus Carrito de Paseo 4 ruedas para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-4-ruedas-para-perros-y-gatos/DUV1717061_M.html"
+        },
+        {
+          "name": "Duvoplus Láser 7 en 1 juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-laser/duvoplus-laser-7-en-1-juguete-para-gatos/DUV12844_M.html"
+        },
+        {
+          "name": "Duvoplus Carrito de Paseo Deluxe para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/viajes/transportin/duvoplus-carrito-de-paseo-deluxe-para-perros-y-gatos/DUV11298_M.html"
+        },
+        {
+          "name": "Duvoplus Foobler Azul pelota para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/juguetes-para-perros/porta-golosinas/duvoplus-foobler-azul-pelota-para-perros/DUV171431_M.html"
+        },
+        {
+          "name": "Duvoplus Catch’n Play Pez de juguete para gatos",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/juguetes/con-catnip/duvoplus-catch%E2%80%99n-play-pez-de-juguete-para-gatos/DUV12843_M.html"
+        },
+        {
+          "name": "Duvoplus Canicross Neopreno Correa para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/paseo/correas/correas-extensibles/duvoplus-canicross-neopreno-correa-para-perros/DUV11804_M.html"
+        },
+        {
+          "name": "Duvoplus Cromo Jaula de Metal Extra fuerte para perros",
+          "url": "https://www.kiwoko.com/perros/accesorios-para-perros/casetas-para-perros/jaulas/duvoplus-cromo-jaula-de-metal-extra-fuerte-para-perros/DUV780470_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-7845778",
+      "name": "EBI Cascade - питьевой фонтан",
+      "brand": "EBI",
+      "pending": [
+        {
+          "id": "yagu-7845778-catalog-pack",
+          "label": "Beige - 1,5 л - 22 × 15 см"
+        }
+      ],
+      "query": "EBI Cascade - питьевой фонтан",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Veterinary Urinary pienso para perros ",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/royal-canin-veterinary-urinary-pienso-para-perros-/ROY470628_M.html"
+        },
+        {
+          "name": "Nath Pillow Snacks Hairball Bocaditos para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/funcionales/nath-pillow-snacks-hairball-bocaditos-para-gatos/NTH40059_M.html"
+        },
+        {
+          "name": "Frontpro Comprimidos Masticables Antiparasitario para perros",
+          "url": "https://www.kiwoko.com/perros/higiene-para-perros/antiparasitarios/comprimidos/frontpro-comprimidos-masticables-antiparasitario-para-perros/BOE154746_M.html"
+        },
+        {
+          "name": "Nath Malta con Omega 3 y 6 para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/maltas-y-hierbas/malta/nath-malta-con-omega-3-y-6-para-gatos/NTH88955_M.html"
+        },
+        {
+          "name": "AdTab Comprimidos Masticables Antiparasitarios para perros",
+          "url": "https://www.kiwoko.com/perros/higiene-para-perros/antiparasitarios/comprimidos/adtab-comprimidos-masticables-antiparasitarios-para-perros/ADT52001_M.html"
+        },
+        {
+          "name": "Frontline Combo Pipetas Antiparasitarias para gatos y hurones",
+          "url": "https://www.kiwoko.com/gatos/higiene-para-gatos/antiparasitarios/pipetas/frontline-combo-pipetas-antiparasitarias-para-gatos-y-hurones/MER042000_M.html"
+        },
+        {
+          "name": "Eheim karbon para Filtros de acuarios",
+          "url": "https://www.kiwoko.com/peces/accesorios-para-acuario/filtros/material-filtrante/eheim-karbon-para-filtros-de-acuarios/EHE2501101_M.html"
+        },
+        {
+          "name": "PSH Odor Control Champú para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/higiene-para-perros/cuidado-del-pelo/champu/psh-odor-control-champu-para-perros-y-gatos/PSH1401CHAO_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-7815320",
+      "name": "EBI Mango / Cascade - сменный фильтр",
+      "brand": "EBI",
+      "pending": [
+        {
+          "id": "yagu-7815320-catalog-pack",
+          "label": "Фильтр - количество в упаковке уточнить"
+        }
+      ],
+      "query": "EBI Mango / Cascade - сменный фильтр",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Artero Nature Collection Supercoat Cuchilla Trimming Doble para perros",
+          "url": "https://www.kiwoko.com/perros/higiene-para-perros/cuidado-del-pelo/cepillado/artero-nature-collection-supercoat-cuchilla-trimming-doble-para-perros/ARTP945_M.html"
+        },
+        {
+          "name": "Zolux Anah Slicker Suave carda para cachorros",
+          "url": "https://www.kiwoko.com/perros/higiene-para-perros/cuidado-del-pelo/cepillado/zolux-anah-slicker-suave-carda-para-cachorros/ANA470845_M.html"
+        },
+        {
+          "name": "Zolux Anah Slicker Carda Suave para gatos",
+          "url": "https://www.kiwoko.com/gatos/higiene-para-gatos/cuidado-del-pelo/cepillado/zolux-anah-slicker-carda-suave-para-gatos/ANA550002_M.html"
+        },
+        {
+          "name": "Zolux Anah Peine Desenredador para gatos",
+          "url": "https://www.kiwoko.com/gatos/higiene-para-gatos/cuidado-del-pelo/cepillado/zolux-anah-peine-desenredador-para-gatos/ANA550016_M.html"
+        },
+        {
+          "name": "Artero Laika Manopla Azul de Goma para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/higiene-para-perros/cuidado-del-pelo/cepillado/artero-laika-manopla-azul-de-goma-para-perros-y-gatos/ARTP825_M.html"
+        },
+        {
+          "name": "Zolux Anah Slicker Retráctil Carda Suave para gatos",
+          "url": "https://www.kiwoko.com/gatos/higiene-para-gatos/cuidado-del-pelo/cepillado/zolux-anah-slicker-retractil-carda-suave-para-gatos/ANA550006_M.html"
+        },
+        {
+          "name": "Zolux Anah Peine Antipulgas para cachorros",
+          "url": "https://www.kiwoko.com/perros/higiene-para-perros/cuidado-del-pelo/cepillado/zolux-anah-peine-antipulgas-para-cachorros/ANA470849_M.html"
+        },
+        {
+          "name": "Zolux Anah Súper Cepillo para cachorros",
+          "url": "https://www.kiwoko.com/perros/higiene-para-perros/cuidado-del-pelo/cepillado/zolux-anah-super-cepillo-para-cachorros/ANA470847_M.html"
+        }
+      ]
+    },
+    {
+      "id": "tc-bfbb53d6d1",
+      "name": "GimCat - трава в лотке",
+      "brand": "GimCat",
+      "pending": [
+        {
+          "id": "tc-bfbb53d6d1-reference-pack",
+          "label": "Лоток для выращивания травы",
+          "ean": "4002064407005"
+        }
+      ],
+      "query": "GimCat",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "GimCat Soft Extra Malta",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/maltas-y-hierbas/malta/gimcat-soft-extra-malta/GIM68696_M.html"
+        },
+        {
+          "name": "GimCat atún en caldo lata para gatos esterilizados",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/gimcat-atun-en-caldo-lata-para-gatos-esterilizados/GIM40996_M.html"
+        },
+        {
+          "name": "GimCat Shiny Cat Atún y Salmón en gelatina lata para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/gimcat-shiny-cat-atun-y-salmon-en-gelatina-lata-para-gatos/GIM40999_M.html"
+        },
+        {
+          "name": "GimCat atún y salmón en caldo sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/gimcat-atun-y-salmon-en-caldo-sobre-para-gatos/GIS78648_M.html"
+        },
+        {
+          "name": "GimCat Shiny Caldo de pollo para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/gimcat-shiny-caldo-de-pollo-para-gatos/GIM78756_M.html"
+        },
+        {
+          "name": "GimCat Atún y Aloe Vera caldo en lata para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/gimcat-atun-y-aloe-vera-caldo-en-lata-para-gatos/GIM41000_M.html"
+        },
+        {
+          "name": "GimCat atún y quinoa en caldo sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/gimcat-atun-y-quinoa-en-caldo-sobre-para-gatos/GIS78650_M.html"
+        },
+        {
+          "name": "GimCat Shiny Cat Atún y Pescado blanco en caldo lata para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/natural/gimcat-shiny-cat-atun-y-pescado-blanco-en-caldo-lata-para-gatos/GIM78747_M.html"
+        }
+      ]
+    },
+    {
+      "id": "hills-wet-3e2a1a71",
+      "name": "Hill’s Prescription Diet Gastrointestinal Biome Chicken - в соусе",
+      "brand": "Hill’s",
+      "pending": [
+        {
+          "id": "hills-wet-3e2a1a71-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Hill's Prescription Diet Gastrointestinal Biome Chicken - в соусе",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Hill's Prescription Diet Gastrointestinal Biome Pollo pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/hill_s-prescription-diet-gastrointestinal-biome-pollo-pienso-para-perros/HIL604457_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Gastrointestinal Biome Estofado Pollo y Verduras lata para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/comida-humeda-gastrointestinal/hill_s-prescription-diet-gastrointestinal-biome-estofado-pollo-y-verduras-lata-para-perros/HIL605412_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Gastrointestinal Biome Estofado de Pollo lata para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-gastrointestinal-biome-estofado-de-pollo-lata-para-gatos/HIL604420_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Gastrointestinal Biome Pollo lata para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/hill_s-prescription-diet-gastrointestinal-biome-pollo-lata-para-perros/HIL607719_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Gastrointestinal Biome Mini pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/hill_s-prescription-diet-gastrointestinal-biome-mini-pienso-para-perros/HIL606424_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Gastrointestinal Biome Pollo pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-seca/hill_s-prescription-diet-gastrointestinal-biome-pollo-pienso-para-gatos/HIL604445_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Feline GI Biome Digestive Care Pollo y Verduras Sobre en salsa",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-feline-gi-biome-digestive-care-pollo-y-verduras-sobre-en-salsa/HIL607212_M.html"
+        },
+        {
+          "name": "Hill’s Prescription Diet Gastrointestinal Biome Stress para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-seca/hill%E2%80%99s-prescription-diet-gastrointestinal-biome-stress-para-gatos/HIL608944_M.html"
+        }
+      ]
+    },
+    {
+      "id": "hills-wet-59c92e72",
+      "name": "Hill’s Prescription Diet Metabolic + Mobility Chicken - в соусе",
+      "brand": "Hill’s",
+      "pending": [
+        {
+          "id": "hills-wet-59c92e72-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Hill's Prescription Diet Metabolic + Mobility Chicken - в соусе",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Hill's Prescription Diet j/d Metabolic + Mobility pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/hill_s-prescription-diet-j_d-metabolic_mobility-pienso-para-perros/HIL10038R_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Canine j/d Metabolic + Mobility lata para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/comida-humeda-para-control-de-peso/hill_s-prescription-diet-canine-j_d-metabolic_mobility-lata-para-perros/HIL607714_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Metabolic + Mobility Mini j/d pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/hill_s-prescription-diet-metabolic_mobility-mini-j_d-pienso-para-perros/HIL606259_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Metabolic + Mobility Pollo Pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-seca/hill_s-prescription-diet-metabolic_mobility-pollo-pienso-para-gatos/HIL609953_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Metabolic + Mobility Pollo Sobres para gatos - Multipack",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-metabolic_mobility-pollo-sobres-para-gatos---multipack/HIL609956BOX_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Metabolic + Mobility Pack Pienso y Latas para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/hill_s-prescription-diet-metabolic_mobility-pack-pienso-y-latas-para-perros/HILDOGMETJD1_M.html"
+        }
+      ]
+    },
+    {
+      "id": "hills-wet-ff59af26",
+      "name": "Hill’s Prescription Diet i/d Digestive Care Kitten Chicken",
+      "brand": "Hill’s",
+      "pending": [
+        {
+          "id": "hills-wet-ff59af26-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Hill's Prescription Diet i/d Digestive Care Kitten Chicken",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Hill's Prescription Diet I/D Digestive Care Kitten Lata Pollo para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-i_d-digestive-care-kitten-lata-pollo-para-gatos/HIL609418_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet i/d Kitten Digestivo Pienso Pollo para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-seca/hill_s-prescription-diet-i_d-kitten-digestivo-pienso-pollo-para-gatos/HIL609601_M.html"
+        }
+      ]
+    },
+    {
+      "id": "hills-adult-chicken",
+      "name": "Hill’s Science Plan Adult Chicken",
+      "brand": "Hill’s",
+      "pending": [
+        {
+          "id": "hills-adult-chicken-300g",
+          "label": "300 г",
+          "ean": null
+        }
+      ],
+      "query": "Hill's Science Plan Adult Chicken",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Hill's Science Plan Adult Medium Pienso Pollo para perros de razas medianas",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-de-pollo/hill_s-science-plan-adult-medium-pienso-pollo-para-perros-de-razas-medianas/HIL3266V_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Perfect Weight Adult Large Pollo pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-razas-grandes/hill_s-science-plan-perfect-weight-adult-large-pollo-pienso-para-perros/HIL3669N_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Perfect Weight Adult Medium Pollo pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-de-pollo/hill_s-science-plan-perfect-weight-adult-medium-pollo-pienso-para-perros/HIL3666U_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Sterilised pienso pollo para gatos adultos esterilizados",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/hill_s-science-plan-sterilised-pienso-pollo-para-gatos-adultos-esterilizados/HIL9351DA_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Adult Medium pienso cordero y arroz para perros de razas medianas",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/hill_s-science-plan-adult-medium-pienso-cordero-y-arroz-para-perros-de-razas-medianas/HIL7701M_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Perfect Weight Adult Small y Mini pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/hill_s-science-plan-perfect-weight-adult-small-y-mini-pienso-para-perros/HIL3662U_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Mature 7+ Adult pollo lata para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/comida-humeda-para-perros-senior/hill_s-science-plan-mature-7_-adult-pollo-lata-para-perros/HIL8055M_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Adult Medium Hypoallergenic Salmón pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-hipoalergenico/hill_s-science-plan-adult-medium-hypoallergenic-salmon-pienso-para-perros/HIL607842_M.html"
+        }
+      ]
+    },
+    {
+      "id": "hills-adult-lamb",
+      "name": "Hill’s Science Plan Adult Lamb",
+      "brand": "Hill’s",
+      "pending": [
+        {
+          "id": "hills-adult-lamb-1500g",
+          "label": "1,5 кг",
+          "ean": null
+        }
+      ],
+      "query": "Hill's Science Plan Adult Lamb",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Hill's Science Plan Adult Medium Pienso Pollo para perros de razas medianas",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-de-pollo/hill_s-science-plan-adult-medium-pienso-pollo-para-perros-de-razas-medianas/HIL3266V_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Perfect Weight Adult Large Pollo pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-razas-grandes/hill_s-science-plan-perfect-weight-adult-large-pollo-pienso-para-perros/HIL3669N_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Perfect Weight Adult Medium Pollo pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-de-pollo/hill_s-science-plan-perfect-weight-adult-medium-pollo-pienso-para-perros/HIL3666U_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Sterilised pienso pollo para gatos adultos esterilizados",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/hill_s-science-plan-sterilised-pienso-pollo-para-gatos-adultos-esterilizados/HIL9351DA_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Adult Medium pienso cordero y arroz para perros de razas medianas",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/hill_s-science-plan-adult-medium-pienso-cordero-y-arroz-para-perros-de-razas-medianas/HIL7701M_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Perfect Weight Adult Small y Mini pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/hill_s-science-plan-perfect-weight-adult-small-y-mini-pienso-para-perros/HIL3662U_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Mature 7+ Adult pollo lata para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/comida-humeda-para-perros-senior/hill_s-science-plan-mature-7_-adult-pollo-lata-para-perros/HIL8055M_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Adult Medium Hypoallergenic Salmón pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-hipoalergenico/hill_s-science-plan-adult-medium-hypoallergenic-salmon-pienso-para-perros/HIL607842_M.html"
+        }
+      ]
+    },
+    {
+      "id": "hills-hypoallergenic",
+      "name": "Hill’s Science Plan Hypoallergenic Adult Egg & Insect Protein",
+      "brand": "Hill’s",
+      "pending": [
+        {
+          "id": "hills-hypoallergenic-1500g",
+          "label": "1,5 кг",
+          "ean": null
+        },
+        {
+          "id": "hills-hypoallergenic-7000g",
+          "label": "7 кг",
+          "ean": null
+        }
+      ],
+      "query": "Hill's Science Plan Hypoallergenic Adult Egg & Insect Protein",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Hill's Science Plan Adult Medium Hypoallergenic Salmón pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-hipoalergenico/hill_s-science-plan-adult-medium-hypoallergenic-salmon-pienso-para-perros/HIL607842_M.html"
+        }
+      ]
+    },
+    {
+      "id": "hills-kitten-regular",
+      "name": "Hill’s Science Plan Kitten Chicken",
+      "brand": "Hill’s",
+      "pending": [
+        {
+          "id": "hills-kitten-regular-3000g",
+          "label": "3 кг",
+          "ean": null
+        }
+      ],
+      "query": "Hill's Science Plan Kitten Chicken",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Hill's Prescription Diet i/d Kitten Digestivo Pienso Pollo para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-seca/hill_s-prescription-diet-i_d-kitten-digestivo-pienso-pollo-para-gatos/HIL609601_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Digestive Care i/d Pollo pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-seca/hill_s-prescription-diet-digestive-care-i_d-pollo-pienso-para-gatos/HIL9188M_M.html"
+        },
+        {
+          "name": "Hill’s Prescription Diet Gastrointestinal Biome Stress estofado lata para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill%E2%80%99s-prescription-diet-gastrointestinal-biome-stress-estofado-lata-para-gatos/HIL608830_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet I/D Digestive Care Kitten Lata Pollo para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-i_d-digestive-care-kitten-lata-pollo-para-gatos/HIL609418_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Gastrointestinal Biome Pollo pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-seca/hill_s-prescription-diet-gastrointestinal-biome-pollo-pienso-para-gatos/HIL604445_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Feline GI Biome Digestive Care Pollo y Verduras Sobre en salsa",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-feline-gi-biome-digestive-care-pollo-y-verduras-sobre-en-salsa/HIL607212_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Digestive Care i/d Gatos Pollo lata",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/hill_s-prescription-diet-digestive-care-i_d-gatos-pollo-lata/HIL4628YT_M.html"
+        },
+        {
+          "name": "Hill's Prescription Diet Digestive Care i/d Pollo en salsa sobre para gatos Multipack",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/hill_s-prescription-diet-digestive-care-i_d-pollo-en-salsa-sobre-para-gatos-multipack/HIL605726_M.html"
+        }
+      ]
+    },
+    {
+      "id": "hills-light",
+      "name": "Hill’s Science Plan Light Adult Chicken",
+      "brand": "Hill’s",
+      "pending": [
+        {
+          "id": "hills-light-3000g",
+          "label": "3 кг",
+          "ean": null
+        },
+        {
+          "id": "hills-light-10000g",
+          "label": "10 кг",
+          "ean": null
+        }
+      ],
+      "query": "Hill's Science Plan Light Adult Chicken",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Hill's Science Plan Mature Adult Light Small & Mini pienso pollo para perros de razas pequeñas",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-perros-seniores/hill_s-science-plan-mature-adult-light-small_mini-pienso-pollo-para-perros-de-razas-pequenas/HIL1700M_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Light Pienso Pollo para perros de razas pequeñas y mini",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-light/hill_s-science-plan-light-pienso-pollo-para-perros-de-razas-pequenas-y-mini/HIL1699M_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Mature Adult Light Medium pienso pollo para perros de razas medianas",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-perros-seniores/hill_s-science-plan-mature-adult-light-medium-pienso-pollo-para-perros-de-razas-medianas/HIL7544M_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Light pienso pollo perros de razas medianas",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-de-pollo/hill_s-science-plan-light-pienso-pollo-perros-de-razas-medianas/HIL7703DA_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Light pienso pollo para perros adultos de razas grandes",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-light/hill_s-science-plan-light-pienso-pollo-para-perros-adultos-de-razas-grandes/HIL7545M_M.html"
+        },
+        {
+          "name": "Hill's Adult Light pollo lata",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/comida-humeda-para-control-de-peso/hill_s-adult-light-pollo-lata/HIL8048M_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Light pienso pollo para gatos adultos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/hill_s-science-plan-light-pienso-pollo-para-gatos-adultos/HIL7520DA_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Light Adult Pescado Azul y Pollo en Salsa sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-light-adult-pescado-azul-y-pollo-en-salsa-sobre-para-gatos/HIL604019_M.html"
+        }
+      ]
+    },
+    {
+      "id": "hills-kitten-digestion",
+      "name": "Hill’s Science Plan Perfect Digestion Kitten Chicken & Brown Rice",
+      "brand": "Hill’s",
+      "pending": [
+        {
+          "id": "hills-kitten-digestion-1500g",
+          "label": "1,5 кг",
+          "ean": null
+        }
+      ],
+      "query": "Hill's Science Plan Perfect Digestion Kitten Chicken & Brown Rice",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Hill's Science Plan Adult Small y Mini Perfect Digestion Mousse de Pavo lata para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/comida-humeda-gastrointestinal/hill_s-science-plan-adult-small-y-mini-perfect-digestion-mousse-de-pavo-lata-para-perros/HIL608360_M.html"
+        }
+      ]
+    },
+    {
+      "id": "hills-ster-duck",
+      "name": "Hill’s Science Plan Sterilised Cat Adult Duck",
+      "brand": "Hill’s",
+      "pending": [
+        {
+          "id": "hills-ster-duck-3000g",
+          "label": "3 кг",
+          "ean": null
+        }
+      ],
+      "query": "Hill's Science Plan Sterilised Cat Adult Duck",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Hill's Science Plan Sterilised pienso pollo para gatos adultos esterilizados",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/hill_s-science-plan-sterilised-pienso-pollo-para-gatos-adultos-esterilizados/HIL9351DA_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Sterilised Adult Pollo y Salmón en Salsa sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-sterilised-adult-pollo-y-salmon-en-salsa-sobre-para-gatos/HIL607317_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Sterilised pienso salmón para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/hill_s-science-plan-sterilised-pienso-salmon-para-gatos/HIL9352DA_M.html"
+        }
+      ]
+    },
+    {
+      "id": "hills-ster-salmon",
+      "name": "Hill’s Science Plan Sterilised Cat Adult Salmon",
+      "brand": "Hill’s",
+      "pending": [
+        {
+          "id": "hills-ster-salmon-300g",
+          "label": "300 г",
+          "ean": null
+        }
+      ],
+      "query": "Hill's Science Plan Sterilised Cat Adult Salmon",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Hill's Science Plan Sterilised Adult Pollo y Salmón en Salsa sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-sterilised-adult-pollo-y-salmon-en-salsa-sobre-para-gatos/HIL607317_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Sterilised pienso salmón para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/hill_s-science-plan-sterilised-pienso-salmon-para-gatos/HIL9352DA_M.html"
+        }
+      ]
+    },
+    {
+      "id": "hills-kitten",
+      "name": "Hill’s Science Plan Sterilised Kitten Chicken",
+      "brand": "Hill’s",
+      "pending": [
+        {
+          "id": "hills-kitten-7000g",
+          "label": "7 кг",
+          "ean": null
+        }
+      ],
+      "query": "Hill's Science Plan Sterilised Kitten Chicken",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Hill's Science Plan Sterilised Kitten Pollo pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/hill_s-science-plan-sterilised-kitten-pollo-pienso-para-gatos/HIL607265_M.html"
+        }
+      ]
+    },
+    {
+      "id": "tc-06a4db0143",
+      "name": "Kit Cat FreezeBites - курица",
+      "brand": "Kit Cat",
+      "pending": [
+        {
+          "id": "tc-06a4db0143-reference-pack",
+          "label": "15 г",
+          "ean": "671875796963"
+        }
+      ],
+      "query": "Kit Cat FreezeBites",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Feline Sterilised Salsa sobres para gato",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-feline-sterilised-salsa-sobres-para-gato/ROY390024_M.html"
+        },
+        {
+          "name": "Royal Canin Sterilised gelatina sobres para gato",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-sterilised-gelatina-sobres-para-gato/ROY390324_M.html"
+        },
+        {
+          "name": "Royal Canin Kitten sobre en salsa para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-kitten-sobre-en-salsa-para-gatos/ROY378526_M.html"
+        },
+        {
+          "name": "Royal Canin Digestive Sensitive sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-digestive-sensitive-sobre-para-gatos/ROY382025_M.html"
+        },
+        {
+          "name": "Royal Canin Mother & Baby mousse latas para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-mother_baby-mousse-latas-para-gatos/ROY377808_M.html"
+        },
+        {
+          "name": "Gourmet Gold Fondant Pollo en Paté lata para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/gourmet-gold-fondant-pollo-en-pate-lata-para-gatos/GOU12348454_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Sterilised Carne y Pescado sobre para gatos Multipack",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-sterilised-carne-y-pescado-sobre-para-gatos-multipack/HIL604014_M.html"
+        },
+        {
+          "name": "Nath Adult Sterilised Filetes de Pavo Sobre en salsa para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/nath-adult-sterilised-filetes-de-pavo-sobre-en-salsa-para-gatos/NTH88843_M.html"
+        }
+      ]
+    },
+    {
+      "id": "tc-1877f4a340",
+      "name": "Kit Cat FreezeBites - лосось",
+      "brand": "Kit Cat",
+      "pending": [
+        {
+          "id": "tc-1877f4a340-reference-pack",
+          "label": "1 × 15 г",
+          "ean": null
+        }
+      ],
+      "query": "Kit Cat FreezeBites",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Feline Sterilised Salsa sobres para gato",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-feline-sterilised-salsa-sobres-para-gato/ROY390024_M.html"
+        },
+        {
+          "name": "Royal Canin Sterilised gelatina sobres para gato",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-sterilised-gelatina-sobres-para-gato/ROY390324_M.html"
+        },
+        {
+          "name": "Royal Canin Kitten sobre en salsa para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-kitten-sobre-en-salsa-para-gatos/ROY378526_M.html"
+        },
+        {
+          "name": "Royal Canin Digestive Sensitive sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-digestive-sensitive-sobre-para-gatos/ROY382025_M.html"
+        },
+        {
+          "name": "Royal Canin Mother & Baby mousse latas para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-mother_baby-mousse-latas-para-gatos/ROY377808_M.html"
+        },
+        {
+          "name": "Gourmet Gold Fondant Pollo en Paté lata para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/gourmet-gold-fondant-pollo-en-pate-lata-para-gatos/GOU12348454_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Sterilised Carne y Pescado sobre para gatos Multipack",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/multipacks-humedo/hill_s-science-plan-sterilised-carne-y-pescado-sobre-para-gatos-multipack/HIL604014_M.html"
+        },
+        {
+          "name": "Nath Adult Sterilised Filetes de Pavo Sobre en salsa para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/nath-adult-sterilised-filetes-de-pavo-sobre-en-salsa-para-gatos/NTH88843_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-9235036",
+      "name": "Moderna CatConcept - лоток, лежанка и когтеточка",
+      "brand": "Moderna",
+      "pending": [
+        {
+          "id": "yagu-9235036-catalog-pack",
+          "label": "40 × 48 × 43 см"
+        }
+      ],
+      "query": "CatConcept - лоток, лежанка и когтеточка",
+      "httpStatus": 200,
+      "candidates": []
+    },
+    {
+      "id": "yagu-9235038",
+      "name": "Moderna Cats in Love - миска для кошек",
+      "brand": "Moderna",
+      "pending": [
+        {
+          "id": "yagu-9235038-catalog-pack",
+          "label": "210 мл - 15,5 × 15,5 × 3,2 см"
+        }
+      ],
+      "query": "Cats in Love - миска для кошек",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Flamingo Cats in Love Comedero",
+          "url": "https://www.kiwoko.com/gatos/accesorios-para-gatos/comederos-y-bebederos/tolvas/flamingo-cats-in-love-comedero/FLA33292_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-9235123",
+      "name": "Moderna Handy - лопатка для лотка",
+      "brand": "Moderna",
+      "pending": [
+        {
+          "id": "yagu-9235123-catalog-pack",
+          "label": "Gris - 30,5 × 10,1 × 4 см"
+        }
+      ],
+      "query": "Handy - лопатка для лотка",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Wave Handy Aspirador Limpiafondos para acuarios",
+          "url": "https://www.kiwoko.com/peces/acuarios-y-peceras/filtros-y-bombas/wave-handy-aspirador-limpiafondos-para-acuarios/WAV15938_M.html"
+        },
+        {
+          "name": "Nice Care Sanitary Scoop Pala Higiénica Handy Max para gatos",
+          "url": "https://www.kiwoko.com/gatos/arenas-y-accesorios/limpieza-y-accesorios/palas-alfombrillas-y-bolsas/nice-care-sanitary-scoop-pala-higienica-handy-max-para-gatos/NCR43741_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-9235044",
+      "name": "Moderna Luxurious - миска для кошек",
+      "brand": "Moderna",
+      "pending": [
+        {
+          "id": "yagu-9235044-catalog-pack",
+          "label": "210 мл - 15,5 × 15,5 × 3,2 см"
+        }
+      ],
+      "query": "Luxurious - миска для кошек",
+      "httpStatus": 200,
+      "candidates": []
+    },
+    {
+      "id": "yagu-9235142",
+      "name": "Moderna Maryloo - открытый лоток",
+      "brand": "Moderna",
+      "pending": [
+        {
+          "id": "yagu-9235142-catalog-pack",
+          "label": "Gris cálido - 50 × 38 × 10,8 см"
+        }
+      ],
+      "query": "Maryloo - открытый лоток",
+      "httpStatus": 200,
+      "candidates": []
+    },
+    {
+      "id": "yagu-9235121",
+      "name": "Moderna Smart Cat - закрытый лоток",
+      "brand": "Moderna",
+      "pending": [
+        {
+          "id": "yagu-9235121-catalog-pack",
+          "label": "Gris cálido - 54,5 × 39,1 × 40,3 см"
+        }
+      ],
+      "query": "Smart Cat - закрытый лоток",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Stefanplast Cathy Clever Smart Arenero Cerrado Gris para gatos",
+          "url": "https://www.kiwoko.com/gatos/arenas-y-accesorios/areneros/cerrados/stefanplast-cathy-clever-smart-arenero-cerrado-gris-para-gatos/STF98712_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-9235071",
+      "name": "Moderna V Scoop - лопатка для наполнителя",
+      "brand": "Moderna",
+      "pending": [
+        {
+          "id": "yagu-9235071-catalog-pack",
+          "label": "Gris - 15,5 × 13,2 × 12,9 см"
+        }
+      ],
+      "query": "V Scoop - лопатка для наполнителя",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Hill's Science Plan Senior Small & Mini Pienso para perros seniors de razas pequeñas y mini",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-perros-seniores/hill_s-science-plan-senior-small_mini-pienso-para-perros-seniors-de-razas-pequenas-y-mini/HIL2830V_M.html"
+        },
+        {
+          "name": "Hill's Science Plan pienso pollo para perros de razas pequeñas y mini",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-perros-seniores/hill_s-science-plan-pienso-pollo-para-perros-de-razas-pequenas-y-mini/HIL2827U_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Alimento Pienso Pollo  para Gatitos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/hill_s-science-plan-alimento-pienso-pollo--para-gatitos/HIL5197X_M.html"
+        },
+        {
+          "name": "Hill's Science Plan pienso pollo para perros adultos de razas mini",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-de-pollo/hill_s-science-plan-pienso-pollo-para-perros-adultos-de-razas-mini/HIL3270Y_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Adult Sensitive Stomach & Skin Small & Mini pienso para perros de razas pequeñas y mini",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/hill_s-science-plan-adult-sensitive-stomach_skin-small_mini-pienso-para-perros-de-razas-pequenas-y-mini/HIL10516V_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Light Pienso Pollo para perros de razas pequeñas y mini",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-light/hill_s-science-plan-light-pienso-pollo-para-perros-de-razas-pequenas-y-mini/HIL1699M_M.html"
+        },
+        {
+          "name": "Hill's Adult Perfect Weight Pollo y Vegetales lata para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/hill_s-adult-perfect-weight-pollo-y-vegetales-lata-para-perros/HIL3643V_M.html"
+        },
+        {
+          "name": "Hill's Science Plan Perfect Weight Adult pollo pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/hill_s-science-plan-perfect-weight-adult-pollo-pienso-para-gatos/HIL3673V_M.html"
+        }
+      ]
+    },
+    {
+      "id": "orijen-fit-trim",
+      "name": "Orijen Fit & Trim",
+      "brand": "Orijen",
+      "pending": [
+        {
+          "id": "orijen-fit-trim-340g",
+          "label": "340 г",
+          "ean": null
+        }
+      ],
+      "query": "Orijen Fit & Trim",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Orijen Fit&Trim pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-natural/orijen-fit_trim-pienso-para-perros/ORJOFT11_M.html"
+        }
+      ]
+    },
+    {
+      "id": "orijen-original",
+      "name": "Orijen Original Cat",
+      "brand": "Orijen",
+      "pending": [
+        {
+          "id": "orijen-original-340g",
+          "label": "340 г",
+          "ean": null
+        }
+      ],
+      "query": "Orijen Original Cat",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Orijen Original pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-natural/orijen-original-pienso-para-perros/ORJOA02_M.html"
+        },
+        {
+          "name": "Orijen Regional Red pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-perros-seniores/orijen-regional-red-pienso-para-perros/ORJOR02_M.html"
+        },
+        {
+          "name": "Orijen Regional Red pienso para gatos y gatitos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/sin-cereales/orijen-regional-red-pienso-para-gatos-y-gatitos/ORJ9227_M.html"
+        },
+        {
+          "name": "Orijen Large Breed Adult Pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-razas-grandes/orijen-large-breed-adult-pienso-para-perros/ORJ02021K11400_M.html"
+        }
+      ]
+    },
+    {
+      "id": "orijen-regional-red",
+      "name": "Orijen Regional Red",
+      "brand": "Orijen",
+      "pending": [
+        {
+          "id": "orijen-regional-red-340g",
+          "label": "340 г",
+          "ean": null
+        }
+      ],
+      "query": "Orijen Regional Red",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Orijen Regional Red pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-perros-seniores/orijen-regional-red-pienso-para-perros/ORJOR02_M.html"
+        },
+        {
+          "name": "Orijen Senior pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-perros-seniores/orijen-senior-pienso-para-perros/ORJOS13_M.html"
+        },
+        {
+          "name": "Orijen Regional Red pienso para gatos y gatitos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/sin-cereales/orijen-regional-red-pienso-para-gatos-y-gatitos/ORJ9227_M.html"
+        }
+      ]
+    },
+    {
+      "id": "orijen-six-fish",
+      "name": "Orijen Six Fish",
+      "brand": "Orijen",
+      "pending": [
+        {
+          "id": "orijen-six-fish-340g",
+          "label": "340 г",
+          "ean": null
+        }
+      ],
+      "query": "Orijen Six Fish",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Orijen Six Fish pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-natural/orijen-six-fish-pienso-para-perros/ORJOF02_M.html"
+        },
+        {
+          "name": "Orijen Six Fish pienso para gatos y gatitos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/sin-cereales/orijen-six-fish-pienso-para-gatos-y-gatitos/ORJOFC07_M.html"
+        }
+      ]
+    },
+    {
+      "id": "tc-ea417c8cdd",
+      "name": "PlaqueOff - порошок для ухода за зубами",
+      "brand": "PlaqueOff",
+      "pending": [
+        {
+          "id": "tc-ea417c8cdd-reference-pack",
+          "label": "60 г",
+          "ean": "7350055513066"
+        }
+      ],
+      "query": "PlaqueOff - порошок для ухода за зубами",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "PlaqueOff Polvo Antisarro para higiene bucal de perros y gatos",
+          "url": "https://www.kiwoko.com/perros/higiene-para-perros/salud-del-perro/dentadura/plaqueoff-polvo-antisarro-para-higiene-bucal-de-perros-y-gatos/SWEFP0320_M.html"
+        },
+        {
+          "name": "Swedencare Plaqueoff Polvo para gatos",
+          "url": "https://www.kiwoko.com/gatos/higiene-para-gatos/salud-del-gato/dentadura/swedencare-plaqueoff-polvo-para-gatos/SWEFP0287_M.html"
+        },
+        {
+          "name": "Swedencare PlaqueOff Croquetas dental para perros y gatos",
+          "url": "https://www.kiwoko.com/perros/higiene-para-perros/salud-del-perro/dentadura/swedencare-plaqueoff-croquetas-dental-para-perros-y-gatos/SWEFP0266_M.html"
+        },
+        {
+          "name": "Swedencare Plaqueoff Dental Bones Bacon para perros",
+          "url": "https://www.kiwoko.com/perros/swedencare-plaqueoff-dental-bones-bacon-para-perros/SWEFP0205_M.html"
+        }
+      ]
+    },
+    {
+      "id": "tc-0c0460f2f4",
+      "name": "Pro Plan Skin & Coat+ - лососевое масло",
+      "brand": "Pro Plan",
+      "pending": [
+        {
+          "id": "tc-0c0460f2f4-reference-pack",
+          "label": "150 мл",
+          "ean": "8445290020574"
+        }
+      ],
+      "query": "Pro Plan Skin & Coat+",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Pro Plan Skin & Coat Suplemento en Aceite para perros",
+          "url": "https://www.kiwoko.com/perros/higiene-para-perros/salud-del-perro/suplementos-y-vitaminas/pro-plan-skin_coat-suplemento-en-aceite-para-perros/PRO12505883_M.html"
+        },
+        {
+          "name": "Pro Plan Skin & Coat + Aceite de Salmón Noruego para gatos",
+          "url": "https://www.kiwoko.com/gatos/higiene-para-gatos/salud-del-gato/suplementos-y-vitaminas/pro-plan-skin_coat_aceite-de-salmon-noruego-para-gatos/PRO12505765_M.html"
+        }
+      ]
+    },
+    {
+      "id": "rc-british",
+      "name": "Royal Canin British Shorthair Adult",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "rc-british-400g",
+          "label": "400 г",
+          "ean": null
+        },
+        {
+          "id": "rc-british-4000g",
+          "label": "4 кг",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin British Shorthair Adult",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Adult British Shorthair pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-adult-british-shorthair-pienso-para-gatos/ROY309560_M.html"
+        },
+        {
+          "name": "Royal Canin Sobre en Salsa British Shorthair Adult",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-sobre-en-salsa-british-shorthair-adult/ROY398621_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-8ffe447c",
+      "name": "Royal Canin Diabetic - соус",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-8ffe447c-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Diabetic - соус",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Veterinary Glycobalance Lata para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-glycobalance-lata-para-perros/ROY355013_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Glycobalance Pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/royal-canin-veterinary-glycobalance-pienso-para-perros/ROY473927_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Diabetic pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-veterinary-diabetic-pienso-para-gatos/ROY493627_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Diet Diabetic sobres para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-diet-diabetic-sobres-para-gatos/ROYDIABDOGBOX_M.html"
+        },
+        {
+          "name": "Royal Canin Glycobalance Pienso para perros pequeños",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/royal-canin-glycobalance-pienso-para-perros-pequenos/ROY423790_M.html"
+        }
+      ]
+    },
+    {
+      "id": "rc-fit",
+      "name": "Royal Canin Fit 32",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "rc-fit-400g",
+          "label": "400 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Fit 32",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Regular Fit 32 pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/bolas-de-pelo/royal-canin-regular-fit-32-pienso-para-gatos/ROY315112_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-f055ffce",
+      "name": "Royal Canin Gastrointestinal - соус",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-f055ffce-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Gastrointestinal - соус",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Gastrointestinal Low Fat lata para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/comida-humeda-gastrointestinal/royal-canin-gastrointestinal-low-fat-lata-para-perros/ROY342018_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Gastrointestinal Low Fat pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/royal-canin-veterinary-gastrointestinal-low-fat-pienso-para-perros/ROY478526_M.html"
+        },
+        {
+          "name": "Royal Canin Digestive Sensitive sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-digestive-sensitive-sobre-para-gatos/ROY382025_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Gastrointestinal pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/royal-canin-veterinary-gastrointestinal-pienso-para-perros/ROY477528_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Gastrointestinal Fibre Response pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-veterinary-gastrointestinal-fibre-response-pienso-para-gatos/ROY492028_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Diet Gastrointestinal Paté lata para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/comida-humeda-gastrointestinal/royal-canin-veterinary-diet-gastrointestinal-pate-lata-para-perros/ROY345014_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Gastrointestinal Mousse lata para gatitos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-gastrointestinal-mousse-lata-para-gatitos/ROY1227000_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Gastrointestinal pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-veterinary-gastrointestinal-pienso-para-gatos/ROY491828_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-db40d730",
+      "name": "Royal Canin Gastrointestinal Moderate Calorie - соус",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-db40d730-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Gastrointestinal Moderate Calorie - соус",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Veterinary Gastrointestinal Moderate Calorie pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-veterinary-gastrointestinal-moderate-calorie-pienso-para-gatos/ROY491936_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Gastrointestinal Moderate Calorie sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-gastrointestinal-moderate-calorie-sobre-para-gatos/ROY364507_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Gastrointestinal Moderate Calorie pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/royal-canin-veterinary-gastrointestinal-moderate-calorie-pienso-para-perros/ROY478028_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-1fdaaee6",
+      "name": "Royal Canin Instinctive Gravy",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-1fdaaee6-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Instinctive Gravy",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Instinctive sobres en salsa para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-instinctive-sobres-en-salsa-para-gatos/ROY379026_M.html"
+        },
+        {
+          "name": "Royal Canin Senior 7+ Instinctive sobres para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/royal-canin-senior-7_-instinctive-sobres-para-gatos/ROY383025_M.html"
+        },
+        {
+          "name": "Royal Canin Instinctive gelatina sobres para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-instinctive-gelatina-sobres-para-gatos/ROY379305_M.html"
+        },
+        {
+          "name": "Royal Canin Instinctive paté sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-instinctive-pate-sobre-para-gatos/ROY379404_M.html"
+        }
+      ]
+    },
+    {
+      "id": "rc-kitten-regular",
+      "name": "Royal Canin Kitten",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "rc-kitten-regular-400g",
+          "label": "400 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Kitten",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Kitten sobre en salsa para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-kitten-sobre-en-salsa-para-gatos/ROY378526_M.html"
+        },
+        {
+          "name": "Royal Canin Kitten pienso para gatitos",
+          "url": "https://www.kiwoko.com/gatos/especial-gatito/pienso-para-gatitos/royal-canin-kitten-pienso-para-gatitos/ROY310910_M.html"
+        },
+        {
+          "name": "Royal Canin Mother & Baby mousse latas para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-mother_baby-mousse-latas-para-gatos/ROY377808_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Gastrointestinal Mousse lata para gatitos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-gastrointestinal-mousse-lata-para-gatitos/ROY1227000_M.html"
+        },
+        {
+          "name": "Royal Canin Kitten paté sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-kitten-pate-sobre-para-gatos/ROY378924_M.html"
+        },
+        {
+          "name": "Royal Canin Kitten Sterilised pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/gato-esterilizado/royal-canin-kitten-sterilised-pienso-para-gatos/ROY316210_M.html"
+        },
+        {
+          "name": "Royal Canin Mother & Babycat pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/especial-gatito/pienso-para-gatitos/royal-canin-mother_babycat-pienso-para-gatos/ROY310715_M.html"
+        },
+        {
+          "name": "Royal Canin Kitten Maine Coon pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/royal-canin-kitten-maine-coon-pienso-para-gatos/ROY302036_M.html"
+        }
+      ]
+    },
+    {
+      "id": "rc-maine-coon",
+      "name": "Royal Canin Maine Coon Adult",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "rc-maine-coon-400g",
+          "label": "400 г",
+          "ean": null
+        },
+        {
+          "id": "rc-maine-coon-2000g",
+          "label": "2 кг",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Maine Coon Adult",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Adult Maine Coon pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/royal-canin-adult-maine-coon-pienso-para-gatos/ROY309338_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-c1fbc2a8",
+      "name": "Royal Canin Mature Consult Balance - паштет",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-c1fbc2a8-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Mature Consult Balance - паштет",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Mature Consult Balance Paté sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/senior/royal-canin-mature-consult-balance-pate-sobre-para-gatos/ROY1503001_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-475d5e2b",
+      "name": "Royal Canin Neutered Balance - соус",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-475d5e2b-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Neutered Balance - соус",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Veterinary Neutered Satiety Balance pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-veterinary-neutered-satiety-balance-pienso-para-gatos/ROY444434_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-86568be1",
+      "name": "Royal Canin Renal Mousse",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-86568be1-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Renal Mousse",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Veterinary Renal Mousse sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-renal-mousse-sobre-para-gatos/ROY1246000_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-1a4d5753",
+      "name": "Royal Canin Renal with Beef - соус",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-1a4d5753-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Renal with Beef - соус",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Veterinary Renal pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/royal-canin-veterinary-renal-pienso-para-perros/ROY472628_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal lata para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-renal-lata-para-perros/ROY341017_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-veterinary-renal-pienso-para-gatos/ROY492129_M.html"
+        },
+        {
+          "name": "Royal Canin Renal pollo sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-renal-pollo-sobre-para-gatos/ROY364204BOX_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal Mousse sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-renal-mousse-sobre-para-gatos/ROY1246000_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal Special latas para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-renal-special-latas-para-perros/ROY341112_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal Small pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/royal-canin-veterinary-renal-small-pienso-para-perros/ROY1249400_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal sobre en salsa para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/royal-canin-veterinary-renal-sobre-en-salsa-para-perros/ROY47015_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-b96b1ee0",
+      "name": "Royal Canin Renal with Chicken - соус",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-b96b1ee0-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Renal with Chicken - соус",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Veterinary Renal pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/royal-canin-veterinary-renal-pienso-para-perros/ROY472628_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal lata para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-renal-lata-para-perros/ROY341017_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-veterinary-renal-pienso-para-gatos/ROY492129_M.html"
+        },
+        {
+          "name": "Royal Canin Renal pollo sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-renal-pollo-sobre-para-gatos/ROY364204BOX_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal Mousse sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-renal-mousse-sobre-para-gatos/ROY1246000_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal Special latas para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-renal-special-latas-para-perros/ROY341112_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal Small pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/royal-canin-veterinary-renal-small-pienso-para-perros/ROY1249400_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal sobre en salsa para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/royal-canin-veterinary-renal-sobre-en-salsa-para-perros/ROY47015_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-e29af258",
+      "name": "Royal Canin Renal with Fish - соус",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-e29af258-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Renal with Fish - соус",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Veterinary Renal pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/royal-canin-veterinary-renal-pienso-para-perros/ROY472628_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal lata para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-renal-lata-para-perros/ROY341017_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-veterinary-renal-pienso-para-gatos/ROY492129_M.html"
+        },
+        {
+          "name": "Royal Canin Renal pollo sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-renal-pollo-sobre-para-gatos/ROY364204BOX_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal Mousse sobre para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-renal-mousse-sobre-para-gatos/ROY1246000_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal Special latas para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-renal-special-latas-para-perros/ROY341112_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal Small pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/royal-canin-veterinary-renal-small-pienso-para-perros/ROY1249400_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Renal sobre en salsa para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/royal-canin-veterinary-renal-sobre-en-salsa-para-perros/ROY47015_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-8ae2a1d3",
+      "name": "Royal Canin Satiety Weight Management - соус",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-8ae2a1d3-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Satiety Weight Management - соус",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Veterinary Gastrointestinal Low Fat pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/royal-canin-veterinary-gastrointestinal-low-fat-pienso-para-perros/ROY478526_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Diet Satiety Weight Management pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/royal-canin-veterinary-diet-satiety-weight-management-pienso-para-perros/ROY476327_M.html"
+        },
+        {
+          "name": "Royal Canin Mini Adult sobre en salsa para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/royal-canin-mini-adult-sobre-en-salsa-para-perros/ROY1096000_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Hypoallergenic Moderate Calorie pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-hipoalergenico/royal-canin-veterinary-hypoallergenic-moderate-calorie-pienso-para-perros/ROY471327_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Neutered Satiety Balance pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-veterinary-neutered-satiety-balance-pienso-para-gatos/ROY444434_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Satiety Weight Management pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-veterinary-satiety-weight-management-pienso-para-gatos/ROY490926_M.html"
+        },
+        {
+          "name": "Royal Canin Small Veterinary Diet Satiety Weight Management pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/dietas-veterinarias/alimentacion-seca/royal-canin-small-veterinary-diet-satiety-weight-management-pienso-para-perros/ROY476234_M.html"
+        },
+        {
+          "name": "Royal Canin Sterilised Medium pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/royal-canin-sterilised-medium-pienso-para-perros/ROY152133_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-955edaaa",
+      "name": "Royal Canin Sensitivity Control Chicken & Rice - соус",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-955edaaa-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Sensitivity Control Chicken & Rice - соус",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Veterinary Sensitivity Control pienso para perros ",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-hipoalergenico/royal-canin-veterinary-sensitivity-control-pienso-para-perros-/ROY474028_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Sensitivity Control Pato y Arroz lata para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/comida-humeda-gastrointestinal/royal-canin-veterinary-sensitivity-control-pato-y-arroz-lata-para-perros/ROY4027202_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Sensitivity Control Pollo y Arroz sobre en salsa",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-sensitivity-control-pollo-y-arroz-sobre-en-salsa/ROY4035001BOX_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Sensitivity Control Mousse de Pollo y Arroz lata para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/comida-humeda-gastrointestinal/royal-canin-veterinary-sensitivity-control-mousse-de-pollo-y-arroz-lata-para-perros/ROY4026202_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Sensitivity Control pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-veterinary-sensitivity-control-pienso-para-gatos/ROY494136_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-ce70b2a8",
+      "name": "Royal Canin Skin & Coat - соус",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-ce70b2a8-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Skin & Coat - соус",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Skin&Coat pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-seca/royal-canin-skin_coat-pienso-para-gatos/ROY1323200_M.html"
+        },
+        {
+          "name": "Royal Canin Skin & Coat Chews Adult Suplemento nutricional para perros",
+          "url": "https://www.kiwoko.com/perros/higiene-para-perros/salud-del-perro/pelo-y-piel/royal-canin-skin_coat-chews-adult-suplemento-nutricional-para-perros/ROYR471812_M.html"
+        },
+        {
+          "name": "Royal Canin Skin & Coat sobre en salsa para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/comida-humeda-para-gatos/royal-canin-skin_coat-sobre-en-salsa-para-gatos/ROY44219_M.html"
+        }
+      ]
+    },
+    {
+      "id": "rc-urinary",
+      "name": "Royal Canin Urinary Care",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "rc-urinary-400g",
+          "label": "400 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Urinary Care",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Urinary Care paté sobre para perros",
+          "url": "https://www.kiwoko.com/perros/higiene-para-perros/salud-del-perro/salud-renal-y-urinaria/royal-canin-urinary-care-pate-sobre-para-perros/ROY1183000_M.html"
+        },
+        {
+          "name": "Royal Canin Urinary Care Mini pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/royal-canin-urinary-care-mini-pienso-para-perros/ROY1261400_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-5c2e58b7",
+      "name": "Royal Canin Urinary S/O - паштет",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-5c2e58b7-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Urinary S/O - паштет",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Veterinary Diet  Urinary S/O sobres para gato",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-diet--urinary-s_o-sobres-para-gato/ROY4032001BOX_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Urinary S/O Moderate Calorie pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-veterinary-urinary-s_o-moderate-calorie-pienso-para-gatos/ROY490026_M.html"
+        },
+        {
+          "name": "Royal Canin Adult 7+ Urinary sobre para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/comida-humeda-para-perros-senior/royal-canin-adult-7_-urinary-sobre-para-perros/ROY1275000_M.html"
+        },
+        {
+          "name": "Royal Canin Adult 7+ Urinary pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-perros-seniores/royal-canin-adult-7_-urinary-pienso-para-perros/ROY1271200_M.html"
+        },
+        {
+          "name": "Royal Canin Urinary sobre en salsa para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/royal-canin-urinary-sobre-en-salsa-para-perros/ROY4079001_M.html"
+        },
+        {
+          "name": "Royal Canin Urinary Moderate Calorie sobre para perros ",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/comida-humeda-para-control-de-peso/royal-canin-urinary-moderate-calorie-sobre-para-perros-/ROY1277000_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-b298cb91",
+      "name": "Royal Canin Urinary S/O - соус",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-b298cb91-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Urinary S/O - соус",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Veterinary Diet  Urinary S/O sobres para gato",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-humeda/royal-canin-veterinary-diet--urinary-s_o-sobres-para-gato/ROY4032001BOX_M.html"
+        },
+        {
+          "name": "Royal Canin Veterinary Urinary S/O Moderate Calorie pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-veterinary-urinary-s_o-moderate-calorie-pienso-para-gatos/ROY490026_M.html"
+        },
+        {
+          "name": "Royal Canin Adult 7+ Urinary sobre para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/comida-humeda-para-perros-senior/royal-canin-adult-7_-urinary-sobre-para-perros/ROY1275000_M.html"
+        },
+        {
+          "name": "Royal Canin Adult 7+ Urinary pienso para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-perros-seniores/royal-canin-adult-7_-urinary-pienso-para-perros/ROY1271200_M.html"
+        },
+        {
+          "name": "Royal Canin Urinary sobre en salsa para perros",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/royal-canin-urinary-sobre-en-salsa-para-perros/ROY4079001_M.html"
+        },
+        {
+          "name": "Royal Canin Urinary Moderate Calorie sobre para perros ",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/comida-humeda-para-control-de-peso/royal-canin-urinary-moderate-calorie-sobre-para-perros-/ROY1277000_M.html"
+        }
+      ]
+    },
+    {
+      "id": "royalcanin-97849099",
+      "name": "Royal Canin Urinary S/O Moderate Calorie - соус",
+      "brand": "Royal Canin",
+      "pending": [
+        {
+          "id": "royalcanin-97849099-85g",
+          "label": "85 г",
+          "ean": null
+        }
+      ],
+      "query": "Royal Canin Urinary S/O Moderate Calorie - соус",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Royal Canin Veterinary Urinary S/O Moderate Calorie pienso para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/pienso-seco-para-gatos/pienso-light/royal-canin-veterinary-urinary-s_o-moderate-calorie-pienso-para-gatos/ROY490026_M.html"
+        },
+        {
+          "name": "Royal Canin Urinary Moderate Calorie sobre para perros ",
+          "url": "https://www.kiwoko.com/perros/comida-para-perros/comida-humeda/comida-humeda-para-control-de-peso/royal-canin-urinary-moderate-calorie-sobre-para-perros-/ROY1277000_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-2170001",
+      "name": "Sanicat Classic - впитывающий наполнитель",
+      "brand": "Sanicat",
+      "pending": [
+        {
+          "id": "yagu-2170001-catalog-pack",
+          "label": "10 л / 6,25 кг"
+        }
+      ],
+      "query": "Sanicat Classic - впитывающий наполнитель",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Sanicat Classic Arena absorbente sin perfume para gatos",
+          "url": "https://www.kiwoko.com/gatos/arenas-y-accesorios/arenas/absorbentes/sanicat-classic-arena-absorbente-sin-perfume-para-gatos/SAN80142_M.html"
+        },
+        {
+          "name": "Sanicat Classic Arena Absorbente Lavanda",
+          "url": "https://www.kiwoko.com/gatos/arenas-y-accesorios/arenas/absorbentes/sanicat-classic-arena-absorbente-lavanda/SAN80143_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-2170004",
+      "name": "Sanicat Clumping - комкующийся наполнитель",
+      "brand": "Sanicat",
+      "pending": [
+        {
+          "id": "yagu-2170004-catalog-pack",
+          "label": "10 л / 8,4 кг"
+        }
+      ],
+      "query": "Sanicat Clumping - комкующийся наполнитель",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Sanicat Clumping White Arena Blanca Aglomerante sin perfume para gatos",
+          "url": "https://www.kiwoko.com/gatos/arenas-y-accesorios/arenas/aglomerante-bentonita/sanicat-clumping-white-arena-blanca-aglomerante-sin-perfume-para-gatos/SANPSANACTI010L_M.html"
+        },
+        {
+          "name": "Sanicat Clumping White Duo Arena Aglomerante para gatos",
+          "url": "https://www.kiwoko.com/gatos/arenas-y-accesorios/arenas/perfumadas/sanicat-clumping-white-duo-arena-aglomerante-para-gatos/SAND010L31_M.html"
+        },
+        {
+          "name": "Sanicat Multicat Cumpling Aire Fresco Arena para gatos",
+          "url": "https://www.kiwoko.com/gatos/arenas-y-accesorios/arenas/aglomerante-bentonita/sanicat-multicat-cumpling-aire-fresco-arena-para-gatos/SAN25081000_M.html"
+        },
+        {
+          "name": "Sanicat Cotton Fresh Arena Blanca Aglomerante para gatos",
+          "url": "https://www.kiwoko.com/gatos/arenas-y-accesorios/arenas/perfumadas/sanicat-cotton-fresh-arena-blanca-aglomerante-para-gatos/SANPSANCLWCV20L31_M.html"
+        },
+        {
+          "name": "Sanicat Arena Aglomerante Vainilla y Mandarina",
+          "url": "https://www.kiwoko.com/gatos/arenas-y-accesorios/arenas/perfumadas/sanicat-arena-aglomerante-vainilla-y-mandarina/SAN80267_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-2170014",
+      "name": "Sanicat Natura Activa - растительный наполнитель",
+      "brand": "Sanicat",
+      "pending": [
+        {
+          "id": "yagu-2170014-catalog-pack",
+          "label": "10 л"
+        }
+      ],
+      "query": "Sanicat Natura Activa - растительный наполнитель",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Sanicat Natura Activa Recycled Arena para gatos",
+          "url": "https://www.kiwoko.com/gatos/arenas-y-accesorios/arenas/biodegradables/sanicat-natura-activa-recycled-arena-para-gatos/SAN23080090_M.html"
+        },
+        {
+          "name": "Sanicat Natura Activa 100% Green Arena Vegetal para gatos",
+          "url": "https://www.kiwoko.com/gatos/arenas-y-accesorios/arenas/biodegradables/sanicat-natura-activa-100_-green-arena-vegetal-para-gatos/SAN230210_M.html"
+        }
+      ]
+    },
+    {
+      "id": "yagu-2170005",
+      "name": "Sanicat Ultra Gold - комкующийся наполнитель",
+      "brand": "Sanicat",
+      "pending": [
+        {
+          "id": "yagu-2170005-catalog-pack",
+          "label": "6 л"
+        }
+      ],
+      "query": "Sanicat Ultra Gold - комкующийся наполнитель",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Sanicat Cumpling Arena Aglomerante sin perfume para gatos",
+          "url": "https://www.kiwoko.com/gatos/arenas-y-accesorios/arenas/aglomerante-bentonita/sanicat-cumpling-arena-aglomerante-sin-perfume-para-gatos/SAN80193_M.html"
+        },
+        {
+          "name": "Sanicat Active Lotus Arena Aglomerante para gatos",
+          "url": "https://www.kiwoko.com/gatos/arenas-y-accesorios/arenas/absorbentes/sanicat-active-lotus-arena-aglomerante-para-gatos/SANPSANACWLM06L31_M.html"
+        }
+      ]
+    },
+    {
+      "id": "tc-f617e6e32b",
+      "name": "Vitakraft Cat Yums - курица",
+      "brand": "Vitakraft",
+      "pending": [
+        {
+          "id": "tc-f617e6e32b-reference-pack",
+          "label": "40 г",
+          "ean": "4008239315311"
+        }
+      ],
+      "query": "Vitakraft Cat Yums - курица",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Vitakraft Cat Yums Bocaditos de Pollo para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/vitakraft-cat-yums-bocaditos-de-pollo-para-gatos/VIT31531_M.html"
+        },
+        {
+          "name": "Vitakraft  Cat Yums Bocaditos de Salmón para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/crujientes/vitakraft--cat-yums-bocaditos-de-salmon-para-gatos/VIT28823_M.html"
+        }
+      ]
+    },
+    {
+      "id": "tc-24dd160a68",
+      "name": "Vitakraft Liquid Snack - курица с таурином",
+      "brand": "Vitakraft",
+      "pending": [
+        {
+          "id": "tc-24dd160a68-reference-pack",
+          "label": "6 × 15 г",
+          "ean": "4008293416582"
+        }
+      ],
+      "query": "Vitakraft Liquid Snack - курица с таурином",
+      "httpStatus": 200,
+      "candidates": [
+        {
+          "name": "Vitakraft Liquid Snack de Salmón para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/liquidos/vitakraft-liquid-snack-de-salmon-para-gatos/VIT16423_M.html"
+        },
+        {
+          "name": "Vitakraft Liquid Snack Salmón y Paté para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/vitakraft-liquid-snack-salmon-y-pate-para-gatos/VIT58000_M.html"
+        },
+        {
+          "name": "Vitakraft Milky Melody Snack Líquido para gatos",
+          "url": "https://www.kiwoko.com/gatos/comida-para-gatos/snacks-para-gatos/vitakraft-milky-melody-snack-liquido-para-gatos/VIT28819_M.html"
+        }
+      ]
+    }
+  ]
+}
