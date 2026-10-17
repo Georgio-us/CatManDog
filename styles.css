@@ -558,6 +558,18 @@ button:hover:not(:disabled) {
   gap: 24px;
 }
 
+.recommendation-item {
+  min-width: 0;
+}
+
+.recommendation-reason {
+  min-height: 1.5em;
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
 .product-card {
   min-width: 0;
   position: relative;
