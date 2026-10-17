@@ -12,7 +12,7 @@
   --card-font-size: 15px;
   --card-title-lines: 2;
   --card-title-line: 1.5em;
-  --card-price-height: 40px;
+  --card-price-height: 84px;
   --card-action-size: 32px;
   --product-columns: 4;
   --catalog-columns: 3;
@@ -223,6 +223,62 @@ button:hover:not(:disabled) {
 .toast.visible {
   opacity: 1;
   transform: translate(-50%,0);
+}
+
+.toast.toast-cart.visible {
+  pointer-events: auto;
+}
+
+.toast.toast-cart {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: max-content;
+  max-width: min(680px,calc(100vw - 32px));
+  padding: 18px 20px;
+  border-radius: 15px;
+  background: #bceee1;
+  color: var(--ink);
+  white-space: normal;
+}
+
+.toast-check {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: white;
+}
+
+.toast-check svg,
+.toast-close svg {
+  width: 18px;
+  height: 18px;
+}
+
+.toast-message {
+  font-weight: 600;
+}
+
+.toast-link {
+  margin-left: auto;
+  border-bottom: 1px solid currentColor;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.toast-close {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  flex: 0 0 28px;
+  background: transparent;
+  color: inherit;
 }
 
 .pill {
@@ -507,6 +563,25 @@ button:hover:not(:disabled) {
   position: relative;
 }
 
+.product-card-open {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.product-card-open:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.product-card:hover .product-info h3,
+.product-card:focus-within .product-info h3 {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .product-media {
   position: relative;
   background: var(--surface);
@@ -539,6 +614,7 @@ button:hover:not(:disabled) {
   position: absolute;
   top: 12px;
   right: 12px;
+  z-index: 2;
   background: white;
   border-radius: 50%;
   width: 32px;
@@ -591,6 +667,8 @@ button:hover:not(:disabled) {
 }
 
 .product-info h3 {
+  position: relative;
+  padding-right: 20px;
   font-size: inherit;
   margin: 0;
   line-height: 1.5;
@@ -601,15 +679,54 @@ button:hover:not(:disabled) {
   overflow: hidden;
 }
 
-.product-price {
+.product-open-cue {
+  position: absolute;
+  top: 3px;
+  right: 0;
   display: flex;
+  width: 15px;
+  height: 15px;
+  color: var(--muted);
+  transition: transform var(--motion-duration,.4s), color var(--motion-duration,.4s);
+}
+
+.product-open-cue svg {
+  width: 100%;
+  height: 100%;
+}
+
+.product-card:hover .product-open-cue,
+.product-card:focus-within .product-open-cue {
+  transform: translateX(2px);
+  color: var(--ink);
+}
+
+.product-price {
+  display: grid;
+  grid-template-rows: minmax(0,1fr) 36px;
   gap: 8px;
-  align-items: center;
+  align-items: end;
   font-size: 15px;
   font-weight: 700;
   margin: 0;
   min-height: var(--card-price-height);
-  white-space: nowrap;
+}
+
+.product-price-values {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  line-height: 1.35;
+}
+
+.product-price-values > span:first-child {
+  min-width: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.real-product-card .product-price {
+  font-size: 14px;
 }
 
 .catalog-toolbar {
@@ -1198,22 +1315,25 @@ button:hover:not(:disabled) {
   justify-content: space-between;
 }
 
-.add-small {
-  width: var(--card-action-size);
-  height: var(--card-action-size);
-  display: flex;
+.product-card-action {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 36px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   border: 1px solid var(--line);
-  border-radius: 50%;
-  background: white;
-  font-size: 22px;
-  line-height: 1;
-  margin-left: auto;
-  flex-shrink: 0;
+  border-radius: 99px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
-.add-small:hover {
+.product-card-action:hover {
   background: var(--lime);
 }
 
@@ -1654,9 +1774,9 @@ details ul {
   object-position: right top;
 }
 
-.add-small svg {
-  width: 18px;
-  height: 18px;
+.product-card-action svg {
+  width: 16px;
+  height: 16px;
 }
 
 /* Gifts */
@@ -2939,6 +3059,38 @@ details .text-link {
 }
 
 @media(max-width:600px) {
+  .toast.toast-cart {
+    display: grid;
+    grid-template-columns: 32px minmax(0,1fr) 28px;
+    gap: 5px 12px;
+    width: calc(100vw - 24px);
+    max-width: 400px;
+    padding: 14px;
+    text-align: left;
+  }
+
+  .toast-check {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+
+  .toast-message {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .toast-link {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: start;
+    margin: 0;
+  }
+
+  .toast-close {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
   .product-card .real-product-image img {
     padding: var(--product-image-padding, 32px 9px 12px);
   }
