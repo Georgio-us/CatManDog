@@ -237,7 +237,7 @@ button:hover:not(:disabled) {
   max-width: min(680px,calc(100vw - 32px));
   padding: 18px 20px;
   border-radius: 15px;
-  background: #bceee1;
+  background: var(--lime);
   color: var(--ink);
   white-space: normal;
 }

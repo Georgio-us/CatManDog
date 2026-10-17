@@ -10,8 +10,11 @@
 .use-tool:hover { transform: translateY(-3px); }
 .use-tool-clinics { background: #edf1e6; }
 .use-tool-travel { background: #f2ebe2; }
-.use-tool-icon { display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px; background: #ffffff80; border-radius: 50%; margin-bottom: 32px; }
+.use-tool-icon { display: inline-flex; align-items: center; justify-content: center; width: 96px; height: 96px; background: #ffffffb8 center / 90% no-repeat; border-radius: 50%; margin-bottom: 26px; }
 .use-tool-icon svg { width: 35px; height: 35px; stroke-width: 1.4; }
+.use-tool-clinics .use-tool-icon svg, .use-tool-travel .use-tool-icon svg { display: none; }
+.use-tool-clinics .use-tool-icon { background-image: url('assets/useful/clinic.svg'); }
+.use-tool-travel .use-tool-icon { background-image: url('assets/useful/travel.svg'); }
 .use-tool h2 { font-size: clamp(27px, 3vw, 40px); letter-spacing: -1.2px; }
 .use-tool p { color: #62665b; font-size: 14px; line-height: 1.8; margin: 16px 0 32px; max-width: 390px; }
 .use-tool-bottom { display: flex; align-items: center; justify-content: space-between; gap: 28px; width: 100%; margin-top: auto; font-size: 13px; font-weight: 650; border-top: 1px solid #29321b20; padding-top: 24px; }
@@ -115,14 +118,17 @@
 .use-home-head .text-link svg { width: 16px; height: 16px; }
 .use-home-items { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; border-top: 1px solid var(--line); padding-top: 32px; }
 .use-home-item { display: flex; flex-direction: column; align-items: center; min-width: 0; padding: 4px 12px 0; text-align: center; text-decoration: none; }
-.use-home-circle { display: grid; place-items: center; width: clamp(130px, 14vw, 184px); aspect-ratio: 1; border: 1px solid var(--line); border-radius: 50%; background: #f8f8f6; transition: transform .2s ease, border-color .2s ease, background .2s ease; }
-.use-home-circle svg { width: 74px; height: 74px; stroke-width: 1.6; }
+.use-home-circle { display: grid; place-items: center; width: clamp(130px, 14vw, 184px); aspect-ratio: 1; border: 1px solid var(--line); border-radius: 50%; background: #f8f8f6 center / 88% no-repeat; transition: transform .2s ease, border-color .2s ease, background-color .2s ease; }
+.use-home-circle svg { display: none; }
+.use-home-item:nth-child(1) .use-home-circle { background-image: url('assets/useful/clinic.svg'); }
+.use-home-item:nth-child(2) .use-home-circle { background-image: url('assets/useful/travel.svg'); }
+.use-home-item:nth-child(3) .use-home-circle { background-image: url('assets/useful/account.svg'); }
 .use-home-copy { display: flex; flex-direction: column; align-items: center; margin-top: 17px; }
 .use-home-copy strong { font-size: 17px; letter-spacing: -.35px; }
 .use-home-description { color: var(--muted); font-size: 12px; margin-top: 5px; }
 .use-home-open { display: inline-flex; margin-top: 12px; }
 .use-home-open svg { width: 17px; height: 17px; }
-.use-home-item:hover .use-home-circle { transform: translateY(-3px); border-color: #c9cbbd; background: #f4f5ef; }
+.use-home-item:hover .use-home-circle { transform: translateY(-3px); border-color: #c9cbbd; background-color: #f4f5ef; }
 .use-home-item:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; border-radius: 8px; }
 @media (max-width: 1050px) {
   .use-tool { padding: 28px; }
@@ -139,7 +145,7 @@
   .use-tools-grid, .use-clinic-layout, .use-travel-layout { grid-template-columns: minmax(0, 1fr); }
   .use-tool { padding: 27px; }
   .use-tool h2 { font-size: 29px; }
-  .use-tool-icon { width: 60px; height: 60px; margin-bottom: 23px; }
+  .use-tool-icon { width: 80px; height: 80px; margin-bottom: 23px; }
   .use-save-note { flex-wrap: wrap; padding: 22px; gap: 16px; }
   .use-save-note > div { flex-basis: calc(100% - 50px); }
   .use-save-note .button { width: 100%; }
@@ -161,7 +167,6 @@
   .use-home-items { grid-template-columns: 1fr; gap: 0; padding-top: 0; }
   .use-home-item { flex-direction: row; gap: 18px; padding: 17px 0; text-align: left; border-bottom: 1px solid var(--line); }
   .use-home-circle { width: 84px; flex-shrink: 0; }
-  .use-home-circle svg { width: 40px; height: 40px; }
   .use-home-copy { align-items: start; margin-top: 0; }
   .use-home-open { margin: 0 0 0 auto; flex-shrink: 0; }
   .use-account-preview { gap: 14px; }
