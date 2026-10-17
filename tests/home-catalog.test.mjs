@@ -26,6 +26,7 @@ test('fillers, trays, scoops, bowls, drinkers and feeders do not mix', () => {
   assert.equal(homeGroupForProduct(byName('лопатка для наполнителя')), 'trays');
   assert.equal(homeGroupForProduct(byName('автоматический лоток')), 'trays');
   assert.equal(homeGroupForProduct(byName('миска для кошек')), 'bowls');
+  assert.equal(homeGroupForProduct(byName('MP Comedero Sensibowl Slomo')), 'bowls');
   assert.equal(homeGroupForProduct(byName('питьевой фонтан')), 'drinkers');
   assert.equal(homeGroupForProduct(byName('автокормушка с камерой')), 'feeders');
 });

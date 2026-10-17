@@ -1,4 +1,4 @@
-import { homeGroupForProduct } from './home-catalog.js';
+import { homeGroupForProduct } from './home-catalog.js?v=dog-first-wave-1';
 import { canBuy, snapshots } from './variants.js';
 
 const foodGroups = new Set(['dry-food', 'wet-food']);
@@ -30,6 +30,7 @@ const isScoop = product => /лопатк|совок|scoop/i.test(product.name ||
 const isAutomaticTray = product => /автоматич|smart.*litter/i.test(product.name || '');
 const isLickMat = product => /коврик для вылизывания|lick.*mat/i.test(product.name || '');
 const isEdibleCare = product => /паста|масло|пробиотик|порошок|снек|трава|malt|bites|flor/i.test(product.name || '');
+const isRestOrWalk = product => /лежанк|cuna|cama|arnés|шлейк|harness/i.test(product.name || '');
 const approvedCareFor = (candidate, product) => (candidate.recommendation?.veterinaryCompatibleWith || []).includes(product.id);
 const toyType = product => isLickMat(product) ? 'lick-mat'
   : /когтеточк|башня|scratcher/i.test(product.name || '') ? 'scratcher'
@@ -80,7 +81,7 @@ function slotsFor(product, group, cartFood) {
       slot('treats', 'Ещё лакомство этого бренда', candidate => brand(candidate) === brand(product)),
       slot('toys', 'Для игры вместе', candidate => toyType(candidate) === 'toy')
     ];
-    case 'toys': return [
+    case 'toys': return isRestOrWalk(product) ? [] : [
       slot('toys', 'Ещё одна игра', toy),
       slot('treats', 'Лакомство для игры'),
       ...(isLickMat(product) ? [slot('wet-food', 'Паштет для коврика', candidate => /паштет|pat[eé]|мусс|mousse|крем|creamy/i.test(candidate.name))] : []),

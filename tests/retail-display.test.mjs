@@ -41,8 +41,19 @@ test('exact single product offers remain visible with VAT', () => {
 
 test('every real catalog variant has a visible non-demo price', () => {
   const variants = catalogProducts.filter(item => item.isReal).flatMap(item => item.variants?.length ? item.variants : [item]);
-  assert.equal(variants.length, 528);
+  assert.equal(variants.length, 571);
   assert.deepEqual(variants.filter(isDemoPrice).map(item => item.id), []);
+});
+
+test('first dog assortment has 22 families and 43 priced variants with separate purchase fields', () => {
+  const dogs = catalogProducts.filter(item => item.pet === 'dog');
+  const variants = dogs.flatMap(item => item.variants);
+  assert.equal(dogs.length, 22);
+  assert.equal(variants.length, 43);
+  assert.equal(new Set(variants.map(item => item.id)).size, 43);
+  assert.deepEqual(variants.filter(isDemoPrice).map(item => item.id), []);
+  assert.ok(variants.every(item => item.purchasePrice === null && item.purchasePriceStatus === 'pending'));
+  assert.equal(variants.filter(item => item.pricingBasis?.kind === 'analogue_single').length, 8);
 });
 
 test('retired variants cannot surface the demo amount in an old cart', () => {

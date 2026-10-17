@@ -20,7 +20,7 @@ export function retailResearch(sku) {
     offers.push({ retailer: selected.sourceName, amount: selected.amount, url: selected.sourceUrl,
       checkedAt: selected.checkedAt, taxIncluded: selected.taxIncluded ?? (taxPolicyUrl ? true : null),
       taxPolicyUrl: selected.taxIncluded == null ? taxPolicyUrl : undefined,
-      shippingIncluded: selected.shippingIncluded });
+      shippingIncluded: selected.shippingIncluded, availability: selected.availability });
   }
   if (!offers.length) return null;
   offers.sort((a, b) => a.amount - b.amount || a.retailer.localeCompare(b.retailer));
@@ -62,9 +62,16 @@ export function retailRangeText(research, money) {
 export function retailResearchBlock(sku, { escape, money }) {
   const research = retailResearch(sku);
   if (!research) return '';
+  const recommended = sku.retailPrice?.type === 'recommended' && research.offers.length === 1 && research.offers[0].retailer === sku.retailPrice.sourceName;
   const taxNote = research.offers.every(offer => offer.taxIncluded === true) ? 'Цены с IVA' : 'Цены из розничных источников';
   const deliveryNote = research.offers.every(offer => offer.shippingIncluded === false) ? 'доставка отдельно' : 'условия доставки зависят от магазина';
-  return `<section class="retail-research" aria-label="Розничные цены"><h2>Розничные цены</h2><p class="retail-research-range">${retailRangeText(research, money)}</p><p class="retail-research-note">${taxNote}, ${deliveryNote} · Исследовательский ориентир</p><ul>${research.offers.map(offer => `<li><a class="text-link" href="${escape(offer.url)}" target="_blank" rel="noopener noreferrer">${escape(offer.retailer)}</a><span>${money(offer.amount)}</span>${offer.availability === 'out_of_stock' ? '<small>Нет в наличии на момент проверки</small>' : ''}${offer.checkedAt ? `<small>Проверено ${escape(offer.checkedAt.slice(0, 10))}</small>` : ''}</li>`).join('')}</ul></section>`;
+  const title = recommended ? 'Рекомендованная розничная цена' : 'Розничные цены';
+  const note = recommended ? `${sku.retailPrice.taxIncluded === true ? 'PVP производителя с IVA' : 'PVP производителя, НДС уточняется'} · Цена конкурентов пока не изучена` : `${taxNote}, ${deliveryNote} · Исследовательский ориентир`;
+  const local = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
+  const sourceLink = offer => offer.url.startsWith('research/supplier-files/') && !local
+    ? `<span>${escape(offer.retailer)}</span>`
+    : `<a class="text-link" href="${escape(offer.url)}" target="_blank" rel="noopener noreferrer">${escape(offer.retailer)}</a>`;
+  return `<section class="retail-research" aria-label="${title}"><h2>${title}</h2><p class="retail-research-range">${retailRangeText(research, money)}</p><p class="retail-research-note">${note}</p><ul>${research.offers.map(offer => `<li>${sourceLink(offer)}<span>${money(offer.amount)}</span>${offer.availability === 'out_of_stock' ? '<small>Нет в наличии на момент проверки</small>' : ''}${offer.checkedAt ? `<small>Проверено ${escape(offer.checkedAt.slice(0, 10))}</small>` : ''}</li>`).join('')}</ul></section>`;
 }
 
 export function provisionalPriceLabel(sku) {
@@ -86,5 +93,5 @@ export function provisionalPriceBlock(sku, { escape, money }) {
   if (basis.kind === 'scaled_pack') {
     return `<section class="retail-research" aria-label="Расчёт розничного ориентира"><h2>Расчётный розничный ориентир</h2><p class="retail-research-range">${money(basis.amount)}</p><p class="retail-research-note">Цена ${basis.sourcePackGrams} г - ${money(basis.sourceAmountEUR)}, расчёт для ${basis.catalogPackGrams} г с коэффициентом ${String(basis.multiplier).replace('.', ',')} - с IVA</p><p>${escape(basis.note)}</p><p><a class="text-link" href="${escape(basis.sourceUrl)}" target="_blank" rel="noopener noreferrer">Источник - ${escape(basis.sourceRetailer)}</a></p></section>`;
   }
-  return `<section class="retail-research" aria-label="Розничный ориентир по аналогам"><h2>Ориентир по аналогам</h2><p class="retail-research-range">${money(basis.amount)}</p><p class="retail-research-note">${basis.sampleSize > 1 ? `Медиана ${basis.sampleSize} сопоставимых предложений` : 'Цена сопоставимого товара'} - ориентир с IVA для расчёта, цена этой модели Heybo Pet у конкурентов пока не найдена</p>${basis.analogueMinEUR != null ? `<p>Диапазон аналогов - ${money(basis.analogueMinEUR)} - ${money(basis.analogueMaxEUR)}</p>` : ''}<p>${escape(basis.group)} - ${escape(basis.note)}</p><p><a class="text-link" href="${escape(basis.exampleUrl)}" target="_blank" rel="noopener noreferrer">Пример - ${escape(basis.exampleRetailer)}, ${money(basis.examplePriceEUR)}</a></p></section>`;
+  return `<section class="retail-research" aria-label="Розничный ориентир по аналогам"><h2>Ориентир по аналогам</h2><p class="retail-research-range">${money(basis.amount)}</p><p class="retail-research-note">${basis.sampleSize > 1 ? `Медиана ${basis.sampleSize} сопоставимых предложений` : 'Цена сопоставимого товара'} - ориентир с IVA для расчёта, розничная цена этого варианта пока не подтверждена</p>${basis.analogueMinEUR != null ? `<p>Диапазон аналогов - ${money(basis.analogueMinEUR)} - ${money(basis.analogueMaxEUR)}</p>` : ''}<p>${escape(basis.group)} - ${escape(basis.note)}</p><p><a class="text-link" href="${escape(basis.exampleUrl)}" target="_blank" rel="noopener noreferrer">Пример - ${escape(basis.exampleRetailer)}, ${money(basis.examplePriceEUR)}</a></p></section>`;
 }

@@ -11,6 +11,7 @@ import { treatsCareProducts } from './treats-care-products.js?v=studio-1';
 import { faireProducts } from './faire-products.js';
 import { yaguProducts, expandYaguCare } from './yagu-products.js?v=yagu-studio-2';
 import { ownatProducts } from './ownat-products.js?v=ownat-studio-1';
+import { dogProducts } from './dog-products.js?v=dog-first-wave-1';
 
 const foodProducts = [...expandPriorityFood(expandRoyalCaninFood(originalFoodProducts)), ...ownatProducts];
 
@@ -802,7 +803,7 @@ const mergeCategory = product => {
     ...(product.variants ? { variants: product.variants.map(variant => ({ ...variant, category: mergedCategory(variant.category) })) } : {})
   };
 };
-export const products = applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy([...foodProducts, ...expandYaguCare(treatsCareProducts), ...yaguProducts, ...enrichedWaterBalconyProducts, ...accessoryProducts.filter(p => !p.ean || !waterBalconyEANs.has(p.ean)), ...catalogHeybopetProducts, ...catalogFaireProducts, ...demoProducts.filter(p => !waterBalconyReplacedIds.has(p.id)).map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)]).map(mergeCategory)));
+export const products = applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy([...foodProducts, ...dogProducts, ...expandYaguCare(treatsCareProducts), ...yaguProducts, ...enrichedWaterBalconyProducts, ...accessoryProducts.filter(p => !p.ean || !waterBalconyEANs.has(p.ean)), ...catalogHeybopetProducts, ...catalogFaireProducts, ...demoProducts.filter(p => !waterBalconyReplacedIds.has(p.id)).map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)]).map(mergeCategory)));
 export const catalogProducts = products.filter(p => !p.catalogHidden);
 
 export { articles } from './journal-content.js';

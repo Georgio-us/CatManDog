@@ -1,5 +1,5 @@
 import { confirmedPrice, snapshots } from './variants.js';
-import { productDisplayedPriceSummary } from './retail-research.js?v=retail-complete-1';
+import { productDisplayedPriceSummary } from './retail-research.js?v=dog-first-wave-1';
 
 const definitions = [
   ['dry-food', 'Сухой корм'],
@@ -35,7 +35,7 @@ export function homeGroupForProduct(product) {
     case 'Миски и поилки':
       if (/автокормуш|кормушк|\bfeeder\b/i.test(name)) return 'feeders';
       if (/приготовлени[яе] корма/i.test(name)) return 'food-prep';
-      if (/миска|тарелк|\bbowl\b/i.test(name)) return 'bowls';
+      if (/миска|тарелк|\bbowl\b|comedero|sensibowl/i.test(name)) return 'bowls';
       return 'drinkers';
     case 'Переноски': return 'carriers';
     case 'Окна и балконы': return 'windows';
