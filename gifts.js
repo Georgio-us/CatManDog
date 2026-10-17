@@ -1,4 +1,4 @@
-import { products } from './data.js?v=catalog-cleanup-1';
+import { products } from './data.js?v=categories-merged-1';
 
 const toys = ['mouse', 'rope', 'rabbit'];
 const treats = ['creamy-treats', 'crunchy-treats', 'pure-treats'];

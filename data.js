@@ -12,7 +12,7 @@ import { ownatProducts } from './ownat-products.js?v=ownat-studio-1';
 
 const foodProducts = [...expandPriorityFood(expandRoyalCaninFood(originalFoodProducts)), ...ownatProducts];
 
-export const categories = ["Корм", "Лакомства", "Наполнитель", "Игрушки", "Аксессуары", "Миски и поилки", "Переноски", "Окна и балконы", "Уход", "Подарочные наборы"];
+export const categories = ["Корм", "Лакомства", "Наполнитель", "Игрушки и аксессуары", "Миски и поилки", "Переноски", "Окна и балконы", "Уход", "Подарочные наборы"];
 
 const demoProducts = [
   {
@@ -791,7 +791,16 @@ const faireFamilyNames = {
   'faire-justcool-cat-a6': 'Just Cool Design - мини-принты с котами A6'
 };
 const catalogFaireProducts = faireProducts.map(p => ({ ...p, name: faireFamilyNames[p.id] || p.name }));
-export const products = applyCatalogPolicy([...foodProducts, ...expandYaguCare(treatsCareProducts), ...yaguProducts, ...enrichedWaterBalconyProducts, ...accessoryProducts.filter(p => !p.ean || !waterBalconyEANs.has(p.ean)), ...catalogHeybopetProducts, ...catalogFaireProducts, ...demoProducts.filter(p => !waterBalconyReplacedIds.has(p.id)).map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)]);
+const mergedCategory = category => ["Игрушки", "Аксессуары"].includes(category) ? "Игрушки и аксессуары" : category;
+const mergeCategory = product => {
+  if (mergedCategory(product.category) === product.category) return product;
+  return {
+    ...product,
+    category: mergedCategory(product.category),
+    ...(product.variants ? { variants: product.variants.map(variant => ({ ...variant, category: mergedCategory(variant.category) })) } : {})
+  };
+};
+export const products = applyCatalogPolicy([...foodProducts, ...expandYaguCare(treatsCareProducts), ...yaguProducts, ...enrichedWaterBalconyProducts, ...accessoryProducts.filter(p => !p.ean || !waterBalconyEANs.has(p.ean)), ...catalogHeybopetProducts, ...catalogFaireProducts, ...demoProducts.filter(p => !waterBalconyReplacedIds.has(p.id)).map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)]).map(mergeCategory);
 export const catalogProducts = products.filter(p => !p.catalogHidden);
 
 export const articles = [
