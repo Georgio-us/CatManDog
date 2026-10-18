@@ -1,0 +1,47 @@
+[
+  {
+    "id": "dog-rc-mini-puppy",
+    "name": "Royal Canin Mini Puppy",
+    "referenceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/mini-puppy-3000",
+    "imageUrl": "https://cdn.royalcanin-weshare-online.io/MT-XCH8BRYZmsWpcINJ8/v39/rc-spt-dry-minipuppy-mv-2-es-es",
+    "referencePath": "assets/dog/references/dog-rc-mini-puppy.png",
+    "generatedPath": "assets/dog/editorial/dog-rc-mini-puppy-v1.png",
+    "displayPath": "assets/dog/editorial/dog-rc-mini-puppy-v1.webp"
+  },
+  {
+    "id": "dog-rc-mini-adult",
+    "name": "Royal Canin Mini Adult",
+    "referenceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/mini-adult-3001",
+    "imageUrl": "https://cdn.royalcanin-weshare-online.io/oEAkU48BRYZmsWpcQSyB/v15/rc-shn-dry-miniad-pork-3001-page-02",
+    "referencePath": "assets/dog/references/dog-rc-mini-adult.png",
+    "generatedPath": "assets/dog/editorial/dog-rc-mini-adult-v1.png",
+    "displayPath": "assets/dog/editorial/dog-rc-mini-adult-v1.webp"
+  },
+  {
+    "id": "dog-rc-medium-adult",
+    "name": "Royal Canin Medium Adult",
+    "referenceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/medium-adult-3004",
+    "imageUrl": "https://marspetcareaprimocdn.petcare.global/217ee075-23bd-4262-9c2d-b1ef00161fb2/217ee075-23bd-4262-9c2d-b1ef00161fb2_DownloadAsJpg.jpg",
+    "referencePath": "assets/dog/references/dog-rc-medium-adult.png",
+    "generatedPath": "assets/dog/editorial/dog-rc-medium-adult-v1.png",
+    "displayPath": "assets/dog/editorial/dog-rc-medium-adult-v1.webp"
+  },
+  {
+    "id": "dog-rc-maxi-adult",
+    "name": "Royal Canin Maxi Adult",
+    "referenceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/maxi-adult-3007",
+    "imageUrl": "https://cdn.royalcanin-weshare-online.io/rkBJU48BRYZmsWpcYCwQ/v15/rc-shn-dry-maxiad-pork-3007-page-02",
+    "referencePath": "assets/dog/references/dog-rc-maxi-adult.png",
+    "generatedPath": "assets/dog/editorial/dog-rc-maxi-adult-v1.png",
+    "displayPath": "assets/dog/editorial/dog-rc-maxi-adult-v1.webp"
+  },
+  {
+    "id": "dog-rc-mini-digestive",
+    "name": "Royal Canin Mini Digestive Care",
+    "referenceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/mini-digestive-care-2447",
+    "imageUrl": "https://marspetcareaprimocdn.petcare.global/8904bdbd-514d-4462-8a9f-b2490007f8bd/8904bdbd-514d-4462-8a9f-b2490007f8bd_DownloadAsJpg.jpg",
+    "referencePath": "assets/dog/references/dog-rc-mini-digestive.png",
+    "generatedPath": "assets/dog/editorial/dog-rc-mini-digestive-v1.png",
+    "displayPath": "assets/dog/editorial/dog-rc-mini-digestive-v1.webp"
+  }
+]

@@ -1,4 +1,4 @@
-import { products } from './data.js?v=dog-first-wave-1';
+import { products } from './data.js?v=dog-studio-1';
 
 const toys = ['mouse', 'rope', 'rabbit'];
 const treats = ['creamy-treats', 'crunchy-treats', 'pure-treats'];

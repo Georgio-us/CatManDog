@@ -1,0 +1,66 @@
+[
+  {
+    "id": "dog-nutriplus-adult-chicken",
+    "name": "NutriPlus Perro Adulto Pollo",
+    "referencePath": "assets/dog/references/dog-nutriplus-adult-chicken.png",
+    "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/97",
+    "generatedPath": "assets/dog/editorial/dog-nutriplus-adult-chicken-v1.png",
+    "displayPath": "assets/dog/editorial/dog-nutriplus-adult-chicken-v1.webp"
+  },
+  {
+    "id": "dog-nutriplus-wet-lamb",
+    "name": "NutriPlus Comida Húmeda Perro Cordero",
+    "referencePath": "assets/dog/references/dog-nutriplus-wet-lamb.png",
+    "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/99",
+    "generatedPath": "assets/dog/editorial/dog-nutriplus-wet-lamb-v1.png",
+    "displayPath": "assets/dog/editorial/dog-nutriplus-wet-lamb-v1.webp"
+  },
+  {
+    "id": "dog-yagu-donut-turquoise",
+    "name": "Yagu Cuna Donut Antiestrés Turquesa",
+    "referencePath": "assets/dog/references/dog-yagu-donut-turquoise.png",
+    "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/5",
+    "generatedPath": "assets/dog/editorial/dog-yagu-donut-turquoise-v1.png",
+    "displayPath": "assets/dog/editorial/dog-yagu-donut-turquoise-v1.webp"
+  },
+  {
+    "id": "dog-yagu-harness-blue",
+    "name": "Yagu Arnés Confort Acolchado Azul",
+    "referencePath": "assets/dog/references/dog-yagu-harness-blue.png",
+    "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/47",
+    "generatedPath": "assets/dog/editorial/dog-yagu-harness-blue-v1.png",
+    "displayPath": "assets/dog/editorial/dog-yagu-harness-blue-v1.webp"
+  },
+  {
+    "id": "dog-mp-sensibowl-slomo",
+    "name": "MP Comedero Sensibowl Slomo",
+    "referencePath": "assets/dog/references/dog-mp-sensibowl-slomo.png",
+    "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/128",
+    "generatedPath": "assets/dog/editorial/dog-mp-sensibowl-slomo-v1.png",
+    "displayPath": "assets/dog/editorial/dog-mp-sensibowl-slomo-v1.webp"
+  },
+  {
+    "id": "dog-mp-sensibowl-slomo-white",
+    "name": "MP Comedero Sensibowl Slomo",
+    "referencePath": "assets/dog/references/dog-mp-sensibowl-slomo-white.png",
+    "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/128",
+    "generatedPath": "assets/dog/editorial/dog-mp-sensibowl-slomo-white-v1.png",
+    "displayPath": "assets/dog/editorial/dog-mp-sensibowl-slomo-white-v1.webp"
+  },
+  {
+    "id": "dog-duvo-huggi-rabbit",
+    "name": "Duvo+ Peluche Huggi Conejo Lila",
+    "referencePath": "assets/dog/references/dog-duvo-huggi-rabbit.png",
+    "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/147",
+    "generatedPath": "assets/dog/editorial/dog-duvo-huggi-rabbit-v1.png",
+    "displayPath": "assets/dog/editorial/dog-duvo-huggi-rabbit-v1.webp"
+  },
+  {
+    "id": "dog-duvo-huggi-rabbit-large",
+    "name": "Duvo+ Peluche Huggi Conejo Lila",
+    "referencePath": "assets/dog/references/dog-duvo-huggi-rabbit-large.png",
+    "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/147",
+    "generatedPath": "assets/dog/editorial/dog-duvo-huggi-rabbit-large-v1.png",
+    "displayPath": "assets/dog/editorial/dog-duvo-huggi-rabbit-large-v1.webp"
+  }
+]

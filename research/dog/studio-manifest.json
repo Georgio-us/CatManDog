@@ -1,0 +1,264 @@
+{
+  "toolMode": "built-in image_gen",
+  "createdAt": "2026-10-17",
+  "scope": "24 studio photos for 22 existing dog product families, including both bowl colors and rabbit toy sizes",
+  "weightPolicy": "Food bag photos represent the exact recipe; multiple package weights may share the representative recipe photo",
+  "images": [
+    {
+      "id": "dog-rc-mini-puppy",
+      "name": "Royal Canin Mini Puppy",
+      "referenceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/mini-puppy-3000",
+      "imageUrl": "https://cdn.royalcanin-weshare-online.io/MT-XCH8BRYZmsWpcINJ8/v39/rc-spt-dry-minipuppy-mv-2-es-es",
+      "referencePath": "assets/dog/references/dog-rc-mini-puppy.png",
+      "generatedPath": "assets/dog/editorial/dog-rc-mini-puppy-v1.png",
+      "displayPath": "assets/dog/editorial/dog-rc-mini-puppy-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Royal Canin Mini Puppy. Preserve exact Royal Canin DOG bag artwork, logo, size-family name, printed dog, original colored accents and all readable markings. Do not use cat artwork or Sterilised text from the style-only first image. One sealed bag only, no loose kibble.",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-ab5f3635-4c7f-435e-ab95-7b52ebfcd2d6.png"
+    },
+    {
+      "id": "dog-rc-mini-adult",
+      "name": "Royal Canin Mini Adult",
+      "referenceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/mini-adult-3001",
+      "imageUrl": "https://cdn.royalcanin-weshare-online.io/oEAkU48BRYZmsWpcQSyB/v15/rc-shn-dry-miniad-pork-3001-page-02",
+      "referencePath": "assets/dog/references/dog-rc-mini-adult.png",
+      "generatedPath": "assets/dog/editorial/dog-rc-mini-adult-v1.png",
+      "displayPath": "assets/dog/editorial/dog-rc-mini-adult-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Royal Canin Mini Adult. Preserve exact Royal Canin DOG bag artwork, logo, size-family name, printed dog, original colored accents and all readable markings. Do not use cat artwork or Sterilised text from the style-only first image. One sealed bag only, no loose kibble.",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-da8db92b-1579-479e-a05a-88bb29bc6f40.png"
+    },
+    {
+      "id": "dog-rc-medium-adult",
+      "name": "Royal Canin Medium Adult",
+      "referenceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/medium-adult-3004",
+      "imageUrl": "https://marspetcareaprimocdn.petcare.global/217ee075-23bd-4262-9c2d-b1ef00161fb2/217ee075-23bd-4262-9c2d-b1ef00161fb2_DownloadAsJpg.jpg",
+      "referencePath": "assets/dog/references/dog-rc-medium-adult.png",
+      "generatedPath": "assets/dog/editorial/dog-rc-medium-adult-v1.png",
+      "displayPath": "assets/dog/editorial/dog-rc-medium-adult-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Royal Canin Medium Adult. Preserve exact Royal Canin DOG bag artwork, logo, size-family name, printed dog, original colored accents and all readable markings. Do not use cat artwork or Sterilised text from the style-only first image. One sealed bag only, no loose kibble.",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-06bffa45-5101-4a39-85ec-70a284666584.png"
+    },
+    {
+      "id": "dog-rc-maxi-adult",
+      "name": "Royal Canin Maxi Adult",
+      "referenceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/maxi-adult-3007",
+      "imageUrl": "https://cdn.royalcanin-weshare-online.io/rkBJU48BRYZmsWpcYCwQ/v15/rc-shn-dry-maxiad-pork-3007-page-02",
+      "referencePath": "assets/dog/references/dog-rc-maxi-adult.png",
+      "generatedPath": "assets/dog/editorial/dog-rc-maxi-adult-v1.png",
+      "displayPath": "assets/dog/editorial/dog-rc-maxi-adult-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Royal Canin Maxi Adult. Preserve exact Royal Canin DOG bag artwork, logo, size-family name, printed dog, original colored accents and all readable markings. Do not use cat artwork or Sterilised text from the style-only first image. One sealed bag only, no loose kibble.",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-70e8772d-914f-4694-aa65-8a6b2d9bc39e.png"
+    },
+    {
+      "id": "dog-rc-mini-digestive",
+      "name": "Royal Canin Mini Digestive Care",
+      "referenceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/mini-digestive-care-2447",
+      "imageUrl": "https://marspetcareaprimocdn.petcare.global/8904bdbd-514d-4462-8a9f-b2490007f8bd/8904bdbd-514d-4462-8a9f-b2490007f8bd_DownloadAsJpg.jpg",
+      "referencePath": "assets/dog/references/dog-rc-mini-digestive.png",
+      "generatedPath": "assets/dog/editorial/dog-rc-mini-digestive-v1.png",
+      "displayPath": "assets/dog/editorial/dog-rc-mini-digestive-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Royal Canin Mini Digestive Care. Preserve exact Royal Canin DOG bag artwork, logo, size-family name, printed dog, original colored accents and all readable markings. Do not use cat artwork or Sterilised text from the style-only first image. One sealed bag only, no loose kibble.",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-d6b39a67-4af2-4eec-9389-47bf6336bd8e.png"
+    },
+    {
+      "id": "dog-ownat-classic-complet",
+      "name": "Ownat Classic Complet Dog",
+      "referencePath": "assets/dog/references/dog-ownat-classic-complet.webp",
+      "referenceUrl": "https://www.ownat.com/classic-complet-perro-es",
+      "imageUrl": "https://www.ownat.com/cdnassets/Complet-1328x1500px_m.webp",
+      "generatedPath": "assets/dog/editorial/dog-ownat-classic-complet-v1.png",
+      "displayPath": "assets/dog/editorial/dog-ownat-classic-complet-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Ownat Classic Complet Dog. Preserve the DOG recipe exactly, not a cat recipe. Preserve every original on-package illustration and label. No invented net weight if source generic recipe bag. ",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-d43d1df6-41e4-42cd-b34d-0fbebb4fd07d.png"
+    },
+    {
+      "id": "dog-ownat-ultra-medium",
+      "name": "Ownat Ultra Medium Adult Dog",
+      "referencePath": "assets/dog/references/dog-ownat-ultra-medium.jpg",
+      "referenceUrl": "https://www.ownat.com/ultra-medium-adult-cao",
+      "imageUrl": "https://www.ownat.com/cdnassets/ow-ultra-medium-adult-saco-front.jpg",
+      "generatedPath": "assets/dog/editorial/dog-ownat-ultra-medium-v1.png",
+      "displayPath": "assets/dog/editorial/dog-ownat-ultra-medium-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Ownat Ultra Medium Adult Dog. Preserve the DOG recipe exactly, not a cat recipe. Preserve every original on-package illustration and label. No invented net weight if source generic recipe bag. ",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-982b77de-0062-4436-bbeb-68d283abad6a.png"
+    },
+    {
+      "id": "dog-ownat-just-gf-chicken",
+      "name": "Ownat Just Grain Free Adult Chicken Dog",
+      "referencePath": "assets/dog/references/dog-ownat-just-gf-chicken.jpg",
+      "referenceUrl": "https://www.ownat.com/gf-just-adult-chicken-perro",
+      "imageUrl": "https://www.ownat.com/cdnassets/ow-just-grain-free-adult-chicken-dog-saco-front_m.jpg",
+      "generatedPath": "assets/dog/editorial/dog-ownat-just-gf-chicken-v1.png",
+      "displayPath": "assets/dog/editorial/dog-ownat-just-gf-chicken-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Ownat Just Grain Free Adult Chicken Dog. Preserve the DOG recipe exactly, not a cat recipe. Preserve every original on-package illustration and label. No invented net weight if source generic recipe bag. ",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-ad28dfbc-a41e-471f-9301-15f935528323.png"
+    },
+    {
+      "id": "dog-ownat-gf-prime",
+      "name": "Ownat Grain Free Prime Adult Chicken & Turkey Dog",
+      "referencePath": "assets/dog/references/dog-ownat-gf-prime.jpg",
+      "referenceUrl": "https://www.ownat.com/gf-prime-adult-chickenturkey-perro",
+      "imageUrl": "https://www.ownat.com/cdnassets/ow-grain-free-prime-adult-chicken-turkey-dog-saco-front_m.jpg",
+      "generatedPath": "assets/dog/editorial/dog-ownat-gf-prime-v1.png",
+      "displayPath": "assets/dog/editorial/dog-ownat-gf-prime-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Ownat Grain Free Prime Adult Chicken & Turkey Dog. Preserve the DOG recipe exactly, not a cat recipe. Preserve every original on-package illustration and label. No invented net weight if source generic recipe bag. ",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-7b5c719a-fece-4cf0-a89b-66a57803f9e8.png"
+    },
+    {
+      "id": "dog-ownat-author-duck",
+      "name": "Ownat Author Fresh Duck & Chicken Dog",
+      "referencePath": "assets/dog/references/dog-ownat-author-duck.jpg",
+      "referenceUrl": "https://www.ownat.com/author-fresh-duck-chicken-cao",
+      "imageUrl": "https://www.ownat.com/cdnassets/Author-Fresh-Duck--Chicken_m.jpg",
+      "generatedPath": "assets/dog/editorial/dog-ownat-author-duck-v1.png",
+      "displayPath": "assets/dog/editorial/dog-ownat-author-duck-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Ownat Author Fresh Duck & Chicken Dog. Preserve the DOG recipe exactly, not a cat recipe. Preserve every original on-package illustration and label. No invented net weight if source generic recipe bag. Remove only the floating GRAIN FREE promotional badge outside upper-right bag; keep actual printed package badges.",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-00f2a519-fec8-4fe7-9062-62ba43ddca8a.png"
+    },
+    {
+      "id": "dog-ownat-wetline-chicken",
+      "name": "Ownat Wetline Chicken with Carrots Dog",
+      "referencePath": "assets/dog/references/dog-ownat-wetline-chicken.png",
+      "referenceUrl": "https://www.ownat.com/wetline-chicken-with-carrots-perro",
+      "imageUrl": "https://www.ownat.com/cdnassets/Ownat-Wetline-Chicken--Carrots_m.png",
+      "generatedPath": "assets/dog/editorial/dog-ownat-wetline-chicken-v1.png",
+      "displayPath": "assets/dog/editorial/dog-ownat-wetline-chicken-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Ownat Wetline Chicken with Carrots Dog. Preserve the DOG recipe exactly, not a cat recipe. Preserve every original on-package illustration and label. No invented net weight if source generic recipe bag. ",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-35848e4a-9c80-430b-90ec-127f65e13f5e.png"
+    },
+    {
+      "id": "dog-orijen-original",
+      "name": "Orijen Original Dog",
+      "referencePath": "assets/dog/references/dog-orijen-original.png",
+      "referenceUrl": "https://emea.orijenpetfoods.com/es-ES/dogs/dog-food/eu-ori-ns-ori-original.html",
+      "imageUrl": "https://emea.orijenpetfoods.com/dw/image/v2/bfdw_prd/on/demandware.static/-/Sites-orijen-eu-master-catalog/default/dw70050318/Original%20Dog/Original%20%281%29.png?sw=1500",
+      "generatedPath": "assets/dog/editorial/dog-orijen-original-v1.png",
+      "displayPath": "assets/dog/editorial/dog-orijen-original-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Orijen Original Dog. Keep the exact DOG recipe, package color, landscape artwork and dog/human silhouettes printed on bag. No live animals or real humans outside the printed packaging. Remove any promotional sticker outside bag, but preserve on-bag markings. Use one bag only, no loose kibble.",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-3c64cbb3-f61f-4f6a-b726-8c767faeca90.png"
+    },
+    {
+      "id": "dog-orijen-puppy",
+      "name": "Orijen Puppy Dog",
+      "referencePath": "assets/dog/references/dog-orijen-puppy.png",
+      "referenceUrl": "https://emea.orijenpetfoods.com/es-ES/dogs/dog-food/eu-ori-ns-puppy.html",
+      "imageUrl": "https://emea.orijenpetfoods.com/dw/image/v2/bfdw_prd/on/demandware.static/-/Sites-orijen-eu-master-catalog/default/dwbbb4c925/Puppy/Puppy%20%281%29.png?sw=1500",
+      "generatedPath": "assets/dog/editorial/dog-orijen-puppy-v1.png",
+      "displayPath": "assets/dog/editorial/dog-orijen-puppy-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Orijen Puppy Dog. Keep the exact DOG recipe, package color, landscape artwork and dog/human silhouettes printed on bag. No live animals or real humans outside the printed packaging. Remove any promotional sticker outside bag, but preserve on-bag markings. Use one bag only, no loose kibble.",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-24cf0669-c328-41a6-88cb-49c3fd62010f.png"
+    },
+    {
+      "id": "dog-orijen-six-fish",
+      "name": "Orijen Six Fish Dog",
+      "referencePath": "assets/dog/references/dog-orijen-six-fish.png",
+      "referenceUrl": "https://emea.orijenpetfoods.com/es-ES/dogs/dog-food/eu-ori-ns-ori-sixfish.html",
+      "imageUrl": "https://emea.orijenpetfoods.com/dw/image/v2/bfdw_prd/on/demandware.static/-/Sites-orijen-eu-master-catalog/default/dw0b15544b/Six%20Fish%20Dog/Six-Fish%20%281%29.png?sw=1500",
+      "generatedPath": "assets/dog/editorial/dog-orijen-six-fish-v1.png",
+      "displayPath": "assets/dog/editorial/dog-orijen-six-fish-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Orijen Six Fish Dog. Keep the exact DOG recipe, package color, landscape artwork and dog/human silhouettes printed on bag. No live animals or real humans outside the printed packaging. Remove any promotional sticker outside bag, but preserve on-bag markings. Use one bag only, no loose kibble.",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-5e64c9f1-35e4-4e77-993b-9384f7efdfdb.png"
+    },
+    {
+      "id": "dog-orijen-small-breed",
+      "name": "Orijen Small Breed Dog",
+      "referencePath": "assets/dog/references/dog-orijen-small-breed.png",
+      "referenceUrl": "https://emea.orijenpetfoods.com/es-ES/dogs/dog-food/eu-ori-ns-ori-small-breed.html",
+      "imageUrl": "https://emea.orijenpetfoods.com/dw/image/v2/bfdw_prd/on/demandware.static/-/Sites-orijen-eu-master-catalog/default/dwa7242e09/Small%20Breed/Small-Breed%20%281%29.png?sw=1500",
+      "generatedPath": "assets/dog/editorial/dog-orijen-small-breed-v1.png",
+      "displayPath": "assets/dog/editorial/dog-orijen-small-breed-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Orijen Small Breed Dog. Keep the exact DOG recipe, package color, landscape artwork and dog/human silhouettes printed on bag. No live animals or real humans outside the printed packaging. Remove any promotional sticker outside bag, but preserve on-bag markings. Use one bag only, no loose kibble.",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-b6bece2f-d517-44cb-8da3-de33727e9e21.png"
+    },
+    {
+      "id": "dog-orijen-fit-trim",
+      "name": "Orijen Fit & Trim Dog",
+      "referencePath": "assets/dog/references/dog-orijen-fit-trim.png",
+      "referenceUrl": "https://emea.orijenpetfoods.com/es-ES/dogs/dog-food/eu-ori-ns-ori-fittrim.html",
+      "imageUrl": "https://emea.orijenpetfoods.com/dw/image/v2/bfdw_prd/on/demandware.static/-/Sites-orijen-eu-master-catalog/default/dwa101382a/Fit%20&%20Trim%20Dog/Fit-Trim%20%281%29.png?sw=1500",
+      "generatedPath": "assets/dog/editorial/dog-orijen-fit-trim-v1.png",
+      "displayPath": "assets/dog/editorial/dog-orijen-fit-trim-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Orijen Fit & Trim Dog. Keep the exact DOG recipe, package color, landscape artwork and dog/human silhouettes printed on bag. No live animals or real humans outside the printed packaging. Remove any promotional sticker outside bag, but preserve on-bag markings. Use one bag only, no loose kibble.",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-1b5a05c5-2a36-4d89-ad40-d7b9cd969024.png"
+    },
+    {
+      "id": "dog-nutriplus-adult-chicken",
+      "name": "NutriPlus Perro Adulto Pollo",
+      "referencePath": "assets/dog/references/dog-nutriplus-adult-chicken.png",
+      "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/97",
+      "generatedPath": "assets/dog/editorial/dog-nutriplus-adult-chicken-v1.png",
+      "displayPath": "assets/dog/editorial/dog-nutriplus-adult-chicken-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: NutriPlus Perro Adulto Pollo. One NutriPlus Chicken adult dry dog food sealed bag, yellow and white with Border Collie print, as in reference. Preserve dog (not cat) artwork",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-ede6c0f9-4a6b-4cbc-9ef3-d54cc570b18d.png"
+    },
+    {
+      "id": "dog-nutriplus-wet-lamb",
+      "name": "NutriPlus Comida Húmeda Perro Cordero",
+      "referencePath": "assets/dog/references/dog-nutriplus-wet-lamb.png",
+      "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/99",
+      "generatedPath": "assets/dog/editorial/dog-nutriplus-wet-lamb-v1.png",
+      "displayPath": "assets/dog/editorial/dog-nutriplus-wet-lamb-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: NutriPlus Comida Húmeda Perro Cordero. One exact 400 g NutriPlus LAMB canned dog food tin with 96% graphic, pink accent and printed dog. Not salmon or rabbit",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-dfb28803-e690-49c1-92c2-e423c72789e4.png"
+    },
+    {
+      "id": "dog-yagu-donut-turquoise",
+      "name": "Yagu Cuna Donut Antiestrés Turquesa",
+      "referencePath": "assets/dog/references/dog-yagu-donut-turquoise.png",
+      "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/5",
+      "generatedPath": "assets/dog/editorial/dog-yagu-donut-turquoise-v1.png",
+      "displayPath": "assets/dog/editorial/dog-yagu-donut-turquoise-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Yagu Cuna Donut Antiestrés Turquesa. One turquoise shaggy round donut dog bed exactly as reference, empty, no dog, no purple or gray alternatives",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-a184a295-7dff-448c-bbd7-5977a4ef545e.png"
+    },
+    {
+      "id": "dog-yagu-harness-blue",
+      "name": "Yagu Arnés Confort Acolchado Azul",
+      "referencePath": "assets/dog/references/dog-yagu-harness-blue.png",
+      "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/47",
+      "generatedPath": "assets/dog/editorial/dog-yagu-harness-blue-v1.png",
+      "displayPath": "assets/dog/editorial/dog-yagu-harness-blue-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Yagu Arnés Confort Acolchado Azul. One blue/navy quilted dog vest harness exactly as reference, complete product supported as a ghost mannequin product photo, no dog or person or invented leash",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-567de6d5-ebfc-4c35-9897-2ef223c687a2.png"
+    },
+    {
+      "id": "dog-mp-sensibowl-slomo",
+      "name": "MP Comedero Sensibowl Slomo",
+      "referencePath": "assets/dog/references/dog-mp-sensibowl-slomo.png",
+      "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/128",
+      "generatedPath": "assets/dog/editorial/dog-mp-sensibowl-slomo-v1.png",
+      "displayPath": "assets/dog/editorial/dog-mp-sensibowl-slomo-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: MP Comedero Sensibowl Slomo. One BLACK Moderna Sensibowl Slomo slow-feeder bowl, preserve the exact asymmetric rounded shape and internal slow feeder partitions",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-abb0fe6d-ee97-4fd3-8912-2fdbb2f99b8a.png"
+    },
+    {
+      "id": "dog-mp-sensibowl-slomo-white",
+      "name": "MP Comedero Sensibowl Slomo",
+      "referencePath": "assets/dog/references/dog-mp-sensibowl-slomo-white.png",
+      "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/128",
+      "generatedPath": "assets/dog/editorial/dog-mp-sensibowl-slomo-white-v1.png",
+      "displayPath": "assets/dog/editorial/dog-mp-sensibowl-slomo-white-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: MP Comedero Sensibowl Slomo. One WHITE Moderna Sensibowl Slomo slow-feeder bowl, preserve the exact asymmetric rounded shape and internal slow feeder partitions",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-fb10a3c5-905c-46f1-b71a-f95d74786012.png"
+    },
+    {
+      "id": "dog-duvo-huggi-rabbit",
+      "name": "Duvo+ Peluche Huggi Conejo Lila",
+      "referencePath": "assets/dog/references/dog-duvo-huggi-rabbit.png",
+      "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/147",
+      "generatedPath": "assets/dog/editorial/dog-duvo-huggi-rabbit-v1.png",
+      "displayPath": "assets/dog/editorial/dog-duvo-huggi-rabbit-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Duvo+ Peluche Huggi Conejo Lila. One SMALL Duvo Huggi LILAC rabbit plush dog toy, S 41x17x3.5cm proportions exactly as reference, elongated segmented soft body and purple paws, remove retail hangtag",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-56d39c93-1cf4-4bc7-94d1-1284b6e2bba8.png"
+    },
+    {
+      "id": "dog-duvo-huggi-rabbit-large",
+      "name": "Duvo+ Peluche Huggi Conejo Lila",
+      "referencePath": "assets/dog/references/dog-duvo-huggi-rabbit-large.png",
+      "referenceUrl": "https://heyzine.com/flip-book/2fca30a7bd.html#page/147",
+      "generatedPath": "assets/dog/editorial/dog-duvo-huggi-rabbit-large-v1.png",
+      "displayPath": "assets/dog/editorial/dog-duvo-huggi-rabbit-large-v1.webp",
+      "prompt": "Use case: product-mockup. Create ONE SQUARE 1:1 premium CatManDog ecommerce studio photograph. Image 1 is STYLE ONLY: match its light gray seamless studio backdrop and tabletop, subtle gradient, soft upper-left light and restrained natural contact shadow. Image 2 is the exact real product reference; faithfully preserve original product shape, proportions, colors, materials, packaging graphics, recipe name and printed markings. Center one complete product at 75-82 percent of square canvas with generous breathing room on every edge. No cropping, no Royal Canin branding from image 1 unless this is the actual product, no live animals outside printed packaging, no people, no props, no extra products, no illustration, no flat vectors, no title text overlays, no watermarks. Photo-realistic high quality product photography, background must clearly be light GRAY rather than white. Remove catalogue headings, captions and other products from image 2. Exact product: Duvo+ Peluche Huggi Conejo Lila. One LARGE Duvo Huggi LILAC rabbit plush dog toy, L 63x33x4.5cm proportions exactly as reference, longer segmented soft body than S, remove retail hangtag",
+      "generatedFrom": "/Users/georgious/.codex/generated_images/01a0fdc1-d68f-7ac1-998e-e3a35de458ba/exec-357e3b28-3b80-486a-bef1-a052d21b794c.png"
+    }
+  ]
+}

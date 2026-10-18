@@ -1,4 +1,4 @@
-import { catalogProducts } from './data.js?v=dog-first-wave-1';
+import { catalogProducts } from './data.js?v=dog-studio-1';
 
 export const activeHomeGroups = [
   { title: 'Свой этаж у окна', text: 'Подбираем реальные товары для окон и балконов - этот раздел появится в каталоге позже', ids: [] },

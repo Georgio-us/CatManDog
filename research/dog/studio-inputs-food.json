@@ -1,0 +1,101 @@
+[
+  {
+    "id": "dog-ownat-classic-complet",
+    "name": "Ownat Classic Complet Dog",
+    "referencePath": "assets/dog/references/dog-ownat-classic-complet.webp",
+    "referenceUrl": "https://www.ownat.com/classic-complet-perro-es",
+    "imageUrl": "https://www.ownat.com/cdnassets/Complet-1328x1500px_m.webp",
+    "generatedPath": "assets/dog/editorial/dog-ownat-classic-complet-v1.png",
+    "displayPath": "assets/dog/editorial/dog-ownat-classic-complet-v1.webp"
+  },
+  {
+    "id": "dog-ownat-ultra-medium",
+    "name": "Ownat Ultra Medium Adult Dog",
+    "referencePath": "assets/dog/references/dog-ownat-ultra-medium.jpg",
+    "referenceUrl": "https://www.ownat.com/ultra-medium-adult-cao",
+    "imageUrl": "https://www.ownat.com/cdnassets/ow-ultra-medium-adult-saco-front.jpg",
+    "generatedPath": "assets/dog/editorial/dog-ownat-ultra-medium-v1.png",
+    "displayPath": "assets/dog/editorial/dog-ownat-ultra-medium-v1.webp"
+  },
+  {
+    "id": "dog-ownat-just-gf-chicken",
+    "name": "Ownat Just Grain Free Adult Chicken Dog",
+    "referencePath": "assets/dog/references/dog-ownat-just-gf-chicken.jpg",
+    "referenceUrl": "https://www.ownat.com/gf-just-adult-chicken-perro",
+    "imageUrl": "https://www.ownat.com/cdnassets/ow-just-grain-free-adult-chicken-dog-saco-front_m.jpg",
+    "generatedPath": "assets/dog/editorial/dog-ownat-just-gf-chicken-v1.png",
+    "displayPath": "assets/dog/editorial/dog-ownat-just-gf-chicken-v1.webp"
+  },
+  {
+    "id": "dog-ownat-gf-prime",
+    "name": "Ownat Grain Free Prime Adult Chicken & Turkey Dog",
+    "referencePath": "assets/dog/references/dog-ownat-gf-prime.jpg",
+    "referenceUrl": "https://www.ownat.com/gf-prime-adult-chickenturkey-perro",
+    "imageUrl": "https://www.ownat.com/cdnassets/ow-grain-free-prime-adult-chicken-turkey-dog-saco-front_m.jpg",
+    "generatedPath": "assets/dog/editorial/dog-ownat-gf-prime-v1.png",
+    "displayPath": "assets/dog/editorial/dog-ownat-gf-prime-v1.webp"
+  },
+  {
+    "id": "dog-ownat-author-duck",
+    "name": "Ownat Author Fresh Duck & Chicken Dog",
+    "referencePath": "assets/dog/references/dog-ownat-author-duck.jpg",
+    "referenceUrl": "https://www.ownat.com/author-fresh-duck-chicken-cao",
+    "imageUrl": "https://www.ownat.com/cdnassets/Author-Fresh-Duck--Chicken_m.jpg",
+    "generatedPath": "assets/dog/editorial/dog-ownat-author-duck-v1.png",
+    "displayPath": "assets/dog/editorial/dog-ownat-author-duck-v1.webp"
+  },
+  {
+    "id": "dog-ownat-wetline-chicken",
+    "name": "Ownat Wetline Chicken with Carrots Dog",
+    "referencePath": "assets/dog/references/dog-ownat-wetline-chicken.png",
+    "referenceUrl": "https://www.ownat.com/wetline-chicken-with-carrots-perro",
+    "imageUrl": "https://www.ownat.com/cdnassets/Ownat-Wetline-Chicken--Carrots_m.png",
+    "generatedPath": "assets/dog/editorial/dog-ownat-wetline-chicken-v1.png",
+    "displayPath": "assets/dog/editorial/dog-ownat-wetline-chicken-v1.webp"
+  },
+  {
+    "id": "dog-orijen-original",
+    "name": "Orijen Original Dog",
+    "referencePath": "assets/dog/references/dog-orijen-original.png",
+    "referenceUrl": "https://emea.orijenpetfoods.com/es-ES/dogs/dog-food/eu-ori-ns-ori-original.html",
+    "imageUrl": "https://emea.orijenpetfoods.com/dw/image/v2/bfdw_prd/on/demandware.static/-/Sites-orijen-eu-master-catalog/default/dw70050318/Original%20Dog/Original%20%281%29.png?sw=1500",
+    "generatedPath": "assets/dog/editorial/dog-orijen-original-v1.png",
+    "displayPath": "assets/dog/editorial/dog-orijen-original-v1.webp"
+  },
+  {
+    "id": "dog-orijen-puppy",
+    "name": "Orijen Puppy Dog",
+    "referencePath": "assets/dog/references/dog-orijen-puppy.png",
+    "referenceUrl": "https://emea.orijenpetfoods.com/es-ES/dogs/dog-food/eu-ori-ns-puppy.html",
+    "imageUrl": "https://emea.orijenpetfoods.com/dw/image/v2/bfdw_prd/on/demandware.static/-/Sites-orijen-eu-master-catalog/default/dwbbb4c925/Puppy/Puppy%20%281%29.png?sw=1500",
+    "generatedPath": "assets/dog/editorial/dog-orijen-puppy-v1.png",
+    "displayPath": "assets/dog/editorial/dog-orijen-puppy-v1.webp"
+  },
+  {
+    "id": "dog-orijen-six-fish",
+    "name": "Orijen Six Fish Dog",
+    "referencePath": "assets/dog/references/dog-orijen-six-fish.png",
+    "referenceUrl": "https://emea.orijenpetfoods.com/es-ES/dogs/dog-food/eu-ori-ns-ori-sixfish.html",
+    "imageUrl": "https://emea.orijenpetfoods.com/dw/image/v2/bfdw_prd/on/demandware.static/-/Sites-orijen-eu-master-catalog/default/dw0b15544b/Six%20Fish%20Dog/Six-Fish%20%281%29.png?sw=1500",
+    "generatedPath": "assets/dog/editorial/dog-orijen-six-fish-v1.png",
+    "displayPath": "assets/dog/editorial/dog-orijen-six-fish-v1.webp"
+  },
+  {
+    "id": "dog-orijen-small-breed",
+    "name": "Orijen Small Breed Dog",
+    "referencePath": "assets/dog/references/dog-orijen-small-breed.png",
+    "referenceUrl": "https://emea.orijenpetfoods.com/es-ES/dogs/dog-food/eu-ori-ns-ori-small-breed.html",
+    "imageUrl": "https://emea.orijenpetfoods.com/dw/image/v2/bfdw_prd/on/demandware.static/-/Sites-orijen-eu-master-catalog/default/dwa7242e09/Small%20Breed/Small-Breed%20%281%29.png?sw=1500",
+    "generatedPath": "assets/dog/editorial/dog-orijen-small-breed-v1.png",
+    "displayPath": "assets/dog/editorial/dog-orijen-small-breed-v1.webp"
+  },
+  {
+    "id": "dog-orijen-fit-trim",
+    "name": "Orijen Fit & Trim Dog",
+    "referencePath": "assets/dog/references/dog-orijen-fit-trim.png",
+    "referenceUrl": "https://emea.orijenpetfoods.com/es-ES/dogs/dog-food/eu-ori-ns-ori-fittrim.html",
+    "imageUrl": "https://emea.orijenpetfoods.com/dw/image/v2/bfdw_prd/on/demandware.static/-/Sites-orijen-eu-master-catalog/default/dwa101382a/Fit%20&%20Trim%20Dog/Fit-Trim%20%281%29.png?sw=1500",
+    "generatedPath": "assets/dog/editorial/dog-orijen-fit-trim-v1.png",
+    "displayPath": "assets/dog/editorial/dog-orijen-fit-trim-v1.webp"
+  }
+]

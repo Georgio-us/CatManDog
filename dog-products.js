@@ -1,3 +1,4 @@
+import { applyDogStudio } from './dog-studio-images.js?v=dog-studio-1';
 // First dog assortment from the saved supplier catalogues and checked Spanish retail pages
 const checkedAt = '2026-10-17';
 const ownatTariff = 'research/supplier-files/2026-10-14-ownat-royal-canin/PVPR_OWNAT_DIFERENTES_PAISES_FEBRERO_2026.pdf';
@@ -13,7 +14,7 @@ function family({ id, name, brand, category = 'Корм', foodType, tag, descrip
     details: [...details, ...(category === 'Корм' ? ['Норму кормления смотрите на упаковке', 'Свежая вода всегда должна быть доступна'] : [])],
     optionLabel, isReal: true, isNew: true,
     purchasePrice: null, purchasePriceStatus: 'pending', availabilityStatus: 'pending',
-    image: { src: `assets/dog/placeholders/${id}.svg`, alt: `Временная иллюстрация для ${name}`, presentation: 'editorial', generated: false },
+    image: null, // Attached from exact product references by applyDogStudio
     productSource: source ? { name: supplierName || brand, url: source, kind: supplierName ? 'supplier' : 'manufacturer' } : null,
     catalogPage: sourcePage || null,
   };
@@ -58,7 +59,7 @@ const ownat = (props) => family({ brand: 'Ownat', source: 'https://www.ownat.com
 const orijen = (props) => family({ brand: 'Orijen', color: '#3a545a', foodType: 'dry', ...props });
 const yagu = (props) => family({ supplierName: 'Yagu', color: '#6d7986', ...props });
 
-export const dogProducts = [
+const dogProductFamilies = [
   rc({ id:'dog-rc-mini-puppy', name:'Royal Canin Mini Puppy', tag:'Для щенков', description:'Сухой корм для щенков мелких пород', details:['Для щенков мелких пород', 'Полнорационный сухой корм'], variants:[
     {label:'2 кг',code:'3000202',ean:'3182550793001',weightKg:2,price:retail(20.49,'Kiwoko',kiwoko.miniPuppy)},
     {label:'4 кг',code:'3000403',ean:'3182550793032',weightKg:4,price:retail(31.99,'Kiwoko',kiwoko.miniPuppy)},
@@ -150,3 +151,5 @@ export const dogProducts = [
     {label:'L · 63 × 33 × 4,5 см',code:'7516408',ean:'5414365466855',price:analogue(16.49,'Zooplus Deutschland','https://www.zooplus.de/shop/hunde/hundespielzeug/pluesch/9980620596',16.49,'Та же модель размера L в Германии; цену в Испании проверить')},
   ]}),
 ];
+
+export const dogProducts = dogProductFamilies.map(applyDogStudio);

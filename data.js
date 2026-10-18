@@ -11,7 +11,7 @@ import { treatsCareProducts } from './treats-care-products.js?v=studio-1';
 import { faireProducts } from './faire-products.js';
 import { yaguProducts, expandYaguCare } from './yagu-products.js?v=yagu-studio-2';
 import { ownatProducts } from './ownat-products.js?v=ownat-studio-1';
-import { dogProducts } from './dog-products.js?v=dog-first-wave-1';
+import { dogProducts } from './dog-products.js?v=dog-studio-1';
 
 const foodProducts = [...expandPriorityFood(expandRoyalCaninFood(originalFoodProducts)), ...ownatProducts];
 
