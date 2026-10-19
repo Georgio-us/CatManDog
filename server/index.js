@@ -16,7 +16,7 @@ if (db) {
 const server = createServer(async (req, res) => {
   try {
     const url = new URL(req.url || '/', 'http://localhost');
-    if (url.pathname.startsWith('/api/')) return handleApi(initialized ? db : null, req, res, url.pathname);
+    if (url.pathname.startsWith('/api/')) return await handleApi(initialized ? db : null, req, res, url.pathname);
     if (process.env.R2_MEDIA_REDIRECT_ENABLED === 'true' && url.pathname.startsWith('/assets/') &&
         process.env.R2_PUBLIC_BASE_URL) {
       const base = new URL(process.env.R2_PUBLIC_BASE_URL);

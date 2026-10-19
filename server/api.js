@@ -156,9 +156,20 @@ async function authRoute(db, req, res, path) {
 async function adminRoute(db, req, res, path) {
   if (!isAdmin(req)) bad('Доступ закрыт', 403);
   if (path === '/api/admin/orders' && req.method === 'GET') {
-    const { rows } = await db.query(`SELECT id,number,customer_name,email,phone,delivery_address,delivery_preference,
-      status,payment_status,total_cents,created_at FROM orders ORDER BY created_at DESC LIMIT 100`);
+    const { rows } = await db.query(`SELECT o.id,o.number,o.customer_name,o.email,o.phone,o.delivery_address,
+      o.delivery_preference,o.status,o.payment_status,o.total_cents,o.created_at,
+      COALESCE(json_agg(json_build_object('name',i.name,'variantLabel',i.variant_label,
+      'qty',i.quantity,'unitPriceCents',i.unit_price_cents,'sourceMode',i.source_mode))
+      FILTER (WHERE i.id IS NOT NULL),'[]') AS items
+      FROM orders o LEFT JOIN order_items i ON i.order_id=o.id GROUP BY o.id
+      ORDER BY o.created_at DESC LIMIT 100`);
     return json(res, 200, { orders: rows });
+  }
+  if (path === '/api/admin/service-requests' && req.method === 'GET') {
+    const { rows } = await db.query(`SELECT r.id,r.kind,r.email,r.product_id,r.variant_id,r.quantity,
+      r.message,r.status,r.created_at,o.number AS order_number FROM service_requests r
+      LEFT JOIN orders o ON o.id=r.order_id ORDER BY r.created_at DESC LIMIT 100`);
+    return json(res, 200, { requests: rows });
   }
   if (path === '/api/admin/variants' && req.method === 'GET') {
     return json(res, 200, { variants: await catalogSnapshot(db) });
@@ -198,6 +209,15 @@ async function adminRoute(db, req, res, path) {
     } catch (error) { await client.query('ROLLBACK'); throw error; }
     finally { client.release(); }
   }
+  const service = path.match(/^\/api\/admin\/service-requests\/([^/]+)\/status$/);
+  if (service && req.method === 'PATCH') {
+    const body = await readJson(req);
+    if (!['new','in_progress','resolved'].includes(body.status)) bad('Некорректный статус обращения');
+    const { rowCount } = await db.query('UPDATE service_requests SET status=$1 WHERE id=$2',
+      [body.status, service[1]]);
+    if (!rowCount) bad('Обращение не найдено', 404);
+    return json(res, 200, { ok: true });
+  }
   bad('Не найдено', 404);
 }
 
@@ -228,8 +248,8 @@ export async function handleApi(db, req, res, pathname) {
       const quote = priceQuote(body.items, await catalogSnapshot(db), promo);
       return json(res, 200, publicQuote(quote));
     }
-    if (pathname.startsWith('/api/admin/')) return adminRoute(db, req, res, pathname);
-    if (pathname.startsWith('/api/auth/') && req.method === 'POST') return authRoute(db, req, res, pathname);
+    if (pathname.startsWith('/api/admin/')) return await adminRoute(db, req, res, pathname);
+    if (pathname.startsWith('/api/auth/') && req.method === 'POST') return await authRoute(db, req, res, pathname);
     if (pathname === '/api/auth/me' && req.method === 'GET') {
       const customer = await currentCustomer(db, req);
       if (!customer) bad('Войдите в кабинет', 401);
@@ -280,6 +300,12 @@ export async function handleApi(db, req, res, pathname) {
       const orderNumber = cap(body.orderNumber, 40);
       const found = orderNumber ? await db.query('SELECT id FROM orders WHERE number=$1 AND email=$2',
         [orderNumber, email]) : { rows: [] };
+      if (body.kind === 'return' && found.rows[0]) {
+        const item = await db.query('SELECT quantity FROM order_items WHERE order_id=$1 AND product_id=$2 AND variant_id=$3',
+          [found.rows[0].id, cap(body.productId, 180), cap(body.variantId, 180)]);
+        if (!item.rows[0] || !Number.isInteger(body.quantity) || body.quantity < 1 ||
+            body.quantity > item.rows[0].quantity) bad('Укажите товар и количество из заказа');
+      }
       await db.query(`INSERT INTO service_requests(id,order_id,kind,email,product_id,variant_id,quantity,message)
         VALUES($1,$2,$3,$4,$5,$6,$7,$8)`, [randomUUID(), found.rows[0]?.id || null,
         body.kind, email, cap(body.productId, 180) || null, cap(body.variantId, 180) || null,

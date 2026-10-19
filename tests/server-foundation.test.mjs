@@ -4,6 +4,7 @@ import { catalogRows } from '../server/catalog.js';
 import { priceQuote, validateAddress, validateDelivery } from '../server/pricing.js';
 import { hashPassword, verifyPassword, sessionCookie } from '../server/auth.js';
 import { applyServerPrices } from '../server-prices.js';
+import { handleApi } from '../server/api.js';
 
 test('catalog import keeps variant identity and source prices separate from purchase prices', () => {
   const rows = catalogRows();
@@ -70,4 +71,13 @@ test('only confirmed server prices replace storefront retail estimates', () => {
   assert.equal(products[0].variants[0].price, 11.99);
   assert.equal(products[0].variants[0].serverPriceConfirmed, true);
   assert.equal(products[0].variants[1].price, 6.5);
+});
+
+test('unauthorized admin request returns 403 without an unhandled rejection', async () => {
+  const req = { method:'GET', headers:{}, socket:{remoteAddress:'127.0.0.1'} };
+  let status, body;
+  const res = { writeHead(code) { status = code; }, end(value) { body = JSON.parse(value); } };
+  await handleApi({}, req, res, '/api/admin/orders');
+  assert.equal(status, 403);
+  assert.equal(body.error, 'Доступ закрыт');
 });

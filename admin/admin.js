@@ -22,6 +22,7 @@ function orderCard(order) {
     <div><strong>Время</strong>${delivery.mode === 'soon' ? 'Как можно скорее' : `${escape(delivery.date)} ${escape(delivery.time)}`}<br>
       <span class="admin-muted">Не забронировано, адрес не проверен</span></div>
     <div><strong>Оплата</strong>${escape(order.payment_status)}</div></div>
+    <ul class="admin-items">${(order.items || []).map(item => `<li>${escape(item.name)} · ${escape(item.variantLabel)} - ${item.qty} шт × ${euros(item.unitPriceCents)} · ${item.sourceMode === 'on_hand' ? 'на складе' : 'под заказ'}</li>`).join('')}</ul>
     <form data-order-id="${escape(order.id)}"><label>Статус<select name="status">${['received','packing','delivering','delivered','cancelled'].map(status =>
       `<option value="${status}" ${status === order.status ? 'selected' : ''}>${({received:'Получен',packing:'Собираем',delivering:'Везём',delivered:'Доставлен',cancelled:'Отменён'})[status]}</option>`).join('')}</select></label>
     <label>Заметка<input name="note" maxlength="300" class="wide-input" placeholder="Необязательно"></label><button>Сохранить статус</button></form></article>`;
@@ -39,14 +40,24 @@ function variantCard(variant) {
     <label><input type="checkbox" name="priceConfirmed" ${variant.price_confirmed ? 'checked' : ''}> Цена подтверждена</label>
     <button>Сохранить</button></form></article>`;
 }
+function requestCard(request) {
+  return `<article class="admin-card"><h2>${request.kind === 'return' ? 'Возврат' : 'Поддержка'} ${request.order_number ? '· ' + escape(request.order_number) : ''}</h2>
+    <p>${escape(request.email)} · ${escape(request.created_at)}</p>
+    ${request.product_id ? `<p>Товар: ${escape(request.product_id)}${request.variant_id ? ' · ' + escape(request.variant_id) : ''}${request.quantity ? ' · ' + request.quantity + ' шт' : ''}</p>` : ''}
+    <p>${escape(request.message)}</p><form data-request-id="${escape(request.id)}"><label>Статус<select name="status">${['new','in_progress','resolved'].map(status =>
+      `<option value="${status}" ${status === request.status ? 'selected' : ''}>${({new:'Новое',in_progress:'В работе',resolved:'Закрыто'})[status]}</option>`).join('')}</select></label><button>Сохранить статус</button></form></article>`;
+}
 async function load() {
   message('Загружаю данные');
   try {
-    const result = await api(tab === 'orders' ? '/api/admin/orders' : '/api/admin/variants');
+    const path = { orders:'/api/admin/orders', variants:'/api/admin/variants', requests:'/api/admin/service-requests' }[tab];
+    const result = await api(path);
     $('admin-content').innerHTML = tab === 'orders'
       ? result.orders.length ? result.orders.map(orderCard).join('') : '<p>Заказов пока нет</p>'
-      : result.variants.map(variantCard).join('');
-    message(tab === 'orders' ? `Заказов: ${result.orders.length}` : `Вариантов: ${result.variants.length}`);
+      : tab === 'variants' ? result.variants.map(variantCard).join('')
+        : result.requests.length ? result.requests.map(requestCard).join('') : '<p>Обращений пока нет</p>';
+    message(tab === 'orders' ? `Заказов: ${result.orders.length}` : tab === 'variants'
+      ? `Вариантов: ${result.variants.length}` : `Обращений: ${result.requests.length}`);
   } catch (error) { message(error.message); }
 }
 $('token-form').addEventListener('submit', async event => {
@@ -77,6 +88,8 @@ $('admin-content').addEventListener('submit', async event => {
   try {
     if (form.dataset.orderId) await api(`/api/admin/orders/${encodeURIComponent(form.dataset.orderId)}/status`, 'PATCH',
       { status: values.get('status'), note: values.get('note') });
+    else if (form.dataset.requestId) await api(`/api/admin/service-requests/${encodeURIComponent(form.dataset.requestId)}/status`, 'PATCH',
+      { status: values.get('status') });
     else await api(`/api/admin/variants/${encodeURIComponent(form.dataset.variantId)}`, 'PATCH', {
       priceCents: values.get('priceCents') === '' ? null : Number(values.get('priceCents')),
       purchasePriceCents: values.get('purchasePriceCents') === '' ? null : Number(values.get('purchasePriceCents')),
