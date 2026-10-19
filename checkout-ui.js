@@ -1,9 +1,11 @@
 import { checkoutTotals, deliveryTiming, FREE_DELIVERY_FROM, DELIVERY_FEE, validateCheckout } from './checkout-model.js';
+import { orderProgress } from './order-progress.js';
 
-export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems, isReady, getPromo, applyPromo, render }) {
+export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems, isReady, getPromo, applyPromo, findOrder, productLabel, render }) {
   let formValues = {};
   let promoError = '';
   let preview = null;
+  let demonstration = null;
   let servicePreview = null;
 
   const cartSignature = items => JSON.stringify(items.map(item => [item.productId, item.variantId, item.qty, item.price]));
@@ -31,14 +33,53 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     const { values, promo } = preview;
     const address = `${values.street}, ${values.building}${values.apartment ? ', ' + values.apartment : ''}, ${values.postcode} València`;
     const when = values.deliveryMode === 'soon' ? 'Сегодня, как можно скорее' : `${values.deliveryDate}, ${values.deliveryTime}`;
-    return `<div class="page checkout-page"><span class="checkout-eyebrow">Предпросмотр подтверждения</span><h1>Всё верно?</h1><p class="checkout-lead">Проверьте данные перед настоящим оформлением заказа</p><div class="checkout-layout"><div class="checkout-preview"><section class="checkout-section"><h2>Доставка</h2><dl><div><dt>Получатель</dt><dd>${e(values.name)}</dd></div><div><dt>Адрес</dt><dd>${e(address)}</dd></div><div><dt>Когда удобно</dt><dd>${e(when)}</dd></div><div><dt>Телефон</dt><dd>${e(values.phone)}${values.whatsapp ? ' · WhatsApp' : ''}</dd></div><div><dt>Email</dt><dd>${e(values.email)}</dd></div>${values.note ? `<div><dt>Комментарий</dt><dd>${e(values.note)}</dd></div>` : ''}</dl></section><div class="checkout-preview-notice">${icon('shield')} <div><strong>Заказ пока не создан</strong><p>Оплата, отправка заказа и уведомления ещё не подключены. Эта страница показывает, как будет выглядеть подтверждение, без передачи ваших данных.</p></div></div><a class="button outline" href="#/checkout">Изменить данные ${icon('arrow')}</a></div>${summary(items, promo)}</div></div>`;
+    const states = `<section class="checkout-state-examples"><h2>Следующий шаг после подключения оплаты</h2><p>Эти экраны можно посмотреть сейчас как образцы интерфейса. Они не создают заказ и не списывают деньги.</p><div><button type="button" class="button" data-checkout-state="accepted">Пример подтверждения ${icon('arrow')}</button><button type="button" class="button outline" data-checkout-state="failed">Пример ошибки оплаты ${icon('arrow')}</button></div></section>`;
+    return `<div class="page checkout-page"><span class="checkout-eyebrow">Предпросмотр подтверждения</span><h1>Всё верно?</h1><p class="checkout-lead">Проверьте данные перед настоящим оформлением заказа</p><div class="checkout-layout"><div class="checkout-preview"><section class="checkout-section"><h2>Доставка</h2><dl><div><dt>Получатель</dt><dd>${e(values.name)}</dd></div><div><dt>Адрес</dt><dd>${e(address)}</dd></div><div><dt>Когда удобно</dt><dd>${e(when)}</dd></div><div><dt>Телефон</dt><dd>${e(values.phone)}${values.whatsapp ? ' · WhatsApp' : ''}</dd></div><div><dt>Email</dt><dd>${e(values.email)}</dd></div>${values.note ? `<div><dt>Комментарий</dt><dd>${e(values.note)}</dd></div>` : ''}</dl></section><div class="checkout-preview-notice">${icon('shield')} <div><strong>Заказ пока не создан</strong><p>Оплата, отправка заказа и уведомления ещё не подключены. Эта страница показывает, как будет выглядеть подтверждение, без передачи ваших данных.</p></div></div><a class="button outline" href="#/checkout">Изменить данные ${icon('arrow')}</a>${states}</div>${summary(items, promo)}</div></div>`;
   }
 
-  function servicePage(kind) {
+  function resultPage(kind) {
+    const items = getItems();
+    if (!preview || !demonstration || preview.signature !== cartSignature(items) || !isReady() ||
+        (kind === 'failed' ? demonstration.kind !== 'failed' : demonstration.kind !== 'accepted')) {
+      return `<div class="page checkout-page"><h1>Сначала проверьте заказ</h1><p>Демонстрационный экран доступен после заполнения формы оформления</p><a class="button" href="#/checkout">К оформлению ${icon('arrow')}</a></div>`;
+    }
+    const { values, promo } = preview;
+    if (kind === 'failed') return `<div class="page checkout-page checkout-result"><span class="checkout-eyebrow">Пример состояния оплаты</span><h1>Оплата не прошла</h1><p class="checkout-lead">Так будет выглядеть экран, если платёж не удастся завершить. Сейчас оплата не подключена и списания не было.</p><div class="checkout-layout"><div><div class="checkout-preview-notice checkout-failed">${icon('shield')}<div><strong>Товары остались в корзине</strong><p>Можно будет повторить оплату или выбрать другой способ, когда мы подключим платёжную систему.</p></div></div><a class="button" href="#/checkout">Вернуться к оформлению ${icon('arrow')}</a><a class="text-link checkout-secondary-link" href="#/support">Помощь с заказом</a></div>${summary(items, promo)}</div></div>`;
+    const address = `${values.street}, ${values.building}${values.apartment ? ', ' + values.apartment : ''}, ${values.postcode} València`;
+    const when = values.deliveryMode === 'soon' ? 'Сегодня, как можно скорее' : `${values.deliveryDate}, ${values.deliveryTime}`;
+    const statusOnly = kind === 'status';
+    const supportLink = `#/support?order=${encodeURIComponent(demonstration.number)}`;
+    const returnLink = `#/returns?order=${encodeURIComponent(demonstration.number)}`;
+    return `<div class="page checkout-page checkout-result"><span class="checkout-eyebrow">${statusOnly ? 'Пример отслеживания' : 'Пример подтверждения'}</span><h1>${statusOnly ? 'Где мой заказ' : 'Заказ принят'}</h1><p class="checkout-lead">${statusOnly ? 'Так будет выглядеть история заказа после подключения сервера' : 'Так будет выглядеть подтверждение после успешной оплаты'}</p><div class="checkout-preview-notice">${icon('shield')}<div><strong>Демонстрационный заказ ${e(demonstration.number)}</strong><p>Этот номер служит только примером. Заказ не отправлен, оплата не проведена и уведомления не отправлялись.</p></div></div><div class="checkout-layout"><div><section class="checkout-section"><h2>Статус заказа</h2>${orderProgress('received', { icon, escape: e })}<p class="checkout-help">Статус показан для примера и не обновляется автоматически</p></section><section class="checkout-section checkout-preview"><h2>Доставка и контакты</h2><dl><div><dt>Получатель</dt><dd>${e(values.name)}</dd></div><div><dt>Адрес</dt><dd>${e(address)}</dd></div><div><dt>Желаемое время</dt><dd>${e(when)}</dd></div><div><dt>Телефон</dt><dd>${e(values.phone)}${values.whatsapp ? ' · WhatsApp' : ''}</dd></div><div><dt>Email</dt><dd>${e(values.email)}</dd></div></dl></section><div class="checkout-result-actions">${statusOnly ? '<a class="text-link" href="#/checkout/confirmation">К подтверждению</a>' : `<a class="button outline" href="#/checkout/status">Посмотреть статус ${icon('arrow')}</a>`}<a class="text-link" href="${supportLink}">Помощь с заказом</a><a class="text-link" href="${returnLink}">Запросить возврат</a><a class="text-link" href="#/catalog">Продолжить покупки</a></div></div>${summary(items, promo)}</div></div>`;
+  }
+
+  function servicePage(kind, params = new URLSearchParams()) {
     const returning = kind === 'return';
     const title = returning ? 'Запрос на возврат' : 'Помощь с заказом';
-    const saved = servicePreview?.kind === kind;
-    return `<div class="page checkout-page service-page"><a class="text-link" href="#/info/delivery">${icon('arrow')} Доставка и возврат</a><span class="checkout-eyebrow">Мы рядом</span><h1>${title}</h1><p class="checkout-lead">${returning ? 'Расскажите, какой товар хотите вернуть и почему' : 'Опишите вопрос, чтобы мы могли найти ваш заказ и помочь'}</p><div class="service-layout"><form class="checkout-form checkout-section" data-service-form="${kind}"><div class="checkout-fields"><label>Номер заказа ${returning ? '' : '<small>Если есть</small>'}<input name="orderNumber" ${returning ? 'required' : ''} maxlength="40" placeholder="CMD-0000"></label><label>Email для ответа<input type="email" name="email" required autocomplete="email" maxlength="160" placeholder="name@example.com"></label>${returning ? '<label class="checkout-wide">Товар<input name="product" required maxlength="120" placeholder="Название товара и фасовка"></label>' : '<label class="checkout-wide">Тема<select name="topic"><option>Вопрос о заказе</option><option>Доставка</option><option>Товар</option><option>Другое</option></select></label>'}<label class="checkout-wide">${returning ? 'Причина возврата' : 'Ваш вопрос'}<textarea name="message" required minlength="10" maxlength="1200" rows="5" placeholder="Расскажите подробнее"></textarea></label><label class="checkout-wide">Фото <small>Если поможет объяснить ситуацию</small><input type="file" name="photo" accept="image/*"></label></div><p class="checkout-help">Форма пока работает как предпросмотр. Сообщение и фото не отправляются и не сохраняются.</p><button class="button" type="submit">Проверить обращение ${icon('arrow')}</button></form><aside class="checkout-summary"><h2>Что будет дальше</h2><p>После подключения поддержки обращения будут привязаны к заказу. Мы покажем статус и способ связи с командой.</p><a class="text-link" href="#/checkout">Вернуться к оформлению</a></aside></div>${saved ? `<div class="checkout-preview-notice service-draft" id="service-preview" role="status">${icon('check')} <div><strong>Черновик обращения готов</strong><p>Он не отправлен. После подключения поддержки здесь появится отправка и номер обращения.</p><dl><div><dt>Заказ</dt><dd>${e(servicePreview.values.orderNumber || 'Не указан')}</dd></div><div><dt>Email</dt><dd>${e(servicePreview.values.email)}</dd></div><div><dt>${returning ? 'Товар' : 'Тема'}</dt><dd>${e(returning ? servicePreview.values.product : servicePreview.values.topic)}</dd></div><div><dt>Сообщение</dt><dd>${e(servicePreview.values.message)}</dd></div>${servicePreview.photoName ? `<div><dt>Выбранное фото</dt><dd>${e(servicePreview.photoName)} - не загружено</dd></div>` : ''}</dl></div></div>` : ''}</div>`;
+    const orderNumber = params.get('order') || '';
+    const accountOrder = findOrder?.(orderNumber) || null;
+    const demoOrder = !accountOrder && demonstration?.kind === 'accepted' && demonstration.number === orderNumber &&
+      preview?.signature === cartSignature(getItems()) ? { id: null, number: orderNumber, items: getItems() } : null;
+    const linkedOrder = accountOrder || demoOrder;
+    const selectedProduct = params.get('product') || '';
+    const saved = servicePreview?.kind === kind && (!orderNumber || servicePreview.values.orderNumber === orderNumber);
+    const draftValues = saved ? servicePreview.values : {};
+    const emailPrefill = draftValues.email || (demoOrder ? preview.values.email : '');
+    const back = accountOrder ? `#/account/orders/${encodeURIComponent(accountOrder.id)}` : demoOrder ? '#/checkout/status' : '#/info/delivery';
+    const choices = linkedOrder?.items.map(item => {
+      const key = `${item.productId}|${item.variantId || ''}`;
+      const label = demoOrder ? `${item.name} · ${item.variant || '1 шт'}` : productLabel?.(item) || item.name || 'Товар';
+      return `<option value="${e(label)}" data-qty="${item.qty}" ${selectedProduct === key || (!selectedProduct && draftValues.product === label) ? 'selected' : ''}>${e(label)}</option>`;
+    }).join('') || '';
+    const productField = linkedOrder
+      ? `<label class="checkout-wide">Товар ${returning ? '' : '<small>Если вопрос о конкретном товаре</small>'}<select name="product" ${returning ? 'required' : ''}><option value="">${returning ? 'Выберите товар из заказа' : 'Весь заказ'}</option>${choices}</select></label>`
+      : `<label class="checkout-wide">Товар ${returning ? '' : '<small>Если вопрос о конкретном товаре</small>'}<input name="product" ${returning ? 'required' : ''} maxlength="120" value="${e(draftValues.product || '')}" placeholder="Название товара и фасовка"></label>`;
+    const selectedQuantity = linkedOrder?.items.find(item => `${item.productId}|${item.variantId || ''}` === selectedProduct ||
+      (draftValues.product && (demoOrder ? `${item.name} · ${item.variant || '1 шт'}` : productLabel?.(item)) === draftValues.product))?.qty || 99;
+    const quantityField = returning ? `<label>Количество<input type="number" name="quantity" min="1" max="${selectedQuantity}" value="${e(Math.min(Number(draftValues.quantity) || 1, selectedQuantity))}" required></label>` : '';
+    const topicField = returning ? '' : `<label class="checkout-wide">Тема<select name="topic">${['Вопрос о заказе', 'Доставка', 'Товар', 'Другое'].map(value => `<option ${draftValues.topic === value ? 'selected' : ''}>${value}</option>`).join('')}</select></label>`;
+    const draft = saved ? `<div class="checkout-preview-notice service-draft" id="service-preview" role="status">${icon('check')} <div><strong>Черновик обращения готов</strong><p>Он не отправлен. После подключения поддержки здесь появится отправка и номер обращения.</p><dl><div><dt>Заказ</dt><dd>${e(servicePreview.values.orderNumber || 'Не указан')}</dd></div><div><dt>Email</dt><dd>${e(servicePreview.values.email)}</dd></div><div><dt>Товар</dt><dd>${e(servicePreview.values.product || 'Весь заказ')}</dd></div>${returning ? `<div><dt>Количество</dt><dd>${e(servicePreview.values.quantity)}</dd></div>` : ''}${!returning ? `<div><dt>Тема</dt><dd>${e(servicePreview.values.topic)}</dd></div>` : ''}<div><dt>Сообщение</dt><dd>${e(servicePreview.values.message)}</dd></div>${servicePreview.photoName ? `<div><dt>Выбранное фото</dt><dd>${e(servicePreview.photoName)} - не загружено</dd></div>` : ''}</dl></div></div>` : '';
+    return `<div class="page checkout-page service-page"><a class="text-link" href="${back}">${icon('arrow')} ${linkedOrder ? 'К заказу' : 'Доставка и возврат'}</a><span class="checkout-eyebrow">Мы рядом</span><h1>${title}</h1><p class="checkout-lead">${returning ? 'Расскажите, какой товар хотите вернуть и почему' : 'Опишите вопрос, чтобы мы могли найти ваш заказ и помочь'}</p><div class="service-layout"><form class="checkout-form checkout-section" data-service-form="${kind}"><div class="checkout-fields"><label>Номер заказа ${returning ? '' : '<small>Если есть</small>'}<input name="orderNumber" ${returning ? 'required' : ''} ${linkedOrder ? 'readonly' : ''} maxlength="40" value="${e(orderNumber || draftValues.orderNumber || '')}" placeholder="CMD-0000"></label><label>Email для ответа<input type="email" name="email" required autocomplete="email" maxlength="160" value="${e(emailPrefill)}" placeholder="name@example.com"></label>${productField}${quantityField}${topicField}<label class="checkout-wide">${returning ? 'Причина возврата' : 'Ваш вопрос'}<textarea name="message" required minlength="10" maxlength="1200" rows="5" placeholder="Расскажите подробнее">${e(draftValues.message || '')}</textarea></label><label class="checkout-wide">Фото <small>Если поможет объяснить ситуацию</small><input type="file" name="photo" accept="image/*"></label></div><p class="checkout-help">Форма пока работает как предпросмотр. Сообщение и фото не отправляются и не сохраняются.</p><button class="button" type="submit">Проверить обращение ${icon('arrow')}</button></form><aside class="checkout-summary"><h2>Что будет дальше</h2><p>После подключения поддержки обращения будут привязаны к заказу. Мы покажем статус и способ связи с командой.</p><a class="text-link" href="${back}">${linkedOrder ? 'Вернуться к заказу' : 'Доставка и возврат'}</a></aside></div>${draft}</div>`;
   }
 
   function remember(form) {
@@ -49,6 +90,13 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
   }
 
   function click(button) {
+    if (button.hasAttribute('data-checkout-state')) {
+      const kind = button.dataset.checkoutState;
+      if (!preview || !isReady() || preview.signature !== cartSignature(getItems()) || !['accepted', 'failed'].includes(kind)) return;
+      demonstration = { kind, number: `DEMO-${String(Date.now()).slice(-6)}` };
+      location.hash = kind === 'accepted' ? '/checkout/confirmation' : '/checkout/payment-error';
+      return;
+    }
     if (!button.hasAttribute('data-checkout-promo')) return;
     const form = button.closest('form');
     const values = remember(form);
@@ -58,6 +106,12 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
   }
 
   function change(target) {
+    if (target.name === 'product' && target.closest('[data-service-form="return"]')) {
+      const quantity = target.form.elements.quantity;
+      quantity.max = target.selectedOptions[0]?.dataset.qty || 99;
+      if (Number(quantity.value) > Number(quantity.max)) quantity.value = quantity.max;
+      return;
+    }
     if (target.name !== 'deliveryMode') return;
     const form = target.closest('form');
     const scheduled = target.value === 'scheduled';
@@ -87,5 +141,5 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     }
   }
 
-  return { page, previewPage, servicePage, click, change, submit };
+  return { page, previewPage, resultPage, servicePage, click, change, submit };
 }

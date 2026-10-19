@@ -1,10 +1,11 @@
 import { createAccountStore } from './account-store.js?v=2';
 import { accountTools } from './useful.js?v=2';
+import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
 const store = createAccountStore(localStorage);
 
 const preferenceOptions = ['Сухой корм', 'Влажный корм', 'Без зерна', 'Стерилизован', 'Чувствительное пищеварение', 'Игрушки с кошачьей мятой'];
 const sections = [['', 'Мой кабинет', 'paw'], ['orders', 'Мои заказы', 'bag'], ['supplies', 'Мои запасы', 'calendar'], ['perks', 'Подарки и бонусы', 'gift'], ['care', 'Мои инструменты', 'map'], ['profile', 'Мой профиль', 'cat'], ['human', 'Мой человек', 'heart']];
-const statuses = { packing: 'Собираем коробку', received: 'Демозаказ сохранён', delivered: 'Коробка доставлена' };
+const statuses = { packing: 'Собираем коробку', received: 'Демозаказ сохранён', delivering: 'Везём к вам', delivered: 'Коробка доставлена' };
 const dateLabel = value => new Intl.DateTimeFormat('ru', { day: 'numeric', month: 'long' }).format(new Date(value + 'T12:00:00'));
 const ageLabel = pet => {
   if (!pet.birthday) return pet.age || 'Возраст пока не указан';
@@ -20,9 +21,11 @@ export function createAccountUI(helpers) {
   const { escape: e, icon, money, products, imageBlock, render, notify, getCart, repeatOrder } = helpers;
   function navigate(path) { if (location.hash === '#' + path) render(); else location.hash = path; }
   const petIcon = pet => `<span class="pet-avatar pet-avatar-${pet?.color || 'sage'}">${icon(pet?.species === 'dog' ? 'paw' : 'cat')}</span>`;
+  const orderVariantId = item => resolveOrderVariantId(products, item);
   const productFor = item => {
     const p = products.find(p => p.id === item.productId);
-    return item.variantId ? p?.variants?.find(v => v.id === item.variantId) || p : p;
+    const variantId = orderVariantId(item);
+    return variantId ? p?.variants?.find(v => v.id === variantId) || p : p;
   };
   const formError = form => form.querySelector('[data-account-error]');
   const pageNote = () => `<p class="pet-local-note">${icon('shield')}${store.mode() === 'demo' ? 'Пример кабинета - заказы и данные демонстрационные' : 'Прототип - данные сохранены только в этом браузере'}</p>`;
@@ -37,7 +40,7 @@ export function createAccountUI(helpers) {
   }
   function orderCard(order, compact = false) {
     const total = order.items.reduce((sum, item) => sum + item.price * item.qty, 0) * (1 - (order.discount || 0) / 100);
-    return `<article class="pet-order"><div class="pet-order-head"><div><strong>${e(order.number)}</strong><span>${dateLabel(order.date)}</span></div><span class="pet-status ${order.status === 'delivered' ? 'pet-status-delivered' : ''}">${statuses[order.status] || 'Демозаказ'}</span></div><div class="pet-order-products">${order.items.slice(0, compact ? 3 : order.items.length).map(item => { const p = productFor(item); return `<a href="#/product/${e(item.productId)}${item.variantId ? '?variant=' + encodeURIComponent(item.variantId) : ''}" aria-label="${e(p?.name || 'Товар')}">${p ? imageBlock(p.image) : icon('bag')}<span>${e(p?.name || item.name || 'Товар')}<small>${item.qty} шт${item.size && item.size !== '1 шт' ? ' · ' + e(item.size) : ''}</small></span></a>`; }).join('')}</div><div class="pet-order-bottom"><strong>${money(total)}</strong><button class="pet-small-button" data-account-repeat="${e(order.id)}">${icon('refresh')} Повторить заказ</button></div>${order.status !== 'delivered' ? '<p class="pet-caption">Статус показан для демонстрации - реальная отправка пока не подключена</p>' : ''}</article>`;
+    return `<article class="pet-order"><div class="pet-order-head"><div><strong>${e(order.number)}</strong><span>${dateLabel(order.date)}</span></div><span class="pet-status ${order.status === 'delivered' ? 'pet-status-delivered' : ''}">${statuses[order.status] || 'Демозаказ'}</span></div><div class="pet-order-products">${order.items.slice(0, compact ? 3 : order.items.length).map(item => { const p = productFor(item); const variantId = orderVariantId(item); return `<a href="#/product/${e(item.productId)}${variantId ? '?variant=' + encodeURIComponent(variantId) : ''}" aria-label="${e(p?.name || 'Товар')}">${p ? imageBlock(p.image) : icon('bag')}<span>${e(p?.name || item.name || 'Товар')}<small>${item.qty} шт${item.size && item.size !== '1 шт' ? ' · ' + e(item.size) : ''}</small></span></a>`; }).join('')}</div><div class="pet-order-bottom"><strong>${money(total)}</strong><div class="pet-order-actions"><a class="pet-small-button" href="#/account/orders/${encodeURIComponent(order.id)}">Детали заказа ${icon('arrow')}</a><button class="pet-small-button" data-account-repeat="${e(order.id)}">${icon('refresh')} Повторить заказ</button></div></div>${order.status !== 'delivered' ? '<p class="pet-caption">Статус показан для демонстрации - реальная отправка пока не подключена</p>' : ''}</article>`;
   }
   function reminderRow(reminder) {
     return `<div class="pet-reminder ${reminder.done ? 'pet-reminder-done' : ''}"><button class="pet-check" data-account-reminder="${e(reminder.id)}" aria-label="${reminder.done ? 'Вернуть в планы' : 'Отметить выполненным'}: ${e(reminder.title)}" aria-pressed="${reminder.done}">${icon(reminder.done ? 'check' : 'calendar')}</button><div><strong>${e(reminder.title)}</strong><span>${dateLabel(reminder.date)}</span></div>${reminder.productId ? `<a class="pet-round-link" href="#/product/${e(reminder.productId)}" aria-label="Посмотреть товар">${icon('arrow')}</a>` : ''}</div>`;
@@ -48,8 +51,27 @@ export function createAccountUI(helpers) {
     const reminders = data.reminders.filter(r => r.petId === pet.id && !r.done);
     return `<div class="pet-welcome"><div><span class="pet-eyebrow">Мой маленький мир</span><h1>Привет, ${e(pet.name)}</h1><p>Всё для твоей хорошей жизни с хвостиком</p></div>${petIcon(pet)}</div><div class="pet-stat-grid"><a href="#/account/orders"><span>${icon('bag')} Мои коробки</span><strong>${orders.length}</strong><small>Питомец: ${e(pet.name)}</small></a><a href="#/account/supplies"><span>${icon('calendar')} Мои планы</span><strong>${reminders.length}</strong><small>Покупки, о которых стоит помнить</small></a><a href="#/account/perks"><span>${icon('gift')} Маленький подарок</span><strong>10%</strong><small>Демопромокод WELCOME10</small></a></div><div class="pet-dashboard-grid"><section class="pet-panel"><div class="pet-panel-head"><h2>Моя следующая коробка</h2><a class="text-link" href="#/account/orders">Все заказы</a></div>${current ? orderCard(current, true) : emptyPanel('Здесь будет твоя коробка', 'Сохрани демозаказ из корзины, чтобы увидеть его в кабинете')}</section><section class="pet-panel"><div class="pet-panel-head"><h2>Скоро понадобится</h2><a class="text-link" href="#/account/supplies">Мои запасы</a></div>${reminders.length ? reminders.slice(0, 3).map(reminderRow).join('') : '<p class="pet-muted">Добавь покупку в планы - и она появится здесь</p>'}<a class="pet-inline-link" href="#/account/supplies">${icon('plus')} Запланировать покупку</a></section></div><section class="pet-profile-summary pet-panel">${petIcon(pet)}<div><span class="pet-eyebrow">Пара слов обо мне</span><h2>${e(pet.name)}</h2><p>${e(pet.breed || (pet.species === 'dog' ? 'Любимая собака' : 'Любимая домашняя кошка'))} · ${e(ageLabel(pet))}</p><div class="pet-chips">${(pet.preferences || []).map(v => `<span>${e(v)}</span>`).join('')}</div></div><a class="text-link" href="#/account/profile">Мой профиль</a></section><a class="use-account-preview" href="#/account/care">${icon('compass')}<div><h2>Моя клиника и поездки</h2><p>Сохраняй контакты и собирай планы для жизни вместе</p></div>${icon('arrow')}</a>`;
   }
-  function ordersPage(pet, data) {
+  function orderDetailPage(pet, order) {
+    const subtotal = order.items.reduce((sum, item) => sum + item.price * item.qty, 0);
+    const discount = subtotal * (order.discount || 0) / 100;
+    const supportLink = `#/support?order=${encodeURIComponent(order.number)}`;
+    const items = order.items.map(item => {
+      const product = productFor(item);
+      const variantId = orderVariantId(item);
+      const name = product?.name || item.name || 'Товар';
+      const label = `${name}${item.size ? ' · ' + item.size : ''}`;
+      const key = `${item.productId}|${variantId || ''}`;
+      const productLink = `#/product/${e(item.productId)}${variantId ? '?variant=' + encodeURIComponent(variantId) : ''}`;
+      return `<li><a href="${productLink}">${product ? imageBlock(product.image) : icon('bag')}<span><strong>${e(name)}</strong><small>${e(item.size || '1 шт')} · ${item.qty} шт × ${money(item.price)}</small></span></a><strong>${money(item.price * item.qty)}</strong><a class="text-link" href="#/returns?order=${encodeURIComponent(order.number)}&amp;product=${encodeURIComponent(key)}" aria-label="Возврат товара: ${e(label)}">Запросить возврат</a></li>`;
+    }).join('');
+    return `<div class="pet-page-head"><a class="text-link" href="#/account/orders">${icon('arrow')} Все заказы</a><span class="pet-eyebrow">Демонстрационный заказ ${e(order.number)}</span><h1>Заказ ${e(order.number)}</h1><p>Сохранён ${dateLabel(order.date)} для ${e(pet.name)}. Статусы показаны для примера.</p></div><div class="pet-order-detail"><section class="pet-panel"><h2>Статус заказа</h2>${orderProgress(order.status, { icon, escape: e })}<p class="pet-caption">Реальная доставка и автоматическое обновление статуса пока не подключены</p></section><section class="pet-panel"><h2>Товары в заказе</h2><ul class="pet-order-detail-items">${items}</ul><div class="summary-line"><span>Товары</span><strong>${money(subtotal)}</strong></div>${discount ? `<div class="summary-line"><span>Скидка</span><strong>−${money(discount)}</strong></div>` : ''}<div class="summary-line total"><span>Сумма товаров</span><strong>${money(subtotal - discount)}</strong></div><p class="pet-caption">Доставка и оплата в этом демонстрационном заказе не записаны</p></section><div class="pet-order-detail-actions"><a class="button outline" href="${supportLink}">Задать вопрос по заказу ${icon('arrow')}</a><button class="pet-small-button" data-account-repeat="${e(order.id)}">${icon('refresh')} Повторить заказ</button></div></div>`;
+  }
+  function ordersPage(pet, data, orderId) {
     const list = data.orders.filter(o => o.petId === pet.id);
+    if (orderId) {
+      const order = list.find(item => item.id === orderId);
+      return order ? orderDetailPage(pet, order) : emptyPanel('Заказ не найден', 'Откройте список заказов своего питомца', 'Мои заказы', '#/account/orders');
+    }
     return `<div class="pet-page-head"><span class="pet-eyebrow">Коробки для ${e(pet.name)}</span><h1>Мои заказы</h1><p>Что уже приехало и что мы ещё собираем</p></div>${list.length ? `<div class="pet-order-grid">${list.map(o => orderCard(o)).join('')}</div>` : `<section class="pet-panel">${emptyPanel('Первая коробка ещё впереди', 'Выбери товары и сохрани демозаказ в корзине')}</section>`}`;
   }
   function suppliesPage(pet, data) {
@@ -70,7 +92,7 @@ export function createAccountUI(helpers) {
     if (!pet) return onboarding(params);
     const data = store.get();
     const section = path.split('/')[2] || '';
-    const content = section === 'care' ? accountTools({ pet, data, escape: e, icon }) : section === 'orders' ? ordersPage(pet, data) : section === 'supplies' ? suppliesPage(pet, data) : section === 'perks' ? perksPage(pet, data) : section === 'profile' ? profilePage(pet) : section === 'human' ? humanPage(data) : dashboard(pet, data);
+    const content = section === 'care' ? accountTools({ pet, data, escape: e, icon }) : section === 'orders' ? ordersPage(pet, data, path.split('/')[3]) : section === 'supplies' ? suppliesPage(pet, data) : section === 'perks' ? perksPage(pet, data) : section === 'profile' ? profilePage(pet) : section === 'human' ? humanPage(data) : dashboard(pet, data);
     return `<div class="page pet-account">${pageNote()}<div class="pet-account-layout"><aside class="pet-sidebar"><a class="pet-account-brand" href="#/account">${icon('paw')} Кабинет с хвостиком</a><div class="pet-switcher" role="group" aria-label="Мои питомцы">${data.pets.map(p => `<button data-account-pet="${e(p.id)}" aria-pressed="${p.id === pet.id}" class="${p.id === pet.id ? 'active' : ''}">${petIcon(p)}<span>${e(p.name)}</span>${p.id === pet.id ? icon('check') : ''}</button>`).join('')}</div><a class="pet-add" href="#/join?add=1">${icon('plus')} Добавить питомца</a><nav class="pet-navigation" aria-label="Разделы кабинета">${sections.map(([key, label, glyph]) => `<a href="#/account${key ? '/' + key : ''}" ${section === key ? 'aria-current="page"' : ''}>${icon(glyph)} ${label}</a>`).join('')}</nav><button class="pet-exit" data-account-exit>${icon('arrow')} ${store.mode() === 'demo' ? 'Создать свой кабинет' : 'Закрыть кабинет'}</button><p class="pet-sidebar-note">Каждому хвостику<br>немного больше заботы</p></aside><div class="pet-account-content">${content}</div></div></div>`;
   }
   async function click(button) {

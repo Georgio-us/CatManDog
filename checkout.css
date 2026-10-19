@@ -60,6 +60,22 @@
 .checkout-preview-notice { display: flex; align-items: flex-start; gap: 14px; padding: 22px; border-radius: 14px; background: #f1f6dc; margin: 24px 0; }
 .checkout-preview-notice svg { width: 22px; height: 22px; flex: none; }
 .checkout-preview-notice p { margin: 5px 0 0; color: #555b46; font-size: 13px; }
+.checkout-state-examples { border-top: 1px solid var(--line); margin-top: 34px; padding-top: 27px; }
+.checkout-state-examples h2 { font-size: 22px; letter-spacing: -.6px; }
+.checkout-state-examples p { color: var(--muted); font-size: 13px; max-width: 540px; }
+.checkout-state-examples > div, .checkout-result-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 18px; }
+.checkout-state-examples .button { font-size: 12px; }
+.checkout-result > .checkout-preview-notice { max-width: 760px; }
+.checkout-failed { background: #fbf0ec; }
+.checkout-failed p { color: #755750; }
+.checkout-secondary-link { display: inline-block; margin: 16px 0 0 18px; }
+.order-progress { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; list-style: none; padding: 0; margin: 24px 0; }
+.order-progress li { display: grid; align-content: start; gap: 10px; color: var(--muted); font-size: 12px; line-height: 1.4; }
+.order-progress-icon { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%; color: var(--muted); font-size: 12px; }
+.order-progress-icon svg { width: 17px; height: 17px; }
+.order-progress li.current { color: var(--ink); font-weight: 700; }
+.order-progress li.current .order-progress-icon { background: var(--lime); border-color: var(--lime); color: var(--ink); }
+.order-progress li.completed .order-progress-icon { background: var(--ink); border-color: var(--ink); color: white; }
 .service-page > .text-link { display: inline-flex; gap: 8px; align-items: center; }
 .service-page .checkout-form { border-bottom: 1px solid var(--line); }
 .service-page .checkout-summary p { color: var(--muted); font-size: 14px; }
@@ -85,4 +101,6 @@
   .checkout-promo { grid-template-columns: 1fr; }
   .checkout-preview dl > div { grid-template-columns: 1fr; gap: 2px; }
   .service-draft dl > div { grid-template-columns: 1fr; gap: 2px; }
+  .order-progress { gap: 6px; }
+  .order-progress li { font-size: 10px; }
 }

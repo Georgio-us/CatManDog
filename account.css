@@ -56,6 +56,18 @@
 .pet-order-products small { display: block; font-size: 10px; color: var(--muted); margin-top: 4px; }
 .pet-order-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); padding-top: 16px; margin-top: 20px; }
 .pet-order-bottom > strong { white-space: nowrap; }
+.pet-order-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.pet-order-actions a svg { width: 14px; height: 14px; }
+.pet-order-detail { display: grid; gap: 22px; }
+.pet-order-detail-items { list-style: none; padding: 0; margin: 22px 0; }
+.pet-order-detail-items li { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 5px 18px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+.pet-order-detail-items li > a:first-child { display: flex; gap: 14px; align-items: center; min-width: 0; }
+.pet-order-detail-items .product-image { width: 56px; height: 56px; flex: none; border-radius: 8px; background: var(--surface); }
+.pet-order-detail-items .product-image img { width: 100%; height: 100%; object-fit: contain; }
+.pet-order-detail-items small { display: block; color: var(--muted); font-size: 11px; }
+.pet-order-detail-items .text-link { grid-column: 1 / -1; font-size: 11px; justify-self: start; margin-left: 70px; }
+.pet-order-detail-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
+.pet-order-detail-actions .button { font-size: 12px; }
 .pet-small-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 9px 12px; border-radius: 99px; border: 1px solid var(--line); background: white; font-size: 11px; }
 .pet-small-button svg { width: 15px; height: 15px; }
 .pet-caption { color: var(--muted); font-size: 10px; line-height: 1.7; margin-top: 16px; }
@@ -139,6 +151,8 @@
   .pet-onboarding-story { min-height: 640px; }
 }
 @media (max-width: 760px) {
+  .pet-order-bottom { flex-wrap: wrap; }
+  .pet-order-actions { justify-content: flex-start; }
   .pet-account-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .pet-sidebar { border-right: 0; border-bottom: 1px solid var(--line); padding: 0 0 15px; }
   .pet-account-brand { margin-bottom: 16px; }
