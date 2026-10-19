@@ -34,8 +34,10 @@ CREATE TABLE IF NOT EXISTS customers (
   password_hash text NOT NULL,
   name text NOT NULL DEFAULT '',
   phone text NOT NULL DEFAULT '',
+  email_verified_at timestamptz,
   created_at timestamptz NOT NULL DEFAULT now()
 );
+ALTER TABLE customers ADD COLUMN IF NOT EXISTS email_verified_at timestamptz;
 CREATE TABLE IF NOT EXISTS customer_sessions (
   id uuid PRIMARY KEY,
   customer_id uuid NOT NULL REFERENCES customers(id) ON DELETE CASCADE,
@@ -44,6 +46,17 @@ CREATE TABLE IF NOT EXISTS customer_sessions (
   created_at timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS customer_sessions_customer_id_idx ON customer_sessions(customer_id);
+
+CREATE TABLE IF NOT EXISTS auth_links (
+  id uuid PRIMARY KEY,
+  customer_id uuid NOT NULL REFERENCES customers(id) ON DELETE CASCADE,
+  kind text NOT NULL CHECK (kind IN ('verify','reset')),
+  token_hash text NOT NULL UNIQUE,
+  expires_at timestamptz NOT NULL,
+  consumed_at timestamptz,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS auth_links_customer_kind_idx ON auth_links(customer_id,kind);
 
 CREATE TABLE IF NOT EXISTS pets (
   id uuid PRIMARY KEY,
@@ -55,6 +68,14 @@ CREATE TABLE IF NOT EXISTS pets (
   updated_at timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS pets_customer_id_idx ON pets(customer_id);
+
+CREATE TABLE IF NOT EXISTS customer_cabinet (
+  customer_id uuid PRIMARY KEY REFERENCES customers(id) ON DELETE CASCADE,
+  data jsonb NOT NULL DEFAULT '{}'::jsonb,
+  revision integer NOT NULL DEFAULT 0,
+  updated_at timestamptz NOT NULL DEFAULT now()
+);
+ALTER TABLE customer_cabinet ADD COLUMN IF NOT EXISTS revision integer NOT NULL DEFAULT 0;
 
 CREATE SEQUENCE IF NOT EXISTS order_number_seq START WITH 10000;
 CREATE TABLE IF NOT EXISTS orders (

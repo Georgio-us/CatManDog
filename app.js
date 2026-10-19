@@ -1,5 +1,5 @@
-import { createUsefulUI } from './useful.js?v=home-preview-1';
-import { createAccountUI } from './account.js?v=4';
+import { createUsefulUI } from './useful.js?v=remote-cabinet-1';
+import { createAccountUI } from './account.js?v=remote-cabinet-1';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, isDemoPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js';
 import { accessoryDetail } from './accessory-ui.js?v=variant-pricing-1';
 import { provisionalPriceLabel } from './retail-research.js?v=variant-pricing-1';
@@ -36,7 +36,7 @@ const account = createAccountUI({ escape, icon, money, products, imageBlock, ren
   getCart: () => cart.map(item => ({ ...item, productId: item.productId || item.id, price: cartUnitPrice(item), name: cartSku(item, products)?.name })),
   repeatOrder: items => items.forEach(item => add(item.productId, item.size, item.qty, item.giftConfig, item.variantId))
 });
-const useful = createUsefulUI({ escape, icon, store: account.store, render, notify });
+const useful = createUsefulUI({ escape, icon, store: account.store, render, notify, syncChanges: account.syncChanges });
 const checkout = createCheckoutUI({
   escape, icon, money, imageBlock, render,
   getItems: () => cart.map(item => {
@@ -274,9 +274,10 @@ document.querySelector('#search-close').addEventListener('click',()=>{document.q
 document.querySelector('#search-form').addEventListener('submit',event=>{event.preventDefault();const q=document.querySelector('#site-search').value.trim();priceLimit=catalogPriceMax;document.querySelector('#search-form').hidden=true;location.hash=`/catalog${q?'?q='+encodeURIComponent(q):''}`;});
 document.querySelector('#mobile-toggle').addEventListener('click',()=>{const open=document.querySelector('nav').classList.toggle('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded',String(open));});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){document.querySelector('#search-form').hidden=true;document.querySelector('nav').classList.remove('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded','false');}});
-window.addEventListener('hashchange',()=>{render();window.scrollTo(0,0);});
+window.addEventListener('hashchange',()=>{render();account.handleLink();window.scrollTo(0,0);});
 await loadSupplierTerms();
 render();
+account.initialize();
 if (['http:','https:'].includes(location.protocol)) {
   fetch('/api/catalog', { credentials: 'same-origin' }).then(response => response.ok ? response.json() : null)
     .then(data => {

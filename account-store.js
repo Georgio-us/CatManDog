@@ -1,4 +1,4 @@
-// Local adapter for the prototype; replace this layer when server accounts are connected
+// Local prototype and server-backed account adapter
 const KEY = 'catmandog-pet-account-v1';
 const DEMO_KEY = 'catmandog-pet-account-demo-v1';
 const MODE_KEY = 'catmandog-pet-account-mode';
@@ -21,6 +21,9 @@ const example = () => ({
 });
 export function createAccountStore(storage) {
   let mode = 'personal';
+  let revision = 0;
+  let saveRemote = null;
+  let remoteQueue = Promise.resolve();
   try { mode = storage.getItem(MODE_KEY) === 'demo' ? 'demo' : 'personal'; } catch { /* A disabled storage must not prevent the storefront from loading */ }
   let data;
   function load() {
@@ -32,12 +35,28 @@ export function createAccountStore(storage) {
     data.human = { ...empty().human, ...data.human };
     if (!data.pets.some(p => p.id === data.activePetId)) data.activePetId = data.pets[0]?.id || null;
   }
-  function save() { storage.setItem(mode === 'demo' ? DEMO_KEY : KEY, JSON.stringify(data)); }
+  function save() { if (mode !== 'remote') storage.setItem(mode === 'demo' ? DEMO_KEY : KEY, JSON.stringify(data)); }
   load();
   return {
     get: () => structuredClone(data),
     mode: () => mode,
     activePet: () => structuredClone(data.pets.find(p => p.id === data.activePetId) || null),
+    connectRemote(snapshot, nextRevision, persist) {
+      if (!snapshot || snapshot.version !== 1 || !Array.isArray(snapshot.pets) || typeof persist !== 'function')
+        throw new Error('Некорректные данные кабинета');
+      mode = 'remote'; data = structuredClone(snapshot); revision = nextRevision;
+      saveRemote = persist; remoteQueue = Promise.resolve();
+    },
+    disconnectRemote() { mode = 'personal'; saveRemote = null; revision = 0; load(); },
+    sync() {
+      if (mode !== 'remote') return Promise.resolve();
+      const snapshot = structuredClone(data);
+      remoteQueue = remoteQueue.catch(() => {}).then(async () => {
+        const result = await saveRemote(snapshot, revision);
+        revision = result.revision;
+      });
+      return remoteQueue;
+    },
     open(nextMode) { mode = nextMode === 'demo' ? 'demo' : 'personal'; storage.setItem(MODE_KEY, mode); load(); },
     switchPet(petId) { if (data.pets.some(p => p.id === petId)) { data.activePetId = petId; save(); } },
     savePet(values, petId) {
@@ -72,6 +91,7 @@ export function createAccountStore(storage) {
       data.tripDrafts[data.activePetId] = saved; save(); return structuredClone(saved);
     },
     recordOrder(items) {
+      if (mode === 'remote') throw new Error('Демозаказ нельзя сохранять в настоящем кабинете');
       if (!data.activePetId || !items.length) throw new Error('Сначала добавьте питомца и товары');
       const order = { id: id(), number: 'DEMO-' + String(Date.now()).slice(-6), petId: data.activePetId, date: day(0), status: 'received', items: structuredClone(items), discount: data.promo ? 10 : 0 };
       data.orders.unshift(order); save(); return structuredClone(order);

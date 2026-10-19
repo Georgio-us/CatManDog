@@ -1,15 +1,28 @@
-import { randomUUID } from 'node:crypto';
+import { randomUUID, randomBytes } from 'node:crypto';
 import { catalogSnapshot } from './catalog.js';
 import { priceQuote, validateAddress, validateDelivery } from './pricing.js';
 import { json, readJson, sameOrigin } from './http.js';
 import { normalizedEmail, validEmail, hashPassword, verifyPassword, currentCustomer,
   createSession, cookieToken, tokenDigest, sessionCookie, clearSessionCookie, isAdmin } from './auth.js';
+import { loadCabinet, saveCabinet } from './cabinet.js';
+import { emailReady, sendAccountLink } from './email.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
 const enabled = name => process.env[name] === 'true';
 const bad = (message, status = 400) => { throw Object.assign(new Error(message), { status }); };
 const secure = req => req.headers['x-forwarded-proto'] === 'https' || !!req.socket.encrypted;
+const authToken = value => /^[a-f0-9]{64}$/.test(String(value || ''));
+
+async function issueAccountLink(db, customerId, kind, email) {
+  const token = randomBytes(32).toString('hex');
+  await db.query('DELETE FROM auth_links WHERE customer_id=$1 AND kind=$2 AND consumed_at IS NULL',
+    [customerId, kind]);
+  await db.query(`INSERT INTO auth_links(id,customer_id,kind,token_hash,expires_at)
+    VALUES($1,$2,$3,$4,now()+($5::integer * interval '1 minute'))`,
+  [randomUUID(), customerId, kind, tokenDigest(token), kind === 'verify' ? 1440 : 30]);
+  await sendAccountLink(email, kind, token);
+}
 
 function rateLimit(req, group, limit, minutes = 15) {
   const ip = String(req.socket.remoteAddress || 'unknown');
@@ -122,8 +135,11 @@ async function authRoute(db, req, res, path) {
   rateLimit(req, 'auth', 12);
   if (path === '/api/auth/register') {
     if (!enabled('ACCOUNTS_ENABLED')) bad('Регистрация будет доступна после подключения почты', 503);
+    if (!emailReady()) bad('Почтовая отправка ещё не подключена', 503);
     const email = normalizedEmail(body.email);
     if (!validEmail(email)) bad('Укажите корректный email');
+    if (typeof body.password !== 'string' || body.password.length < 12 || body.password.length > 200)
+      bad('Пароль должен содержать от 12 до 200 символов');
     const hash = await hashPassword(body.password);
     const id = randomUUID();
     try {
@@ -133,17 +149,65 @@ async function authRoute(db, req, res, path) {
       if (error.code === '23505') bad('Этот email уже используется', 409);
       throw error;
     }
-    const token = await createSession(db, id);
-    return json(res, 201, { id, email }, { 'Set-Cookie': sessionCookie(token, secure(req)) });
+    await issueAccountLink(db, id, 'verify', email);
+    return json(res, 201, { pending: true, email });
   }
   if (path === '/api/auth/login') {
     if (!enabled('ACCOUNTS_ENABLED')) bad('Вход пока не подключён', 503);
     const email = normalizedEmail(body.email);
-    const { rows } = await db.query('SELECT id,email,password_hash,name FROM customers WHERE email=$1', [email]);
+    const { rows } = await db.query('SELECT id,email,password_hash,name,email_verified_at FROM customers WHERE email=$1', [email]);
     if (!rows[0] || !await verifyPassword(body.password, rows[0].password_hash)) bad('Неверный email или пароль', 401);
+    if (!rows[0].email_verified_at) bad('Подтвердите email по ссылке из письма', 403);
     const token = await createSession(db, rows[0].id);
     return json(res, 200, { id: rows[0].id, email, name: rows[0].name },
       { 'Set-Cookie': sessionCookie(token, secure(req)) });
+  }
+  if (path === '/api/auth/resend-verification' || path === '/api/auth/recover') {
+    if (!enabled('ACCOUNTS_ENABLED') || !emailReady()) bad('Почтовая отправка ещё не подключена', 503);
+    const email = normalizedEmail(body.email);
+    if (!validEmail(email)) bad('Укажите корректный email');
+    rateLimit(req, `email:${email}`, 3, 60);
+    const { rows } = await db.query('SELECT id,email_verified_at FROM customers WHERE email=$1', [email]);
+    const customer = rows[0];
+    const kind = path.endsWith('recover') ? 'reset' : 'verify';
+    if (customer && (kind === 'reset' ? !!customer.email_verified_at : !customer.email_verified_at)) {
+      try { await issueAccountLink(db, customer.id, kind, email); }
+      catch (error) { console.error('Account email failed:', error.message); }
+    }
+    return json(res, 202, { accepted: true });
+  }
+  if (path === '/api/auth/verify' || path === '/api/auth/reset') {
+    if (!enabled('ACCOUNTS_ENABLED')) bad('Аккаунты пока не подключены', 503);
+    const kind = path.endsWith('verify') ? 'verify' : 'reset';
+    if (!authToken(body.token)) bad('Ссылка недействительна');
+    const password = kind === 'reset' ? body.password : null;
+    if (kind === 'reset' && (typeof password !== 'string' || password.length < 12 || password.length > 200))
+      bad('Пароль должен содержать от 12 до 200 символов');
+    const hash = password ? await hashPassword(password) : null;
+    const client = await db.connect();
+    let account;
+    try {
+      await client.query('BEGIN');
+      const { rows } = await client.query(`SELECT l.id,l.customer_id,c.email,c.name FROM auth_links l
+        JOIN customers c ON c.id=l.customer_id WHERE l.token_hash=$1 AND l.kind=$2
+        AND l.consumed_at IS NULL AND l.expires_at>now() FOR UPDATE OF l`,
+      [tokenDigest(body.token), kind]);
+      if (!rows[0]) bad('Ссылка истекла или уже использована');
+      account = rows[0];
+      if (kind === 'verify') await client.query('UPDATE customers SET email_verified_at=now() WHERE id=$1', [account.customer_id]);
+      else {
+        await client.query('UPDATE customers SET password_hash=$1 WHERE id=$2', [hash, account.customer_id]);
+        await client.query('DELETE FROM customer_sessions WHERE customer_id=$1', [account.customer_id]);
+      }
+      await client.query('UPDATE auth_links SET consumed_at=now() WHERE customer_id=$1 AND kind=$2 AND consumed_at IS NULL',
+        [account.customer_id, kind]);
+      await client.query('COMMIT');
+    } catch (error) { await client.query('ROLLBACK'); throw error; }
+    finally { client.release(); }
+    if (kind === 'reset') return json(res, 200, { ok: true });
+    const session = await createSession(db, account.customer_id);
+    return json(res, 200, { id: account.customer_id, email: account.email, name: account.name },
+      { 'Set-Cookie': sessionCookie(session, secure(req)) });
   }
   if (path === '/api/auth/logout') {
     const token = cookieToken(req);
@@ -233,7 +297,7 @@ export async function handleApi(db, req, res, pathname) {
     if (!db) bad('База данных ещё не подключена', 503);
     if (pathname === '/api/config' && req.method === 'GET') return json(res, 200,
       { ordersEnabled: enabled('ORDERS_ENABLED'), accountsEnabled: enabled('ACCOUNTS_ENABLED'),
-        emailEnabled: false, paymentsEnabled: enabled('PAYMENTS_ENABLED') });
+        emailEnabled: emailReady(), paymentsEnabled: enabled('PAYMENTS_ENABLED') });
     if (pathname === '/api/catalog' && req.method === 'GET') {
       const list = await catalogSnapshot(db);
       return json(res, 200, { variants: list.map(({ price_override_cents, source_price_cents,
@@ -254,6 +318,14 @@ export async function handleApi(db, req, res, pathname) {
       const customer = await currentCustomer(db, req);
       if (!customer) bad('Войдите в кабинет', 401);
       return json(res, 200, { customer });
+    }
+    if (pathname === '/api/me/cabinet' && ['GET', 'PUT'].includes(req.method)) {
+      if (!enabled('ACCOUNTS_ENABLED')) bad('Кабинет пока не подключён', 503);
+      const customer = await currentCustomer(db, req);
+      if (!customer) bad('Войдите в кабинет', 401);
+      if (req.method === 'GET') return json(res, 200, await loadCabinet(db, customer));
+      const body = await readJson(req);
+      return json(res, 200, await saveCabinet(db, customer, body));
     }
     if (pathname === '/api/me/pets' && req.method === 'GET') {
       const customer = await currentCustomer(db, req);
