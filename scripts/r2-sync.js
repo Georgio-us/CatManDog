@@ -19,6 +19,8 @@ const client = apply || verify ? new S3Client({
 }) : null;
 const types = { '.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg',
   '.jpeg':'image/jpeg','.gif':'image/gif','.svg':'image/svg+xml' };
+// Filenames are stable, so browsers must be able to pick up later image replacements.
+const cacheControl = 'public, max-age=86400';
 
 async function* files(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
@@ -34,26 +36,36 @@ async function sha256(path) {
 }
 
 let count = 0, bytes = 0, uploaded = 0, missing = 0, failed = 0;
-for await (const file of files(root)) {
+const localFiles = [];
+for await (const file of files(root)) localFiles.push(file);
+
+async function syncFile(file) {
   const info = await stat(file);
   const key = `assets/${relative(root, file).split(sep).join('/')}`;
   count += 1; bytes += info.size;
-  if (!client) continue;
+  if (!client) return;
   const digest = await sha256(file);
   let remote = null;
   try { remote = await client.send(new HeadObjectCommand({ Bucket: process.env.R2_BUCKET, Key: key })); }
   catch (error) { if (error.$metadata?.httpStatusCode !== 404 && error.name !== 'NotFound') throw error; }
-  if (remote?.ContentLength === info.size && remote.Metadata?.sha256 === digest) continue;
-  if (verify) { missing += 1; console.log(`Missing or changed: ${key}`); continue; }
+  if (remote?.ContentLength === info.size && remote.Metadata?.sha256 === digest &&
+      remote.CacheControl === cacheControl) return;
+  if (verify) { missing += 1; console.log(`Missing or changed: ${key}`); return; }
   try {
     await client.send(new PutObjectCommand({ Bucket: process.env.R2_BUCKET, Key: key,
       Body: createReadStream(file), ContentLength: info.size,
       ContentType: types[extname(file).toLowerCase()] || 'application/octet-stream',
-      CacheControl: 'public, max-age=31536000, immutable', Metadata: { sha256: digest } }));
+      CacheControl: cacheControl, Metadata: { sha256: digest } }));
     uploaded += 1;
     if (uploaded % 25 === 0) console.log(`Uploaded ${uploaded} files`);
   } catch (error) { failed += 1; console.error(`Failed: ${key}: ${error.message}`); }
 }
+
+let nextFile = 0;
+async function worker() {
+  while (nextFile < localFiles.length) await syncFile(localFiles[nextFile++]);
+}
+await Promise.all(Array.from({ length: Math.min(8, localFiles.length) }, worker));
 console.log(JSON.stringify({ count, megabytes: Math.round(bytes / 1048576), uploaded, missing, failed,
   mode: apply ? 'upload' : verify ? 'verify' : 'dry-run' }));
 if (missing || failed) process.exitCode = 1;
