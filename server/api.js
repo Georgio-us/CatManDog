@@ -297,7 +297,8 @@ export async function handleApi(db, req, res, pathname) {
     if (!db) bad('База данных ещё не подключена', 503);
     if (pathname === '/api/config' && req.method === 'GET') return json(res, 200,
       { ordersEnabled: enabled('ORDERS_ENABLED'), accountsEnabled: enabled('ACCOUNTS_ENABLED'),
-        emailEnabled: emailReady(), paymentsEnabled: enabled('PAYMENTS_ENABLED') });
+        emailEnabled: emailReady(), paymentsEnabled: enabled('PAYMENTS_ENABLED'),
+        supportEnabled: enabled('SUPPORT_ENABLED') });
     if (pathname === '/api/catalog' && req.method === 'GET') {
       const list = await catalogSnapshot(db);
       return json(res, 200, { variants: list.map(({ price_override_cents, source_price_cents,
@@ -370,19 +371,24 @@ export async function handleApi(db, req, res, pathname) {
       if (!validEmail(email) || !['support','return'].includes(body.kind) || cap(body.message, 1200).length < 10)
         bad('Проверьте форму обращения');
       const orderNumber = cap(body.orderNumber, 40);
+      if (/^DEMO-/i.test(orderNumber)) bad('Демонстрационный заказ нельзя отправить в поддержку');
+      if (body.kind === 'return' && !orderNumber) bad('Укажите номер заказа');
+      if (body.kind === 'return' && (!Number.isInteger(body.quantity) || body.quantity < 1 || body.quantity > 99))
+        bad('Укажите количество для возврата');
       const found = orderNumber ? await db.query('SELECT id FROM orders WHERE number=$1 AND email=$2',
         [orderNumber, email]) : { rows: [] };
-      if (body.kind === 'return' && found.rows[0]) {
+      if (body.kind === 'return' && found.rows[0] && body.productId && body.variantId) {
         const item = await db.query('SELECT quantity FROM order_items WHERE order_id=$1 AND product_id=$2 AND variant_id=$3',
           [found.rows[0].id, cap(body.productId, 180), cap(body.variantId, 180)]);
         if (!item.rows[0] || !Number.isInteger(body.quantity) || body.quantity < 1 ||
             body.quantity > item.rows[0].quantity) bad('Укажите товар и количество из заказа');
       }
+      const requestId = randomUUID();
       await db.query(`INSERT INTO service_requests(id,order_id,kind,email,product_id,variant_id,quantity,message)
-        VALUES($1,$2,$3,$4,$5,$6,$7,$8)`, [randomUUID(), found.rows[0]?.id || null,
+        VALUES($1,$2,$3,$4,$5,$6,$7,$8)`, [requestId, found.rows[0]?.id || null,
         body.kind, email, cap(body.productId, 180) || null, cap(body.variantId, 180) || null,
         body.quantity && Number.isInteger(body.quantity) ? body.quantity : null, cap(body.message, 1200)]);
-      return json(res, 202, { accepted: true });
+      return json(res, 202, { accepted: true, id: requestId });
     }
     bad('Не найдено', 404);
   } catch (error) {

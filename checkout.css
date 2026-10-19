@@ -84,6 +84,8 @@
 .service-draft dl > div { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 16px; border-top: 1px solid #d8e5bb; padding: 10px 0; }
 .service-draft dt { color: #687051; }
 .service-draft dd { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.service-draft .button { margin-top: 22px; }
+.service-draft .button:disabled { opacity: .5; cursor: not-allowed; }
 
 @media (max-width: 900px) {
   .checkout-layout, .service-layout { grid-template-columns: 1fr; gap: 42px; }

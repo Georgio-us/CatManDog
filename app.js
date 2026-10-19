@@ -9,7 +9,7 @@ import { loadSupplierTerms } from './supplier-terms.js';
 import { categories, products, catalogProducts, articles } from './data.js?v=dog-studio-1';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=dog-studio-1';
 import { checkoutTotals } from './checkout-model.js';
-import { createCheckoutUI } from './checkout-ui.js?v=checkout-final-1';
+import { createCheckoutUI } from './checkout-ui.js?v=service-api-1';
 import { orderVariantId } from './order-progress.js';
 import { applyServerPrices } from './server-prices.js';
 
@@ -232,8 +232,8 @@ function cartPage(){
 }
 function about(){return `<div class="page">${crumbs('О нас')}<section class="about-hero"><h1>Они - часть семьи<br>Мы - на вашей стороне</h1><p>CatManDog объединяет вещи и идеи для хорошей жизни с кошками и собаками С заботой о них и с пониманием вас</p></section><div class="prose"><h2>Меньше случайного Больше нужного</h2><p>Нам близок простой подход: окружающие вещи должны быть удобными, продуманными и приятными в повседневной жизни От миски на кухне до переноски для нового путешествия</p><h2>Магазин, в котором помогают выбрать</h2><p>Мы собираем всё необходимое в понятные категории и рассказываем о назначении каждого товара А в журнале делимся идеями для дома, прогулок, игр и жизни вместе</p><a class="button" href="#/catalog">Найти своё ${icon('arrow')}</a></div></div>${service()}`;}
 function info(id){
-  if(id==='delivery')return `<div class="page">${crumbs('Доставка и возврат')}<div class="prose"><h1>Доставка и возврат</h1><h2>Доставка по Валенсии</h2><p>Пока доставляем только в пределах города Валенсия. Доставка стоит 3,99 € для заказа меньше 49 € после скидки. От 49 € она бесплатная. Купон на доставку может сделать её бесплатной и для меньшего заказа.</p><p>При оформлении можно выбрать доставку сегодня, если до ближайшего ориентира остаётся не менее двух часов, или указать другую дату и время. Это пожелание: точное время подтвердим после подключения системы заказов.</p><h2>Если нужна помощь</h2><p>Для вопросов о заказе подготовлена форма поддержки. Запрос на возврат можно начать через отдельную форму. Пока формы показывают предпросмотр и не отправляют данные.</p><p><a class="text-link" href="#/support">Помощь с заказом</a> · <a class="text-link" href="#/returns">Запрос на возврат</a></p></div></div>`;
-  if(id==='contact')return `<div class="page">${crumbs('Контакты')}<div class="prose"><h1>Давайте поговорим</h1><p>Если у вас есть вопрос о товаре или заказе, откройте форму поддержки. Пока обращение можно подготовить, отправка появится после подключения серверной части.</p><a class="button outline" href="#/support">Помощь с заказом ${icon('arrow')}</a></div></div>`;
+  if(id==='delivery')return `<div class="page">${crumbs('Доставка и возврат')}<div class="prose"><h1>Доставка и возврат</h1><h2>Доставка по Валенсии</h2><p>Пока доставляем только в пределах города Валенсия. Доставка стоит 3,99 € для заказа меньше 49 € после скидки. От 49 € она бесплатная. Купон на доставку может сделать её бесплатной и для меньшего заказа.</p><p>При оформлении можно выбрать доставку сегодня, если до ближайшего ориентира остаётся не менее двух часов, или указать другую дату и время. Это пожелание: точное время подтвердим после подключения системы заказов.</p><h2>Если нужна помощь</h2><p>Для вопросов о заказе подготовлена форма поддержки. Запрос на возврат можно начать через отдельную форму. ${checkout.isSupportEnabled() ? 'После проверки обращение можно отправить команде.' : 'Пока формы показывают предпросмотр и не отправляют данные.'}</p><p><a class="text-link" href="#/support">Помощь с заказом</a> · <a class="text-link" href="#/returns">Запрос на возврат</a></p></div></div>`;
+  if(id==='contact')return `<div class="page">${crumbs('Контакты')}<div class="prose"><h1>Давайте поговорим</h1><p>Если у вас есть вопрос о товаре или заказе, откройте форму поддержки. ${checkout.isSupportEnabled() ? 'После проверки обращение можно отправить команде.' : 'Пока обращение можно подготовить, отправка появится после подключения поддержки.'}</p><a class="button outline" href="#/support">Помощь с заказом ${icon('arrow')}</a></div></div>`;
   if(id==='privacy')return `<div class="page">${crumbs('Конфиденциальность')}<div class="prose"><h1>Конфиденциальность</h1><p>Это локальный прототип. Корзина, избранное и данные кабинета сохраняются только в браузере на этом устройстве. Данные, введённые при оформлении, поддержке и возврате, не отправляются на сервер; черновик оформления доступен только до перезагрузки страницы.</p><p>Политика конфиденциальности для работающего магазина будет опубликована до запуска. Шрифт загружается с Google Fonts; при отсутствии интернета используется системный шрифт.</p></div></div>`;
   return notFound();
 }
@@ -278,6 +278,7 @@ window.addEventListener('hashchange',()=>{render();account.handleLink();window.s
 await loadSupplierTerms();
 render();
 account.initialize();
+checkout.initialize();
 if (['http:','https:'].includes(location.protocol)) {
   fetch('/api/catalog', { credentials: 'same-origin' }).then(response => response.ok ? response.json() : null)
     .then(data => {
@@ -302,6 +303,8 @@ app.addEventListener('submit', event => {
   checkout.submit(event.target);
 });
 app.addEventListener('change', event => checkout.change(event.target));
+app.addEventListener('input', event => { if (event.target.closest('[data-service-form]')) checkout.invalidateService(); });
+app.addEventListener('change', event => { if (event.target.closest('[data-service-form]')) checkout.invalidateService(); });
 app.addEventListener('click', event => {
   const button = event.target.closest('button');
   if (button) checkout.click(button);
