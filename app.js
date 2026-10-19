@@ -1,5 +1,5 @@
 import { createUsefulUI } from './useful.js?v=remote-cabinet-1';
-import { createAccountUI } from './account.js?v=remote-cabinet-1';
+import { createAccountUI } from './account.js?v=pet-choice-1';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, isDemoPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js';
 import { accessoryDetail } from './accessory-ui.js?v=variant-pricing-1';
 import { provisionalPriceLabel } from './retail-research.js?v=variant-pricing-1';
