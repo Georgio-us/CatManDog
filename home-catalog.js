@@ -1,5 +1,4 @@
-import { confirmedPrice, snapshots } from './variants.js';
-import { productDisplayedPriceSummary } from './retail-research.js?v=dog-first-wave-1';
+import { canBuy, confirmedPrice, snapshots } from './variants.js';
 
 const definitions = [
   ['dry-food', 'Сухой корм'],
@@ -100,17 +99,12 @@ export function matchesHomeFeature(product, groupId, featureId) {
 }
 
 export function homePriceOptions(products) {
-  const amounts = products.map(product => productDisplayedPriceSummary(product)?.min ?? Math.min(...snapshots(product).map(variant => confirmedPrice(variant) ?? Infinity)));
+  const amounts = products.map(product => Math.min(...snapshots(product).filter(canBuy).map(variant => confirmedPrice(variant) ?? Infinity)));
   return [3, 5, 10, 20, 30, 50, 100, 200].filter(limit => amounts.some(amount => amount <= limit) && amounts.some(amount => amount > limit && Number.isFinite(amount)));
 }
 
 export function matchesHomePrice(product, maxPrice) {
   if (!maxPrice) return true;
   const limit = Number(maxPrice);
-  const research = productDisplayedPriceSummary(product);
-  if (research) return Number.isFinite(limit) && research.min <= limit;
-  return Number.isFinite(limit) && snapshots(product).some(variant => {
-    const price = confirmedPrice(variant);
-    return price !== null && price <= limit;
-  });
+  return Number.isFinite(limit) && snapshots(product).some(variant => canBuy(variant) && (confirmedPrice(variant) ?? Infinity) <= limit);
 }

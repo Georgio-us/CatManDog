@@ -17,10 +17,14 @@ export function canBuy(sku) {
 }
 export function catalogPrice(product) {
   const variants = snapshots(product);
-  const prices = variants.map(storefrontPrice);
-  const amount = Math.min(...prices);
-  const pricedSku = variants.find(v => storefrontPrice(v) === amount && !isDemoPrice(v)) || variants.find(v => storefrontPrice(v) === amount);
-  return { amount, from: variants.length > 1, demo: isDemoPrice(pricedSku) };
+  const available = variants.filter(canBuy);
+  const priced = available.length ? available : variants.filter(variant => !variant.storefrontRetired);
+  const prices = priced.map(storefrontPrice).filter(Number.isFinite);
+  if (!prices.length) return { amount: null, min: null, max: null, from: false, demo: false };
+  const min = Math.min(...prices);
+  const max = Math.max(...prices);
+  const pricedSku = priced.find(variant => storefrontPrice(variant) === min && !isDemoPrice(variant)) || priced.find(variant => storefrontPrice(variant) === min);
+  return { amount: min, min, max, from: min !== max, demo: isDemoPrice(pricedSku) };
 }
 export function normalizeCart(items, products) {
   if (!Array.isArray(items)) return [];
@@ -32,17 +36,21 @@ export function normalizeCart(items, products) {
     if (!product) return [];
     let variantId = item.variantId;
     if (hasVariants(product) && !variantId) {
-      const legacy = product.variants.find(v => v.id === item.id || v.label === item.size || v.sizes?.includes(item.size));
-      variantId = legacy?.id || product.defaultVariantId || product.variants[0].id;
+      const matches = product.variants.filter(v => v.id === item.id || v.label === item.size || v.sizes?.includes(item.size));
+      variantId = matches.length === 1 ? matches[0].id : null;
     }
     const sku = resolveVariant(product, variantId);
-    if (!sku) return []; // Never substitute a removed SKU with a different one
+    if (hasVariants(product) && (!variantId || !sku)) {
+      return [{ ...item, id: product.id, productId: product.id, qty: Math.min(99,item.qty),
+        variantId: null, variantLabel: null, size: '', needsVariantSelection: true }];
+    }
     if (!hasVariants(product) && typeof item.size !== 'string') return [];
     return [{ ...item, id: product.id, productId: product.id, qty: Math.min(99,item.qty),
-      ...(hasVariants(product) ? { variantId: sku.id, variantLabel: sku.label, size: sku.label } : { variantId: null }) }];
+      ...(hasVariants(product) ? { variantId: sku.id, variantLabel: sku.label, size: sku.label, needsVariantSelection: false } : { variantId: null }) }];
   });
 }
 export function cartSku(item, products) {
+  if (item?.needsVariantSelection) return null;
   const product = products.find(p => p.id === (item.productId || item.id));
   return product ? resolveVariant(product,item.variantId) : null;
 }

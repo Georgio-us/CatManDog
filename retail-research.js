@@ -65,8 +65,8 @@ export function retailResearchBlock(sku, { escape, money }) {
   const recommended = sku.retailPrice?.type === 'recommended' && research.offers.length === 1 && research.offers[0].retailer === sku.retailPrice.sourceName;
   const taxNote = research.offers.every(offer => offer.taxIncluded === true) ? 'Цены с IVA' : 'Цены из розничных источников';
   const deliveryNote = research.offers.every(offer => offer.shippingIncluded === false) ? 'доставка отдельно' : 'условия доставки зависят от магазина';
-  const title = recommended ? 'Рекомендованная розничная цена' : 'Розничные цены';
-  const note = recommended ? `${sku.retailPrice.taxIncluded === true ? 'PVP производителя с IVA' : 'PVP производителя, НДС уточняется'} · Цена конкурентов пока не изучена` : `${taxNote}, ${deliveryNote} · Исследовательский ориентир`;
+  const title = recommended ? 'PVP производителя' : 'Цены в изученных магазинах';
+  const note = recommended ? `${sku.retailPrice.taxIncluded === true ? 'PVP производителя с IVA' : 'PVP производителя, НДС уточняется'} · Цена конкурентов пока не изучена` : `${taxNote}, ${deliveryNote} · Для сравнения с ценой товара выше`;
   const local = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
   const sourceLink = offer => offer.url.startsWith('research/supplier-files/') && !local
     ? `<span>${escape(offer.retailer)}</span>`
