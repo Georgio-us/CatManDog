@@ -273,7 +273,7 @@ document.querySelector('#search-toggle').addEventListener('click',()=>{const pan
 document.querySelector('#search-close').addEventListener('click',()=>{document.querySelector('#search-form').hidden=true;document.querySelector('#search-toggle').focus();});
 document.querySelector('#search-form').addEventListener('submit',event=>{event.preventDefault();const q=document.querySelector('#site-search').value.trim();priceLimit=catalogPriceMax;document.querySelector('#search-form').hidden=true;location.hash=`/catalog${q?'?q='+encodeURIComponent(q):''}`;});
 document.querySelector('#mobile-toggle').addEventListener('click',()=>{const open=document.querySelector('nav').classList.toggle('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded',String(open));});
-document.addEventListener('keydown',event=>{if(event.key==='Escape'){document.querySelector('#search-form').hidden=true;document.querySelector('nav').classList.remove('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded','false');}});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'){account.escapeChoices();document.querySelector('#search-form').hidden=true;document.querySelector('nav').classList.remove('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded','false');}});
 window.addEventListener('hashchange',()=>{render();account.handleLink();window.scrollTo(0,0);});
 await loadSupplierTerms();
 render();
@@ -292,6 +292,8 @@ if (['http:','https:'].includes(location.protocol)) {
 }
 
 app.addEventListener('change',event=>{if(event.target.id==='food-brand')setParam('brand',event.target.value);});
+app.addEventListener('change',event=>account.change(event.target));
+app.addEventListener('click',event=>account.dismissChoices(event.target));
 
 app.addEventListener('submit',event=>{if(event.target.matches('[data-account-form]')){event.preventDefault();account.submit(event.target);}});
 

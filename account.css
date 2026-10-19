@@ -99,6 +99,26 @@
 .pet-field > span { color: var(--muted); font-size: 10px; font-weight: 400; }
 .pet-field small { font-weight: 400; color: var(--muted); line-height: 1.6; }
 .pet-field input, .pet-field select, .pet-field textarea { width: 100%; min-width: 0; font-size: 13px; font-weight: 400; color: var(--ink); border: 1px solid #dfdfd8; border-radius: 9px; background: white; padding: 12px; }
+.pet-choice-field { position: relative; }
+.pet-field .pet-field-title { color: var(--ink); font-size: 12px; font-weight: 600; }
+.pet-field .pet-field-note { color: var(--muted); font-size: 10px; font-weight: 400; }
+.pet-choice { position: relative; padding: 0; border: 0; font-weight: 400; }
+.pet-choice summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 43px; width: 100%; padding: 11px 12px; border: 1px solid #dfdfd8; border-radius: 9px; background: white; font-size: 13px; font-weight: 400; color: var(--ink); cursor: pointer; list-style: none; }
+.pet-choice summary::-webkit-details-marker { display: none; }
+.pet-choice summary:hover, .pet-choice[open] summary { border-color: #a9b58c; background: #fbfcf7; }
+.pet-choice summary:focus-visible, .pet-choice-option:focus-within { outline: 2px solid var(--ink); outline-offset: 2px; }
+.pet-choice summary svg { width: 17px; height: 17px; transition: transform .18s ease; }
+.pet-choice[open] summary svg { transform: rotate(180deg); }
+.pet-choice-options { position: absolute; z-index: 12; top: calc(100% + 5px); left: 0; right: 0; display: grid; gap: 3px; padding: 5px; border: 1px solid var(--line); border-radius: 12px; background: white; box-shadow: 0 16px 36px #20231c24; }
+.pet-choice:not([open]) .pet-choice-options { display: none; }
+.pet-choice-option { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 9px; padding: 10px 11px; border-radius: 8px; font-size: 13px; cursor: pointer; }
+.pet-choice-option:hover { background: #f5f7ee; }
+.pet-choice-option:has(input:checked) { background: #eef5d2; font-weight: 600; }
+.pet-choice-option input { position: absolute; width: 1px; height: 1px; padding: 0; opacity: 0; }
+.pet-choice-option svg { width: 16px; height: 16px; opacity: 0; }
+.pet-choice-option:has(input:checked) svg { opacity: 1; }
+.pet-field .pet-age-preview { color: #657548; }
+.pet-age-preview:empty { display: none; }
 .pet-field textarea { resize: vertical; }
 .pet-field-wide { grid-column: 1 / -1; }
 .pet-preferences, .pet-notifications { border: 0; padding: 0; margin: 0; min-width: 0; }

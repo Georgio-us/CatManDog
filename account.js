@@ -9,15 +9,36 @@ const preferenceOptions = ['Сухой корм', 'Влажный корм', 'Б
 const sections = [['', 'Мой кабинет', 'paw'], ['orders', 'Мои заказы', 'bag'], ['supplies', 'Мои запасы', 'calendar'], ['perks', 'Подарки и бонусы', 'gift'], ['care', 'Мои инструменты', 'map'], ['profile', 'Мой профиль', 'cat'], ['human', 'Мой человек', 'heart']];
 const statuses = { packing: 'Собираем коробку', received: 'Демозаказ сохранён', delivering: 'Везём к вам', delivered: 'Коробка доставлена' };
 const dateLabel = value => new Intl.DateTimeFormat('ru', { day: 'numeric', month: 'long' }).format(new Date(value + 'T12:00:00'));
-const ageLabel = pet => {
-  if (!pet.birthday) return pet.age || 'Возраст пока не указан';
-  const birthday = new Date(pet.birthday + 'T12:00:00');
+const petYears = birthdayValue => {
+  if (!birthdayValue) return null;
+  const birthday = new Date(birthdayValue + 'T12:00:00');
+  if (Number.isNaN(birthday.getTime())) return null;
   const now = new Date();
   const months = (now.getFullYear() - birthday.getFullYear()) * 12 + now.getMonth() - birthday.getMonth() - (now.getDate() < birthday.getDate() ? 1 : 0);
-  if (months < 12) return `${Math.max(0, months)} мес`;
-  const years = Math.floor(months / 12);
+  if (months < 0) return null;
+  return { months, years: Math.floor(months / 12) };
+};
+const yearsLabel = years => {
   const ending = new Intl.PluralRules('ru').select(years);
   return `${years} ${ending === 'one' ? 'год' : ending === 'few' ? 'года' : 'лет'}`;
+};
+const catYearsLabel = years => {
+  const ending = new Intl.PluralRules('ru').select(years);
+  return `${years} ${ending === 'one' ? 'кошачий год' : ending === 'few' ? 'кошачьих года' : 'кошачьих лет'}`;
+};
+// Approximate equivalence from International Cat Care's "How old is your cat?" chart.
+const catHumanYears = years => years === 1 ? 15 : 24 + (years - 2) * 4;
+const catAgePreview = birthday => {
+  const age = petYears(birthday);
+  return age?.years >= 1 ? `${catYearsLabel(age.years)} - примерно ${catHumanYears(age.years)} по человеческим меркам` : '';
+};
+const ageLabel = pet => {
+  if (!pet.birthday) return pet.age || 'Возраст пока не указан';
+  const age = petYears(pet.birthday);
+  if (!age) return pet.age || 'Возраст пока не указан';
+  const { months, years } = age;
+  if (months < 12) return `${months} мес`;
+  return pet.species === 'cat' ? `${catYearsLabel(years)} · примерно ${catHumanYears(years)} по человеческим меркам` : yearsLabel(years);
 };
 export function createAccountUI(helpers) {
   const { escape: e, icon, money, products, imageBlock, render, notify, getCart, repeatOrder } = helpers;
@@ -90,9 +111,14 @@ export function createAccountUI(helpers) {
     return `<div class="page pet-onboarding pet-auth-page"><div class="pet-auth-panel"><span class="pet-eyebrow">Кабинет с хвостиком</span><h1>${title}</h1>${content}<a class="text-link pet-demo-link" href="#/join">Продолжить локальный прототип</a><button class="text-link pet-demo-link" data-account-demo>Посмотреть кабинет Лео</button></div></div>`;
   }
   const emptyPanel = (title, text, action = 'Выбрать товары', href = '#/catalog?pet=cat') => `<div class="pet-empty">${icon('paw')}<h3>${title}</h3><p>${text}</p><a class="button outline" href="${href}">${action}</a></div>`;
+  const petChoice = (name, title, options, selected, note = '') => {
+    const current = options.find(([value]) => value === selected) || options[0];
+    return `<div class="pet-field pet-choice-field"><span class="pet-field-title" id="pet-${name}-label">${title}</span>${note ? `<span class="pet-field-note">${note}</span>` : ''}<details class="pet-choice"><summary aria-labelledby="pet-${name}-label pet-${name}-value"><span id="pet-${name}-value" data-pet-choice-value>${e(current[1])}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="pet-choice-options" role="radiogroup" aria-labelledby="pet-${name}-label">${options.map(([value, label]) => `<label class="pet-choice-option"><input type="radio" name="${name}" value="${e(value)}" aria-label="${e(label)}" ${selected === value ? 'checked' : ''}><span>${e(label)}</span>${icon('check')}</label>`).join('')}</div></details></div>`;
+  };
   function petFields(pet = {}) {
     const today = new Date().toISOString().slice(0, 10);
-    return `<div class="pet-form-grid"><label class="pet-field">Имя питомца<input name="name" value="${e(pet.name || '')}" required maxlength="40" placeholder="Например, Барсик" autocomplete="off"></label><label class="pet-field">Кто живёт с вами<select name="species"><option value="cat" ${pet.species !== 'dog' ? 'selected' : ''}>Кошка или кот</option><option value="dog" ${pet.species === 'dog' ? 'selected' : ''}>Собака</option></select></label><label class="pet-field">День рождения <span>Если знаете</span><input type="date" name="birthday" max="${today}" value="${e(pet.birthday || '')}"></label><label class="pet-field">Примерный возраст <span>Если дата неизвестна</span><select name="age"><option value="">Выбрать</option>${['До года', '1-3 года', '4-7 лет', '8 лет и старше'].map(v => `<option ${pet.age === v ? 'selected' : ''}>${v}</option>`).join('')}</select></label><label class="pet-field pet-field-wide">Порода <span>Необязательно</span><input name="breed" value="${e(pet.breed || '')}" maxlength="80" placeholder="Любимая домашняя кошка"></label></div><fieldset class="pet-preferences"><legend>Что подходит и нравится</legend><p>Поможет собирать более подходящие подборки</p><div>${preferenceOptions.map(v => `<label><input type="checkbox" name="preferences" value="${e(v)}" ${(pet.preferences || []).includes(v) ? 'checked' : ''}><span>${v}</span></label>`).join('')}</div></fieldset><label class="pet-field">Ещё кое-что обо мне <span>Необязательно</span><textarea name="notes" maxlength="400" rows="3" placeholder="Любимые игры, привычки и маленькие особенности">${e(pet.notes || '')}</textarea></label>`;
+    const ageOptions = [['', 'Выбрать'], ...['До года', '1-3 года', '4-7 лет', '8 лет и старше'].map(value => [value, value])];
+    return `<div class="pet-form-grid"><label class="pet-field">Имя питомца<input name="name" value="${e(pet.name || '')}" required maxlength="40" placeholder="Например, Барсик" autocomplete="off"></label>${petChoice('species', 'Кто живёт с вами', [['cat', 'Кошка или кот'], ['dog', 'Собака']], pet.species === 'dog' ? 'dog' : 'cat')}<label class="pet-field">День рождения <span>Если знаете</span><input type="date" name="birthday" max="${today}" value="${e(pet.birthday || '')}"><small class="pet-age-preview" data-pet-age-preview aria-live="polite">${pet.species === 'dog' ? '' : e(catAgePreview(pet.birthday))}</small></label>${petChoice('age', 'Примерный возраст', ageOptions, pet.age || '', 'Если дата неизвестна')}<label class="pet-field pet-field-wide">Порода <span>Необязательно</span><input name="breed" value="${e(pet.breed || '')}" maxlength="80" placeholder="Любимая домашняя кошка"></label></div><fieldset class="pet-preferences"><legend>Что подходит и нравится</legend><p>Поможет собирать более подходящие подборки</p><div>${preferenceOptions.map(v => `<label><input type="checkbox" name="preferences" value="${e(v)}" ${(pet.preferences || []).includes(v) ? 'checked' : ''}><span>${v}</span></label>`).join('')}</div></fieldset><label class="pet-field">Ещё кое-что обо мне <span>Необязательно</span><textarea name="notes" maxlength="400" rows="3" placeholder="Любимые игры, привычки и маленькие особенности">${e(pet.notes || '')}</textarea></label>`;
   }
   function onboarding(params) {
     const adding = params.get('add') === '1';
@@ -174,6 +200,29 @@ export function createAccountUI(helpers) {
       try { store.recordOrder(getCart()); navigate('/account/orders'); } catch (error) { notify(error.message); }
     }
   }
+  function change(target) {
+    const form = target.closest('[data-account-form="join"], [data-account-form="profile"]');
+    if (!form || !['species', 'age', 'birthday'].includes(target.name)) return;
+    if (target.matches('.pet-choice-option input')) {
+      const choice = target.closest('.pet-choice');
+      choice.querySelector('[data-pet-choice-value]').textContent = target.parentElement.querySelector('span').textContent;
+      choice.open = false;
+      choice.querySelector('summary').focus();
+    }
+    const preview = form.querySelector('[data-pet-age-preview]');
+    preview.textContent = form.elements.species.value === 'cat' ? catAgePreview(form.elements.birthday.value) : '';
+  }
+  function dismissChoices(target) {
+    document.querySelectorAll('.pet-choice[open]').forEach(choice => {
+      if (!choice.contains(target)) choice.open = false;
+    });
+  }
+  function escapeChoices() {
+    const open = document.querySelector('.pet-choice[open]');
+    if (!open) return;
+    open.open = false;
+    open.querySelector('summary').focus();
+  }
   async function syncChanges() {
     if (store.mode() !== 'remote') return;
     try { await store.sync(); }
@@ -235,5 +284,5 @@ export function createAccountUI(helpers) {
     } catch (error) { if (form.isConnected) formError(form).textContent = error.message; else notify(error.message); }
   }
   const routeAdding = () => new URLSearchParams(location.hash.split('?')[1]).get('add') === '1';
-  return { page, click, submit, store, initialize, syncChanges, handleLink };
+  return { page, click, change, dismissChoices, escapeChoices, submit, store, initialize, syncChanges, handleLink };
 }
