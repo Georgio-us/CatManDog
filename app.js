@@ -11,6 +11,7 @@ import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOpt
 import { checkoutTotals } from './checkout-model.js';
 import { createCheckoutUI } from './checkout-ui.js?v=checkout-final-1';
 import { orderVariantId } from './order-progress.js';
+import { applyServerPrices } from './server-prices.js';
 
 import { homeDirections, activeHomeLanding } from './collections.js?v=dog-studio-1';
 
@@ -24,7 +25,7 @@ function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)) ?? 
 let cart = normalizeCart(read('catmandog-cart',[]), products);
 function cartUnitPrice(item){const p=products.find(p=>p.id===(item.productId||item.id));return p?.gift?legacyCartUnitPrice(item):storefrontPrice(cartSku(item,products));}
 let favorites = read('catmandog-favorites',[]); if(!Array.isArray(favorites))favorites=[];favorites=favorites.filter(x=>products.some(p=>p.id===x));
-const catalogPriceMax = Math.max(100, Math.ceil(Math.max(...catalogProducts.map(p => catalogPrice(p).max ?? 0)) / 10) * 10);
+let catalogPriceMax = Math.max(100, Math.ceil(Math.max(...catalogProducts.map(p => catalogPrice(p).max ?? 0)) / 10) * 10);
 const displayedMinPrice = p => catalogPrice(p).min;
 let homePet='cat', homeGroup='', homeBrand='', homePrice='', homeFeature='', homeVisible=8, selectedSize='', detailQuantity=1, priceLimit=catalogPriceMax, journalCategory='Все материалы';
 let selectedVariantId=null;
@@ -88,7 +89,7 @@ function card(p){
   const sku=resolveVariant(p);
   const configure=family||p.gift||!canBuy(sku);
   const actionLabel=family?'Выбрать вариант':p.gift?'Выбрать набор':!canBuy(sku)?'К товару':'В корзину';
-  const caption=pricing.demo?'Демонстрационная цена':family?'Цена зависит от фасовки':p.isReal?(sku.retailPrice?.type==='recommended'?'Рекомендованная розничная цена':'Розничный ориентир'):'';
+  const caption=pricing.demo?'Демонстрационная цена':family?'Цена зависит от фасовки':sku.serverPriceConfirmed?'Цена с IVA':p.isReal?(sku.retailPrice?.type==='recommended'?'Рекомендованная розничная цена':'Розничный ориентир'):'';
   const displayPrice=pricing.min!==null&&pricing.min!==pricing.max?`${money(pricing.min)} - ${money(pricing.max)}`:`${p.gift==='personal'?'от ':''}${money(pricing.amount)}`;
   return `<article class="product-card ${p.isReal?'real-product-card':''}"><a class="product-card-open" href="#/product/${escape(p.id)}" aria-label="Открыть товар: ${escape(p.name)}"></a><div class="product-media">${imageBlock(p.image)}<span class="product-tag">${escape(p.tag||'')}</span><button class="icon-button favorite ${favorites.includes(p.id)?'selected':''}" data-favorite="${escape(p.id)}" aria-label="${favorites.includes(p.id)?'Убрать из избранного':'В избранное'}: ${escape(p.name)}" aria-pressed="${favorites.includes(p.id)}">${icon('heart')}</button></div><div class="product-info"><small>${escape(p.brand||'CatManDog')}${p.weight?` · ${escape(p.weight)}`:''}${family?` · ${itemCount(p.variants.length).replace('товар','вариант')}`:''}</small><div class="product-title"><h3>${escape(p.name)} <span class="product-open-cue">${icon('arrow')}</span></h3></div><span class="retail-label" ${caption?'':'aria-hidden="true"'}>${caption}</span><div class="product-price"><div class="product-price-values"><span>${displayPrice}</span>${!pricing.demo&&!family&&p.old?`<span class="old-price">${money(p.old)}</span>`:''}</div><button class="product-card-action" ${configure?'data-configure':'data-add'}="${escape(p.id)}" aria-label="${actionLabel}: ${escape(p.name)}">${actionLabel}${icon(configure?'arrow':'bag')}</button></div></div></article>`;
 }
@@ -224,7 +225,7 @@ function cartPage(){
     const link=`#/product/${parent.id}${item.variantId?'?variant='+encodeURIComponent(item.variantId):''}`;
     const unitPrice=needsVariant?null:cartUnitPrice(item);
     const variantText=needsVariant?'Вариант не выбран':`${parent.optionLabel||sku.optionLabel||'Вариант'}: ${offer?.label??item.variantLabel??item.size}`;
-    const priceLabel=product.storefrontRetired?'Товар больше не представлен':needsVariant?'Выберите вариант для расчёта цены':isDemoPrice(product)?'Демонстрационная цена':product.isReal?provisionalPriceLabel(product)||(product.retailPrice?.type==='recommended'?'Рекомендованная розничная цена':'Розничный ориентир'):'';
+    const priceLabel=product.storefrontRetired?'Товар больше не представлен':needsVariant?'Выберите вариант для расчёта цены':isDemoPrice(product)?'Демонстрационная цена':product.serverPriceConfirmed?'Цена с IVA':product.isReal?provisionalPriceLabel(product)||(product.retailPrice?.type==='recommended'?'Рекомендованная розничная цена':'Розничный ориентир'):'';
     return `<article class="cart-row"><a href="${link}" aria-label="${escape(product.name)}">${imageBlock(offer?.image??product.image)}</a><div><a href="${link}"><h3>${escape(product.name)}</h3></a><p>${escape(product.brand||'CatManDog')}</p><p class="cart-variant">${escape(variantText)}</p>${needsVariant?`<a class="text-link cart-choose-variant" href="${link}">Выбрать вариант</a>`:''}${priceLabel?`<span class="retail-label">${escape(priceLabel)}</span>`:''}${offer?`<div class="cart-gift-details"><p>${offer.items.map(part=>escape(part.name)).join(' + ')}<br>Коробка и открытка включены</p>${offer.config.recipient?`<p>Для: <strong>${escape(offer.config.recipient)}</strong></p>`:''}${offer.config.message?`<p class="cart-greeting">«${escape(offer.config.message)}»</p>`:''}${offer.preorder?'<span class="gift-status">Предзаказ · дата отправки пока не объявлена</span>':''}</div>`:''}<div class="quantity"><button data-cart-qty="${index}" data-delta="-1" aria-label="Уменьшить количество ${escape(product.name)}">${icon('minus')}</button><span>${item.qty}</span><button data-cart-qty="${index}" data-delta="1" aria-label="Увеличить количество ${escape(product.name)}">${icon('plus')}</button></div></div><div class="cart-row-right"><strong>${unitPrice===null?'После выбора варианта':money(unitPrice*item.qty)}</strong>${unitPrice===null?'':`<small class="cart-unit-price">${money(unitPrice)} / шт</small>`}<button class="remove" data-remove="${index}">Удалить</button></div></article>`;
   }).join('');
   return `<div class="page">${crumbs('Корзина')}<h1 class="page-title">Ваша корзина${count?` <span class="muted">(${count})</span>`:''}</h1>${!count?empty('Пока здесь тихо','Самое время найти что-нибудь для любимого хвостика','За покупками','#/catalog'):`<div class="cart-layout"><div>${rows}</div><aside class="cart-summary"><h2>Всё самое нужное</h2><div class="summary-line"><span>Товары (${count})</span><span>${subtotal===null?pendingTotalLabel:money(subtotal)}</span></div><div class="summary-line"><span>Доставка по Валенсии</span><span>${totals?totals.freeDelivery?'Бесплатно':money(totals.delivery):pendingTotalLabel}</span></div>${promo?`<div class="summary-line"><span>${escape(promo.code)} - ${promo.percent}%</span><span>${subtotal===null?pendingTotalLabel:money(-totals.discount)}</span></div>`:''}<div class="summary-line total"><span>Итого с IVA</span><span>${total===null?pendingTotalLabel:money(total)}</span></div><button class="button" id="checkout" ${pending||unavailable?'disabled':''}>Перейти к оформлению ${icon('arrow')}</button><p>${needsChoice?'Выберите вариант товара, чтобы увидеть итог':pending?'Цена одного из вариантов уточняется Итог будет доступен после подтверждения':unavailable?'Один из вариантов сейчас недоступен Проверьте состав корзины':totals.freeDelivery?'Бесплатная доставка по Валенсии':'Бесплатная доставка от 49 € после скидки, иначе 3,99 €'}</p></aside></div>`}</div>`;
@@ -276,6 +277,17 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape'){document.qu
 window.addEventListener('hashchange',()=>{render();window.scrollTo(0,0);});
 await loadSupplierTerms();
 render();
+if (['http:','https:'].includes(location.protocol)) {
+  fetch('/api/catalog', { credentials: 'same-origin' }).then(response => response.ok ? response.json() : null)
+    .then(data => {
+      if (!data || !applyServerPrices(products, data.variants)) return;
+      const previousMax = catalogPriceMax;
+      catalogPriceMax = Math.max(100, Math.ceil(Math.max(...catalogProducts.map(p => catalogPrice(p).max ?? 0)) / 10) * 10);
+      if (priceLimit === previousMax) priceLimit = catalogPriceMax;
+      cart = normalizeCart(cart, products);
+      render();
+    }).catch(() => {});
+}
 
 app.addEventListener('change',event=>{if(event.target.id==='food-brand')setParam('brand',event.target.value);});
 

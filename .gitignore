@@ -10,3 +10,7 @@ __pycache__/
 # Private supplier documents and purchasing price reviews stay local
 research/supplier-files/
 research/supplier-cats/
+node_modules/
+.env
+.env.*
+!.env.example
