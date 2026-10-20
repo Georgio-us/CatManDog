@@ -78,7 +78,7 @@ export function createAccountUI(helpers) {
       } else if (mode === 'signin') {
         customer = await api.googleSignIn(response.credential);
         await loadRemote();
-        navigate(store.activePet() ? '/account' : '/join');
+        navigate('/account');
       }
     } catch (error) {
       const message = document.querySelector('[data-google-error]');
@@ -132,7 +132,7 @@ export function createAccountUI(helpers) {
       customer = await api.verify(token);
       await loadRemote();
       notify('Email подтверждён');
-      navigate(store.activePet() ? '/account' : '/join');
+      navigate('/account');
     } catch (error) { authStatus = error.message; render(); }
   }
   function navigate(path) { if (location.hash === '#' + path) render(); else location.hash = path; }
@@ -176,7 +176,10 @@ export function createAccountUI(helpers) {
   }
   function onboarding(params) {
     const adding = params.get('add') === '1';
-    return `<div class="page pet-onboarding">${pageNote()}<div class="pet-onboarding-grid"><div><span class="pet-eyebrow">У каждого хвоста - свой кабинет</span><h1>Давайте знакомиться<br>Как тебя зовут?</h1><p class="pet-intro-copy">Твои коробки, привычки и маленькие радости - в одном месте. А твой человек поможет всё заполнить.</p><form class="pet-panel pet-onboarding-form" data-account-form="join">${petFields()}${!adding ? '<label class="pet-field">Как зовут твоего человека <span>Необязательно</span><input name="humanName" maxlength="80" autocomplete="given-name" placeholder="Можно просто имя"></label>' : ''}<input type="hidden" name="ref" value="${e(params.get('ref') || '')}"><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">${adding ? 'Добавить питомца' : 'Создать мой кабинет'} ${icon('arrow')}</button><p class="pet-form-hint">${store.mode() === 'remote' ? 'Профиль сохранится в вашем аккаунте' : 'Локальный прототип - профиль сохранится на этом устройстве'}</p></form>${!adding && store.mode() === 'personal' && store.activePet() ? '<a class="text-link pet-demo-link" href="#/account">Открыть мой кабинет</a><br>' : ''}${!adding && store.mode() !== 'remote' ? '<button class="text-link pet-demo-link" data-account-demo>Сначала посмотреть кабинет Лео</button>' : '<a class="text-link pet-demo-link" href="#/account">Вернуться в кабинет</a>'}</div><aside class="pet-onboarding-story"><img src="https://img.catmandog.es/assets/hero-happy.png" alt="Кот и собака отдыхают дома"><div><span class="pet-eyebrow">Хорошо быть собой</span><h2>Здесь всё<br>про тебя</h2><p>Когда заканчивается корм<br>Когда хочется новой игрушки<br>Когда у тебя день рождения</p></div></aside></div></div>`;
+    return `<div class="page pet-onboarding">${pageNote()}<div class="pet-onboarding-grid"><div><span class="pet-eyebrow">У каждого хвоста - свой кабинет</span><h1>Давайте знакомиться<br>Как тебя зовут?</h1><p class="pet-intro-copy">Твои коробки, привычки и маленькие радости - в одном месте. А твой человек поможет всё заполнить.</p><form class="pet-panel pet-onboarding-form" data-account-form="join">${petFields()}${!adding ? '<label class="pet-field">Как зовут твоего человека <span>Необязательно</span><input name="humanName" maxlength="80" autocomplete="given-name" placeholder="Можно просто имя"></label>' : ''}<input type="hidden" name="ref" value="${e(params.get('ref') || '')}"><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">${adding ? 'Добавить питомца' : 'Создать мой кабинет'} ${icon('arrow')}</button><p class="pet-form-hint">${store.mode() === 'remote' ? 'Профиль сохранится в вашем аккаунте' : 'Локальный прототип - профиль сохранится на этом устройстве'}</p></form>${!adding && store.mode() === 'personal' && store.activePet() ? '<a class="text-link pet-demo-link" href="#/account">Открыть мой кабинет</a><br>' : ''}${!adding && store.mode() !== 'remote' ? '<button class="text-link pet-demo-link" data-account-demo>Сначала посмотреть кабинет Лео</button>' : '<div class="pet-onboarding-links"><a class="text-link" href="#/account">Вернуться в кабинет</a><button class="text-link" data-account-exit>Выйти из аккаунта</button></div>'}</div><aside class="pet-onboarding-story"><img src="https://img.catmandog.es/assets/hero-happy.png" alt="Кот и собака отдыхают дома"><div><span class="pet-eyebrow">Хорошо быть собой</span><h2>Здесь всё<br>про тебя</h2><p>Когда заканчивается корм<br>Когда хочется новой игрушки<br>Когда у тебя день рождения</p></div></aside></div></div>`;
+  }
+  function emptyAccount() {
+    return `<div class="page pet-account">${pageNote()}<section class="pet-panel pet-empty-account"><span class="pet-eyebrow">Кабинет с хвостиком</span><h1>Вы вошли в аккаунт</h1><p class="pet-empty-account-email">${e(customer?.email || store.get().human.email || '')}</p><p class="pet-muted">Питомца можно добавить позже</p><div class="pet-empty-account-actions"><a class="button" href="#/join">Добавить питомца ${icon('arrow')}</a><a class="button outline" href="#/catalog">Перейти в каталог</a></div><button class="text-link" data-account-exit>Выйти из аккаунта</button></section></div>`;
   }
   function orderCard(order, compact = false) {
     const total = order.items.reduce((sum, item) => sum + item.price * item.qty, 0) * (1 - (order.discount || 0) / 100);
@@ -231,7 +234,7 @@ export function createAccountUI(helpers) {
     if (['login','register','recover','reset','verify','check-email'].includes(path.split('/')[2]) && path.startsWith('/account/')) return authPage(path.split('/')[2]);
     if (path === '/join' || path === '/account/welcome') return onboarding(params);
     const pet = store.activePet();
-    if (!pet) return accountsEnabled && store.mode() !== 'remote' ? authPage('login') : onboarding(params);
+    if (!pet) return store.mode() === 'remote' ? emptyAccount() : accountsEnabled ? authPage('login') : onboarding(params);
     const data = store.get();
     const section = path.split('/')[2] || '';
     const content = section === 'care' ? accountTools({ pet, data, escape: e, icon }) : section === 'orders' ? ordersPage(pet, data, path.split('/')[3]) : section === 'supplies' ? suppliesPage(pet, data) : section === 'perks' ? perksPage(pet, data) : section === 'profile' ? profilePage(pet) : section === 'human' ? humanPage(data) : dashboard(pet, data);
@@ -292,7 +295,7 @@ export function createAccountUI(helpers) {
         try {
           const result = await api[kind]({ email: values.get('email'), password: values.get('password'), name: values.get('name') });
           if (kind === 'register') { pendingEmail = result.email; pendingLinkKind = 'verify'; navigate('/account/check-email'); }
-          else { customer = result; await loadRemote(); navigate(store.activePet() ? '/account' : '/join'); }
+          else { customer = result; await loadRemote(); navigate('/account'); }
         } catch (error) {
           if (kind === 'login' && error.status === 403) {
             pendingEmail = String(values.get('email') || '');

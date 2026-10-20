@@ -154,6 +154,13 @@
 .pet-onboarding-form { display: grid; gap: 22px; }
 .pet-form-hint { color: var(--muted); font-size: 10px; }
 .pet-demo-link { display: inline-block; margin-top: 22px; background: transparent; }
+.pet-onboarding-links { display: flex; flex-wrap: wrap; gap: 22px; align-items: center; margin-top: 22px; }
+.pet-onboarding-links button { background: transparent; }
+.pet-empty-account { max-width: 650px; margin: 35px auto 80px; padding: clamp(25px, 5vw, 55px); }
+.pet-empty-account h1 { font-size: clamp(32px, 4vw, 50px); line-height: 1.1; letter-spacing: -1.5px; }
+.pet-empty-account-email { margin: 17px 0 24px; color: var(--muted); overflow-wrap: anywhere; }
+.pet-empty-account-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0; }
+.pet-empty-account > .text-link { background: transparent; }
 .pet-auth-page { min-height: 70vh; display: flex; justify-content: center; align-items: flex-start; padding-top: clamp(35px, 6vw, 90px); }
 .pet-auth-panel { width: min(100%, 540px); }
 .pet-auth-panel h1 { font-size: clamp(35px, 4vw, 54px); letter-spacing: -1.5px; line-height: 1.1; }
