@@ -1,5 +1,5 @@
 import { createAccountStore } from './account-store.js?v=remote-cabinet-1';
-import { createAccountApi } from './account-api.js';
+import { createAccountApi } from './account-api.js?v=google-signin-2';
 import { accountTools } from './useful.js?v=2';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
 const store = createAccountStore(localStorage);
