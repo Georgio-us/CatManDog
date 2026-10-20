@@ -8,7 +8,7 @@ export const waterBalconyProducts = [
     "pet": "cat",
     "price": 43.99,
     "image": {
-      "src": "assets/water-balcony/pixi-steel.webp",
+      "src": "https://img.catmandog.es/assets/water-balcony/pixi-steel.webp",
       "alt": "Catit PIXI - фонтан со стальной чашей - 2,5 л · белый"
     },
     "tag": "Стальная чаша",
@@ -66,7 +66,7 @@ export const waterBalconyProducts = [
     "pet": "cat",
     "price": 109.99,
     "image": {
-      "src": "assets/water-balcony/pixi-smart.webp",
+      "src": "https://img.catmandog.es/assets/water-balcony/pixi-smart.webp",
       "alt": "Catit PIXI Smart - умный фонтан - 2 л · белый"
     },
     "tag": "Управление с телефона",
@@ -124,7 +124,7 @@ export const waterBalconyProducts = [
     "pet": "cat",
     "price": 69.99,
     "image": {
-      "src": "assets/water-balcony/pixi-wireless.webp",
+      "src": "https://img.catmandog.es/assets/water-balcony/pixi-wireless.webp",
       "alt": "Catit PIXI UVC - фонтан без проводов - 5 л · сталь"
     },
     "tag": "На аккумуляторе",
@@ -185,7 +185,7 @@ export const waterBalconyProducts = [
     "pet": "cat",
     "price": 41.99,
     "image": {
-      "src": "assets/water-balcony/pixi-clean.jpg",
+      "src": "https://img.catmandog.es/assets/water-balcony/pixi-clean.jpg",
       "alt": "Catit PIXI Easy Clean - фонтан - 2,25 л · бордовый"
     },
     "tag": "Легко мыть",
@@ -243,7 +243,7 @@ export const waterBalconyProducts = [
     "pet": "cat",
     "price": 7.02,
     "image": {
-      "src": "assets/water-balcony/pixi-filters.jpg",
+      "src": "https://img.catmandog.es/assets/water-balcony/pixi-filters.jpg",
       "alt": "Catit PIXI - сменные фильтры - 3 шт"
     },
     "tag": "Для фонтанов PIXI",
@@ -301,7 +301,7 @@ export const waterBalconyProducts = [
     "pet": "cat",
     "price": 37.49,
     "image": {
-      "src": "assets/water-balcony/net.jpg",
+      "src": "https://img.catmandog.es/assets/water-balcony/net.jpg",
       "alt": "Trixie - армированная сетка для балкона - 4 × 3 м · оливковый"
     },
     "tag": "С металлической нитью",
@@ -361,7 +361,7 @@ export const waterBalconyProducts = [
     "pet": "cat",
     "price": 28.49,
     "image": {
-      "src": "assets/water-balcony/rail.jpg",
+      "src": "https://img.catmandog.es/assets/water-balcony/rail.jpg",
       "alt": "Trixie - стойка с зажимом для перил - 1-2 м · зажим до 3,5 см"
     },
     "tag": "Для балконной сетки",
@@ -421,7 +421,7 @@ export const waterBalconyProducts = [
     "pet": "cat",
     "price": 45.99,
     "image": {
-      "src": "assets/water-balcony/window.jpg",
+      "src": "https://img.catmandog.es/assets/water-balcony/window.jpg",
       "alt": "Trixie - оконная лежанка на присосках - 50 × 30 см · серый"
     },
     "tag": "Свой этаж у окна",
@@ -481,7 +481,7 @@ export const waterBalconyProducts = [
     "pet": "cat",
     "price": 29.99,
     "image": {
-      "src": "assets/water-balcony/chair.jpg",
+      "src": "https://img.catmandog.es/assets/water-balcony/chair.jpg",
       "alt": "Trixie STRONG - шезлонг для кошки - 33 × 37 × 51 см · серый"
     },
     "tag": "Для защищённого балкона",

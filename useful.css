@@ -13,8 +13,8 @@
 .use-tool-icon { display: inline-flex; align-items: center; justify-content: center; width: 96px; height: 96px; background: #ffffffb8 center / 90% no-repeat; border-radius: 50%; margin-bottom: 26px; }
 .use-tool-icon svg { width: 35px; height: 35px; stroke-width: 1.4; }
 .use-tool-clinics .use-tool-icon svg, .use-tool-travel .use-tool-icon svg { display: none; }
-.use-tool-clinics .use-tool-icon { background-image: url('assets/useful/clinic.svg'); }
-.use-tool-travel .use-tool-icon { background-image: url('assets/useful/travel.svg'); }
+.use-tool-clinics .use-tool-icon { background-image: url('https://img.catmandog.es/assets/useful/clinic.svg'); }
+.use-tool-travel .use-tool-icon { background-image: url('https://img.catmandog.es/assets/useful/travel.svg'); }
 .use-tool h2 { font-size: clamp(27px, 3vw, 40px); letter-spacing: -1.2px; }
 .use-tool p { color: #62665b; font-size: 14px; line-height: 1.8; margin: 16px 0 32px; max-width: 390px; }
 .use-tool-bottom { display: flex; align-items: center; justify-content: space-between; gap: 28px; width: 100%; margin-top: auto; font-size: 13px; font-weight: 650; border-top: 1px solid #29321b20; padding-top: 24px; }
@@ -120,9 +120,9 @@
 .use-home-item { display: flex; flex-direction: column; align-items: center; min-width: 0; padding: 4px 12px 0; text-align: center; text-decoration: none; }
 .use-home-circle { display: grid; place-items: center; width: clamp(130px, 14vw, 184px); aspect-ratio: 1; border: 1px solid var(--line); border-radius: 50%; background: #f8f8f6 center / 88% no-repeat; transition: transform .2s ease, border-color .2s ease, background-color .2s ease; }
 .use-home-circle svg { display: none; }
-.use-home-item:nth-child(1) .use-home-circle { background-image: url('assets/useful/clinic.svg'); }
-.use-home-item:nth-child(2) .use-home-circle { background-image: url('assets/useful/travel.svg'); }
-.use-home-item:nth-child(3) .use-home-circle { background-image: url('assets/useful/account.svg'); }
+.use-home-item:nth-child(1) .use-home-circle { background-image: url('https://img.catmandog.es/assets/useful/clinic.svg'); }
+.use-home-item:nth-child(2) .use-home-circle { background-image: url('https://img.catmandog.es/assets/useful/travel.svg'); }
+.use-home-item:nth-child(3) .use-home-circle { background-image: url('https://img.catmandog.es/assets/useful/account.svg'); }
 .use-home-copy { display: flex; flex-direction: column; align-items: center; margin-top: 17px; }
 .use-home-copy strong { font-size: 17px; letter-spacing: -.35px; }
 .use-home-description { color: var(--muted); font-size: 12px; margin-top: 5px; }

@@ -15,7 +15,7 @@ export const faireProducts = [
     "availabilityStatus": "pending",
     "weight": "10 × 8 × 2,5 см",
     "image": {
-      "src": "assets/faire/p_dafmm24zr9.jpg",
+      "src": "https://img.catmandog.es/assets/faire/p_dafmm24zr9.jpg",
       "alt": "greenPAWS TIGRE - перезаполняемая игрушка"
     },
     "tag": "Для игр",
@@ -94,7 +94,7 @@ export const faireProducts = [
         "availabilityStatus": "pending",
         "weight": "10 × 8 × 2,5 см",
         "image": {
-          "src": "assets/faire/p_dafmm24zr9.jpg",
+          "src": "https://img.catmandog.es/assets/faire/p_dafmm24zr9.jpg",
           "alt": "greenPAWS TIGRE - перезаполняемая игрушка"
         },
         "tag": "Для игр",
@@ -173,7 +173,7 @@ export const faireProducts = [
     "availabilityStatus": "pending",
     "weight": "30 г",
     "image": {
-      "src": "assets/faire/p_zux9be76dn.jpg",
+      "src": "https://img.catmandog.es/assets/faire/p_zux9be76dn.jpg",
       "alt": "greenPAWS - кошачья мята и валериана 30 г"
     },
     "tag": "Для игр",
@@ -252,7 +252,7 @@ export const faireProducts = [
         "availabilityStatus": "pending",
         "weight": "30 г",
         "image": {
-          "src": "assets/faire/p_zux9be76dn.jpg",
+          "src": "https://img.catmandog.es/assets/faire/p_zux9be76dn.jpg",
           "alt": "greenPAWS - кошачья мята и валериана 30 г"
         },
         "tag": "Для игр",
@@ -331,7 +331,7 @@ export const faireProducts = [
     "availabilityStatus": "pending",
     "weight": "3 × 2 дюйма",
     "image": {
-      "src": "assets/faire/p_ep6itv80.jpg",
+      "src": "https://img.catmandog.es/assets/faire/p_ep6itv80.jpg",
       "alt": "The Foggy Dog Sushi Cat Toy - Prawn Nigiri"
     },
     "tag": "Для игр",
@@ -410,7 +410,7 @@ export const faireProducts = [
         "availabilityStatus": "pending",
         "weight": "3 × 2 дюйма",
         "image": {
-          "src": "assets/faire/p_ep6itv80.jpg",
+          "src": "https://img.catmandog.es/assets/faire/p_ep6itv80.jpg",
           "alt": "The Foggy Dog Sushi Cat Toy - Prawn Nigiri"
         },
         "tag": "Для игр",
@@ -487,7 +487,7 @@ export const faireProducts = [
         "availabilityStatus": "pending",
         "weight": "3 × 2 дюйма",
         "image": {
-          "src": "assets/faire/p_dxv0xmcs.jpg",
+          "src": "https://img.catmandog.es/assets/faire/p_dxv0xmcs.jpg",
           "alt": "The Foggy Dog Sushi Cat Toy - California Roll"
         },
         "tag": "Для игр",
@@ -564,7 +564,7 @@ export const faireProducts = [
         "availabilityStatus": "pending",
         "weight": "3 × 2 дюйма",
         "image": {
-          "src": "assets/faire/p_5uszghxs02.jpg",
+          "src": "https://img.catmandog.es/assets/faire/p_5uszghxs02.jpg",
           "alt": "The Foggy Dog Sushi Cat Toy - Salmon Nigiri"
         },
         "tag": "Для игр",
@@ -643,7 +643,7 @@ export const faireProducts = [
     "availabilityStatus": "pending",
     "weight": "1 набор",
     "image": {
-      "src": "assets/faire/p_tpsyfnsktv.jpg",
+      "src": "https://img.catmandog.es/assets/faire/p_tpsyfnsktv.jpg",
       "alt": "Simply B Vermont Happy Cat - подарочная банка"
     },
     "tag": "Для игр",
@@ -723,7 +723,7 @@ export const faireProducts = [
         "availabilityStatus": "pending",
         "weight": "1 набор",
         "image": {
-          "src": "assets/faire/p_tpsyfnsktv.jpg",
+          "src": "https://img.catmandog.es/assets/faire/p_tpsyfnsktv.jpg",
           "alt": "Simply B Vermont Happy Cat - подарочная банка"
         },
         "tag": "Для игр",
@@ -803,7 +803,7 @@ export const faireProducts = [
     "availabilityStatus": "pending",
     "weight": "1 набор",
     "image": {
-      "src": "assets/faire/p_2u4sudz0rb.jpg",
+      "src": "https://img.catmandog.es/assets/faire/p_2u4sudz0rb.jpg",
       "alt": "Pearhead - рождественское украшение с фото и отпечатком"
     },
     "tag": "Для любителей кошек",
@@ -883,7 +883,7 @@ export const faireProducts = [
         "availabilityStatus": "pending",
         "weight": "1 набор",
         "image": {
-          "src": "assets/faire/p_2u4sudz0rb.jpg",
+          "src": "https://img.catmandog.es/assets/faire/p_2u4sudz0rb.jpg",
           "alt": "Pearhead - рождественское украшение с фото и отпечатком"
         },
         "tag": "Для любителей кошек",
@@ -963,7 +963,7 @@ export const faireProducts = [
     "availabilityStatus": "pending",
     "weight": "500 мл",
     "image": {
-      "src": "assets/faire/p_see8z22mfe.jpg",
+      "src": "https://img.catmandog.es/assets/faire/p_see8z22mfe.jpg",
       "alt": "Egg Back Home Cloud Mug - Cat Dad 500 мл"
     },
     "tag": "Для любителей кошек",
@@ -1042,7 +1042,7 @@ export const faireProducts = [
         "availabilityStatus": "pending",
         "weight": "500 мл",
         "image": {
-          "src": "assets/faire/p_see8z22mfe.jpg",
+          "src": "https://img.catmandog.es/assets/faire/p_see8z22mfe.jpg",
           "alt": "Egg Back Home Cloud Mug - Cat Dad 500 мл"
         },
         "tag": "Для любителей кошек",
@@ -1121,7 +1121,7 @@ export const faireProducts = [
     "availabilityStatus": "pending",
     "weight": "A6",
     "image": {
-      "src": "assets/faire/p_h2rs3xhzt2.jpg",
+      "src": "https://img.catmandog.es/assets/faire/p_h2rs3xhzt2.jpg",
       "alt": "Just Cool Design Two Cats - мини-принт A6"
     },
     "tag": "Для любителей кошек",
@@ -1201,7 +1201,7 @@ export const faireProducts = [
         "availabilityStatus": "pending",
         "weight": "A6",
         "image": {
-          "src": "assets/faire/p_h2rs3xhzt2.jpg",
+          "src": "https://img.catmandog.es/assets/faire/p_h2rs3xhzt2.jpg",
           "alt": "Just Cool Design Two Cats - мини-принт A6"
         },
         "tag": "Для любителей кошек",
@@ -1279,7 +1279,7 @@ export const faireProducts = [
         "availabilityStatus": "pending",
         "weight": "A6",
         "image": {
-          "src": "assets/faire/p_8gek774e6z.jpg",
+          "src": "https://img.catmandog.es/assets/faire/p_8gek774e6z.jpg",
           "alt": "Just Cool Design Born to Be Wild - мини-принт A6"
         },
         "tag": "Для любителей кошек",
@@ -1359,7 +1359,7 @@ export const faireProducts = [
     "availabilityStatus": "pending",
     "weight": "1 домик",
     "image": {
-      "src": "assets/faire/p_3jy7vpk4e2.jpg",
+      "src": "https://img.catmandog.es/assets/faire/p_3jy7vpk4e2.jpg",
       "alt": "Cat in the Box Gingerloaf House - пряничный домик"
     },
     "tag": "Для любителей кошек",
@@ -1438,7 +1438,7 @@ export const faireProducts = [
         "availabilityStatus": "pending",
         "weight": "1 домик",
         "image": {
-          "src": "assets/faire/p_3jy7vpk4e2.jpg",
+          "src": "https://img.catmandog.es/assets/faire/p_3jy7vpk4e2.jpg",
           "alt": "Cat in the Box Gingerloaf House - пряничный домик"
         },
         "tag": "Для любителей кошек",

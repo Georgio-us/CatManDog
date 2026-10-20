@@ -28,8 +28,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-light-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/leonardo-08.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-light-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/leonardo-08.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Adult Light & Sterilised"
@@ -159,8 +159,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-poultry-v1.webp",
-      "originalSrc": "assets/food/leonardo-poultry.png",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-poultry-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/leonardo-poultry.png",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Adult GF Poultry"
@@ -290,8 +290,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-salmon-v1.webp",
-      "originalSrc": "assets/food/leonardo-salmon.png",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-salmon-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/leonardo-salmon.png",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Adult GF Salmon"
@@ -421,8 +421,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-kitten-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/leonardo-12.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-kitten-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/leonardo-12.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Kitten"
@@ -552,8 +552,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-fresh-beef-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/leonardo-02.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-fresh-beef-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/leonardo-02.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo fresh Meat Fresh Beef"
@@ -683,8 +683,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-ster-v1.webp",
-      "originalSrc": "assets/food/hills-ster.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-ster-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/hills-ster.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Sterilised Cat Adult Chicken"
@@ -872,8 +872,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-kitten-v1.webp",
-      "originalSrc": "assets/food/hills-kitten.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-kitten-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/hills-kitten.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Sterilised Kitten Chicken"
@@ -986,8 +986,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-digestion-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/hills-11.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-digestion-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/hills-11.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Perfect Digestion Adult Chicken & Brown Rice"
@@ -1108,8 +1108,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-urinary-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/hills-14.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-urinary-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/hills-14.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Urinary Health Adult Chicken"
@@ -1180,8 +1180,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-hairball-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/hills-15.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-hairball-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/hills-15.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Hairball & Perfect Coat Adult Chicken"
@@ -1277,8 +1277,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-sterilised-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/advance-03.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-sterilised-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/advance-03.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Sterilized Adult Turkey & Barley"
@@ -1441,8 +1441,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-kitten-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/advance-02.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-kitten-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/advance-02.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Kitten Chicken & Rice"
@@ -1580,8 +1580,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-sensitive-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/advance-05.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-sensitive-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/advance-05.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Sensitive Care Sterilized Salmon"
@@ -1702,8 +1702,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-hairball-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/advance-06.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-hairball-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/advance-06.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Sterilized Hairball Turkey"
@@ -1817,8 +1817,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-urinary-v1.webp",
-      "originalSrc": "assets/food/advance-urinary.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-urinary-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/advance-urinary.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Veterinary Diets Urinary Feline"
@@ -1881,8 +1881,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/acana-first-feast-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/acana-01.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/acana-first-feast-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/acana-01.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Acana First Feast"
@@ -1978,8 +1978,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/acana-indoor-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/acana-02.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/acana-indoor-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/acana-02.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Acana Indoor Entrée"
@@ -2092,8 +2092,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/acana-wild-prairie-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/acana-05.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/acana-wild-prairie-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/acana-05.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Acana Wild Prairie"
@@ -2206,8 +2206,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/acana-grasslands-v1.webp",
-      "originalSrc": "assets/food/acana-grasslands.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/acana-grasslands-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/acana-grasslands.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Acana Grasslands"
@@ -2320,8 +2320,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/acana-pacifica-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/acana-07.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/acana-pacifica-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/acana-07.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Acana Pacifica"
@@ -2434,8 +2434,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/orijen-original-v1.webp",
-      "originalSrc": "assets/food/orijen-original.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/orijen-original-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/orijen-original.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Orijen Original Cat"
@@ -2548,8 +2548,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/orijen-fit-trim-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/orijen-02.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/orijen-fit-trim-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/orijen-02.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Orijen Fit & Trim"
@@ -2662,8 +2662,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/orijen-six-fish-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/orijen-03.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/orijen-six-fish-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/orijen-03.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Orijen Six Fish"
@@ -2776,8 +2776,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/orijen-kitten-v1.webp",
-      "originalSrc": "assets/food/references/priority-dry/orijen-06.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/orijen-kitten-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-dry/orijen-06.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Orijen Kitten"
@@ -2873,8 +2873,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-fresh-duck-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/leonardo-01.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-fresh-duck-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/leonardo-01.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo fresh Meat Duck"
@@ -3004,8 +3004,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-fresh-salmon-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/leonardo-03.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-fresh-salmon-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/leonardo-03.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo fresh Meat Salmon"
@@ -3135,8 +3135,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-adult-duck-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/leonardo-05.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-adult-duck-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/leonardo-05.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Adult Duck"
@@ -3294,8 +3294,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-maxi-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/leonardo-11.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-maxi-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/leonardo-11.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Adult GF Maxi"
@@ -3453,8 +3453,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-senior-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/leonardo-15.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-senior-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/leonardo-15.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Senior"
@@ -3584,8 +3584,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-senior-gf-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/leonardo-16.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-senior-gf-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/leonardo-16.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Senior GF"
@@ -3715,8 +3715,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-adult-chicken-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/hills-01.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-adult-chicken-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/hills-01.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Adult Chicken"
@@ -3879,8 +3879,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-ster-salmon-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/hills-04.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-ster-salmon-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/hills-04.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Sterilised Cat Adult Salmon"
@@ -4027,8 +4027,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-ster-duck-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/hills-05.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-ster-duck-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/hills-05.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Sterilised Cat Adult Duck"
@@ -4116,8 +4116,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-mature-ster-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/hills-08.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-mature-ster-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/hills-08.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Sterilised Cat Mature Adult 7+ Chicken"
@@ -4188,8 +4188,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-sensitive-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/hills-13.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-sensitive-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/hills-13.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Sensitive Stomach & Skin Adult Chicken"
@@ -4260,8 +4260,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-senior11-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/hills-17.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-senior11-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/hills-17.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Senior 11+ Healthy Ageing Chicken"
@@ -4332,8 +4332,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-adult-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/advance-01.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-adult-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/advance-01.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Adult Chicken & Rice"
@@ -4479,8 +4479,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-sensitive-adult-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/advance-04.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-sensitive-adult-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/advance-04.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Sensitive Care Salmon & Rice"
@@ -4576,8 +4576,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-junior-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/advance-07.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-junior-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/advance-07.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Sterilized Junior Chicken"
@@ -4665,8 +4665,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-senior-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/advance-08.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-senior-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/advance-08.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Vitality Sterilized Senior +10"
@@ -4754,8 +4754,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/acana-homestead-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/acana-03.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/acana-homestead-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/acana-03.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Acana Homestead Harvest"
@@ -4876,8 +4876,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/acana-bountiful-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/acana-04.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/acana-bountiful-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/acana-04.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Acana Bountiful Catch"
@@ -4973,8 +4973,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/acana-hp-indoor-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/acana-08.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/acana-hp-indoor-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/acana-08.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Acana Highest Protein Indoor Cat"
@@ -5062,8 +5062,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/orijen-regional-red-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/orijen-04.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/orijen-regional-red-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/orijen-04.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Orijen Regional Red"
@@ -5176,8 +5176,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/orijen-guardian8-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/orijen-05.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/orijen-guardian8-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/orijen-05.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Orijen Guardian 8"
@@ -5298,8 +5298,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-wet-ster-turkey-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/advance-56a888bd.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-wet-ster-turkey-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/advance-56a888bd.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Adult Sterilized Turkey - в соусе"
@@ -5370,8 +5370,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/acana-wet-kitten-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/acana-265a9eae.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/acana-wet-kitten-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/acana-265a9eae.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Acana Premium Paté Kitten Chicken & Fish"
@@ -5442,8 +5442,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/acana-wet-chicken-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch2/acana-0544e2e9.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/acana-wet-chicken-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch2/acana-0544e2e9.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Acana Premium Paté Chicken"
@@ -5514,8 +5514,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-complete-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/leonardo-04.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-complete-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/leonardo-04.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Adult Complete 32/16"
@@ -5673,8 +5673,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-fish-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/leonardo-06.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-fish-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/leonardo-06.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Adult Fish"
@@ -5832,8 +5832,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-lamb-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/leonardo-07.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-lamb-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/leonardo-07.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Adult Lamb"
@@ -5991,8 +5991,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-kitten-gf-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/leonardo-13.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-kitten-gf-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/leonardo-13.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Kitten GF"
@@ -6122,8 +6122,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-granula-start-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/leonardo-14.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-granula-start-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/leonardo-14.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Kitten Granula-Start"
@@ -6225,8 +6225,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-adult-lamb-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/hills-02.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-adult-lamb-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/hills-02.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Adult Lamb"
@@ -6314,8 +6314,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-kitten-regular-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/hills-06.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-kitten-regular-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/hills-06.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Kitten Chicken"
@@ -6445,8 +6445,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-light-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/hills-09.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-light-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/hills-09.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Light Adult Chicken"
@@ -6576,8 +6576,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-perfect-weight-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/hills-10.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-perfect-weight-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/hills-10.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Perfect Weight Adult Chicken"
@@ -6690,8 +6690,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-kitten-digestion-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/hills-12.png",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-kitten-digestion-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/hills-12.png",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Perfect Digestion Kitten Chicken & Brown Rice"
@@ -6754,8 +6754,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-hypoallergenic-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/hills-16.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-hypoallergenic-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/hills-16.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Hypoallergenic Adult Egg & Insect Protein"
@@ -6835,8 +6835,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-chicken-v1.webp",
-      "originalSrc": "assets/food/leonardo-chicken.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-chicken-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/leonardo-chicken.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Extra Filet Chicken"
@@ -6916,8 +6916,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-turkey-v1.webp",
-      "originalSrc": "assets/food/leonardo-turkey.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-turkey-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/leonardo-turkey.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Extra Filet Turkey"
@@ -6997,8 +6997,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-salmon-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/leonardo-b251d533.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-salmon-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/leonardo-b251d533.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Extra Filet Salmon"
@@ -7078,8 +7078,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-kitten-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/leonardo-bf1e18d3.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-kitten-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/leonardo-bf1e18d3.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Kitten Poultry"
@@ -7142,8 +7142,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-rabbit-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/leonardo-ee08de93.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-rabbit-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/leonardo-ee08de93.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Rabbit & Cranberries"
@@ -7206,8 +7206,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/acana-wet-tuna-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/acana-c58f94cd.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/acana-wet-tuna-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/acana-c58f94cd.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Acana Premium Paté Tuna & Chicken"
@@ -7278,8 +7278,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/acana-wet-lamb-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/acana-ded3686b.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/acana-wet-lamb-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/acana-ded3686b.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Acana Premium Paté Lamb"
@@ -7350,8 +7350,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/acana-wet-salmon-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/acana-21da5951.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/acana-wet-salmon-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/acana-21da5951.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Acana Premium Paté Salmon & Chicken"
@@ -7422,8 +7422,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/acana-wet-beef-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/acana-3a7cb68b.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/acana-wet-beef-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/acana-3a7cb68b.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Acana Premium Paté Beef"
@@ -7494,8 +7494,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-wet-adult-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/advance-06d9acb9.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-wet-adult-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/advance-06d9acb9.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Adult Chicken - в соусе"
@@ -7566,8 +7566,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-wet-kitten-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/advance-eb954ea7.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-wet-kitten-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/advance-eb954ea7.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Kitten Turkey - в соусе"
@@ -7638,8 +7638,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-mousse-salmon-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/hills-bd4b65b0.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-mousse-salmon-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/hills-bd4b65b0.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Sterilised Adult Salmon Mousse"
@@ -7710,8 +7710,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-kitten-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch3/hills-581247f6.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-kitten-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch3/hills-581247f6.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Kitten Chicken - в соусе"
@@ -7782,8 +7782,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-herring-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/leonardo-2a3637d3.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-herring-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/leonardo-2a3637d3.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Extra Filet Herring"
@@ -7863,8 +7863,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-lamb-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/leonardo-6a36e950.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-lamb-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/leonardo-6a36e950.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Extra Filet Lamb"
@@ -7944,8 +7944,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-venison-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/leonardo-ead26978.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-venison-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/leonardo-ead26978.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Extra Filet Venison"
@@ -8025,8 +8025,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-poultry-egg-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/leonardo-6e2daf53.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-poultry-egg-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/leonardo-6e2daf53.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Poultry & Egg"
@@ -8089,8 +8089,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-buffalo-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/leonardo-d451fe16.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-buffalo-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/leonardo-d451fe16.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Buffalo & Blueberries"
@@ -8153,8 +8153,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-lamb-cranberry-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/leonardo-b22ec952.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-lamb-cranberry-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/leonardo-b22ec952.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Lamb & Cranberries"
@@ -8217,8 +8217,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-pheasant-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/leonardo-d30c0db6.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-pheasant-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/leonardo-d30c0db6.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Pheasant & Cranberries"
@@ -8281,8 +8281,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-meat-menu-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/leonardo-6073bc52.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-meat-menu-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/leonardo-6073bc52.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Meat Menu"
@@ -8345,8 +8345,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-duck-cheese-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/leonardo-6d413fe3.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-duck-cheese-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/leonardo-6d413fe3.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Duck & Cheese"
@@ -8409,8 +8409,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-fish-shrimp-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/leonardo-e56198a8.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-fish-shrimp-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/leonardo-e56198a8.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Fish & Shrimps"
@@ -8473,8 +8473,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-v1.webp",
-      "originalSrc": "assets/food/hills-wet.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/hills-wet.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Sterilised Young Adult Chicken"
@@ -8545,8 +8545,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-adult-chicken-mousse-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/hills-c2b38601.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-adult-chicken-mousse-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/hills-c2b38601.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Adult Chicken Mousse"
@@ -8617,8 +8617,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-adult-salmon-mousse-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/hills-9c575b67.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-adult-salmon-mousse-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/hills-9c575b67.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Adult Salmon Mousse"
@@ -8689,8 +8689,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-turkey-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/hills-ee5bc575.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-turkey-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/hills-ee5bc575.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Adult Turkey - в соусе"
@@ -8761,8 +8761,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-digestion-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/hills-eb23f10b.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-digestion-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/hills-eb23f10b.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Adult Perfect Digestion Chicken"
@@ -8833,8 +8833,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-fish-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/hills-a115862f.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-fish-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/hills-a115862f.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Adult Ocean Fish - в соусе"
@@ -8905,8 +8905,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-ster-chicken-mousse-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/hills-2d92e01b.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-ster-chicken-mousse-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/hills-2d92e01b.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Sterilised Adult Chicken Mousse"
@@ -8977,8 +8977,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-senior-vitality-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/hills-cfe706a6.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-senior-vitality-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/hills-cfe706a6.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Senior Vitality Chicken & Salmon"
@@ -9049,8 +9049,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-wet-deli-tuna-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/advance-d687ca7d.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-wet-deli-tuna-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/advance-d687ca7d.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Delicatessen Tuna - в соусе"
@@ -9121,8 +9121,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-wet-deli-turkey-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/advance-95923f62.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-wet-deli-turkey-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/advance-95923f62.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Delicatessen Turkey - в соусе"
@@ -9193,8 +9193,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-wet-deli-chicken-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/advance-48db10e3.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-wet-deli-chicken-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/advance-48db10e3.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Delicatessen Chicken - в соусе"
@@ -9265,8 +9265,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-wet-deli-salmon-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/advance-652cf312.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-wet-deli-salmon-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/advance-652cf312.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Delicatessen Salmon - в соусе"
@@ -9338,8 +9338,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-wet-v1.webp",
-      "originalSrc": "assets/food/advance-wet.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-wet-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/advance-wet.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Veterinary Diets Gastroenteric Chicken"
@@ -9402,8 +9402,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-wet-kitten-chicken-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch4/advance-2996b2c4.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-wet-kitten-chicken-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch4/advance-2996b2c4.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Kitten Chicken - в соусе"
@@ -9474,8 +9474,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-pure-turkey-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/leonardo-3e65b946.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-pure-turkey-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-3e65b946.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Pure Turkey"
@@ -9538,8 +9538,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-pure-chicken-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/leonardo-c90d6fff.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-pure-chicken-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-c90d6fff.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Pure Chicken"
@@ -9602,8 +9602,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-pure-beef-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/leonardo-cec6d7b8.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-pure-beef-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-cec6d7b8.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Pure Beef"
@@ -9666,8 +9666,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-senior-chicken-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/leonardo-04d3623d.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-senior-chicken-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-04d3623d.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Senior Pure Chicken"
@@ -9730,8 +9730,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-senior-beef-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/leonardo-a8fa1682.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-senior-beef-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-a8fa1682.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Senior Pure Beef"
@@ -9794,8 +9794,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-beef-vegetables-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/leonardo-ce1bb081.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-beef-vegetables-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-ce1bb081.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Beef & Vegetables"
@@ -9858,8 +9858,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-trout-catnip-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/leonardo-e16b56c6.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-trout-catnip-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-e16b56c6.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Trout & Catnip"
@@ -9922,8 +9922,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-venison-blueberries-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/leonardo-fa83dd83.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-venison-blueberries-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-fa83dd83.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Finest Selection Venison & Blueberries"
@@ -9986,8 +9986,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-pulled-beef-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/leonardo-bcfaec2c.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-pulled-beef-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-bcfaec2c.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Pulled Beef Beef"
@@ -10050,8 +10050,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-pulled-chicken-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/leonardo-244fbf75.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-pulled-chicken-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-244fbf75.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Pulled Beef Chicken"
@@ -10114,8 +10114,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-adult-chicken-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/hills-bb9a38e6.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-adult-chicken-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/hills-bb9a38e6.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Adult Chicken - в соусе"
@@ -10186,8 +10186,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-adult-beef-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/hills-8ae14cbf.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-adult-beef-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/hills-8ae14cbf.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Adult Beef - в соусе"
@@ -10258,8 +10258,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-kitten-turkey-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/hills-9795b719.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-kitten-turkey-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/hills-9795b719.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Kitten Turkey - в соусе"
@@ -10330,8 +10330,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-kitten-fish-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/hills-184b871c.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-kitten-fish-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/hills-184b871c.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Kitten Ocean Fish - в соусе"
@@ -10402,8 +10402,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-kitten-mother-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/hills-178db5ef.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-kitten-mother-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/hills-178db5ef.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Kitten & Mother Chicken & Turkey Mousse"
@@ -10474,8 +10474,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-mature-chicken-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/hills-66637f63.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-mature-chicken-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/hills-66637f63.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Mature Chicken Mousse"
@@ -10546,8 +10546,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-mature-sterilised-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/hills-52ebd066.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-mature-sterilised-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/hills-52ebd066.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Mature Sterilised Chicken Mousse"
@@ -10618,8 +10618,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-sterilised-turkey-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/hills-b35bf2eb.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-sterilised-turkey-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/hills-b35bf2eb.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Sterilised Young Adult Turkey - в соусе"
@@ -10690,8 +10690,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-sterilised-trout-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/hills-461a6d98.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-sterilised-trout-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/hills-461a6d98.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Sterilised Young Adult Trout - в соусе"
@@ -10763,8 +10763,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-wet-recovery-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/advance-dd162181.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-wet-recovery-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/advance-dd162181.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Veterinary Diets Recovery"
@@ -10836,8 +10836,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-wet-renal-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/advance-703db95b.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-wet-renal-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/advance-703db95b.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Veterinary Diets Renal Chicken & Pork"
@@ -10908,8 +10908,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-wet-sterilised-cod-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/advance-ae0f356b.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-wet-sterilised-cod-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/advance-ae0f356b.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Sterilized Adult Cod"
@@ -10981,8 +10981,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-wet-urinary-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/advance-fde0cd46.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-wet-urinary-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/advance-fde0cd46.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Veterinary Diets Urinary"
@@ -11054,8 +11054,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/advance-wet-weight-balance-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch5/advance-8ccc9ae4.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/advance-wet-weight-balance-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/advance-8ccc9ae4.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Advance Veterinary Diets Weight Balance"
@@ -11126,8 +11126,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-pulled-duck-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-e1551323.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-pulled-duck-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-e1551323.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Pulled Beef Duck"
@@ -11190,8 +11190,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-pulled-lamb-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-707b57a4.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-pulled-lamb-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-707b57a4.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Pulled Beef Lamb"
@@ -11254,8 +11254,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-pulled-turkey-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-1fe1a310.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-pulled-turkey-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-1fe1a310.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Pulled Beef Turkey"
@@ -11318,8 +11318,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-quality-kitten-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-85c26e29.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-quality-kitten-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-85c26e29.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Quality Selection Kitten"
@@ -11416,8 +11416,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-quality-poultry-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-e950030e.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-quality-poultry-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-e950030e.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Quality Selection Poultry"
@@ -11514,8 +11514,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-quality-beef-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-d1038e4a.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-quality-beef-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-d1038e4a.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Quality Selection Beef"
@@ -11612,8 +11612,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-quality-rabbit-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-90918afc.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-quality-rabbit-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-90918afc.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Quality Selection Rabbit"
@@ -11693,8 +11693,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-quality-ocean-fish-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-cb293103.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-quality-ocean-fish-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-cb293103.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Quality Selection Ocean Fish"
@@ -11791,8 +11791,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-quality-liver-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-910731e6.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-quality-liver-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-910731e6.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Quality Selection Liver"
@@ -11872,8 +11872,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-quality-duck-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-3a2a0be9.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-quality-duck-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-3a2a0be9.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Quality Selection Duck"
@@ -11970,8 +11970,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-superior-horse-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-25e027e9.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-superior-horse-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-25e027e9.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Superior Selection Horse & Courgette"
@@ -12051,8 +12051,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-superior-lamb-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-4a011626.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-superior-lamb-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-4a011626.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Superior Selection Lamb, Poultry & Pumpkin"
@@ -12132,8 +12132,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-superior-duck-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-46821738.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-superior-duck-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-46821738.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Superior Selection Duck, Chicken & Carrots"
@@ -12213,8 +12213,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-superior-turkey-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-b63a54dd.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-superior-turkey-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-b63a54dd.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Superior Selection Turkey, Trout & Cranberries"
@@ -12294,8 +12294,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-superior-chicken-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-1f85f0d3.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-superior-chicken-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-1f85f0d3.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Superior Selection Chicken & Spinach"
@@ -12375,8 +12375,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/leonardo-wet-superior-beef-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/leonardo-127ba3d8.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/leonardo-wet-superior-beef-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-127ba3d8.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Leonardo Superior Selection Beef, Venison & Sweet Potato"
@@ -12456,8 +12456,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-adult-mix-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/hills-d6890546.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-adult-mix-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/hills-d6890546.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Adult Chicken, Ocean Fish & Beef"
@@ -12528,8 +12528,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-kitten-mix-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/hills-71b606c4.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-kitten-mix-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/hills-71b606c4.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Kitten Chicken & Turkey"
@@ -12600,8 +12600,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-light-mix-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/hills-237aca66.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-light-mix-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/hills-237aca66.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Light Adult Ocean Fish & Chicken"
@@ -12672,8 +12672,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-perfect-weight-mix-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/hills-52c3af05.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-perfect-weight-mix-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/hills-52c3af05.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Perfect Weight Salmon & Chicken"
@@ -12744,8 +12744,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-sterilised-mix-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/hills-71f6c1c2.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-sterilised-mix-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/hills-71f6c1c2.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Sterilised Adult Chicken & Salmon"
@@ -12816,8 +12816,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-sterilised-meat-fish-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/hills-9f8e8fdf.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-sterilised-meat-fish-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/hills-9f8e8fdf.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Sterilised Meat & Fish"
@@ -12888,8 +12888,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-sterilised-salmon-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/hills-595b883e.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-sterilised-salmon-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/hills-595b883e.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Science Plan Sterilised Young Adult Salmon - в соусе"
@@ -12961,8 +12961,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-cd-stress-chicken-stew-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch6/hills-2e88710b.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-cd-stress-chicken-stew-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/hills-2e88710b.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet c/d Urinary Stress Chicken & Vegetables Stew"
@@ -13034,8 +13034,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-84c83496-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-84c83496.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-84c83496-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-84c83496.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet i/d Digestive Care Chicken & Vegetables Stew"
@@ -13107,8 +13107,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-43f33709-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-43f33709.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-43f33709-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-43f33709.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet i/d Digestive Care Chicken"
@@ -13180,8 +13180,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-fcae66af-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-fcae66af.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-fcae66af-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-fcae66af.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet i/d Digestive Care Chicken - в соусе"
@@ -13253,8 +13253,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-5d47b053-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-5d47b053.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-5d47b053-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-5d47b053.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet k/d Early Stage Kidney Care Chicken - в соусе"
@@ -13326,8 +13326,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-741ce6ac-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-741ce6ac.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-741ce6ac-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-741ce6ac.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet ON-Care Chicken & Vegetables Stew"
@@ -13399,8 +13399,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-3e2a1a71-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-3e2a1a71.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-3e2a1a71-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-3e2a1a71.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet Gastrointestinal Biome Chicken - в соусе"
@@ -13464,8 +13464,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-4e422946-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-4e422946.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-4e422946-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-4e422946.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet z/d Food Sensitivities"
@@ -13537,8 +13537,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-455d9020-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-455d9020.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-455d9020-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-455d9020.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet Gastrointestinal Biome Chicken Stew"
@@ -13610,8 +13610,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-ff59af26-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-ff59af26.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-ff59af26-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-ff59af26.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet i/d Digestive Care Kitten Chicken"
@@ -13675,8 +13675,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-93eb5a88-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-93eb5a88.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-93eb5a88-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-93eb5a88.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet k/d Kidney Care Chicken"
@@ -13748,8 +13748,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-0637713f-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-0637713f.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-0637713f-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-0637713f.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet k/d Kidney Care Chicken - в соусе"
@@ -13821,8 +13821,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-35883719-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-35883719.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-35883719-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-35883719.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet k/d Kidney Care Chicken & Vegetables Stew"
@@ -13894,8 +13894,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-59c92e72-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-59c92e72.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-59c92e72-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-59c92e72.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet Metabolic + Mobility Chicken - в соусе"
@@ -13959,8 +13959,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-39b05056-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-39b05056.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-39b05056-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-39b05056.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet Metabolic Chicken & Vegetables Stew"
@@ -14032,8 +14032,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-d365388e-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-d365388e.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-d365388e-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-d365388e.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet Metabolic Chicken - в соусе"
@@ -14105,8 +14105,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-0295886f-v3.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-0295886f.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-0295886f-v3.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-0295886f.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet Metabolic Chicken Mousse"
@@ -14178,8 +14178,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-957babc5-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-957babc5.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-957babc5-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-957babc5.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet y/d Thyroid Care Chicken"
@@ -14251,8 +14251,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-fde8dc60-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-fde8dc60.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-fde8dc60-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-fde8dc60.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet a/d Urgent Care Chicken Mousse"
@@ -14324,8 +14324,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-a11884d0-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-a11884d0.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-a11884d0-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-a11884d0.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet c/d Urinary Care Chicken"
@@ -14397,8 +14397,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-e9c06900-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-e9c06900.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-e9c06900-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-e9c06900.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet c/d Urinary Care Chicken - в соусе"
@@ -14470,8 +14470,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-5870554d-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-5870554d.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-5870554d-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-5870554d.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet s/d Urinary Care Chicken - в соусе"
@@ -14543,8 +14543,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-61fa56ea-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-61fa56ea.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-61fa56ea-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-61fa56ea.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet Urinary Stress + Metabolic Chicken - в соусе"
@@ -14616,8 +14616,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-4ade1f05-v2.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-4ade1f05.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-4ade1f05-v2.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-4ade1f05.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet a/d Chicken Mousse"
@@ -14689,8 +14689,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-21a67454-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-21a67454.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-21a67454-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-21a67454.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet c/d Urinary Stress Tuna Stew"
@@ -14762,8 +14762,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-a93b1999-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-a93b1999.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-a93b1999-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-a93b1999.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet c/d Multicare Chicken Mousse"
@@ -14835,8 +14835,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-f2f234bf-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-f2f234bf.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-f2f234bf-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-f2f234bf.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet c/d Urinary Care Chicken & Vegetables Stew"
@@ -14908,8 +14908,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-868091cf-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-868091cf.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-868091cf-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-868091cf.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet i/d Chicken Mousse"
@@ -15006,8 +15006,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-b35fc3b5-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-b35fc3b5.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-b35fc3b5-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-b35fc3b5.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet k/d + Mobility j/d Chicken - в соусе"
@@ -15079,8 +15079,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-e2a61dad-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-e2a61dad.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-e2a61dad-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-e2a61dad.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet k/d Kidney Care Salmon - в соусе"
@@ -15152,8 +15152,8 @@ const recipes = [
     "purchasePriceStatus": "pending",
     "availabilityStatus": "pending",
     "image": {
-      "src": "assets/food/editorial/hills-wet-aea119a2-v1.webp",
-      "originalSrc": "assets/food/references/priority-batch7/hills-aea119a2.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/hills-wet-aea119a2-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch7/hills-aea119a2.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Hill’s Prescription Diet Gastrointestinal Biome Stress Stew"

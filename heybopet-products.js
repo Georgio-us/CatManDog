@@ -10,11 +10,11 @@ export const heybopetProducts = [
     "price": null,
     "priceStatus": "pending",
     "image": {
-      "src": "assets/heybopet/editorial/hbhd-pwf-fc30l-v1.webp",
+      "src": "https://img.catmandog.es/assets/heybopet/editorial/hbhd-pwf-fc30l-v1.webp",
       "alt": "Heybo Pet HBHD-PWF-FC30L",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/heybopet/heybopet-hbhd-pwf-fc30l-water-fountain-b2b-wholesale-oem-odm-image-01.png"
+      "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbhd-pwf-fc30l-water-fountain-b2b-wholesale-oem-odm-image-01.png"
     },
     "tag": "Умный уход",
     "line": "Heybo Pet · FC30L - 3 л",
@@ -97,11 +97,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbhd-pwf-fc30l-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbhd-pwf-fc30l-v1.webp",
           "alt": "Heybo Pet HBHD-PWF-FC30L",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbhd-pwf-fc30l-water-fountain-b2b-wholesale-oem-odm-image-01.png"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbhd-pwf-fc30l-water-fountain-b2b-wholesale-oem-odm-image-01.png"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · FC30L - 3 л",
@@ -182,11 +182,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbhd-pwf-r32l-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbhd-pwf-r32l-v1.webp",
           "alt": "Heybo Pet HBHD-PWF-R32L",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbhd-pwf-r32l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbhd-pwf-r32l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · R32L - 3,2 л",
@@ -268,11 +268,11 @@ export const heybopetProducts = [
     "price": null,
     "priceStatus": "pending",
     "image": {
-      "src": "assets/heybopet/editorial/hbhd-pwf-sssb30l-v1.webp",
+      "src": "https://img.catmandog.es/assets/heybopet/editorial/hbhd-pwf-sssb30l-v1.webp",
       "alt": "Heybo Pet HBHD-PWF-SSSB30L",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/heybopet/heybopet-hbhd-pwf-sssb30l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbhd-pwf-sssb30l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
     },
     "tag": "Умный уход",
     "line": "Heybo Pet · SSSB30L - 3 л",
@@ -355,11 +355,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbhd-pwf-sssb30l-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbhd-pwf-sssb30l-v1.webp",
           "alt": "Heybo Pet HBHD-PWF-SSSB30L",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbhd-pwf-sssb30l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbhd-pwf-sssb30l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · SSSB30L - 3 л",
@@ -442,11 +442,11 @@ export const heybopetProducts = [
     "price": null,
     "priceStatus": "pending",
     "image": {
-      "src": "assets/heybopet/editorial/hbhd-iwf-32-v1.webp",
+      "src": "https://img.catmandog.es/assets/heybopet/editorial/hbhd-iwf-32-v1.webp",
       "alt": "Heybo Pet HBHD-IWF-32",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/heybopet/heybopet-hbhd-iwf-32-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbhd-iwf-32-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
     },
     "tag": "Умный уход",
     "line": "Heybo Pet · IWF-32 - 3,2 л",
@@ -529,11 +529,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbhd-iwf-32-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbhd-iwf-32-v1.webp",
           "alt": "Heybo Pet HBHD-IWF-32",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbhd-iwf-32-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbhd-iwf-32-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · IWF-32 - 3,2 л",
@@ -614,11 +614,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbhq-pwf-sf032l-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbhq-pwf-sf032l-v1.webp",
           "alt": "Heybo Pet HBHQ-PWF-SF032L",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbhq-pwf-sf032l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbhq-pwf-sf032l-water-fountain-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · SF032L - 3,2 л",
@@ -701,11 +701,11 @@ export const heybopetProducts = [
     "price": null,
     "priceStatus": "pending",
     "image": {
-      "src": "assets/heybopet/editorial/hbzyh-pfw-04lr-v2.webp",
+      "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzyh-pfw-04lr-v2.webp",
       "alt": "Heybo Pet HBZYH-PFW-04LR",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/heybopet/heybopet-hbzyh-pfw-04lr-feeder-b2b-wholesale-oem-odm-image-01.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbzyh-pfw-04lr-feeder-b2b-wholesale-oem-odm-image-01.jpg"
     },
     "tag": "Умный уход",
     "line": "Heybo Pet · 04LR - 4 л",
@@ -789,11 +789,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbzyh-pfw-04lr-v2.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzyh-pfw-04lr-v2.webp",
           "alt": "Heybo Pet HBZYH-PFW-04LR",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbzyh-pfw-04lr-feeder-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbzyh-pfw-04lr-feeder-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · 04LR - 4 л",
@@ -875,11 +875,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbjh-pfv-5lb-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbjh-pfv-5lb-v1.webp",
           "alt": "Heybo Pet HBJH-PFV-5LB",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbjh-pfv-5lb-feeder-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbjh-pfv-5lb-feeder-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · 5LB - 7 л",
@@ -962,11 +962,11 @@ export const heybopetProducts = [
     "price": null,
     "priceStatus": "pending",
     "image": {
-      "src": "assets/heybopet/editorial/hbjh-pfv-4l-v1.webp",
+      "src": "https://img.catmandog.es/assets/heybopet/editorial/hbjh-pfv-4l-v1.webp",
       "alt": "Heybo Pet HBJH-PFV-4L",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/heybopet/heybopet-hbjh-pfv-4l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbjh-pfv-4l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
     },
     "tag": "Камера",
     "line": "Heybo Pet · PFV-4L - 4 л · камера",
@@ -1049,11 +1049,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbjh-pfv-4l-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbjh-pfv-4l-v1.webp",
           "alt": "Heybo Pet HBJH-PFV-4L",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbjh-pfv-4l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbjh-pfv-4l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Камера",
         "line": "Heybo Pet · PFV-4L - 4 л · камера",
@@ -1134,11 +1134,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbzh-pfv-45l-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-pfv-45l-v1.webp",
           "alt": "Heybo Pet HBZH-PFV-45L",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbzh-pfv-45l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbzh-pfv-45l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Камера",
         "line": "Heybo Pet · PFV-45L - 4,5 л · камера",
@@ -1219,11 +1219,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbjh-pfv-7l-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbjh-pfv-7l-v1.webp",
           "alt": "Heybo Pet HBJH-PFV-7L",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbjh-pfv-7l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbjh-pfv-7l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Камера",
         "line": "Heybo Pet · PFV-7L - 7 л · камера",
@@ -1306,11 +1306,11 @@ export const heybopetProducts = [
     "price": null,
     "priceStatus": "pending",
     "image": {
-      "src": "assets/heybopet/editorial/hbzh-pfw-7l-v1.webp",
+      "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-pfw-7l-v1.webp",
       "alt": "Heybo Pet HBZH-PFW-7L",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/heybopet/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
     },
     "tag": "Умный уход",
     "line": "Heybo Pet · PFW-7L - 7 л · две миски",
@@ -1393,11 +1393,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbzh-pfw-7l-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-pfw-7l-v1.webp",
           "alt": "Heybo Pet HBZH-PFW-7L",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbzh-pfw-7l-feeder-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Умный уход",
         "line": "Heybo Pet · PFW-7L - 7 л · две миски",
@@ -1480,11 +1480,11 @@ export const heybopetProducts = [
     "price": null,
     "priceStatus": "pending",
     "image": {
-      "src": "assets/heybopet/editorial/hbzh-icb-20-v1.webp",
+      "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-icb-20-v1.webp",
       "alt": "Heybo Pet HBZH-ICB-20",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/heybopet/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
     },
     "tag": "Автоматическая очистка",
     "line": "Heybo Pet · ICB-20 - Open",
@@ -1568,11 +1568,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbzh-icb-20-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-icb-20-v1.webp",
           "alt": "Heybo Pet HBZH-ICB-20",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbzh-icb-20-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Автоматическая очистка",
         "line": "Heybo Pet · ICB-20 - Open",
@@ -1654,11 +1654,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbzh-icb-15-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-icb-15-v1.webp",
           "alt": "Heybo Pet HBZH-ICB-15",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbzh-icb-15-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbzh-icb-15-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Автоматическая очистка",
         "line": "Heybo Pet · ICB-15 - Lite",
@@ -1739,11 +1739,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbzh-icb-16-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-icb-16-v1.webp",
           "alt": "Heybo Pet HBZH-ICB-16",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbzh-icb-16-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbzh-icb-16-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Автоматическая очистка",
         "line": "Heybo Pet · ICB-16 - Standard",
@@ -1824,11 +1824,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbzh-icb-21-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-icb-21-v1.webp",
           "alt": "Heybo Pet HBZH-ICB-21",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbzh-icb-21-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbzh-icb-21-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Автоматическая очистка",
         "line": "Heybo Pet · ICB-21 - Pro",
@@ -1911,11 +1911,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbzh-icb-19-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-icb-19-v1.webp",
           "alt": "Heybo Pet HBZH-ICB-19",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-06.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-06.jpg"
         },
         "tag": "Автоматическая очистка",
         "line": "Heybo Pet · ICB-19 - XL",
@@ -1998,11 +1998,11 @@ export const heybopetProducts = [
         "price": null,
         "priceStatus": "pending",
         "image": {
-          "src": "assets/heybopet/editorial/hbzh-icb-24-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-icb-24-v1.webp",
           "alt": "Heybo Pet HBZH-ICB-24",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/heybopet-hbzh-icb-24-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/heybopet-hbzh-icb-24-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
         },
         "tag": "Автоматическая очистка",
         "line": "Heybo Pet · ICB-24 - XL Pro",
@@ -2126,11 +2126,11 @@ export const heybopetProducts = [
       "sourceUrl": "https://www.heybopet.com/es/products/hbzh-hrc-01-hair-removal-cat-litter-box"
     },
     "image": {
-      "src": "assets/heybopet/editorial/hbzh-hrc-01-v1.webp",
+      "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-hrc-01-v1.webp",
       "alt": "Heybo Pet HBZH-HRC-01",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/heybopet/references/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/heybopet/references/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
     },
     "defaultVariantId": "heybopet-hair-removal-litter-box-model",
     "variants": [
@@ -2185,11 +2185,11 @@ export const heybopetProducts = [
         },
         "label": "HBZH-HRC-01",
         "image": {
-          "src": "assets/heybopet/editorial/hbzh-hrc-01-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-hrc-01-v1.webp",
           "alt": "Heybo Pet HBZH-HRC-01",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/references/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/references/heybopet-hbzh-hrc-01-hair-removal-cat-litter-box-b2b-wholesale-oem-odm-image-01.jpg"
         }
       }
     ]
@@ -2243,11 +2243,11 @@ export const heybopetProducts = [
       "sourceUrl": "https://www.heybopet.com/es/products/heybopet-waterproof-bottom-mat-accessories"
     },
     "image": {
-      "src": "assets/heybopet/editorial/mat-001-v1.webp",
+      "src": "https://img.catmandog.es/assets/heybopet/editorial/mat-001-v1.webp",
       "alt": "Heybo Pet heybopet-MAT-001",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/heybopet/references/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-01.png"
+      "originalSrc": "https://img.catmandog.es/assets/heybopet/references/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-01.png"
     },
     "defaultVariantId": "heybopet-protective-liner-model",
     "variants": [
@@ -2301,11 +2301,11 @@ export const heybopetProducts = [
         },
         "label": "heybopet-MAT-001",
         "image": {
-          "src": "assets/heybopet/editorial/mat-001-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/mat-001-v1.webp",
           "alt": "Heybo Pet heybopet-MAT-001",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/references/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-01.png"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/references/heybopet-mat-001-accessories-b2b-wholesale-oem-odm-image-01.png"
         }
       }
     ]
@@ -2360,11 +2360,11 @@ export const heybopetProducts = [
       "sourceUrl": "https://www.heybopet.com/es/products/hbzh-pdb-hg100-smart-pet-drying-cabinet"
     },
     "image": {
-      "src": "assets/heybopet/editorial/hbzh-pdb-hg100-v1.webp",
+      "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-pdb-hg100-v1.webp",
       "alt": "Heybo Pet HBZH-PDB-HG100",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/heybopet/references/heybopet-hbzh-pdb-hg100-drying-cabinet-b2b-wholesale-oem-odm-image-01.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/heybopet/references/heybopet-hbzh-pdb-hg100-drying-cabinet-b2b-wholesale-oem-odm-image-01.jpg"
     },
     "defaultVariantId": "heybopet-drying-cabinet-model",
     "variants": [
@@ -2419,11 +2419,11 @@ export const heybopetProducts = [
         },
         "label": "HBZH-PDB-HG100",
         "image": {
-          "src": "assets/heybopet/editorial/hbzh-pdb-hg100-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-pdb-hg100-v1.webp",
           "alt": "Heybo Pet HBZH-PDB-HG100",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/references/heybopet-hbzh-pdb-hg100-drying-cabinet-b2b-wholesale-oem-odm-image-01.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/references/heybopet-hbzh-pdb-hg100-drying-cabinet-b2b-wholesale-oem-odm-image-01.jpg"
         }
       }
     ]
@@ -2478,11 +2478,11 @@ export const heybopetProducts = [
       "sourceUrl": "https://www.heybopet.com/es/products/hbzh-ffc-01-fresh-food-cooker"
     },
     "image": {
-      "src": "assets/heybopet/editorial/hbzh-ffc-01-v1.webp",
+      "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-ffc-01-v1.webp",
       "alt": "Heybo Pet HBZH-FFC-01",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/heybopet/references/heybopet-hbzh-ffc-01-fresh-food-cooker-b2b-wholesale-oem-odm-image-01.png"
+      "originalSrc": "https://img.catmandog.es/assets/heybopet/references/heybopet-hbzh-ffc-01-fresh-food-cooker-b2b-wholesale-oem-odm-image-01.png"
     },
     "defaultVariantId": "heybopet-fresh-food-cooker-model",
     "variants": [
@@ -2537,11 +2537,11 @@ export const heybopetProducts = [
         },
         "label": "HBZH-FFC-01",
         "image": {
-          "src": "assets/heybopet/editorial/hbzh-ffc-01-v1.webp",
+          "src": "https://img.catmandog.es/assets/heybopet/editorial/hbzh-ffc-01-v1.webp",
           "alt": "Heybo Pet HBZH-FFC-01",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/heybopet/references/heybopet-hbzh-ffc-01-fresh-food-cooker-b2b-wholesale-oem-odm-image-01.png"
+          "originalSrc": "https://img.catmandog.es/assets/heybopet/references/heybopet-hbzh-ffc-01-fresh-food-cooker-b2b-wholesale-oem-odm-image-01.png"
         }
       }
     ]

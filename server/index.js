@@ -17,9 +17,8 @@ const server = createServer(async (req, res) => {
   try {
     const url = new URL(req.url || '/', 'http://localhost');
     if (url.pathname.startsWith('/api/')) return await handleApi(initialized ? db : null, req, res, url.pathname);
-    if (process.env.R2_MEDIA_REDIRECT_ENABLED === 'true' && url.pathname.startsWith('/assets/') &&
-        process.env.R2_PUBLIC_BASE_URL) {
-      const base = new URL(process.env.R2_PUBLIC_BASE_URL);
+    if (process.env.R2_MEDIA_REDIRECT_ENABLED !== 'false' && url.pathname.startsWith('/assets/')) {
+      const base = new URL(process.env.R2_PUBLIC_BASE_URL || 'https://img.catmandog.es');
       if (base.protocol === 'https:' && !url.pathname.includes('..')) {
         res.writeHead(302, { Location: `${base.href.replace(/\/$/, '')}${url.pathname}`,
           'Cache-Control': 'public, max-age=3600' });

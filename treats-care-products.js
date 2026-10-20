@@ -30,11 +30,11 @@ export const treatsCareProducts = [
     "ean": "8859387700674",
     "packageWeightKg": 0.056,
     "image": {
-      "src": "assets/treats-care/editorial/tc-4e50c58957-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-4e50c58957-v1.webp",
       "alt": "Churu - тунец - 4 × 14 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-4e50c58957.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-4e50c58957.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -78,11 +78,11 @@ export const treatsCareProducts = [
         "ean": "8859387700674",
         "packageWeightKg": 0.056,
         "image": {
-          "src": "assets/treats-care/editorial/tc-4e50c58957-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-4e50c58957-v1.webp",
           "alt": "Churu - тунец - 4 × 14 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-4e50c58957.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-4e50c58957.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -128,11 +128,11 @@ export const treatsCareProducts = [
     "ean": "8859387700698",
     "packageWeightKg": 0.056,
     "image": {
-      "src": "assets/treats-care/editorial/tc-0707caf730-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-0707caf730-v1.webp",
       "alt": "Churu - курица - 4 × 14 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-0707caf730.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-0707caf730.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -176,11 +176,11 @@ export const treatsCareProducts = [
         "ean": "8859387700698",
         "packageWeightKg": 0.056,
         "image": {
-          "src": "assets/treats-care/editorial/tc-0707caf730-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-0707caf730-v1.webp",
           "alt": "Churu - курица - 4 × 14 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-0707caf730.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-0707caf730.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -226,11 +226,11 @@ export const treatsCareProducts = [
     "ean": "8859387700704",
     "packageWeightKg": 0.056,
     "image": {
-      "src": "assets/treats-care/editorial/tc-768abf17c2-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-768abf17c2-v1.webp",
       "alt": "Churu - тунец с гребешком - 4 × 14 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-768abf17c2.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-768abf17c2.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -274,11 +274,11 @@ export const treatsCareProducts = [
         "ean": "8859387700704",
         "packageWeightKg": 0.056,
         "image": {
-          "src": "assets/treats-care/editorial/tc-768abf17c2-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-768abf17c2-v1.webp",
           "alt": "Churu - тунец с гребешком - 4 × 14 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-768abf17c2.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-768abf17c2.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -324,11 +324,11 @@ export const treatsCareProducts = [
     "ean": "8859387700735",
     "packageWeightKg": 0.056,
     "image": {
-      "src": "assets/treats-care/editorial/tc-dc3d6d94c2-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-dc3d6d94c2-v1.webp",
       "alt": "Churu - курица с сыром - 4 × 14 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-dc3d6d94c2.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-dc3d6d94c2.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -372,11 +372,11 @@ export const treatsCareProducts = [
         "ean": "8859387700735",
         "packageWeightKg": 0.056,
         "image": {
-          "src": "assets/treats-care/editorial/tc-dc3d6d94c2-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-dc3d6d94c2-v1.webp",
           "alt": "Churu - курица с сыром - 4 × 14 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-dc3d6d94c2.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-dc3d6d94c2.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -422,11 +422,11 @@ export const treatsCareProducts = [
     "ean": "4262365730589",
     "packageWeightKg": 0.056,
     "image": {
-      "src": "assets/treats-care/editorial/tc-713f42fb9a-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-713f42fb9a-v1.webp",
       "alt": "Churu Kitten - курица - 4 × 14 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-713f42fb9a.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-713f42fb9a.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -470,11 +470,11 @@ export const treatsCareProducts = [
         "ean": "4262365730589",
         "packageWeightKg": 0.056,
         "image": {
-          "src": "assets/treats-care/editorial/tc-713f42fb9a-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-713f42fb9a-v1.webp",
           "alt": "Churu Kitten - курица - 4 × 14 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-713f42fb9a.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-713f42fb9a.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -520,11 +520,11 @@ export const treatsCareProducts = [
     "ean": "4262365732651",
     "packageWeightKg": 0.056,
     "image": {
-      "src": "assets/treats-care/editorial/tc-4b391892b7-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-4b391892b7-v1.webp",
       "alt": "Churu Hairball Control - лосось - 4 × 14 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-4b391892b7.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-4b391892b7.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -568,11 +568,11 @@ export const treatsCareProducts = [
         "ean": "4262365732651",
         "packageWeightKg": 0.056,
         "image": {
-          "src": "assets/treats-care/editorial/tc-4b391892b7-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-4b391892b7-v1.webp",
           "alt": "Churu Hairball Control - лосось - 4 × 14 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-4b391892b7.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-4b391892b7.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -618,11 +618,11 @@ export const treatsCareProducts = [
     "ean": "022517444528",
     "packageWeightKg": 0.04,
     "image": {
-      "src": "assets/treats-care/editorial/tc-82b5e1f561-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-82b5e1f561-v1.webp",
       "alt": "Catit Creamy - курица с ягнёнком - 4 × 10 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-82b5e1f561.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-82b5e1f561.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -666,11 +666,11 @@ export const treatsCareProducts = [
         "ean": "022517444528",
         "packageWeightKg": 0.04,
         "image": {
-          "src": "assets/treats-care/editorial/tc-82b5e1f561-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-82b5e1f561-v1.webp",
           "alt": "Catit Creamy - курица с ягнёнком - 4 × 10 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-82b5e1f561.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-82b5e1f561.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -716,11 +716,11 @@ export const treatsCareProducts = [
     "ean": "022517444535",
     "packageWeightKg": 0.04,
     "image": {
-      "src": "assets/treats-care/editorial/tc-c4fc3a3e21-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-c4fc3a3e21-v1.webp",
       "alt": "Catit Creamy - лосось с креветками - 4 × 10 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-c4fc3a3e21.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-c4fc3a3e21.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -764,11 +764,11 @@ export const treatsCareProducts = [
         "ean": "022517444535",
         "packageWeightKg": 0.04,
         "image": {
-          "src": "assets/treats-care/editorial/tc-c4fc3a3e21-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-c4fc3a3e21-v1.webp",
           "alt": "Catit Creamy - лосось с креветками - 4 × 10 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-c4fc3a3e21.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-c4fc3a3e21.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -814,11 +814,11 @@ export const treatsCareProducts = [
     "ean": "4002064407524",
     "packageWeightKg": 0.02,
     "image": {
-      "src": "assets/treats-care/editorial/tc-84ace3f3f7-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-84ace3f3f7-v1.webp",
       "alt": "GimCat Malt-Soft Extra - 20 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-84ace3f3f7.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-84ace3f3f7.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -862,11 +862,11 @@ export const treatsCareProducts = [
         "ean": "4002064407524",
         "packageWeightKg": 0.02,
         "image": {
-          "src": "assets/treats-care/editorial/tc-84ace3f3f7-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-84ace3f3f7-v1.webp",
           "alt": "GimCat Malt-Soft Extra - 20 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-84ace3f3f7.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-84ace3f3f7.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -912,11 +912,11 @@ export const treatsCareProducts = [
     "ean": "0022517444597",
     "packageWeightKg": 0.15,
     "image": {
-      "src": "assets/treats-care/editorial/tc-0e0e3831a6-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-0e0e3831a6-v1.webp",
       "alt": "Catit Creamy - ассорти - 15 × 10 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-0e0e3831a6.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-0e0e3831a6.jpg"
     },
     "productSource": {
       "name": "Tiendanimal",
@@ -960,11 +960,11 @@ export const treatsCareProducts = [
         "ean": "0022517444597",
         "packageWeightKg": 0.15,
         "image": {
-          "src": "assets/treats-care/editorial/tc-0e0e3831a6-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-0e0e3831a6-v1.webp",
           "alt": "Catit Creamy - ассорти - 15 × 10 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-0e0e3831a6.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-0e0e3831a6.jpg"
         },
         "productSource": {
           "name": "Tiendanimal",
@@ -1010,11 +1010,11 @@ export const treatsCareProducts = [
     "ean": "4008293416582",
     "packageWeightKg": 0.09,
     "image": {
-      "src": "assets/treats-care/editorial/tc-24dd160a68-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-24dd160a68-v1.webp",
       "alt": "Vitakraft Liquid Snack - курица с таурином - 6 × 15 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-24dd160a68.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-24dd160a68.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -1058,11 +1058,11 @@ export const treatsCareProducts = [
         "ean": "4008293416582",
         "packageWeightKg": 0.09,
         "image": {
-          "src": "assets/treats-care/editorial/tc-24dd160a68-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-24dd160a68-v1.webp",
           "alt": "Vitakraft Liquid Snack - курица с таурином - 6 × 15 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-24dd160a68.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-24dd160a68.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -1108,11 +1108,11 @@ export const treatsCareProducts = [
     "ean": "8711231129478",
     "packageWeightKg": 0.1,
     "image": {
-      "src": "assets/treats-care/editorial/tc-b5a74b28d5-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-b5a74b28d5-v1.webp",
       "alt": "Beaphar - мальт-паста - 100 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-b5a74b28d5.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-b5a74b28d5.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -1156,11 +1156,11 @@ export const treatsCareProducts = [
         "ean": "8711231129478",
         "packageWeightKg": 0.1,
         "image": {
-          "src": "assets/treats-care/editorial/tc-b5a74b28d5-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-b5a74b28d5-v1.webp",
           "alt": "Beaphar - мальт-паста - 100 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-b5a74b28d5.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-b5a74b28d5.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -1206,11 +1206,11 @@ export const treatsCareProducts = [
     "ean": "3605874367432",
     "packageWeightKg": 0.12,
     "image": {
-      "src": "assets/treats-care/editorial/tc-636d6973f1-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-636d6973f1-v1.webp",
       "alt": "Vetoquinol Bezopet - 120 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-636d6973f1.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-636d6973f1.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -1254,11 +1254,11 @@ export const treatsCareProducts = [
         "ean": "3605874367432",
         "packageWeightKg": 0.12,
         "image": {
-          "src": "assets/treats-care/editorial/tc-636d6973f1-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-636d6973f1-v1.webp",
           "alt": "Vetoquinol Bezopet - 120 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-636d6973f1.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-636d6973f1.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -1304,11 +1304,11 @@ export const treatsCareProducts = [
     "ean": "4002064427065",
     "packageWeightKg": 0.04,
     "image": {
-      "src": "assets/treats-care/editorial/tc-629d7d8db7-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-629d7d8db7-v1.webp",
       "alt": "GimCat Nutri Malt Bites - 40 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-629d7d8db7.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-629d7d8db7.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -1352,11 +1352,11 @@ export const treatsCareProducts = [
         "ean": "4002064427065",
         "packageWeightKg": 0.04,
         "image": {
-          "src": "assets/treats-care/editorial/tc-629d7d8db7-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-629d7d8db7-v1.webp",
           "alt": "GimCat Nutri Malt Bites - 40 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-629d7d8db7.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-629d7d8db7.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -1402,11 +1402,11 @@ export const treatsCareProducts = [
     "ean": "8445290020574",
     "packageWeightKg": null,
     "image": {
-      "src": "assets/treats-care/editorial/tc-0c0460f2f4-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-0c0460f2f4-v1.webp",
       "alt": "Pro Plan Skin & Coat+ - лососевое масло - 150 мл",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-0c0460f2f4.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-0c0460f2f4.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -1450,11 +1450,11 @@ export const treatsCareProducts = [
         "ean": "8445290020574",
         "packageWeightKg": null,
         "image": {
-          "src": "assets/treats-care/editorial/tc-0c0460f2f4-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-0c0460f2f4-v1.webp",
           "alt": "Pro Plan Skin & Coat+ - лососевое масло - 150 мл",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-0c0460f2f4.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-0c0460f2f4.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -1500,11 +1500,11 @@ export const treatsCareProducts = [
     "ean": "18859387700824",
     "packageWeightKg": 0.03,
     "image": {
-      "src": "assets/treats-care/editorial/tc-0ed7b07305-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-0ed7b07305-v1.webp",
       "alt": "Churu Bites - курица - 3 × 10 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-0ed7b07305.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-0ed7b07305.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -1548,11 +1548,11 @@ export const treatsCareProducts = [
         "ean": "18859387700824",
         "packageWeightKg": 0.03,
         "image": {
-          "src": "assets/treats-care/editorial/tc-0ed7b07305-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-0ed7b07305-v1.webp",
           "alt": "Churu Bites - курица - 3 × 10 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-0ed7b07305.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-0ed7b07305.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -1598,11 +1598,11 @@ export const treatsCareProducts = [
     "ean": "4008239315311",
     "packageWeightKg": 0.04,
     "image": {
-      "src": "assets/treats-care/editorial/tc-f617e6e32b-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-f617e6e32b-v1.webp",
       "alt": "Vitakraft Cat Yums - курица - 40 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-f617e6e32b.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-f617e6e32b.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -1646,11 +1646,11 @@ export const treatsCareProducts = [
         "ean": "4008239315311",
         "packageWeightKg": 0.04,
         "image": {
-          "src": "assets/treats-care/editorial/tc-f617e6e32b-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-f617e6e32b-v1.webp",
           "alt": "Vitakraft Cat Yums - курица - 40 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-f617e6e32b.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-f617e6e32b.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -1696,11 +1696,11 @@ export const treatsCareProducts = [
     "ean": "8711231112951",
     "packageWeightKg": null,
     "image": {
-      "src": "assets/treats-care/editorial/tc-7934eaf44b-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-7934eaf44b-v1.webp",
       "alt": "Beaphar - лососевое масло - 425 мл",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-7934eaf44b.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-7934eaf44b.jpg"
     },
     "productSource": {
       "name": "Tiendanimal",
@@ -1744,11 +1744,11 @@ export const treatsCareProducts = [
         "ean": "8711231112951",
         "packageWeightKg": null,
         "image": {
-          "src": "assets/treats-care/editorial/tc-7934eaf44b-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-7934eaf44b-v1.webp",
           "alt": "Beaphar - лососевое масло - 425 мл",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-7934eaf44b.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-7934eaf44b.jpg"
         },
         "productSource": {
           "name": "Tiendanimal",
@@ -1794,11 +1794,11 @@ export const treatsCareProducts = [
     "ean": "671875796963",
     "packageWeightKg": 0.015,
     "image": {
-      "src": "assets/treats-care/editorial/tc-06a4db0143-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-06a4db0143-v1.webp",
       "alt": "Kit Cat FreezeBites - курица - 15 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-06a4db0143.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-06a4db0143.jpg"
     },
     "productSource": {
       "name": "Tiendanimal",
@@ -1842,11 +1842,11 @@ export const treatsCareProducts = [
         "ean": "671875796963",
         "packageWeightKg": 0.015,
         "image": {
-          "src": "assets/treats-care/editorial/tc-06a4db0143-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-06a4db0143-v1.webp",
           "alt": "Kit Cat FreezeBites - курица - 15 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-06a4db0143.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-06a4db0143.jpg"
         },
         "productSource": {
           "name": "Tiendanimal",
@@ -1892,11 +1892,11 @@ export const treatsCareProducts = [
     "ean": "4002064400716",
     "packageWeightKg": 0.06,
     "image": {
-      "src": "assets/treats-care/editorial/tc-719843e78f-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-719843e78f-v1.webp",
       "alt": "GimCat Nutri Pockets - сыр - 60 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-719843e78f.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-719843e78f.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -1940,11 +1940,11 @@ export const treatsCareProducts = [
         "ean": "4002064400716",
         "packageWeightKg": 0.06,
         "image": {
-          "src": "assets/treats-care/editorial/tc-719843e78f-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-719843e78f-v1.webp",
           "alt": "GimCat Nutri Pockets - сыр - 60 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-719843e78f.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-719843e78f.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -1990,11 +1990,11 @@ export const treatsCareProducts = [
     "ean": "4262365738271",
     "packageWeightKg": 0.04,
     "image": {
-      "src": "assets/treats-care/editorial/tc-61ec2b29f1-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-61ec2b29f1-v1.webp",
       "alt": "Churu Broth - курица с гребешком - 40 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-61ec2b29f1.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-61ec2b29f1.jpg"
     },
     "productSource": {
       "name": "Qanimals",
@@ -2038,11 +2038,11 @@ export const treatsCareProducts = [
         "ean": "4262365738271",
         "packageWeightKg": 0.04,
         "image": {
-          "src": "assets/treats-care/editorial/tc-61ec2b29f1-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-61ec2b29f1-v1.webp",
           "alt": "Churu Broth - курица с гребешком - 40 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-61ec2b29f1.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-61ec2b29f1.jpg"
         },
         "productSource": {
           "name": "Qanimals",
@@ -2088,11 +2088,11 @@ export const treatsCareProducts = [
     "ean": "5060333434649",
     "packageWeightKg": 0.03,
     "image": {
-      "src": "assets/treats-care/editorial/tc-b121011ccc-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-b121011ccc-v1.webp",
       "alt": "Applaws - филе тунца - 30 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-b121011ccc.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-b121011ccc.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -2136,11 +2136,11 @@ export const treatsCareProducts = [
         "ean": "5060333434649",
         "packageWeightKg": 0.03,
         "image": {
-          "src": "assets/treats-care/editorial/tc-b121011ccc-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-b121011ccc-v1.webp",
           "alt": "Applaws - филе тунца - 30 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-b121011ccc.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-b121011ccc.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -2186,11 +2186,11 @@ export const treatsCareProducts = [
     "ean": null,
     "packageWeightKg": 0.015,
     "image": {
-      "src": "assets/treats-care/editorial/tc-1877f4a340-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-1877f4a340-v1.webp",
       "alt": "Kit Cat FreezeBites - лосось - 1 × 15 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-1877f4a340.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-1877f4a340.jpg"
     },
     "productSource": {
       "name": "Kit Cat España - официальный магазин",
@@ -2234,11 +2234,11 @@ export const treatsCareProducts = [
         "ean": null,
         "packageWeightKg": 0.015,
         "image": {
-          "src": "assets/treats-care/editorial/tc-1877f4a340-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-1877f4a340-v1.webp",
           "alt": "Kit Cat FreezeBites - лосось - 1 × 15 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-1877f4a340.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-1877f4a340.jpg"
         },
         "productSource": {
           "name": "Kit Cat España - официальный магазин",
@@ -2284,11 +2284,11 @@ export const treatsCareProducts = [
     "ean": "4262365738424",
     "packageWeightKg": 0.04,
     "image": {
-      "src": "assets/treats-care/editorial/tc-db3fbe95f1-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-db3fbe95f1-v1.webp",
       "alt": "Churu Stew - курица - 40 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-db3fbe95f1.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-db3fbe95f1.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -2332,11 +2332,11 @@ export const treatsCareProducts = [
         "ean": "4262365738424",
         "packageWeightKg": 0.04,
         "image": {
-          "src": "assets/treats-care/editorial/tc-db3fbe95f1-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-db3fbe95f1-v1.webp",
           "alt": "Churu Stew - курица - 40 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-db3fbe95f1.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-db3fbe95f1.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -2382,11 +2382,11 @@ export const treatsCareProducts = [
     "ean": "4262365730664",
     "packageWeightKg": 0.07,
     "image": {
-      "src": "assets/treats-care/editorial/tc-185b159101-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-185b159101-v1.webp",
       "alt": "Dashi Delights - курица с лососем - 70 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-185b159101.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-185b159101.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -2430,11 +2430,11 @@ export const treatsCareProducts = [
         "ean": "4262365730664",
         "packageWeightKg": 0.07,
         "image": {
-          "src": "assets/treats-care/editorial/tc-185b159101-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-185b159101-v1.webp",
           "alt": "Dashi Delights - курица с лососем - 70 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-185b159101.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-185b159101.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -2480,11 +2480,11 @@ export const treatsCareProducts = [
     "ean": "4262365738264",
     "packageWeightKg": 0.04,
     "image": {
-      "src": "assets/treats-care/editorial/tc-57f941fe4f-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-57f941fe4f-v1.webp",
       "alt": "Ciao Broth - курица с тунцом - 40 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-57f941fe4f.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-57f941fe4f.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -2528,11 +2528,11 @@ export const treatsCareProducts = [
         "ean": "4262365738264",
         "packageWeightKg": 0.04,
         "image": {
-          "src": "assets/treats-care/editorial/tc-57f941fe4f-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-57f941fe4f-v1.webp",
           "alt": "Ciao Broth - курица с тунцом - 40 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-57f941fe4f.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-57f941fe4f.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -2578,11 +2578,11 @@ export const treatsCareProducts = [
     "ean": "4262365730657",
     "packageWeightKg": 0.07,
     "image": {
-      "src": "assets/treats-care/editorial/tc-5da4b0e874-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-5da4b0e874-v1.webp",
       "alt": "Dashi Delights - курица с хлопьями бонито - 70 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-5da4b0e874.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-5da4b0e874.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -2626,11 +2626,11 @@ export const treatsCareProducts = [
         "ean": "4262365730657",
         "packageWeightKg": 0.07,
         "image": {
-          "src": "assets/treats-care/editorial/tc-5da4b0e874-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-5da4b0e874-v1.webp",
           "alt": "Dashi Delights - курица с хлопьями бонито - 70 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-5da4b0e874.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-5da4b0e874.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -2676,11 +2676,11 @@ export const treatsCareProducts = [
     "ean": "4262365731937",
     "packageWeightKg": 0.07,
     "image": {
-      "src": "assets/treats-care/editorial/tc-0206d66a70-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-0206d66a70-v1.webp",
       "alt": "Dashi Delights - тунец - 70 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-0206d66a70.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-0206d66a70.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -2724,11 +2724,11 @@ export const treatsCareProducts = [
         "ean": "4262365731937",
         "packageWeightKg": 0.07,
         "image": {
-          "src": "assets/treats-care/editorial/tc-0206d66a70-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-0206d66a70-v1.webp",
           "alt": "Dashi Delights - тунец - 70 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-0206d66a70.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-0206d66a70.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -2774,11 +2774,11 @@ export const treatsCareProducts = [
     "ean": "4002064402109",
     "packageWeightKg": 0.05,
     "image": {
-      "src": "assets/treats-care/editorial/tc-5477267745-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-5477267745-v1.webp",
       "alt": "GimCat - паста с таурином - 50 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-5477267745.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-5477267745.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -2822,11 +2822,11 @@ export const treatsCareProducts = [
         "ean": "4002064402109",
         "packageWeightKg": 0.05,
         "image": {
-          "src": "assets/treats-care/editorial/tc-5477267745-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-5477267745-v1.webp",
           "alt": "GimCat - паста с таурином - 50 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-5477267745.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-5477267745.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -2872,11 +2872,11 @@ export const treatsCareProducts = [
     "ean": "8445290040923",
     "packageWeightKg": 0.03,
     "image": {
-      "src": "assets/treats-care/editorial/tc-157b188bba-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-157b188bba-v1.webp",
       "alt": "Pro Plan FortiFlora - пробиотик - 30 × 1 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-157b188bba.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-157b188bba.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -2920,11 +2920,11 @@ export const treatsCareProducts = [
         "ean": "8445290040923",
         "packageWeightKg": 0.03,
         "image": {
-          "src": "assets/treats-care/editorial/tc-157b188bba-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-157b188bba-v1.webp",
           "alt": "Pro Plan FortiFlora - пробиотик - 30 × 1 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-157b188bba.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-157b188bba.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -2970,11 +2970,11 @@ export const treatsCareProducts = [
     "ean": "7350055513516",
     "packageWeightKg": 0.06,
     "image": {
-      "src": "assets/treats-care/editorial/tc-ea417c8cdd-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-ea417c8cdd-v1.webp",
       "alt": "PlaqueOff - порошок для ухода за зубами - 60 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-ea417c8cdd-60g.webp"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-ea417c8cdd-60g.webp"
     },
     "productSource": {
       "name": "Farmaciasdirect",
@@ -3018,11 +3018,11 @@ export const treatsCareProducts = [
         "ean": "7350055513516",
         "packageWeightKg": 0.06,
         "image": {
-          "src": "assets/treats-care/editorial/tc-ea417c8cdd-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-ea417c8cdd-v1.webp",
           "alt": "PlaqueOff - порошок для ухода за зубами - 60 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-ea417c8cdd-60g.webp"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-ea417c8cdd-60g.webp"
         },
         "productSource": {
           "name": "Farmaciasdirect",
@@ -3068,11 +3068,11 @@ export const treatsCareProducts = [
     "ean": "7613036724135",
     "packageWeightKg": 0.04,
     "image": {
-      "src": "assets/treats-care/editorial/tc-2b64c192f5-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-2b64c192f5-v1.webp",
       "alt": "Dentalife - дентальные снеки с курицей - 40 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-2b64c192f5.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-2b64c192f5.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -3116,11 +3116,11 @@ export const treatsCareProducts = [
         "ean": "7613036724135",
         "packageWeightKg": 0.04,
         "image": {
-          "src": "assets/treats-care/editorial/tc-2b64c192f5-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-2b64c192f5-v1.webp",
           "alt": "Dentalife - дентальные снеки с курицей - 40 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-2b64c192f5.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-2b64c192f5.jpg"
         },
         "productSource": {
           "name": "Kiwoko",
@@ -3166,11 +3166,11 @@ export const treatsCareProducts = [
     "ean": "4002064407005",
     "packageWeightKg": null,
     "image": {
-      "src": "assets/treats-care/editorial/tc-bfbb53d6d1-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-bfbb53d6d1-v1.webp",
       "alt": "GimCat - трава в лотке - Лоток для выращивания травы",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-bfbb53d6d1.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-bfbb53d6d1.jpg"
     },
     "productSource": {
       "name": "Tiendanimal",
@@ -3214,11 +3214,11 @@ export const treatsCareProducts = [
         "ean": "4002064407005",
         "packageWeightKg": null,
         "image": {
-          "src": "assets/treats-care/editorial/tc-bfbb53d6d1-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-bfbb53d6d1-v1.webp",
           "alt": "GimCat - трава в лотке - Лоток для выращивания травы",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-bfbb53d6d1.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-bfbb53d6d1.jpg"
         },
         "productSource": {
           "name": "Tiendanimal",
@@ -3264,11 +3264,11 @@ export const treatsCareProducts = [
     "ean": "8711231156856",
     "packageWeightKg": 0.1,
     "image": {
-      "src": "assets/treats-care/editorial/tc-b85b72cc24-v1.webp",
+      "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-b85b72cc24-v1.webp",
       "alt": "Beaphar - зубной гель - 100 г",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/treats-care/references/tc-b85b72cc24.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-b85b72cc24.jpg"
     },
     "productSource": {
       "name": "Kiwoko",
@@ -3312,11 +3312,11 @@ export const treatsCareProducts = [
         "ean": "8711231156856",
         "packageWeightKg": 0.1,
         "image": {
-          "src": "assets/treats-care/editorial/tc-b85b72cc24-v1.webp",
+          "src": "https://img.catmandog.es/assets/treats-care/editorial/tc-b85b72cc24-v1.webp",
           "alt": "Beaphar - зубной гель - 100 г",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/treats-care/references/tc-b85b72cc24.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/treats-care/references/tc-b85b72cc24.jpg"
         },
         "productSource": {
           "name": "Kiwoko",

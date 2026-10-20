@@ -10,9 +10,9 @@ export const foodProducts = [
     "weight": "2 кг",
     "packageWeightKg": 2,
     "image": {
-      "src": "assets/food/editorial/rc-sterilised-v1.png",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-sterilised-v1.png",
       "presentation": "editorial",
-      "originalSrc": "assets/food/rc-sterilised.jpg",
+      "originalSrc": "https://img.catmandog.es/assets/food/rc-sterilised.jpg",
       "generated": true,
       "alt": "Royal Canin Sterilised 37 - упаковка 2 кг"
     },
@@ -77,7 +77,7 @@ export const foodProducts = [
     "weight": "1,8 кг",
     "packageWeightKg": 1.8,
     "image": {
-      "src": "assets/food/leonardo-poultry.png",
+      "src": "https://img.catmandog.es/assets/food/leonardo-poultry.png",
       "alt": "Leonardo Adult GF Poultry - упаковка 1,8 кг"
     },
     "tag": "GF · с птицей",
@@ -138,7 +138,7 @@ export const foodProducts = [
     "weight": "1,5 кг",
     "packageWeightKg": 1.5,
     "image": {
-      "src": "assets/food/hills-ster.jpg",
+      "src": "https://img.catmandog.es/assets/food/hills-ster.jpg",
       "alt": "Hill’s Science Plan Sterilised Cat Adult Chicken - упаковка 1,5 кг"
     },
     "tag": "Для стерилизованных",
@@ -194,7 +194,7 @@ export const foodProducts = [
     "weight": "200 г",
     "packageWeightKg": 0.2,
     "image": {
-      "src": "assets/food/leonardo-chicken.jpg",
+      "src": "https://img.catmandog.es/assets/food/leonardo-chicken.jpg",
       "alt": "Leonardo Extra Filet Chicken - упаковка 200 г"
     },
     "tag": "Влажный · extra filet",
@@ -249,7 +249,7 @@ export const foodProducts = [
     "weight": "1,8 кг",
     "packageWeightKg": 1.8,
     "image": {
-      "src": "assets/food/acana-grasslands.jpg",
+      "src": "https://img.catmandog.es/assets/food/acana-grasslands.jpg",
       "alt": "Acana Grasslands Cat - упаковка 1,8 кг"
     },
     "tag": "Без зерна",
@@ -306,7 +306,7 @@ export const foodProducts = [
     "weight": "3 кг",
     "packageWeightKg": 3,
     "image": {
-      "src": "assets/food/advance-urinary.jpg",
+      "src": "https://img.catmandog.es/assets/food/advance-urinary.jpg",
       "alt": "Advance Veterinary Diets Urinary Feline - упаковка 3 кг"
     },
     "tag": "Ветеринарная диета",
@@ -363,7 +363,7 @@ export const foodProducts = [
     "weight": "1,8 кг",
     "packageWeightKg": 1.8,
     "image": {
-      "src": "assets/food/orijen-original.jpg",
+      "src": "https://img.catmandog.es/assets/food/orijen-original.jpg",
       "alt": "Orijen Original Cat - упаковка 1,8 кг"
     },
     "tag": "85% животных ингредиентов",
@@ -428,9 +428,9 @@ export const foodProducts = [
     "weight": "85 г",
     "packageWeightKg": 0.085,
     "image": {
-      "src": "assets/food/editorial/rc-wet-v1.png",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-wet-v1.png",
       "presentation": "editorial",
-      "originalSrc": "assets/food/rc-wet.jpg",
+      "originalSrc": "https://img.catmandog.es/assets/food/rc-wet.jpg",
       "generated": true,
       "alt": "Royal Canin Sterilised in Gravy - упаковка 85 г"
     },
@@ -487,7 +487,7 @@ export const foodProducts = [
     "weight": "1,5 кг",
     "packageWeightKg": 1.5,
     "image": {
-      "src": "assets/food/hills-kitten.jpg",
+      "src": "https://img.catmandog.es/assets/food/hills-kitten.jpg",
       "alt": "Hill’s Science Plan Sterilised Kitten Chicken - упаковка 1,5 кг"
     },
     "tag": "Для котят",
@@ -543,7 +543,7 @@ export const foodProducts = [
     "weight": "300 г",
     "packageWeightKg": 0.3,
     "image": {
-      "src": "assets/food/leonardo-salmon.png",
+      "src": "https://img.catmandog.es/assets/food/leonardo-salmon.png",
       "alt": "Leonardo Adult GF Salmon - упаковка 300 г"
     },
     "tag": "GF · с лососем",
@@ -597,9 +597,9 @@ export const foodProducts = [
     "weight": "2 кг",
     "packageWeightKg": 2,
     "image": {
-      "src": "assets/food/editorial/rc-kitten-v1.png",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-kitten-v1.png",
       "presentation": "editorial",
-      "originalSrc": "assets/food/rc-kitten.jpg",
+      "originalSrc": "https://img.catmandog.es/assets/food/rc-kitten.jpg",
       "generated": true,
       "alt": "Royal Canin Kitten Sterilised - упаковка 2 кг"
     },
@@ -664,7 +664,7 @@ export const foodProducts = [
     "weight": "85 г",
     "packageWeightKg": 0.085,
     "image": {
-      "src": "assets/food/hills-wet.jpg",
+      "src": "https://img.catmandog.es/assets/food/hills-wet.jpg",
       "alt": "Hill’s Science Plan Sterilised Cat Young Adult Chicken - упаковка 85 г"
     },
     "tag": "Влажный · с курицей",
@@ -713,9 +713,9 @@ export const foodProducts = [
     "weight": "2 кг",
     "packageWeightKg": 2,
     "image": {
-      "src": "assets/food/editorial/rc-digestive-v1.png",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-digestive-v1.png",
       "presentation": "editorial",
-      "originalSrc": "assets/food/rc-digestive.jpg",
+      "originalSrc": "https://img.catmandog.es/assets/food/rc-digestive.jpg",
       "generated": true,
       "alt": "Royal Canin Digestive Care - упаковка 2 кг"
     },
@@ -780,7 +780,7 @@ export const foodProducts = [
     "weight": "85 г",
     "packageWeightKg": 0.085,
     "image": {
-      "src": "assets/food/advance-wet.jpg",
+      "src": "https://img.catmandog.es/assets/food/advance-wet.jpg",
       "alt": "Advance Veterinary Diets Gastroenteric Chicken - упаковка 85 г"
     },
     "tag": "Digestive · ветдиета",
@@ -843,7 +843,7 @@ export const foodProducts = [
     "weight": "200 г",
     "packageWeightKg": 0.2,
     "image": {
-      "src": "assets/food/leonardo-turkey.jpg",
+      "src": "https://img.catmandog.es/assets/food/leonardo-turkey.jpg",
       "alt": "Leonardo Extra Filet Turkey - упаковка 200 г"
     },
     "tag": "Влажный · с индейкой",

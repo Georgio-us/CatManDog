@@ -36,11 +36,11 @@ export const ownatProducts = [
     "tag": "Для котят",
     "line": "Ownat · 1,5 кг",
     "image": {
-      "src": "assets/food/ownat/editorial/classic-kitten-gato-es-v1.webp",
+      "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-kitten-gato-es-v1.webp",
       "alt": "Ownat Classic Kitten - студийное изображение рецептуры",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/food/ownat/classic-kitten-gato-es.webp"
+      "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-kitten-gato-es.webp"
     },
     "productSource": {
       "name": "Ownat",
@@ -50,7 +50,7 @@ export const ownatProducts = [
     "imageSource": {
       "name": "Ownat",
       "pageUrl": "https://www.ownat.com/classic-kitten-gato-es",
-      "url": "https://www.ownat.com/cdnassets/Kitten-1328x1500px_l.webp"
+      "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Kitten-1328x1500px_l.webp"
     },
     "retailPrice": {
       "amount": 7.15,
@@ -100,11 +100,11 @@ export const ownatProducts = [
         "tag": "Для котят",
         "line": "Ownat · 400 г",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-kitten-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-kitten-gato-es-v1.webp",
           "alt": "Ownat Classic Kitten - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-kitten-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-kitten-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -114,7 +114,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-kitten-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Kitten-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Kitten-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 2.4,
@@ -163,11 +163,11 @@ export const ownatProducts = [
         "tag": "Для котят",
         "line": "Ownat · 1,5 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-kitten-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-kitten-gato-es-v1.webp",
           "alt": "Ownat Classic Kitten - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-kitten-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-kitten-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -177,7 +177,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-kitten-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Kitten-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Kitten-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 7.15,
@@ -226,11 +226,11 @@ export const ownatProducts = [
         "tag": "Для котят",
         "line": "Ownat · 4 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-kitten-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-kitten-gato-es-v1.webp",
           "alt": "Ownat Classic Kitten - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-kitten-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-kitten-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -240,7 +240,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-kitten-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Kitten-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Kitten-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 16.22,
@@ -295,11 +295,11 @@ export const ownatProducts = [
     "tag": "На каждый день",
     "line": "Ownat · 1,5 кг",
     "image": {
-      "src": "assets/food/ownat/editorial/classic-daily-care-gato-es-v1.webp",
+      "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-daily-care-gato-es-v1.webp",
       "alt": "Ownat Classic Daily Care - студийное изображение рецептуры",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/food/ownat/classic-daily-care-gato-es.webp"
+      "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-daily-care-gato-es.webp"
     },
     "productSource": {
       "name": "Ownat",
@@ -309,7 +309,7 @@ export const ownatProducts = [
     "imageSource": {
       "name": "Ownat",
       "pageUrl": "https://www.ownat.com/classic-daily-care-gato-es",
-      "url": "https://www.ownat.com/cdnassets/Daily-Care-1328x1500px_l.webp"
+      "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Daily-Care-1328x1500px_l.webp"
     },
     "retailPrice": {
       "amount": 6.31,
@@ -360,11 +360,11 @@ export const ownatProducts = [
         "tag": "На каждый день",
         "line": "Ownat · 400 г",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-daily-care-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-daily-care-gato-es-v1.webp",
           "alt": "Ownat Classic Daily Care - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-daily-care-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-daily-care-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -374,7 +374,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-daily-care-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Daily-Care-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Daily-Care-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 2.27,
@@ -424,11 +424,11 @@ export const ownatProducts = [
         "tag": "На каждый день",
         "line": "Ownat · 1,5 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-daily-care-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-daily-care-gato-es-v1.webp",
           "alt": "Ownat Classic Daily Care - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-daily-care-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-daily-care-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -438,7 +438,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-daily-care-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Daily-Care-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Daily-Care-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 6.31,
@@ -488,11 +488,11 @@ export const ownatProducts = [
         "tag": "На каждый день",
         "line": "Ownat · 4 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-daily-care-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-daily-care-gato-es-v1.webp",
           "alt": "Ownat Classic Daily Care - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-daily-care-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-daily-care-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -502,7 +502,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-daily-care-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Daily-Care-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Daily-Care-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 13.27,
@@ -552,11 +552,11 @@ export const ownatProducts = [
         "tag": "На каждый день",
         "line": "Ownat · 15 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-daily-care-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-daily-care-gato-es-v1.webp",
           "alt": "Ownat Classic Daily Care - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-daily-care-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-daily-care-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -566,7 +566,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-daily-care-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Daily-Care-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Daily-Care-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 44.81,
@@ -620,11 +620,11 @@ export const ownatProducts = [
     "tag": "С рыбой",
     "line": "Ownat · 1,5 кг",
     "image": {
-      "src": "assets/food/ownat/editorial/classic-fish-gato-es-v1.webp",
+      "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-fish-gato-es-v1.webp",
       "alt": "Ownat Classic Fish - студийное изображение рецептуры",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/food/ownat/classic-fish-gato-es.webp"
+      "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-fish-gato-es.webp"
     },
     "productSource": {
       "name": "Ownat",
@@ -634,7 +634,7 @@ export const ownatProducts = [
     "imageSource": {
       "name": "Ownat",
       "pageUrl": "https://www.ownat.com/classic-fish-gato-es",
-      "url": "https://www.ownat.com/cdnassets/Fish-cat-1328x1500px_l.webp"
+      "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Fish-cat-1328x1500px_l.webp"
     },
     "retailPrice": {
       "amount": 6.32,
@@ -685,11 +685,11 @@ export const ownatProducts = [
         "tag": "С рыбой",
         "line": "Ownat · 400 г",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-fish-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-fish-gato-es-v1.webp",
           "alt": "Ownat Classic Fish - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-fish-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-fish-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -699,7 +699,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-fish-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Fish-cat-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Fish-cat-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 2.25,
@@ -749,11 +749,11 @@ export const ownatProducts = [
         "tag": "С рыбой",
         "line": "Ownat · 1,5 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-fish-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-fish-gato-es-v1.webp",
           "alt": "Ownat Classic Fish - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-fish-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-fish-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -763,7 +763,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-fish-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Fish-cat-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Fish-cat-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 6.32,
@@ -813,11 +813,11 @@ export const ownatProducts = [
         "tag": "С рыбой",
         "line": "Ownat · 4 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-fish-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-fish-gato-es-v1.webp",
           "alt": "Ownat Classic Fish - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-fish-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-fish-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -827,7 +827,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-fish-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Fish-cat-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Fish-cat-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 13.93,
@@ -880,11 +880,11 @@ export const ownatProducts = [
     "tag": "Контроль веса",
     "line": "Ownat · 1,5 кг",
     "image": {
-      "src": "assets/food/ownat/editorial/classic-light-gato-es-v1.webp",
+      "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-light-gato-es-v1.webp",
       "alt": "Ownat Classic Light - студийное изображение рецептуры",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/food/ownat/classic-light-gato-es.webp"
+      "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-light-gato-es.webp"
     },
     "productSource": {
       "name": "Ownat",
@@ -894,7 +894,7 @@ export const ownatProducts = [
     "imageSource": {
       "name": "Ownat",
       "pageUrl": "https://www.ownat.com/classic-light-gato-es",
-      "url": "https://www.ownat.com/cdnassets/Light-cat-1328x1500px_l.webp"
+      "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Light-cat-1328x1500px_l.webp"
     },
     "retailPrice": {
       "amount": 6.1,
@@ -945,11 +945,11 @@ export const ownatProducts = [
         "tag": "Контроль веса",
         "line": "Ownat · 1,5 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-light-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-light-gato-es-v1.webp",
           "alt": "Ownat Classic Light - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-light-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-light-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -959,7 +959,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-light-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Light-cat-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Light-cat-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 6.1,
@@ -1009,11 +1009,11 @@ export const ownatProducts = [
         "tag": "Контроль веса",
         "line": "Ownat · 4 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-light-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-light-gato-es-v1.webp",
           "alt": "Ownat Classic Light - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-light-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-light-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -1023,7 +1023,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-light-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Light-cat-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Light-cat-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 13.3,
@@ -1076,11 +1076,11 @@ export const ownatProducts = [
     "tag": "Мальт и клетчатка",
     "line": "Ownat · 1,5 кг",
     "image": {
-      "src": "assets/food/ownat/editorial/classic-hairball-gato-es-v1.webp",
+      "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-hairball-gato-es-v1.webp",
       "alt": "Ownat Classic Hairball - студийное изображение рецептуры",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/food/ownat/classic-hairball-gato-es.webp"
+      "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-hairball-gato-es.webp"
     },
     "productSource": {
       "name": "Ownat",
@@ -1090,7 +1090,7 @@ export const ownatProducts = [
     "imageSource": {
       "name": "Ownat",
       "pageUrl": "https://www.ownat.com/classic-hairball-gato-es",
-      "url": "https://www.ownat.com/cdnassets/Hairball-1328x1500px_l.webp"
+      "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Hairball-1328x1500px_l.webp"
     },
     "retailPrice": {
       "amount": 6.19,
@@ -1141,11 +1141,11 @@ export const ownatProducts = [
         "tag": "Мальт и клетчатка",
         "line": "Ownat · 1,5 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-hairball-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-hairball-gato-es-v1.webp",
           "alt": "Ownat Classic Hairball - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-hairball-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-hairball-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -1155,7 +1155,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-hairball-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Hairball-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Hairball-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 6.19,
@@ -1205,11 +1205,11 @@ export const ownatProducts = [
         "tag": "Мальт и клетчатка",
         "line": "Ownat · 4 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-hairball-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-hairball-gato-es-v1.webp",
           "alt": "Ownat Classic Hairball - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-hairball-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-hairball-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -1219,7 +1219,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-hairball-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Hairball-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Hairball-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 13.64,
@@ -1274,11 +1274,11 @@ export const ownatProducts = [
     "tag": "Для стерилизованных",
     "line": "Ownat · 1,5 кг",
     "image": {
-      "src": "assets/food/ownat/editorial/classic-sterilized-gato-es-v1.webp",
+      "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-sterilized-gato-es-v1.webp",
       "alt": "Ownat Classic Sterilized - студийное изображение рецептуры",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/food/ownat/classic-sterilized-gato-es.webp"
+      "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-sterilized-gato-es.webp"
     },
     "productSource": {
       "name": "Ownat",
@@ -1288,7 +1288,7 @@ export const ownatProducts = [
     "imageSource": {
       "name": "Ownat",
       "pageUrl": "https://www.ownat.com/classic-sterilized-gato-es",
-      "url": "https://www.ownat.com/cdnassets/Sterilized-1328x1500px_l.webp"
+      "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Sterilized-1328x1500px_l.webp"
     },
     "retailPrice": {
       "amount": 6.69,
@@ -1339,11 +1339,11 @@ export const ownatProducts = [
         "tag": "Для стерилизованных",
         "line": "Ownat · 400 г",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-sterilized-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-sterilized-gato-es-v1.webp",
           "alt": "Ownat Classic Sterilized - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-sterilized-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-sterilized-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -1353,7 +1353,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-sterilized-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Sterilized-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Sterilized-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 2.29,
@@ -1403,11 +1403,11 @@ export const ownatProducts = [
         "tag": "Для стерилизованных",
         "line": "Ownat · 1,5 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-sterilized-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-sterilized-gato-es-v1.webp",
           "alt": "Ownat Classic Sterilized - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-sterilized-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-sterilized-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -1417,7 +1417,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-sterilized-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Sterilized-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Sterilized-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 6.69,
@@ -1467,11 +1467,11 @@ export const ownatProducts = [
         "tag": "Для стерилизованных",
         "line": "Ownat · 4 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-sterilized-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-sterilized-gato-es-v1.webp",
           "alt": "Ownat Classic Sterilized - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-sterilized-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-sterilized-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -1481,7 +1481,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-sterilized-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Sterilized-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Sterilized-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 14.61,
@@ -1531,11 +1531,11 @@ export const ownatProducts = [
         "tag": "Для стерилизованных",
         "line": "Ownat · 15 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/classic-sterilized-gato-es-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/classic-sterilized-gato-es-v1.webp",
           "alt": "Ownat Classic Sterilized - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/classic-sterilized-gato-es.webp"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/classic-sterilized-gato-es.webp"
         },
         "productSource": {
           "name": "Ownat",
@@ -1545,7 +1545,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/classic-sterilized-gato-es",
-          "url": "https://www.ownat.com/cdnassets/Sterilized-1328x1500px_l.webp"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Sterilized-1328x1500px_l.webp"
         },
         "retailPrice": {
           "amount": 45.44,
@@ -1600,11 +1600,11 @@ export const ownatProducts = [
     "tag": "Без зерна",
     "line": "Ownat · 1 кг",
     "image": {
-      "src": "assets/food/ownat/editorial/gf-just-adult-chicken-cat-v1.webp",
+      "src": "https://img.catmandog.es/assets/food/ownat/editorial/gf-just-adult-chicken-cat-v1.webp",
       "alt": "Ownat Just Grain Free Adult Chicken - студийное изображение рецептуры",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/food/ownat/gf-just-adult-chicken-cat.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/food/ownat/gf-just-adult-chicken-cat.jpg"
     },
     "productSource": {
       "name": "Ownat",
@@ -1614,7 +1614,7 @@ export const ownatProducts = [
     "imageSource": {
       "name": "Ownat",
       "pageUrl": "https://www.ownat.com/gf-just-adult-chicken-cat",
-      "url": "https://www.ownat.com/cdnassets/ow-just-grain-free-adult-chicken-cat-saco-front_l.jpg"
+      "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/ow-just-grain-free-adult-chicken-cat-saco-front_l.jpg"
     },
     "retailPrice": {
       "amount": 7.94,
@@ -1665,11 +1665,11 @@ export const ownatProducts = [
         "tag": "Без зерна",
         "line": "Ownat · 400 г",
         "image": {
-          "src": "assets/food/ownat/editorial/gf-just-adult-chicken-cat-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/gf-just-adult-chicken-cat-v1.webp",
           "alt": "Ownat Just Grain Free Adult Chicken - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/gf-just-adult-chicken-cat.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/gf-just-adult-chicken-cat.jpg"
         },
         "productSource": {
           "name": "Ownat",
@@ -1679,7 +1679,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/gf-just-adult-chicken-cat",
-          "url": "https://www.ownat.com/cdnassets/ow-just-grain-free-adult-chicken-cat-saco-front_l.jpg"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/ow-just-grain-free-adult-chicken-cat-saco-front_l.jpg"
         },
         "retailPrice": {
           "amount": 3.77,
@@ -1729,11 +1729,11 @@ export const ownatProducts = [
         "tag": "Без зерна",
         "line": "Ownat · 1 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/gf-just-adult-chicken-cat-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/gf-just-adult-chicken-cat-v1.webp",
           "alt": "Ownat Just Grain Free Adult Chicken - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/gf-just-adult-chicken-cat.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/gf-just-adult-chicken-cat.jpg"
         },
         "productSource": {
           "name": "Ownat",
@@ -1743,7 +1743,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/gf-just-adult-chicken-cat",
-          "url": "https://www.ownat.com/cdnassets/ow-just-grain-free-adult-chicken-cat-saco-front_l.jpg"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/ow-just-grain-free-adult-chicken-cat-saco-front_l.jpg"
         },
         "retailPrice": {
           "amount": 7.94,
@@ -1793,11 +1793,11 @@ export const ownatProducts = [
         "tag": "Без зерна",
         "line": "Ownat · 3 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/gf-just-adult-chicken-cat-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/gf-just-adult-chicken-cat-v1.webp",
           "alt": "Ownat Just Grain Free Adult Chicken - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/gf-just-adult-chicken-cat.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/gf-just-adult-chicken-cat.jpg"
         },
         "productSource": {
           "name": "Ownat",
@@ -1807,7 +1807,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/gf-just-adult-chicken-cat",
-          "url": "https://www.ownat.com/cdnassets/ow-just-grain-free-adult-chicken-cat-saco-front_l.jpg"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/ow-just-grain-free-adult-chicken-cat-saco-front_l.jpg"
         },
         "retailPrice": {
           "amount": 19.42,
@@ -1857,11 +1857,11 @@ export const ownatProducts = [
         "tag": "Без зерна",
         "line": "Ownat · 8 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/gf-just-adult-chicken-cat-v1.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/gf-just-adult-chicken-cat-v1.webp",
           "alt": "Ownat Just Grain Free Adult Chicken - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/gf-just-adult-chicken-cat.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/gf-just-adult-chicken-cat.jpg"
         },
         "productSource": {
           "name": "Ownat",
@@ -1871,7 +1871,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/gf-just-adult-chicken-cat",
-          "url": "https://www.ownat.com/cdnassets/ow-just-grain-free-adult-chicken-cat-saco-front_l.jpg"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/ow-just-grain-free-adult-chicken-cat-saco-front_l.jpg"
         },
         "retailPrice": {
           "amount": 40.55,
@@ -1926,11 +1926,11 @@ export const ownatProducts = [
     "tag": "Для стерилизованных",
     "line": "Ownat · 1 кг",
     "image": {
-      "src": "assets/food/ownat/editorial/gf-just-sterilized-cat-v2.webp",
+      "src": "https://img.catmandog.es/assets/food/ownat/editorial/gf-just-sterilized-cat-v2.webp",
       "alt": "Ownat Just Grain Free Sterilized - студийное изображение рецептуры",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/food/ownat/gf-just-sterilized-cat.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/food/ownat/gf-just-sterilized-cat.jpg"
     },
     "productSource": {
       "name": "Ownat",
@@ -1940,7 +1940,7 @@ export const ownatProducts = [
     "imageSource": {
       "name": "Ownat",
       "pageUrl": "https://www.ownat.com/gf-just-sterilized-cat",
-      "url": "https://www.ownat.com/cdnassets/ow-just-grain-free-sterilized-saco-front_l.jpg"
+      "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/ow-just-grain-free-sterilized-saco-front_l.jpg"
     },
     "retailPrice": {
       "amount": 8.17,
@@ -1991,11 +1991,11 @@ export const ownatProducts = [
         "tag": "Для стерилизованных",
         "line": "Ownat · 400 г",
         "image": {
-          "src": "assets/food/ownat/editorial/gf-just-sterilized-cat-v2.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/gf-just-sterilized-cat-v2.webp",
           "alt": "Ownat Just Grain Free Sterilized - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/gf-just-sterilized-cat.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/gf-just-sterilized-cat.jpg"
         },
         "productSource": {
           "name": "Ownat",
@@ -2005,7 +2005,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/gf-just-sterilized-cat",
-          "url": "https://www.ownat.com/cdnassets/ow-just-grain-free-sterilized-saco-front_l.jpg"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/ow-just-grain-free-sterilized-saco-front_l.jpg"
         },
         "retailPrice": {
           "amount": 3.88,
@@ -2055,11 +2055,11 @@ export const ownatProducts = [
         "tag": "Для стерилизованных",
         "line": "Ownat · 1 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/gf-just-sterilized-cat-v2.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/gf-just-sterilized-cat-v2.webp",
           "alt": "Ownat Just Grain Free Sterilized - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/gf-just-sterilized-cat.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/gf-just-sterilized-cat.jpg"
         },
         "productSource": {
           "name": "Ownat",
@@ -2069,7 +2069,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/gf-just-sterilized-cat",
-          "url": "https://www.ownat.com/cdnassets/ow-just-grain-free-sterilized-saco-front_l.jpg"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/ow-just-grain-free-sterilized-saco-front_l.jpg"
         },
         "retailPrice": {
           "amount": 8.17,
@@ -2119,11 +2119,11 @@ export const ownatProducts = [
         "tag": "Для стерилизованных",
         "line": "Ownat · 3 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/gf-just-sterilized-cat-v2.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/gf-just-sterilized-cat-v2.webp",
           "alt": "Ownat Just Grain Free Sterilized - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/gf-just-sterilized-cat.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/gf-just-sterilized-cat.jpg"
         },
         "productSource": {
           "name": "Ownat",
@@ -2133,7 +2133,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/gf-just-sterilized-cat",
-          "url": "https://www.ownat.com/cdnassets/ow-just-grain-free-sterilized-saco-front_l.jpg"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/ow-just-grain-free-sterilized-saco-front_l.jpg"
         },
         "retailPrice": {
           "amount": 20.05,
@@ -2183,11 +2183,11 @@ export const ownatProducts = [
         "tag": "Для стерилизованных",
         "line": "Ownat · 8 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/gf-just-sterilized-cat-v2.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/gf-just-sterilized-cat-v2.webp",
           "alt": "Ownat Just Grain Free Sterilized - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/gf-just-sterilized-cat.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/gf-just-sterilized-cat.jpg"
         },
         "productSource": {
           "name": "Ownat",
@@ -2197,7 +2197,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/gf-just-sterilized-cat",
-          "url": "https://www.ownat.com/cdnassets/ow-just-grain-free-sterilized-saco-front_l.jpg"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/ow-just-grain-free-sterilized-saco-front_l.jpg"
         },
         "retailPrice": {
           "amount": 41.82,
@@ -2251,11 +2251,11 @@ export const ownatProducts = [
     "tag": "С рыбой",
     "line": "Ownat · 1 кг",
     "image": {
-      "src": "assets/food/ownat/editorial/gf-just-sterilized-fish-gato-v2.webp",
+      "src": "https://img.catmandog.es/assets/food/ownat/editorial/gf-just-sterilized-fish-gato-v2.webp",
       "alt": "Ownat Just Grain Free Sterilized Fish - студийное изображение рецептуры",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/food/ownat/gf-just-sterilized-fish-gato.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/food/ownat/gf-just-sterilized-fish-gato.jpg"
     },
     "productSource": {
       "name": "Ownat",
@@ -2265,7 +2265,7 @@ export const ownatProducts = [
     "imageSource": {
       "name": "Ownat",
       "pageUrl": "https://www.ownat.com/gf-just-sterilized-fish-gato",
-      "url": "https://www.ownat.com/cdnassets/ow-just-sterilized-fish-saco-front_l.jpg"
+      "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/ow-just-sterilized-fish-saco-front_l.jpg"
     },
     "retailPrice": {
       "amount": 9.01,
@@ -2316,11 +2316,11 @@ export const ownatProducts = [
         "tag": "С рыбой",
         "line": "Ownat · 1 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/gf-just-sterilized-fish-gato-v2.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/gf-just-sterilized-fish-gato-v2.webp",
           "alt": "Ownat Just Grain Free Sterilized Fish - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/gf-just-sterilized-fish-gato.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/gf-just-sterilized-fish-gato.jpg"
         },
         "productSource": {
           "name": "Ownat",
@@ -2330,7 +2330,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/gf-just-sterilized-fish-gato",
-          "url": "https://www.ownat.com/cdnassets/ow-just-sterilized-fish-saco-front_l.jpg"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/ow-just-sterilized-fish-saco-front_l.jpg"
         },
         "retailPrice": {
           "amount": 9.01,
@@ -2380,11 +2380,11 @@ export const ownatProducts = [
         "tag": "С рыбой",
         "line": "Ownat · 3 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/gf-just-sterilized-fish-gato-v2.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/gf-just-sterilized-fish-gato-v2.webp",
           "alt": "Ownat Just Grain Free Sterilized Fish - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/gf-just-sterilized-fish-gato.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/gf-just-sterilized-fish-gato.jpg"
         },
         "productSource": {
           "name": "Ownat",
@@ -2394,7 +2394,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/gf-just-sterilized-fish-gato",
-          "url": "https://www.ownat.com/cdnassets/ow-just-sterilized-fish-saco-front_l.jpg"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/ow-just-sterilized-fish-saco-front_l.jpg"
         },
         "retailPrice": {
           "amount": 20.57,
@@ -2444,11 +2444,11 @@ export const ownatProducts = [
         "tag": "С рыбой",
         "line": "Ownat · 8 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/gf-just-sterilized-fish-gato-v2.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/gf-just-sterilized-fish-gato-v2.webp",
           "alt": "Ownat Just Grain Free Sterilized Fish - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/gf-just-sterilized-fish-gato.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/gf-just-sterilized-fish-gato.jpg"
         },
         "productSource": {
           "name": "Ownat",
@@ -2458,7 +2458,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/gf-just-sterilized-fish-gato",
-          "url": "https://www.ownat.com/cdnassets/ow-just-sterilized-fish-saco-front_l.jpg"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/ow-just-sterilized-fish-saco-front_l.jpg"
         },
         "retailPrice": {
           "amount": 41.93,
@@ -2511,11 +2511,11 @@ export const ownatProducts = [
     "tag": "Рыба и птица",
     "line": "Ownat · 1,5 кг",
     "image": {
-      "src": "assets/food/ownat/editorial/author-fresh-oily-fish-poultry-cat-v2.webp",
+      "src": "https://img.catmandog.es/assets/food/ownat/editorial/author-fresh-oily-fish-poultry-cat-v2.webp",
       "alt": "Ownat Author Fresh Oily Fish & Poultry - студийное изображение рецептуры",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/food/ownat/author-fresh-oily-fish-poultry-cat.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/food/ownat/author-fresh-oily-fish-poultry-cat.jpg"
     },
     "productSource": {
       "name": "Ownat",
@@ -2525,7 +2525,7 @@ export const ownatProducts = [
     "imageSource": {
       "name": "Ownat",
       "pageUrl": "https://www.ownat.com/author-fresh-oily-fish-poultry-cat",
-      "url": "https://www.ownat.com/cdnassets/Fresh-Oily-Fish--Poultry_l.jpg"
+      "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Fresh-Oily-Fish--Poultry_l.jpg"
     },
     "retailPrice": {
       "amount": 14.04,
@@ -2576,11 +2576,11 @@ export const ownatProducts = [
         "tag": "Рыба и птица",
         "line": "Ownat · 1,5 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/author-fresh-oily-fish-poultry-cat-v2.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/author-fresh-oily-fish-poultry-cat-v2.webp",
           "alt": "Ownat Author Fresh Oily Fish & Poultry - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/author-fresh-oily-fish-poultry-cat.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/author-fresh-oily-fish-poultry-cat.jpg"
         },
         "productSource": {
           "name": "Ownat",
@@ -2590,7 +2590,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/author-fresh-oily-fish-poultry-cat",
-          "url": "https://www.ownat.com/cdnassets/Fresh-Oily-Fish--Poultry_l.jpg"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Fresh-Oily-Fish--Poultry_l.jpg"
         },
         "retailPrice": {
           "amount": 14.04,
@@ -2640,11 +2640,11 @@ export const ownatProducts = [
         "tag": "Рыба и птица",
         "line": "Ownat · 3 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/author-fresh-oily-fish-poultry-cat-v2.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/author-fresh-oily-fish-poultry-cat-v2.webp",
           "alt": "Ownat Author Fresh Oily Fish & Poultry - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/author-fresh-oily-fish-poultry-cat.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/author-fresh-oily-fish-poultry-cat.jpg"
         },
         "productSource": {
           "name": "Ownat",
@@ -2654,7 +2654,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/author-fresh-oily-fish-poultry-cat",
-          "url": "https://www.ownat.com/cdnassets/Fresh-Oily-Fish--Poultry_l.jpg"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Fresh-Oily-Fish--Poultry_l.jpg"
         },
         "retailPrice": {
           "amount": 24.74,
@@ -2707,11 +2707,11 @@ export const ownatProducts = [
     "tag": "Для стерилизованных",
     "line": "Ownat · 1,5 кг",
     "image": {
-      "src": "assets/food/ownat/editorial/author-sterilized-fresh-chicken-gato-v2.webp",
+      "src": "https://img.catmandog.es/assets/food/ownat/editorial/author-sterilized-fresh-chicken-gato-v2.webp",
       "alt": "Ownat Author Sterilized Fresh Chicken - студийное изображение рецептуры",
       "presentation": "editorial",
       "generated": true,
-      "originalSrc": "assets/food/ownat/author-sterilized-fresh-chicken-gato.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/food/ownat/author-sterilized-fresh-chicken-gato.jpg"
     },
     "productSource": {
       "name": "Ownat",
@@ -2721,7 +2721,7 @@ export const ownatProducts = [
     "imageSource": {
       "name": "Ownat",
       "pageUrl": "https://www.ownat.com/author-sterilized-fresh-chicken-gato",
-      "url": "https://www.ownat.com/cdnassets/Author-Sterilized-Fresh-Chicken-v2_l.jpg"
+      "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Author-Sterilized-Fresh-Chicken-v2_l.jpg"
     },
     "retailPrice": {
       "amount": 13.29,
@@ -2772,11 +2772,11 @@ export const ownatProducts = [
         "tag": "Для стерилизованных",
         "line": "Ownat · 1,5 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/author-sterilized-fresh-chicken-gato-v2.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/author-sterilized-fresh-chicken-gato-v2.webp",
           "alt": "Ownat Author Sterilized Fresh Chicken - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/author-sterilized-fresh-chicken-gato.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/author-sterilized-fresh-chicken-gato.jpg"
         },
         "productSource": {
           "name": "Ownat",
@@ -2786,7 +2786,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/author-sterilized-fresh-chicken-gato",
-          "url": "https://www.ownat.com/cdnassets/Author-Sterilized-Fresh-Chicken-v2_l.jpg"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Author-Sterilized-Fresh-Chicken-v2_l.jpg"
         },
         "retailPrice": {
           "amount": 13.29,
@@ -2836,11 +2836,11 @@ export const ownatProducts = [
         "tag": "Для стерилизованных",
         "line": "Ownat · 3 кг",
         "image": {
-          "src": "assets/food/ownat/editorial/author-sterilized-fresh-chicken-gato-v2.webp",
+          "src": "https://img.catmandog.es/assets/food/ownat/editorial/author-sterilized-fresh-chicken-gato-v2.webp",
           "alt": "Ownat Author Sterilized Fresh Chicken - студийное изображение рецептуры",
           "presentation": "editorial",
           "generated": true,
-          "originalSrc": "assets/food/ownat/author-sterilized-fresh-chicken-gato.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/food/ownat/author-sterilized-fresh-chicken-gato.jpg"
         },
         "productSource": {
           "name": "Ownat",
@@ -2850,7 +2850,7 @@ export const ownatProducts = [
         "imageSource": {
           "name": "Ownat",
           "pageUrl": "https://www.ownat.com/author-sterilized-fresh-chicken-gato",
-          "url": "https://www.ownat.com/cdnassets/Author-Sterilized-Fresh-Chicken-v2_l.jpg"
+          "url": "https://www.ownat.com/cdnhttps://img.catmandog.es/assets/Author-Sterilized-Fresh-Chicken-v2_l.jpg"
         },
         "retailPrice": {
           "amount": 23.43,

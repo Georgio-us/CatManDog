@@ -7,6 +7,9 @@ node_modules/
 __pycache__/
 *.pyc
 
+# Product and editorial media lives in Cloudflare R2. Keep temporary upload files local.
+assets/
+
 # Private supplier documents and purchasing price reviews stay local
 research/supplier-files/
 research/supplier-cats/

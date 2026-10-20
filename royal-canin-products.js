@@ -1,71 +1,71 @@
 // Generated from saved research and completed studio images
 const displayImages = {
-  "assets/food/editorial/rc-sensible-v1.png": "assets/food/editorial/rc-sensible-v1.webp",
-  "assets/food/editorial/royalcanin-b96b1ee0-v1.png": "assets/food/editorial/royalcanin-b96b1ee0-v1.webp",
-  "assets/food/editorial/rc-maine-coon-v1.png": "assets/food/editorial/rc-maine-coon-v1.webp",
-  "assets/food/editorial/royalcanin-6542b0c4-v1.png": "assets/food/editorial/royalcanin-6542b0c4-v1.webp",
-  "assets/food/editorial/royalcanin-676d439a-v1.png": "assets/food/editorial/royalcanin-676d439a-v1.webp",
-  "assets/food/editorial/rc-sterilised-senior-v1.png": "assets/food/editorial/rc-sterilised-senior-v1.webp",
-  "assets/food/editorial/royalcanin-e34b38d7-v1.png": "assets/food/editorial/royalcanin-e34b38d7-v1.webp",
-  "assets/food/editorial/royalcanin-0eae4742-v1.png": "assets/food/editorial/royalcanin-0eae4742-v1.webp",
-  "assets/food/editorial/rc-urinary-v1.png": "assets/food/editorial/rc-urinary-v1.webp",
-  "assets/food/editorial/royalcanin-db40d730-v1.png": "assets/food/editorial/royalcanin-db40d730-v1.webp",
-  "assets/food/editorial/royalcanin-da9b039e-v1.png": "assets/food/editorial/royalcanin-da9b039e-v1.webp",
-  "assets/food/editorial/royalcanin-7f8c2e4e-v1.png": "assets/food/editorial/royalcanin-7f8c2e4e-v1.webp",
-  "assets/food/editorial/royalcanin-e29af258-v1.png": "assets/food/editorial/royalcanin-e29af258-v1.webp",
-  "assets/food/editorial/royalcanin-7661a067-v1.png": "assets/food/editorial/royalcanin-7661a067-v1.webp",
-  "assets/food/editorial/royalcanin-5536b29b-v1.png": "assets/food/editorial/royalcanin-5536b29b-v1.webp",
-  "assets/food/editorial/royalcanin-5dbd7826-v1.png": "assets/food/editorial/royalcanin-5dbd7826-v1.webp",
-  "assets/food/editorial/rc-wet-v1.png": "assets/food/editorial/rc-wet-v1.webp",
-  "assets/food/editorial/royalcanin-475d5e2b-v1.png": "assets/food/editorial/royalcanin-475d5e2b-v1.webp",
-  "assets/food/editorial/royalcanin-93e8aeca-v1.png": "assets/food/editorial/royalcanin-93e8aeca-v1.webp",
-  "assets/food/editorial/royalcanin-a510d4e9-v1.png": "assets/food/editorial/royalcanin-a510d4e9-v1.webp",
-  "assets/food/editorial/royalcanin-d3493c23-v1.png": "assets/food/editorial/royalcanin-d3493c23-v1.webp",
-  "assets/food/editorial/rc-hairball-v1.png": "assets/food/editorial/rc-hairball-v1.webp",
-  "assets/food/editorial/royalcanin-6168e429-v1.png": "assets/food/editorial/royalcanin-6168e429-v1.webp",
-  "assets/food/editorial/royalcanin-d861a238-v1.png": "assets/food/editorial/royalcanin-d861a238-v1.webp",
-  "assets/food/editorial/royalcanin-f055ffce-v1.png": "assets/food/editorial/royalcanin-f055ffce-v1.webp",
-  "assets/food/editorial/royalcanin-96e21d56-v1.png": "assets/food/editorial/royalcanin-96e21d56-v1.webp",
-  "assets/food/editorial/royalcanin-8ffe447c-v1.png": "assets/food/editorial/royalcanin-8ffe447c-v1.webp",
-  "assets/food/editorial/royalcanin-a78036ba-v1.png": "assets/food/editorial/royalcanin-a78036ba-v1.webp",
-  "assets/food/editorial/royalcanin-92ee61fb-v1.png": "assets/food/editorial/royalcanin-92ee61fb-v1.webp",
-  "assets/food/editorial/royalcanin-5c2e58b7-v1.png": "assets/food/editorial/royalcanin-5c2e58b7-v1.webp",
-  "assets/food/editorial/royalcanin-78dac31b-v1.png": "assets/food/editorial/royalcanin-78dac31b-v1.webp",
-  "assets/food/editorial/royalcanin-b348c5c6-v1.png": "assets/food/editorial/royalcanin-b348c5c6-v1.webp",
-  "assets/food/editorial/royalcanin-9f8011d7-v1.png": "assets/food/editorial/royalcanin-9f8011d7-v1.webp",
-  "assets/food/editorial/royalcanin-c23304f8-v1.png": "assets/food/editorial/royalcanin-c23304f8-v1.webp",
-  "assets/food/editorial/royalcanin-86568be1-v1.png": "assets/food/editorial/royalcanin-86568be1-v1.webp",
-  "assets/food/editorial/rc-british-v1.png": "assets/food/editorial/rc-british-v1.webp",
-  "assets/food/editorial/royalcanin-1fdaaee6-v1.png": "assets/food/editorial/royalcanin-1fdaaee6-v1.webp",
-  "assets/food/editorial/royalcanin-8d039848-v1.png": "assets/food/editorial/royalcanin-8d039848-v1.webp",
-  "assets/food/editorial/royalcanin-99cd69dd-v1.png": "assets/food/editorial/royalcanin-99cd69dd-v1.webp",
-  "assets/food/editorial/royalcanin-b298cb91-v1.png": "assets/food/editorial/royalcanin-b298cb91-v1.webp",
-  "assets/food/editorial/royalcanin-8ae2a1d3-v1.png": "assets/food/editorial/royalcanin-8ae2a1d3-v1.webp",
-  "assets/food/editorial/royalcanin-dce3f76e-v1.png": "assets/food/editorial/royalcanin-dce3f76e-v1.webp",
-  "assets/food/editorial/royalcanin-3e9915b4-v1.png": "assets/food/editorial/royalcanin-3e9915b4-v1.webp",
-  "assets/food/editorial/royalcanin-11fd4a79-v1.png": "assets/food/editorial/royalcanin-11fd4a79-v1.webp",
-  "assets/food/editorial/royalcanin-c1fbc2a8-v1.png": "assets/food/editorial/royalcanin-c1fbc2a8-v1.webp",
-  "assets/food/editorial/royalcanin-1a4d5753-v1.png": "assets/food/editorial/royalcanin-1a4d5753-v1.webp",
-  "assets/food/editorial/rc-indoor-v1.png": "assets/food/editorial/rc-indoor-v1.webp",
-  "assets/food/editorial/rc-mother-babycat-v1.png": "assets/food/editorial/rc-mother-babycat-v1.webp",
-  "assets/food/editorial/rc-digestive-v1.png": "assets/food/editorial/rc-digestive-v1.webp",
-  "assets/food/editorial/royalcanin-47767475-v1.png": "assets/food/editorial/royalcanin-47767475-v1.webp",
-  "assets/food/editorial/rc-kitten-v1.png": "assets/food/editorial/rc-kitten-v1.webp",
-  "assets/food/editorial/royalcanin-ce70b2a8-v1.png": "assets/food/editorial/royalcanin-ce70b2a8-v1.webp",
-  "assets/food/editorial/royalcanin-a85257e1-v1.png": "assets/food/editorial/royalcanin-a85257e1-v1.webp",
-  "assets/food/editorial/royalcanin-04439e9c-v1.png": "assets/food/editorial/royalcanin-04439e9c-v1.webp",
-  "assets/food/editorial/rc-light-v1.png": "assets/food/editorial/rc-light-v1.webp",
-  "assets/food/editorial/royalcanin-659556dc-v1.png": "assets/food/editorial/royalcanin-659556dc-v1.webp",
-  "assets/food/editorial/royalcanin-77b93f1a-v1.png": "assets/food/editorial/royalcanin-77b93f1a-v1.webp",
-  "assets/food/editorial/rc-sterilised-v1.png": "assets/food/editorial/rc-sterilised-v1.webp",
-  "assets/food/editorial/rc-persian-v1.png": "assets/food/editorial/rc-persian-v1.webp",
-  "assets/food/editorial/rc-kitten-regular-v1.png": "assets/food/editorial/rc-kitten-regular-v1.webp",
-  "assets/food/editorial/royalcanin-f2600773-v1.png": "assets/food/editorial/royalcanin-f2600773-v1.webp",
-  "assets/food/editorial/rc-fit-v1.png": "assets/food/editorial/rc-fit-v1.webp",
-  "assets/food/editorial/royalcanin-97849099-v1.png": "assets/food/editorial/royalcanin-97849099-v1.webp",
-  "assets/food/editorial/royalcanin-aad6d1bc-v1.png": "assets/food/editorial/royalcanin-aad6d1bc-v1.webp",
-  "assets/food/editorial/royalcanin-955edaaa-v1.png": "assets/food/editorial/royalcanin-955edaaa-v1.webp",
-  "assets/food/editorial/royalcanin-0a55a9ec-v1.png": "assets/food/editorial/royalcanin-0a55a9ec-v1.webp"
+  "https://img.catmandog.es/assets/food/editorial/rc-sensible-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-sensible-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-b96b1ee0-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-b96b1ee0-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/rc-maine-coon-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-maine-coon-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-6542b0c4-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-6542b0c4-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-676d439a-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-676d439a-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/rc-sterilised-senior-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-sterilised-senior-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-e34b38d7-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-e34b38d7-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-0eae4742-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-0eae4742-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/rc-urinary-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-urinary-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-db40d730-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-db40d730-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-da9b039e-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-da9b039e-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-7f8c2e4e-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-7f8c2e4e-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-e29af258-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-e29af258-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-7661a067-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-7661a067-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-5536b29b-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-5536b29b-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-5dbd7826-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-5dbd7826-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/rc-wet-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-wet-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-475d5e2b-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-475d5e2b-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-93e8aeca-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-93e8aeca-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-a510d4e9-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-a510d4e9-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-d3493c23-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-d3493c23-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/rc-hairball-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-hairball-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-6168e429-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-6168e429-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-d861a238-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-d861a238-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-f055ffce-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-f055ffce-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-96e21d56-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-96e21d56-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-8ffe447c-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-8ffe447c-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-a78036ba-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-a78036ba-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-92ee61fb-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-92ee61fb-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-5c2e58b7-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-5c2e58b7-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-78dac31b-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-78dac31b-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-b348c5c6-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-b348c5c6-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-9f8011d7-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-9f8011d7-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-c23304f8-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-c23304f8-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-86568be1-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-86568be1-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/rc-british-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-british-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-1fdaaee6-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-1fdaaee6-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-8d039848-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-8d039848-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-99cd69dd-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-99cd69dd-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-b298cb91-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-b298cb91-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-8ae2a1d3-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-8ae2a1d3-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-dce3f76e-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-dce3f76e-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-3e9915b4-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-3e9915b4-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-11fd4a79-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-11fd4a79-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-c1fbc2a8-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-c1fbc2a8-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-1a4d5753-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-1a4d5753-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/rc-indoor-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-indoor-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/rc-mother-babycat-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-mother-babycat-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/rc-digestive-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-digestive-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-47767475-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-47767475-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/rc-kitten-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-kitten-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-ce70b2a8-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-ce70b2a8-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-a85257e1-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-a85257e1-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-04439e9c-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-04439e9c-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/rc-light-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-light-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-659556dc-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-659556dc-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-77b93f1a-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-77b93f1a-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/rc-sterilised-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-sterilised-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/rc-persian-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-persian-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/rc-kitten-regular-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-kitten-regular-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-f2600773-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-f2600773-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/rc-fit-v1.png": "https://img.catmandog.es/assets/food/editorial/rc-fit-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-97849099-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-97849099-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-aad6d1bc-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-aad6d1bc-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-955edaaa-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-955edaaa-v1.webp",
+  "https://img.catmandog.es/assets/food/editorial/royalcanin-0a55a9ec-v1.png": "https://img.catmandog.es/assets/food/editorial/royalcanin-0a55a9ec-v1.webp"
 };
 const recipes = [
   {
@@ -231,8 +231,8 @@ const recipes = [
       "Свежая вода всегда должна быть в свободном доступе"
     ],
     "image": {
-      "src": "assets/food/editorial/rc-fit-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin/royalcanin-02.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-fit-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin/royalcanin-02.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Fit 32"
@@ -369,8 +369,8 @@ const recipes = [
       "Свежая вода всегда должна быть в свободном доступе"
     ],
     "image": {
-      "src": "assets/food/editorial/rc-indoor-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin/royalcanin-03.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-indoor-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin/royalcanin-03.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Indoor 27"
@@ -515,8 +515,8 @@ const recipes = [
       "Свежая вода всегда должна быть в свободном доступе"
     ],
     "image": {
-      "src": "assets/food/editorial/rc-kitten-regular-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin/royalcanin-04.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-kitten-regular-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin/royalcanin-04.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Kitten"
@@ -768,8 +768,8 @@ const recipes = [
       "Свежая вода всегда должна быть в свободном доступе"
     ],
     "image": {
-      "src": "assets/food/editorial/rc-mother-babycat-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin/royalcanin-06.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-mother-babycat-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin/royalcanin-06.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Mother & Babycat"
@@ -914,8 +914,8 @@ const recipes = [
       "Свежая вода всегда должна быть в свободном доступе"
     ],
     "image": {
-      "src": "assets/food/editorial/rc-hairball-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin/royalcanin-07.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-hairball-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin/royalcanin-07.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Hairball Care"
@@ -1200,8 +1200,8 @@ const recipes = [
       "Свежая вода всегда должна быть в свободном доступе"
     ],
     "image": {
-      "src": "assets/food/editorial/rc-sensible-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin/royalcanin-09.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-sensible-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin/royalcanin-09.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Sensible 33"
@@ -1346,8 +1346,8 @@ const recipes = [
       "Свежая вода всегда должна быть в свободном доступе"
     ],
     "image": {
-      "src": "assets/food/editorial/rc-urinary-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin/royalcanin-10.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-urinary-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin/royalcanin-10.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Urinary Care"
@@ -1484,8 +1484,8 @@ const recipes = [
       "Свежая вода всегда должна быть в свободном доступе"
     ],
     "image": {
-      "src": "assets/food/editorial/rc-light-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin/royalcanin-11.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-light-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin/royalcanin-11.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Light Weight Care"
@@ -1605,8 +1605,8 @@ const recipes = [
       "Свежая вода всегда должна быть в свободном доступе"
     ],
     "image": {
-      "src": "assets/food/editorial/rc-sterilised-senior-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin/royalcanin-12.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-sterilised-senior-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin/royalcanin-12.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Sterilised 7+"
@@ -1751,8 +1751,8 @@ const recipes = [
       "Свежая вода всегда должна быть в свободном доступе"
     ],
     "image": {
-      "src": "assets/food/editorial/rc-maine-coon-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin/royalcanin-13.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-maine-coon-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin/royalcanin-13.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Maine Coon Adult"
@@ -1881,8 +1881,8 @@ const recipes = [
       "Свежая вода всегда должна быть в свободном доступе"
     ],
     "image": {
-      "src": "assets/food/editorial/rc-persian-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin/royalcanin-14.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-persian-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin/royalcanin-14.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Persian Adult"
@@ -2027,8 +2027,8 @@ const recipes = [
       "Свежая вода всегда должна быть в свободном доступе"
     ],
     "image": {
-      "src": "assets/food/editorial/rc-british-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin/royalcanin-15.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/rc-british-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin/royalcanin-15.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin British Shorthair Adult"
@@ -2156,8 +2156,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-8d039848-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-8d039848.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-8d039848-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-8d039848.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Adult Sensory Feel salsa sobre para gatos - 85 г"
@@ -2227,8 +2227,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-659556dc-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-659556dc.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-659556dc-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-659556dc.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Adult Sensory Smell salsa sobre para gatos - 85 г"
@@ -2298,8 +2298,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-a510d4e9-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-a510d4e9.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-a510d4e9-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-a510d4e9.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Adult Sensory Taste salsa sobre para gatos - 85 г"
@@ -2370,8 +2370,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-5c2e58b7-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-5c2e58b7.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-5c2e58b7-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-5c2e58b7.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Adult Veterinary Urinary mousse sobre para gatos - 85 г"
@@ -2433,8 +2433,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-f2600773-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-f2600773.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-f2600773-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-f2600773.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Ageing 11+ Comida Húmeda en gelatina para gatos senior - 85 г"
@@ -2504,8 +2504,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-96e21d56-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-96e21d56.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-96e21d56-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-96e21d56.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Ageing 11+ sobre en salsa para gatos senior - 85 г"
@@ -2575,8 +2575,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-d861a238-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-d861a238.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-d861a238-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-d861a238.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Ageing 15+ Comida Húmeda en salsa para gatos senior - 85 г"
@@ -2646,8 +2646,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-6168e429-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-6168e429.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-6168e429-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-6168e429.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Appetite Control Care salsa sobre para gatos - 85 г"
@@ -2717,8 +2717,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-e34b38d7-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-e34b38d7.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-e34b38d7-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-e34b38d7.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Care Digestive Mousse Lata para gatos adultos - 85 г"
@@ -2788,8 +2788,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-0eae4742-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-0eae4742.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-0eae4742-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-0eae4742.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Care Light Weight Mousse Lata para gatos adultos - 85 г"
@@ -2859,8 +2859,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-99cd69dd-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-99cd69dd.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-99cd69dd-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-99cd69dd.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Digestive Sensitive sobre para gatos - 85 г"
@@ -2930,8 +2930,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-676d439a-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-676d439a.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-676d439a-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-676d439a.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Feline Persian Adult sobres para gatos - 85 г"
@@ -3065,8 +3065,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-5dbd7826-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-5dbd7826.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-5dbd7826-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-5dbd7826.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Hair and Skin sobre en salsa para gatos - 85 г"
@@ -3136,8 +3136,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-9f8011d7-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-9f8011d7.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-9f8011d7-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-9f8011d7.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Hairball Care Sobre en Gelatina para gatos - 85 г"
@@ -3207,8 +3207,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-0a55a9ec-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-0a55a9ec.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-0a55a9ec-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-0a55a9ec.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Hairball sobre en salsa para gatos - 85 г"
@@ -3278,8 +3278,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-a85257e1-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-a85257e1.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-a85257e1-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-a85257e1.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Indoor Sterilised sobre en gelatina para gatos - 85 г"
@@ -3349,8 +3349,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-77b93f1a-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-77b93f1a.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-77b93f1a-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-77b93f1a.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Indoor Sterilised sobre en salsa para gatos - 85 г"
@@ -3420,8 +3420,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-1fdaaee6-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-1fdaaee6.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-1fdaaee6-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-1fdaaee6.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Instinctive Gravy - 85 г"
@@ -3483,8 +3483,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-78dac31b-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-78dac31b.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-78dac31b-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-78dac31b.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Instinctive gelatina sobres para gatos - 85 г"
@@ -3554,8 +3554,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-11fd4a79-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-11fd4a79.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-11fd4a79-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-11fd4a79.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Instinctive paté sobre para gatos - 85 г"
@@ -3625,8 +3625,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-b348c5c6-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-b348c5c6.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-b348c5c6-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-b348c5c6.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Intense Beauty gelatina sobre para gatos - 85 г"
@@ -3696,8 +3696,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-04439e9c-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-04439e9c.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-04439e9c-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-04439e9c.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Kitten Sterilised gelatina para gatos - 85 г"
@@ -3767,8 +3767,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-7f8c2e4e-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-7f8c2e4e.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-7f8c2e4e-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-7f8c2e4e.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Kitten paté sobre para gatos - 85 г"
@@ -3838,8 +3838,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-93e8aeca-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-93e8aeca.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-93e8aeca-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-93e8aeca.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Kitten sobre en salsa para gatos - 85 г"
@@ -3909,8 +3909,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-92ee61fb-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-92ee61fb.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-92ee61fb-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-92ee61fb.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Maine Coon sobres para gatos - 85 г"
@@ -3981,8 +3981,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-c1fbc2a8-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-c1fbc2a8.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-c1fbc2a8-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-c1fbc2a8.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Mature Consult Balance Paté sobre para gatos - 85 г"
@@ -4044,8 +4044,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-5536b29b-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-5536b29b.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-5536b29b-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-5536b29b.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Mother & Baby mousse latas para gatos - 195 г"
@@ -4115,8 +4115,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-a78036ba-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-a78036ba.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-a78036ba-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-a78036ba.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Nutrition Appetite Control Care gelatina para gatos - 85 г"
@@ -4187,8 +4187,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-1a4d5753-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-1a4d5753.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-1a4d5753-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-1a4d5753.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Renal Buey sobre para gatos - 85 г"
@@ -4251,8 +4251,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-e29af258-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-e29af258.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-e29af258-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-e29af258.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Renal Pescado sobre para gatos - 85 г"
@@ -4315,8 +4315,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-b96b1ee0-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-b96b1ee0.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-b96b1ee0-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-b96b1ee0.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Renal pollo sobre para gatos - 85 г"
@@ -4378,8 +4378,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-d3493c23-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-d3493c23.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-d3493c23-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-d3493c23.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Senior 7+ Instinctive sobres para gatos - 85 г"
@@ -4450,8 +4450,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-ce70b2a8-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-ce70b2a8.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-ce70b2a8-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-ce70b2a8.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Skin & Coat sobre en salsa para gatos - 85 г"
@@ -4513,8 +4513,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-c23304f8-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-c23304f8.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-c23304f8-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-c23304f8.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Sobre en Salsa British Shorthair Adult - 85 г"
@@ -4584,8 +4584,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-aad6d1bc-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-aad6d1bc.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-aad6d1bc-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-aad6d1bc.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Sterilised Paté sobre para gatos - 85 г"
@@ -4655,8 +4655,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-6542b0c4-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-6542b0c4.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-6542b0c4-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-6542b0c4.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Sterilised gelatina sobres para gato - 85 г"
@@ -4726,8 +4726,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-7661a067-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-7661a067.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-7661a067-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-7661a067.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Ultra Light gelatina sobre para gatos - 85 г"
@@ -4797,8 +4797,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-47767475-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-47767475.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-47767475-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-47767475.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Ultra Light sobres para gatos - 85 г"
@@ -4868,8 +4868,8 @@ const recipes = [
       "Норму кормления смотрите на упаковке"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-da9b039e-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-da9b039e.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-da9b039e-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-da9b039e.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Urinary Care Sobre en Gelatina para gatos - 85 г"
@@ -4940,8 +4940,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-b298cb91-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-b298cb91.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-b298cb91-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-b298cb91.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Veterinary Diet  Urinary S/O sobres para gato - 85 г"
@@ -5004,8 +5004,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-8ffe447c-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-8ffe447c.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-8ffe447c-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-8ffe447c.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Veterinary Diet Diabetic sobres para gatos - 85 г"
@@ -5068,8 +5068,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-db40d730-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-db40d730.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-db40d730-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-db40d730.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Veterinary Gastrointestinal Moderate Calorie sobre para gatos - 85 г"
@@ -5132,8 +5132,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-dce3f76e-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-dce3f76e.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-dce3f76e-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-dce3f76e.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Veterinary Gastrointestinal Mousse lata para gatitos - 195 г"
@@ -5204,8 +5204,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-f055ffce-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-f055ffce.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-f055ffce-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-f055ffce.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Veterinary Gastrointestinal sobre en salsa para gatos - 85 г"
@@ -5268,8 +5268,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-475d5e2b-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-475d5e2b.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-475d5e2b-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-475d5e2b.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Veterinary Neutered Carne sobre en salsa para gatos - 85 г"
@@ -5332,8 +5332,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-3e9915b4-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-3e9915b4.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-3e9915b4-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-3e9915b4.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Veterinary Recovery lata para perros y gatos - 195 г"
@@ -5404,8 +5404,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-86568be1-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-86568be1.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-86568be1-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-86568be1.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Veterinary Renal Mousse sobre para gatos - 85 г"
@@ -5468,8 +5468,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-8ae2a1d3-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-8ae2a1d3.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-8ae2a1d3-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-8ae2a1d3.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Veterinary Satiety sobres en salsa para gatos - 85 г"
@@ -5532,8 +5532,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-955edaaa-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-955edaaa.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-955edaaa-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-955edaaa.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Veterinary Sensitivity Control Pollo y Arroz sobre en salsa - 85 г"
@@ -5596,8 +5596,8 @@ const recipes = [
       "Ветеринарная диета - применение по рекомендации ветеринарного врача"
     ],
     "image": {
-      "src": "assets/food/editorial/royalcanin-97849099-v1.webp",
-      "originalSrc": "assets/food/references/royal-canin-wet/royalcanin-97849099.jpg",
+      "src": "https://img.catmandog.es/assets/food/editorial/royalcanin-97849099-v1.webp",
+      "originalSrc": "https://img.catmandog.es/assets/food/references/royal-canin-wet/royalcanin-97849099.jpg",
       "presentation": "editorial",
       "generated": true,
       "alt": "Royal Canin Veterinary Urinary Moderate Calorie sobres para gatos - 85 г"

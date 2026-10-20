@@ -546,7 +546,7 @@ button:hover:not(:disabled) {
 
 /* Catalog, product details and cart */
 .product-image {
-  background-image: var(--product-sheet, url('assets/products-sheet.png'));
+  background-image: var(--product-sheet, url('https://img.catmandog.es/assets/products-sheet.png'));
   background-size: 400% 200%;
   background-position: var(--px) var(--py);
   background-repeat: no-repeat;
@@ -1661,7 +1661,7 @@ details ul {
 .category-image {
   aspect-ratio: 1;
   margin-bottom: 12px;
-  background-image: var(--category-sheet, url('assets/categories-open.png'));
+  background-image: var(--category-sheet, url('https://img.catmandog.es/assets/categories-open.png'));
   background-size: var(--category-size, 400% 200%);
   background-position: var(--px) var(--py);
   background-repeat: no-repeat;

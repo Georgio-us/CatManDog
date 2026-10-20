@@ -28,11 +28,11 @@ export const yaguProducts = [
       "Выращивайте и используйте по инструкции на упаковке"
     ],
     "image": {
-      "src": "assets/yagu/editorial/7500815-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/7500815-v1.webp",
       "alt": "Duvo+ - трава для кошек",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/7500815.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/7500815.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -78,11 +78,11 @@ export const yaguProducts = [
           "Выращивайте и используйте по инструкции на упаковке"
         ],
         "image": {
-          "src": "assets/yagu/editorial/7500815-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/7500815-v1.webp",
           "alt": "Duvo+ - трава для кошек",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/7500815.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/7500815.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -129,11 +129,11 @@ export const yaguProducts = [
       "Упаковка 10 л / 6,25 кг"
     ],
     "image": {
-      "src": "assets/yagu/editorial/2170001-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/2170001-v1.webp",
       "alt": "Sanicat Classic - впитывающий наполнитель",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/2170001.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/2170001.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -179,11 +179,11 @@ export const yaguProducts = [
           "Упаковка 10 л / 6,25 кг"
         ],
         "image": {
-          "src": "assets/yagu/editorial/2170001-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/2170001-v1.webp",
           "alt": "Sanicat Classic - впитывающий наполнитель",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/2170001.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/2170001.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -230,11 +230,11 @@ export const yaguProducts = [
       "Упаковка 10 л / 8,4 кг"
     ],
     "image": {
-      "src": "assets/yagu/editorial/2170004-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/2170004-v1.webp",
       "alt": "Sanicat Clumping - комкующийся наполнитель",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/2170004.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/2170004.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -280,11 +280,11 @@ export const yaguProducts = [
           "Упаковка 10 л / 8,4 кг"
         ],
         "image": {
-          "src": "assets/yagu/editorial/2170004-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/2170004-v1.webp",
           "alt": "Sanicat Clumping - комкующийся наполнитель",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/2170004.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/2170004.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -331,11 +331,11 @@ export const yaguProducts = [
       "Упаковка 6 л"
     ],
     "image": {
-      "src": "assets/yagu/editorial/2170005-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/2170005-v1.webp",
       "alt": "Sanicat Ultra Gold - комкующийся наполнитель",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/2170005.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/2170005.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -381,11 +381,11 @@ export const yaguProducts = [
           "Упаковка 6 л"
         ],
         "image": {
-          "src": "assets/yagu/editorial/2170005-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/2170005-v1.webp",
           "alt": "Sanicat Ultra Gold - комкующийся наполнитель",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/2170005.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/2170005.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -432,11 +432,11 @@ export const yaguProducts = [
       "Упаковка 10 л"
     ],
     "image": {
-      "src": "assets/yagu/editorial/2170014-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/2170014-v1.webp",
       "alt": "Sanicat Natura Activa - растительный наполнитель",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/2170014.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/2170014.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -482,11 +482,11 @@ export const yaguProducts = [
           "Упаковка 10 л"
         ],
         "image": {
-          "src": "assets/yagu/editorial/2170014-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/2170014-v1.webp",
           "alt": "Sanicat Natura Activa - растительный наполнитель",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/2170014.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/2170014.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -533,11 +533,11 @@ export const yaguProducts = [
       "Размер 50 × 38 × 10,8 см"
     ],
     "image": {
-      "src": "assets/yagu/editorial/9235142-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/9235142-v1.webp",
       "alt": "Moderna Maryloo - открытый лоток",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/9235142.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/9235142.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -583,11 +583,11 @@ export const yaguProducts = [
           "Размер 50 × 38 × 10,8 см"
         ],
         "image": {
-          "src": "assets/yagu/editorial/9235142-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/9235142-v1.webp",
           "alt": "Moderna Maryloo - открытый лоток",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/9235142.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/9235142.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -634,11 +634,11 @@ export const yaguProducts = [
       "Размер 54,5 × 39,1 × 40,3 см"
     ],
     "image": {
-      "src": "assets/yagu/editorial/9235121-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/9235121-v1.webp",
       "alt": "Moderna Smart Cat - закрытый лоток",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/9235121.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/9235121.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -684,11 +684,11 @@ export const yaguProducts = [
           "Размер 54,5 × 39,1 × 40,3 см"
         ],
         "image": {
-          "src": "assets/yagu/editorial/9235121-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/9235121-v1.webp",
           "alt": "Moderna Smart Cat - закрытый лоток",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/9235121.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/9235121.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -735,11 +735,11 @@ export const yaguProducts = [
       "Размер 40 × 48 × 43 см"
     ],
     "image": {
-      "src": "assets/yagu/editorial/9235036-v2.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/9235036-v2.webp",
       "alt": "Moderna CatConcept - лоток, лежанка и когтеточка",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/9235036.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/9235036.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -785,11 +785,11 @@ export const yaguProducts = [
           "Размер 40 × 48 × 43 см"
         ],
         "image": {
-          "src": "assets/yagu/editorial/9235036-v2.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/9235036-v2.webp",
           "alt": "Moderna CatConcept - лоток, лежанка и когтеточка",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/9235036.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/9235036.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -836,11 +836,11 @@ export const yaguProducts = [
       "Размер 30,5 × 10,1 × 4 см"
     ],
     "image": {
-      "src": "assets/yagu/editorial/9235123-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/9235123-v1.webp",
       "alt": "Moderna Handy - лопатка для лотка",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/9235123.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/9235123.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -886,11 +886,11 @@ export const yaguProducts = [
           "Размер 30,5 × 10,1 × 4 см"
         ],
         "image": {
-          "src": "assets/yagu/editorial/9235123-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/9235123-v1.webp",
           "alt": "Moderna Handy - лопатка для лотка",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/9235123.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/9235123.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -937,11 +937,11 @@ export const yaguProducts = [
       "Размер 15,5 × 13,2 × 12,9 см"
     ],
     "image": {
-      "src": "assets/yagu/editorial/9235071-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/9235071-v1.webp",
       "alt": "Moderna V Scoop - лопатка для наполнителя",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/9235071.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/9235071.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -987,11 +987,11 @@ export const yaguProducts = [
           "Размер 15,5 × 13,2 × 12,9 см"
         ],
         "image": {
-          "src": "assets/yagu/editorial/9235071-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/9235071-v1.webp",
           "alt": "Moderna V Scoop - лопатка для наполнителя",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/9235071.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/9235071.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -1038,11 +1038,11 @@ export const yaguProducts = [
       "Размер 15,5 × 15,5 × 3,2 см"
     ],
     "image": {
-      "src": "assets/yagu/editorial/9235038-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/9235038-v1.webp",
       "alt": "Moderna Cats in Love - миска для кошек",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/9235038.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/9235038.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -1088,11 +1088,11 @@ export const yaguProducts = [
           "Размер 15,5 × 15,5 × 3,2 см"
         ],
         "image": {
-          "src": "assets/yagu/editorial/9235038-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/9235038-v1.webp",
           "alt": "Moderna Cats in Love - миска для кошек",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/9235038.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/9235038.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -1139,11 +1139,11 @@ export const yaguProducts = [
       "Размер 15,5 × 15,5 × 3,2 см"
     ],
     "image": {
-      "src": "assets/yagu/editorial/9235044-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/9235044-v1.webp",
       "alt": "Moderna Luxurious - миска для кошек",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/9235044.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/9235044.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -1189,11 +1189,11 @@ export const yaguProducts = [
           "Размер 15,5 × 15,5 × 3,2 см"
         ],
         "image": {
-          "src": "assets/yagu/editorial/9235044-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/9235044-v1.webp",
           "alt": "Moderna Luxurious - миска для кошек",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/9235044.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/9235044.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -1241,11 +1241,11 @@ export const yaguProducts = [
       "Сменный фильтр EBI Mango / Cascade представлен отдельно"
     ],
     "image": {
-      "src": "assets/yagu/editorial/7845778-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/7845778-v1.webp",
       "alt": "EBI Cascade - питьевой фонтан",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/7845778.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/7845778.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -1292,11 +1292,11 @@ export const yaguProducts = [
           "Сменный фильтр EBI Mango / Cascade представлен отдельно"
         ],
         "image": {
-          "src": "assets/yagu/editorial/7845778-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/7845778-v1.webp",
           "alt": "EBI Cascade - питьевой фонтан",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/7845778.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/7845778.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -1343,11 +1343,11 @@ export const yaguProducts = [
       "Количество фильтров в упаковке требует подтверждения"
     ],
     "image": {
-      "src": "assets/yagu/editorial/7815320-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/7815320-v1.webp",
       "alt": "EBI Mango / Cascade - сменный фильтр",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/7815320.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/7815320.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -1393,11 +1393,11 @@ export const yaguProducts = [
           "Количество фильтров в упаковке требует подтверждения"
         ],
         "image": {
-          "src": "assets/yagu/editorial/7815320-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/7815320-v1.webp",
           "alt": "EBI Mango / Cascade - сменный фильтр",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/7815320.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/7815320.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -1444,11 +1444,11 @@ export const yaguProducts = [
       "Размер по каталогу Yagu 36 × 35 × 70 см"
     ],
     "image": {
-      "src": "assets/yagu/editorial/7502810-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/7502810-v1.webp",
       "alt": "Duvo+ Tower - когтеточка-башня",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/7502810-exact.jpg"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/7502810-exact.jpg"
     },
     "supplier": {
       "name": "Yagu",
@@ -1494,11 +1494,11 @@ export const yaguProducts = [
           "Размер по каталогу Yagu 36 × 35 × 70 см"
         ],
         "image": {
-          "src": "assets/yagu/editorial/7502810-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/7502810-v1.webp",
           "alt": "Duvo+ Tower - когтеточка-башня",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/7502810-exact.jpg"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/7502810-exact.jpg"
         },
         "supplier": {
           "name": "Yagu",
@@ -1545,11 +1545,11 @@ export const yaguProducts = [
       "Размер 30 × 30 × 45 см"
     ],
     "image": {
-      "src": "assets/yagu/editorial/7515812-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/7515812-v1.webp",
       "alt": "Duvo+ Sole - когтеточка-столбик",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/7515812.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/7515812.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -1595,11 +1595,11 @@ export const yaguProducts = [
           "Размер 30 × 30 × 45 см"
         ],
         "image": {
-          "src": "assets/yagu/editorial/7515812-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/7515812-v1.webp",
           "alt": "Duvo+ Sole - когтеточка-столбик",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/7515812.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/7515812.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -1646,11 +1646,11 @@ export const yaguProducts = [
       "Размер 30 × 30 × 28 см"
     ],
     "image": {
-      "src": "assets/yagu/editorial/7515817-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/7515817-v1.webp",
       "alt": "Duvo+ Square - туннель-когтеточка",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/7515817.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/7515817.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -1696,11 +1696,11 @@ export const yaguProducts = [
           "Размер 30 × 30 × 28 см"
         ],
         "image": {
-          "src": "assets/yagu/editorial/7515817-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/7515817-v1.webp",
           "alt": "Duvo+ Square - туннель-когтеточка",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/7515817.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/7515817.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -1748,11 +1748,11 @@ export const yaguProducts = [
       "Используйте под присмотром и очищайте после использования"
     ],
     "image": {
-      "src": "assets/yagu/editorial/7515988-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/7515988-v1.webp",
       "alt": "Duvo+ - коврик для вылизывания",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/7515988.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/7515988.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -1799,11 +1799,11 @@ export const yaguProducts = [
           "Используйте под присмотром и очищайте после использования"
         ],
         "image": {
-          "src": "assets/yagu/editorial/7515988-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/7515988-v1.webp",
           "alt": "Duvo+ - коврик для вылизывания",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/7515988.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/7515988.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -1851,11 +1851,11 @@ export const yaguProducts = [
       "Играйте под присмотром, убирайте повреждённые игрушки"
     ],
     "image": {
-      "src": "assets/yagu/editorial/7517019-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/7517019-v1.webp",
       "alt": "Duvo+ - набор игрушечных мышек",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/7517019.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/7517019.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -1902,11 +1902,11 @@ export const yaguProducts = [
           "Играйте под присмотром, убирайте повреждённые игрушки"
         ],
         "image": {
-          "src": "assets/yagu/editorial/7517019-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/7517019-v1.webp",
           "alt": "Duvo+ - набор игрушечных мышек",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/7517019.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/7517019.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -1954,11 +1954,11 @@ export const yaguProducts = [
       "Играйте под присмотром, убирайте повреждённые игрушки"
     ],
     "image": {
-      "src": "assets/yagu/editorial/7552371-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/7552371-v1.webp",
       "alt": "Duvo+ - мышка на пружинной подставке",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/7552371.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/7552371.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -2005,11 +2005,11 @@ export const yaguProducts = [
           "Играйте под присмотром, убирайте повреждённые игрушки"
         ],
         "image": {
-          "src": "assets/yagu/editorial/7552371-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/7552371-v1.webp",
           "alt": "Duvo+ - мышка на пружинной подставке",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/7552371.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/7552371.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -2057,11 +2057,11 @@ export const yaguProducts = [
       "Играйте под присмотром, убирайте повреждённые игрушки"
     ],
     "image": {
-      "src": "assets/yagu/editorial/7517046-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/7517046-v1.webp",
       "alt": "Duvo+ - удочка с джутом и перьями",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/7517046.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/7517046.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -2108,11 +2108,11 @@ export const yaguProducts = [
           "Играйте под присмотром, убирайте повреждённые игрушки"
         ],
         "image": {
-          "src": "assets/yagu/editorial/7517046-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/7517046-v1.webp",
           "alt": "Duvo+ - удочка с джутом и перьями",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/7517046.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/7517046.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -2160,11 +2160,11 @@ export const yaguProducts = [
       "Играйте под присмотром, убирайте повреждённые игрушки"
     ],
     "image": {
-      "src": "assets/yagu/editorial/7514634-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/7514634-v1.webp",
       "alt": "Duvo+ Eco Hongo - удочка-дразнилка",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/7514634.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/7514634.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -2211,11 +2211,11 @@ export const yaguProducts = [
           "Играйте под присмотром, убирайте повреждённые игрушки"
         ],
         "image": {
-          "src": "assets/yagu/editorial/7514634-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/7514634-v1.webp",
           "alt": "Duvo+ Eco Hongo - удочка-дразнилка",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/7514634.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/7514634.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -2263,11 +2263,11 @@ export const yaguProducts = [
       "Играйте под присмотром, убирайте повреждённые игрушки"
     ],
     "image": {
-      "src": "assets/yagu/editorial/7514629-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/7514629-v1.webp",
       "alt": "Duvo+ Eco - игрушка-рыбка",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/7514629.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/7514629.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -2314,11 +2314,11 @@ export const yaguProducts = [
           "Играйте под присмотром, убирайте повреждённые игрушки"
         ],
         "image": {
-          "src": "assets/yagu/editorial/7514629-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/7514629-v1.webp",
           "alt": "Duvo+ Eco - игрушка-рыбка",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/7514629.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/7514629.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -2366,11 +2366,11 @@ export const yaguProducts = [
       "Играйте под присмотром, убирайте повреждённые игрушки"
     ],
     "image": {
-      "src": "assets/yagu/editorial/7514626-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/7514626-v1.webp",
       "alt": "Duvo+ Eco - игрушка-мышка",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/7514626.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/7514626.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -2417,11 +2417,11 @@ export const yaguProducts = [
           "Играйте под присмотром, убирайте повреждённые игрушки"
         ],
         "image": {
-          "src": "assets/yagu/editorial/7514626-v1.webp",
+          "src": "https://img.catmandog.es/assets/yagu/editorial/7514626-v1.webp",
           "alt": "Duvo+ Eco - игрушка-мышка",
           "generated": true,
           "presentation": "editorial",
-          "originalSrc": "assets/yagu/references/7514626.png"
+          "originalSrc": "https://img.catmandog.es/assets/yagu/references/7514626.png"
         },
         "supplier": {
           "name": "Yagu",
@@ -2471,11 +2471,11 @@ const yaguMaltVariants = [
     ],
     "packageWeightKg": 0.1,
     "image": {
-      "src": "assets/yagu/editorial/T68669-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/T68669-v1.webp",
       "alt": "GimCat Malt-Soft Extra - изображение линейки",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/T68669.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/T68669.png"
     },
     "supplier": {
       "name": "Yagu",
@@ -2521,11 +2521,11 @@ const yaguMaltVariants = [
     ],
     "packageWeightKg": 0.05,
     "image": {
-      "src": "assets/yagu/editorial/T68669-v1.webp",
+      "src": "https://img.catmandog.es/assets/yagu/editorial/T68669-v1.webp",
       "alt": "GimCat Malt-Soft Extra - изображение линейки",
       "generated": true,
       "presentation": "editorial",
-      "originalSrc": "assets/yagu/references/T68669.png"
+      "originalSrc": "https://img.catmandog.es/assets/yagu/references/T68669.png"
     },
     "supplier": {
       "name": "Yagu",

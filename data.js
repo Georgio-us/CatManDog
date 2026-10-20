@@ -714,7 +714,7 @@ const demoProducts = [
     "category": "Подарочные наборы",
     "pet": "cat",
     "price": 24.9,
-    "image": "assets/gift-visit.png",
+    "image": "https://img.catmandog.es/assets/gift-visit.png",
     "tag": "Гостинец для кота",
     "line": "CatManDog · Little celebrations",
     "sizes": [
@@ -736,7 +736,7 @@ const demoProducts = [
     "category": "Подарочные наборы",
     "pet": "cat",
     "price": 29.9,
-    "image": "assets/gift-halloween.png",
+    "image": "https://img.catmandog.es/assets/gift-halloween.png",
     "tag": "Хэллоуин · сейчас",
     "line": "CatManDog · Little celebrations",
     "sizes": [

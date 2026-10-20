@@ -14,7 +14,7 @@ export const accessoryProducts = [
     "availabilityStatus": "pending",
     "weight": "1 шт",
     "image": {
-      "src": "assets/accessories/v55ju04625.png",
+      "src": "https://img.catmandog.es/assets/accessories/v55ju04625.png",
       "alt": "KONG Cat Active Scrunchie - 1 шт"
     },
     "tag": "Мягкая игрушка",
@@ -60,7 +60,7 @@ export const accessoryProducts = [
     "availabilityStatus": "pending",
     "weight": "Cork с пером",
     "image": {
-      "src": "assets/accessories/v55ju03686.png",
+      "src": "https://img.catmandog.es/assets/accessories/v55ju03686.png",
       "alt": "KONG Cat Cork с пером"
     },
     "tag": "Для охоты",
@@ -107,7 +107,7 @@ export const accessoryProducts = [
     "availabilityStatus": "pending",
     "weight": "1 шт",
     "image": {
-      "src": "assets/accessories/v55ju04660.png",
+      "src": "https://img.catmandog.es/assets/accessories/v55ju04660.png",
       "alt": "KONG Cat - цветная гусеница - 1 шт"
     },
     "tag": "Для игр",
@@ -153,7 +153,7 @@ export const accessoryProducts = [
     "availabilityStatus": "pending",
     "weight": "1 шт",
     "image": {
-      "src": "assets/accessories/v55ju04722.png",
+      "src": "https://img.catmandog.es/assets/accessories/v55ju04722.png",
       "alt": "KONG Crackles Noodles - 1 шт"
     },
     "tag": "Новая игрушка",
@@ -199,7 +199,7 @@ export const accessoryProducts = [
     "availabilityStatus": "pending",
     "weight": "7 × 5 × 2 см",
     "image": {
-      "src": "assets/accessories/v55ju04710.png",
+      "src": "https://img.catmandog.es/assets/accessories/v55ju04710.png",
       "alt": "KONG - сардина с эластичным креплением - 7 × 5 × 2 см"
     },
     "tag": "Для охоты",
@@ -245,7 +245,7 @@ export const accessoryProducts = [
     "availabilityStatus": "pending",
     "weight": "2,5 л",
     "image": {
-      "src": "assets/accessories/18115094.jpg",
+      "src": "https://img.catmandog.es/assets/accessories/18115094.jpg",
       "alt": "Catit PIXI - поилка с чашей из стали - 2,5 л"
     },
     "tag": "Свежая вода",
@@ -291,7 +291,7 @@ export const accessoryProducts = [
     "availabilityStatus": "pending",
     "weight": "1,5 л",
     "image": {
-      "src": "assets/accessories/18111212.jpg",
+      "src": "https://img.catmandog.es/assets/accessories/18111212.jpg",
       "alt": "Catit Mini Flower Fountain - 1,5 л"
     },
     "tag": "Компактная поилка",
@@ -337,7 +337,7 @@ export const accessoryProducts = [
     "availabilityStatus": "pending",
     "weight": "3 л",
     "image": {
-      "src": "assets/accessories/18113163.jpg",
+      "src": "https://img.catmandog.es/assets/accessories/18113163.jpg",
       "alt": "Catit Flower Fountain - 3 л"
     },
     "tag": "Три потока воды",
@@ -384,7 +384,7 @@ export const accessoryProducts = [
     "availabilityStatus": "pending",
     "weight": "3 шт",
     "image": {
-      "src": "assets/accessories/18115095.jpg",
+      "src": "https://img.catmandog.es/assets/accessories/18115095.jpg",
       "alt": "Catit PIXI - фильтры для поилки - 3 шт"
     },
     "tag": "Для поилки PIXI",
@@ -430,7 +430,7 @@ export const accessoryProducts = [
     "availabilityStatus": "pending",
     "weight": "Зелёный",
     "image": {
-      "src": "assets/accessories/18114469.jpg",
+      "src": "https://img.catmandog.es/assets/accessories/18114469.jpg",
       "alt": "Catit Flower - силиконовый коврик - Зелёный"
     },
     "tag": "Место для кормления",
@@ -476,7 +476,7 @@ export const accessoryProducts = [
     "availabilityStatus": "pending",
     "weight": "1 шт",
     "image": {
-      "src": "assets/accessories/18411059.jpg",
+      "src": "https://img.catmandog.es/assets/accessories/18411059.jpg",
       "alt": "Dashi Pixie с кошачьей мятой - 1 шт"
     },
     "tag": "С кошачьей мятой",
@@ -523,7 +523,7 @@ export const accessoryProducts = [
     "availabilityStatus": "pending",
     "weight": "355 мл",
     "image": {
-      "src": "assets/accessories/tarblawhime.jpg",
+      "src": "https://img.catmandog.es/assets/accessories/tarblawhime.jpg",
       "alt": "TarHong Black & White Meow - 355 мл"
     },
     "tag": "Для еды и воды",
@@ -569,7 +569,7 @@ export const accessoryProducts = [
     "availabilityStatus": "pending",
     "weight": "200 мл",
     "image": {
-      "src": "assets/accessories/tarbohopla200.jpg",
+      "src": "https://img.catmandog.es/assets/accessories/tarbohopla200.jpg",
       "alt": "TarHong Boho - миска-тарелка - 200 мл"
     },
     "tag": "Низкая миска",
@@ -616,7 +616,7 @@ export const accessoryProducts = [
     "availabilityStatus": "pending",
     "weight": "355 мл",
     "image": {
-      "src": "assets/accessories/tarflocatbo.jpg",
+      "src": "https://img.catmandog.es/assets/accessories/tarflocatbo.jpg",
       "alt": "TarHong Flower & Cat - 355 мл"
     },
     "tag": "Для кормления",
