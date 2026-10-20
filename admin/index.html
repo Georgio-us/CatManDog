@@ -1,14 +1,15 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><title>Управление · CatManDog</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"><link rel="stylesheet" href="/admin/admin.css?v=ui-audit-1"></head><body>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"><link rel="stylesheet" href="/admin/admin.css?v=operations-1"></head><body>
 <main class="admin-shell"><header><a href="/">CatManDog</a><span>Управление магазином</span></header>
-<section class="admin-login" id="admin-login"><h1>Вход для команды</h1><p>Для работы с обращениями войдите в кабинет через support@catmandog.es, затем откройте эту страницу снова</p>
-<a href="/#/account" class="admin-account-link">Войти в кабинет</a><p>Для управления заказами и каталогом нужен отдельный ключ</p>
-<form id="token-form"><label>Ключ доступа<input type="password" id="admin-token" autocomplete="off" required></label>
-<button type="submit">Открыть панель</button></form><p id="login-error" role="alert"></p></section>
-<section id="admin-panel" hidden><div class="admin-head"><div><h1 id="admin-panel-title">Заказы и каталог</h1><p id="admin-panel-lead">Адрес и время требуют ручного подтверждения до отправки</p></div>
+<section class="admin-login" id="admin-login"><h1>Панель CatManDog</h1><p>Вход доступен только назначенным сотрудникам</p>
+<div id="google-login"></div><p id="login-error" role="alert"></p>
+<div id="bootstrap-box" hidden><p>Первый вход владельца: введите действующий ключ управления и выберите свой Google-аккаунт</p>
+<label>Ключ первичной настройки<input type="password" id="admin-token" autocomplete="off"></label></div>
+<p class="admin-muted">Для ответов покупателям можно также <a href="/#/account">войти в кабинет поддержки</a></p></section>
+<section id="admin-panel" hidden><div class="admin-head"><div><h1 id="admin-panel-title">Управление магазином</h1><p id="admin-panel-lead">Ревизия каталога, поставщики и заказы</p></div>
 <button type="button" id="admin-lock">Закрыть панель</button></div>
-<nav><button type="button" data-tab="orders" aria-pressed="true" data-full-admin>Заказы</button><button type="button" data-tab="variants" aria-pressed="false" data-full-admin>Цены и остатки</button><button type="button" data-tab="requests" aria-pressed="false">Обращения</button></nav>
+<nav aria-label="Разделы управления"><button type="button" data-tab="overview" aria-pressed="true" data-full-admin>Сегодня</button><button type="button" data-tab="audit" aria-pressed="false" data-full-admin>Ревизия SKU</button><button type="button" data-tab="suppliers" aria-pressed="false" data-full-admin>Поставщики</button><button type="button" data-tab="orders" aria-pressed="false" data-full-admin>Заказы</button><button type="button" data-tab="variants" aria-pressed="false" data-full-admin>Цены и остатки</button><button type="button" data-tab="requests" aria-pressed="false">Обращения</button></nav>
 <p id="admin-message" role="status"></p><div id="admin-content"></div></section></main>
-<script type="module" src="/admin/admin.js?v=service-live-2"></script></body></html>
+<script type="module" src="/admin/admin.js?v=operations-1"></script></body></html>

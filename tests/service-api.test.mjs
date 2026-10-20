@@ -47,13 +47,12 @@ test('support API stores the request and emails the team and buyer', async () =>
 });
 
 test('admin reply sends a branded email and records it against the request', async () => {
-  const keys = ['ADMIN_TOKEN', 'RESEND_API_KEY', 'RESEND_FROM', 'PUBLIC_BASE_URL'];
+  const keys = ['RESEND_API_KEY', 'RESEND_FROM', 'PUBLIC_BASE_URL'];
   const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]));
   const originalFetch = globalThis.fetch;
   const queries = [];
   const sent = [];
   try {
-    process.env.ADMIN_TOKEN = 'a'.repeat(40);
     process.env.RESEND_API_KEY = 'test-key';
     process.env.RESEND_FROM = 'CatManDog <no-reply@notify.catmandog.es>';
     process.env.PUBLIC_BASE_URL = 'https://catmandog.es/';
@@ -63,11 +62,13 @@ test('admin reply sends a branded email and records it against the request', asy
     };
     const db = { async query(sql, params) {
       queries.push({ sql, params });
+      if (sql.includes('FROM staff_sessions'))
+        return { rows: [{ id: 'staff-id', email: 'owner@example.test', role: 'owner' }] };
       if (sql.startsWith('SELECT id,email FROM service_requests'))
         return { rows: [{ id: 'request-id', email: 'buyer@example.test' }] };
       return { rowCount: 1 };
     } };
-    const req = { method: 'POST', headers: { authorization: `Bearer ${process.env.ADMIN_TOKEN}` },
+    const req = { method: 'POST', headers: { cookie: `cmd_staff_session=${'a'.repeat(64)}` },
       socket: { remoteAddress: 'test-admin-reply' },
       async *[Symbol.asyncIterator]() { yield JSON.stringify({ message: 'Ваш заказ уже в пути' }); } };
     let status, result;
@@ -89,7 +90,9 @@ test('admin reply sends a branded email and records it against the request', asy
 
 test('verified support session can see requests but cannot edit prices or orders', async () => {
   const db = { async query(sql) {
-    if (sql.includes('FROM customer_sessions')) return { rows: [{ id: 'staff', email: 'support@catmandog.es' }] };
+    if (sql.includes('FROM staff_sessions')) return { rows: [] };
+    if (sql.includes('FROM customer_sessions')) return { rows: [{ id: 'staff',
+      email: 'support@catmandog.es', googleLinked: true, emailVerified: true }] };
     if (sql.includes('FROM service_requests r')) return { rows: [] };
     throw new Error(`Unexpected SQL: ${sql}`);
   } };

@@ -32,7 +32,7 @@ export async function currentCustomer(db, req) {
   const token = cookieToken(req);
   if (!token || !/^[a-f0-9]{64}$/.test(token)) return null;
   const { rows } = await db.query(`SELECT c.id,c.email,c.name,c.phone,
-    c.google_sub IS NOT NULL AS "googleLinked" FROM customer_sessions s
+    c.google_sub IS NOT NULL AS "googleLinked",c.email_verified_at IS NOT NULL AS "emailVerified" FROM customer_sessions s
     JOIN customers c ON c.id=s.customer_id WHERE s.token_hash=$1 AND s.expires_at>now()`, [tokenDigest(token)]);
   return rows[0] || null;
 }

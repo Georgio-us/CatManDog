@@ -27,6 +27,71 @@ CREATE TABLE IF NOT EXISTS catalog_variants (
 );
 CREATE INDEX IF NOT EXISTS catalog_variants_product_id_idx ON catalog_variants(product_id);
 ALTER TABLE catalog_variants ADD COLUMN IF NOT EXISTS source_orderable boolean NOT NULL DEFAULT true;
+ALTER TABLE catalog_variants ADD COLUMN IF NOT EXISTS display_priority integer NOT NULL DEFAULT 0
+  CHECK (display_priority BETWEEN 0 AND 999);
+ALTER TABLE catalog_variants ADD COLUMN IF NOT EXISTS review_note text NOT NULL DEFAULT '';
+ALTER TABLE catalog_variants ADD COLUMN IF NOT EXISTS reviewed_at timestamptz;
+
+CREATE TABLE IF NOT EXISTS suppliers (
+  id uuid PRIMARY KEY,
+  name text NOT NULL UNIQUE,
+  contact_name text NOT NULL DEFAULT '',
+  email text NOT NULL DEFAULT '',
+  website text NOT NULL DEFAULT '',
+  terms text NOT NULL DEFAULT '',
+  lead_days integer CHECK (lead_days BETWEEN 0 AND 365),
+  active boolean NOT NULL DEFAULT true,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS supplier_offers (
+  id uuid PRIMARY KEY,
+  supplier_id uuid NOT NULL REFERENCES suppliers(id) ON DELETE RESTRICT,
+  variant_id text NOT NULL REFERENCES catalog_variants(id) ON DELETE CASCADE,
+  cost_cents integer CHECK (cost_cents >= 0),
+  vat_included boolean NOT NULL DEFAULT true,
+  minimum_quantity integer NOT NULL DEFAULT 1 CHECK (minimum_quantity BETWEEN 1 AND 99999),
+  source_url text NOT NULL DEFAULT '',
+  note text NOT NULL DEFAULT '',
+  preferred boolean NOT NULL DEFAULT false,
+  checked_at timestamptz,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now(),
+  UNIQUE(supplier_id, variant_id)
+);
+CREATE UNIQUE INDEX IF NOT EXISTS supplier_offers_one_preferred_idx
+  ON supplier_offers(variant_id) WHERE preferred=true;
+CREATE INDEX IF NOT EXISTS supplier_offers_variant_idx ON supplier_offers(variant_id);
+
+CREATE TABLE IF NOT EXISTS staff_accounts (
+  id uuid PRIMARY KEY,
+  google_sub text NOT NULL UNIQUE,
+  email text NOT NULL,
+  name text NOT NULL DEFAULT '',
+  role text NOT NULL CHECK (role IN ('owner','support')),
+  active boolean NOT NULL DEFAULT true,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  last_login_at timestamptz
+);
+CREATE TABLE IF NOT EXISTS staff_sessions (
+  id uuid PRIMARY KEY,
+  staff_id uuid NOT NULL REFERENCES staff_accounts(id) ON DELETE CASCADE,
+  token_hash text NOT NULL UNIQUE,
+  expires_at timestamptz NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS staff_sessions_staff_idx ON staff_sessions(staff_id);
+
+CREATE TABLE IF NOT EXISTS admin_audit_events (
+  id uuid PRIMARY KEY,
+  staff_id uuid REFERENCES staff_accounts(id) ON DELETE SET NULL,
+  action text NOT NULL,
+  target_id text NOT NULL,
+  details jsonb NOT NULL DEFAULT '{}'::jsonb,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS admin_audit_events_created_idx ON admin_audit_events(created_at DESC);
 
 CREATE TABLE IF NOT EXISTS customers (
   id uuid PRIMARY KEY,

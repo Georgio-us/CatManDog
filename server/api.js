@@ -7,6 +7,8 @@ import { normalizedEmail, validEmail, hashPassword, verifyPassword, currentCusto
 import { loadCabinet, saveCabinet } from './cabinet.js';
 import { emailReady, sendAccountLink, notifyServiceRequest, sendServiceReply } from './email.js';
 import { googleClientId, verifyGoogleCredential, googleOwnsEmail } from './google-auth.js';
+import { currentStaff, createStaffSession, staffCookie, clearStaffCookie,
+  revokeStaffSession, bootstrapOwner } from './staff.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
@@ -272,13 +274,190 @@ async function authRoute(db, req, res, path) {
 }
 
 async function adminRoute(db, req, res, path) {
-  const fullAdmin = isAdmin(req);
-  const staff = fullAdmin ? null : await currentCustomer(db, req);
-  const supportStaff = staff?.email === (process.env.SUPPORT_STAFF_EMAIL || 'support@catmandog.es');
+  if (path === '/api/admin/setup-status' && req.method === 'GET') {
+    const { rows } = await db.query("SELECT 1 FROM staff_accounts WHERE role='owner' LIMIT 1");
+    return json(res, 200, { needsBootstrap: rows.length === 0, googleClientId: googleClientId() });
+  }
+  if (path === '/api/admin/bootstrap' && req.method === 'POST') {
+    rateLimit(req, 'staff-bootstrap', 5, 30);
+    if (!isAdmin(req)) bad('Доступ закрыт', 403);
+    const body = await readJson(req);
+    let identity;
+    try { identity = await verifyGoogleCredential(body.credential); }
+    catch { bad('Не удалось подтвердить Google', 401); }
+    const owner = await bootstrapOwner(db, identity);
+    const token = await createStaffSession(db, owner.id);
+    return json(res, 200, { role: owner.role, name: owner.name, email: owner.email },
+      { 'Set-Cookie': staffCookie(token, secure(req)) });
+  }
+  if (path === '/api/admin/login' && req.method === 'POST') {
+    rateLimit(req, 'staff-login', 12, 15);
+    const body = await readJson(req);
+    let identity;
+    try { identity = await verifyGoogleCredential(body.credential); }
+    catch { bad('Не удалось подтвердить Google', 401); }
+    const { rows } = await db.query(`SELECT id,email,name,role FROM staff_accounts
+      WHERE google_sub=$1 AND active=true`, [identity.sub]);
+    const account = rows[0];
+    if (!account) bad('Доступ закрыт', 403);
+    if (account.email !== identity.email) bad('Email Google изменился. Обратитесь к владельцу', 403);
+    await db.query('UPDATE staff_accounts SET last_login_at=now() WHERE id=$1', [account.id]);
+    const token = await createStaffSession(db, account.id);
+    return json(res, 200, { role: account.role, name: account.name, email: account.email },
+      { 'Set-Cookie': staffCookie(token, secure(req)) });
+  }
+  if (path === '/api/admin/logout' && req.method === 'POST') {
+    await revokeStaffSession(db, req);
+    return json(res, 200, { ok: true }, { 'Set-Cookie': clearStaffCookie(secure(req)) });
+  }
+  const operator = await currentStaff(db, req);
+  const customer = operator ? null : await currentCustomer(db, req);
+  const supportStaff = operator?.role === 'support' ||
+    (customer?.email === (process.env.SUPPORT_STAFF_EMAIL || 'support@catmandog.es') &&
+      customer.googleLinked && customer.emailVerified);
+  const fullAdmin = operator?.role === 'owner';
   if (!fullAdmin && !supportStaff) bad('Доступ закрыт', 403);
   if (path === '/api/admin/access' && req.method === 'GET')
-    return json(res, 200, { role: fullAdmin ? 'admin' : 'support' });
+    return json(res, 200, { role: fullAdmin ? 'admin' : 'support',
+      name: operator?.name || customer?.name || '', email: operator?.email || customer?.email });
   if (!fullAdmin && !path.startsWith('/api/admin/service-requests')) bad('Доступ закрыт', 403);
+  if (path === '/api/admin/overview' && req.method === 'GET') {
+    const [catalog, orders, requests, top] = await Promise.all([
+      db.query(`SELECT count(*)::integer AS total,
+        count(*) FILTER (WHERE v.price_confirmed=false)::integer AS unconfirmed_prices,
+        count(*) FILTER (WHERE v.purchase_price_cents IS NULL AND so.cost_cents IS NULL)::integer AS missing_costs,
+        count(*) FILTER (WHERE so.id IS NULL)::integer AS missing_suppliers,
+        count(*) FILTER (WHERE v.availability='on_hand' AND coalesce(v.stock_quantity,0)<3)::integer AS low_stock
+        FROM catalog_variants v LEFT JOIN supplier_offers so ON so.variant_id=v.id AND so.preferred=true`),
+      db.query(`SELECT count(*) FILTER (WHERE status IN ('received','packing','delivering'))::integer AS open_orders,
+        count(*) FILTER (WHERE payment_status='paid' AND status!='cancelled' AND
+          created_at>=now()-interval '30 days')::integer AS paid_orders_30d,
+        coalesce(sum(total_cents) FILTER (WHERE payment_status='paid' AND
+          status!='cancelled' AND created_at>=now()-interval '30 days'),0)::integer AS paid_total_30d
+        FROM orders`),
+      db.query("SELECT count(*)::integer AS new_requests FROM service_requests WHERE status='new'"),
+      db.query(`SELECT i.variant_id,i.name,sum(i.quantity)::integer AS quantity
+        FROM order_items i JOIN orders o ON o.id=i.order_id
+        WHERE o.payment_status='paid' AND o.status!='cancelled'
+        GROUP BY i.variant_id,i.name ORDER BY quantity DESC LIMIT 5`)
+    ]);
+    return json(res, 200, { catalog: catalog.rows[0], orders: orders.rows[0],
+      requests: requests.rows[0], topPaidSkus: top.rows });
+  }
+  if (path === '/api/admin/sku-audit' && req.method === 'GET') {
+    const { rows } = await db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.category,p.pet,
+      v.label,v.source_price_cents,v.price_override_cents,v.purchase_price_cents,
+      v.price_confirmed,v.source_orderable,v.availability,v.stock_quantity,
+      v.display_priority,v.review_note,v.reviewed_at,
+      so.cost_cents AS supplier_cost_cents,so.vat_included AS supplier_vat_included,
+      so.checked_at AS supplier_checked_at,s.name AS supplier_name
+      FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
+      LEFT JOIN supplier_offers so ON so.variant_id=v.id AND so.preferred=true
+      LEFT JOIN suppliers s ON s.id=so.supplier_id
+      ORDER BY p.name,v.label LIMIT 2000`);
+    return json(res, 200, { variants: rows });
+  }
+  const review = path.match(/^\/api\/admin\/variants\/([^/]+)\/review$/);
+  if (review && req.method === 'PATCH') {
+    const body = await readJson(req);
+    const priority = Number(body.priority);
+    const note = cap(body.note, 500);
+    if (!Number.isInteger(priority) || priority < 0 || priority > 999) bad('Приоритет должен быть от 0 до 999');
+    const variantId = decodeURIComponent(review[1]);
+    const { rowCount } = await db.query(`UPDATE catalog_variants
+      SET display_priority=$1,review_note=$2,reviewed_at=now(),updated_at=now() WHERE id=$3`,
+    [priority, note, variantId]);
+    if (!rowCount) bad('Вариант не найден', 404);
+    await db.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+      VALUES($1,$2,'variant_review',$3,$4)`,
+    [randomUUID(), operator.id, variantId, { priority, note }]);
+    return json(res, 200, { ok: true });
+  }
+  if (path === '/api/admin/suppliers' && req.method === 'GET') {
+    const { rows } = await db.query(`SELECT s.*,count(o.id)::integer AS offer_count
+      FROM suppliers s LEFT JOIN supplier_offers o ON o.supplier_id=s.id
+      GROUP BY s.id ORDER BY s.name`);
+    return json(res, 200, { suppliers: rows });
+  }
+  if (path === '/api/admin/suppliers' && req.method === 'POST') {
+    const body = await readJson(req);
+    const name = cap(body.name, 120);
+    if (name.length < 2) bad('Укажите название поставщика');
+    const email = cap(body.email, 160);
+    if (email && !validEmail(normalizedEmail(email))) bad('Некорректный email');
+    const leadDays = body.leadDays === null || body.leadDays === '' ? null : Number(body.leadDays);
+    if (leadDays !== null && (!Number.isInteger(leadDays) || leadDays < 0 || leadDays > 365))
+      bad('Некорректный срок поставки');
+    const id = randomUUID();
+    try {
+      await db.query(`INSERT INTO suppliers(id,name,contact_name,email,website,terms,lead_days)
+        VALUES($1,$2,$3,$4,$5,$6,$7)`, [id, name, cap(body.contactName, 120),
+        normalizedEmail(email), cap(body.website, 300), cap(body.terms, 1000), leadDays]);
+    } catch (error) { if (error.code === '23505') bad('Поставщик уже существует', 409); throw error; }
+    await db.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+      VALUES($1,$2,'supplier_created',$3,$4)`, [randomUUID(), operator.id, id, { name }]);
+    return json(res, 201, { id });
+  }
+  const supplier = path.match(/^\/api\/admin\/suppliers\/([a-f0-9-]+)$/);
+  if (supplier && req.method === 'PATCH') {
+    const body = await readJson(req);
+    const name = cap(body.name, 120);
+    const email = normalizedEmail(body.email);
+    const leadDays = body.leadDays === null || body.leadDays === '' ? null : Number(body.leadDays);
+    if (name.length < 2 || (email && !validEmail(email)) ||
+      (leadDays !== null && (!Number.isInteger(leadDays) || leadDays < 0 || leadDays > 365)))
+      bad('Проверьте данные поставщика');
+    const { rowCount } = await db.query(`UPDATE suppliers SET name=$1,contact_name=$2,email=$3,
+      website=$4,terms=$5,lead_days=$6,active=$7,updated_at=now() WHERE id=$8`,
+    [name, cap(body.contactName, 120), email, cap(body.website, 300), cap(body.terms, 1000),
+      leadDays, body.active === true, supplier[1]]);
+    if (!rowCount) bad('Поставщик не найден', 404);
+    await db.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+      VALUES($1,$2,'supplier_updated',$3,$4)`, [randomUUID(), operator.id, supplier[1], { name }]);
+    return json(res, 200, { ok: true });
+  }
+  if (path === '/api/admin/supplier-offers' && req.method === 'GET') {
+    const variantId = cap(new URL(req.url, 'http://localhost').searchParams.get('variantId'), 180);
+    if (!variantId) bad('Укажите вариант');
+    const { rows } = await db.query(`SELECT o.*,s.name AS supplier_name FROM supplier_offers o
+      JOIN suppliers s ON s.id=o.supplier_id WHERE o.variant_id=$1 ORDER BY o.preferred DESC,s.name`, [variantId]);
+    return json(res, 200, { offers: rows });
+  }
+  if (path === '/api/admin/supplier-offers' && req.method === 'PUT') {
+    const body = await readJson(req);
+    const variantId = cap(body.variantId, 180);
+    const supplierId = cap(body.supplierId, 36);
+    const cost = body.costCents === null || body.costCents === '' ? null : Number(body.costCents);
+    const minimum = Number(body.minimumQuantity ?? 1);
+    if (!variantId || !/^[a-f0-9-]{36}$/.test(supplierId) ||
+      (cost !== null && (!Number.isInteger(cost) || cost < 0 || cost > 100000000)) ||
+      !Number.isInteger(minimum) || minimum < 1 || minimum > 99999) bad('Проверьте предложение');
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const variantRow = await client.query('SELECT id FROM catalog_variants WHERE id=$1 FOR UPDATE', [variantId]);
+      if (!variantRow.rows.length) bad('Вариант не найден', 404);
+      const supplierRow = await client.query('SELECT id FROM suppliers WHERE id=$1 AND active=true', [supplierId]);
+      if (!supplierRow.rows.length) bad('Поставщик не найден', 404);
+      if (body.preferred === true) await client.query('UPDATE supplier_offers SET preferred=false WHERE variant_id=$1', [variantId]);
+      await client.query(`INSERT INTO supplier_offers(id,supplier_id,variant_id,cost_cents,vat_included,
+        minimum_quantity,source_url,note,preferred,checked_at)
+        VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
+        ON CONFLICT(supplier_id,variant_id) DO UPDATE SET cost_cents=EXCLUDED.cost_cents,
+          vat_included=EXCLUDED.vat_included,minimum_quantity=EXCLUDED.minimum_quantity,
+          source_url=EXCLUDED.source_url,note=EXCLUDED.note,preferred=EXCLUDED.preferred,
+          checked_at=EXCLUDED.checked_at,updated_at=now()`,
+      [randomUUID(), supplierId, variantId, cost, body.vatIncluded !== false, minimum,
+        cap(body.sourceUrl, 300), cap(body.note, 500), body.preferred === true,
+        cost === null ? null : new Date()]);
+      await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+        VALUES($1,$2,'supplier_offer_saved',$3,$4)`, [randomUUID(), operator.id, variantId,
+        { supplierId, costCents: cost, preferred: body.preferred === true }]);
+      await client.query('COMMIT');
+      return json(res, 200, { ok: true });
+    } catch (error) { await client.query('ROLLBACK'); throw error; }
+    finally { client.release(); }
+  }
   if (path === '/api/admin/orders' && req.method === 'GET') {
     const { rows } = await db.query(`SELECT o.id,o.number,o.customer_name,o.email,o.phone,o.delivery_address,
       o.delivery_preference,o.status,o.payment_status,o.total_cents,o.created_at,
@@ -313,12 +492,25 @@ async function adminRoute(db, req, res, path) {
     if (purchase !== null && (!Number.isInteger(purchase) || purchase < 0)) bad('Некорректная закупочная цена');
     const stock = body.stockQuantity === null ? null : Number(body.stockQuantity);
     if (stock !== null && (!Number.isInteger(stock) || stock < 0)) bad('Некорректный остаток');
-    const { rowCount } = await db.query(`UPDATE catalog_variants SET price_override_cents=$1,
-      purchase_price_cents=$2,price_confirmed=$3,availability=$4,stock_quantity=$5,updated_at=now()
-      WHERE id=$6`, [price, purchase, body.priceConfirmed === true, body.availability, stock,
-        decodeURIComponent(variant[1])]);
-    if (!rowCount) bad('Вариант не найден', 404);
-    return json(res, 200, { ok: true });
+    const variantId = decodeURIComponent(variant[1]);
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const previous = await client.query(`SELECT price_override_cents,purchase_price_cents,
+        price_confirmed,availability,stock_quantity FROM catalog_variants WHERE id=$1 FOR UPDATE`, [variantId]);
+      if (!previous.rows.length) bad('Вариант не найден', 404);
+      await client.query(`UPDATE catalog_variants SET price_override_cents=$1,
+        purchase_price_cents=$2,price_confirmed=$3,availability=$4,stock_quantity=$5,updated_at=now()
+        WHERE id=$6`, [price, purchase, body.priceConfirmed === true, body.availability, stock, variantId]);
+      await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+        VALUES($1,$2,'variant_terms_updated',$3,$4)`, [randomUUID(), operator.id, variantId,
+        { before: previous.rows[0], after: { price_override_cents: price,
+          purchase_price_cents: purchase, price_confirmed: body.priceConfirmed === true,
+          availability: body.availability, stock_quantity: stock } }]);
+      await client.query('COMMIT');
+      return json(res, 200, { ok: true });
+    } catch (error) { await client.query('ROLLBACK'); throw error; }
+    finally { client.release(); }
   }
   const status = path.match(/^\/api\/admin\/orders\/([^/]+)\/status$/);
   if (status && req.method === 'PATCH') {
