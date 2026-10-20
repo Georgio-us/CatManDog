@@ -80,6 +80,23 @@
 .service-page .checkout-form { border-bottom: 1px solid var(--line); }
 .service-page .checkout-summary p { color: var(--muted); font-size: 14px; }
 .service-page .checkout-summary a { display: inline-block; margin-top: 18px; }
+.service-select { display: block; position: relative; }
+.service-select select { appearance: none; -webkit-appearance: none; padding-right: 48px; cursor: pointer; }
+.service-select svg { position: absolute; width: 20px; height: 20px; right: 16px; top: 50%; transform: translateY(-50%); pointer-events: none; stroke-width: 1.8; }
+.service-upload { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; border-top: 1px solid var(--line); padding-top: 24px; }
+.service-upload-copy { display: grid; gap: 3px; }
+.service-upload-copy strong { font-size: 13px; font-weight: 650; }
+.service-upload-copy > span { font-size: 12px; color: var(--muted); font-weight: 400; }
+.service-upload-control { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; min-width: 0; cursor: pointer; }
+.service-upload-control input[type="file"] { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+.service-upload-button { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 9px 16px; border: 1px solid var(--line); border-radius: 99px; background: #fff; font-size: 12px; font-weight: 650; white-space: nowrap; }
+.service-upload-button svg { width: 17px; height: 17px; }
+.service-upload-control:hover .service-upload-button { border-color: var(--ink); }
+.service-upload-control:focus-within .service-upload-button { outline: 2px solid var(--ink); outline-offset: 3px; }
+.service-upload-name { min-width: 0; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 12px; font-weight: 400; }
+.service-form-footer { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin-top: 27px; }
+.service-form-footer p { max-width: 430px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+.service-form-footer .button { flex: none; }
 .service-draft dl { margin: 18px 0 0; }
 .service-draft dl > div { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 16px; border-top: 1px solid #d8e5bb; padding: 10px 0; }
 .service-draft dt { color: #687051; }
@@ -103,6 +120,9 @@
   .checkout-promo { grid-template-columns: 1fr; }
   .checkout-preview dl > div { grid-template-columns: 1fr; gap: 2px; }
   .service-draft dl > div { grid-template-columns: 1fr; gap: 2px; }
+  .service-upload { align-items: flex-start; }
+  .service-form-footer { align-items: flex-start; flex-direction: column-reverse; }
+  .service-form-footer .button { width: 100%; }
   .order-progress { gap: 6px; }
   .order-progress li { font-size: 10px; }
 }
