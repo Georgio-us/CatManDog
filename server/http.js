@@ -50,6 +50,6 @@ export async function serveStatic(req, res, pathname) {
   if (!info.isFile()) return json(res, 404, { error: 'Не найдено' });
   res.writeHead(200, { 'Content-Type': types[extname(file)] || 'application/octet-stream',
     'Content-Length': info.size, 'X-Content-Type-Options': 'nosniff',
-    'Cache-Control': extname(file) === '.html' ? 'no-cache' : 'public, max-age=3600' });
+    'Cache-Control': ['.html', '.js', '.css'].includes(extname(file)) ? 'no-cache' : 'public, max-age=3600' });
   if (req.method === 'HEAD') res.end(); else createReadStream(file).pipe(res);
 }

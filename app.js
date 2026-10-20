@@ -9,7 +9,7 @@ import { loadSupplierTerms } from './supplier-terms.js';
 import { categories, products, catalogProducts, articles } from './data.js?v=r2-media-1';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=r2-media-1';
 import { checkoutTotals, FREE_DELIVERY_FROM, DELIVERY_FEE } from './checkout-model.js';
-import { createCheckoutUI } from './checkout-ui.js?v=service-form-1';
+import { createCheckoutUI } from './checkout-ui.js?v=service-live-1';
 import { orderVariantId } from './order-progress.js';
 import { applyServerPrices } from './server-prices.js';
 
