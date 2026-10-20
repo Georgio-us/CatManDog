@@ -83,7 +83,16 @@ export function createAccountUI(helpers) {
       }
     } catch (error) {
       const message = document.querySelector('[data-google-error]');
-      if (message) message.textContent = error.message;
+      if (message) {
+        message.textContent = error.message;
+        if (error.status === 409 && mode === 'signin') {
+          const link = document.createElement('a');
+          link.href = '#/account/login';
+          link.className = 'text-link';
+          link.textContent = 'Войти по паролю';
+          message.append(' ', link);
+        }
+      }
       else notify(error.message);
     } finally { googleBusy = false; }
   }
@@ -99,7 +108,7 @@ export function createAccountUI(helpers) {
         googleInitialized = true;
       }
       window.google.accounts.id.renderButton(host, { type: 'standard', theme: 'outline', size: 'large',
-        shape: 'pill', text: 'continue_with', locale: 'ru', width: Math.min(350, host.clientWidth || 300) });
+        shape: 'pill', text: 'continue_with', locale: 'ru', width: Math.min(320, host.parentElement?.clientWidth || 300) });
     } catch (error) { if (host.isConnected) host.textContent = error.message; }
   }
   async function loadRemote() {

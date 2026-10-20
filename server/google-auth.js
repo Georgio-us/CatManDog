@@ -20,5 +20,11 @@ export async function verifyGoogleCredential(credential, verify = options => ver
   if (!payload?.sub || typeof payload.sub !== 'string' || payload.sub.length > 255 ||
       !validEmail(email) || payload.email_verified !== true)
     throw new Error('Google не подтвердил email');
-  return { sub: payload.sub, email, name: String(payload.name || '').trim().slice(0, 100) };
+  return { sub: payload.sub, email, name: String(payload.name || '').trim().slice(0, 100),
+    hostedDomain: String(payload.hd || '').trim().toLowerCase() };
+}
+
+export function googleOwnsEmail(identity) {
+  return identity.email.endsWith('@gmail.com') ||
+    Boolean(identity.hostedDomain && identity.email.endsWith(`@${identity.hostedDomain}`));
 }

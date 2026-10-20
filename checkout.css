@@ -16,8 +16,12 @@
 .checkout-fields label small { font-size: 11px; color: var(--muted); font-weight: 400; }
 .checkout-fields input:not([type="checkbox"]):not([type="file"]), .checkout-fields select, .checkout-fields textarea, .checkout-schedule input, .checkout-promo input { width: 100%; min-width: 0; border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; background: #fff; color: var(--ink); font: inherit; outline-offset: 2px; }
 .checkout-fields input[readonly]:not([type="checkbox"]):not([type="file"]) { background: var(--surface); }
-.checkout-fields textarea { resize: vertical; }
+.checkout-fields textarea { resize: none; min-height: 140px; }
 .checkout-fields input[type="file"] { max-width: 100%; font: inherit; color: var(--muted); font-weight: 400; }
+.checkout-fields input[type="file"]::file-selector-button { margin-right: 12px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 99px; background: var(--surface); color: var(--ink); font: inherit; font-weight: 650; cursor: pointer; }
+.checkout-fields input[type="number"] { appearance: textfield; -moz-appearance: textfield; }
+.checkout-fields input[type="number"]::-webkit-inner-spin-button,
+.checkout-fields input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 .checkout-wide { grid-column: 1 / -1; }
 .checkout-fields > label.checkout-check { grid-column: 1 / -1; flex-direction: row; align-items: flex-start; gap: 11px; font-weight: 500; }
 .checkout-check input { width: 18px; height: 18px; accent-color: var(--ink); flex: none; margin: 1px 0 0; }

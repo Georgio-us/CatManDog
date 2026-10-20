@@ -154,7 +154,7 @@
   .use-emergency-note .text-link { margin-left: 34px; }
   .use-filter-bar > label { width: 100%; }
   .use-map-panel, .use-trip-form { position: static; }
-  .use-map-panel { grid-row: 1; }
+  .use-map-panel { grid-row: auto; }
   .use-map-panel iframe { height: 260px; }
   .use-map-footer { padding: 18px; }
   .use-clinic-top { flex-wrap: wrap; }

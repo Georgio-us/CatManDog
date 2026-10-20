@@ -6,7 +6,7 @@ import { normalizedEmail, validEmail, hashPassword, verifyPassword, currentCusto
   createSession, cookieToken, tokenDigest, sessionCookie, clearSessionCookie, isAdmin } from './auth.js';
 import { loadCabinet, saveCabinet } from './cabinet.js';
 import { emailReady, sendAccountLink, notifyServiceRequest, sendServiceReply } from './email.js';
-import { googleClientId, verifyGoogleCredential } from './google-auth.js';
+import { googleClientId, verifyGoogleCredential, googleOwnsEmail } from './google-auth.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
@@ -191,9 +191,19 @@ async function authRoute(db, req, res, path) {
     if (account && account.email !== identity.email)
       bad('Email аккаунта Google изменился. Обратитесь в поддержку', 409);
     if (!account) {
-      const existing = (await db.query('SELECT id FROM customers WHERE email=$1', [identity.email])).rows[0];
-      if (existing) bad('Этот email уже зарегистрирован. Войдите по паролю и подключите Google в кабинете', 409);
-      try {
+      const existing = (await db.query('SELECT id,email,name,google_sub,email_verified_at FROM customers WHERE email=$1', [identity.email])).rows[0];
+      if (existing) {
+        if (!existing.email_verified_at || !googleOwnsEmail(identity) || existing.google_sub)
+          bad('Этот email уже зарегистрирован. Войдите по паролю и подключите Google в кабинете', 409);
+        try {
+          account = (await db.query(`UPDATE customers SET google_sub=$1 WHERE id=$2 AND google_sub IS NULL
+            AND email_verified_at IS NOT NULL RETURNING id,email,name`, [identity.sub, existing.id])).rows[0];
+        } catch (error) {
+          if (error.code === '23505') bad('Этот аккаунт Google уже подключён к другому кабинету', 409);
+          throw error;
+        }
+        if (!account) bad('Не удалось подключить Google. Повторите вход', 409);
+      } else try {
         account = (await db.query(`INSERT INTO customers(id,email,password_hash,google_sub,name,email_verified_at)
           VALUES($1,$2,NULL,$3,$4,now()) RETURNING id,email,name`,
         [randomUUID(), identity.email, identity.sub, identity.name])).rows[0];

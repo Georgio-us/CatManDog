@@ -3632,3 +3632,33 @@ details .text-link {
     grid-template-columns: 1fr;
   }
 }
+
+/* Keep native select behaviour while using the same SVG chevron as the interface */
+.catalog-toolbar select,
+.food-brand select,
+.gift-selects select,
+.gift-size select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 38px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2320221e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-size: 17px 17px;
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+@media (max-width: 360px) {
+  .catalog-layout .product-grid { grid-template-columns: 1fr; }
+  .catalog-layout .product-card { max-width: 360px; }
+}
+
+@media (max-width: 760px) {
+  .filters {
+    padding-right: 28px;
+    scroll-snap-type: x proximity;
+    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 28px), transparent 100%);
+    mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 28px), transparent 100%);
+  }
+  .filter-category { scroll-snap-align: start; }
+}
