@@ -92,11 +92,10 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     const topicField = returning ? '' : `<label class="checkout-wide">Тема<span class="service-select"><select name="topic">${['Вопрос о заказе', 'Доставка', 'Товар', 'Другое'].map(value => `<option ${draftValues.topic === value ? 'selected' : ''}>${value}</option>`).join('')}</select>${selectArrow}</span></label>`;
     const sent = saved && servicePreview.sent === true;
     const demoNumber = saved && /^DEMO-/.test(servicePreview.values.orderNumber || '');
-    const draft = saved ? `<div class="checkout-preview-notice service-draft" id="service-preview" role="status">${icon(sent ? 'check' : 'shield')} <div><strong>${sent ? 'Обращение отправлено' : 'Проверьте обращение'}</strong><p>${sent ? 'Мы сохранили обращение и ответим на указанный email' : supportEnabled ? demoNumber ? 'Демозаказ служит примером. Для настоящего обращения откройте форму без демонстрационного номера.' : 'Проверьте данные и отправьте обращение. Фото пока не загружается.' : 'Это черновик. Сообщение и фото не отправлены.'}</p>${supportEnabled && demoNumber ? `<a class="text-link" href="#/${returning ? 'returns' : 'support'}">Открыть новую форму</a>` : ''}<dl><div><dt>Заказ</dt><dd>${e(servicePreview.values.orderNumber || 'Не указан')}</dd></div><div><dt>Email</dt><dd>${e(servicePreview.values.email)}</dd></div><div><dt>Товар</dt><dd>${e(servicePreview.values.product || 'Весь заказ')}</dd></div>${returning ? `<div><dt>Количество</dt><dd>${e(servicePreview.values.quantity)}</dd></div>` : ''}${!returning ? `<div><dt>Тема</dt><dd>${e(servicePreview.values.topic)}</dd></div>` : ''}<div><dt>Сообщение</dt><dd>${e(servicePreview.values.message)}</dd></div>${servicePreview.photoName ? `<div><dt>Выбранное фото</dt><dd>${e(servicePreview.photoName)} - не загружено</dd></div>` : ''}</dl>${serviceError ? `<p class="checkout-error" role="alert">${e(serviceError)}</p>` : ''}${supportEnabled && !sent && !demoNumber ? `<button type="button" class="button" data-service-send>Отправить обращение ${icon('arrow')}</button>` : ''}</div></div>` : '';
-    const photoField = `<div class="checkout-wide service-upload"><div class="service-upload-copy"><strong>Фото (необязательно)</strong><span>Если поможет объяснить ситуацию</span></div><label class="service-upload-control"><input type="file" name="photo" accept="image/*"><span class="service-upload-button">${icon('plus')} Добавить фото</span><span class="service-upload-name" data-service-file-name aria-live="polite">Фото не выбрано</span></label></div>`;
+    const draft = saved ? `<div class="checkout-preview-notice service-draft" id="service-preview" role="status">${icon(sent ? 'check' : 'shield')} <div><strong>${sent ? 'Обращение отправлено' : 'Проверьте обращение'}</strong><p>${sent ? 'Мы сохранили обращение и ответим на указанный email' : supportEnabled ? demoNumber ? 'Демозаказ служит примером. Для настоящего обращения откройте форму без демонстрационного номера.' : 'Проверьте данные и отправьте обращение.' : 'Это черновик. Сообщение не отправлено.'}</p>${supportEnabled && demoNumber ? `<a class="text-link" href="#/${returning ? 'returns' : 'support'}">Открыть новую форму</a>` : ''}<dl><div><dt>Заказ</dt><dd>${e(servicePreview.values.orderNumber || 'Не указан')}</dd></div><div><dt>Email</dt><dd>${e(servicePreview.values.email)}</dd></div><div><dt>Товар</dt><dd>${e(servicePreview.values.product || 'Весь заказ')}</dd></div>${returning ? `<div><dt>Количество</dt><dd>${e(servicePreview.values.quantity)}</dd></div>` : ''}${!returning ? `<div><dt>Тема</dt><dd>${e(servicePreview.values.topic)}</dd></div>` : ''}<div><dt>Сообщение</dt><dd>${e(servicePreview.values.message)}</dd></div></dl>${serviceError ? `<p class="checkout-error" role="alert">${e(serviceError)}</p>` : ''}${supportEnabled && !sent && !demoNumber ? `<button type="button" class="button" data-service-send>Отправить обращение ${icon('arrow')}</button>` : ''}</div></div>` : '';
     const formNote = supportEnabled
-      ? 'Фото пока не загружается. Сначала проверьте обращение, затем отправьте его.'
-      : 'Это предварительный просмотр. Сообщение и фото не отправляются и не сохраняются.';
+      ? 'Сначала проверьте обращение, затем отправьте его.'
+      : 'Это предварительный просмотр. Сообщение не отправляется и не сохраняется.';
     return `<div class="page checkout-page service-page">
       <a class="text-link" href="${back}">${icon('arrow')} ${linkedOrder ? 'К заказу' : 'Доставка и возврат'}</a>
       <span class="checkout-eyebrow">Мы рядом</span><h1>${title}</h1>
@@ -107,7 +106,6 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
           <label>Email для ответа<input type="email" name="email" required autocomplete="email" maxlength="160" value="${e(emailPrefill)}" placeholder="name@example.com"></label>
           ${productField}${quantityField}${topicField}
           <label class="checkout-wide">${returning ? 'Причина возврата' : 'Ваш вопрос'}<textarea name="message" required minlength="10" maxlength="1200" rows="5" placeholder="Расскажите подробнее">${e(draftValues.message || '')}</textarea></label>
-          ${photoField}
         </div>
         <div class="service-form-footer"><p>${formNote}</p><button class="button" type="submit">Проверить обращение ${icon('arrow')}</button></div>
       </form><aside class="checkout-summary"><h2>Что будет дальше</h2><p>${supportEnabled ? 'После отправки обращение попадёт к команде. Для ответа используем указанный email.' : 'После подключения поддержки обращения будут привязаны к заказу. Мы покажем статус и способ связи с командой.'}</p><a class="text-link" href="${back}">${linkedOrder ? 'Вернуться к заказу' : 'Доставка и возврат'}</a></aside></div>${draft}</div>`;
@@ -154,11 +152,6 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
   }
 
   function change(target) {
-    if (target.name === 'photo' && target.closest('[data-service-form]')) {
-      const name = target.closest('.service-upload')?.querySelector('[data-service-file-name]');
-      if (name) name.textContent = target.files?.[0]?.name || 'Фото не выбрано';
-      return;
-    }
     if (target.name === 'product' && target.closest('[data-service-form="return"]')) {
       const quantity = target.form.elements.quantity;
       quantity.max = target.selectedOptions[0]?.dataset.qty || 99;
@@ -186,7 +179,6 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     }
     if (form.matches('[data-service-form]')) {
       const values = Object.fromEntries(new FormData(form).entries());
-      delete values.photo;
       const selected = form.elements.product?.selectedOptions?.[0];
       const quantity = form.dataset.serviceForm === 'return' ? Number(values.quantity) : null;
       const context = [values.topic, values.product && `Товар: ${values.product}`].filter(Boolean).join(' | ');
@@ -194,7 +186,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
       serviceError = '';
       servicePreview = { kind: form.dataset.serviceForm,
         routeOrderNumber: new URLSearchParams((globalThis.location?.hash || '').split('?')[1] || '').get('order') || '',
-        values, photoName: form.elements.photo?.files?.[0]?.name || '', sent: false,
+        values, sent: false,
         payload: { kind: form.dataset.serviceForm, orderNumber: values.orderNumber,
           email: values.email, productId: selected?.dataset.productId || null,
           variantId: selected?.dataset.variantId || null, quantity, message } };

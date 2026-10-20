@@ -5,7 +5,7 @@ import { json, readJson, sameOrigin } from './http.js';
 import { normalizedEmail, validEmail, hashPassword, verifyPassword, currentCustomer,
   createSession, cookieToken, tokenDigest, sessionCookie, clearSessionCookie, isAdmin } from './auth.js';
 import { loadCabinet, saveCabinet } from './cabinet.js';
-import { emailReady, sendAccountLink } from './email.js';
+import { emailReady, sendAccountLink, notifyServiceRequest, sendServiceReply } from './email.js';
 import { googleClientId, verifyGoogleCredential } from './google-auth.js';
 
 const counters = new Map();
@@ -275,7 +275,12 @@ async function adminRoute(db, req, res, path) {
   }
   if (path === '/api/admin/service-requests' && req.method === 'GET') {
     const { rows } = await db.query(`SELECT r.id,r.kind,r.email,r.product_id,r.variant_id,r.quantity,
-      r.message,r.status,r.created_at,o.number AS order_number FROM service_requests r
+      r.message,r.status,r.created_at,COALESCE(o.number,r.order_number_input) AS order_number,
+      (SELECT sent_at FROM service_request_replies WHERE request_id=r.id
+        ORDER BY sent_at DESC LIMIT 1) AS last_reply_at,
+      (SELECT message FROM service_request_replies WHERE request_id=r.id
+        ORDER BY sent_at DESC LIMIT 1) AS last_reply_message
+      FROM service_requests r
       LEFT JOIN orders o ON o.id=r.order_id ORDER BY r.created_at DESC LIMIT 100`);
     return json(res, 200, { requests: rows });
   }
@@ -326,6 +331,20 @@ async function adminRoute(db, req, res, path) {
     if (!rowCount) bad('Обращение не найдено', 404);
     return json(res, 200, { ok: true });
   }
+  const reply = path.match(/^\/api\/admin\/service-requests\/([^/]+)\/reply$/);
+  if (reply && req.method === 'POST') {
+    if (!emailReady()) bad('Почтовая отправка не настроена', 503);
+    const body = await readJson(req);
+    const message = cap(body.message, 4000);
+    if (message.length < 2) bad('Напишите ответ');
+    const { rows } = await db.query('SELECT id,email FROM service_requests WHERE id=$1', [reply[1]]);
+    if (!rows[0]) bad('Обращение не найдено', 404);
+    await sendServiceReply(rows[0].email, rows[0].id, message);
+    await db.query('INSERT INTO service_request_replies(id,request_id,message) VALUES($1,$2,$3)',
+      [randomUUID(), rows[0].id, message]);
+    await db.query("UPDATE service_requests SET status='in_progress' WHERE id=$1 AND status='new'", [rows[0].id]);
+    return json(res, 200, { sent: true });
+  }
   bad('Не найдено', 404);
 }
 
@@ -343,7 +362,7 @@ export async function handleApi(db, req, res, pathname) {
       { ordersEnabled: enabled('ORDERS_ENABLED'), accountsEnabled: enabled('ACCOUNTS_ENABLED'),
         emailEnabled: emailReady(), googleClientId: enabled('ACCOUNTS_ENABLED') ? googleClientId() : null,
         paymentsEnabled: enabled('PAYMENTS_ENABLED'),
-        supportEnabled: enabled('SUPPORT_ENABLED') });
+        supportEnabled: enabled('SUPPORT_ENABLED') && emailReady() });
     if (pathname === '/api/catalog' && req.method === 'GET') {
       const list = await catalogSnapshot(db);
       return json(res, 200, { variants: list.map(({ price_override_cents, source_price_cents,
@@ -409,7 +428,7 @@ export async function handleApi(db, req, res, pathname) {
       return json(res, 200, { orders: rows });
     }
     if (pathname === '/api/service-requests' && req.method === 'POST') {
-      if (!enabled('SUPPORT_ENABLED')) bad('Приём обращений ещё не включён', 503);
+      if (!enabled('SUPPORT_ENABLED') || !emailReady()) bad('Приём обращений ещё не включён', 503);
       rateLimit(req, 'support', 10, 60);
       const body = await readJson(req);
       const email = normalizedEmail(body.email);
@@ -429,10 +448,13 @@ export async function handleApi(db, req, res, pathname) {
             body.quantity > item.rows[0].quantity) bad('Укажите товар и количество из заказа');
       }
       const requestId = randomUUID();
-      await db.query(`INSERT INTO service_requests(id,order_id,kind,email,product_id,variant_id,quantity,message)
-        VALUES($1,$2,$3,$4,$5,$6,$7,$8)`, [requestId, found.rows[0]?.id || null,
+      await db.query(`INSERT INTO service_requests(id,order_id,kind,email,product_id,variant_id,quantity,message,order_number_input)
+        VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)`, [requestId, found.rows[0]?.id || null,
         body.kind, email, cap(body.productId, 180) || null, cap(body.variantId, 180) || null,
-        body.quantity && Number.isInteger(body.quantity) ? body.quantity : null, cap(body.message, 1200)]);
+        body.quantity && Number.isInteger(body.quantity) ? body.quantity : null, cap(body.message, 1200), orderNumber || null]);
+      try { await notifyServiceRequest({ id: requestId, kind: body.kind, email,
+        orderNumber, message: cap(body.message, 1200) }); }
+      catch (error) { console.error('Support notification failed:', error.message); }
       return json(res, 202, { accepted: true, id: requestId });
     }
     bad('Не найдено', 404);

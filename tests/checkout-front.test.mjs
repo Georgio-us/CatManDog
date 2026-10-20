@@ -39,5 +39,5 @@ test('checkout presents exact variant, shipping and explicit demo state', () => 
   assert.match(html, /72\.62 €/);
   assert.match(html, /Бесплатно/);
   assert.match(html, /заказ не будет создан или оплачен/);
-  assert.match(ui.servicePage('return'), /не отправляются и не сохраняются/);
+  assert.match(ui.servicePage('return'), /не отправляется и не сохраняется/);
 });

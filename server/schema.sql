@@ -144,7 +144,16 @@ CREATE TABLE IF NOT EXISTS service_requests (
   status text NOT NULL DEFAULT 'new' CHECK (status IN ('new','in_progress','resolved')),
   created_at timestamptz NOT NULL DEFAULT now()
 );
+ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS order_number_input text;
 CREATE INDEX IF NOT EXISTS service_requests_order_id_idx ON service_requests(order_id);
+
+CREATE TABLE IF NOT EXISTS service_request_replies (
+  id uuid PRIMARY KEY,
+  request_id uuid NOT NULL REFERENCES service_requests(id) ON DELETE CASCADE,
+  message text NOT NULL,
+  sent_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS service_request_replies_request_id_idx ON service_request_replies(request_id);
 
 CREATE TABLE IF NOT EXISTS promo_codes (
   code text PRIMARY KEY,

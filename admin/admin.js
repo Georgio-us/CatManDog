@@ -44,7 +44,9 @@ function requestCard(request) {
   return `<article class="admin-card"><h2>${request.kind === 'return' ? 'Возврат' : 'Поддержка'} ${request.order_number ? '· ' + escape(request.order_number) : ''}</h2>
     <p>${escape(request.email)} · ${escape(request.created_at)}</p>
     ${request.product_id ? `<p>Товар: ${escape(request.product_id)}${request.variant_id ? ' · ' + escape(request.variant_id) : ''}${request.quantity ? ' · ' + request.quantity + ' шт' : ''}</p>` : ''}
-    <p>${escape(request.message)}</p><form data-request-id="${escape(request.id)}"><label>Статус<select name="status">${['new','in_progress','resolved'].map(status =>
+    <p>${escape(request.message)}</p>${request.last_reply_at ? `<p class="admin-muted">Последний ответ: ${escape(new Date(request.last_reply_at).toLocaleString('ru-RU'))}</p><p>${escape(request.last_reply_message || '')}</p>` : ''}
+    <form data-reply-id="${escape(request.id)}" class="admin-reply-form"><label>Ответ покупателю<textarea name="message" rows="4" minlength="2" maxlength="4000" required placeholder="Напишите ответ на email покупателя"></textarea></label><button type="submit">Отправить ответ</button></form>
+    <form data-request-id="${escape(request.id)}"><label>Статус<select name="status">${['new','in_progress','resolved'].map(status =>
       `<option value="${status}" ${status === request.status ? 'selected' : ''}>${({new:'Новое',in_progress:'В работе',resolved:'Закрыто'})[status]}</option>`).join('')}</select></label><button>Сохранить статус</button></form></article>`;
 }
 async function load() {
@@ -85,9 +87,13 @@ $('admin-content').addEventListener('submit', async event => {
   if (!form) return;
   event.preventDefault();
   const values = new FormData(form);
+  const submitButton = form.querySelector('button[type="submit"], button:not([type])');
+  if (submitButton) submitButton.disabled = true;
   try {
     if (form.dataset.orderId) await api(`/api/admin/orders/${encodeURIComponent(form.dataset.orderId)}/status`, 'PATCH',
       { status: values.get('status'), note: values.get('note') });
+    else if (form.dataset.replyId) await api(`/api/admin/service-requests/${encodeURIComponent(form.dataset.replyId)}/reply`, 'POST',
+      { message: values.get('message') });
     else if (form.dataset.requestId) await api(`/api/admin/service-requests/${encodeURIComponent(form.dataset.requestId)}/status`, 'PATCH',
       { status: values.get('status') });
     else await api(`/api/admin/variants/${encodeURIComponent(form.dataset.variantId)}`, 'PATCH', {
@@ -98,6 +104,6 @@ $('admin-content').addEventListener('submit', async event => {
       priceConfirmed: values.has('priceConfirmed')
     });
     await load();
-    message('Сохранено');
-  } catch (error) { message(error.message); }
+    message(form.dataset.replyId ? 'Ответ отправлен' : 'Сохранено');
+  } catch (error) { message(error.message); if (submitButton) submitButton.disabled = false; }
 });
