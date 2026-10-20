@@ -86,3 +86,24 @@ test('admin reply sends a branded email and records it against the request', asy
     }
   }
 });
+
+test('verified support session can see requests but cannot edit prices or orders', async () => {
+  const db = { async query(sql) {
+    if (sql.includes('FROM customer_sessions')) return { rows: [{ id: 'staff', email: 'support@catmandog.es' }] };
+    if (sql.includes('FROM service_requests r')) return { rows: [] };
+    throw new Error(`Unexpected SQL: ${sql}`);
+  } };
+  const request = path => ({ method: 'GET', headers: { cookie: `cmd_session=${'a'.repeat(64)}` },
+    socket: { remoteAddress: 'test-staff-access' } });
+  const response = () => {
+    const result = { status: null, body: null };
+    return { result, res: { writeHead(code) { result.status = code; },
+      end(value) { result.body = JSON.parse(value); } } };
+  };
+  const permitted = response();
+  await handleApi(db, request(), permitted.res, '/api/admin/service-requests');
+  assert.equal(permitted.result.status, 200);
+  const denied = response();
+  await handleApi(db, request(), denied.res, '/api/admin/variants');
+  assert.equal(denied.result.status, 403);
+});

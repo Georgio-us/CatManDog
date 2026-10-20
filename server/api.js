@@ -262,7 +262,13 @@ async function authRoute(db, req, res, path) {
 }
 
 async function adminRoute(db, req, res, path) {
-  if (!isAdmin(req)) bad('Доступ закрыт', 403);
+  const fullAdmin = isAdmin(req);
+  const staff = fullAdmin ? null : await currentCustomer(db, req);
+  const supportStaff = staff?.email === (process.env.SUPPORT_STAFF_EMAIL || 'support@catmandog.es');
+  if (!fullAdmin && !supportStaff) bad('Доступ закрыт', 403);
+  if (path === '/api/admin/access' && req.method === 'GET')
+    return json(res, 200, { role: fullAdmin ? 'admin' : 'support' });
+  if (!fullAdmin && !path.startsWith('/api/admin/service-requests')) bad('Доступ закрыт', 403);
   if (path === '/api/admin/orders' && req.method === 'GET') {
     const { rows } = await db.query(`SELECT o.id,o.number,o.customer_name,o.email,o.phone,o.delivery_address,
       o.delivery_preference,o.status,o.payment_status,o.total_cents,o.created_at,

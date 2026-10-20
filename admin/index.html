@@ -3,11 +3,12 @@
 <meta name="robots" content="noindex,nofollow"><title>Управление · CatManDog</title>
 <link rel="stylesheet" href="/admin/admin.css"></head><body>
 <main class="admin-shell"><header><a href="/">CatManDog</a><span>Управление магазином</span></header>
-<section class="admin-login" id="admin-login"><h1>Вход для команды</h1><p>Введите ключ управления, сохранённый в Railway</p>
+<section class="admin-login" id="admin-login"><h1>Вход для команды</h1><p>Для работы с обращениями войдите в кабинет через support@catmandog.es, затем откройте эту страницу снова</p>
+<a href="/#/account" class="admin-account-link">Войти в кабинет</a><p>Для управления заказами и каталогом нужен отдельный ключ</p>
 <form id="token-form"><label>Ключ доступа<input type="password" id="admin-token" autocomplete="off" required></label>
 <button type="submit">Открыть панель</button></form><p id="login-error" role="alert"></p></section>
 <section id="admin-panel" hidden><div class="admin-head"><div><h1>Заказы и каталог</h1><p>Адрес и время требуют ручного подтверждения до отправки</p></div>
 <button type="button" id="admin-lock">Закрыть панель</button></div>
-<nav><button type="button" data-tab="orders" aria-pressed="true">Заказы</button><button type="button" data-tab="variants" aria-pressed="false">Цены и остатки</button><button type="button" data-tab="requests" aria-pressed="false">Обращения</button></nav>
+<nav><button type="button" data-tab="orders" aria-pressed="true" data-full-admin>Заказы</button><button type="button" data-tab="variants" aria-pressed="false" data-full-admin>Цены и остатки</button><button type="button" data-tab="requests" aria-pressed="false">Обращения</button></nav>
 <p id="admin-message" role="status"></p><div id="admin-content"></div></section></main>
 <script type="module" src="/admin/admin.js"></script></body></html>

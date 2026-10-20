@@ -1,18 +1,27 @@
 let token = '';
-let tab = 'orders';
+let tab = 'requests';
 const $ = id => document.getElementById(id);
 const escape = value => String(value ?? '').replace(/[&<>"']/g, char =>
   ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[char]);
 const euros = cents => new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'}).format(cents / 100);
 async function api(path, method = 'GET', body) {
-  const response = await fetch(path, { method, headers: {
-    Authorization: `Bearer ${token}`, ...(body ? { 'Content-Type':'application/json' } : {})
+  const response = await fetch(path, { method, credentials: 'same-origin', headers: {
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...(body ? { 'Content-Type':'application/json' } : {})
   }, ...(body ? { body: JSON.stringify(body) } : {}) });
   const result = await response.json();
   if (!response.ok) throw new Error(result.error || 'Запрос не выполнен');
   return result;
 }
 function message(value) { $('admin-message').textContent = value; }
+function openPanel(role) {
+  $('admin-login').hidden = true;
+  $('admin-panel').hidden = false;
+  document.querySelectorAll('[data-full-admin]').forEach(element => { element.hidden = role !== 'admin'; });
+  if (role !== 'admin') tab = 'requests';
+  document.querySelectorAll('[data-tab]').forEach(item => item.setAttribute('aria-pressed', String(item.dataset.tab === tab)));
+  load();
+}
 function orderCard(order) {
   const address = order.delivery_address || {};
   const delivery = order.delivery_preference || {};
@@ -66,17 +75,16 @@ $('token-form').addEventListener('submit', async event => {
   event.preventDefault();
   token = $('admin-token').value.trim();
   try {
-    await api('/api/admin/orders');
+    const access = await api('/api/admin/access');
     $('admin-token').value = '';
-    $('admin-login').hidden = true;
-    $('admin-panel').hidden = false;
-    load();
+    openPanel(access.role);
   } catch (error) { $('login-error').textContent = error.message; token = ''; }
 });
 $('admin-lock').addEventListener('click', () => {
   token = ''; $('admin-panel').hidden = true; $('admin-login').hidden = false;
   $('admin-content').innerHTML = '';
 });
+api('/api/admin/access').then(access => openPanel(access.role)).catch(() => {});
 document.querySelectorAll('[data-tab]').forEach(button => button.addEventListener('click', () => {
   tab = button.dataset.tab;
   document.querySelectorAll('[data-tab]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
