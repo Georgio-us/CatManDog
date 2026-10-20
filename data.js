@@ -1,17 +1,17 @@
 import { applyCatalogPolicy } from './catalog-policy.js';
 import { applyRetailUpdates } from './retail-updates.js?v=retail-coverage-1';
 import { applyProvisionalPrices } from './provisional-prices.js';
-import { waterBalconyProducts } from './water-balcony-products.js';
-import { foodProducts as originalFoodProducts } from './food-products.js?v=rc-editorial-1';
-import { expandRoyalCaninFood } from './royal-canin-products.js?v=rc-range-2';
-import { expandPriorityFood } from './priority-food-products.js?v=priority-food-7';
-import { accessoryProducts } from './accessory-products.js';
-import { heybopetProducts } from './heybopet-products.js?v=studio-1';
-import { treatsCareProducts } from './treats-care-products.js?v=studio-1';
-import { faireProducts } from './faire-products.js';
-import { yaguProducts, expandYaguCare } from './yagu-products.js?v=yagu-studio-2';
-import { ownatProducts } from './ownat-products.js?v=ownat-studio-1';
-import { dogProducts } from './dog-products.js?v=dog-studio-1';
+import { waterBalconyProducts } from './water-balcony-products.js?v=r2-media-1';
+import { foodProducts as originalFoodProducts } from './food-products.js?v=r2-media-1';
+import { expandRoyalCaninFood } from './royal-canin-products.js?v=r2-media-1';
+import { expandPriorityFood } from './priority-food-products.js?v=r2-media-1';
+import { accessoryProducts } from './accessory-products.js?v=r2-media-1';
+import { heybopetProducts } from './heybopet-products.js?v=r2-media-1';
+import { treatsCareProducts } from './treats-care-products.js?v=r2-media-1';
+import { faireProducts } from './faire-products.js?v=r2-media-1';
+import { yaguProducts, expandYaguCare } from './yagu-products.js?v=r2-media-1';
+import { ownatProducts } from './ownat-products.js?v=r2-media-1';
+import { dogProducts } from './dog-products.js?v=r2-media-1';
 
 const foodProducts = [...expandPriorityFood(expandRoyalCaninFood(originalFoodProducts)), ...ownatProducts];
 

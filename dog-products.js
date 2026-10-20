@@ -1,4 +1,4 @@
-import { applyDogStudio } from './dog-studio-images.js?v=dog-studio-1';
+import { applyDogStudio } from './dog-studio-images.js?v=r2-media-1';
 // First dog assortment from the saved supplier catalogues and checked Spanish retail pages
 const checkedAt = '2026-10-17';
 const ownatTariff = 'research/supplier-files/2026-10-14-ownat-royal-canin/PVPR_OWNAT_DIFERENTES_PAISES_FEBRERO_2026.pdf';
