@@ -163,6 +163,13 @@
 .pet-auth-panel .button:disabled { opacity: .48; cursor: not-allowed; }
 .pet-auth-links { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 18px; }
 .pet-auth-panel > .pet-demo-link { margin-right: 25px; }
+.pet-google-divider { display: flex; align-items: center; gap: 18px; margin: 20px 0; color: var(--muted); font-size: 12px; }
+.pet-google-divider::before, .pet-google-divider::after { content: ''; flex: 1; border-top: 1px solid #e5e5df; }
+.pet-google-control { min-height: 44px; width: 100%; display: flex; align-items: center; justify-content: center; }
+.pet-google-control iframe { max-width: 100%; }
+.pet-google-link { margin-top: 24px; }
+.pet-google-link h2 { margin-bottom: 10px; }
+.pet-google-link .pet-google-control { justify-content: flex-start; margin-top: 18px; }
 .pet-onboarding-story { position: sticky; top: 30px; min-height: 690px; border-radius: 20px; overflow: hidden; background: #efeee9; }
 .pet-onboarding-story img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 83% center; }
 .pet-onboarding-story::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, #f0eee9 0%, #f0eee9e6 20%, #f0eee900 65%); }

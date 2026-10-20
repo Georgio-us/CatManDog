@@ -6,6 +6,7 @@ import { normalizedEmail, validEmail, hashPassword, verifyPassword, currentCusto
   createSession, cookieToken, tokenDigest, sessionCookie, clearSessionCookie, isAdmin } from './auth.js';
 import { loadCabinet, saveCabinet } from './cabinet.js';
 import { emailReady, sendAccountLink } from './email.js';
+import { googleClientId, verifyGoogleCredential } from './google-auth.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
@@ -155,11 +156,54 @@ async function authRoute(db, req, res, path) {
   if (path === '/api/auth/login') {
     if (!enabled('ACCOUNTS_ENABLED')) bad('Вход пока не подключён', 503);
     const email = normalizedEmail(body.email);
-    const { rows } = await db.query('SELECT id,email,password_hash,name,email_verified_at FROM customers WHERE email=$1', [email]);
+    const { rows } = await db.query('SELECT id,email,password_hash,name,email_verified_at,google_sub FROM customers WHERE email=$1', [email]);
     if (!rows[0] || !await verifyPassword(body.password, rows[0].password_hash)) bad('Неверный email или пароль', 401);
     if (!rows[0].email_verified_at) bad('Подтвердите email по ссылке из письма', 403);
     const token = await createSession(db, rows[0].id);
-    return json(res, 200, { id: rows[0].id, email, name: rows[0].name },
+    return json(res, 200, { id: rows[0].id, email, name: rows[0].name, googleLinked: !!rows[0].google_sub },
+      { 'Set-Cookie': sessionCookie(token, secure(req)) });
+  }
+  if (path === '/api/auth/google' || path === '/api/auth/google/link') {
+    if (!enabled('ACCOUNTS_ENABLED') || !googleClientId()) bad('Google-вход пока не подключён', 503);
+    let identity;
+    try { identity = await verifyGoogleCredential(body.credential); }
+    catch { bad('Не удалось подтвердить вход через Google', 401); }
+    if (path.endsWith('/link')) {
+      const customer = await currentCustomer(db, req);
+      if (!customer) bad('Сначала войдите в кабинет по email', 401);
+      if (customer.email !== identity.email) bad('Email аккаунта Google должен совпадать с email кабинета', 409);
+      const { rows } = await db.query('SELECT google_sub FROM customers WHERE id=$1', [customer.id]);
+      if (rows[0]?.google_sub && rows[0].google_sub !== identity.sub)
+        bad('К кабинету уже подключён другой аккаунт Google', 409);
+      try {
+        const linked = await db.query(`UPDATE customers SET google_sub=$1 WHERE id=$2
+          AND (google_sub IS NULL OR google_sub=$1)`, [identity.sub, customer.id]);
+        if (!linked.rowCount) bad('К кабинету уже подключён другой аккаунт Google', 409);
+      }
+      catch (error) {
+        if (error.code === '23505') bad('Этот аккаунт Google уже подключён к другому кабинету', 409);
+        throw error;
+      }
+      return json(res, 200, { ok: true, googleLinked: true });
+    }
+    let account = (await db.query('SELECT id,email,name FROM customers WHERE google_sub=$1',
+      [identity.sub])).rows[0];
+    if (account && account.email !== identity.email)
+      bad('Email аккаунта Google изменился. Обратитесь в поддержку', 409);
+    if (!account) {
+      const existing = (await db.query('SELECT id FROM customers WHERE email=$1', [identity.email])).rows[0];
+      if (existing) bad('Этот email уже зарегистрирован. Войдите по паролю и подключите Google в кабинете', 409);
+      try {
+        account = (await db.query(`INSERT INTO customers(id,email,password_hash,google_sub,name,email_verified_at)
+          VALUES($1,$2,NULL,$3,$4,now()) RETURNING id,email,name`,
+        [randomUUID(), identity.email, identity.sub, identity.name])).rows[0];
+      } catch (error) {
+        if (error.code === '23505') bad('Аккаунт уже существует. Повторите вход', 409);
+        throw error;
+      }
+    }
+    const token = await createSession(db, account.id);
+    return json(res, 200, { ...account, googleLinked: true },
       { 'Set-Cookie': sessionCookie(token, secure(req)) });
   }
   if (path === '/api/auth/resend-verification' || path === '/api/auth/recover') {
@@ -297,7 +341,8 @@ export async function handleApi(db, req, res, pathname) {
     if (!db) bad('База данных ещё не подключена', 503);
     if (pathname === '/api/config' && req.method === 'GET') return json(res, 200,
       { ordersEnabled: enabled('ORDERS_ENABLED'), accountsEnabled: enabled('ACCOUNTS_ENABLED'),
-        emailEnabled: emailReady(), paymentsEnabled: enabled('PAYMENTS_ENABLED'),
+        emailEnabled: emailReady(), googleClientId: enabled('ACCOUNTS_ENABLED') ? googleClientId() : null,
+        paymentsEnabled: enabled('PAYMENTS_ENABLED'),
         supportEnabled: enabled('SUPPORT_ENABLED') });
     if (pathname === '/api/catalog' && req.method === 'GET') {
       const list = await catalogSnapshot(db);

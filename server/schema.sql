@@ -31,13 +31,17 @@ ALTER TABLE catalog_variants ADD COLUMN IF NOT EXISTS source_orderable boolean N
 CREATE TABLE IF NOT EXISTS customers (
   id uuid PRIMARY KEY,
   email text NOT NULL UNIQUE,
-  password_hash text NOT NULL,
+  password_hash text,
+  google_sub text,
   name text NOT NULL DEFAULT '',
   phone text NOT NULL DEFAULT '',
   email_verified_at timestamptz,
   created_at timestamptz NOT NULL DEFAULT now()
 );
 ALTER TABLE customers ADD COLUMN IF NOT EXISTS email_verified_at timestamptz;
+ALTER TABLE customers ADD COLUMN IF NOT EXISTS google_sub text;
+ALTER TABLE customers ALTER COLUMN password_hash DROP NOT NULL;
+CREATE UNIQUE INDEX IF NOT EXISTS customers_google_sub_idx ON customers(google_sub) WHERE google_sub IS NOT NULL;
 CREATE TABLE IF NOT EXISTS customer_sessions (
   id uuid PRIMARY KEY,
   customer_id uuid NOT NULL REFERENCES customers(id) ON DELETE CASCADE,

@@ -44,11 +44,63 @@ export function createAccountUI(helpers) {
   const { escape: e, icon, money, products, imageBlock, render, notify, getCart, repeatOrder } = helpers;
   let accountsEnabled = false;
   let emailEnabled = false;
+  let googleClientId = null;
+  let googleScript = null;
   let customer = null;
   let pendingEmail = '';
   let pendingLinkKind = 'verify';
   let authStatus = '';
   let verifyingToken = null;
+  let googleInitialized = false;
+  let googleBusy = false;
+  function loadGoogleScript() {
+    if (window.google?.accounts?.id) return Promise.resolve();
+    if (!googleScript) googleScript = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://accounts.google.com/gsi/client';
+      script.async = true;
+      script.onload = resolve;
+      script.onerror = () => reject(new Error('Google-вход временно недоступен'));
+      document.head.append(script);
+    }).catch(error => { googleScript = null; throw error; });
+    return googleScript;
+  }
+  async function googleCredential(response) {
+    if (googleBusy || !response?.credential) return;
+    googleBusy = true;
+    const mode = document.querySelector('[data-google-mode]')?.dataset.googleMode;
+    try {
+      if (mode === 'link') {
+        await api.linkGoogle(response.credential);
+        customer = { ...customer, googleLinked: true };
+        render();
+        notify('Google подключён к кабинету');
+      } else if (mode === 'signin') {
+        customer = await api.googleSignIn(response.credential);
+        await loadRemote();
+        navigate(store.activePet() ? '/account' : '/join');
+      }
+    } catch (error) {
+      const message = document.querySelector('[data-google-error]');
+      if (message) message.textContent = error.message;
+      else notify(error.message);
+    } finally { googleBusy = false; }
+  }
+  async function afterRender() {
+    const host = document.querySelector('[data-google-mode]');
+    if (!host || !googleClientId) return;
+    try {
+      await loadGoogleScript();
+      if (!host.isConnected) return;
+      if (!googleInitialized) {
+        window.google.accounts.id.initialize({ client_id: googleClientId, callback: googleCredential,
+          auto_select: false, cancel_on_tap_outside: true });
+        googleInitialized = true;
+      }
+      window.google.accounts.id.renderButton(host, { type: 'standard', theme: 'outline', size: 'large',
+        shape: 'pill', text: 'continue_with', locale: 'ru', width: Math.min(350, host.clientWidth || 300) });
+    } catch (error) { if (host.isConnected) host.textContent = error.message; }
+  }
   async function loadRemote() {
     const snapshot = await api.cabinet();
     store.connectRemote(snapshot.cabinet, snapshot.revision, api.saveCabinet);
@@ -58,6 +110,7 @@ export function createAccountUI(helpers) {
       const config = await api.config();
       accountsEnabled = config.accountsEnabled === true;
       emailEnabled = config.emailEnabled === true;
+      googleClientId = config.googleClientId || null;
       if (!accountsEnabled) { render(); return; }
       if (location.hash.startsWith('#/account/verify?')) { await handleLink(); return; }
       customer = (await api.me()).customer;
@@ -108,7 +161,7 @@ export function createAccountUI(helpers) {
       : resetting ? `<p class="pet-intro-copy">Введите новый пароль для вашего аккаунта</p>${passwordForm}`
       : checking ? `<p class="pet-intro-copy" role="status">${pendingEmail ? `Запрос принят для <strong class="pet-auth-address">${e(pendingEmail)}</strong>. ` : ''}Если указанный email связан с аккаунтом, письмо со ссылкой придёт на почту. Проверьте также папку «Спам».</p>${emailForm}<div class="pet-auth-links"><a class="text-link" href="#/account/login">Вернуться ко входу</a><a class="text-link" href="#/account/register">Создать аккаунт</a></div>`
       : recovering ? `<p class="pet-intro-copy">Укажите email, который использовали при регистрации. Мы отправим ссылку для создания нового пароля, если адрес связан с аккаунтом.</p>${emailForm}<div class="pet-auth-links"><a class="text-link" href="#/account/login">Вернуться ко входу</a><a class="text-link" href="#/account/register">Создать аккаунт</a></div>`
-      : `<p class="pet-intro-copy">${registering ? 'Сохраните питомцев и планы в своём аккаунте' : 'Ваши питомцы и планы будут доступны на ваших устройствах'}</p>${authForm}<div class="pet-auth-links"><a class="text-link" href="#/account/${registering ? 'login' : 'register'}">${registering ? 'Уже есть аккаунт' : 'Создать аккаунт'}</a>${!registering ? '<a class="text-link" href="#/account/recover">Забыли пароль?</a>' : ''}</div>`;
+      : `<p class="pet-intro-copy">${registering ? 'Сохраните питомцев и планы в своём аккаунте' : 'Ваши питомцы и планы будут доступны на ваших устройствах'}</p>${authForm}${googleClientId ? '<div class="pet-google-divider"><span>или</span></div><div class="pet-google-control" data-google-mode="signin"></div><p class="pet-form-error" data-google-error role="alert"></p>' : ''}<div class="pet-auth-links"><a class="text-link" href="#/account/${registering ? 'login' : 'register'}">${registering ? 'Уже есть аккаунт' : 'Создать аккаунт'}</a>${!registering ? '<a class="text-link" href="#/account/recover">Забыли пароль?</a>' : ''}</div>`;
     return `<div class="page pet-onboarding pet-auth-page"><div class="pet-auth-panel"><span class="pet-eyebrow">Кабинет с хвостиком</span><h1>${title}</h1>${content}${recovering || checking || resetting || verifying ? '' : '<a class="text-link pet-demo-link" href="#/join">Продолжить локальный прототип</a><button class="text-link pet-demo-link" data-account-demo>Посмотреть кабинет Лео</button>'}</div></div>`;
   }
   const emptyPanel = (title, text, action = 'Выбрать товары', href = '#/catalog?pet=cat') => `<div class="pet-empty">${icon('paw')}<h3>${title}</h3><p>${text}</p><a class="button outline" href="${href}">${action}</a></div>`;
@@ -172,7 +225,7 @@ export function createAccountUI(helpers) {
   }
   function profilePage(pet) { return `<div class="pet-page-head"><span class="pet-eyebrow">Знакомимся ближе</span><h1>Я - ${e(pet.name)}</h1><p>Мои привычки и предпочтения могут меняться</p></div><form class="pet-panel pet-form" data-account-form="profile">${petFields(pet)}<p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">Сохранить мой профиль ${icon('check')}</button></form>`; }
   function humanPage(data) {
-    return `<div class="pet-page-head"><span class="pet-eyebrow">Кто помогает мне с покупками</span><h1>Мой человек</h1><p>Контакты и то, о чём стоит напоминать</p></div><form class="pet-panel pet-form" data-account-form="human"><div class="pet-form-grid"><label class="pet-field">Имя моего человека<input name="name" maxlength="80" autocomplete="given-name" value="${e(data.human.name)}"></label><label class="pet-field">Email<input type="email" name="email" autocomplete="email" value="${e(data.human.email)}" placeholder="name@example.com"></label><label class="pet-field pet-field-wide">Telegram <span>Необязательно</span><input name="telegram" maxlength="33" pattern="@?[A-Za-z0-9_]{5,32}" value="${e(data.human.telegram)}" placeholder="@username"><small>Пока только сохраняем контакт Подключение бота появится позже</small></label></div><fieldset class="pet-notifications"><legend>О чём можно сообщать моему человеку</legend>${[['orderUpdates', 'Что происходит с моими заказами'], ['reminders', 'Когда пора пополнить запасы'], ['offers', 'Подарки и специальные предложения']].map(([key, label]) => `<label><input type="checkbox" name="${key}" ${data.human[key] ? 'checked' : ''}><span>${label}</span></label>`).join('')}</fieldset><p class="pet-caption">${store.mode() === 'remote' ? 'Контакты сохраняются в аккаунте. Уведомления пока не рассылаются.' : 'Контакты не отправляются на сервер Уведомления в этом прототипе не рассылаются'}</p><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">Сохранить настройки ${icon('check')}</button></form>`;
+    return `<div class="pet-page-head"><span class="pet-eyebrow">Кто помогает мне с покупками</span><h1>Мой человек</h1><p>Контакты и то, о чём стоит напоминать</p></div><form class="pet-panel pet-form" data-account-form="human"><div class="pet-form-grid"><label class="pet-field">Имя моего человека<input name="name" maxlength="80" autocomplete="given-name" value="${e(data.human.name)}"></label><label class="pet-field">Email<input type="email" name="email" autocomplete="email" value="${e(data.human.email)}" placeholder="name@example.com"></label><label class="pet-field pet-field-wide">Telegram <span>Необязательно</span><input name="telegram" maxlength="33" pattern="@?[A-Za-z0-9_]{5,32}" value="${e(data.human.telegram)}" placeholder="@username"><small>Пока только сохраняем контакт Подключение бота появится позже</small></label></div><fieldset class="pet-notifications"><legend>О чём можно сообщать моему человеку</legend>${[['orderUpdates', 'Что происходит с моими заказами'], ['reminders', 'Когда пора пополнить запасы'], ['offers', 'Подарки и специальные предложения']].map(([key, label]) => `<label><input type="checkbox" name="${key}" ${data.human[key] ? 'checked' : ''}><span>${label}</span></label>`).join('')}</fieldset><p class="pet-caption">${store.mode() === 'remote' ? 'Контакты сохраняются в аккаунте. Уведомления пока не рассылаются.' : 'Контакты не отправляются на сервер Уведомления в этом прототипе не рассылаются'}</p><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">Сохранить настройки ${icon('check')}</button></form>${store.mode() === 'remote' && googleClientId ? `<section class="pet-panel pet-google-link"><h2>Вход через Google</h2>${customer?.googleLinked ? '<p class="pet-muted">Google подключён к этому кабинету</p>' : '<p class="pet-muted">Подключите Google с тем же email, чтобы входить без пароля</p><div class="pet-google-control" data-google-mode="link"></div><p class="pet-form-error" data-google-error role="alert"></p>'}</section>` : ''}`;
   }
   function page(path, params) {
     if (['login','register','recover','reset','verify','check-email'].includes(path.split('/')[2]) && path.startsWith('/account/')) return authPage(path.split('/')[2]);
@@ -285,5 +338,5 @@ export function createAccountUI(helpers) {
     } catch (error) { if (form.isConnected) formError(form).textContent = error.message; else notify(error.message); }
   }
   const routeAdding = () => new URLSearchParams(location.hash.split('?')[1]).get('add') === '1';
-  return { page, click, change, dismissChoices, escapeChoices, submit, store, initialize, syncChanges, handleLink };
+  return { page, click, change, dismissChoices, escapeChoices, submit, store, initialize, syncChanges, handleLink, afterRender };
 }

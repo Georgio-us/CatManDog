@@ -9,6 +9,7 @@
     "node": ">=20"
   },
   "dependencies": {
+    "google-auth-library": "^10.9.1",
     "pg": "^8.23.1"
   },
   "devDependencies": {
