@@ -17,6 +17,8 @@ function message(value) { $('admin-message').textContent = value; }
 function openPanel(role) {
   $('admin-login').hidden = true;
   $('admin-panel').hidden = false;
+  $('admin-panel-title').textContent = role === 'support' ? 'Обращения покупателей' : 'Заказы и каталог';
+  $('admin-panel-lead').textContent = role === 'support' ? 'Вопросы и возвраты от покупателей' : 'Адрес и время требуют ручного подтверждения до отправки';
   document.querySelectorAll('[data-full-admin]').forEach(element => { element.hidden = role !== 'admin'; });
   if (role !== 'admin') tab = 'requests';
   document.querySelectorAll('[data-tab]').forEach(item => item.setAttribute('aria-pressed', String(item.dataset.tab === tab)));
