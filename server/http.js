@@ -48,8 +48,12 @@ export async function serveStatic(req, res, pathname) {
   let info;
   try { info = await stat(file); } catch { return json(res, 404, { error: 'Не найдено' }); }
   if (!info.isFile()) return json(res, 404, { error: 'Не найдено' });
+  const adminAsset = parts[0] === 'admin';
   res.writeHead(200, { 'Content-Type': types[extname(file)] || 'application/octet-stream',
     'Content-Length': info.size, 'X-Content-Type-Options': 'nosniff',
-    'Cache-Control': ['.html', '.js', '.css'].includes(extname(file)) ? 'no-cache' : 'public, max-age=3600' });
+    'Cache-Control': adminAsset ? 'no-store' :
+      ['.html', '.js', '.css'].includes(extname(file)) ? 'no-cache' : 'public, max-age=3600',
+    ...(adminAsset ? { 'X-Frame-Options': 'DENY', 'Referrer-Policy': 'no-referrer',
+      'Content-Security-Policy': "frame-ancestors 'none'" } : {}) });
   if (req.method === 'HEAD') res.end(); else createReadStream(file).pipe(res);
 }

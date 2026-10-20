@@ -14,6 +14,15 @@ const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
 const enabled = name => process.env[name] === 'true';
 const bad = (message, status = 400) => { throw Object.assign(new Error(message), { status }); };
+const optionalWebUrl = value => {
+  const url = cap(value, 300);
+  if (!url) return '';
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol === 'https:' && !parsed.username && !parsed.password) return parsed.href;
+  } catch { /* Пустой или некорректный URL */ }
+  bad('Укажите адрес сайта с https://');
+};
 const secure = req => req.headers['x-forwarded-proto'] === 'https' || !!req.socket.encrypted;
 const authToken = value => /^[a-f0-9]{64}$/.test(String(value || ''));
 
@@ -392,7 +401,7 @@ async function adminRoute(db, req, res, path) {
     try {
       await db.query(`INSERT INTO suppliers(id,name,contact_name,email,website,terms,lead_days)
         VALUES($1,$2,$3,$4,$5,$6,$7)`, [id, name, cap(body.contactName, 120),
-        normalizedEmail(email), cap(body.website, 300), cap(body.terms, 1000), leadDays]);
+        normalizedEmail(email), optionalWebUrl(body.website), cap(body.terms, 1000), leadDays]);
     } catch (error) { if (error.code === '23505') bad('Поставщик уже существует', 409); throw error; }
     await db.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
       VALUES($1,$2,'supplier_created',$3,$4)`, [randomUUID(), operator.id, id, { name }]);
@@ -409,7 +418,7 @@ async function adminRoute(db, req, res, path) {
       bad('Проверьте данные поставщика');
     const { rowCount } = await db.query(`UPDATE suppliers SET name=$1,contact_name=$2,email=$3,
       website=$4,terms=$5,lead_days=$6,active=$7,updated_at=now() WHERE id=$8`,
-    [name, cap(body.contactName, 120), email, cap(body.website, 300), cap(body.terms, 1000),
+    [name, cap(body.contactName, 120), email, optionalWebUrl(body.website), cap(body.terms, 1000),
       leadDays, body.active === true, supplier[1]]);
     if (!rowCount) bad('Поставщик не найден', 404);
     await db.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
@@ -448,7 +457,7 @@ async function adminRoute(db, req, res, path) {
           source_url=EXCLUDED.source_url,note=EXCLUDED.note,preferred=EXCLUDED.preferred,
           checked_at=EXCLUDED.checked_at,updated_at=now()`,
       [randomUUID(), supplierId, variantId, cost, body.vatIncluded !== false, minimum,
-        cap(body.sourceUrl, 300), cap(body.note, 500), body.preferred === true,
+        optionalWebUrl(body.sourceUrl), cap(body.note, 500), body.preferred === true,
         cost === null ? null : new Date()]);
       await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
         VALUES($1,$2,'supplier_offer_saved',$3,$4)`, [randomUUID(), operator.id, variantId,

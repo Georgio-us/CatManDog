@@ -111,7 +111,7 @@ function auditRow(row) {
     <div><small>Поставщик</small><strong>${escape(row.supplier_name || 'Не выбран')}</strong></div>
     <div><small>Ревизия</small><strong class="${needs ? 'audit-warning' : 'audit-ready'}">${escape(needs || 'Данные заполнены')}</strong></div>
     <details class="audit-details"><summary>Проверить SKU</summary>
-      <form data-review-id="${escape(row.variant_id)}" class="audit-edit"><label>Приоритет показа
+      <form data-review-id="${escape(row.variant_id)}" class="audit-edit"><label>Приоритет SKU
         <input type="number" name="priority" min="0" max="999" value="${row.display_priority ?? 0}"></label>
         <label>Заметка по SKU<input name="note" maxlength="500" value="${escape(row.review_note || '')}" placeholder="Что нужно проверить"></label>
         <button type="submit">Сохранить ревизию</button></form>
