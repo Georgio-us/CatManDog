@@ -39,6 +39,15 @@ test('demo sample and personal data never leak into each other', () => {
   store.open('personal'); assert.equal(store.activePet().id, personal.id);
   assert.equal(store.get().orders.length, 0); assert.equal(store.promo(), null);
 });
+test('an older saved demo order no longer shows a removed toy', () => {
+  const storage = memoryStorage();
+  const store = createAccountStore(storage);
+  store.open('demo');
+  const snapshot = store.get();
+  snapshot.orders[0].items[1] = { productId: 'kong-scrunchie', size: '1 шт', qty: 1, price: 7.77 };
+  storage.setItem('catmandog-pet-account-demo-v1', JSON.stringify(snapshot));
+  assert.equal(createAccountStore(storage).get().orders[0].items[1].productId, 'yagu-7514629');
+});
 test('coupons validate and are captured in order snapshots', () => {
   const store = createAccountStore(memoryStorage()); store.savePet(pet('Лео'));
   assert.throws(() => store.applyPromo('invalid'));

@@ -1,4 +1,4 @@
-import { randomUUID, randomBytes } from 'node:crypto';
+import { randomUUID, randomBytes, createHash } from 'node:crypto';
 import { catalogSnapshot } from './catalog.js';
 import { priceQuote, validateAddress, validateDelivery } from './pricing.js';
 import { json, readJson, sameOrigin } from './http.js';
@@ -9,6 +9,7 @@ import { emailReady, sendAccountLink, notifyServiceRequest, sendServiceReply } f
 import { googleClientId, verifyGoogleCredential, googleOwnsEmail } from './google-auth.js';
 import { currentStaff, createStaffSession, staffCookie, clearStaffCookie,
   revokeStaffSession, bootstrapOwner } from './staff.js';
+import { financePreview } from './finance.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
@@ -25,6 +26,32 @@ const optionalWebUrl = value => {
 };
 const secure = req => req.headers['x-forwarded-proto'] === 'https' || !!req.socket.encrypted;
 const authToken = value => /^[a-f0-9]{64}$/.test(String(value || ''));
+const validUuid = value => /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i.test(String(value || ''));
+const catalogPets = new Set(['cat', 'dog', 'both']);
+const catalogCategories = new Set(['Корм', 'Лакомства', 'Наполнитель', 'Лотки',
+  'Лотки и гигиена',
+  'Игрушки и аксессуары', 'Миски и поилки', 'Переноски', 'Окна и балконы', 'Уход', 'Подарочные наборы']);
+function catalogImagePath(value) {
+  const path = cap(value, 500);
+  if (path && !path.startsWith('/assets/') && !path.startsWith('https://img.catmandog.es/'))
+    bad('Для фото используйте адрес из CatManDog R2');
+  return path;
+}
+function productFields(body) {
+  const name = cap(body.name, 160);
+  const brand = cap(body.brand, 100);
+  const category = cap(body.category, 80);
+  const pet = cap(body.pet, 10);
+  const description = cap(body.description, 3000);
+  const foodType = category === 'Корм' ? cap(body.foodType, 12) || null : null;
+  const imagePath = catalogImagePath(body.imagePath);
+  const details = Array.isArray(body.details) ? body.details.map(item => cap(item, 300)).filter(Boolean).slice(0, 20) : [];
+  if (name.length < 2 || !catalogCategories.has(category) || !catalogPets.has(pet))
+    bad('Укажите название, категорию и питомца');
+  if (category === 'Корм' && !foodType) bad('Для корма выберите сухой или влажный');
+  if (foodType && !['dry','wet'].includes(foodType)) bad('Некорректный тип корма');
+  return { name, brand, category, pet, description, foodType, imagePath, details };
+}
 
 async function issueAccountLink(db, customerId, kind, email) {
   const token = randomBytes(32).toString('hex');
@@ -68,6 +95,29 @@ function publicQuote(quote) {
     deliverySlot: quote.deliverySlot, promoCode: quote.promoCode };
 }
 
+async function liveCatalogSnapshot(db) {
+  const list = await catalogSnapshot(db);
+  const { rows } = await db.query('SELECT id,reserved_quantity FROM catalog_variants WHERE reserved_quantity>0');
+  const reserved = new Map(rows.map(row => [row.id, row.reserved_quantity]));
+  return list.map(row => {
+    const reservedQuantity = reserved.get(row.variant_id) || 0;
+    return { ...row, reserved_quantity: reservedQuantity,
+      orderable: row.orderable && (row.availability !== 'on_hand' ||
+        row.stock_quantity - reservedQuantity > 0) };
+  });
+}
+
+async function recordInventoryMovement(client, values) {
+  await client.query(`INSERT INTO inventory_movements(id,variant_id,order_id,staff_id,supplier_id,
+    unit_cost_cents,idempotency_key,reason,delta_on_hand,delta_reserved,on_hand_after,reserved_after,note,
+    purchase_order_item_id)
+    VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)`,
+  [randomUUID(), values.variantId, values.orderId || null, values.staffId || null,
+    values.supplierId || null, values.unitCostCents ?? null, values.idempotencyKey || null,
+    values.reason, values.deltaOnHand || 0, values.deltaReserved || 0,
+    values.onHandAfter, values.reservedAfter, values.note || '', values.purchaseOrderItemId || null]);
+}
+
 async function createOrder(db, payload, customer) {
   if (!enabled('ORDERS_ENABLED') || !enabled('PAYMENTS_ENABLED'))
     bad('Приём заказов ещё не включён', 503);
@@ -95,9 +145,10 @@ async function createOrder(db, payload, customer) {
     }
     const ids = lines.map(line => cap(line.variantId, 180));
     const variants = await client.query(`SELECT v.id AS variant_id,v.product_id,v.label,v.source_price_cents,
-      v.price_override_cents,v.price_confirmed,v.source_orderable,v.availability,v.stock_quantity,p.name
+      v.price_override_cents,v.price_confirmed,v.source_orderable,v.availability,v.tax_rate_bps,
+      v.stock_quantity,v.reserved_quantity,p.name
       FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
-      WHERE v.id=ANY($1::text[]) FOR UPDATE OF v`, [ids]);
+      WHERE v.id=ANY($1::text[]) AND v.active=true AND p.active=true FOR UPDATE OF v`, [ids]);
     const promo = await promoFor(client, payload.promoCode, true);
     const quote = priceQuote(lines, variants.rows, promo);
     if (!quote.orderable) bad('Один из товаров пока нельзя заказать');
@@ -109,13 +160,15 @@ async function createOrder(db, payload, customer) {
       apartment: cap(address.apartment, 80), note: cap(address.note, 300), verified: false };
     const cleanDelivery = delivery.mode === 'soon' ? { mode: 'soon', reserved: false }
       : { mode: 'scheduled', date: delivery.date, time: delivery.time, reserved: false };
+    const billingProfile = await client.query('SELECT delivery_tax_rate_bps FROM billing_profile WHERE id=true');
+    const deliveryTaxRate = billingProfile.rows[0]?.delivery_tax_rate_bps ?? null;
     const inserted = await client.query(`INSERT INTO orders(id,number,customer_id,customer_name,email,phone,whatsapp_opt_in,
-      delivery_address,delivery_preference,subtotal_cents,discount_cents,delivery_cents,total_cents,
-      promo_code,idempotency_key) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)
+      delivery_address,delivery_preference,subtotal_cents,discount_cents,delivery_cents,delivery_tax_rate_bps,total_cents,
+      promo_code,idempotency_key,stock_state) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,'reserved')
       ON CONFLICT(idempotency_key) DO NOTHING RETURNING id,number`,
     [orderId, number, customer?.id || null, name, email, phone, !!payload.whatsapp,
       cleanAddress, cleanDelivery, quote.subtotalCents, quote.discountCents,
-      quote.deliveryCents, quote.totalCents, quote.promoCode, idempotency]);
+      quote.deliveryCents, deliveryTaxRate, quote.totalCents, quote.promoCode, idempotency]);
     if (!inserted.rows.length) {
       const duplicate = await client.query('SELECT id,number,email FROM orders WHERE idempotency_key=$1', [idempotency]);
       if (duplicate.rows[0]?.email !== email) bad('Ключ оформления уже использован', 409);
@@ -124,11 +177,19 @@ async function createOrder(db, payload, customer) {
     }
     for (const item of quote.items) {
       await client.query(`INSERT INTO order_items(id,order_id,product_id,variant_id,name,variant_label,quantity,
-        unit_price_cents,source_mode) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
+        unit_price_cents,source_mode,tax_rate_bps) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
       [randomUUID(), orderId, item.productId, item.variantId, item.name, item.variantLabel,
-        item.qty, item.unitPriceCents, item.sourceMode]);
-      if (item.sourceMode === 'on_hand') await client.query(`UPDATE catalog_variants SET stock_quantity=stock_quantity-$1,
-        updated_at=now() WHERE id=$2`, [item.qty, item.variantId]);
+        item.qty, item.unitPriceCents, item.sourceMode,
+        variants.rows.find(row => row.variant_id === item.variantId)?.tax_rate_bps ?? null]);
+      if (item.sourceMode === 'on_hand') {
+        const changed = await client.query(`UPDATE catalog_variants
+          SET reserved_quantity=reserved_quantity+$1,updated_at=now() WHERE id=$2
+          RETURNING stock_quantity,reserved_quantity`, [item.qty, item.variantId]);
+        await recordInventoryMovement(client, { variantId: item.variantId, orderId,
+          reason: 'order_reserved', deltaReserved: item.qty,
+          onHandAfter: changed.rows[0].stock_quantity,
+          reservedAfter: changed.rows[0].reserved_quantity });
+      }
     }
     await client.query('INSERT INTO order_events(id,order_id,type,actor) VALUES($1,$2,$3,$4)',
       [randomUUID(), orderId, 'received', 'system']);
@@ -330,14 +391,208 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { role: fullAdmin ? 'admin' : 'support',
       name: operator?.name || customer?.name || '', email: operator?.email || customer?.email });
   if (!fullAdmin && !path.startsWith('/api/admin/service-requests')) bad('Доступ закрыт', 403);
+  if (path === '/api/admin/finance' && req.method === 'GET') {
+    const [profile, totals, orders, taxCoverage] = await Promise.all([
+      db.query('SELECT * FROM billing_profile WHERE id=true'),
+      db.query(`SELECT count(*) FILTER (WHERE payment_status='paid' AND status!='cancelled')::integer AS paid_orders,
+        coalesce(sum(total_cents) FILTER (WHERE payment_status='paid' AND status!='cancelled'),0)::bigint AS paid_total_cents,
+        count(*) FILTER (WHERE payment_status IN ('awaiting_payment','pending'))::integer AS awaiting_orders,
+        count(*) FILTER (WHERE payment_status='refunded')::integer AS refunded_orders
+        FROM orders`),
+      db.query(`SELECT o.id,o.number,o.customer_name,o.payment_status,o.status,o.total_cents,o.created_at,
+        count(i.id) FILTER (WHERE i.tax_rate_bps IS NULL)::integer AS lines_without_tax,
+        o.delivery_cents>0 AND o.delivery_tax_rate_bps IS NULL AS delivery_tax_missing
+        FROM orders o LEFT JOIN order_items i ON i.order_id=o.id
+        GROUP BY o.id ORDER BY o.created_at DESC LIMIT 50`),
+      db.query(`SELECT count(*) FILTER (WHERE v.tax_rate_bps IS NULL)::integer AS missing_sku_rates,
+        count(*)::integer AS active_skus FROM catalog_variants v
+        JOIN catalog_products p ON p.id=v.product_id WHERE v.active=true AND p.active=true`)
+    ]);
+    return json(res, 200, { profile: profile.rows[0] || null, totals: totals.rows[0],
+      orders: orders.rows, taxCoverage: taxCoverage.rows[0] });
+  }
+  if (path === '/api/admin/finance/settings' && req.method === 'PATCH') {
+    const body = await readJson(req);
+    const values = {
+      legalName: cap(body.legalName, 160), taxId: cap(body.taxId, 40),
+      streetAddress: cap(body.streetAddress, 200), postalCode: cap(body.postalCode, 20),
+      city: cap(body.city, 100), province: cap(body.province, 100),
+      contactEmail: normalizedEmail(cap(body.contactEmail, 160))
+    };
+    if (values.contactEmail && !validEmail(values.contactEmail)) bad('Некорректный email продавца');
+    const deliveryTaxRate = body.deliveryTaxRateBps === null ? null : Number(body.deliveryTaxRateBps);
+    if (deliveryTaxRate !== null && (!Number.isInteger(deliveryTaxRate) ||
+      deliveryTaxRate < 0 || deliveryTaxRate > 10000)) bad('Некорректная ставка доставки');
+    await db.query(`INSERT INTO billing_profile(id,legal_name,tax_id,street_address,postal_code,
+      city,province,contact_email,delivery_tax_rate_bps) VALUES(true,$1,$2,$3,$4,$5,$6,$7,$8)
+      ON CONFLICT(id) DO UPDATE SET legal_name=excluded.legal_name,tax_id=excluded.tax_id,
+      street_address=excluded.street_address,postal_code=excluded.postal_code,
+      city=excluded.city,province=excluded.province,contact_email=excluded.contact_email,
+      delivery_tax_rate_bps=excluded.delivery_tax_rate_bps,updated_at=now()`,
+    [values.legalName, values.taxId, values.streetAddress, values.postalCode,
+      values.city, values.province, values.contactEmail, deliveryTaxRate]);
+    await db.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+      VALUES($1,$2,'billing_profile_updated','seller',$3)`,
+    [randomUUID(), operator.id, { ...values, deliveryTaxRateBps: deliveryTaxRate }]);
+    return json(res, 200, { ok: true });
+  }
+  const financeOrder = path.match(/^\/api\/admin\/finance\/orders\/([^/]+)$/);
+  if (financeOrder && req.method === 'GET') {
+    const orderId = decodeURIComponent(financeOrder[1]);
+    if (!validUuid(orderId)) bad('Некорректный заказ');
+    const [order, items, profile] = await Promise.all([
+      db.query(`SELECT id,number,customer_name,payment_status,status,subtotal_cents,discount_cents,
+        delivery_cents,delivery_tax_rate_bps,total_cents,created_at FROM orders WHERE id=$1`, [orderId]),
+      db.query(`SELECT variant_id,name,variant_label,quantity,unit_price_cents,tax_rate_bps
+        FROM order_items WHERE order_id=$1 ORDER BY id`, [orderId]),
+      db.query('SELECT * FROM billing_profile WHERE id=true')
+    ]);
+    if (!order.rows.length) bad('Заказ не найден', 404);
+    return json(res, 200, { order: order.rows[0],
+      preview: financePreview(order.rows[0], items.rows, profile.rows[0] || {}) });
+  }
+  if (path === '/api/admin/customers' && req.method === 'GET') {
+    const params = new URL(req.url || path, 'http://localhost').searchParams;
+    const search = cap(params.get('q'), 100).toLocaleLowerCase('ru');
+    const page = Number(params.get('page') || 0);
+    if (!Number.isInteger(page) || page < 0 || page > 200) bad('Некорректная страница');
+    const { rows } = await db.query(`SELECT c.id,c.email,c.name,c.phone,
+      coalesce(nullif(c.phone,''),last_order_contact.phone,'') AS contact_phone,c.email_verified_at,
+      c.google_sub IS NOT NULL AS google_linked,c.password_hash IS NOT NULL AS has_password,
+      c.created_at,coalesce(pet_counts.pet_count,0)::integer AS pet_count,
+      coalesce(order_counts.order_count,0)::integer AS order_count,
+      coalesce(order_counts.paid_total_cents,0)::integer AS paid_total_cents,
+      order_counts.last_order_at
+      FROM customers c
+      LEFT JOIN LATERAL (SELECT count(*)::integer AS pet_count FROM pets p
+        WHERE p.customer_id=c.id) pet_counts ON true
+      LEFT JOIN LATERAL (SELECT count(*)::integer AS order_count,
+        coalesce(sum(o.total_cents) FILTER (WHERE o.payment_status='paid' AND o.status!='cancelled'),0)::integer AS paid_total_cents,
+        max(o.created_at) AS last_order_at FROM orders o WHERE o.customer_id=c.id) order_counts ON true
+      LEFT JOIN LATERAL (SELECT o.phone FROM orders o WHERE o.customer_id=c.id
+        ORDER BY o.created_at DESC LIMIT 1) last_order_contact ON true
+      WHERE $1='' OR strpos(lower(c.email),$1)>0 OR strpos(lower(c.name),$1)>0
+        OR strpos(lower(coalesce(nullif(c.phone,''),last_order_contact.phone,'')),$1)>0
+      ORDER BY coalesce(order_counts.last_order_at,c.created_at) DESC,c.id DESC
+      LIMIT 51 OFFSET $2`, [search, page * 50]);
+    return json(res, 200, { customers: rows.slice(0, 50), page, hasMore: rows.length > 50 });
+  }
+  const customerDetail = path.match(/^\/api\/admin\/customers\/([^/]+)$/);
+  if (customerDetail && req.method === 'GET') {
+    const customerId = decodeURIComponent(customerDetail[1]);
+    if (!validUuid(customerId)) bad('Некорректный покупатель');
+    const [account, pets, orders] = await Promise.all([
+      db.query(`SELECT id,email,name,phone,email_verified_at,
+        google_sub IS NOT NULL AS google_linked,password_hash IS NOT NULL AS has_password,created_at
+        FROM customers WHERE id=$1`, [customerId]),
+      db.query(`SELECT id,name,species,created_at FROM pets WHERE customer_id=$1
+        ORDER BY created_at,name LIMIT 30`, [customerId]),
+      db.query(`SELECT number,status,payment_status,total_cents,created_at
+        FROM orders WHERE customer_id=$1 ORDER BY created_at DESC LIMIT 30`, [customerId])
+    ]);
+    if (!account.rows.length) bad('Покупатель не найден', 404);
+    return json(res, 200, { customer: account.rows[0], pets: pets.rows, orders: orders.rows });
+  }
+  if (path === '/api/admin/products' && req.method === 'GET') {
+    const { rows } = await db.query(`SELECT p.id,p.name,p.brand,p.category,p.pet,p.image_path,
+      p.description,p.details,p.food_type,p.active,
+      coalesce(json_agg(json_build_object('id',v.id,'label',v.label,'active',v.active,
+        'imagePath',v.image_path,'description',v.description,'details',v.details,
+        'priceConfirmed',v.price_confirmed,'availability',v.availability,
+        'reservedQuantity',v.reserved_quantity) ORDER BY v.display_priority DESC,v.label)
+        FILTER (WHERE v.id IS NOT NULL),'[]'::json) AS variants
+      FROM catalog_products p LEFT JOIN catalog_variants v ON v.product_id=p.id
+      WHERE coalesce(p.source->>'gift','')='' AND coalesce(p.source->>'catalogHidden','false')!='true'
+      GROUP BY p.id ORDER BY p.name LIMIT 2000`);
+    return json(res, 200, { products: rows });
+  }
+  if (path === '/api/admin/products' && req.method === 'POST') {
+    const body = await readJson(req);
+    const fields = productFields(body);
+    const label = cap(body.variantLabel, 100);
+    if (!label) bad('Укажите первый вариант товара');
+    const productId = `cmd-${randomUUID()}`;
+    const variantId = `cmd-sku-${randomUUID()}`;
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      await client.query(`INSERT INTO catalog_products(id,name,brand,category,pet,image_path,
+        description,details,food_type,active) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,false)`,
+      [productId, fields.name, fields.brand, fields.category, fields.pet, fields.imagePath,
+        fields.description, JSON.stringify(fields.details), fields.foodType]);
+      await client.query(`INSERT INTO catalog_variants(id,product_id,label,source_orderable,availability)
+        VALUES($1,$2,$3,true,'source_on_demand')`, [variantId, productId, label]);
+      await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+        VALUES($1,$2,'product_created',$3,$4)`, [randomUUID(), operator.id, productId,
+        { name: fields.name, variantId }]);
+      await client.query('COMMIT');
+      return json(res, 201, { id: productId, variantId });
+    } catch (error) { await client.query('ROLLBACK'); throw error; }
+    finally { client.release(); }
+  }
+  const productMeta = path.match(/^\/api\/admin\/products\/([^/]+)$/);
+  if (productMeta && req.method === 'PATCH') {
+    const body = await readJson(req);
+    const fields = productFields(body);
+    const productId = decodeURIComponent(productMeta[1]);
+    const active = body.active === true;
+    if (active && !fields.imagePath) bad('Добавьте фото перед публикацией');
+    const { rowCount } = await db.query(`UPDATE catalog_products SET name=$1,brand=$2,category=$3,
+      pet=$4,image_path=$5,description=$6,details=$7,food_type=$8,active=$9 WHERE id=$10`,
+    [fields.name, fields.brand, fields.category, fields.pet, fields.imagePath,
+      fields.description, JSON.stringify(fields.details), fields.foodType, active, productId]);
+    if (!rowCount) bad('Товар не найден', 404);
+    await db.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+      VALUES($1,$2,'product_updated',$3,$4)`, [randomUUID(), operator.id, productId,
+      { ...fields, active }]);
+    return json(res, 200, { ok: true });
+  }
+  const newVariant = path.match(/^\/api\/admin\/products\/([^/]+)\/variants$/);
+  if (newVariant && req.method === 'POST') {
+    const productId = decodeURIComponent(newVariant[1]);
+    const body = await readJson(req);
+    const label = cap(body.label, 100);
+    if (!label) bad('Укажите фасовку или вариант');
+    const variantId = `cmd-sku-${randomUUID()}`;
+    const { rowCount } = await db.query(`INSERT INTO catalog_variants(id,product_id,label,source_orderable,
+      availability) SELECT $1,id,$3,true,'source_on_demand' FROM catalog_products WHERE id=$2`,
+    [variantId, productId, label]);
+    if (!rowCount) bad('Товар не найден', 404);
+    await db.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+      VALUES($1,$2,'variant_created',$3,$4)`, [randomUUID(), operator.id, variantId, { productId, label }]);
+    return json(res, 201, { id: variantId });
+  }
+  const variantMeta = path.match(/^\/api\/admin\/variants\/([^/]+)\/metadata$/);
+  if (variantMeta && req.method === 'PATCH') {
+    const body = await readJson(req);
+    const label = cap(body.label, 100);
+    if (!label) bad('Укажите фасовку или вариант');
+    const variantId = decodeURIComponent(variantMeta[1]);
+    const active = body.active === true;
+    const imagePath = catalogImagePath(body.imagePath);
+    const description = cap(body.description, 3000);
+    const details = Array.isArray(body.details) ? body.details.map(item => cap(item, 300)).filter(Boolean).slice(0, 20) : [];
+    const { rowCount } = await db.query(`UPDATE catalog_variants SET label=$1,active=$2,image_path=$3,
+      description=$4,details=$5,updated_at=now() WHERE id=$6`,
+    [label, active, imagePath || null, description, JSON.stringify(details), variantId]);
+    if (!rowCount) bad('Вариант не найден', 404);
+    await db.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+      VALUES($1,$2,'variant_metadata_updated',$3,$4)`, [randomUUID(), operator.id, variantId,
+      { label, active, imagePath, description, details }]);
+    return json(res, 200, { ok: true });
+  }
   if (path === '/api/admin/overview' && req.method === 'GET') {
-    const [catalog, orders, requests, top] = await Promise.all([
+    const [catalog, orders, requests, top, purchases, coverage, customers] = await Promise.all([
       db.query(`SELECT count(*)::integer AS total,
         count(*) FILTER (WHERE v.price_confirmed=false)::integer AS unconfirmed_prices,
         count(*) FILTER (WHERE v.purchase_price_cents IS NULL AND so.cost_cents IS NULL)::integer AS missing_costs,
+        count(*) FILTER (WHERE v.tax_rate_bps IS NULL)::integer AS missing_tax_rates,
         count(*) FILTER (WHERE so.id IS NULL)::integer AS missing_suppliers,
-        count(*) FILTER (WHERE v.availability='on_hand' AND coalesce(v.stock_quantity,0)<3)::integer AS low_stock
-        FROM catalog_variants v LEFT JOIN supplier_offers so ON so.variant_id=v.id AND so.preferred=true`),
+        count(*) FILTER (WHERE v.availability='on_hand' AND
+          coalesce(v.stock_quantity,0)-v.reserved_quantity<=v.reorder_point)::integer AS low_stock
+        FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
+        LEFT JOIN supplier_offers so ON so.variant_id=v.id AND so.preferred=true
+        WHERE p.active=true AND v.active=true`),
       db.query(`SELECT count(*) FILTER (WHERE status IN ('received','packing','delivering'))::integer AS open_orders,
         count(*) FILTER (WHERE payment_status='paid' AND status!='cancelled' AND
           created_at>=now()-interval '30 days')::integer AS paid_orders_30d,
@@ -348,22 +603,58 @@ async function adminRoute(db, req, res, path) {
       db.query(`SELECT i.variant_id,i.name,sum(i.quantity)::integer AS quantity
         FROM order_items i JOIN orders o ON o.id=i.order_id
         WHERE o.payment_status='paid' AND o.status!='cancelled'
-        GROUP BY i.variant_id,i.name ORDER BY quantity DESC LIMIT 5`)
+        GROUP BY i.variant_id,i.name ORDER BY quantity DESC LIMIT 5`),
+      db.query(`SELECT count(*)::integer AS open_purchase_orders FROM purchase_orders
+        WHERE status IN ('draft','ordered','partially_received')`),
+      db.query(`SELECT p.pet,p.category,count(DISTINCT p.id)::integer AS products,
+        count(v.id)::integer AS variants,
+        count(v.id) FILTER (WHERE v.price_confirmed=false)::integer AS unconfirmed_prices,
+        count(v.id) FILTER (WHERE so.id IS NULL)::integer AS missing_suppliers
+        FROM catalog_products p JOIN catalog_variants v ON v.product_id=p.id
+        LEFT JOIN supplier_offers so ON so.variant_id=v.id AND so.preferred=true
+        WHERE p.active=true AND v.active=true
+        GROUP BY p.pet,p.category ORDER BY p.pet,p.category`),
+      db.query('SELECT count(*)::integer AS registered FROM customers')
     ]);
     return json(res, 200, { catalog: catalog.rows[0], orders: orders.rows[0],
-      requests: requests.rows[0], topPaidSkus: top.rows });
+      requests: requests.rows[0], topPaidSkus: top.rows, purchases: purchases.rows[0],
+      coverage: coverage.rows, customers: customers.rows[0] });
   }
   if (path === '/api/admin/sku-audit' && req.method === 'GET') {
     const { rows } = await db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.category,p.pet,
       v.label,v.source_price_cents,v.price_override_cents,v.purchase_price_cents,
-      v.price_confirmed,v.source_orderable,v.availability,v.stock_quantity,
+      v.price_confirmed,v.source_orderable,v.availability,v.stock_quantity,v.reserved_quantity,v.tax_rate_bps,
       v.display_priority,v.review_note,v.reviewed_at,
       so.cost_cents AS supplier_cost_cents,so.vat_included AS supplier_vat_included,
       so.checked_at AS supplier_checked_at,s.name AS supplier_name
       FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
       LEFT JOIN supplier_offers so ON so.variant_id=v.id AND so.preferred=true
       LEFT JOIN suppliers s ON s.id=so.supplier_id
+      WHERE p.active=true AND v.active=true
       ORDER BY p.name,v.label LIMIT 2000`);
+    return json(res, 200, { variants: rows });
+  }
+  if (path === '/api/admin/replenishment' && req.method === 'GET') {
+    const { rows } = await db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.pet,
+      v.label,v.stock_quantity,v.reserved_quantity,v.reorder_point,v.target_stock,
+      coalesce(v.stock_quantity,0)-v.reserved_quantity AS available_quantity,
+      incoming.incoming_quantity,
+      CASE WHEN v.target_stock-(coalesce(v.stock_quantity,0)-v.reserved_quantity+
+        incoming.incoming_quantity)<=0 THEN 0
+        ELSE least(99999,greatest(v.target_stock-(coalesce(v.stock_quantity,0)-v.reserved_quantity+
+          incoming.incoming_quantity),coalesce(so.minimum_quantity,1))) END::integer AS suggested_quantity,
+      s.id AS supplier_id,s.name AS supplier_name,s.lead_days,
+      so.cost_cents,so.vat_included,so.minimum_quantity,so.checked_at
+      FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
+      LEFT JOIN supplier_offers so ON so.variant_id=v.id AND so.preferred=true
+      LEFT JOIN suppliers s ON s.id=so.supplier_id
+      LEFT JOIN LATERAL (SELECT coalesce(sum(poi.ordered_quantity-poi.received_quantity),0)::integer
+        AS incoming_quantity FROM purchase_order_items poi
+        JOIN purchase_orders po ON po.id=poi.purchase_order_id
+        WHERE poi.variant_id=v.id AND po.status IN ('ordered','partially_received')) incoming ON true
+      WHERE p.active=true AND v.active=true AND v.availability='on_hand'
+        AND coalesce(v.stock_quantity,0)-v.reserved_quantity<=v.reorder_point
+      ORDER BY available_quantity,p.name,v.label LIMIT 500`);
     return json(res, 200, { variants: rows });
   }
   const review = path.match(/^\/api\/admin\/variants\/([^/]+)\/review$/);
@@ -438,7 +729,7 @@ async function adminRoute(db, req, res, path) {
     const supplierId = cap(body.supplierId, 36);
     const cost = body.costCents === null || body.costCents === '' ? null : Number(body.costCents);
     const minimum = Number(body.minimumQuantity ?? 1);
-    if (!variantId || !/^[a-f0-9-]{36}$/.test(supplierId) ||
+    if (!variantId || !validUuid(supplierId) ||
       (cost !== null && (!Number.isInteger(cost) || cost < 0 || cost > 100000000)) ||
       !Number.isInteger(minimum) || minimum < 1 || minimum > 99999) bad('Проверьте предложение');
     const client = await db.connect();
@@ -467,9 +758,269 @@ async function adminRoute(db, req, res, path) {
     } catch (error) { await client.query('ROLLBACK'); throw error; }
     finally { client.release(); }
   }
+  if (path === '/api/admin/purchase-order-candidates' && req.method === 'GET') {
+    const supplierId = cap(new URL(req.url, 'http://localhost').searchParams.get('supplierId'), 36);
+    if (!validUuid(supplierId)) bad('Выберите поставщика');
+    const { rows } = await db.query(`SELECT v.id AS variant_id,p.name,p.brand,v.label,
+      so.cost_cents,so.vat_included,so.minimum_quantity,
+      v.stock_quantity,v.reserved_quantity
+      FROM supplier_offers so JOIN catalog_variants v ON v.id=so.variant_id
+      JOIN catalog_products p ON p.id=v.product_id
+      WHERE so.supplier_id=$1 AND so.cost_cents IS NOT NULL AND p.active=true AND v.active=true
+      ORDER BY p.name,v.label LIMIT 2000`, [supplierId]);
+    return json(res, 200, { variants: rows });
+  }
+  if (path === '/api/admin/purchase-orders' && req.method === 'GET') {
+    const { rows } = await db.query(`SELECT po.id,po.number,po.status,po.note,po.expected_date,
+      po.ordered_at,po.created_at,s.id AS supplier_id,s.name AS supplier_name,
+      coalesce((SELECT json_agg(json_build_object('id',i.id,'variantId',i.variant_id,
+        'name',i.name_snapshot,'label',i.variant_label_snapshot,
+        'orderedQuantity',i.ordered_quantity,'receivedQuantity',i.received_quantity,
+        'unitCostCents',i.unit_cost_cents,'vatIncluded',i.vat_included)
+        ORDER BY i.name_snapshot,i.variant_label_snapshot)
+        FROM purchase_order_items i WHERE i.purchase_order_id=po.id),'[]'::json) AS items
+      FROM purchase_orders po JOIN suppliers s ON s.id=po.supplier_id
+      ORDER BY po.created_at DESC LIMIT 100`);
+    return json(res, 200, { orders: rows });
+  }
+  if (path === '/api/admin/purchase-orders' && req.method === 'POST') {
+    const body = await readJson(req);
+    const supplierId = cap(body.supplierId, 36);
+    const note = cap(body.note, 500);
+    const expectedDate = String(body.expectedDate || '').trim() || null;
+    const key = cap(body.idempotencyKey, 100);
+    if (!validUuid(supplierId) ||
+      !/^[a-zA-Z0-9_-]{20,100}$/.test(key) ||
+      !Array.isArray(body.items) || body.items.length < 1 || body.items.length > 50)
+      bad('Проверьте заявку поставщику');
+    if (expectedDate) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(expectedDate)) bad('Проверьте дату поставки');
+      const [year, month, day] = expectedDate.split('-').map(Number);
+      const parsed = new Date(Date.UTC(year, month - 1, day));
+      if (parsed.getUTCFullYear() !== year || parsed.getUTCMonth() + 1 !== month ||
+        parsed.getUTCDate() !== day) bad('Проверьте дату поставки');
+    }
+    const items = body.items.map(item => ({ variantId: cap(item?.variantId, 180),
+      quantity: Number(item?.quantity) }));
+    if (items.some(item => !item.variantId || !Number.isInteger(item.quantity) ||
+      item.quantity < 1 || item.quantity > 99999) ||
+      new Set(items.map(item => item.variantId)).size !== items.length)
+      bad('Проверьте товары и количество');
+    const canonicalItems = [...items].sort((a, b) => a.variantId.localeCompare(b.variantId));
+    const requestHash = createHash('sha256').update(JSON.stringify({ supplierId, note,
+      expectedDate, items: canonicalItems })).digest('hex');
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const prior = await client.query(`SELECT id,number,request_hash FROM purchase_orders
+        WHERE creation_key=$1`, [key]);
+      if (prior.rows[0]) {
+        if (prior.rows[0].request_hash !== requestHash) bad('Ключ заявки уже использован с другими данными', 409);
+        await client.query('COMMIT');
+        return json(res, 200, { id: prior.rows[0].id, number: prior.rows[0].number,
+          alreadyRecorded: true });
+      }
+      const supplier = await client.query('SELECT id FROM suppliers WHERE id=$1 AND active=true', [supplierId]);
+      if (!supplier.rows.length) bad('Поставщик не найден', 404);
+      const offers = await client.query(`SELECT so.variant_id,so.cost_cents,so.vat_included,
+        so.minimum_quantity,p.name,v.label
+        FROM supplier_offers so JOIN catalog_variants v ON v.id=so.variant_id
+        JOIN catalog_products p ON p.id=v.product_id
+        WHERE so.supplier_id=$1 AND so.variant_id=ANY($2::text[])
+          AND p.active=true AND v.active=true FOR SHARE OF so`,
+      [supplierId, items.map(item => item.variantId)]);
+      const offerByVariant = new Map(offers.rows.map(item => [item.variant_id, item]));
+      if (offerByVariant.size !== items.length) bad('У поставщика нет предложения для одного из SKU', 409);
+      for (const item of items) {
+        const offer = offerByVariant.get(item.variantId);
+        if (offer.cost_cents === null || item.quantity < offer.minimum_quantity)
+          bad('Укажите закупочную цену и соблюдайте минимальную партию', 409);
+      }
+      const number = (await client.query("SELECT 'PUR-' || nextval('purchase_order_number_seq') AS number")).rows[0].number;
+      const orderId = randomUUID();
+      const inserted = await client.query(`INSERT INTO purchase_orders
+        (id,number,supplier_id,created_by,creation_key,request_hash,note,expected_date)
+        VALUES($1,$2,$3,$4,$5,$6,$7,$8)
+        ON CONFLICT(creation_key) DO NOTHING RETURNING id`,
+      [orderId, number, supplierId, operator.id, key, requestHash, note, expectedDate]);
+      if (!inserted.rows.length) {
+        const duplicate = await client.query(`SELECT id,number,request_hash FROM purchase_orders
+          WHERE creation_key=$1`, [key]);
+        if (duplicate.rows[0]?.request_hash !== requestHash)
+          bad('Ключ заявки уже использован с другими данными', 409);
+        await client.query('COMMIT');
+        return json(res, 200, { id: duplicate.rows[0].id, number: duplicate.rows[0].number,
+          alreadyRecorded: true });
+      }
+      for (const item of canonicalItems) {
+        const offer = offerByVariant.get(item.variantId);
+        await client.query(`INSERT INTO purchase_order_items
+          (id,purchase_order_id,variant_id,name_snapshot,variant_label_snapshot,
+          ordered_quantity,unit_cost_cents,vat_included)
+          VALUES($1,$2,$3,$4,$5,$6,$7,$8)`, [randomUUID(), orderId, item.variantId,
+          offer.name, offer.label, item.quantity, offer.cost_cents, offer.vat_included]);
+      }
+      await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+        VALUES($1,$2,'purchase_order_created',$3,$4)`, [randomUUID(), operator.id, orderId,
+        { number, supplierId, items: canonicalItems }]);
+      await client.query('COMMIT');
+      return json(res, 201, { id: orderId, number });
+    } catch (error) { await client.query('ROLLBACK'); throw error; }
+    finally { client.release(); }
+  }
+  const purchaseStatus = path.match(/^\/api\/admin\/purchase-orders\/([a-f0-9-]+)\/status$/);
+  if (purchaseStatus && req.method === 'PATCH') {
+    if (!validUuid(purchaseStatus[1])) bad('Заявка не найдена', 404);
+    const body = await readJson(req);
+    if (!['ordered','cancelled'].includes(body.status)) bad('Некорректный статус заявки');
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const result = await client.query(`SELECT id,status FROM purchase_orders WHERE id=$1 FOR UPDATE`,
+        [purchaseStatus[1]]);
+      const order = result.rows[0];
+      if (!order) bad('Заявка не найдена', 404);
+      if (order.status === body.status) { await client.query('COMMIT'); return json(res, 200, { ok: true }); }
+      if (body.status === 'ordered' && order.status !== 'draft')
+        bad('Заказать можно только черновик', 409);
+      if (body.status === 'cancelled' && !['draft','ordered','partially_received'].includes(order.status))
+        bad('Эту заявку нельзя закрыть', 409);
+      await client.query(`UPDATE purchase_orders SET status=$1,
+        ordered_at=CASE WHEN $1='ordered' THEN now() ELSE ordered_at END,
+        updated_at=now() WHERE id=$2`, [body.status, order.id]);
+      await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+        VALUES($1,$2,'purchase_order_status',$3,$4)`, [randomUUID(), operator.id, order.id,
+        { from: order.status, to: body.status }]);
+      await client.query('COMMIT');
+      return json(res, 200, { ok: true });
+    } catch (error) { await client.query('ROLLBACK'); throw error; }
+    finally { client.release(); }
+  }
+  const purchaseReceipt = path.match(/^\/api\/admin\/purchase-orders\/([a-f0-9-]+)\/receipts$/);
+  if (purchaseReceipt && req.method === 'POST') {
+    if (!validUuid(purchaseReceipt[1])) bad('Заявка не найдена', 404);
+    const body = await readJson(req);
+    const itemId = cap(body.itemId, 36);
+    const quantity = Number(body.quantity);
+    const key = cap(body.idempotencyKey, 100);
+    const note = cap(body.note, 300);
+    if (!validUuid(itemId) || !Number.isInteger(quantity) ||
+      quantity < 1 || quantity > 99999 || !/^[a-zA-Z0-9_-]{20,100}$/.test(key))
+      bad('Проверьте приёмку заявки');
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const found = await client.query(`SELECT id,status,supplier_id FROM purchase_orders
+        WHERE id=$1 FOR UPDATE`, [purchaseReceipt[1]]);
+      const order = found.rows[0];
+      if (!order) bad('Заявка не найдена', 404);
+      const duplicate = await client.query(`SELECT id,purchase_order_item_id,delta_on_hand,note
+        FROM inventory_movements WHERE idempotency_key=$1`, [key]);
+      if (duplicate.rows[0]) {
+        const previous = duplicate.rows[0];
+        if (previous.purchase_order_item_id !== itemId || previous.delta_on_hand !== quantity ||
+          previous.note !== note) bad('Ключ приёмки уже использован с другими данными', 409);
+        await client.query('COMMIT');
+        return json(res, 200, { ok: true, alreadyRecorded: true });
+      }
+      if (!['ordered','partially_received'].includes(order.status))
+        bad('Приёмка доступна после отметки о заказе поставщику', 409);
+      const selected = await client.query(`SELECT id,variant_id,ordered_quantity,received_quantity,
+        unit_cost_cents FROM purchase_order_items
+        WHERE id=$1 AND purchase_order_id=$2 FOR UPDATE`, [itemId, order.id]);
+      const item = selected.rows[0];
+      if (!item) bad('SKU не найден в заявке', 404);
+      if (item.received_quantity + quantity > item.ordered_quantity)
+        bad('Количество превышает остаток по заявке', 409);
+      const changed = await client.query(`UPDATE catalog_variants
+        SET stock_quantity=coalesce(stock_quantity,0)+$1,availability='on_hand',updated_at=now()
+        WHERE id=$2 RETURNING stock_quantity,reserved_quantity`, [quantity, item.variant_id]);
+      if (!changed.rows.length) bad('SKU больше нет в каталоге. Проверьте заявку', 409);
+      await client.query(`UPDATE purchase_order_items SET received_quantity=received_quantity+$1
+        WHERE id=$2`, [quantity, item.id]);
+      await recordInventoryMovement(client, { variantId: item.variant_id, staffId: operator.id,
+        supplierId: order.supplier_id, purchaseOrderItemId: item.id,
+        unitCostCents: item.unit_cost_cents, idempotencyKey: key, reason: 'receipt',
+        deltaOnHand: quantity, onHandAfter: changed.rows[0].stock_quantity,
+        reservedAfter: changed.rows[0].reserved_quantity, note });
+      const summary = await client.query(`SELECT bool_and(received_quantity=ordered_quantity) AS complete
+        FROM purchase_order_items WHERE purchase_order_id=$1`, [order.id]);
+      const next = summary.rows[0].complete ? 'received' : 'partially_received';
+      await client.query(`UPDATE purchase_orders SET status=$1,updated_at=now() WHERE id=$2`, [next, order.id]);
+      await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+        VALUES($1,$2,'purchase_order_received',$3,$4)`, [randomUUID(), operator.id, order.id,
+        { itemId, quantity, status: next }]);
+      await client.query('COMMIT');
+      return json(res, 201, { ok: true, status: next });
+    } catch (error) { await client.query('ROLLBACK');
+      if (error.code === '23505') bad('Приёмка уже записана. Обновите заявку', 409);
+      throw error;
+    } finally { client.release(); }
+  }
+  if (path === '/api/admin/inventory-movements' && req.method === 'GET') {
+    const variantId = cap(new URL(req.url, 'http://localhost').searchParams.get('variantId'), 180);
+    if (!variantId) bad('Укажите вариант');
+    const { rows } = await db.query(`SELECT m.id,m.variant_id,m.reason,m.delta_on_hand,m.delta_reserved,
+      m.on_hand_after,m.reserved_after,m.unit_cost_cents,m.note,m.created_at,
+      o.number AS order_number,po.number AS purchase_order_number,
+      s.name AS supplier_name,a.email AS staff_email
+      FROM inventory_movements m LEFT JOIN orders o ON o.id=m.order_id
+      LEFT JOIN purchase_order_items poi ON poi.id=m.purchase_order_item_id
+      LEFT JOIN purchase_orders po ON po.id=poi.purchase_order_id
+      LEFT JOIN suppliers s ON s.id=m.supplier_id
+      LEFT JOIN staff_accounts a ON a.id=m.staff_id
+      WHERE m.variant_id=$1 ORDER BY m.created_at DESC LIMIT 100`, [variantId]);
+    return json(res, 200, { movements: rows });
+  }
+  if (path === '/api/admin/inventory-receipts' && req.method === 'POST') {
+    const body = await readJson(req);
+    const variantId = cap(body.variantId, 180);
+    const supplierId = cap(body.supplierId, 36);
+    const quantity = Number(body.quantity);
+    const cost = body.unitCostCents === null || body.unitCostCents === '' ? null : Number(body.unitCostCents);
+    const note = cap(body.note, 300);
+    const key = cap(body.idempotencyKey, 100);
+    if (!variantId || (supplierId && !validUuid(supplierId)) ||
+      !Number.isInteger(quantity) || quantity < 1 || quantity > 99999 ||
+      (cost !== null && (!Number.isInteger(cost) || cost < 0 || cost > 100000000)) ||
+      !/^[a-zA-Z0-9_-]{20,100}$/.test(key) || (!supplierId && note.length < 5))
+      bad('Проверьте приёмку товара');
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const variant = await client.query(`SELECT id FROM catalog_variants WHERE id=$1 FOR UPDATE`, [variantId]);
+      if (!variant.rows.length) bad('Вариант не найден', 404);
+      const existing = await client.query(`SELECT id,variant_id,delta_on_hand,supplier_id,unit_cost_cents,note
+        FROM inventory_movements
+        WHERE idempotency_key=$1`, [key]);
+      if (existing.rows[0]) {
+        const recorded = existing.rows[0];
+        if (recorded.variant_id !== variantId || recorded.delta_on_hand !== quantity ||
+          (recorded.supplier_id || '') !== supplierId || recorded.unit_cost_cents !== cost ||
+          recorded.note !== note) bad('Ключ приёмки уже использован с другими данными', 409);
+        await client.query('COMMIT');
+        return json(res, 200, { ok: true, alreadyRecorded: true });
+      }
+      if (supplierId) {
+        const supplier = await client.query('SELECT id FROM suppliers WHERE id=$1 AND active=true', [supplierId]);
+        if (!supplier.rows.length) bad('Поставщик не найден', 404);
+      }
+      const changed = await client.query(`UPDATE catalog_variants
+        SET stock_quantity=coalesce(stock_quantity,0)+$1,availability='on_hand',updated_at=now()
+        WHERE id=$2 RETURNING stock_quantity,reserved_quantity`, [quantity, variantId]);
+      await recordInventoryMovement(client, { variantId, staffId: operator.id, supplierId: supplierId || null,
+        unitCostCents: cost, idempotencyKey: key, reason: 'receipt', deltaOnHand: quantity,
+        onHandAfter: changed.rows[0].stock_quantity, reservedAfter: changed.rows[0].reserved_quantity, note });
+      await client.query('COMMIT');
+      return json(res, 201, { ok: true });
+    } catch (error) { await client.query('ROLLBACK');
+      if (error.code === '23505') bad('Приёмка уже записана. Обновите историю товара', 409);
+      throw error;
+    } finally { client.release(); }
+  }
   if (path === '/api/admin/orders' && req.method === 'GET') {
     const { rows } = await db.query(`SELECT o.id,o.number,o.customer_name,o.email,o.phone,o.delivery_address,
-      o.delivery_preference,o.status,o.payment_status,o.total_cents,o.created_at,
+      o.delivery_preference,o.status,o.payment_status,o.stock_state,o.total_cents,o.created_at,
       COALESCE(json_agg(json_build_object('name',i.name,'variantLabel',i.variant_label,
       'qty',i.quantity,'unitPriceCents',i.unit_price_cents,'sourceMode',i.source_mode))
       FILTER (WHERE i.id IS NOT NULL),'[]') AS items
@@ -489,7 +1040,7 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { requests: rows });
   }
   if (path === '/api/admin/variants' && req.method === 'GET') {
-    return json(res, 200, { variants: await catalogSnapshot(db) });
+    return json(res, 200, { variants: await liveCatalogSnapshot(db) });
   }
   const variant = path.match(/^\/api\/admin\/variants\/([^/]+)$/);
   if (variant && req.method === 'PATCH') {
@@ -501,21 +1052,52 @@ async function adminRoute(db, req, res, path) {
     if (purchase !== null && (!Number.isInteger(purchase) || purchase < 0)) bad('Некорректная закупочная цена');
     const stock = body.stockQuantity === null ? null : Number(body.stockQuantity);
     if (stock !== null && (!Number.isInteger(stock) || stock < 0)) bad('Некорректный остаток');
+    const taxRate = body.taxRateBps === undefined ? undefined :
+      body.taxRateBps === null ? null : Number(body.taxRateBps);
+    if (taxRate !== undefined && taxRate !== null &&
+      (!Number.isInteger(taxRate) || taxRate < 0 || taxRate > 10000))
+      bad('Некорректная ставка IVA');
+    const reorderPoint = body.reorderPoint === undefined ? undefined : Number(body.reorderPoint);
+    const targetStock = body.targetStock === undefined ? undefined : Number(body.targetStock);
     const variantId = decodeURIComponent(variant[1]);
     const client = await db.connect();
     try {
       await client.query('BEGIN');
-      const previous = await client.query(`SELECT price_override_cents,purchase_price_cents,
-        price_confirmed,availability,stock_quantity FROM catalog_variants WHERE id=$1 FOR UPDATE`, [variantId]);
+      const previous = await client.query(`SELECT source_price_cents,price_override_cents,purchase_price_cents,
+        price_confirmed,availability,stock_quantity,reserved_quantity,reorder_point,target_stock,tax_rate_bps
+        FROM catalog_variants WHERE id=$1 FOR UPDATE`, [variantId]);
       if (!previous.rows.length) bad('Вариант не найден', 404);
+      const before = previous.rows[0];
+      const nextReorderPoint = reorderPoint ?? before.reorder_point;
+      const nextTargetStock = targetStock ?? before.target_stock;
+      const nextTaxRate = taxRate === undefined ? before.tax_rate_bps : taxRate;
+      if (!Number.isInteger(nextReorderPoint) || nextReorderPoint < 0 || nextReorderPoint > 99998 ||
+        !Number.isInteger(nextTargetStock) || nextTargetStock <= nextReorderPoint || nextTargetStock > 99999)
+        bad('Целевой запас должен быть больше порога заказа');
+      if (body.priceConfirmed === true && !(price ?? before.source_price_cents))
+        bad('Укажите цену продажи перед подтверждением');
+      if (body.availability === 'on_hand' && stock === null) bad('Для товара на складе укажите остаток');
+      if (stock !== null && stock < before.reserved_quantity) bad('Остаток меньше зарезервированного', 409);
+      if (stock === null && (before.stock_quantity > 0 || before.reserved_quantity > 0))
+        bad('Нельзя очистить ненулевой остаток', 409);
+      const stockDelta = (stock ?? 0) - (before.stock_quantity ?? 0);
+      const stockNote = cap(body.stockNote, 300);
+      if (stockDelta !== 0 && stockNote.length < 5) bad('Укажите причину изменения остатка');
       await client.query(`UPDATE catalog_variants SET price_override_cents=$1,
-        purchase_price_cents=$2,price_confirmed=$3,availability=$4,stock_quantity=$5,updated_at=now()
-        WHERE id=$6`, [price, purchase, body.priceConfirmed === true, body.availability, stock, variantId]);
+        purchase_price_cents=$2,price_confirmed=$3,availability=$4,stock_quantity=$5,
+        reorder_point=$6,target_stock=$7,tax_rate_bps=$8,updated_at=now()
+        WHERE id=$9`, [price, purchase, body.priceConfirmed === true, body.availability, stock,
+        nextReorderPoint, nextTargetStock, nextTaxRate, variantId]);
+      if (stockDelta !== 0) await recordInventoryMovement(client, { variantId, staffId: operator.id,
+        reason: 'adjustment', deltaOnHand: stockDelta, onHandAfter: stock,
+        reservedAfter: before.reserved_quantity, note: stockNote });
       await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
         VALUES($1,$2,'variant_terms_updated',$3,$4)`, [randomUUID(), operator.id, variantId,
-        { before: previous.rows[0], after: { price_override_cents: price,
+        { before, after: { price_override_cents: price,
           purchase_price_cents: purchase, price_confirmed: body.priceConfirmed === true,
-          availability: body.availability, stock_quantity: stock } }]);
+          availability: body.availability, stock_quantity: stock,
+          reorder_point: nextReorderPoint, target_stock: nextTargetStock,
+          tax_rate_bps: nextTaxRate }, stockNote }]);
       await client.query('COMMIT');
       return json(res, 200, { ok: true });
     } catch (error) { await client.query('ROLLBACK'); throw error; }
@@ -529,11 +1111,55 @@ async function adminRoute(db, req, res, path) {
     const client = await db.connect();
     try {
       await client.query('BEGIN');
-      const { rowCount } = await client.query('UPDATE orders SET status=$1,updated_at=now() WHERE id=$2',
-        [body.status, status[1]]);
-      if (!rowCount) bad('Заказ не найден', 404);
+      const found = await client.query(`SELECT id,status,stock_state,payment_status
+        FROM orders WHERE id=$1 FOR UPDATE`, [status[1]]);
+      const order = found.rows[0];
+      if (!order) bad('Заказ не найден', 404);
+      if (order.status === body.status) { await client.query('COMMIT'); return json(res, 200, { ok: true }); }
+      if (['cancelled','delivered'].includes(order.status)) bad('Закрытый заказ нельзя вернуть в работу', 409);
+      if (body.status === 'cancelled' && order.payment_status === 'paid')
+        bad('Сначала оформите возврат оплаты', 409);
+      if (['delivering','delivered'].includes(body.status) && order.payment_status !== 'paid')
+        bad('Доставка возможна после подтверждения оплаты', 409);
+      let nextStockState = order.stock_state;
+      if (['cancelled','delivered'].includes(body.status)) {
+        const items = await client.query(`SELECT variant_id,quantity FROM order_items
+          WHERE order_id=$1 AND source_mode='on_hand' ORDER BY variant_id`, [order.id]);
+        for (const item of items.rows) {
+          let changed;
+          let reason;
+          let deltaOnHand = 0;
+          let deltaReserved = 0;
+          if (body.status === 'cancelled' && order.stock_state === 'reserved') {
+            changed = await client.query(`UPDATE catalog_variants SET reserved_quantity=reserved_quantity-$1,
+              updated_at=now() WHERE id=$2 AND reserved_quantity>=$1
+              RETURNING stock_quantity,reserved_quantity`, [item.quantity, item.variant_id]);
+            reason = 'order_released'; deltaReserved = -item.quantity;
+          } else if (body.status === 'cancelled' && order.stock_state === 'legacy') {
+            changed = await client.query(`UPDATE catalog_variants SET stock_quantity=coalesce(stock_quantity,0)+$1,
+              updated_at=now() WHERE id=$2 RETURNING stock_quantity,reserved_quantity`,
+            [item.quantity, item.variant_id]);
+            reason = 'legacy_order_cancelled'; deltaOnHand = item.quantity;
+          } else if (body.status === 'delivered' && order.stock_state === 'reserved') {
+            changed = await client.query(`UPDATE catalog_variants SET stock_quantity=stock_quantity-$1,
+              reserved_quantity=reserved_quantity-$1,updated_at=now()
+              WHERE id=$2 AND stock_quantity>=$1 AND reserved_quantity>=$1
+              RETURNING stock_quantity,reserved_quantity`, [item.quantity, item.variant_id]);
+            reason = 'order_fulfilled'; deltaOnHand = -item.quantity; deltaReserved = -item.quantity;
+          }
+          if (changed) {
+            if (!changed.rows.length) bad('Остаток заказа не найден или изменён', 409);
+            await recordInventoryMovement(client, { variantId: item.variant_id, orderId: order.id,
+              reason, deltaOnHand, deltaReserved, onHandAfter: changed.rows[0].stock_quantity,
+              reservedAfter: changed.rows[0].reserved_quantity });
+          }
+        }
+        nextStockState = body.status === 'cancelled' ? 'released' : 'consumed';
+      }
+      await client.query('UPDATE orders SET status=$1,stock_state=$2,updated_at=now() WHERE id=$3',
+        [body.status, nextStockState, order.id]);
       await client.query('INSERT INTO order_events(id,order_id,type,actor,note) VALUES($1,$2,$3,$4,$5)',
-        [randomUUID(), status[1], body.status, 'admin', cap(body.note, 300)]);
+        [randomUUID(), status[1], body.status, operator.email, cap(body.note, 300)]);
       await client.query('COMMIT');
       return json(res, 200, { ok: true });
     } catch (error) { await client.query('ROLLBACK'); throw error; }
@@ -581,17 +1207,19 @@ export async function handleApi(db, req, res, pathname) {
         paymentsEnabled: enabled('PAYMENTS_ENABLED'),
         supportEnabled: enabled('SUPPORT_ENABLED') && emailReady() });
     if (pathname === '/api/catalog' && req.method === 'GET') {
-      const list = await catalogSnapshot(db);
+      const list = await liveCatalogSnapshot(db);
       return json(res, 200, { variants: list.map(({ price_override_cents, source_price_cents,
-        purchase_price_cents, stock_quantity, ...entry }) => ({ ...entry,
-        priceCents: price_override_cents ?? source_price_cents,
+        purchase_price_cents, stock_quantity, reserved_quantity, reorder_point, target_stock,
+        tax_rate_bps,
+        ...entry }) => ({ ...entry,
+        priceCents: entry.price_confirmed ? price_override_cents ?? source_price_cents : 777,
         availability: entry.availability })) });
     }
     if (pathname === '/api/checkout/quote' && req.method === 'POST') {
       rateLimit(req, 'quote', 100);
       const body = await readJson(req);
       const promo = await promoFor(db, body.promoCode);
-      const quote = priceQuote(body.items, await catalogSnapshot(db), promo);
+      const quote = priceQuote(body.items, await liveCatalogSnapshot(db), promo);
       return json(res, 200, publicQuote(quote));
     }
     if (pathname.startsWith('/api/admin/')) return await adminRoute(db, req, res, pathname);

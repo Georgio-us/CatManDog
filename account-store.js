@@ -13,7 +13,7 @@ const example = () => ({
   ],
   human: { name: 'Саша', email: '', telegram: '', orderUpdates: true, reminders: true, offers: false },
   orders: [
-    { id: 'demo-order-1032', petId: 'demo-leo', number: 'CMD-1032', date: day(-1), status: 'packing', items: [{ productId: 'rc-sterilised', variantId: null, size: '2 кг', qty: 1, price: 29.09 }, { productId: 'kong-scrunchie', variantId: null, size: '1 шт', qty: 1, price: 7.77 }], discount: 0 },
+    { id: 'demo-order-1032', petId: 'demo-leo', number: 'CMD-1032', date: day(-1), status: 'packing', items: [{ productId: 'rc-sterilised', variantId: null, size: '2 кг', qty: 1, price: 29.09 }, { productId: 'yagu-7514629', variantId: 'yagu-7514629-catalog-pack', size: '1 шт', qty: 1, price: 3.27 }], discount: 0 },
     { id: 'demo-order-987', petId: 'demo-leo', number: 'CMD-0987', date: day(-28), status: 'delivered', items: [{ productId: 'rc-sterilised', variantId: null, size: '2 кг', qty: 1, price: 29.09 }], discount: 0 },
     { id: 'demo-order-991', petId: 'demo-margo', number: 'CMD-0991', date: day(-19), status: 'delivered', items: [{ productId: 'leonardo-chicken', variantId: null, size: '200 г', qty: 4, price: 2.77 }], discount: 0 }
   ],
@@ -29,6 +29,12 @@ export function createAccountStore(storage) {
   function load() {
     try { data = JSON.parse(storage.getItem(mode === 'demo' ? DEMO_KEY : KEY)); } catch { data = null; }
     if (!data || data.version !== 1 || !Array.isArray(data.pets) || !Array.isArray(data.orders) || !Array.isArray(data.reminders)) data = mode === 'demo' ? example() : empty();
+    if (mode === 'demo') {
+      const sample = data.orders.find(order => order.id === 'demo-order-1032');
+      if (sample) sample.items = sample.items.map(item => item.productId === 'kong-scrunchie'
+        ? { productId: 'yagu-7514629', variantId: 'yagu-7514629-catalog-pack', size: '1 шт', qty: item.qty, price: 3.27 }
+        : item);
+    }
     data.clinics = data.clinics && typeof data.clinics === 'object' && !Array.isArray(data.clinics) ? data.clinics : {};
     data.trips = Array.isArray(data.trips) ? data.trips : [];
     data.tripDrafts = data.tripDrafts && typeof data.tripDrafts === 'object' && !Array.isArray(data.tripDrafts) ? data.tripDrafts : {};

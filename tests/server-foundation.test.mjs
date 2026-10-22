@@ -1,10 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { catalogRows } from '../server/catalog.js';
+import { catalogRows, importCatalog, catalogSnapshot } from '../server/catalog.js';
 import { priceQuote, validateAddress, validateDelivery } from '../server/pricing.js';
 import { hashPassword, verifyPassword, sessionCookie } from '../server/auth.js';
-import { applyServerPrices } from '../server-prices.js';
+import { applyServerPrices, applyServerCatalog } from '../server-prices.js';
 import { handleApi } from '../server/api.js';
+import { retiredProductIds } from '../catalog-policy.js';
 
 test('catalog import keeps variant identity and source prices separate from purchase prices', () => {
   const rows = catalogRows();
@@ -13,6 +14,40 @@ test('catalog import keeps variant identity and source prices separate from purc
   assert.ok(rows.some(row => row.variant.id === 'rc-sterilised-2000g'));
   assert.ok(rows.every(row => row.variant.sourcePriceCents === null || row.variant.sourcePriceCents > 0));
   assert.ok(rows.every(row => row.variant.source.purchasePrice === null || row.variant.source.purchasePrice === undefined));
+  assert.ok(rows.every(row => !retiredProductIds.has(row.product.id)));
+});
+test('full catalog import archives retired rows once and preserves edited products', async () => {
+  const queries = [];
+  const db = { connect: async () => ({
+    query: async (sql, params) => { queries.push([sql, params]); return { rows: [] }; },
+    release() {}
+  }) };
+  await importCatalog(db);
+  assert.ok(queries.every(([sql]) => !sql.startsWith('DELETE FROM catalog_')));
+  assert.ok(queries.filter(([sql]) => sql.startsWith('INSERT INTO catalog_products'))
+    .every(([sql]) => sql.includes('ON CONFLICT(id) DO NOTHING')));
+  assert.ok(queries.filter(([sql]) => sql.startsWith('INSERT INTO catalog_variants'))
+    .every(([sql]) => sql.includes('ON CONFLICT(id) DO NOTHING')));
+  const retired = queries.find(([sql, params]) => sql.startsWith('UPDATE catalog_products SET active=false') &&
+    params?.[0]?.includes('kong-scrunchie'));
+  assert.ok(retired[1][0].includes('kong-scrunchie') && retired[1][0].includes('trixie-balcony-chair'));
+  assert.equal(queries.at(-1)[0], 'COMMIT');
+});
+
+test('public catalog reads all active database SKUs without a static product whitelist', async () => {
+  let query, parameters;
+  const db = { async query(sql, params) {
+    query = sql; parameters = params;
+    return { rows: [{ variant_id:'cmd-sku-new',product_id:'cmd-new',name:'Новый товар',
+      source_price_cents:null,price_override_cents:1299,price_confirmed:true,
+      source_orderable:true,availability:'source_on_demand',stock_quantity:null }] };
+  } };
+  const rows = await catalogSnapshot(db);
+  assert.match(query, /p\.active=true AND v\.active=true/);
+  assert.doesNotMatch(query, /p\.id = ANY/);
+  assert.equal(parameters, undefined);
+  assert.equal(rows[0].sale_price_cents, 1299);
+  assert.equal(rows[0].orderable, true);
 });
 
 const variant = { variant_id:'rc-sterilised-2kg', product_id:'rc-sterilised', name:'Royal Canin Sterilised 37',
@@ -71,6 +106,33 @@ test('only confirmed server prices replace storefront retail estimates', () => {
   assert.equal(products[0].variants[0].price, 11.99);
   assert.equal(products[0].variants[0].serverPriceConfirmed, true);
   assert.equal(products[0].variants[1].price, 6.5);
+});
+
+test('database catalog controls published products, variants and demo prices', () => {
+  const products = [{ id:'old',name:'Old',catalogHidden:false },
+    { id:'gift',name:'Gift',gift:'personal' },
+    { id:'food',name:'Before',variants:[{ id:'food-1',label:'old',price:9.9 }] }];
+  const catalogProducts = [...products];
+  assert.equal(applyServerCatalog(products, catalogProducts, [
+    { variant_id:'food-1',product_id:'food',name:'After',brand:'Royal Canin',category:'Корм',
+      pet:'cat',image_path:'https://img.catmandog.es/assets/food.webp',description:'Описание',
+      details:['Состав'],food_type:'dry',variant_image_path:'https://img.catmandog.es/assets/food-2kg.webp',
+      variant_description:'Описание фасовки',variant_details:['2 кг'],
+      label:'2 кг',price_confirmed:false,priceCents:2999,
+      availability:'source_on_demand',stock_quantity:null },
+    { variant_id:'new-1',product_id:'new',name:'New',brand:'CatManDog',category:'Лакомства',
+      pet:'dog',image_path:'https://img.catmandog.es/assets/new.webp',description:'Новый товар',
+      details:[],food_type:null,label:'1 шт',price_confirmed:true,priceCents:1299,
+      availability:'source_on_demand',stock_quantity:null,display_priority:10 }
+  ]), true);
+  assert.deepEqual(products.map(product => product.id), ['gift','food','new']);
+  assert.deepEqual(catalogProducts.map(product => product.id), ['new','gift','food']);
+  assert.equal(products[1].name, 'After');
+  assert.equal(products[1].variants[0].label, '2 кг');
+  assert.equal(products[1].variants[0].description, 'Описание фасовки');
+  assert.equal(products[1].variants[0].image.src, 'https://img.catmandog.es/assets/food-2kg.webp');
+  assert.equal(products[1].variants[0].priceStatus, 'pending');
+  assert.equal(products[2].variants[0].price, 12.99);
 });
 
 test('unauthorized admin request returns 403 without an unhandled rejection', async () => {

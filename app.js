@@ -1,19 +1,19 @@
 import { createUsefulUI } from './useful.js?v=account-cleanup-1';
-import { createAccountUI } from './account.js?v=google-link-1';
+import { createAccountUI } from './account.js?v=cat-assortment-1';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, isDemoPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js';
 import { accessoryDetail } from './accessory-ui.js?v=variant-pricing-1';
 import { provisionalPriceLabel } from './retail-research.js?v=variant-pricing-1';
 import { recommendForProduct } from './recommendations.js?v=dog-first-wave-1';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=variant-pricing-1';
 import { loadSupplierTerms } from './supplier-terms.js';
-import { categories, products, catalogProducts, articles } from './data.js?v=r2-media-1';
-import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=r2-media-1';
+import { categories, products, catalogProducts, articles } from './data.js?v=cat-assortment-1';
+import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=cat-assortment-1';
 import { checkoutTotals, FREE_DELIVERY_FROM, DELIVERY_FEE } from './checkout-model.js';
 import { createCheckoutUI } from './checkout-ui.js?v=service-live-1';
 import { orderVariantId } from './order-progress.js';
-import { applyServerPrices } from './server-prices.js';
+import { applyServerCatalog } from './server-prices.js?v=database-catalog-1';
 
-import { homeDirections, activeHomeLanding } from './collections.js?v=account-cleanup-1';
+import { homeDirections, activeHomeLanding } from './collections.js?v=cat-assortment-1';
 
 const app = document.querySelector('#app');
 const paths = {map:'<path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2V5Zm6-2v16m6-14v16"/>',compass:'<circle cx="12" cy="12" r="9"/><path d="m16 8-3 5-5 3 3-5 5-3Z"/>',phone:'<path d="m7 3 3 5-3 2a15 15 0 0 0 7 7l2-3 5 3-2 4C9 21 3 15 3 5l4-2Z"/>',cat:'<path d="M5 8 4 3l6 4h4l6-4-1 5c2 2 3 4 3 6 0 5-4 8-10 8S2 19 2 14c0-2 1-4 3-6Z"/><path d="M8 13h.01M16 13h.01M11 17h2m-9-1H1m19 0h3"/>',paw:'<ellipse cx="12" cy="16" rx="6" ry="5"/><ellipse cx="5" cy="8" rx="2" ry="3"/><ellipse cx="10" cy="5" rx="2" ry="3"/><ellipse cx="15" cy="5" rx="2" ry="3"/><ellipse cx="20" cy="8" rx="2" ry="3"/>',calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 11h18m-14 4h3m4 0h3"/>',gift:'<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13"/><path d="M12 8H8a3 3 0 1 1 3-3l1 3Zm0 0h4a3 3 0 1 0-3-3l-1 3Z"/>',shield:'<path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/><path d="m8 12 3 3 5-6"/>',refresh:'<path d="M20 7v5h-5M4 17v-5h5"/><path d="M6 7a7 7 0 0 1 12-2l2 3M4 16l2 3a7 7 0 0 0 12-2"/>',copy:'<rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V3H3v13h5"/>',plus:'<path d="M12 5v14M5 12h14"/>',minus:'<path d="M5 12h14"/>',close:'<path d="m6 6 12 12M18 6 6 18"/>',search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',heart:'<path d="M20.8 4.8a5.4 5.4 0 0 0-7.6 0L12 6l-1.2-1.2a5.4 5.4 0 0 0-7.6 7.6L12 21l8.8-8.6a5.4 5.4 0 0 0 0-7.6Z"/>',bag:'<path d="M5 7h14l1 14H4L5 7Z"/><path d="M9 9V5a3 3 0 0 1 6 0v4"/>',arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>',menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',leaf:'<path d="M20 3C8 2 3 8 5 15s13 7 15-12Z"/><path d="M3 21 16 8"/>',truck:'<path d="M2 4h12v13H2zM14 9h4l4 5v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/>',check:'<path d="m5 12 4 4L19 6"/>'};
@@ -26,6 +26,7 @@ let cart = normalizeCart(read('catmandog-cart',[]), products);
 function cartUnitPrice(item){const p=products.find(p=>p.id===(item.productId||item.id));return p?.gift?legacyCartUnitPrice(item):storefrontPrice(cartSku(item,products));}
 let favorites = read('catmandog-favorites',[]); if(!Array.isArray(favorites))favorites=[];favorites=favorites.filter(x=>products.some(p=>p.id===x));
 let catalogPriceMax = Math.max(100, Math.ceil(Math.max(...catalogProducts.map(p => catalogPrice(p).max ?? 0)) / 10) * 10);
+let catalogUnavailable = false;
 const displayedMinPrice = p => catalogPrice(p).min;
 let homePet='cat', homeGroup='', homeBrand='', homePrice='', homeFeature='', homeVisible=8, selectedSize='', detailQuantity=1, priceLimit=catalogPriceMax, journalCategory='Все материалы';
 let selectedVariantId=null;
@@ -155,6 +156,7 @@ function homeCatalog(){
     : groupProducts.length && (homeBrand || homePrice || homeFeature) ? 'data-home-clear' : `data-home-group="${escape(homeGroup)}"`;
   const emptyLabel = emptyAction==='data-home-clear'?'Сбросить фильтры':homePet==='dog'?'Посмотреть товары для кошек':'Показать все товары';
   return `<div class="section-head selection-head"><h2 id="home-catalog-title">Каталог товаров</h2><div class="tabs" role="group" aria-label="Для кого товары">${[['cat','Для кошек'],['dog','Для собак']].map(([value,label])=>`<button class="tab ${homePet===value?'active':''}" data-home-pet="${value}" aria-pressed="${homePet===value}">${label}</button>`).join('')}</div><a href="${homeCatalogUrl()}" class="text-link">Смотреть всё</a></div>
+  ${catalogUnavailable?'<p class="food-catalog-note">Каталог временно недоступен. Обновите страницу позже.</p>':''}
   ${groups.length?`<div class="home-catalog-filters" role="group" aria-label="Категории для ${homePet==='cat'?'кошек':'собак'}">${groups.map(group=>`<button class="home-category ${homeGroup===group.id?'active':''}" data-home-group="${escape(group.id)}" aria-pressed="${homeGroup===group.id}">${escape(group.label)}</button>`).join('')}</div>`:''}
   ${homeGroup&&hasFacets?`<div class="home-catalog-facets" role="group" aria-label="Фильтры категории">${brands.length>1?homeFacet('Бренд','brand',homeBrand,brands.map(brand=>({value:brand,label:brand}))):''}${prices.length?homeFacet('Цена','price',homePrice,prices.map(price=>({value:String(price),label:`До ${money(price)}`}))):''}${features.length?homeFacet('Особенности','feature',homeFeature,features.map(feature=>({value:feature.id,label:feature.label}))):''}${homeBrand||homePrice||homeFeature?'<button class="home-facet-reset" data-home-clear>Сбросить фильтры</button>':''}</div>`:''}
   <p class="home-catalog-count" role="status">Показано ${shown.length} из ${list.length}</p>
@@ -301,13 +303,20 @@ checkout.initialize();
 if (['http:','https:'].includes(location.protocol)) {
   fetch('/api/catalog', { credentials: 'same-origin' }).then(response => response.ok ? response.json() : null)
     .then(data => {
-      if (!data || !applyServerPrices(products, data.variants)) return;
+      if (!data) throw new Error('Каталог недоступен');
+      if (!applyServerCatalog(products, catalogProducts, data.variants)) throw new Error('Некорректный каталог');
+      for (const product of catalogProducts) if (product.category && !categories.includes(product.category))
+        categories.push(product.category);
       const previousMax = catalogPriceMax;
       catalogPriceMax = Math.max(100, Math.ceil(Math.max(...catalogProducts.map(p => catalogPrice(p).max ?? 0)) / 10) * 10);
       if (priceLimit === previousMax) priceLimit = catalogPriceMax;
       cart = normalizeCart(cart, products);
       render();
-    }).catch(() => {});
+    }).catch(() => {
+      catalogUnavailable = true;
+      applyServerCatalog(products, catalogProducts, []);
+      render();
+    });
 }
 
 app.addEventListener('change',event=>{if(event.target.id==='food-brand')setParam('brand',event.target.value);});

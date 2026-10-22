@@ -29,6 +29,7 @@ export function homeGroupForProduct(product) {
     case 'Корм': return product.foodType === 'dry' ? 'dry-food' : product.foodType === 'wet' ? 'wet-food' : 'other-food';
     case 'Лакомства': return 'treats';
     case 'Наполнитель': return /лопатк|лоток|совок/i.test(name) ? 'trays' : 'litter';
+    case 'Лотки': return 'trays';
     case 'Лотки и гигиена': return 'trays';
     case 'Игрушки и аксессуары': return 'toys';
     case 'Миски и поилки':
@@ -46,7 +47,7 @@ export function homeGroupForProduct(product) {
 
 export function homeGroupsForPet(pet, products) {
   const available = new Set(products.filter(product => matchesPet(product, pet)).map(homeGroupForProduct));
-  const known = homeGroups.filter(group => (pet === 'cat' || !catOnly.has(group.id)) && (pet === 'cat' || available.has(group.id)));
+  const known = homeGroups.filter(group => available.has(group.id) && (pet === 'cat' || !catOnly.has(group.id)));
   const extra = [...available].filter(id => !groupLabels.has(id)).map(id => ({
     id,
     label: id === 'other-food' ? 'Другой корм' : id.slice('category:'.length)

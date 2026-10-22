@@ -4,6 +4,18 @@ let suppliers = [];
 let googleBusy = false;
 let activeRole = null;
 let auditFilters = { search: '', filter: 'all', pet: 'all' };
+let purchaseSupplierId = '';
+let purchaseCandidates = [];
+let purchaseDraftItems = [];
+let productRows = [];
+let productSearch = '';
+let openedProductId = '';
+let variantRows = [];
+let variantSearch = '';
+let customerSearch = '';
+let customerPage = 0;
+let customerLoadSerial = 0;
+let customerSearchTimer;
 const $ = id => document.getElementById(id);
 const escape = value => String(value ?? '').replace(/[&<>"']/g, char =>
   ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[char]);
@@ -79,7 +91,9 @@ function orderCard(order) {
     <div><strong>Адрес</strong>${escape(address.street)}, ${escape(address.building)}<br>${escape(address.postcode)} València<br>${escape(address.apartment || '')}<br>${escape(address.note || '')}</div>
     <div><strong>Время</strong>${delivery.mode === 'soon' ? 'Как можно скорее' : `${escape(delivery.date)} ${escape(delivery.time)}`}<br>
       <span class="admin-muted">Не забронировано, адрес не проверен</span></div>
-    <div><strong>Оплата</strong>${escape(order.payment_status)}</div></div>
+    <div><strong>Оплата и склад</strong>${escape(order.payment_status)}<br>${(order.items || []).some(item => item.sourceMode === 'on_hand')
+      ? escape(({ reserved:'Товар зарезервирован',released:'Резерв снят',consumed:'Выдан со склада',legacy:'Старый учёт' })[order.stock_state] || '')
+      : 'Товар под заказ'}</div></div>
     <ul class="admin-items">${(order.items || []).map(item => `<li>${escape(item.name)} · ${escape(item.variantLabel)} - ${item.qty} шт × ${euros(item.unitPriceCents)} · ${item.sourceMode === 'on_hand' ? 'на складе' : 'под заказ'}</li>`).join('')}</ul>
     <form data-order-id="${escape(order.id)}"><label>Статус<select name="status">${['received','packing','delivering','delivered','cancelled'].map(status =>
       `<option value="${status}" ${status === order.status ? 'selected' : ''}>${({received:'Получен',packing:'Собираем',delivering:'Везём',delivered:'Доставлен',cancelled:'Отменён'})[status]}</option>`).join('')}</select></label>
@@ -90,25 +104,146 @@ function variantCard(variant) {
   return `<article class="admin-card"><div class="admin-variant-top"><div><h2>${escape(variant.name)}</h2>
     <span class="admin-muted">${escape(variant.label)} · ${escape(variant.variant_id)}</span></div>
     <span>${price ? euros(price) : 'Без цены'}</span></div>
+    <p class="admin-muted">Зарезервировано: ${variant.reserved_quantity || 0} · Доступно:
+      ${variant.stock_quantity === null ? 'не указано' : Math.max(0, variant.stock_quantity - (variant.reserved_quantity || 0))}</p>
     <form data-variant-id="${escape(variant.variant_id)}"><label>Цена продажи, центы<input type="number" name="priceCents" min="1" value="${variant.price_override_cents ?? ''}" placeholder="Исходная: ${variant.source_price_cents ?? '-'}"></label>
     <label>Закупка, центы<input type="number" name="purchasePriceCents" min="0" value="${variant.purchase_price_cents ?? ''}"></label>
     <label>Доступность<select name="availability">${['source_on_demand','on_hand','unavailable'].map(mode =>
       `<option value="${mode}" ${mode === variant.availability ? 'selected' : ''}>${({source_on_demand:'Покупаем под заказ',on_hand:'У нас на складе',unavailable:'Недоступен'})[mode]}</option>`).join('')}</select></label>
-    <label>Остаток<input type="number" name="stockQuantity" min="0" value="${variant.stock_quantity ?? ''}"></label>
+    <label>Фактически на складе<input type="number" name="stockQuantity" min="0" value="${variant.stock_quantity ?? ''}"></label>
+    <label>Порог закупки, шт<input type="number" name="reorderPoint" min="0" max="99998" required value="${variant.reorder_point ?? 2}"></label>
+    <label>Целевой запас, шт<input type="number" name="targetStock" min="1" max="99999" required value="${variant.target_stock ?? 6}"></label>
+    <label>IVA товара, %<input type="number" name="taxRatePercent" min="0" max="100" step="0.01" value="${variant.tax_rate_bps === null || variant.tax_rate_bps === undefined ? '' : variant.tax_rate_bps / 100}" placeholder="После проверки"></label>
+    <label>Причина изменения остатка<input name="stockNote" maxlength="300" class="wide-input" placeholder="Например, инвентаризация"></label>
     <label><input type="checkbox" name="priceConfirmed" ${variant.price_confirmed ? 'checked' : ''}> Цена подтверждена</label>
     <button>Сохранить</button></form></article>`;
+}
+const productCategories = ['Корм','Лакомства','Наполнитель','Лотки','Лотки и гигиена','Игрушки и аксессуары',
+  'Миски и поилки','Переноски','Окна и балконы','Уход','Подарочные наборы'];
+function productFields(product = {}) {
+  const options = (items, selected) => items.map(([value, label]) =>
+    `<option value="${escape(value)}" ${selected === value ? 'selected' : ''}>${escape(label)}</option>`).join('');
+  return `<label>Название<input name="name" required maxlength="160" value="${escape(product.name || '')}"></label>
+    <label>Бренд<input name="brand" maxlength="100" value="${escape(product.brand || '')}"></label>
+    <label>Категория<select name="category">${options(productCategories.map(item => [item,item]), product.category || 'Корм')}</select></label>
+    <label>Для кого<select name="pet">${options([['cat','Кошки'],['dog','Собаки'],['both','Оба']], product.pet || 'cat')}</select></label>
+    <label>Тип корма<select name="foodType">${options([['','Не указан'],['dry','Сухой'],['wet','Влажный']], product.food_type || '')}</select></label>
+    <label class="catalog-wide">Фото в R2<input name="imagePath" maxlength="500" value="${escape(product.image_path || '')}" placeholder="https://img.catmandog.es/..."></label>
+    <label class="catalog-wide">Описание<textarea name="description" maxlength="3000">${escape(product.description || '')}</textarea></label>
+    <label class="catalog-wide">Детали - по одной на строку<textarea name="details" rows="3">${escape((product.details || []).join('\n'))}</textarea></label>`;
+}
+function productCard(product) {
+  return `<article class="admin-card catalog-product-card"><details ${openedProductId === product.id ? 'open' : ''}><summary><strong>${escape(product.name)}</strong>
+    <span class="admin-muted">${escape(product.brand || '')} · ${escape(product.category)} · ${product.variants.length} SKU · ${product.active ? 'На сайте' : 'Скрыт'}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+    <form data-product-id="${escape(product.id)}" class="catalog-product-form">${productFields(product)}
+      <label class="catalog-check"><input type="checkbox" name="active" ${product.active ? 'checked' : ''}> Показывать на сайте</label>
+      <button type="submit">Сохранить карточку</button></form>
+    <div class="catalog-variant-list"><h3>Варианты</h3>${product.variants.map(variant =>
+      `<form data-variant-metadata="${escape(variant.id)}" class="catalog-variant-form">
+        <label>Фасовка или вариант<input name="label" required maxlength="100" value="${escape(variant.label)}"></label>
+        <label class="catalog-variant-wide">Фото варианта в R2<input name="imagePath" maxlength="500" value="${escape(variant.imagePath || '')}" placeholder="Если пусто - фото карточки"></label>
+        <label class="catalog-variant-wide">Описание варианта<textarea name="description" maxlength="3000" rows="2">${escape(variant.description || '')}</textarea></label>
+        <label class="catalog-variant-wide">Детали варианта - по одной на строку<textarea name="details" rows="2">${escape((variant.details || []).join('\n'))}</textarea></label>
+        <label class="catalog-check"><input type="checkbox" name="active" ${variant.active ? 'checked' : ''}> На сайте</label>
+        <button type="submit">Сохранить SKU</button><button type="button" data-edit-variant="${escape(variant.id)}">Цена и остаток</button><small class="admin-muted">${escape(variant.id)} · ${variant.priceConfirmed ? 'Цена подтверждена' : 'Демонстрационная цена'}</small>
+      </form>`).join('')}
+      <form data-product-variant="${escape(product.id)}" class="catalog-variant-form"><label>Новый вариант<input name="label" required maxlength="100" placeholder="Например, 2 кг"></label><button type="submit">Добавить SKU</button></form>
+    </div></details></article>`;
+}
+function renderProductList() {
+  const target = $('catalog-product-list');
+  if (!target) return;
+  const needle = productSearch.toLocaleLowerCase('ru');
+  const matching = productRows.filter(item => `${item.name} ${item.brand} ${item.category} ${item.id} ${item.variants.map(v => `${v.label} ${v.id}`).join(' ')}`.toLocaleLowerCase('ru').includes(needle));
+  const visible = matching.slice(0, 40);
+  const opened = matching.find(item => item.id === openedProductId);
+  if (opened && !visible.includes(opened)) visible.splice(0, 1, opened);
+  target.innerHTML = visible.map(productCard).join('') || '<p>Товары не найдены</p>';
+  $('catalog-product-count').textContent = `Найдено: ${matching.length}${matching.length > 40 ? ' · показаны первые 40' : ''}`;
+}
+function renderProducts() {
+  $('admin-content').innerHTML = `<section class="admin-card"><h2>Новый товар</h2><p class="admin-muted">Сначала карточка сохраняется скрытой. После проверки фото, вариантов и цены её можно опубликовать</p>
+    <details class="catalog-create"><summary>Добавить товар <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><form data-product-create class="catalog-product-form">${productFields()}
+      <label>Первый вариант<input name="variantLabel" required maxlength="100" placeholder="Например, 1 шт"></label>
+      <button type="submit">Создать черновик</button></form></details></section>
+    <div class="audit-toolbar"><label>Найти товар или SKU<input id="catalog-product-search" value="${escape(productSearch)}" placeholder="Название, бренд или артикул"></label><span id="catalog-product-count"></span></div>
+    <div id="catalog-product-list"></div>`;
+  renderProductList();
+}
+function catalogPayload(values) {
+  return { name: values.get('name'), brand: values.get('brand'), category: values.get('category'),
+    pet: values.get('pet'), foodType: values.get('foodType'), imagePath: values.get('imagePath'),
+    description: values.get('description'), details: String(values.get('details') || '').split('\n').map(item => item.trim()).filter(Boolean) };
+}
+function renderVariantList() {
+  const target = $('admin-variant-list');
+  if (!target) return;
+  const needle = variantSearch.toLocaleLowerCase('ru');
+  const matching = variantRows.filter(item => `${item.name} ${item.brand} ${item.label} ${item.variant_id}`.toLocaleLowerCase('ru').includes(needle));
+  target.innerHTML = matching.slice(0, 40).map(variantCard).join('') || '<p>SKU не найдены</p>';
+  $('admin-variant-count').textContent = `Найдено: ${matching.length}${matching.length > 40 ? ' · показаны первые 40' : ''}`;
+}
+function renderVariants() {
+  $('admin-content').innerHTML = `<div class="audit-toolbar"><label>Найти SKU<input id="admin-variant-search" value="${escape(variantSearch)}" placeholder="Товар, бренд или артикул"></label><span id="admin-variant-count"></span></div><div id="admin-variant-list"></div>`;
+  renderVariantList();
+}
+const shortDate = value => value ? new Date(value).toLocaleDateString('ru-RU') : 'Нет';
+function customerCard(customer) {
+  const methods = [customer.has_password && 'Почта', customer.google_linked && 'Google'].filter(Boolean).join(' + ') || 'Не указан';
+  return `<article class="admin-card customer-card"><details data-customer-id="${escape(customer.id)}"><summary>
+    <div><strong>${escape(customer.name || customer.email)}</strong><small>${escape(customer.email)}${customer.contact_phone ? ` · ${escape(customer.contact_phone)}` : ''}</small></div>
+    <div><strong>${customer.pet_count}</strong><small>Питомцев</small></div>
+    <div><strong>${customer.order_count}</strong><small>Заказов</small></div>
+    <div><strong>${euros(customer.paid_total_cents)}</strong><small>Оплачено</small></div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+    <p class="admin-muted">Вход: ${escape(methods)} · Email ${customer.email_verified_at ? 'подтверждён' : 'не подтверждён'} · Аккаунт с ${escape(shortDate(customer.created_at))}</p>
+    <div class="customer-detail" aria-live="polite"></div></details></article>`;
+}
+async function loadCustomers() {
+  const serial = ++customerLoadSerial;
+  if (!$('customer-list')) $('admin-content').innerHTML = `<div class="audit-toolbar customer-toolbar">
+    <label>Найти покупателя<input id="customer-search" value="${escape(customerSearch)}" placeholder="Имя, email или телефон" autocomplete="off"></label>
+    <span id="customer-count"></span></div><div id="customer-list"></div><div id="customer-pages" class="customer-pages"></div>`;
+  $('customer-count').textContent = 'Загружаю';
+  const params = new URLSearchParams({ q: customerSearch, page: String(customerPage) });
+  const data = await api(`/api/admin/customers?${params}`);
+  if (serial !== customerLoadSerial || tab !== 'customers') return;
+  $('customer-list').innerHTML = data.customers.length ? data.customers.map(customerCard).join('')
+    : '<p class="admin-muted">Покупатели не найдены</p>';
+  $('customer-count').textContent = `Показано: ${data.customers.length}`;
+  $('customer-pages').innerHTML = `<button type="button" data-customer-page="${customerPage - 1}" ${customerPage === 0 ? 'disabled' : ''}>Назад</button>
+    <span>Страница ${customerPage + 1}</span>
+    <button type="button" data-customer-page="${customerPage + 1}" ${data.hasMore ? '' : 'disabled'}>Дальше</button>`;
+  message('Покупатели и их заказы');
+}
+async function loadCustomerDetail(details) {
+  const host = details.querySelector('.customer-detail');
+  if (!host || host.dataset.loaded) return;
+  host.textContent = 'Загружаю историю';
+  try {
+    const data = await api(`/api/admin/customers/${encodeURIComponent(details.dataset.customerId)}`);
+    if (!details.isConnected) return;
+    host.innerHTML = `<div class="customer-detail-grid"><section><h3>Питомцы</h3>
+      ${data.pets.length ? `<ul>${data.pets.map(pet => `<li>${escape(pet.name)} · ${pet.species === 'dog' ? 'собака' : 'кошка'}</li>`).join('')}</ul>` : '<p>Питомцы не добавлены</p>'}</section>
+      <section><h3>Заказы аккаунта</h3>${data.orders.length ? `<ul>${data.orders.map(order => `<li><strong>${escape(order.number)}</strong> · ${escape(shortDate(order.created_at))} · ${euros(order.total_cents)}
+        <small>${escape(({received:'Получен',packing:'Собираем',delivering:'Везём',delivered:'Доставлен',cancelled:'Отменён'})[order.status] || order.status)} · ${escape(order.payment_status === 'paid' ? 'Оплачен' : 'Не оплачен')}</small></li>`).join('')}</ul>` : '<p>Заказов пока нет</p>'}</section></div>`;
+    host.dataset.loaded = 'true';
+  } catch (error) { host.textContent = error.message; }
 }
 function auditRow(row) {
   const sale = row.price_override_cents ?? row.source_price_cents;
   const cost = row.purchase_price_cents ?? row.supplier_cost_cents;
   const needs = [!row.price_confirmed && 'Цена', cost === null && 'Закупка',
+    row.tax_rate_bps === null && 'IVA',
     !row.supplier_name && 'Поставщик'].filter(Boolean).join(', ');
   return `<article class="audit-row" data-search="${escape([row.name,row.brand,row.label,row.variant_id,row.supplier_name].join(' ').toLowerCase())}"
     data-issues="${escape(needs.toLowerCase())}" data-pet="${escape(row.pet)}">
-    <div class="audit-identity"><strong>${escape(row.name)}</strong><small>${escape(row.brand || '')} · ${escape(row.label)} · ${escape(row.variant_id)}</small></div>
+    <div class="audit-identity"><strong>${escape(row.name)}</strong><small>${escape(row.brand || '')} · ${escape(row.label)} · ${escape(row.variant_id)}</small>
+      <small>На складе: ${row.stock_quantity ?? 'не указано'} · Резерв: ${row.reserved_quantity || 0}</small></div>
     <div><small>Продажа</small><strong>${sale ? euros(sale) : 'Нет цены'}</strong></div>
     <div><small>Закупка</small><strong>${cost === null ? 'Не указана' : euros(cost)}</strong></div>
     <div><small>Поставщик</small><strong>${escape(row.supplier_name || 'Не выбран')}</strong></div>
+    <div><small>IVA</small><strong>${row.tax_rate_bps === null ? 'Не указана' : `${row.tax_rate_bps / 100}%`}</strong></div>
     <div><small>Ревизия</small><strong class="${needs ? 'audit-warning' : 'audit-ready'}">${escape(needs || 'Данные заполнены')}</strong></div>
     <details class="audit-details"><summary>Проверить SKU</summary>
       <form data-review-id="${escape(row.variant_id)}" class="audit-edit"><label>Приоритет SKU
@@ -116,18 +251,22 @@ function auditRow(row) {
         <label>Заметка по SKU<input name="note" maxlength="500" value="${escape(row.review_note || '')}" placeholder="Что нужно проверить"></label>
         <button type="submit">Сохранить ревизию</button></form>
       <details data-offers-id="${escape(row.variant_id)}"><summary>Предложения поставщиков</summary><div class="offer-content">Загружаю</div></details>
+      <details data-stock-id="${escape(row.variant_id)}"><summary>Приёмка и история остатков</summary><div class="stock-content">Загружаю</div></details>
     </details></article>`;
 }
 function renderAudit() {
   const missingPrice = auditRows.filter(row => !row.price_confirmed).length;
   const missingCost = auditRows.filter(row => row.purchase_price_cents === null && row.supplier_cost_cents === null).length;
   const missingSupplier = auditRows.filter(row => !row.supplier_name).length;
+  const missingTax = auditRows.filter(row => row.tax_rate_bps === null).length;
   $('admin-content').innerHTML = `<div class="audit-overview"><div><strong>${auditRows.length}</strong><span>SKU в каталоге</span></div>
     <div><strong>${missingPrice}</strong><span>Цен проверить</span></div><div><strong>${missingCost}</strong><span>Без закупочной цены</span></div>
-    <div><strong>${missingSupplier}</strong><span>Без поставщика</span></div></div>
+    <div><strong>${missingSupplier}</strong><span>Без поставщика</span></div>
+    <div><strong>${missingTax}</strong><span>Без ставки IVA</span></div></div>
     <div class="audit-toolbar"><label>Поиск SKU<input id="audit-search" type="search" placeholder="Название, бренд или артикул"></label>
       <label>Показать<select id="audit-filter"><option value="all">Все варианты</option><option value="price">Цена не подтверждена</option>
-        <option value="cost">Нет закупочной цены</option><option value="supplier">Нет поставщика</option></select></label>
+        <option value="cost">Нет закупочной цены</option><option value="supplier">Нет поставщика</option>
+        <option value="tax">Нет ставки IVA</option></select></label>
       <label>Питомец<select id="audit-pet"><option value="all">Кошки и собаки</option><option value="cat">Кошки</option><option value="dog">Собаки</option></select></label></div>
     <p id="audit-visible" class="admin-muted"></p><div class="audit-list">${auditRows.map(auditRow).join('')}</div>`;
   $('audit-search').value = auditFilters.search;
@@ -147,7 +286,8 @@ function filterAudit() {
       (pet === 'all' || row.pet === pet) &&
       (filter === 'all' || (filter === 'price' && !row.price_confirmed) ||
       (filter === 'cost' && row.purchase_price_cents === null && row.supplier_cost_cents === null) ||
-      (filter === 'supplier' && !row.supplier_name));
+      (filter === 'supplier' && !row.supplier_name) ||
+      (filter === 'tax' && row.tax_rate_bps === null));
     element.hidden = !visible;
     if (visible) count++;
   });
@@ -172,6 +312,95 @@ function renderSuppliers() {
     <button type="submit">Добавить поставщика</button></form></section>
     <div class="supplier-list">${suppliers.map(supplierCard).join('')}</div>`;
 }
+function renderReplenishment(variants) {
+  $('admin-content').innerHTML = `<section class="admin-card"><h2>Товары к закупке</h2>
+    <p class="admin-muted">Каждый SKU попадает сюда при достижении своего порога с учётом резерва. Количество рассчитано до целевого запаса и минимальной партии поставщика. Заказ поставщику автоматически не отправляется</p></section>
+    ${variants.length ? `<div class="replenishment-list">${variants.map(row => `<article class="admin-card replenishment-row">
+      <div><h2>${escape(row.name)}</h2><p class="admin-muted">${escape(row.brand || '')} · ${escape(row.label)} · ${escape(row.variant_id)}</p></div>
+      <div><strong>${row.available_quantity} доступно</strong><small>На складе ${row.stock_quantity ?? 0} · Резерв ${row.reserved_quantity} · Порог ${row.reorder_point}</small>
+      <small>Цель ${row.target_stock} · Уже заказано ${row.incoming_quantity} · ${row.suggested_quantity ? `В заявку ${row.suggested_quantity} шт` : 'Новая заявка не нужна'}</small></div>
+      <div><strong>${escape(row.supplier_name || 'Поставщик не выбран')}</strong><small>${row.cost_cents === null ? 'Закупочная цена не указана' : euros(row.cost_cents) + (row.vat_included ? ' с IVA' : ' без IVA')}${row.minimum_quantity ? ` · минимум ${row.minimum_quantity} шт` : ''}${row.lead_days !== null ? ` · ${row.lead_days} дн` : ''}</small></div>
+      <div class="replenishment-actions"><button type="button" data-audit-variant="${escape(row.variant_id)}">Открыть SKU</button>
+        ${row.suggested_quantity > 0 && row.supplier_id && row.cost_cents !== null ? `<button type="button" data-plan-variant="${escape(row.variant_id)}"
+          data-plan-supplier="${escape(row.supplier_id)}" data-plan-quantity="${row.suggested_quantity}">В заявку</button>` : ''}</div>
+    </article>`).join('')}</div>` : '<p class="admin-card">Сейчас нет товаров с малым остатком</p>'}`;
+}
+function purchaseStatusLabel(status) {
+  return ({ draft:'Черновик',ordered:'Заказано',partially_received:'Частично получено',
+    received:'Получено',cancelled:'Закрыто' })[status] || status;
+}
+function renderPurchaseDraft() {
+  const host = $('purchase-draft-items');
+  if (!host) return;
+  host.innerHTML = purchaseDraftItems.length ? purchaseDraftItems.map(item => {
+    const candidate = purchaseCandidates.find(row => row.variant_id === item.variantId);
+    if (!candidate) return '';
+    return `<div class="purchase-draft-row"><div><strong>${escape(candidate.name)}</strong>
+      <small>${escape(candidate.label)} · ${escape(candidate.variant_id)} · ${euros(candidate.cost_cents)} за шт</small></div>
+      <label>Количество<input type="number" min="${candidate.minimum_quantity}" max="99999" required
+        value="${item.quantity}" data-purchase-qty="${escape(item.variantId)}"></label>
+      <button type="button" data-purchase-remove="${escape(item.variantId)}">Убрать</button></div>`;
+  }).join('') : '<p class="admin-muted">Добавьте товары из предложений выбранного поставщика</p>';
+  $('purchase-create-button').disabled = purchaseDraftItems.length === 0;
+}
+function renderPurchaseCandidates() {
+  const select = $('purchase-candidate');
+  if (!select) return;
+  select.innerHTML = `<option value="">Выберите SKU</option>${purchaseCandidates.map(item =>
+    `<option value="${escape(item.variant_id)}">${escape(item.name)} · ${escape(item.label)} · ${euros(item.cost_cents)} · минимум ${item.minimum_quantity} шт</option>`).join('')}`;
+  $('purchase-add-button').disabled = !purchaseCandidates.length;
+  renderPurchaseDraft();
+}
+function purchaseOrderCard(order) {
+  const open = ['ordered','partially_received'].includes(order.status);
+  const total = order.items.reduce((sum, item) => sum + item.orderedQuantity * item.unitCostCents, 0);
+  const remaining = order.items.reduce((sum, item) => sum + item.orderedQuantity - item.receivedQuantity, 0);
+  return `<article class="admin-card purchase-order-card"><div class="admin-variant-top"><div><h2>${escape(order.number)}</h2>
+    <p class="admin-muted">${escape(order.supplier_name)} · ${purchaseStatusLabel(order.status)} · ${escape(new Date(order.created_at).toLocaleDateString('ru-RU'))}</p></div>
+    <strong>Ориентир: ${euros(total)}${order.items.some(item => !item.vatIncluded) ? ' · есть цены без IVA' : ' с IVA'}</strong></div>
+    ${order.expected_date ? `<p>Ожидаемая дата: ${escape(String(order.expected_date).slice(0,10))}</p>` : ''}
+    ${order.note ? `<p>${escape(order.note)}</p>` : ''}
+    <div class="purchase-order-lines">${order.items.map(item => `<div class="purchase-order-line"><div>
+      <strong>${escape(item.name)}</strong><small>${escape(item.label)} · ${escape(item.variantId)}</small>
+      <small>${euros(item.unitCostCents)} за шт · ${item.vatIncluded ? 'с IVA' : 'без IVA'}</small></div>
+      <span>${item.receivedQuantity} из ${item.orderedQuantity} получено</span>
+      ${open && item.receivedQuantity < item.orderedQuantity ? `<form data-purchase-receipt="${escape(order.id)}" class="purchase-receipt-form">
+        <input type="hidden" name="itemId" value="${escape(item.id)}">
+        <input type="hidden" name="idempotencyKey" value="${crypto.randomUUID()}">
+        <label>Пришло, шт<input type="number" name="quantity" min="1" max="${item.orderedQuantity - item.receivedQuantity}" required></label>
+        <label>Примечание<input name="note" maxlength="300" placeholder="При необходимости"></label>
+        <button type="submit">Принять на склад</button></form>` : ''}</div>`).join('')}</div>
+    <div class="purchase-order-footer"><span>Осталось получить: ${remaining} шт</span>
+      ${order.status === 'draft' ? `<button type="button" data-purchase-status="ordered" data-purchase-id="${escape(order.id)}">Отметить как заказано</button>` : ''}
+      ${['draft','ordered','partially_received'].includes(order.status) ? `<button type="button" data-purchase-status="cancelled"
+        data-purchase-id="${escape(order.id)}">Закрыть остаток заявки</button>` : ''}</div></article>`;
+}
+function renderPurchases(orders) {
+  $('admin-content').innerHTML = `<section class="admin-card"><h2>Новая заявка поставщику</h2>
+    <p class="admin-muted">Заявка сохраняется здесь. Отправку поставщику и подтверждение заказа отмечайте вручную</p>
+    <form data-purchase-create class="purchase-create-form">
+      <label>Поставщик<select name="supplierId" id="purchase-supplier" required><option value="">Выберите поставщика</option>
+        ${suppliers.filter(item => item.active).map(item => `<option value="${escape(item.id)}" ${item.id === purchaseSupplierId ? 'selected' : ''}>${escape(item.name)}</option>`).join('')}</select></label>
+      <div class="purchase-pick"><label>Товар<select id="purchase-candidate"><option value="">Выберите поставщика</option></select></label>
+        <button type="button" id="purchase-add-button" data-purchase-add disabled>Добавить SKU</button></div>
+      <div id="purchase-draft-items" class="purchase-draft-items"></div>
+      <label>Ожидаемая дата<input type="date" name="expectedDate"></label>
+      <label class="purchase-note">Примечание<input name="note" maxlength="500" placeholder="Условия или номер заказа у поставщика"></label>
+      <input type="hidden" name="idempotencyKey" value="${crypto.randomUUID()}">
+      <button type="submit" id="purchase-create-button" disabled>Сохранить черновик</button></form></section>
+    <section><h2>Заявки</h2>${orders.length ? orders.map(purchaseOrderCard).join('') : '<p class="admin-card">Заявок пока нет</p>'}</section>`;
+  renderPurchaseCandidates();
+}
+async function loadPurchaseCandidates() {
+  const selectedSupplier = purchaseSupplierId;
+  purchaseCandidates = [];
+  renderPurchaseCandidates();
+  const variants = selectedSupplier ? (await api(`/api/admin/purchase-order-candidates?supplierId=${encodeURIComponent(selectedSupplier)}`)).variants : [];
+  if (selectedSupplier !== purchaseSupplierId) return;
+  purchaseCandidates = variants;
+  purchaseDraftItems = purchaseDraftItems.filter(item => variants.some(row => row.variant_id === item.variantId));
+  renderPurchaseCandidates();
+}
 async function loadOffers(details) {
   const variantId = details.dataset.offersId;
   const host = details.querySelector('.offer-content');
@@ -192,6 +421,33 @@ async function loadOffers(details) {
       <button type="submit">Сохранить предложение</button></form>`;
   } catch (error) { host.textContent = error.message; }
 }
+async function loadStock(details) {
+  const variantId = details.dataset.stockId;
+  const host = details.querySelector('.stock-content');
+  const names = { receipt:'Приёмка', adjustment:'Инвентаризация', order_reserved:'Резерв заказа',
+    order_released:'Снятие резерва', order_fulfilled:'Доставлен заказ',
+    legacy_order_cancelled:'Отмена старого заказа' };
+  try {
+    const { movements } = await api(`/api/admin/inventory-movements?variantId=${encodeURIComponent(variantId)}`);
+    host.innerHTML = `<form data-receipt-variant="${escape(variantId)}" class="offer-form">
+      <input type="hidden" name="idempotencyKey" value="${crypto.randomUUID()}">
+      <label>Количество, шт<input type="number" name="quantity" min="1" max="99999" required></label>
+      <label>Поставщик<select name="supplierId"><option value="">Без поставщика</option>
+        ${suppliers.filter(item => item.active).map(item =>
+          `<option value="${escape(item.id)}">${escape(item.name)}</option>`).join('')}</select></label>
+      <label>Цена закупки за шт, €<input type="number" name="costEuros" min="0" step="0.01"></label>
+      <label>Примечание<input name="note" maxlength="300" placeholder="Поставка или источник"></label>
+      <button type="submit">Записать приёмку</button></form>
+      <p class="admin-muted">Если поставщик не выбран, добавьте примечание</p>
+      ${movements.length ? `<ol class="movement-list">${movements.map(item => `<li>
+        <strong>${escape(names[item.reason] || item.reason)}</strong>
+        <span>${item.delta_on_hand > 0 ? '+' : ''}${item.delta_on_hand} на складе ·
+          ${item.delta_reserved > 0 ? '+' : ''}${item.delta_reserved} резерв ·
+          ${escape(new Date(item.created_at).toLocaleString('ru-RU'))}</span>
+        <small>${escape([item.supplier_name,item.purchase_order_number,item.order_number,item.note].filter(Boolean).join(' · '))}</small>
+      </li>`).join('')}</ol>` : '<p>Движений пока нет</p>'}`;
+  } catch (error) { host.textContent = error.message; }
+}
 function requestCard(request) {
   return `<article class="admin-card"><h2>${request.kind === 'return' ? 'Возврат' : 'Поддержка'} ${request.order_number ? '· ' + escape(request.order_number) : ''}</h2>
     <p>${escape(request.email)} · ${escape(request.created_at)}</p>
@@ -201,21 +457,88 @@ function requestCard(request) {
     <form data-request-id="${escape(request.id)}"><label>Статус<select name="status">${['new','in_progress','resolved'].map(status =>
       `<option value="${status}" ${status === request.status ? 'selected' : ''}>${({new:'Новое',in_progress:'В работе',resolved:'Закрыто'})[status]}</option>`).join('')}</select></label><button>Сохранить статус</button></form></article>`;
 }
+const sellerFieldLabels = { legal_name:'Имя или название', tax_id:'NIF',
+  street_address:'Адрес', postal_code:'Почтовый индекс', city:'Город' };
+function renderFinance(data) {
+  const profile = data.profile || {};
+  const totals = data.totals || {};
+  const missingProfile = Object.entries(sellerFieldLabels).filter(([key]) => !profile[key]).map(([, label]) => label);
+  $('admin-content').innerHTML = `<section class="admin-card"><h2>Финансы</h2>
+    <p class="admin-muted">Это внутренний учёт заказов. Он не выпускает фактуры и не отправляет данные в налоговую службу</p>
+    <div class="finance-totals"><div><strong>${euros(totals.paid_total_cents || 0)}</strong><span>Оплачено · ${totals.paid_orders || 0} заказов</span></div>
+    <div><strong>${totals.awaiting_orders || 0}</strong><span>Ожидают оплаты</span></div>
+    <div><strong>${totals.refunded_orders || 0}</strong><span>Возвращены</span></div></div></section>
+    <section class="admin-card"><h2>Что нужно заполнить</h2>
+      <p>${missingProfile.length ? `Реквизиты: ${escape(missingProfile.join(', '))}` : 'Основные реквизиты заполнены'}</p>
+      <p>Ставки IVA SKU: ${data.taxCoverage?.missing_sku_rates ?? 0} из ${data.taxCoverage?.active_skus ?? 0} без проверки${profile.delivery_tax_rate_bps === null || profile.delivery_tax_rate_bps === undefined ? ' · ставка доставки не указана' : ''}</p>
+      <p class="admin-muted">После заполнения данных потребуется подключить соответствующий требованиям способ выпуска фактур</p></section>
+    <section class="admin-card"><h2>Данные продавца</h2>
+    <p class="admin-muted">Оставьте неизвестные поля пустыми. Реквизиты сохраняются отдельно и не появляются у покупателей</p>
+    <form data-finance-settings class="finance-settings">
+      <label>Имя или юридическое название<input name="legalName" maxlength="160" value="${escape(profile.legal_name)}"></label>
+      <label>NIF<input name="taxId" maxlength="40" value="${escape(profile.tax_id)}"></label>
+      <label>Адрес<input name="streetAddress" maxlength="200" value="${escape(profile.street_address)}"></label>
+      <label>Почтовый индекс<input name="postalCode" maxlength="20" value="${escape(profile.postal_code)}"></label>
+      <label>Город<input name="city" maxlength="100" value="${escape(profile.city)}"></label>
+      <label>Провинция<input name="province" maxlength="100" value="${escape(profile.province)}"></label>
+      <label>Email<input name="contactEmail" type="email" maxlength="160" value="${escape(profile.contact_email)}"></label>
+      <label>IVA доставки, %<input name="deliveryTaxPercent" type="number" min="0" max="100" step="0.01" value="${profile.delivery_tax_rate_bps === null || profile.delivery_tax_rate_bps === undefined ? '' : profile.delivery_tax_rate_bps / 100}" placeholder="После проверки"></label>
+      <button type="submit">Сохранить данные</button></form>
+    <p class="admin-muted">Ставка доставки применяется только к будущим заказам. Ставки товаров задаются в разделе «Цены и остатки» для каждого SKU</p></section>
+    <section><h2>Расчёты заказов</h2><p class="admin-muted">В расчёте используются ставки IVA, сохранённые в момент заказа. Изменение ставки SKU не переписывает старый заказ</p>
+    ${data.orders.length ? `<div class="finance-orders">${data.orders.map(order => `<article class="admin-card finance-order">
+      <div><strong>${escape(order.number)}</strong><small>${escape(order.customer_name)} · ${escape(shortDate(order.created_at))}</small></div>
+      <div><strong>${euros(order.total_cents)}</strong><small>${escape(order.payment_status === 'paid' ? 'Оплачен' : 'Не оплачен')} · ${order.lines_without_tax || order.delivery_tax_missing ? 'Ставки не заполнены' : 'Ставки сохранены'}</small></div>
+      <button type="button" data-finance-order="${escape(order.id)}">Проверить расчёт</button>
+      <div class="finance-preview" id="finance-preview-${escape(order.id)}" hidden></div></article>`).join('')}</div>` : '<p class="admin-card">Заказов пока нет</p>'}</section>`;
+}
+async function loadFinancePreview(button) {
+  const host = document.getElementById(`finance-preview-${button.dataset.financeOrder}`);
+  if (!host) return;
+  if (!host.hidden) { host.hidden = true; return; }
+  host.hidden = false;
+  host.textContent = 'Загружаю расчёт';
+  try {
+    const { preview } = await api(`/api/admin/finance/orders/${encodeURIComponent(button.dataset.financeOrder)}`);
+    const missing = [
+      ...preview.missingSellerFields.map(field => sellerFieldLabels[field] || field),
+      ...preview.missingTaxVariants.map(id => `IVA для ${id}`),
+      ...(preview.missingDeliveryTax ? ['IVA доставки'] : [])
+    ];
+    host.innerHTML = `<p><strong>Внутренний расчёт ${escape(preview.orderNumber)}</strong></p>
+      <ul>${preview.lines.map(line => `<li>${escape(line.name)} · ${escape(line.variantLabel)} · ${line.quantity} шт
+        <span>${euros(line.grossCents)}${line.taxCents === null ? ' · IVA не указана' : ` · IVA ${line.taxRateBps / 100}%: ${euros(line.taxCents)}`}</span></li>`).join('')}</ul>
+      <p>Скидка: ${euros(preview.discountCents)} · Доставка: ${euros(preview.deliveryCents)} · Итого: <strong>${euros(preview.totalCents)}</strong></p>
+      ${preview.taxComplete ? `<p>Основа: ${euros(preview.netTotalCents)} · IVA: ${euros(preview.taxTotalCents)}</p>` : ''}
+      <p class="admin-muted">${missing.length ? `Для будущего оформления нужно заполнить: ${escape(missing.join(', '))}` : 'Расчёт заполнен, выпуск фактуры пока не подключён'}</p>`;
+  } catch (error) { host.textContent = error.message; }
+}
 function renderOverview(data) {
-  const { catalog, orders, requests, topPaidSkus } = data;
+  const { catalog, orders, requests, topPaidSkus, purchases, coverage = [], customers = {} } = data;
   $('admin-content').innerHTML = `<div class="audit-overview overview-grid">
     <div><strong>${catalog.total}</strong><span>SKU в каталоге</span></div>
     <div><strong>${catalog.unconfirmed_prices}</strong><span>Цен проверить</span></div>
     <div><strong>${catalog.missing_costs}</strong><span>Без закупочной цены</span></div>
+    <div><strong>${catalog.missing_tax_rates}</strong><span>Без ставки IVA</span></div>
     <div><strong>${catalog.missing_suppliers}</strong><span>Без основного поставщика</span></div>
     <div><strong>${catalog.low_stock}</strong><span>Мало товара на складе</span></div>
+    <div><strong>${purchases.open_purchase_orders}</strong><span>Заявок поставщикам в работе</span></div>
     <div><strong>${orders.open_orders}</strong><span>Заказов в работе</span></div>
+    <div><strong>${customers.registered ?? 0}</strong><span>Аккаунтов покупателей</span></div>
     <div><strong>${requests.new_requests}</strong><span>Новых обращений</span></div>
     <div><strong>${euros(orders.paid_total_30d)}</strong><span>Оплачено за 30 дней · ${orders.paid_orders_30d} заказов</span></div>
   </div><section class="admin-card"><h2>Что проверить сейчас</h2>
     <div class="overview-actions"><button type="button" data-go-tab="audit">Открыть ревизию SKU</button>
+    <button type="button" data-go-tab="replenishment">Товары к закупке</button>
+    <button type="button" data-go-tab="purchases">Открыть закупки</button>
     <button type="button" data-go-tab="orders">Открыть заказы</button>
+    <button type="button" data-go-tab="customers">Открыть покупателей</button>
+    <button type="button" data-go-tab="finance">Финансы и реквизиты</button>
     <button type="button" data-go-tab="requests">Открыть обращения</button></div></section>
+    <section class="admin-card"><h2>Ассортимент по категориям</h2>
+      <div class="coverage-list">${coverage.map(item => `<div><strong>${escape(item.pet === 'cat' ? 'Кошки' : item.pet === 'dog' ? 'Собаки' : 'Оба')} · ${escape(item.category)}</strong>
+        <span>${item.products} товаров · ${item.variants} SKU</span>
+        <small>${item.unconfirmed_prices} цен проверить · ${item.missing_suppliers} без поставщика</small></div>`).join('') || '<p class="admin-muted">Действующих товаров пока нет</p>'}</div></section>
     <section class="admin-card"><h2>Чаще покупали</h2>
       ${topPaidSkus.length ? `<ol class="overview-top">${topPaidSkus.map(item => `<li>${escape(item.name)}
         <span>${escape(item.variant_id)} · ${item.quantity} шт</span></li>`).join('')}</ol>` :
@@ -237,20 +560,54 @@ async function load() {
       message('Ревизия каталога');
       return;
     }
+    if (tab === 'products') {
+      productRows = (await api('/api/admin/products')).products;
+      renderProducts();
+      message(`Товаров: ${productRows.length}`);
+      return;
+    }
+    if (tab === 'customers') {
+      await loadCustomers();
+      return;
+    }
+    if (tab === 'finance') {
+      renderFinance(await api('/api/admin/finance'));
+      message('Финансовая сводка');
+      return;
+    }
     if (tab === 'suppliers') {
       suppliers = (await api('/api/admin/suppliers')).suppliers;
       renderSuppliers();
       message(`Поставщиков: ${suppliers.length}`);
       return;
     }
+    if (tab === 'replenishment') {
+      const { variants } = await api('/api/admin/replenishment');
+      renderReplenishment(variants);
+      message(`К закупке: ${variants.length}`);
+      return;
+    }
+    if (tab === 'purchases') {
+      const [purchaseData, supplierData] = await Promise.all([
+        api('/api/admin/purchase-orders'), api('/api/admin/suppliers')]);
+      suppliers = supplierData.suppliers;
+      renderPurchases(purchaseData.orders);
+      await loadPurchaseCandidates();
+      message(`Заявок: ${purchaseData.orders.length}`);
+      return;
+    }
     const path = { orders:'/api/admin/orders', variants:'/api/admin/variants', requests:'/api/admin/service-requests' }[tab];
     const result = await api(path);
+    if (tab === 'variants') {
+      variantRows = result.variants;
+      renderVariants();
+      message(`Вариантов: ${variantRows.length}`);
+      return;
+    }
     $('admin-content').innerHTML = tab === 'orders'
       ? result.orders.length ? result.orders.map(orderCard).join('') : '<p>Заказов пока нет</p>'
-      : tab === 'variants' ? result.variants.map(variantCard).join('')
-        : result.requests.length ? result.requests.map(requestCard).join('') : '<p>Обращений пока нет</p>';
-    message(tab === 'orders' ? `Заказов: ${result.orders.length}` : tab === 'variants'
-      ? `Вариантов: ${result.variants.length}` : `Обращений: ${result.requests.length}`);
+      : result.requests.length ? result.requests.map(requestCard).join('') : '<p>Обращений пока нет</p>';
+    message(tab === 'orders' ? `Заказов: ${result.orders.length}` : `Обращений: ${result.requests.length}`);
   } catch (error) { message(error.message); }
 }
 $('admin-lock').addEventListener('click', async () => {
@@ -268,12 +625,105 @@ document.querySelectorAll('[data-tab]').forEach(button => button.addEventListene
   load();
 }));
 $('admin-content').addEventListener('input', event => {
+  if (event.target.id === 'catalog-product-search') {
+    productSearch = event.target.value;
+    renderProductList();
+  }
+  if (event.target.id === 'admin-variant-search') {
+    variantSearch = event.target.value;
+    renderVariantList();
+  }
+  if (event.target.id === 'customer-search') {
+    customerSearch = event.target.value.trim();
+    customerPage = 0;
+    clearTimeout(customerSearchTimer);
+    customerSearchTimer = setTimeout(() => loadCustomers().catch(error => message(error.message)), 300);
+  }
   if (['audit-search','audit-filter','audit-pet'].includes(event.target.id)) filterAudit();
+  if (event.target.matches('[data-purchase-qty]')) {
+    const item = purchaseDraftItems.find(row => row.variantId === event.target.dataset.purchaseQty);
+    if (item) item.quantity = Number(event.target.value);
+  }
 });
-$('admin-content').addEventListener('change', event => {
+$('admin-content').addEventListener('change', async event => {
   if (['audit-filter','audit-pet'].includes(event.target.id)) filterAudit();
+  if (event.target.id === 'purchase-supplier') {
+    purchaseSupplierId = event.target.value;
+    purchaseDraftItems = [];
+    try { await loadPurchaseCandidates(); }
+    catch (error) { message(error.message); }
+  }
 });
-$('admin-content').addEventListener('click', event => {
+$('admin-content').addEventListener('click', async event => {
+  const financeButton = event.target.closest('[data-finance-order]');
+  if (financeButton) { await loadFinancePreview(financeButton); return; }
+  const pageButton = event.target.closest('[data-customer-page]');
+  if (pageButton && !pageButton.disabled) {
+    customerPage = Number(pageButton.dataset.customerPage);
+    await loadCustomers().catch(error => message(error.message));
+    return;
+  }
+  const customerSummary = event.target.closest('details[data-customer-id] > summary');
+  if (customerSummary) {
+    const details = customerSummary.parentElement;
+    if (!details.open) loadCustomerDetail(details);
+    return;
+  }
+  const plan = event.target.closest('[data-plan-variant]');
+  if (plan) {
+    purchaseSupplierId = plan.dataset.planSupplier;
+    purchaseDraftItems = [{ variantId: plan.dataset.planVariant,
+      quantity: Number(plan.dataset.planQuantity) }];
+    tab = 'purchases';
+    document.querySelectorAll('[data-tab]').forEach(item =>
+      item.setAttribute('aria-pressed', String(item.dataset.tab === tab)));
+    await load();
+    return;
+  }
+  if (event.target.closest('[data-purchase-add]')) {
+    const variantId = $('purchase-candidate')?.value;
+    const candidate = purchaseCandidates.find(row => row.variant_id === variantId);
+    if (candidate && !purchaseDraftItems.some(item => item.variantId === variantId)) {
+      purchaseDraftItems.push({ variantId, quantity: candidate.minimum_quantity });
+      renderPurchaseDraft();
+    }
+    return;
+  }
+  const remove = event.target.closest('[data-purchase-remove]');
+  if (remove) {
+    purchaseDraftItems = purchaseDraftItems.filter(item => item.variantId !== remove.dataset.purchaseRemove);
+    renderPurchaseDraft();
+    return;
+  }
+  const purchaseStatus = event.target.closest('[data-purchase-status]');
+  if (purchaseStatus) {
+    purchaseStatus.disabled = true;
+    try {
+      await api(`/api/admin/purchase-orders/${encodeURIComponent(purchaseStatus.dataset.purchaseId)}/status`, 'PATCH',
+        { status: purchaseStatus.dataset.purchaseStatus });
+      await load();
+      message('Статус заявки сохранён');
+    } catch (error) { purchaseStatus.disabled = false; message(error.message); }
+    return;
+  }
+  const selectedVariant = event.target.closest('[data-audit-variant]');
+  if (selectedVariant) {
+    auditFilters = { search: selectedVariant.dataset.auditVariant.toLowerCase(), filter: 'all', pet: 'all' };
+    tab = 'audit';
+    document.querySelectorAll('[data-tab]').forEach(item =>
+      item.setAttribute('aria-pressed', String(item.dataset.tab === tab)));
+    load();
+    return;
+  }
+  const editVariant = event.target.closest('[data-edit-variant]');
+  if (editVariant) {
+    variantSearch = editVariant.dataset.editVariant;
+    tab = 'variants';
+    document.querySelectorAll('[data-tab]').forEach(item =>
+      item.setAttribute('aria-pressed', String(item.dataset.tab === tab)));
+    await load();
+    return;
+  }
   const shortcut = event.target.closest('[data-go-tab]');
   if (shortcut) {
     tab = shortcut.dataset.goTab;
@@ -283,9 +733,16 @@ $('admin-content').addEventListener('click', event => {
     return;
   }
   const summary = event.target.closest('details[data-offers-id] > summary');
-  if (!summary) return;
-  const details = summary.parentElement;
-  if (!details.open) loadOffers(details);
+  if (summary) {
+    const details = summary.parentElement;
+    if (!details.open) loadOffers(details);
+    return;
+  }
+  const stockSummary = event.target.closest('details[data-stock-id] > summary');
+  if (stockSummary) {
+    const details = stockSummary.parentElement;
+    if (!details.open) loadStock(details);
+  }
 });
 $('admin-content').addEventListener('submit', async event => {
   const form = event.target.closest('form');
@@ -295,8 +752,47 @@ $('admin-content').addEventListener('submit', async event => {
   const submitButton = form.querySelector('button[type="submit"], button:not([type])');
   if (submitButton) submitButton.disabled = true;
   try {
-    if (form.dataset.reviewId) await api(`/api/admin/variants/${encodeURIComponent(form.dataset.reviewId)}/review`, 'PATCH',
+    if (form.hasAttribute('data-purchase-create')) {
+      const items = [...form.querySelectorAll('[data-purchase-qty]')].map(input => ({
+        variantId: input.dataset.purchaseQty, quantity: Number(input.value) }));
+      if (!items.length) throw new Error('Добавьте товары в заявку');
+      await api('/api/admin/purchase-orders', 'POST', { supplierId: values.get('supplierId'),
+        expectedDate: values.get('expectedDate'), note: values.get('note'),
+        idempotencyKey: values.get('idempotencyKey'), items });
+      purchaseDraftItems = [];
+    }
+    else if (form.dataset.purchaseReceipt) await api(`/api/admin/purchase-orders/${encodeURIComponent(form.dataset.purchaseReceipt)}/receipts`, 'POST', {
+      itemId: values.get('itemId'), quantity: Number(values.get('quantity')),
+      note: values.get('note'), idempotencyKey: values.get('idempotencyKey') });
+    else if (form.hasAttribute('data-product-create')) {
+      const created = await api('/api/admin/products', 'POST', { ...catalogPayload(values), variantLabel: values.get('variantLabel') });
+      openedProductId = created.id;
+      productSearch = created.id;
+    }
+    else if (form.dataset.productId) {
+      await api(`/api/admin/products/${encodeURIComponent(form.dataset.productId)}`, 'PATCH',
+        { ...catalogPayload(values), active: values.has('active') });
+      openedProductId = form.dataset.productId;
+    }
+    else if (form.dataset.productVariant) {
+      await api(`/api/admin/products/${encodeURIComponent(form.dataset.productVariant)}/variants`, 'POST',
+        { label: values.get('label') });
+      openedProductId = form.dataset.productVariant;
+    }
+    else if (form.dataset.variantMetadata) {
+      await api(`/api/admin/variants/${encodeURIComponent(form.dataset.variantMetadata)}/metadata`, 'PATCH',
+        { label: values.get('label'), active: values.has('active'), imagePath: values.get('imagePath'),
+          description: values.get('description'), details: String(values.get('details') || '').split('\n').map(item => item.trim()).filter(Boolean) });
+      openedProductId = productRows.find(product => product.variants.some(variant => variant.id === form.dataset.variantMetadata))?.id || '';
+    }
+    else if (form.dataset.reviewId) await api(`/api/admin/variants/${encodeURIComponent(form.dataset.reviewId)}/review`, 'PATCH',
       { priority: Number(values.get('priority')), note: values.get('note') });
+    else if (form.hasAttribute('data-finance-settings')) await api('/api/admin/finance/settings', 'PATCH', {
+      legalName: values.get('legalName'), taxId: values.get('taxId'),
+      streetAddress: values.get('streetAddress'), postalCode: values.get('postalCode'),
+      city: values.get('city'), province: values.get('province'), contactEmail: values.get('contactEmail'),
+      deliveryTaxRateBps: values.get('deliveryTaxPercent') === '' ? null :
+        Math.round(Number(values.get('deliveryTaxPercent')) * 100) });
     else if (form.hasAttribute('data-new-supplier')) await api('/api/admin/suppliers', 'POST', {
       name: values.get('name'), email: values.get('email'), leadDays: values.get('leadDays') });
     else if (form.dataset.supplierId) await api(`/api/admin/suppliers/${encodeURIComponent(form.dataset.supplierId)}`, 'PATCH', {
@@ -309,6 +805,13 @@ $('admin-content').addEventListener('submit', async event => {
         minimumQuantity: Number(values.get('minimumQuantity')), sourceUrl: values.get('sourceUrl'),
         note: values.get('note'), vatIncluded: values.has('vatIncluded'), preferred: values.has('preferred') });
     }
+    else if (form.dataset.receiptVariant) {
+      const price = String(values.get('costEuros') || '').trim();
+      await api('/api/admin/inventory-receipts', 'POST', { variantId: form.dataset.receiptVariant,
+        supplierId: values.get('supplierId'), quantity: Number(values.get('quantity')),
+        unitCostCents: price === '' ? null : Math.round(Number(price) * 100),
+        note: values.get('note'), idempotencyKey: values.get('idempotencyKey') });
+    }
     else if (form.dataset.orderId) await api(`/api/admin/orders/${encodeURIComponent(form.dataset.orderId)}/status`, 'PATCH',
       { status: values.get('status'), note: values.get('note') });
     else if (form.dataset.replyId) await api(`/api/admin/service-requests/${encodeURIComponent(form.dataset.replyId)}/reply`, 'POST',
@@ -320,6 +823,11 @@ $('admin-content').addEventListener('submit', async event => {
       purchasePriceCents: values.get('purchasePriceCents') === '' ? null : Number(values.get('purchasePriceCents')),
       availability: values.get('availability'),
       stockQuantity: values.get('stockQuantity') === '' ? null : Number(values.get('stockQuantity')),
+      reorderPoint: Number(values.get('reorderPoint')),
+      targetStock: Number(values.get('targetStock')),
+      taxRateBps: values.get('taxRatePercent') === '' ? null :
+        Math.round(Number(values.get('taxRatePercent')) * 100),
+      stockNote: values.get('stockNote'),
       priceConfirmed: values.has('priceConfirmed')
     });
     await load();

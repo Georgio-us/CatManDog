@@ -1,4 +1,4 @@
-import { products } from './data.js?v=r2-media-1';
+import { products } from './data.js?v=cat-assortment-1';
 
 const toys = ['mouse', 'rope', 'rabbit'];
 const treats = ['creamy-treats', 'crunchy-treats', 'pure-treats'];

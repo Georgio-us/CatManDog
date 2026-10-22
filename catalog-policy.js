@@ -1,5 +1,5 @@
-// Removed from public merchandising after the assortment review on 2026-10-16
-// Retain records for saved orders and internal references; categories and gift concepts stay available
+// IDs removed from the active assortment after the review on 2026-10-16.
+// Historical order items keep their own name and price snapshots.
 export const retiredProductIds = new Set([
   "fountain",
   "catit-pixi-smart",
@@ -7,6 +7,7 @@ export const retiredProductIds = new Set([
   "catit-pixi-easy-clean",
   "catit-pixi-filters-3",
   "balcony-net",
+  "mesh",
   "trixie-balcony-rail",
   "window-hammock",
   "trixie-balcony-chair",
@@ -46,8 +47,5 @@ export const retiredProductIds = new Set([
   "grooming-glove"
 ]);
 export function applyCatalogPolicy(products) {
-  return products.map(product => retiredProductIds.has(product.id)
-    ? { ...product, catalogHidden: true, storefrontRetired: true,
-        ...(product.variants ? { variants: product.variants.map(variant => ({ ...variant, storefrontRetired: true })) } : {}) }
-    : product);
+  return products.filter(product => !retiredProductIds.has(product.id));
 }

@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 
 import { catalogProducts, products } from '../data.js';
 import { productRetailResearch, productDisplayedPriceSummary, retailResearch, retailRangeText } from '../retail-research.js';
-import { isDemoPrice, storefrontPrice } from '../variants.js';
+import { isDemoPrice, normalizeCart } from '../variants.js';
+import { retiredProductIds } from '../catalog-policy.js';
 
 const product = id => catalogProducts.find(item => item.id === id);
 const variant = id => catalogProducts.flatMap(item => item.variants?.length ? item.variants : [item]).find(item => item.id === id);
@@ -56,10 +57,12 @@ test('first dog assortment has 22 families and 43 priced variants with separate 
   assert.equal(variants.filter(item => item.pricingBasis?.kind === 'analogue_single').length, 8);
 });
 
-test('retired variants cannot surface the demo amount in an old cart', () => {
-  const retired = products.find(item => item.id === 'kong-scrunchie');
-  assert.equal(retired.storefrontRetired, true);
-  assert.equal(storefrontPrice(retired), null);
+test('removed products are absent from every live catalog path and old carts', () => {
+  assert.deepEqual(products.filter(item => retiredProductIds.has(item.id)).map(item => item.id), []);
+  assert.deepEqual(catalogProducts.filter(item => retiredProductIds.has(item.id)).map(item => item.id), []);
+  assert.deepEqual(normalizeCart([{ id: 'kong-scrunchie', size: '1 шт', qty: 1 },
+    { id: 'trixie-balcony-chair', size: '1 шт', qty: 1 },
+    { id: 'mesh', size: '1 × 1 м', qty: 1 }], products), []);
 });
 
 test('supplier calculation stays separate from purchase and competitor retail prices', () => {

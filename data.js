@@ -1,21 +1,18 @@
 import { applyCatalogPolicy } from './catalog-policy.js';
 import { applyRetailUpdates } from './retail-updates.js?v=retail-coverage-1';
 import { applyProvisionalPrices } from './provisional-prices.js';
-import { waterBalconyProducts } from './water-balcony-products.js?v=r2-media-1';
 import { foodProducts as originalFoodProducts } from './food-products.js?v=r2-media-1';
 import { expandRoyalCaninFood } from './royal-canin-products.js?v=r2-media-1';
 import { expandPriorityFood } from './priority-food-products.js?v=r2-media-1';
-import { accessoryProducts } from './accessory-products.js?v=r2-media-1';
 import { heybopetProducts } from './heybopet-products.js?v=r2-media-1';
 import { treatsCareProducts } from './treats-care-products.js?v=r2-media-1';
-import { faireProducts } from './faire-products.js?v=r2-media-1';
 import { yaguProducts, expandYaguCare } from './yagu-products.js?v=r2-media-1';
 import { ownatProducts } from './ownat-products.js?v=r2-media-1';
 import { dogProducts } from './dog-products.js?v=r2-media-1';
 
 const foodProducts = [...expandPriorityFood(expandRoyalCaninFood(originalFoodProducts)), ...ownatProducts];
 
-export const categories = ["Корм", "Лакомства", "Наполнитель", "Игрушки и аксессуары", "Миски и поилки", "Переноски", "Окна и балконы", "Уход", "Подарочные наборы"];
+export const categories = ["Корм", "Лакомства", "Наполнитель", "Игрушки и аксессуары", "Миски и поилки", "Уход", "Подарочные наборы"];
 
 const demoProducts = [
   {
@@ -57,223 +54,6 @@ const demoProducts = [
       "Дерево, шнур и натуральные перья",
       "Играйте вместе под присмотром; после игры убирайте дразнилку",
       "Проверяйте шнур и крепления перед каждой игрой"
-    ],
-    "optionLabel": "Размер",
-    "isNew": false
-  },
-  {
-    "id": "litter",
-    "name": "Растительный наполнитель",
-    "category": "Наполнитель",
-    "pet": "cat",
-    "price": 16.5,
-    "image": 3,
-    "tag": "Каждый день",
-    "line": "CatManDog · Clean home",
-    "sizes": [
-      "6 л",
-      "12 л"
-    ],
-    "description": "Комкующийся наполнитель на растительной основе для привычного домашнего ритуала Без добавленной отдушки - для тех, кому нравится, когда дома пахнет домом",
-    "details": [
-      "Растительная основа",
-      "Без добавленной отдушки",
-      "Регулярно убирайте комки; утилизируйте с бытовыми отходами"
-    ],
-    "optionLabel": "Упаковка",
-    "isNew": false
-  },
-  {
-    "id": "carrier",
-    "name": "Переноска Weekend",
-    "category": "Переноски",
-    "pet": "cat",
-    "price": 69,
-    "image": 4,
-    "tag": "В путь",
-    "line": "CatManDog · Anywhere together",
-    "sizes": [
-      "S",
-      "M"
-    ],
-    "description": "Мягкая переноска для поездок к ветеринару и новых приключений Нейтральный бежевый оттенок, удобные ручки и съёмная подкладка для спокойной дороги",
-    "details": [
-      "Мягкая ткань и вентиляционные вставки",
-      "Выбирайте размер по росту и длине кошки",
-      "Подкладку можно снять; перед перелётом уточняйте правила перевозчика"
-    ],
-    "optionLabel": "Размер",
-    "isNew": false
-  },
-  {
-    "id": "mesh",
-    "name": "Защитная сетка для окна",
-    "category": "Окна и балконы",
-    "pet": "cat",
-    "price": 39,
-    "image": 5,
-    "tag": "Для дома",
-    "line": "CatManDog · Safe spaces",
-    "sizes": [
-      "1 × 1 м",
-      "1 × 1,5 м"
-    ],
-    "description": "Сетка для обустройства защищённого пространства у окна Подбирайте размер и крепления с учётом конструкции вашего окна и привычек кошки",
-    "details": [
-      "Сетка и крепления в комплекте",
-      "Проверяйте крепление перед использованием",
-      "Монтаж по инструкции; не оставляйте кошку у открытого окна без присмотра"
-    ],
-    "optionLabel": "Размер",
-    "isNew": false
-  },
-  {
-    "id": "brush",
-    "name": "Щётка для бережного ухода",
-    "category": "Уход",
-    "pet": "cat",
-    "price": 18,
-    "image": 6,
-    "tag": "Каждый день",
-    "line": "CatManDog · Care rituals",
-    "sizes": [
-      "Один размер"
-    ],
-    "description": "Щётка для спокойных домашних ритуалов Помогает собрать выпавшую шерсть и поддерживать аккуратный вид без спешки и лишних усилий",
-    "details": [
-      "Удобная ручка и закруглённые зубцы",
-      "Подбирайте интенсивность расчёсывания под тип шерсти",
-      "Очищайте от шерсти после каждого использования"
-    ],
-    "optionLabel": "Размер",
-    "isNew": false
-  },
-  {
-    "id": "harness",
-    "name": "Шлейка Daily Walk для кошек",
-    "category": "Аксессуары",
-    "pet": "cat",
-    "price": 32,
-    "image": 7,
-    "tag": "На прогулку",
-    "line": "CatManDog · Walk collection",
-    "sizes": [
-      "XS",
-      "S",
-      "M"
-    ],
-    "description": "Мягкая шлейка для кошек, которым нравится исследовать мир рядом с вами Регулируемая посадка и спокойный бежевый оттенок для коротких прогулок",
-    "details": [
-      "Регулируемые ремни; подбирайте размер по обхвату груди",
-      "Сначала познакомьте кошку со шлейкой дома",
-      "Ручная стирка при 30 °C; поводок приобретается отдельно"
-    ],
-    "optionLabel": "Размер",
-    "isNew": false
-  },
-  {
-    "id": "mineral-litter",
-    "name": "Минеральный наполнитель Basic",
-    "category": "Наполнитель",
-    "pet": "cat",
-    "price": 9.9,
-    "image": 13,
-    "tag": "Базовый выбор",
-    "line": "CatManDog · Clean home",
-    "sizes": [
-      "5 л",
-      "10 л"
-    ],
-    "description": "Комкующийся минеральный наполнитель без отдушки Практичный вариант для привычного лотка и регулярного ухода за домашним пространством",
-    "details": [
-      "Минеральные гранулы без отдушки",
-      "Подходит для открытых и закрытых лотков",
-      "Убирайте комки ежедневно; не смывайте наполнитель в унитаз"
-    ],
-    "optionLabel": "Упаковка",
-    "isNew": false
-  },
-  {
-    "id": "tray-basic",
-    "name": "Открытый лоток Everyday",
-    "category": "Наполнитель",
-    "pet": "cat",
-    "price": 14,
-    "image": 14,
-    "tag": "Базовый выбор",
-    "line": "CatManDog · Clean home",
-    "sizes": [
-      "40 × 30 см",
-      "50 × 40 см"
-    ],
-    "description": "Лёгкий открытый лоток с невысоким бортиком Простая форма, в которую удобно заходить и которую легко мыть - хороший вариант для первого домашнего лотка",
-    "details": [
-      "Гладкий пластик; невысокий вход",
-      "Подбирайте размер по длине кошки",
-      "Мойте тёплой водой с мягким средством без резкого запаха"
-    ],
-    "optionLabel": "Размер",
-    "isNew": false
-  },
-  {
-    "id": "tray-high",
-    "name": "Лоток с высокими бортами Cove",
-    "category": "Наполнитель",
-    "pet": "cat",
-    "price": 28,
-    "image": 15,
-    "tag": "Меньше рассыпанного",
-    "line": "CatManDog · Clean home",
-    "sizes": [
-      "50 × 40 см"
-    ],
-    "description": "Для кошек, которые копают с энтузиазмом Высокие борта помогают удерживать наполнитель внутри, а пониженный вход оставляет лоток удобным каждый день",
-    "details": [
-      "Открытая конструкция с пониженным входом",
-      "Матовый пластик в шалфейном оттенке",
-      "Мойте вручную; наполнитель приобретается отдельно"
-    ],
-    "optionLabel": "Размер",
-    "isNew": false
-  },
-  {
-    "id": "tray-covered",
-    "name": "Закрытый лоток Nest",
-    "category": "Наполнитель",
-    "pet": "cat",
-    "price": 59,
-    "image": 16,
-    "tag": "Красиво дома",
-    "line": "CatManDog · Home collection",
-    "sizes": [
-      "55 × 42 × 40 см"
-    ],
-    "description": "Закрытый лоток с мягкими линиями и спокойным песочным оттенком Для тех, кому важно вписать кошачий уголок в интерьер и оставить питомцу отдельное пространство",
-    "details": [
-      "Съёмная верхняя часть для уборки",
-      "Свободный вход без дверцы",
-      "Дайте кошке привыкнуть; при необходимости начните без крышки"
-    ],
-    "optionLabel": "Размер",
-    "isNew": false
-  },
-  {
-    "id": "litter-scoop",
-    "name": "Лопаточка для лотка Scoop",
-    "category": "Наполнитель",
-    "pet": "cat",
-    "price": 6.5,
-    "image": 17,
-    "tag": "Нужная мелочь",
-    "line": "CatManDog · Clean home",
-    "sizes": [
-      "Один размер"
-    ],
-    "description": "Та самая мелочь, без которой неудобно каждый день Лёгкая лопаточка с прорезями помогает убрать комки и оставить чистый наполнитель в лотке",
-    "details": [
-      "Прочный пластик и удобная ручка",
-      "Прорези для просеивания наполнителя",
-      "Ополаскивайте после уборки; храните отдельно от кухонных принадлежностей"
     ],
     "optionLabel": "Размер",
     "isNew": false
@@ -364,50 +144,6 @@ const demoProducts = [
     "isNew": false
   },
   {
-    "id": "collar",
-    "name": "Ошейник с безопасной застёжкой Soft",
-    "category": "Аксессуары",
-    "pet": "cat",
-    "price": 9.5,
-    "image": 22,
-    "tag": "Нужная мелочь",
-    "line": "CatManDog · Everyday accessories",
-    "sizes": [
-      "Кремовый",
-      "Шалфейный"
-    ],
-    "description": "Лёгкий ошейник для кошек с регулируемой длиной и застёжкой, которая расстёгивается при натяжении Небольшой аккуратный аксессуар для повседневной жизни",
-    "details": [
-      "Регулировка обхвата от 20 до 30 см",
-      "Застёжка с расстёгиванием при натяжении",
-      "Не крепите поводок к ошейнику; проверяйте посадку регулярно"
-    ],
-    "optionLabel": "Цвет",
-    "isNew": false
-  },
-  {
-    "id": "bed-cloud",
-    "name": "Лежанка Cloud",
-    "category": "Аксессуары",
-    "pet": "cat",
-    "price": 49,
-    "image": 23,
-    "tag": "Для уютных моментов",
-    "line": "CatManDog · Home collection",
-    "sizes": [
-      "45 см",
-      "55 см"
-    ],
-    "description": "Мягкое круглое гнёздышко с приподнятым бортиком Для кошек, которые любят свернуться клубочком, и людей, которым нравятся спокойные фактуры дома",
-    "details": [
-      "Мягкий текстиль в оттенке слоновой кости",
-      "Приподнятый бортик и съёмная подушка",
-      "Бережная стирка подушки при 30 °C; сушить естественным способом"
-    ],
-    "optionLabel": "Диаметр",
-    "isNew": false
-  },
-  {
     "id": "bowl-steel",
     "name": "Стальная миска Everyday",
     "category": "Миски и поилки",
@@ -448,133 +184,6 @@ const demoProducts = [
       "Миски можно мыть в машине; деревянную основу протирайте вручную"
     ],
     "optionLabel": "Комплектация",
-    "isNew": false
-  },
-  {
-    "id": "fountain",
-    "name": "Поилка-фонтан Flow",
-    "category": "Миски и поилки",
-    "pet": "cat",
-    "price": 89,
-    "image": 26,
-    "tag": "Для любителей потока",
-    "line": "CatManDog · Home collection",
-    "sizes": [
-      "2 л"
-    ],
-    "description": "Тихий домашний фонтан с небольшим потоком воды и лаконичной формой Для кошек, которым интереснее пить движущуюся воду, и красивого уголка на кухне",
-    "details": [
-      "Резервуар 2 л; насос, кабель и сменный фильтр в комплекте",
-      "Питание через USB; сетевой адаптер приобретается отдельно",
-      "Мойте резервуар и насос по инструкции; фильтр меняйте регулярно"
-    ],
-    "optionLabel": "Объём",
-    "isNew": true
-  },
-  {
-    "id": "carrier-capsule",
-    "name": "Переноска Capsule",
-    "category": "Переноски",
-    "pet": "cat",
-    "price": 99,
-    "image": 27,
-    "tag": "Комфорт в дороге",
-    "line": "CatManDog · Anywhere together",
-    "sizes": [
-      "48 × 32 × 30 см"
-    ],
-    "description": "Жёсткая переноска с округлой формой и широкой передней дверцей Для поездок, в которых хочется оставить кошке устойчивое знакомое пространство",
-    "details": [
-      "Жёсткий корпус с вентиляционными отверстиями",
-      "Передняя дверца с фиксацией; удобная верхняя ручка",
-      "Подбирайте размер по кошке; протирайте корпус мягкой влажной тканью"
-    ],
-    "optionLabel": "Размер",
-    "isNew": true
-  },
-  {
-    "id": "balcony-net",
-    "name": "Сетка для балкона Safe Air",
-    "category": "Окна и балконы",
-    "pet": "cat",
-    "price": 54,
-    "image": 28,
-    "tag": "Больше воздуха",
-    "line": "CatManDog · Safe spaces",
-    "sizes": [
-      "3 × 2 м",
-      "4 × 3 м"
-    ],
-    "description": "Сетка для обустройства защищённого балкона Полупрозрачная структура сохраняет ощущение открытого пространства, а размер можно подобрать под вашу планировку",
-    "details": [
-      "Сетка и крепёжный шнур в комплекте",
-      "Крепления выбирайте с учётом поверхности и конструкции балкона",
-      "Установка по инструкции; регулярно проверяйте натяжение и целостность"
-    ],
-    "optionLabel": "Размер",
-    "isNew": false
-  },
-  {
-    "id": "window-hammock",
-    "name": "Лежанка на окно Sunny Spot",
-    "category": "Окна и балконы",
-    "pet": "cat",
-    "price": 29,
-    "image": 29,
-    "tag": "Место у солнца",
-    "line": "CatManDog · Home collection",
-    "sizes": [
-      "55 × 30 см"
-    ],
-    "description": "Свой маленький наблюдательный пункт для любимого зрителя Светлая лежанка у окна - чтобы смотреть на птиц, греться на солнце и оставаться рядом с вами",
-    "details": [
-      "Текстильное полотно, опоры и присоски",
-      "Для гладкого стекла; проверяйте допустимую нагрузку по инструкции",
-      "Проверяйте крепления перед использованием; не устанавливайте на открывающуюся створку"
-    ],
-    "optionLabel": "Размер",
-    "isNew": false
-  },
-  {
-    "id": "nail-clippers",
-    "name": "Когтерез Clip",
-    "category": "Уход",
-    "pet": "cat",
-    "price": 9,
-    "image": 30,
-    "tag": "Нужная мелочь",
-    "line": "CatManDog · Care rituals",
-    "sizes": [
-      "Один размер"
-    ],
-    "description": "Компактный когтерез с удобными ручками для аккуратного домашнего ухода Небольшой инструмент, который легко держать и хранить рядом со щёткой",
-    "details": [
-      "Рабочая часть из нержавеющей стали",
-      "Срезайте только прозрачный кончик когтя",
-      "Если не уверены в технике, попросите специалиста показать её; очищайте после использования"
-    ],
-    "optionLabel": "Размер",
-    "isNew": false
-  },
-  {
-    "id": "grooming-glove",
-    "name": "Перчатка для ухода Gentle Touch",
-    "category": "Уход",
-    "pet": "cat",
-    "price": 12.9,
-    "image": 31,
-    "tag": "Забота без спешки",
-    "line": "CatManDog · Care rituals",
-    "sizes": [
-      "Правая рука"
-    ],
-    "description": "Мягкая перчатка с короткими силиконовыми зубчиками для спокойного ухода во время привычного поглаживания Для кошек, которым не нравится обычная щётка",
-    "details": [
-      "Текстильная основа и гибкая силиконовая ладонь",
-      "Регулируемая застёжка на запястье",
-      "Убирайте собранную шерсть; промывайте вручную и полностью высушивайте"
-    ],
-    "optionLabel": "Размер",
     "isNew": false
   },
   {
@@ -778,22 +387,11 @@ const demoProducts = [
 ];
 
 // Preserve gift components until the gift assortment is researched separately
-const waterBalconyReplacedIds = new Set(['fountain', 'balcony-net', 'window-hammock', 'mesh']);
-const waterBalconyEANs = new Set(waterBalconyProducts.map(p => p.ean).filter(Boolean));
-const enrichedWaterBalconyProducts = waterBalconyProducts.map(p => {
-  const alternative = accessoryProducts.find(a => a.ean && a.ean === p.ean);
-  return alternative ? { ...p, alternativeSuppliers: [...(p.alternativeSuppliers || []), alternative.supplier] } : p;
-});
 const heybopetFamilyNames = {
   'heybopet-feeder': 'Heybo Pet - автокормушка без камеры',
   'heybopet-camera-feeder': 'Heybo Pet - автокормушка с камерой'
 };
 const catalogHeybopetProducts = heybopetProducts.map(p => ({ ...p, name: heybopetFamilyNames[p.id] || p.name }));
-const faireFamilyNames = {
-  'faire-foggy-dog-sushi': 'The Foggy Dog - суши-игрушки для кошек',
-  'faire-justcool-cat-a6': 'Just Cool Design - мини-принты с котами A6'
-};
-const catalogFaireProducts = faireProducts.map(p => ({ ...p, name: faireFamilyNames[p.id] || p.name }));
 const mergedCategory = category => ["Игрушки", "Аксессуары"].includes(category) ? "Игрушки и аксессуары" : category;
 const mergeCategory = product => {
   if (mergedCategory(product.category) === product.category) return product;
@@ -803,7 +401,7 @@ const mergeCategory = product => {
     ...(product.variants ? { variants: product.variants.map(variant => ({ ...variant, category: mergedCategory(variant.category) })) } : {})
   };
 };
-export const products = applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy([...foodProducts, ...dogProducts, ...expandYaguCare(treatsCareProducts), ...yaguProducts, ...enrichedWaterBalconyProducts, ...accessoryProducts.filter(p => !p.ean || !waterBalconyEANs.has(p.ean)), ...catalogHeybopetProducts, ...catalogFaireProducts, ...demoProducts.filter(p => !waterBalconyReplacedIds.has(p.id)).map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)]).map(mergeCategory)));
+export const products = applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy([...foodProducts, ...dogProducts, ...expandYaguCare(treatsCareProducts), ...yaguProducts, ...catalogHeybopetProducts, ...demoProducts.map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)]).map(mergeCategory)));
 export const catalogProducts = products.filter(p => !p.catalogHidden);
 
 export { articles } from './journal-content.js';

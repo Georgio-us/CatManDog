@@ -44,7 +44,8 @@ export function priceQuote(lines, variants, promo = null) {
       variantLabel: variant.label, qty: line.qty, unitPriceCents: price,
       lineCents: price * line.qty, sourceMode: variant.availability,
       orderable: !!variant.price_confirmed && variant.source_orderable !== false && variant.availability !== 'unavailable' &&
-        (variant.availability !== 'on_hand' || variant.stock_quantity >= line.qty) };
+        (variant.availability !== 'on_hand' ||
+          variant.stock_quantity - (variant.reserved_quantity ?? 0) >= line.qty) };
   });
   const subtotalCents = items.reduce((sum, item) => sum + item.lineCents, 0);
   const percent = promo?.percent_off ?? 0;
