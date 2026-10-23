@@ -1,5 +1,5 @@
 import { createUsefulUI } from './useful.js?v=account-cleanup-1';
-import { createAccountUI } from './account.js?v=cat-assortment-1';
+import { createAccountUI } from './account.js?v=owner-admin-link-1';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, isDemoPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js';
 import { accessoryDetail } from './accessory-ui.js?v=variant-pricing-1';
 import { provisionalPriceLabel } from './retail-research.js?v=variant-pricing-1';

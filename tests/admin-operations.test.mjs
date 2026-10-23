@@ -16,6 +16,31 @@ test('staff cookie is scoped to admin API, HttpOnly and short lived', () => {
   assert.match(clearStaffCookie(true), /Max-Age=0; Secure/);
 });
 
+test('store management link is disclosed only for the matching active Google owner', async () => {
+  let matchingOwner = true;
+  const db = { async query(sql, params) {
+    if (sql.includes('FROM customer_sessions')) return { rows: [{
+      id: 'customer-1', email: 'owner@example.test', googleLinked: true, emailVerified: true }] };
+    if (sql.includes('FROM customers c JOIN staff_accounts s')) {
+      assert.deepEqual(params, ['customer-1']);
+      assert.match(sql, /s\.google_sub=c\.google_sub/);
+      assert.match(sql, /s\.email=c\.email/);
+      assert.match(sql, /s\.role='owner' AND s\.active=true/);
+      return { rows: [{ canManageStore: matchingOwner }] };
+    }
+    throw new Error(`Unexpected query: ${sql}`);
+  } };
+  const req = { method: 'GET', headers: { cookie: `cmd_session=${'a'.repeat(64)}` },
+    socket: { remoteAddress: 'test-owner-link' } };
+  const owner = response();
+  await handleApi(db, req, owner.res, '/api/auth/me');
+  assert.equal(owner.state.body.customer.canManageStore, true);
+  matchingOwner = false;
+  const visitor = response();
+  await handleApi(db, req, visitor.res, '/api/auth/me');
+  assert.equal(visitor.state.body.customer.canManageStore, false);
+});
+
 test('old bearer key alone cannot read or modify the admin API', async () => {
   const previous = process.env.ADMIN_TOKEN;
   process.env.ADMIN_TOKEN = 'a'.repeat(40);

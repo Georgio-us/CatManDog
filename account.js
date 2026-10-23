@@ -54,6 +54,12 @@ export function createAccountUI(helpers) {
   let verifyingToken = null;
   let googleInitialized = false;
   let googleBusy = false;
+  function setCustomer(value) {
+    customer = value;
+    const adminLink = typeof document === 'undefined' ? null : document.querySelector('#admin-link');
+    if (adminLink) adminLink.hidden = value?.canManageStore !== true;
+  }
+  async function refreshCustomer() { setCustomer((await api.me()).customer); }
   function loadGoogleScript() {
     if (window.google?.accounts?.id) return Promise.resolve();
     if (!googleScript) googleScript = new Promise((resolve, reject) => {
@@ -73,11 +79,12 @@ export function createAccountUI(helpers) {
     try {
       if (mode === 'link') {
         await api.linkGoogle(response.credential);
-        customer = { ...customer, googleLinked: true };
+        await refreshCustomer();
         render();
         notify('Google подключён к кабинету');
       } else if (mode === 'signin') {
-        customer = await api.googleSignIn(response.credential);
+        await api.googleSignIn(response.credential);
+        await refreshCustomer();
         await loadRemote();
         navigate('/account');
       }
@@ -123,10 +130,11 @@ export function createAccountUI(helpers) {
       googleClientId = config.googleClientId || null;
       if (!accountsEnabled) { render(); return; }
       if (location.hash.startsWith('#/account/verify?')) { await handleLink(); return; }
-      customer = (await api.me()).customer;
+      await refreshCustomer();
       await loadRemote();
       render();
     } catch (error) {
+      setCustomer(null);
       if (error.status !== 401) console.warn('Cabinet initialization:', error.message);
       render();
     }
@@ -139,7 +147,8 @@ export function createAccountUI(helpers) {
     authStatus = 'Проверяем ссылку из письма';
     render();
     try {
-      customer = await api.verify(token);
+      await api.verify(token);
+      await refreshCustomer();
       await loadRemote();
       notify('Email подтверждён');
       navigate('/account');
@@ -189,7 +198,7 @@ export function createAccountUI(helpers) {
     return `<div class="page pet-onboarding">${pageNote()}<div class="pet-onboarding-grid"><div><span class="pet-eyebrow">У каждого хвоста - свой кабинет</span><h1>Давайте знакомиться<br>Как тебя зовут?</h1><p class="pet-intro-copy">Твои коробки, привычки и маленькие радости - в одном месте. А твой человек поможет всё заполнить.</p><form class="pet-panel pet-onboarding-form" data-account-form="join">${petFields()}${!adding ? '<label class="pet-field">Как зовут твоего человека <span>Необязательно</span><input name="humanName" maxlength="80" autocomplete="given-name" placeholder="Можно просто имя"></label>' : ''}<input type="hidden" name="ref" value="${e(params.get('ref') || '')}"><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">${adding ? 'Добавить питомца' : 'Создать мой кабинет'} ${icon('arrow')}</button><p class="pet-form-hint">${store.mode() === 'remote' ? 'Профиль сохранится в вашем аккаунте' : 'Профиль сохранится на этом устройстве'}</p></form>${!adding && store.mode() === 'personal' && store.activePet() ? '<a class="text-link pet-demo-link" href="#/account">Открыть мой кабинет</a><br>' : ''}${!adding && store.mode() !== 'remote' ? '<a class="text-link pet-demo-link" href="#/account/login">Войти в аккаунт</a>' : '<div class="pet-onboarding-links"><a class="text-link" href="#/account">Вернуться в кабинет</a><button class="text-link" data-account-exit>Выйти из аккаунта</button></div>'}</div><aside class="pet-onboarding-story"><img src="https://img.catmandog.es/assets/hero-happy.png" alt="Кот и собака отдыхают дома"><div><span class="pet-eyebrow">Хорошо быть собой</span><h2>Здесь всё<br>про тебя</h2><p>Когда заканчивается корм<br>Когда хочется новой игрушки<br>Когда у тебя день рождения</p></div></aside></div></div>`;
   }
   function emptyAccount() {
-    return `<div class="page pet-account">${pageNote()}<section class="pet-panel pet-empty-account"><span class="pet-eyebrow">Кабинет с хвостиком</span><h1>Вы вошли в аккаунт</h1><p class="pet-empty-account-email">${e(customer?.email || store.get().human.email || '')}</p><p class="pet-muted">Питомца можно добавить позже</p><div class="pet-empty-account-actions"><a class="button" href="#/join">Добавить питомца ${icon('arrow')}</a><a class="button outline" href="#/catalog">Перейти в каталог</a></div><button class="text-link" data-account-exit>Выйти из аккаунта</button></section></div>`;
+    return `<div class="page pet-account">${pageNote()}<section class="pet-panel pet-empty-account"><span class="pet-eyebrow">Кабинет с хвостиком</span><h1>Вы вошли в аккаунт</h1><p class="pet-empty-account-email">${e(customer?.email || store.get().human.email || '')}</p><p class="pet-muted">Питомца можно добавить позже</p><div class="pet-empty-account-actions"><a class="button" href="#/join">Добавить питомца ${icon('arrow')}</a><a class="button outline" href="#/catalog">Перейти в каталог</a>${customer?.canManageStore ? '<a class="button outline" href="/admin">Управление магазином</a>' : ''}</div><button class="text-link" data-account-exit>Выйти из аккаунта</button></section></div>`;
   }
   function orderCard(order, compact = false) {
     const total = order.items.reduce((sum, item) => sum + item.price * item.qty, 0) * (1 - (order.discount || 0) / 100);
@@ -246,11 +255,11 @@ export function createAccountUI(helpers) {
     const data = store.get();
     const section = path.split('/')[2] || '';
     const content = section === 'care' ? accountTools({ pet, data, escape: e, icon }) : section === 'supplies' ? suppliesPage(pet, data) : section === 'profile' ? profilePage(pet) : section === 'human' ? humanPage(data) : section === 'orders' && store.mode() === 'demo' ? ordersPage(pet, data, path.split('/')[3]) : dashboard(pet, data);
-    return `<div class="page pet-account">${pageNote()}<div class="pet-account-layout"><aside class="pet-sidebar"><a class="pet-account-brand" href="#/account">${icon('paw')} Кабинет с хвостиком</a><div class="pet-switcher" role="group" aria-label="Мои питомцы">${data.pets.map(p => `<button data-account-pet="${e(p.id)}" aria-pressed="${p.id === pet.id}" class="${p.id === pet.id ? 'active' : ''}">${petIcon(p)}<span>${e(p.name)}</span>${p.id === pet.id ? icon('check') : ''}</button>`).join('')}</div><a class="pet-add" href="#/join?add=1">${icon('plus')} Добавить питомца</a><nav class="pet-navigation" aria-label="Разделы кабинета">${sections.map(([key, label, glyph]) => `<a href="#/account${key ? '/' + key : ''}" ${section === key ? 'aria-current="page"' : ''}>${icon(glyph)} ${label}</a>`).join('')}</nav><button class="pet-exit" data-account-exit>${icon('arrow')} ${store.mode() === 'demo' ? 'Создать свой кабинет' : store.mode() === 'remote' ? 'Выйти из аккаунта' : 'Закрыть кабинет'}</button><p class="pet-sidebar-note">Каждому хвостику<br>немного больше заботы</p></aside><div class="pet-account-content">${content}</div></div></div>`;
+    return `<div class="page pet-account">${pageNote()}<div class="pet-account-layout"><aside class="pet-sidebar"><a class="pet-account-brand" href="#/account">${icon('paw')} Кабинет с хвостиком</a><div class="pet-switcher" role="group" aria-label="Мои питомцы">${data.pets.map(p => `<button data-account-pet="${e(p.id)}" aria-pressed="${p.id === pet.id}" class="${p.id === pet.id ? 'active' : ''}">${petIcon(p)}<span>${e(p.name)}</span>${p.id === pet.id ? icon('check') : ''}</button>`).join('')}</div><a class="pet-add" href="#/join?add=1">${icon('plus')} Добавить питомца</a><nav class="pet-navigation" aria-label="Разделы кабинета">${sections.map(([key, label, glyph]) => `<a href="#/account${key ? '/' + key : ''}" ${section === key ? 'aria-current="page"' : ''}>${icon(glyph)} ${label}</a>`).join('')}</nav>${customer?.canManageStore ? `<a class="pet-admin-entry" href="/admin">${icon('shield')} Управление магазином ${icon('arrow')}</a>` : ''}<button class="pet-exit" data-account-exit>${icon('arrow')} ${store.mode() === 'demo' ? 'Создать свой кабинет' : store.mode() === 'remote' ? 'Выйти из аккаунта' : 'Закрыть кабинет'}</button><p class="pet-sidebar-note">Каждому хвостику<br>немного больше заботы</p></aside><div class="pet-account-content">${content}</div></div></div>`;
   }
   async function click(button) {
     if (button.hasAttribute('data-account-pet')) { store.switchPet(button.dataset.accountPet); render(); await syncChanges().catch(() => {}); }
-    if (button.hasAttribute('data-account-exit')) { if (store.mode() === 'remote') { try { await api.logout(); customer = null; store.disconnectRemote(); navigate('/account/login'); } catch (error) { notify(error.message); } } else { store.open('personal'); navigate('/account/welcome'); } }
+    if (button.hasAttribute('data-account-exit')) { if (store.mode() === 'remote') { try { await api.logout(); setCustomer(null); store.disconnectRemote(); navigate('/account/login'); } catch (error) { notify(error.message); } } else { store.open('personal'); navigate('/account/welcome'); } }
     if (button.hasAttribute('data-account-reminder')) { store.toggleReminder(button.dataset.accountReminder); render(); await syncChanges().catch(() => {}); }
     if (button.hasAttribute('data-account-repeat')) {
       const order = store.get().orders.find(o => o.id === button.dataset.accountRepeat && o.petId === store.activePet()?.id);
@@ -302,7 +311,7 @@ export function createAccountUI(helpers) {
         try {
           const result = await api[kind]({ email: values.get('email'), password: values.get('password'), name: values.get('name') });
           if (kind === 'register') { pendingEmail = result.email; pendingLinkKind = 'verify'; navigate('/account/check-email'); }
-          else { customer = result; await loadRemote(); navigate('/account'); }
+          else { await refreshCustomer(); await loadRemote(); navigate('/account'); }
         } catch (error) {
           if (kind === 'login' && error.status === 403) {
             pendingEmail = String(values.get('email') || '');

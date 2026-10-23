@@ -134,6 +134,8 @@ button:hover:not(:disabled) {
   stroke-width: 1.6;
 }
 
+#admin-link[hidden] { display: none; }
+
 .button {
   display: inline-flex;
   align-items: center;

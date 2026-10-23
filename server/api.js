@@ -1237,7 +1237,12 @@ export async function handleApi(db, req, res, pathname) {
     if (pathname === '/api/auth/me' && req.method === 'GET') {
       const customer = await currentCustomer(db, req);
       if (!customer) bad('Войдите в кабинет', 401);
-      return json(res, 200, { customer });
+      const { rows } = await db.query(`SELECT EXISTS (
+        SELECT 1 FROM customers c JOIN staff_accounts s
+          ON s.google_sub=c.google_sub AND s.email=c.email
+        WHERE c.id=$1 AND c.google_sub IS NOT NULL AND s.role='owner' AND s.active=true
+      ) AS "canManageStore"`, [customer.id]);
+      return json(res, 200, { customer: { ...customer, canManageStore: rows[0].canManageStore } });
     }
     if (pathname === '/api/me/cabinet' && ['GET', 'PUT'].includes(req.method)) {
       if (!enabled('ACCOUNTS_ENABLED')) bad('Кабинет пока не подключён', 503);

@@ -23,6 +23,9 @@
 .pet-navigation a { display: flex; align-items: center; gap: 12px; padding: 12px 10px; border-radius: 10px; font-size: 13px; color: var(--muted); }
 .pet-navigation a[aria-current="page"] { background: var(--ink); color: white; font-weight: 650; }
 .pet-navigation a:hover { background: var(--surface); color: var(--ink); }
+.pet-admin-entry { display: flex; align-items: center; gap: 12px; margin-top: 10px; padding: 12px 10px; border-radius: 10px; color: var(--ink); font-size: 13px; font-weight: 650; }
+.pet-admin-entry:hover { background: var(--surface); }
+.pet-admin-entry svg:last-child { margin-left: auto; }
 .pet-exit { margin-top: 30px; padding: 10px; }
 .pet-sidebar-note { color: #96978f; font-size: 11px; margin: 30px 10px; }
 .pet-account-content { min-width: 0; }
