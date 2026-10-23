@@ -10,6 +10,7 @@ import { googleClientId, verifyGoogleCredential, googleOwnsEmail } from './googl
 import { currentStaff, createStaffSession, staffCookie, clearStaffCookie,
   revokeStaffSession, bootstrapOwner } from './staff.js';
 import { financePreview } from './finance.js';
+import { backupConfiguration, listBackups } from './backup.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
@@ -391,6 +392,15 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { role: fullAdmin ? 'admin' : 'support',
       name: operator?.name || customer?.name || '', email: operator?.email || customer?.email });
   if (!fullAdmin && !path.startsWith('/api/admin/service-requests')) bad('Доступ закрыт', 403);
+  if (path === '/api/admin/backups' && req.method === 'GET') {
+    const config = backupConfiguration();
+    if (!config) return json(res, 200, { enabled: false, backups: [] });
+    try {
+      const backups = await listBackups(config.s3, config.bucket);
+      return json(res, 200, { enabled: true, backups: backups.slice(0, 2).map(item =>
+        ({ createdAt: item.LastModified, bytes: item.Size })) });
+    } finally { config.s3.destroy(); }
+  }
   if (path === '/api/admin/finance' && req.method === 'GET') {
     const [profile, totals, orders, taxCoverage] = await Promise.all([
       db.query('SELECT * FROM billing_profile WHERE id=true'),

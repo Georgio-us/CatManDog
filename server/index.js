@@ -2,6 +2,7 @@ import { createServer } from 'node:http';
 import { createDatabase, initializeDatabase } from './db.js';
 import { handleApi } from './api.js';
 import { serveStatic } from './http.js';
+import { startBackupScheduler } from './backup.js';
 
 const port = Number(process.env.PORT || 8080);
 const db = createDatabase();
@@ -34,4 +35,5 @@ const server = createServer(async (req, res) => {
 });
 
 server.listen(port, '0.0.0.0', () => console.info(`CatManDog listening on ${port}`));
-process.on('SIGTERM', () => server.close(() => db?.end()));
+const stopBackups = startBackupScheduler(initialized ? db : null);
+process.on('SIGTERM', () => { stopBackups(); server.close(() => db?.end()); });

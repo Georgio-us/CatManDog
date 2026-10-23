@@ -1,0 +1,9 @@
+.git
+node_modules
+assets
+.env
+.env.*
+!.env.example
+research/supplier-files
+research/supplier-cats
+*.log
