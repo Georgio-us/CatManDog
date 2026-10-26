@@ -1,20 +1,20 @@
-import { createUsefulUI } from './useful.js?v=account-cleanup-1';
-import { createAccountUI } from './account.js?v=owner-admin-link-1';
+import { createUsefulUI } from './useful.js?v=es-locale-3';
+import { createAccountUI } from './account.js?v=es-locale-3';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, isDemoPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js';
-import { accessoryDetail } from './accessory-ui.js?v=retail-reference-1';
-import { provisionalPriceLabel } from './retail-research.js?v=variant-pricing-1';
+import { accessoryDetail } from './accessory-ui.js?v=es-locale-3';
+import { provisionalPriceLabel } from './retail-research.js?v=es-locale-3';
 import { recommendForProduct } from './recommendations.js?v=dog-first-wave-1';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=variant-pricing-1';
 import { loadSupplierTerms } from './supplier-terms.js';
 import { categories, products, catalogProducts, articles } from './data.js?v=retail-reference-1';
-import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=cat-assortment-1';
+import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=es-locale-3';
 import { checkoutTotals, FREE_DELIVERY_FROM, DELIVERY_FEE } from './checkout-model.js';
-import { createCheckoutUI } from './checkout-ui.js?v=service-live-1';
+import { createCheckoutUI } from './checkout-ui.js?v=es-locale-3';
 import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=technical-audit-1';
 
 import { homeDirections, activeHomeLanding } from './collections.js?v=cat-assortment-1';
-import { installLocale, intlLocale, locale, translate } from './locale.js';
+import { installLocale, intlLocale, locale, translate } from './locale.js?v=es-locale-3';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 
 const app = document.querySelector('#app');

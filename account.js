@@ -1,8 +1,8 @@
 import { createAccountStore } from './account-store.js?v=cat-assortment-1';
-import { createAccountApi } from './account-api.js?v=google-signin-2';
-import { accountTools } from './useful.js?v=account-cleanup-1';
+import { createAccountApi } from './account-api.js?v=es-locale-3';
+import { accountTools } from './useful.js?v=es-locale-3';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
-import { intlLocale, locale } from './locale.js';
+import { intlLocale, locale } from './locale.js?v=es-locale-3';
 const store = createAccountStore(localStorage);
 const api = createAccountApi();
 

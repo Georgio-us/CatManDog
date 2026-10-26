@@ -1,4 +1,4 @@
-import { es, esPatterns } from './locales/es.js';
+import { es, esPatterns } from './locales/es.js?v=es-locale-3';
 import { esProductText } from './locales/product-es.js';
 import { esDetails } from './locales/details-es.js';
 

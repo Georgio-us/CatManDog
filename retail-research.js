@@ -1,6 +1,6 @@
 import { retailObservations } from './retail-observations.js';
 import { isDemoPrice } from './variants.js';
-import { locale, translate } from './locale.js';
+import { locale, translate } from './locale.js?v=es-locale-3';
 
 const retailerTaxPolicies = {
   kiwoko: 'https://www.kiwoko.com/condiciones-de-uso.html',
