@@ -1046,6 +1046,10 @@ export const es = {
 };
 
 export const esPatterns = [
+  [/^(.+) - упаковка (.+)$/, (_, name, size) => `${name} - envase de ${size}`],
+  [/^(.+) - студийное изображение рецептуры$/, (_, name) => `${name} - imagen de estudio de la receta`],
+  [/^(.+) - студийное изображение$/, (_, name) => `${name} - imagen de estudio`],
+  [/^(.+) - изображение линейки$/, (_, name) => `${name} - imagen de la gama`],
   [/^Цена сопоставимой мягкой шлейки; цену Yagu (T\d) проверить$/, (_, size) => `Precio de un arnés acolchado comparable; queda por comprobar el precio de Yagu ${size}`],
   [/^Та же модель размера ([SL]) в Германии; цену в Испании проверить$/, (_, size) => `El mismo modelo en talla ${size} se vende en Alemania; queda por comprobar el precio en España`],
   [/^Проверено (\d{4})-(\d{2})-(\d{2})$/, (_, year, month, day) => `Consultado el ${Number(day)}/${Number(month)}/${year}`],

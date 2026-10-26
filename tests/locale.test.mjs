@@ -10,8 +10,8 @@ const { articlesEs } = await import('../journal-content-es.js');
 
 test('Spanish catalogue copy covers product names, descriptions and variants', () => {
   for (const product of [...catalogProducts, ...products]) {
-    const fields = [product.name, product.description, product.tag, product.weight,
-      ...(product.variants || []).flatMap(variant => [variant.name, variant.description, variant.label])];
+    const fields = [product.name, product.description, product.tag, product.weight, product.image?.alt,
+      ...(product.variants || []).flatMap(variant => [variant.name, variant.description, variant.label, variant.image?.alt])];
     for (const value of fields.filter(Boolean)) {
       assert.doesNotMatch(translate(value), /[А-Яа-яЁё]/u, `${product.id}: ${value}`);
     }
