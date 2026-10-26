@@ -1043,9 +1043,22 @@ export const es = {
   'Приборы для приготовления еды': 'Aparatos para preparar comida',
   'LEONARDO - испанский магазин бренда': 'LEONARDO - tienda oficial en España',
   'Ownat - PVPR Испания, февраль 2026': 'Ownat - PVP recomendado en España, febrero de 2026',
+  'Каталог испанской розницы': 'Catálogo de tiendas españolas',
+  'Kit Cat España - официальный магазин': 'Kit Cat España - tienda oficial',
+  'Yagu - каталог 2026': 'Yagu - catálogo de 2026',
+  'Duvo Tower - точная коричневая модель': 'Duvo Tower - modelo marrón exacto',
+  'официальный магазин': 'tienda oficial',
+  'каталог 2026': 'catálogo de 2026',
+  'точная коричневая модель': 'modelo marrón exacto',
+  'камера': 'cámara',
+  'две миски': 'dos recipientes',
 };
 
 export const esPatterns = [
+  [/^Референс (.+)$/, (_, brand) => `Referencia de ${brand}`],
+  [/^Модель: (.+)$/, (_, model) => `Modelo: ${model}`],
+  [/^Размер: (.+)$/, (_, size) => `Talla: ${size}`],
+  [/^Цвет: (.+)$/, (_, color) => `Color: ${color}`],
   [/^(.+) - упаковка (.+)$/, (_, name, size) => `${name} - envase de ${size}`],
   [/^(.+) - студийное изображение рецептуры$/, (_, name) => `${name} - imagen de estudio de la receta`],
   [/^(.+) - студийное изображение$/, (_, name) => `${name} - imagen de estudio`],

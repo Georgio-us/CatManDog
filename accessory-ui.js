@@ -1,6 +1,6 @@
 import { hasSupplierTerms, supplierTermsDetail } from './supplier-terms.js';
 import { hasVariants, resolveVariant, storefrontPrice, isDemoPrice, canBuy } from './variants.js';
-import { retailResearch, retailResearchBlock, provisionalPriceBlock, provisionalPriceLabel } from './retail-research.js?v=es-locale-3';
+import { retailResearch, retailResearchBlock, provisionalPriceBlock, provisionalPriceLabel } from './retail-research.js?v=es-locale-4';
 
 export function accessoryDetail(product, helpers) {
   const { crumbs, imageBlock, escape, icon, favorites, goodTogether, money, variantId, quantity = 1 } = helpers;

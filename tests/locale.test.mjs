@@ -42,7 +42,16 @@ test('Spanish storefront has no Russian copy in surfaced catalogue and service l
     'Лакомство для вашего питомца', 'Миска для кормления',
     'Для вопросов о заказе подготовлена форма поддержки. Запрос на возврат можно начать через отдельную форму. После проверки обращение можно отправить команде',
     'MP Bergamo · Чёрный · 950 мл - Белый · 950 мл · 2 formatos',
-    'Yagu · T2 · шея 25-27 см - T4 · cuello 35-37 cm · 3 formatos'
+    'Yagu · T2 · шея 25-27 см - T4 · cuello 35-37 cm · 3 formatos',
+    'Источник фото - Каталог испанской розницы',
+    'Источник фото - Референс Royal Canin',
+    'Источник товара - Kit Cat España - официальный магазин',
+    'Источник фото - Duvo Tower - точная коричневая модель',
+    'Размер: T2 · шея 25-27 cm',
+    'Цвет: Negro · 950 ml',
+    'Модель: ICB-20 - Open',
+    'Heybo Pet · PFV-4L - 4 l · камера',
+    'Heybo Pet · PFW-7L - 7 l · две миски'
   ];
   for (const label of labels) assert.doesNotMatch(translate(label), /[А-Яа-яЁё]/u, label);
 });
