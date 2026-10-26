@@ -24,7 +24,7 @@
 
 Публичный сайт и API запускаются командой `npm start`. `GET /api/health` проверяет соединение с PostgreSQL. `GET /api/config` возвращает включенные функции. Локально без базы сайт продолжает обслуживаться, API сообщает о недоступной базе.
 
-Флаги по умолчанию выключены: `ACCOUNTS_ENABLED`, `ORDERS_ENABLED`, `SUPPORT_ENABLED`. Приём заказа также требует `PAYMENTS_ENABLED`. Для настоящих аккаунтов нужны `RESEND_API_KEY`, `RESEND_FROM` и публичный HTTPS-адрес `PUBLIC_BASE_URL`. Домен отправителя подтверждён, вход по email и Google работает. Поддержка использует `SUPPORT_ENABLED=true`, `SUPPORT_INBOX` и проверенный аккаунт `SUPPORT_STAFF_EMAIL`; отправка доступна только при рабочем Resend. Оплата и оформление пока остаются демонстрационными.
+Флаги по умолчанию выключены: `ACCOUNTS_ENABLED`, `ORDERS_ENABLED`, `SUPPORT_ENABLED`. Даже если включить `ORDERS_ENABLED` и `PAYMENTS_ENABLED`, сервер не создаст заказ до реализации платёжного провайдера. Для настоящих аккаунтов нужны `RESEND_API_KEY`, `RESEND_FROM` и публичный HTTPS-адрес `PUBLIC_BASE_URL`. Домен отправителя подтверждён, вход по email и Google работает. Поддержка использует `SUPPORT_ENABLED=true`, `SUPPORT_INBOX` и проверенный аккаунт `SUPPORT_STAFF_EMAIL`; отправка доступна только при рабочем Resend. Оплата и оформление пока остаются демонстрационными.
 
 ## Что ещё требуется для реального запуска
 

@@ -11,7 +11,7 @@ import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOpt
 import { checkoutTotals, FREE_DELIVERY_FROM, DELIVERY_FEE } from './checkout-model.js';
 import { createCheckoutUI } from './checkout-ui.js?v=service-live-1';
 import { orderVariantId } from './order-progress.js';
-import { applyServerCatalog } from './server-prices.js?v=retail-reference-1';
+import { applyServerCatalog } from './server-prices.js?v=technical-audit-1';
 
 import { homeDirections, activeHomeLanding } from './collections.js?v=cat-assortment-1';
 

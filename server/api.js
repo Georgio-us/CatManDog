@@ -15,6 +15,9 @@ import { backupConfiguration, listBackups } from './backup.js';
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
 const enabled = name => process.env[name] === 'true';
+// Configuration flags alone must never open checkout before a payment provider is integrated.
+const paymentGatewayImplemented = false;
+const ordersReady = () => paymentGatewayImplemented && enabled('ORDERS_ENABLED') && enabled('PAYMENTS_ENABLED');
 const bad = (message, status = 400) => { throw Object.assign(new Error(message), { status }); };
 const optionalWebUrl = value => {
   const url = cap(value, 300);
@@ -120,7 +123,7 @@ async function recordInventoryMovement(client, values) {
 }
 
 async function createOrder(db, payload, customer) {
-  if (!enabled('ORDERS_ENABLED') || !enabled('PAYMENTS_ENABLED'))
+  if (!ordersReady())
     bad('Приём заказов ещё не включён', 503);
   const idempotency = cap(payload.idempotencyKey, 100);
   if (!/^[a-zA-Z0-9_-]{20,100}$/.test(idempotency)) bad('Повторите оформление заказа');
@@ -1212,18 +1215,20 @@ export async function handleApi(db, req, res, pathname) {
     }
     if (!db) bad('База данных ещё не подключена', 503);
     if (pathname === '/api/config' && req.method === 'GET') return json(res, 200,
-      { ordersEnabled: enabled('ORDERS_ENABLED'), accountsEnabled: enabled('ACCOUNTS_ENABLED'),
+      { ordersEnabled: ordersReady(), accountsEnabled: enabled('ACCOUNTS_ENABLED'),
         emailEnabled: emailReady(), googleClientId: enabled('ACCOUNTS_ENABLED') ? googleClientId() : null,
-        paymentsEnabled: enabled('PAYMENTS_ENABLED'),
+        paymentsEnabled: paymentGatewayImplemented && enabled('PAYMENTS_ENABLED'),
         supportEnabled: enabled('SUPPORT_ENABLED') && emailReady() });
     if (pathname === '/api/catalog' && req.method === 'GET') {
       const list = await liveCatalogSnapshot(db);
       return json(res, 200, { variants: list.map(({ price_override_cents, source_price_cents,
-        purchase_price_cents, stock_quantity, reserved_quantity, reorder_point, target_stock,
+        purchase_price_cents, sale_price_cents, stock_quantity, reserved_quantity, reorder_point, target_stock,
         tax_rate_bps,
         ...entry }) => ({ ...entry,
         priceCents: entry.price_confirmed ? price_override_cents ?? source_price_cents : null,
         referencePriceCents: entry.price_confirmed ? null : source_price_cents,
+        availableForCart: entry.source_orderable && entry.availability !== 'unavailable' &&
+          (entry.availability !== 'on_hand' || stock_quantity - reserved_quantity > 0),
         availability: entry.availability })) });
     }
     if (pathname === '/api/checkout/quote' && req.method === 'POST') {

@@ -38,7 +38,9 @@ export function priceQuote(lines, variants, promo = null) {
     if (seen.has(id)) throw new Error('Повторяющийся вариант в корзине');
     seen.add(id);
     if (!Number.isInteger(line.qty) || line.qty < 1 || line.qty > 99) throw new Error('Некорректное количество');
-    const price = variant.price_override_cents ?? variant.source_price_cents;
+    const price = variant.price_confirmed
+      ? variant.price_override_cents ?? variant.source_price_cents
+      : variant.source_price_cents;
     if (!Number.isInteger(price) || price <= 0) throw new Error('Цена товара ещё не подтверждена');
     return { productId: variant.product_id, variantId: id, name: variant.name,
       variantLabel: variant.label, qty: line.qty, unitPriceCents: price,

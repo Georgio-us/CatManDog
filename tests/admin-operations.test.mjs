@@ -46,10 +46,10 @@ test('public catalog exposes sourced references without inventing a sale price',
     if (sql.includes('FROM catalog_variants v JOIN catalog_products p')) return { rows: [
       { variant_id: 'reference', product_id: 'food', source_price_cents: 2219,
         price_override_cents: 9999, price_confirmed: false, source_orderable: true,
-        availability: 'source_on_demand', stock_quantity: null },
+        availability: 'source_on_demand', stock_quantity: null, reserved_quantity: 0 },
       { variant_id: 'confirmed', product_id: 'food', source_price_cents: 2219,
         price_override_cents: 2499, price_confirmed: true, source_orderable: true,
-        availability: 'source_on_demand', stock_quantity: null }
+        availability: 'source_on_demand', stock_quantity: null, reserved_quantity: 0 }
     ] };
     if (sql.includes('reserved_quantity>0')) return { rows: [] };
     throw new Error(`Unexpected query: ${sql}`);
@@ -61,8 +61,30 @@ test('public catalog exposes sourced references without inventing a sale price',
   assert.equal(output.state.body.variants[0].priceCents, null);
   assert.equal(output.state.body.variants[0].referencePriceCents, 2219);
   assert.equal(output.state.body.variants[0].orderable, false);
+  assert.equal(output.state.body.variants[0].availableForCart, true);
+  assert.equal(Object.hasOwn(output.state.body.variants[0], 'sale_price_cents'), false);
   assert.equal(output.state.body.variants[1].priceCents, 2499);
   assert.equal(output.state.body.variants[1].referencePriceCents, null);
+});
+
+test('public catalog marks reserved stock and supplier-disabled SKUs unavailable to the cart', async () => {
+  const db = { async query(sql) {
+    if (sql.includes('FROM catalog_variants v JOIN catalog_products p')) return { rows: [
+      { variant_id: 'reserved', product_id: 'food', source_price_cents: 2000,
+        price_override_cents: 2500, price_confirmed: true, source_orderable: true,
+        availability: 'on_hand', stock_quantity: 2, reserved_quantity: 0 },
+      { variant_id: 'disabled', product_id: 'food', source_price_cents: 2000,
+        price_override_cents: 2500, price_confirmed: true, source_orderable: false,
+        availability: 'source_on_demand', stock_quantity: null, reserved_quantity: 0 }
+    ] };
+    if (sql.includes('reserved_quantity>0')) return { rows: [{ id: 'reserved', reserved_quantity: 2 }] };
+    throw new Error(`Unexpected query: ${sql}`);
+  } };
+  const output = response();
+  await handleApi(db, { method: 'GET', headers: {}, socket: { remoteAddress: 'test-stock-cart' } },
+    output.res, '/api/catalog');
+  assert.equal(output.state.status, 200);
+  assert.deepEqual(output.state.body.variants.map(row => row.availableForCart), [false, false]);
 });
 
 test('old bearer key alone cannot read or modify the admin API', async () => {

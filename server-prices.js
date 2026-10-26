@@ -13,7 +13,7 @@ export function applyServerPrices(products, entries) {
       sku.price = row.priceCents / 100;
       sku.priceStatus = 'confirmed';
       sku.serverPriceConfirmed = true;
-      if (!row.source_orderable || row.availability === 'unavailable' ||
+      if (row.availableForCart === false || !row.source_orderable || row.availability === 'unavailable' ||
           (row.availability === 'on_hand' && row.stock_quantity === 0))
         sku.availabilityStatus = 'unavailable';
       else sku.availabilityStatus = row.availability;
@@ -64,7 +64,9 @@ export function applyServerCatalog(products, catalogProducts, entries) {
       sku.description = row.variant_description || product.description;
       sku.details = Array.isArray(row.variant_details) && row.variant_details.length
         ? row.variant_details : product.details;
-      sku.availabilityStatus = row.availability === 'on_hand' && row.stock_quantity <= 0
+      sku.availabilityStatus = row.availableForCart === false || row.source_orderable === false ||
+        row.availability === 'unavailable' ||
+        (row.availability === 'on_hand' && row.stock_quantity <= 0)
         ? 'unavailable' : row.availability;
       sku.serverPriceConfirmed = row.price_confirmed === true;
       if (row.price_confirmed === true && Number.isInteger(row.priceCents) && row.priceCents > 0) {

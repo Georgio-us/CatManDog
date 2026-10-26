@@ -4,6 +4,7 @@ import { catalogRows, importCatalog, catalogSnapshot } from '../server/catalog.j
 import { priceQuote, validateAddress, validateDelivery } from '../server/pricing.js';
 import { hashPassword, verifyPassword, sessionCookie } from '../server/auth.js';
 import { applyServerPrices, applyServerCatalog } from '../server-prices.js';
+import { canBuy } from '../variants.js';
 import { handleApi } from '../server/api.js';
 import { retiredProductIds } from '../catalog-policy.js';
 
@@ -72,6 +73,14 @@ test('server blocks unconfirmed, unavailable and overdrawn variants', () => {
   assert.throws(() => priceQuote([{ ...lines[0], variantId:'other' }], [variant]));
 });
 
+test('public quote never uses a draft sale price before confirmation', () => {
+  const quote = priceQuote([{ ...lines[0], qty: 1 }], [
+    { ...variant, price_confirmed: false, price_override_cents: 9900 }
+  ]);
+  assert.equal(quote.items[0].unitPriceCents, 2909);
+  assert.equal(quote.orderable, false);
+});
+
 test('address and desired delivery time remain marked for manual verification', () => {
   const address = { city:'València', postcode:'46001', street:'Carrer de la Pau', building:'12' };
   assert.equal(validateAddress(address), null);
@@ -137,6 +146,21 @@ test('database catalog controls published products and keeps reference prices se
   assert.equal(products[2].variants[0].price, 12.99);
 });
 
+test('storefront disables cart actions for reserved stock and supplier-disabled variants', () => {
+  const products = [];
+  const catalogProducts = [];
+  applyServerCatalog(products, catalogProducts, [
+    { variant_id:'reserved',product_id:'food',name:'Food',brand:'Brand',category:'Корм',pet:'cat',
+      label:'1 кг',price_confirmed:true,priceCents:1299,source_orderable:true,
+      availability:'on_hand',availableForCart:false },
+    { variant_id:'disabled',product_id:'treat',name:'Treat',brand:'Brand',category:'Лакомства',pet:'cat',
+      label:'1 шт',price_confirmed:true,priceCents:299,source_orderable:false,
+      availability:'source_on_demand',availableForCart:false }
+  ]);
+  assert.equal(canBuy(products[0].variants[0]), false);
+  assert.equal(canBuy(products[1].variants[0]), false);
+});
+
 test('unauthorized admin request returns 403 without an unhandled rejection', async () => {
   const req = { method:'GET', headers:{}, socket:{remoteAddress:'127.0.0.1'} };
   let status, body;
@@ -144,4 +168,30 @@ test('unauthorized admin request returns 403 without an unhandled rejection', as
   await handleApi({}, req, res, '/api/admin/orders');
   assert.equal(status, 403);
   assert.equal(body.error, 'Доступ закрыт');
+});
+
+test('checkout stays closed even if both order flags are enabled before payment integration', async () => {
+  const previousOrders = process.env.ORDERS_ENABLED;
+  const previousPayments = process.env.PAYMENTS_ENABLED;
+  process.env.ORDERS_ENABLED = 'true';
+  process.env.PAYMENTS_ENABLED = 'true';
+  try {
+    const db = { async query() { throw new Error('Database should not be used for checkout'); } };
+    const config = { status: null, body: null };
+    const res = { writeHead(status) { config.status = status; }, end(body) { config.body = JSON.parse(body); } };
+    await handleApi(db, { method: 'GET', headers: {}, socket: { remoteAddress: 'test-payment-gate' } },
+      res, '/api/config');
+    assert.equal(config.body.ordersEnabled, false);
+    assert.equal(config.body.paymentsEnabled, false);
+    const order = { status: null, body: null };
+    const orderRes = { writeHead(status) { order.status = status; }, end(body) { order.body = JSON.parse(body); } };
+    await handleApi(db, { method: 'POST', headers: {}, socket: { remoteAddress: 'test-payment-gate' },
+      async *[Symbol.asyncIterator]() { yield '{}'; } }, orderRes, '/api/orders');
+    assert.equal(order.status, 503);
+  } finally {
+    if (previousOrders === undefined) delete process.env.ORDERS_ENABLED;
+    else process.env.ORDERS_ENABLED = previousOrders;
+    if (previousPayments === undefined) delete process.env.PAYMENTS_ENABLED;
+    else process.env.PAYMENTS_ENABLED = previousPayments;
+  }
 });
