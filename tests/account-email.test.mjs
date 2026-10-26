@@ -19,6 +19,14 @@ test('account email uses the public HTTPS domain and an individual one-time link
     assert.deepEqual(JSON.parse(sent.options.body).to, ['pet@example.test']);
     assert.match(JSON.parse(sent.options.body).text,
       /https:\/\/catmandog\.es\/#\/account\/reset\?token=token-value/);
+    await sendAccountLink('pet@example.test', 'verify', 'otro-token', async (url, options) => {
+      sent = { url, options };
+      return { ok: true };
+    }, 'es');
+    const spanish = JSON.parse(sent.options.body);
+    assert.equal(spanish.subject, 'Confirma tu email - CatManDog');
+    assert.match(spanish.text, /Confirmar email: https:\/\/catmandog\.es\/#\/account\/verify\?token=otro-token/);
+    assert.doesNotMatch(spanish.text, /[А-Яа-яЁё]/u);
     process.env.PUBLIC_BASE_URL = 'http://catmandog.es/';
     assert.equal(emailReady(), false);
   } finally {

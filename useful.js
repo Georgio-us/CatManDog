@@ -1,6 +1,7 @@
 import { clinics, checkedAt, destinations, transports, travelSources } from './useful-data.js';
 import { tripChecklist, tripProgress } from './trip-planner.js';
-const dateText = value => new Intl.DateTimeFormat('ru', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(value + 'T12:00:00')).replace(/\.$/, '');
+import { intlLocale } from './locale.js?v=es-1';
+const dateText = value => new Intl.DateTimeFormat(intlLocale(), { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(value + 'T12:00:00')).replace(/\.$/, '');
 const mapQuery = clinic => encodeURIComponent(`${clinic.name}, ${clinic.address}`);
 const routeLink = clinic => `https://www.google.com/maps/dir/?api=1&destination=${mapQuery(clinic)}`;
 export function accountTools({ pet, data, escape: e, icon }) {

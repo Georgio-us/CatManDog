@@ -25,6 +25,11 @@ test('support request notifies the team and customer, and replies come from CatM
     assert.deepEqual(sent[2].to, ['pet@example.test']);
     assert.equal(sent[2].reply_to, 'support@catmandog.es');
     assert.match(sent[2].text, /Ваш заказ в пути/);
+    await notifyServiceRequest({ id: 'consulta-id', kind: 'support', locale: 'es',
+      email: 'pet@example.test', orderNumber: 'CMD-102', message: '¿Dónde está mi pedido?' }, fetcher);
+    assert.equal(sent[4].subject, 'Hemos recibido tu consulta - CatManDog');
+    assert.match(sent[4].text, /Número de consulta: consulta-id/);
+    assert.doesNotMatch(sent[4].text, /[А-Яа-яЁё]/u);
   } finally {
     for (const [key, value] of Object.entries(previous)) {
       if (value === undefined) delete process.env[key];

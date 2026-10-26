@@ -1,5 +1,6 @@
 import { checkoutTotals, deliveryTiming, FREE_DELIVERY_FROM, DELIVERY_FEE, validateCheckout } from './checkout-model.js';
 import { orderProgress } from './order-progress.js';
+import { locale } from './locale.js';
 
 export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems, isReady, getPromo, applyPromo, findOrder, productLabel, render }) {
   let formValues = {};
@@ -89,7 +90,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     const selectedQuantity = linkedOrder?.items.find(item => `${item.productId}|${item.variantId || ''}` === selectedProduct ||
       (draftValues.product && (demoOrder ? `${item.name} · ${item.variant || '1 шт'}` : productLabel?.(item)) === draftValues.product))?.qty || 99;
     const quantityField = returning ? `<label>Количество<input type="number" name="quantity" min="1" max="${selectedQuantity}" value="${e(Math.min(Number(draftValues.quantity) || 1, selectedQuantity))}" required></label>` : '';
-    const topicField = returning ? '' : `<label class="checkout-wide">Тема<span class="service-select"><select name="topic">${['Вопрос о заказе', 'Доставка', 'Товар', 'Другое'].map(value => `<option ${draftValues.topic === value ? 'selected' : ''}>${value}</option>`).join('')}</select>${selectArrow}</span></label>`;
+    const topicField = returning ? '' : `<label class="checkout-wide">Тема<span class="service-select"><select name="topic">${['Вопрос о заказе', 'Доставка', 'Товар', 'Другое'].map(value => `<option value="${e(value)}" ${draftValues.topic === value ? 'selected' : ''}>${value}</option>`).join('')}</select>${selectArrow}</span></label>`;
     const sent = saved && servicePreview.sent === true;
     const demoNumber = saved && /^DEMO-/.test(servicePreview.values.orderNumber || '');
     const draft = saved ? `<div class="checkout-preview-notice service-draft" id="service-preview" role="status">${icon(sent ? 'check' : 'shield')} <div><strong>${sent ? 'Обращение отправлено' : 'Проверьте обращение'}</strong><p>${sent ? 'Мы сохранили обращение и ответим на указанный email' : supportEnabled ? demoNumber ? 'Демозаказ служит примером. Для настоящего обращения откройте форму без демонстрационного номера.' : 'Проверьте данные и отправьте обращение.' : 'Это черновик. Сообщение не отправлено.'}</p>${supportEnabled && demoNumber ? `<a class="text-link" href="#/${returning ? 'returns' : 'support'}">Открыть новую форму</a>` : ''}<dl><div><dt>Заказ</dt><dd>${e(servicePreview.values.orderNumber || 'Не указан')}</dd></div><div><dt>Email</dt><dd>${e(servicePreview.values.email)}</dd></div><div><dt>Товар</dt><dd>${e(servicePreview.values.product || 'Весь заказ')}</dd></div>${returning ? `<div><dt>Количество</dt><dd>${e(servicePreview.values.quantity)}</dd></div>` : ''}${!returning ? `<div><dt>Тема</dt><dd>${e(servicePreview.values.topic)}</dd></div>` : ''}<div><dt>Сообщение</dt><dd>${e(servicePreview.values.message)}</dd></div></dl>${serviceError ? `<p class="checkout-error" role="alert">${e(serviceError)}</p>` : ''}${supportEnabled && !sent && !demoNumber ? `<button type="button" class="button" data-service-send>Отправить обращение ${icon('arrow')}</button>` : ''}</div></div>` : '';
@@ -187,7 +188,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
       servicePreview = { kind: form.dataset.serviceForm,
         routeOrderNumber: new URLSearchParams((globalThis.location?.hash || '').split('?')[1] || '').get('order') || '',
         values, sent: false,
-        payload: { kind: form.dataset.serviceForm, orderNumber: values.orderNumber,
+        payload: { kind: form.dataset.serviceForm, locale: locale(), orderNumber: values.orderNumber,
           email: values.email, productId: selected?.dataset.productId || null,
           variantId: selected?.dataset.variantId || null, quantity, message } };
       render();

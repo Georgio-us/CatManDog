@@ -2,13 +2,14 @@ import { createAccountStore } from './account-store.js?v=cat-assortment-1';
 import { createAccountApi } from './account-api.js?v=google-signin-2';
 import { accountTools } from './useful.js?v=account-cleanup-1';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
+import { intlLocale, locale } from './locale.js?v=es-1';
 const store = createAccountStore(localStorage);
 const api = createAccountApi();
 
 const preferenceOptions = ['Сухой корм', 'Влажный корм', 'Без зерна', 'Стерилизован', 'Чувствительное пищеварение', 'Игрушки с кошачьей мятой'];
 const sections = [['', 'Мой кабинет', 'paw'], ['supplies', 'Мои запасы', 'calendar'], ['care', 'Мои инструменты', 'map'], ['profile', 'Мой профиль', 'cat'], ['human', 'Мой человек', 'heart']];
 const statuses = { packing: 'Собираем коробку', received: 'Демозаказ сохранён', delivering: 'Везём к вам', delivered: 'Коробка доставлена' };
-const dateLabel = value => new Intl.DateTimeFormat('ru', { day: 'numeric', month: 'long' }).format(new Date(value + 'T12:00:00'));
+const dateLabel = value => new Intl.DateTimeFormat(intlLocale(), { day: 'numeric', month: 'long' }).format(new Date(value + 'T12:00:00'));
 const petYears = birthdayValue => {
   if (!birthdayValue) return null;
   const birthday = new Date(birthdayValue + 'T12:00:00');
@@ -19,10 +20,12 @@ const petYears = birthdayValue => {
   return { months, years: Math.floor(months / 12) };
 };
 const yearsLabel = years => {
+  if (locale() === 'es') return `${years} ${years === 1 ? 'año' : 'años'}`;
   const ending = new Intl.PluralRules('ru').select(years);
   return `${years} ${ending === 'one' ? 'год' : ending === 'few' ? 'года' : 'лет'}`;
 };
 const catYearsLabel = years => {
+  if (locale() === 'es') return `${years} ${years === 1 ? 'año felino' : 'años felinos'}`;
   const ending = new Intl.PluralRules('ru').select(years);
   return `${years} ${ending === 'one' ? 'кошачий год' : ending === 'few' ? 'кошачьих года' : 'кошачьих лет'}`;
 };
@@ -30,15 +33,15 @@ const catYearsLabel = years => {
 const catHumanYears = years => years === 1 ? 15 : 24 + (years - 2) * 4;
 const catAgePreview = birthday => {
   const age = petYears(birthday);
-  return age?.years >= 1 ? `${catYearsLabel(age.years)} - примерно ${catHumanYears(age.years)} по человеческим меркам` : '';
+  return age?.years >= 1 ? locale() === 'es' ? `${catYearsLabel(age.years)} - unos ${catHumanYears(age.years)} años humanos` : `${catYearsLabel(age.years)} - примерно ${catHumanYears(age.years)} по человеческим меркам` : '';
 };
 const ageLabel = pet => {
-  if (!pet.birthday) return pet.age || 'Возраст пока не указан';
+  if (!pet.birthday) return pet.age || (locale() === 'es' ? 'Edad no indicada' : 'Возраст пока не указан');
   const age = petYears(pet.birthday);
-  if (!age) return pet.age || 'Возраст пока не указан';
+  if (!age) return pet.age || (locale() === 'es' ? 'Edad no indicada' : 'Возраст пока не указан');
   const { months, years } = age;
-  if (months < 12) return `${months} мес`;
-  return pet.species === 'cat' ? `${catYearsLabel(years)} · примерно ${catHumanYears(years)} по человеческим меркам` : yearsLabel(years);
+  if (months < 12) return locale() === 'es' ? `${months} ${months === 1 ? 'mes' : 'meses'}` : `${months} мес`;
+  return pet.species === 'cat' ? locale() === 'es' ? `${catYearsLabel(years)} · unos ${catHumanYears(years)} años humanos` : `${catYearsLabel(years)} · примерно ${catHumanYears(years)} по человеческим меркам` : yearsLabel(years);
 };
 export function createAccountUI(helpers) {
   const { escape: e, icon, money, products, imageBlock, render, notify, getCart, repeatOrder } = helpers;
@@ -115,7 +118,7 @@ export function createAccountUI(helpers) {
         googleInitialized = true;
       }
       window.google.accounts.id.renderButton(host, { type: 'standard', theme: 'outline', size: 'large',
-        shape: 'pill', text: 'continue_with', locale: 'ru', width: Math.min(320, host.parentElement?.clientWidth || 300) });
+        shape: 'pill', text: 'continue_with', locale: locale(), width: Math.min(320, host.parentElement?.clientWidth || 300) });
     } catch (error) { if (host.isConnected) host.textContent = error.message; }
   }
   async function loadRemote() {
@@ -210,7 +213,7 @@ export function createAccountUI(helpers) {
   function dashboard(pet, data) {
     const reminders = data.reminders.filter(r => r.petId === pet.id && !r.done);
     const trips = (data.trips || []).filter(t => t.petId === pet.id);
-    return `<div class="pet-welcome"><div><span class="pet-eyebrow">Мой маленький мир</span><h1>Привет, ${e(pet.name)}</h1><p>Всё для твоей хорошей жизни с хвостиком</p></div>${petIcon(pet)}</div><div class="pet-stat-grid pet-stat-grid-two"><a href="#/account/supplies"><span>${icon('calendar')} Мои планы</span><strong>${reminders.length}</strong><small>Покупки, о которых стоит помнить</small></a><a href="#/account/care"><span>${icon('compass')} Мои поездки</span><strong>${trips.length}</strong><small>Сохранённые маршруты и чек-листы</small></a></div><div class="pet-dashboard-grid"><section class="pet-panel"><div class="pet-panel-head"><h2>Мои планы</h2><a class="text-link" href="#/account/supplies">Все планы</a></div>${reminders.length ? reminders.slice(0, 3).map(reminderRow).join('') : '<p class="pet-muted">Планов пока нет</p>'}<a class="pet-inline-link" href="#/account/supplies">${icon('plus')} Запланировать покупку</a></section><section class="pet-panel"><div class="pet-panel-head"><h2>Мои инструменты</h2><a class="text-link" href="#/account/care">Открыть</a></div><div class="pet-dashboard-tools"><a href="#/useful/clinics">${icon('map')} Найти ветеринарную клинику ${icon('arrow')}</a><a href="#/useful/travel">${icon('compass')} Собрать чек-лист поездки ${icon('arrow')}</a></div></section></div><section class="pet-profile-summary pet-panel">${petIcon(pet)}<div><span class="pet-eyebrow">Пара слов обо мне</span><h2>${e(pet.name)}</h2><p>${e(pet.breed || (pet.species === 'dog' ? 'Любимая собака' : 'Любимая домашняя кошка'))} · ${e(ageLabel(pet))}</p><div class="pet-chips">${(pet.preferences || []).map(v => `<span>${e(v)}</span>`).join('')}</div></div><a class="text-link" href="#/account/profile">Мой профиль</a></section>`;
+    return `<div class="pet-welcome"><div><span class="pet-eyebrow">Мой маленький мир</span><h1>Привет, ${e(pet.name)}</h1><p>Всё для твоей хорошей жизни с хвостиком</p></div>${petIcon(pet)}</div><div class="pet-stat-grid pet-stat-grid-two"><a href="#/account/supplies"><span>${icon('calendar')} Мои планы</span><strong>${reminders.length}</strong><small>Покупки, о которых стоит помнить</small></a><a href="#/account/care"><span>${icon('compass')} Мои поездки</span><strong>${trips.length}</strong><small>Сохранённые маршруты и чек-листы</small></a></div><div class="pet-dashboard-grid"><section class="pet-panel"><div class="pet-panel-head"><h2>Мои планы</h2><a class="text-link" href="#/account/supplies">Все планы</a></div>${reminders.length ? reminders.slice(0, 3).map(reminderRow).join('') : '<p class="pet-muted">Планов пока нет</p>'}<a class="pet-inline-link" href="#/account/supplies">${icon('plus')} Запланировать покупку</a></section><section class="pet-panel"><div class="pet-panel-head"><h2>Мои инструменты</h2><a class="text-link" href="#/account/care">Открыть</a></div><div class="pet-dashboard-tools"><a href="#/useful/clinics">${icon('map')} Найти ветеринарную клинику ${icon('arrow')}</a><a href="#/useful/travel">${icon('compass')} Собрать чек-лист поездки ${icon('arrow')}</a></div></section></div><section class="pet-profile-summary pet-panel">${petIcon(pet)}<div><span class="pet-eyebrow">Пара слов обо мне</span><h2 data-no-translate>${e(pet.name)}</h2><p>${e(pet.breed || (pet.species === 'dog' ? 'Любимая собака' : 'Любимая домашняя кошка'))} · ${e(ageLabel(pet))}</p><div class="pet-chips">${(pet.preferences || []).map(v => `<span>${e(v)}</span>`).join('')}</div></div><a class="text-link" href="#/account/profile">Мой профиль</a></section>`;
   }
   function orderDetailPage(pet, order) {
     const subtotal = order.items.reduce((sum, item) => sum + item.price * item.qty, 0);
@@ -255,7 +258,7 @@ export function createAccountUI(helpers) {
     const data = store.get();
     const section = path.split('/')[2] || '';
     const content = section === 'care' ? accountTools({ pet, data, escape: e, icon }) : section === 'supplies' ? suppliesPage(pet, data) : section === 'profile' ? profilePage(pet) : section === 'human' ? humanPage(data) : section === 'orders' && store.mode() === 'demo' ? ordersPage(pet, data, path.split('/')[3]) : dashboard(pet, data);
-    return `<div class="page pet-account">${pageNote()}<div class="pet-account-layout"><aside class="pet-sidebar"><a class="pet-account-brand" href="#/account">${icon('paw')} Кабинет с хвостиком</a><div class="pet-switcher" role="group" aria-label="Мои питомцы">${data.pets.map(p => `<button data-account-pet="${e(p.id)}" aria-pressed="${p.id === pet.id}" class="${p.id === pet.id ? 'active' : ''}">${petIcon(p)}<span>${e(p.name)}</span>${p.id === pet.id ? icon('check') : ''}</button>`).join('')}</div><a class="pet-add" href="#/join?add=1">${icon('plus')} Добавить питомца</a><nav class="pet-navigation" aria-label="Разделы кабинета">${sections.map(([key, label, glyph]) => `<a href="#/account${key ? '/' + key : ''}" ${section === key ? 'aria-current="page"' : ''}>${icon(glyph)} ${label}</a>`).join('')}</nav>${customer?.canManageStore ? `<a class="pet-admin-entry" href="/admin">${icon('shield')} Управление магазином ${icon('arrow')}</a>` : ''}<button class="pet-exit" data-account-exit>${icon('arrow')} ${store.mode() === 'demo' ? 'Создать свой кабинет' : store.mode() === 'remote' ? 'Выйти из аккаунта' : 'Закрыть кабинет'}</button><p class="pet-sidebar-note">Каждому хвостику<br>немного больше заботы</p></aside><div class="pet-account-content">${content}</div></div></div>`;
+    return `<div class="page pet-account">${pageNote()}<div class="pet-account-layout"><aside class="pet-sidebar"><a class="pet-account-brand" href="#/account">${icon('paw')} Кабинет с хвостиком</a><div class="pet-switcher" role="group" aria-label="Мои питомцы">${data.pets.map(p => `<button data-account-pet="${e(p.id)}" aria-pressed="${p.id === pet.id}" class="${p.id === pet.id ? 'active' : ''}">${petIcon(p)}<span data-no-translate>${e(p.name)}</span>${p.id === pet.id ? icon('check') : ''}</button>`).join('')}</div><a class="pet-add" href="#/join?add=1">${icon('plus')} Добавить питомца</a><nav class="pet-navigation" aria-label="Разделы кабинета">${sections.map(([key, label, glyph]) => `<a href="#/account${key ? '/' + key : ''}" ${section === key ? 'aria-current="page"' : ''}>${icon(glyph)} ${label}</a>`).join('')}</nav>${customer?.canManageStore ? `<a class="pet-admin-entry" href="/admin">${icon('shield')} Управление магазином ${icon('arrow')}</a>` : ''}<button class="pet-exit" data-account-exit>${icon('arrow')} ${store.mode() === 'demo' ? 'Создать свой кабинет' : store.mode() === 'remote' ? 'Выйти из аккаунта' : 'Закрыть кабинет'}</button><p class="pet-sidebar-note">Каждому хвостику<br>немного больше заботы</p></aside><div class="pet-account-content">${content}</div></div></div>`;
   }
   async function click(button) {
     if (button.hasAttribute('data-account-pet')) { store.switchPet(button.dataset.accountPet); render(); await syncChanges().catch(() => {}); }

@@ -396,6 +396,13 @@ button:hover:not(:disabled) {
   font-size: 14px;
 }
 
+@media (min-width: 1051px) and (max-width: 1350px) {
+  .header { gap: 22px; }
+  .header nav { gap: 16px; font-size: 13px; white-space: nowrap; }
+  .header-actions { gap: 12px; }
+  .brand { width: 128px; }
+}
+
 .header nav a:hover {
   color: #778529;
 }
@@ -409,6 +416,40 @@ button:hover:not(:disabled) {
   display: flex;
   gap: 17px;
   align-items: center;
+}
+
+.language-switcher {
+  display: flex;
+  flex: none;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #f7f7f3;
+}
+
+.language-switcher button {
+  min-width: 29px;
+  min-height: 29px;
+  padding: 0 5px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #656660;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.language-switcher button[aria-pressed="true"] {
+  background: var(--ink);
+  color: #fff;
+}
+
+.language-switcher button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
 }
 
 .bag {
@@ -2548,11 +2589,11 @@ details .text-link {
   }
 
   .brand {
-    width: 145px;
+    width: 112px;
   }
 
   .header-actions {
-    gap: 10px;
+    gap: 7px;
   }
 
   .header nav {
@@ -3653,6 +3694,14 @@ details .text-link {
 @media (max-width: 360px) {
   .catalog-layout .product-grid { grid-template-columns: 1fr; }
   .catalog-layout .product-card { max-width: 360px; }
+}
+
+@media (max-width: 420px) {
+  .header { padding: 0 12px; gap: 8px; }
+  .brand { width: 96px; }
+  .header-actions { gap: 4px; }
+  .header-actions .icon-button { width: 29px; }
+  .language-switcher button { min-width: 24px; min-height: 26px; padding: 0 2px; font-size: 10px; }
 }
 
 @media (max-width: 760px) {

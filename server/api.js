@@ -57,14 +57,14 @@ function productFields(body) {
   return { name, brand, category, pet, description, foodType, imagePath, details };
 }
 
-async function issueAccountLink(db, customerId, kind, email) {
+async function issueAccountLink(db, customerId, kind, email, language = 'ru') {
   const token = randomBytes(32).toString('hex');
   await db.query('DELETE FROM auth_links WHERE customer_id=$1 AND kind=$2 AND consumed_at IS NULL',
     [customerId, kind]);
   await db.query(`INSERT INTO auth_links(id,customer_id,kind,token_hash,expires_at)
     VALUES($1,$2,$3,$4,now()+($5::integer * interval '1 minute'))`,
   [randomUUID(), customerId, kind, tokenDigest(token), kind === 'verify' ? 1440 : 30]);
-  await sendAccountLink(email, kind, token);
+  await sendAccountLink(email, kind, token, fetch, language);
 }
 
 function rateLimit(req, group, limit, minutes = 15) {
@@ -226,7 +226,7 @@ async function authRoute(db, req, res, path) {
       if (error.code === '23505') bad('Этот email уже используется', 409);
       throw error;
     }
-    await issueAccountLink(db, id, 'verify', email);
+    await issueAccountLink(db, id, 'verify', email, body.locale === 'es' ? 'es' : 'ru');
     return json(res, 201, { pending: true, email });
   }
   if (path === '/api/auth/login') {
@@ -301,7 +301,7 @@ async function authRoute(db, req, res, path) {
     const customer = rows[0];
     const kind = path.endsWith('recover') ? 'reset' : 'verify';
     if (customer && (kind === 'reset' ? !!customer.email_verified_at : !customer.email_verified_at)) {
-      try { await issueAccountLink(db, customer.id, kind, email); }
+      try { await issueAccountLink(db, customer.id, kind, email, body.locale === 'es' ? 'es' : 'ru'); }
       catch (error) { console.error('Account email failed:', error.message); }
     }
     return json(res, 202, { accepted: true });
@@ -1318,6 +1318,7 @@ export async function handleApi(db, req, res, pathname) {
         body.kind, email, cap(body.productId, 180) || null, cap(body.variantId, 180) || null,
         body.quantity && Number.isInteger(body.quantity) ? body.quantity : null, cap(body.message, 1200), orderNumber || null]);
       try { await notifyServiceRequest({ id: requestId, kind: body.kind, email,
+        locale: body.locale === 'es' ? 'es' : 'ru',
         orderNumber, message: cap(body.message, 1200) }); }
       catch (error) { console.error('Support notification failed:', error.message); }
       return json(res, 202, { accepted: true, id: requestId });
