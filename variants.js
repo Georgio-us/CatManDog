@@ -8,10 +8,9 @@ export function resolveVariant(product, variantId) {
 export function confirmedPrice(sku) {
   return sku && sku.priceStatus !== 'pending' && Number.isFinite(sku.price) && sku.price > 0 ? sku.price : null;
 }
-export const DEMO_PRICE = 7.77;
 export const isDemoPrice = sku => !!sku && confirmedPrice(sku) === null;
-// Keep sourcing prices untouched; the storefront uses an explicit demo price
-export const storefrontPrice = sku => sku ? (sku.storefrontRetired ? null : confirmedPrice(sku) ?? DEMO_PRICE) : null;
+// Unknown prices stay unknown; retail references never become confirmed sale prices.
+export const storefrontPrice = sku => sku?.storefrontRetired ? null : confirmedPrice(sku);
 export function canBuy(sku) {
   return storefrontPrice(sku) !== null && !sku.storefrontRetired && !['unavailable','out-of-stock','outOfStock','discontinued'].includes(sku.availabilityStatus);
 }

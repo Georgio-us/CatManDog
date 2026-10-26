@@ -108,7 +108,7 @@ test('only confirmed server prices replace storefront retail estimates', () => {
   assert.equal(products[0].variants[1].price, 6.5);
 });
 
-test('database catalog controls published products, variants and demo prices', () => {
+test('database catalog controls published products and keeps reference prices separate from confirmed sale prices', () => {
   const products = [{ id:'old',name:'Old',catalogHidden:false },
     { id:'gift',name:'Gift',gift:'personal' },
     { id:'food',name:'Before',variants:[{ id:'food-1',label:'old',price:9.9 }] }];
@@ -118,7 +118,7 @@ test('database catalog controls published products, variants and demo prices', (
       pet:'cat',image_path:'https://img.catmandog.es/assets/food.webp',description:'Описание',
       details:['Состав'],food_type:'dry',variant_image_path:'https://img.catmandog.es/assets/food-2kg.webp',
       variant_description:'Описание фасовки',variant_details:['2 кг'],
-      label:'2 кг',price_confirmed:false,priceCents:2999,
+      label:'2 кг',price_confirmed:false,priceCents:null,referencePriceCents:2999,
       availability:'source_on_demand',stock_quantity:null },
     { variant_id:'new-1',product_id:'new',name:'New',brand:'CatManDog',category:'Лакомства',
       pet:'dog',image_path:'https://img.catmandog.es/assets/new.webp',description:'Новый товар',
@@ -131,7 +131,9 @@ test('database catalog controls published products, variants and demo prices', (
   assert.equal(products[1].variants[0].label, '2 кг');
   assert.equal(products[1].variants[0].description, 'Описание фасовки');
   assert.equal(products[1].variants[0].image.src, 'https://img.catmandog.es/assets/food-2kg.webp');
-  assert.equal(products[1].variants[0].priceStatus, 'pending');
+  assert.equal(products[1].variants[0].priceStatus, 'temporary');
+  assert.equal(products[1].variants[0].price, 29.99);
+  assert.equal(products[1].variants[0].serverPriceConfirmed, false);
   assert.equal(products[2].variants[0].price, 12.99);
 });
 

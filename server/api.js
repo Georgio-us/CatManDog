@@ -1222,7 +1222,8 @@ export async function handleApi(db, req, res, pathname) {
         purchase_price_cents, stock_quantity, reserved_quantity, reorder_point, target_stock,
         tax_rate_bps,
         ...entry }) => ({ ...entry,
-        priceCents: entry.price_confirmed ? price_override_cents ?? source_price_cents : 777,
+        priceCents: entry.price_confirmed ? price_override_cents ?? source_price_cents : null,
+        referencePriceCents: entry.price_confirmed ? null : source_price_cents,
         availability: entry.availability })) });
     }
     if (pathname === '/api/checkout/quote' && req.method === 'POST') {
@@ -1238,9 +1239,8 @@ export async function handleApi(db, req, res, pathname) {
       const customer = await currentCustomer(db, req);
       if (!customer) bad('Войдите в кабинет', 401);
       const { rows } = await db.query(`SELECT EXISTS (
-        SELECT 1 FROM customers c JOIN staff_accounts s
-          ON s.google_sub=c.google_sub AND s.email=c.email
-        WHERE c.id=$1 AND c.google_sub IS NOT NULL AND s.role='owner' AND s.active=true
+        SELECT 1 FROM customers c JOIN staff_accounts s ON s.email=c.email
+        WHERE c.id=$1 AND c.email_verified_at IS NOT NULL AND s.role='owner' AND s.active=true
       ) AS "canManageStore"`, [customer.id]);
       return json(res, 200, { customer: { ...customer, canManageStore: rows[0].canManageStore } });
     }

@@ -1,17 +1,17 @@
 import { createUsefulUI } from './useful.js?v=account-cleanup-1';
 import { createAccountUI } from './account.js?v=owner-admin-link-1';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, isDemoPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js';
-import { accessoryDetail } from './accessory-ui.js?v=variant-pricing-1';
+import { accessoryDetail } from './accessory-ui.js?v=retail-reference-1';
 import { provisionalPriceLabel } from './retail-research.js?v=variant-pricing-1';
 import { recommendForProduct } from './recommendations.js?v=dog-first-wave-1';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=variant-pricing-1';
 import { loadSupplierTerms } from './supplier-terms.js';
-import { categories, products, catalogProducts, articles } from './data.js?v=cat-assortment-1';
+import { categories, products, catalogProducts, articles } from './data.js?v=retail-reference-1';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=cat-assortment-1';
 import { checkoutTotals, FREE_DELIVERY_FROM, DELIVERY_FEE } from './checkout-model.js';
 import { createCheckoutUI } from './checkout-ui.js?v=service-live-1';
 import { orderVariantId } from './order-progress.js';
-import { applyServerCatalog } from './server-prices.js?v=database-catalog-1';
+import { applyServerCatalog } from './server-prices.js?v=retail-reference-1';
 
 import { homeDirections, activeHomeLanding } from './collections.js?v=cat-assortment-1';
 
@@ -90,8 +90,8 @@ function card(p){
   const sku=resolveVariant(p);
   const configure=family||p.gift||!canBuy(sku);
   const actionLabel=family?'Выбрать вариант':p.gift?'Выбрать набор':!canBuy(sku)?'К товару':'В корзину';
-  const caption=pricing.demo?'Демонстрационная цена':family?'Цена зависит от фасовки':sku.serverPriceConfirmed?'Цена с IVA':p.isReal?(sku.retailPrice?.type==='recommended'?'Рекомендованная розничная цена':'Розничный ориентир'):'';
-  const displayPrice=pricing.min!==null&&pricing.min!==pricing.max?`${money(pricing.min)} - ${money(pricing.max)}`:`${p.gift==='personal'?'от ':''}${money(pricing.amount)}`;
+  const caption=pricing.amount===null?'Цена уточняется':family?'Цена зависит от фасовки':sku.serverPriceConfirmed?'Цена с IVA':p.isReal?provisionalPriceLabel(sku)||(sku.retailPrice?.type==='recommended'?'Рекомендованная розничная цена':'Ценовой ориентир'):'';
+  const displayPrice=pricing.amount===null?'Цена уточняется':pricing.min!==pricing.max?`${money(pricing.min)} - ${money(pricing.max)}`:`${p.gift==='personal'?'от ':''}${money(pricing.amount)}`;
   return `<article class="product-card ${p.isReal?'real-product-card':''}"><a class="product-card-open" href="#/product/${escape(p.id)}" aria-label="Открыть товар: ${escape(p.name)}"></a><div class="product-media">${imageBlock(p.image)}<span class="product-tag">${escape(p.tag||'')}</span><button class="icon-button favorite ${favorites.includes(p.id)?'selected':''}" data-favorite="${escape(p.id)}" aria-label="${favorites.includes(p.id)?'Убрать из избранного':'В избранное'}: ${escape(p.name)}" aria-pressed="${favorites.includes(p.id)}">${icon('heart')}</button></div><div class="product-info"><small>${escape(p.brand||'CatManDog')}${p.weight?` · ${escape(p.weight)}`:''}${family?` · ${itemCount(p.variants.length).replace('товар','вариант')}`:''}</small><div class="product-title"><h3>${escape(p.name)} <span class="product-open-cue">${icon('arrow')}</span></h3></div><span class="retail-label" ${caption?'':'aria-hidden="true"'}>${caption}</span><div class="product-price"><div class="product-price-values"><span>${displayPrice}</span>${!pricing.demo&&!family&&p.old?`<span class="old-price">${money(p.old)}</span>`:''}</div><button class="product-card-action" ${configure?'data-configure':'data-add'}="${escape(p.id)}" aria-label="${actionLabel}: ${escape(p.name)}">${actionLabel}${icon(configure?'arrow':'bag')}</button></div></div></article>`;
 }
 function goodTogether(product){
@@ -228,6 +228,11 @@ function cartPage(){
   const needsChoice=cart.some(item=>item.needsVariantSelection);
   const pending=cart.some(item=>cartUnitPrice(item)===null);
   const unavailable=cart.some(item=>!canBuy(cartSku(item,products)));
+  const referenceOnly=cart.some(item=>{
+    const parent=products.find(product=>product.id===(item.productId||item.id));
+    const sku=cartSku(item,products);
+    return parent && !parent.gift && sku && !sku.serverPriceConfirmed;
+  });
   const promo=account.store.promo();
   const totals=pending?null:checkoutTotals(cart.map(item=>({price:cartUnitPrice(item),qty:item.qty})),promo);
   const subtotal=totals?.subtotal??null;
@@ -236,7 +241,7 @@ function cartPage(){
   const deliveryHint=totals&&!unavailable?(totals.freeDelivery
     ? `<div class="cart-delivery-hint"><strong>${promo?.freeShipping?'Доставка бесплатная по купону':'Порог бесплатной доставки достигнут'}</strong><span>${promo?.freeShipping?'Купон убрал стоимость доставки':`Вы экономите ${money(DELIVERY_FEE)} на доставке по Валенсии`}</span></div>`
     : `<div class="cart-delivery-hint"><strong>До бесплатной доставки - ${money(Math.max(0, Math.round(FREE_DELIVERY_FROM*100)-Math.round(totals.products*100))/100)}</strong><span>При сумме товаров от ${money(FREE_DELIVERY_FROM)} доставка ${money(DELIVERY_FEE)} исчезнет из итога</span></div>`):'';
-  const footerNote=needsChoice?'Выберите вариант товара, чтобы увидеть итог':pending?'Цена одного из вариантов уточняется. Итог будет доступен после подтверждения.':unavailable?'Один из вариантов сейчас недоступен. Проверьте состав корзины.':'';
+  const footerNote=needsChoice?'Выберите вариант товара, чтобы увидеть итог':pending?'Цена одного из вариантов уточняется. Итог будет доступен после подтверждения.':unavailable?'Один из вариантов сейчас недоступен. Проверьте состав корзины.':referenceOnly?'Это ориентир по изученным ценам. Цены продажи ещё не подтверждены.':'';
   const rows=cart.map((item,index)=>{
     const parent=products.find(product=>product.id===(item.productId||item.id));
     const sku=cartSku(item,products);
@@ -246,10 +251,10 @@ function cartPage(){
     const link=`#/product/${parent.id}${item.variantId?'?variant='+encodeURIComponent(item.variantId):''}`;
     const unitPrice=needsVariant?null:cartUnitPrice(item);
     const variantText=needsVariant?'Вариант не выбран':`${parent.optionLabel||sku.optionLabel||'Вариант'}: ${offer?.label??item.variantLabel??item.size}`;
-    const priceLabel=product.storefrontRetired?'Товар больше не представлен':needsVariant?'Выберите вариант для расчёта цены':isDemoPrice(product)?'Демонстрационная цена':product.serverPriceConfirmed?'Цена с IVA':product.isReal?provisionalPriceLabel(product)||(product.retailPrice?.type==='recommended'?'Рекомендованная розничная цена':'Розничный ориентир'):'';
+    const priceLabel=product.storefrontRetired?'Товар больше не представлен':needsVariant?'Выберите вариант для расчёта цены':isDemoPrice(product)?'Цена уточняется':product.serverPriceConfirmed?'Цена с IVA':product.isReal?provisionalPriceLabel(product)||(product.retailPrice?.type==='recommended'?'Рекомендованная розничная цена':'Розничный ориентир'):'';
     return `<article class="cart-row"><a href="${link}" aria-label="${escape(product.name)}">${imageBlock(offer?.image??product.image)}</a><div><a href="${link}"><h3>${escape(product.name)}</h3></a><p>${escape(product.brand||'CatManDog')}</p><p class="cart-variant">${escape(variantText)}</p>${needsVariant?`<a class="text-link cart-choose-variant" href="${link}">Выбрать вариант</a>`:''}${priceLabel?`<span class="retail-label">${escape(priceLabel)}</span>`:''}${offer?`<div class="cart-gift-details"><p>${offer.items.map(part=>escape(part.name)).join(' + ')}<br>Коробка и открытка включены</p>${offer.config.recipient?`<p>Для: <strong>${escape(offer.config.recipient)}</strong></p>`:''}${offer.config.message?`<p class="cart-greeting">«${escape(offer.config.message)}»</p>`:''}${offer.preorder?'<span class="gift-status">Предзаказ · дата отправки пока не объявлена</span>':''}</div>`:''}<div class="quantity"><button data-cart-qty="${index}" data-delta="-1" aria-label="Уменьшить количество ${escape(product.name)}">${icon('minus')}</button><span>${item.qty}</span><button data-cart-qty="${index}" data-delta="1" aria-label="Увеличить количество ${escape(product.name)}">${icon('plus')}</button></div></div><div class="cart-row-right"><strong>${unitPrice===null?'После выбора варианта':money(unitPrice*item.qty)}</strong>${unitPrice===null?'':`<small class="cart-unit-price">${money(unitPrice)} / шт</small>`}<button class="remove" data-remove="${index}">Удалить</button></div></article>`;
   }).join('');
-  return `<div class="page">${crumbs('Корзина')}<h1 class="page-title">Ваша корзина${count?` <span class="muted">(${count})</span>`:''}</h1>${!count?empty('Пока здесь тихо','Самое время найти что-нибудь для любимого хвостика','За покупками','#/catalog'):`<div class="cart-layout"><div>${rows}</div><aside class="cart-summary"><h2>Всё самое нужное</h2><div class="summary-line"><span>Товары (${count})</span><span>${subtotal===null?pendingTotalLabel:money(subtotal)}</span></div><div class="summary-line"><span>Доставка по Валенсии</span><span>${totals?totals.freeDelivery?'Бесплатно':money(totals.delivery):pendingTotalLabel}</span></div>${promo?`<div class="summary-line"><span>${escape(promo.code)} - ${promo.percent}%</span><span>${subtotal===null?pendingTotalLabel:money(-totals.discount)}</span></div>`:''}${deliveryHint}<div class="summary-line total"><span>Итого с IVA</span><span>${total===null?pendingTotalLabel:money(total)}</span></div><button class="button" id="checkout" ${pending||unavailable?'disabled':''}>Перейти к оформлению ${icon('arrow')}</button>${footerNote?`<p>${footerNote}</p>`:''}</aside></div>`}</div>`;
+  return `<div class="page">${crumbs('Корзина')}<h1 class="page-title">Ваша корзина${count?` <span class="muted">(${count})</span>`:''}</h1>${!count?empty('Пока здесь тихо','Самое время найти что-нибудь для любимого хвостика','За покупками','#/catalog'):`<div class="cart-layout"><div>${rows}</div><aside class="cart-summary"><h2>Всё самое нужное</h2><div class="summary-line"><span>Товары (${count})</span><span>${subtotal===null?pendingTotalLabel:money(subtotal)}</span></div><div class="summary-line"><span>Доставка по Валенсии</span><span>${totals?totals.freeDelivery?'Бесплатно':money(totals.delivery):pendingTotalLabel}</span></div>${promo?`<div class="summary-line"><span>${escape(promo.code)} - ${promo.percent}%</span><span>${subtotal===null?pendingTotalLabel:money(-totals.discount)}</span></div>`:''}${deliveryHint}<div class="summary-line total"><span>${referenceOnly?'Ориентир с доставкой':'Итого с IVA'}</span><span>${total===null?pendingTotalLabel:money(total)}</span></div><button class="button" id="checkout" ${pending||unavailable||referenceOnly?'disabled':''}>Перейти к оформлению ${icon('arrow')}</button>${footerNote?`<p>${footerNote}</p>`:''}</aside></div>`}</div>`;
 }
 function about(){return `<div class="page">${crumbs('О нас')}<section class="about-hero"><h1>Они - часть семьи<br>Мы - на вашей стороне</h1><p>CatManDog объединяет вещи и идеи для хорошей жизни с кошками и собаками С заботой о них и с пониманием вас</p></section><div class="prose"><h2>Меньше случайного Больше нужного</h2><p>Нам близок простой подход: окружающие вещи должны быть удобными, продуманными и приятными в повседневной жизни От миски на кухне до переноски для нового путешествия</p><h2>Магазин, в котором помогают выбрать</h2><p>Мы собираем всё необходимое в понятные категории и рассказываем о назначении каждого товара А в журнале делимся идеями для дома, прогулок, игр и жизни вместе</p><a class="button" href="#/catalog">Найти своё ${icon('arrow')}</a></div></div>${service()}`;}
 function info(id){
@@ -305,8 +310,10 @@ if (['http:','https:'].includes(location.protocol)) {
     .then(data => {
       if (!data) throw new Error('Каталог недоступен');
       if (!applyServerCatalog(products, catalogProducts, data.variants)) throw new Error('Некорректный каталог');
-      for (const product of catalogProducts) if (product.category && !categories.includes(product.category))
-        categories.push(product.category);
+      for (const product of catalogProducts) {
+        const category = categoryKey(product);
+        if (category && !categories.includes(category)) categories.push(category);
+      }
       const previousMax = catalogPriceMax;
       catalogPriceMax = Math.max(100, Math.ceil(Math.max(...catalogProducts.map(p => catalogPrice(p).max ?? 0)) / 10) * 10);
       if (priceLimit === previousMax) priceLimit = catalogPriceMax;

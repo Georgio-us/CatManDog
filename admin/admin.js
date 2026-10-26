@@ -145,7 +145,7 @@ function productCard(product) {
         <label class="catalog-variant-wide">Описание варианта<textarea name="description" maxlength="3000" rows="2">${escape(variant.description || '')}</textarea></label>
         <label class="catalog-variant-wide">Детали варианта - по одной на строку<textarea name="details" rows="2">${escape((variant.details || []).join('\n'))}</textarea></label>
         <label class="catalog-check"><input type="checkbox" name="active" ${variant.active ? 'checked' : ''}> На сайте</label>
-        <button type="submit">Сохранить SKU</button><button type="button" data-edit-variant="${escape(variant.id)}">Цена и остаток</button><small class="admin-muted">${escape(variant.id)} · ${variant.priceConfirmed ? 'Цена подтверждена' : 'Демонстрационная цена'}</small>
+        <button type="submit">Сохранить SKU</button><button type="button" data-edit-variant="${escape(variant.id)}">Цена и остаток</button><small class="admin-muted">${escape(variant.id)} · ${variant.priceConfirmed ? 'Цена подтверждена' : 'Цена продажи не подтверждена'}</small>
       </form>`).join('')}
       <form data-product-variant="${escape(product.id)}" class="catalog-variant-form"><label>Новый вариант<input name="label" required maxlength="100" placeholder="Например, 2 кг"></label><button type="submit">Добавить SKU</button></form>
     </div></details></article>`;

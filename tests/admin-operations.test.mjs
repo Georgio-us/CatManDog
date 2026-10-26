@@ -16,15 +16,15 @@ test('staff cookie is scoped to admin API, HttpOnly and short lived', () => {
   assert.match(clearStaffCookie(true), /Max-Age=0; Secure/);
 });
 
-test('store management link is disclosed only for the matching active Google owner', async () => {
+test('store management link is disclosed only for the matching active owner email', async () => {
   let matchingOwner = true;
   const db = { async query(sql, params) {
     if (sql.includes('FROM customer_sessions')) return { rows: [{
       id: 'customer-1', email: 'owner@example.test', googleLinked: true, emailVerified: true }] };
     if (sql.includes('FROM customers c JOIN staff_accounts s')) {
       assert.deepEqual(params, ['customer-1']);
-      assert.match(sql, /s\.google_sub=c\.google_sub/);
       assert.match(sql, /s\.email=c\.email/);
+      assert.match(sql, /c\.email_verified_at IS NOT NULL/);
       assert.match(sql, /s\.role='owner' AND s\.active=true/);
       return { rows: [{ canManageStore: matchingOwner }] };
     }
@@ -39,6 +39,30 @@ test('store management link is disclosed only for the matching active Google own
   const visitor = response();
   await handleApi(db, req, visitor.res, '/api/auth/me');
   assert.equal(visitor.state.body.customer.canManageStore, false);
+});
+
+test('public catalog exposes sourced references without inventing a sale price', async () => {
+  const db = { async query(sql) {
+    if (sql.includes('FROM catalog_variants v JOIN catalog_products p')) return { rows: [
+      { variant_id: 'reference', product_id: 'food', source_price_cents: 2219,
+        price_override_cents: 9999, price_confirmed: false, source_orderable: true,
+        availability: 'source_on_demand', stock_quantity: null },
+      { variant_id: 'confirmed', product_id: 'food', source_price_cents: 2219,
+        price_override_cents: 2499, price_confirmed: true, source_orderable: true,
+        availability: 'source_on_demand', stock_quantity: null }
+    ] };
+    if (sql.includes('reserved_quantity>0')) return { rows: [] };
+    throw new Error(`Unexpected query: ${sql}`);
+  } };
+  const output = response();
+  await handleApi(db, { method: 'GET', headers: {}, socket: { remoteAddress: 'test-catalog-price' } },
+    output.res, '/api/catalog');
+  assert.equal(output.state.status, 200);
+  assert.equal(output.state.body.variants[0].priceCents, null);
+  assert.equal(output.state.body.variants[0].referencePriceCents, 2219);
+  assert.equal(output.state.body.variants[0].orderable, false);
+  assert.equal(output.state.body.variants[1].priceCents, 2499);
+  assert.equal(output.state.body.variants[1].referencePriceCents, null);
 });
 
 test('old bearer key alone cannot read or modify the admin API', async () => {
