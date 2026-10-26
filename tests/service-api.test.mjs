@@ -25,7 +25,7 @@ test('support API stores the request and emails the team and buyer', async () =>
       }
       throw new Error(`Unexpected SQL: ${sql}`);
     } };
-    const body = JSON.stringify({ kind: 'support', orderNumber: 'CMD-12345',
+    const body = JSON.stringify({ kind: 'support', orderNumber: 'CMD-12345', locale: 'es',
       email: 'buyer@example.test', message: 'Мне нужна помощь с заказом' });
     const req = { method: 'POST', headers: {}, socket: { remoteAddress: 'test-support-route' },
       async *[Symbol.asyncIterator]() { yield body; } };
@@ -36,7 +36,9 @@ test('support API stores the request and emails the team and buyer', async () =>
     assert.equal(result.accepted, true);
     assert.equal(inserted.length, 1);
     assert.equal(inserted[0][8], 'CMD-12345');
+    assert.equal(inserted[0][9], 'es');
     assert.deepEqual(sent.map(mail => mail.to[0]), ['support@catmandog.es', 'buyer@example.test']);
+    assert.match(sent[1].subject, /Hemos recibido tu consulta/);
   } finally {
     globalThis.fetch = originalFetch;
     for (const [key, value] of Object.entries(previous)) {
@@ -64,20 +66,22 @@ test('admin reply sends a branded email and records it against the request', asy
       queries.push({ sql, params });
       if (sql.includes('FROM staff_sessions'))
         return { rows: [{ id: 'staff-id', email: 'owner@example.test', role: 'owner' }] };
-      if (sql.startsWith('SELECT id,email FROM service_requests'))
-        return { rows: [{ id: 'request-id', email: 'buyer@example.test' }] };
+      if (sql.startsWith('SELECT id,email,locale FROM service_requests'))
+        return { rows: [{ id: 'request-id', email: 'buyer@example.test', locale: 'es' }] };
       return { rowCount: 1 };
     } };
     const req = { method: 'POST', headers: { cookie: `cmd_staff_session=${'a'.repeat(64)}` },
       socket: { remoteAddress: 'test-admin-reply' },
-      async *[Symbol.asyncIterator]() { yield JSON.stringify({ message: 'Ваш заказ уже в пути' }); } };
+      async *[Symbol.asyncIterator]() { yield JSON.stringify({ message: 'Tu pedido está en camino' }); } };
     let status, result;
     const res = { writeHead(code) { status = code; }, end(value) { result = JSON.parse(value); } };
     await handleApi(db, req, res, '/api/admin/service-requests/request-id/reply');
     assert.equal(status, 200);
     assert.equal(result.sent, true);
     assert.equal(sent[0].to[0], 'buyer@example.test');
-    assert.match(sent[0].text, /Ваш заказ уже в пути/);
+    assert.match(sent[0].subject, /Respuesta de CatManDog/);
+    assert.match(sent[0].text, /Tu pedido está en camino/);
+    assert.doesNotMatch(sent[0].text, /[А-Яа-яЁё]/u);
     assert.ok(queries.some(({ sql }) => sql.startsWith('INSERT INTO service_request_replies')));
   } finally {
     globalThis.fetch = originalFetch;

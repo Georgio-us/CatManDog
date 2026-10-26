@@ -1042,7 +1042,7 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { orders: rows });
   }
   if (path === '/api/admin/service-requests' && req.method === 'GET') {
-    const { rows } = await db.query(`SELECT r.id,r.kind,r.email,r.product_id,r.variant_id,r.quantity,
+    const { rows } = await db.query(`SELECT r.id,r.kind,r.email,r.locale,r.product_id,r.variant_id,r.quantity,
       r.message,r.status,r.created_at,COALESCE(o.number,r.order_number_input) AS order_number,
       (SELECT sent_at FROM service_request_replies WHERE request_id=r.id
         ORDER BY sent_at DESC LIMIT 1) AS last_reply_at,
@@ -1193,9 +1193,9 @@ async function adminRoute(db, req, res, path) {
     const body = await readJson(req);
     const message = cap(body.message, 4000);
     if (message.length < 2) bad('Напишите ответ');
-    const { rows } = await db.query('SELECT id,email FROM service_requests WHERE id=$1', [reply[1]]);
+    const { rows } = await db.query('SELECT id,email,locale FROM service_requests WHERE id=$1', [reply[1]]);
     if (!rows[0]) bad('Обращение не найдено', 404);
-    await sendServiceReply(rows[0].email, rows[0].id, message);
+    await sendServiceReply(rows[0].email, rows[0].id, message, undefined, rows[0].locale);
     await db.query('INSERT INTO service_request_replies(id,request_id,message) VALUES($1,$2,$3)',
       [randomUUID(), rows[0].id, message]);
     await db.query("UPDATE service_requests SET status='in_progress' WHERE id=$1 AND status='new'", [rows[0].id]);
@@ -1313,12 +1313,13 @@ export async function handleApi(db, req, res, pathname) {
             body.quantity > item.rows[0].quantity) bad('Укажите товар и количество из заказа');
       }
       const requestId = randomUUID();
-      await db.query(`INSERT INTO service_requests(id,order_id,kind,email,product_id,variant_id,quantity,message,order_number_input)
-        VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)`, [requestId, found.rows[0]?.id || null,
+      const requestLocale = body.locale === 'es' ? 'es' : 'ru';
+      await db.query(`INSERT INTO service_requests(id,order_id,kind,email,product_id,variant_id,quantity,message,order_number_input,locale)
+        VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`, [requestId, found.rows[0]?.id || null,
         body.kind, email, cap(body.productId, 180) || null, cap(body.variantId, 180) || null,
-        body.quantity && Number.isInteger(body.quantity) ? body.quantity : null, cap(body.message, 1200), orderNumber || null]);
+        body.quantity && Number.isInteger(body.quantity) ? body.quantity : null, cap(body.message, 1200), orderNumber || null, requestLocale]);
       try { await notifyServiceRequest({ id: requestId, kind: body.kind, email,
-        locale: body.locale === 'es' ? 'es' : 'ru',
+        locale: requestLocale,
         orderNumber, message: cap(body.message, 1200) }); }
       catch (error) { console.error('Support notification failed:', error.message); }
       return json(res, 202, { accepted: true, id: requestId });

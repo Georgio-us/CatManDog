@@ -26,7 +26,7 @@ test('product detail shows the chosen price and keeps researched offers separate
   });
   assert.match(html, /Фасовка: 4 кг|Вес: 4 кг|Вариант: 4 кг/);
   assert.match(html, /<div class="detail-price">36\.31 €<\/div>/);
-  assert.match(html, /Цены в изученных магазинах/);
+  assert.match(html, /Precios observados en otras tiendas/);
   assert.doesNotMatch(html, /<div class="detail-price">36\.31 € - 36\.49 €<\/div>/);
 });
 

@@ -37,6 +37,9 @@ export function translate(value) {
     if (/[А-Яа-яЁё]/u.test(result) && result.includes(' · ')) {
       result = result.split(' · ').map(part => translate(part)).join(' · ');
     }
+    if (/[А-Яа-яЁё]/u.test(result) && result.includes(' - ')) {
+      result = result.split(' - ').map(part => translate(part)).join(' - ');
+    }
   }
   result = result.replace(/(^|[\s×/·-])(\d+(?:,\d+)?)\s*(кг|г|см|мл|л|шт)(?=$|[\s×/·-])/gu,
     (_, before, amount, unit) => `${before}${amount} ${{ кг: 'kg', г: 'g', см: 'cm', мл: 'ml', л: 'l', шт: 'uds.' }[unit]}`);

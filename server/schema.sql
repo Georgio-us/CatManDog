@@ -332,6 +332,8 @@ CREATE TABLE IF NOT EXISTS service_requests (
   created_at timestamptz NOT NULL DEFAULT now()
 );
 ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS order_number_input text;
+ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS locale text NOT NULL DEFAULT 'ru'
+  CHECK (locale IN ('ru','es'));
 CREATE INDEX IF NOT EXISTS service_requests_order_id_idx ON service_requests(order_id);
 
 CREATE TABLE IF NOT EXISTS service_request_replies (

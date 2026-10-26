@@ -450,10 +450,10 @@ async function loadStock(details) {
 }
 function requestCard(request) {
   return `<article class="admin-card"><h2>${request.kind === 'return' ? 'Возврат' : 'Поддержка'} ${request.order_number ? '· ' + escape(request.order_number) : ''}</h2>
-    <p>${escape(request.email)} · ${escape(request.created_at)}</p>
+    <p>${escape(request.email)} · ${escape(request.created_at)} · Язык покупателя: ${request.locale === 'es' ? 'испанский' : 'русский'}</p>
     ${request.product_id ? `<p>Товар: ${escape(request.product_id)}${request.variant_id ? ' · ' + escape(request.variant_id) : ''}${request.quantity ? ' · ' + request.quantity + ' шт' : ''}</p>` : ''}
     <p>${escape(request.message)}</p>${request.last_reply_at ? `<p class="admin-muted">Последний ответ: ${escape(new Date(request.last_reply_at).toLocaleString('ru-RU'))}</p><p>${escape(request.last_reply_message || '')}</p>` : ''}
-    <form data-reply-id="${escape(request.id)}" class="admin-reply-form"><label>Ответ покупателю<textarea name="message" rows="4" minlength="2" maxlength="4000" required placeholder="Напишите ответ на email покупателя"></textarea></label><button type="submit">Отправить ответ</button></form>
+    <form data-reply-id="${escape(request.id)}" class="admin-reply-form"><label>Ответ покупателю<textarea name="message" rows="4" minlength="2" maxlength="4000" required placeholder="${request.locale === 'es' ? 'Напишите ответ покупателю на испанском' : 'Напишите ответ покупателю на русском'}"></textarea></label><button type="submit">Отправить ответ</button></form>
     <form data-request-id="${escape(request.id)}"><label>Статус<select name="status">${['new','in_progress','resolved'].map(status =>
       `<option value="${status}" ${status === request.status ? 'selected' : ''}>${({new:'Новое',in_progress:'В работе',resolved:'Закрыто'})[status]}</option>`).join('')}</select></label><button>Сохранить статус</button></form></article>`;
 }

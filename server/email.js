@@ -35,9 +35,13 @@ export async function notifyServiceRequest(request, fetcher = fetch) {
     throw new Error('Не удалось отправить одно или несколько писем об обращении');
 }
 
-export async function sendServiceReply(to, requestId, message, fetcher = fetch) {
-  await sendEmail(to, `Ответ CatManDog по обращению ${requestId.slice(0, 8)}`,
-    `Здравствуйте!\n\n${message}\n\nЕсли у вас остались вопросы, ответьте на это письмо.\n\nCatManDog`, fetcher);
+export async function sendServiceReply(to, requestId, message, fetcher = fetch, language = 'ru') {
+  const spanish = language === 'es';
+  await sendEmail(to,
+    spanish ? `Respuesta de CatManDog a tu consulta ${requestId.slice(0, 8)}`
+      : `Ответ CatManDog по обращению ${requestId.slice(0, 8)}`,
+    spanish ? `Hola:\n\n${message}\n\nSi tienes más preguntas, responde a este correo.\n\nCatManDog`
+      : `Здравствуйте!\n\n${message}\n\nЕсли у вас остались вопросы, ответьте на это письмо.\n\nCatManDog`, fetcher);
 }
 
 export async function sendAccountLink(to, kind, token, fetcher = fetch, language = 'ru') {

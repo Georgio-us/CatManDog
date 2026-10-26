@@ -30,6 +30,10 @@ test('support request notifies the team and customer, and replies come from CatM
     assert.equal(sent[4].subject, 'Hemos recibido tu consulta - CatManDog');
     assert.match(sent[4].text, /Número de consulta: consulta-id/);
     assert.doesNotMatch(sent[4].text, /[А-Яа-яЁё]/u);
+    await sendServiceReply('pet@example.test', 'consulta-id', 'Tu pedido está en camino', fetcher, 'es');
+    assert.match(sent[5].subject, /Respuesta de CatManDog/);
+    assert.match(sent[5].text, /Tu pedido está en camino/);
+    assert.doesNotMatch(sent[5].text, /[А-Яа-яЁё]/u);
   } finally {
     for (const [key, value] of Object.entries(previous)) {
       if (value === undefined) delete process.env[key];
