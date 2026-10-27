@@ -170,11 +170,15 @@ test('unauthorized admin request returns 403 without an unhandled rejection', as
   assert.equal(body.error, 'Доступ закрыт');
 });
 
-test('checkout stays closed even if both order flags are enabled before payment integration', async () => {
+test('checkout stays closed without Stripe keys even if both order flags are enabled', async () => {
   const previousOrders = process.env.ORDERS_ENABLED;
   const previousPayments = process.env.PAYMENTS_ENABLED;
+  const previousStripeKey = process.env.STRIPE_SECRET_KEY;
+  const previousWebhookKey = process.env.STRIPE_WEBHOOK_SECRET;
   process.env.ORDERS_ENABLED = 'true';
   process.env.PAYMENTS_ENABLED = 'true';
+  delete process.env.STRIPE_SECRET_KEY;
+  delete process.env.STRIPE_WEBHOOK_SECRET;
   try {
     const db = { async query() { throw new Error('Database should not be used for checkout'); } };
     const config = { status: null, body: null };
@@ -186,12 +190,16 @@ test('checkout stays closed even if both order flags are enabled before payment 
     const order = { status: null, body: null };
     const orderRes = { writeHead(status) { order.status = status; }, end(body) { order.body = JSON.parse(body); } };
     await handleApi(db, { method: 'POST', headers: {}, socket: { remoteAddress: 'test-payment-gate' },
-      async *[Symbol.asyncIterator]() { yield '{}'; } }, orderRes, '/api/orders');
+      async *[Symbol.asyncIterator]() { yield '{}'; } }, orderRes, '/api/checkout/start');
     assert.equal(order.status, 503);
   } finally {
     if (previousOrders === undefined) delete process.env.ORDERS_ENABLED;
     else process.env.ORDERS_ENABLED = previousOrders;
     if (previousPayments === undefined) delete process.env.PAYMENTS_ENABLED;
     else process.env.PAYMENTS_ENABLED = previousPayments;
+    if (previousStripeKey === undefined) delete process.env.STRIPE_SECRET_KEY;
+    else process.env.STRIPE_SECRET_KEY = previousStripeKey;
+    if (previousWebhookKey === undefined) delete process.env.STRIPE_WEBHOOK_SECRET;
+    else process.env.STRIPE_WEBHOOK_SECRET = previousWebhookKey;
   }
 });

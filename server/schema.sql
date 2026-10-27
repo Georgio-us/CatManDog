@@ -223,6 +223,17 @@ ALTER TABLE orders ADD COLUMN IF NOT EXISTS stock_state text NOT NULL DEFAULT 'l
   CHECK (stock_state IN ('legacy','reserved','released','consumed'));
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS delivery_tax_rate_bps integer
   CHECK (delivery_tax_rate_bps BETWEEN 0 AND 10000);
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS stripe_checkout_session_id text UNIQUE;
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS stripe_checkout_url text;
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS stripe_payment_intent_id text;
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS payment_expires_at timestamptz;
+
+CREATE TABLE IF NOT EXISTS stripe_events (
+  id text PRIMARY KEY,
+  type text NOT NULL,
+  order_id uuid REFERENCES orders(id) ON DELETE SET NULL,
+  received_at timestamptz NOT NULL DEFAULT now()
+);
 
 CREATE TABLE IF NOT EXISTS order_items (
   id uuid PRIMARY KEY,

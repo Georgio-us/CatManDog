@@ -11,13 +11,21 @@ import { currentStaff, createStaffSession, staffCookie, clearStaffCookie,
   revokeStaffSession, bootstrapOwner } from './staff.js';
 import { financePreview } from './finance.js';
 import { backupConfiguration, listBackups } from './backup.js';
+import { createStripeCheckout, stripeMode, stripeReady, verifyStripeEvent } from './stripe.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
 const enabled = name => process.env[name] === 'true';
-// Configuration flags alone must never open checkout before a payment provider is integrated.
-const paymentGatewayImplemented = false;
-const ordersReady = () => paymentGatewayImplemented && enabled('ORDERS_ENABLED') && enabled('PAYMENTS_ENABLED');
+const ordersReady = () => stripeReady() && enabled('ORDERS_ENABLED') && enabled('PAYMENTS_ENABLED');
+async function checkoutAllowed(db, req) {
+  if (!ordersReady()) return false;
+  if (stripeMode() === 'live') return true;
+  const customer = await currentCustomer(db, req);
+  if (!customer?.emailVerified) return false;
+  const { rows } = await db.query(`SELECT EXISTS(SELECT 1 FROM staff_accounts
+    WHERE email=$1 AND role='owner' AND active=true) AS allowed`, [customer.email]);
+  return rows[0]?.allowed === true;
+}
 const bad = (message, status = 400) => { throw Object.assign(new Error(message), { status }); };
 const optionalWebUrl = value => {
   const url = cap(value, 300);
@@ -91,11 +99,14 @@ async function promoFor(db, code, lock = false) {
 }
 
 function publicQuote(quote) {
-  return { items: quote.items.map(({ orderable, sourceMode, ...item }) => ({ ...item, orderable,
+  const canSource = enabled('SOURCE_ON_DEMAND_PAYMENT_ENABLED');
+  return { items: quote.items.map(({ orderable, sourceMode, ...item }) => ({ ...item,
+      orderable: orderable && (sourceMode === 'on_hand' || canSource),
       availability: sourceMode })),
     subtotalCents: quote.subtotalCents, discountCents: quote.discountCents,
     deliveryCents: quote.deliveryCents, totalCents: quote.totalCents,
-    orderable: quote.orderable, addressVerification: quote.addressVerification,
+    orderable: quote.orderable && (canSource || quote.items.every(item => item.sourceMode === 'on_hand')),
+    addressVerification: quote.addressVerification,
     deliverySlot: quote.deliverySlot, promoCode: quote.promoCode };
 }
 
@@ -142,10 +153,15 @@ async function createOrder(db, payload, customer) {
   const client = await db.connect();
   try {
     await client.query('BEGIN');
-    const existing = await client.query('SELECT id,number,email FROM orders WHERE idempotency_key=$1', [idempotency]);
+    const existing = await client.query(`SELECT id,number,email,payment_status,
+      stripe_checkout_url,payment_expires_at FROM orders WHERE idempotency_key=$1`, [idempotency]);
     if (existing.rows[0]) {
       if (existing.rows[0].email !== email) bad('Ключ оформления уже использован', 409);
-      await client.query('COMMIT'); return existing.rows[0];
+      if (existing.rows[0].payment_status === 'paid') bad('Этот заказ уже оплачен', 409);
+      if (!existing.rows[0].stripe_checkout_url || existing.rows[0].payment_expires_at <= new Date())
+        bad('Время оплаты истекло. Начните оформление заново', 409);
+      await client.query('COMMIT');
+      return { url: existing.rows[0].stripe_checkout_url, orderNumber: existing.rows[0].number };
     }
     const ids = lines.map(line => cap(line.variantId, 180));
     const variants = await client.query(`SELECT v.id AS variant_id,v.product_id,v.label,v.source_price_cents,
@@ -156,6 +172,8 @@ async function createOrder(db, payload, customer) {
     const promo = await promoFor(client, payload.promoCode, true);
     const quote = priceQuote(lines, variants.rows, promo);
     if (!quote.orderable) bad('Один из товаров пока нельзя заказать');
+    if (!enabled('SOURCE_ON_DEMAND_PAYMENT_ENABLED') && quote.items.some(item => item.sourceMode !== 'on_hand'))
+      bad('Для оплаты доступны только товары с подтверждённым наличием');
     const orderId = randomUUID();
     const numberResult = await client.query("SELECT 'CMD-' || nextval('order_number_seq') AS number");
     const number = numberResult.rows[0].number;
@@ -174,10 +192,13 @@ async function createOrder(db, payload, customer) {
       cleanAddress, cleanDelivery, quote.subtotalCents, quote.discountCents,
       quote.deliveryCents, deliveryTaxRate, quote.totalCents, quote.promoCode, idempotency]);
     if (!inserted.rows.length) {
-      const duplicate = await client.query('SELECT id,number,email FROM orders WHERE idempotency_key=$1', [idempotency]);
+      const duplicate = await client.query(`SELECT id,number,email,stripe_checkout_url,payment_expires_at
+        FROM orders WHERE idempotency_key=$1`, [idempotency]);
       if (duplicate.rows[0]?.email !== email) bad('Ключ оформления уже использован', 409);
+      if (!duplicate.rows[0]?.stripe_checkout_url || duplicate.rows[0].payment_expires_at <= new Date())
+        bad('Время оплаты истекло. Начните оформление заново', 409);
       await client.query('COMMIT');
-      return duplicate.rows[0];
+      return { url: duplicate.rows[0].stripe_checkout_url, orderNumber: duplicate.rows[0].number };
     }
     for (const item of quote.items) {
       await client.query(`INSERT INTO order_items(id,order_id,product_id,variant_id,name,variant_label,quantity,
@@ -198,13 +219,98 @@ async function createOrder(db, payload, customer) {
     await client.query('INSERT INTO order_events(id,order_id,type,actor) VALUES($1,$2,$3,$4)',
       [randomUUID(), orderId, 'received', 'system']);
     if (promo) await client.query('UPDATE promo_codes SET used_count=used_count+1 WHERE code=$1', [promo.code]);
+    const session = await createStripeCheckout({ id: orderId, number, email,
+      items: quote.items, subtotal_cents: quote.subtotalCents, discount_cents: quote.discountCents,
+      delivery_cents: quote.deliveryCents, total_cents: quote.totalCents }, payload.locale);
+    await client.query(`UPDATE orders SET stripe_checkout_session_id=$2,stripe_checkout_url=$3,
+      payment_expires_at=to_timestamp($4),payment_status='pending',updated_at=now() WHERE id=$1`,
+    [orderId, session.id, session.url, session.expires_at]);
     await client.query('COMMIT');
-    return { id: orderId, number, paymentStatus: 'awaiting_payment', addressVerified: false,
-      deliveryReserved: false };
+    return { url: session.url, orderNumber: number };
   } catch (error) {
     await client.query('ROLLBACK');
     throw error;
   } finally { client.release(); }
+}
+
+async function readWebhookBody(req) {
+  const chunks = [];
+  let size = 0;
+  for await (const chunk of req) {
+    size += chunk.length;
+    if (size > 1024 * 1024) bad('Слишком большой webhook', 413);
+    chunks.push(chunk);
+  }
+  return Buffer.concat(chunks);
+}
+
+async function releasePaymentReservation(client, order) {
+  if (order.stock_state !== 'reserved') return;
+  const { rows } = await client.query(`SELECT variant_id,quantity FROM order_items
+    WHERE order_id=$1 AND source_mode='on_hand' ORDER BY variant_id`, [order.id]);
+  for (const item of rows) {
+    const changed = await client.query(`UPDATE catalog_variants SET reserved_quantity=reserved_quantity-$1,
+      updated_at=now() WHERE id=$2 AND reserved_quantity>=$1
+      RETURNING stock_quantity,reserved_quantity`, [item.quantity, item.variant_id]);
+    if (!changed.rows.length) throw new Error('Резерв товара не найден');
+    await recordInventoryMovement(client, { variantId: item.variant_id, orderId: order.id,
+      reason: 'order_released', deltaReserved: -item.quantity,
+      onHandAfter: changed.rows[0].stock_quantity, reservedAfter: changed.rows[0].reserved_quantity });
+  }
+  if (order.promo_code) await client.query(`UPDATE promo_codes
+    SET used_count=greatest(0,used_count-1) WHERE code=$1`, [order.promo_code]);
+}
+
+async function handleStripeWebhook(db, req, res) {
+  const event = verifyStripeEvent(await readWebhookBody(req), req.headers['stripe-signature']);
+  if (!/^evt_/.test(event.id || '') || event.livemode !== (stripeMode() === 'live'))
+    bad('Некорректное событие Stripe', 400);
+  const types = new Set(['checkout.session.completed', 'checkout.session.async_payment_succeeded',
+    'checkout.session.async_payment_failed', 'checkout.session.expired']);
+  if (!types.has(event.type)) return json(res, 200, { received: true });
+  const session = event.data?.object;
+  if (!session || !/^cs_(test|live)_/.test(session.id || '') || !validUuid(session.client_reference_id) ||
+      session.metadata?.order_id !== session.client_reference_id || session.currency !== 'eur')
+    bad('Некорректная сессия оплаты', 400);
+  const client = await db.connect();
+  try {
+    await client.query('BEGIN');
+    const found = await client.query(`SELECT id,total_cents,payment_status,stock_state,promo_code,
+      stripe_checkout_session_id FROM orders WHERE id=$1 FOR UPDATE`, [session.client_reference_id]);
+    const order = found.rows[0];
+    if (!order || order.total_cents !== session.amount_total ||
+        order.stripe_checkout_session_id !== session.id)
+      bad('Сумма или заказ Stripe не совпадают', 409);
+    const inserted = await client.query(`INSERT INTO stripe_events(id,type,order_id)
+      VALUES($1,$2,$3) ON CONFLICT DO NOTHING RETURNING id`, [event.id, event.type, order.id]);
+    if (!inserted.rows.length) { await client.query('COMMIT'); return json(res, 200, { received: true }); }
+    const paid = (event.type === 'checkout.session.completed' && session.payment_status === 'paid') ||
+      event.type === 'checkout.session.async_payment_succeeded';
+    const failed = ['checkout.session.async_payment_failed', 'checkout.session.expired'].includes(event.type);
+    if (paid && order.payment_status !== 'paid') {
+      if (order.payment_status === 'failed' || order.stock_state === 'released')
+        throw new Error('Оплата поступила после освобождения резерва');
+      await client.query(`UPDATE orders SET payment_status='paid',
+        stripe_checkout_session_id=coalesce(stripe_checkout_session_id,$2),
+        stripe_payment_intent_id=$3,updated_at=now() WHERE id=$1`,
+      [order.id, session.id, typeof session.payment_intent === 'string' ? session.payment_intent : null]);
+      await client.query(`INSERT INTO order_events(id,order_id,type,actor)
+        VALUES($1,$2,'payment_paid','stripe')`, [randomUUID(), order.id]);
+    } else if (failed && order.payment_status !== 'paid' && order.payment_status !== 'failed') {
+      await releasePaymentReservation(client, order);
+      await client.query(`UPDATE orders SET payment_status='failed',status='cancelled',
+        stock_state='released',updated_at=now() WHERE id=$1`, [order.id]);
+      await client.query(`INSERT INTO order_events(id,order_id,type,actor)
+        VALUES($1,$2,'payment_failed','stripe')`, [randomUUID(), order.id]);
+    } else if (!paid && !failed && order.payment_status === 'awaiting_payment') {
+      await client.query(`UPDATE orders SET payment_status='pending',
+        stripe_checkout_session_id=coalesce(stripe_checkout_session_id,$2),updated_at=now() WHERE id=$1`,
+      [order.id, session.id]);
+    }
+    await client.query('COMMIT');
+    return json(res, 200, { received: true });
+  } catch (error) { await client.query('ROLLBACK'); throw error; }
+  finally { client.release(); }
 }
 
 async function authRoute(db, req, res, path) {
@@ -1132,8 +1238,10 @@ async function adminRoute(db, req, res, path) {
       if (['cancelled','delivered'].includes(order.status)) bad('Закрытый заказ нельзя вернуть в работу', 409);
       if (body.status === 'cancelled' && order.payment_status === 'paid')
         bad('Сначала оформите возврат оплаты', 409);
-      if (['delivering','delivered'].includes(body.status) && order.payment_status !== 'paid')
-        bad('Доставка возможна после подтверждения оплаты', 409);
+      if (body.status === 'cancelled' && order.payment_status === 'pending')
+        bad('Сначала завершите или отмените платёжную сессию Stripe', 409);
+      if (['packing','delivering','delivered'].includes(body.status) && order.payment_status !== 'paid')
+        bad('Обработка заказа возможна после подтверждения оплаты', 409);
       let nextStockState = order.stock_state;
       if (['cancelled','delivered'].includes(body.status)) {
         const items = await client.query(`SELECT variant_id,quantity FROM order_items
@@ -1207,6 +1315,10 @@ async function adminRoute(db, req, res, path) {
 export async function handleApi(db, req, res, pathname) {
   try {
     if (req.method === 'OPTIONS') return json(res, 405, { error: 'CORS не используется' });
+    if (pathname === '/api/stripe/webhook' && req.method === 'POST') {
+      if (!db) bad('База данных ещё не подключена', 503);
+      return await handleStripeWebhook(db, req, res);
+    }
     if (!sameOrigin(req) && !['GET','HEAD'].includes(req.method)) bad('Источник запроса не разрешён', 403);
     if (pathname === '/api/health') {
       if (!db) return json(res, 503, { ok: false, database: 'not_configured' });
@@ -1214,11 +1326,14 @@ export async function handleApi(db, req, res, pathname) {
       return json(res, 200, { ok: true, database: 'connected' });
     }
     if (!db) bad('База данных ещё не подключена', 503);
-    if (pathname === '/api/config' && req.method === 'GET') return json(res, 200,
-      { ordersEnabled: ordersReady(), accountsEnabled: enabled('ACCOUNTS_ENABLED'),
+    if (pathname === '/api/config' && req.method === 'GET') {
+      const paymentAccess = await checkoutAllowed(db, req);
+      return json(res, 200,
+      { ordersEnabled: paymentAccess, accountsEnabled: enabled('ACCOUNTS_ENABLED'),
         emailEnabled: emailReady(), googleClientId: enabled('ACCOUNTS_ENABLED') ? googleClientId() : null,
-        paymentsEnabled: paymentGatewayImplemented && enabled('PAYMENTS_ENABLED'),
+        paymentsEnabled: paymentAccess,
         supportEnabled: enabled('SUPPORT_ENABLED') && emailReady() });
+    }
     if (pathname === '/api/catalog' && req.method === 'GET') {
       const list = await liveCatalogSnapshot(db);
       return json(res, 200, { variants: list.map(({ price_override_cents, source_price_cents,
@@ -1277,10 +1392,24 @@ export async function handleApi(db, req, res, pathname) {
       return json(res, 201, { id, name: body.name, species: body.species, profile });
     }
     if (pathname === '/api/orders' && req.method === 'POST') {
-      rateLimit(req, 'order', 20);
+      bad('Используйте защищённое оформление через Stripe', 410);
+    }
+    if (pathname === '/api/checkout/start' && req.method === 'POST') {
+      if (!await checkoutAllowed(db, req)) bad('Приём заказов ещё не включён', 503);
+      rateLimit(req, 'order', 12);
       const body = await readJson(req);
       const customer = await currentCustomer(db, req);
-      return json(res, 201, { order: await createOrder(db, body, customer) });
+      return json(res, 201, await createOrder(db, body, customer));
+    }
+    if (pathname === '/api/checkout/status' && req.method === 'GET') {
+      const url = new URL(req.url || '/', 'https://catmandog.es');
+      const sessionId = url.searchParams.get('session_id') || '';
+      if (!/^cs_(test|live)_[A-Za-z0-9]+$/.test(sessionId)) bad('Некорректная сессия оплаты');
+      const { rows } = await db.query(`SELECT number,payment_status,total_cents FROM orders
+        WHERE stripe_checkout_session_id=$1`, [sessionId]);
+      if (!rows[0]) bad('Заказ не найден', 404);
+      return json(res, 200, { number: rows[0].number,
+        paymentStatus: rows[0].payment_status, totalCents: rows[0].total_cents });
     }
     if (pathname === '/api/me/orders' && req.method === 'GET') {
       const customer = await currentCustomer(db, req);

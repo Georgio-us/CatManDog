@@ -2,21 +2,26 @@ import { checkoutTotals, deliveryTiming, FREE_DELIVERY_FROM, DELIVERY_FEE, valid
 import { orderProgress } from './order-progress.js';
 import { locale } from './locale.js?v=es-locale-4';
 
-export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems, isReady, getPromo, applyPromo, findOrder, productLabel, render }) {
+export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems, isReady, getPromo, applyPromo, findOrder, productLabel, render, onPaid }) {
   let formValues = {};
   let promoError = '';
   let preview = null;
   let demonstration = null;
   let servicePreview = null;
   let supportEnabled = false;
+  let paymentsEnabled = false;
+  let paymentError = '';
+  let paymentReturn = null;
   let serviceError = '';
 
   async function initialize() {
     try {
       const response = await fetch('/api/config', { credentials: 'same-origin' });
       if (!response.ok) return;
-      supportEnabled = (await response.json()).supportEnabled === true;
-      if (supportEnabled && /^#\/(support|returns)/.test(location.hash)) render();
+      const config = await response.json();
+      supportEnabled = config.supportEnabled === true;
+      paymentsEnabled = config.paymentsEnabled === true && config.ordersEnabled === true;
+      if (/^#\/(support|returns|checkout)/.test(location.hash)) render();
     } catch { /* The local file preview has no API */ }
   }
 
@@ -36,7 +41,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     const timing = deliveryTiming();
     const mode = formValues.deliveryMode || (timing.todayAvailable ? 'soon' : 'scheduled');
     const promo = getPromo();
-    return `<div class="page checkout-page"><div class="checkout-head"><a class="text-link" href="#/cart">${icon('arrow')} Вернуться в корзину</a><span>Доставка по городу Валенсия</span></div><h1>Оформление заказа</h1><p class="checkout-lead">Укажите, куда привезти покупки. Перед отправкой заказа мы покажем все данные ещё раз</p><div class="checkout-layout"><form id="checkout-form" class="checkout-form" data-checkout-form><section class="checkout-section"><div class="checkout-section-head"><span>01</span><div><h2>Как с вами связаться</h2><p>Подтверждение заказа придёт на email после подключения отправки уведомлений</p></div></div><div class="checkout-fields"><label>Имя и фамилия<input name="name" required autocomplete="name" maxlength="100" value="${field('name')}" placeholder="Как к вам обращаться"></label><label>Email<input type="email" name="email" required autocomplete="email" maxlength="160" value="${field('email')}" placeholder="name@example.com"></label><label>Телефон<input type="tel" name="phone" required autocomplete="tel" minlength="6" maxlength="24" value="${field('phone')}" placeholder="+34 600 000 000"></label><label class="checkout-check"><input type="checkbox" name="whatsapp" ${checked('whatsapp')}><span>Можно связаться со мной в WhatsApp по этому номеру</span></label></div></section><section class="checkout-section"><div class="checkout-section-head"><span>02</span><div><h2>Куда доставить</h2><p>Пока доставляем лично только по городу Валенсия</p></div></div><div class="checkout-fields"><label>Город<input name="city" value="València" readonly autocomplete="address-level2"></label><label>Почтовый индекс<input name="postcode" required inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code" value="${field('postcode')}" placeholder="46001"></label><label class="checkout-wide">Улица<input name="street" required autocomplete="address-line1" maxlength="120" value="${field('street')}" placeholder="Название улицы"></label><label>Номер дома<input name="building" required maxlength="16" value="${field('building')}" placeholder="12"></label><label>Квартира, этаж, дверь <small>Если есть</small><input name="apartment" autocomplete="address-line2" maxlength="80" value="${field('apartment')}" placeholder="2 этаж, дверь 4"></label><label class="checkout-wide">Комментарий для доставки <small>Необязательно</small><textarea name="note" rows="2" maxlength="300" placeholder="Код домофона или удобный вход">${field('note')}</textarea></label></div><p class="checkout-help">Адрес пока не проверяется по карте. Точную зону доставки подтвердим после подключения сервера.</p></section><section class="checkout-section"><div class="checkout-section-head"><span>03</span><div><h2>Когда удобно получить</h2><p>Время пока ориентировочное и не бронируется</p></div></div><div class="checkout-delivery-options">${timing.todayAvailable ? `<label class="checkout-choice"><input type="radio" name="deliveryMode" value="soon" ${mode === 'soon' ? 'checked' : ''}><span><strong>Сегодня, как можно скорее</strong><small>Ориентир - не раньше ${e(timing.time)} по Валенсии</small></span></label>` : ''}<label class="checkout-choice"><input type="radio" name="deliveryMode" value="scheduled" ${mode === 'scheduled' ? 'checked' : ''}><span><strong>Выбрать дату и время</strong><small>Укажите удобное время, мы подтвердим его отдельно</small></span></label><div class="checkout-schedule" ${mode === 'scheduled' ? '' : 'hidden'}><label>Дата<input type="date" name="deliveryDate" min="${e(timing.date)}" value="${field('deliveryDate', timing.date)}" ${mode === 'scheduled' ? 'required' : ''}></label><label>Желаемое время<input type="time" name="deliveryTime" value="${field('deliveryTime', timing.time)}" ${mode === 'scheduled' ? 'required' : ''}></label></div></div></section><section class="checkout-section"><div class="checkout-section-head"><span>04</span><div><h2>Скидка и оплата</h2><p>Онлайн-оплата появится после подключения Stripe</p></div></div><div class="checkout-promo"><label>Промокод<input name="promoCode" value="${field('promoCode', promo?.code || '')}" maxlength="40" placeholder="Введите код"></label><button type="button" class="button outline" data-checkout-promo>Применить</button></div>${promoError ? `<p class="checkout-error" role="alert">${e(promoError)}</p>` : ''}<div class="checkout-payment">${icon('shield')} <span>Карта онлайн - подключим перед приёмом заказов. Данные карты здесь не вводятся.</span></div></section><p class="checkout-error" data-checkout-error role="alert"></p><button class="button checkout-next" type="submit">Проверить данные ${icon('arrow')}</button><p class="checkout-help">Это прототип оформления. Нажатие покажет предпросмотр - заказ не будет создан или оплачен.</p></form>${summary(items, promo)}</div><div class="checkout-after"><a href="#/support">Нужна помощь с заказом ${icon('arrow')}</a><a href="#/returns">Как оформить возврат ${icon('arrow')}</a></div></div>`;
+    return `<div class="page checkout-page"><div class="checkout-head"><a class="text-link" href="#/cart">${icon('arrow')} Вернуться в корзину</a><span>Доставка по городу Валенсия</span></div><h1>Оформление заказа</h1><p class="checkout-lead">Укажите, куда привезти покупки. Перед отправкой заказа мы покажем все данные ещё раз</p><div class="checkout-layout"><form id="checkout-form" class="checkout-form" data-checkout-form><section class="checkout-section"><div class="checkout-section-head"><span>01</span><div><h2>Как с вами связаться</h2><p>${paymentsEnabled ? 'Email нужен для связи по заказу; статус оплаты появится в кабинете' : 'Подтверждение заказа придёт на email после подключения отправки уведомлений'}</p></div></div><div class="checkout-fields"><label>Имя и фамилия<input name="name" required autocomplete="name" maxlength="100" value="${field('name')}" placeholder="Как к вам обращаться"></label><label>Email<input type="email" name="email" required autocomplete="email" maxlength="160" value="${field('email')}" placeholder="name@example.com"></label><label>Телефон<input type="tel" name="phone" required autocomplete="tel" minlength="6" maxlength="24" value="${field('phone')}" placeholder="+34 600 000 000"></label><label class="checkout-check"><input type="checkbox" name="whatsapp" ${checked('whatsapp')}><span>Можно связаться со мной в WhatsApp по этому номеру</span></label></div></section><section class="checkout-section"><div class="checkout-section-head"><span>02</span><div><h2>Куда доставить</h2><p>Пока доставляем лично только по городу Валенсия</p></div></div><div class="checkout-fields"><label>Город<input name="city" value="València" readonly autocomplete="address-level2"></label><label>Почтовый индекс<input name="postcode" required inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code" value="${field('postcode')}" placeholder="46001"></label><label class="checkout-wide">Улица<input name="street" required autocomplete="address-line1" maxlength="120" value="${field('street')}" placeholder="Название улицы"></label><label>Номер дома<input name="building" required maxlength="16" value="${field('building')}" placeholder="12"></label><label>Квартира, этаж, дверь <small>Если есть</small><input name="apartment" autocomplete="address-line2" maxlength="80" value="${field('apartment')}" placeholder="2 этаж, дверь 4"></label><label class="checkout-wide">Комментарий для доставки <small>Необязательно</small><textarea name="note" rows="2" maxlength="300" placeholder="Код домофона или удобный вход">${field('note')}</textarea></label></div><p class="checkout-help">${paymentsEnabled ? 'Проверьте адрес: доставку по Валенсии подтвердим после оформления' : 'Адрес пока не проверяется по карте. Точную зону доставки подтвердим после подключения сервера.'}</p></section><section class="checkout-section"><div class="checkout-section-head"><span>03</span><div><h2>Когда удобно получить</h2><p>Время пока ориентировочное и не бронируется</p></div></div><div class="checkout-delivery-options">${timing.todayAvailable ? `<label class="checkout-choice"><input type="radio" name="deliveryMode" value="soon" ${mode === 'soon' ? 'checked' : ''}><span><strong>Сегодня, как можно скорее</strong><small>Ориентир - не раньше ${e(timing.time)} по Валенсии</small></span></label>` : ''}<label class="checkout-choice"><input type="radio" name="deliveryMode" value="scheduled" ${mode === 'scheduled' ? 'checked' : ''}><span><strong>Выбрать дату и время</strong><small>Укажите удобное время, мы подтвердим его отдельно</small></span></label><div class="checkout-schedule" ${mode === 'scheduled' ? '' : 'hidden'}><label>Дата<input type="date" name="deliveryDate" min="${e(timing.date)}" value="${field('deliveryDate', timing.date)}" ${mode === 'scheduled' ? 'required' : ''}></label><label>Желаемое время<input type="time" name="deliveryTime" value="${field('deliveryTime', timing.time)}" ${mode === 'scheduled' ? 'required' : ''}></label></div></div></section><section class="checkout-section"><div class="checkout-section-head"><span>04</span><div><h2>Скидка и оплата</h2><p>${paymentsEnabled ? 'После проверки заказа перейдёте на защищённую страницу Stripe' : 'Онлайн-оплата появится после подключения Stripe'}</p></div></div><div class="checkout-promo"><label>Промокод<input name="promoCode" value="${field('promoCode', promo?.code || '')}" maxlength="40" placeholder="Введите код"></label><button type="button" class="button outline" data-checkout-promo>Применить</button></div>${promoError ? `<p class="checkout-error" role="alert">${e(promoError)}</p>` : ''}<div class="checkout-payment">${icon('shield')} <span>${paymentsEnabled ? 'Оплата картой через Stripe. Данные карты вводятся только на защищённой странице Stripe' : 'Карта онлайн - подключим перед приёмом заказов. Данные карты здесь не вводятся.'}</span></div></section><p class="checkout-error" data-checkout-error role="alert"></p><button class="button checkout-next" type="submit">Проверить данные ${icon('arrow')}</button><p class="checkout-help">${paymentsEnabled ? 'На следующем шаге проверьте заказ и перейдите к оплате' : 'Это прототип оформления. Нажатие покажет предпросмотр - заказ не будет создан или оплачен.'}</p></form>${summary(items, promo)}</div><div class="checkout-after"><a href="#/support">Нужна помощь с заказом ${icon('arrow')}</a><a href="#/returns">Как оформить возврат ${icon('arrow')}</a></div></div>`;
   }
 
   function previewPage() {
@@ -45,11 +50,13 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     const { values, promo } = preview;
     const address = `${values.street}, ${values.building}${values.apartment ? ', ' + values.apartment : ''}, ${values.postcode} València`;
     const when = values.deliveryMode === 'soon' ? 'Сегодня, как можно скорее' : `${values.deliveryDate}, ${values.deliveryTime}`;
-    const states = `<section class="checkout-state-examples"><h2>Следующий шаг после подключения оплаты</h2><p>Эти экраны можно посмотреть сейчас как образцы интерфейса. Они не создают заказ и не списывают деньги.</p><div><button type="button" class="button" data-checkout-state="accepted">Пример подтверждения ${icon('arrow')}</button><button type="button" class="button outline" data-checkout-state="failed">Пример ошибки оплаты ${icon('arrow')}</button></div></section>`;
-    return `<div class="page checkout-page"><span class="checkout-eyebrow">Предпросмотр подтверждения</span><h1>Всё верно?</h1><p class="checkout-lead">Проверьте данные перед настоящим оформлением заказа</p><div class="checkout-layout"><div class="checkout-preview"><section class="checkout-section"><h2>Доставка</h2><dl><div><dt>Получатель</dt><dd>${e(values.name)}</dd></div><div><dt>Адрес</dt><dd>${e(address)}</dd></div><div><dt>Когда удобно</dt><dd>${e(when)}</dd></div><div><dt>Телефон</dt><dd>${e(values.phone)}${values.whatsapp ? ' · WhatsApp' : ''}</dd></div><div><dt>Email</dt><dd>${e(values.email)}</dd></div>${values.note ? `<div><dt>Комментарий</dt><dd>${e(values.note)}</dd></div>` : ''}</dl></section><div class="checkout-preview-notice">${icon('shield')} <div><strong>Заказ пока не создан</strong><p>Оплата, отправка заказа и уведомления ещё не подключены. Эта страница показывает, как будет выглядеть подтверждение, без передачи ваших данных.</p></div></div><a class="button outline" href="#/checkout">Изменить данные ${icon('arrow')}</a>${states}</div>${summary(items, promo)}</div></div>`;
+    const states = paymentsEnabled ? `<section class="checkout-state-examples"><h2>Оплата картой</h2><p>Сначала проверим цену и наличие, затем откроем защищённую страницу Stripe</p>${paymentError ? `<p class="checkout-error" role="alert">${e(paymentError)}</p>` : ''}<button type="button" class="button" data-checkout-pay>Перейти к оплате ${icon('arrow')}</button></section>` : `<section class="checkout-state-examples"><h2>Следующий шаг после подключения оплаты</h2><p>Эти экраны можно посмотреть сейчас как образцы интерфейса. Они не создают заказ и не списывают деньги.</p><div><button type="button" class="button" data-checkout-state="accepted">Пример подтверждения ${icon('arrow')}</button><button type="button" class="button outline" data-checkout-state="failed">Пример ошибки оплаты ${icon('arrow')}</button></div></section>`;
+    return `<div class="page checkout-page"><span class="checkout-eyebrow">Предпросмотр подтверждения</span><h1>Всё верно?</h1><p class="checkout-lead">Проверьте данные перед настоящим оформлением заказа</p><div class="checkout-layout"><div class="checkout-preview"><section class="checkout-section"><h2>Доставка</h2><dl><div><dt>Получатель</dt><dd>${e(values.name)}</dd></div><div><dt>Адрес</dt><dd>${e(address)}</dd></div><div><dt>Когда удобно</dt><dd>${e(when)}</dd></div><div><dt>Телефон</dt><dd>${e(values.phone)}${values.whatsapp ? ' · WhatsApp' : ''}</dd></div><div><dt>Email</dt><dd>${e(values.email)}</dd></div>${values.note ? `<div><dt>Комментарий</dt><dd>${e(values.note)}</dd></div>` : ''}</dl></section><div class="checkout-preview-notice">${icon('shield')} <div><strong>Заказ пока не создан</strong><p>${paymentsEnabled ? 'После нажатия кнопки оплаты проверим корзину и откроем Stripe. Заказ начнём выполнять после подтверждения платежа.' : 'Оплата, отправка заказа и уведомления ещё не подключены. Эта страница показывает, как будет выглядеть подтверждение, без передачи ваших данных.'}</p></div></div><a class="button outline" href="#/checkout">Изменить данные ${icon('arrow')}</a>${states}</div>${summary(items, promo)}</div></div>`;
   }
 
-  function resultPage(kind) {
+  function resultPage(kind, params = new URLSearchParams()) {
+    if (paymentsEnabled && (params.has('session_id') || kind === 'failed'))
+      return liveResultPage(kind, params);
     const items = getItems();
     if (!preview || !demonstration || preview.signature !== cartSignature(items) || !isReady() ||
         (kind === 'failed' ? demonstration.kind !== 'failed' : demonstration.kind !== 'accepted')) {
@@ -119,6 +126,81 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     return values;
   }
 
+  async function startPayment(button) {
+    if (!paymentsEnabled || !preview || preview.signature !== cartSignature(getItems())) return;
+    button.disabled = true;
+    paymentError = '';
+    const items = getItems();
+    const { values, promo } = preview;
+    try {
+      const request = (path, body) => fetch(path, { method: 'POST', credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      const lines = items.map(item => ({ productId: item.productId, variantId: item.variantId, qty: item.qty }));
+      const quoteResponse = await request('/api/checkout/quote', { items: lines, promoCode: promo?.code || '' });
+      const quote = await quoteResponse.json().catch(() => ({}));
+      if (!quoteResponse.ok || !quote.orderable) throw new Error(quote.error || 'Проверьте цену и наличие товаров');
+      const shownTotal = Math.round(checkoutTotals(items, promo).total * 100);
+      if (quote.totalCents !== shownTotal)
+        throw new Error(`Итоговая цена изменилась: ${money(quote.totalCents / 100)}. Обновите корзину перед оплатой`);
+      const signature = JSON.stringify([preview.signature, values, promo?.code || '']);
+      let saved;
+      try { saved = JSON.parse(sessionStorage.getItem('catmandog-payment-attempt') || 'null'); } catch { /* Invalid draft */ }
+      const key = saved?.signature === signature ? saved.key : crypto.randomUUID();
+      sessionStorage.setItem('catmandog-payment-attempt', JSON.stringify({ key, signature,
+        cartSignature: preview.signature }));
+      const payload = { items: lines, promoCode: promo?.code || '', idempotencyKey: key, locale: locale(),
+        name: values.name, email: values.email, phone: values.phone, whatsapp: values.whatsapp,
+        address: { city: values.city, postcode: values.postcode, street: values.street,
+          building: values.building, apartment: values.apartment, note: values.note },
+        delivery: values.deliveryMode === 'soon' ? { mode: 'soon' }
+          : { mode: 'scheduled', date: values.deliveryDate, time: values.deliveryTime } };
+      const response = await request('/api/checkout/start', payload);
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !/^https:\/\/checkout\.stripe\.com\//.test(result.url || ''))
+        throw new Error(result.error || 'Не удалось открыть безопасную оплату');
+      location.assign(result.url);
+    } catch (error) {
+      paymentError = error.message;
+      button.disabled = false;
+      render();
+    }
+  }
+
+  async function loadPaymentReturn(sessionId) {
+    try {
+      const response = await fetch(`/api/checkout/status?session_id=${encodeURIComponent(sessionId)}`,
+        { credentials: 'same-origin' });
+      const result = await response.json().catch(() => ({}));
+      paymentReturn = { sessionId, ...(response.ok ? result : { error: result.error || 'Заказ пока не найден' }) };
+      if (result.paymentStatus === 'paid') {
+        try {
+          const saved = JSON.parse(sessionStorage.getItem('catmandog-payment-attempt') || 'null');
+          if (saved?.cartSignature === cartSignature(getItems())) onPaid?.();
+          sessionStorage.removeItem('catmandog-payment-attempt');
+        } catch { /* Local storage can be unavailable */ }
+      }
+    } catch { paymentReturn = { sessionId, error: 'Не удалось проверить оплату' }; }
+    render();
+  }
+
+  function liveResultPage(kind, params) {
+    if (kind === 'failed') return `<div class="page checkout-page checkout-result"><h1>Вы вернулись с оплаты</h1><p class="checkout-lead">Платёж не подтверждён. Товары остались в корзине. Вы можете вернуться к оформлению</p><a class="button" href="#/checkout">Вернуться к оформлению ${icon('arrow')}</a></div>`;
+    const sessionId = params.get('session_id') || '';
+    if (!/^cs_(test|live)_[A-Za-z0-9]+$/.test(sessionId))
+      return `<div class="page checkout-page"><h1>Статус оплаты</h1><p>Не удалось определить платёж</p><a class="button" href="#/account/orders">Мои заказы ${icon('arrow')}</a></div>`;
+    if (paymentReturn?.sessionId !== sessionId) {
+      void loadPaymentReturn(sessionId);
+      return `<div class="page checkout-page"><h1>Проверяем оплату</h1><p>Подождите, пока банк подтвердит платёж</p></div>`;
+    }
+    const state = paymentReturn;
+    const paid = state.paymentStatus === 'paid';
+    return `<div class="page checkout-page checkout-result"><h1>${paid ? 'Оплата подтверждена' : 'Проверяем оплату'}</h1>
+      <p class="checkout-lead">${paid ? 'Заказ передан в работу' : state.error || 'Подтверждение от платёжной системы ещё не поступило'}</p>
+      ${state.number ? `<div class="checkout-preview-notice">${icon('shield')}<div><strong>Заказ ${e(state.number)}</strong><p>Сумма ${money(state.totalCents / 100)}</p></div></div>` : ''}
+      <div class="checkout-result-actions"><a class="button outline" href="#/account/orders">Мои заказы ${icon('arrow')}</a>
+      ${paid ? '<a class="text-link" href="#/catalog">Продолжить покупки</a>' : '<button type="button" class="button" data-payment-refresh>Проверить ещё раз</button>'}</div></div>`;
+  }
+
   async function sendService(button) {
     if (!supportEnabled || !servicePreview || servicePreview.sent || /^DEMO-/.test(servicePreview.values.orderNumber || '')) return;
     button.disabled = true;
@@ -136,6 +218,12 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
   }
 
   function click(button) {
+    if (button.hasAttribute('data-checkout-pay')) { void startPayment(button); return; }
+    if (button.hasAttribute('data-payment-refresh')) {
+      const sessionId = new URLSearchParams((location.hash || '').split('?')[1] || '').get('session_id');
+      if (sessionId) void loadPaymentReturn(sessionId);
+      return;
+    }
     if (button.hasAttribute('data-service-send')) { void sendService(button); return; }
     if (button.hasAttribute('data-checkout-state')) {
       const kind = button.dataset.checkoutState;

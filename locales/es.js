@@ -1,6 +1,26 @@
 // Spanish copy is written and reviewed here. Russian remains the source language
 // for internal category IDs, routes and saved customer data.
 export const es = {
+  'Email нужен для связи по заказу; статус оплаты появится в кабинете': 'Usaremos tu email para contactar contigo sobre el pedido; podrás consultar el estado del pago en tu cuenta',
+  'Проверьте адрес: доставку по Валенсии подтвердим после оформления': 'Comprueba la dirección: confirmaremos la entrega en València después de realizar el pedido',
+  'После проверки заказа перейдёте на защищённую страницу Stripe': 'Tras revisar el pedido, pasarás a la página segura de Stripe',
+  'Оплата картой через Stripe. Данные карты вводятся только на защищённой странице Stripe': 'Pago con tarjeta a través de Stripe. Introducirás los datos de la tarjeta únicamente en la página segura de Stripe.',
+  'На следующем шаге проверьте заказ и перейдите к оплате': 'En el siguiente paso, revisa el pedido y continúa con el pago',
+  'Оплата картой': 'Pago con tarjeta',
+  'Сначала проверим цену и наличие, затем откроем защищённую страницу Stripe': 'Primero comprobaremos el precio y la disponibilidad; después abriremos la página segura de Stripe',
+  'Перейти к оплате': 'Ir al pago',
+  'После нажатия кнопки оплаты проверим корзину и откроем Stripe. Заказ начнём выполнять после подтверждения платежа.': 'Al pulsar el botón, revisaremos la cesta y abriremos Stripe. Prepararemos el pedido cuando se confirme el pago.',
+  'Вы вернулись с оплаты': 'Has vuelto del pago',
+  'Платёж не подтверждён. Товары остались в корзине. Вы можете вернуться к оформлению': 'El pago aún no se ha confirmado. Los productos siguen en la cesta. Puedes volver al proceso de compra.',
+  'Вернуться к оформлению': 'Volver al proceso de compra',
+  'Статус оплаты': 'Estado del pago',
+  'Не удалось определить платёж': 'No hemos podido identificar el pago',
+  'Проверяем оплату': 'Estamos comprobando el pago',
+  'Подождите, пока банк подтвердит платёж': 'Espera mientras el banco confirma el pago',
+  'Оплата подтверждена': 'Pago confirmado',
+  'Заказ передан в работу': 'Ya estamos preparando tu pedido',
+  'Подтверждение от платёжной системы ещё не поступило': 'Aún no hemos recibido la confirmación del pago',
+  'Проверить ещё раз': 'Comprobar de nuevo',
   'CatManDog - главная': 'CatManDog - inicio',
   'CatManDog - хорошая жизнь с хвостиком': 'CatManDog - una buena vida juntos',
   'CatManDog - вещи для счастливой жизни кошек, собак и их людей': 'CatManDog - artículos para una vida feliz con gatos y perros',
@@ -1055,6 +1075,9 @@ export const es = {
 };
 
 export const esPatterns = [
+  [/^Заказ (CMD-\d+)$/, (_, number) => `Pedido ${number}`],
+  [/^Сумма (.+)$/, (_, amount) => `Importe ${amount}`],
+  [/^Итоговая цена изменилась: (.+)\. Обновите корзину перед оплатой$/, (_, amount) => `El importe ha cambiado: ${amount}. Actualiza la cesta antes de pagar.`],
   [/^Референс (.+)$/, (_, brand) => `Referencia de ${brand}`],
   [/^Модель: (.+)$/, (_, model) => `Modelo: ${model}`],
   [/^Размер: (.+)$/, (_, size) => `Talla: ${size}`],
