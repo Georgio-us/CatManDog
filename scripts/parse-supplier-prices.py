@@ -59,6 +59,9 @@ def snapshot(identifier, supplier, brand, date, file, shop_basis, items, note=""
 
 def royal_canin():
     file = BASE / "2026-10-14-ownat-royal-canin/TARIFAS TIENDA 2026 COSTE.xlsx"
+    # The matching 01.03.2026 PDF tariff corrects three duplicated EAN in XLSX.
+    corrected_eans = {"2554001": "3182550721202", "2554201": "3182550721219",
+                      "2554401": "3182550721226"}
     sheet = load_workbook(file, read_only=True, data_only=True).active
     items = []
     for row_number, row in enumerate(sheet.iter_rows(values_only=True), 1):
@@ -66,13 +69,15 @@ def royal_canin():
             continue
         species, technology = text(row[1]), text(row[2])
         unit = text(row[7])
-        items.append(dict(article=str(row[4]), name=text(row[5]),
+        article = str(row[4])
+        items.append(dict(article=article, name=text(row[5]),
                           line=f"{species} / {text(row[0])} / {technology}",
                           weight=f"{row[6]} {unit}" if row[6] is not None else "",
-                          ean=ean(row[3]), shopPriceCents=cents(row[8]),
+                          ean=corrected_eans.get(article, ean(row[3])), shopPriceCents=cents(row[8]),
                           recommendedPriceCents=None, minimumPriceCents=None,
                           rawPrices=dict(kind="supplier_tariff_ex_iva", sourceAmount=row[8],
                                          unit="as_listed", species=species,
+                                         eanCorrectionSource="Tarifas-PSR-2026.pdf" if article in corrected_eans else None,
                                          note="Check case versus individual unit before using as purchase cost"),
                           sourceRow=row_number))
     snapshot("royal-canin-2026-03-01", "Royal Canin", "Royal Canin", "2026-03-01",

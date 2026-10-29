@@ -191,6 +191,24 @@ CREATE TABLE IF NOT EXISTS admin_audit_events (
 );
 CREATE INDEX IF NOT EXISTS admin_audit_events_created_idx ON admin_audit_events(created_at DESC);
 
+-- The 01.03.2026 Royal Canin PDF tariff corrects three duplicated Kitten Persian
+-- EAN values in the accompanying Excel sheet. Keep the source row and price.
+WITH corrections(article, old_ean, new_ean) AS (VALUES
+  ('2554001', '9003579001165', '3182550721202'),
+  ('2554201', '9003579001202', '3182550721219'),
+  ('2554401', '9003579001240', '3182550721226')
+), fixed AS (
+  UPDATE supplier_catalog_items i SET ean=c.new_ean,
+    raw_prices=i.raw_prices || '{"eanCorrectionSource":"Tarifas-PSR-2026.pdf"}'::jsonb
+  FROM corrections c WHERE i.source_id='royal-canin-2026-03-01'
+    AND i.article=c.article AND i.ean=c.old_ean
+  RETURNING i.id,i.ean
+)
+INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+SELECT md5('royal-canin-ean-fix:' || id)::uuid,NULL,'supplier_catalog_ean_corrected',id,
+  jsonb_build_object('ean',ean,'source','Tarifas-PSR-2026.pdf') FROM fixed
+ON CONFLICT(id) DO NOTHING;
+
 CREATE TABLE IF NOT EXISTS customers (
   id uuid PRIMARY KEY,
   email text NOT NULL UNIQUE,
