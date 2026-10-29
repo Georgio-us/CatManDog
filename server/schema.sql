@@ -82,13 +82,23 @@ CREATE TABLE IF NOT EXISTS suppliers (
   name text NOT NULL UNIQUE,
   contact_name text NOT NULL DEFAULT '',
   email text NOT NULL DEFAULT '',
+  phone text NOT NULL DEFAULT '',
   website text NOT NULL DEFAULT '',
   terms text NOT NULL DEFAULT '',
+  notes text NOT NULL DEFAULT '',
+  kind text NOT NULL DEFAULT 'distributor' CHECK (kind IN ('distributor','brand')),
+  stage text NOT NULL DEFAULT 'lead' CHECK (stage IN ('lead','contacted','onboarding','catalog','ready','paused')),
   lead_days integer CHECK (lead_days BETWEEN 0 AND 365),
   active boolean NOT NULL DEFAULT true,
   created_at timestamptz NOT NULL DEFAULT now(),
   updated_at timestamptz NOT NULL DEFAULT now()
 );
+ALTER TABLE suppliers ADD COLUMN IF NOT EXISTS phone text NOT NULL DEFAULT '';
+ALTER TABLE suppliers ADD COLUMN IF NOT EXISTS notes text NOT NULL DEFAULT '';
+ALTER TABLE suppliers ADD COLUMN IF NOT EXISTS kind text NOT NULL DEFAULT 'distributor'
+  CHECK (kind IN ('distributor','brand'));
+ALTER TABLE suppliers ADD COLUMN IF NOT EXISTS stage text NOT NULL DEFAULT 'lead'
+  CHECK (stage IN ('lead','contacted','onboarding','catalog','ready','paused'));
 
 CREATE TABLE IF NOT EXISTS supplier_offers (
   id uuid PRIMARY KEY,

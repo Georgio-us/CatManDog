@@ -935,14 +935,22 @@ async function adminRoute(db, req, res, path) {
     if (name.length < 2) bad('Укажите название поставщика');
     const email = cap(body.email, 160);
     if (email && !validEmail(normalizedEmail(email))) bad('Некорректный email');
+    const kind = cap(body.kind, 20) || 'distributor';
+    const stage = cap(body.stage, 20) || 'lead';
+    if (!['distributor','brand'].includes(kind) ||
+      !['lead','contacted','onboarding','catalog','ready','paused'].includes(stage))
+      bad('Проверьте тип и этап поставщика');
     const leadDays = body.leadDays === null || body.leadDays === '' ? null : Number(body.leadDays);
     if (leadDays !== null && (!Number.isInteger(leadDays) || leadDays < 0 || leadDays > 365))
       bad('Некорректный срок поставки');
     const id = randomUUID();
     try {
-      await db.query(`INSERT INTO suppliers(id,name,contact_name,email,website,terms,lead_days)
-        VALUES($1,$2,$3,$4,$5,$6,$7)`, [id, name, cap(body.contactName, 120),
-        normalizedEmail(email), optionalWebUrl(body.website), cap(body.terms, 1000), leadDays]);
+      await db.query(`INSERT INTO suppliers
+        (id,name,contact_name,email,phone,website,terms,notes,kind,stage,lead_days,active)
+        VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,
+      [id, name, cap(body.contactName, 120), normalizedEmail(email), cap(body.phone, 60),
+        optionalWebUrl(body.website), cap(body.terms, 1000), cap(body.notes, 1500),
+        kind, stage, leadDays, body.active === true]);
     } catch (error) { if (error.code === '23505') bad('Поставщик уже существует', 409); throw error; }
     await db.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
       VALUES($1,$2,'supplier_created',$3,$4)`, [randomUUID(), operator.id, id, { name }]);
@@ -954,13 +962,19 @@ async function adminRoute(db, req, res, path) {
     const name = cap(body.name, 120);
     const email = normalizedEmail(body.email);
     const leadDays = body.leadDays === null || body.leadDays === '' ? null : Number(body.leadDays);
+    const kind = cap(body.kind, 20) || 'distributor';
+    const stage = cap(body.stage, 20) || 'lead';
     if (name.length < 2 || (email && !validEmail(email)) ||
-      (leadDays !== null && (!Number.isInteger(leadDays) || leadDays < 0 || leadDays > 365)))
+      (leadDays !== null && (!Number.isInteger(leadDays) || leadDays < 0 || leadDays > 365)) ||
+      !['distributor','brand'].includes(kind) ||
+      !['lead','contacted','onboarding','catalog','ready','paused'].includes(stage))
       bad('Проверьте данные поставщика');
     const { rowCount } = await db.query(`UPDATE suppliers SET name=$1,contact_name=$2,email=$3,
-      website=$4,terms=$5,lead_days=$6,active=$7,updated_at=now() WHERE id=$8`,
-    [name, cap(body.contactName, 120), email, optionalWebUrl(body.website), cap(body.terms, 1000),
-      leadDays, body.active === true, supplier[1]]);
+      phone=$4,website=$5,terms=$6,notes=$7,kind=$8,stage=$9,lead_days=$10,
+      active=$11,updated_at=now() WHERE id=$12`,
+    [name, cap(body.contactName, 120), email, cap(body.phone, 60), optionalWebUrl(body.website),
+      cap(body.terms, 1000), cap(body.notes, 1500), kind, stage, leadDays,
+      body.active === true, supplier[1]]);
     if (!rowCount) bad('Поставщик не найден', 404);
     await db.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
       VALUES($1,$2,'supplier_updated',$3,$4)`, [randomUUID(), operator.id, supplier[1], { name }]);

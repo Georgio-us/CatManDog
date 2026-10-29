@@ -8,6 +8,7 @@ let brandLine = '';
 let brandSelected = '';
 let brandVisibleCount = 50;
 let brandMobileOpen = false;
+let brandMatchEditing = false;
 let googleBusy = false;
 let activeRole = null;
 let auditFilters = { search: '', filter: 'all', pet: 'all' };
@@ -300,23 +301,47 @@ function filterAudit() {
   });
   $('audit-visible').textContent = `Показано: ${count}`;
 }
+const supplierStages = { lead:'Контакт не установлен', contacted:'Запрос отправлен',
+  onboarding:'Оформление доступа', catalog:'Каталог или прайс получен',
+  ready:'Готов к закупке', paused:'На паузе' };
+function supplierFields(supplier = {}) {
+  const selected = (name, value) => name === (value || '') ? 'selected' : '';
+  return `<label>Название<input name="name" required minlength="2" maxlength="120" value="${escape(supplier.name || '')}"></label>
+    <label>Тип канала<select name="kind"><option value="distributor" ${selected('distributor',supplier.kind)}>Дистрибьютор или B2B-канал</option>
+      <option value="brand" ${selected('brand',supplier.kind)}>Прямой контакт бренда</option></select></label>
+    <label>Этап<select name="stage">${Object.entries(supplierStages).map(([value,label]) =>
+      `<option value="${value}" ${selected(value,supplier.stage)}>${label}</option>`).join('')}</select></label>
+    <label>Контакт<input name="contactName" maxlength="120" value="${escape(supplier.contact_name || '')}"></label>
+    <label>Email<input type="email" name="email" value="${escape(supplier.email || '')}"></label>
+    <label>Телефон<input type="tel" name="phone" maxlength="60" value="${escape(supplier.phone || '')}"></label>
+    <label>Сайт<input type="url" name="website" value="${escape(supplier.website || '')}"></label>
+    <label>Срок доставки, дней<input type="number" min="0" max="365" name="leadDays" value="${supplier.lead_days ?? ''}"></label>
+    <label class="supplier-wide">Условия<textarea name="terms" maxlength="1000" rows="2">${escape(supplier.terms || '')}</textarea></label>
+    <label class="supplier-wide">Текущий статус и следующий шаг<textarea name="notes" maxlength="1500" rows="2">${escape(supplier.notes || '')}</textarea></label>
+    <label class="supplier-check supplier-wide"><input type="checkbox" name="active" ${supplier.active ? 'checked' : ''}>
+      Доступен для закупки - условия и точные цены проверены</label>`;
+}
 function supplierCard(supplier) {
-  return `<article class="admin-card supplier-card"><h2>${escape(supplier.name)}</h2><p class="admin-muted">Предложений: ${supplier.offer_count}</p>
-    <form data-supplier-id="${escape(supplier.id)}" class="supplier-form">
-      <label>Название<input name="name" required maxlength="120" value="${escape(supplier.name)}"></label>
-      <label>Контакт<input name="contactName" maxlength="120" value="${escape(supplier.contact_name)}"></label>
-      <label>Email<input type="email" name="email" value="${escape(supplier.email)}"></label>
-      <label>Сайт<input type="url" name="website" value="${escape(supplier.website)}"></label>
-      <label>Срок, дней<input type="number" min="0" max="365" name="leadDays" value="${supplier.lead_days ?? ''}"></label>
-      <label class="supplier-wide">Условия<input name="terms" maxlength="1000" value="${escape(supplier.terms)}"></label>
-      <label class="supplier-check"><input type="checkbox" name="active" ${supplier.active ? 'checked' : ''}> Активен</label>
-      <button type="submit">Сохранить</button></form></article>`;
+  return `<article class="admin-card supplier-card" data-supplier-search="${escape(`${supplier.name} ${supplier.contact_name} ${supplier.email} ${supplier.notes}`.toLowerCase())}">
+    <details><summary><span class="supplier-card-title"><strong>${escape(supplier.name)}</strong>
+      <small>${supplier.kind === 'brand' ? 'Бренд' : 'Дистрибьютор'} · ${escape(supplierStages[supplier.stage] || supplierStages.lead)}</small></span>
+      <span class="supplier-card-count">${supplier.offer_count} предложений</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="supplier-card-body">${supplier.contact_name ? `<p>Контакт: ${escape(supplier.contact_name)}</p>` : ''}
+      ${supplier.email ? `<p>Email: <a href="mailto:${escape(supplier.email)}">${escape(supplier.email)}</a></p>` : ''}
+      ${supplier.phone ? `<p>Телефон: ${escape(supplier.phone)}</p>` : ''}
+      ${supplier.notes ? `<p>${escape(supplier.notes)}</p>` : ''}
+      <form data-supplier-id="${escape(supplier.id)}" class="supplier-form">${supplierFields(supplier)}
+        <button type="submit">Сохранить изменения</button></form></div></details></article>`;
 }
 function renderSuppliers() {
-  $('admin-content').innerHTML = `<section class="admin-card"><h2>Новый поставщик</h2><form data-new-supplier>
-    <label>Название<input name="name" required minlength="2" maxlength="120"></label>
-    <label>Email<input type="email" name="email"></label><label>Срок, дней<input type="number" name="leadDays" min="0" max="365"></label>
-    <button type="submit">Добавить поставщика</button></form></section>
+  $('admin-content').innerHTML = `<section class="supplier-overview"><div><h2>Поставщики и контакты брендов</h2>
+    <p>${suppliers.length} контактов · ${suppliers.filter(item => item.active).length} доступны для закупки</p></div>
+    <input id="supplier-search" type="search" aria-label="Поиск поставщика" placeholder="Поиск по названию, контакту или статусу"></section>
+    <details class="admin-card supplier-create" ${suppliers.length ? '' : 'open'}><summary>Добавить поставщика
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <form data-new-supplier class="supplier-form">${supplierFields()}
+        <button type="submit">Добавить поставщика</button></form></details>
     <div class="supplier-list">${suppliers.map(supplierCard).join('')}</div>`;
 }
 const brandMoney = cents => cents === null || cents === undefined ? '-' : euros(cents);
@@ -352,7 +377,7 @@ function brandMatchOptions(item) {
     .split(/[^\p{L}\p{N}]+/u).filter(word => word.length > 2 && word !== 'leonardo'));
   const sourceWords = words(item.name);
   const weight = value => String(value || '').toLowerCase().replace(/\s/g, '').replace('кг', 'kg').replace('гр', 'g').replace('г', 'g');
-  const ranked = brandData.siteVariants.map(site => {
+  const ranked = brandData.siteVariants.filter(site => !site.item_id || site.variant_id === item.variant_id).map(site => {
     const shared = [...words(site.name)].filter(word => sourceWords.has(word)).length;
     return { site, score: shared * 2 + (weight(site.label) === weight(item.weight) ? 6 : 0) };
   }).sort((a, b) => b.score - a.score || a.site.name.localeCompare(b.site.name));
@@ -411,12 +436,16 @@ function renderBrandInspector() {
       `<div class="brand-discount"><label>Проверить скидку, %<input id="brand-discount" type="number" min="0" max="70" step="1" value="0"></label>
         <p id="brand-discount-result">Цена после скидки: ${escape(brandSitePrice(variant))}</p>
         <small>Предпросмотр не меняет цену на сайте и исходный прайс</small></div>` : ''}
+    ${item ? `<div class="brand-link-state"><strong>${variant ? 'Связано с товаром сайта' : 'Этой позиции пока нет на сайте'}</strong>
+      <p>${variant ? escape(`${variant.name} · ${variant.label}`) : 'Позиция есть в прайсе поставщика. Для публикации нужна отдельная карточка товара'}</p>
+      ${variant || brandData.siteVariants.some(site => !site.item_id)
+        ? `<button type="button" data-brand-edit>${variant ? 'Исправить сопоставление' : 'Найти существующий товар'}</button>` : ''}</div>` : ''}
     ${variant ? `<div class="brand-actions"><button type="button" data-brand-product="${escape(variant.product_id)}">Открыть товар</button>
       <button type="button" data-brand-variant="${escape(variant.variant_id)}">Цена и остаток</button></div>` : ''}
-    ${item ? `<form data-brand-match="${escape(item.article)}" class="brand-match-form">
-      <label>Связь с SKU сайта<select name="variantId">${brandMatchOptions(item)}</select></label>
-      <button type="submit">Сохранить связь</button></form>
-      ${!item.variant_id ? '<button type="button" class="brand-draft" data-brand-draft="' + escape(item.article) + '">Создать скрытый черновик</button>' : ''}` : ''}`;
+    ${item && brandMatchEditing ? `<form data-brand-match="${escape(item.article)}" class="brand-match-form">
+      <label>Товар и фасовка на сайте<select name="variantId">${brandMatchOptions(item)}</select></label>
+      <button type="submit">${variant ? 'Сохранить исправление' : 'Связать с товаром'}</button></form>` : ''}
+    ${item && !item.variant_id ? '<button type="button" class="brand-draft" data-brand-draft="' + escape(item.article) + '">Создать скрытый черновик</button>' : ''}`;
 }
 function renderBrandRows() {
   const rows = brandRows();
@@ -779,6 +808,13 @@ document.querySelectorAll('[data-tab]').forEach(button => button.addEventListene
   load();
 }));
 $('admin-content').addEventListener('input', event => {
+  if (event.target.id === 'supplier-search') {
+    const needle = event.target.value.trim().toLowerCase();
+    document.querySelectorAll('.supplier-card').forEach(card => {
+      card.hidden = !card.dataset.supplierSearch.includes(needle);
+    });
+    return;
+  }
   if (event.target.id === 'brand-discount') {
     const selected = brandRows().find(row => row.key === brandSelected);
     const price = selected?.variant?.price_override_cents ?? selected?.variant?.source_price_cents;
@@ -881,8 +917,14 @@ $('admin-content').addEventListener('click', async event => {
   const brandRowButton = event.target.closest('[data-brand-key]');
   if (brandRowButton) {
     brandSelected = brandRowButton.dataset.brandKey;
+    brandMatchEditing = false;
     brandMobileOpen = true;
     renderBrandRows();
+    return;
+  }
+  if (event.target.closest('[data-brand-edit]')) {
+    brandMatchEditing = !brandMatchEditing;
+    renderBrandInspector();
     return;
   }
   if (event.target.closest('[data-brand-close]')) {
@@ -1025,8 +1067,9 @@ $('admin-content').addEventListener('submit', async event => {
       await api(`/api/admin/brands/leonardo/items/${form.dataset.brandMatch}/match`, 'PUT',
         { variantId: values.get('variantId') });
       brandData = await api('/api/admin/brands/leonardo');
+      brandMatchEditing = false;
       renderBrands();
-      message('Связь с SKU сохранена');
+      message('Сопоставление товара обновлено');
       return;
     }
     if (form.hasAttribute('data-purchase-create')) {
@@ -1071,10 +1114,15 @@ $('admin-content').addEventListener('submit', async event => {
       deliveryTaxRateBps: values.get('deliveryTaxPercent') === '' ? null :
         Math.round(Number(values.get('deliveryTaxPercent')) * 100) });
     else if (form.hasAttribute('data-new-supplier')) await api('/api/admin/suppliers', 'POST', {
-      name: values.get('name'), email: values.get('email'), leadDays: values.get('leadDays') });
+      name: values.get('name'), kind: values.get('kind'), stage: values.get('stage'),
+      contactName: values.get('contactName'), email: values.get('email'), phone: values.get('phone'),
+      website: values.get('website'), terms: values.get('terms'), notes: values.get('notes'),
+      leadDays: values.get('leadDays'), active: values.has('active') });
     else if (form.dataset.supplierId) await api(`/api/admin/suppliers/${encodeURIComponent(form.dataset.supplierId)}`, 'PATCH', {
       name: values.get('name'), contactName: values.get('contactName'), email: values.get('email'),
-      website: values.get('website'), terms: values.get('terms'), leadDays: values.get('leadDays'), active: values.has('active') });
+      phone: values.get('phone'), kind: values.get('kind'), stage: values.get('stage'),
+      website: values.get('website'), terms: values.get('terms'), notes: values.get('notes'),
+      leadDays: values.get('leadDays'), active: values.has('active') });
     else if (form.dataset.offerVariant) {
       const price = String(values.get('costEuros') || '').trim();
       await api('/api/admin/supplier-offers', 'PUT', { variantId: form.dataset.offerVariant,
