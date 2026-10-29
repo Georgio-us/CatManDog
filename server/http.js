@@ -17,11 +17,11 @@ export function json(res, status, value, headers = {}) {
   res.end(JSON.stringify(value));
 }
 
-export async function readJson(req) {
+export async function readJson(req, maxLength = 65536) {
   let body = '';
   for await (const chunk of req) {
     body += chunk;
-    if (body.length > 65536) throw Object.assign(new Error('Слишком большой запрос'), { status: 413 });
+    if (body.length > maxLength) throw Object.assign(new Error('Слишком большой запрос'), { status: 413 });
   }
   try { return body ? JSON.parse(body) : {}; }
   catch { throw Object.assign(new Error('Некорректный JSON'), { status: 400 }); }

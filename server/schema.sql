@@ -109,6 +109,34 @@ CREATE UNIQUE INDEX IF NOT EXISTS supplier_offers_one_preferred_idx
   ON supplier_offers(variant_id) WHERE preferred=true;
 CREATE INDEX IF NOT EXISTS supplier_offers_variant_idx ON supplier_offers(variant_id);
 
+CREATE TABLE IF NOT EXISTS supplier_catalog_sources (
+  id text PRIMARY KEY,
+  supplier_name text NOT NULL,
+  brand text NOT NULL,
+  price_date date NOT NULL,
+  source_file text NOT NULL,
+  shop_price_tax_basis text NOT NULL DEFAULT 'unknown',
+  retail_price_tax_basis text NOT NULL DEFAULT 'includes_iva',
+  imported_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS supplier_catalog_items (
+  id text PRIMARY KEY,
+  source_id text NOT NULL REFERENCES supplier_catalog_sources(id) ON DELETE RESTRICT,
+  article text NOT NULL,
+  name text NOT NULL,
+  line text NOT NULL DEFAULT '',
+  weight text NOT NULL DEFAULT '',
+  ean text NOT NULL DEFAULT '',
+  shop_price_cents integer CHECK (shop_price_cents >= 0),
+  recommended_price_cents integer CHECK (recommended_price_cents >= 0),
+  minimum_price_cents integer CHECK (minimum_price_cents >= 0),
+  raw_prices jsonb NOT NULL DEFAULT '{}'::jsonb,
+  source_row integer NOT NULL,
+  UNIQUE(source_id,article)
+);
+CREATE INDEX IF NOT EXISTS supplier_catalog_items_source_idx
+  ON supplier_catalog_items(source_id,line,name);
+
 CREATE TABLE IF NOT EXISTS staff_accounts (
   id uuid PRIMARY KEY,
   google_sub text NOT NULL UNIQUE,
@@ -127,6 +155,16 @@ CREATE TABLE IF NOT EXISTS staff_sessions (
   created_at timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS staff_sessions_staff_idx ON staff_sessions(staff_id);
+
+CREATE TABLE IF NOT EXISTS supplier_catalog_matches (
+  item_id text PRIMARY KEY REFERENCES supplier_catalog_items(id) ON DELETE CASCADE,
+  source_id text NOT NULL REFERENCES supplier_catalog_sources(id) ON DELETE CASCADE,
+  variant_id text NOT NULL REFERENCES catalog_variants(id) ON DELETE CASCADE,
+  match_method text NOT NULL CHECK (match_method IN ('ean','manual','draft')),
+  matched_by uuid REFERENCES staff_accounts(id) ON DELETE SET NULL,
+  matched_at timestamptz NOT NULL DEFAULT now(),
+  UNIQUE(source_id,variant_id)
+);
 
 CREATE TABLE IF NOT EXISTS admin_audit_events (
   id uuid PRIMARY KEY,

@@ -12,6 +12,7 @@ import { currentStaff, createStaffSession, staffCookie, clearStaffCookie,
 import { financePreview } from './finance.js';
 import { backupConfiguration, listBackups } from './backup.js';
 import { createStripeCheckout, stripeMode, stripeReady, verifyStripeEvent } from './stripe.js';
+import { importSupplierCatalog } from './supplier-catalog.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
@@ -27,6 +28,13 @@ async function checkoutAllowed(db, req) {
   return rows[0]?.allowed === true;
 }
 const bad = (message, status = 400) => { throw Object.assign(new Error(message), { status }); };
+async function latestLeonardoSource(db) {
+  const { rows } = await db.query(`SELECT id,supplier_name,brand,price_date,source_file,
+    shop_price_tax_basis,retail_price_tax_basis FROM supplier_catalog_sources
+    WHERE supplier_name='Albet' AND brand='Leonardo'
+    ORDER BY price_date DESC,imported_at DESC LIMIT 1`);
+  return rows[0] || null;
+}
 const optionalWebUrl = value => {
   const url = cap(value, 300);
   if (!url) return '';
@@ -624,6 +632,129 @@ async function adminRoute(db, req, res, path) {
       WHERE coalesce(p.source->>'gift','')='' AND coalesce(p.source->>'catalogHidden','false')!='true'
       GROUP BY p.id ORDER BY p.name LIMIT 2000`);
     return json(res, 200, { products: rows });
+  }
+  if (path === '/api/admin/brands/leonardo/import' && req.method === 'POST') {
+    const payload = await readJson(req, 2000000);
+    const result = await importSupplierCatalog(db, payload, operator.id);
+    return json(res, result.alreadyImported ? 200 : 201, result);
+  }
+  if (path === '/api/admin/brands/leonardo' && req.method === 'GET') {
+    const source = await latestLeonardoSource(db);
+    const sourceId = source?.id || '';
+    const [items, site] = await Promise.all([
+      db.query(`SELECT i.id,i.article,i.name,i.line,i.weight,i.ean,i.shop_price_cents,
+        i.recommended_price_cents,i.minimum_price_cents,i.source_row,
+        m.variant_id,m.match_method,p.id AS product_id,p.name AS site_name,
+        p.active AS product_active,v.label AS site_label,v.active AS variant_active,
+        v.price_override_cents,v.source_price_cents,v.price_confirmed,
+        v.availability,v.stock_quantity,v.reserved_quantity,
+        coalesce(sales.quantity,0)::integer AS sold_quantity,
+        coalesce(sales.order_count,0)::integer AS customer_order_count,
+        coalesce(purchases.ordered_quantity,0)::integer AS ordered_quantity,
+        coalesce(purchases.received_quantity,0)::integer AS purchased_quantity,
+        coalesce(purchases.order_count,0)::integer AS purchase_order_count
+        FROM supplier_catalog_items i
+        LEFT JOIN supplier_catalog_matches m ON m.item_id=i.id
+        LEFT JOIN catalog_variants v ON v.id=m.variant_id
+        LEFT JOIN catalog_products p ON p.id=v.product_id
+        LEFT JOIN LATERAL (SELECT sum(oi.quantity) AS quantity,
+          count(DISTINCT oi.order_id) AS order_count FROM order_items oi
+          JOIN orders o ON o.id=oi.order_id WHERE oi.variant_id=v.id
+          AND o.payment_status='paid' AND o.status!='cancelled') sales ON true
+        LEFT JOIN LATERAL (SELECT sum(poi.ordered_quantity) AS ordered_quantity,
+          sum(poi.received_quantity) AS received_quantity,
+          count(DISTINCT poi.purchase_order_id) AS order_count
+          FROM purchase_order_items poi JOIN purchase_orders po ON po.id=poi.purchase_order_id
+          WHERE poi.variant_id=v.id AND po.status IN ('ordered','partially_received','received')) purchases ON true
+        WHERE i.source_id=$1 ORDER BY i.line,i.name,i.weight`, [sourceId]),
+      db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.active AS product_active,
+        v.label,v.active AS variant_active,v.price_override_cents,v.source_price_cents,
+        v.price_confirmed,v.availability,v.stock_quantity,v.reserved_quantity,
+        m.item_id,m.match_method,
+        coalesce(sales.quantity,0)::integer AS sold_quantity,
+        coalesce(sales.order_count,0)::integer AS customer_order_count,
+        coalesce(purchases.ordered_quantity,0)::integer AS ordered_quantity,
+        coalesce(purchases.received_quantity,0)::integer AS purchased_quantity,
+        coalesce(purchases.order_count,0)::integer AS purchase_order_count
+        FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
+        LEFT JOIN supplier_catalog_matches m ON m.variant_id=v.id AND m.source_id=$1
+        LEFT JOIN LATERAL (SELECT sum(oi.quantity) AS quantity,
+          count(DISTINCT oi.order_id) AS order_count FROM order_items oi
+          JOIN orders o ON o.id=oi.order_id WHERE oi.variant_id=v.id
+          AND o.payment_status='paid' AND o.status!='cancelled') sales ON true
+        LEFT JOIN LATERAL (SELECT sum(poi.ordered_quantity) AS ordered_quantity,
+          sum(poi.received_quantity) AS received_quantity,
+          count(DISTINCT poi.purchase_order_id) AS order_count
+          FROM purchase_order_items poi JOIN purchase_orders po ON po.id=poi.purchase_order_id
+          WHERE poi.variant_id=v.id AND po.status IN ('ordered','partially_received','received')) purchases ON true
+        WHERE lower(p.brand)='leonardo' ORDER BY p.name,v.label`, [sourceId])
+    ]);
+    return json(res, 200, { source: source || { supplier_name: 'Albet', brand: 'Leonardo',
+      price_date: null, source_file: '' }, items: items.rows, siteVariants: site.rows });
+  }
+  const supplierMatch = path.match(/^\/api\/admin\/brands\/leonardo\/items\/([0-9]+)\/match$/);
+  if (supplierMatch && req.method === 'PUT') {
+    const body = await readJson(req);
+    const variantId = cap(body.variantId, 180);
+    const sourceId = (await latestLeonardoSource(db))?.id;
+    if (!sourceId) bad('Сначала загрузите прайс Leonardo', 409);
+    const itemId = `${sourceId}:${supplierMatch[1]}`;
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const item = await client.query('SELECT id FROM supplier_catalog_items WHERE id=$1 FOR UPDATE', [itemId]);
+      if (!item.rowCount) bad('Позиция прайса не найдена', 404);
+      if (variantId) {
+        const variant = await client.query(`SELECT v.id FROM catalog_variants v
+          JOIN catalog_products p ON p.id=v.product_id WHERE v.id=$1 AND lower(p.brand)='leonardo'`, [variantId]);
+        if (!variant.rowCount) bad('Выберите SKU Leonardo', 400);
+      }
+      await client.query('DELETE FROM supplier_catalog_matches WHERE item_id=$1', [itemId]);
+      if (variantId) await client.query(`INSERT INTO supplier_catalog_matches
+        (item_id,source_id,variant_id,match_method,matched_by)
+        VALUES($1,$2,$3,'manual',$4)`, [itemId, sourceId, variantId, operator.id]);
+      await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+        VALUES($1,$2,'supplier_catalog_match',$3,$4)`,
+      [randomUUID(), operator.id, itemId, { variantId: variantId || null }]);
+      await client.query('COMMIT');
+      return json(res, 200, { ok: true });
+    } catch (error) {
+      await client.query('ROLLBACK');
+      if (error.code === '23505') bad('Этот SKU уже связан с другой строкой прайса', 409);
+      throw error;
+    } finally { client.release(); }
+  }
+  const supplierDraft = path.match(/^\/api\/admin\/brands\/leonardo\/items\/([0-9]+)\/draft$/);
+  if (supplierDraft && req.method === 'POST') {
+    const sourceId = (await latestLeonardoSource(db))?.id;
+    if (!sourceId) bad('Сначала загрузите прайс Leonardo', 409);
+    const itemId = `${sourceId}:${supplierDraft[1]}`;
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const { rows } = await client.query(`SELECT i.* FROM supplier_catalog_items i
+        LEFT JOIN supplier_catalog_matches m ON m.item_id=i.id
+        WHERE i.id=$1 AND m.item_id IS NULL FOR UPDATE OF i`, [itemId]);
+      if (!rows.length) bad('Позиция уже связана с товаром или не найдена', 409);
+      const item = rows[0];
+      const productId = `cmd-${randomUUID()}`;
+      const variantId = `cmd-sku-${randomUUID()}`;
+      const foodType = /seco|fresh meat|\bgf\b/i.test(item.line) ? 'dry' : 'wet';
+      await client.query(`INSERT INTO catalog_products(id,name,brand,category,pet,food_type,active)
+        VALUES($1,$2,'Leonardo','Корм','cat',$3,false)`, [productId, item.name, foodType]);
+      await client.query(`INSERT INTO catalog_variants(id,product_id,label,source_orderable,
+        availability,price_confirmed,active) VALUES($1,$2,$3,true,'unavailable',false,true)`,
+      [variantId, productId, item.weight || '1 шт']);
+      await client.query(`INSERT INTO supplier_catalog_matches
+        (item_id,source_id,variant_id,match_method,matched_by)
+        VALUES($1,$2,$3,'draft',$4)`, [itemId, sourceId, variantId, operator.id]);
+      await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+        VALUES($1,$2,'supplier_catalog_draft_created',$3,$4)`,
+      [randomUUID(), operator.id, productId, { itemId, variantId }]);
+      await client.query('COMMIT');
+      return json(res, 201, { productId, variantId });
+    } catch (error) { await client.query('ROLLBACK'); throw error; }
+    finally { client.release(); }
   }
   if (path === '/api/admin/products' && req.method === 'POST') {
     const body = await readJson(req);

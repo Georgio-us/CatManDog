@@ -1,6 +1,13 @@
 let tab = 'overview';
 let auditRows = [];
 let suppliers = [];
+let brandData = null;
+let brandView = 'site';
+let brandSearch = '';
+let brandLine = '';
+let brandSelected = '';
+let brandVisibleCount = 50;
+let brandMobileOpen = false;
 let googleBusy = false;
 let activeRole = null;
 let auditFilters = { search: '', filter: 'all', pet: 'all' };
@@ -312,6 +319,142 @@ function renderSuppliers() {
     <button type="submit">Добавить поставщика</button></form></section>
     <div class="supplier-list">${suppliers.map(supplierCard).join('')}</div>`;
 }
+const brandMoney = cents => cents === null || cents === undefined ? '-' : euros(cents);
+function brandRows() {
+  if (!brandData) return [];
+  const sources = new Map(brandData.items.map(item => [item.id, item]));
+  const rows = brandView === 'site'
+    ? brandData.siteVariants.map(variant => ({ key: `v:${variant.variant_id}`,
+      variant, item: sources.get(variant.item_id) || null }))
+    : brandData.items.filter(item => brandView !== 'unmatched' || !item.variant_id)
+      .map(item => ({ key: `s:${item.id}`, item,
+        variant: brandData.siteVariants.find(variant => variant.variant_id === item.variant_id) || null }));
+  const needle = brandSearch.toLocaleLowerCase('ru');
+  return rows.filter(({ item, variant }) =>
+    (!brandLine || item?.line === brandLine) &&
+    `${item?.name || ''} ${item?.article || ''} ${item?.ean || ''} ${variant?.name || ''} ${variant?.variant_id || ''}`
+      .toLocaleLowerCase('ru').includes(needle));
+}
+function brandStock(variant) {
+  if (!variant) return '-';
+  if (variant.availability === 'unavailable') return 'Недоступен';
+  if (variant.availability !== 'on_hand') return 'Под заказ';
+  if (variant.stock_quantity === null) return 'Не указано';
+  return `${Math.max(0, variant.stock_quantity - (variant.reserved_quantity || 0))} доступно`;
+}
+function brandSitePrice(variant) {
+  if (!variant) return '-';
+  if (!variant.price_confirmed) return '7,77 € · Демонстрационная цена';
+  return brandMoney(variant.price_override_cents ?? variant.source_price_cents);
+}
+function brandMatchOptions(item) {
+  const words = value => new Set(String(value || '').toLocaleLowerCase('ru')
+    .split(/[^\p{L}\p{N}]+/u).filter(word => word.length > 2 && word !== 'leonardo'));
+  const sourceWords = words(item.name);
+  const weight = value => String(value || '').toLowerCase().replace(/\s/g, '').replace('кг', 'kg').replace('гр', 'g').replace('г', 'g');
+  const ranked = brandData.siteVariants.map(site => {
+    const shared = [...words(site.name)].filter(word => sourceWords.has(word)).length;
+    return { site, score: shared * 2 + (weight(site.label) === weight(item.weight) ? 6 : 0) };
+  }).sort((a, b) => b.score - a.score || a.site.name.localeCompare(b.site.name));
+  const likely = ranked.filter(row => row.score >= 6).slice(0, 8);
+  const likelyIds = new Set(likely.map(row => row.site.variant_id));
+  const option = site => `<option value="${escape(site.variant_id)}" ${site.variant_id === item.variant_id ? 'selected' : ''}>${escape(`${site.name} · ${site.label}`)}</option>`;
+  return `<option value="">Не сопоставлен</option>
+    ${likely.length ? `<optgroup label="Похожие по названию и фасовке">${likely.map(row => option(row.site)).join('')}</optgroup>` : ''}
+    <optgroup label="Все остальные SKU">${ranked.filter(row => !likelyIds.has(row.site.variant_id)).map(row => option(row.site)).join('')}</optgroup>`;
+}
+function brandRow({ key, item, variant }) {
+  const active = variant && variant.product_active && variant.variant_active;
+  const state = variant ? active ? 'На сайте' : 'Скрыт' : 'Нет связи с сайтом';
+  return `<button type="button" class="brand-row" data-brand-key="${escape(key)}"
+    aria-pressed="${String(brandSelected === key)}">
+    <span class="brand-identity"><strong>${escape(item?.name || variant.name)}</strong>
+      <small>${escape(item ? `${item.article} · ${item.line}` : `${variant.variant_id} · Без связи с прайсом`)}</small></span>
+    <span>${escape(item?.weight || variant?.label || '-')}</span>
+    <span>${brandMoney(item?.shop_price_cents)}</span>
+    <span>${brandMoney(item?.minimum_price_cents)}</span>
+    <span>${escape(brandSitePrice(variant))}</span>
+    <span>${escape(brandStock(variant))}</span>
+    <span class="brand-state ${active ? 'is-live' : ''}">${escape(state)}</span>
+  </button>`;
+}
+function renderBrandInspector() {
+  const host = $('brand-inspector');
+  if (!host) return;
+  host.classList.toggle('is-open', brandMobileOpen);
+  const selected = brandRows().find(row => row.key === brandSelected);
+  if (!selected) { host.innerHTML = '<p class="admin-muted">Выберите строку, чтобы увидеть детали</p>'; return; }
+  const { item, variant } = selected;
+  const source = brandData.source;
+  host.innerHTML = `<button type="button" class="brand-inspector-close" data-brand-close aria-label="Закрыть детали">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 5 19 19M19 5 5 19"/></svg></button>
+    <div class="brand-inspector-head"><div><span class="admin-muted">${item ? 'Позиция прайса' : 'Товар сайта'}</span>
+    <h2>${escape(item?.name || variant.name)}</h2><p>${escape(item?.weight || variant?.label || '')}</p></div></div>
+    <div class="brand-facts">
+      <div><span>Артикул поставщика</span><strong>${escape(item?.article || '-')}</strong></div>
+      <div><span>EAN</span><strong>${escape(item?.ean || 'Не указан')}</strong></div>
+      <div><span>Tienda</span><strong>${brandMoney(item?.shop_price_cents)}</strong></div>
+      <div><span>Рекомендованная PVP с IVA</span><strong>${brandMoney(item?.recommended_price_cents)}</strong></div>
+      <div><span>Минимальная PVP с IVA</span><strong>${brandMoney(item?.minimum_price_cents)}</strong></div>
+      <div><span>Цена на сайте</span><strong>${escape(brandSitePrice(variant))}</strong></div>
+      <div><span>Наличие</span><strong>${escape(brandStock(variant))}</strong></div>
+      <div><span>Продано, шт</span><strong>${variant ? variant.sold_quantity ?? 0 : '-'}</strong></div>
+      <div><span>Заказов покупателей</span><strong>${variant ? variant.customer_order_count ?? 0 : '-'}</strong></div>
+      <div><span>Заказано у поставщиков, шт</span><strong>${variant ? variant.ordered_quantity ?? 0 : '-'}</strong></div>
+      <div><span>Получено по закупкам, шт</span><strong>${variant ? variant.purchased_quantity ?? 0 : '-'}</strong></div>
+      <div><span>Заявок поставщикам</span><strong>${variant ? variant.purchase_order_count ?? 0 : '-'}</strong></div>
+    </div>
+    ${item ? `<p class="brand-source">Источник: ${escape(source.source_file)}, строка ${item.source_row}
+      <br>Tienda указана в прайсе без явной пометки об IVA - это ещё не подтверждённая закупочная цена</p>` :
+      '<p class="brand-source">Для этого SKU пока нет подтверждённой связи со строкой прайса</p>'}
+    ${item && variant?.price_confirmed && (variant.price_override_cents ?? variant.source_price_cents) ?
+      `<div class="brand-discount"><label>Проверить скидку, %<input id="brand-discount" type="number" min="0" max="70" step="1" value="0"></label>
+        <p id="brand-discount-result">Цена после скидки: ${escape(brandSitePrice(variant))}</p>
+        <small>Предпросмотр не меняет цену на сайте и исходный прайс</small></div>` : ''}
+    ${variant ? `<div class="brand-actions"><button type="button" data-brand-product="${escape(variant.product_id)}">Открыть товар</button>
+      <button type="button" data-brand-variant="${escape(variant.variant_id)}">Цена и остаток</button></div>` : ''}
+    ${item ? `<form data-brand-match="${escape(item.article)}" class="brand-match-form">
+      <label>Связь с SKU сайта<select name="variantId">${brandMatchOptions(item)}</select></label>
+      <button type="submit">Сохранить связь</button></form>
+      ${!item.variant_id ? '<button type="button" class="brand-draft" data-brand-draft="' + escape(item.article) + '">Создать скрытый черновик</button>' : ''}` : ''}`;
+}
+function renderBrandRows() {
+  const rows = brandRows();
+  if (!rows.some(row => row.key === brandSelected)) brandSelected = rows[0]?.key || '';
+  $('brand-list').innerHTML = rows.slice(0, brandVisibleCount).map(brandRow).join('') ||
+    '<p class="brand-empty">По выбранным условиям ничего не найдено</p>';
+  $('brand-count').textContent = `Показано ${Math.min(rows.length, brandVisibleCount)} из ${rows.length}`;
+  $('brand-more').hidden = rows.length <= brandVisibleCount;
+  renderBrandInspector();
+}
+function renderBrands() {
+  const { source, items, siteVariants } = brandData;
+  const linked = items.filter(item => item.variant_id).length;
+  const lines = [...new Set(items.map(item => item.line).filter(Boolean))];
+  $('admin-content').innerHTML = `<section class="brand-workspace"><div class="brand-heading">
+    <div><p class="brand-path">Бренды / Leonardo</p><h2>Leonardo</h2>
+      <p>Поставщик ${escape(source.supplier_name)} · ${source.price_date ? `прайс от ${escape(shortDate(source.price_date))}` : 'прайс ещё не загружен'}</p></div>
+    <div class="brand-heading-actions"><label class="brand-upload">Загрузить прайс JSON<input id="brand-upload" type="file" accept=".json,application/json"></label>
+      <button type="button" data-go-tab="suppliers">Поставщики</button></div></div>
+    <div class="brand-summary"><div><strong>${items.length}</strong><span>Строк в прайсе</span></div>
+      <div><strong>${siteVariants.length}</strong><span>SKU Leonardo на сайте и в черновиках</span></div>
+      <div><strong>${linked}</strong><span>Связей с SKU</span></div>
+      <div><strong>${items.length - linked}</strong><span>Строк прайса без связи</span></div></div>
+    <div class="brand-main"><div class="brand-left">
+      <div class="brand-tabs" role="group" aria-label="Каталог Leonardo">
+        <button type="button" data-brand-view="site" aria-pressed="${brandView === 'site'}">На сайте</button>
+        <button type="button" data-brand-view="catalog" aria-pressed="${brandView === 'catalog'}">Весь прайс</button>
+        <button type="button" data-brand-view="unmatched" aria-pressed="${brandView === 'unmatched'}">Без связи</button></div>
+      <div class="brand-filters"><label>Поиск<input id="brand-search" value="${escape(brandSearch)}" placeholder="Название, EAN или артикул"></label>
+        <label>Линейка<select id="brand-line"><option value="">Все линейки</option>
+          ${lines.map(line => `<option value="${escape(line)}" ${brandLine === line ? 'selected' : ''}>${escape(line)}</option>`).join('')}</select></label></div>
+      <div class="brand-table"><div class="brand-table-head"><span>Товар</span><span>Фасовка</span><span>Tienda</span>
+        <span>Мин. PVP</span><span>На сайте</span><span>Наличие</span><span>Статус</span></div>
+        <div id="brand-list"></div></div><div class="brand-footer"><span id="brand-count"></span>
+        <button type="button" id="brand-more">Показать ещё</button></div></div>
+      <aside class="brand-inspector" id="brand-inspector" aria-live="polite"></aside></div></section>`;
+  renderBrandRows();
+}
 function renderReplenishment(variants) {
   $('admin-content').innerHTML = `<section class="admin-card"><h2>Товары к закупке</h2>
     <p class="admin-muted">Каждый SKU попадает сюда при достижении своего порога с учётом резерва. Количество рассчитано до целевого запаса и минимальной партии поставщика. Заказ поставщику автоматически не отправляется</p></section>
@@ -529,6 +672,7 @@ function renderOverview(data) {
     <div><strong>${euros(orders.paid_total_30d)}</strong><span>Оплачено за 30 дней · ${orders.paid_orders_30d} заказов</span></div>
   </div><section class="admin-card"><h2>Что проверить сейчас</h2>
     <div class="overview-actions"><button type="button" data-go-tab="audit">Открыть ревизию SKU</button>
+    <button type="button" data-go-tab="brands">Открыть Leonardo</button>
     <button type="button" data-go-tab="replenishment">Товары к закупке</button>
     <button type="button" data-go-tab="purchases">Открыть закупки</button>
     <button type="button" data-go-tab="orders">Открыть заказы</button>
@@ -564,6 +708,12 @@ async function load() {
       productRows = (await api('/api/admin/products')).products;
       renderProducts();
       message(`Товаров: ${productRows.length}`);
+      return;
+    }
+    if (tab === 'brands') {
+      brandData = await api('/api/admin/brands/leonardo');
+      renderBrands();
+      message('');
       return;
     }
     if (tab === 'customers') {
@@ -625,6 +775,23 @@ document.querySelectorAll('[data-tab]').forEach(button => button.addEventListene
   load();
 }));
 $('admin-content').addEventListener('input', event => {
+  if (event.target.id === 'brand-discount') {
+    const selected = brandRows().find(row => row.key === brandSelected);
+    const price = selected?.variant?.price_override_cents ?? selected?.variant?.source_price_cents;
+    const percent = Number(event.target.value);
+    const output = $('brand-discount-result');
+    if (!output || !Number.isInteger(percent) || percent < 0 || percent > 70 || !price) return;
+    const discounted = Math.round(price * (100 - percent) / 100);
+    output.textContent = `Цена после скидки: ${euros(discounted)}` +
+      (selected.item.minimum_price_cents !== null && discounted < selected.item.minimum_price_cents
+        ? ' · ниже минимума в прайсе' : '');
+    return;
+  }
+  if (event.target.id === 'brand-search') {
+    brandSearch = event.target.value;
+    brandVisibleCount = 50;
+    renderBrandRows();
+  }
   if (event.target.id === 'catalog-product-search') {
     productSearch = event.target.value;
     renderProductList();
@@ -646,6 +813,27 @@ $('admin-content').addEventListener('input', event => {
   }
 });
 $('admin-content').addEventListener('change', async event => {
+  if (event.target.id === 'brand-upload') {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    try {
+      if (file.size > 1500000) throw new Error('Файл прайса слишком большой');
+      const snapshot = JSON.parse(await file.text());
+      const result = await api('/api/admin/brands/leonardo/import', 'POST', snapshot);
+      brandData = await api('/api/admin/brands/leonardo');
+      brandView = 'catalog';
+      brandSelected = '';
+      renderBrands();
+      message(result.alreadyImported ? 'Эта версия прайса уже загружена' :
+        `Загружено ${result.imported} строк, по EAN связано ${result.autoMatched}`);
+    } catch (error) { message(error.message); event.target.value = ''; }
+    return;
+  }
+  if (event.target.id === 'brand-line') {
+    brandLine = event.target.value;
+    brandVisibleCount = 50;
+    renderBrandRows();
+  }
   if (['audit-filter','audit-pet'].includes(event.target.id)) filterAudit();
   if (event.target.id === 'purchase-supplier') {
     purchaseSupplierId = event.target.value;
@@ -655,6 +843,61 @@ $('admin-content').addEventListener('change', async event => {
   }
 });
 $('admin-content').addEventListener('click', async event => {
+  const brandViewButton = event.target.closest('[data-brand-view]');
+  if (brandViewButton) {
+    brandView = brandViewButton.dataset.brandView;
+    brandVisibleCount = 50;
+    document.querySelectorAll('[data-brand-view]').forEach(button =>
+      button.setAttribute('aria-pressed', String(button === brandViewButton)));
+    renderBrandRows();
+    return;
+  }
+  const brandRowButton = event.target.closest('[data-brand-key]');
+  if (brandRowButton) {
+    brandSelected = brandRowButton.dataset.brandKey;
+    brandMobileOpen = true;
+    renderBrandRows();
+    return;
+  }
+  if (event.target.closest('[data-brand-close]')) {
+    brandMobileOpen = false;
+    renderBrandInspector();
+    return;
+  }
+  if (event.target.closest('#brand-more')) { brandVisibleCount += 50; renderBrandRows(); return; }
+  const brandProduct = event.target.closest('[data-brand-product]');
+  if (brandProduct) {
+    productSearch = brandProduct.dataset.brandProduct;
+    openedProductId = brandProduct.dataset.brandProduct;
+    tab = 'products';
+    document.querySelectorAll('[data-tab]').forEach(item =>
+      item.setAttribute('aria-pressed', String(item.dataset.tab === tab)));
+    await load();
+    return;
+  }
+  const brandVariant = event.target.closest('[data-brand-variant]');
+  if (brandVariant) {
+    variantSearch = brandVariant.dataset.brandVariant;
+    tab = 'variants';
+    document.querySelectorAll('[data-tab]').forEach(item =>
+      item.setAttribute('aria-pressed', String(item.dataset.tab === tab)));
+    await load();
+    return;
+  }
+  const brandDraft = event.target.closest('[data-brand-draft]');
+  if (brandDraft) {
+    brandDraft.disabled = true;
+    try {
+      const sourceId = brandData.source.id;
+      const created = await api(`/api/admin/brands/leonardo/items/${brandDraft.dataset.brandDraft}/draft`, 'POST');
+      brandData = await api('/api/admin/brands/leonardo');
+      brandView = 'catalog';
+      brandSelected = `s:${sourceId}:${brandDraft.dataset.brandDraft}`;
+      renderBrands();
+      message(`Скрытый черновик создан: ${created.variantId}`);
+    } catch (error) { brandDraft.disabled = false; message(error.message); }
+    return;
+  }
   const financeButton = event.target.closest('[data-finance-order]');
   if (financeButton) { await loadFinancePreview(financeButton); return; }
   const pageButton = event.target.closest('[data-customer-page]');
@@ -752,6 +995,14 @@ $('admin-content').addEventListener('submit', async event => {
   const submitButton = form.querySelector('button[type="submit"], button:not([type])');
   if (submitButton) submitButton.disabled = true;
   try {
+    if (form.hasAttribute('data-brand-match')) {
+      await api(`/api/admin/brands/leonardo/items/${form.dataset.brandMatch}/match`, 'PUT',
+        { variantId: values.get('variantId') });
+      brandData = await api('/api/admin/brands/leonardo');
+      renderBrands();
+      message('Связь с SKU сохранена');
+      return;
+    }
     if (form.hasAttribute('data-purchase-create')) {
       const items = [...form.querySelectorAll('[data-purchase-qty]')].map(input => ({
         variantId: input.dataset.purchaseQty, quantity: Number(input.value) }));
