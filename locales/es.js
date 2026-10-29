@@ -63,6 +63,7 @@ export const es = {
   'Помощь с заказом': 'Ayuda con tu pedido',
   'С заботой о каждом хвосте': 'Cuidamos de cada compañero',
   'Конфиденциальность': 'Privacidad',
+  'Юридическая информация': 'Aviso legal',
   'Язык сайта': 'Idioma del sitio',
   'Закрыть уведомление': 'Cerrar aviso',
   'В корзину': 'Ver cesta',

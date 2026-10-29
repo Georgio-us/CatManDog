@@ -82,6 +82,9 @@ function elementAttributes(element) {
   if (language === 'es' && element.tagName === 'A' && element.getAttribute('href') === '/privacy.html') {
     element.setAttribute('href', '/privacy-es.html');
   }
+  if (language === 'es' && element.tagName === 'A' && element.getAttribute('href') === '/legal.html') {
+    element.setAttribute('href', '/legal-es.html');
+  }
   const previous = translatedAttributes.get(element) || {};
   for (const name of attributes) {
     const current = element.getAttribute(name);
