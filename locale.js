@@ -4,7 +4,9 @@ import { esDetails } from './locales/details-es.js';
 
 const storageKey = 'catmandog-language';
 const saved = (() => { try { return localStorage.getItem(storageKey); } catch { return null; } })();
-const language = saved === 'ru' || saved === 'es' ? saved : 'es';
+const seoPath = globalThis.location?.pathname || '';
+const language = seoPath === '/revista' || seoPath.startsWith('/revista/')
+  ? 'es' : saved === 'ru' || saved === 'es' ? saved : 'es';
 const translatedNodes = new WeakMap();
 const translatedAttributes = new WeakMap();
 const attributes = ['aria-label', 'title', 'placeholder', 'alt'];
@@ -14,6 +16,10 @@ export const intlLocale = () => language === 'es' ? 'es-ES' : 'ru-RU';
 export function setLocale(value) {
   if (value !== 'ru' && value !== 'es') return;
   try { localStorage.setItem(storageKey, value); } catch { /* Private browsing */ }
+  if (value === 'ru' && (location.pathname === '/revista' || location.pathname.startsWith('/revista/'))) {
+    location.assign(`/#/journal${location.pathname.slice('/revista'.length)}`);
+    return;
+  }
   location.reload();
 }
 
@@ -56,6 +62,12 @@ function textNode(node) {
 }
 
 function elementAttributes(element) {
+  if (language === 'ru' && element.tagName === 'A') {
+    const href = element.getAttribute('href');
+    if (href === '/revista' || href?.startsWith('/revista/')) {
+      element.setAttribute('href', `#/journal${href.slice('/revista'.length)}`);
+    }
+  }
   // An <option> without an explicit value otherwise changes its form value
   // when its visible Russian label is translated.
   if (element.tagName === 'OPTION' && !element.hasAttribute('value')) {

@@ -5,7 +5,8 @@ import { extname, resolve, sep } from 'node:path';
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
   '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8',
   '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp',
-  '.svg': 'image/svg+xml', '.gif': 'image/gif', '.ico': 'image/x-icon', '.woff2': 'font/woff2' };
+  '.svg': 'image/svg+xml', '.gif': 'image/gif', '.ico': 'image/x-icon', '.woff2': 'font/woff2',
+  '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml; charset=utf-8' };
 const root = resolve(new URL('..', import.meta.url).pathname);
 const hidden = name => name.startsWith('.') || name === 'server' || name === 'node_modules' ||
   name === 'tests' || name === 'research' || name.endsWith('.md') || name === 'package.json' ||
