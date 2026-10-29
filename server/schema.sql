@@ -160,11 +160,16 @@ CREATE TABLE IF NOT EXISTS supplier_catalog_matches (
   item_id text PRIMARY KEY REFERENCES supplier_catalog_items(id) ON DELETE CASCADE,
   source_id text NOT NULL REFERENCES supplier_catalog_sources(id) ON DELETE CASCADE,
   variant_id text NOT NULL REFERENCES catalog_variants(id) ON DELETE CASCADE,
-  match_method text NOT NULL CHECK (match_method IN ('ean','manual','draft')),
+  match_method text NOT NULL CHECK (match_method IN ('ean','manual','draft','catalog')),
   matched_by uuid REFERENCES staff_accounts(id) ON DELETE SET NULL,
   matched_at timestamptz NOT NULL DEFAULT now(),
   UNIQUE(source_id,variant_id)
 );
+ALTER TABLE supplier_catalog_matches
+  DROP CONSTRAINT IF EXISTS supplier_catalog_matches_match_method_check;
+ALTER TABLE supplier_catalog_matches
+  ADD CONSTRAINT supplier_catalog_matches_match_method_check
+  CHECK (match_method IN ('ean','manual','draft','catalog'));
 
 CREATE TABLE IF NOT EXISTS admin_audit_events (
   id uuid PRIMARY KEY,

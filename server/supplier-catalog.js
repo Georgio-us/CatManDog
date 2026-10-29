@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { leonardoCatalogMatches } from './leonardo-matcher.js';
 
 const invalid = message => { throw Object.assign(new Error(message), { status: 400 }); };
 
@@ -66,13 +67,30 @@ export async function importSupplierCatalog(db, input, staffId) {
       FROM supplier_catalog_items i JOIN supplier_eans e ON e.ean=i.ean
       JOIN shop_eans s ON s.ean=i.ean WHERE i.source_id=$1
       ON CONFLICT DO NOTHING RETURNING item_id`, [snapshot.id]);
+    const supplierRows = await client.query(`SELECT id,name,line,weight,ean
+      FROM supplier_catalog_items WHERE source_id=$1`, [snapshot.id]);
+    const siteRows = await client.query(`SELECT v.id,p.name,v.label,coalesce(v.source->>'ean','') AS ean
+      FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
+      WHERE lower(p.brand)='leonardo'`);
+    const catalogPairs = leonardoCatalogMatches(supplierRows.rows, siteRows.rows);
+    const catalogMatches = catalogPairs.length ? await client.query(`INSERT INTO supplier_catalog_matches
+      (item_id,source_id,variant_id,match_method)
+      SELECT i.id,i.source_id,v.id,'catalog'
+      FROM unnest($1::text[],$2::text[]) AS proposed(item_id,variant_id)
+      JOIN supplier_catalog_items i ON i.id=proposed.item_id AND i.source_id=$3
+      JOIN catalog_variants v ON v.id=proposed.variant_id
+      JOIN catalog_products p ON p.id=v.product_id AND lower(p.brand)='leonardo'
+      ON CONFLICT DO NOTHING RETURNING item_id`,
+    [catalogPairs.map(pair => pair.itemId), catalogPairs.map(pair => pair.variantId), snapshot.id]) : { rowCount: 0 };
     if (source.rowCount) await client.query(`INSERT INTO admin_audit_events
       (id,staff_id,action,target_id,details) VALUES($1,$2,'supplier_catalog_imported',$3,$4)`,
     [randomUUID(), staffId, snapshot.id, { rows: snapshot.items.length,
-      autoMatched: matches.rowCount, sourceFile: snapshot.sourceFile }]);
+      autoMatched: matches.rowCount, catalogMatched: catalogMatches.rowCount,
+      sourceFile: snapshot.sourceFile }]);
     await client.query('COMMIT');
     return { imported: source.rowCount ? snapshot.items.length : 0,
-      alreadyImported: !source.rowCount, autoMatched: matches.rowCount };
+      alreadyImported: !source.rowCount, autoMatched: matches.rowCount,
+      catalogMatched: catalogMatches.rowCount };
   } catch (error) {
     await client.query('ROLLBACK');
     throw error;

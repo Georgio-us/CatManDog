@@ -344,8 +344,8 @@ function brandStock(variant) {
 }
 function brandSitePrice(variant) {
   if (!variant) return '-';
-  if (!variant.price_confirmed) return '7,77 € · Демонстрационная цена';
-  return brandMoney(variant.price_override_cents ?? variant.source_price_cents);
+  const amount = brandMoney(variant.price_override_cents ?? variant.source_price_cents);
+  return variant.price_confirmed ? amount : amount === '-' ? 'Цена не указана' : `${amount} · ориентир`;
 }
 function brandMatchOptions(item) {
   const words = value => new Set(String(value || '').toLocaleLowerCase('ru')
@@ -443,7 +443,7 @@ function renderBrands() {
     <div class="brand-summary"><div><strong>${items.length}</strong><span>Строк в прайсе</span></div>
       <div><strong>${siteVariants.length}</strong><span>SKU Leonardo на сайте и в черновиках</span></div>
       <div><strong>${linked}</strong><span>Связей с SKU</span></div>
-      <div><strong>${items.length - linked}</strong><span>Строк прайса без связи</span></div></div>
+      <div><strong>${items.length - linked}</strong><span>Позиций прайса без SKU на сайте</span></div></div>
     <div class="brand-main"><div class="brand-left">
       <div class="brand-tabs" role="group" aria-label="Каталог Leonardo">
         <button type="button" data-brand-view="site" aria-pressed="${brandView === 'site'}">На сайте</button>
@@ -822,8 +822,10 @@ async function importBrandSnapshot(snapshot) {
   brandView = 'catalog';
   brandSelected = '';
   renderBrands();
-  message(result.alreadyImported ? 'Эта версия прайса уже загружена' :
-    `Загружено ${result.imported} строк, по EAN связано ${result.autoMatched}`);
+  const newLinks = (result.autoMatched || 0) + (result.catalogMatched || 0);
+  message(result.alreadyImported
+    ? `Прайс уже загружен, сейчас сопоставлено ещё ${newLinks} позиций`
+    : `Загружено ${result.imported} строк, сопоставлено ${newLinks} позиций`);
 }
 $('admin-content').addEventListener('change', async event => {
   if (event.target.id === 'brand-upload') {

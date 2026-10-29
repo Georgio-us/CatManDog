@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { handleApi } from '../server/api.js';
 import { importSupplierCatalog, validateSupplierCatalog } from '../server/supplier-catalog.js';
+import { leonardoCatalogMatches } from '../server/leonardo-matcher.js';
 
 const snapshot = {
   id: 'albet-leonardo-2026-03-01', supplierName: 'Albet', brand: 'Leonardo',
@@ -36,14 +37,50 @@ test('import records supplier prices without changing public prices or purchase 
   const queries = [];
   const client = { async query(sql, params) {
     queries.push([sql, params]);
-    return { rowCount: sql.includes('INSERT INTO supplier_catalog_matches') ? 0 : 1 };
+    return { rowCount: sql.includes('INSERT INTO supplier_catalog_matches') ? 0 : 1, rows: [] };
   }, release() {} };
   const result = await importSupplierCatalog({ async connect() { return client; } }, snapshot, 'owner-1');
-  assert.deepEqual(result, { imported: 1, alreadyImported: false, autoMatched: 0 });
+  assert.deepEqual(result, { imported: 1, alreadyImported: false, autoMatched: 0, catalogMatched: 0 });
   const itemInsert = queries.find(([sql]) => sql.includes('INSERT INTO supplier_catalog_items'));
   assert.deepEqual(itemInsert[1].slice(7, 10), [321, 599, 499]);
   assert.equal(queries.some(([sql]) => /(?:UPDATE|INSERT INTO) catalog_variants/.test(sql)), false);
   assert.equal(queries.some(([sql]) => sql.includes('supplier_offers')), false);
+});
+
+test('Leonardo recipe and pack matching links only unique products and respects EAN conflicts', () => {
+  const items = [
+    { id:'a',name:'LEONARDO Salmón + extra filete',line:'Leonardo alimento húmedo con extra filete (latas)',weight:'200 g',ean:'111' },
+    { id:'b',name:'Leonardo Adult GF Poultry',line:'Leonardo GF - alimento seco SIN CEREALES - con 30% de carne fresca',weight:'1,8 kg',ean:'222' },
+    { id:'c',name:'Leonardo Drink Duck',line:'Leonardo húmedo Drink (pouches)',weight:'40g',ean:'333' },
+    { id:'d',name:'LEONARDO Salmón + extra filete',line:'Leonardo alimento húmedo con extra filete (latas)',weight:'400 g',ean:'444' },
+  ];
+  const sites = [
+    { id:'salmon-200',name:'Leonardo Extra Filet Salmon',label:'200 г',ean:'' },
+    { id:'poultry-1800',name:'Leonardo Adult GF Poultry',label:'1,8 кг',ean:'222' },
+    { id:'salmon-400',name:'Leonardo Extra Filet Salmon',label:'400 г',ean:'different' },
+  ];
+  assert.deepEqual(leonardoCatalogMatches(items, sites).map(pair => [pair.itemId,pair.variantId]),
+    [['a','salmon-200'],['b','poultry-1800']]);
+});
+
+test('re-importing an existing Leonardo price list fills catalog links without rewriting prices', async () => {
+  const rows = [];
+  const client = { async query(sql, params) {
+    rows.push([sql, params]);
+    if (sql.includes('INSERT INTO supplier_catalog_sources')) return { rowCount: 0 };
+    if (sql.includes('SELECT id,name,line,weight,ean')) return { rows: [{
+      id:'albet-leonardo-2026-03-01:123456',name:'Leonardo Adult GF Poultry',
+      line:'Leonardo GF - alimento seco SIN CEREALES - con 30% de carne fresca',
+      weight:'1,8 kg',ean:'4000000000000' }] };
+    if (sql.includes('SELECT v.id,p.name,v.label')) return { rows: [{
+      id:'leonardo-poultry-1800g',name:'Leonardo Adult GF Poultry',label:'1,8 кг',ean:'' }] };
+    if (sql.includes("SELECT i.id,i.source_id,v.id,'catalog'")) return { rowCount: 1 };
+    return { rowCount: 0 };
+  }, release() {} };
+  const result = await importSupplierCatalog({ async connect() { return client; } }, snapshot, 'owner-1');
+  assert.deepEqual(result, { imported: 0, alreadyImported: true, autoMatched: 0, catalogMatched: 1 });
+  assert.equal(rows.some(([sql]) => sql.includes('INSERT INTO supplier_catalog_items')), false);
+  assert.equal(rows.some(([sql]) => /(?:UPDATE|INSERT INTO) catalog_variants/.test(sql)), false);
 });
 
 test('owner-only supplier view and draft creation do not publish or invent a purchase price', async () => {
