@@ -31,6 +31,12 @@ const $ = id => document.getElementById(id);
 const escape = value => String(value ?? '').replace(/[&<>"']/g, char =>
   ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[char]);
 const euros = cents => new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'}).format(cents / 100);
+const countNoun = (count, one, few, many) => {
+  const lastTwo = count % 100;
+  if (lastTwo >= 11 && lastTwo <= 14) return many;
+  const last = count % 10;
+  return last === 1 ? one : last >= 2 && last <= 4 ? few : many;
+};
 async function api(path, method = 'GET', body, accessKey = '') {
   const response = await fetch(path, { method, credentials: 'same-origin', headers: {
     ...(accessKey ? { Authorization: `Bearer ${accessKey}` } : {}),
@@ -485,7 +491,7 @@ function renderBrandDirectory() {
       value="${escape(brandDirectorySearch)}" placeholder="Название бренда"></label></div>
     <div class="brand-directory-list">${rows.map(row => `<button type="button" class="brand-directory-row"
       data-brand-open="${escape(row.name)}" data-search="${escape(row.name.toLocaleLowerCase('ru'))}">
-      <span><strong>${escape(row.name)}</strong><small>${row.products ? `${row.products} товаров · ${row.skus} SKU` : 'Товаров на сайте пока нет'}</small></span>
+      <span><strong>${escape(row.name)}</strong><small>${row.products ? `${row.products} ${countNoun(row.products,'товар','товара','товаров')} · ${row.skus} SKU` : 'Товаров на сайте пока нет'}</small></span>
       <span class="brand-directory-status">${row.name === 'Leonardo' && brandData?.items.length
         ? 'Прайс в панели' : 'Прайс не загружен в панель'}</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
@@ -517,7 +523,7 @@ function renderCatalogBrand() {
   const skuCount = products.reduce((sum, product) => sum + product.variants.length, 0);
   $('admin-content').innerHTML = `<section class="brand-workspace brand-catalog">
     <div class="brand-heading"><div><button type="button" class="brand-back" data-brand-home>Все бренды</button>
-      <h2>${escape(brandName)}</h2><p>${products.length} товаров · ${skuCount} SKU в каталоге</p></div>
+      <h2>${escape(brandName)}</h2><p>${products.length} ${countNoun(products.length,'товар','товара','товаров')} · ${skuCount} SKU в каталоге</p></div>
       <button type="button" data-go-tab="suppliers">Поставщики и контакты</button></div>
     <p class="brand-price-notice">Здесь показаны товары сайта. Прайс поставщика для этого бренда пока не загружен в панель; закупочную цену и наличие нужно проверять отдельно</p>
     <div class="brand-directory-toolbar"><label>Найти товар или SKU<input id="brand-product-search" type="search"
@@ -543,11 +549,11 @@ function renderBrands() {
     <div class="brand-paste" id="brand-paste-panel" hidden><label for="brand-paste-json">Содержимое прайса JSON</label>
       <textarea id="brand-paste-json" spellcheck="false" placeholder="Вставьте содержимое файла JSON"></textarea>
       <button type="button" id="brand-paste-submit">Загрузить прайс</button></div>
-    <p class="brand-price-notice">Прайс поставщика помогает сверить позиции и рассчитать цену. Он не подтверждает цену продажи CatManDog, закупочную скидку или наличие. По EAN точно совпали ${exact} SKU; остальные ${linked - exact} связи требуют проверки</p>
+    <p class="brand-price-notice">Прайс поставщика помогает сверить позиции и рассчитать цену. Он не подтверждает цену продажи CatManDog, закупочную скидку или наличие. По EAN точно совпали ${exact} SKU; остальные ${linked - exact} ${countNoun(linked - exact,'связь','связи','связей')} требуют проверки.</p>
     <div class="brand-summary"><div><strong>${items.length}</strong><span>Строк в прайсе</span></div>
       <div><strong>${siteVariants.length}</strong><span>SKU Leonardo на сайте и в черновиках</span></div>
-      <div><strong>${exact}</strong><span>Совпадений по EAN</span></div>
-      <div><strong>${linked - exact}</strong><span>Предварительных связей</span></div>
+      <div><strong>${exact}</strong><span>Совпадения по EAN</span></div>
+      <div><strong>${linked - exact}</strong><span>Предварительные связи</span></div>
       <div><strong>${items.length - linked}</strong><span>Позиций прайса без SKU на сайте</span></div></div>
     <div class="brand-main"><div class="brand-left">
       <div class="brand-tabs" role="group" aria-label="Каталог Leonardo">
