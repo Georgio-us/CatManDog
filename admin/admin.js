@@ -245,7 +245,7 @@ function renderProducts() {
   const categories = [...new Set([...productRows.map(productGroup), ...(productRows.some(item => item.category === 'Корм') ? ['Корм'] : [])])].sort((a,b) => a.localeCompare(b,'ru'));
   const brands = [...new Set(productRows.map(item => item.brand).filter(Boolean))].sort((a,b) => a.localeCompare(b,'ru'));
   $('admin-content').innerHTML = `<section class="product-workspace"><nav class="catalog-breadcrumb" aria-label="Путь в каталоге">Продукция${productBrand !== 'all' ? ` <span>/</span> ${escape(productBrand)}` : ''}</nav>
-    <div class="catalog-heading"><div><h2>Продукция</h2><p>${productRows.length} товаров · ${catalogBrandCount()} брендов · ${catalogSkuCount()} SKU</p></div>
+    <div class="catalog-heading"><div><h2>Продукция</h2><p>${productRows.length} товаров · ${catalogBrandCount()} брендов с товарами · ${catalogSkuCount()} SKU</p></div>
       <details class="catalog-create"><summary>Добавить товар <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
       <form data-product-create class="catalog-product-form">${productFields()}<label>Первый вариант<input name="variantLabel" required maxlength="100" placeholder="Например, 1 шт"></label>
       <button type="submit">Создать черновик</button></form></details></div>
