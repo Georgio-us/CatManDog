@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { catalogRows, importCatalog, catalogSnapshot } from '../server/catalog.js';
 import { priceQuote, validateAddress, validateDelivery } from '../server/pricing.js';
 import { hashPassword, verifyPassword, sessionCookie } from '../server/auth.js';
@@ -7,6 +8,12 @@ import { applyServerPrices, applyServerCatalog } from '../server-prices.js';
 import { canBuy } from '../variants.js';
 import { handleApi } from '../server/api.js';
 import { retiredProductIds } from '../catalog-policy.js';
+
+test('catalog schema migrates existing availability constraint for pending supplier stock', () => {
+  const schema = readFileSync(new URL('../server/schema.sql', import.meta.url), 'utf8');
+  assert.match(schema, /DROP CONSTRAINT IF EXISTS catalog_variants_availability_check/);
+  assert.match(schema, /ADD CONSTRAINT catalog_variants_availability_check\s+CHECK \(availability IN \('on_hand', 'source_on_demand', 'pending', 'unavailable'\)\)/);
+});
 
 test('catalog import keeps variant identity and source prices separate from purchase prices', () => {
   const rows = catalogRows();

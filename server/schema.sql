@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS catalog_variants (
   source_orderable boolean NOT NULL DEFAULT true,
   active boolean NOT NULL DEFAULT true,
   availability text NOT NULL DEFAULT 'source_on_demand'
-    CHECK (availability IN ('on_hand', 'source_on_demand', 'unavailable')),
+    CHECK (availability IN ('on_hand', 'source_on_demand', 'pending', 'unavailable')),
   stock_quantity integer CHECK (stock_quantity >= 0),
   tax_rate_bps integer CHECK (tax_rate_bps BETWEEN 0 AND 10000),
   reorder_point integer NOT NULL DEFAULT 2 CHECK (reorder_point BETWEEN 0 AND 99998),
@@ -46,6 +46,9 @@ CREATE TABLE IF NOT EXISTS catalog_variants (
   updated_at timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS catalog_variants_product_id_idx ON catalog_variants(product_id);
+ALTER TABLE catalog_variants DROP CONSTRAINT IF EXISTS catalog_variants_availability_check;
+ALTER TABLE catalog_variants ADD CONSTRAINT catalog_variants_availability_check
+  CHECK (availability IN ('on_hand', 'source_on_demand', 'pending', 'unavailable'));
 ALTER TABLE catalog_variants ADD COLUMN IF NOT EXISTS source_orderable boolean NOT NULL DEFAULT true;
 ALTER TABLE catalog_variants ADD COLUMN IF NOT EXISTS image_path text;
 ALTER TABLE catalog_variants ADD COLUMN IF NOT EXISTS description text NOT NULL DEFAULT '';
