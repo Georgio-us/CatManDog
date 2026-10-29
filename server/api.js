@@ -66,8 +66,8 @@ function productFields(body) {
   const foodType = category === 'Корм' ? cap(body.foodType, 12) || null : null;
   const imagePath = catalogImagePath(body.imagePath);
   const details = Array.isArray(body.details) ? body.details.map(item => cap(item, 300)).filter(Boolean).slice(0, 20) : [];
-  if (name.length < 2 || !catalogCategories.has(category) || !catalogPets.has(pet))
-    bad('Укажите название, категорию и питомца');
+  if (name.length < 2 || brand.length < 2 || !catalogCategories.has(category) || !catalogPets.has(pet))
+    bad('Укажите название, бренд, категорию и питомца');
   if (category === 'Корм' && !foodType) bad('Для корма выберите сухой или влажный');
   if (foodType && !['dry','wet'].includes(foodType)) bad('Некорректный тип корма');
   return { name, brand, category, pet, description, foodType, imagePath, details };
@@ -1328,6 +1328,10 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { orders: rows });
   }
   if (path === '/api/admin/service-requests' && req.method === 'GET') {
+    const params = new URL(req.url, 'http://localhost').searchParams;
+    const page = Math.max(0, Math.min(10000, Number.parseInt(params.get('page') || '0', 10) || 0));
+    const search = cap(params.get('q'), 160);
+    const status = ['new','in_progress','resolved'].includes(params.get('status')) ? params.get('status') : null;
     const { rows } = await db.query(`SELECT r.id,r.kind,r.email,r.locale,r.product_id,r.variant_id,r.quantity,
       r.message,r.status,r.created_at,COALESCE(o.number,r.order_number_input) AS order_number,
       (SELECT sent_at FROM service_request_replies WHERE request_id=r.id
@@ -1335,8 +1339,12 @@ async function adminRoute(db, req, res, path) {
       (SELECT message FROM service_request_replies WHERE request_id=r.id
         ORDER BY sent_at DESC LIMIT 1) AS last_reply_message
       FROM service_requests r
-      LEFT JOIN orders o ON o.id=r.order_id ORDER BY r.created_at DESC LIMIT 100`);
-    return json(res, 200, { requests: rows });
+      LEFT JOIN orders o ON o.id=r.order_id
+      WHERE ($1::text = '' OR r.email ILIKE '%' || $1 || '%' OR r.message ILIKE '%' || $1 || '%'
+        OR COALESCE(o.number,r.order_number_input,'') ILIKE '%' || $1 || '%')
+        AND ($2::text IS NULL OR r.status=$2)
+      ORDER BY r.created_at DESC LIMIT 26 OFFSET $3`, [search, status, page * 25]);
+    return json(res, 200, { requests: rows.slice(0,25), hasMore: rows.length > 25 });
   }
   if (path === '/api/admin/variants' && req.method === 'GET') {
     return json(res, 200, { variants: await liveCatalogSnapshot(db) });

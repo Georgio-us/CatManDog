@@ -124,3 +124,25 @@ test('verified support session can see requests but cannot edit prices or orders
   await handleApi(db, request(), denied.res, '/api/admin/variants');
   assert.equal(denied.result.status, 403);
 });
+
+test('admin requests can be searched and paged without a fixed first-100 limit', async () => {
+  let queryParams;
+  const db = { async query(sql, params) {
+    if (sql.includes('FROM staff_sessions'))
+      return { rows: [{ id: 'owner', email: 'owner@example.test', role: 'owner' }] };
+    if (sql.includes('FROM service_requests r')) {
+      queryParams = params;
+      return { rows: Array.from({ length: 26 }, (_, index) => ({ id: `request-${index}` })) };
+    }
+    throw new Error(`Unexpected SQL: ${sql}`);
+  } };
+  const req = { method: 'GET', url: '/api/admin/service-requests?page=2&q=CMD-42&status=new',
+    headers: { cookie: `cmd_staff_session=${'a'.repeat(64)}` },
+    socket: { remoteAddress: 'test-request-pagination' } };
+  let result;
+  const res = { writeHead() {}, end(value) { result = JSON.parse(value); } };
+  await handleApi(db, req, res, '/api/admin/service-requests');
+  assert.deepEqual(queryParams, ['CMD-42', 'new', 50]);
+  assert.equal(result.requests.length, 25);
+  assert.equal(result.hasMore, true);
+});
