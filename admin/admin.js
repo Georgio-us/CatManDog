@@ -559,7 +559,12 @@ function renderCatalogBrand() {
     <div class="brand-heading"><div><button type="button" class="brand-back" data-brand-home>Все бренды</button>
       <h2>${escape(brandName)}</h2><p>${products.length} ${countNoun(products.length,'товар','товара','товаров')} · ${skuCount} SKU в каталоге</p></div>
       <div class="brand-heading-actions"><label class="brand-upload">Загрузить прайс JSON<input id="supplier-catalog-upload" type="file" accept=".json,application/json"></label>
+        <button type="button" id="supplier-catalog-paste-toggle">Вставить JSON</button>
         <button type="button" data-go-tab="suppliers">Поставщики и контакты</button></div></div>
+    <div class="brand-paste" id="supplier-catalog-paste-panel" hidden>
+      <label for="supplier-catalog-paste-json">Содержимое прайса JSON</label>
+      <textarea id="supplier-catalog-paste-json" spellcheck="false" placeholder="Вставьте содержимое подготовленного файла"></textarea>
+      <button type="button" id="supplier-catalog-paste-submit">Загрузить прайс</button></div>
     <p class="brand-price-notice">${sources.length ? `Прайс ${escape(source?.source_file || sources[0].source_file)} сохранён отдельно от цен на сайте. Совпадения по EAN требуют проверки фасовки перед закупкой. Наличие поставщика не подтверждено` : 'Прайс поставщика пока не загружен в панель; закупочную цену и наличие нужно проверять отдельно'}</p>
     ${sources.length ? `<div class="supplier-catalog-heading"><div><h3>Прайс поставщика</h3><p>${sources.reduce((total, row) => total + row.item_count, 0)} позиций в ${sources.length} ${countNoun(sources.length,'файле','файлах','файлах')}</p></div>
       <label>Источник<select id="supplier-catalog-source">${sources.map(row => `<option value="${escape(row.id)}" ${source?.id === row.id ? 'selected' : ''}>${escape(row.source_file)} · ${row.item_count} позиций</option>`).join('')}</select></label></div>
@@ -1004,6 +1009,15 @@ async function importBrandSnapshot(snapshot) {
     ? `Прайс уже загружен, сейчас сопоставлено ещё ${newLinks} позиций`
     : `Загружено ${result.imported} строк, сопоставлено ${newLinks} позиций`);
 }
+async function importGenericSupplierCatalog(snapshot) {
+  if (snapshot.brand !== brandName) throw new Error('Бренд в файле не совпадает с открытым брендом');
+  const result = await api('/api/admin/supplier-catalogs/import', 'POST', snapshot);
+  supplierCatalogSources = (await api('/api/admin/supplier-catalogs')).sources;
+  supplierCatalogData = await api(`/api/admin/supplier-catalogs/${encodeURIComponent(snapshot.id)}`);
+  brandVisibleCount = 50;
+  renderBrands();
+  message(result.alreadyImported ? 'Этот прайс уже был загружен' : `Загружено ${result.imported} позиций`);
+}
 $('admin-content').addEventListener('change', async event => {
   if (event.target.id === 'supplier-catalog-upload') {
     const file = event.target.files?.[0];
@@ -1011,13 +1025,7 @@ $('admin-content').addEventListener('change', async event => {
     try {
       if (file.size > 1500000) throw new Error('Файл прайса слишком большой');
       const snapshot = JSON.parse(await file.text());
-      if (snapshot.brand !== brandName) throw new Error('Бренд в файле не совпадает с открытым брендом');
-      const result = await api('/api/admin/supplier-catalogs/import', 'POST', snapshot);
-      supplierCatalogSources = (await api('/api/admin/supplier-catalogs')).sources;
-      supplierCatalogData = await api(`/api/admin/supplier-catalogs/${encodeURIComponent(snapshot.id)}`);
-      brandVisibleCount = 50;
-      renderBrands();
-      message(result.alreadyImported ? 'Этот прайс уже был загружен' : `Загружено ${result.imported} позиций`);
+      await importGenericSupplierCatalog(snapshot);
     } catch (error) { message(error.message); event.target.value = ''; }
     return;
   }
@@ -1053,6 +1061,19 @@ $('admin-content').addEventListener('change', async event => {
   }
 });
 $('admin-content').addEventListener('click', async event => {
+  if (event.target.id === 'supplier-catalog-paste-toggle') {
+    const panel = $('supplier-catalog-paste-panel');
+    panel.hidden = !panel.hidden;
+    if (!panel.hidden) $('supplier-catalog-paste-json').focus();
+    return;
+  }
+  if (event.target.id === 'supplier-catalog-paste-submit') {
+    const button = event.target;
+    button.disabled = true;
+    try { await importGenericSupplierCatalog(JSON.parse($('supplier-catalog-paste-json').value)); }
+    catch (error) { message(error.message); button.disabled = false; }
+    return;
+  }
   if (event.target.closest('[data-brand-home]')) {
     brandName = '';
     brandProductSearch = '';
