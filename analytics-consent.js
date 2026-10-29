@@ -22,12 +22,12 @@ export function publicPageLocation(location) {
 export function consentCopy(language) {
   return language === 'ru' ? {
     title: 'Аналитика сайта',
-    description: 'С вашего разрешения мы используем Google Analytics, чтобы понимать, какие страницы и товары полезны посетителям. До согласия аналитика не загружается',
+    description: 'С вашего разрешения мы используем Google Analytics, чтобы понимать, какие страницы и товары полезны посетителям. До согласия аналитика не загружается.',
     accept: 'Принять', reject: 'Отклонить', settings: 'Настройки аналитики',
     privacy: 'Конфиденциальность'
   } : {
     title: 'Analítica del sitio',
-    description: 'Con tu permiso, usamos Google Analytics para entender qué páginas y productos interesan a quienes nos visitan. No cargamos la analítica antes de tu consentimiento',
+    description: 'Con tu permiso, usamos Google Analytics para entender qué páginas y productos interesan a quienes nos visitan. No cargamos la analítica antes de tu consentimiento.',
     accept: 'Aceptar', reject: 'Rechazar', settings: 'Preferencias de analítica',
     privacy: 'Privacidad'
   };
