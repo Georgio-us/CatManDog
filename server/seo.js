@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { articlesEs } from '../journal-content-es.js';
+import { seoCategoryForPath } from '../seo-categories.js';
 
 const origin = 'https://catmandog.es';
 const shell = new URL('../index.html', import.meta.url);
@@ -10,6 +11,12 @@ const articleLinks = articlesEs.map(article =>
   `<a class="article-card" href="/revista/${article.id}"><div class="article-meta"><span>${escapeHtml(article.section)}</span><span>${escapeHtml(article.time)}</span></div><h3>${escapeHtml(article.title)}</h3><p>${escapeHtml(article.summary)}</p></a>`).join('');
 
 function pageData(pathname) {
+  const category = seoCategoryForPath(pathname);
+  if (category) return {
+    title: `${category.title} | CatManDog`, description: category.description,
+    robots: 'noindex,follow',
+    content: `<div class="page"><h1 class="page-title">${escapeHtml(category.title)}</h1><p class="lead">${escapeHtml(category.intro)}</p><p><a class="text-link" href="/catalogo">Todo el catálogo</a></p></div>`
+  };
   if (pathname === '/catalogo') return {
     title: 'Catálogo de productos para gatos y perros | CatManDog',
     description: 'Explora el catálogo de CatManDog para gatos y perros',
@@ -54,7 +61,7 @@ export async function serveSeo(req, res, pathname) {
   res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8',
     'Content-Length': Buffer.byteLength(body), 'Cache-Control': 'no-cache',
     'X-Content-Type-Options': 'nosniff',
-    ...(pathname === '/catalogo' ? { 'X-Robots-Tag': 'noindex' } : {}) });
+    ...(pathname.startsWith('/catalogo') ? { 'X-Robots-Tag': 'noindex' } : {}) });
   res.end(req.method === 'HEAD' ? undefined : body);
   return true;
 }

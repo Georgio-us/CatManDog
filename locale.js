@@ -1,11 +1,12 @@
 import { es, esPatterns } from './locales/es.js?v=es-locale-4';
 import { esProductText } from './locales/product-es.js';
 import { esDetails } from './locales/details-es.js';
+import { seoCategoryForPath } from './seo-categories.js';
 
 const storageKey = 'catmandog-language';
 const saved = (() => { try { return localStorage.getItem(storageKey); } catch { return null; } })();
 const seoPath = globalThis.location?.pathname || '';
-const language = seoPath === '/revista' || seoPath.startsWith('/revista/')
+const language = seoPath === '/revista' || seoPath.startsWith('/revista/') || !!seoCategoryForPath(seoPath)
   ? 'es' : saved === 'ru' || saved === 'es' ? saved : 'es';
 const translatedNodes = new WeakMap();
 const translatedAttributes = new WeakMap();
@@ -18,6 +19,11 @@ export function setLocale(value) {
   try { localStorage.setItem(storageKey, value); } catch { /* Private browsing */ }
   if (value === 'ru' && (location.pathname === '/revista' || location.pathname.startsWith('/revista/'))) {
     location.assign(`/#/journal${location.pathname.slice('/revista'.length)}`);
+    return;
+  }
+  const category = seoCategoryForPath(location.pathname);
+  if (value === 'ru' && category) {
+    location.assign(`/#/catalog?pet=${category.pet}&group=${category.group}`);
     return;
   }
   location.reload();
