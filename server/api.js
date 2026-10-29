@@ -1038,9 +1038,16 @@ async function adminRoute(db, req, res, path) {
   if (path === '/api/admin/supplier-offers' && req.method === 'GET') {
     const variantId = cap(new URL(req.url, 'http://localhost').searchParams.get('variantId'), 180);
     if (!variantId) bad('Укажите вариант');
-    const { rows } = await db.query(`SELECT o.*,s.name AS supplier_name FROM supplier_offers o
-      JOIN suppliers s ON s.id=o.supplier_id WHERE o.variant_id=$1 ORDER BY o.preferred DESC,s.name`, [variantId]);
-    return json(res, 200, { offers: rows });
+    const [offers, catalogPrices] = await Promise.all([
+      db.query(`SELECT o.*,s.name AS supplier_name FROM supplier_offers o
+        JOIN suppliers s ON s.id=o.supplier_id WHERE o.variant_id=$1 ORDER BY o.preferred DESC,s.name`, [variantId]),
+      db.query(`SELECT s.supplier_name,s.price_date,s.shop_price_tax_basis,
+        i.article,i.shop_price_cents,i.recommended_price_cents,i.minimum_price_cents
+        FROM supplier_catalog_matches m JOIN supplier_catalog_items i ON i.id=m.item_id
+        JOIN supplier_catalog_sources s ON s.id=i.source_id
+        WHERE m.variant_id=$1 ORDER BY s.price_date DESC`, [variantId])
+    ]);
+    return json(res, 200, { offers: offers.rows, catalogPrices: catalogPrices.rows });
   }
   if (path === '/api/admin/supplier-offers' && req.method === 'PUT') {
     const body = await readJson(req);

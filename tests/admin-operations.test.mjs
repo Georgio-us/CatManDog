@@ -258,6 +258,29 @@ test('sale price update leaves purchase and supplier reference prices unchanged'
   assert.deepEqual(params, [2250,true,'sku-1']);
 });
 
+test('product supplier view returns only prices matched to the selected SKU', async () => {
+  const db = { async query(sql, params) {
+    if (sql.includes('FROM staff_sessions')) return { rows: [{ id:'owner-1', email:'owner@example.test', role:'owner' }] };
+    assert.deepEqual(params, ['sku-1']);
+    if (sql.includes('FROM supplier_offers o')) return { rows: [] };
+    if (sql.includes('FROM supplier_catalog_matches m')) {
+      assert.match(sql, /WHERE m\.variant_id=\$1/);
+      return { rows: [{ supplier_name:'Albet', shop_price_cents:1500,
+        recommended_price_cents:2400, shop_price_tax_basis:'excludes_iva',
+        price_date:'2026-03-01' }] };
+    }
+    throw new Error(`Unexpected query: ${sql}`);
+  } };
+  const req = { method:'GET', url:'/api/admin/supplier-offers?variantId=sku-1',
+    headers:{ cookie:`cmd_staff_session=${'c'.repeat(64)}` },
+    socket:{ remoteAddress:'test-sku-supplier' } };
+  const { state, res } = response();
+  await handleApi(db, req, res, '/api/admin/supplier-offers');
+  assert.equal(state.status, 200);
+  assert.equal(state.body.catalogPrices[0].supplier_name, 'Albet');
+  assert.equal(state.body.catalogPrices[0].shop_price_cents, 1500);
+});
+
 test('new admin product starts hidden with one stable SKU', async () => {
   const writes = [];
   const client = { async query(sql, params) {

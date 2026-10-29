@@ -797,10 +797,12 @@ async function loadOffers(details) {
 async function loadProductOffers(details) {
   const host = details.querySelector('.offer-content');
   try {
-    const { offers } = await api(`/api/admin/supplier-offers?variantId=${encodeURIComponent(details.dataset.productOffersId)}`);
-    host.innerHTML = offers.length ? `<ul class="catalog-offer-list">${offers.map(offer => `<li><strong>${escape(offer.supplier_name)}</strong>
+    const { offers, catalogPrices = [] } = await api(`/api/admin/supplier-offers?variantId=${encodeURIComponent(details.dataset.productOffersId)}`);
+    host.innerHTML = `${catalogPrices.length ? `<ul class="catalog-offer-list">${catalogPrices.map(row => `<li><strong>${escape(row.supplier_name)} · прайс ${escape(String(row.price_date).slice(0,10))}</strong>
+      <span>Закупка: ${row.shop_price_cents === null ? 'не указана' : euros(row.shop_price_cents)} · ${escape(({includes_iva:'с IVA',excludes_iva:'без IVA',unknown:'IVA не уточнён'})[row.shop_price_tax_basis] || 'IVA не уточнён')}${row.recommended_price_cents === null ? '' : ` · Рекоменд. розница: ${euros(row.recommended_price_cents)}`}</span></li>`).join('')}</ul>` : ''}
+      ${offers.length ? `<ul class="catalog-offer-list">${offers.map(offer => `<li><strong>${escape(offer.supplier_name)}</strong>
       <span>${offer.cost_cents === null ? 'Цена закупки не указана' : euros(offer.cost_cents)}${offer.vat_included ? ' с IVA' : ' без IVA'}${offer.preferred ? ' · Основной поставщик' : ''}</span></li>`).join('')}</ul>`
-      : '<p>Для этого варианта предложений пока нет</p>';
+      : ''}${!catalogPrices.length && !offers.length ? '<p>Для этого варианта предложений пока нет</p>' : ''}`;
   } catch (error) { host.textContent = error.message; }
 }
 async function loadStock(details) {
