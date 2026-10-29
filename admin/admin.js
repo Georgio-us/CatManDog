@@ -169,14 +169,15 @@ const productMedia = product => productImage(product)
   ? `<img src="${escape(productImage(product))}" alt="" loading="lazy">`
   : '<span class="product-no-image">Фото не добавлено</span>';
 const catalogBrandCount = () => new Set(productRows.map(item => item.brand).filter(Boolean)).size;
+const unbrandedProducts = () => productRows.filter(item => !item.brand);
 const catalogSkuCount = () => productRows.reduce((sum, item) => sum + item.variants.length, 0);
 function productCard(product) {
   return `<article class="catalog-tile">
     <button type="button" class="catalog-tile-open" data-product-open="${escape(product.id)}" aria-label="Открыть ${escape(product.name)}">
       <span class="catalog-tile-media">${productMedia(product)}</span>
-      <span class="catalog-tile-body"><span class="catalog-tile-brand">${escape(product.brand || 'Без бренда')} · ${escape(productPetLabel(product.pet))}</span>
+      <span class="catalog-tile-body"><span class="catalog-tile-brand">${escape(product.brand || 'Бренд не указан')} · ${escape(productPetLabel(product.pet))}</span>
         <strong>${escape(product.name)}</strong><span class="catalog-tile-meta">${escape(productGroup(product))} · ${product.variants.length} SKU</span>
-        <span class="catalog-tile-state">${product.active ? 'На сайте' : 'Скрыт'}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></span></span>
+        <span class="catalog-tile-state ${product.brand ? '' : 'needs-brand'}">${product.brand ? product.active ? 'На сайте' : 'Скрыт' : 'Указать бренд'}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></span></span>
     </button></article>`;
 }
 function renderProductDetail() {
@@ -201,11 +202,11 @@ function renderProductDetail() {
   }).join('');
   $('admin-content').innerHTML = `<section class="product-workspace product-detail">
     <nav class="catalog-breadcrumb" aria-label="Путь в каталоге"><button type="button" data-product-back>Продукция</button><span>/</span>
-      <button type="button" data-product-brand="${escape(product.brand)}">${escape(product.brand || 'Без бренда')}</button><span>/</span>
+      <button type="button" data-product-brand="${escape(product.brand || '__unbranded__')}">${escape(product.brand || 'Бренд не указан')}</button><span>/</span>
       <button type="button" data-product-category="${escape(productGroup(product))}">${escape(productGroup(product))}</button><span>/</span><span>${escape(product.name)}</span></nav>
     <div class="product-detail-head"><div class="product-detail-media">${productMedia(product)}</div><div><span class="catalog-eyebrow">${escape(productPetLabel(product.pet))} · ${escape(productGroup(product))}</span>
       <h2>${escape(product.name)}</h2><p>${product.variants.length} SKU · ${product.active ? 'На сайте' : 'Скрыт'}</p>
-      <div class="product-detail-actions"><button type="button" data-product-price-list="${escape(product.brand)}">Прайс бренда</button>
+      <div class="product-detail-actions">${product.brand ? `<button type="button" data-product-price-list="${escape(product.brand)}">Прайс бренда</button>` : ''}
         <button type="button" data-go-tab="suppliers">Поставщики</button></div></div></div>
     <section class="product-detail-section"><h3>Варианты, цены и остатки</h3><p>Откройте фасовку, чтобы изменить цену, остаток или описание конкретного SKU</p>
       <div class="catalog-sku-list">${variants}</div><details class="catalog-create"><summary>Добавить SKU <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
@@ -220,9 +221,12 @@ function renderProductList() {
   if (!target) return;
   const needle = productSearch.trim().toLocaleLowerCase('ru');
   if (catalogView === 'brands') {
-    const brands = brandDirectoryRows().filter(item => item.name.toLocaleLowerCase('ru').includes(needle));
+    const unbranded = unbrandedProducts();
+    const brands = [...brandDirectoryRows(), ...(unbranded.length ? [{name:'Бренд не указан',key:'__unbranded__',products:unbranded.length,
+      skus:unbranded.reduce((total,item) => total + item.variants.length,0)}] : [])]
+      .filter(item => item.name.toLocaleLowerCase('ru').includes(needle));
     target.className = 'catalog-brand-grid';
-    target.innerHTML = brands.map(row => `<button type="button" class="catalog-brand-tile" data-catalog-brand-open="${escape(row.name)}">
+    target.innerHTML = brands.map(row => `<button type="button" class="catalog-brand-tile" data-catalog-brand-open="${escape(row.key === '__unbranded__' ? row.key : row.name)}">
       <strong>${escape(row.name)}</strong><span>${row.products ? `${row.products} ${countNoun(row.products,'товар','товара','товаров')} · ${row.skus} SKU` : 'Товаров на сайте пока нет'}</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>`).join('') || '<p>Бренды не найдены</p>';
     $('catalog-product-count').textContent = `${brands.length} брендов`;
@@ -232,7 +236,7 @@ function renderProductList() {
   }
   const matching = productRows.filter(item => (!needle || `${item.name} ${item.brand} ${item.category} ${item.id} ${item.variants.map(v => `${v.label} ${v.id}`).join(' ')}`.toLocaleLowerCase('ru').includes(needle)) &&
     (productCategory === 'all' || productGroup(item) === productCategory || productCategory === 'Корм' && item.category === 'Корм') &&
-    (productBrand === 'all' || item.brand === productBrand) &&
+    (productBrand === 'all' || item.brand === productBrand || productBrand === '__unbranded__' && !item.brand) &&
     (productPet === 'all' || item.pet === productPet || item.pet === 'both'));
   target.className = 'catalog-product-grid';
   target.innerHTML = matching.slice(0, productVisibleCount).map(productCard).join('') || '<p>Товары не найдены</p>';
@@ -244,8 +248,8 @@ function renderProducts() {
   if (openedProductId) { renderProductDetail(); return; }
   const categories = [...new Set([...productRows.map(productGroup), ...(productRows.some(item => item.category === 'Корм') ? ['Корм'] : [])])].sort((a,b) => a.localeCompare(b,'ru'));
   const brands = [...new Set(productRows.map(item => item.brand).filter(Boolean))].sort((a,b) => a.localeCompare(b,'ru'));
-  $('admin-content').innerHTML = `<section class="product-workspace"><nav class="catalog-breadcrumb" aria-label="Путь в каталоге">Продукция${productBrand !== 'all' ? ` <span>/</span> ${escape(productBrand)}` : ''}</nav>
-    <div class="catalog-heading"><div><h2>Продукция</h2><p>${productRows.length} товаров · ${catalogBrandCount()} брендов с товарами · ${catalogSkuCount()} SKU</p></div>
+  $('admin-content').innerHTML = `<section class="product-workspace"><nav class="catalog-breadcrumb" aria-label="Путь в каталоге">Продукция${productBrand !== 'all' ? ` <span>/</span> ${escape(productBrand === '__unbranded__' ? 'Бренд не указан' : productBrand)}` : ''}</nav>
+    <div class="catalog-heading"><div><h2>Продукция</h2><p>${productRows.length} товаров · ${catalogBrandCount()} брендов с товарами · ${catalogSkuCount()} SKU${unbrandedProducts().length ? ` · ${unbrandedProducts().length} без бренда` : ''}</p></div>
       <details class="catalog-create"><summary>Добавить товар <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
       <form data-product-create class="catalog-product-form">${productFields()}<label>Первый вариант<input name="variantLabel" required maxlength="100" placeholder="Например, 1 шт"></label>
       <button type="submit">Создать черновик</button></form></details></div>
@@ -253,10 +257,10 @@ function renderProducts() {
       <button type="button" data-catalog-view="brands" aria-pressed="${catalogView === 'brands'}">Бренды</button></div>
     <div class="catalog-filters"><label>Поиск<input id="catalog-product-search" type="search" value="${escape(productSearch)}" placeholder="Название, бренд или артикул"></label>
       ${catalogView === 'products' ? `<label>Категория<select id="catalog-category"><option value="all">Все категории</option>${categories.map(item => `<option value="${escape(item)}" ${item === productCategory ? 'selected' : ''}>${escape(item)}</option>`).join('')}</select></label>
-      <label>Бренд<select id="catalog-brand"><option value="all">Все бренды</option>${brands.map(item => `<option value="${escape(item)}" ${item === productBrand ? 'selected' : ''}>${escape(item)}</option>`).join('')}</select></label>
+      <label>Бренд<select id="catalog-brand"><option value="all">Все бренды</option>${brands.map(item => `<option value="${escape(item)}" ${item === productBrand ? 'selected' : ''}>${escape(item)}</option>`).join('')}${unbrandedProducts().length ? `<option value="__unbranded__" ${productBrand === '__unbranded__' ? 'selected' : ''}>Бренд не указан</option>` : ''}</select></label>
       <label>Питомец<select id="catalog-pet"><option value="all">Кошки и собаки</option><option value="cat" ${productPet === 'cat' ? 'selected' : ''}>Кошки</option><option value="dog" ${productPet === 'dog' ? 'selected' : ''}>Собаки</option><option value="both" ${productPet === 'both' ? 'selected' : ''}>Для обоих</option></select></label>` : ''}</div>
     ${catalogView === 'products' ? `<div class="catalog-category-tabs" role="group" aria-label="Категории товаров"><button type="button" data-catalog-category="all" aria-pressed="${productCategory === 'all'}">Все товары</button>${categories.map(item => `<button type="button" data-catalog-category="${escape(item)}" aria-pressed="${productCategory === item}">${escape(item)}</button>`).join('')}</div>` : ''}
-    <div class="catalog-result-head"><span id="catalog-product-count"></span>${productBrand !== 'all' && catalogView === 'products' ? `<button type="button" data-product-price-list="${escape(productBrand)}">Открыть прайс бренда</button>` : ''}</div>
+    <div class="catalog-result-head"><span id="catalog-product-count"></span>${productBrand !== 'all' && productBrand !== '__unbranded__' && catalogView === 'products' ? `<button type="button" data-product-price-list="${escape(productBrand)}">Открыть прайс бренда</button>` : ''}</div>
     <div id="catalog-product-list"></div><div class="catalog-load-actions"><button type="button" id="catalog-product-more">Показать ещё 40</button><button type="button" id="catalog-product-all">Показать все</button></div></section>`;
   renderProductList();
 }
