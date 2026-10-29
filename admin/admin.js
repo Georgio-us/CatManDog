@@ -2,6 +2,8 @@ let tab = 'overview';
 let auditRows = [];
 let suppliers = [];
 let brandData = null;
+let supplierCatalogSources = [];
+let supplierCatalogData = null;
 let brandName = '';
 let brandDirectorySearch = '';
 let brandProductSearch = '';
@@ -477,6 +479,8 @@ function brandDirectoryRows() {
     if (product.active) entry.published++;
     brands.set(name, entry);
   }
+  for (const source of supplierCatalogSources) if (!brands.has(source.brand)) brands.set(source.brand,
+    { name: source.brand, products: 0, skus: 0, published: 0 });
   if (!brands.has('Edgard & Cooper')) brands.set('Edgard & Cooper',
     { name: 'Edgard & Cooper', products: 0, skus: 0, published: 0 });
   return [...brands.values()].sort((a, b) => a.name.localeCompare(b.name, 'ru'));
@@ -492,8 +496,8 @@ function renderBrandDirectory() {
     <div class="brand-directory-list">${rows.map(row => `<button type="button" class="brand-directory-row"
       data-brand-open="${escape(row.name)}" data-search="${escape(row.name.toLocaleLowerCase('ru'))}">
       <span><strong>${escape(row.name)}</strong><small>${row.products ? `${row.products} ${countNoun(row.products,'товар','товара','товаров')} · ${row.skus} SKU` : 'Товаров на сайте пока нет'}</small></span>
-      <span class="brand-directory-status">${row.name === 'Leonardo' && brandData?.items.length
-        ? 'Прайс в панели' : 'Прайс не загружен в панель'}</span>
+      <span class="brand-directory-status">${supplierCatalogSources.some(source => source.brand === row.name) ||
+        row.name === 'Leonardo' && brandData?.items.length ? 'Прайс в панели' : 'Прайс не загружен в панель'}</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
     </button>`).join('')}</div></section>`;
   filterBrandDirectory();
@@ -517,15 +521,51 @@ function renderCatalogBrandRows() {
       <button type="button" data-brand-variant="${escape(row.variant_id)}">Цена и остаток</button></div>
   </article>`).join('') || '<p class="brand-empty">Товары этого бренда пока не найдены</p>';
   $('brand-catalog-more').hidden = rows.length <= brandVisibleCount;
+  renderSupplierCatalogRows();
+}
+function supplierPriceLabel(source, item) {
+  if (item.raw_prices?.kind === 'recommended_shop_ex_iva')
+    return item.raw_prices.recommendedShopCaseCents ? 'Рекомендовано магазину за коробку без IVA' : 'Рекомендовано магазину без IVA';
+  if (item.raw_prices?.kind === 'purchase_price_per_product_ex_iva') return 'Покупка за штуку без IVA';
+  if (source?.shop_price_tax_basis === 'excludes_iva') return 'Тариф магазину без IVA';
+  return 'Tienda, IVA не уточнён';
+}
+function renderSupplierCatalogRows() {
+  const host = $('supplier-catalog-list');
+  if (!host) return;
+  const source = supplierCatalogData?.source;
+  const items = supplierCatalogData?.items || [];
+  const needle = brandProductSearch.trim().toLocaleLowerCase('ru');
+  const filtered = items.filter(item =>
+    `${item.name} ${item.article} ${item.ean} ${item.line} ${item.weight}`.toLocaleLowerCase('ru').includes(needle));
+  host.innerHTML = filtered.slice(0, brandVisibleCount).map(item => `<article class="supplier-price-row">
+    <div><strong>${escape(item.name)}</strong><small>${escape(item.article)} · ${escape(item.line)} · ${escape(item.weight)}</small>
+      <small>EAN ${escape(item.ean || 'не указан')} · строка ${item.source_row}</small></div>
+    <div><strong>${brandMoney(item.shop_price_cents ?? item.raw_prices?.recommendedShopCaseCents)}</strong>
+      <small>${supplierPriceLabel(source, item)}</small></div>
+    <div><strong>${brandMoney(item.recommended_price_cents)}</strong><small>Рекомендованная PVP с IVA</small></div>
+    <div><strong>${item.variant_id ? 'Совпадение по EAN' : 'Нет связи с SKU'}</strong>
+      <small>${escape(item.site_name ? `${item.site_name} · ${item.site_label}` : 'Цена на сайте не меняется')}</small></div>
+  </article>`).join('') || '<p class="brand-empty">Позиций по запросу нет</p>';
+  $('supplier-catalog-count').textContent = `Показано ${Math.min(filtered.length, brandVisibleCount)} из ${filtered.length}`;
+  $('supplier-catalog-more').hidden = filtered.length <= brandVisibleCount;
 }
 function renderCatalogBrand() {
   const products = productRows.filter(product => product.brand === brandName);
   const skuCount = products.reduce((sum, product) => sum + product.variants.length, 0);
+  const sources = supplierCatalogSources.filter(source => source.brand === brandName);
+  const source = supplierCatalogData?.source;
   $('admin-content').innerHTML = `<section class="brand-workspace brand-catalog">
     <div class="brand-heading"><div><button type="button" class="brand-back" data-brand-home>Все бренды</button>
       <h2>${escape(brandName)}</h2><p>${products.length} ${countNoun(products.length,'товар','товара','товаров')} · ${skuCount} SKU в каталоге</p></div>
-      <button type="button" data-go-tab="suppliers">Поставщики и контакты</button></div>
-    <p class="brand-price-notice">Здесь показаны товары сайта. Прайс поставщика для этого бренда пока не загружен в панель; закупочную цену и наличие нужно проверять отдельно</p>
+      <div class="brand-heading-actions"><label class="brand-upload">Загрузить прайс JSON<input id="supplier-catalog-upload" type="file" accept=".json,application/json"></label>
+        <button type="button" data-go-tab="suppliers">Поставщики и контакты</button></div></div>
+    <p class="brand-price-notice">${sources.length ? `Прайс ${escape(source?.source_file || sources[0].source_file)} сохранён отдельно от цен на сайте. Совпадения по EAN требуют проверки фасовки перед закупкой. Наличие поставщика не подтверждено` : 'Прайс поставщика пока не загружен в панель; закупочную цену и наличие нужно проверять отдельно'}</p>
+    ${sources.length ? `<div class="supplier-catalog-heading"><div><h3>Прайс поставщика</h3><p>${sources.reduce((total, row) => total + row.item_count, 0)} позиций в ${sources.length} ${countNoun(sources.length,'файле','файлах','файлах')}</p></div>
+      <label>Источник<select id="supplier-catalog-source">${sources.map(row => `<option value="${escape(row.id)}" ${source?.id === row.id ? 'selected' : ''}>${escape(row.source_file)} · ${row.item_count} позиций</option>`).join('')}</select></label></div>
+      <div id="supplier-catalog-list"></div><div class="brand-footer"><span id="supplier-catalog-count"></span>
+        <button type="button" id="supplier-catalog-more">Показать ещё</button></div>` : ''}
+    <div class="supplier-catalog-heading"><div><h3>Товары на сайте</h3><p>Цены продажи и остатки ведутся отдельно</p></div></div>
     <div class="brand-directory-toolbar"><label>Найти товар или SKU<input id="brand-product-search" type="search"
       value="${escape(brandProductSearch)}" placeholder="Название, фасовка или артикул"></label>
       <span id="brand-catalog-count"></span></div>
@@ -826,11 +866,14 @@ async function load() {
       return;
     }
     if (tab === 'brands') {
-      const [products, variants, leonardo] = await Promise.all([
-        api('/api/admin/products'), api('/api/admin/variants'), api('/api/admin/brands/leonardo')]);
+      const [products, variants, leonardo, catalogs] = await Promise.all([
+        api('/api/admin/products'), api('/api/admin/variants'), api('/api/admin/brands/leonardo'),
+        api('/api/admin/supplier-catalogs')]);
       productRows = products.products;
       variantRows = variants.variants;
       brandData = leonardo;
+      supplierCatalogSources = catalogs.sources;
+      supplierCatalogData = null;
       renderBrands();
       message('');
       return;
@@ -962,6 +1005,30 @@ async function importBrandSnapshot(snapshot) {
     : `Загружено ${result.imported} строк, сопоставлено ${newLinks} позиций`);
 }
 $('admin-content').addEventListener('change', async event => {
+  if (event.target.id === 'supplier-catalog-upload') {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    try {
+      if (file.size > 1500000) throw new Error('Файл прайса слишком большой');
+      const snapshot = JSON.parse(await file.text());
+      if (snapshot.brand !== brandName) throw new Error('Бренд в файле не совпадает с открытым брендом');
+      const result = await api('/api/admin/supplier-catalogs/import', 'POST', snapshot);
+      supplierCatalogSources = (await api('/api/admin/supplier-catalogs')).sources;
+      supplierCatalogData = await api(`/api/admin/supplier-catalogs/${encodeURIComponent(snapshot.id)}`);
+      brandVisibleCount = 50;
+      renderBrands();
+      message(result.alreadyImported ? 'Этот прайс уже был загружен' : `Загружено ${result.imported} позиций`);
+    } catch (error) { message(error.message); event.target.value = ''; }
+    return;
+  }
+  if (event.target.id === 'supplier-catalog-source') {
+    try {
+      supplierCatalogData = await api(`/api/admin/supplier-catalogs/${encodeURIComponent(event.target.value)}`);
+      brandVisibleCount = 50;
+      renderBrands();
+    } catch (error) { message(error.message); }
+    return;
+  }
   if (event.target.id === 'brand-upload') {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -997,7 +1064,18 @@ $('admin-content').addEventListener('click', async event => {
     brandName = brandOpen.dataset.brandOpen;
     brandProductSearch = '';
     brandVisibleCount = 50;
+    const firstSource = supplierCatalogSources.find(source => source.brand === brandName);
+    supplierCatalogData = null;
+    if (firstSource && brandName !== 'Leonardo') {
+      try { supplierCatalogData = await api(`/api/admin/supplier-catalogs/${encodeURIComponent(firstSource.id)}`); }
+      catch (error) { message(error.message); }
+    }
     renderBrands();
+    return;
+  }
+  if (event.target.id === 'supplier-catalog-more') {
+    brandVisibleCount += 50;
+    renderSupplierCatalogRows();
     return;
   }
   if (event.target.closest('#brand-catalog-more')) {

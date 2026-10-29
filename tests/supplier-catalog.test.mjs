@@ -30,7 +30,31 @@ test('Leonardo import validates articles and keeps supplier, retail and tax basi
   assert.throws(() => validateSupplierCatalog({ ...snapshot,
     items: [duck, { ...duck }] }), /Проверьте строки/);
   assert.throws(() => validateSupplierCatalog({ ...snapshot,
-    shopPriceTaxBasis: 'includes_iva' }), /Неверный формат/);
+    shopPriceTaxBasis: 'unspecified' }), /Неверный формат/);
+});
+
+test('supplier snapshots keep different price meanings and only exact EAN links are automatic', async () => {
+  const royal = { ...snapshot, id: 'royal-canin-2026-03-01', supplierName: 'Royal Canin',
+    brand: 'Royal Canin', shopPriceTaxBasis: 'excludes_iva',
+    items: [{ ...snapshot.items[0], article: 'R601188',
+      shopPriceCents: 1428, recommendedPriceCents: null, minimumPriceCents: null,
+      rawPrices: { kind: 'supplier_tariff_ex_iva', unit: 'case' } }] };
+  assert.equal(validateSupplierCatalog(royal), royal);
+  const ownat = { ...snapshot, id: 'ownat-2026-02-01-online-wetline-2026',
+    supplierName: 'Comercial Química Muñoz', brand: 'Ownat', priceDate: '2026-02-01',
+    shopPriceTaxBasis: 'excludes_iva', items: [{ ...snapshot.items[0],
+      shopPriceCents: null, recommendedPriceCents: 179, minimumPriceCents: null,
+      rawPrices: { kind: 'recommended_shop_ex_iva', recommendedShopCaseCents: 1255 } }] };
+  assert.equal(validateSupplierCatalog(ownat), ownat);
+  const queries = [];
+  const client = { async query(sql, params) {
+    queries.push([sql, params]);
+    return { rowCount: sql.includes('INSERT INTO supplier_catalog_matches') ? 0 : 1, rows: [] };
+  }, release() {} };
+  await importSupplierCatalog({ async connect() { return client; } }, royal, 'owner-1');
+  assert.equal(queries.some(([sql]) => sql.includes("'catalog'")), false);
+  assert.equal(queries.some(([sql]) => /(?:UPDATE|INSERT INTO) catalog_variants/.test(sql)), false);
+  assert.equal(queries.some(([sql]) => sql.includes('supplier_offers')), false);
 });
 
 test('import records supplier prices without changing public prices or purchase costs', async () => {

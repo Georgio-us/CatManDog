@@ -638,6 +638,41 @@ async function adminRoute(db, req, res, path) {
     const result = await importSupplierCatalog(db, payload, operator.id);
     return json(res, result.alreadyImported ? 200 : 201, result);
   }
+  if (path === '/api/admin/supplier-catalogs' && req.method === 'GET') {
+    const { rows } = await db.query(`SELECT s.id,s.supplier_name,s.brand,s.price_date,s.source_file,
+      s.shop_price_tax_basis,s.retail_price_tax_basis,s.imported_at,
+      count(i.id)::integer AS item_count,count(m.item_id)::integer AS matched_count,
+      count(m.item_id) FILTER (WHERE m.match_method='ean')::integer AS exact_count
+      FROM supplier_catalog_sources s
+      LEFT JOIN supplier_catalog_items i ON i.source_id=s.id
+      LEFT JOIN supplier_catalog_matches m ON m.item_id=i.id
+      GROUP BY s.id ORDER BY s.brand,s.price_date DESC,s.imported_at DESC`);
+    return json(res, 200, { sources: rows });
+  }
+  if (path === '/api/admin/supplier-catalogs/import' && req.method === 'POST') {
+    const payload = await readJson(req, 2000000);
+    const result = await importSupplierCatalog(db, payload, operator.id);
+    return json(res, result.alreadyImported ? 200 : 201, result);
+  }
+  const supplierCatalogDetail = path.match(/^\/api\/admin\/supplier-catalogs\/([a-z0-9-]+)$/);
+  if (supplierCatalogDetail && req.method === 'GET') {
+    const { rows: sources } = await db.query(`SELECT id,supplier_name,brand,price_date,source_file,
+      shop_price_tax_basis,retail_price_tax_basis,imported_at FROM supplier_catalog_sources WHERE id=$1`,
+    [supplierCatalogDetail[1]]);
+    if (!sources.length) bad('Прайс не найден', 404);
+    const { rows: items } = await db.query(`SELECT i.id,i.article,i.name,i.line,i.weight,i.ean,
+      i.shop_price_cents,i.recommended_price_cents,i.minimum_price_cents,
+      i.raw_prices,i.source_row,m.variant_id,m.match_method,
+      p.id AS product_id,p.name AS site_name,v.label AS site_label,
+      v.price_override_cents,v.source_price_cents,v.price_confirmed,
+      v.availability,v.stock_quantity,v.reserved_quantity
+      FROM supplier_catalog_items i
+      LEFT JOIN supplier_catalog_matches m ON m.item_id=i.id
+      LEFT JOIN catalog_variants v ON v.id=m.variant_id
+      LEFT JOIN catalog_products p ON p.id=v.product_id
+      WHERE i.source_id=$1 ORDER BY i.source_row`, [sources[0].id]);
+    return json(res, 200, { source: sources[0], items });
+  }
   if (path === '/api/admin/brands/leonardo' && req.method === 'GET') {
     const source = await latestLeonardoSource(db);
     const sourceId = source?.id || '';
