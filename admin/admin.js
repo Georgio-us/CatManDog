@@ -322,10 +322,10 @@ function supplierFields(supplier = {}) {
       Доступен для закупки - условия и точные цены проверены</label>`;
 }
 function supplierCard(supplier) {
-  return `<article class="admin-card supplier-card" data-supplier-search="${escape(`${supplier.name} ${supplier.contact_name} ${supplier.email} ${supplier.notes}`.toLowerCase())}">
+  return `<article class="admin-card supplier-card" data-supplier-search="${escape(`${supplier.name} ${supplier.contact_name} ${supplier.email} ${supplier.notes} ${supplierStages[supplier.stage] || ''}`.toLowerCase())}">
     <details><summary><span class="supplier-card-title"><strong>${escape(supplier.name)}</strong>
       <small>${supplier.kind === 'brand' ? 'Бренд' : 'Дистрибьютор'} · ${escape(supplierStages[supplier.stage] || supplierStages.lead)}</small></span>
-      <span class="supplier-card-count">${supplier.offer_count} предложений</span>
+      ${supplier.offer_count ? `<span class="supplier-card-count">${supplier.offer_count} предложений</span>` : ''}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
       <div class="supplier-card-body">${supplier.contact_name ? `<p>Контакт: ${escape(supplier.contact_name)}</p>` : ''}
       ${supplier.email ? `<p>Email: <a href="mailto:${escape(supplier.email)}">${escape(supplier.email)}</a></p>` : ''}
