@@ -213,6 +213,51 @@ test('only the owner can publish a product and changes are audited', async () =>
   assert.equal(support.state.status, 403);
 });
 
+test('daily product editor changes only content and publication', async () => {
+  const writes = [];
+  const db = { async query(sql, params) {
+    if (sql.includes('FROM staff_sessions')) return { rows: [{ id:'owner-1', email:'owner@example.test', role:'owner' }] };
+    writes.push([sql, params]);
+    if (sql.startsWith('UPDATE catalog_products SET')) return { rows: [{ id:'product-1' }] };
+    if (sql.startsWith('INSERT INTO admin_audit_events')) return { rowCount:1 };
+    throw new Error(`Unexpected query: ${sql}`);
+  } };
+  const req = { method:'PATCH', headers:{ cookie:`cmd_staff_session=${'c'.repeat(64)}` },
+    socket:{ remoteAddress:'test-product-content' },
+    async *[Symbol.asyncIterator]() { yield JSON.stringify({ name:'Новая витрина',
+      description:'Короткое описание', active:true, brand:'Подменённый бренд' }); } };
+  const { state, res } = response();
+  await handleApi(db, req, res, '/api/admin/products/product-1/content');
+  assert.equal(state.status, 200);
+  const [sql, params] = writes[0];
+  assert.match(sql, /SET name=\$1,description=\$2,active=\$3/);
+  assert.doesNotMatch(sql, /brand=|category=|image_path=/);
+  assert.deepEqual(params, ['Новая витрина','Короткое описание',true,'product-1']);
+});
+
+test('sale price update leaves purchase and supplier reference prices unchanged', async () => {
+  const writes = [];
+  const db = { async query(sql, params) {
+    if (sql.includes('FROM staff_sessions')) return { rows: [{ id:'owner-1', email:'owner@example.test', role:'owner' }] };
+    writes.push([sql, params]);
+    if (sql.startsWith('UPDATE catalog_variants')) return { rows: [{ source_price_cents:2500,
+      purchase_price_cents:1500 }] };
+    if (sql.startsWith('INSERT INTO admin_audit_events')) return { rowCount:1 };
+    throw new Error(`Unexpected query: ${sql}`);
+  } };
+  const req = { method:'PATCH', headers:{ cookie:`cmd_staff_session=${'c'.repeat(64)}` },
+    socket:{ remoteAddress:'test-sale-price' },
+    async *[Symbol.asyncIterator]() { yield JSON.stringify({ priceCents:2250,
+      priceConfirmed:true, purchasePriceCents:1 }); } };
+  const { state, res } = response();
+  await handleApi(db, req, res, '/api/admin/variants/sku-1/sale-price');
+  assert.equal(state.status, 200);
+  const [sql, params] = writes[0];
+  assert.match(sql, /SET price_override_cents=\$1,price_confirmed=\$2/);
+  assert.doesNotMatch(sql, /SET [^]*purchase_price_cents=|SET [^]*source_price_cents=/);
+  assert.deepEqual(params, [2250,true,'sku-1']);
+});
+
 test('new admin product starts hidden with one stable SKU', async () => {
   const writes = [];
   const client = { async query(sql, params) {

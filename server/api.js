@@ -626,7 +626,9 @@ async function adminRoute(db, req, res, path) {
       coalesce(json_agg(json_build_object('id',v.id,'label',v.label,'active',v.active,
         'imagePath',v.image_path,'description',v.description,'details',v.details,
         'priceConfirmed',v.price_confirmed,'availability',v.availability,
-        'reservedQuantity',v.reserved_quantity) ORDER BY v.display_priority DESC,v.label)
+        'sourcePriceCents',v.source_price_cents,'priceOverrideCents',v.price_override_cents,
+        'stockQuantity',v.stock_quantity,'reservedQuantity',v.reserved_quantity)
+        ORDER BY v.display_priority DESC,v.label)
         FILTER (WHERE v.id IS NOT NULL),'[]'::json) AS variants
       FROM catalog_products p LEFT JOIN catalog_variants v ON v.product_id=p.id
       WHERE coalesce(p.source->>'gift','')='' AND coalesce(p.source->>'catalogHidden','false')!='true'
@@ -814,6 +816,24 @@ async function adminRoute(db, req, res, path) {
       return json(res, 201, { id: productId, variantId });
     } catch (error) { await client.query('ROLLBACK'); throw error; }
     finally { client.release(); }
+  }
+  const productContent = path.match(/^\/api\/admin\/products\/([^/]+)\/content$/);
+  if (productContent && req.method === 'PATCH') {
+    const body = await readJson(req);
+    const productId = decodeURIComponent(productContent[1]);
+    const name = cap(body.name, 160);
+    const description = cap(body.description, 3000);
+    if (name.length < 2 || typeof body.active !== 'boolean') bad('Проверьте название и публикацию товара');
+    const active = body.active;
+    const { rows } = await db.query(`UPDATE catalog_products SET name=$1,description=$2,active=$3
+      WHERE id=$4 AND ($3=false OR coalesce(image_path,'')<>'' OR EXISTS
+        (SELECT 1 FROM catalog_variants WHERE product_id=$4 AND coalesce(image_path,'')<>''))
+      RETURNING id`, [name, description, active, productId]);
+    if (!rows.length) bad('Товар не найден или у него нет фото', 400);
+    await db.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+      VALUES($1,$2,'product_content_updated',$3,$4)`, [randomUUID(), operator.id, productId,
+      { name, description, active }]);
+    return json(res, 200, { ok: true });
   }
   const productMeta = path.match(/^\/api\/admin\/products\/([^/]+)$/);
   if (productMeta && req.method === 'PATCH') {
@@ -1348,6 +1368,24 @@ async function adminRoute(db, req, res, path) {
   }
   if (path === '/api/admin/variants' && req.method === 'GET') {
     return json(res, 200, { variants: await liveCatalogSnapshot(db) });
+  }
+  const variantSalePrice = path.match(/^\/api\/admin\/variants\/([^/]+)\/sale-price$/);
+  if (variantSalePrice && req.method === 'PATCH') {
+    const body = await readJson(req);
+    const variantId = decodeURIComponent(variantSalePrice[1]);
+    const price = Number(body.priceCents);
+    if (!Number.isInteger(price) || price <= 0 || price > 100000000)
+      bad('Укажите корректную цену продажи');
+    if (typeof body.priceConfirmed !== 'boolean') bad('Укажите статус проверки цены');
+    const { rows } = await db.query(`UPDATE catalog_variants
+      SET price_override_cents=$1,price_confirmed=$2,updated_at=now()
+      WHERE id=$3 RETURNING source_price_cents,purchase_price_cents`,
+    [price, body.priceConfirmed, variantId]);
+    if (!rows.length) bad('Вариант не найден', 404);
+    await db.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+      VALUES($1,$2,'variant_sale_price_updated',$3,$4)`, [randomUUID(), operator.id, variantId,
+      { priceCents: price, priceConfirmed: body.priceConfirmed }]);
+    return json(res, 200, { ok: true, priceCents: price });
   }
   const variant = path.match(/^\/api\/admin\/variants\/([^/]+)$/);
   if (variant && req.method === 'PATCH') {

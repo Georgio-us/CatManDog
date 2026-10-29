@@ -146,20 +146,6 @@ function variantCard(variant) {
     <label><input type="checkbox" name="priceConfirmed" ${variant.price_confirmed ? 'checked' : ''}> Цена подтверждена</label>
     <button>Сохранить</button></form></article>`;
 }
-const productCategories = ['Корм','Лакомства','Наполнитель','Лотки','Лотки и гигиена','Игрушки и аксессуары',
-  'Миски и поилки','Переноски','Окна и балконы','Уход','Подарочные наборы'];
-function productFields(product = {}) {
-  const options = (items, selected) => items.map(([value, label]) =>
-    `<option value="${escape(value)}" ${selected === value ? 'selected' : ''}>${escape(label)}</option>`).join('');
-  return `<label>Название<input name="name" required maxlength="160" value="${escape(product.name || '')}"></label>
-    <label>Бренд<input name="brand" required maxlength="100" value="${escape(product.brand || '')}"></label>
-    <label>Категория<select name="category">${options(productCategories.map(item => [item,item]), product.category || 'Корм')}</select></label>
-    <label>Для кого<select name="pet">${options([['cat','Кошки'],['dog','Собаки'],['both','Оба']], product.pet || 'cat')}</select></label>
-    <label>Тип корма<select name="foodType">${options([['','Не указан'],['dry','Сухой'],['wet','Влажный']], product.food_type || '')}</select></label>
-    <label class="catalog-wide">Фото в R2<input name="imagePath" maxlength="500" value="${escape(product.image_path || '')}" placeholder="https://img.catmandog.es/..."></label>
-    <label class="catalog-wide">Описание<textarea name="description" maxlength="3000">${escape(product.description || '')}</textarea></label>
-    <label class="catalog-wide">Детали - по одной на строку<textarea name="details" rows="3">${escape((product.details || []).join('\n'))}</textarea></label>`;
-}
 const productGroup = product => product.category === 'Корм'
   ? product.food_type === 'dry' ? 'Сухой корм' : product.food_type === 'wet' ? 'Влажный корм' : 'Корм'
   : product.category;
@@ -184,37 +170,48 @@ function renderProductDetail() {
   const product = productRows.find(item => item.id === openedProductId);
   if (!product) { openedProductId = ''; renderProducts(); return; }
   const variants = product.variants.map(variant => {
-    const live = variantRows.find(item => item.variant_id === variant.id);
+    const live = variantRows.find(item => item.variant_id === variant.id) || {
+      source_price_cents: variant.sourcePriceCents,
+      price_override_cents: variant.priceOverrideCents,
+      price_confirmed: variant.priceConfirmed,
+      stock_quantity: variant.stockQuantity,
+      availability: variant.availability
+    };
     const sale = live?.price_override_cents ?? live?.source_price_cents;
-    return `<details class="catalog-sku"><summary><span><strong>${escape(variant.label)}</strong><small>${escape(variant.id)}</small></span>
-      <span>${sale ? euros(sale) : 'Цена не указана'}<small>${variant.priceConfirmed ? 'Цена подтверждена' : 'Цена не подтверждена'}</small></span>
-      <span>${live?.stock_quantity === null || live?.stock_quantity === undefined ? 'Остаток не указан' : `На складе ${live.stock_quantity}`}</span>
+    const confirmed = live?.price_confirmed === true;
+    const saleInput = confirmed && sale ? (sale / 100).toFixed(2) :
+      live?.price_override_cents ? (live.price_override_cents / 100).toFixed(2) : '';
+    const stock = live?.stock_quantity === null || live?.stock_quantity === undefined
+      ? 'Остаток не указан' : `На складе ${live.stock_quantity}`;
+    return `<details class="catalog-sku" data-catalog-sku="${escape(variant.id)}"><summary><span><strong>${escape(variant.label)}</strong><small>${escape(variant.id)}</small></span>
+      <span>${sale ? euros(sale) : 'Цена не указана'}<small>${confirmed ? 'Цена подтверждена' : 'Цена не подтверждена'}</small></span>
+      <span>${stock}</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-      <div class="catalog-sku-body"><form data-variant-metadata="${escape(variant.id)}" class="catalog-variant-form">
-        <label>Фасовка или вариант<input name="label" required maxlength="100" value="${escape(variant.label)}"></label>
-        <label class="catalog-variant-wide">Фото варианта в R2<input name="imagePath" maxlength="500" value="${escape(variant.imagePath || '')}" placeholder="Если пусто - фото товара"></label>
-        <label class="catalog-variant-wide">Описание варианта<textarea name="description" maxlength="3000" rows="2">${escape(variant.description || '')}</textarea></label>
-        <label class="catalog-variant-wide">Детали варианта - по одной на строку<textarea name="details" rows="2">${escape((variant.details || []).join('\n'))}</textarea></label>
-        <label class="catalog-check"><input type="checkbox" name="active" ${variant.active ? 'checked' : ''}> На сайте</label>
-        <button type="submit">Сохранить SKU</button></form>
-        ${live ? variantCard(live) : '<p>Цена и остаток пока не загружены</p>'}
-        <button type="button" data-audit-variant="${escape(variant.id)}">Проверить данные этого SKU</button></div></details>`;
+      <div class="catalog-sku-body"><div class="catalog-sku-facts"><span>Доступность: ${escape(({on_hand:'На складе',source_on_demand:'Под заказ',pending:'Уточняется',unavailable:'Недоступен'})[live?.availability] || 'Не указана')}</span>
+        <span>${stock}</span>${live?.source_price_cents ? `<span>Исходный ориентир: ${euros(live.source_price_cents)}</span>` : ''}</div>
+        ${live ? `<form data-sale-price="${escape(variant.id)}" class="catalog-price-form" data-price-base="${confirmed ? sale : ''}">
+          <label>Цена продажи, €<input type="number" name="priceEuros" min="0.01" step="0.01" required value="${saleInput}" placeholder="Введите цену"></label>
+          <div class="catalog-price-discounts" role="group" aria-label="Скидка от текущей цены"><button type="button" data-price-discount="5" ${confirmed ? '' : 'disabled'}>-5%</button>
+            <button type="button" data-price-discount="10" ${confirmed ? '' : 'disabled'}>-10%</button></div>
+          <label class="catalog-price-confirm"><input type="checkbox" name="priceConfirmed" ${confirmed ? 'checked' : ''}> Цена проверена</label>
+          <button type="submit" class="catalog-price-save">Сохранить цену</button>
+          <small class="catalog-price-note">Скидка считается от текущей подтверждённой цены. Закупочная цена не меняется</small></form>` : '<p>Данные цены пока не загружены</p>'}
+        <details class="catalog-product-offers" data-product-offers-id="${escape(variant.id)}"><summary>Закупочные предложения для этого SKU <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="offer-content">Загружаю</div></details></div></details>`;
   }).join('');
   $('admin-content').innerHTML = `<section class="product-workspace product-detail">
     <nav class="catalog-breadcrumb" aria-label="Путь в каталоге"><button type="button" data-product-back>Продукция</button><span>/</span>
       <button type="button" data-product-brand="${escape(product.brand || '__unbranded__')}">${escape(product.brand || 'Бренд не указан')}</button><span>/</span>
       <button type="button" data-product-category="${escape(productGroup(product))}">${escape(productGroup(product))}</button><span>/</span><span>${escape(product.name)}</span></nav>
     <div class="product-detail-head"><div class="product-detail-media">${productMedia(product)}</div><div><span class="catalog-eyebrow">${escape(productPetLabel(product.pet))} · ${escape(productGroup(product))}</span>
-      <h2>${escape(product.name)}</h2><p>${product.variants.length} SKU · ${product.active ? 'На сайте' : 'Скрыт'}</p>
-      <div class="product-detail-actions">${product.brand ? `<button type="button" data-product-price-list="${escape(product.brand)}">Прайс бренда</button>` : ''}
-        <button type="button" data-go-tab="suppliers">Поставщики</button></div></div></div>
-    <section class="product-detail-section"><h3>Варианты, цены и остатки</h3><p>Откройте фасовку, чтобы изменить цену, остаток или описание конкретного SKU</p>
-      <div class="catalog-sku-list">${variants}</div><details class="catalog-create"><summary>Добавить SKU <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-      <form data-product-variant="${escape(product.id)}" class="catalog-variant-form"><label>Новый вариант<input name="label" required maxlength="100" placeholder="Например, 2 кг"></label><button type="submit">Добавить SKU</button></form></details></section>
-    <details class="product-detail-section product-editor"><summary>Редактировать товар <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-      <form data-product-id="${escape(product.id)}" class="catalog-product-form">${productFields(product)}
-        <label class="catalog-check"><input type="checkbox" name="active" ${product.active ? 'checked' : ''}> Показывать на сайте</label>
-        <button type="submit">Сохранить товар</button></form></details></section>`;
+      <h2>${escape(product.name)}</h2><p>${escape(product.brand || 'Бренд не указан')} · ${product.variants.length} SKU · ${product.active ? 'На сайте' : 'Скрыт'}</p></div></div>
+    <section class="product-detail-section product-editor"><h3>Публикация и описание</h3>
+      <form data-product-content="${escape(product.id)}" class="catalog-content-form">
+        <label>Название товара<input name="name" required maxlength="160" value="${escape(product.name)}"></label>
+        <label>Описание<textarea name="description" maxlength="3000" rows="4">${escape(product.description || '')}</textarea></label>
+        <div class="catalog-content-actions"><label class="catalog-publish"><input type="checkbox" name="active" ${product.active ? 'checked' : ''}> Показывать на сайте</label>
+          <button type="submit">Сохранить изменения</button></div></form></section>
+    <section class="product-detail-section"><h3>Варианты и цены</h3><p>Откройте вариант, чтобы изменить цену продажи или посмотреть предложения по нему</p>
+      <div class="catalog-sku-list">${variants}</div></section></section>`;
 }
 function renderProductList() {
   const target = $('catalog-product-list');
@@ -249,10 +246,7 @@ function renderProducts() {
   const categories = [...new Set([...productRows.map(productGroup), ...(productRows.some(item => item.category === 'Корм') ? ['Корм'] : [])])].sort((a,b) => a.localeCompare(b,'ru'));
   const brands = [...new Set(productRows.map(item => item.brand).filter(Boolean))].sort((a,b) => a.localeCompare(b,'ru'));
   $('admin-content').innerHTML = `<section class="product-workspace"><nav class="catalog-breadcrumb" aria-label="Путь в каталоге">Продукция${productBrand !== 'all' ? ` <span>/</span> ${escape(productBrand === '__unbranded__' ? 'Бренд не указан' : productBrand)}` : ''}</nav>
-    <div class="catalog-heading"><div><h2>Продукция</h2><p>${productRows.length} товаров · ${catalogBrandCount()} брендов с товарами · ${catalogSkuCount()} SKU${unbrandedProducts().length ? ` · ${unbrandedProducts().length} без бренда` : ''}</p></div>
-      <details class="catalog-create"><summary>Добавить товар <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-      <form data-product-create class="catalog-product-form">${productFields()}<label>Первый вариант<input name="variantLabel" required maxlength="100" placeholder="Например, 1 шт"></label>
-      <button type="submit">Создать черновик</button></form></details></div>
+    <div class="catalog-heading"><div><h2>Продукция</h2><p>${productRows.length} товаров · ${catalogBrandCount()} брендов с товарами · ${catalogSkuCount()} SKU${unbrandedProducts().length ? ` · ${unbrandedProducts().length} без бренда` : ''}</p></div></div>
     <div class="catalog-view-switch" role="group" aria-label="Вид каталога"><button type="button" data-catalog-view="products" aria-pressed="${catalogView === 'products'}">Товары</button>
       <button type="button" data-catalog-view="brands" aria-pressed="${catalogView === 'brands'}">Бренды</button></div>
     <div class="catalog-filters"><label>Поиск<input id="catalog-product-search" type="search" value="${escape(productSearch)}" placeholder="Название, бренд или артикул"></label>
@@ -263,11 +257,6 @@ function renderProducts() {
     <div class="catalog-result-head"><span id="catalog-product-count"></span>${productBrand !== 'all' && productBrand !== '__unbranded__' && catalogView === 'products' ? `<button type="button" data-product-price-list="${escape(productBrand)}">Открыть прайс бренда</button>` : ''}</div>
     <div id="catalog-product-list"></div><div class="catalog-load-actions"><button type="button" id="catalog-product-more">Показать ещё 40</button><button type="button" id="catalog-product-all">Показать все</button></div></section>`;
   renderProductList();
-}
-function catalogPayload(values) {
-  return { name: values.get('name'), brand: values.get('brand'), category: values.get('category'),
-    pet: values.get('pet'), foodType: values.get('foodType'), imagePath: values.get('imagePath'),
-    description: values.get('description'), details: String(values.get('details') || '').split('\n').map(item => item.trim()).filter(Boolean) };
 }
 function renderVariantList() {
   const target = $('admin-variant-list');
@@ -805,6 +794,15 @@ async function loadOffers(details) {
       <button type="submit">Сохранить предложение</button></form>`;
   } catch (error) { host.textContent = error.message; }
 }
+async function loadProductOffers(details) {
+  const host = details.querySelector('.offer-content');
+  try {
+    const { offers } = await api(`/api/admin/supplier-offers?variantId=${encodeURIComponent(details.dataset.productOffersId)}`);
+    host.innerHTML = offers.length ? `<ul class="catalog-offer-list">${offers.map(offer => `<li><strong>${escape(offer.supplier_name)}</strong>
+      <span>${offer.cost_cents === null ? 'Цена закупки не указана' : euros(offer.cost_cents)}${offer.vat_included ? ' с IVA' : ' без IVA'}${offer.preferred ? ' · Основной поставщик' : ''}</span></li>`).join('')}</ul>`
+      : '<p>Для этого варианта предложений пока нет</p>';
+  } catch (error) { host.textContent = error.message; }
+}
 async function loadStock(details) {
   const variantId = details.dataset.stockId;
   const host = details.querySelector('.stock-content');
@@ -1195,6 +1193,16 @@ $('admin-content').addEventListener('change', async event => {
   }
 });
 $('admin-content').addEventListener('click', async event => {
+  const discount = event.target.closest('[data-price-discount]');
+  if (discount) {
+    const form = discount.closest('[data-sale-price]');
+    const base = Number(form.dataset.priceBase);
+    if (Number.isInteger(base) && base > 0) {
+      form.elements.priceEuros.value = (Math.round(base * (100 - Number(discount.dataset.priceDiscount)) / 100) / 100).toFixed(2);
+      form.elements.priceEuros.focus();
+    }
+    return;
+  }
   if (event.target.id === 'request-prev' || event.target.id === 'request-next') {
     requestPage = Math.max(0, requestPage + (event.target.id === 'request-next' ? 1 : -1));
     loadRequests().catch(error => message(error.message));
@@ -1487,6 +1495,12 @@ $('admin-content').addEventListener('click', async event => {
     if (!details.open) loadOffers(details);
     return;
   }
+  const productOffers = event.target.closest('details[data-product-offers-id] > summary');
+  if (productOffers) {
+    const details = productOffers.parentElement;
+    if (!details.open) loadProductOffers(details);
+    return;
+  }
   const stockSummary = event.target.closest('details[data-stock-id] > summary');
   if (stockSummary) {
     const details = stockSummary.parentElement;
@@ -1522,26 +1536,18 @@ $('admin-content').addEventListener('submit', async event => {
     else if (form.dataset.purchaseReceipt) await api(`/api/admin/purchase-orders/${encodeURIComponent(form.dataset.purchaseReceipt)}/receipts`, 'POST', {
       itemId: values.get('itemId'), quantity: Number(values.get('quantity')),
       note: values.get('note'), idempotencyKey: values.get('idempotencyKey') });
-    else if (form.hasAttribute('data-product-create')) {
-      const created = await api('/api/admin/products', 'POST', { ...catalogPayload(values), variantLabel: values.get('variantLabel') });
-      openedProductId = created.id;
-      productSearch = created.id;
+    else if (form.dataset.productContent) {
+      await api(`/api/admin/products/${encodeURIComponent(form.dataset.productContent)}/content`, 'PATCH',
+        { name: values.get('name'), description: values.get('description'), active: values.has('active') });
+      openedProductId = form.dataset.productContent;
     }
-    else if (form.dataset.productId) {
-      await api(`/api/admin/products/${encodeURIComponent(form.dataset.productId)}`, 'PATCH',
-        { ...catalogPayload(values), active: values.has('active') });
-      openedProductId = form.dataset.productId;
-    }
-    else if (form.dataset.productVariant) {
-      await api(`/api/admin/products/${encodeURIComponent(form.dataset.productVariant)}/variants`, 'POST',
-        { label: values.get('label') });
-      openedProductId = form.dataset.productVariant;
-    }
-    else if (form.dataset.variantMetadata) {
-      await api(`/api/admin/variants/${encodeURIComponent(form.dataset.variantMetadata)}/metadata`, 'PATCH',
-        { label: values.get('label'), active: values.has('active'), imagePath: values.get('imagePath'),
-          description: values.get('description'), details: String(values.get('details') || '').split('\n').map(item => item.trim()).filter(Boolean) });
-      openedProductId = productRows.find(product => product.variants.some(variant => variant.id === form.dataset.variantMetadata))?.id || '';
+    else if (form.dataset.salePrice) {
+      const eurosValue = String(values.get('priceEuros') || '').trim();
+      const cents = Math.round(Number(eurosValue.replace(',', '.')) * 100);
+      if (!eurosValue || !/^\d+(?:[.,]\d{1,2})?$/.test(eurosValue) || cents <= 0)
+        throw new Error('Введите корректную цену в евро');
+      await api(`/api/admin/variants/${encodeURIComponent(form.dataset.salePrice)}/sale-price`, 'PATCH',
+        { priceCents: cents, priceConfirmed: values.has('priceConfirmed') });
     }
     else if (form.dataset.reviewId) await api(`/api/admin/variants/${encodeURIComponent(form.dataset.reviewId)}/review`, 'PATCH',
       { priority: Number(values.get('priority')), note: values.get('note') });
@@ -1594,6 +1600,11 @@ $('admin-content').addEventListener('submit', async event => {
       priceConfirmed: values.has('priceConfirmed')
     });
     await load();
+    if (form.dataset.salePrice) {
+      const selected = [...document.querySelectorAll('[data-catalog-sku]')]
+        .find(item => item.dataset.catalogSku === form.dataset.salePrice);
+      if (selected) selected.open = true;
+    }
     message(form.dataset.replyId ? 'Ответ отправлен' : 'Сохранено');
   } catch (error) { message(error.message); if (submitButton) submitButton.disabled = false; }
 });

@@ -294,3 +294,42 @@ nav{overflow-x:auto;padding-bottom:4px}nav button{white-space:nowrap}
 .admin-shell .admin-head{align-items:center;margin-top:12px}.admin-shell .admin-head h1{margin:0;font-size:19px;letter-spacing:-.035em}.admin-shell .admin-head p{display:none}.admin-shell>header{padding-bottom:14px}.admin-shell #admin-panel>nav{margin:14px 0 18px}
 @media(max-width:650px){.admin-shell .admin-head{display:flex;align-items:center}.admin-shell .admin-head h1{font-size:17px}.admin-shell .admin-head button{padding:9px 11px;font-size:11px}.admin-shell #admin-panel>nav{margin:12px 0 14px}}
 .catalog-tile-state.needs-brand{color:#a44b35}
+
+/* Редактор продукта показывает только ежедневные действия владельца */
+#catalog-product-list.catalog-product-grid{align-items:start}
+.catalog-tile{aspect-ratio:1 / 1}
+.catalog-tile-open{height:100%;min-height:0}
+.catalog-tile-media{display:flex;align-items:center;justify-content:center;height:57%;flex:none}
+.catalog-tile-media img{display:block;min-width:0;min-height:0;max-width:100%;max-height:100%;padding:4px;object-fit:contain}
+.catalog-tile-body{flex:1;min-height:0;padding:12px 14px}
+.catalog-tile-body strong{margin:5px 0 3px}
+.catalog-tile-state{padding-top:7px}
+.catalog-content-form{display:grid;gap:16px;max-width:880px;margin-top:18px}
+.catalog-content-form>label,.catalog-price-form>label:first-child{display:grid;gap:7px;font-size:12px;font-weight:800}
+.catalog-content-form input[name=name],.catalog-content-form textarea,.catalog-price-form input[name=priceEuros]{width:100%;max-width:none;min-width:0;padding:12px 14px;border:1px solid #dce0d7;border-radius:10px;background:#fff;color:#22251f;font:inherit;font-size:13px}
+.catalog-content-form textarea{min-height:105px;resize:vertical;line-height:1.5}
+.catalog-content-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.catalog-content-actions button,.catalog-price-save{background:#d8f273;border-color:#d8f273;font-size:12px;font-weight:800}
+.catalog-publish,.catalog-price-confirm{display:flex;align-items:center;gap:8px;color:#33382f;font-size:12px;font-weight:700}
+.catalog-publish input,.catalog-price-confirm input{width:17px;height:17px;margin:0;accent-color:#9dc13b}
+.catalog-sku-facts{display:flex;gap:8px 22px;flex-wrap:wrap;color:#6f756a;font-size:12px}
+.catalog-price-form{display:flex;flex-wrap:wrap;gap:10px 12px;align-items:end}
+.catalog-price-form>label:first-child{flex:0 1 210px;min-width:150px}
+.catalog-price-form input[name=priceEuros]{height:44px}
+.catalog-price-discounts{display:flex;gap:6px}
+.catalog-price-discounts button{height:44px;padding:8px 12px;border-color:#dfe4d5;background:#f6f8f0;font-size:12px;font-weight:800}
+.catalog-price-discounts button:disabled{opacity:.45;cursor:default}
+.catalog-price-confirm{min-height:44px}
+.catalog-price-save{height:44px}
+.catalog-price-note{flex-basis:100%;color:#777d73;font-size:11px}
+.catalog-product-offers{border-top:1px solid var(--catalog-line);padding-top:12px}
+.catalog-product-offers>summary{display:flex;align-items:center;justify-content:space-between;gap:10px;list-style:none;cursor:pointer;color:#3e5834;font-size:12px;font-weight:800}
+.catalog-product-offers>summary::-webkit-details-marker{display:none}
+.catalog-product-offers>summary svg{width:17px;height:17px;transition:transform .18s}
+.catalog-product-offers[open]>summary svg{transform:rotate(180deg)}
+.catalog-product-offers .offer-content{padding-top:12px}
+.catalog-offer-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.catalog-offer-list li{display:flex;justify-content:space-between;gap:8px;padding:10px 12px;border:1px solid var(--catalog-line);border-radius:9px;font-size:12px}
+.catalog-offer-list li span{color:#6f756a}
+@media(max-width:760px){.catalog-tile{aspect-ratio:auto}.catalog-tile-open{min-height:270px}.catalog-tile-media{height:140px}.catalog-tile-body{min-height:130px}}
+@media(max-width:520px){.catalog-price-form>label:first-child{flex-basis:100%}.catalog-price-save{width:100%}.catalog-tile-media{height:130px}.catalog-offer-list li{display:grid}}
