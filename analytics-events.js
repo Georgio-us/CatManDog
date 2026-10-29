@@ -1,8 +1,8 @@
 import { confirmedPrice, resolveVariant } from './variants.js';
 import { homeGroupForProduct } from './home-catalog.js';
 
-// This only announces an in-memory event. A future GA4 adapter must subscribe
-// after the visitor has given analytics consent; no data is sent or stored here.
+// This only announces an in-memory event. The GA4 adapter subscribes after
+// the visitor has given analytics consent; this module sends no data itself.
 export function analyticsItem(product, variant, quantity = 1) {
   if (!product) return null;
   const sku = variant || resolveVariant(product);
