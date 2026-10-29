@@ -435,7 +435,11 @@ function renderBrands() {
     <div><p class="brand-path">Бренды / Leonardo</p><h2>Leonardo</h2>
       <p>Поставщик ${escape(source.supplier_name)} · ${source.price_date ? `прайс от ${escape(shortDate(source.price_date))}` : 'прайс ещё не загружен'}</p></div>
     <div class="brand-heading-actions"><label class="brand-upload">Загрузить прайс JSON<input id="brand-upload" type="file" accept=".json,application/json"></label>
+      <button type="button" id="brand-paste-toggle" aria-expanded="false">Вставить JSON</button>
       <button type="button" data-go-tab="suppliers">Поставщики</button></div></div>
+    <div class="brand-paste" id="brand-paste-panel" hidden><label for="brand-paste-json">Содержимое прайса JSON</label>
+      <textarea id="brand-paste-json" spellcheck="false" placeholder="Вставьте содержимое файла JSON"></textarea>
+      <button type="button" id="brand-paste-submit">Загрузить прайс</button></div>
     <div class="brand-summary"><div><strong>${items.length}</strong><span>Строк в прайсе</span></div>
       <div><strong>${siteVariants.length}</strong><span>SKU Leonardo на сайте и в черновиках</span></div>
       <div><strong>${linked}</strong><span>Связей с SKU</span></div>
@@ -812,6 +816,15 @@ $('admin-content').addEventListener('input', event => {
     if (item) item.quantity = Number(event.target.value);
   }
 });
+async function importBrandSnapshot(snapshot) {
+  const result = await api('/api/admin/brands/leonardo/import', 'POST', snapshot);
+  brandData = await api('/api/admin/brands/leonardo');
+  brandView = 'catalog';
+  brandSelected = '';
+  renderBrands();
+  message(result.alreadyImported ? 'Эта версия прайса уже загружена' :
+    `Загружено ${result.imported} строк, по EAN связано ${result.autoMatched}`);
+}
 $('admin-content').addEventListener('change', async event => {
   if (event.target.id === 'brand-upload') {
     const file = event.target.files?.[0];
@@ -819,13 +832,7 @@ $('admin-content').addEventListener('change', async event => {
     try {
       if (file.size > 1500000) throw new Error('Файл прайса слишком большой');
       const snapshot = JSON.parse(await file.text());
-      const result = await api('/api/admin/brands/leonardo/import', 'POST', snapshot);
-      brandData = await api('/api/admin/brands/leonardo');
-      brandView = 'catalog';
-      brandSelected = '';
-      renderBrands();
-      message(result.alreadyImported ? 'Эта версия прайса уже загружена' :
-        `Загружено ${result.imported} строк, по EAN связано ${result.autoMatched}`);
+      await importBrandSnapshot(snapshot);
     } catch (error) { message(error.message); event.target.value = ''; }
     return;
   }
@@ -843,6 +850,23 @@ $('admin-content').addEventListener('change', async event => {
   }
 });
 $('admin-content').addEventListener('click', async event => {
+  if (event.target.id === 'brand-paste-toggle') {
+    const panel = $('brand-paste-panel');
+    panel.hidden = !panel.hidden;
+    event.target.setAttribute('aria-expanded', String(!panel.hidden));
+    if (!panel.hidden) $('brand-paste-json').focus();
+    return;
+  }
+  if (event.target.id === 'brand-paste-submit') {
+    const input = $('brand-paste-json');
+    const raw = input.value.trim();
+    if (!raw) { message('Вставьте содержимое файла JSON'); return; }
+    if (raw.length > 1500000) { message('Прайс слишком большой'); return; }
+    event.target.disabled = true;
+    try { await importBrandSnapshot(JSON.parse(raw)); }
+    catch (error) { message(error.message); event.target.disabled = false; }
+    return;
+  }
   const brandViewButton = event.target.closest('[data-brand-view]');
   if (brandViewButton) {
     brandView = brandViewButton.dataset.brandView;
