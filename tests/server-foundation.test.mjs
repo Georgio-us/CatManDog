@@ -29,6 +29,11 @@ test('full catalog import archives retired rows once and preserves edited produc
     .every(([sql]) => sql.includes('ON CONFLICT(id) DO NOTHING')));
   assert.ok(queries.filter(([sql]) => sql.startsWith('INSERT INTO catalog_variants'))
     .every(([sql]) => sql.includes('ON CONFLICT(id) DO NOTHING')));
+  const yaguRetailBackfill = queries.find(([sql, params]) =>
+    sql.startsWith('UPDATE catalog_variants SET source_price_cents=$2') && params?.[0] === 'yagu-1128036');
+  assert.equal(yaguRetailBackfill?.[1][1], 3826);
+  assert.match(yaguRetailBackfill?.[0] || '', /source_price_cents IS NULL AND price_override_cents IS NULL/);
+  assert.match(yaguRetailBackfill?.[0] || '', /price_confirmed=false/);
   const retired = queries.find(([sql, params]) => sql.startsWith('UPDATE catalog_products SET active=false') &&
     params?.[0]?.includes('kong-scrunchie'));
   assert.ok(retired[1][0].includes('kong-scrunchie') && retired[1][0].includes('trixie-balcony-chair'));

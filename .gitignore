@@ -13,6 +13,13 @@ assets/
 # Private supplier documents and purchasing price reviews stay local
 research/supplier-files/
 research/supplier-cats/
+output/pdf/supplier-onboarding/
+outputs/supplier-onboarding/
+tmp/pdfs/supplier-forms/
+research/yagu/launch-variants-*.csv
+research/yagu/competitor-prices-*.csv
+research/yagu/private/
+/YAGU-*.md
 node_modules/
 .env
 .env.*

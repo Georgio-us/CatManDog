@@ -5,6 +5,7 @@ import { catalogProducts, products } from '../data.js';
 import { productRetailResearch, productDisplayedPriceSummary, retailResearch, retailRangeText } from '../retail-research.js';
 import { isDemoPrice, normalizeCart } from '../variants.js';
 import { retiredProductIds } from '../catalog-policy.js';
+import { yaguLaunchProducts } from '../yagu-launch-products.js';
 
 const product = id => catalogProducts.find(item => item.id === id);
 const variant = id => catalogProducts.flatMap(item => item.variants?.length ? item.variants : [item]).find(item => item.id === id);
@@ -40,14 +41,27 @@ test('exact single product offers remain visible with VAT', () => {
   assert.equal(retailResearch(family.variants[0]).offers[0].taxIncluded, true);
 });
 
-test('every real catalog variant has a visible non-demo price', () => {
+test('Yagu variants keep supplier costs separate from retail benchmarks', () => {
   const variants = catalogProducts.filter(item => item.isReal).flatMap(item => item.variants?.length ? item.variants : [item]);
-  assert.equal(variants.length, 571);
-  assert.deepEqual(variants.filter(isDemoPrice).map(item => item.id), []);
+  const pending = variants.filter(isDemoPrice);
+  assert.equal(pending.length, 0);
+  assert.equal(variants.filter(item => !isDemoPrice(item)).length, 609);
+  assert.equal(yaguLaunchProducts.filter(item => product(item.id)).length, 11);
+  assert.equal(product('yagu-kubo-plus-pana'), undefined);
+  const donut = variant('yagu-1128036');
+  assert.equal(donut.price, 38.26);
+  assert.equal(donut.retailPrice.sourceName, 'MisMascotas');
+  assert.equal(donut.purchasePrice, null);
+  const beti = variant('yagu-1128216');
+  assert.equal(beti.price, 21.44);
+  assert.equal(beti.pricingBasis.kind, 'analogue_single');
+  assert.equal(retailResearch(beti), null);
+  assert.deepEqual(product('yagu-duvo-balcony-net').variants.map(item => item.supplier.sku), ['7611509', '7611510']);
+  assert.equal(new Set(variants.map(item => item.id)).size, variants.length);
 });
 
 test('first dog assortment has 22 families and 43 priced variants with separate purchase fields', () => {
-  const dogs = catalogProducts.filter(item => item.pet === 'dog');
+  const dogs = catalogProducts.filter(item => item.pet === 'dog' && !item.id.startsWith('yagu-'));
   const variants = dogs.flatMap(item => item.variants);
   assert.equal(dogs.length, 22);
   assert.equal(variants.length, 43);

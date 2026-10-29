@@ -1,6 +1,26 @@
 // Spanish copy is written and reviewed here. Russian remains the source language
 // for internal category IDs, routes and saved customer data.
 export const es = {
+  'Цвет и размер': 'Color y talla',
+  'Бежевый': 'Beige',
+  'Антрацит': 'Antracita',
+  'Серый': 'Gris',
+  'Зелёный': 'Verde',
+  'Зелёный в горошек': 'Verde de lunares',
+  'Бежевый цветочный': 'Beige floral',
+  'Мягкая лежанка': 'Cama suave',
+  'Уютное гнездо': 'Cama envolvente',
+  'Фактурная лежанка': 'Cama de pana',
+  'Компактная лежанка': 'Cama compacta',
+  'Домик': 'Refugio',
+  'Лежанка с бортиком': 'Cama con borde',
+  'Большая лежанка': 'Cama amplia',
+  'Лёгкий матрас': 'Colchoneta ligera',
+  'Мягкий матрас': 'Colchón suave',
+  'Рюкзак-переноска': 'Mochila transportín',
+  'Сумка-переноска': 'Bolso transportín',
+  'Для балкона': 'Para balcones',
+  'Цена зависит от размера': 'El precio depende de la talla',
   'Email нужен для связи по заказу; статус оплаты появится в кабинете': 'Usaremos tu email para contactar contigo sobre el pedido; podrás consultar el estado del pago en tu cuenta',
   'Проверьте адрес: доставку по Валенсии подтвердим после оформления': 'Comprueba la dirección: confirmaremos la entrega en València después de realizar el pedido',
   'После проверки заказа перейдёте на защищённую страницу Stripe': 'Tras revisar el pedido, pasarás a la página segura de Stripe',
@@ -1082,6 +1102,8 @@ export const es = {
 };
 
 export const esPatterns = [
+  [/^К товару: (.+)$/u, (_, name) => `Ver producto: ${name}`],
+  [/^Цвет и размер: (.+)$/u, (_, value) => `Color y talla: ${value}`],
   [/^Заказ (CMD-\d+)$/, (_, number) => `Pedido ${number}`],
   [/^Сумма (.+)$/, (_, amount) => `Importe ${amount}`],
   [/^Итоговая цена изменилась: (.+)\. Обновите корзину перед оплатой$/, (_, amount) => `El importe ha cambiado: ${amount}. Actualiza la cesta antes de pagar.`],

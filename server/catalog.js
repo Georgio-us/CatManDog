@@ -1,6 +1,7 @@
 import { products } from '../data.js';
 import { retiredProductIds } from '../catalog-policy.js';
 import { snapshots, confirmedPrice, canBuy } from '../variants.js';
+import { yaguRetailBenchmarks } from '../yagu-retail-benchmarks.js';
 
 const cents = value => Number.isFinite(value) && value > 0 ? Math.round(value * 100) : null;
 const imagePath = image => typeof image === 'string' ? image : image?.src || null;
@@ -46,7 +47,15 @@ export async function importCatalog(db, items = products) {
         VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,now()) ON CONFLICT(id) DO NOTHING`,
       [variant.id, variant.productId, variant.label, variant.imagePath, variant.description,
         JSON.stringify(variant.details), variant.sourcePriceCents,variant.sourceOrderable,
-        variant.sourceOrderable ? 'source_on_demand' : 'unavailable', variant.source]);
+        variant.source.availabilityStatus === 'pending' ? 'pending' :
+          variant.sourceOrderable ? 'source_on_demand' : 'unavailable', variant.source]);
+      // Existing launch variants may have been imported before retail research was completed.
+      // Fill only empty reference prices; never replace an owner-approved or edited price.
+      if (Object.hasOwn(yaguRetailBenchmarks, variant.source.supplier?.sku) && variant.sourcePriceCents) {
+        await client.query(`UPDATE catalog_variants SET source_price_cents=$2
+          WHERE id=$1 AND source_price_cents IS NULL AND price_override_cents IS NULL
+            AND price_confirmed=false`, [variant.id, variant.sourcePriceCents]);
+      }
     }
     if (items === products) {
       const localMigration = await client.query("SELECT name FROM catalog_migrations WHERE name='local_only_products_archived'");

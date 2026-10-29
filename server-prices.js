@@ -64,7 +64,8 @@ export function applyServerCatalog(products, catalogProducts, entries) {
       sku.description = row.variant_description || product.description;
       sku.details = Array.isArray(row.variant_details) && row.variant_details.length
         ? row.variant_details : product.details;
-      sku.availabilityStatus = row.availableForCart === false || row.source_orderable === false ||
+      sku.availabilityStatus = row.availability === 'pending' && row.price_confirmed !== true
+        ? 'pending' : row.availableForCart === false || row.source_orderable === false ||
         row.availability === 'unavailable' ||
         (row.availability === 'on_hand' && row.stock_quantity <= 0)
         ? 'unavailable' : row.availability;
