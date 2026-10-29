@@ -39,6 +39,16 @@ test('support API stores the request and emails the team and buyer', async () =>
     assert.equal(inserted[0][9], 'es');
     assert.deepEqual(sent.map(mail => mail.to[0]), ['support@catmandog.es', 'buyer@example.test']);
     assert.match(sent[1].subject, /Hemos recibido tu consulta/);
+
+    const withdrawal = JSON.stringify({ kind: 'return', locale: 'es',
+      email: 'buyer@example.test', quantity: 1,
+      message: 'Comunico mi decisión de desistir de la compra a distancia' });
+    const returnReq = { method: 'POST', headers: {}, socket: { remoteAddress: 'test-withdrawal-route' },
+      async *[Symbol.asyncIterator]() { yield withdrawal; } };
+    await handleApi(db, returnReq, res, '/api/service-requests');
+    assert.equal(status, 202);
+    assert.equal(inserted.length, 2);
+    assert.equal(inserted[1][8], null);
   } finally {
     globalThis.fetch = originalFetch;
     for (const [key, value] of Object.entries(previous)) {

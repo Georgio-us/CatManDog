@@ -1610,7 +1610,6 @@ export async function handleApi(db, req, res, pathname) {
         bad('Проверьте форму обращения');
       const orderNumber = cap(body.orderNumber, 40);
       if (/^DEMO-/i.test(orderNumber)) bad('Демонстрационный заказ нельзя отправить в поддержку');
-      if (body.kind === 'return' && !orderNumber) bad('Укажите номер заказа');
       if (body.kind === 'return' && (!Number.isInteger(body.quantity) || body.quantity < 1 || body.quantity > 99))
         bad('Укажите количество для возврата');
       const found = orderNumber ? await db.query('SELECT id FROM orders WHERE number=$1 AND email=$2',

@@ -1,4 +1,4 @@
-import { es, esPatterns } from './locales/es.js?v=legal-1';
+import { es, esPatterns } from './locales/es.js?v=terms-1';
 import { esProductText } from './locales/product-es.js';
 import { esDetails } from './locales/details-es.js';
 import { seoCategoryForPath } from './seo-categories.js';
@@ -84,6 +84,9 @@ function elementAttributes(element) {
   }
   if (language === 'es' && element.tagName === 'A' && element.getAttribute('href') === '/legal.html') {
     element.setAttribute('href', '/legal-es.html');
+  }
+  if (language === 'es' && element.tagName === 'A' && element.getAttribute('href') === '/purchase-terms.html') {
+    element.setAttribute('href', '/purchase-terms-es.html');
   }
   const previous = translatedAttributes.get(element) || {};
   for (const name of attributes) {
