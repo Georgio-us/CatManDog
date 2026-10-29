@@ -8,6 +8,7 @@ const allowedCatalogs = new Map([
   ['royal-canin', ['Royal Canin', 'Royal Canin']],
   ['edgard-cooper', ['Edgard & Cooper', 'Edgard & Cooper']],
   ['ownat', ['Comercial Química Muñoz', 'Ownat']],
+  ['heybopet', ['Heybo Pet', 'Heybo Pet']],
 ]);
 
 export function validateSupplierCatalog(snapshot) {

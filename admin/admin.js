@@ -524,6 +524,8 @@ function renderCatalogBrandRows() {
   renderSupplierCatalogRows();
 }
 function supplierPriceLabel(source, item) {
+  if (item.raw_prices?.kind === 'supplier_quote_tiered_iva') return 'Котировка до 5 шт, с IVA';
+  if (item.raw_prices?.kind === 'recommended_retail_spain') return 'Закупочная цена не указана';
   if (item.raw_prices?.kind === 'recommended_shop_ex_iva')
     return item.raw_prices.recommendedShopCaseCents ? 'Рекомендовано магазину за коробку без IVA' : 'Рекомендовано магазину без IVA';
   if (item.raw_prices?.kind === 'purchase_price_per_product_ex_iva') return 'Покупка за штуку без IVA';
@@ -545,7 +547,8 @@ function renderSupplierCatalogRows() {
       <small>${supplierPriceLabel(source, item)}</small></div>
     <div><strong>${brandMoney(item.recommended_price_cents)}</strong><small>Рекомендованная PVP с IVA</small></div>
     <div><strong>${item.variant_id ? 'Совпадение по EAN' : 'Нет связи с SKU'}</strong>
-      <small>${escape(item.site_name ? `${item.site_name} · ${item.site_label}` : 'Цена на сайте не меняется')}</small></div>
+      <small>${escape(item.site_name ? `${item.site_name} · ${item.site_label}` : 'Цена на сайте не меняется')}</small>
+      ${item.raw_prices?.kind === 'supplier_quote_tiered_iva' ? `<small>От 5 шт: ${brandMoney(item.raw_prices.priceAtLeast5Cents)} с IVA · срок котировки не подтверждён</small>` : ''}</div>
   </article>`).join('') || '<p class="brand-empty">Позиций по запросу нет</p>';
   $('supplier-catalog-count').textContent = `Показано ${Math.min(filtered.length, brandVisibleCount)} из ${filtered.length}`;
   $('supplier-catalog-more').hidden = filtered.length <= brandVisibleCount;
@@ -565,7 +568,10 @@ function renderCatalogBrand() {
       <label for="supplier-catalog-paste-json">Содержимое прайса JSON</label>
       <textarea id="supplier-catalog-paste-json" spellcheck="false" placeholder="Вставьте содержимое подготовленного файла"></textarea>
       <button type="button" id="supplier-catalog-paste-submit">Загрузить прайс</button></div>
-    <p class="brand-price-notice">${sources.length ? `Прайс ${escape(source?.source_file || sources[0].source_file)} сохранён отдельно от цен на сайте. Совпадения по EAN требуют проверки фасовки перед закупкой. Наличие поставщика не подтверждено` : 'Прайс поставщика пока не загружен в панель; закупочную цену и наличие нужно проверять отдельно'}</p>
+    <p class="brand-price-notice">${sources.length ? brandName === 'Heybo Pet'
+      ? `Котировка ${escape(source?.source_file || sources[0].source_file)} сохранена для сравнения. Поставщик на паузе; срок действия цен и соответствие моделей товарам сайта не подтверждены`
+      : `Прайс ${escape(source?.source_file || sources[0].source_file)} сохранён отдельно от цен на сайте. Совпадения по EAN требуют проверки фасовки перед закупкой. Наличие поставщика не подтверждено`
+      : 'Прайс поставщика пока не загружен в панель; закупочную цену и наличие нужно проверять отдельно'}</p>
     ${sources.length ? `<div class="supplier-catalog-heading"><div><h3>Прайс поставщика</h3><p>${sources.reduce((total, row) => total + row.item_count, 0)} позиций в ${sources.length} ${countNoun(sources.length,'файле','файлах','файлах')}</p></div>
       <label>Источник<select id="supplier-catalog-source">${sources.map(row => `<option value="${escape(row.id)}" ${source?.id === row.id ? 'selected' : ''}>${escape(row.source_file)} · ${row.item_count} позиций</option>`).join('')}</select></label></div>
       <div id="supplier-catalog-list"></div><div class="brand-footer"><span id="supplier-catalog-count"></span>

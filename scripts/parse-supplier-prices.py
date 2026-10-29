@@ -20,7 +20,9 @@ OUTPUT = BASE / "parsed-price-snapshots"
 
 def cents(value):
     if isinstance(value, str):
-        value = value.replace("€", "").strip().replace(".", "").replace(",", ".")
+        value = value.replace("€", "").strip()
+        if "," in value:
+            value = value.replace(".", "").replace(",", ".")
     if isinstance(value, bool) or not isinstance(value, (int, float, str)) or value in ("", "-"):
         return None
     try:
@@ -187,8 +189,63 @@ def ownat():
                  "2026-02-01", file.name, "excludes_iva", items)
 
 
+def ownat_retail_supplement():
+    file = BASE / "2026-10-14-ownat-royal-canin/PVPR_OWNAT_DIFERENTES_PAISES_FEBRERO_2026.pdf"
+    existing = {item["ean"] for source in OUTPUT.glob("ownat-2026-02-01-*.json")
+                if source.name != "ownat-2026-02-01-retail-supplement.json"
+                for item in json.loads(source.read_text())["items"]}
+    items, row_number = [], 0
+    for page in pdfplumber.open(file).pages:
+        for table in page.extract_tables():
+            for row in table:
+                row_number += 1
+                if len(row) < 4:
+                    continue
+                product_ean = ean(row[2])
+                if len(product_ean) != 13 or product_ean in existing:
+                    continue
+                article = text(row[0])
+                name = text(row[1])
+                retail = cents(text(row[3]).replace(" ", ""))
+                if not re.fullmatch(r"\d{6}", article) or retail is None:
+                    raise ValueError(f"Bad Spanish PVP row {row_number}: {row}")
+                items.append(dict(article=article, name=name, line="PVPR España / дополнительная позиция",
+                                  weight="", ean=product_ean, shopPriceCents=None,
+                                  recommendedPriceCents=retail, minimumPriceCents=None,
+                                  rawPrices=dict(kind="recommended_retail_spain", sourceAmount=row[3],
+                                                 note="Spanish PVP only; no shop or purchase cost"),
+                                  sourceRow=row_number))
+    snapshot("ownat-2026-02-01-retail-supplement", "Comercial Química Muñoz", "Ownat",
+             "2026-02-01", file.name + " (2 additional SKUs)", "unknown", items)
+
+
+def heybopet_quote():
+    file = BASE / "2026-10-14-heybopet/Quotation of upcoming Smart Cat Litter Box.pdf"
+    items = []
+    for row_number, row in enumerate(pdfplumber.open(file).pages[0].extract_tables()[0], 1):
+        if row_number == 1:
+            continue
+        article = text(row[0])
+        if not re.fullmatch(r"ICB-[A-Z0-9]+", article):
+            raise ValueError(f"Unexpected quote model: {article}")
+        items.append(dict(article=article, name=f"{text(row[1])} {article}",
+                          line="Котировка моделей / поставщик на паузе", weight="1 шт", ean="",
+                          shopPriceCents=cents(text(row[4]).replace(" ", "")),
+                          recommendedPriceCents=None, minimumPriceCents=None,
+                          rawPrices=dict(kind="supplier_quote_tiered_iva",
+                                         priceAtLeast5Cents=cents(text(row[5]).replace(" ", "")),
+                                         minimumOrder=text(row[3]),
+                                         note="Supplier paused; quote validity and model correspondence unconfirmed"),
+                          sourceRow=row_number))
+    snapshot("heybopet-2026-10-14-quote", "Heybo Pet", "Heybo Pet", "2026-10-14",
+             file.name, "includes_iva", items,
+             "Received 2026-10-14; quote validity and model correspondence unconfirmed")
+
+
 if __name__ == "__main__":
     royal_canin()
     belcando()
     edgard_cooper()
     ownat()
+    ownat_retail_supplement()
+    heybopet_quote()
