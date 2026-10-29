@@ -2,6 +2,9 @@ let tab = 'overview';
 let auditRows = [];
 let suppliers = [];
 let brandData = null;
+let brandName = '';
+let brandDirectorySearch = '';
+let brandProductSearch = '';
 let brandView = 'site';
 let brandSearch = '';
 let brandLine = '';
@@ -418,6 +421,7 @@ function renderBrandInspector() {
     <div class="brand-facts">
       <div><span>Артикул поставщика</span><strong>${escape(item?.article || '-')}</strong></div>
       <div><span>EAN</span><strong>${escape(item?.ean || 'Не указан')}</strong></div>
+      ${item && variant ? `<div><span>Сопоставление</span><strong>${item.match_method === 'ean' ? 'По EAN' : 'Предварительно по каталогу'}</strong></div>` : ''}
       <div><span>Tienda</span><strong>${brandMoney(item?.shop_price_cents)}</strong></div>
       <div><span>Рекомендованная PVP с IVA</span><strong>${brandMoney(item?.recommended_price_cents)}</strong></div>
       <div><span>Минимальная PVP с IVA</span><strong>${brandMoney(item?.minimum_price_cents)}</strong></div>
@@ -456,12 +460,82 @@ function renderBrandRows() {
   $('brand-more').hidden = rows.length <= brandVisibleCount;
   renderBrandInspector();
 }
+function brandDirectoryRows() {
+  const brands = new Map();
+  for (const product of productRows) {
+    const name = String(product.brand || '').trim();
+    if (!name) continue;
+    const entry = brands.get(name) || { name, products: 0, skus: 0, published: 0 };
+    entry.products++;
+    entry.skus += product.variants.length;
+    if (product.active) entry.published++;
+    brands.set(name, entry);
+  }
+  if (!brands.has('Edgard & Cooper')) brands.set('Edgard & Cooper',
+    { name: 'Edgard & Cooper', products: 0, skus: 0, published: 0 });
+  return [...brands.values()].sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+}
+function renderBrandDirectory() {
+  const rows = brandDirectoryRows();
+  $('admin-content').innerHTML = `<section class="brand-workspace brand-directory">
+    <div class="brand-heading"><div><p class="brand-path">Управление каталогом</p><h2>Бренды</h2>
+      <p>Выберите бренд, чтобы посмотреть его товары и SKU</p></div>
+      <span class="brand-total">${rows.length} брендов</span></div>
+    <div class="brand-directory-toolbar"><label>Найти бренд<input id="brand-directory-search" type="search"
+      value="${escape(brandDirectorySearch)}" placeholder="Название бренда"></label></div>
+    <div class="brand-directory-list">${rows.map(row => `<button type="button" class="brand-directory-row"
+      data-brand-open="${escape(row.name)}" data-search="${escape(row.name.toLocaleLowerCase('ru'))}">
+      <span><strong>${escape(row.name)}</strong><small>${row.products ? `${row.products} товаров · ${row.skus} SKU` : 'Товаров на сайте пока нет'}</small></span>
+      <span class="brand-directory-status">${row.name === 'Leonardo' && brandData?.items.length
+        ? 'Прайс в панели' : 'Прайс не загружен в панель'}</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+    </button>`).join('')}</div></section>`;
+  filterBrandDirectory();
+}
+function filterBrandDirectory() {
+  const needle = brandDirectorySearch.trim().toLocaleLowerCase('ru');
+  document.querySelectorAll('.brand-directory-row').forEach(row => {
+    row.hidden = !row.dataset.search.includes(needle);
+  });
+}
+function renderCatalogBrandRows() {
+  const needle = brandProductSearch.trim().toLocaleLowerCase('ru');
+  const rows = variantRows.filter(row => row.brand === brandName &&
+    `${row.name} ${row.label} ${row.variant_id}`.toLocaleLowerCase('ru').includes(needle));
+  $('brand-catalog-count').textContent = `${rows.length} SKU${rows.length > brandVisibleCount ? ` · показаны первые ${brandVisibleCount}` : ''}`;
+  $('brand-catalog-list').innerHTML = rows.slice(0, brandVisibleCount).map(row => `<article class="brand-catalog-row">
+    <div><strong>${escape(row.name)}</strong><small>${escape(row.label)} · ${escape(row.category)} · ${escape(row.pet === 'dog' ? 'Собака' : row.pet === 'cat' ? 'Кошка' : 'Кошка и собака')}</small></div>
+    <div><strong>${row.sale_price_cents ? euros(row.sale_price_cents) : 'Цена не указана'}</strong>
+      <small>${row.price_confirmed ? 'Цена продажи подтверждена' : 'Цена продажи - ориентир'}</small></div>
+    <div><span>${escape(({on_hand:'На складе',source_on_demand:'Под заказ',unavailable:'Недоступен'})[row.availability] || row.availability)}</span>
+      <button type="button" data-brand-variant="${escape(row.variant_id)}">Цена и остаток</button></div>
+  </article>`).join('') || '<p class="brand-empty">Товары этого бренда пока не найдены</p>';
+  $('brand-catalog-more').hidden = rows.length <= brandVisibleCount;
+}
+function renderCatalogBrand() {
+  const products = productRows.filter(product => product.brand === brandName);
+  const skuCount = products.reduce((sum, product) => sum + product.variants.length, 0);
+  $('admin-content').innerHTML = `<section class="brand-workspace brand-catalog">
+    <div class="brand-heading"><div><button type="button" class="brand-back" data-brand-home>Все бренды</button>
+      <h2>${escape(brandName)}</h2><p>${products.length} товаров · ${skuCount} SKU в каталоге</p></div>
+      <button type="button" data-go-tab="suppliers">Поставщики и контакты</button></div>
+    <p class="brand-price-notice">Здесь показаны товары сайта. Прайс поставщика для этого бренда пока не загружен в панель; закупочную цену и наличие нужно проверять отдельно</p>
+    <div class="brand-directory-toolbar"><label>Найти товар или SKU<input id="brand-product-search" type="search"
+      value="${escape(brandProductSearch)}" placeholder="Название, фасовка или артикул"></label>
+      <span id="brand-catalog-count"></span></div>
+    <div id="brand-catalog-list"></div><div class="brand-footer"><span></span>
+      <button type="button" id="brand-catalog-more">Показать ещё</button></div></section>`;
+  renderCatalogBrandRows();
+}
 function renderBrands() {
+  if (!brandName) { renderBrandDirectory(); return; }
+  if (brandName !== 'Leonardo') { renderCatalogBrand(); return; }
   const { source, items, siteVariants } = brandData;
   const linked = items.filter(item => item.variant_id).length;
+  const exact = items.filter(item => item.match_method === 'ean').length;
   const lines = [...new Set(items.map(item => item.line).filter(Boolean))];
   $('admin-content').innerHTML = `<section class="brand-workspace"><div class="brand-heading">
-    <div><p class="brand-path">Бренды / Leonardo</p><h2>Leonardo</h2>
+    <div><button type="button" class="brand-back" data-brand-home>Все бренды</button><h2>Leonardo</h2>
       <p>Поставщик ${escape(source.supplier_name)} · ${source.price_date ? `прайс от ${escape(shortDate(source.price_date))}` : 'прайс ещё не загружен'}</p></div>
     <div class="brand-heading-actions"><label class="brand-upload">Загрузить прайс JSON<input id="brand-upload" type="file" accept=".json,application/json"></label>
       <button type="button" id="brand-paste-toggle" aria-expanded="false">Вставить JSON</button>
@@ -469,9 +543,11 @@ function renderBrands() {
     <div class="brand-paste" id="brand-paste-panel" hidden><label for="brand-paste-json">Содержимое прайса JSON</label>
       <textarea id="brand-paste-json" spellcheck="false" placeholder="Вставьте содержимое файла JSON"></textarea>
       <button type="button" id="brand-paste-submit">Загрузить прайс</button></div>
+    <p class="brand-price-notice">Прайс поставщика помогает сверить позиции и рассчитать цену. Он не подтверждает цену продажи CatManDog, закупочную скидку или наличие. По EAN точно совпали ${exact} SKU; остальные ${linked - exact} связи требуют проверки</p>
     <div class="brand-summary"><div><strong>${items.length}</strong><span>Строк в прайсе</span></div>
       <div><strong>${siteVariants.length}</strong><span>SKU Leonardo на сайте и в черновиках</span></div>
-      <div><strong>${linked}</strong><span>Связей с SKU</span></div>
+      <div><strong>${exact}</strong><span>Совпадений по EAN</span></div>
+      <div><strong>${linked - exact}</strong><span>Предварительных связей</span></div>
       <div><strong>${items.length - linked}</strong><span>Позиций прайса без SKU на сайте</span></div></div>
     <div class="brand-main"><div class="brand-left">
       <div class="brand-tabs" role="group" aria-label="Каталог Leonardo">
@@ -705,7 +781,7 @@ function renderOverview(data) {
     <div><strong>${euros(orders.paid_total_30d)}</strong><span>Оплачено за 30 дней · ${orders.paid_orders_30d} заказов</span></div>
   </div><section class="admin-card"><h2>Что проверить сейчас</h2>
     <div class="overview-actions"><button type="button" data-go-tab="audit">Открыть ревизию SKU</button>
-    <button type="button" data-go-tab="brands">Открыть Leonardo</button>
+    <button type="button" data-go-tab="brands">Открыть бренды</button>
     <button type="button" data-go-tab="replenishment">Товары к закупке</button>
     <button type="button" data-go-tab="purchases">Открыть закупки</button>
     <button type="button" data-go-tab="orders">Открыть заказы</button>
@@ -744,7 +820,11 @@ async function load() {
       return;
     }
     if (tab === 'brands') {
-      brandData = await api('/api/admin/brands/leonardo');
+      const [products, variants, leonardo] = await Promise.all([
+        api('/api/admin/products'), api('/api/admin/variants'), api('/api/admin/brands/leonardo')]);
+      productRows = products.products;
+      variantRows = variants.variants;
+      brandData = leonardo;
       renderBrands();
       message('');
       return;
@@ -804,10 +884,22 @@ $('admin-lock').addEventListener('click', async () => {
 setupLogin();
 document.querySelectorAll('[data-tab]').forEach(button => button.addEventListener('click', () => {
   tab = button.dataset.tab;
+  if (tab === 'brands') brandName = '';
   document.querySelectorAll('[data-tab]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
   load();
 }));
 $('admin-content').addEventListener('input', event => {
+  if (event.target.id === 'brand-directory-search') {
+    brandDirectorySearch = event.target.value;
+    filterBrandDirectory();
+    return;
+  }
+  if (event.target.id === 'brand-product-search') {
+    brandProductSearch = event.target.value;
+    brandVisibleCount = 50;
+    renderCatalogBrandRows();
+    return;
+  }
   if (event.target.id === 'supplier-search') {
     const needle = event.target.value.trim().toLowerCase();
     document.querySelectorAll('.supplier-card').forEach(card => {
@@ -888,6 +980,25 @@ $('admin-content').addEventListener('change', async event => {
   }
 });
 $('admin-content').addEventListener('click', async event => {
+  if (event.target.closest('[data-brand-home]')) {
+    brandName = '';
+    brandProductSearch = '';
+    renderBrands();
+    return;
+  }
+  const brandOpen = event.target.closest('[data-brand-open]');
+  if (brandOpen) {
+    brandName = brandOpen.dataset.brandOpen;
+    brandProductSearch = '';
+    brandVisibleCount = 50;
+    renderBrands();
+    return;
+  }
+  if (event.target.closest('#brand-catalog-more')) {
+    brandVisibleCount += 50;
+    renderCatalogBrandRows();
+    return;
+  }
   if (event.target.id === 'brand-paste-toggle') {
     const panel = $('brand-paste-panel');
     panel.hidden = !panel.hidden;
@@ -1038,6 +1149,7 @@ $('admin-content').addEventListener('click', async event => {
   const shortcut = event.target.closest('[data-go-tab]');
   if (shortcut) {
     tab = shortcut.dataset.goTab;
+    if (tab === 'brands') brandName = '';
     document.querySelectorAll('[data-tab]').forEach(item =>
       item.setAttribute('aria-pressed', String(item.dataset.tab === tab)));
     load();
