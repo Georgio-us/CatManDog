@@ -1,4 +1,4 @@
-// A private product-page preview. These statuses are examples, not stock records.
+// Product-specific delivery flow for Sterilised 37. It does not alter catalog stock records.
 const scenario = {
   'rc-sterilised-400g': 'on_hand',
   'rc-sterilised-2000g': 'on_hand',
@@ -8,7 +8,8 @@ const scenario = {
 
 const copy = {
   ru: {
-    price: 'Демонстрационная цена',
+    price: 'Цена выбранной фасовки',
+    pricePending: 'Цена уточняется',
     pack: 'Фасовка',
     stock: 'В наличии',
     supplier: 'Под заказ',
@@ -22,7 +23,8 @@ const copy = {
     checkoutUnavailable: 'Оформление заказа пока недоступно'
   },
   es: {
-    price: 'Precio de demostración',
+    price: 'Precio del formato elegido',
+    pricePending: 'Precio pendiente de confirmar',
     pack: 'Formato',
     stock: 'Disponible',
     supplier: 'Por encargo',
@@ -51,7 +53,7 @@ export function availabilityScenario(product, selectedId, language = 'es') {
 }
 
 export function availabilityScenarioDetail(product, helpers) {
-  const { crumbs, imageBlock, escape, icon, favorites, money, variantId, quantity = 1, language = 'es' } = helpers;
+  const { crumbs, imageBlock, escape, icon, favorites, money, goodTogether = () => '', variantId, quantity = 1, language = 'es' } = helpers;
   const view = availabilityScenario(product, variantId, language);
   if (!view) return '';
   const { strings: t, selected, status, variants } = view;
@@ -64,7 +66,8 @@ export function availabilityScenarioDetail(product, helpers) {
     <div class="detail-grid">${imageBlock(selected.image || product.image, 'detail-image')}
       <div class="detail-copy"><span class="eyebrow">${escape(product.brand)}</span><h1>${escape(product.name)}</h1>
         <p class="variant-current">${escape(t.pack)}: ${escape(selected.label)}</p>
-        <span class="detail-price-label">${escape(t.price)}</span><div class="detail-price">${money(7.77)}</div>
+        <span class="detail-price-label">${escape(t.price)}</span><div class="detail-price">${Number.isFinite(selected.price) && selected.price > 0 ? money(selected.price) : escape(t.pricePending)}</div>
+        <p>${escape(selected.description || product.description || '')}</p>
         <span class="size-label">${escape(t.pack)}</span>
         <div class="size-options variant-options availability-options" aria-label="${escape(t.pack)}">${variants.map(variant =>
           `<button type="button" class="size availability-option ${variant.id === selected.id ? 'active' : ''} ${variant.status === 'unavailable' ? 'availability-option-unavailable' : ''}" data-variant="${escape(variant.id)}" aria-pressed="${variant.id === selected.id}"><strong>${escape(variant.label)}</strong><small>${escape(optionLabel(variant.status))}</small></button>`).join('')}</div>
@@ -73,7 +76,8 @@ export function availabilityScenarioDetail(product, helpers) {
           <button type="button" class="button" ${status === 'unavailable' ? 'disabled' : `data-preview-action="${escape(status)}"`}>${escape(action)} ${status === 'unavailable' ? '' : icon(status === 'on_hand' ? 'bag' : 'arrow')}</button>
           <button type="button" class="icon-button favorite-detail ${favorites.includes(product.id) ? 'selected' : ''}" data-favorite="${escape(product.id)}" aria-label="В избранное" aria-pressed="${favorites.includes(product.id)}">${icon('heart')}</button></div>
         <p class="availability-preview-feedback" data-preview-feedback role="status" hidden></p>
-      </div></div></div>`;
+        <details open><summary>${language === 'es' ? 'Sobre este alimento' : 'О корме'}</summary><ul>${(selected.details || product.details || []).map(detail => `<li>${escape(detail)}</li>`).join('')}</ul></details>
+      </div></div></div>${goodTogether(product)}`;
 }
 
 export function availabilityScenarioFeedback(language = 'es') {
