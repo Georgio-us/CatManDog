@@ -18,8 +18,10 @@ const copy = {
     stockDetail: 'Товар есть у нас. При оформлении можно будет выбрать удобный интервал доставки по Валенсии. Точное время мы подтвердим после заказа.',
     supplierDetail: 'Эту фасовку привезём от поставщика. Ориентир доставки - 24-48 часов после подтверждения наличия. Срок будет виден ещё раз в корзине и перед оплатой.',
     unavailableDetail: 'Эту фасовку сейчас заказать нельзя. Выберите другой вес.',
+    requestDetail: 'Этой фасовки сейчас нет. Отправьте запрос - мы проверим, можем ли найти её, и сообщим цену и срок.',
     add: 'Добавить в корзину',
     order: 'Заказать с доставкой',
+    request: 'Помочь найти 10 кг',
     checkoutUnavailable: 'Оформление заказа пока недоступно'
   },
   es: {
@@ -33,8 +35,10 @@ const copy = {
     stockDetail: 'Tenemos este formato. Al realizar el pedido podrás indicar la franja de entrega que prefieras en València. Confirmaremos la hora después.',
     supplierDetail: 'Pediremos este formato al proveedor. Plazo orientativo de entrega: 24-48 horas tras confirmar su disponibilidad. Volverás a ver el plazo en la cesta y antes de pagar.',
     unavailableDetail: 'Este formato no se puede pedir ahora. Elige otro peso.',
+    requestDetail: 'Este formato no está disponible ahora. Envíanos una solicitud y comprobaremos si podemos conseguirlo, a qué precio y en qué plazo.',
     add: 'Añadir a la cesta',
     order: 'Pedir con entrega',
+    request: 'Ayúdame a encontrar 10 kg',
     checkoutUnavailable: 'Los pedidos aún no están disponibles'
   }
 };
@@ -53,15 +57,16 @@ export function availabilityScenario(product, selectedId, language = 'es') {
 }
 
 export function availabilityScenarioDetail(product, helpers) {
-  const { crumbs, imageBlock, escape, icon, favorites, money, goodTogether = () => '', variantId, quantity = 1, language = 'es' } = helpers;
+  const { crumbs, imageBlock, escape, icon, favorites, money, goodTogether = () => '', variantId, quantity = 1, language = 'es', flowEnabled = false } = helpers;
   const view = availabilityScenario(product, variantId, language);
   if (!view) return '';
   const { strings: t, selected, status, variants } = view;
   const statusLabel = value => ({ on_hand: t.stock, supplier_48h: t.supplier, unavailable: t.unavailable })[value];
   const optionLabel = value => value === 'supplier_48h' ? t.supplierOption : statusLabel(value);
-  const description = ({ on_hand: t.stockDetail, supplier_48h: t.supplierDetail,
+  const description = status === 'unavailable' && flowEnabled ? t.requestDetail : ({ on_hand: t.stockDetail, supplier_48h: t.supplierDetail,
     unavailable: t.unavailableDetail })[status];
-  const action = status === 'on_hand' ? t.add : status === 'supplier_48h' ? t.order : t.unavailable;
+  const action = status === 'on_hand' ? t.add : status === 'supplier_48h' ? t.order : flowEnabled ? t.request : t.unavailable;
+  const actionAttribute = flowEnabled ? status === 'unavailable' ? `data-rc-flow-request="${escape(selected.id)}"` : `data-rc-flow-add="${escape(selected.id)}"` : status === 'unavailable' ? 'disabled' : `data-preview-action="${escape(status)}"`;
   return `<div class="page availability-scenario-page">${crumbs(product.name)}
     <div class="detail-grid">${imageBlock(selected.image || product.image, 'detail-image')}
       <div class="detail-copy"><span class="eyebrow">${escape(product.brand)}</span><h1>${escape(product.name)}</h1>
@@ -73,7 +78,7 @@ export function availabilityScenarioDetail(product, helpers) {
           `<button type="button" class="size availability-option ${variant.id === selected.id ? 'active' : ''} ${variant.status === 'unavailable' ? 'availability-option-unavailable' : ''}" data-variant="${escape(variant.id)}" aria-pressed="${variant.id === selected.id}"><strong>${escape(variant.label)}</strong><small>${escape(optionLabel(variant.status))}</small></button>`).join('')}</div>
         <div class="availability-selected availability-selected-${status}" role="status"><strong>${escape(statusLabel(status))}</strong><p>${escape(description)}</p></div>
         <div class="buy-row">${status !== 'unavailable' ? `<div class="quantity"><button type="button" data-detail-qty="-1" aria-label="Уменьшить количество">${icon('minus')}</button><span id="detail-qty">${quantity}</span><button type="button" data-detail-qty="1" aria-label="Увеличить количество">${icon('plus')}</button></div>` : ''}
-          <button type="button" class="button" ${status === 'unavailable' ? 'disabled' : `data-preview-action="${escape(status)}"`}>${escape(action)} ${status === 'unavailable' ? '' : icon(status === 'on_hand' ? 'bag' : 'arrow')}</button>
+          <button type="button" class="button" ${actionAttribute}>${escape(action)} ${status === 'unavailable' && !flowEnabled ? '' : icon(status === 'on_hand' ? 'bag' : 'arrow')}</button>
           <button type="button" class="icon-button favorite-detail ${favorites.includes(product.id) ? 'selected' : ''}" data-favorite="${escape(product.id)}" aria-label="В избранное" aria-pressed="${favorites.includes(product.id)}">${icon('heart')}</button></div>
         <p class="availability-preview-feedback" data-preview-feedback role="status" hidden></p>
         <details open><summary>${language === 'es' ? 'Sobre este alimento' : 'О корме'}</summary><ul>${(selected.details || product.details || []).map(detail => `<li>${escape(detail)}</li>`).join('')}</ul></details>
