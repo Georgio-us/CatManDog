@@ -3,6 +3,7 @@ import { checkoutTotals } from './checkout-model.js';
 const ROOT = '/rc-order';
 const PRODUCT_LINK = '#/product/rc-sterilised?availabilityPreview=1';
 const STORAGE_KEY = 'catmandog-rc-order-v1';
+const GROUPING_KEY = 'catmandog-rc-delivery-grouping-v1';
 const purchasable = new Set(['rc-sterilised-400g', 'rc-sterilised-2000g', 'rc-sterilised-4000g']);
 const sourceVariant = 'rc-sterilised-4000g';
 const requestedVariant = 'rc-sterilised-10000g';
@@ -99,9 +100,14 @@ function readCart() {
   } catch { return []; }
 }
 
+function readGrouping() {
+  try { return sessionStorage.getItem(GROUPING_KEY) === 'separate' ? 'separate' : 'together'; }
+  catch { return 'together'; }
+}
+
 export function createRoyalCaninFlow({ products, escape, icon, money, imageBlock, locale, render }) {
   let cart = readCart();
-  let form = { day: 'today', slot: '14-18', deliveryGrouping: 'together', contactLanguage: locale() === 'es' ? 'es' : 'ru' };
+  let form = { day: 'today', slot: '14-18', deliveryGrouping: readGrouping(), contactLanguage: locale() === 'es' ? 'es' : 'ru' };
   let request = {};
   let finished = false;
   let requestFinished = false;
@@ -125,6 +131,7 @@ export function createRoyalCaninFlow({ products, escape, icon, money, imageBlock
       freeDelivery: delivery === 0, deliveries: groups };
   };
   const persist = () => { try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch { /* Private browsing */ } };
+  const persistGrouping = () => { try { sessionStorage.setItem(GROUPING_KEY, form.deliveryGrouping); } catch { /* Private browsing */ } };
   const go = step => { location.hash = `${ROOT}/${step}`; render(); };
   const safe = value => escape(value || '');
 
@@ -266,7 +273,7 @@ export function createRoyalCaninFlow({ products, escape, icon, money, imageBlock
       if (item) item.qty = Math.min(99, Math.max(1, item.qty + Number(button.dataset.rcQty)));
       persist(); render(); return true;
     }
-    if (button.hasAttribute('data-rc-remove')) { cart = cart.filter(item => item.variantId !== button.dataset.rcRemove); if (!mixed()) form.deliveryGrouping = 'together'; persist(); render(); return true; }
+    if (button.hasAttribute('data-rc-remove')) { cart = cart.filter(item => item.variantId !== button.dataset.rcRemove); if (!mixed()) form.deliveryGrouping = 'together'; persist(); persistGrouping(); render(); return true; }
     if (button.hasAttribute('data-rc-next')) { go(button.dataset.rcNext); return true; }
     if (button.hasAttribute('data-rc-pay')) { finished = true; go('complete'); return true; }
     if (button.hasAttribute('data-rc-request-send')) { requestFinished = true; go('requested'); return true; }
@@ -279,6 +286,7 @@ export function createRoyalCaninFlow({ products, escape, icon, money, imageBlock
       const field = target.dataset.rcField;
       if (field === 'deliveryGrouping' && form.deliveryGrouping !== target.value) {
         form.deliveryGrouping = target.value;
+        persistGrouping();
         render();
         return true;
       }

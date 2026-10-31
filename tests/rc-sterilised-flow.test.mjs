@@ -50,7 +50,7 @@ test('4 kg has supplier timing and 10 kg opens sourcing request', () => {
 });
 
 test('mixed basket compares one and two deliveries before payment', () => {
-  const { flow, button } = setup();
+  const { flow, button, saved } = setup();
   flow.click(button({ 'data-rc-flow-add': true, rcFlowAdd: 'rc-sterilised-400g' }), 1);
   flow.click(button({ 'data-rc-flow-add': true, rcFlowAdd: 'rc-sterilised-4000g' }), 1);
   const together = flow.page('/rc-order/basket');
@@ -60,6 +60,7 @@ test('mixed basket compares one and two deliveries before payment', () => {
   assert.match(flow.page('/rc-order/delivery'), /Все товары одной доставкой/);
   flow.update({ dataset: { rcField: 'deliveryGrouping' }, value: 'separate', type: 'radio', checked: true,
     hasAttribute: key => key === 'data-rc-field' });
+  assert.equal(saved.get('catmandog-rc-delivery-grouping-v1'), 'separate');
   const separate = flow.page('/rc-order/basket');
   assert.match(separate, /49\.38 €/);
   assert.match(separate, /Доставка товара в наличии/);
