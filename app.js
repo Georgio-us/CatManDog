@@ -1,7 +1,7 @@
 import { createUsefulUI } from './useful.js?v=es-locale-4';
 import { createAccountUI } from './account.js?v=es-locale-4';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, isDemoPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js';
-import { accessoryDetail } from './accessory-ui.js?v=rc-availability-1';
+import { accessoryDetail } from './accessory-ui.js?v=rc-availability-2';
 import { availabilityScenarioDetail, availabilityScenarioFeedback } from './availability-scenario.js?v=3';
 import { provisionalPriceLabel } from './retail-research.js?v=es-locale-4';
 import { recommendForProduct } from './recommendations.js?v=dog-first-wave-1';

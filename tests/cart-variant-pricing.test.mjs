@@ -55,6 +55,7 @@ test('Sterilised 37 shows live variant availability without publishing unconfirm
   assert.match(unconfirmed, /Демонстрационная цена/);
   assert.match(unconfirmed, /<button class="button" disabled>Наличие уточняется/);
   assert.doesNotMatch(unconfirmed, /data-buy="rc-sterilised"/);
+  assert.doesNotMatch(unconfirmed, /Цены в изученных магазинах|Precios observados en otras tiendas/);
 });
 
 test('cart keeps distinct variants and an exact unit price', () => {
