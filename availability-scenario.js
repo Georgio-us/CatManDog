@@ -8,8 +8,6 @@ const scenario = {
 
 const copy = {
   ru: {
-    preview: 'Предпросмотр наличия и доставки',
-    disclaimer: 'Это пример для проверки карточки. Остатки, цены и срок поставщика пока не подтверждены, заказ здесь не создаётся.',
     price: 'Демонстрационная цена',
     pack: 'Фасовка',
     stock: 'В наличии',
@@ -21,13 +19,9 @@ const copy = {
     unavailableDetail: 'Эту фасовку сейчас заказать нельзя. Выберите другой вес.',
     add: 'Добавить в корзину',
     order: 'Заказать с доставкой',
-    savedStock: 'Для этой фасовки в рабочей версии откроется корзина с доставкой из наличия.',
-    savedSupplier: 'Для этой фасовки в рабочей версии откроется корзина со сроком поставки 24-48 часов.',
-    onlyPreview: 'Сейчас это просмотр сценария: товар в корзину не добавлен'
+    checkoutUnavailable: 'Оформление заказа пока недоступно'
   },
   es: {
-    preview: 'Vista previa de disponibilidad y entrega',
-    disclaimer: 'Este es un ejemplo para revisar la ficha. Aún no se han confirmado las existencias, los precios ni el plazo del proveedor. Aquí no se crea ningún pedido.',
     price: 'Precio de demostración',
     pack: 'Formato',
     stock: 'Disponible',
@@ -39,9 +33,7 @@ const copy = {
     unavailableDetail: 'Este formato no se puede pedir ahora. Elige otro peso.',
     add: 'Añadir a la cesta',
     order: 'Pedir con entrega',
-    savedStock: 'En la versión operativa, este formato abrirá la cesta con entrega desde nuestras existencias.',
-    savedSupplier: 'En la versión operativa, este formato abrirá la cesta con un plazo de 24-48 horas.',
-    onlyPreview: 'Esta es solo una vista previa: el producto no se ha añadido a la cesta'
+    checkoutUnavailable: 'Los pedidos aún no están disponibles'
   }
 };
 
@@ -69,7 +61,6 @@ export function availabilityScenarioDetail(product, helpers) {
     unavailable: t.unavailableDetail })[status];
   const action = status === 'on_hand' ? t.add : status === 'supplier_48h' ? t.order : t.unavailable;
   return `<div class="page availability-scenario-page">${crumbs(product.name)}
-    <div class="availability-preview-banner" role="note"><strong>${escape(t.preview)}</strong><p>${escape(t.disclaimer)}</p></div>
     <div class="detail-grid">${imageBlock(selected.image || product.image, 'detail-image')}
       <div class="detail-copy"><span class="eyebrow">${escape(product.brand)}</span><h1>${escape(product.name)}</h1>
         <p class="variant-current">${escape(t.pack)}: ${escape(selected.label)}</p>
@@ -85,7 +76,7 @@ export function availabilityScenarioDetail(product, helpers) {
       </div></div></div>`;
 }
 
-export function availabilityScenarioFeedback(status, language = 'es') {
+export function availabilityScenarioFeedback(language = 'es') {
   const t = copy[language === 'ru' ? 'ru' : 'es'];
-  return `${status === 'supplier_48h' ? t.savedSupplier : t.savedStock} ${t.onlyPreview}`;
+  return t.checkoutUnavailable;
 }
