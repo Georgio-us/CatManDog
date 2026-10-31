@@ -7,7 +7,7 @@ const product = {
   id: 'rc-sterilised', name: 'Royal Canin Sterilised 37', brand: 'Royal Canin',
   image: 0, variants: [
     { id: 'rc-sterilised-400g', label: '400 г', price: 5.09 },
-    { id: 'rc-sterilised-2000g', label: '2 кг', price: 25.86 },
+    { id: 'rc-sterilised-2000g', label: '2 кг', price: 29.09 },
     { id: 'rc-sterilised-4000g', label: '4 кг', price: 36.31 },
     { id: 'rc-sterilised-10000g', label: '10 кг', price: 74.99 }
   ]
@@ -51,23 +51,29 @@ test('4 kg has supplier timing and 10 kg opens sourcing request', () => {
 
 test('mixed basket compares one and two deliveries before payment', () => {
   const { flow, button, saved } = setup();
-  flow.click(button({ 'data-rc-flow-add': true, rcFlowAdd: 'rc-sterilised-400g' }), 1);
+  flow.click(button({ 'data-rc-flow-add': true, rcFlowAdd: 'rc-sterilised-2000g' }), 1);
   flow.click(button({ 'data-rc-flow-add': true, rcFlowAdd: 'rc-sterilised-4000g' }), 1);
   const together = flow.page('/rc-order/basket');
-  assert.match(together, /Одной доставкой/);
-  assert.match(together, /Двумя доставками/);
-  assert.match(together, /45\.39 €/);
+  assert.match(together, /Один заказ - одна доставка/);
+  assert.match(together, /Два заказа - две доставки/);
+  assert.match(together, /65\.40 €/);
   assert.match(flow.page('/rc-order/delivery'), /Все товары одной доставкой/);
   flow.update({ dataset: { rcField: 'deliveryGrouping' }, value: 'separate', type: 'radio', checked: true,
     hasAttribute: key => key === 'data-rc-field' });
   assert.equal(saved.get('catmandog-rc-delivery-grouping-v1'), 'separate');
   const separate = flow.page('/rc-order/basket');
-  assert.match(separate, /49\.38 €/);
-  assert.match(separate, /Доставка товара в наличии/);
-  assert.match(separate, /Доставка товара под заказ/);
-  assert.match(flow.page('/rc-order/delivery'), /Удобное время для товара в наличии/);
-  assert.match(flow.page('/rc-order/delivery'), /Поставщик|поставщика/);
-  assert.match(flow.page('/rc-order/payment'), /49\.38 €/);
+  assert.match(separate, /73\.38 €/);
+  assert.match(separate, /Заказ 1 - в наличии/);
+  assert.match(separate, /Заказ 2 - под заказ/);
+  const delivery = flow.page('/rc-order/delivery');
+  assert.match(delivery, /Доставка двух заказов/);
+  assert.match(delivery, /Royal Canin Sterilised 37 · 2 кг × 1/);
+  assert.match(delivery, /Royal Canin Sterilised 37 · 4 кг × 1/);
+  assert.match(delivery, /Поставщик|поставщика/);
+  const payment = flow.page('/rc-order/payment');
+  assert.match(payment, /Заказ 1 - в наличии/);
+  assert.match(payment, /Заказ 2 - под заказ/);
+  assert.match(payment, /73\.38 €/);
   flow.click(button({ 'data-rc-pay': true }));
   const complete = flow.page('/rc-order/complete');
   assert.match(complete, /Заказы приняты/);
