@@ -35,8 +35,8 @@ const copy = {
     complete: 'Заказ принят', completeLead: 'Мы свяжемся с вами, чтобы подтвердить детали доставки',
     completeSource: 'Фасовку под заказ сначала подтвердим у поставщика, затем согласуем доставку.',
     continueShopping: 'Продолжить покупки', newOrder: 'Оформить ещё один вариант',
-    request: 'Поможем найти 10 кг', requestLead: 'Проверим, можно ли привезти эту фасовку, и сообщим срок и стоимость.',
-    requestContacts: 'Куда сообщить результат', requestComment: 'Что важно для вас',
+    request: 'Поможем найти', requestLead: 'Проверим, можно ли привезти эту фасовку, и сообщим срок и стоимость. Оставьте контакты - мы свяжемся с вами, как только получим ответ.',
+    requestContacts: 'Ваши контактные данные', requestComment: 'Что важно для вас',
     sendRequest: 'Отправить запрос', requested: 'Запрос получен',
     requestedLead: 'Мы проверим наличие этой фасовки и свяжемся с вами.',
     iva: 'Цены включают IVA'
@@ -68,8 +68,8 @@ const copy = {
     complete: 'Pedido recibido', completeLead: 'Nos pondremos en contacto para confirmar los detalles de la entrega',
     completeSource: 'Primero confirmaremos el formato con el proveedor y después acordaremos la entrega.',
     continueShopping: 'Seguir comprando', newOrder: 'Elegir otro formato',
-    request: 'Te ayudamos a encontrar 10 kg', requestLead: 'Comprobaremos si podemos conseguir este formato y te diremos el plazo y el precio.',
-    requestContacts: 'Dónde comunicarte la respuesta', requestComment: '¿Qué necesitas?',
+    request: 'Te ayudamos a encontrar', requestLead: 'Comprobaremos si podemos conseguir este formato y te diremos el plazo y el precio. Déjanos tus datos y nos pondremos en contacto cuando tengamos una respuesta.',
+    requestContacts: 'Tus datos de contacto', requestComment: '¿Qué necesitas?',
     sendRequest: 'Enviar solicitud', requested: 'Solicitud recibida',
     requestedLead: 'Comprobaremos la disponibilidad de este formato y nos pondremos en contacto.',
     iva: 'Los precios incluyen IVA'
@@ -186,7 +186,7 @@ export function createRoyalCaninFlow({ products, escape, icon, money, imageBlock
     const sku = variant(requestedVariant);
     if (done && requestFinished) return shell(3, s.requested, s.requestedLead,
       `<div class="rc-flow-complete-mark">${icon('check')}</div><a class="button" href="${PRODUCT_LINK}">${safe(s.back)} ${icon('arrow')}</a>`, false, false);
-    return shell(0, s.request, s.requestLead, `<div class="rc-flow-request-product">${imageBlock(sku?.image || product()?.image)}<div><strong>${safe(product()?.name)}</strong><span>${safe(sku?.label || '10 кг')}</span></div></div>
+    return shell(0, `${s.request} ${product()?.name} · ${sku?.label || (locale() === 'es' ? '10 kg' : '10 кг')}`, s.requestLead, `<div class="rc-flow-request-product">${imageBlock(sku?.image || product()?.image)}<div><strong>${safe(product()?.name)}</strong><span>${safe(sku?.label || '10 кг')}</span></div></div>
       <section class="rc-flow-panel"><h2>${safe(s.requestContacts)}</h2><div class="rc-flow-fields">
       <label>${safe(s.name)}<input data-rc-request-field="name" value="${safe(request.name)}" autocomplete="name"></label>
       <label>${safe(s.phone)}<input data-rc-request-field="phone" type="tel" value="${safe(request.phone)}" autocomplete="tel"></label>
