@@ -9,6 +9,7 @@
 .rc-flow-progress li.current span { border-color: var(--lime); background: var(--lime); font-weight: 700; }
 .rc-flow-heading { margin-bottom: 38px; }
 .rc-flow-heading h1 { font-size: clamp(40px, 5vw, 66px); letter-spacing: -.055em; line-height: 1.05; }
+.rc-flow-page:has(.rc-flow-request-product) .rc-flow-heading h1 { white-space: pre-line; }
 .rc-flow-heading p { max-width: 660px; margin-top: 14px; color: var(--muted); font-size: 16px; line-height: 1.55; }
 .rc-flow-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(290px, .85fr); gap: clamp(32px, 5vw, 94px); align-items: start; }
 .rc-flow-main { min-width: 0; }

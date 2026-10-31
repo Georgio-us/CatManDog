@@ -186,7 +186,7 @@ export function createRoyalCaninFlow({ products, escape, icon, money, imageBlock
     const sku = variant(requestedVariant);
     if (done && requestFinished) return shell(3, s.requested, s.requestedLead,
       `<div class="rc-flow-complete-mark">${icon('check')}</div><a class="button" href="${PRODUCT_LINK}">${safe(s.back)} ${icon('arrow')}</a>`, false, false);
-    return shell(0, `${s.request} ${product()?.name} · ${sku?.label || (locale() === 'es' ? '10 kg' : '10 кг')}`, s.requestLead, `<div class="rc-flow-request-product">${imageBlock(sku?.image || product()?.image)}<div><strong>${safe(product()?.name)}</strong><span>${safe(sku?.label || '10 кг')}</span></div></div>
+    return shell(0, `${s.request}\n${product()?.name} · ${sku?.label || (locale() === 'es' ? '10 kg' : '10 кг')}`, s.requestLead, `<div class="rc-flow-request-product">${imageBlock(sku?.image || product()?.image)}<div><strong>${safe(product()?.name)}</strong><span>${safe(sku?.label || '10 кг')}</span></div></div>
       <section class="rc-flow-panel"><h2>${safe(s.requestContacts)}</h2><div class="rc-flow-fields">
       <label>${safe(s.name)}<input data-rc-request-field="name" value="${safe(request.name)}" autocomplete="name"></label>
       <label>${safe(s.phone)}<input data-rc-request-field="phone" type="tel" value="${safe(request.phone)}" autocomplete="tel"></label>
