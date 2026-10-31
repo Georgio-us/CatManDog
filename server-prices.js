@@ -64,6 +64,11 @@ export function applyServerCatalog(products, catalogProducts, entries) {
       sku.description = row.variant_description || product.description;
       sku.details = Array.isArray(row.variant_details) && row.variant_details.length
         ? row.variant_details : product.details;
+      // Keep the stock record separate from checkout eligibility. An unconfirmed
+      // price can block checkout without turning supplier stock into "sold out".
+      sku.serverAvailabilityStatus = row.availability;
+      sku.serverSourceOrderable = row.source_orderable === true;
+      sku.serverAvailableForCart = row.availableForCart === true;
       sku.availabilityStatus = row.availability === 'pending' && row.price_confirmed !== true
         ? 'pending' : row.availableForCart === false || row.source_orderable === false ||
         row.availability === 'unavailable' ||
