@@ -51,9 +51,11 @@ export function availabilityScenario(product, selectedId, language = 'es') {
   if (!selected || !(selected.id in scenario)) return null;
   const strings = copy[language === 'ru' ? 'ru' : 'es'];
   const status = scenario[selected.id];
-  return { strings, selected, status, variants: product.variants.map(variant => ({
-    id: variant.id, label: variant.label, status: scenario[variant.id] || 'unavailable'
-  })) };
+  const order = Object.keys(scenario);
+  return { strings, selected, status, variants: product.variants
+    .filter(variant => order.includes(variant.id))
+    .sort((left, right) => order.indexOf(left.id) - order.indexOf(right.id))
+    .map(variant => ({ id: variant.id, label: variant.label, status: scenario[variant.id] })) };
 }
 
 export function availabilityScenarioDetail(product, helpers) {
