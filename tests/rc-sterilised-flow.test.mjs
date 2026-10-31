@@ -49,6 +49,31 @@ test('4 kg has supplier timing and 10 kg opens sourcing request', () => {
   assert.match(flow.page('/rc-order/request'), /10 кг/);
 });
 
+test('mixed basket compares one and two deliveries before payment', () => {
+  const { flow, button } = setup();
+  flow.click(button({ 'data-rc-flow-add': true, rcFlowAdd: 'rc-sterilised-400g' }), 1);
+  flow.click(button({ 'data-rc-flow-add': true, rcFlowAdd: 'rc-sterilised-4000g' }), 1);
+  const together = flow.page('/rc-order/basket');
+  assert.match(together, /Одной доставкой/);
+  assert.match(together, /Двумя доставками/);
+  assert.match(together, /45\.39 €/);
+  assert.match(flow.page('/rc-order/delivery'), /Все товары одной доставкой/);
+  flow.update({ dataset: { rcField: 'deliveryGrouping' }, value: 'separate', type: 'radio', checked: true,
+    hasAttribute: key => key === 'data-rc-field' });
+  const separate = flow.page('/rc-order/basket');
+  assert.match(separate, /49\.38 €/);
+  assert.match(separate, /Доставка товара в наличии/);
+  assert.match(separate, /Доставка товара под заказ/);
+  assert.match(flow.page('/rc-order/delivery'), /Удобное время для товара в наличии/);
+  assert.match(flow.page('/rc-order/delivery'), /Поставщик|поставщика/);
+  assert.match(flow.page('/rc-order/payment'), /49\.38 €/);
+  flow.click(button({ 'data-rc-pay': true }));
+  const complete = flow.page('/rc-order/complete');
+  assert.match(complete, /Заказы приняты/);
+  assert.doesNotMatch(complete, /Фасовка есть в наличии/);
+  assert.doesNotMatch(complete, /Оформить ещё один вариант/);
+});
+
 test('only special product URL enables isolated actions', () => {
   const helpers = { crumbs: () => '', imageBlock: () => '', escape: String, icon: () => '',
     favorites: [], money: value => `${value} €`, variantId: 'rc-sterilised-10000g', language: 'ru' };

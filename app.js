@@ -3,7 +3,7 @@ import { createAccountUI } from './account.js?v=es-locale-4';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, isDemoPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js';
 import { accessoryDetail } from './accessory-ui.js?v=rc-availability-2';
 import { availabilityScenarioDetail, availabilityScenarioFeedback } from './availability-scenario.js?v=5';
-import { createRoyalCaninFlow } from './rc-sterilised-flow.js?v=4';
+import { createRoyalCaninFlow } from './rc-sterilised-flow.js?v=5';
 import { provisionalPriceLabel } from './retail-research.js?v=es-locale-4';
 import { recommendForProduct } from './recommendations.js?v=dog-first-wave-1';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=variant-pricing-1';

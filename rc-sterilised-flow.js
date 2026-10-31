@@ -11,12 +11,19 @@ const copy = {
   ru: {
     steps: ['Корзина', 'Доставка', 'Оплата', 'Готово'], back: 'К товару',
     basket: 'Ваш заказ', basketLead: 'Проверьте фасовку и количество перед оформлением',
-    empty: 'В корзине пока пусто', choose: 'Выбрать фасовку', quantity: 'Количество',
+    empty: 'В корзине пока пусто', choose: 'Выбрать фасовку', addAnother: 'Добавить ещё фасовку', quantity: 'Количество',
     remove: 'Удалить', goods: 'Товары', delivery: 'Доставка по Валенсии', free: 'Бесплатно',
     total: 'Итого с IVA', deliveryFree: 'Бесплатная доставка от 49 €',
     inStock: 'В наличии', source: 'Под заказ · 24-48 ч',
     sourceNotice: 'Эту фасовку привезём от поставщика. Ориентир доставки - 24-48 часов после подтверждения наличия.',
     stockNotice: 'Фасовка есть в наличии. Время доставки согласуем после оформления.',
+    mixedTitle: 'Как доставить товары', mixedLead: 'В корзине есть товар в наличии и товар под заказ. Выберите удобный вариант до оформления.',
+    together: 'Одной доставкой', togetherDetail: 'Привезём всё вместе после получения фасовки под заказ. Одна доставка, ориентир - 24-48 часов после подтверждения наличия.',
+    separate: 'Двумя доставками', separateDetail: 'Товар в наличии можно получить раньше, фасовку под заказ - после поступления. Это два заказа с отдельной стоимостью доставки.',
+    firstDelivery: 'Доставка товара в наличии', secondDelivery: 'Доставка товара под заказ', deliveryCost: 'Стоимость доставки',
+    eachDeliveryFree: 'Бесплатная доставка от 49 € для каждого заказа отдельно',
+    stockTiming: 'Удобное время для товара в наличии', supplierTiming: 'Товар под заказ',
+    combinedTiming: 'Все товары одной доставкой после получения фасовки под заказ',
     checkout: 'Перейти к оформлению', details: 'Контакты и доставка',
     detailsLead: 'Оставьте контакты и адрес в Валенсии. После заказа мы свяжемся с вами и подтвердим время доставки.',
     contacts: 'Контактные данные', name: 'Имя', phone: 'Телефон', email: 'Email',
@@ -33,8 +40,8 @@ const copy = {
     contactSummary: 'Получатель', addressSummary: 'Адрес', timeSummary: 'Доставка',
     missing: 'Не указано', edit: 'Изменить данные', pay: 'Оплатить',
     complete: 'Заказ принят', completeLead: 'Мы свяжемся с вами, чтобы подтвердить детали доставки',
-    completeSource: 'Фасовку под заказ сначала подтвердим у поставщика, затем согласуем доставку.',
-    continueShopping: 'Продолжить покупки', newOrder: 'Оформить ещё один вариант',
+    completeSplit: 'Заказы приняты', completeSplitLead: 'Мы свяжемся с вами, чтобы согласовать две доставки',
+    continueShopping: 'Продолжить покупки',
     request: 'Поможем найти', requestLead: 'Проверим, можно ли привезти эту фасовку, и сообщим срок и стоимость. Оставьте контакты - мы свяжемся с вами, как только получим ответ.',
     requestContacts: 'Ваши контактные данные', requestComment: 'Что важно для вас',
     sendRequest: 'Отправить запрос', requested: 'Запрос получен',
@@ -44,12 +51,19 @@ const copy = {
   es: {
     steps: ['Cesta', 'Entrega', 'Pago', 'Listo'], back: 'Volver al producto',
     basket: 'Tu pedido', basketLead: 'Comprueba el formato y la cantidad antes de continuar',
-    empty: 'Tu cesta está vacía', choose: 'Elegir formato', quantity: 'Cantidad',
+    empty: 'Tu cesta está vacía', choose: 'Elegir formato', addAnother: 'Añadir otro formato', quantity: 'Cantidad',
     remove: 'Eliminar', goods: 'Productos', delivery: 'Entrega en València', free: 'Gratis',
     total: 'Total con IVA', deliveryFree: 'Envío gratis a partir de 49 €',
     inStock: 'Disponible', source: 'Por encargo · 24-48 h',
     sourceNotice: 'Pediremos este formato al proveedor. Plazo orientativo: 24-48 horas tras confirmar su disponibilidad.',
     stockNotice: 'Tenemos este formato. Acordaremos la hora de entrega después del pedido.',
+    mixedTitle: 'Cómo recibir tus productos', mixedLead: 'Tu cesta contiene un producto disponible y otro por encargo. Elige cómo quieres recibirlos antes de continuar.',
+    together: 'Una sola entrega', togetherDetail: 'Entregaremos todo junto cuando llegue el formato por encargo. Una entrega, plazo orientativo de 24-48 horas tras confirmar su disponibilidad.',
+    separate: 'Dos entregas', separateDetail: 'Puedes recibir antes el producto disponible y el otro cuando llegue. Son dos pedidos con gastos de entrega independientes.',
+    firstDelivery: 'Entrega del producto disponible', secondDelivery: 'Entrega del producto por encargo', deliveryCost: 'Gastos de entrega',
+    eachDeliveryFree: 'Envío gratis a partir de 49 € en cada pedido por separado',
+    stockTiming: 'Horario para el producto disponible', supplierTiming: 'Producto por encargo',
+    combinedTiming: 'Todos los productos en una entrega al llegar el formato por encargo',
     checkout: 'Continuar con el pedido', details: 'Contacto y entrega',
     detailsLead: 'Indica tus datos y una dirección en València. Nos pondremos en contacto para confirmar la entrega.',
     contacts: 'Datos de contacto', name: 'Nombre', phone: 'Teléfono', email: 'Email',
@@ -66,8 +80,8 @@ const copy = {
     contactSummary: 'Destinatario', addressSummary: 'Dirección', timeSummary: 'Entrega',
     missing: 'Sin indicar', edit: 'Modificar datos', pay: 'Pagar',
     complete: 'Pedido recibido', completeLead: 'Nos pondremos en contacto para confirmar los detalles de la entrega',
-    completeSource: 'Primero confirmaremos el formato con el proveedor y después acordaremos la entrega.',
-    continueShopping: 'Seguir comprando', newOrder: 'Elegir otro formato',
+    completeSplit: 'Pedidos recibidos', completeSplitLead: 'Nos pondremos en contacto para acordar las dos entregas',
+    continueShopping: 'Seguir comprando',
     request: 'Te ayudamos a encontrar', requestLead: 'Comprobaremos si podemos conseguir este formato y te diremos el plazo y el precio. Déjanos tus datos y nos pondremos en contacto cuando tengamos una respuesta.',
     requestContacts: 'Tus datos de contacto', requestComment: '¿Qué necesitas?',
     sendRequest: 'Enviar solicitud', requested: 'Solicitud recibida',
@@ -87,7 +101,7 @@ function readCart() {
 
 export function createRoyalCaninFlow({ products, escape, icon, money, imageBlock, locale, render }) {
   let cart = readCart();
-  let form = { day: 'today', slot: '14-18', contactLanguage: locale() === 'es' ? 'es' : 'ru' };
+  let form = { day: 'today', slot: '14-18', deliveryGrouping: 'together', contactLanguage: locale() === 'es' ? 'es' : 'ru' };
   let request = {};
   let finished = false;
   let requestFinished = false;
@@ -96,7 +110,20 @@ export function createRoyalCaninFlow({ products, escape, icon, money, imageBlock
   const variant = id => product()?.variants?.find(item => item.id === id);
   const items = () => cart.map(item => ({ ...item, sku: variant(item.variantId) })).filter(item => item.sku);
   const hasSource = () => cart.some(item => item.variantId === sourceVariant);
-  const totals = () => checkoutTotals(items().map(item => ({ qty: item.qty, price: Number(item.sku.price) || 0 })));
+  const hasStock = () => cart.some(item => item.variantId !== sourceVariant);
+  const mixed = () => hasSource() && hasStock();
+  const split = () => mixed() && form.deliveryGrouping === 'separate';
+  const priced = entries => entries.map(item => ({ qty: item.qty, price: Number(item.sku.price) || 0 }));
+  const groupTotals = () => ({ stock: checkoutTotals(priced(items().filter(item => item.variantId !== sourceVariant))),
+    supplier: checkoutTotals(priced(items().filter(item => item.variantId === sourceVariant))) });
+  const totals = () => {
+    const combined = checkoutTotals(priced(items()));
+    if (!split()) return combined;
+    const groups = groupTotals();
+    const delivery = Math.round((groups.stock.delivery + groups.supplier.delivery) * 100) / 100;
+    return { ...combined, delivery, total: Math.round((combined.subtotal + delivery) * 100) / 100,
+      freeDelivery: delivery === 0, deliveries: groups };
+  };
   const persist = () => { try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch { /* Private browsing */ } };
   const go = step => { location.hash = `${ROOT}/${step}`; render(); };
   const safe = value => escape(value || '');
@@ -110,12 +137,16 @@ export function createRoyalCaninFlow({ products, escape, icon, money, imageBlock
   function summary() {
     const s = t();
     const total = totals();
+    const deliveryRows = total.deliveries
+      ? `<div class="rc-flow-total-line"><span>${safe(s.firstDelivery)}</span><strong>${total.deliveries.stock.freeDelivery ? safe(s.free) : money(total.deliveries.stock.delivery)}</strong></div>
+        <div class="rc-flow-total-line"><span>${safe(s.secondDelivery)}</span><strong>${total.deliveries.supplier.freeDelivery ? safe(s.free) : money(total.deliveries.supplier.delivery)}</strong></div>`
+      : `<div class="rc-flow-total-line"><span>${safe(s.delivery)}</span><strong>${total.freeDelivery ? safe(s.free) : money(total.delivery)}</strong></div>`;
     return `<aside class="rc-flow-summary"><h2>${safe(s.basket)}</h2>${items().map(item =>
       `<div class="rc-flow-summary-item">${imageBlock(item.sku.image || product().image)}<div><strong>${safe(product().name)}</strong><small>${safe(item.sku.label)} · ${item.qty} × ${money(item.sku.price)}</small></div><strong>${money(item.sku.price * item.qty)}</strong></div>`).join('')}
       <div class="rc-flow-total-line"><span>${safe(s.goods)}</span><strong>${money(total.subtotal)}</strong></div>
-      <div class="rc-flow-total-line"><span>${safe(s.delivery)}</span><strong>${total.freeDelivery ? safe(s.free) : money(total.delivery)}</strong></div>
+      ${deliveryRows}
       <div class="rc-flow-total-line rc-flow-total"><span>${safe(s.total)}</span><strong>${money(total.total)}</strong></div>
-      <p>${safe(s.iva)} · ${safe(s.deliveryFree)}</p></aside>`;
+      <p>${safe(s.iva)} · ${safe(split() ? s.eachDeliveryFree : s.deliveryFree)}</p></aside>`;
   }
 
   function shell(step, heading, lead, body, showSummary = true, showProgress = true) {
@@ -132,13 +163,21 @@ export function createRoyalCaninFlow({ products, escape, icon, money, imageBlock
         <div class="rc-flow-quantity" aria-label="${safe(s.quantity)}"><button type="button" data-rc-qty="-1" data-rc-variant="${safe(item.variantId)}" aria-label="${safe(s.quantity)} -">${icon('minus')}</button><span>${item.qty}</span><button type="button" data-rc-qty="1" data-rc-variant="${safe(item.variantId)}" aria-label="${safe(s.quantity)} +">${icon('plus')}</button></div>
         <button class="rc-flow-remove" type="button" data-rc-remove="${safe(item.variantId)}">${safe(s.remove)}</button></div>
       <strong>${money(item.sku.price * item.qty)}</strong></div>`).join('');
-    const notice = hasSource() ? s.sourceNotice : s.stockNotice;
-    return shell(0, s.basket, s.basketLead, `<div class="rc-flow-panel">${rows}</div><p class="rc-flow-notice">${icon('truck')}${safe(notice)}</p>
-      <div class="rc-flow-actions"><button class="button" type="button" data-rc-next="delivery">${safe(s.checkout)} ${icon('arrow')}</button><a class="button outline" href="${PRODUCT_LINK}">${safe(s.choose)}</a></div>`);
+    const mixedChoice = mixed() ? `<section class="rc-flow-panel rc-flow-delivery-choice"><h2>${safe(s.mixedTitle)}</h2><p>${safe(s.mixedLead)}</p>
+      <div class="rc-flow-choice-list"><label><input type="radio" name="rc-delivery-grouping" data-rc-field="deliveryGrouping" value="together" ${!split() ? 'checked' : ''}><span><strong>${safe(s.together)}</strong><small>${safe(s.togetherDetail)}</small><em>${safe(s.deliveryCost)}: ${checkoutTotals(priced(items())).freeDelivery ? safe(s.free) : money(checkoutTotals(priced(items())).delivery)}</em></span></label>
+      <label><input type="radio" name="rc-delivery-grouping" data-rc-field="deliveryGrouping" value="separate" ${split() ? 'checked' : ''}><span><strong>${safe(s.separate)}</strong><small>${safe(s.separateDetail)}</small><em>${safe(s.deliveryCost)}: ${money(groupTotals().stock.delivery + groupTotals().supplier.delivery)}</em></span></label></div></section>` : `<p class="rc-flow-notice">${icon('truck')}${safe(hasSource() ? s.sourceNotice : s.stockNotice)}</p>`;
+    return shell(0, s.basket, s.basketLead, `<div class="rc-flow-panel">${rows}</div>${mixedChoice}
+      <div class="rc-flow-actions"><button class="button" type="button" data-rc-next="delivery">${safe(s.checkout)} ${icon('arrow')}</button><a class="button outline" href="${PRODUCT_LINK}">${safe(s.addAnother)}</a></div>`);
   }
 
   function input(name, label, type = 'text', extra = '') {
     return `<label>${safe(label)}<input data-rc-field="${name}" type="${type}" value="${safe(form[name])}" ${extra}></label>`;
+  }
+
+  function select(name, label, options) {
+    return `<label class="rc-flow-select">${safe(label)}<span class="rc-flow-select-wrap"><select data-rc-field="${name}">${options.map(([value, text]) =>
+      `<option value="${safe(value)}" ${form[name] === value ? 'selected' : ''}>${safe(text)}</option>`).join('')}</select>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></label>`;
   }
 
   function deliveryPage() {
@@ -146,12 +185,13 @@ export function createRoyalCaninFlow({ products, escape, icon, money, imageBlock
     const s = t();
     const languages = [['es','Español'],['ru','Русский'],['en','English'],['uk','Українська']];
     const slots = [['10-14',s.slotMorning],['14-18',s.slotAfternoon],['18-22',s.slotEvening]];
-    const timing = hasSource()
-      ? `<div class="rc-flow-notice">${icon('truck')}${safe(s.sourceTiming)}<br>${safe(s.sourceNotice)}</div>`
-      : `<div class="rc-flow-radio-row"><label><input type="radio" name="rc-day" data-rc-field="day" value="today" ${form.day === 'today' ? 'checked' : ''}>${safe(s.today)}</label><label><input type="radio" name="rc-day" data-rc-field="day" value="tomorrow" ${form.day === 'tomorrow' ? 'checked' : ''}>${safe(s.tomorrow)}</label></div>
-        <label class="rc-flow-select">${safe(s.slot)}<select data-rc-field="slot">${slots.map(([value,label]) => `<option value="${value}" ${form.slot === value ? 'selected' : ''}>${safe(label)}</option>`).join('')}</select></label><p class="rc-flow-help">${safe(s.slotNotice)}</p>`;
+    const daySlot = `<div class="rc-flow-radio-row"><label><input type="radio" name="rc-day" data-rc-field="day" value="today" ${form.day === 'today' ? 'checked' : ''}>${safe(s.today)}</label><label><input type="radio" name="rc-day" data-rc-field="day" value="tomorrow" ${form.day === 'tomorrow' ? 'checked' : ''}>${safe(s.tomorrow)}</label></div>
+      ${select('slot',s.slot,slots)}<p class="rc-flow-help">${safe(s.slotNotice)}</p>`;
+    const timing = split() ? `<div class="rc-flow-timing-group"><h3>${safe(s.stockTiming)}</h3>${daySlot}</div>
+      <div class="rc-flow-timing-group"><h3>${safe(s.supplierTiming)}</h3><p class="rc-flow-notice">${icon('truck')}${safe(s.sourceNotice)}</p></div>`
+      : hasSource() ? `<p class="rc-flow-notice">${icon('truck')}${safe(mixed() ? s.combinedTiming : s.sourceTiming)}. ${safe(s.sourceNotice)}</p>` : daySlot;
     return shell(1, s.details, s.detailsLead, `<section class="rc-flow-panel"><h2>${safe(s.contacts)}</h2><div class="rc-flow-fields">${input('name',s.name,'text','autocomplete="name"')}${input('phone',s.phone,'tel','autocomplete="tel"')}${input('email',s.email,'email','autocomplete="email"')}
-      <label>${safe(s.contactLanguage)}<select data-rc-field="contactLanguage">${languages.map(([value,label]) => `<option value="${value}" ${form.contactLanguage === value ? 'selected' : ''}>${label}</option>`).join('')}</select></label></div></section>
+      ${select('contactLanguage',s.contactLanguage,languages)}</div></section>
       <section class="rc-flow-panel"><h2>${safe(s.address)}</h2><div class="rc-flow-fields">${input('postcode',s.postcode,'text','inputmode="numeric" autocomplete="postal-code" maxlength="5"')}
       <label>${safe(s.city)}<input value="València" readonly></label>${input('street',s.street,'text','autocomplete="address-line1"')}${input('building',s.building)}${input('apartment',s.apartment)}
       <label class="rc-flow-wide">${safe(s.courierNote)}<textarea data-rc-field="courierNote">${safe(form.courierNote)}</textarea></label></div></section>
@@ -166,9 +206,13 @@ export function createRoyalCaninFlow({ products, escape, icon, money, imageBlock
     const address = [form.street, form.building, form.apartment, form.postcode].some(Boolean)
       ? [form.street, form.building, form.apartment, form.postcode, 'València'].filter(Boolean).join(', ') : s.missing;
     const slotLabel = ({ '10-14': s.slotMorning, '14-18': s.slotAfternoon, '18-22': s.slotEvening })[form.slot] || s.slotAfternoon;
-    const when = hasSource() ? s.sourceTiming : `${form.day === 'tomorrow' ? s.tomorrow : s.today}, ${slotLabel}`;
+    const stockWhen = `${form.day === 'tomorrow' ? s.tomorrow : s.today}, ${slotLabel}`;
+    const deliveryReview = split()
+      ? `<div><dt>${safe(s.firstDelivery)}</dt><dd>${safe(stockWhen)}</dd></div><div><dt>${safe(s.secondDelivery)}</dt><dd>${safe(s.sourceTiming)}</dd></div>`
+      : `<div><dt>${safe(s.timeSummary)}</dt><dd>${safe(hasSource() ? mixed() ? s.combinedTiming : s.sourceTiming : stockWhen)}</dd></div>`;
     return shell(2, s.payment, s.paymentLead, `<section class="rc-flow-panel"><h2>${safe(s.details)}</h2>
-      <dl class="rc-flow-review"><div><dt>${safe(s.contactSummary)}</dt><dd>${safe(contact)}</dd></div><div><dt>${safe(s.addressSummary)}</dt><dd>${safe(address || s.missing)}</dd></div><div><dt>${safe(s.timeSummary)}</dt><dd>${safe(when)}</dd></div></dl>
+      <dl class="rc-flow-review"><div><dt>${safe(s.contactSummary)}</dt><dd>${safe(contact)}</dd></div><div><dt>${safe(s.addressSummary)}</dt><dd>${safe(address || s.missing)}</dd></div>${deliveryReview}</dl>
+      ${mixed() ? `<p class="rc-flow-notice">${icon('truck')}${safe(split() ? s.separateDetail : s.togetherDetail)}</p>` : ''}
       <a class="rc-flow-edit" href="#${ROOT}/delivery">${safe(s.edit)} ${icon('arrow')}</a></section>
       <section class="rc-flow-panel"><h2>${safe(s.paymentMethod)}</h2><div class="rc-flow-method">${icon('shield')}<span><strong>${safe(s.card)}</strong><small>${safe(s.cardCaption)}</small></span></div></section>
       <div class="rc-flow-actions"><button class="button" type="button" data-rc-pay>${safe(s.pay)} ${money(totals().total)} ${icon('arrow')}</button></div>`);
@@ -177,8 +221,8 @@ export function createRoyalCaninFlow({ products, escape, icon, money, imageBlock
   function completePage() {
     if (!finished) return paymentPage();
     const s = t();
-    return shell(3, s.complete, s.completeLead, `<div class="rc-flow-complete-mark">${icon('check')}</div><p class="rc-flow-notice">${icon('truck')}${safe(hasSource() ? s.completeSource : s.stockNotice)}</p>
-      <div class="rc-flow-actions"><button class="button" type="button" data-rc-new-order>${safe(s.newOrder)} ${icon('arrow')}</button><a class="button outline" href="#/catalog">${safe(s.continueShopping)}</a></div>`);
+    return shell(3, split() ? s.completeSplit : s.complete, split() ? s.completeSplitLead : s.completeLead,
+      `<div class="rc-flow-complete-mark">${icon('check')}</div><div class="rc-flow-actions"><a class="button" href="#/catalog">${safe(s.continueShopping)} ${icon('arrow')}</a></div>`);
   }
 
   function requestPage(done = false) {
@@ -217,13 +261,12 @@ export function createRoyalCaninFlow({ products, escape, icon, money, imageBlock
       persist(); finished = false; go('basket'); return true;
     }
     if (button.hasAttribute('data-rc-flow-request')) { requestFinished = false; go('request'); return true; }
-    if (button.hasAttribute('data-rc-new-order')) { cart = []; persist(); finished = false; location.hash = PRODUCT_LINK.slice(1); render(); return true; }
     if (button.hasAttribute('data-rc-qty')) {
       const item = cart.find(entry => entry.variantId === button.dataset.rcVariant);
       if (item) item.qty = Math.min(99, Math.max(1, item.qty + Number(button.dataset.rcQty)));
       persist(); render(); return true;
     }
-    if (button.hasAttribute('data-rc-remove')) { cart = cart.filter(item => item.variantId !== button.dataset.rcRemove); persist(); render(); return true; }
+    if (button.hasAttribute('data-rc-remove')) { cart = cart.filter(item => item.variantId !== button.dataset.rcRemove); if (!mixed()) form.deliveryGrouping = 'together'; persist(); render(); return true; }
     if (button.hasAttribute('data-rc-next')) { go(button.dataset.rcNext); return true; }
     if (button.hasAttribute('data-rc-pay')) { finished = true; go('complete'); return true; }
     if (button.hasAttribute('data-rc-request-send')) { requestFinished = true; go('requested'); return true; }
@@ -232,7 +275,14 @@ export function createRoyalCaninFlow({ products, escape, icon, money, imageBlock
 
   function update(target) {
     if (target.hasAttribute('data-rc-field')) {
-      if (target.type !== 'radio' || target.checked) form[target.dataset.rcField] = target.value;
+      if (target.type === 'radio' && !target.checked) return true;
+      const field = target.dataset.rcField;
+      if (field === 'deliveryGrouping' && form.deliveryGrouping !== target.value) {
+        form.deliveryGrouping = target.value;
+        render();
+        return true;
+      }
+      form[field] = target.value;
       return true;
     }
     if (target.hasAttribute('data-rc-request-field')) { request[target.dataset.rcRequestField] = target.value; return true; }
