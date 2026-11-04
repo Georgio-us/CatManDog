@@ -2,6 +2,7 @@ import { products } from '../data.js';
 import { retiredProductIds } from '../catalog-policy.js';
 import { snapshots, confirmedPrice, canBuy } from '../variants.js';
 import { yaguRetailBenchmarks } from '../yagu-retail-benchmarks.js';
+import { supplierSourcingByVariant } from './sourcing-status.js';
 
 const cents = value => Number.isFinite(value) && value > 0 ? Math.round(value * 100) : null;
 const imagePath = image => typeof image === 'string' ? image : image?.src || null;
@@ -100,7 +101,8 @@ export async function importCatalog(db, items = products) {
 }
 
 export async function catalogSnapshot(db) {
-  const { rows } = await db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.category,p.pet,p.image_path,
+  const sourcingEnabled = process.env.SUPPLIER_SOURCING_ENABLED === 'true';
+  const [{ rows }, supplierStates] = await Promise.all([db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.category,p.pet,p.image_path,
     p.description,p.details,p.food_type,v.image_path AS variant_image_path,
     v.description AS variant_description,v.details AS variant_details,
     v.label,v.source_price_cents,v.price_override_cents,v.purchase_price_cents,
@@ -109,9 +111,14 @@ export async function catalogSnapshot(db) {
     FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
     WHERE p.active=true AND v.active=true
       AND coalesce(p.source->>'gift','')='' AND coalesce(p.source->>'catalogHidden','false')!='true'
-    ORDER BY p.name,v.display_priority DESC,v.label`);
+    ORDER BY p.name,v.display_priority DESC,v.label`),
+    sourcingEnabled ? supplierSourcingByVariant(db) : Promise.resolve(new Map())]);
   return rows.map(row => ({
     ...row, sale_price_cents: row.price_override_cents ?? row.source_price_cents,
+    sourcing_availability: sourcingEnabled
+      ? supplierStates.get(row.variant_id)?.status || 'unavailable' : null,
+    selected_supplier_units: supplierStates.get(row.variant_id)?.selectedUnits || 0,
+    supplier_source_count: supplierStates.get(row.variant_id)?.sourceCount || 0,
     orderable: row.price_confirmed && row.source_orderable && row.availability !== 'unavailable' &&
       (row.availability !== 'on_hand' || row.stock_quantity > 0) &&
       (row.price_override_cents ?? row.source_price_cents) > 0

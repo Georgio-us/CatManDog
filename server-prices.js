@@ -67,13 +67,15 @@ export function applyServerCatalog(products, catalogProducts, entries) {
       // Keep the stock record separate from checkout eligibility. An unconfirmed
       // price can block checkout without turning supplier stock into "sold out".
       sku.serverAvailabilityStatus = row.availability;
+      sku.serverSourcingAvailability = row.sourcingAvailability || null;
       sku.serverSourceOrderable = row.source_orderable === true;
       sku.serverAvailableForCart = row.availableForCart === true;
-      sku.availabilityStatus = row.availability === 'pending' && row.price_confirmed !== true
-        ? 'pending' : row.availableForCart === false || row.source_orderable === false ||
-        row.availability === 'unavailable' ||
-        (row.availability === 'on_hand' && row.stock_quantity <= 0)
-        ? 'unavailable' : row.availability;
+      sku.availabilityStatus = sku.serverSourcingAvailability ||
+        (row.availability === 'pending' && row.price_confirmed !== true
+          ? 'pending' : row.availableForCart === false || row.source_orderable === false ||
+          row.availability === 'unavailable' ||
+          (row.availability === 'on_hand' && row.stock_quantity <= 0)
+          ? 'unavailable' : row.availability);
       sku.serverPriceConfirmed = row.price_confirmed === true;
       if (row.price_confirmed === true && Number.isInteger(row.priceCents) && row.priceCents > 0) {
         sku.price = row.priceCents / 100;

@@ -543,7 +543,7 @@ function brandDirectoryRows() {
     if (product.active) entry.published++;
     brands.set(name, entry);
   }
-  for (const source of supplierCatalogSources) if (!brands.has(source.brand)) brands.set(source.brand,
+  for (const source of supplierCatalogSources) if (![...brands.keys()].some(name => name.toLocaleLowerCase('ru') === source.brand.toLocaleLowerCase('ru'))) brands.set(source.brand,
     { name: source.brand, products: 0, skus: 0, published: 0 });
   if (!brands.has('Edgard & Cooper')) brands.set('Edgard & Cooper',
     { name: 'Edgard & Cooper', products: 0, skus: 0, published: 0 });
@@ -556,11 +556,13 @@ function renderBrandDirectory() {
       <p>Выберите бренд, чтобы посмотреть его товары и SKU</p></div>
       <span class="brand-total">${rows.length} брендов</span></div>
     <div class="brand-directory-toolbar"><label>Найти бренд<input id="brand-directory-search" type="search"
-      value="${escape(brandDirectorySearch)}" placeholder="Название бренда"></label></div>
+      value="${escape(brandDirectorySearch)}" placeholder="Название бренда"></label>
+      <label class="brand-upload">Загрузить прайсы и выбранные SKU<input id="sourcing-bundle-upload"
+        type="file" accept=".json,application/json"></label></div>
     <div class="brand-directory-list">${rows.map(row => `<button type="button" class="brand-directory-row"
       data-brand-open="${escape(row.name)}" data-search="${escape(row.name.toLocaleLowerCase('ru'))}">
       <span><strong>${escape(row.name)}</strong><small>${row.products ? `${row.products} ${countNoun(row.products,'товар','товара','товаров')} · ${row.skus} SKU` : 'Товаров на сайте пока нет'}</small></span>
-      <span class="brand-directory-status">${supplierCatalogSources.some(source => source.brand === row.name) ||
+      <span class="brand-directory-status">${supplierCatalogSources.some(source => source.brand.toLocaleLowerCase('ru') === row.name.toLocaleLowerCase('ru')) ||
         row.name === 'Leonardo' && brandData?.items.length ? 'Прайс в панели' : 'Прайс не загружен в панель'}</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
     </button>`).join('')}</div></section>`;
@@ -620,7 +622,7 @@ function renderSupplierCatalogRows() {
 function renderCatalogBrand() {
   const products = productRows.filter(product => product.brand === brandName);
   const skuCount = products.reduce((sum, product) => sum + product.variants.length, 0);
-  const sources = supplierCatalogSources.filter(source => source.brand === brandName);
+  const sources = supplierCatalogSources.filter(source => source.brand.toLocaleLowerCase('ru') === brandName.toLocaleLowerCase('ru'));
   const source = supplierCatalogData?.source;
   $('admin-content').innerHTML = `<section class="brand-workspace brand-catalog">
     <div class="brand-heading"><div><nav class="brand-breadcrumb" aria-label="Путь в каталоге"><button type="button" class="brand-back" data-brand-home>Продукция</button><span>/</span><button type="button" class="brand-back" data-brand-home>Бренды</button><span>/</span><span>${escape(brandName)}</span></nav>
@@ -1120,7 +1122,8 @@ async function importBrandSnapshot(snapshot) {
     : `Загружено ${result.imported} строк, сопоставлено ${newLinks} позиций`);
 }
 async function importGenericSupplierCatalog(snapshot) {
-  if (snapshot.brand !== brandName) throw new Error('Бренд в файле не совпадает с открытым брендом');
+  if (snapshot.brand?.toLocaleLowerCase('ru') !== brandName.toLocaleLowerCase('ru'))
+    throw new Error('Бренд в файле не совпадает с открытым брендом');
   const result = await api('/api/admin/supplier-catalogs/import', 'POST', snapshot);
   supplierCatalogSources = (await api('/api/admin/supplier-catalogs')).sources;
   supplierCatalogData = await api(`/api/admin/supplier-catalogs/${encodeURIComponent(snapshot.id)}`);
@@ -1129,6 +1132,30 @@ async function importGenericSupplierCatalog(snapshot) {
   message(result.alreadyImported ? 'Этот прайс уже был загружен' : `Загружено ${result.imported} позиций`);
 }
 $('admin-content').addEventListener('change', async event => {
+  if (event.target.id === 'sourcing-bundle-upload') {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    event.target.disabled = true;
+    try {
+      if (file.size > 1500000) throw new Error('Файл слишком большой');
+      const bundle = JSON.parse(await file.text());
+      if (!Array.isArray(bundle.sources) || bundle.sources.length !== 3 ||
+          bundle.matches?.items?.length !== 157 || bundle.selection?.items?.length !== 50)
+        throw new Error('Проверьте комплект прайсов и выбранных SKU');
+      for (const source of bundle.sources)
+        await api('/api/admin/supplier-catalogs/import', 'POST', source);
+      await api('/api/admin/supplier-catalogs/matches', 'PUT', bundle.matches);
+      await api('/api/admin/selected-supplier-items', 'PUT', bundle.selection);
+      supplierCatalogSources = (await api('/api/admin/supplier-catalogs')).sources;
+      renderBrands();
+      message('Прайсы и выбранные SKU сохранены');
+    } catch (error) {
+      message(error.message);
+      event.target.disabled = false;
+      event.target.value = '';
+    }
+    return;
+  }
   if (event.target.id === 'request-status') {
     requestStatus = event.target.value;
     requestPage = 0;
@@ -1316,7 +1343,7 @@ $('admin-content').addEventListener('click', async event => {
     brandName = brandOpen.dataset.brandOpen;
     brandProductSearch = '';
     brandVisibleCount = 50;
-    const firstSource = supplierCatalogSources.find(source => source.brand === brandName);
+    const firstSource = supplierCatalogSources.find(source => source.brand.toLocaleLowerCase('ru') === brandName.toLocaleLowerCase('ru'));
     supplierCatalogData = null;
     if (firstSource && brandName !== 'Leonardo') {
       try { supplierCatalogData = await api(`/api/admin/supplier-catalogs/${encodeURIComponent(firstSource.id)}`); }

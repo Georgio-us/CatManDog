@@ -2,6 +2,11 @@ import { checkoutTotals } from './checkout-model.js';
 import { cartSku, storefrontPrice } from './variants.js';
 
 export function fulfillmentState(sku) {
+  if (sku?.serverSourcingAvailability) {
+    if (sku.serverSourcingAvailability === 'on_hand') return 'stock';
+    if (sku.serverSourcingAvailability === 'source_on_demand') return 'supplier';
+    return 'pending';
+  }
   if (!sku || sku.serverPriceConfirmed !== true || sku.serverAvailableForCart !== true) return 'pending';
   if (sku.serverAvailabilityStatus === 'on_hand') return 'stock';
   if (sku.serverAvailabilityStatus === 'source_on_demand') return 'supplier';

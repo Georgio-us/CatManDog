@@ -31,12 +31,13 @@ test('product detail shows the chosen price and keeps researched offers separate
   assert.doesNotMatch(html, /<div class="detail-price">36\.31 € - 36\.49 €<\/div>/);
 });
 
-test('Sterilised 37 shows live variant availability without publishing unconfirmed stock or prices', () => {
+test('Sterilised 37 shows supplier sourcing states with a demo sale price', () => {
   globalThis.location = { hostname: 'localhost' };
   const product = structuredClone(family);
   const states = ['on_hand', 'on_hand', 'source_on_demand', 'unavailable'];
   for (const [index, variant] of product.variants.entries()) {
     variant.serverAvailabilityStatus = states[index];
+    variant.serverSourcingAvailability = states[index];
     variant.availabilityStatus = states[index];
     variant.serverPriceConfirmed = index !== 2;
     variant.serverSourceOrderable = true;
@@ -47,15 +48,14 @@ test('Sterilised 37 shows live variant availability without publishing unconfirm
   };
   const stock = accessoryDetail(product, { ...helpers, variantId: product.variants[0].id });
   assert.match(stock, /400 г<\/strong><small>В наличии<\/small>/);
-  assert.match(stock, /4 кг<\/strong><small>Наличие уточняется<\/small>/);
+  assert.match(stock, /4 кг<\/strong><small>Под заказ<\/small>/);
   assert.match(stock, /10 кг<\/strong><small>Нет в наличии<\/small>/);
   assert.match(stock, /data-buy="rc-sterilised"[^>]*>Добавить в корзину/);
 
   const unconfirmed = accessoryDetail(product, { ...helpers, variantId: product.variants[2].id });
   assert.match(unconfirmed, /<div class="detail-price">7\.77 €<\/div>/);
   assert.match(unconfirmed, /Демонстрационная цена/);
-  assert.match(unconfirmed, /<button class="button" disabled>Наличие уточняется/);
-  assert.doesNotMatch(unconfirmed, /data-buy="rc-sterilised"/);
+  assert.match(unconfirmed, /data-buy="rc-sterilised"[^>]*>Заказать с доставкой/);
   assert.doesNotMatch(unconfirmed, /Цены в изученных магазинах|Precios observados en otras tiendas/);
 });
 

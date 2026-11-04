@@ -178,6 +178,13 @@ CREATE TABLE IF NOT EXISTS supplier_catalog_matches (
   matched_at timestamptz NOT NULL DEFAULT now(),
   UNIQUE(source_id,variant_id)
 );
+CREATE TABLE IF NOT EXISTS selected_supplier_items (
+  item_id text PRIMARY KEY REFERENCES supplier_catalog_items(id) ON DELETE CASCADE,
+  quantity integer NOT NULL CHECK (quantity BETWEEN 1 AND 99999),
+  retail_units_per_purchase_unit integer CHECK (retail_units_per_purchase_unit BETWEEN 1 AND 99999),
+  selected_by uuid REFERENCES staff_accounts(id) ON DELETE SET NULL,
+  selected_at timestamptz NOT NULL DEFAULT now()
+);
 ALTER TABLE supplier_catalog_matches
   DROP CONSTRAINT IF EXISTS supplier_catalog_matches_match_method_check;
 ALTER TABLE supplier_catalog_matches

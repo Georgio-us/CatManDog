@@ -50,6 +50,7 @@ test('full catalog import archives retired rows once and preserves edited produc
 test('public catalog reads all active database SKUs without a static product whitelist', async () => {
   let query, parameters;
   const db = { async query(sql, params) {
+    if (sql.includes('FROM supplier_catalog_matches')) return { rows: [] };
     query = sql; parameters = params;
     return { rows: [{ variant_id:'cmd-sku-new',product_id:'cmd-new',name:'Новый товар',
       source_price_cents:null,price_override_cents:1299,price_confirmed:true,
@@ -61,6 +62,33 @@ test('public catalog reads all active database SKUs without a static product whi
   assert.equal(parameters, undefined);
   assert.equal(rows[0].sale_price_cents, 1299);
   assert.equal(rows[0].orderable, true);
+  assert.equal(rows[0].sourcing_availability, null);
+});
+
+test('supplier availability replaces display state only when explicitly enabled', async () => {
+  const previous = process.env.SUPPLIER_SOURCING_ENABLED;
+  process.env.SUPPLIER_SOURCING_ENABLED = 'true';
+  try {
+    const db = { async query(sql) {
+      if (sql.includes('FROM supplier_catalog_matches')) return { rows: [
+        { variant_id:'selected',source_count:1,selected_units:2 },
+        { variant_id:'supplier',source_count:1,selected_units:0 }
+      ] };
+      return { rows: ['selected','supplier','unlinked'].map(variant_id => ({
+        variant_id,product_id:variant_id,name:variant_id,
+        source_price_cents:null,price_override_cents:null,price_confirmed:false,
+        source_orderable:false,availability:'pending',stock_quantity:null
+      })) };
+    } };
+    const rows = await catalogSnapshot(db);
+    assert.deepEqual(rows.map(row => row.sourcing_availability),
+      ['on_hand','source_on_demand','unavailable']);
+    assert.deepEqual(rows.map(row => row.selected_supplier_units), [2,0,0]);
+    assert.ok(rows.every(row => row.orderable === false));
+  } finally {
+    if (previous === undefined) delete process.env.SUPPLIER_SOURCING_ENABLED;
+    else process.env.SUPPLIER_SOURCING_ENABLED = previous;
+  }
 });
 
 const variant = { variant_id:'rc-sterilised-2kg', product_id:'rc-sterilised', name:'Royal Canin Sterilised 37',

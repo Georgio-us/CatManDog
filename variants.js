@@ -8,11 +8,15 @@ export function resolveVariant(product, variantId) {
 export function confirmedPrice(sku) {
   return sku && sku.priceStatus !== 'pending' && Number.isFinite(sku.price) && sku.price > 0 ? sku.price : null;
 }
-export const isDemoPrice = sku => !!sku && confirmedPrice(sku) === null;
+export const isDemoPrice = sku => !!sku &&
+  (sku.serverSourcingAvailability && sku.serverPriceConfirmed === false || confirmedPrice(sku) === null);
 // Unknown prices stay unknown; retail references never become confirmed sale prices.
-export const storefrontPrice = sku => sku?.storefrontRetired ? null : confirmedPrice(sku);
+export const storefrontPrice = sku => sku?.storefrontRetired ? null :
+  sku?.serverSourcingAvailability && sku.serverPriceConfirmed === false ? 7.77 : confirmedPrice(sku);
 export function canBuy(sku) {
-  return storefrontPrice(sku) !== null && !sku.storefrontRetired && !['unavailable','out-of-stock','outOfStock','discontinued'].includes(sku.availabilityStatus);
+  return storefrontPrice(sku) !== null && !sku.storefrontRetired &&
+    (sku.serverSourcingAvailability || sku.serverAvailableForCart !== false) &&
+    !['unavailable','out-of-stock','outOfStock','discontinued'].includes(sku.availabilityStatus);
 }
 export function catalogPrice(product) {
   const variants = snapshots(product);

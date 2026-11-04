@@ -656,6 +656,93 @@ async function adminRoute(db, req, res, path) {
     const result = await importSupplierCatalog(db, payload, operator.id);
     return json(res, result.alreadyImported ? 200 : 201, result);
   }
+  if (path === '/api/admin/supplier-catalogs/matches' && req.method === 'PUT') {
+    const payload = await readJson(req, 100000);
+    const entries = payload?.items;
+    if (!Array.isArray(entries) || !entries.length || entries.length > 500 ||
+        entries.some(item => !item || typeof item.itemId !== 'string' ||
+          typeof item.variantId !== 'string' || !item.itemId || !item.variantId ||
+          item.itemId.length > 180 || item.variantId.length > 180))
+      bad('Проверьте связи товаров с прайсом');
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      for (const item of entries) {
+        const { rows } = await client.query(`SELECT i.source_id,s.brand AS source_brand,
+          p.brand AS site_brand FROM supplier_catalog_items i
+          JOIN supplier_catalog_sources s ON s.id=i.source_id
+          JOIN catalog_variants v ON v.id=$2
+          JOIN catalog_products p ON p.id=v.product_id
+          WHERE i.id=$1`, [item.itemId, item.variantId]);
+        if (!rows.length || rows[0].source_brand.toLowerCase() !==
+          String(rows[0].site_brand || '').toLowerCase())
+          bad(`Не удалось сопоставить ${item.itemId} с ${item.variantId}`);
+        await client.query(`INSERT INTO supplier_catalog_matches
+          (item_id,source_id,variant_id,match_method,matched_by)
+          VALUES($1,$2,$3,'manual',$4)
+          ON CONFLICT(item_id) DO UPDATE SET variant_id=excluded.variant_id,
+            match_method='manual',matched_by=excluded.matched_by,matched_at=now()`,
+        [item.itemId, rows[0].source_id, item.variantId, operator.id]);
+      }
+      await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+        VALUES($1,$2,'supplier_catalog_matches_uploaded',$3,$4)`,
+      [randomUUID(), operator.id, 'supplier_catalog_matches', { count: entries.length }]);
+      await client.query('COMMIT');
+      return json(res, 200, { ok: true, count: entries.length });
+    } catch (error) {
+      await client.query('ROLLBACK');
+      if (error.code === '23505') bad('Две строки прайса указывают на один SKU', 409);
+      throw error;
+    } finally { client.release(); }
+  }
+  if (path === '/api/admin/selected-supplier-items' && req.method === 'GET') {
+    const { rows } = await db.query(`SELECT s.item_id,s.quantity,s.retail_units_per_purchase_unit,
+      i.article,i.name,i.weight,m.variant_id,c.supplier_name,c.brand,c.price_date
+      FROM selected_supplier_items s JOIN supplier_catalog_items i ON i.id=s.item_id
+      JOIN supplier_catalog_sources c ON c.id=i.source_id
+      LEFT JOIN supplier_catalog_matches m ON m.item_id=i.id
+      ORDER BY c.supplier_name,c.brand,i.name,i.weight`);
+    return json(res, 200, { items: rows });
+  }
+  if (path === '/api/admin/selected-supplier-items' && req.method === 'PUT') {
+    const payload = await readJson(req, 100000);
+    const entries = payload?.items;
+    if (!Array.isArray(entries) || !entries.length || entries.length > 500)
+      bad('Проверьте выбранные позиции');
+    const itemIds = new Set();
+    for (const item of entries) {
+      if (!item || typeof item.itemId !== 'string' ||
+          !/^[a-z0-9-]+:\S{1,40}$/.test(item.itemId) || itemIds.has(item.itemId) ||
+          !Number.isInteger(item.quantity) || item.quantity < 1 || item.quantity > 99999 ||
+          !(item.retailUnitsPerPurchaseUnit == null ||
+            Number.isInteger(item.retailUnitsPerPurchaseUnit) &&
+            item.retailUnitsPerPurchaseUnit >= 1 && item.retailUnitsPerPurchaseUnit <= 99999))
+        bad('Проверьте коды, количество и упаковку');
+      itemIds.add(item.itemId);
+    }
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const found = await client.query('SELECT id FROM supplier_catalog_items WHERE id=ANY($1::text[])',
+        [[...itemIds]]);
+      if (found.rowCount !== entries.length) bad('Некоторые позиции отсутствуют в загруженных прайсах');
+      await client.query('DELETE FROM selected_supplier_items');
+      for (const item of entries) {
+        await client.query(`INSERT INTO selected_supplier_items
+          (item_id,quantity,retail_units_per_purchase_unit,selected_by)
+          VALUES($1,$2,$3,$4)`,
+        [item.itemId, item.quantity, item.retailUnitsPerPurchaseUnit ?? null, operator.id]);
+      }
+      await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+        VALUES($1,$2,'selected_supplier_items_replaced',$3,$4)`,
+      [randomUUID(), operator.id, 'selected_supplier_items', { count: entries.length }]);
+      await client.query('COMMIT');
+      return json(res, 200, { ok: true, count: entries.length });
+    } catch (error) {
+      await client.query('ROLLBACK');
+      throw error;
+    } finally { client.release(); }
+  }
   const supplierCatalogDetail = path.match(/^\/api\/admin\/supplier-catalogs\/([a-z0-9-]+)$/);
   if (supplierCatalogDetail && req.method === 'GET') {
     const { rows: sources } = await db.query(`SELECT id,supplier_name,brand,price_date,source_file,
@@ -1572,10 +1659,11 @@ export async function handleApi(db, req, res, pathname) {
       const list = await liveCatalogSnapshot(db);
       return json(res, 200, { variants: list.map(({ price_override_cents, source_price_cents,
         purchase_price_cents, sale_price_cents, stock_quantity, reserved_quantity, reorder_point, target_stock,
-        tax_rate_bps,
+        tax_rate_bps, selected_supplier_units, supplier_source_count, sourcing_availability,
         ...entry }) => ({ ...entry,
         priceCents: entry.price_confirmed ? price_override_cents ?? source_price_cents : null,
         referencePriceCents: entry.price_confirmed ? null : source_price_cents,
+        ...(sourcing_availability ? { sourcingAvailability: sourcing_availability } : {}),
         availableForCart: entry.source_orderable && entry.availability !== 'unavailable' &&
           (entry.availability !== 'on_hand' || stock_quantity - reserved_quantity > 0),
         availability: entry.availability })) });
