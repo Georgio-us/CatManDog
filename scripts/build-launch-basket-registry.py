@@ -96,7 +96,7 @@ def main() -> None:
         "931046": ("leonardo-fresh-salmon-4000g", 1),
         "931045": ("leonardo-fresh-salmon-1500g", 1),
         "931293": ("leonardo-light-1800g", 1),
-        "931251": (None, 16),  # Single pouch is not on the site yet.
+        "931251": ("leonardo-wet-pure-chicken-85g", 16),
     }
     leo = json.loads(LEONARDO_TARIFF.read_text())["items"]
     leo_ean = {
@@ -193,13 +193,13 @@ def main() -> None:
     if len(selected) != 37 or sum(x["purchaseQuantity"] for x in selected) != 42 or sum(x["lineCostCents"] for x in selected) != 125035:
         raise ValueError("ACANA / ORIJEN basket no longer matches 37 SKUs / 42 units / 1250.35 EUR")
     rows.extend(selected)
-    if len(rows) != 50 or sum(bool(x["siteVariantId"]) for x in rows) != 26:
-        raise ValueError("Expected 50 selected SKUs, 26 on site, 24 missing")
+    if len(rows) != 50 or sum(bool(x["siteVariantId"]) for x in rows) != 27:
+        raise ValueError("Expected 50 selected SKUs, 27 on site, 23 missing")
     OUT.write_text(json.dumps({
         "asOf": "2026-11-04", "kind": "planned_purchase_reconciliation",
         "actualPurchaseReceived": False,
         "purpose": "Selected storefront availability for the current purchasing scenario",
-        "counts": {"selectedSupplierSkus": 50, "onSite": 26, "missingOnSite": 24},
+        "counts": {"selectedSupplierSkus": 50, "onSite": 27, "missingOnSite": 23},
         "items": rows,
     }, ensure_ascii=False, indent=2) + "\n")
     selected_by_source = {}
@@ -226,7 +226,7 @@ def main() -> None:
         {"itemId": source_id, "variantId": variant_id}
         for source_id, variant_id in matches_by_source.items()
     ]}, ensure_ascii=False, indent=2) + "\n")
-    print(f"Wrote {OUT.relative_to(ROOT)}: 50 SKUs, 26 on site, 24 missing")
+    print(f"Wrote {OUT.relative_to(ROOT)}: 50 SKUs, 27 on site, 23 missing")
 
 
 if __name__ == "__main__":

@@ -1149,7 +1149,7 @@ $('admin-content').addEventListener('change', async event => {
       if (file.size > 1500000) throw new Error('Файл слишком большой');
       const bundle = JSON.parse(await file.text());
       if (!Array.isArray(bundle.sources) || bundle.sources.length !== 5 ||
-          bundle.matches?.items?.length !== 157 || bundle.drafts?.items?.length !== 24 ||
+          bundle.matches?.items?.length !== 158 || bundle.drafts?.items?.length !== 23 ||
           bundle.selection?.items?.length !== 50)
         throw new Error('Проверьте комплект прайсов и выбранных SKU');
       for (const source of bundle.sources)
@@ -1160,7 +1160,7 @@ $('admin-content').addEventListener('change', async event => {
       supplierCatalogSources = (await api('/api/admin/supplier-catalogs')).sources;
       selectedSupplierItems = (await api('/api/admin/selected-supplier-items')).items;
       renderBrands();
-      message('Прайсы и 50 выбранных SKU связаны с каталогом. 24 новые карточки остаются скрытыми');
+      message('Прайсы и 50 выбранных SKU связаны с каталогом. 23 новых SKU остаются скрытыми');
     } catch (error) {
       message(error.message);
       event.target.disabled = false;

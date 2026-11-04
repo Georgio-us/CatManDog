@@ -28,9 +28,9 @@ def main():
     for item in matches + selected:
         if item["itemId"] not in source_articles:
             raise ValueError(f"Missing supplier source row: {item['itemId']}")
-    if len(selected) != 50 or len(matches) != 157 or len(drafts) != 24:
+    if len(selected) != 50 or len(matches) != 158 or len(drafts) != 23:
         raise ValueError("Source selection or crosswalk count changed")
-    if len({item["itemId"] for item in drafts}) != 24 or \
+    if len({item["itemId"] for item in drafts}) != 23 or \
             {item["itemId"] for item in drafts} & {item["itemId"] for item in matches} or \
             not {item["itemId"] for item in drafts} <= {item["itemId"] for item in selected}:
         raise ValueError("Drafts must be selected source rows without an existing storefront link")

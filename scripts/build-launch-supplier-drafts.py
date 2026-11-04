@@ -18,8 +18,8 @@ def identifier(prefix, value):
 def main():
     registry = json.loads(REGISTRY.read_text())
     missing = [row for row in registry["items"] if not row["siteVariantId"]]
-    if len(missing) != 24:
-        raise ValueError(f"Expected 24 missing storefront SKU, got {len(missing)}")
+    if len(missing) != 23:
+        raise ValueError(f"Expected 23 missing storefront SKU, got {len(missing)}")
     snapshots = {}
     for row in missing:
         source_id = row["sourceItemId"].split(":", 1)[0]
@@ -42,9 +42,6 @@ def main():
         if row["brand"] == "Churu":
             name, label, pet, category, food_type = (
                 "Churu Variedades Salmón y Pollo", "20 × 14 г", "cat", "Лакомства", None)
-        elif row["brand"] == "Leonardo":
-            name, label, pet, category, food_type = (
-                "Leonardo Puro en Pollo", "85 г", "cat", "Корм", "wet")
         else:
             name, label, pet, category, food_type = (
                 row["name"], row["purchaseUnit"], "dog", "Корм", "dry")
@@ -55,7 +52,7 @@ def main():
             "name": name, "brand": row["brand"], "category": category,
             "pet": pet, "foodType": food_type, "label": label, "ean": source["ean"],
         })
-    if len({row["variantId"] for row in drafts}) != 24:
+    if len({row["variantId"] for row in drafts}) != 23:
         raise ValueError("Duplicate draft SKU")
     OUTPUT.write_text(json.dumps({"items": drafts}, ensure_ascii=False, indent=2) + "\n")
     print(f"{OUTPUT.relative_to(ROOT)}: {len(drafts)} hidden SKU drafts, "
