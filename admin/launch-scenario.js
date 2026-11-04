@@ -15,6 +15,18 @@ const items = () => [...state.cart].map(([id, quantity]) => ({ ...byId().get(id)
   .filter(item => item.variantId);
 const price = item => item.priceCents * item.quantity;
 const deliveryFee = list => list.reduce((sum, item) => sum + price(item), 0) >= 4900 ? 0 : 399;
+const todaySlots = () => {
+  const parts = date => Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+  }).formatToParts(date).map(part => [part.type, part.value]));
+  const now = new Date();
+  const current = parts(now);
+  const earliest = parts(new Date(now.getTime() + 2 * 60 * 60 * 1000));
+  if (`${current.year}-${current.month}-${current.day}` !==
+      `${earliest.year}-${earliest.month}-${earliest.day}`) return [];
+  return ['10:00-14:00','14:00-18:00','18:00-22:00'].filter(slot => slot.slice(0, 5) >= `${earliest.hour}:${earliest.minute}`);
+};
 const groups = () => {
   const all = items();
   const stock = all.filter(item => item.state === 'on_hand');
@@ -71,6 +83,10 @@ function renderCart() {
 }
 function renderDelivery() {
   const hasStock = groups().some(list => list.every(item => item.state === 'on_hand'));
+  const availableToday = todaySlots();
+  if (state.delivery.day === 'today' && !availableToday.length) state.delivery.day = 'tomorrow';
+  const slots = state.delivery.day === 'today' ? availableToday : ['10:00-14:00','14:00-18:00','18:00-22:00'];
+  if (!slots.includes(state.delivery.slot)) state.delivery.slot = slots[0];
   const field = (name, label, value, type = 'text', autocomplete = '') => `<label>${label}<input name="${name}" type="${type}" value="${esc(value)}" ${autocomplete ? `autocomplete="${autocomplete}"` : ''} required></label>`;
   root.innerHTML = shell('Куда доставить', 'Укажите контакты и адрес в городе Валенсия',
     `<form id="lab-form"><section class="lab-panel"><h2>Контакты</h2><div class="lab-fields">
@@ -83,8 +99,8 @@ function renderDelivery() {
       ${field('building', 'Номер дома', state.address.building || '')}
       <label>Квартира, этаж, дверь<input name="apartment" value="${esc(state.address.apartment || '')}" autocomplete="address-line2"></label></div></section>
     ${hasStock ? `<section class="lab-panel"><h2>Удобное время для товара в наличии</h2><div class="lab-fields">
-      <label>День<select name="day"><option value="today" ${state.delivery.day === 'today' ? 'selected' : ''}>Сегодня</option><option value="tomorrow" ${state.delivery.day === 'tomorrow' ? 'selected' : ''}>Завтра</option></select></label>
-      <label>Интервал<select name="slot">${['10:00-14:00','14:00-18:00','18:00-22:00'].map(slot => `<option value="${slot}" ${state.delivery.slot === slot ? 'selected' : ''}>${slot}</option>`).join('')}</select></label></div>
+      <label>День<select name="day">${availableToday.length ? `<option value="today" ${state.delivery.day === 'today' ? 'selected' : ''}>Сегодня</option>` : ''}<option value="tomorrow" ${state.delivery.day === 'tomorrow' ? 'selected' : ''}>Завтра</option></select></label>
+      <label>Интервал<select name="slot">${slots.map(slot => `<option value="${slot}" ${state.delivery.slot === slot ? 'selected' : ''}>${slot}</option>`).join('')}</select></label></div>
       <p class="lab-note">Точное время подтвердим после заказа</p></section>` : ''}
     ${items().some(item => item.state === 'source_on_demand') ? '<section class="lab-panel"><h2>Товары под заказ</h2><p>Срок доставки согласуем после подтверждения наличия у поставщика</p></section>' : ''}
     <p class="lab-alert">${esc(state.error)}</p><div class="lab-actions"><button class="lab-button primary" type="submit">Проверить заказ ${icon('arrow')}</button>
@@ -175,6 +191,15 @@ root.addEventListener('input', event => {
 root.addEventListener('change', event => {
   if (event.target.id === 'lab-filter') { state.filter = event.target.value; renderCatalog(); }
   if (event.target.name === 'grouping') { state.grouping = event.target.value; renderCart(); }
+  if (event.target.name === 'day') {
+    const data = Object.fromEntries(new FormData(event.target.form));
+    state.contact = { name: data.name, email: data.email, phone: data.phone };
+    state.address = { postcode: data.postcode, street: data.street,
+      building: data.building, apartment: data.apartment };
+    state.delivery.day = event.target.value;
+    renderDelivery();
+  }
+  if (event.target.name === 'slot') state.delivery.slot = event.target.value;
 });
 root.addEventListener('submit', event => {
   if (event.target.id !== 'lab-form') return;

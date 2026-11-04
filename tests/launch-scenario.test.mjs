@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { launchState, launchPrice, launchGroups, saveLaunchOrder } from '../server/launch-scenario.js';
+import { launchState, launchPrice, launchGroups, launchTodaySlots,
+  saveLaunchOrder } from '../server/launch-scenario.js';
 
 test('selected supplier line appears in stock only in isolated scenario', () => {
   assert.equal(launchState(true, true), 'on_hand');
@@ -60,4 +61,10 @@ test('test checkout writes only to isolated test order table', async () => {
   assert.equal(result.orders[0].number, 'TEST-1000');
   assert.ok(statements.some(sql => /INSERT INTO launch_test_orders/.test(sql)));
   assert.ok(!statements.some(sql => /INSERT INTO orders\b|UPDATE catalog_variants|stripe_events/.test(sql)));
+});
+
+test('today delivery closes when no future Valencia interval remains', () => {
+  assert.deepEqual(launchTodaySlots(new Date('2026-11-04T08:00:00Z')),
+    ['14:00-18:00','18:00-22:00']);
+  assert.deepEqual(launchTodaySlots(new Date('2026-11-04T21:00:00Z')), []);
 });

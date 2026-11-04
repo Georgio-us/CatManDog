@@ -3,6 +3,20 @@ import { randomUUID } from 'node:crypto';
 const DELIVERY_FEE_CENTS = 399;
 const FREE_DELIVERY_FROM_CENTS = 4900;
 const trim = (value, limit) => String(value ?? '').trim().slice(0, limit);
+const deliverySlots = ['10:00-14:00', '14:00-18:00', '18:00-22:00'];
+const valenciaDateTime = date => Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit',
+  hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+}).formatToParts(date).map(part => [part.type, part.value]));
+
+export function launchTodaySlots(now = new Date()) {
+  const current = valenciaDateTime(now);
+  const earliest = valenciaDateTime(new Date(now.getTime() + 2 * 60 * 60 * 1000));
+  if (`${current.year}-${current.month}-${current.day}` !==
+      `${earliest.year}-${earliest.month}-${earliest.day}`) return [];
+  const time = `${earliest.hour}:${earliest.minute}`;
+  return deliverySlots.filter(slot => slot.slice(0, 5) >= time);
+}
 
 export function launchState(selected, matched) {
   if (selected) return 'on_hand';
@@ -90,7 +104,8 @@ export async function saveLaunchOrder(db, ownerId, payload) {
   };
   if (groups.some(group => group.deliveryType === 'stock') &&
       (!['today','tomorrow'].includes(delivery.day) ||
-        !['10:00-14:00','14:00-18:00','18:00-22:00'].includes(delivery.slot)))
+        !deliverySlots.includes(delivery.slot) ||
+        delivery.day === 'today' && !launchTodaySlots().includes(delivery.slot)))
     throw new Error('Выберите удобное время для товара в наличии');
   const client = await db.connect();
   const batchId = randomUUID();
