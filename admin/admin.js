@@ -4,6 +4,7 @@ let suppliers = [];
 let brandData = null;
 let supplierCatalogSources = [];
 let supplierCatalogData = null;
+let selectedSupplierItems = [];
 let brandName = '';
 let brandDirectorySearch = '';
 let brandProductSearch = '';
@@ -551,10 +552,12 @@ function brandDirectoryRows() {
 }
 function renderBrandDirectory() {
   const rows = brandDirectoryRows();
+  const selectedOnSite = selectedSupplierItems.filter(item => item.variant_id).length;
   $('admin-content').innerHTML = `<section class="brand-workspace brand-directory">
     <div class="brand-heading"><div><p class="brand-path">Продукция / Бренды</p><h2>Бренды</h2>
       <p>Выберите бренд, чтобы посмотреть его товары и SKU</p></div>
       <span class="brand-total">${rows.length} брендов</span></div>
+    ${selectedSupplierItems.length ? `<p class="brand-price-notice">Выбрано для закупки: ${selectedSupplierItems.length} SKU · ${selectedOnSite} связаны с товарами сайта · ${selectedSupplierItems.length - selectedOnSite} ждут карточку</p>` : ''}
     <div class="brand-directory-toolbar"><label>Найти бренд<input id="brand-directory-search" type="search"
       value="${escape(brandDirectorySearch)}" placeholder="Название бренда"></label>
       <label class="brand-upload">Загрузить прайсы и выбранные SKU<input id="sourcing-bundle-upload"
@@ -612,8 +615,10 @@ function renderSupplierCatalogRows() {
     <div><strong>${brandMoney(item.shop_price_cents ?? item.raw_prices?.recommendedShopCaseCents)}</strong>
       <small>${supplierPriceLabel(source, item)}</small></div>
     <div><strong>${brandMoney(item.recommended_price_cents)}</strong><small>Рекомендованная PVP с IVA</small></div>
-    <div><strong>${item.variant_id ? 'Совпадение по EAN' : 'Нет связи с SKU'}</strong>
+    <div><strong>${item.variant_id ? item.match_method === 'ean' ? 'Совпадение по EAN' : 'Связано с SKU' : 'Нет связи с SKU'}</strong>
       <small>${escape(item.site_name ? `${item.site_name} · ${item.site_label}` : 'Цена на сайте не меняется')}</small>
+      ${selectedSupplierItems.some(selected => selected.item_id === item.id)
+        ? `<small>Выбрано для закупки: ${selectedSupplierItems.find(selected => selected.item_id === item.id).quantity} шт</small>` : ''}
       ${item.raw_prices?.kind === 'supplier_quote_tiered_iva' ? `<small>От 5 шт: ${brandMoney(item.raw_prices.priceAtLeast5Cents)} с IVA · срок котировки не подтверждён</small>` : ''}</div>
   </article>`).join('') || '<p class="brand-empty">Позиций по запросу нет</p>';
   $('supplier-catalog-count').textContent = `Показано ${Math.min(filtered.length, brandVisibleCount)} из ${filtered.length}`;
@@ -966,23 +971,26 @@ async function load() {
       return;
     }
     if (tab === 'products') {
-      const [products, variants, catalogs] = await Promise.all([
-        api('/api/admin/products'), api('/api/admin/variants'), api('/api/admin/supplier-catalogs')]);
+      const [products, variants, catalogs, selected] = await Promise.all([
+        api('/api/admin/products'), api('/api/admin/variants'), api('/api/admin/supplier-catalogs'),
+        api('/api/admin/selected-supplier-items')]);
       productRows = products.products;
       variantRows = variants.variants;
       supplierCatalogSources = catalogs.sources;
+      selectedSupplierItems = selected.items;
       renderProducts();
       message('');
       return;
     }
     if (tab === 'brands') {
-      const [products, variants, leonardo, catalogs] = await Promise.all([
+      const [products, variants, leonardo, catalogs, selected] = await Promise.all([
         api('/api/admin/products'), api('/api/admin/variants'), api('/api/admin/brands/leonardo'),
-        api('/api/admin/supplier-catalogs')]);
+        api('/api/admin/supplier-catalogs'), api('/api/admin/selected-supplier-items')]);
       productRows = products.products;
       variantRows = variants.variants;
       brandData = leonardo;
       supplierCatalogSources = catalogs.sources;
+      selectedSupplierItems = selected.items;
       supplierCatalogData = null;
       renderBrands();
       message('');
@@ -1147,6 +1155,7 @@ $('admin-content').addEventListener('change', async event => {
       await api('/api/admin/supplier-catalogs/matches', 'PUT', bundle.matches);
       await api('/api/admin/selected-supplier-items', 'PUT', bundle.selection);
       supplierCatalogSources = (await api('/api/admin/supplier-catalogs')).sources;
+      selectedSupplierItems = (await api('/api/admin/selected-supplier-items')).items;
       renderBrands();
       message('Прайсы и выбранные SKU сохранены');
     } catch (error) {
