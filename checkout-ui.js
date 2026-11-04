@@ -64,7 +64,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
   }
 
   function resultPage(kind, params = new URLSearchParams()) {
-    if (paymentsEnabled && (params.has('session_id') || kind === 'failed'))
+    if (params.has('session_id'))
       return liveResultPage(kind, params);
     return `<div class="page checkout-page"><h1>Заказ не найден</h1><p>Вернитесь к оформлению, чтобы проверить товары и данные доставки</p><a class="button" href="#/cart">В корзину ${icon('arrow')}</a></div>`;
   }
