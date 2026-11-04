@@ -1565,6 +1565,7 @@ export async function handleApi(db, req, res, pathname) {
       { ordersEnabled: paymentAccess, accountsEnabled: enabled('ACCOUNTS_ENABLED'),
         emailEnabled: emailReady(), googleClientId: enabled('ACCOUNTS_ENABLED') ? googleClientId() : null,
         paymentsEnabled: paymentAccess,
+        sourcePaymentsEnabled: enabled('SOURCE_ON_DEMAND_PAYMENT_ENABLED'),
         supportEnabled: enabled('SUPPORT_ENABLED') && emailReady() });
     }
     if (pathname === '/api/catalog' && req.method === 'GET') {

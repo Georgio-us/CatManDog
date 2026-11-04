@@ -21,7 +21,7 @@ test('old demo orders resolve their original pack instead of the default pack', 
   assert.equal(orderVariantId(products, { productId: 'rc-sterilised', size: 'неизвестно' }), null);
 });
 
-test('confirmation and payment error remain explicitly simulated', () => {
+test('real checkout never fabricates confirmation or payment failure', () => {
   const OriginalFormData = globalThis.FormData;
   const originalLocation = globalThis.location;
   globalThis.location = { hash: '' };
@@ -32,28 +32,20 @@ test('confirmation and payment error remain explicitly simulated', () => {
   };
   try {
     const ui = createCheckoutUI(helpers);
-    assert.match(ui.resultPage('accepted'), /Сначала проверьте заказ/);
+    assert.match(ui.resultPage('accepted'), /Заказ не найден/);
     const form = { values: { name: 'Антон', email: 'anton@example.com', phone: '+34 600 000 000',
       city: 'València', postcode: '46001', street: 'Carrer de la Pau', building: '12',
       deliveryMode: 'scheduled', deliveryDate: '2099-10-19', deliveryTime: '18:00' },
       matches: selector => selector === '[data-checkout-form]' };
     ui.submit(form);
     assert.equal(location.hash, '/checkout/preview');
-    assert.match(ui.previewPage(), /Пример подтверждения/);
+    assert.match(ui.previewPage(), /Приём заказов пока закрыт/);
     ui.click({ hasAttribute: name => name === 'data-checkout-state', dataset: { checkoutState: 'accepted' } });
-    assert.equal(location.hash, '/checkout/confirmation');
-    const confirmation = ui.resultPage('accepted');
-    assert.match(confirmation, /Заказ не отправлен, оплата не проведена/);
-    const demoNumber = confirmation.match(/Демонстрационный заказ (DEMO-\d+)/)?.[1];
-    assert.ok(demoNumber);
-    const returnForm = ui.servicePage('return', new URLSearchParams({ order: demoNumber }));
-    assert.match(returnForm, /href="#\/checkout\/status"/);
-    assert.match(returnForm, /Royal Canin Sterilised 37 · 4 кг/);
-    assert.match(ui.resultPage('status'), /Статус заказа/);
+    assert.equal(location.hash, '/checkout/preview');
+    assert.match(ui.resultPage('status'), /Заказ не найден/);
     ui.click({ hasAttribute: name => name === 'data-checkout-state', dataset: { checkoutState: 'failed' } });
-    assert.equal(location.hash, '/checkout/payment-error');
-    assert.match(ui.resultPage('failed'), /списания не было/);
-    assert.match(ui.resultPage('accepted'), /Сначала проверьте заказ/);
+    assert.equal(location.hash, '/checkout/preview');
+    assert.match(ui.resultPage('failed'), /Заказ не найден/);
   } finally {
     globalThis.FormData = OriginalFormData;
     globalThis.location = originalLocation;

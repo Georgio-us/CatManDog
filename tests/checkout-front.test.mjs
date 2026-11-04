@@ -30,7 +30,7 @@ test('checkout requires a complete city address and a future requested time', ()
   assert.equal(validateCheckout({ ...valid, deliveryMode: 'scheduled', deliveryDate: '2026-10-19', deliveryTime: '18:00' }, now), null);
 });
 
-test('checkout presents exact variant, shipping and explicit demo state', () => {
+test('live checkout presents the exact variant without creating a fictitious order', () => {
   const ui = createCheckoutUI({ escape: String, icon: () => '', money: value => `${value.toFixed(2)} €`,
     imageBlock: () => '', getItems: () => [{ productId: 'rc-sterilised', variantId: 'rc-sterilised-4000g', name: 'Royal Canin Sterilised 37', variant: '4 кг', qty: 2, price: 36.31 }],
     isReady: () => true, getPromo: () => null, applyPromo: () => {}, render: () => {} });
@@ -38,6 +38,20 @@ test('checkout presents exact variant, shipping and explicit demo state', () => 
   assert.match(html, /4 кг · 2 шт × 36\.31 €/);
   assert.match(html, /72\.62 €/);
   assert.match(html, /Бесплатно/);
-  assert.match(html, /заказ не будет создан или оплачен/);
+  assert.match(html, /Приём заказов|Оплата станет доступна/);
+  assert.doesNotMatch(html, /прототип|демонстрационный заказ/i);
+  assert.match(ui.resultPage('accepted'), /Заказ не найден/);
   assert.match(ui.servicePage('return'), /не отправляется и не сохраняется/);
+});
+
+test('supplier checkout asks for a later preferred date and cannot promise delivery today', () => {
+  const ui = createCheckoutUI({ escape: String, icon: () => '', money: value => `${value.toFixed(2)} €`,
+    imageBlock: () => '', getItems: () => [{ productId: 'food', variantId: 'food-4kg', name: 'Корм',
+      variant: '4 кг', qty: 1, price: 36.31, fulfillment: 'supplier' }],
+    isReady: () => true, getCheckoutContext: () => ({ hasSupplier: true }), getPromo: () => null,
+    applyPromo: () => {}, render: () => {} });
+  const html = ui.page();
+  assert.match(html, /Под заказ/);
+  assert.match(html, /Срок согласуем отдельно/);
+  assert.doesNotMatch(html, /Сегодня, как можно скорее/);
 });
