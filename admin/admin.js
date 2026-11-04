@@ -562,7 +562,7 @@ function renderBrandDirectory() {
     <div class="brand-directory-toolbar"><label>Найти бренд<input id="brand-directory-search" type="search"
       value="${escape(brandDirectorySearch)}" placeholder="Название бренда"></label>
       <label class="brand-upload">Загрузить прайсы и выбранные SKU<input id="sourcing-bundle-upload"
-        type="file" accept=".json,application/json"></label></div>
+        type="file"></label></div>
     <div class="brand-directory-list">${rows.map(row => `<button type="button" class="brand-directory-row"
       data-brand-open="${escape(row.name)}" data-search="${escape(row.name.toLocaleLowerCase('ru'))}">
       <span><strong>${escape(row.name)}</strong><small>${row.products ? `${row.products} ${countNoun(row.products,'товар','товара','товаров')} · ${row.skus} SKU` : 'Товаров на сайте пока нет'}</small></span>
