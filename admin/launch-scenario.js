@@ -134,6 +134,8 @@ async function load() {
 root.addEventListener('click', async event => {
   const button = event.target.closest('button');
   if (!button) return;
+  if (!['add', 'qty', 'next', 'place', 'new', 'clearTests'].some(key =>
+    Object.hasOwn(button.dataset, key))) return;
   if (button.dataset.add) state.cart.set(button.dataset.add, Math.min(99, (state.cart.get(button.dataset.add) || 0) + 1));
   if (button.dataset.qty) {
     const next = (state.cart.get(button.dataset.qty) || 0) + Number(button.dataset.delta);
