@@ -14,6 +14,7 @@ import { backupConfiguration, listBackups } from './backup.js';
 import { createStripeCheckout, stripeMode, stripeReady, verifyStripeEvent } from './stripe.js';
 import { importSupplierCatalog } from './supplier-catalog.js';
 import { importSupplierDrafts } from './supplier-drafts.js';
+import { launchCatalog, saveLaunchOrder } from './launch-scenario.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
@@ -510,6 +511,22 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { role: fullAdmin ? 'admin' : 'support',
       name: operator?.name || customer?.name || '', email: operator?.email || customer?.email });
   if (!fullAdmin && !path.startsWith('/api/admin/service-requests')) bad('Доступ закрыт', 403);
+  if (path === '/api/admin/launch-scenario/catalog' && req.method === 'GET')
+    return json(res, 200, { variants: await launchCatalog(db) });
+  if (path === '/api/admin/launch-scenario/orders' && req.method === 'GET') {
+    const { rows } = await db.query(`SELECT id,number,items,delivery,total_cents,created_at
+      FROM launch_test_orders ORDER BY created_at DESC LIMIT 50`);
+    return json(res, 200, { orders: rows });
+  }
+  if (path === '/api/admin/launch-scenario/orders' && req.method === 'POST') {
+    rateLimit(req, 'launch-test-order', 20, 60);
+    const result = await saveLaunchOrder(db, operator.id, await readJson(req, 20000));
+    return json(res, 201, result);
+  }
+  if (path === '/api/admin/launch-scenario/orders' && req.method === 'DELETE') {
+    const { rowCount } = await db.query('DELETE FROM launch_test_orders');
+    return json(res, 200, { removed: rowCount });
+  }
   if (path === '/api/admin/backups' && req.method === 'GET') {
     const config = backupConfiguration();
     if (!config) return json(res, 200, { enabled: false, backups: [] });

@@ -185,6 +185,23 @@ CREATE TABLE IF NOT EXISTS selected_supplier_items (
   selected_by uuid REFERENCES staff_accounts(id) ON DELETE SET NULL,
   selected_at timestamptz NOT NULL DEFAULT now()
 );
+-- Isolated checkout rehearsal. These rows never enter orders, stock or Stripe.
+CREATE SEQUENCE IF NOT EXISTS launch_test_order_number_seq START WITH 1000;
+CREATE TABLE IF NOT EXISTS launch_test_orders (
+  id uuid PRIMARY KEY,
+  batch_id uuid NOT NULL,
+  owner_id uuid NOT NULL REFERENCES staff_accounts(id) ON DELETE RESTRICT,
+  number text NOT NULL UNIQUE,
+  items jsonb NOT NULL,
+  contact jsonb NOT NULL,
+  address jsonb NOT NULL,
+  delivery jsonb NOT NULL,
+  subtotal_cents integer NOT NULL CHECK (subtotal_cents >= 0),
+  delivery_cents integer NOT NULL CHECK (delivery_cents >= 0),
+  total_cents integer NOT NULL CHECK (total_cents >= 0),
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS launch_test_orders_created_idx ON launch_test_orders(created_at DESC);
 ALTER TABLE supplier_catalog_matches
   DROP CONSTRAINT IF EXISTS supplier_catalog_matches_match_method_check;
 ALTER TABLE supplier_catalog_matches
