@@ -1,0 +1,231 @@
+{
+  "date": "2026-11-04",
+  "status": "r2-uploaded-review-pending",
+  "r2Bucket": "catmandog-media",
+  "publicBaseUrl": "https://img.catmandog.es/",
+  "imageRoot": "assets/launch-studio-2026-11-04",
+  "note": "AI-generated studio renders based on supplier pack references. Front-label claims and fine print may differ from the real package; compare against source images before public use. Retail pack weight must match the selected SKU.",
+  "sources": {
+    "acanaOrijen": "Champion Petfoods archive: Web/Imágenes Pack",
+    "leonardo": "https://www.albet.es/leonardo-puro-en-pollo",
+    "churu": "https://www.albet.es/churu-cat-variedades-salmon-pollo-snack-cremoso-20x14g"
+  },
+  "items": [
+    {
+      "supplierCode": "ACC201",
+      "product": "ACANA Classics Prairie Poultry",
+      "weight": "2 кг",
+      "image": "acana-prairie-poultry-2kg.webp",
+      "bytes": 112542,
+      "sha256": "b27bee2d2502a2374c0ac906913492cb075a13fc83201cfabbc87a5d71806555",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-prairie-poultry-2kg.webp"
+    },
+    {
+      "supplierCode": "CAP10",
+      "product": "ACANA Classics Prairie Poultry",
+      "weight": "9,7 кг",
+      "image": "acana-prairie-poultry-9-7kg.webp",
+      "bytes": 98428,
+      "sha256": "f7c9a1efff3a6e5d0a6f7b40b0060e6cd6feef85ba0be9875fcef107caa4e442",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-prairie-poultry-9-7kg.webp"
+    },
+    {
+      "supplierCode": "64992525200",
+      "product": "ACANA Adult Dog",
+      "weight": "2 кг",
+      "image": "acana-adult-dog-2kg.webp",
+      "bytes": 90348,
+      "sha256": "23af2b3692ccd4cddbef68f56cb11b3b69a5c93ceecdb95bf7e7d18b3916be7d",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-adult-dog-2kg.webp"
+    },
+    {
+      "supplierCode": "064992525606",
+      "product": "ACANA Adult Dog",
+      "weight": "6 кг",
+      "image": "acana-adult-dog-6kg.webp",
+      "bytes": 80844,
+      "sha256": "01143fc3d40e6501afd1e9a919b4ec872c89575ef527fd07f937940f1fa7ea3c",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-adult-dog-6kg.webp"
+    },
+    {
+      "supplierCode": "ACH111",
+      "product": "ACANA Adult Small Breed",
+      "weight": "2 кг",
+      "image": "acana-adult-small-breed-2kg.webp",
+      "bytes": 84842,
+      "sha256": "87e46c24bc5e958b7485410637b785dd81e0e842bff1ba2f6a8c34e582d25a8c",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-adult-small-breed-2kg.webp"
+    },
+    {
+      "supplierCode": "ACH112",
+      "product": "ACANA Adult Small Breed",
+      "weight": "6 кг",
+      "image": "acana-adult-small-breed-6kg.webp",
+      "bytes": 79846,
+      "sha256": "a354cbab92cddc4e0d080167404761a732fd531cfde36a98990b35891d849fc6",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-adult-small-breed-6kg.webp"
+    },
+    {
+      "supplierCode": "ACH123",
+      "product": "ACANA Light & Fit",
+      "weight": "2 кг",
+      "image": "acana-light-fit-2kg.webp",
+      "bytes": 82098,
+      "sha256": "36c52a8c22099e8d8d61cfcff700cfc1aff8469d7049f93a23f7424fb8fe3a0f",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-light-fit-2kg.webp"
+    },
+    {
+      "supplierCode": "ACH104",
+      "product": "ACANA Puppy",
+      "weight": "2 кг",
+      "image": "acana-puppy-2kg.webp",
+      "bytes": 81170,
+      "sha256": "93aa244d9cfa03883100a322a8258989cf8cf815c1a288021c0d4e67b05abf84",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-puppy-2kg.webp"
+    },
+    {
+      "supplierCode": "ACH105",
+      "product": "ACANA Puppy",
+      "weight": "6 кг",
+      "image": "acana-puppy-6kg.webp",
+      "bytes": 73484,
+      "sha256": "bf0b039752143b6e74f6a982b3ac0cdfc632d3392041bcb24401c05efc532fa8",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-puppy-6kg.webp"
+    },
+    {
+      "supplierCode": "064992730888",
+      "product": "ACANA Dog Red Meat",
+      "weight": "2 кг",
+      "image": "acana-red-meat-2kg.webp",
+      "bytes": 92004,
+      "sha256": "a14bb582c83e952956a8be184ce4a708ba671dac84351813f6c35d5d7c512b1e",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-red-meat-2kg.webp"
+    },
+    {
+      "supplierCode": "064992730901",
+      "product": "ACANA Dog Red Meat",
+      "weight": "6 кг",
+      "image": "acana-red-meat-6kg.webp",
+      "bytes": 87194,
+      "sha256": "4b9fbabe5f03101ec194a8f4eeaf1900431d70cb8cdcadc110dd27cb0911fd8c",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-red-meat-6kg.webp"
+    },
+    {
+      "supplierCode": "064992730963",
+      "product": "ACANA Dog Coldwater Fish",
+      "weight": "2 кг",
+      "image": "acana-coldwater-fish-2kg.webp",
+      "bytes": 83970,
+      "sha256": "2eb400b4184ded06bc14f2e97c9c299c85dbb9a5415cce60aab68ae34250abfb",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-coldwater-fish-2kg.webp"
+    },
+    {
+      "supplierCode": "064992730987",
+      "product": "ACANA Dog Coldwater Fish",
+      "weight": "6 кг",
+      "image": "acana-coldwater-fish-6kg.webp",
+      "bytes": 92326,
+      "sha256": "a4ac20ea6779ac4caebef70e1954af0d4842a16adc7fc1b626f6d2cd8175020b",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-coldwater-fish-6kg.webp"
+    },
+    {
+      "supplierCode": "064992730802",
+      "product": "ACANA Singles Beef with Pumpkin",
+      "weight": "2 кг",
+      "image": "acana-beef-pumpkin-2kg.webp",
+      "bytes": 99752,
+      "sha256": "fc38d89582468765f45db9c6cab45f5c767e4e0b26762ecbb92a48bee79fe2cf",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-beef-pumpkin-2kg.webp"
+    },
+    {
+      "supplierCode": "064992730826",
+      "product": "ACANA Singles Beef with Pumpkin",
+      "weight": "6 кг",
+      "image": "acana-beef-pumpkin-6kg.webp",
+      "bytes": 94350,
+      "sha256": "86895dc4d60012779c9c4da50470ca69b6291930470fa9ffd89b9d666ff56b95",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-beef-pumpkin-6kg.webp"
+    },
+    {
+      "supplierCode": "SAD02",
+      "product": "ACANA Singles Free-Run Duck",
+      "weight": "2 кг",
+      "image": "acana-free-run-duck-2kg.webp",
+      "bytes": 79684,
+      "sha256": "dfff9faa3c9ccc441e0bcf7beb275c97eb2848c04099e846e08e481d9d80f1bd",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-free-run-duck-2kg.webp"
+    },
+    {
+      "supplierCode": "64992571603",
+      "product": "ACANA Singles Free-Run Duck",
+      "weight": "6 кг",
+      "image": "acana-free-run-duck-6kg.webp",
+      "bytes": 80524,
+      "sha256": "faba0aac1b508408048092ffb1284efaa337f8af10a97c3ec670016d4ded449b",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-free-run-duck-6kg.webp"
+    },
+    {
+      "supplierCode": "ACS202",
+      "product": "ACANA Grass-Fed Lamb",
+      "weight": "6 кг",
+      "image": "acana-grass-fed-lamb-6kg.webp",
+      "bytes": 85850,
+      "sha256": "930d8da8a59dd8e7298d6e6ebd0b6620347b0e1df6a2938cb298cb0e71992806",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-grass-fed-lamb-6kg.webp"
+    },
+    {
+      "supplierCode": "ACR205",
+      "product": "ACANA Highest Protein Pacifica",
+      "weight": "2 кг",
+      "image": "acana-highest-protein-pacifica-2kg.webp",
+      "bytes": 96020,
+      "sha256": "285dd4e5a906e0b2e0848715a5b1bd4da78b1a40634bd52bbedef81c50a1cfcf",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-highest-protein-pacifica-2kg.webp"
+    },
+    {
+      "supplierCode": "ACR201",
+      "product": "ACANA Highest Protein Wild Prairie",
+      "weight": "2 кг",
+      "image": "acana-highest-protein-wild-prairie-2kg.webp",
+      "bytes": 94726,
+      "sha256": "364b15e5c229662251e1897580b71f5ffab3a7f35ff6e0953468350d2353148e",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-highest-protein-wild-prairie-2kg.webp"
+    },
+    {
+      "supplierCode": "64992543600",
+      "product": "ACANA Highest Protein Ranchlands",
+      "weight": "6 кг",
+      "image": "acana-highest-protein-ranchlands-6kg.webp",
+      "bytes": 100318,
+      "sha256": "b52c710ddb284fa821106eebbb49cc813cf4118655e31798bbd1672a6573dc07",
+      "r2Key": "assets/launch-studio-2026-11-04/acana-highest-protein-ranchlands-6kg.webp"
+    },
+    {
+      "supplierCode": "ORD116",
+      "product": "ORIJEN Regional Red Dog",
+      "weight": "2 кг",
+      "image": "orijen-regional-red-dog-2kg.webp",
+      "bytes": 91700,
+      "sha256": "b8e62f45eaab0c7f404eeb2d5e60d8aa4e25870853e4ba775d383768f5fa881d",
+      "r2Key": "assets/launch-studio-2026-11-04/orijen-regional-red-dog-2kg.webp"
+    },
+    {
+      "supplierCode": "931251",
+      "product": "Leonardo Puro en Pollo",
+      "weight": "85 г, один пауч",
+      "image": "leonardo-puro-en-pollo-85g.webp",
+      "bytes": 157878,
+      "sha256": "307e087f35a9862765cb824af5f8f302b9d38800fb59468ffdab35db59d3490a",
+      "r2Key": "assets/launch-studio-2026-11-04/leonardo-puro-en-pollo-85g.webp"
+    },
+    {
+      "supplierCode": "949577",
+      "product": "Churu CAT Variedades Salmón y Pollo",
+      "weight": "20 × 14 г, одна коробка",
+      "image": "churu-salmon-pollo-20x14g.webp",
+      "bytes": 140828,
+      "sha256": "d0023b50d0866b7aeabcdb32732852048e0064d447e7aef3af978a742b71177a",
+      "r2Key": "assets/launch-studio-2026-11-04/churu-salmon-pollo-20x14g.webp"
+    }
+  ]
+}
