@@ -557,7 +557,7 @@ function renderBrandDirectory() {
     <div class="brand-heading"><div><p class="brand-path">Продукция / Бренды</p><h2>Бренды</h2>
       <p>Выберите бренд, чтобы посмотреть его товары и SKU</p></div>
       <span class="brand-total">${rows.length} брендов</span></div>
-    ${selectedSupplierItems.length ? `<p class="brand-price-notice">Выбрано для закупки: ${selectedSupplierItems.length} SKU · ${selectedOnSite} связаны с товарами сайта · ${selectedSupplierItems.length - selectedOnSite} ждут карточку</p>` : ''}
+    ${selectedSupplierItems.length ? `<p class="brand-price-notice">Выбрано для закупки: ${selectedSupplierItems.length} SKU · ${selectedOnSite} связаны с карточками, включая скрытые черновики · ${selectedSupplierItems.length - selectedOnSite} ждут карточку</p>` : ''}
     <div class="brand-directory-toolbar"><label>Найти бренд<input id="brand-directory-search" type="search"
       value="${escape(brandDirectorySearch)}" placeholder="Название бренда"></label>
       <label class="brand-upload">Загрузить прайсы и выбранные SKU<input id="sourcing-bundle-upload"
@@ -1147,17 +1147,19 @@ $('admin-content').addEventListener('change', async event => {
     try {
       if (file.size > 1500000) throw new Error('Файл слишком большой');
       const bundle = JSON.parse(await file.text());
-      if (!Array.isArray(bundle.sources) || bundle.sources.length !== 3 ||
-          bundle.matches?.items?.length !== 157 || bundle.selection?.items?.length !== 50)
+      if (!Array.isArray(bundle.sources) || bundle.sources.length !== 5 ||
+          bundle.matches?.items?.length !== 157 || bundle.drafts?.items?.length !== 24 ||
+          bundle.selection?.items?.length !== 50)
         throw new Error('Проверьте комплект прайсов и выбранных SKU');
       for (const source of bundle.sources)
         await api('/api/admin/supplier-catalogs/import', 'POST', source);
+      await api('/api/admin/supplier-catalogs/drafts/import', 'POST', bundle.drafts);
       await api('/api/admin/supplier-catalogs/matches', 'PUT', bundle.matches);
       await api('/api/admin/selected-supplier-items', 'PUT', bundle.selection);
       supplierCatalogSources = (await api('/api/admin/supplier-catalogs')).sources;
       selectedSupplierItems = (await api('/api/admin/selected-supplier-items')).items;
       renderBrands();
-      message('Прайсы и выбранные SKU сохранены');
+      message('Прайсы и 50 выбранных SKU связаны с каталогом. 24 новые карточки остаются скрытыми');
     } catch (error) {
       message(error.message);
       event.target.disabled = false;

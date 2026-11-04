@@ -13,6 +13,7 @@ import { financePreview } from './finance.js';
 import { backupConfiguration, listBackups } from './backup.js';
 import { createStripeCheckout, stripeMode, stripeReady, verifyStripeEvent } from './stripe.js';
 import { importSupplierCatalog } from './supplier-catalog.js';
+import { importSupplierDrafts } from './supplier-drafts.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
@@ -655,6 +656,11 @@ async function adminRoute(db, req, res, path) {
     const payload = await readJson(req, 2000000);
     const result = await importSupplierCatalog(db, payload, operator.id);
     return json(res, result.alreadyImported ? 200 : 201, result);
+  }
+  if (path === '/api/admin/supplier-catalogs/drafts/import' && req.method === 'POST') {
+    const payload = await readJson(req, 100000);
+    const result = await importSupplierDrafts(db, payload, operator.id);
+    return json(res, result.createdVariants ? 201 : 200, result);
   }
   if (path === '/api/admin/supplier-catalogs/matches' && req.method === 'PUT') {
     const payload = await readJson(req, 100000);
