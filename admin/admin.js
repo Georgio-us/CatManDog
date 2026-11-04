@@ -247,7 +247,8 @@ function renderProducts() {
   const categories = [...new Set([...productRows.map(productGroup), ...(productRows.some(item => item.category === 'Корм') ? ['Корм'] : [])])].sort((a,b) => a.localeCompare(b,'ru'));
   const brands = [...new Set(productRows.map(item => item.brand).filter(Boolean))].sort((a,b) => a.localeCompare(b,'ru'));
   $('admin-content').innerHTML = `<section class="product-workspace"><nav class="catalog-breadcrumb" aria-label="Путь в каталоге">Продукция${productBrand !== 'all' ? ` <span>/</span> ${escape(productBrand === '__unbranded__' ? 'Бренд не указан' : productBrand)}` : ''}</nav>
-    <div class="catalog-heading"><div><h2>Продукция</h2><p>${productRows.length} товаров · ${catalogBrandCount()} брендов с товарами · ${catalogSkuCount()} SKU${unbrandedProducts().length ? ` · ${unbrandedProducts().length} без бренда` : ''}</p></div></div>
+    <div class="catalog-heading"><div><h2>Продукция</h2><p>${productRows.length} товаров · ${catalogBrandCount()} брендов с товарами · ${catalogSkuCount()} SKU${unbrandedProducts().length ? ` · ${unbrandedProducts().length} без бренда` : ''}</p></div>
+      <button type="button" class="catalog-sourcing-link" data-go-tab="brands">Прайсы и связи SKU</button></div>
     <div class="catalog-view-switch" role="group" aria-label="Вид каталога"><button type="button" data-catalog-view="products" aria-pressed="${catalogView === 'products'}">Товары</button>
       <button type="button" data-catalog-view="brands" aria-pressed="${catalogView === 'brands'}">Бренды</button></div>
     <div class="catalog-filters"><label>Поиск<input id="catalog-product-search" type="search" value="${escape(productSearch)}" placeholder="Название, бренд или артикул"></label>
