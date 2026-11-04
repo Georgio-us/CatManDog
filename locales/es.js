@@ -1,6 +1,13 @@
 // Spanish copy is written and reviewed here. Russian remains the source language
 // for internal category IDs, routes and saved customer data.
 export const es = {
+  'Поиск по каталогу': 'Buscar en el catálogo',
+  'Название товара или бренд': 'Producto o marca',
+  'Все товары бренда': 'Todos los productos de la marca',
+  'Отменить': 'Deshacer',
+  'Добавление отменено': 'Se ha deshecho la acción',
+  'Корзина уже изменилась': 'La cesta ya ha cambiado',
+  'Попробуйте другое название или бренд': 'Prueba con otro producto o marca',
   'Цвет и размер': 'Color y talla',
   'Бежевый': 'Beige',
   'Антрацит': 'Antracita',

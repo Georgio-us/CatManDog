@@ -1,4 +1,4 @@
-import { es, esPatterns } from './locales/es.js?v=terms-1';
+import { es, esPatterns } from './locales/es.js?v=catalog-search-1';
 import { esProductText } from './locales/product-es.js';
 import { esDetails } from './locales/details-es.js';
 import { seoCategoryForPath } from './seo-categories.js';
