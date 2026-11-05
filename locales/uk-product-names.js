@@ -1,5 +1,7 @@
 // Ukrainian product names. Brand and registered line names remain unchanged.
 export const ukProductNames = {
+  "HeyboPet - беспроводной фонтан 3 л": "HeyboPet - бездротовий фонтан 3 л",
+  "Churu - лосось и курица": "Churu - лосось і курка",
   "Churu - тунец": "Churu - тунець",
   "Churu - курица": "Churu - курка",
   "Churu - тунец с гребешком": "Churu - тунець із гребінцем",

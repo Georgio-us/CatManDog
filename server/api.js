@@ -17,6 +17,7 @@ import { importSupplierDrafts } from './supplier-drafts.js';
 import { launchCatalog, saveLaunchOrder } from './launch-scenario.js';
 import { selectedPriceRows, applySelectedPrices } from './selected-pricing.js';
 import { applyMatchedPrices } from './matched-pricing.js';
+import { churuRepackOptions } from '../churu-retail-formats.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
@@ -57,8 +58,10 @@ const catalogCategories = new Set(['Корм', 'Лакомства', 'Напол
   'Игрушки и аксессуары', 'Миски и поилки', 'Переноски', 'Окна и балконы', 'Уход', 'Подарочные наборы']);
 function catalogImagePath(value) {
   const path = cap(value, 500);
-  if (path && !path.startsWith('/assets/') && !path.startsWith('https://img.catmandog.es/'))
-    bad('Для фото используйте адрес из CatManDog R2');
+  if (path && !path.startsWith('/assets/') &&
+      !path.startsWith('/media/churu-formats-2026-11-05/') &&
+      !path.startsWith('https://img.catmandog.es/'))
+    bad('Для фото используйте адрес изображения CatManDog');
   return path;
 }
 function productFields(body) {
@@ -179,9 +182,11 @@ async function createOrder(db, payload, customer) {
     const variants = await client.query(`SELECT v.id AS variant_id,v.product_id,v.label,v.source_price_cents,
       v.price_override_cents,v.price_confirmed,v.source_orderable,v.availability,v.tax_rate_bps,
       v.stock_quantity,v.reserved_quantity,p.name,
-      EXISTS (SELECT 1 FROM supplier_catalog_matches m
+      (EXISTS (SELECT 1 FROM supplier_catalog_matches m
         JOIN supplier_catalog_items i ON i.id=m.item_id
-        WHERE m.variant_id=v.id AND i.shop_price_cents>0) AS supplier_matched
+        WHERE m.variant_id=v.id AND i.shop_price_cents>0)
+        OR EXISTS (SELECT 1 FROM supplier_catalog_items i
+          WHERE i.id=(v.source#>>'{retailFormat,sourceItemId}') AND i.shop_price_cents>0)) AS supplier_matched
       FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
       WHERE v.id=ANY($1::text[]) AND v.active=true AND p.active=true FOR UPDATE OF v`, [ids]);
     const promo = await promoFor(client, payload.promoCode, true);
@@ -516,6 +521,65 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { role: fullAdmin ? 'admin' : 'support',
       name: operator?.name || customer?.name || '', email: operator?.email || customer?.email });
   if (!fullAdmin && !path.startsWith('/api/admin/service-requests')) bad('Доступ закрыт', 403);
+  if (path === '/api/admin/churu/repack' && req.method === 'POST') {
+    const body = await readJson(req);
+    const productId = cap(body.productId, 180);
+    const operation = cap(body.operation, 40);
+    const quantity = Number(body.quantity);
+    const key = cap(body.idempotencyKey, 80);
+    const conversion = churuRepackOptions(productId).find(item => item.id === operation);
+    if (!conversion || !Number.isInteger(quantity) || quantity < 1 || quantity > 9999 ||
+        !/^[a-zA-Z0-9_-]{20,80}$/.test(key)) bad('Проверьте фасовку Churu');
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const inserted = await client.query(`INSERT INTO churu_repack_batches
+        (idempotency_key,product_id,operation,quantity,staff_id) VALUES($1,$2,$3,$4,$5)
+        ON CONFLICT (idempotency_key) DO NOTHING RETURNING idempotency_key`,
+      [key, productId, operation, quantity, operator.id]);
+      if (!inserted.rows.length) {
+        const previous = await client.query(`SELECT product_id,operation,quantity
+          FROM churu_repack_batches WHERE idempotency_key=$1`, [key]);
+        if (previous.rows[0]?.product_id !== productId ||
+            previous.rows[0]?.operation !== operation || previous.rows[0]?.quantity !== quantity)
+          bad('Ключ фасовки уже использован для другого действия', 409);
+        await client.query('COMMIT');
+        return json(res, 200, { ok: true, alreadyRecorded: true });
+      }
+      const ids = [conversion.from.id, ...conversion.to.map(item => item.id)];
+      const locked = await client.query(`SELECT id FROM catalog_variants
+        WHERE id=ANY($1::text[]) AND product_id=$2 AND active=true ORDER BY id FOR UPDATE`,
+      [ids, productId]);
+      if (locked.rows.length !== ids.length) bad('Варианты Churu не найдены', 409);
+      const outgoing = conversion.from.units * quantity;
+      const source = await client.query(`UPDATE catalog_variants SET
+        stock_quantity=stock_quantity-$1,
+        availability=CASE WHEN stock_quantity-$1=0 THEN 'source_on_demand' ELSE availability END,
+        updated_at=now() WHERE id=$2 AND stock_quantity-reserved_quantity>=$1
+        RETURNING stock_quantity,reserved_quantity`, [outgoing, conversion.from.id]);
+      if (!source.rows.length) bad('Недостаточно свободного остатка для фасовки', 409);
+      await recordInventoryMovement(client, { variantId: conversion.from.id, staffId: operator.id,
+        reason: 'repack_out', deltaOnHand: -outgoing,
+        onHandAfter: source.rows[0].stock_quantity, reservedAfter: source.rows[0].reserved_quantity,
+        note: conversion.label });
+      for (const target of conversion.to) {
+        const incoming = target.units * quantity;
+        const changed = await client.query(`UPDATE catalog_variants SET
+          stock_quantity=coalesce(stock_quantity,0)+$1,availability='on_hand',updated_at=now()
+          WHERE id=$2 RETURNING stock_quantity,reserved_quantity`, [incoming, target.id]);
+        await recordInventoryMovement(client, { variantId: target.id, staffId: operator.id,
+          reason: 'repack_in', deltaOnHand: incoming,
+          onHandAfter: changed.rows[0].stock_quantity, reservedAfter: changed.rows[0].reserved_quantity,
+          note: conversion.label });
+      }
+      await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+        VALUES($1,$2,'churu_repack',$3,$4)`, [randomUUID(), operator.id, productId,
+        { operation, quantity, from: conversion.from, to: conversion.to }]);
+      await client.query('COMMIT');
+      return json(res, 201, { ok: true });
+    } catch (error) { await client.query('ROLLBACK'); throw error; }
+    finally { client.release(); }
+  }
   if (path === '/api/admin/launch-scenario/catalog' && req.method === 'GET')
     return json(res, 200, { variants: await launchCatalog(db) });
   if (path === '/api/admin/launch-scenario/orders' && req.method === 'GET') {

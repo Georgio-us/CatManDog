@@ -1,6 +1,9 @@
 // Spanish copy is written and reviewed here. Russian remains the source language
 // for internal category IDs, routes and saved customer data.
 export const es = {
+  'HeyboPet - беспроводной фонтан 3 л': 'HeyboPet - fuente inalámbrica de 3 l',
+  'Аккумуляторный фонтан с резервуаром из нержавеющей стали и датчиком движения':
+    'Fuente recargable con depósito de acero inoxidable y sensor de movimiento',
   'Поиск по каталогу': 'Buscar en el catálogo',
   'Название товара или бренд': 'Producto o marca',
   'Все товары бренда': 'Todos los productos de la marca',

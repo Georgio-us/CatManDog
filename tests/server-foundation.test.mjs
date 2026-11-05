@@ -74,17 +74,17 @@ test('supplier availability is calculated for every active catalog SKU', async (
       return { rows: ['selected','supplier','unlinked'].map(variant_id => ({
         variant_id,product_id:variant_id,name:variant_id,
         source_price_cents:null,price_override_cents:null,price_confirmed:false,
-        source_orderable:false,availability:'pending',stock_quantity:null
+        source_orderable:false,availability:variant_id === 'unlinked' ? 'pending' : 'source_on_demand',stock_quantity:null
       })) };
     } };
     const rows = await catalogSnapshot(db);
     assert.deepEqual(rows.map(row => row.sourcing_availability),
-      ['on_hand','source_on_demand','unavailable']);
+      ['source_on_demand','source_on_demand','unavailable']);
     assert.deepEqual(rows.map(row => row.selected_supplier_units), [2,0,0]);
     assert.ok(rows.every(row => row.orderable === false));
 });
 
-test('a selected basket is shown as available before launch but does not become live stock', async () => {
+test('a selected basket remains source on demand until physical receipt', async () => {
   const oldOrders = process.env.ORDERS_ENABLED;
   const oldPayments = process.env.PAYMENTS_ENABLED;
   const db = { async query(sql) {
@@ -99,8 +99,8 @@ test('a selected basket is shown as available before launch but does not become 
     delete process.env.ORDERS_ENABLED;
     delete process.env.PAYMENTS_ENABLED;
     const preview = (await catalogSnapshot(db))[0];
-    assert.equal(preview.sourcing_availability, 'on_hand');
-    assert.equal(preview.orderable, false);
+    assert.equal(preview.sourcing_availability, 'source_on_demand');
+    assert.equal(preview.orderable, true);
     process.env.ORDERS_ENABLED = 'true';
     process.env.PAYMENTS_ENABLED = 'true';
     const live = (await catalogSnapshot(db))[0];

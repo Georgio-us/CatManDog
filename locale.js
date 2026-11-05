@@ -6,6 +6,7 @@ import { ukExtra } from './locales/uk-extra.js?v=ukrainian-public-2';
 import { ukProductNames } from './locales/uk-product-names.js';
 import { ukProductCopy } from './locales/uk-product-copy.js';
 import { ukDetails } from './locales/uk-details.js';
+import { churuFormatsEs, churuFormatsUk } from './locales/churu-formats.js';
 import { seoCategoryForPath } from './seo-categories.js';
 
 const storageKey = 'catmandog-language';
@@ -41,8 +42,8 @@ export function translate(value) {
   const whitespace = value.match(/^(\s*)([\s\S]*?)(\s*)$/);
   const source = whitespace?.[2] ?? value;
   let result = language === 'uk'
-    ? uk[source] ?? ukExtra[source] ?? ukProductNames[source] ?? ukProductCopy(source) ?? ukDetails[source] ?? esProductText[source] ?? esDetails[source]
-    : es[source] ?? esProductText[source] ?? esDetails[source];
+    ? uk[source] ?? ukExtra[source] ?? churuFormatsUk[source] ?? ukProductNames[source] ?? ukProductCopy(source) ?? ukDetails[source] ?? esProductText[source] ?? esDetails[source]
+    : es[source] ?? churuFormatsEs[source] ?? esProductText[source] ?? esDetails[source];
   if (result === undefined) {
     result = source;
     for (const [pattern, replacement] of language === 'uk' ? ukPatterns : esPatterns) {

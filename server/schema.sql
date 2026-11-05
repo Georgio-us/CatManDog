@@ -405,7 +405,7 @@ CREATE TABLE IF NOT EXISTS inventory_movements (
   unit_cost_cents integer CHECK (unit_cost_cents >= 0),
   idempotency_key text,
   reason text NOT NULL CHECK (reason IN ('receipt','adjustment','order_reserved',
-    'order_released','order_fulfilled','legacy_order_cancelled')),
+    'order_released','order_fulfilled','legacy_order_cancelled','repack_out','repack_in')),
   delta_on_hand integer NOT NULL DEFAULT 0,
   delta_reserved integer NOT NULL DEFAULT 0,
   on_hand_after integer,
@@ -420,6 +420,10 @@ ALTER TABLE inventory_movements ADD COLUMN IF NOT EXISTS unit_cost_cents integer
 ALTER TABLE inventory_movements ADD COLUMN IF NOT EXISTS idempotency_key text;
 ALTER TABLE inventory_movements ADD COLUMN IF NOT EXISTS purchase_order_item_id uuid
   REFERENCES purchase_order_items(id) ON DELETE SET NULL;
+ALTER TABLE inventory_movements DROP CONSTRAINT IF EXISTS inventory_movements_reason_check;
+ALTER TABLE inventory_movements ADD CONSTRAINT inventory_movements_reason_check
+  CHECK (reason IN ('receipt','adjustment','order_reserved','order_released',
+    'order_fulfilled','legacy_order_cancelled','repack_out','repack_in'));
 CREATE UNIQUE INDEX IF NOT EXISTS inventory_movements_idempotency_idx
   ON inventory_movements(idempotency_key) WHERE idempotency_key IS NOT NULL;
 CREATE INDEX IF NOT EXISTS inventory_movements_variant_idx
@@ -427,6 +431,15 @@ CREATE INDEX IF NOT EXISTS inventory_movements_variant_idx
 CREATE INDEX IF NOT EXISTS inventory_movements_order_idx ON inventory_movements(order_id);
 CREATE INDEX IF NOT EXISTS inventory_movements_purchase_item_idx
   ON inventory_movements(purchase_order_item_id);
+
+CREATE TABLE IF NOT EXISTS churu_repack_batches (
+  idempotency_key text PRIMARY KEY,
+  product_id text NOT NULL REFERENCES catalog_products(id),
+  operation text NOT NULL,
+  quantity integer NOT NULL CHECK (quantity BETWEEN 1 AND 9999),
+  staff_id uuid NOT NULL REFERENCES staff_accounts(id),
+  created_at timestamptz NOT NULL DEFAULT now()
+);
 
 CREATE TABLE IF NOT EXISTS service_requests (
   id uuid PRIMARY KEY,
