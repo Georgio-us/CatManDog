@@ -16,6 +16,7 @@ import { importSupplierCatalog } from './supplier-catalog.js';
 import { importSupplierDrafts } from './supplier-drafts.js';
 import { launchCatalog, saveLaunchOrder } from './launch-scenario.js';
 import { selectedPriceRows, applySelectedPrices } from './selected-pricing.js';
+import { applyMatchedPrices } from './matched-pricing.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
@@ -660,6 +661,8 @@ async function adminRoute(db, req, res, path) {
   if (path === '/api/admin/brands/leonardo/import' && req.method === 'POST') {
     const payload = await readJson(req, 2000000);
     const result = await importSupplierCatalog(db, payload, operator.id);
+    if (result.imported || result.catalogMatched || result.autoMatched)
+      await applyMatchedPrices(db, operator.id);
     return json(res, result.alreadyImported ? 200 : 201, result);
   }
   if (path === '/api/admin/supplier-catalogs' && req.method === 'GET') {
@@ -676,6 +679,8 @@ async function adminRoute(db, req, res, path) {
   if (path === '/api/admin/supplier-catalogs/import' && req.method === 'POST') {
     const payload = await readJson(req, 2000000);
     const result = await importSupplierCatalog(db, payload, operator.id);
+    if (result.imported || result.catalogMatched || result.autoMatched)
+      await applyMatchedPrices(db, operator.id);
     return json(res, result.alreadyImported ? 200 : 201, result);
   }
   if (path === '/api/admin/supplier-catalogs/drafts/import' && req.method === 'POST') {
@@ -715,12 +720,13 @@ async function adminRoute(db, req, res, path) {
         VALUES($1,$2,'supplier_catalog_matches_uploaded',$3,$4)`,
       [randomUUID(), operator.id, 'supplier_catalog_matches', { count: entries.length }]);
       await client.query('COMMIT');
-      return json(res, 200, { ok: true, count: entries.length });
     } catch (error) {
       await client.query('ROLLBACK');
       if (error.code === '23505') bad('Две строки прайса указывают на один SKU', 409);
       throw error;
     } finally { client.release(); }
+    const pricing = await applyMatchedPrices(db, operator.id);
+    return json(res, 200, { ok: true, count: entries.length, pricing });
   }
   if (path === '/api/admin/selected-supplier-items' && req.method === 'GET') {
     const { rows } = await db.query(`SELECT s.item_id,s.quantity,s.retail_units_per_purchase_unit,
