@@ -15,6 +15,7 @@ import { createStripeCheckout, stripeMode, stripeReady, verifyStripeEvent } from
 import { importSupplierCatalog } from './supplier-catalog.js';
 import { importSupplierDrafts } from './supplier-drafts.js';
 import { launchCatalog, saveLaunchOrder } from './launch-scenario.js';
+import { selectedPriceRows, applySelectedPrices } from './selected-pricing.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
@@ -735,6 +736,22 @@ async function adminRoute(db, req, res, path) {
       LEFT JOIN catalog_products p ON p.id=v.product_id
       ORDER BY c.supplier_name,c.brand,i.name,i.weight`);
     return json(res, 200, { items: rows });
+  }
+  if (path === '/api/admin/selected-supplier-items/prices' && req.method === 'GET') {
+    const rows = await selectedPriceRows(db);
+    return json(res, 200, { items: rows.map(row => ({
+      itemId: row.item_id, variantId: row.variant_id, name: row.name,
+      brand: row.brand, article: row.article,
+      currentPriceCents: row.price_override_cents ?? row.source_price_cents,
+      priceConfirmed: row.price_confirmed,
+      proposedPriceCents: row.proposal?.priceCents ?? null,
+      grossUnitCostCents: row.proposal?.grossUnitCostCents ?? null,
+      basis: row.proposal?.basis ?? null
+    })) });
+  }
+  if (path === '/api/admin/selected-supplier-items/prices' && req.method === 'POST') {
+    const result = await applySelectedPrices(db, operator.id);
+    return json(res, 200, { ok: true, ...result });
   }
   if (path === '/api/admin/selected-supplier-items' && req.method === 'PUT') {
     const payload = await readJson(req, 100000);

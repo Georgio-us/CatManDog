@@ -5,6 +5,7 @@ let brandData = null;
 let supplierCatalogSources = [];
 let supplierCatalogData = null;
 let selectedSupplierItems = [];
+let selectedPricePreview = [];
 let brandName = '';
 let brandDirectorySearch = '';
 let brandProductSearch = '';
@@ -553,17 +554,21 @@ function brandDirectoryRows() {
 }
 function selectedSupplierAudit() {
   if (!selectedSupplierItems.length) return '';
+  const proposals = new Map(selectedPricePreview.map(item => [item.itemId, item]));
   const confirmed = selectedSupplierItems.filter(item => item.price_confirmed &&
     (item.price_override_cents ?? item.source_price_cents) > 0).length;
   const withCost = selectedSupplierItems.filter(item => item.shop_price_cents > 0).length;
   return `<details class="selected-sku-audit"><summary>Проверить выбранные SKU - закупка ${withCost}/${selectedSupplierItems.length}, цена продажи ${confirmed}/${selectedSupplierItems.length}</summary>
     <p>Закупочная цена относится к единице поставщика. Цена продажи и физический остаток учитываются отдельно</p>
+    <p>Расчёт для корма: рекомендованный PVP Albet, если он есть; иначе закупка с IVA 10% и recargo 1,4% плюс 20%. Скидка Distrivet не учтена</p>
+    ${selectedPricePreview.length === selectedSupplierItems.length ? '<button type="button" class="admin-action" data-apply-selected-prices>Применить рассчитанные цены к выбранным SKU</button>' : ''}
     <div class="selected-sku-list">${selectedSupplierItems.map(item => {
       const sale = item.price_override_cents ?? item.source_price_cents;
       const pack = item.retail_units_per_purchase_unit || 1;
+      const proposal = proposals.get(item.item_id);
       return `<div class="selected-sku-row"><div><strong>${escape(item.name)}</strong><small>${escape(item.brand)} · ${escape(item.article)} · ${escape(item.weight)}</small></div>
         <div><small>Закупка</small><strong>${item.shop_price_cents > 0 ? euros(item.shop_price_cents) : 'Не указана'}</strong><small>${escape(({ includes_iva:'с IVA', excludes_iva:'без IVA', unknown:'IVA не уточнён' })[item.shop_price_tax_basis] || 'IVA не уточнён')}${pack > 1 ? ` · ${pack} розничных ед.` : ''}</small></div>
-        <div><small>Продажа</small><strong>${item.price_confirmed && sale > 0 ? euros(sale) : 'Не утверждена'}</strong>${!item.price_confirmed && sale > 0 ? `<small>Ориентир ${euros(sale)}</small>` : ''}</div>
+        <div><small>Продажа</small><strong>${item.price_confirmed && sale > 0 ? euros(sale) : 'Не утверждена'}</strong>${!item.price_confirmed && sale > 0 ? `<small>Старый ориентир ${euros(sale)}</small>` : ''}${proposal?.proposedPriceCents ? `<small>Расчёт ${euros(proposal.proposedPriceCents)} · ${proposal.basis === 'cost_plus_20' ? 'закупка + 20%' : 'PVP Albet'}</small>` : ''}</div>
         <div><small>Доступность</small><strong>${item.variant_id ? item.stock_quantity > 0 ? `На складе ${item.stock_quantity}` : 'Выбрано для закупки' : 'Нет связи с SKU'}</strong><small>${item.variant_id ? item.product_active && item.variant_active ? 'На витрине' : 'Скрытый черновик' : 'Нужна карточка'}</small>${item.product_id ? `<button type="button" data-selected-product="${escape(item.product_id)}">Открыть товар</button>` : ''}</div></div>`;
     }).join('')}</div></details>`;
 }
@@ -1001,14 +1006,16 @@ async function load() {
       return;
     }
     if (tab === 'brands') {
-      const [products, variants, leonardo, catalogs, selected] = await Promise.all([
+      const [products, variants, leonardo, catalogs, selected, pricing] = await Promise.all([
         api('/api/admin/products'), api('/api/admin/variants'), api('/api/admin/brands/leonardo'),
-        api('/api/admin/supplier-catalogs'), api('/api/admin/selected-supplier-items')]);
+        api('/api/admin/supplier-catalogs'), api('/api/admin/selected-supplier-items'),
+        api('/api/admin/selected-supplier-items/prices')]);
       productRows = products.products;
       variantRows = variants.variants;
       brandData = leonardo;
       supplierCatalogSources = catalogs.sources;
       selectedSupplierItems = selected.items;
+      selectedPricePreview = pricing.items;
       supplierCatalogData = null;
       renderBrands();
       message('');
@@ -1251,6 +1258,16 @@ $('admin-content').addEventListener('change', async event => {
   }
 });
 $('admin-content').addEventListener('click', async event => {
+  if (event.target.closest('[data-apply-selected-prices]')) {
+    const button = event.target.closest('[data-apply-selected-prices]');
+    button.disabled = true;
+    try {
+      const result = await api('/api/admin/selected-supplier-items/prices', 'POST', {});
+      await load();
+      message(`Цены рассчитаны для ${result.selected} SKU, обновлено ${result.applied}`);
+    } catch (error) { button.disabled = false; message(error.message); }
+    return;
+  }
   const selectedProduct = event.target.closest('[data-selected-product]');
   if (selectedProduct) {
     tab = 'products';
