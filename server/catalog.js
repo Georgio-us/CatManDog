@@ -137,8 +137,6 @@ export async function importCatalog(db, items = products) {
 }
 
 export async function catalogSnapshot(db) {
-  const acceptingOrders = process.env.ORDERS_ENABLED === 'true' &&
-    process.env.PAYMENTS_ENABLED === 'true';
   const [{ rows }, supplierStates] = await Promise.all([db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.category,p.pet,p.image_path,
     p.description,p.details,p.food_type,v.image_path AS variant_image_path,
     v.description AS variant_description,v.details AS variant_details,
@@ -152,11 +150,9 @@ export async function catalogSnapshot(db) {
     supplierSourcingByVariant(db)]);
   return rows.map(row => {
     const supplier = supplierStates.get(row.variant_id);
-    const sourcingAvailability = !supplier || row.availability === 'unavailable'
-      ? 'unavailable' : acceptingOrders
-      ? row.availability === 'on_hand' && row.stock_quantity > 0
-        ? 'on_hand' : 'source_on_demand'
-      : supplier.status;
+    const sourcingAvailability = ['unavailable', 'pending'].includes(row.availability)
+      ? 'unavailable' : row.availability === 'on_hand' && row.stock_quantity > 0
+      ? 'on_hand' : supplier ? 'source_on_demand' : 'unavailable';
     return {
       ...row, sale_price_cents: row.price_override_cents ?? row.source_price_cents,
       sourcing_availability: sourcingAvailability,

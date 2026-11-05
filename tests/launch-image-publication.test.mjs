@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { launchSelectedImageMap } from '../launch-selected-image-map.js';
 import { launchHeyboPetProducts } from '../launch-heybopet-products.js';
-import { publishSelectedLaunchImages } from '../server/catalog.js';
+import { catalogSnapshot, publishSelectedLaunchImages } from '../server/catalog.js';
 
 test('the first basket image map contains 23 distinct supplier drafts', () => {
   const variants = launchSelectedImageMap.flatMap(product => product.variants);
@@ -39,4 +39,19 @@ test('first basket publication attaches photos without creating warehouse stock'
   assert.deepEqual(calls.filter(call => call.sql.includes('UPDATE catalog_variants') &&
     call.values[0] === 'cmd-source-sku-9c96bc24c8863222').map(call => call.values[3]), [false]);
   assert.ok(calls.every(call => !call.sql.includes('stock_quantity')));
+});
+
+test('a selected supplier item with zero received stock is shown as on demand', async () => {
+  const db = {
+    async query(sql) {
+      return sql.includes('FROM catalog_variants v JOIN catalog_products p')
+        ? { rows: [{ variant_id: 'selected-dog-food', price_confirmed: true,
+          source_orderable: true, availability: 'source_on_demand', stock_quantity: 0,
+          price_override_cents: 2228, source_price_cents: null }] }
+        : { rows: [{ variant_id: 'selected-dog-food', source_count: 1, selected_units: 1 }] };
+    }
+  };
+  const [row] = await catalogSnapshot(db);
+  assert.equal(row.sourcing_availability, 'source_on_demand');
+  assert.equal(row.stock_quantity, 0);
 });
