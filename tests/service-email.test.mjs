@@ -34,6 +34,13 @@ test('support request notifies the team and customer, and replies come from CatM
     assert.match(sent[5].subject, /Respuesta de CatManDog/);
     assert.match(sent[5].text, /Tu pedido está en camino/);
     assert.doesNotMatch(sent[5].text, /[А-Яа-яЁё]/u);
+    await notifyServiceRequest({ id: 'zvernennia-id', kind: 'support', locale: 'uk',
+      email: 'pet@example.test', orderNumber: 'CMD-103', message: 'Де моє замовлення?' }, fetcher);
+    assert.equal(sent[7].subject, 'Ми отримали ваше звернення - CatManDog');
+    assert.match(sent[7].text, /Номер звернення: zvernennia-id/);
+    await sendServiceReply('pet@example.test', 'zvernennia-id', 'Замовлення в дорозі', fetcher, 'uk');
+    assert.match(sent[8].subject, /Відповідь CatManDog/);
+    assert.match(sent[8].text, /Замовлення в дорозі/);
   } finally {
     for (const [key, value] of Object.entries(previous)) {
       if (value === undefined) delete process.env[key];

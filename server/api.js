@@ -342,7 +342,7 @@ async function authRoute(db, req, res, path) {
       if (error.code === '23505') bad('Этот email уже используется', 409);
       throw error;
     }
-    await issueAccountLink(db, id, 'verify', email, body.locale === 'es' ? 'es' : 'ru', body.returnTo);
+    await issueAccountLink(db, id, 'verify', email, ['es', 'ru', 'uk'].includes(body.locale) ? body.locale : 'ru', body.returnTo);
     return json(res, 201, { pending: true, email });
   }
   if (path === '/api/auth/login') {
@@ -417,7 +417,7 @@ async function authRoute(db, req, res, path) {
     const customer = rows[0];
     const kind = path.endsWith('recover') ? 'reset' : 'verify';
     if (customer && (kind === 'reset' ? !!customer.email_verified_at : !customer.email_verified_at)) {
-      try { await issueAccountLink(db, customer.id, kind, email, body.locale === 'es' ? 'es' : 'ru', body.returnTo); }
+      try { await issueAccountLink(db, customer.id, kind, email, ['es', 'ru', 'uk'].includes(body.locale) ? body.locale : 'ru', body.returnTo); }
       catch (error) { console.error('Account email failed:', error.message); }
     }
     return json(res, 202, { accepted: true });
@@ -1786,7 +1786,7 @@ export async function handleApi(db, req, res, pathname) {
             body.quantity > item.rows[0].quantity) bad('Укажите товар и количество из заказа');
       }
       const requestId = randomUUID();
-      const requestLocale = body.locale === 'es' ? 'es' : 'ru';
+      const requestLocale = ['es', 'ru', 'uk'].includes(body.locale) ? body.locale : 'ru';
       await db.query(`INSERT INTO service_requests(id,order_id,kind,email,product_id,variant_id,quantity,message,order_number_input,locale)
         VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`, [requestId, found.rows[0]?.id || null,
         body.kind, email, cap(body.productId, 180) || null, cap(body.variantId, 180) || null,

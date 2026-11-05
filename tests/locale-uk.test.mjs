@@ -1,16 +1,24 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { es } from '../locales/es.js';
+import { uk } from '../locales/uk.js';
+import { ukExtra } from '../locales/uk-extra.js';
+import { ukProductNames } from '../locales/uk-product-names.js';
+import { ukDetails } from '../locales/uk-details.js';
+import { esDetails } from '../locales/details-es.js';
+import { catalogProducts } from '../data.js';
+import { articlesUk } from '../journal-content-uk.js';
 
-const saved = new Map([['catmandog-language', 'ru'], ['catmandog-uk-preview-language', 'uk']]);
+const saved = new Map([['catmandog-language', 'uk']]);
 globalThis.localStorage = {
   getItem: key => saved.get(key) ?? null,
   setItem: (key, value) => saved.set(key, value),
   removeItem: key => saved.delete(key)
 };
-globalThis.location = { pathname: '/', search: '?ukPreview=1' };
-const ukrainian = await import('../locale.js?uk-preview-test');
+globalThis.location = { pathname: '/', search: '', reload() {} };
+const ukrainian = await import('../locale.js?uk-public-test');
 
-test('Ukrainian preview uses its own locale and translates the shopping flow', () => {
+test('Ukrainian is a public language and translates the shopping flow', () => {
   assert.equal(ukrainian.locale(), 'uk');
   assert.equal(ukrainian.intlLocale(), 'uk-UA');
   for (const [source, expected] of [
@@ -26,22 +34,39 @@ test('Ukrainian preview uses its own locale and translates the shopping flow', (
     ['Корзина: 1 товар', 'Кошик: 1 товар'],
     ['Корзина: 2 товара', 'Кошик: 2 товари'],
     ['Корзина: 5 товаров', 'Кошик: 5 товарів'],
-    ['Демонстрационная цена', 'Демонстраційна ціна']
+    ['Демонстрационная цена', 'Демонстраційна ціна'],
+    ['Оплата подтверждена', 'Оплату підтверджено'],
+    ['Кремовые лакомства', 'Кремові ласощі']
   ]) assert.equal(ukrainian.translate(source), expected, source);
 });
 
-test('Ukrainian preview stays opt-in and does not replace the public language', async () => {
-  globalThis.location = { pathname: '/', search: '' };
-  const publicLocale = await import('../locale.js?uk-public-test');
-  assert.equal(publicLocale.locale(), 'ru');
+test('Ukrainian copy covers every storefront key in the Spanish dictionary', () => {
+  const missing = Object.keys(es).filter(key => !(key in uk) && !(key in ukExtra));
+  assert.deepEqual(missing, []);
 });
 
-test('Selecting Ukrainian keeps the public language preference intact', () => {
-  globalThis.location = { pathname: '/', search: '?ukPreview=1', reload() {} };
-  ukrainian.setLocale('uk');
+test('Catalog names and journal pages have Ukrainian copy', () => {
+  const productNames = [...new Set(catalogProducts.map(product => product.name).filter(name => /[А-Яа-яЁё]/u.test(name)))];
+  assert.deepEqual(productNames.filter(name => !(name in ukProductNames)), []);
+  assert.deepEqual(articlesUk.map(article => article.id), ['home', 'play', 'travel']);
+  for (const article of articlesUk) assert.ok(article.sections.every(section => section.paragraphs.length));
+  assert.equal(ukrainian.translate('Выбрать набор: Набор «В гости с подарком»'), 'Вибрати набір: Набір «У гості з подарунком»');
+});
+
+test('Catalog descriptions and details do not fall back to Russian or Spanish', () => {
+  assert.deepEqual(Object.keys(esDetails).filter(source => !(source in ukDetails)), []);
+  const descriptions = [...new Set(catalogProducts.map(product => product.description).filter(Boolean))];
+  const untranslated = descriptions.filter(source => {
+    const output = ukrainian.translate(source);
+    return /[ыэёъЫЭЁЪ]/u.test(output) || /\b(?:для кошек|для собак с|влажный корм|сухой корм|полнорационный корм)\b/iu.test(output);
+  });
+  assert.deepEqual(untranslated, []);
+  assert.equal(ukrainian.translate('Влажный корм NutriPlus с ягнёнком для собак'), 'Вологий корм NutriPlus із ягням для собак');
+});
+
+test('Selecting a language saves the public preference', () => {
+  ukrainian.setLocale('ru');
   assert.equal(saved.get('catmandog-language'), 'ru');
-  assert.equal(saved.get('catmandog-uk-preview-language'), 'uk');
-  ukrainian.setLocale('es');
-  assert.equal(saved.get('catmandog-language'), 'es');
-  assert.equal(saved.has('catmandog-uk-preview-language'), false);
+  ukrainian.setLocale('uk');
+  assert.equal(saved.get('catmandog-language'), 'uk');
 });

@@ -20,7 +20,12 @@ export function publicPageLocation(location) {
 }
 
 export function consentCopy(language) {
-  return language === 'ru' ? {
+  return language === 'uk' ? {
+    title: 'Аналітика сайту',
+    description: 'З вашого дозволу ми використовуємо Google Analytics, щоб розуміти, які сторінки й товари цікавлять відвідувачів. До вашої згоди аналітика не завантажується.',
+    accept: 'Прийняти', reject: 'Відхилити', settings: 'Налаштування аналітики',
+    privacy: 'Конфіденційність'
+  } : language === 'ru' ? {
     title: 'Аналитика сайта',
     description: 'С вашего разрешения мы используем Google Analytics, чтобы понимать, какие страницы и товары полезны посетителям. До согласия аналитика не загружается.',
     accept: 'Принять', reject: 'Отклонить', settings: 'Настройки аналитики',
@@ -44,7 +49,7 @@ export function installAnalytics(language) {
   panel.querySelector('[data-analytics-reject]').textContent = copy.reject;
   const privacy = panel.querySelector('a');
   privacy.textContent = copy.privacy;
-  privacy.href = language === 'ru' ? '/privacy.html' : '/privacy-es.html';
+  privacy.href = language === 'ru' ? '/privacy.html' : language === 'uk' ? '/privacy-uk.html' : '/privacy-es.html';
   settings.textContent = copy.settings;
   let choice;
   try { choice = localStorage.getItem(CONSENT_KEY); } catch { choice = null; }

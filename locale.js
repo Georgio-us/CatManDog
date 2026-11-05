@@ -1,17 +1,18 @@
 import { es, esPatterns } from './locales/es.js?v=welcome-card-1';
 import { esProductText } from './locales/product-es.js';
 import { esDetails } from './locales/details-es.js';
-import { uk, ukPatterns } from './locales/uk.js';
+import { uk, ukPatterns } from './locales/uk.js?v=ukrainian-public-2';
+import { ukExtra } from './locales/uk-extra.js?v=ukrainian-public-2';
+import { ukProductNames } from './locales/uk-product-names.js';
+import { ukProductCopy } from './locales/uk-product-copy.js';
+import { ukDetails } from './locales/uk-details.js';
 import { seoCategoryForPath } from './seo-categories.js';
 
 const storageKey = 'catmandog-language';
 const saved = (() => { try { return localStorage.getItem(storageKey); } catch { return null; } })();
-const previewStorageKey = 'catmandog-uk-preview-language';
-const previewSaved = (() => { try { return localStorage.getItem(previewStorageKey); } catch { return null; } })();
 const seoPath = globalThis.location?.pathname || '';
-const ukrainianPreview = new URLSearchParams(globalThis.location?.search || '').has('ukPreview');
 const language = seoPath === '/revista' || seoPath.startsWith('/revista/') || !!seoCategoryForPath(seoPath)
-  ? 'es' : ukrainianPreview && previewSaved === 'uk' ? 'uk' : saved === 'ru' || saved === 'es' ? saved : 'es';
+  ? 'es' : saved === 'ru' || saved === 'es' || saved === 'uk' ? saved : 'es';
 const translatedNodes = new WeakMap();
 const translatedAttributes = new WeakMap();
 const attributes = ['aria-label', 'title', 'placeholder', 'alt'];
@@ -19,13 +20,9 @@ const attributes = ['aria-label', 'title', 'placeholder', 'alt'];
 export const locale = () => language;
 export const intlLocale = () => ({ es: 'es-ES', ru: 'ru-RU', uk: 'uk-UA' })[language];
 export function setLocale(value) {
-  if (value !== 'ru' && value !== 'es' && !(ukrainianPreview && value === 'uk')) return;
+  if (value !== 'ru' && value !== 'es' && value !== 'uk') return;
   try {
-    if (value === 'uk') localStorage.setItem(previewStorageKey, value);
-    else {
-      localStorage.setItem(storageKey, value);
-      localStorage.removeItem(previewStorageKey);
-    }
+    localStorage.setItem(storageKey, value);
   } catch { /* Private browsing */ }
   if (value !== 'es' && (location.pathname === '/revista' || location.pathname.startsWith('/revista/'))) {
     location.assign(`/${location.search}#/journal${location.pathname.slice('/revista'.length)}`);
@@ -43,7 +40,9 @@ export function translate(value) {
   if (language === 'ru' || typeof value !== 'string' || !/[А-Яа-яЁё]/.test(value)) return value;
   const whitespace = value.match(/^(\s*)([\s\S]*?)(\s*)$/);
   const source = whitespace?.[2] ?? value;
-  let result = language === 'uk' ? uk[source] : es[source] ?? esProductText[source] ?? esDetails[source];
+  let result = language === 'uk'
+    ? uk[source] ?? ukExtra[source] ?? ukProductNames[source] ?? ukProductCopy(source) ?? ukDetails[source] ?? esProductText[source] ?? esDetails[source]
+    : es[source] ?? esProductText[source] ?? esDetails[source];
   if (result === undefined) {
     result = source;
     for (const [pattern, replacement] of language === 'uk' ? ukPatterns : esPatterns) {
@@ -100,6 +99,11 @@ function elementAttributes(element) {
   if (language === 'es' && element.tagName === 'A' && element.getAttribute('href') === '/purchase-terms.html') {
     element.setAttribute('href', '/purchase-terms-es.html');
   }
+  if (language === 'uk' && element.tagName === 'A') {
+    for (const page of ['privacy', 'legal', 'purchase-terms']) {
+      if (element.getAttribute('href') === `/${page}.html`) element.setAttribute('href', `/${page}-uk.html`);
+    }
+  }
   const previous = translatedAttributes.get(element) || {};
   for (const name of attributes) {
     const current = element.getAttribute(name);
@@ -138,7 +142,6 @@ export function installLocale() {
   }
   const switcher = document.querySelector('#language-switcher');
   if (switcher) {
-    if (ukrainianPreview) switcher.querySelector('[data-locale="uk"]')?.removeAttribute('hidden');
     const trigger = switcher.querySelector('.language-trigger');
     const options = switcher.querySelector('.language-options');
     const names = { es: 'Español', ru: 'Русский', uk: 'Українська' };
