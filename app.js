@@ -1,5 +1,5 @@
 import { createUsefulUI } from './useful.js?v=es-locale-4';
-import { createAccountUI } from './account.js?v=welcome-card-1';
+import { createAccountUI } from './account.js?v=welcome-card-2';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js';
 import { accessoryDetail } from './accessory-ui.js?v=rc-availability-2';
 import { availabilityScenarioDetail, availabilityScenarioFeedback } from './availability-scenario.js?v=5';

@@ -44,6 +44,37 @@ test('postcard route opens account onboarding or editable profile by pet state',
   }
 });
 
+test('postcard sign-in links preserve the pet return target', async () => {
+  const previous = { storage: globalThis.localStorage, location: globalThis.location,
+    fetch: globalThis.fetch };
+  const entries = new Map();
+  globalThis.localStorage = { getItem: key => entries.get(key) ?? null,
+    setItem: (key, value) => entries.set(key, value), removeItem: key => entries.delete(key) };
+  globalThis.location = { pathname: '/pet', hash: '', href: 'https://catmandog.es/pet' };
+  globalThis.fetch = async path => {
+    if (path === '/api/config') return Response.json({ accountsEnabled: true, emailEnabled: true });
+    if (path === '/api/auth/me') return Response.json({ error: 'Not signed in' }, { status: 401 });
+    throw new Error(`Unexpected request ${path}`);
+  };
+  try {
+    const { createAccountUI } = await import('../account.js?welcome-card-link-test');
+    const ui = createAccountUI({ escape: String, icon: () => '', money: String,
+      products: [], imageBlock: () => '', render: () => {}, notify: () => {} });
+    await ui.initialize();
+    const welcome = ui.page('/pet', new URLSearchParams());
+    assert.match(welcome, /href="\/pet#\/account\/register\?return=pet"/);
+    assert.match(welcome, /href="\/pet#\/account\/login\?return=pet"/);
+    location.hash = '#/account/login?return=pet';
+    const login = ui.page('/account/login', new URLSearchParams('return=pet'));
+    assert.match(login, /href="#\/account\/recover\?return=pet"/);
+    assert.doesNotMatch(login, /\$\{authReturn\}/);
+  } finally {
+    globalThis.localStorage = previous.storage;
+    globalThis.location = previous.location;
+    globalThis.fetch = previous.fetch;
+  }
+});
+
 test('email verification opened in another tab returns to the pet path', async () => {
   const previous = { storage: globalThis.localStorage, location: globalThis.location,
     fetch: globalThis.fetch };
