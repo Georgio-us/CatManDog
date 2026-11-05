@@ -17,6 +17,7 @@ globalThis.localStorage = {
 };
 globalThis.location = { pathname: '/', search: '', reload() {} };
 const ukrainian = await import('../locale.js?uk-public-test');
+const { retailResearchBlock } = await import('../retail-research.js?v=ukrainian-public-3');
 
 test('Ukrainian is a public language and translates the shopping flow', () => {
   assert.equal(ukrainian.locale(), 'uk');
@@ -62,6 +63,14 @@ test('Catalog descriptions and details do not fall back to Russian or Spanish', 
   });
   assert.deepEqual(untranslated, []);
   assert.equal(ukrainian.translate('Влажный корм NutriPlus с ягнёнком для собак'), 'Вологий корм NutriPlus із ягням для собак');
+});
+
+test('The retail price comparison follows the Ukrainian selection', () => {
+  const sku = catalogProducts.find(product => product.id === 'rc-sterilised').variants[0];
+  const block = retailResearchBlock(sku, { escape: value => value, money: amount => `${amount} €` });
+  assert.match(block, /Ціни в інших магазинах/);
+  assert.match(block, /Перевірено/);
+  assert.doesNotMatch(block, /Precios observados|Цены в изученных|Consultado el|Проверено/);
 });
 
 test('Selecting a language saves the public preference', () => {

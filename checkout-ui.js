@@ -1,5 +1,5 @@
 import { checkoutTotals, deliveryTiming, FREE_DELIVERY_FROM, DELIVERY_FEE, validateCheckout } from './checkout-model.js';
-import { locale } from './locale.js?v=es-locale-4';
+import { locale } from './locale.js?v=ukrainian-public-3';
 
 export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems, isReady, getPromo, applyPromo, findOrder, productLabel, getCheckoutContext = () => ({}), render, onPaid }) {
   let formValues = {};

@@ -1,5 +1,5 @@
 import { products } from './data.js?v=cat-assortment-1';
-import { locale } from './locale.js?v=es-locale-4';
+import { locale } from './locale.js?v=ukrainian-public-3';
 
 const toys = ['mouse', 'rope', 'rabbit'];
 const treats = ['creamy-treats', 'crunchy-treats', 'pure-treats'];

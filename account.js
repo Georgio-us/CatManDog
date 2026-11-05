@@ -1,8 +1,8 @@
 import { createAccountStore } from './account-store.js?v=cat-assortment-1';
-import { createAccountApi } from './account-api.js?v=welcome-card-1';
-import { accountTools } from './useful.js?v=es-locale-4';
+import { createAccountApi } from './account-api.js?v=ukrainian-public-3';
+import { accountTools } from './useful.js?v=ukrainian-public-3';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
-import { intlLocale, locale } from './locale.js?v=welcome-card-1';
+import { intlLocale, locale } from './locale.js?v=ukrainian-public-3';
 const store = createAccountStore(localStorage);
 const api = createAccountApi();
 
