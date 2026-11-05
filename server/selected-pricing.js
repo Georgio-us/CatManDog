@@ -51,11 +51,19 @@ export async function selectedPriceRows(db) {
   return rows.map(row => ({ ...row, proposal: selectedPrice(row) }));
 }
 
-export async function applySelectedPrices(db, staffId) {
+export async function applySelectedPrices(db, staffId, { automatic = false } = {}) {
   const client = await db.connect();
   try {
     await client.query('BEGIN');
     await client.query('SELECT pg_advisory_xact_lock(1043321)');
+    const migration = 'selected_sale_prices_2026_11_05';
+    if (automatic) {
+      const done = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [migration]);
+      if (done.rowCount) {
+        await client.query('COMMIT');
+        return { selected: 50, applied: 0, alreadyApplied: true };
+      }
+    }
     const rows = await selectedPriceRows(client);
     if (rows.length !== 50 || rows.some(row => !row.proposal) ||
         new Set(rows.map(row => row.variant_id)).size !== 50)
@@ -68,11 +76,12 @@ export async function applySelectedPrices(db, staffId) {
         WHERE id=$2 AND price_confirmed=false`, [row.proposal.priceCents, row.variant_id]);
       applied += result.rowCount;
     }
-    await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+    if (applied) await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
       VALUES($1,$2,'selected_supplier_prices_applied',$3,$4)`,
     [randomUUID(), staffId, 'selected_supplier_items', { selected: rows.length, applied,
-      policy: 'supplier_pvp_or_purchase_gross_plus_20', ivaBps: IVA_BPS,
+      automatic, policy: 'supplier_pvp_or_purchase_gross_plus_20', ivaBps: IVA_BPS,
       equivalenceBps: EQUIVALENCE_BPS }]);
+    if (automatic) await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [migration]);
     await client.query('COMMIT');
     return { selected: rows.length, applied };
   } catch (error) {

@@ -59,7 +59,7 @@ for (const entry of selected) {
   lines.push(`| ${escape(entry.brand)} ${escape(entry.supplierCode)} | ${escape(entry.name)} - ${escape(retailUnit)} | ${euros(netCost)} | ${euros(item.minimumPriceCents)} | ${euros(item.recommendedPriceCents || (entry.brand === 'Churu' ? proposal.priceCents : null))} | ${marketCell} | ${euros(proposal.priceCents)} | ${basis} |`);
 }
 if (selected.length !== 50 || missing) throw new Error(`Ожидалось 50 цен, отсутствует ${missing}`);
-lines.push('', 'Кнопка в закрытой админке «Применить рассчитанные цены к выбранным SKU» сохраняет расчёт только для ещё не утверждённых вариантов. Уже утверждённые вручную цены она не перезаписывает. Физический остаток при этом не меняется', '');
+lines.push('', 'При развёртывании расчёт однократно записывается в базу, если все 50 выбранных строк уже связаны с SKU. Если прайсы были загружены позже, та же операция доступна по кнопке в закрытой админке. Уже утверждённые вручную цены не перезаписываются. Физический остаток при этом не меняется', '');
 const output = resolve(folder, 'SELECTED-PRICE-REVIEW-2026-11-05.md');
 writeFileSync(output, lines.join('\n'));
 console.log(output);

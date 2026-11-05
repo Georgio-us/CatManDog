@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { Pool } from 'pg';
 import { importCatalog } from './catalog.js';
+import { applySelectedPrices } from './selected-pricing.js';
 
 export function createDatabase(url = process.env.DATABASE_URL) {
   if (!url) return null;
@@ -24,5 +25,12 @@ export async function initializeDatabase(db) {
   } finally { client.release(); }
   const count = await importCatalog(db);
   console.info(`Catalog imported: ${count} variants`);
+  try {
+    const pricing = await applySelectedPrices(db, null, { automatic: true });
+    if (!pricing.alreadyApplied) console.info(`Selected sale prices applied: ${pricing.applied}/${pricing.selected}`);
+  } catch (error) {
+    if (error.status !== 409) throw error;
+    console.info('Selected sale prices pending: supplier selection is incomplete');
+  }
   return count;
 }
