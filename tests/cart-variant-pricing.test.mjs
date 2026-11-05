@@ -31,7 +31,7 @@ test('product detail shows the chosen price and keeps researched offers separate
   assert.doesNotMatch(html, /<div class="detail-price">36\.31 € - 36\.49 €<\/div>/);
 });
 
-test('Sterilised 37 shows supplier sourcing states with a demo sale price', () => {
+test('Sterilised 37 keeps its retail price when supplier availability changes', () => {
   globalThis.location = { hostname: 'localhost' };
   const product = structuredClone(family);
   const states = ['on_hand', 'on_hand', 'source_on_demand', 'unavailable'];
@@ -53,10 +53,10 @@ test('Sterilised 37 shows supplier sourcing states with a demo sale price', () =
   assert.match(stock, /data-buy="rc-sterilised"[^>]*>Добавить в корзину/);
 
   const unconfirmed = accessoryDetail(product, { ...helpers, variantId: product.variants[2].id });
-  assert.match(unconfirmed, /<div class="detail-price">7\.77 €<\/div>/);
-  assert.match(unconfirmed, /Демонстрационная цена/);
+  assert.match(unconfirmed, /<div class="detail-price">36\.31 €<\/div>/);
+  assert.doesNotMatch(unconfirmed, /Демонстрационная цена/);
   assert.match(unconfirmed, /data-buy="rc-sterilised"[^>]*>Заказать с доставкой/);
-  assert.doesNotMatch(unconfirmed, /Цены в изученных магазинах|Precios observados en otras tiendas/);
+  assert.match(unconfirmed, /Цены в изученных магазинах|Precios observados en otras tiendas/);
 });
 
 test('Sterilised 37 product-specific flow shows the four requested delivery states', () => {

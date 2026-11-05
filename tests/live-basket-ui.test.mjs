@@ -32,20 +32,20 @@ test('real basket uses server availability and calculates separate delivery per 
 test('unconfirmed availability cannot appear as stock or enter checkout', () => {
   const pendingCart = [{ id: 'food', productId: 'food', variantId: 'food-pending', qty: 1 }];
   const html = renderLiveBasket({ ...helpers, cart: pendingCart, grouping: 'together' });
-  assert.match(html, /Наличие и цена уточняются/);
+  assert.match(html, /Наличие уточняется/);
   assert.match(html, /id="checkout"[^>]*disabled/);
   assert.doesNotMatch(html, /Товары в наличии/);
-  assert.doesNotMatch(html, /74\.99 €/);
+  assert.match(html, /74\.99 €/);
 });
 
-test('supplier-linked SKU with a demonstration price can enter the basket but not checkout', () => {
+test('supplier-linked SKU keeps its retail price in the basket but cannot check out yet', () => {
   const pendingSale = { ...product.variants[0], priceStatus: 'temporary',
     serverPriceConfirmed: false, serverSourcingAvailability: 'on_hand' };
   const linkedProduct = { ...product, variants: [pendingSale] };
   const html = renderLiveBasket({ ...helpers, products: [linkedProduct],
     cart: [{ id: 'food', productId: 'food', variantId: 'food-small', qty: 1 }], grouping: 'together' });
   assert.match(html, /В наличии/);
-  assert.match(html, /Цена уточняется/);
+  assert.match(html, /5\.09 €/);
   assert.match(html, /id="checkout"[^>]*disabled/);
   assert.doesNotMatch(html, /7\.77 €/);
 });

@@ -8,11 +8,9 @@ export function resolveVariant(product, variantId) {
 export function confirmedPrice(sku) {
   return sku && sku.priceStatus !== 'pending' && Number.isFinite(sku.price) && sku.price > 0 ? sku.price : null;
 }
-export const isDemoPrice = sku => !!sku &&
-  (sku.serverSourcingAvailability && sku.serverPriceConfirmed === false || confirmedPrice(sku) === null);
-// Unknown prices stay unknown; retail references never become confirmed sale prices.
-export const storefrontPrice = sku => sku?.storefrontRetired ? null :
-  sku?.serverSourcingAvailability && sku.serverPriceConfirmed === false ? 7.77 : confirmedPrice(sku);
+export const isDemoPrice = sku => !!sku && confirmedPrice(sku) === null;
+// Price and availability are independent: an unavailable SKU can still have a retail price.
+export const storefrontPrice = sku => sku?.storefrontRetired ? null : confirmedPrice(sku);
 export function canBuy(sku) {
   return storefrontPrice(sku) !== null && !sku.storefrontRetired &&
     sku.serverAvailableForCart !== false &&
@@ -21,8 +19,7 @@ export function canBuy(sku) {
 }
 export function catalogPrice(product) {
   const variants = snapshots(product);
-  const available = variants.filter(canBuy);
-  const priced = available.length ? available : variants.filter(variant => !variant.storefrontRetired);
+  const priced = variants.filter(variant => !variant.storefrontRetired);
   const prices = priced.map(storefrontPrice).filter(Number.isFinite);
   if (!prices.length) return { amount: null, min: null, max: null, from: false, demo: false };
   const min = Math.min(...prices);

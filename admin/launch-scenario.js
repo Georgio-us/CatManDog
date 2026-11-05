@@ -53,8 +53,8 @@ function renderCatalog() {
   const cards = list.slice(0, 100).map(item => `<article class="lab-card"><div class="lab-card-media">${image(item)}</div>
     <div class="lab-card-body"><small>${esc(item.brand)} · ${esc(item.label)}</small><h2>${esc(item.name)}</h2>
     <span class="lab-status ${item.state === 'unavailable' ? 'off' : ''}">${status(item)}</span>
-    <span class="lab-price">${money(item.priceCents)}</span><span class="lab-price-note">${item.priceConfirmed ? '' : 'Демонстрационная цена'}</span>
-    <button type="button" class="lab-button primary" data-add="${esc(item.variantId)}" ${item.state === 'unavailable' ? 'disabled' : ''}>${item.state === 'unavailable' ? 'Недоступен' : 'Добавить в корзину'}</button></div></article>`).join('');
+    <span class="lab-price">${item.priceCents === null ? 'Цена уточняется' : money(item.priceCents)}</span><span class="lab-price-note">${item.priceConfirmed ? '' : item.priceCents === null ? '' : 'Ценовой ориентир'}</span>
+    <button type="button" class="lab-button primary" data-add="${esc(item.variantId)}" ${item.state === 'unavailable' || item.priceCents === null ? 'disabled' : ''}>${item.state === 'unavailable' ? 'Недоступен' : 'Добавить в корзину'}</button></div></article>`).join('');
   root.innerHTML = shell('Выберите товары', 'Фасовки из каталога и загруженных прайсов поставщиков',
     `<div class="lab-toolbar"><input id="lab-search" type="search" placeholder="Название, бренд или фасовка" value="${esc(state.search)}" aria-label="Поиск товаров">
     <select id="lab-filter" aria-label="Какие товары показывать"><option value="selected" ${state.filter === 'selected' ? 'selected' : ''}>Выбраны для закупки</option>

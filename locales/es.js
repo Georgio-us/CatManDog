@@ -175,7 +175,6 @@ export const es = {
   'Рекомендованная розничная цена': 'Precio de venta recomendado',
   'Ценовой ориентир': 'Precio orientativo',
   'Розничный ориентир': 'Precio orientativo de venta',
-  'Демонстрационная цена': 'Precio de demostración',
   'Выбор CatManDog': 'Selección CatManDog',
   'В избранное': 'Añadir a favoritos',
   'Убрать из избранного': 'Quitar de favoritos',

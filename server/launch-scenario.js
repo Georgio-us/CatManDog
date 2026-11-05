@@ -25,8 +25,8 @@ export function launchState(selected, matched) {
 }
 
 export function launchPrice(row) {
-  return row.price_confirmed && (row.price_override_cents ?? row.source_price_cents) > 0
-    ? row.price_override_cents ?? row.source_price_cents : 777;
+  const cents = row.price_override_cents ?? row.source_price_cents;
+  return Number.isInteger(cents) && cents > 0 ? cents : null;
 }
 
 export async function launchCatalog(db) {
@@ -61,7 +61,7 @@ export function launchGroups(lines, byId, grouping = 'together') {
   const items = lines.map(line => {
     const id = trim(line?.variantId, 180);
     const item = byId.get(id);
-    if (!item || item.state === 'unavailable' || seen.has(id) ||
+    if (!item || item.state === 'unavailable' || item.priceCents === null || seen.has(id) ||
         !Number.isInteger(line.quantity) || line.quantity < 1 || line.quantity > 99)
       throw new Error('Проверьте товар и количество');
     seen.add(id);
