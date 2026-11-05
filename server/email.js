@@ -44,10 +44,10 @@ export async function sendServiceReply(to, requestId, message, fetcher = fetch, 
       : `Здравствуйте!\n\n${message}\n\nЕсли у вас остались вопросы, ответьте на это письмо.\n\nCatManDog`, fetcher);
 }
 
-export async function sendAccountLink(to, kind, token, fetcher = fetch, language = 'ru') {
+export async function sendAccountLink(to, kind, token, fetcher = fetch, language = 'ru', returnTo = '') {
   if (!emailReady()) throw new Error('Почтовая отправка не настроена');
   const base = new URL(process.env.PUBLIC_BASE_URL);
-  base.hash = `/account/${kind === 'verify' ? 'verify' : 'reset'}?token=${token}`;
+  base.hash = `/account/${kind === 'verify' ? 'verify' : 'reset'}?token=${token}${returnTo === 'pet' ? '&return=pet' : ''}`;
   const url = base.toString();
   const spanish = language === 'es';
   const title = spanish ? (kind === 'verify' ? 'Confirma tu email - CatManDog' : 'Restablece tu contraseña - CatManDog')

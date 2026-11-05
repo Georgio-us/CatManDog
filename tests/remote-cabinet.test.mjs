@@ -6,12 +6,14 @@ const petId = '86e579dd-20c2-4b5e-a4b8-65f9510f8c27';
 const reminderId = 'a36b7d20-0e24-45de-9c0d-ce86725c0fc2';
 
 test('cabinet input cannot inject orders and keeps plans scoped to a saved pet', () => {
-  const result = normalizeCabinet({ pets: [{ id: petId, name: 'Лео.', species: 'cat', notes: 'Любит играть' }],
+  const result = normalizeCabinet({ pets: [{ id: petId, name: 'Лео.', species: 'cat',
+    food: 'Royal Canin Sterilised', notes: 'Любит играть' }],
     activePetId: petId, orders: [{ total_cents: 0, status: 'paid' }], promo: 'WELCOME10',
     reminders: [{ id: reminderId, petId, title: 'Корм', date: '2026-11-01' },
       { id: '74f17b92-e030-4a75-8f48-6ca5bf421a59', petId: '7b439d2d-5bfa-4015-9c72-d09680797c81',
         title: 'Чужой план', date: '2026-11-01' }] });
   assert.equal(result.pets[0].name, 'Лео.');
+  assert.equal(result.pets[0].profile.food, 'Royal Canin Sterilised');
   assert.equal(result.data.reminders.length, 1);
   assert.equal(result.data.reminders[0].title, 'Корм');
   assert.equal('orders' in result.data, false);
@@ -30,6 +32,7 @@ test('signed-in profile loads from API and saves without writing it to browser s
   globalThis.fetch = async (path, options) => {
     if (path === '/api/config') return Response.json({ accountsEnabled: true, emailEnabled: true });
     if (path === '/api/auth/me') return Response.json({ customer: { id: petId, email: 'a@example.test' } });
+    if (path === '/api/me/promo') return Response.json({ coupon: null });
     if (path === '/api/me/cabinet' && options.method === 'GET') return Response.json({ revision: 0,
       cabinet: { version: 1, pets: [{ id: petId, name: 'Лео', species: 'cat' }], activePetId: petId,
         human: {}, orders: [], reminders: [], clinics: {}, trips: [], tripDrafts: {} } });

@@ -13,6 +13,7 @@ function petFields(value) {
   if (!name || !['cat', 'dog'].includes(value?.species)) fail('Укажите имя и вид питомца');
   return { id, name, species: value.species,
     profile: { birthday: date(value.birthday), age: clean(value.age, 40), breed: clean(value.breed, 80),
+      food: clean(value.food, 120),
       preferences: list(value.preferences, 20).map(item => clean(item, 60)).filter(Boolean),
       notes: clean(value.notes, 400), color: value.color === 'peach' ? 'peach' : 'sage' } };
 }

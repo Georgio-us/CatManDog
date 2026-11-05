@@ -44,7 +44,8 @@ export async function serveStatic(req, res, pathname) {
   const parts = decoded.split('/').filter(Boolean);
   if (parts.some(part => part === '..' || hidden(part))) return json(res, 404, { error: 'Не найдено' });
   const file = resolve(root, ...(!parts.length ? ['index.html'] :
-    parts.length === 1 && parts[0] === 'admin' ? ['admin','index.html'] : parts));
+    parts.length === 1 && parts[0] === 'admin' ? ['admin','index.html'] :
+      parts.length === 1 && parts[0] === 'pet' ? ['index.html'] : parts));
   if (file !== root && !file.startsWith(root + sep)) return json(res, 404, { error: 'Не найдено' });
   let info;
   try { info = await stat(file); } catch { return json(res, 404, { error: 'Не найдено' }); }

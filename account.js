@@ -47,6 +47,7 @@ export function createAccountUI(helpers) {
   const { escape: e, icon, money, products, imageBlock, render, notify, getCart, repeatOrder } = helpers;
   if (helpers.publicStore && store.mode() === 'demo') store.open('personal');
   let accountsEnabled = false;
+  let authReady = false;
   let emailEnabled = false;
   let googleClientId = null;
   let googleScript = null;
@@ -57,6 +58,9 @@ export function createAccountUI(helpers) {
   let verifyingToken = null;
   let googleInitialized = false;
   let googleBusy = false;
+  const petCardIntent = () => location.pathname === '/pet' || location.hash?.startsWith('#/pet') ||
+    new URLSearchParams((location.hash || '').split('?')[1] || '').get('return') === 'pet';
+  const afterSignIn = () => petCardIntent() ? '/pet' : '/account';
   function setCustomer(value) {
     customer = value;
     const adminLink = typeof document === 'undefined' ? null : document.querySelector('#admin-link');
@@ -89,7 +93,7 @@ export function createAccountUI(helpers) {
         await api.googleSignIn(response.credential);
         await refreshCustomer();
         await loadRemote();
-        navigate('/account');
+        navigate(afterSignIn());
       }
     } catch (error) {
       const message = document.querySelector('[data-google-error]');
@@ -97,7 +101,7 @@ export function createAccountUI(helpers) {
         message.textContent = error.message;
         if (error.status === 409 && mode === 'signin') {
           const link = document.createElement('a');
-          link.href = '#/account/login';
+          link.href = '#/account/login' + (petCardIntent() ? '?return=pet' : '');
           link.className = 'text-link';
           link.textContent = 'Войти по паролю';
           message.append(' ', link);
@@ -131,12 +135,14 @@ export function createAccountUI(helpers) {
       accountsEnabled = config.accountsEnabled === true;
       emailEnabled = config.emailEnabled === true;
       googleClientId = config.googleClientId || null;
+      authReady = true;
       if (!accountsEnabled) { render(); return; }
       if (location.hash.startsWith('#/account/verify?')) { await handleLink(); return; }
       await refreshCustomer();
       await loadRemote();
       render();
     } catch (error) {
+      authReady = true;
       setCustomer(null);
       if (error.status !== 401) console.warn('Cabinet initialization:', error.message);
       render();
@@ -154,7 +160,7 @@ export function createAccountUI(helpers) {
       await refreshCustomer();
       await loadRemote();
       notify('Email подтверждён');
-      navigate('/account');
+      navigate(afterSignIn());
     } catch (error) { authStatus = error.message; render(); }
   }
   function navigate(path) { if (location.hash === '#' + path) render(); else location.hash = path; }
@@ -167,6 +173,11 @@ export function createAccountUI(helpers) {
   };
   const formError = form => form.querySelector('[data-account-error]');
   const pageNote = () => store.mode() === 'remote' ? '' : `<p class="pet-local-note">${icon('shield')}Данные этого профиля хранятся на устройстве${accountsEnabled ? ' <a href="#/account/login">Войти или зарегистрироваться</a>' : ''}</p>`;
+  function petCardPage(params) {
+    if (store.mode() === 'remote') return store.activePet() ? page('/account/profile', params) : onboarding(params);
+    if (!authReady) return '<div class="page pet-onboarding pet-auth-page"><div class="pet-auth-panel" role="status">Открываем профиль питомца</div></div>';
+    return `<div class="page pet-onboarding pet-auth-page"><div class="pet-auth-panel"><span class="pet-eyebrow">Кабинет с хвостиком</span><h1>Расскажите о своём питомце</h1><p class="pet-intro-copy">Сохраните его привычки и любимый корм в аккаунте. К профилю можно вернуться с другого устройства.</p>${accountsEnabled ? `<div class="pet-empty-account-actions"><a class="button" href="#/account/register">Создать аккаунт ${icon('arrow')}</a><a class="button outline" href="#/account/login">Уже есть аккаунт? Войти</a></div>${googleClientId ? '<div class="pet-google-divider"><span>или</span></div><div class="pet-google-control" data-google-mode="signin"></div><p class="pet-form-error" data-google-error role="alert"></p>' : ''}` : '<p class="pet-form-error" role="status">Регистрация временно недоступна. Попробуйте позже.</p>'}</div></div>`;
+  }
   function authPage(kind = 'login') {
     const registering = kind === 'register';
     const recovering = kind === 'recover';
@@ -176,14 +187,15 @@ export function createAccountUI(helpers) {
     const title = registering ? 'Создать аккаунт' : recovering ? 'Восстановить пароль' : resetting ? 'Новый пароль' : checking ? 'Проверьте почту' : verifying ? 'Подтверждаем email' : 'Войти в кабинет';
     const params = new URLSearchParams(location.hash.split('?')[1] || '');
     const token = params.get('token') || '';
+    const authReturn = petCardIntent() ? '?return=pet' : '';
     const emailForm = `<form class="pet-panel pet-form" data-account-form="${checking && pendingLinkKind === 'verify' ? 'resend-verification' : 'recover'}"><label class="pet-field">${checking ? 'Проверить или исправить email' : 'Email'}<input type="email" name="email" required maxlength="160" autocomplete="email" value="${e(pendingEmail)}"></label><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit" ${accountsEnabled && emailEnabled ? '' : 'disabled'}>${checking ? 'Отправить ссылку ещё раз' : 'Получить ссылку'} ${icon('arrow')}</button></form>`;
     const passwordForm = `<form class="pet-panel pet-form" data-account-form="reset"><input type="hidden" name="token" value="${e(token)}"><label class="pet-field">Новый пароль<input type="password" name="password" required minlength="12" maxlength="200" autocomplete="new-password"></label><label class="pet-field">Повторите пароль<input type="password" name="passwordConfirm" required minlength="12" maxlength="200" autocomplete="new-password"></label><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit" ${token && accountsEnabled ? '' : 'disabled'}>Сохранить пароль ${icon('arrow')}</button></form>`;
     const authForm = `<form class="pet-panel pet-form" data-account-form="${registering ? 'register' : 'login'}">${registering ? '<label class="pet-field">Ваше имя<input name="name" maxlength="100" autocomplete="name"></label>' : ''}<label class="pet-field">Email<input type="email" name="email" required maxlength="160" autocomplete="email"></label><label class="pet-field">Пароль<input type="password" name="password" required minlength="12" maxlength="200" autocomplete="${registering ? 'new-password' : 'current-password'}"></label>${registering ? '<label class="pet-field">Повторите пароль<input type="password" name="passwordConfirm" required minlength="12" maxlength="200" autocomplete="new-password"></label>' : ''}<p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit" ${accountsEnabled && (!registering || emailEnabled) ? '' : 'disabled'}>${registering ? 'Зарегистрироваться' : 'Войти'} ${icon('arrow')}</button>${accountsEnabled && (!registering || emailEnabled) ? '' : '<p class="pet-form-hint">Регистрация и вход станут доступны после подключения почтовых писем</p>'}</form>`;
-    const content = verifying ? `<p class="pet-intro-copy" role="status">${e(authStatus || 'Проверяем ссылку из письма')}</p><a class="text-link" href="#/account/check-email">Запросить новую ссылку</a>`
+    const content = verifying ? `<p class="pet-intro-copy" role="status">${e(authStatus || 'Проверяем ссылку из письма')}</p><a class="text-link" href="#/account/check-email${authReturn}">Запросить новую ссылку</a>`
       : resetting ? `<p class="pet-intro-copy">Введите новый пароль для вашего аккаунта</p>${passwordForm}`
-      : checking ? `<p class="pet-intro-copy" role="status">${pendingEmail ? `Запрос принят для <strong class="pet-auth-address">${e(pendingEmail)}</strong>. ` : ''}Если указанный email связан с аккаунтом, письмо со ссылкой придёт на почту. Проверьте также папку «Спам».</p>${emailForm}<div class="pet-auth-links"><a class="text-link" href="#/account/login">Вернуться ко входу</a><a class="text-link" href="#/account/register">Создать аккаунт</a></div>`
-      : recovering ? `<p class="pet-intro-copy">Укажите email, который использовали при регистрации. Мы отправим ссылку для создания нового пароля, если адрес связан с аккаунтом.</p>${emailForm}<div class="pet-auth-links"><a class="text-link" href="#/account/login">Вернуться ко входу</a><a class="text-link" href="#/account/register">Создать аккаунт</a></div>`
-      : `<p class="pet-intro-copy">${registering ? 'Сохраните питомцев и планы в своём аккаунте' : 'Ваши питомцы и планы будут доступны на ваших устройствах'}</p>${authForm}${googleClientId ? '<div class="pet-google-divider"><span>или</span></div><div class="pet-google-control" data-google-mode="signin"></div><p class="pet-form-error" data-google-error role="alert"></p>' : ''}<div class="pet-auth-links"><a class="text-link" href="#/account/${registering ? 'login' : 'register'}">${registering ? 'Уже есть аккаунт' : 'Создать аккаунт'}</a>${!registering ? '<a class="text-link" href="#/account/recover">Забыли пароль?</a>' : ''}</div>`;
+      : checking ? `<p class="pet-intro-copy" role="status">${pendingEmail ? `Запрос принят для <strong class="pet-auth-address">${e(pendingEmail)}</strong>. ` : ''}Если указанный email связан с аккаунтом, письмо со ссылкой придёт на почту. Проверьте также папку «Спам».</p>${emailForm}<div class="pet-auth-links"><a class="text-link" href="#/account/login${authReturn}">Вернуться ко входу</a><a class="text-link" href="#/account/register${authReturn}">Создать аккаунт</a></div>`
+      : recovering ? `<p class="pet-intro-copy">Укажите email, который использовали при регистрации. Мы отправим ссылку для создания нового пароля, если адрес связан с аккаунтом.</p>${emailForm}<div class="pet-auth-links"><a class="text-link" href="#/account/login${authReturn}">Вернуться ко входу</a><a class="text-link" href="#/account/register${authReturn}">Создать аккаунт</a></div>`
+      : `<p class="pet-intro-copy">${registering ? 'Сохраните питомцев и планы в своём аккаунте' : 'Ваши питомцы и планы будут доступны на ваших устройствах'}</p>${authForm}${googleClientId ? '<div class="pet-google-divider"><span>или</span></div><div class="pet-google-control" data-google-mode="signin"></div><p class="pet-form-error" data-google-error role="alert"></p>' : ''}<div class="pet-auth-links"><a class="text-link" href="#/account/${registering ? 'login' : 'register'}${authReturn}">${registering ? 'Уже есть аккаунт' : 'Создать аккаунт'}</a>${!registering ? '<a class="text-link" href="#/account/recover${authReturn}">Забыли пароль?</a>' : ''}</div>`;
     return `<div class="page pet-onboarding pet-auth-page"><div class="pet-auth-panel"><span class="pet-eyebrow">Кабинет с хвостиком</span><h1>${title}</h1>${content}</div></div>`;
   }
   const emptyPanel = (title, text, action = 'Выбрать товары', href = '#/catalog?pet=cat') => `<div class="pet-empty">${icon('paw')}<h3>${title}</h3><p>${text}</p><a class="button outline" href="${href}">${action}</a></div>`;
@@ -194,11 +206,11 @@ export function createAccountUI(helpers) {
   function petFields(pet = {}) {
     const today = new Date().toISOString().slice(0, 10);
     const ageOptions = [['', 'Выбрать'], ...['До года', '1-3 года', '4-7 лет', '8 лет и старше'].map(value => [value, value])];
-    return `<div class="pet-form-grid"><label class="pet-field">Имя питомца<input name="name" value="${e(pet.name || '')}" required maxlength="40" placeholder="Например, Барсик" autocomplete="off"></label>${petChoice('species', 'Кто живёт с вами', [['cat', 'Кошка или кот'], ['dog', 'Собака']], pet.species === 'dog' ? 'dog' : 'cat')}<label class="pet-field">День рождения <span>Если знаете</span><input type="date" name="birthday" max="${today}" value="${e(pet.birthday || '')}"><small class="pet-age-preview" data-pet-age-preview aria-live="polite">${pet.species === 'dog' ? '' : e(catAgePreview(pet.birthday))}</small></label>${petChoice('age', 'Примерный возраст', ageOptions, pet.age || '', 'Если дата неизвестна')}<label class="pet-field pet-field-wide">Порода <span>Необязательно</span><input name="breed" value="${e(pet.breed || '')}" maxlength="80" placeholder="Любимая домашняя кошка"></label></div><fieldset class="pet-preferences"><legend>Что подходит и нравится</legend><p>Сохраните привычки и предпочтения питомца</p><div>${preferenceOptions.map(v => `<label><input type="checkbox" name="preferences" value="${e(v)}" ${(pet.preferences || []).includes(v) ? 'checked' : ''}><span>${v}</span></label>`).join('')}</div></fieldset><label class="pet-field">Ещё кое-что обо мне <span>Необязательно</span><textarea name="notes" maxlength="400" rows="3" placeholder="Любимые игры, привычки и маленькие особенности">${e(pet.notes || '')}</textarea></label>`;
+    return `<div class="pet-form-grid"><label class="pet-field">Имя питомца<input name="name" value="${e(pet.name || '')}" required maxlength="40" placeholder="Например, Барсик" autocomplete="off"></label>${petChoice('species', 'Кто живёт с вами', [['cat', 'Кошка или кот'], ['dog', 'Собака']], pet.species === 'dog' ? 'dog' : 'cat')}<label class="pet-field">День рождения <span>Если знаете</span><input type="date" name="birthday" max="${today}" value="${e(pet.birthday || '')}"><small class="pet-age-preview" data-pet-age-preview aria-live="polite">${pet.species === 'dog' ? '' : e(catAgePreview(pet.birthday))}</small></label>${petChoice('age', 'Примерный возраст', ageOptions, pet.age || '', 'Если дата неизвестна')}<label class="pet-field pet-field-wide">Порода <span>Необязательно</span><input name="breed" value="${e(pet.breed || '')}" maxlength="80" placeholder="Любимая домашняя кошка"></label></div><fieldset class="pet-preferences"><legend>Что подходит и нравится</legend><p>Сохраните привычки и предпочтения питомца</p><div>${preferenceOptions.map(v => `<label><input type="checkbox" name="preferences" value="${e(v)}" ${(pet.preferences || []).includes(v) ? 'checked' : ''}><span>${v}</span></label>`).join('')}</div></fieldset><label class="pet-field">Любимый корм или рацион <span>Необязательно</span><input name="food" value="${e(pet.food || '')}" maxlength="120" placeholder="Например, название корма"></label><label class="pet-field">Ещё кое-что обо мне <span>Необязательно</span><textarea name="notes" maxlength="400" rows="3" placeholder="Любимые игры, привычки и маленькие особенности">${e(pet.notes || '')}</textarea></label>`;
   }
   function onboarding(params) {
     const adding = params.get('add') === '1';
-    return `<div class="page pet-onboarding">${pageNote()}<div class="pet-onboarding-grid"><div><span class="pet-eyebrow">У каждого хвоста - свой кабинет</span><h1>Давайте знакомиться<br>Как тебя зовут?</h1><p class="pet-intro-copy">Твои коробки, привычки и маленькие радости - в одном месте. А твой человек поможет всё заполнить.</p><form class="pet-panel pet-onboarding-form" data-account-form="join">${petFields()}${!adding ? '<label class="pet-field">Как зовут твоего человека <span>Необязательно</span><input name="humanName" maxlength="80" autocomplete="given-name" placeholder="Можно просто имя"></label>' : ''}<input type="hidden" name="ref" value="${e(params.get('ref') || '')}"><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">${adding ? 'Добавить питомца' : 'Создать мой кабинет'} ${icon('arrow')}</button><p class="pet-form-hint">${store.mode() === 'remote' ? 'Профиль сохранится в вашем аккаунте' : 'Профиль сохранится на этом устройстве'}</p></form>${!adding && store.mode() === 'personal' && store.activePet() ? '<a class="text-link pet-demo-link" href="#/account">Открыть мой кабинет</a><br>' : ''}${!adding && store.mode() !== 'remote' ? '<a class="text-link pet-demo-link" href="#/account/login">Войти в аккаунт</a>' : '<div class="pet-onboarding-links"><a class="text-link" href="#/account">Вернуться в кабинет</a><button class="text-link" data-account-exit>Выйти из аккаунта</button></div>'}</div><aside class="pet-onboarding-story"><img src="https://img.catmandog.es/assets/hero-happy.png" alt="Кот и собака отдыхают дома"><div><span class="pet-eyebrow">Хорошо быть собой</span><h2>Здесь всё<br>про тебя</h2><p>Когда заканчивается корм<br>Когда хочется новой игрушки<br>Когда у тебя день рождения</p></div></aside></div></div>`;
+    return `<div class="page pet-onboarding">${pageNote()}<div class="pet-onboarding-grid"><div><span class="pet-eyebrow">У каждого хвоста - свой кабинет</span><h1>Давайте знакомиться<br>Как тебя зовут?</h1><p class="pet-intro-copy">Твои коробки, привычки и маленькие радости - в одном месте. А твой человек поможет всё заполнить.</p><form class="pet-panel pet-onboarding-form" data-account-form="join">${petFields()}${!adding ? '<label class="pet-field">Как зовут твоего человека <span>Необязательно</span><input name="humanName" maxlength="80" autocomplete="given-name" placeholder="Можно просто имя"></label>' : ''}<input type="hidden" name="ref" value="${e(params.get('ref') || '')}"><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">${adding ? 'Добавить питомца' : store.mode() === 'remote' ? 'Сохранить профиль питомца' : 'Создать мой кабинет'} ${icon('arrow')}</button><p class="pet-form-hint">${store.mode() === 'remote' ? 'Профиль сохранится в вашем аккаунте' : 'Профиль сохранится на этом устройстве'}</p></form>${!adding && store.mode() === 'personal' && store.activePet() ? '<a class="text-link pet-demo-link" href="#/account">Открыть мой кабинет</a><br>' : ''}${!adding && store.mode() !== 'remote' ? '<a class="text-link pet-demo-link" href="#/account/login">Войти в аккаунт</a>' : '<div class="pet-onboarding-links"><a class="text-link" href="#/account">Вернуться в кабинет</a><button class="text-link" data-account-exit>Выйти из аккаунта</button></div>'}</div><aside class="pet-onboarding-story"><img src="https://img.catmandog.es/assets/hero-happy.png" alt="Кот и собака отдыхают дома"><div><span class="pet-eyebrow">Хорошо быть собой</span><h2>Здесь всё<br>про тебя</h2><p>Когда заканчивается корм<br>Когда хочется новой игрушки<br>Когда у тебя день рождения</p></div></aside></div></div>`;
   }
   function emptyAccount() {
     return `<div class="page pet-account">${pageNote()}<section class="pet-panel pet-empty-account"><span class="pet-eyebrow">Кабинет с хвостиком</span><h1>Вы вошли в аккаунт</h1><p class="pet-empty-account-email">${e(customer?.email || store.get().human.email || '')}</p><p class="pet-muted">Питомца можно добавить позже</p><div class="pet-empty-account-actions"><a class="button" href="#/join">Добавить питомца ${icon('arrow')}</a><a class="button outline" href="#/catalog">Перейти в каталог</a>${customer?.canManageStore ? '<a class="button outline" href="/admin">Управление магазином</a>' : ''}</div><button class="text-link" data-account-exit>Выйти из аккаунта</button></section></div>`;
@@ -251,6 +263,7 @@ export function createAccountUI(helpers) {
     return `<div class="pet-page-head"><span class="pet-eyebrow">Кто помогает мне с покупками</span><h1>Мой человек</h1><p>Имя и контакты в кабинете</p></div><form class="pet-panel pet-form" data-account-form="human"><div class="pet-form-grid"><label class="pet-field">Имя моего человека<input name="name" maxlength="80" autocomplete="given-name" value="${e(data.human.name)}"></label><label class="pet-field">Email<input type="email" name="email" autocomplete="email" value="${e(data.human.email)}" placeholder="name@example.com"></label><label class="pet-field pet-field-wide">Telegram <span>Необязательно</span><input name="telegram" maxlength="33" pattern="@?[A-Za-z0-9_]{5,32}" value="${e(data.human.telegram)}" placeholder="@username"></label></div><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">Сохранить контакты ${icon('check')}</button></form>${store.mode() === 'remote' && googleClientId ? `<section class="pet-panel pet-google-link"><h2>Вход через Google</h2>${customer?.googleLinked ? '<p class="pet-muted">Google подключён к этому кабинету</p>' : '<p class="pet-muted">Подключите Google с тем же email, чтобы входить без пароля</p><div class="pet-google-control" data-google-mode="link"></div><p class="pet-form-error" data-google-error role="alert"></p>'}</section>` : ''}`;
   }
   function page(path, params) {
+    if (path === '/pet') return petCardPage(params);
     if (['login','register','recover','reset','verify','check-email'].includes(path.split('/')[2]) && path.startsWith('/account/')) return authPage(path.split('/')[2]);
     if (path === '/join' || path === '/account/welcome') return onboarding(params);
     const pet = store.activePet();
@@ -312,14 +325,15 @@ export function createAccountUI(helpers) {
         if (kind === 'register' && values.get('password') !== values.get('passwordConfirm')) throw new Error('Пароли не совпадают');
         const button = form.querySelector('button[type=submit]'); button.disabled = true;
         try {
-          const result = await api[kind]({ email: values.get('email'), password: values.get('password'), name: values.get('name') });
-          if (kind === 'register') { pendingEmail = result.email; pendingLinkKind = 'verify'; navigate('/account/check-email'); }
-          else { await refreshCustomer(); await loadRemote(); navigate('/account'); }
+          const result = await api[kind]({ email: values.get('email'), password: values.get('password'),
+            name: values.get('name'), ...(kind === 'register' ? { returnTo: petCardIntent() ? 'pet' : '' } : {}) });
+          if (kind === 'register') { pendingEmail = result.email; pendingLinkKind = 'verify'; navigate('/account/check-email' + (petCardIntent() ? '?return=pet' : '')); }
+          else { await refreshCustomer(); await loadRemote(); navigate(afterSignIn()); }
         } catch (error) {
           if (kind === 'login' && error.status === 403) {
             pendingEmail = String(values.get('email') || '');
             pendingLinkKind = 'verify';
-            navigate('/account/check-email');
+            navigate('/account/check-email' + (petCardIntent() ? '?return=pet' : ''));
           }
           throw error;
         } finally { button.disabled = false; }
@@ -328,20 +342,21 @@ export function createAccountUI(helpers) {
       if (kind === 'recover' || kind === 'resend-verification') {
         pendingEmail = String(values.get('email') || '');
         pendingLinkKind = kind === 'recover' ? 'reset' : 'verify';
-        await api[kind === 'recover' ? 'recover' : 'resendVerification'](pendingEmail);
-        navigate('/account/check-email');
+        if (kind === 'recover') await api.recover(pendingEmail, petCardIntent() ? 'pet' : '');
+        else await api.resendVerification(pendingEmail, petCardIntent() ? 'pet' : '');
+        navigate('/account/check-email' + (petCardIntent() ? '?return=pet' : ''));
         notify('Проверьте адрес и почту');
         return;
       }
       if (kind === 'reset') {
         if (values.get('password') !== values.get('passwordConfirm')) throw new Error('Пароли не совпадают');
         await api.reset(values.get('token'), values.get('password'));
-        navigate('/account/login');
+        navigate('/account/login' + (petCardIntent() ? '?return=pet' : ''));
         notify('Пароль обновлён. Войдите с новым паролем');
         return;
       }
       if (kind === 'join' || kind === 'profile') {
-        const fields = { name: values.get('name'), species: values.get('species'), birthday: values.get('birthday'), age: values.get('age'), breed: values.get('breed'), notes: values.get('notes'), preferences: values.getAll('preferences') };
+        const fields = { name: values.get('name'), species: values.get('species'), birthday: values.get('birthday'), age: values.get('age'), breed: values.get('breed'), food: values.get('food'), notes: values.get('notes'), preferences: values.getAll('preferences') };
         if (kind === 'join') {
           if (routeAdding() === false && store.mode() !== 'remote') store.open('personal');
           store.savePet(fields);
@@ -351,7 +366,7 @@ export function createAccountUI(helpers) {
           const next = new URLSearchParams(location.hash.split('?')[1]).get('return');
           if (next === 'trip' && store.tripDraft()) { store.saveTrip(store.tripDraft()); await syncChanges(); navigate('/account/care'); }
           else if (next === 'clinics') navigate('/useful/clinics');
-          else navigate('/account');
+          else navigate(petCardIntent() ? '/account/profile' : '/account');
         } else { store.savePet(fields, store.activePet().id); await syncChanges(); render(); notify('Профиль сохранён'); }
       }
       if (kind === 'human') { store.saveHuman({ name: values.get('name'), email: values.get('email'), telegram: values.get('telegram') }); await syncChanges(); notify('Настройки сохранены'); }
