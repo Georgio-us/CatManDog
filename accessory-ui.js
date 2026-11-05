@@ -4,14 +4,14 @@ import { retailResearch, retailResearchBlock, provisionalPriceBlock, provisional
 
 const availabilityCopy = {
   ru: {
-    pending: ['Наличие уточняется', 'Наличие и цену этой фасовки уточняем. Пока её нельзя оформить.'],
+    pending: ['Наличие уточняется', 'Наличие этой фасовки уточняем. Пока её нельзя оформить.'],
     on_hand: ['В наличии', 'Товар есть у нас. При оформлении можно будет выбрать удобный интервал доставки по Валенсии. Точное время мы подтвердим после заказа.'],
     source_on_demand: ['Под заказ', 'Эту фасовку закажем у поставщика. Срок доставки уточним до оплаты.'],
     unavailable: ['Нет в наличии', 'Эту фасовку сейчас заказать нельзя. Выберите другой вес.'],
     add: 'Добавить в корзину', order: 'Заказать с доставкой'
   },
   es: {
-    pending: ['Disponibilidad pendiente', 'Estamos comprobando la disponibilidad y el precio de este formato. Todavía no se puede pedir.'],
+    pending: ['Disponibilidad pendiente', 'Estamos comprobando la disponibilidad de este formato. Todavía no se puede pedir.'],
     on_hand: ['Disponible', 'Tenemos este formato. Al realizar el pedido podrás indicar la franja de entrega que prefieras en València. Confirmaremos la hora después.'],
     source_on_demand: ['Por encargo', 'Pediremos este formato al proveedor. Confirmaremos el plazo de entrega antes del pago.'],
     unavailable: ['Agotado', 'Este formato no se puede pedir ahora. Elige otro peso.'],
