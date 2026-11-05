@@ -221,7 +221,7 @@ test('database image conversion keeps studio presentation only for the same asse
   const catalogProducts = [...products];
   const base = { product_id: 'food', name: 'Food', brand: 'Brand', category: 'Корм', pet: 'cat',
     image_path: 'https://img.catmandog.es/assets/food/editorial/food-v1.webp',
-    price_confirmed: false, referencePriceCents: 777, availability: 'pending' };
+    price_confirmed: false, referencePriceCents: 649, availability: 'pending' };
   applyServerCatalog(products, catalogProducts, [
     { ...base, variant_id: 'food-small', label: '400 г',
       variant_image_path: 'https://img.catmandog.es/assets/food/editorial/food-small-v1.webp' },

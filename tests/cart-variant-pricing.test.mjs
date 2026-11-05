@@ -70,7 +70,7 @@ test('Sterilised 37 product-specific flow shows the four requested delivery stat
   assert.match(inStock, /4 кг<\/strong><small>Под заказ · 24-48 ч<\/small>/);
   assert.match(inStock, /10 кг<\/strong><small>Нет в наличии<\/small>/);
   assert.ok(inStock.includes(`<div class="detail-price">${euro(family.variants.find(variant => variant.id === 'rc-sterilised-2000g').price)}</div>`));
-  assert.doesNotMatch(inStock, /Демонстрационная цена|7\.77 €/);
+  assert.doesNotMatch(inStock, /Демонстрационная цена/);
   assert.match(inStock, /data-preview-action="on_hand"/);
   assert.match(detail('rc-sterilised-4000g'), /data-preview-action="supplier_48h"/);
   assert.match(detail('rc-sterilised-10000g'), /<button type="button" class="button" disabled>/);

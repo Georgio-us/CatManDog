@@ -44,7 +44,7 @@ test('pet categories and features follow available products', () => {
 });
 
 test('price filter uses confirmed variants and excludes demo prices', () => {
-  const pending = { name: 'Ожидает цену', price: 7.77, priceStatus: 'pending' };
+  const pending = { name: 'Ожидает цену', price: 6.49, priceStatus: 'pending' };
   const priced = { name: 'Подтверждён', price: 12, priceStatus: 'confirmed' };
   const variantFamily = { variants: [pending, priced] };
   assert.equal(matchesHomePrice(pending, 20), false);

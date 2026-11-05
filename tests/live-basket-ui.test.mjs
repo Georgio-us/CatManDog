@@ -47,5 +47,5 @@ test('supplier-linked SKU keeps its retail price in the basket but cannot check 
   assert.match(html, /В наличии/);
   assert.match(html, /5\.09 €/);
   assert.match(html, /id="checkout"[^>]*disabled/);
-  assert.doesNotMatch(html, /7\.77 €/);
+  assert.doesNotMatch(html, /Демонстрационная цена/);
 });

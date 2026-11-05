@@ -44,7 +44,7 @@ test('an older saved demo order no longer shows a removed toy', () => {
   const store = createAccountStore(storage);
   store.open('demo');
   const snapshot = store.get();
-  snapshot.orders[0].items[1] = { productId: 'kong-scrunchie', size: '1 шт', qty: 1, price: 7.77 };
+  snapshot.orders[0].items[1] = { productId: 'kong-scrunchie', size: '1 шт', qty: 1, price: 6.49 };
   storage.setItem('catmandog-pet-account-demo-v1', JSON.stringify(snapshot));
   assert.equal(createAccountStore(storage).get().orders[0].items[1].productId, 'yagu-7514629');
 });
@@ -52,9 +52,9 @@ test('coupons validate and are captured in order snapshots', () => {
   const store = createAccountStore(memoryStorage()); store.savePet(pet('Лео'));
   assert.throws(() => store.applyPromo('invalid'));
   store.applyPromo(' WELCOME10 ');
-  const items = [{ productId: 'sample', price: 7.77, qty: 1, variantId: 'a' }];
+  const items = [{ productId: 'sample', price: 6.49, qty: 1, variantId: 'a' }];
   const order = store.recordOrder(items); items[0].price = 999;
-  assert.equal(order.discount, 10); assert.equal(store.get().orders[0].items[0].price, 7.77);
+  assert.equal(order.discount, 10); assert.equal(store.get().orders[0].items[0].price, 6.49);
   assert.throws(() => store.recordOrder([]));
 });
 test('unreadable storage does not prevent the storefront from initializing', () => {
@@ -64,7 +64,7 @@ test('unreadable storage does not prevent the storefront from initializing', () 
 
 test('older account data gains tools without losing profiles and orders', () => {
   const storage = memoryStorage(); const store = createAccountStore(storage);
-  const leo = store.savePet(pet('Лео')); store.recordOrder([{ productId: 'sample', price: 7.77, qty: 1 }]);
+  const leo = store.savePet(pet('Лео')); store.recordOrder([{ productId: 'sample', price: 6.49, qty: 1 }]);
   const old = store.get(); delete old.clinics; delete old.trips; delete old.tripDrafts;
   storage.setItem('catmandog-pet-account-v1', JSON.stringify(old));
   const restored = createAccountStore(storage);
