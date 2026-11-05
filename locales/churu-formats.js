@@ -17,7 +17,15 @@ export const churuFormatsEs = {
     'Premios cremosos Churu con salmón y salmón con pollo',
   'Churu - лосось и курица, короб 20 тюбиков': 'Churu - salmón y pollo, caja de 20 tubos',
   'Churu лосося - один тюбик 14 г': 'Churu salmón - un tubo de 14 g',
-  'Churu лосося с курицей - один тюбик 14 г': 'Churu salmón y pollo - un tubo de 14 g'
+  'Churu лосося с курицей - один тюбик 14 г': 'Churu salmón y pollo - un tubo de 14 g',
+  'Один запечатанный тюбик кремового лакомства Churu 14 г':
+    'Un tubo cerrado de premio cremoso Churu de 14 g',
+  '12 закрытых пачек Churu по 4 тюбика 14 г одного вкуса':
+    '12 sobres cerrados Churu de 4 tubos de 14 g del mismo sabor',
+  'Кремовое лакомство Churu со вкусом лосося в одном тюбике 14 г':
+    'Premio cremoso Churu de salmón en un tubo de 14 g',
+  'Кремовое лакомство Churu со вкусом лосося с курицей в одном тюбике 14 г':
+    'Premio cremoso Churu de salmón y pollo en un tubo de 14 g'
 };
 
 export const churuFormatsUk = {
@@ -32,7 +40,15 @@ export const churuFormatsUk = {
   '1 тюбик × 14 г · лосося с курицей': '1 тюбик × 14 г · лосось із куркою',
   'Churu - лосось и курица, короб 20 тюбиков': 'Churu - лосось і курка, короб 20 тюбиків',
   'Churu лосося - один тюбик 14 г': 'Churu лосось - один тюбик 14 г',
-  'Churu лосося с курицей - один тюбик 14 г': 'Churu лосось із куркою - один тюбик 14 г'
+  'Churu лосося с курицей - один тюбик 14 г': 'Churu лосось із куркою - один тюбик 14 г',
+  'Один запечатанный тюбик кремового лакомства Churu 14 г':
+    'Один запечатаний тюбик кремових ласощів Churu 14 г',
+  '12 закрытых пачек Churu по 4 тюбика 14 г одного вкуса':
+    '12 закритих пачок Churu по 4 тюбики 14 г одного смаку',
+  'Кремовое лакомство Churu со вкусом лосося в одном тюбике 14 г':
+    'Кремові ласощі Churu зі смаком лосося в одному тюбику 14 г',
+  'Кремовое лакомство Churu со вкусом лосося с курицей в одном тюбике 14 г':
+    'Кремові ласощі Churu зі смаком лосося з куркою в одному тюбику 14 г'
 };
 
 for (const [source, es, uk] of flavors) {

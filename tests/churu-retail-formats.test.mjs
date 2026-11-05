@@ -22,6 +22,9 @@ test('Churu purchase cartons map to distinct retail formats and approved prices'
     assert.deepEqual(product.variants.map(variant => variant.retailFormat.sourceUnitsPerPurchaseUnit),
       [48,48,48]);
     assert.equal(product.variants[1].availabilityStatus, 'unavailable');
+    assert.equal(product.variants[2].availabilityStatus, 'source_on_demand');
+    assert.doesNotMatch(product.variants[1].description, /4 × 14/);
+    assert.match(product.variants[2].description, /12 закрытых пачек/);
     for (const variant of product.variants.slice(1)) {
       assert.ok(variant.image.src.startsWith('/media/churu-formats-2026-11-05/'));
       assert.ok(existsSync(new URL(`..${variant.image.src}`, import.meta.url)));

@@ -52,3 +52,33 @@ export async function publishChuruRetailFormats(db) {
     throw error;
   } finally { client.release(); }
 }
+
+// A follow-up migration corrects the descriptions and availability of rows
+// created before the first production catalogue check.
+export async function publishChuruRetailFormatDetails(db) {
+  const churu = products.filter(product => product.brand === 'Churu' &&
+    product.variants?.some(variant => variant.retailFormat));
+  const client = await db.connect();
+  try {
+    await client.query('BEGIN');
+    await client.query('SELECT pg_advisory_xact_lock(1043319)');
+    const migration = await client.query(`SELECT 1 FROM catalog_migrations
+      WHERE name='churu_retail_format_details_2026_11_05'`);
+    if (!migration.rows.length) {
+      for (const product of churu) for (const variant of product.variants) {
+        const result = await client.query(`UPDATE catalog_variants SET description=$3,
+          availability=CASE WHEN $4 AND availability='pending' THEN 'source_on_demand'
+            ELSE availability END,updated_at=now() WHERE id=$1 AND product_id=$2`,
+        [variant.id, product.id, variant.description || product.description,
+          variant.retailFormat.kind === 'carton48']);
+        if (result.rowCount !== 1) throw new Error(`Missing Churu retail SKU: ${variant.id}`);
+      }
+      await client.query(`INSERT INTO catalog_migrations(name)
+        VALUES('churu_retail_format_details_2026_11_05')`);
+    }
+    await client.query('COMMIT');
+  } catch (error) {
+    await client.query('ROLLBACK');
+    throw error;
+  } finally { client.release(); }
+}
