@@ -1,7 +1,7 @@
 import { createUsefulUI } from './useful.js?v=ukrainian-public-3';
 import { createAccountUI } from './account.js?v=ukrainian-public-3';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js';
-import { accessoryDetail } from './accessory-ui.js?v=ukrainian-public-3';
+import { accessoryDetail } from './accessory-ui.js?v=churu-retail-1';
 import { availabilityScenarioDetail, availabilityScenarioFeedback } from './availability-scenario.js?v=5';
 import { createRoyalCaninFlow } from './rc-sterilised-flow.js?v=7';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=1';
@@ -9,14 +9,14 @@ import { provisionalPriceLabel } from './retail-research.js?v=ukrainian-public-3
 import { recommendForProduct } from './recommendations.js?v=dog-first-wave-1';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=variant-pricing-1';
 import { loadSupplierTerms } from './supplier-terms.js';
-import { categories, products, catalogProducts, articles } from './data.js?v=retail-reference-1';
+import { categories, products, catalogProducts, articles } from './data.js?v=churu-retail-1';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=ukrainian-public-3';
 import { createCheckoutUI } from './checkout-ui.js?v=ukrainian-public-3';
 import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=editorial-image-1';
 
 import { homeDirections, activeHomeLanding } from './collections.js?v=cat-assortment-1';
-import { installLocale, intlLocale, locale, translate } from './locale.js?v=ukrainian-public-3';
+import { installLocale, intlLocale, locale, translate } from './locale.js?v=churu-retail-1';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
