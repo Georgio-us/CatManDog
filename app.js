@@ -13,7 +13,7 @@ import { categories, products, catalogProducts, articles } from './data.js?v=ret
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=es-locale-4';
 import { createCheckoutUI } from './checkout-ui.js?v=live-basket-1';
 import { orderVariantId } from './order-progress.js';
-import { applyServerCatalog } from './server-prices.js?v=rc-availability-1';
+import { applyServerCatalog } from './server-prices.js?v=editorial-image-1';
 
 import { homeDirections, activeHomeLanding } from './collections.js?v=cat-assortment-1';
 import { installLocale, intlLocale, locale, translate } from './locale.js?v=welcome-card-1';
