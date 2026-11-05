@@ -3,9 +3,38 @@ import { retiredProductIds } from '../catalog-policy.js';
 import { snapshots, confirmedPrice, canBuy } from '../variants.js';
 import { yaguRetailBenchmarks } from '../yagu-retail-benchmarks.js';
 import { supplierSourcingByVariant } from './sourcing-status.js';
+import { launchSelectedImageMap } from '../launch-selected-image-map.js';
 
 const cents = value => Number.isFinite(value) && value > 0 ? Math.round(value * 100) : null;
 const imagePath = image => typeof image === 'string' ? image : image?.src || null;
+
+export async function publishSelectedLaunchImages(client) {
+  const { rows } = await client.query("SELECT name FROM catalog_migrations WHERE name='launch_selected_images_2026_11_05'");
+  if (rows.length) return 0;
+  let matchedProducts = 0;
+  let matchedVariants = 0;
+  for (const product of launchSelectedImageMap) {
+    const updated = await client.query(`UPDATE catalog_products
+      SET image_path=coalesce(nullif(image_path,''),$2),active=true,
+        source=source-'catalogHidden'
+      WHERE id=$1 RETURNING id`, [product.id, product.imagePath]);
+    matchedProducts += updated.rowCount || 0;
+    for (const variant of product.variants) {
+      const result = await client.query(`UPDATE catalog_variants
+        SET image_path=coalesce(nullif(image_path,''),$2),
+          availability=CASE WHEN availability='unavailable' AND $4 THEN 'source_on_demand'
+            ELSE availability END
+        WHERE id=$1 AND product_id=$3`, [variant.id, variant.imagePath, product.id,
+        variant.supplierCode !== '949577']);
+      matchedVariants += result.rowCount || 0;
+    }
+  }
+  if (matchedProducts === launchSelectedImageMap.length &&
+      matchedVariants === launchSelectedImageMap.reduce((count, product) => count + product.variants.length, 0)) {
+    await client.query("INSERT INTO catalog_migrations(name) VALUES('launch_selected_images_2026_11_05')");
+  }
+  return matchedProducts;
+}
 
 export function catalogRows(items = products) {
   return items.filter(product => !product.gift && !product.catalogHidden)
@@ -91,6 +120,13 @@ export async function importCatalog(db, items = products) {
           [[...retiredProductIds]]);
         await client.query("INSERT INTO catalog_migrations(name) VALUES('retired_products_archived')");
       }
+      await publishSelectedLaunchImages(client);
+      // The owner set a retail price for this model; its two color variants remain
+      // unavailable for checkout until Tina confirms which colors she can supply.
+      await client.query(`UPDATE catalog_variants SET price_override_cents=5490,
+        price_confirmed=true WHERE id = ANY($1::text[])
+          AND price_override_cents IS NULL AND price_confirmed=false`,
+      [['heybopet-hb-pwfs-s30s-black','heybopet-hb-pwfs-s30s-white']]);
     }
     await client.query('COMMIT');
     return rows.length;
