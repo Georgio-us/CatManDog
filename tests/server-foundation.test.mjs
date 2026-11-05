@@ -186,6 +186,31 @@ test('database catalog controls published products and keeps reference prices se
   assert.equal(products[2].variants[0].price, 12.99);
 });
 
+test('database image conversion keeps studio presentation only for the same asset', () => {
+  const products = [{ id: 'food', image: {
+    src: 'https://img.catmandog.es/assets/food/editorial/food-v1.png', presentation: 'editorial'
+  }, variants: [{ id: 'food-small', image: {
+    src: 'https://img.catmandog.es/assets/food/editorial/food-small-v1.png', presentation: 'editorial'
+  } }, { id: 'food-large', image: {
+    src: 'https://img.catmandog.es/assets/food/editorial/food-large-v1.png', presentation: 'editorial'
+  } }] }];
+  const catalogProducts = [...products];
+  const base = { product_id: 'food', name: 'Food', brand: 'Brand', category: 'Корм', pet: 'cat',
+    image_path: 'https://img.catmandog.es/assets/food/editorial/food-v1.webp',
+    price_confirmed: false, referencePriceCents: 777, availability: 'pending' };
+  applyServerCatalog(products, catalogProducts, [
+    { ...base, variant_id: 'food-small', label: '400 г',
+      variant_image_path: 'https://img.catmandog.es/assets/food/editorial/food-small-v1.webp' },
+    { ...base, variant_id: 'food-large', label: '2 кг',
+      variant_image_path: 'https://img.catmandog.es/assets/food/replacement-large.webp' }
+  ]);
+  assert.equal(products[0].image.presentation, 'editorial');
+  assert.equal(products[0].variants[0].image.presentation, 'editorial');
+  assert.equal(products[0].variants[0].image.src,
+    'https://img.catmandog.es/assets/food/editorial/food-small-v1.webp');
+  assert.equal(products[0].variants[1].image.presentation, undefined);
+});
+
 test('storefront disables cart actions for reserved stock and supplier-disabled variants', () => {
   const products = [];
   const catalogProducts = [];
