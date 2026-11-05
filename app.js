@@ -1,5 +1,5 @@
 import { createUsefulUI } from './useful.js?v=es-locale-4';
-import { createAccountUI } from './account.js?v=es-locale-4';
+import { createAccountUI } from './account.js?v=welcome-card-1';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js';
 import { accessoryDetail } from './accessory-ui.js?v=rc-availability-2';
 import { availabilityScenarioDetail, availabilityScenarioFeedback } from './availability-scenario.js?v=5';
@@ -16,7 +16,7 @@ import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=rc-availability-1';
 
 import { homeDirections, activeHomeLanding } from './collections.js?v=cat-assortment-1';
-import { installLocale, intlLocale, locale, translate } from './locale.js?v=language-menu-1';
+import { installLocale, intlLocale, locale, translate } from './locale.js?v=welcome-card-1';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
 import { analyticsItem, announceCommerce } from './analytics-events.js';

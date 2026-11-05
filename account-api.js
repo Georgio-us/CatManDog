@@ -1,4 +1,4 @@
-import { locale } from './locale.js?v=es-locale-4';
+import { locale } from './locale.js?v=welcome-card-1';
 
 export function createAccountApi(fetcher = fetch) {
   async function request(path, method = 'GET', body) {
