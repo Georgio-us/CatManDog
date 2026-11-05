@@ -1,42 +1,52 @@
 import { es, esPatterns } from './locales/es.js?v=catalog-search-1';
 import { esProductText } from './locales/product-es.js';
 import { esDetails } from './locales/details-es.js';
+import { uk, ukPatterns } from './locales/uk.js';
 import { seoCategoryForPath } from './seo-categories.js';
 
 const storageKey = 'catmandog-language';
 const saved = (() => { try { return localStorage.getItem(storageKey); } catch { return null; } })();
+const previewStorageKey = 'catmandog-uk-preview-language';
+const previewSaved = (() => { try { return localStorage.getItem(previewStorageKey); } catch { return null; } })();
 const seoPath = globalThis.location?.pathname || '';
+const ukrainianPreview = new URLSearchParams(globalThis.location?.search || '').has('ukPreview');
 const language = seoPath === '/revista' || seoPath.startsWith('/revista/') || !!seoCategoryForPath(seoPath)
-  ? 'es' : saved === 'ru' || saved === 'es' ? saved : 'es';
+  ? 'es' : ukrainianPreview && previewSaved === 'uk' ? 'uk' : saved === 'ru' || saved === 'es' ? saved : 'es';
 const translatedNodes = new WeakMap();
 const translatedAttributes = new WeakMap();
 const attributes = ['aria-label', 'title', 'placeholder', 'alt'];
 
 export const locale = () => language;
-export const intlLocale = () => language === 'es' ? 'es-ES' : 'ru-RU';
+export const intlLocale = () => ({ es: 'es-ES', ru: 'ru-RU', uk: 'uk-UA' })[language];
 export function setLocale(value) {
-  if (value !== 'ru' && value !== 'es') return;
-  try { localStorage.setItem(storageKey, value); } catch { /* Private browsing */ }
-  if (value === 'ru' && (location.pathname === '/revista' || location.pathname.startsWith('/revista/'))) {
-    location.assign(`/#/journal${location.pathname.slice('/revista'.length)}`);
+  if (value !== 'ru' && value !== 'es' && !(ukrainianPreview && value === 'uk')) return;
+  try {
+    if (value === 'uk') localStorage.setItem(previewStorageKey, value);
+    else {
+      localStorage.setItem(storageKey, value);
+      localStorage.removeItem(previewStorageKey);
+    }
+  } catch { /* Private browsing */ }
+  if (value !== 'es' && (location.pathname === '/revista' || location.pathname.startsWith('/revista/'))) {
+    location.assign(`/${location.search}#/journal${location.pathname.slice('/revista'.length)}`);
     return;
   }
   const category = seoCategoryForPath(location.pathname);
-  if (value === 'ru' && category) {
-    location.assign(`/#/catalog?pet=${category.pet}&group=${category.group}`);
+  if (value !== 'es' && category) {
+    location.assign(`/${location.search}#/catalog?pet=${category.pet}&group=${category.group}`);
     return;
   }
   location.reload();
 }
 
 export function translate(value) {
-  if (language !== 'es' || typeof value !== 'string' || !/[А-Яа-яЁё]/.test(value)) return value;
+  if (language === 'ru' || typeof value !== 'string' || !/[А-Яа-яЁё]/.test(value)) return value;
   const whitespace = value.match(/^(\s*)([\s\S]*?)(\s*)$/);
   const source = whitespace?.[2] ?? value;
-  let result = es[source] ?? esProductText[source] ?? esDetails[source];
+  let result = language === 'uk' ? uk[source] : es[source] ?? esProductText[source] ?? esDetails[source];
   if (result === undefined) {
     result = source;
-    for (const [pattern, replacement] of esPatterns) {
+    for (const [pattern, replacement] of language === 'uk' ? ukPatterns : esPatterns) {
       if (pattern.test(result)) result = result.replace(pattern, replacement);
     }
     // Action labels contain a product name after the colon. Translate that
@@ -53,8 +63,10 @@ export function translate(value) {
       result = result.split(' - ').map(part => translate(part)).join(' - ');
     }
   }
-  result = result.replace(/(^|[\s×/·-])(\d+(?:,\d+)?)\s*(кг|г|см|мл|л|шт)(?=$|[\s×/·-])/gu,
+  if (language === 'es') result = result.replace(/(^|[\s×/·-])(\d+(?:,\d+)?)\s*(кг|г|см|мл|л|шт)(?=$|[\s×/·-])/gu,
     (_, before, amount, unit) => `${before}${amount} ${{ кг: 'kg', г: 'g', см: 'cm', мл: 'ml', л: 'l', шт: 'uds.' }[unit]}`);
+  if (language === 'uk') result = result.replace(/(^|[\s×/·-])(\d+(?:,\d+)?)\s*(кг|г|см|мл|л|шт)(?=$|[\s×/·-])/gu,
+    (_, before, amount, unit) => `${before}${amount} ${{ кг: 'кг', г: 'г', см: 'см', мл: 'мл', л: 'л', шт: 'шт.' }[unit]}`);
   return `${whitespace?.[1] ?? ''}${result}${whitespace?.[3] ?? ''}`;
 }
 
@@ -68,7 +80,7 @@ function textNode(node) {
 }
 
 function elementAttributes(element) {
-  if (language === 'ru' && element.tagName === 'A') {
+  if (language !== 'es' && element.tagName === 'A') {
     const href = element.getAttribute('href');
     if (href === '/revista' || href?.startsWith('/revista/')) {
       element.setAttribute('href', `#/journal${href.slice('/revista'.length)}`);
@@ -102,7 +114,7 @@ function elementAttributes(element) {
 }
 
 function translateTree(root) {
-  if (language !== 'es' || !root) return;
+  if (language === 'ru' || !root) return;
   if (root.nodeType === Node.TEXT_NODE) {
     if (!root.parentElement?.closest('script, style, [data-no-translate]')) textNode(root);
     return;
@@ -120,19 +132,55 @@ function translateTree(root) {
 
 export function installLocale() {
   document.documentElement.lang = language;
-  if (language === 'es') {
+  if (language !== 'ru') {
     const description = document.querySelector('meta[name="description"]');
     if (description) description.content = translate(description.content);
   }
   const switcher = document.querySelector('#language-switcher');
   if (switcher) {
+    if (ukrainianPreview) switcher.querySelector('[data-locale="uk"]')?.removeAttribute('hidden');
+    const trigger = switcher.querySelector('.language-trigger');
+    const options = switcher.querySelector('.language-options');
+    const names = { es: 'Español', ru: 'Русский', uk: 'Українська' };
+    const shortNames = { es: 'ES', ru: 'RU', uk: 'УКР' };
+    const accessibleLabels = {
+      es: `Elegir idioma. Actual: ${names[language]}`,
+      ru: `Выбрать язык. Сейчас: ${names[language]}`,
+      uk: `Обрати мову. Зараз: ${names[language]}`
+    };
+    const groupLabels = { es: 'Idioma del sitio', ru: 'Язык сайта', uk: 'Мова сайту' };
+    trigger.querySelector('[data-current-language]').textContent = shortNames[language];
+    trigger.setAttribute('aria-label', accessibleLabels[language]);
+    options.setAttribute('aria-label', groupLabels[language]);
+    const close = () => {
+      options.hidden = true;
+      trigger.setAttribute('aria-expanded', 'false');
+    };
+    trigger.addEventListener('click', () => {
+      const open = options.hidden;
+      options.hidden = !open;
+      trigger.setAttribute('aria-expanded', String(open));
+      if (open) options.querySelector('[aria-pressed="true"]')?.focus();
+    });
     for (const button of switcher.querySelectorAll('[data-locale]')) {
       const active = button.dataset.locale === language;
       button.setAttribute('aria-pressed', String(active));
-      button.addEventListener('click', () => setLocale(button.dataset.locale));
+      button.addEventListener('click', () => {
+        close();
+        if (!active) setLocale(button.dataset.locale);
+        else trigger.focus();
+      });
     }
+    document.addEventListener('pointerdown', event => {
+      if (!switcher.contains(event.target)) close();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key !== 'Escape' || options.hidden) return;
+      close();
+      trigger.focus();
+    });
   }
-  if (language !== 'es') return;
+  if (language === 'ru') return;
   translateTree(document.body);
   const observer = new MutationObserver(changes => {
     for (const change of changes) {

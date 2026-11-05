@@ -418,36 +418,71 @@ button:hover:not(:disabled) {
   align-items: center;
 }
 
-.language-switcher {
-  display: flex;
+.language-menu {
+  position: relative;
   flex: none;
-  gap: 2px;
-  padding: 3px;
+}
+
+.language-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 9px;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: #f7f7f3;
-}
-
-.language-switcher button {
-  min-width: 29px;
-  min-height: 29px;
-  padding: 0 5px;
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  color: #656660;
+  color: var(--ink);
   font: inherit;
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
 }
 
-.language-switcher button[aria-pressed="true"] {
-  background: var(--ink);
-  color: #fff;
+.language-trigger svg:first-child { width: 17px; height: 17px; }
+.language-trigger .language-chevron { width: 12px; height: 12px; }
+
+.language-options {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 40;
+  width: 188px;
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 32px #20221e1c;
 }
 
-.language-switcher button:focus-visible {
+.language-options[hidden],
+.language-options button[hidden] { display: none; }
+
+.language-options button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 40px;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.language-options button span { color: #777970; font-size: 11px; font-weight: 700; }
+.language-options button:hover,
+.language-options button[aria-pressed="true"] { background: #f2f4e5; }
+.language-options button[aria-pressed="true"] { font-weight: 700; }
+
+.language-trigger:focus-visible,
+.language-options button:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
@@ -3800,7 +3835,9 @@ details .text-link {
   .brand { width: 96px; }
   .header-actions { gap: 4px; }
   .header-actions .icon-button { width: 29px; }
-  .language-switcher button { min-width: 24px; min-height: 26px; padding: 0 2px; font-size: 10px; }
+  .language-trigger { min-height: 30px; width: 56px; padding: 0 5px; gap: 3px; font-size: 10px; }
+  .language-trigger svg:first-child { width: 14px; height: 14px; }
+  .language-trigger .language-chevron { width: 10px; height: 10px; }
 }
 
 @media (max-width: 760px) {
