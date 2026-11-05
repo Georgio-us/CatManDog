@@ -755,6 +755,25 @@ button:hover:not(:disabled) {
   pointer-events: none;
 }
 
+.product-availability-tag {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  max-width: calc(100% - 28px);
+  padding: 5px 10px;
+  border-radius: 30px;
+  background: #f7f8ef;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.35;
+  pointer-events: none;
+}
+
+.product-availability-stock,
+.product-availability-mixed { background: var(--lime); }
+.product-availability-unavailable { background: #e5e7e0; }
+
 .favorite {
   position: absolute;
   top: 12px;

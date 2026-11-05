@@ -176,7 +176,10 @@ async function createOrder(db, payload, customer) {
     const ids = lines.map(line => cap(line.variantId, 180));
     const variants = await client.query(`SELECT v.id AS variant_id,v.product_id,v.label,v.source_price_cents,
       v.price_override_cents,v.price_confirmed,v.source_orderable,v.availability,v.tax_rate_bps,
-      v.stock_quantity,v.reserved_quantity,p.name
+      v.stock_quantity,v.reserved_quantity,p.name,
+      EXISTS (SELECT 1 FROM supplier_catalog_matches m
+        JOIN supplier_catalog_items i ON i.id=m.item_id
+        WHERE m.variant_id=v.id AND i.shop_price_cents>0) AS supplier_matched
       FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
       WHERE v.id=ANY($1::text[]) AND v.active=true AND p.active=true FOR UPDATE OF v`, [ids]);
     const promo = await promoFor(client, payload.promoCode, true);
@@ -720,10 +723,16 @@ async function adminRoute(db, req, res, path) {
   }
   if (path === '/api/admin/selected-supplier-items' && req.method === 'GET') {
     const { rows } = await db.query(`SELECT s.item_id,s.quantity,s.retail_units_per_purchase_unit,
-      i.article,i.name,i.weight,m.variant_id,c.supplier_name,c.brand,c.price_date
+      i.article,i.name,i.weight,i.shop_price_cents,i.recommended_price_cents,
+      m.variant_id,v.product_id,c.supplier_name,c.brand,c.price_date,c.shop_price_tax_basis,
+      v.price_override_cents,v.source_price_cents,v.price_confirmed,
+      v.purchase_price_cents,v.availability,v.stock_quantity,v.active AS variant_active,
+      p.active AS product_active
       FROM selected_supplier_items s JOIN supplier_catalog_items i ON i.id=s.item_id
       JOIN supplier_catalog_sources c ON c.id=i.source_id
       LEFT JOIN supplier_catalog_matches m ON m.item_id=i.id
+      LEFT JOIN catalog_variants v ON v.id=m.variant_id
+      LEFT JOIN catalog_products p ON p.id=v.product_id
       ORDER BY c.supplier_name,c.brand,i.name,i.weight`);
     return json(res, 200, { items: rows });
   }
@@ -1686,9 +1695,11 @@ export async function handleApi(db, req, res, pathname) {
         ...entry }) => ({ ...entry,
         priceCents: entry.price_confirmed ? price_override_cents ?? source_price_cents : null,
         referencePriceCents: entry.price_confirmed ? null : source_price_cents,
-        ...(sourcing_availability ? { sourcingAvailability: sourcing_availability } : {}),
+        sourcingAvailability: sourcing_availability,
         availableForCart: entry.source_orderable && entry.availability !== 'unavailable' &&
-          (entry.availability !== 'on_hand' || stock_quantity - reserved_quantity > 0),
+          sourcing_availability !== 'unavailable' &&
+          (sourcing_availability !== 'on_hand' || stock_quantity <= 0 ||
+            stock_quantity - reserved_quantity > 0),
         availability: entry.availability })) });
     }
     if (pathname === '/api/checkout/quote' && req.method === 'POST') {

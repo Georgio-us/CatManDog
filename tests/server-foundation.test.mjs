@@ -47,7 +47,7 @@ test('full catalog import archives retired rows once and preserves edited produc
   assert.equal(queries.at(-1)[0], 'COMMIT');
 });
 
-test('public catalog reads all active database SKUs without a static product whitelist', async () => {
+test('public catalog reads all active SKUs but blocks a SKU without a priced supplier link', async () => {
   let query, parameters;
   const db = { async query(sql, params) {
     if (sql.includes('FROM supplier_catalog_matches')) return { rows: [] };
@@ -61,14 +61,11 @@ test('public catalog reads all active database SKUs without a static product whi
   assert.doesNotMatch(query, /p\.id = ANY/);
   assert.equal(parameters, undefined);
   assert.equal(rows[0].sale_price_cents, 1299);
-  assert.equal(rows[0].orderable, true);
-  assert.equal(rows[0].sourcing_availability, null);
+  assert.equal(rows[0].orderable, false);
+  assert.equal(rows[0].sourcing_availability, 'unavailable');
 });
 
-test('supplier availability replaces display state only when explicitly enabled', async () => {
-  const previous = process.env.SUPPLIER_SOURCING_ENABLED;
-  process.env.SUPPLIER_SOURCING_ENABLED = 'true';
-  try {
+test('supplier availability is calculated for every active catalog SKU', async () => {
     const db = { async query(sql) {
       if (sql.includes('FROM supplier_catalog_matches')) return { rows: [
         { variant_id:'selected',source_count:1,selected_units:2 },
@@ -85,9 +82,34 @@ test('supplier availability replaces display state only when explicitly enabled'
       ['on_hand','source_on_demand','unavailable']);
     assert.deepEqual(rows.map(row => row.selected_supplier_units), [2,0,0]);
     assert.ok(rows.every(row => row.orderable === false));
+});
+
+test('a selected basket is shown as available before launch but does not become live stock', async () => {
+  const oldOrders = process.env.ORDERS_ENABLED;
+  const oldPayments = process.env.PAYMENTS_ENABLED;
+  const db = { async query(sql) {
+    if (sql.includes('FROM supplier_catalog_matches')) return { rows: [
+      { variant_id: 'selected', source_count: 1, selected_units: 12 }
+    ] };
+    return { rows: [{ variant_id: 'selected', product_id: 'food', name: 'Корм',
+      source_price_cents: 2000, price_override_cents: null, price_confirmed: true,
+      source_orderable: true, availability: 'source_on_demand', stock_quantity: 0 }] };
+  } };
+  try {
+    delete process.env.ORDERS_ENABLED;
+    delete process.env.PAYMENTS_ENABLED;
+    const preview = (await catalogSnapshot(db))[0];
+    assert.equal(preview.sourcing_availability, 'on_hand');
+    assert.equal(preview.orderable, false);
+    process.env.ORDERS_ENABLED = 'true';
+    process.env.PAYMENTS_ENABLED = 'true';
+    const live = (await catalogSnapshot(db))[0];
+    assert.equal(live.sourcing_availability, 'source_on_demand');
   } finally {
-    if (previous === undefined) delete process.env.SUPPLIER_SOURCING_ENABLED;
-    else process.env.SUPPLIER_SOURCING_ENABLED = previous;
+    if (oldOrders === undefined) delete process.env.ORDERS_ENABLED;
+    else process.env.ORDERS_ENABLED = oldOrders;
+    if (oldPayments === undefined) delete process.env.PAYMENTS_ENABLED;
+    else process.env.PAYMENTS_ENABLED = oldPayments;
   }
 });
 
@@ -109,6 +131,8 @@ test('server ignores browser price and totals exact variant, discount and delive
 test('server blocks unconfirmed, unavailable and overdrawn variants', () => {
   assert.equal(priceQuote(lines, [{ ...variant, price_confirmed:false }]).orderable, false);
   assert.equal(priceQuote(lines, [{ ...variant, availability:'unavailable' }]).orderable, false);
+  assert.equal(priceQuote(lines, [{ ...variant, supplier_matched:false }]).orderable, false);
+  assert.equal(priceQuote(lines, [{ ...variant, sourcing_availability:'unavailable' }]).orderable, false);
   assert.equal(priceQuote(lines, [{ ...variant, stock_quantity:1 }]).orderable, false);
   assert.throws(() => priceQuote([{ ...lines[0], variantId:'other' }], [variant]));
 });
@@ -217,12 +241,27 @@ test('storefront disables cart actions for reserved stock and supplier-disabled 
   applyServerCatalog(products, catalogProducts, [
     { variant_id:'reserved',product_id:'food',name:'Food',brand:'Brand',category:'Корм',pet:'cat',
       label:'1 кг',price_confirmed:true,priceCents:1299,source_orderable:true,
-      availability:'on_hand',availableForCart:false },
+      availability:'on_hand',sourcingAvailability:'on_hand',availableForCart:false },
     { variant_id:'disabled',product_id:'treat',name:'Treat',brand:'Brand',category:'Лакомства',pet:'cat',
       label:'1 шт',price_confirmed:true,priceCents:299,source_orderable:false,
       availability:'source_on_demand',availableForCart:false }
   ]);
   assert.equal(canBuy(products[0].variants[0]), false);
+  assert.equal(canBuy(products[1].variants[0]), false);
+});
+
+test('selected supplier preview remains addable while unsourced SKU is blocked', () => {
+  const products = [];
+  const catalogProducts = [];
+  applyServerCatalog(products, catalogProducts, [
+    { variant_id:'selected',product_id:'food',name:'Food',brand:'Brand',category:'Корм',pet:'cat',
+      label:'1 кг',price_confirmed:false,referencePriceCents:1299,source_orderable:true,
+      availability:'source_on_demand',sourcingAvailability:'on_hand',availableForCart:true },
+    { variant_id:'unsourced',product_id:'other',name:'Other',brand:'Brand',category:'Корм',pet:'cat',
+      label:'1 кг',price_confirmed:false,referencePriceCents:1299,source_orderable:true,
+      availability:'source_on_demand',sourcingAvailability:'unavailable',availableForCart:false }
+  ]);
+  assert.equal(canBuy(products[0].variants[0]), true);
   assert.equal(canBuy(products[1].variants[0]), false);
 });
 

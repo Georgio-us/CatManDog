@@ -18,7 +18,8 @@ export function basketGroups(cart, products) {
     const product = products.find(entry => entry.id === (item.productId || item.id));
     const sku = cartSku(item, products);
     const state = fulfillmentState(sku);
-    return { item, index, product, sku, state, price: state === 'pending' ? null : storefrontPrice(sku) };
+    return { item, index, product, sku, state,
+      price: state === 'pending' || sku?.serverPriceConfirmed !== true ? null : storefrontPrice(sku) };
   });
   return {
     entries,

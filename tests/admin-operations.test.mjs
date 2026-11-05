@@ -43,6 +43,10 @@ test('store management link is disclosed only for the matching active owner emai
 
 test('public catalog exposes sourced references without inventing a sale price', async () => {
   const db = { async query(sql) {
+    if (sql.includes('FROM supplier_catalog_matches m')) return { rows: [
+      { variant_id: 'reference', source_count: 1, selected_units: 0 },
+      { variant_id: 'confirmed', source_count: 1, selected_units: 0 }
+    ] };
     if (sql.includes('FROM catalog_variants v JOIN catalog_products p')) return { rows: [
       { variant_id: 'reference', product_id: 'food', source_price_cents: 2219,
         price_override_cents: 9999, price_confirmed: false, source_orderable: true,
@@ -69,6 +73,10 @@ test('public catalog exposes sourced references without inventing a sale price',
 
 test('public catalog marks reserved stock and supplier-disabled SKUs unavailable to the cart', async () => {
   const db = { async query(sql) {
+    if (sql.includes('FROM supplier_catalog_matches m')) return { rows: [
+      { variant_id: 'reserved', source_count: 1, selected_units: 2 },
+      { variant_id: 'disabled', source_count: 1, selected_units: 0 }
+    ] };
     if (sql.includes('FROM catalog_variants v JOIN catalog_products p')) return { rows: [
       { variant_id: 'reserved', product_id: 'food', source_price_cents: 2000,
         price_override_cents: 2500, price_confirmed: true, source_orderable: true,

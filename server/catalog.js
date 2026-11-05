@@ -101,7 +101,8 @@ export async function importCatalog(db, items = products) {
 }
 
 export async function catalogSnapshot(db) {
-  const sourcingEnabled = process.env.SUPPLIER_SOURCING_ENABLED === 'true';
+  const acceptingOrders = process.env.ORDERS_ENABLED === 'true' &&
+    process.env.PAYMENTS_ENABLED === 'true';
   const [{ rows }, supplierStates] = await Promise.all([db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.category,p.pet,p.image_path,
     p.description,p.details,p.food_type,v.image_path AS variant_image_path,
     v.description AS variant_description,v.details AS variant_details,
@@ -112,15 +113,25 @@ export async function catalogSnapshot(db) {
     WHERE p.active=true AND v.active=true
       AND coalesce(p.source->>'gift','')='' AND coalesce(p.source->>'catalogHidden','false')!='true'
     ORDER BY p.name,v.display_priority DESC,v.label`),
-    sourcingEnabled ? supplierSourcingByVariant(db) : Promise.resolve(new Map())]);
-  return rows.map(row => ({
-    ...row, sale_price_cents: row.price_override_cents ?? row.source_price_cents,
-    sourcing_availability: sourcingEnabled
-      ? supplierStates.get(row.variant_id)?.status || 'unavailable' : null,
-    selected_supplier_units: supplierStates.get(row.variant_id)?.selectedUnits || 0,
-    supplier_source_count: supplierStates.get(row.variant_id)?.sourceCount || 0,
-    orderable: row.price_confirmed && row.source_orderable && row.availability !== 'unavailable' &&
-      (row.availability !== 'on_hand' || row.stock_quantity > 0) &&
-      (row.price_override_cents ?? row.source_price_cents) > 0
-  }));
+    supplierSourcingByVariant(db)]);
+  return rows.map(row => {
+    const supplier = supplierStates.get(row.variant_id);
+    const sourcingAvailability = !supplier || row.availability === 'unavailable'
+      ? 'unavailable' : acceptingOrders
+      ? row.availability === 'on_hand' && row.stock_quantity > 0
+        ? 'on_hand' : 'source_on_demand'
+      : supplier.status;
+    return {
+      ...row, sale_price_cents: row.price_override_cents ?? row.source_price_cents,
+      sourcing_availability: sourcingAvailability,
+      selected_supplier_units: supplier?.selectedUnits || 0,
+      supplier_source_count: supplier?.sourceCount || 0,
+      // Selection for the first basket is a storefront scenario, not received stock.
+      // A real payment still needs an approved price and physical stock when on hand.
+      orderable: sourcingAvailability !== 'unavailable' && row.price_confirmed &&
+        row.source_orderable && row.availability !== 'unavailable' &&
+        (sourcingAvailability !== 'on_hand' || row.stock_quantity > 0) &&
+        (row.price_override_cents ?? row.source_price_cents) > 0
+    };
+  });
 }

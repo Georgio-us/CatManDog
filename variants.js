@@ -15,7 +15,8 @@ export const storefrontPrice = sku => sku?.storefrontRetired ? null :
   sku?.serverSourcingAvailability && sku.serverPriceConfirmed === false ? 7.77 : confirmedPrice(sku);
 export function canBuy(sku) {
   return storefrontPrice(sku) !== null && !sku.storefrontRetired &&
-    (sku.serverSourcingAvailability || sku.serverAvailableForCart !== false) &&
+    sku.serverAvailableForCart !== false &&
+    sku.serverSourcingAvailability !== 'unavailable' &&
     !['unavailable','out-of-stock','outOfStock','discontinued'].includes(sku.availabilityStatus);
 }
 export function catalogPrice(product) {

@@ -37,3 +37,15 @@ test('unconfirmed availability cannot appear as stock or enter checkout', () => 
   assert.doesNotMatch(html, /Товары в наличии/);
   assert.doesNotMatch(html, /74\.99 €/);
 });
+
+test('supplier-linked SKU with a demonstration price can enter the basket but not checkout', () => {
+  const pendingSale = { ...product.variants[0], priceStatus: 'temporary',
+    serverPriceConfirmed: false, serverSourcingAvailability: 'on_hand' };
+  const linkedProduct = { ...product, variants: [pendingSale] };
+  const html = renderLiveBasket({ ...helpers, products: [linkedProduct],
+    cart: [{ id: 'food', productId: 'food', variantId: 'food-small', qty: 1 }], grouping: 'together' });
+  assert.match(html, /В наличии/);
+  assert.match(html, /Цена уточняется/);
+  assert.match(html, /id="checkout"[^>]*disabled/);
+  assert.doesNotMatch(html, /7\.77 €/);
+});

@@ -551,6 +551,22 @@ function brandDirectoryRows() {
     { name: 'Edgard & Cooper', products: 0, skus: 0, published: 0 });
   return [...brands.values()].sort((a, b) => a.name.localeCompare(b.name, 'ru'));
 }
+function selectedSupplierAudit() {
+  if (!selectedSupplierItems.length) return '';
+  const confirmed = selectedSupplierItems.filter(item => item.price_confirmed &&
+    (item.price_override_cents ?? item.source_price_cents) > 0).length;
+  const withCost = selectedSupplierItems.filter(item => item.shop_price_cents > 0).length;
+  return `<details class="selected-sku-audit"><summary>Проверить выбранные SKU - закупка ${withCost}/${selectedSupplierItems.length}, цена продажи ${confirmed}/${selectedSupplierItems.length}</summary>
+    <p>Закупочная цена относится к единице поставщика. Цена продажи и физический остаток учитываются отдельно</p>
+    <div class="selected-sku-list">${selectedSupplierItems.map(item => {
+      const sale = item.price_override_cents ?? item.source_price_cents;
+      const pack = item.retail_units_per_purchase_unit || 1;
+      return `<div class="selected-sku-row"><div><strong>${escape(item.name)}</strong><small>${escape(item.brand)} · ${escape(item.article)} · ${escape(item.weight)}</small></div>
+        <div><small>Закупка</small><strong>${item.shop_price_cents > 0 ? euros(item.shop_price_cents) : 'Не указана'}</strong><small>${escape(({ includes_iva:'с IVA', excludes_iva:'без IVA', unknown:'IVA не уточнён' })[item.shop_price_tax_basis] || 'IVA не уточнён')}${pack > 1 ? ` · ${pack} розничных ед.` : ''}</small></div>
+        <div><small>Продажа</small><strong>${item.price_confirmed && sale > 0 ? euros(sale) : 'Не утверждена'}</strong>${!item.price_confirmed && sale > 0 ? `<small>Ориентир ${euros(sale)}</small>` : ''}</div>
+        <div><small>Доступность</small><strong>${item.variant_id ? item.stock_quantity > 0 ? `На складе ${item.stock_quantity}` : 'Выбрано для закупки' : 'Нет связи с SKU'}</strong><small>${item.variant_id ? item.product_active && item.variant_active ? 'На витрине' : 'Скрытый черновик' : 'Нужна карточка'}</small>${item.product_id ? `<button type="button" data-selected-product="${escape(item.product_id)}">Открыть товар</button>` : ''}</div></div>`;
+    }).join('')}</div></details>`;
+}
 function renderBrandDirectory() {
   const rows = brandDirectoryRows();
   const selectedOnSite = selectedSupplierItems.filter(item => item.variant_id).length;
@@ -559,6 +575,7 @@ function renderBrandDirectory() {
       <p>Выберите бренд, чтобы посмотреть его товары и SKU</p></div>
       <span class="brand-total">${rows.length} брендов</span></div>
     ${selectedSupplierItems.length ? `<p class="brand-price-notice">Выбрано для закупки: ${selectedSupplierItems.length} SKU · ${selectedOnSite} связаны с карточками, включая скрытые черновики · ${selectedSupplierItems.length - selectedOnSite} ждут карточку</p>` : ''}
+    ${selectedSupplierAudit()}
     <div class="brand-directory-toolbar"><label>Найти бренд<input id="brand-directory-search" type="search"
       value="${escape(brandDirectorySearch)}" placeholder="Название бренда"></label>
       <label class="brand-upload">Загрузить прайсы и выбранные SKU<input id="sourcing-bundle-upload"
@@ -1234,6 +1251,17 @@ $('admin-content').addEventListener('change', async event => {
   }
 });
 $('admin-content').addEventListener('click', async event => {
+  const selectedProduct = event.target.closest('[data-selected-product]');
+  if (selectedProduct) {
+    tab = 'products';
+    catalogView = 'products';
+    openedProductId = selectedProduct.dataset.selectedProduct;
+    document.querySelectorAll('[data-tab]').forEach(item =>
+      item.setAttribute('aria-pressed', String(item.dataset.tab === tab)));
+    renderProducts();
+    window.scrollTo(0, 0);
+    return;
+  }
   const discount = event.target.closest('[data-price-discount]');
   if (discount) {
     const form = discount.closest('[data-sale-price]');

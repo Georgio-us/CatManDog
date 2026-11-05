@@ -45,7 +45,9 @@ export function priceQuote(lines, variants, promo = null) {
     return { productId: variant.product_id, variantId: id, name: variant.name,
       variantLabel: variant.label, qty: line.qty, unitPriceCents: price,
       lineCents: price * line.qty, sourceMode: variant.availability,
-      orderable: !!variant.price_confirmed && variant.source_orderable !== false && variant.availability !== 'unavailable' &&
+      orderable: !!variant.price_confirmed && variant.source_orderable !== false &&
+        variant.sourcing_availability !== 'unavailable' && variant.supplier_matched !== false &&
+        variant.availability !== 'unavailable' &&
         (variant.availability !== 'on_hand' ||
           variant.stock_quantity - (variant.reserved_quantity ?? 0) >= line.qty) };
   });
