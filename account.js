@@ -1,13 +1,13 @@
 import { createAccountStore } from './account-store.js?v=cat-assortment-1';
-import { createAccountApi } from './account-api.js?v=ukrainian-public-3';
+import { createAccountApi } from './account-api.js?v=coupon-qr-1';
 import { accountTools } from './useful.js?v=ukrainian-public-3';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
-import { intlLocale, locale } from './locale.js?v=ukrainian-public-3';
+import { intlLocale, locale } from './locale.js?v=coupon-qr-1';
 const store = createAccountStore(localStorage);
 const api = createAccountApi();
 
 const preferenceOptions = ['Сухой корм', 'Влажный корм', 'Без зерна', 'Стерилизован', 'Чувствительное пищеварение', 'Игрушки с кошачьей мятой'];
-const sections = [['', 'Мой кабинет', 'paw'], ['supplies', 'Мои запасы', 'calendar'], ['care', 'Мои инструменты', 'map'], ['profile', 'Мой профиль', 'cat'], ['human', 'Мой человек', 'heart']];
+const sections = [['', 'Мой кабинет', 'paw'], ['promos', 'Промокоды', 'gift'], ['supplies', 'Мои запасы', 'calendar'], ['care', 'Мои инструменты', 'map'], ['profile', 'Мой профиль', 'cat'], ['human', 'Мой человек', 'heart']];
 const statuses = { packing: 'Собираем коробку', received: 'Демозаказ сохранён', delivering: 'Везём к вам', delivered: 'Коробка доставлена' };
 const dateLabel = value => new Intl.DateTimeFormat(intlLocale(), { day: 'numeric', month: 'long' }).format(new Date(value + 'T12:00:00'));
 const petYears = birthdayValue => {
@@ -58,9 +58,63 @@ export function createAccountUI(helpers) {
   let verifyingToken = null;
   let googleInitialized = false;
   let googleBusy = false;
+  let guestCoupon = null;
+  let couponError = '';
+  const pendingPromoKey = 'catmandog-pending-promo';
   const petCardIntent = () => location.pathname === '/pet' || location.hash?.startsWith('#/pet') ||
     new URLSearchParams((location.hash || '').split('?')[1] || '').get('return') === 'pet';
-  const afterSignIn = () => petCardIntent() ? '/pet' : '/account';
+  const afterSignIn = hadCoupon => petCardIntent() ? '/pet' : hadCoupon ? '/coupon' : '/account';
+  function rememberPromo(code) {
+    try { localStorage.setItem(pendingPromoKey, JSON.stringify({ code: String(code).trim().slice(0, 40), at: Date.now() })); }
+    catch { /* Storage unavailable */ }
+  }
+  function pendingPromoCode() {
+    try {
+      const value = JSON.parse(localStorage.getItem(pendingPromoKey) || 'null');
+      if (value?.code && Date.now() - value.at < 30 * 24 * 60 * 60 * 1000) return value.code;
+      localStorage.removeItem(pendingPromoKey);
+    } catch { /* Storage unavailable or stale */ }
+    return '';
+  }
+  function capturePromoLink() {
+    const url = new URL(location.href);
+    const hashParams = new URLSearchParams(url.hash.split('?')[1] || '');
+    const code = url.searchParams.get('promo') || hashParams.get('promo');
+    if (!code) return '';
+    rememberPromo(code);
+    url.searchParams.delete('promo');
+    hashParams.delete('promo');
+    if (url.hash.includes('?')) url.hash = url.hash.split('?')[0] + (hashParams.size ? '?' + hashParams : '');
+    history.replaceState(null, '', url);
+    return code;
+  }
+  async function refreshPromo() {
+    if (store.mode() === 'remote') {
+      const result = await api.promo();
+      store.setRemoteCoupon(result.coupon);
+    } else if (pendingPromoCode()) {
+      const result = await api.activateCoupon(pendingPromoCode());
+      guestCoupon = result.coupon;
+    }
+  }
+  async function claimPendingPromo() {
+    if (store.mode() !== 'remote') return;
+    const code = pendingPromoCode();
+    if (!code) return;
+    try {
+      const result = await api.claimPromo(code);
+      store.setRemoteCoupon(result.coupon);
+      localStorage.removeItem(pendingPromoKey);
+      if (result.coupon.status === 'ready') {
+        notify('Купон сохранён в кабинете');
+      }
+    } catch (error) {
+      if (error.status === 403) { couponError = error.message; return; }
+      if (error.status && error.status < 500) localStorage.removeItem(pendingPromoKey);
+      couponError = error.message;
+      notify(error.message);
+    }
+  }
   function setCustomer(value) {
     customer = value;
     const adminLink = typeof document === 'undefined' ? null : document.querySelector('#admin-link');
@@ -90,10 +144,11 @@ export function createAccountUI(helpers) {
         render();
         notify('Google подключён к кабинету');
       } else if (mode === 'signin') {
+        const hasCoupon = !!pendingPromoCode();
         await api.googleSignIn(response.credential);
         await refreshCustomer();
         await loadRemote();
-        navigate(afterSignIn());
+        navigate(afterSignIn(hasCoupon));
       }
     } catch (error) {
       const message = document.querySelector('[data-google-error]');
@@ -128,27 +183,45 @@ export function createAccountUI(helpers) {
   async function loadRemote() {
     const snapshot = await api.cabinet();
     store.connectRemote(snapshot.cabinet, snapshot.revision, api.saveCabinet);
+    await refreshPromo();
+    await claimPendingPromo();
   }
   async function initialize() {
+    const arrivedWithCoupon = !!capturePromoLink();
     try {
       const config = await api.config();
       accountsEnabled = config.accountsEnabled === true;
       emailEnabled = config.emailEnabled === true;
       googleClientId = config.googleClientId || null;
       authReady = true;
-      if (!accountsEnabled) { render(); return; }
+      if (!accountsEnabled) {
+        await refreshPromo().catch(error => { couponError = error.message; });
+        if (arrivedWithCoupon && !petCardIntent()) navigate('/coupon'); else render();
+        return;
+      }
       if (location.hash.startsWith('#/account/verify?')) { await handleLink(); return; }
       await refreshCustomer();
       await loadRemote();
-      render();
+      if (arrivedWithCoupon && !petCardIntent()) navigate('/coupon'); else render();
     } catch (error) {
       authReady = true;
       setCustomer(null);
       if (error.status !== 401) console.warn('Cabinet initialization:', error.message);
-      render();
+      await refreshPromo().catch(error => { couponError = error.message; });
+      if (arrivedWithCoupon && !petCardIntent()) navigate('/coupon'); else render();
     }
   }
   async function handleLink() {
+    const scannedCoupon = capturePromoLink();
+    if (pendingPromoCode()) {
+      if (store.mode() === 'remote') await claimPendingPromo();
+      else if (scannedCoupon || !guestCoupon)
+        await refreshPromo().catch(error => { couponError = error.message; });
+    }
+    if (scannedCoupon && !petCardIntent() && !location.hash.startsWith('#/account') && !location.hash.startsWith('#/coupon')) {
+      navigate('/coupon');
+      return;
+    }
     if (!accountsEnabled || !location.hash.startsWith('#/account/verify?')) return;
     const token = new URLSearchParams(location.hash.split('?')[1] || '').get('token');
     if (!token || verifyingToken === token) return;
@@ -156,11 +229,13 @@ export function createAccountUI(helpers) {
     authStatus = 'Проверяем ссылку из письма';
     render();
     try {
-      await api.verify(token);
+      const verified = await api.verify(token);
+      if (verified.promoCodeProcessed && !verified.promoError) localStorage.removeItem(pendingPromoKey);
       await refreshCustomer();
       await loadRemote();
+      if (verified.promoError) notify(verified.promoError);
       notify('Email подтверждён');
-      navigate(afterSignIn());
+      navigate(afterSignIn(verified.promoCodeProcessed));
     } catch (error) { authStatus = error.message; render(); }
   }
   function navigate(path) { if (location.hash === '#' + path) render(); else location.hash = path; }
@@ -213,7 +288,29 @@ export function createAccountUI(helpers) {
     return `<div class="page pet-onboarding">${pageNote()}<div class="pet-onboarding-grid"><div><span class="pet-eyebrow">У каждого хвоста - свой кабинет</span><h1>Давайте знакомиться<br>Как тебя зовут?</h1><p class="pet-intro-copy">Твои коробки, привычки и маленькие радости - в одном месте. А твой человек поможет всё заполнить.</p><form class="pet-panel pet-onboarding-form" data-account-form="join">${petFields()}${!adding ? '<label class="pet-field">Как зовут твоего человека <span>Необязательно</span><input name="humanName" maxlength="80" autocomplete="given-name" placeholder="Можно просто имя"></label>' : ''}<input type="hidden" name="ref" value="${e(params.get('ref') || '')}"><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">${adding ? 'Добавить питомца' : store.mode() === 'remote' ? 'Сохранить профиль питомца' : 'Создать мой кабинет'} ${icon('arrow')}</button><p class="pet-form-hint">${store.mode() === 'remote' ? 'Профиль сохранится в вашем аккаунте' : 'Профиль сохранится на этом устройстве'}</p></form>${!adding && store.mode() === 'personal' && store.activePet() ? '<a class="text-link pet-demo-link" href="#/account">Открыть мой кабинет</a><br>' : ''}${!adding && store.mode() !== 'remote' ? '<a class="text-link pet-demo-link" href="#/account/login">Войти в аккаунт</a>' : '<div class="pet-onboarding-links"><a class="text-link" href="#/account">Вернуться в кабинет</a><button class="text-link" data-account-exit>Выйти из аккаунта</button></div>'}</div><aside class="pet-onboarding-story"><img src="https://img.catmandog.es/assets/hero-happy.png" alt="Кот и собака отдыхают дома"><div><span class="pet-eyebrow">Хорошо быть собой</span><h2>Здесь всё<br>про тебя</h2><p>Когда заканчивается корм<br>Когда хочется новой игрушки<br>Когда у тебя день рождения</p></div></aside></div></div>`;
   }
   function emptyAccount() {
-    return `<div class="page pet-account">${pageNote()}<section class="pet-panel pet-empty-account"><span class="pet-eyebrow">Кабинет с хвостиком</span><h1>Вы вошли в аккаунт</h1><p class="pet-empty-account-email">${e(customer?.email || store.get().human.email || '')}</p><p class="pet-muted">Питомца можно добавить позже</p><div class="pet-empty-account-actions"><a class="button" href="#/join">Добавить питомца ${icon('arrow')}</a><a class="button outline" href="#/catalog">Перейти в каталог</a>${customer?.canManageStore ? '<a class="button outline" href="/admin">Управление магазином</a>' : ''}</div><button class="text-link" data-account-exit>Выйти из аккаунта</button></section></div>`;
+    return `<div class="page pet-account">${pageNote()}<section class="pet-panel pet-empty-account"><span class="pet-eyebrow">Кабинет с хвостиком</span><h1>Вы вошли в аккаунт</h1><p class="pet-empty-account-email">${e(customer?.email || store.get().human.email || '')}</p><p class="pet-muted">Питомца можно добавить позже</p><div class="pet-empty-account-actions"><a class="button" href="#/join">Добавить питомца ${icon('arrow')}</a><a class="button outline" href="#/catalog">Перейти в каталог</a>${customer?.canManageStore ? '<a class="button outline" href="/admin">Управление магазином</a>' : ''}</div><button class="text-link" data-account-exit>Выйти из аккаунта</button></section>${promoPanel()}</div>`;
+  }
+  function couponPage() {
+    const knownCoupon = store.mode() === 'remote' ? store.remoteCoupon() || guestCoupon : guestCoupon;
+    const code = pendingPromoCode() || knownCoupon?.code || '';
+    const coupon = knownCoupon?.code === code ? knownCoupon : null;
+    const label = coupon?.status === 'ready' ? (getCart?.().length ? 'Промокод применён: скидка 10% в корзине' : 'Промокод принят: скидка 10% появится в корзине после выбора товаров')
+      : coupon?.status === 'pending_payment' ? 'Купон зарезервирован до завершения оплаты'
+      : coupon?.status === 'used' ? 'Вы уже использовали этот промокод'
+      : coupon?.status === 'expired' ? 'Срок действия промокода истёк'
+      : coupon?.status === 'limit_reached' ? 'Лимит купонов исчерпан - свяжитесь с поддержкой'
+      : coupon?.status === 'invalid' ? 'Промокод недействителен' : '';
+    return `<div class="page pet-onboarding pet-auth-page"><div class="pet-auth-panel"><span class="pet-eyebrow">Купон CatManDog</span><h1>10% на заказ</h1><p class="pet-intro-copy">Код с карточки и QR работают одинаково. Можно купить как гость или войти в аккаунт, чтобы сохранить купон.</p>${label ? `<section class="pet-panel"><strong>${e(coupon.code)}</strong><p>${e(label)}</p>${coupon.status === 'ready' ? `<a class="button" href="${getCart?.().length ? '#/checkout' : '#/catalog'}">${getCart?.().length ? 'Продолжить как гость' : 'Выбрать товары'} ${icon('arrow')}</a>` : '<a class="text-link" href="#/support">Связаться с поддержкой</a>'}</section>` : `<form class="pet-panel pet-form" data-account-form="coupon-activate"><label class="pet-field">Код с карточки<input name="code" required maxlength="40" value="${e(code)}" autocapitalize="characters" autocomplete="off" placeholder="Введите код"></label><p class="pet-form-error" data-account-error role="alert">${e(couponError)}</p><button class="button" type="submit">Применить купон</button></form>`}<div class="pet-auth-links">${accountsEnabled ? '<a class="text-link" href="#/account/login">Войти или зарегистрироваться</a>' : ''}<a class="text-link" href="#/cart">Вернуться в корзину</a></div></div></div>`;
+  }
+  function promoPanel() {
+    const coupon = store.remoteCoupon();
+    const status = coupon?.status === 'ready' ? 'Купон готов - скидка 10% применится при оформлении заказа'
+      : coupon?.status === 'used' ? 'Вы уже использовали этот промокод'
+      : coupon?.status === 'pending_payment' ? 'Купон зарезервирован до завершения оплаты'
+      : coupon?.status === 'expired' ? 'Срок действия промокода истёк'
+      : coupon?.status === 'limit_reached' ? 'Лимит купонов исчерпан - свяжитесь с поддержкой'
+      : coupon ? 'Промокод недействителен' : '';
+    return `<section class="pet-panel pet-promo-panel"><h2>У вас есть промокод?</h2><p>Купон на 10% можно добавить сейчас или позже</p><form class="pet-form" data-account-form="promo"><label class="pet-field">Промокод<input name="code" required maxlength="40" autocomplete="off" autocapitalize="characters" placeholder="Введите код"></label><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">Сохранить промокод</button></form>${status ? `<p class="pet-caption" role="status">${coupon?.code ? `<strong>${e(coupon.code)}</strong> - ` : ''}${e(status)}</p>` : ''}${coupon?.status === 'limit_reached' ? '<a class="text-link" href="#/support">Связаться с поддержкой</a>' : ''}</section>`;
   }
   function orderCard(order, compact = false) {
     const total = order.items.reduce((sum, item) => sum + item.price * item.qty, 0) * (1 - (order.discount || 0) / 100);
@@ -225,7 +322,7 @@ export function createAccountUI(helpers) {
   function dashboard(pet, data) {
     const reminders = data.reminders.filter(r => r.petId === pet.id && !r.done);
     const trips = (data.trips || []).filter(t => t.petId === pet.id);
-    return `<div class="pet-welcome"><div><span class="pet-eyebrow">Мой маленький мир</span><h1>Привет, ${e(pet.name)}</h1><p>Всё для твоей хорошей жизни с хвостиком</p></div>${petIcon(pet)}</div><div class="pet-stat-grid pet-stat-grid-two"><a href="#/account/supplies"><span>${icon('calendar')} Мои планы</span><strong>${reminders.length}</strong><small>Покупки, о которых стоит помнить</small></a><a href="#/account/care"><span>${icon('compass')} Мои поездки</span><strong>${trips.length}</strong><small>Сохранённые маршруты и чек-листы</small></a></div><div class="pet-dashboard-grid"><section class="pet-panel"><div class="pet-panel-head"><h2>Мои планы</h2><a class="text-link" href="#/account/supplies">Все планы</a></div>${reminders.length ? reminders.slice(0, 3).map(reminderRow).join('') : '<p class="pet-muted">Планов пока нет</p>'}<a class="pet-inline-link" href="#/account/supplies">${icon('plus')} Запланировать покупку</a></section><section class="pet-panel"><div class="pet-panel-head"><h2>Мои инструменты</h2><a class="text-link" href="#/account/care">Открыть</a></div><div class="pet-dashboard-tools"><a href="#/useful/clinics">${icon('map')} Найти ветеринарную клинику ${icon('arrow')}</a><a href="#/useful/travel">${icon('compass')} Собрать чек-лист поездки ${icon('arrow')}</a></div></section></div><section class="pet-profile-summary pet-panel">${petIcon(pet)}<div><span class="pet-eyebrow">Пара слов обо мне</span><h2 data-no-translate>${e(pet.name)}</h2><p>${e(pet.breed || (pet.species === 'dog' ? 'Любимая собака' : 'Любимая домашняя кошка'))} · ${e(ageLabel(pet))}</p><div class="pet-chips">${(pet.preferences || []).map(v => `<span>${e(v)}</span>`).join('')}</div></div><a class="text-link" href="#/account/profile">Мой профиль</a></section>`;
+    return `<div class="pet-welcome"><div><span class="pet-eyebrow">Мой маленький мир</span><h1>Привет, ${e(pet.name)}</h1><p>Всё для твоей хорошей жизни с хвостиком</p></div>${petIcon(pet)}</div>${store.mode() === 'remote' ? promoPanel() : ''}<div class="pet-stat-grid pet-stat-grid-two"><a href="#/account/supplies"><span>${icon('calendar')} Мои планы</span><strong>${reminders.length}</strong><small>Покупки, о которых стоит помнить</small></a><a href="#/account/care"><span>${icon('compass')} Мои поездки</span><strong>${trips.length}</strong><small>Сохранённые маршруты и чек-листы</small></a></div><div class="pet-dashboard-grid"><section class="pet-panel"><div class="pet-panel-head"><h2>Мои планы</h2><a class="text-link" href="#/account/supplies">Все планы</a></div>${reminders.length ? reminders.slice(0, 3).map(reminderRow).join('') : '<p class="pet-muted">Планов пока нет</p>'}<a class="pet-inline-link" href="#/account/supplies">${icon('plus')} Запланировать покупку</a></section><section class="pet-panel"><div class="pet-panel-head"><h2>Мои инструменты</h2><a class="text-link" href="#/account/care">Открыть</a></div><div class="pet-dashboard-tools"><a href="#/useful/clinics">${icon('map')} Найти ветеринарную клинику ${icon('arrow')}</a><a href="#/useful/travel">${icon('compass')} Собрать чек-лист поездки ${icon('arrow')}</a></div></section></div><section class="pet-profile-summary pet-panel">${petIcon(pet)}<div><span class="pet-eyebrow">Пара слов обо мне</span><h2 data-no-translate>${e(pet.name)}</h2><p>${e(pet.breed || (pet.species === 'dog' ? 'Любимая собака' : 'Любимая домашняя кошка'))} · ${e(ageLabel(pet))}</p><div class="pet-chips">${(pet.preferences || []).map(v => `<span>${e(v)}</span>`).join('')}</div></div><a class="text-link" href="#/account/profile">Мой профиль</a></section>`;
   }
   function orderDetailPage(pet, order) {
     const subtotal = order.items.reduce((sum, item) => sum + item.price * item.qty, 0);
@@ -264,14 +361,15 @@ export function createAccountUI(helpers) {
   }
   function page(path, params) {
     if (path === '/pet') return petCardPage(params);
+    if (path === '/coupon') return couponPage();
     if (['login','register','recover','reset','verify','check-email'].includes(path.split('/')[2]) && path.startsWith('/account/')) return authPage(path.split('/')[2]);
     if (path === '/join' || path === '/account/welcome') return onboarding(params);
     const pet = store.activePet();
     if (!pet) return store.mode() === 'remote' ? emptyAccount() : accountsEnabled ? authPage('login') : onboarding(params);
     const data = store.get();
     const section = path.split('/')[2] || '';
-    const content = section === 'care' ? accountTools({ pet, data, escape: e, icon }) : section === 'supplies' ? suppliesPage(pet, data) : section === 'profile' ? profilePage(pet) : section === 'human' ? humanPage(data) : section === 'orders' && store.mode() === 'demo' ? ordersPage(pet, data, path.split('/')[3]) : dashboard(pet, data);
-    return `<div class="page pet-account">${pageNote()}<div class="pet-account-layout"><aside class="pet-sidebar"><a class="pet-account-brand" href="#/account">${icon('paw')} Кабинет с хвостиком</a><div class="pet-switcher" role="group" aria-label="Мои питомцы">${data.pets.map(p => `<button data-account-pet="${e(p.id)}" aria-pressed="${p.id === pet.id}" class="${p.id === pet.id ? 'active' : ''}">${petIcon(p)}<span data-no-translate>${e(p.name)}</span>${p.id === pet.id ? icon('check') : ''}</button>`).join('')}</div><a class="pet-add" href="#/join?add=1">${icon('plus')} Добавить питомца</a><nav class="pet-navigation" aria-label="Разделы кабинета">${sections.map(([key, label, glyph]) => `<a href="#/account${key ? '/' + key : ''}" ${section === key ? 'aria-current="page"' : ''}>${icon(glyph)} ${label}</a>`).join('')}</nav>${customer?.canManageStore ? `<a class="pet-admin-entry" href="/admin">${icon('shield')} Управление магазином ${icon('arrow')}</a>` : ''}<button class="pet-exit" data-account-exit>${icon('arrow')} ${store.mode() === 'demo' ? 'Создать свой кабинет' : store.mode() === 'remote' ? 'Выйти из аккаунта' : 'Закрыть кабинет'}</button><p class="pet-sidebar-note">Каждому хвостику<br>немного больше заботы</p></aside><div class="pet-account-content">${content}</div></div></div>`;
+    const content = section === 'care' ? accountTools({ pet, data, escape: e, icon }) : section === 'promos' && store.mode() === 'remote' ? promoPanel() : section === 'supplies' ? suppliesPage(pet, data) : section === 'profile' ? profilePage(pet) : section === 'human' ? humanPage(data) : section === 'orders' && store.mode() === 'demo' ? ordersPage(pet, data, path.split('/')[3]) : dashboard(pet, data);
+    return `<div class="page pet-account">${pageNote()}<div class="pet-account-layout"><aside class="pet-sidebar"><a class="pet-account-brand" href="#/account">${icon('paw')} Кабинет с хвостиком</a><div class="pet-switcher" role="group" aria-label="Мои питомцы">${data.pets.map(p => `<button data-account-pet="${e(p.id)}" aria-pressed="${p.id === pet.id}" class="${p.id === pet.id ? 'active' : ''}">${petIcon(p)}<span data-no-translate>${e(p.name)}</span>${p.id === pet.id ? icon('check') : ''}</button>`).join('')}</div><a class="pet-add" href="#/join?add=1">${icon('plus')} Добавить питомца</a><nav class="pet-navigation" aria-label="Разделы кабинета">${sections.filter(([key]) => key !== 'promos' || store.mode() === 'remote').map(([key, label, glyph]) => `<a href="#/account${key ? '/' + key : ''}" ${section === key ? 'aria-current="page"' : ''}>${icon(glyph)} ${label}</a>`).join('')}</nav>${customer?.canManageStore ? `<a class="pet-admin-entry" href="/admin">${icon('shield')} Управление магазином ${icon('arrow')}</a>` : ''}<button class="pet-exit" data-account-exit>${icon('arrow')} ${store.mode() === 'demo' ? 'Создать свой кабинет' : store.mode() === 'remote' ? 'Выйти из аккаунта' : 'Закрыть кабинет'}</button><p class="pet-sidebar-note">Каждому хвостику<br>немного больше заботы</p></aside><div class="pet-account-content">${content}</div></div></div>`;
   }
   async function click(button) {
     if (button.hasAttribute('data-account-pet')) { store.switchPet(button.dataset.accountPet); render(); await syncChanges().catch(() => {}); }
@@ -321,14 +419,23 @@ export function createAccountUI(helpers) {
     const values = new FormData(form);
     try {
       const kind = form.dataset.accountForm;
+      if (kind === 'coupon-activate') {
+        await applyPromo(values.get('code'));
+        render();
+        return;
+      }
       if (kind === 'register' || kind === 'login') {
         if (kind === 'register' && values.get('password') !== values.get('passwordConfirm')) throw new Error('Пароли не совпадают');
         const button = form.querySelector('button[type=submit]'); button.disabled = true;
         try {
           const result = await api[kind]({ email: values.get('email'), password: values.get('password'),
-            name: values.get('name'), ...(kind === 'register' ? { returnTo: petCardIntent() ? 'pet' : '' } : {}) });
+            name: values.get('name'), ...(kind === 'register' ?
+              { promoCode: pendingPromoCode(), returnTo: petCardIntent() ? 'pet' : '' } : {}) });
           if (kind === 'register') { pendingEmail = result.email; pendingLinkKind = 'verify'; navigate('/account/check-email' + (petCardIntent() ? '?return=pet' : '')); }
-          else { await refreshCustomer(); await loadRemote(); navigate(afterSignIn()); }
+          else {
+            const hasCoupon = !!pendingPromoCode();
+            await refreshCustomer(); await loadRemote(); navigate(afterSignIn(hasCoupon));
+          }
         } catch (error) {
           if (kind === 'login' && error.status === 403) {
             pendingEmail = String(values.get('email') || '');
@@ -371,9 +478,34 @@ export function createAccountUI(helpers) {
       }
       if (kind === 'human') { store.saveHuman({ name: values.get('name'), email: values.get('email'), telegram: values.get('telegram') }); await syncChanges(); notify('Настройки сохранены'); }
       if (kind === 'reminder') { store.addReminder({ title: values.get('title'), date: values.get('date'), productId: values.get('productId') }); await syncChanges(); render(); notify('Покупка добавлена в планы'); }
-      if (kind === 'promo') { store.applyPromo(values.get('code')); render(); notify('Демопромокод активирован'); }
+      if (kind === 'promo') {
+        if (store.mode() === 'remote') {
+          await applyPromo(values.get('code'));
+          if (location.hash !== '#/coupon') render();
+        } else { store.applyPromo(values.get('code')); render(); notify('Демопромокод активирован'); }
+      }
     } catch (error) { if (form.isConnected) formError(form).textContent = error.message; else notify(error.message); }
   }
   const routeAdding = () => new URLSearchParams(location.hash.split('?')[1]).get('add') === '1';
-  return { page, click, change, dismissChoices, escapeChoices, submit, store, initialize, syncChanges, handleLink, afterRender };
+  async function applyPromo(code) {
+    if (store.mode() === 'remote') {
+      const result = await api.claimPromo(code);
+      store.setRemoteCoupon(result.coupon);
+      if (result.coupon.status === 'ready') notify('Купон сохранён в кабинете');
+      return result.coupon;
+    }
+    guestCoupon = (await api.activateCoupon(code)).coupon;
+    rememberPromo(code);
+    couponError = '';
+    navigate('/coupon');
+    return guestCoupon;
+  }
+  const promo = () => store.mode() === 'remote' ? store.promo()
+    : guestCoupon?.status === 'ready' ? { code: guestCoupon.code, percent: guestCoupon.percent } : null;
+  function couponPaid() {
+    guestCoupon = null;
+    try { localStorage.removeItem(pendingPromoKey); } catch { /* Storage unavailable */ }
+  }
+  return { page, click, change, dismissChoices, escapeChoices, submit, store, initialize, syncChanges,
+    handleLink, afterRender, applyPromo, refreshPromo, promo, couponPaid };
 }

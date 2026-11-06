@@ -268,6 +268,7 @@ CREATE TABLE IF NOT EXISTS auth_links (
   consumed_at timestamptz,
   created_at timestamptz NOT NULL DEFAULT now()
 );
+ALTER TABLE auth_links ADD COLUMN IF NOT EXISTS promo_code text;
 CREATE INDEX IF NOT EXISTS auth_links_customer_kind_idx ON auth_links(customer_id,kind);
 
 CREATE TABLE IF NOT EXISTS pets (
@@ -315,6 +316,7 @@ CREATE TABLE IF NOT EXISTS orders (
   updated_at timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS orders_email_idx ON orders(lower(email));
+CREATE INDEX IF NOT EXISTS orders_promo_code_idx ON orders(promo_code);
 CREATE INDEX IF NOT EXISTS orders_customer_id_idx ON orders(customer_id);
 CREATE INDEX IF NOT EXISTS orders_created_at_idx ON orders(created_at DESC);
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS stock_state text NOT NULL DEFAULT 'legacy'
@@ -325,6 +327,10 @@ ALTER TABLE orders ADD COLUMN IF NOT EXISTS stripe_checkout_session_id text UNIQ
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS stripe_checkout_url text;
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS stripe_payment_intent_id text;
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS payment_expires_at timestamptz;
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS buyer_phone text;
+UPDATE orders SET buyer_phone=right(regexp_replace(phone,'[^0-9]','','g'),9)
+  WHERE buyer_phone IS NULL AND length(regexp_replace(phone,'[^0-9]','','g'))>=9;
+CREATE INDEX IF NOT EXISTS orders_buyer_phone_idx ON orders(buyer_phone);
 
 CREATE TABLE IF NOT EXISTS stripe_events (
   id text PRIMARY KEY,
@@ -477,4 +483,21 @@ CREATE TABLE IF NOT EXISTS promo_codes (
   max_uses integer CHECK (max_uses >= 0),
   used_count integer NOT NULL DEFAULT 0 CHECK (used_count >= 0),
   expires_at timestamptz
+);
+ALTER TABLE promo_codes ADD COLUMN IF NOT EXISTS kind text NOT NULL DEFAULT 'general';
+ALTER TABLE promo_codes DROP CONSTRAINT IF EXISTS promo_codes_kind_check;
+ALTER TABLE promo_codes ADD CONSTRAINT promo_codes_kind_check
+  CHECK (kind IN ('general','second_order','paper_shared'));
+ALTER TABLE promo_codes DROP CONSTRAINT IF EXISTS promo_codes_paper_shared_rules;
+ALTER TABLE promo_codes ADD CONSTRAINT promo_codes_paper_shared_rules
+  CHECK (kind<>'paper_shared' OR (percent_off=10 AND max_uses=100 AND free_delivery=false));
+INSERT INTO promo_codes(code,kind,percent_off,free_delivery,active,max_uses,used_count,expires_at)
+VALUES('CMD10-D8E2EYWE','paper_shared',10,false,true,100,0,now() + interval '90 days')
+ON CONFLICT DO NOTHING;
+
+CREATE TABLE IF NOT EXISTS customer_promos (
+  customer_id uuid NOT NULL REFERENCES customers(id) ON DELETE CASCADE,
+  code text NOT NULL REFERENCES promo_codes(code) ON DELETE CASCADE,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  PRIMARY KEY(customer_id,code)
 );

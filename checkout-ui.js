@@ -1,7 +1,8 @@
 import { checkoutTotals, deliveryTiming, FREE_DELIVERY_FROM, DELIVERY_FEE, validateCheckout } from './checkout-model.js';
 import { locale } from './locale.js?v=ukrainian-public-3';
 
-export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems, isReady, getPromo, applyPromo, findOrder, productLabel, getCheckoutContext = () => ({}), render, onPaid }) {
+export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems, isReady, getPromo, applyPromo,
+  refreshPromo = async () => {}, findOrder, productLabel, getCheckoutContext = () => ({}), render, onPaid }) {
   let formValues = {};
   let promoError = '';
   let preview = null;
@@ -131,12 +132,18 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
       const request = (path, body) => fetch(path, { method: 'POST', credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
       const lines = items.map(item => ({ productId: item.productId, variantId: item.variantId, qty: item.qty }));
-      const quoteResponse = await request('/api/checkout/quote', { items: lines, promoCode: promo?.code || '' });
+      const quoteResponse = await request('/api/checkout/quote', { items: lines,
+        promoCode: promo?.code || '', email: values.email, phone: values.phone });
       const quote = await quoteResponse.json().catch(() => ({}));
       if (!quoteResponse.ok || !quote.orderable) throw new Error(quote.error || 'Проверьте цену и наличие товаров');
       const shownTotal = Math.round(checkoutTotals(items, promo).total * 100);
-      if (quote.totalCents !== shownTotal)
+      if (quote.totalCents !== shownTotal) {
+        await refreshPromo().catch(() => {});
+        preview.promo = getPromo();
+        if (quote.totalCents === Math.round(checkoutTotals(items, preview.promo).total * 100))
+          throw new Error('Скидка обновлена. Проверьте итог и нажмите оплату ещё раз');
         throw new Error(`Итоговая цена изменилась: ${money(quote.totalCents / 100)}. Обновите корзину перед оплатой`);
+      }
       const signature = JSON.stringify([preview.signature, values, promo?.code || '']);
       let saved;
       try { saved = JSON.parse(sessionStorage.getItem('catmandog-payment-attempt') || 'null'); } catch { /* Invalid draft */ }
@@ -155,6 +162,8 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
         throw new Error(result.error || 'Не удалось открыть безопасную оплату');
       location.assign(result.url);
     } catch (error) {
+      await refreshPromo().catch(() => {});
+      if (preview) preview.promo = getPromo();
       paymentError = error.message;
       button.disabled = false;
       render();
@@ -212,7 +221,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     document.getElementById('service-preview')?.scrollIntoView({ block: 'start' });
   }
 
-  function click(button) {
+  async function click(button) {
     if (button.hasAttribute('data-checkout-pay')) { void startPayment(button); return; }
     if (button.hasAttribute('data-payment-refresh')) {
       const sessionId = new URLSearchParams((location.hash || '').split('?')[1] || '').get('session_id');
@@ -223,7 +232,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     if (!button.hasAttribute('data-checkout-promo')) return;
     const form = button.closest('form');
     const values = remember(form);
-    try { applyPromo(String(values.promoCode || '')); promoError = ''; }
+    try { await applyPromo(String(values.promoCode || '')); formValues.promoCode = getPromo()?.code || ''; promoError = ''; }
     catch (error) { promoError = error.message; }
     render();
   }

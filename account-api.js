@@ -1,4 +1,4 @@
-import { locale } from './locale.js?v=ukrainian-public-3';
+import { locale } from './locale.js?v=coupon-qr-1';
 
 export function createAccountApi(fetcher = fetch) {
   async function request(path, method = 'GET', body) {
@@ -24,6 +24,9 @@ export function createAccountApi(fetcher = fetch) {
       { email, locale: locale(), returnTo }),
     reset: (token, password) => request('/api/auth/reset', 'POST', { token, password }),
     logout: () => request('/api/auth/logout', 'POST', {}),
+    promo: () => request('/api/me/promo'),
+    claimPromo: code => request('/api/me/promo', 'POST', { code }),
+    activateCoupon: code => request('/api/coupon/activate', 'POST', { code }),
     cabinet: () => request('/api/me/cabinet'),
     saveCabinet: (cabinet, revision) => request('/api/me/cabinet', 'PUT', { cabinet, revision })
   };

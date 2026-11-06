@@ -41,6 +41,7 @@ export function createAccountStore(storage) {
     data.human = { ...empty().human, ...data.human };
     if (!data.pets.some(p => p.id === data.activePetId)) data.activePetId = data.pets[0]?.id || null;
   }
+  let remoteCoupon = null;
   function save() { if (mode !== 'remote') storage.setItem(mode === 'demo' ? DEMO_KEY : KEY, JSON.stringify(data)); }
   load();
   return {
@@ -50,10 +51,12 @@ export function createAccountStore(storage) {
     connectRemote(snapshot, nextRevision, persist) {
       if (!snapshot || snapshot.version !== 1 || !Array.isArray(snapshot.pets) || typeof persist !== 'function')
         throw new Error('Некорректные данные кабинета');
-      mode = 'remote'; data = structuredClone(snapshot); revision = nextRevision;
+      mode = 'remote'; data = structuredClone(snapshot); revision = nextRevision; remoteCoupon = null;
       saveRemote = persist; remoteQueue = Promise.resolve();
     },
-    disconnectRemote() { mode = 'personal'; saveRemote = null; revision = 0; load(); },
+    disconnectRemote() { mode = 'personal'; saveRemote = null; revision = 0; remoteCoupon = null; load(); },
+    setRemoteCoupon(coupon) { remoteCoupon = coupon; },
+    remoteCoupon: () => remoteCoupon,
     sync() {
       if (mode !== 'remote') return Promise.resolve();
       const snapshot = structuredClone(data);
@@ -83,7 +86,9 @@ export function createAccountStore(storage) {
     addReminder(values) { if (!values.title?.trim() || !values.date || !data.activePetId) throw new Error('Укажите покупку и дату'); data.reminders.push({ ...values, id: id(), petId: data.activePetId, done: false }); save(); },
     toggleReminder(reminderId) { const reminder = data.reminders.find(r => r.id === reminderId && r.petId === data.activePetId); if (reminder) { reminder.done = !reminder.done; save(); } },
     applyPromo(code) { const value = code.trim().toUpperCase(); if (!['WELCOME10', 'LEO10'].includes(value)) throw new Error('В прототипе доступны WELCOME10 и LEO10'); data.promo = value; save(); },
-    promo: () => data.promo ? { code: data.promo, percent: 10 } : null,
+    promo: () => mode === 'remote' ? (remoteCoupon?.status === 'ready'
+      ? { code: remoteCoupon.code, percent: remoteCoupon.percent } : null)
+      : data.promo ? { code: data.promo, percent: 10 } : null,
     assignClinic(clinicId) { data.clinics[data.activePetId || 'guest'] = clinicId; save(); },
     tripDraft: () => structuredClone(data.tripDrafts[data.activePetId || 'guest'] || null),
     setTripDraft(trip) { data.tripDrafts[data.activePetId || 'guest'] = structuredClone(trip); save(); },

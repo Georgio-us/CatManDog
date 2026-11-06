@@ -5,7 +5,8 @@ import { json, readJson, sameOrigin } from './http.js';
 import { normalizedEmail, validEmail, hashPassword, verifyPassword, currentCustomer,
   createSession, cookieToken, tokenDigest, sessionCookie, clearSessionCookie, isAdmin } from './auth.js';
 import { loadCabinet, saveCabinet } from './cabinet.js';
-import { emailReady, sendAccountLink, notifyServiceRequest, sendServiceReply } from './email.js';
+import { emailReady, sendAccountLink,
+  notifyServiceRequest, sendServiceReply } from './email.js';
 import { googleClientId, verifyGoogleCredential, googleOwnsEmail } from './google-auth.js';
 import { currentStaff, createStaffSession, staffCookie, clearStaffCookie,
   revokeStaffSession, bootstrapOwner } from './staff.js';
@@ -17,6 +18,8 @@ import { importSupplierDrafts } from './supplier-drafts.js';
 import { launchCatalog, saveLaunchOrder } from './launch-scenario.js';
 import { selectedPriceRows, applySelectedPrices } from './selected-pricing.js';
 import { applyMatchedPrices } from './matched-pricing.js';
+import { activatePaperCoupon, normalizeBuyerPhone, resolvePromo,
+  savedPaperCoupon } from './promo.js';
 import { churuRepackOptions } from '../churu-retail-formats.js';
 
 const counters = new Map();
@@ -80,13 +83,20 @@ function productFields(body) {
   return { name, brand, category, pet, description, foodType, imagePath, details };
 }
 
-async function issueAccountLink(db, customerId, kind, email, language = 'ru', returnTo = '') {
+async function issueAccountLink(db, customerId, kind, email, language = 'ru', promoCode = '', returnTo = '') {
   const token = randomBytes(32).toString('hex');
+  if (kind === 'verify' && !promoCode) {
+    const pending = await db.query(`SELECT promo_code FROM auth_links WHERE customer_id=$1
+      AND kind='verify' AND consumed_at IS NULL AND promo_code IS NOT NULL
+      ORDER BY created_at DESC LIMIT 1`, [customerId]);
+    promoCode = pending.rows[0]?.promo_code || '';
+  }
   await db.query('DELETE FROM auth_links WHERE customer_id=$1 AND kind=$2 AND consumed_at IS NULL',
     [customerId, kind]);
-  await db.query(`INSERT INTO auth_links(id,customer_id,kind,token_hash,expires_at)
-    VALUES($1,$2,$3,$4,now()+($5::integer * interval '1 minute'))`,
-  [randomUUID(), customerId, kind, tokenDigest(token), kind === 'verify' ? 1440 : 30]);
+  await db.query(`INSERT INTO auth_links(id,customer_id,kind,token_hash,expires_at,promo_code)
+    VALUES($1,$2,$3,$4,now()+($5::integer * interval '1 minute'),$6)`,
+  [randomUUID(), customerId, kind, tokenDigest(token), kind === 'verify' ? 1440 : 30,
+    kind === 'verify' ? cap(promoCode, 40) || null : null]);
   await sendAccountLink(email, kind, token, fetch, language, returnTo === 'pet' ? 'pet' : '');
 }
 
@@ -102,15 +112,10 @@ function rateLimit(req, group, limit, minutes = 15) {
   if (counters.size > 10000) for (const [entry, counter] of counters) if (counter.until < now) counters.delete(entry);
 }
 
-async function promoFor(db, code, lock = false) {
-  if (!code) return null;
-  const value = cap(code, 40).toUpperCase();
-  const { rows } = await db.query(`SELECT code,percent_off,free_delivery,max_uses,used_count FROM promo_codes
-    WHERE code=$1 AND active=true AND (expires_at IS NULL OR expires_at>now())
-    ${lock ? 'FOR UPDATE' : ''}`, [value]);
-  const promo = rows[0];
-  if (!promo || (promo.max_uses !== null && promo.used_count >= promo.max_uses)) bad('Промокод недоступен');
-  return promo;
+async function promoFor(db, code, customer, identity = null, lock = false) {
+  const automatic = !code ? await savedPaperCoupon(db, customer) : null;
+  return resolvePromo(db, code || (automatic?.status === 'ready' ? automatic.code : ''),
+    customer, identity, lock);
 }
 
 function publicQuote(quote) {
@@ -189,7 +194,7 @@ async function createOrder(db, payload, customer) {
           WHERE i.id=(v.source#>>'{retailFormat,sourceItemId}') AND i.shop_price_cents>0)) AS supplier_matched
       FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
       WHERE v.id=ANY($1::text[]) AND v.active=true AND p.active=true FOR UPDATE OF v`, [ids]);
-    const promo = await promoFor(client, payload.promoCode, true);
+    const promo = await promoFor(client, payload.promoCode, customer, { email, phone }, true);
     const quote = priceQuote(lines, variants.rows, promo);
     if (!quote.orderable) bad('Один из товаров пока нельзя заказать');
     if (!enabled('SOURCE_ON_DEMAND_PAYMENT_ENABLED') && quote.items.some(item => item.sourceMode !== 'on_hand'))
@@ -204,11 +209,11 @@ async function createOrder(db, payload, customer) {
       : { mode: 'scheduled', date: delivery.date, time: delivery.time, reserved: false };
     const billingProfile = await client.query('SELECT delivery_tax_rate_bps FROM billing_profile WHERE id=true');
     const deliveryTaxRate = billingProfile.rows[0]?.delivery_tax_rate_bps ?? null;
-    const inserted = await client.query(`INSERT INTO orders(id,number,customer_id,customer_name,email,phone,whatsapp_opt_in,
+    const inserted = await client.query(`INSERT INTO orders(id,number,customer_id,customer_name,email,buyer_phone,phone,whatsapp_opt_in,
       delivery_address,delivery_preference,subtotal_cents,discount_cents,delivery_cents,delivery_tax_rate_bps,total_cents,
-      promo_code,idempotency_key,stock_state) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,'reserved')
+      promo_code,idempotency_key,stock_state) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,'reserved')
       ON CONFLICT(idempotency_key) DO NOTHING RETURNING id,number`,
-    [orderId, number, customer?.id || null, name, email, phone, !!payload.whatsapp,
+    [orderId, number, customer?.id || null, name, email, normalizeBuyerPhone(phone), phone, !!payload.whatsapp,
       cleanAddress, cleanDelivery, quote.subtotalCents, quote.discountCents,
       quote.deliveryCents, deliveryTaxRate, quote.totalCents, quote.promoCode, idempotency]);
     if (!inserted.rows.length) {
@@ -352,7 +357,8 @@ async function authRoute(db, req, res, path) {
       if (error.code === '23505') bad('Этот email уже используется', 409);
       throw error;
     }
-    await issueAccountLink(db, id, 'verify', email, ['es', 'ru', 'uk'].includes(body.locale) ? body.locale : 'ru', body.returnTo);
+    await issueAccountLink(db, id, 'verify', email, ['es', 'ru', 'uk'].includes(body.locale) ? body.locale : 'ru',
+      body.promoCode, body.returnTo);
     return json(res, 201, { pending: true, email });
   }
   if (path === '/api/auth/login') {
@@ -427,7 +433,8 @@ async function authRoute(db, req, res, path) {
     const customer = rows[0];
     const kind = path.endsWith('recover') ? 'reset' : 'verify';
     if (customer && (kind === 'reset' ? !!customer.email_verified_at : !customer.email_verified_at)) {
-      try { await issueAccountLink(db, customer.id, kind, email, ['es', 'ru', 'uk'].includes(body.locale) ? body.locale : 'ru', body.returnTo); }
+      try { await issueAccountLink(db, customer.id, kind, email, ['es', 'ru', 'uk'].includes(body.locale) ? body.locale : 'ru',
+        '', body.returnTo); }
       catch (error) { console.error('Account email failed:', error.message); }
     }
     return json(res, 202, { accepted: true });
@@ -444,7 +451,7 @@ async function authRoute(db, req, res, path) {
     let account;
     try {
       await client.query('BEGIN');
-      const { rows } = await client.query(`SELECT l.id,l.customer_id,c.email,c.name FROM auth_links l
+      const { rows } = await client.query(`SELECT l.id,l.customer_id,l.promo_code,c.email,c.name FROM auth_links l
         JOIN customers c ON c.id=l.customer_id WHERE l.token_hash=$1 AND l.kind=$2
         AND l.consumed_at IS NULL AND l.expires_at>now() FOR UPDATE OF l`,
       [tokenDigest(body.token), kind]);
@@ -461,8 +468,15 @@ async function authRoute(db, req, res, path) {
     } catch (error) { await client.query('ROLLBACK'); throw error; }
     finally { client.release(); }
     if (kind === 'reset') return json(res, 200, { ok: true });
+    let promoError = null;
+    if (account.promo_code) {
+      try { await activatePaperCoupon(db, account.promo_code,
+        { id: account.customer_id, email: account.email }); }
+      catch (error) { promoError = error.message; }
+    }
     const session = await createSession(db, account.customer_id);
-    return json(res, 200, { id: account.customer_id, email: account.email, name: account.name },
+    return json(res, 200, { id: account.customer_id, email: account.email, name: account.name,
+      promoCodeProcessed: !!account.promo_code, promoError },
       { 'Set-Cookie': sessionCookie(session, secure(req)) });
   }
   if (path === '/api/auth/logout') {
@@ -1093,7 +1107,7 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { ok: true });
   }
   if (path === '/api/admin/overview' && req.method === 'GET') {
-    const [catalog, orders, requests, top, purchases, coverage, customers] = await Promise.all([
+    const [catalog, orders, requests, top, purchases, coverage, customers, coupon] = await Promise.all([
       db.query(`SELECT count(*)::integer AS total,
         count(*) FILTER (WHERE v.price_confirmed=false)::integer AS unconfirmed_prices,
         count(*) FILTER (WHERE v.purchase_price_cents IS NULL AND so.cost_cents IS NULL)::integer AS missing_costs,
@@ -1125,11 +1139,17 @@ async function adminRoute(db, req, res, path) {
         LEFT JOIN supplier_offers so ON so.variant_id=v.id AND so.preferred=true
         WHERE p.active=true AND v.active=true
         GROUP BY p.pet,p.category ORDER BY p.pet,p.category`),
-      db.query('SELECT count(*)::integer AS registered FROM customers')
+      db.query('SELECT count(*)::integer AS registered FROM customers'),
+      db.query(`SELECT p.code,p.max_uses,p.used_count,p.expires_at,p.active,
+        (SELECT count(*)::integer FROM orders o WHERE o.promo_code=p.code
+          AND o.payment_status IN ('awaiting_payment','pending')
+          AND o.stock_state='reserved') AS pending_uses
+        FROM promo_codes p WHERE p.kind='paper_shared'
+        ORDER BY p.expires_at DESC NULLS LAST LIMIT 1`)
     ]);
     return json(res, 200, { catalog: catalog.rows[0], orders: orders.rows[0],
       requests: requests.rows[0], topPaidSkus: top.rows, purchases: purchases.rows[0],
-      coverage: coverage.rows, customers: customers.rows[0] });
+      coverage: coverage.rows, customers: customers.rows[0], coupon: coupon.rows[0] || null });
   }
   if (path === '/api/admin/sku-audit' && req.method === 'GET') {
     const { rows } = await db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.category,p.pet,
@@ -1789,10 +1809,18 @@ export async function handleApi(db, req, res, pathname) {
             stock_quantity - reserved_quantity > 0),
         availability: entry.availability })) });
     }
+    if (pathname === '/api/coupon/activate' && req.method === 'POST') {
+      rateLimit(req, 'coupon-activate', 30, 60);
+      const body = await readJson(req);
+      const customer = await currentCustomer(db, req);
+      return json(res, 200, { coupon: await activatePaperCoupon(db, body.code, customer) });
+    }
     if (pathname === '/api/checkout/quote' && req.method === 'POST') {
       rateLimit(req, 'quote', 100);
       const body = await readJson(req);
-      const promo = await promoFor(db, body.promoCode);
+      const customer = await currentCustomer(db, req);
+      const promo = await promoFor(db, body.promoCode, customer,
+        { email: body.email, phone: body.phone });
       const quote = priceQuote(body.items, await liveCatalogSnapshot(db), promo);
       return json(res, 200, publicQuote(quote));
     }
@@ -1806,6 +1834,14 @@ export async function handleApi(db, req, res, pathname) {
         WHERE c.id=$1 AND c.email_verified_at IS NOT NULL AND s.role='owner' AND s.active=true
       ) AS "canManageStore"`, [customer.id]);
       return json(res, 200, { customer: { ...customer, canManageStore: rows[0].canManageStore } });
+    }
+    if (pathname === '/api/me/promo' && ['GET', 'POST'].includes(req.method)) {
+      const customer = await currentCustomer(db, req);
+      if (!customer) bad('Войдите в кабинет', 401);
+      if (req.method === 'GET') return json(res, 200, { coupon: await savedPaperCoupon(db, customer) });
+      rateLimit(req, 'promo', 20);
+      const body = await readJson(req);
+      return json(res, 200, { coupon: await activatePaperCoupon(db, body.code, customer) });
     }
     if (pathname === '/api/me/cabinet' && ['GET', 'PUT'].includes(req.method)) {
       if (!enabled('ACCOUNTS_ENABLED')) bad('Кабинет пока не подключён', 503);

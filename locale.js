@@ -1,7 +1,7 @@
-import { es, esPatterns } from './locales/es.js?v=welcome-card-1';
+import { es, esPatterns } from './locales/es.js?v=coupon-qr-1';
 import { esProductText } from './locales/product-es.js';
 import { esDetails } from './locales/details-es.js';
-import { uk, ukPatterns } from './locales/uk.js?v=ukrainian-public-2';
+import { uk, ukPatterns } from './locales/uk.js?v=coupon-qr-1';
 import { ukExtra } from './locales/uk-extra.js?v=ukrainian-public-2';
 import { ukProductNames } from './locales/uk-product-names.js';
 import { ukProductCopy } from './locales/uk-product-copy.js';
