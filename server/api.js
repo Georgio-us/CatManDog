@@ -546,8 +546,22 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { role: fullAdmin ? 'admin' : 'support',
       name: operator?.name || customer?.name || '', email: operator?.email || customer?.email });
   if (!fullAdmin && !path.startsWith('/api/admin/service-requests')) bad('Доступ закрыт', 403);
-  if (path === '/api/admin/sendcloud/status' && req.method === 'GET')
-    return json(res, 200, { configured: sendcloudReady(), nationalCheckoutEnabled: false });
+  if (path === '/api/admin/sendcloud/status' && req.method === 'GET') {
+    const configured = sendcloudReady();
+    if (new URL(req.url, 'https://catmandog.es').searchParams.get('verify') !== '1')
+      return json(res, 200, { configured, nationalCheckoutEnabled: false });
+    rateLimit(req, 'sendcloud-verify', 6);
+    if (!configured) return json(res, 200, { configured, reachable: false });
+    try {
+      const options = await sendcloudShippingOptions({ postalCode: '28001', parcels: [
+        { weightKg: 2, lengthCm: 30, widthCm: 20, heightCm: 15 }
+      ] });
+      return json(res, 200, { configured, reachable: true, optionCount: options.length,
+        nationalCheckoutEnabled: false });
+    } catch (error) {
+      return json(res, 502, { configured, reachable: false, error: error.message });
+    }
+  }
   if (path === '/api/admin/sendcloud/quote' && req.method === 'POST') {
     rateLimit(req, 'sendcloud-quote', 20);
     const body = await readJson(req);
