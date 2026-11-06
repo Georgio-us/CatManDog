@@ -1,5 +1,5 @@
-import { confirmedPrice, resolveVariant } from './variants.js';
-import { homeGroupForProduct } from './home-catalog.js';
+import { confirmedPrice, resolveVariant } from './variants.js?v=delivery-status-3';
+import { homeGroupForProduct } from './home-catalog.js?v=delivery-status-3';
 
 // This only announces an in-memory event. The GA4 adapter subscribes after
 // the visitor has given analytics consent; this module sends no data itself.

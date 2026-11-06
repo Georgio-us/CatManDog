@@ -1,6 +1,6 @@
 import { hasSupplierTerms, supplierTermsDetail } from './supplier-terms.js';
-import { hasVariants, resolveVariant, storefrontPrice, isDemoPrice, canBuy } from './variants.js';
-import { retailResearch, retailResearchBlock, provisionalPriceBlock, provisionalPriceLabel } from './retail-research.js?v=ukrainian-public-3';
+import { hasVariants, resolveVariant, storefrontPrice, isDemoPrice, canBuy } from './variants.js?v=delivery-status-3';
+import { retailResearch, retailResearchBlock, provisionalPriceBlock, provisionalPriceLabel } from './retail-research.js?v=delivery-status-3';
 
 const availabilityCopy = {
   ru: {

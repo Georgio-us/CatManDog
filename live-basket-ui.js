@@ -1,5 +1,5 @@
 import { checkoutTotals } from './checkout-model.js';
-import { cartSku, storefrontPrice } from './variants.js';
+import { cartSku, storefrontPrice } from './variants.js?v=delivery-status-3';
 
 export function fulfillmentState(sku) {
   if (sku?.saleStatus) return sku.saleStatus === 'available' ? 'stock' :

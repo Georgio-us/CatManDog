@@ -1,4 +1,4 @@
-import { hasVariants } from './variants.js';
+import { hasVariants } from './variants.js?v=delivery-status-3';
 
 function catalogImage(path, previousImages, alt) {
   const imagePath = value => {

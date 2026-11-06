@@ -1,4 +1,4 @@
-import { canBuy, confirmedPrice, snapshots } from './variants.js';
+import { canBuy, confirmedPrice, snapshots } from './variants.js?v=delivery-status-3';
 
 const definitions = [
   ['dry-food', 'Сухой корм'],

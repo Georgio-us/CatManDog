@@ -1,5 +1,5 @@
-import { homeGroupForProduct } from './home-catalog.js?v=dog-first-wave-1';
-import { canBuy, snapshots } from './variants.js';
+import { homeGroupForProduct } from './home-catalog.js?v=delivery-status-3';
+import { canBuy, snapshots } from './variants.js?v=delivery-status-3';
 
 const foodGroups = new Set(['dry-food', 'wet-food']);
 const ingestibleGroups = new Set(['dry-food', 'wet-food', 'treats']);

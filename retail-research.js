@@ -1,5 +1,5 @@
 import { retailObservations } from './retail-observations.js';
-import { isDemoPrice } from './variants.js';
+import { isDemoPrice } from './variants.js?v=delivery-status-3';
 import { locale, translate } from './locale.js?v=ukrainian-public-3';
 
 const localized = (spanish, russian, ukrainian) => locale() === 'es' ? spanish : locale() === 'uk' ? ukrainian : russian;
