@@ -560,8 +560,10 @@ async function adminRoute(db, req, res, path) {
   if (!fullAdmin && !path.startsWith('/api/admin/service-requests')) bad('Доступ закрыт', 403);
   if (path === '/api/admin/sendcloud/status' && req.method === 'GET') {
     const configured = sendcloudReady();
-    if (new URL(req.url, 'https://catmandog.es').searchParams.get('verify') !== '1')
-      return json(res, 200, { configured, nationalCheckoutEnabled: false });
+    const verify = new URL(req.url, 'https://catmandog.es').searchParams.get('verify');
+    if (!['1', 'details'].includes(verify))
+      return json(res, 200, { configured,
+        nationalCheckoutEnabled: enabled('NATIONAL_CHECKOUT_ENABLED') });
     rateLimit(req, 'sendcloud-verify', 6);
     if (!configured) return json(res, 200, { configured, reachable: false });
     try {
@@ -569,7 +571,8 @@ async function adminRoute(db, req, res, path) {
         { weightKg: 2, lengthCm: 30, widthCm: 20, heightCm: 15 }
       ] });
       return json(res, 200, { configured, reachable: true, optionCount: options.length,
-        nationalCheckoutEnabled: false });
+        nationalCheckoutEnabled: enabled('NATIONAL_CHECKOUT_ENABLED'),
+        ...(verify === 'details' ? { sample: options.slice(0, 2) } : {}) });
     } catch (error) {
       return json(res, 502, { configured, reachable: false, error: error.message });
     }
