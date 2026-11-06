@@ -38,6 +38,15 @@ test('unconfirmed availability cannot appear as stock or enter checkout', () => 
   assert.match(html, /74\.99 €/);
 });
 
+test('an accepted QR code remains visible when the basket total is still unknown', () => {
+  const pendingCart = [{ id: 'food', productId: 'food', variantId: 'food-pending', qty: 1 }];
+  const html = renderLiveBasket({ ...helpers, cart: pendingCart, grouping: 'together',
+    promo: { code: 'CMD10-D8E2EYWE', percent: 10 } });
+  assert.match(html, /CMD10-D8E2EYWE/);
+  assert.match(html, /Промокод принят - скидка 10% будет учтена/);
+  assert.match(html, /Итог уточняется/);
+});
+
 test('supplier-linked SKU keeps its retail price in the basket but cannot check out yet', () => {
   const pendingSale = { ...product.variants[0], priceStatus: 'temporary',
     serverPriceConfirmed: false, serverSourcingAvailability: 'on_hand' };

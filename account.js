@@ -2,7 +2,7 @@ import { createAccountStore } from './account-store.js?v=cat-assortment-1';
 import { createAccountApi } from './account-api.js?v=coupon-qr-1';
 import { accountTools } from './useful.js?v=ukrainian-public-3';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
-import { intlLocale, locale } from './locale.js?v=coupon-qr-1';
+import { intlLocale, locale } from './locale.js?v=coupon-qr-2';
 const store = createAccountStore(localStorage);
 const api = createAccountApi();
 
@@ -294,7 +294,7 @@ export function createAccountUI(helpers) {
     const knownCoupon = store.mode() === 'remote' ? store.remoteCoupon() || guestCoupon : guestCoupon;
     const code = pendingPromoCode() || knownCoupon?.code || '';
     const coupon = knownCoupon?.code === code ? knownCoupon : null;
-    const label = coupon?.status === 'ready' ? (getCart?.().length ? 'Промокод применён: скидка 10% в корзине' : 'Промокод принят: скидка 10% появится в корзине после выбора товаров')
+    const label = coupon?.status === 'ready' ? 'Промокод принят - скидка 10% будет учтена при оформлении подходящего заказа'
       : coupon?.status === 'pending_payment' ? 'Купон зарезервирован до завершения оплаты'
       : coupon?.status === 'used' ? 'Вы уже использовали этот промокод'
       : coupon?.status === 'expired' ? 'Срок действия промокода истёк'
@@ -304,7 +304,7 @@ export function createAccountUI(helpers) {
   }
   function promoPanel() {
     const coupon = store.remoteCoupon();
-    const status = coupon?.status === 'ready' ? 'Купон готов - скидка 10% применится при оформлении заказа'
+    const status = coupon?.status === 'ready' ? 'Промокод принят - скидка 10% будет учтена при оформлении подходящего заказа'
       : coupon?.status === 'used' ? 'Вы уже использовали этот промокод'
       : coupon?.status === 'pending_payment' ? 'Купон зарезервирован до завершения оплаты'
       : coupon?.status === 'expired' ? 'Срок действия промокода истёк'

@@ -1,4 +1,4 @@
-import { locale } from './locale.js?v=coupon-qr-1';
+import { locale } from './locale.js?v=coupon-qr-2';
 
 export function createAccountApi(fetcher = fetch) {
   async function request(path, method = 'GET', body) {

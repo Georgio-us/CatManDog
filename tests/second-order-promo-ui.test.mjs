@@ -44,7 +44,7 @@ test('the common QR applies a guest coupon immediately without registration', as
     assert.equal(globalThis.location.hash, '/coupon');
     assert.equal(globalThis.location.href.includes('promo='), false);
     assert.match(ui.page('/coupon', new URLSearchParams()), /Можно купить как гость/);
-    assert.match(ui.page('/coupon', new URLSearchParams()), /Промокод принят: скидка 10% появится в корзине/);
+    assert.match(ui.page('/coupon', new URLSearchParams()), /Промокод принят - скидка 10% будет учтена/);
     assert.doesNotMatch(ui.page('/coupon', new URLSearchParams()), /подтвердите email/);
     globalThis.location.hash = '#/catalog';
     await ui.handleLink();

@@ -980,6 +980,7 @@ export const es = {
   'Промокод недоступен': 'Este código promocional no está disponible',
   'Промокоды': 'Códigos promocionales',
   'Купон на 10% можно добавить сейчас или позже': 'Puedes guardar ahora o más tarde tu cupón del 10 %',
+  'Промокод принят - скидка 10% будет учтена при оформлении подходящего заказа': 'Código aceptado: aplicaremos el 10 % de descuento al realizar un pedido válido',
   'Промокод применён: скидка 10% в корзине': 'Código aplicado: 10 % de descuento en la cesta',
   'Промокод принят: скидка 10% появится в корзине после выбора товаров': 'Código aceptado: el descuento del 10 % aparecerá en la cesta cuando elijas productos',
   'Купон готов - скидка 10% применится при оформлении заказа': 'Cupón listo: el descuento del 10 % se aplicará al finalizar el pedido',
