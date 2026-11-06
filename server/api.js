@@ -13,6 +13,7 @@ import { currentStaff, createStaffSession, staffCookie, clearStaffCookie,
 import { financePreview } from './finance.js';
 import { backupConfiguration, listBackups } from './backup.js';
 import { createStripeCheckout, stripeMode, stripeReady, verifyStripeEvent } from './stripe.js';
+import { sendcloudReady, sendcloudShippingOptions } from './sendcloud.js';
 import { importSupplierCatalog } from './supplier-catalog.js';
 import { importSupplierDrafts } from './supplier-drafts.js';
 import { launchCatalog, saveLaunchOrder } from './launch-scenario.js';
@@ -545,6 +546,19 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { role: fullAdmin ? 'admin' : 'support',
       name: operator?.name || customer?.name || '', email: operator?.email || customer?.email });
   if (!fullAdmin && !path.startsWith('/api/admin/service-requests')) bad('Доступ закрыт', 403);
+  if (path === '/api/admin/sendcloud/status' && req.method === 'GET')
+    return json(res, 200, { configured: sendcloudReady(), nationalCheckoutEnabled: false });
+  if (path === '/api/admin/sendcloud/quote' && req.method === 'POST') {
+    rateLimit(req, 'sendcloud-quote', 20);
+    const body = await readJson(req);
+    try {
+      const options = await sendcloudShippingOptions(body);
+      return json(res, 200, { options });
+    } catch (error) {
+      if (/^Укажите|^Проверьте/.test(error.message)) bad(error.message);
+      throw error;
+    }
+  }
   if (path === '/api/admin/churu/repack' && req.method === 'POST') {
     const body = await readJson(req);
     const productId = cap(body.productId, 180);
