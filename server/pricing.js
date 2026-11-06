@@ -3,16 +3,22 @@ import { deliveryTiming, availableDeliverySlots } from '../checkout-model.js';
 export const DELIVERY_FEE_CENTS = 399;
 export const FREE_DELIVERY_FROM_CENTS = 4900;
 
-export function validateAddress(address) {
+export function validateAddress(address, deliveryMode = 'slot') {
   if (!address || typeof address !== 'object') return 'Укажите адрес доставки';
-  if (address.city !== 'València') return 'Пока доставляем только по городу Валенсия';
-  if (!/^460\d{2}$/.test(String(address.postcode || ''))) return 'Укажите почтовый индекс в городе Валенсия';
+  if (deliveryMode === 'national') {
+    if (!String(address.city || '').trim()) return 'Укажите город доставки';
+    if (!/^\d{5}$/.test(String(address.postcode || ''))) return 'Укажите почтовый индекс Испании';
+  } else {
+    if (address.city !== 'València') return 'Пока доставляем только по городу Валенсия';
+    if (!/^460\d{2}$/.test(String(address.postcode || ''))) return 'Укажите почтовый индекс в городе Валенсия';
+  }
   if (!String(address.street || '').trim() || !String(address.building || '').trim()) return 'Укажите улицу и номер дома';
   return null;
 }
 
 export function validateDelivery(delivery, now = new Date()) {
   if (!delivery || typeof delivery !== 'object') return 'Укажите время доставки';
+  if (delivery.mode === 'national') return null;
   if (delivery.mode === 'preorder') return null;
   if (delivery.mode === 'slot') return availableDeliverySlots(now).some(option =>
     option.date === delivery.date && option.window === delivery.window)
@@ -31,7 +37,7 @@ export function validateDelivery(delivery, now = new Date()) {
   return null;
 }
 
-export function priceQuote(lines, variants, promo = null) {
+export function priceQuote(lines, variants, promo = null, shippingCents = null) {
   if (!Array.isArray(lines) || !lines.length || lines.length > 50) throw new Error('Корзина пуста или слишком велика');
   const byId = new Map(variants.map(variant => [variant.variant_id, variant]));
   const seen = new Set();
@@ -66,7 +72,9 @@ export function priceQuote(lines, variants, promo = null) {
   const percent = promo?.percent_off ?? 0;
   const discountCents = Math.round(subtotalCents * percent / 100);
   const productsCents = subtotalCents - discountCents;
-  const deliveryCents = productsCents >= FREE_DELIVERY_FROM_CENTS || promo?.free_delivery ? 0 : DELIVERY_FEE_CENTS;
+  const deliveryCents = shippingCents === null
+    ? productsCents >= FREE_DELIVERY_FROM_CENTS || promo?.free_delivery ? 0 : DELIVERY_FEE_CENTS
+    : shippingCents;
   return { items, subtotalCents, discountCents, deliveryCents,
     totalCents: productsCents + deliveryCents,
     orderable: items.every(item => item.orderable),

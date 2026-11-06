@@ -152,7 +152,9 @@ export async function catalogSnapshot(db) {
   const [{ rows }, supplierStates] = await Promise.all([db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.category,p.pet,p.image_path,
     p.description,p.details,p.food_type,v.image_path AS variant_image_path,
     v.description AS variant_description,v.details AS variant_details,
-    v.label,v.source_price_cents,v.price_override_cents,v.purchase_price_cents,
+    v.label,v.source->>'weight' AS declared_weight,
+    v.source->>'packageWeightKg' AS package_weight_kg,
+    v.source_price_cents,v.price_override_cents,v.purchase_price_cents,
     v.price_confirmed,v.source_orderable,v.availability,v.sale_status,v.stock_quantity,v.reorder_point,v.target_stock,
     v.tax_rate_bps,v.display_priority
     FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id

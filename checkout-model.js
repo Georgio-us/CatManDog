@@ -3,12 +3,14 @@ export const DELIVERY_FEE = 3.99;
 
 const cents = amount => Math.round(Number(amount) * 100);
 
-export function checkoutTotals(items, promo = null) {
+export function checkoutTotals(items, promo = null, shippingCents = null) {
   const subtotalCents = items.reduce((sum, item) => sum + cents(item.price) * item.qty, 0);
   const percent = Math.max(0, Math.min(100, Number(promo?.percent) || 0));
   const discountCents = Math.round(subtotalCents * percent / 100);
   const productsCents = subtotalCents - discountCents;
-  const deliveryCents = !items.length || productsCents >= cents(FREE_DELIVERY_FROM) || promo?.freeShipping ? 0 : cents(DELIVERY_FEE);
+  const deliveryCents = shippingCents === null
+    ? !items.length || productsCents >= cents(FREE_DELIVERY_FROM) || promo?.freeShipping ? 0 : cents(DELIVERY_FEE)
+    : shippingCents;
   return {
     subtotal: subtotalCents / 100,
     discount: discountCents / 100,
@@ -59,8 +61,11 @@ export function validateCheckout(values, now = new Date()) {
   const field = name => String(values[name] || '').trim();
   if (!field('name') || !field('email') || !field('phone')) return 'Укажите имя, email и телефон';
   if (!/^\d{5}$/.test(field('postcode'))) return 'Укажите почтовый индекс из пяти цифр';
-  if (field('city') !== 'València') return 'Пока оформляем доставку только в городе Валенсия';
+  if (field('deliveryRegion') !== 'national' && field('city') !== 'València')
+    return 'Укажите город Валенсия';
+  if (field('deliveryRegion') === 'national' && !field('city')) return 'Укажите город доставки';
   if (!field('street') || !field('building')) return 'Укажите улицу и номер дома';
+  if (field('deliveryRegion') === 'national') return null;
   if (field('deliveryMode') === 'preorder') return null;
   if (field('deliveryMode') === 'slot') {
     const [date, window] = field('deliverySlot').split('|');

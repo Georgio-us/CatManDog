@@ -1,6 +1,7 @@
 import { randomUUID, randomBytes, createHash } from 'node:crypto';
 import { catalogSnapshot } from './catalog.js';
 import { priceQuote, validateAddress, validateDelivery } from './pricing.js';
+import { nationalShippingQuote } from './national-shipping.js';
 import { json, readJson, sameOrigin } from './http.js';
 import { normalizedEmail, validEmail, hashPassword, verifyPassword, currentCustomer,
   createSession, cookieToken, tokenDigest, sessionCookie, clearSessionCookie, isAdmin } from './auth.js';
@@ -165,11 +166,13 @@ async function createOrder(db, payload, customer) {
   const phone = cap(payload.phone, 24);
   if (!name || !validEmail(email) || phone.length < 6) bad('Укажите имя, email и телефон');
   const address = payload.address;
-  const addressError = validateAddress(address);
+  const addressError = validateAddress(address, payload.delivery?.mode);
   if (addressError) bad(addressError);
   const delivery = payload.delivery;
   const deliveryError = validateDelivery(delivery);
   if (deliveryError) bad(deliveryError);
+  if (delivery.mode === 'national' && !enabled('NATIONAL_CHECKOUT_ENABLED'))
+    bad('Доставка по Испании пока не открыта для оплаты', 503);
   const lines = payload.items;
   if (!Array.isArray(lines) || !lines.length || lines.length > 50) bad('Проверьте корзину');
   const client = await db.connect();
@@ -186,7 +189,9 @@ async function createOrder(db, payload, customer) {
       return { url: existing.rows[0].stripe_checkout_url, orderNumber: existing.rows[0].number };
     }
     const ids = lines.map(line => cap(line.variantId, 180));
-    const variants = await client.query(`SELECT v.id AS variant_id,v.product_id,v.label,v.source_price_cents,
+    const variants = await client.query(`SELECT v.id AS variant_id,v.product_id,v.label,v.source->>'weight' AS declared_weight,
+      v.source->>'packageWeightKg' AS package_weight_kg,
+      p.category,v.source_price_cents,
       v.price_override_cents,v.price_confirmed,v.source_orderable,v.availability,v.sale_status,v.tax_rate_bps,
       v.stock_quantity,v.reserved_quantity,p.name,
       (EXISTS (SELECT 1 FROM supplier_catalog_matches m
@@ -197,12 +202,15 @@ async function createOrder(db, payload, customer) {
       FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
       WHERE v.id=ANY($1::text[]) AND v.active=true AND p.active=true FOR UPDATE OF v`, [ids]);
     const promo = await promoFor(client, payload.promoCode, customer, { email, phone }, true);
-    const quote = priceQuote(lines, variants.rows, promo);
+    const shipping = delivery.mode === 'national'
+      ? await nationalShippingQuote({ postalCode: address.postcode, lines, variants: variants.rows }) : null;
+    if (shipping && !shipping.available) bad('Для этой корзины доставка по Испании пока недоступна');
+    const quote = priceQuote(lines, variants.rows, promo, shipping?.deliveryCents ?? null);
     if (!quote.orderable) bad('Один из товаров пока нельзя заказать');
     if (!enabled('SOURCE_ON_DEMAND_PAYMENT_ENABLED') && quote.items.some(item =>
       item.sourceMode === 'source_on_demand' && item.saleStatus !== 'preorder'))
       bad('Для оплаты доступны только товары с подтверждённым наличием');
-    if (variants.rows.every(row => row.sale_status)) {
+    if (delivery.mode !== 'national' && variants.rows.every(row => row.sale_status)) {
       const requiresPreorder = quote.items.some(item => item.saleStatus === 'preorder');
       if (delivery.mode !== (requiresPreorder ? 'preorder' : 'slot'))
         bad('Проверьте выбранный способ доставки');
@@ -210,10 +218,14 @@ async function createOrder(db, payload, customer) {
     const orderId = randomUUID();
     const numberResult = await client.query("SELECT 'CMD-' || nextval('order_number_seq') AS number");
     const number = numberResult.rows[0].number;
-    const cleanAddress = { city: 'València', postcode: cap(address.postcode, 5),
+    const cleanAddress = { city: delivery.mode === 'national' ? cap(address.city, 100) : 'València',
+      country: 'ES', postcode: cap(address.postcode, 5),
       street: cap(address.street, 120), building: cap(address.building, 16),
       apartment: cap(address.apartment, 80), note: cap(address.note, 300), verified: false };
-    const cleanDelivery = delivery.mode === 'soon' ? { mode: 'soon', reserved: false }
+    const cleanDelivery = delivery.mode === 'national'
+      ? { mode:'national', carrier: shipping.carrier, optionCode: shipping.optionCode,
+        weightKg: shipping.weightKg, quoteWeightKg: shipping.quoteWeightKg, reserved:false }
+      : delivery.mode === 'soon' ? { mode: 'soon', reserved: false }
       : delivery.mode === 'slot' ? { mode:'slot', date:delivery.date,
         window:delivery.window, reserved:false }
       : delivery.mode === 'preorder' ? { mode:'preorder', estimateHours:[24,48], reserved:false }
@@ -1899,8 +1911,25 @@ export async function handleApi(db, req, res, pathname) {
       const customer = await currentCustomer(db, req);
       const promo = await promoFor(db, body.promoCode, customer,
         { email: body.email, phone: body.phone });
-      const quote = priceQuote(body.items, await liveCatalogSnapshot(db), promo);
-      return json(res, 200, publicQuote(quote));
+      const variants = await liveCatalogSnapshot(db);
+      const shipping = body.delivery?.mode === 'national'
+        ? await nationalShippingQuote({ postalCode: body.address?.postcode,
+          lines: body.items, variants }) : null;
+      const quote = priceQuote(body.items, variants, promo,
+        shipping?.available ? shipping.deliveryCents : null);
+      return json(res, 200, { ...publicQuote(quote),
+        nationalShipping: shipping,
+        nationalCheckoutEnabled: enabled('NATIONAL_CHECKOUT_ENABLED') });
+    }
+    if (pathname === '/api/checkout/shipping-quote' && req.method === 'POST') {
+      rateLimit(req, 'shipping-quote', 30);
+      const body = await readJson(req);
+      if (!Array.isArray(body.items) || !body.items.length || body.items.length > 50)
+        bad('Проверьте корзину');
+      const shipping = await nationalShippingQuote({ postalCode: body.postcode,
+        lines: body.items, variants: await liveCatalogSnapshot(db) });
+      return json(res, 200, { ...shipping,
+        nationalCheckoutEnabled: enabled('NATIONAL_CHECKOUT_ENABLED') });
     }
     if (pathname.startsWith('/api/admin/')) return await adminRoute(db, req, res, pathname);
     if (pathname.startsWith('/api/auth/') && req.method === 'POST') return await authRoute(db, req, res, pathname);
