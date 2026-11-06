@@ -31,11 +31,23 @@ test('national delivery does not guess accessory weight from a variant name', ()
 
 test('only priced carrier options are accepted', () => {
   assert.deepEqual(pricedShippingOptions([
-    { code: 'a', quote: { total_price: { value: '7.25', currency: 'EUR' } } },
-    { code: 'b', quote: { total_price: { value: '5.40', currency: 'EUR' } } },
-    { code: 'c', quote: null },
-    { code: 'd', quote: { total_price: { value: '1', currency: 'USD' } } }
+    { code: 'a', functionalities: { last_mile:'home_delivery' },
+      quotes: [{ price: { total: { value: '7.25', currency: 'EUR' } } }] },
+    { code: 'b', functionalities: { last_mile:'home_delivery' },
+      quotes: [{ price: { total: { value: '5.40', currency: 'EUR' } } }] },
+    { code: 'c', functionalities: { last_mile:'home_delivery' }, quote: null },
+    { code: 'd', functionalities: { last_mile:'home_delivery' },
+      quote: { total_price: { value: '1', currency: 'USD' } } },
+    { code: 'pickup', functionalities: { last_mile:'service_point' },
+      quotes: [{ price: { total: { value: '2', currency: 'EUR' } } }] }
   ]).map(option => [option.code, option.priceCents]), [['b', 540], ['a', 725]]);
+  assert.deepEqual(pricedShippingOptions([{ code: 'tiered',
+    functionalities: { last_mile:'home_delivery' }, quotes: [
+    { weight: { min: { value: '0' }, max: { value: '2' } },
+      price: { total: { value: '4.00', currency: 'EUR' } } },
+    { weight: { min: { value: '2' }, max: { value: '5' } },
+      price: { total: { value: '7.00', currency: 'EUR' } } }
+  ] }], 2.5)[0].priceCents, 700);
 });
 
 test('national address and price require the carrier fee while Valencia rules remain intact', () => {
