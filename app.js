@@ -1,5 +1,5 @@
 import { createUsefulUI } from './useful.js?v=ukrainian-public-3';
-import { createAccountUI } from './account.js?v=coupon-qr-2';
+import { createAccountUI } from './account.js?v=delivery-status-4';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=delivery-status-3';
 import { accessoryDetail } from './accessory-ui.js?v=delivery-status-3';
 import { availabilityScenarioDetail, availabilityScenarioFeedback } from './availability-scenario.js?v=5';

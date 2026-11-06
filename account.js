@@ -1,4 +1,4 @@
-import { createAccountStore } from './account-store.js?v=cat-assortment-1';
+import { createAccountStore } from './account-store.js?v=delivery-status-4';
 import { createAccountApi } from './account-api.js?v=coupon-qr-1';
 import { accountTools } from './useful.js?v=ukrainian-public-3';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
