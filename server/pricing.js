@@ -1,12 +1,12 @@
 import { deliveryTiming, availableDeliverySlots } from '../checkout-model.js';
+import { shippingZone } from './shipping-zones.js';
 
 export const DELIVERY_FEE_CENTS = 399;
 export const FREE_DELIVERY_FROM_CENTS = 4900;
 
 export function validateAddress(address) {
   if (!address || typeof address !== 'object') return 'Укажите адрес доставки';
-  if (address.city !== 'València') return 'Пока доставляем только по городу Валенсия';
-  if (!/^460\d{2}$/.test(String(address.postcode || ''))) return 'Укажите почтовый индекс в городе Валенсия';
+  if (shippingZone(address) !== 'valencia_local') return 'Пока доставляем только по городу Валенсия';
   if (!String(address.street || '').trim() || !String(address.building || '').trim()) return 'Укажите улицу и номер дома';
   return null;
 }
