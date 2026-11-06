@@ -4,8 +4,8 @@ const fail = (message, status = 400) => { throw Object.assign(new Error(message)
 export const normalizePromoCode = value => String(value || '').trim().toUpperCase();
 const validCode = value => /^[A-Z0-9_-]{4,40}$/.test(value);
 
-// Delivery is currently limited to València. Compare the local nine-digit number
-// so 600 000 000 and +34 600 000 000 identify the same checkout contact.
+// Compare the Spanish nine-digit number so 600 000 000 and +34 600 000 000
+// identify the same checkout contact, regardless of delivery region.
 export function normalizeBuyerPhone(value) {
   const digits = String(value || '').replace(/\D/g, '');
   return digits.length >= 9 ? digits.slice(-9) : null;

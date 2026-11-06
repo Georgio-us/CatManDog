@@ -67,6 +67,8 @@ test('Valencia cart reaches delivery review without creating an order while paym
         variantId:'rc-sterilised-400g', name:'Royal Canin Sterilised 37',
         variant:'400 г', qty:1, price:5.13 }], isReady:() => true,
       getPromo:() => null, applyPromo:() => {}, render:() => { checkoutStarted = true; } });
+    ui.change({ name:'deliveryRegion', value:'local', form:{ values:{ deliveryRegion:'local' } } });
+    checkoutStarted = false;
     assert.match(ui.page(), new RegExp(slot.label));
     const error = { textContent:'' };
     ui.submit({ matches:selector => selector === '[data-checkout-form]', values,
@@ -113,7 +115,9 @@ test('live checkout presents the exact variant without creating a fictitious ord
   const html = ui.page();
   assert.match(html, /4 кг · 2 шт × 36\.31 €/);
   assert.match(html, /72\.62 €/);
-  assert.match(html, /Бесплатно/);
+  assert.match(html, /Доставка по материковой Испании/);
+  assert.match(html, /После проверки/);
+  assert.match(html, /name="city" value=""\s+required/);
   assert.match(html, /Приём заказов|Оплата станет доступна/);
   assert.doesNotMatch(html, /прототип|демонстрационный заказ/i);
   assert.match(ui.resultPage('accepted'), /Заказ не найден/);

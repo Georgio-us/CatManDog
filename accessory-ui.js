@@ -15,7 +15,7 @@ const availabilityCopy = {
   ru: {
     available: ['Доступно к заказу', 'Выберите этот вариант и укажите удобное время при оформлении. Детали доставки подтвердим после заказа.'],
     pending: ['Наличие уточняется', 'Наличие этой фасовки уточняем. Пока её нельзя оформить.'],
-    on_hand: ['В наличии', 'Товар есть у нас. При оформлении можно будет выбрать удобный интервал доставки по Валенсии. Точное время мы подтвердим после заказа.'],
+    on_hand: ['В наличии', 'Товар есть у нас. Способ и стоимость доставки вы увидите при оформлении заказа.'],
     source_on_demand: ['Под заказ', 'Эту фасовку закажем у поставщика. Срок доставки уточним до оплаты.'],
     unavailable: ['Пока недоступно', 'Оставьте запрос, и мы сообщим, когда сможем предложить этот вариант.'],
     add: 'Добавить в корзину', order: 'Заказать с доставкой', request:'Сообщить о поступлении'
@@ -23,7 +23,7 @@ const availabilityCopy = {
   es: {
     available: ['Disponible para pedir', 'Elige este formato e indica cuándo te viene bien recibirlo. Confirmaremos los detalles de entrega después del pedido.'],
     pending: ['Disponibilidad pendiente', 'Estamos comprobando la disponibilidad de este formato. Todavía no se puede pedir.'],
-    on_hand: ['Disponible', 'Tenemos este formato. Al realizar el pedido podrás indicar la franja de entrega que prefieras en València. Confirmaremos la hora después.'],
+    on_hand: ['Disponible', 'Tenemos este formato. Verás las opciones y el coste de entrega al realizar el pedido.'],
     source_on_demand: ['Por encargo', 'Pediremos este formato al proveedor. Confirmaremos el plazo de entrega antes del pago.'],
     unavailable: ['No disponible ahora', 'Déjanos una solicitud y te avisaremos cuando podamos ofrecer este formato.'],
     add: 'Añadir a la cesta', order: 'Pedir con entrega', request:'Avisadme cuando esté disponible'
@@ -31,7 +31,7 @@ const availabilityCopy = {
   uk: {
     available: ['Доступно для замовлення', 'Виберіть цей варіант і зручний час під час оформлення. Деталі доставки підтвердимо після замовлення.'],
     pending: ['Наявність уточнюється', 'Наявність цього формату уточнюємо. Поки його не можна замовити.'],
-    on_hand: ['У наявності', 'Товар є в нас. Час доставки у Валенсії підтвердимо після замовлення.'],
+    on_hand: ['У наявності', 'Товар є в нас. Спосіб і вартість доставки ви побачите під час оформлення замовлення.'],
     source_on_demand: ['Під замовлення', 'Замовимо цей формат у постачальника. Строк доставки уточнимо до оплати.'],
     unavailable: ['Поки недоступно', 'Залиште запит, і ми повідомимо, коли зможемо запропонувати цей варіант.'],
     add: 'Додати до кошика', order: 'Замовити з доставкою', request:'Повідомити про надходження'

@@ -16,14 +16,17 @@ const cart = ['food-small', 'food-large'].map(variantId => ({ id: 'food', produc
 const helpers = { products: [product], promo: null, escape: String, icon: () => '<svg></svg>',
   money: value => `${value.toFixed(2)} €`, imageBlock: () => '<div></div>' };
 
-test('real basket uses server availability and calculates separate delivery per order', () => {
+test('real basket uses server availability and defers delivery cost until the address is chosen', () => {
   assert.equal(basketGroups(cart, [product]).stock.length, 1);
   const one = renderLiveBasket({ ...helpers, cart, grouping: 'together' });
   assert.match(one, /Один заказ - одна доставка/);
-  assert.match(one, /45\.39 €/);
+  assert.match(one, /После выбора адреса/);
+  assert.match(one, /материковой Испании - от 99 €/);
+  assert.doesNotMatch(one, /45\.39 €/);
   const separate = renderLiveBasket({ ...helpers, cart, grouping: 'separate' });
   assert.match(separate, /data-live-checkout-group="stock"/);
-  assert.match(separate, /49\.38 €/);
+  assert.match(separate, /Стоимость каждой доставки покажем при оформлении/);
+  assert.doesNotMatch(separate, /49\.38 €/);
   assert.match(separate, /Сначала оформите товары с обычной доставкой/);
   assert.match(separate, /Заказ 1 - обычная доставка/);
   assert.match(separate, /Заказ 2 - под заказ/);

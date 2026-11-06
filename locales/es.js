@@ -1,6 +1,19 @@
 // Spanish copy is written and reviewed here. Russian remains the source language
 // for internal category IDs, routes and saved customer data.
 export const es = {
+  'Где доставляем': 'Dónde entregamos',
+  'Доставляем по городу Валенсия и отправляем заказы по материковой Испании. Способ и итоговую стоимость доставки покажем при оформлении заказа.': 'Entregamos en la ciudad de València y enviamos pedidos a la España peninsular. Verás la modalidad y el coste final del envío al realizar el pedido.',
+  'Доставка стоит 3,99 € при сумме товаров после скидки меньше 49 €. От 49 € доставка бесплатная. Купон на доставку может сделать её бесплатной и для меньшего заказа.': 'En València, la entrega cuesta 3,99 € si el importe de los productos después del descuento es inferior a 49 €. A partir de 49 € es gratuita. Un cupón de envío puede hacerla gratuita también para pedidos de menor importe.',
+  'Для товаров с обычной доставкой можно выбрать интервал: 10:00-14:00, 14:00-18:00 или 18:00-22:00. Прошедшие интервалы текущего дня не показываем. Точное время подтвердим после заказа. Для товара под заказ срок согласуем отдельно.': 'Para los productos de entrega habitual puedes elegir una franja: 10:00-14:00, 14:00-18:00 o 18:00-22:00. Las franjas de hoy que ya han comenzado no se muestran. Confirmaremos la hora exacta después del pedido. Para los productos por encargo acordaremos el plazo por separado.',
+  'Доставка по материковой Испании': 'Envío a la España peninsular',
+  'При сумме товаров после скидки меньше 49 € доставка стоит 9,99 €, от 49 € - 3,99 €, от 99 € - бесплатно. Отправляем перевозчиком. Срок сообщим после передачи посылки.': 'Si el importe de los productos después del descuento es inferior a 49 €, el envío cuesta 9,99 €; a partir de 49 €, 3,99 €; y a partir de 99 €, es gratuito. Enviamos por transportista. Te comunicaremos el plazo tras entregar el paquete.',
+  'Выберите способ доставки для вашего адреса': 'Elige la modalidad de entrega para tu dirección',
+  'На оформлении': 'Al finalizar el pedido',
+  'После выбора адреса': 'Tras elegir la dirección',
+  'Стоимость доставки покажем при оформлении': 'Verás el coste de entrega al finalizar el pedido',
+  'Стоимость каждой доставки покажем при оформлении': 'Verás el coste de cada entrega al finalizar el pedido',
+  'Цены включают IVA. Стоимость доставки зависит от адреса: по Валенсии бесплатно от 49 €, по материковой Испании - от 99 € после скидки': 'Los precios incluyen IVA. El coste de envío depende de la dirección: gratis en València a partir de 49 € y en la España peninsular a partir de 99 € después del descuento',
+  'Цены включают IVA. Стоимость доставки зависит от адреса: по Валенсии бесплатно от 49 €, по материковой Испании - от 99 € после скидки. Для каждого заказа доставка рассчитывается отдельно': 'Los precios incluyen IVA. El coste de envío depende de la dirección: gratis en València a partir de 49 € y en la España peninsular a partir de 99 € después del descuento. El envío se calcula por separado para cada pedido',
   'HeyboPet - беспроводной фонтан 3 л': 'HeyboPet - fuente inalámbrica de 3 l',
   'Аккумуляторный фонтан с резервуаром из нержавеющей стали и датчиком движения':
     'Fuente recargable con depósito de acero inoxidable y sensor de movimiento',
