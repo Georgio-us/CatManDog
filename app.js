@@ -11,7 +11,7 @@ import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, 
 import { loadSupplierTerms } from './supplier-terms.js';
 import { categories, products, catalogProducts, articles } from './data.js?v=churu-retail-1';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=ukrainian-public-3';
-import { createCheckoutUI } from './checkout-ui.js?v=delivery-status-1';
+import { createCheckoutUI } from './checkout-ui.js?v=delivery-status-2';
 import { availabilityRequestPage } from './availability-request-ui.js';
 import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=editorial-image-1';
