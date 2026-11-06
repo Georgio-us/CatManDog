@@ -58,7 +58,7 @@ function renderCatalog() {
   root.innerHTML = shell('Выберите товары', 'Фасовки из каталога и загруженных прайсов поставщиков',
     `<div class="lab-toolbar"><input id="lab-search" type="search" placeholder="Название, бренд или фасовка" value="${esc(state.search)}" aria-label="Поиск товаров">
     <select id="lab-filter" aria-label="Какие товары показывать"><option value="selected" ${state.filter === 'selected' ? 'selected' : ''}>Выбраны для закупки</option>
-    <option value="supplier" ${state.filter === 'supplier' ? 'selected' : ''}>Остальные из прайсов</option>
+    <option value="supplier" ${state.filter === 'supplier' ? 'selected' : ''}>Под заказ из прайсов</option>
     <option value="unavailable" ${state.filter === 'unavailable' ? 'selected' : ''}>Без подтверждённого источника</option>
     <option value="all" ${state.filter === 'all' ? 'selected' : ''}>Все товары</option></select></div>
     <p class="lab-count">Найдено ${list.length} SKU${list.length > 100 ? ' · показаны первые 100, уточните поиск' : ''}</p>

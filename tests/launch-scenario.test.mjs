@@ -3,10 +3,12 @@ import test from 'node:test';
 import { launchState, launchPrice, launchGroups, launchTodaySlots,
   saveLaunchOrder } from '../server/launch-scenario.js';
 
-test('selected supplier line appears in stock only in isolated scenario', () => {
-  assert.equal(launchState(true, true), 'on_hand');
-  assert.equal(launchState(false, true), 'source_on_demand');
-  assert.equal(launchState(false, false), 'unavailable');
+test('only received stock appears in stock in the isolated scenario', () => {
+  assert.equal(launchState('on_hand', 2, false), 'on_hand');
+  assert.equal(launchState('on_hand', 0, true), 'source_on_demand');
+  assert.equal(launchState('source_on_demand', 0, true), 'source_on_demand');
+  assert.equal(launchState('unavailable', 0, true), 'unavailable');
+  assert.equal(launchState('source_on_demand', 0, false), 'unavailable');
 });
 
 test('unconfirmed retail price uses the recorded source price without changing it', () => {
@@ -43,7 +45,8 @@ test('test checkout writes only to isolated test order table', async () => {
         variant_active: true, product_active: true, name: 'Корм', brand: 'Brand',
         category: 'Корм', pet: 'cat', image_path: null, variant_image_path: null,
         price_confirmed: false, price_override_cents: null, source_price_cents: 2280,
-        selected_units: 2, source_count: 1 }] };
+        selected_units: 2, source_count: 1, availability: 'source_on_demand',
+        stock_quantity: 0 }] };
     },
     async connect() {
       return { query: async (sql) => {

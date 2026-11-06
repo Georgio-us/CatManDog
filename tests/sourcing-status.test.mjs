@@ -2,11 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { sourcingStatus, supplierSourcingByVariant } from '../server/sourcing-status.js';
 
-test('selected supplier SKU, source-only SKU and unlinked SKU have distinct states', () => {
-  assert.equal(sourcingStatus(true, 2), 'on_hand');
-  assert.equal(sourcingStatus(true, 0), 'source_on_demand');
-  assert.equal(sourcingStatus(false, 0), 'unavailable');
-  assert.equal(sourcingStatus(false, 2), 'unavailable');
+test('selection does not convert a supplier source into physical stock', () => {
+  assert.equal(sourcingStatus(true), 'source_on_demand');
+  assert.equal(sourcingStatus(false), 'unavailable');
 });
 
 test('supplier links and selected purchase units are read without changing inventory', async () => {
@@ -20,7 +18,7 @@ test('supplier links and selected purchase units are read without changing inven
     ] };
   } };
   const statuses = await supplierSourcingByVariant(db);
-  assert.equal(statuses.get('selected').status, 'on_hand');
+  assert.equal(statuses.get('selected').status, 'source_on_demand');
   assert.equal(statuses.get('selected').selectedUnits, 12);
   assert.equal(statuses.get('source-only').status, 'source_on_demand');
   assert.equal(statuses.has('unlinked'), false);

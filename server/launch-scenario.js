@@ -18,9 +18,10 @@ export function launchTodaySlots(now = new Date()) {
   return deliverySlots.filter(slot => slot.slice(0, 5) >= time);
 }
 
-export function launchState(selected, matched) {
-  if (selected) return 'on_hand';
-  if (matched) return 'source_on_demand';
+export function launchState(availability, stockQuantity, matched) {
+  if (availability === 'on_hand' && Number(stockQuantity) > 0) return 'on_hand';
+  if ((availability === 'on_hand' || availability === 'source_on_demand') && matched)
+    return 'source_on_demand';
   return 'unavailable';
 }
 
@@ -33,6 +34,7 @@ export async function launchCatalog(db) {
   const { rows } = await db.query(`SELECT v.id AS variant_id,v.product_id,v.label,v.active AS variant_active,
       p.name,p.brand,p.category,p.pet,p.image_path,p.active AS product_active,
       v.image_path AS variant_image_path,v.price_confirmed,v.price_override_cents,v.source_price_cents,
+      v.availability,v.stock_quantity,
       coalesce(s.selected_units,0)::integer AS selected_units,
       coalesce(m.source_count,0)::integer AS source_count
     FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
@@ -48,7 +50,7 @@ export async function launchCatalog(db) {
     variantId: row.variant_id, productId: row.product_id, name: row.name,
     label: row.label, brand: row.brand, category: row.category, pet: row.pet,
     image: row.variant_image_path || row.image_path,
-    state: launchState(row.selected_units > 0, row.source_count > 0),
+    state: launchState(row.availability, row.stock_quantity, row.source_count > 0),
     selectedUnits: row.selected_units, sourceCount: row.source_count,
     published: row.product_active && row.variant_active,
     priceCents: launchPrice(row), priceConfirmed: row.price_confirmed === true

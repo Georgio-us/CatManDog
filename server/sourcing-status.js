@@ -1,5 +1,4 @@
-export function sourcingStatus(supplierMatch, selectedUnits) {
-  if (selectedUnits > 0 && supplierMatch) return 'on_hand';
+export function sourcingStatus(supplierMatch) {
   if (supplierMatch) return 'source_on_demand';
   return 'unavailable';
 }
@@ -25,6 +24,6 @@ export async function supplierSourcingByVariant(db) {
     ) sources GROUP BY variant_id`);
   return new Map(rows.map(row => [row.variant_id, {
     sourceCount: Number(row.source_count), selectedUnits: Number(row.selected_units),
-    status: sourcingStatus(Number(row.source_count) > 0, Number(row.selected_units))
+    status: sourcingStatus(Number(row.source_count) > 0)
   }]));
 }
