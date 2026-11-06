@@ -353,9 +353,12 @@ CREATE TABLE IF NOT EXISTS order_items (
   quantity integer NOT NULL CHECK (quantity BETWEEN 1 AND 99),
   unit_price_cents integer NOT NULL CHECK (unit_price_cents >= 0),
   tax_rate_bps integer CHECK (tax_rate_bps BETWEEN 0 AND 10000),
-  source_mode text NOT NULL CHECK (source_mode IN ('on_hand','source_on_demand'))
+  source_mode text NOT NULL CHECK (source_mode IN ('on_hand','open_order','source_on_demand'))
 );
 CREATE INDEX IF NOT EXISTS order_items_order_id_idx ON order_items(order_id);
+ALTER TABLE order_items DROP CONSTRAINT IF EXISTS order_items_source_mode_check;
+ALTER TABLE order_items ADD CONSTRAINT order_items_source_mode_check
+  CHECK (source_mode IN ('on_hand','open_order','source_on_demand'));
 ALTER TABLE order_items ADD COLUMN IF NOT EXISTS tax_rate_bps integer
   CHECK (tax_rate_bps BETWEEN 0 AND 10000);
 
@@ -454,8 +457,10 @@ CREATE TABLE IF NOT EXISTS churu_repack_batches (
 CREATE TABLE IF NOT EXISTS service_requests (
   id uuid PRIMARY KEY,
   order_id uuid REFERENCES orders(id) ON DELETE SET NULL,
-  kind text NOT NULL CHECK (kind IN ('support','return')),
+  kind text NOT NULL CHECK (kind IN ('support','return','availability')),
   email text NOT NULL,
+  contact_name text NOT NULL DEFAULT '',
+  contact_phone text NOT NULL DEFAULT '',
   product_id text,
   variant_id text,
   quantity integer,
@@ -464,6 +469,11 @@ CREATE TABLE IF NOT EXISTS service_requests (
   created_at timestamptz NOT NULL DEFAULT now()
 );
 ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS order_number_input text;
+ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS contact_name text NOT NULL DEFAULT '';
+ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS contact_phone text NOT NULL DEFAULT '';
+ALTER TABLE service_requests DROP CONSTRAINT IF EXISTS service_requests_kind_check;
+ALTER TABLE service_requests ADD CONSTRAINT service_requests_kind_check
+  CHECK (kind IN ('support','return','availability'));
 ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS locale text NOT NULL DEFAULT 'ru'
   CHECK (locale IN ('ru','es','uk'));
 

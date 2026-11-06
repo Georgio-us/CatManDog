@@ -36,6 +36,14 @@ test('full catalog import archives retired rows once and preserves edited produc
     .every(([sql]) => sql.includes('ON CONFLICT(id) DO NOTHING')));
   assert.ok(queries.filter(([sql]) => sql.startsWith('INSERT INTO catalog_variants'))
     .every(([sql]) => sql.includes('ON CONFLICT(id) DO NOTHING')));
+  const imported = queries.filter(([sql]) => sql.startsWith('INSERT INTO catalog_variants'));
+  for (const [brand, expected] of [['Heybo Pet','preorder'],['Advance','unavailable'],
+    ['Hill’s','unavailable']]) {
+    const example = catalogRows().find(row => row.product.brand === brand);
+    assert.ok(example, `${brand} is present in the catalog`);
+    assert.equal(imported.find(([, params]) => params?.[0] === example.variant.id)?.[1][9], expected);
+  }
+  assert.ok(queries.some(([sql]) => sql.includes("initial_brand_sale_status_2026_11_06")));
   const yaguRetailBackfill = queries.find(([sql, params]) =>
     sql.startsWith('UPDATE catalog_variants SET source_price_cents=$2') && params?.[0] === 'yagu-1128036');
   assert.equal(yaguRetailBackfill?.[1][1], 3826);
@@ -62,7 +70,7 @@ test('public catalog keeps the sale status separate from payment readiness', asy
   assert.equal(parameters, undefined);
   assert.equal(rows[0].sale_price_cents, 1299);
   assert.equal(rows[0].sale_status, 'available');
-  assert.equal(rows[0].orderable, false);
+  assert.equal(rows[0].orderable, true);
   assert.equal(rows[0].sourcing_availability, 'unavailable');
 });
 
@@ -129,6 +137,19 @@ test('server ignores browser price and totals exact variant, discount and delive
   assert.equal(quote.orderable, true);
 });
 
+test('sale status controls checkout while physical stock remains separate', () => {
+  const available = priceQuote([{ ...lines[0], qty: 3 }],
+    [{ ...variant, sale_status:'available', stock_quantity: 0, supplier_matched:false }]);
+  assert.equal(available.orderable, true);
+  assert.equal(available.items[0].sourceMode, 'open_order');
+  const preorder = priceQuote(lines,
+    [{ ...variant, sale_status:'preorder', availability:'unavailable', stock_quantity: 0 }]);
+  assert.equal(preorder.orderable, true);
+  assert.equal(preorder.items[0].sourceMode, 'source_on_demand');
+  assert.equal(priceQuote(lines, [{ ...variant, sale_status:'unavailable' }]).orderable, false);
+  assert.equal(priceQuote(lines, [{ ...variant, sale_status:'available', price_confirmed:false }]).orderable, false);
+});
+
 test('server blocks unconfirmed, unavailable and overdrawn variants', () => {
   assert.equal(priceQuote(lines, [{ ...variant, price_confirmed:false }]).orderable, false);
   assert.equal(priceQuote(lines, [{ ...variant, availability:'unavailable' }]).orderable, false);
@@ -155,6 +176,9 @@ test('address and desired delivery time remain marked for manual verification', 
   assert.equal(validateDelivery({ mode:'scheduled', date:'2026-10-20', time:'18:00' }, future), null);
   assert.ok(validateDelivery({ mode:'scheduled', date:'2026-10-20', time:'99:00' }, future));
   assert.equal(priceQuote([{ ...lines[0], qty:1 }], [variant]).addressVerification, 'manual_required');
+  assert.equal(validateDelivery({ mode:'slot', date:'2026-10-20', window:'14-18' }, future), null);
+  assert.ok(validateDelivery({ mode:'slot', date:'2026-10-19', window:'10-14' }, future));
+  assert.equal(validateDelivery({ mode:'preorder' }, future), null);
 });
 
 test('password hashes are salted and session cookies remain HttpOnly', async () => {

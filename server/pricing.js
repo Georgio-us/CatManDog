@@ -1,4 +1,4 @@
-import { deliveryTiming } from '../checkout-model.js';
+import { deliveryTiming, availableDeliverySlots } from '../checkout-model.js';
 
 export const DELIVERY_FEE_CENTS = 399;
 export const FREE_DELIVERY_FROM_CENTS = 4900;
@@ -13,6 +13,10 @@ export function validateAddress(address) {
 
 export function validateDelivery(delivery, now = new Date()) {
   if (!delivery || typeof delivery !== 'object') return 'Укажите время доставки';
+  if (delivery.mode === 'preorder') return null;
+  if (delivery.mode === 'slot') return availableDeliverySlots(now).some(option =>
+    option.date === delivery.date && option.window === delivery.window)
+    ? null : 'Выберите доступный интервал доставки';
   const earliest = deliveryTiming(now);
   if (delivery.mode === 'soon') return earliest.todayAvailable ? null : 'Сегодня уже нет доступного времени';
   if (delivery.mode !== 'scheduled') return 'Выберите способ доставки';
@@ -42,10 +46,17 @@ export function priceQuote(lines, variants, promo = null) {
       ? variant.price_override_cents ?? variant.source_price_cents
       : variant.source_price_cents;
     if (!Number.isInteger(price) || price <= 0) throw new Error('Цена товара ещё не подтверждена');
-    return { productId: variant.product_id, variantId: id, name: variant.name,
+    const saleStatus = variant.sale_status;
+    const sourceMode = saleStatus === 'preorder' ? 'source_on_demand' :
+      saleStatus === 'available' ?
+        (variant.availability === 'on_hand' &&
+          variant.stock_quantity - (variant.reserved_quantity ?? 0) >= line.qty
+          ? 'on_hand' : 'open_order') : variant.availability;
+    return { productId: variant.product_id, variantId: id, name: variant.name, saleStatus,
       variantLabel: variant.label, qty: line.qty, unitPriceCents: price,
-      lineCents: price * line.qty, sourceMode: variant.availability,
-      orderable: !!variant.price_confirmed && variant.source_orderable !== false &&
+      lineCents: price * line.qty, sourceMode,
+      orderable: saleStatus ? !!variant.price_confirmed && saleStatus !== 'unavailable' :
+        !!variant.price_confirmed && variant.source_orderable !== false &&
         variant.sourcing_availability !== 'unavailable' && variant.supplier_matched !== false &&
         variant.availability !== 'unavailable' &&
         (variant.availability !== 'on_hand' ||

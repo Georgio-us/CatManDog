@@ -1,22 +1,23 @@
 import { createUsefulUI } from './useful.js?v=ukrainian-public-3';
 import { createAccountUI } from './account.js?v=coupon-qr-2';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js';
-import { accessoryDetail } from './accessory-ui.js?v=churu-retail-1';
+import { accessoryDetail } from './accessory-ui.js?v=delivery-status-1';
 import { availabilityScenarioDetail, availabilityScenarioFeedback } from './availability-scenario.js?v=5';
 import { createRoyalCaninFlow } from './rc-sterilised-flow.js?v=7';
-import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=coupon-qr-2';
+import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=delivery-status-1';
 import { provisionalPriceLabel } from './retail-research.js?v=ukrainian-public-3';
 import { recommendForProduct } from './recommendations.js?v=dog-first-wave-1';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=variant-pricing-1';
 import { loadSupplierTerms } from './supplier-terms.js';
 import { categories, products, catalogProducts, articles } from './data.js?v=churu-retail-1';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=ukrainian-public-3';
-import { createCheckoutUI } from './checkout-ui.js?v=coupon-qr-1';
+import { createCheckoutUI } from './checkout-ui.js?v=delivery-status-1';
+import { availabilityRequestPage } from './availability-request-ui.js';
 import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=editorial-image-1';
 
 import { homeDirections, activeHomeLanding } from './collections.js?v=cat-assortment-1';
-import { installLocale, intlLocale, locale, translate } from './locale.js?v=coupon-qr-2';
+import { installLocale, intlLocale, locale, translate } from './locale.js?v=delivery-status-1';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
@@ -49,6 +50,7 @@ let catalogUnavailable = false;
 const displayedMinPrice = p => catalogPrice(p).min;
 let homePet='cat', homeGroup='', homeBrand='', homePrice='', homeFeature='', homeVisible=8, selectedSize='', detailQuantity=1, priceLimit=catalogPriceMax, journalCategory='Все материалы';
 let selectedVariantId=null;
+let availabilityRequestState = null;
 let giftState=normalizeGift();
 const giftHelpers={money,imageBlock,icon,escape,crumbs,card};
 let toastTimer;
@@ -81,11 +83,12 @@ const checkout = createCheckoutUI({
   }),
   isReady: () => checkoutCart().length > 0 && checkoutCart().every(item => {
     const sku = cartSku(item, products);
-    return cartUnitPrice(item) !== null && sku?.serverPriceConfirmed === true && canBuy(sku);
+    return cartUnitPrice(item) !== null && canBuy(sku);
   }),
   getCheckoutContext: () => ({ group: checkoutGroup === 'stock' && checkoutCart().length < cart.length ? 'stock' : 'all',
     hasSupplier: checkoutCart().some(item => fulfillmentState(cartSku(item, products)) === 'supplier'),
-    hasRemaining: checkoutGroup === 'stock' && basketGroups(cart, products).supplier.length > 0 }),
+    hasRemaining: checkoutGroup === 'stock' && basketGroups(cart, products).supplier.length > 0,
+    pricesConfirmed: checkoutCart().every(item => cartSku(item, products)?.serverPriceConfirmed === true) }),
   getPromo: checkoutPromo,
   refreshPromo: () => account.refreshPromo(),
   applyPromo: code => account.applyPromo(code),
@@ -315,15 +318,26 @@ function cartPage() {
   return renderLiveBasket({ cart, products, promo: checkoutPromo(), grouping: basketGrouping,
     escape, icon, money, imageBlock });
 }
+function availabilityPage() {
+  const variantId = route().params.get('variant');
+  const product = products.find(item => snapshots(item).some(variant => variant.id === variantId));
+  const variant = product && resolveVariant(product, variantId);
+  if (!product || !variant || variant.saleStatus !== 'unavailable') return notFound();
+  const human = account.store.get().human || {};
+  const state = availabilityRequestState?.variantId === variantId ? availabilityRequestState : null;
+  return availabilityRequestPage(product, variant, { language:locale(), escape, icon,
+    defaults:state?.values || { name:human.name, email:human.email, phone:human.phone },
+    sent:state?.sent, error:state?.error });
+}
 function about(){return `<div class="page">${crumbs('О нас')}<section class="about-hero"><h1>Они - часть семьи<br>Мы - на вашей стороне</h1><p>CatManDog объединяет вещи и идеи для хорошей жизни с кошками и собаками С заботой о них и с пониманием вас</p></section><div class="prose"><h2>Меньше случайного Больше нужного</h2><p>Нам близок простой подход: окружающие вещи должны быть удобными, продуманными и приятными в повседневной жизни От миски на кухне до переноски для нового путешествия</p><h2>Магазин, в котором помогают выбрать</h2><p>Мы собираем всё необходимое в понятные категории и рассказываем о назначении каждого товара А в журнале делимся идеями для дома, прогулок, игр и жизни вместе</p><a class="button" href="#/catalog">Найти своё ${icon('arrow')}</a></div></div>${service()}`;}
 function info(id){
-  if(id==='delivery')return `<div class="page">${crumbs('Доставка и возврат')}<div class="prose"><h1>Доставка и возврат</h1><h2>Доставка по Валенсии</h2><p>Пока доставляем только в пределах города Валенсия. Доставка стоит 3,99 € для заказа меньше 49 € после скидки. От 49 € она бесплатная. Купон на доставку может сделать её бесплатной и для меньшего заказа.</p><p>При оформлении можно выбрать доставку сегодня, если до ближайшего ориентира остаётся не менее двух часов, или указать другую дату и время. Это пожелание: точное время подтвердим после подключения системы заказов.</p><h2>Если нужна помощь</h2><p>Для вопросов о заказе подготовлена форма поддержки. Запрос на возврат можно начать через отдельную форму. ${checkout.isSupportEnabled() ? 'После проверки обращение можно отправить команде' : 'Пока формы показывают предпросмотр и не отправляют данные.'}</p><p><a class="text-link" href="#/support">Помощь с заказом</a> · <a class="text-link" href="#/returns">Запрос на возврат</a> · <a class="text-link" href="/purchase-terms.html">Условия покупки и возврата</a></p></div></div>`;
+  if(id==='delivery')return `<div class="page">${crumbs('Доставка и возврат')}<div class="prose"><h1>Доставка и возврат</h1><h2>Доставка по Валенсии</h2><p>Пока доставляем только в пределах города Валенсия. Доставка стоит 3,99 € для заказа меньше 49 € после скидки. От 49 € она бесплатная. Купон на доставку может сделать её бесплатной и для меньшего заказа.</p><p>При оформлении обычных товаров можно выбрать удобный интервал доставки: 10:00-14:00, 14:00-18:00 или 18:00-22:00. Прошедшие интервалы текущего дня не показываем. Точное время подтвердим после заказа. Для товара под заказ указываем ориентир 24-48 часов после подтверждения возможности поставки.</p><h2>Если нужна помощь</h2><p>Для вопросов о заказе подготовлена форма поддержки. Запрос на возврат можно начать через отдельную форму. ${checkout.isSupportEnabled() ? 'После проверки обращение можно отправить команде' : 'Пока формы показывают предпросмотр и не отправляют данные.'}</p><p><a class="text-link" href="#/support">Помощь с заказом</a> · <a class="text-link" href="#/returns">Запрос на возврат</a> · <a class="text-link" href="/purchase-terms.html">Условия покупки и возврата</a></p></div></div>`;
   if(id==='contact')return `<div class="page">${crumbs('Контакты')}<div class="prose"><h1>Давайте поговорим</h1><p>Если у вас есть вопрос о товаре или заказе, откройте форму поддержки. ${checkout.isSupportEnabled() ? 'После проверки обращение можно отправить команде' : 'Пока обращение можно подготовить, отправка появится после подключения поддержки.'}</p><a class="button outline" href="#/support">Помощь с заказом ${icon('arrow')}</a></div></div>`;
   if(id==='privacy')return `<div class="page">${crumbs('Конфиденциальность')}<div class="prose"><h1>Конфиденциальность</h1><p>Информация о данных аккаунта, входе через Google, заказах и обращениях находится на отдельной странице.</p><p><a class="text-link" href="/privacy.html">Открыть информацию о конфиденциальности</a></p></div></div>`;
   return notFound();
 }
 function notFound(){return `<div class="page">${empty('Эта страница убежала','Но все любимые вещи по-прежнему на месте','На главную','#/')}</div>`;}
-function render(){const {path}=route();let html;if(path==='/pet'||path==='/join'||path.startsWith('/account')||path==='/coupon')html=account.page(path,route().params);else if(path.startsWith('/useful'))html=useful.page(path,route().params);else if(path==='/')html=home();else if(path==='/catalog')html=catalog();else if(path==='/gifts')html=giftLanding(giftHelpers);else if(path==='/active-home')html=activeHomeLanding(giftHelpers);else if(rcFlow.handles(path))html=rcFlow.page(path);else if(path.startsWith('/product/'))html=detail(path.split('/')[2]);else if(path==='/cart')html=cartPage();else if(path==='/checkout')html=checkout.page();else if(path==='/checkout/preview')html=checkout.previewPage();else if(path==='/checkout/confirmation')html=checkout.resultPage('accepted',route().params);else if(path==='/checkout/payment-error')html=checkout.resultPage('failed',route().params);else if(path==='/checkout/status')html=checkout.resultPage('status',route().params);else if(path==='/support')html=checkout.servicePage('support',route().params);else if(path==='/returns')html=checkout.servicePage('return',route().params);else if(path==='/favorites')html=favoritePage();else if(path==='/journal')html=journal();else if(path.startsWith('/journal/'))html=article(path.split('/')[2]);else if(path==='/about')html=about();else if(path.startsWith('/info/'))html=info(path.split('/')[2]);else html=notFound();app.innerHTML=html;document.title=`${(path.startsWith('/account') && account.store.activePet() ? 'Кабинет ' + account.store.activePet().name : null) || ({'/useful':'Полезное','/useful/clinics':'Ветклиники Валенсии','/useful/travel':'В дорогу вместе','/account':'Кабинет с хвостиком','/coupon':'Купон на 10%','/join':'Знакомство с питомцем','/pet':'Профиль питомца','/':'Хорошая жизнь с хвостиком','/catalog':'Каталог','/gifts':'Подарочные наборы','/active-home':'Дом для активного кота','/cart':'Корзина','/checkout':'Оформление заказа','/checkout/preview':'Проверка заказа','/checkout/confirmation':'Подтверждение заказа','/checkout/payment-error':'Ошибка оплаты','/checkout/status':'Статус заказа','/support':'Помощь с заказом','/returns':'Возврат','/journal':'Журнал','/favorites':'Избранное','/about':'О нас'})[path]||'Для хорошей жизни'} · CatManDog`;if(path.startsWith('/journal/'))document.title=`${displayArticles.find(item=>item.id===path.split('/')[2])?.title||translate('Журнал')} · CatManDog`;if(path.startsWith('/product/')){const id=path.split('/')[2];const product=products.find(item=>item.id===id||item.variants?.some(variant=>variant.id===id));if(product)document.title=`${product.name} · CatManDog`;}document.title = locale()==='ru' ? document.title : translate(document.title.split(' · CatManDog')[0])+' · CatManDog';if(rcFlow.handles(path))document.title=`${locale()==='es'?'Pedido Royal Canin':locale()==='uk'?'Замовлення Royal Canin':'Заказ Royal Canin'} · CatManDog`;const categoryPage=!location.hash?seoCategoryForPath(location.pathname):null;if(categoryPage)document.title=`${categoryPage.title} · CatManDog`;document.querySelector('nav').classList.remove('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded','false');document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')===location.hash?'page':'false'));updateHeader();account.afterRender();announceView();analytics.pageView();}
+function render(){const {path}=route();let html;if(path==='/pet'||path==='/join'||path.startsWith('/account')||path==='/coupon')html=account.page(path,route().params);else if(path.startsWith('/useful'))html=useful.page(path,route().params);else if(path==='/')html=home();else if(path==='/catalog')html=catalog();else if(path==='/gifts')html=giftLanding(giftHelpers);else if(path==='/active-home')html=activeHomeLanding(giftHelpers);else if(rcFlow.handles(path))html=rcFlow.page(path);else if(path.startsWith('/product/'))html=detail(path.split('/')[2]);else if(path==='/availability-request')html=availabilityPage();else if(path==='/cart')html=cartPage();else if(path==='/checkout')html=checkout.page();else if(path==='/checkout/preview')html=checkout.previewPage();else if(path==='/checkout/confirmation')html=checkout.resultPage('accepted',route().params);else if(path==='/checkout/payment-error')html=checkout.resultPage('failed',route().params);else if(path==='/checkout/status')html=checkout.resultPage('status',route().params);else if(path==='/support')html=checkout.servicePage('support',route().params);else if(path==='/returns')html=checkout.servicePage('return',route().params);else if(path==='/favorites')html=favoritePage();else if(path==='/journal')html=journal();else if(path.startsWith('/journal/'))html=article(path.split('/')[2]);else if(path==='/about')html=about();else if(path.startsWith('/info/'))html=info(path.split('/')[2]);else html=notFound();app.innerHTML=html;document.title=`${(path.startsWith('/account') && account.store.activePet() ? 'Кабинет ' + account.store.activePet().name : null) || ({'/useful':'Полезное','/useful/clinics':'Ветклиники Валенсии','/useful/travel':'В дорогу вместе','/account':'Кабинет с хвостиком','/coupon':'Купон на 10%','/join':'Знакомство с питомцем','/pet':'Профиль питомца','/':'Хорошая жизнь с хвостиком','/catalog':'Каталог','/gifts':'Подарочные наборы','/active-home':'Дом для активного кота','/cart':'Корзина','/checkout':'Оформление заказа','/checkout/preview':'Проверка заказа','/checkout/confirmation':'Подтверждение заказа','/checkout/payment-error':'Ошибка оплаты','/checkout/status':'Статус заказа','/support':'Помощь с заказом','/returns':'Возврат','/availability-request':'Сообщить о поступлении','/journal':'Журнал','/favorites':'Избранное','/about':'О нас'})[path]||'Для хорошей жизни'} · CatManDog`;if(path.startsWith('/journal/'))document.title=`${displayArticles.find(item=>item.id===path.split('/')[2])?.title||translate('Журнал')} · CatManDog`;if(path.startsWith('/product/')){const id=path.split('/')[2];const product=products.find(item=>item.id===id||item.variants?.some(variant=>variant.id===id));if(product)document.title=`${product.name} · CatManDog`;}document.title = locale()==='ru' ? document.title : translate(document.title.split(' · CatManDog')[0])+' · CatManDog';if(rcFlow.handles(path))document.title=`${locale()==='es'?'Pedido Royal Canin':locale()==='uk'?'Замовлення Royal Canin':'Заказ Royal Canin'} · CatManDog`;const categoryPage=!location.hash?seoCategoryForPath(location.pathname):null;if(categoryPage)document.title=`${categoryPage.title} · CatManDog`;document.querySelector('nav').classList.remove('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded','false');document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')===location.hash?'page':'false'));updateHeader();account.afterRender();announceView();analytics.pageView();}
 function setParam(key,value){const {params}=route();if(key==='category'||key==='pet'){['foodType','brand','group','feature','maxPrice'].forEach(name=>params.delete(name));}value?params.set(key,value):params.delete(key);location.hash=`/catalog${params.size?'?'+params.toString():''}`;}
 function add(id,size,qty=1,config,variantId){
   const p=products.find(p=>p.id===id);if(!p)return;
@@ -413,6 +427,31 @@ app.addEventListener('submit', event => {
   if (!event.target.matches('[data-checkout-form], [data-service-form]')) return;
   event.preventDefault();
   checkout.submit(event.target);
+});
+app.addEventListener('click', event => {
+  const button = event.target.closest('[data-request-availability]');
+  if (button) location.hash = `/availability-request?variant=${encodeURIComponent(button.dataset.requestAvailability)}`;
+});
+app.addEventListener('submit', async event => {
+  const form = event.target.closest('[data-availability-request]');
+  if (!form) return;
+  event.preventDefault();
+  const variantId = form.dataset.availabilityRequest;
+  const values = Object.fromEntries(new FormData(form).entries());
+  const button = form.querySelector('[type="submit"]');
+  button.disabled = true;
+  try {
+    const response = await fetch('/api/availability-requests', { method:'POST', credentials:'same-origin',
+      headers:{ 'Content-Type':'application/json' },
+      body:JSON.stringify({ variantId, name:values.name, email:values.email, phone:values.phone,
+        consent:values.consent === 'on', locale:locale() }) });
+    const result = await response.json();
+    if (!response.ok || !result.accepted) throw new Error(result.error || 'Не удалось отправить запрос');
+    availabilityRequestState = { variantId, sent:true };
+  } catch (error) {
+    availabilityRequestState = { variantId, error:error.message, values };
+  }
+  render();
 });
 app.addEventListener('change', event => {
   if (event.target.name === 'live-delivery-grouping') {

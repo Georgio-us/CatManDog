@@ -124,8 +124,8 @@ function orderCard(order) {
       <span class="admin-muted">Не забронировано, адрес не проверен</span></div>
     <div><strong>Оплата и склад</strong>${escape(order.payment_status)}<br>${(order.items || []).some(item => item.sourceMode === 'on_hand')
       ? escape(({ reserved:'Товар зарезервирован',released:'Резерв снят',consumed:'Выдан со склада',legacy:'Старый учёт' })[order.stock_state] || '')
-      : 'Товар под заказ'}</div></div>
-    <ul class="admin-items">${(order.items || []).map(item => `<li>${escape(item.name)} · ${escape(item.variantLabel)} - ${item.qty} шт × ${euros(item.unitPriceCents)} · ${item.sourceMode === 'on_hand' ? 'на складе' : 'под заказ'}</li>`).join('')}</ul>
+      : (order.items || []).some(item => item.sourceMode === 'open_order') ? 'Комплектация после заказа' : 'Товар под заказ'}</div></div>
+    <ul class="admin-items">${(order.items || []).map(item => `<li>${escape(item.name)} · ${escape(item.variantLabel)} - ${item.qty} шт × ${euros(item.unitPriceCents)} · ${item.sourceMode === 'on_hand' ? 'на складе' : item.sourceMode === 'open_order' ? 'комплектация после заказа' : 'под заказ'}</li>`).join('')}</ul>
     <form data-order-id="${escape(order.id)}"><label>Статус<select name="status">${['received','packing','delivering','delivered','cancelled'].map(status =>
       `<option value="${status}" ${status === order.status ? 'selected' : ''}>${({received:'Получен',packing:'Собираем',delivering:'Везём',delivered:'Доставлен',cancelled:'Отменён'})[status]}</option>`).join('')}</select></label>
     <label>Заметка<input name="note" maxlength="300" class="wide-input" placeholder="Необязательно"></label><button>Сохранить статус</button></form></article>`;
@@ -892,11 +892,11 @@ async function loadStock(details) {
 function requestCard(request) {
   const statusLabel = {new:'Новое',in_progress:'В работе',resolved:'Закрыто'}[request.status] || 'Новое';
   const date = new Date(request.created_at).toLocaleString('ru-RU', {dateStyle:'short',timeStyle:'short'});
-  return `<article class="request-item"><details><summary><span class="request-kind">${request.kind === 'return' ? 'Возврат' : 'Поддержка'}</span>
+  return `<article class="request-item"><details><summary><span class="request-kind">${request.kind === 'return' ? 'Возврат' : request.kind === 'availability' ? 'Запрос товара' : 'Поддержка'}</span>
     <span class="request-identity"><strong>${escape(request.email)}</strong><small>${escape(request.message)}</small></span>
     <span class="request-status request-status-${escape(request.status)}">${statusLabel}</span><time>${escape(date)}</time>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-    <div class="request-detail"><div class="request-facts"><span>Заказ: ${escape(request.order_number || 'Не указан')}</span><span>Язык: ${request.locale === 'es' ? 'испанский' : 'русский'}</span>
+    <div class="request-detail"><div class="request-facts">${request.kind === 'availability' ? `<span>Контакт: ${escape(request.contact_name)} · ${escape(request.contact_phone)}</span>` : `<span>Заказ: ${escape(request.order_number || 'Не указан')}</span>`}<span>Язык: ${request.locale === 'es' ? 'испанский' : request.locale === 'uk' ? 'украинский' : 'русский'}</span>
       ${request.product_id ? `<span>Товар: ${escape(request.product_id)}${request.variant_id ? ` · ${escape(request.variant_id)}` : ''}${request.quantity ? ` · ${request.quantity} шт` : ''}</span>` : ''}</div>
       <p>${escape(request.message)}</p>${request.last_reply_at ? `<div class="request-last-reply"><strong>Последний ответ · ${escape(new Date(request.last_reply_at).toLocaleString('ru-RU'))}</strong><p>${escape(request.last_reply_message || '')}</p></div>` : ''}
       <form data-reply-id="${escape(request.id)}" class="admin-reply-form"><label>Ответ покупателю<textarea name="message" rows="4" minlength="2" maxlength="4000" required placeholder="${request.locale === 'es' ? 'Напишите ответ покупателю на испанском' : 'Напишите ответ покупателю на русском'}"></textarea></label><button type="submit">Отправить ответ</button></form>

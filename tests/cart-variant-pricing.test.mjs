@@ -49,7 +49,7 @@ test('Sterilised 37 keeps its retail price when supplier availability changes', 
   const stock = accessoryDetail(product, { ...helpers, variantId: product.variants[0].id });
   assert.match(stock, /400 г<\/strong><small>В наличии<\/small>/);
   assert.match(stock, /4 кг<\/strong><small>Под заказ<\/small>/);
-  assert.match(stock, /10 кг<\/strong><small>Нет в наличии<\/small>/);
+  assert.match(stock, /10 кг<\/strong><small>Пока недоступно<\/small>/);
   assert.match(stock, /data-buy="rc-sterilised"[^>]*>Добавить в корзину/);
 
   const unconfirmed = accessoryDetail(product, { ...helpers, variantId: product.variants[2].id });

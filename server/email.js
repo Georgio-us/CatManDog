@@ -19,21 +19,21 @@ async function sendEmail(to, subject, message, fetcher = fetch) {
 }
 
 export async function notifyServiceRequest(request, fetcher = fetch) {
-  const kind = request.kind === 'return' ? 'возврат' : 'вопрос';
+  const kind = request.kind === 'return' ? 'возврат' : request.kind === 'availability' ? 'поступление товара' : 'вопрос';
   const order = request.orderNumber ? `Заказ: ${request.orderNumber}\n` : '';
   const subject = `Новое обращение CatManDog - ${kind}`;
   const inbox = process.env.SUPPORT_INBOX || 'support@catmandog.es';
   const notifications = await Promise.allSettled([sendEmail(inbox, subject,
-    `Новое обращение ${request.id}\nEmail: ${request.email}\n${order}Сообщение:\n${request.message}\n\nОтветьте клиенту из панели управления`, fetcher),
+    `Новое обращение ${request.id}\nEmail: ${request.email}\n${request.name ? `Имя: ${request.name}\n` : ''}${request.phone ? `Телефон: ${request.phone}\n` : ''}${order}Сообщение:\n${request.message}\n\nОтветьте клиенту из панели управления`, fetcher),
   sendEmail(request.email,
     request.locale === 'es' ? 'Hemos recibido tu consulta - CatManDog'
       : request.locale === 'uk' ? 'Ми отримали ваше звернення - CatManDog'
         : 'Мы получили ваше обращение - CatManDog',
     request.locale === 'es'
-      ? `Hola:\n\nHemos recibido tu consulta${request.orderNumber ? ` sobre el pedido ${request.orderNumber}` : ''}. Te responderemos a este correo.\n\nNúmero de consulta: ${request.id}\n\nCatManDog`
+      ? `Hola:\n\n${request.kind === 'availability' ? 'Hemos recibido tu solicitud. Te avisaremos cuando podamos ofrecerte este producto.' : `Hemos recibido tu consulta${request.orderNumber ? ` sobre el pedido ${request.orderNumber}` : ''}. Te responderemos a este correo.`}\n\nNúmero de consulta: ${request.id}\n\nCatManDog`
       : request.locale === 'uk'
-        ? `Вітаємо! Ми отримали ваше звернення${request.orderNumber ? ` щодо замовлення ${request.orderNumber}` : ''} і відповімо на цей email.\n\nНомер звернення: ${request.id}\n\nCatManDog`
-        : `Здравствуйте! Мы получили ваше обращение${request.orderNumber ? ` по заказу ${request.orderNumber}` : ''} и ответим на этот email.\n\nНомер обращения: ${request.id}\n\nCatManDog`, fetcher)
+        ? `Вітаємо! ${request.kind === 'availability' ? 'Ми отримали ваш запит і повідомимо, коли зможемо запропонувати цей товар.' : `Ми отримали ваше звернення${request.orderNumber ? ` щодо замовлення ${request.orderNumber}` : ''} і відповімо на цей email.`}\n\nНомер звернення: ${request.id}\n\nCatManDog`
+        : `Здравствуйте! ${request.kind === 'availability' ? 'Мы получили ваш запрос и сообщим, когда сможем предложить этот товар.' : `Мы получили ваше обращение${request.orderNumber ? ` по заказу ${request.orderNumber}` : ''} и ответим на этот email.`}\n\nНомер обращения: ${request.id}\n\nCatManDog`, fetcher)
   ]);
   if (notifications.some(result => result.status === 'rejected'))
     throw new Error('Не удалось отправить одно или несколько писем об обращении');

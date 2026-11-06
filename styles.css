@@ -774,6 +774,13 @@ button:hover:not(:disabled) {
 .product-availability-stock,
 .product-availability-mixed { background: var(--lime); }
 .product-availability-unavailable { background: #e5e7e0; }
+.availability-request-page{max-width:960px}
+.availability-request-product{display:flex;align-items:center;gap:18px;margin:24px 0;padding:18px;border:1px solid #e5e9df;border-radius:18px;background:#f7f8f3}
+.availability-request-product img{width:96px;height:96px;object-fit:contain;border-radius:12px;background:#fff}
+.availability-request-product div{display:grid;gap:6px}
+.availability-request-product strong{font-size:18px}
+.availability-request-product span{color:#737a70}
+.availability-request-form{max-width:760px}
 
 .favorite {
   position: absolute;

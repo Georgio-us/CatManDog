@@ -29,6 +29,24 @@ function valenciaTime(date) {
   return { date: `${parts.year}-${parts.month}-${parts.day}`, time: `${parts.hour}:${parts.minute}` };
 }
 
+export const DELIVERY_WINDOWS = [
+  { id:'10-14', label:'10:00-14:00', start:10 },
+  { id:'14-18', label:'14:00-18:00', start:14 },
+  { id:'18-22', label:'18:00-22:00', start:18 }
+];
+
+export function availableDeliverySlots(now = new Date(), days = 7) {
+  const local = valenciaTime(now);
+  const hour = Number(local.time.slice(0,2));
+  const minute = Number(local.time.slice(3));
+  const base = new Date(`${local.date}T12:00:00Z`);
+  return Array.from({ length: days }, (_, offset) => {
+    const date = new Date(base.getTime() + offset * 86400000).toISOString().slice(0,10);
+    return DELIVERY_WINDOWS.filter(window => offset > 0 || hour * 60 + minute < window.start * 60)
+      .map(window => ({ date, window: window.id, label: window.label, day: offset }));
+  }).flat();
+}
+
 export function deliveryTiming(now = new Date()) {
   const earliestMs = now.getTime() + 2 * 60 * 60 * 1000;
   const roundedHourMs = Math.ceil(earliestMs / 3600000) * 3600000;
@@ -43,6 +61,12 @@ export function validateCheckout(values, now = new Date()) {
   if (!/^\d{5}$/.test(field('postcode'))) return 'Укажите почтовый индекс из пяти цифр';
   if (field('city') !== 'València') return 'Пока оформляем доставку только в городе Валенсия';
   if (!field('street') || !field('building')) return 'Укажите улицу и номер дома';
+  if (field('deliveryMode') === 'preorder') return null;
+  if (field('deliveryMode') === 'slot') {
+    const [date, window] = field('deliverySlot').split('|');
+    return availableDeliverySlots(now).some(option => option.date === date && option.window === window)
+      ? null : 'Выберите доступный интервал доставки';
+  }
   const timing = deliveryTiming(now);
   if (field('deliveryMode') === 'soon' && !timing.todayAvailable) return 'Сегодня уже нет доступного времени - выберите другую дату';
   if (field('deliveryMode') === 'scheduled') {

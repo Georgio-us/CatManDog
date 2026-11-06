@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { checkoutTotals, deliveryTiming, validateCheckout } from '../checkout-model.js';
+import { checkoutTotals, deliveryTiming, availableDeliverySlots, validateCheckout } from '../checkout-model.js';
 import { createCheckoutUI } from '../checkout-ui.js';
 
 test('delivery fee follows the discounted total and free delivery coupon', () => {
@@ -17,6 +17,23 @@ test('Valencia delivery timing has a two-hour lead and crosses midnight', () => 
   assert.deepEqual(afternoon, { today: '2026-10-19', date: '2026-10-19', time: '17:00', todayAvailable: true });
   const late = deliveryTiming(new Date('2026-10-19T21:30:00Z'));
   assert.deepEqual(late, { today: '2026-10-19', date: '2026-10-20', time: '02:00', todayAvailable: false });
+});
+
+test('delivery windows advance with Valencia time and reject expired choices', () => {
+  const morning = new Date('2026-11-06T07:00:00Z');
+  const afterFirst = new Date('2026-11-06T09:00:00Z');
+  const afterLast = new Date('2026-11-06T18:00:00Z');
+  assert.deepEqual(availableDeliverySlots(morning, 1).map(slot => slot.window),
+    ['10-14', '14-18', '18-22']);
+  assert.deepEqual(availableDeliverySlots(afterFirst, 1).map(slot => slot.window),
+    ['14-18', '18-22']);
+  assert.deepEqual(availableDeliverySlots(afterLast, 1), []);
+  const values = { name:'Антон',email:'anton@example.com',phone:'+34 600 000 000',
+    city:'València',postcode:'46001',street:'Carrer de la Pau',building:'12',
+    deliveryMode:'slot',deliverySlot:'2026-11-06|10-14' };
+  assert.equal(validateCheckout(values, morning), null);
+  assert.match(validateCheckout(values, afterFirst), /доступный интервал/);
+  assert.equal(validateCheckout({ ...values, deliveryMode:'preorder' }, afterLast), null);
 });
 
 test('checkout requires a complete city address and a future requested time', () => {

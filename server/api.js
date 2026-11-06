@@ -121,11 +121,12 @@ async function promoFor(db, code, customer, identity = null, lock = false) {
 function publicQuote(quote) {
   const canSource = enabled('SOURCE_ON_DEMAND_PAYMENT_ENABLED');
   return { items: quote.items.map(({ orderable, sourceMode, ...item }) => ({ ...item,
-      orderable: orderable && (sourceMode === 'on_hand' || canSource),
+      orderable: orderable && (sourceMode !== 'source_on_demand' || item.saleStatus === 'preorder' || canSource),
       availability: sourceMode })),
     subtotalCents: quote.subtotalCents, discountCents: quote.discountCents,
     deliveryCents: quote.deliveryCents, totalCents: quote.totalCents,
-    orderable: quote.orderable && (canSource || quote.items.every(item => item.sourceMode === 'on_hand')),
+    orderable: quote.orderable && (canSource || quote.items.every(item =>
+      item.sourceMode !== 'source_on_demand' || item.saleStatus === 'preorder')),
     addressVerification: quote.addressVerification,
     deliverySlot: quote.deliverySlot, promoCode: quote.promoCode };
 }
@@ -137,7 +138,7 @@ async function liveCatalogSnapshot(db) {
   return list.map(row => {
     const reservedQuantity = reserved.get(row.variant_id) || 0;
     return { ...row, reserved_quantity: reservedQuantity,
-      orderable: row.orderable && (row.availability !== 'on_hand' ||
+      orderable: row.orderable && (row.sale_status || row.availability !== 'on_hand' ||
         row.stock_quantity - reservedQuantity > 0) };
   });
 }
@@ -185,7 +186,7 @@ async function createOrder(db, payload, customer) {
     }
     const ids = lines.map(line => cap(line.variantId, 180));
     const variants = await client.query(`SELECT v.id AS variant_id,v.product_id,v.label,v.source_price_cents,
-      v.price_override_cents,v.price_confirmed,v.source_orderable,v.availability,v.tax_rate_bps,
+      v.price_override_cents,v.price_confirmed,v.source_orderable,v.availability,v.sale_status,v.tax_rate_bps,
       v.stock_quantity,v.reserved_quantity,p.name,
       (EXISTS (SELECT 1 FROM supplier_catalog_matches m
         JOIN supplier_catalog_items i ON i.id=m.item_id
@@ -197,8 +198,14 @@ async function createOrder(db, payload, customer) {
     const promo = await promoFor(client, payload.promoCode, customer, { email, phone }, true);
     const quote = priceQuote(lines, variants.rows, promo);
     if (!quote.orderable) bad('Один из товаров пока нельзя заказать');
-    if (!enabled('SOURCE_ON_DEMAND_PAYMENT_ENABLED') && quote.items.some(item => item.sourceMode !== 'on_hand'))
+    if (!enabled('SOURCE_ON_DEMAND_PAYMENT_ENABLED') && quote.items.some(item =>
+      item.sourceMode === 'source_on_demand' && item.saleStatus !== 'preorder'))
       bad('Для оплаты доступны только товары с подтверждённым наличием');
+    if (variants.rows.every(row => row.sale_status)) {
+      const requiresPreorder = quote.items.some(item => item.saleStatus === 'preorder');
+      if (delivery.mode !== (requiresPreorder ? 'preorder' : 'slot'))
+        bad('Проверьте выбранный способ доставки');
+    }
     const orderId = randomUUID();
     const numberResult = await client.query("SELECT 'CMD-' || nextval('order_number_seq') AS number");
     const number = numberResult.rows[0].number;
@@ -206,6 +213,9 @@ async function createOrder(db, payload, customer) {
       street: cap(address.street, 120), building: cap(address.building, 16),
       apartment: cap(address.apartment, 80), note: cap(address.note, 300), verified: false };
     const cleanDelivery = delivery.mode === 'soon' ? { mode: 'soon', reserved: false }
+      : delivery.mode === 'slot' ? { mode:'slot', date:delivery.date,
+        window:delivery.window, reserved:false }
+      : delivery.mode === 'preorder' ? { mode:'preorder', estimateHours:[24,48], reserved:false }
       : { mode: 'scheduled', date: delivery.date, time: delivery.time, reserved: false };
     const billingProfile = await client.query('SELECT delivery_tax_rate_bps FROM billing_profile WHERE id=true');
     const deliveryTaxRate = billingProfile.rows[0]?.delivery_tax_rate_bps ?? null;
@@ -1939,6 +1949,31 @@ export async function handleApi(db, req, res, pathname) {
         FROM orders o LEFT JOIN order_items i ON i.order_id=o.id WHERE o.customer_id=$1
         GROUP BY o.id ORDER BY o.created_at DESC`, [customer.id]);
       return json(res, 200, { orders: rows });
+    }
+    if (pathname === '/api/availability-requests' && req.method === 'POST') {
+      rateLimit(req, 'availability-request', 8, 60);
+      const body = await readJson(req);
+      const name = cap(body.name, 100);
+      const email = normalizedEmail(body.email);
+      const phone = cap(body.phone, 24);
+      const variantId = cap(body.variantId, 180);
+      if (!name || !validEmail(email) || phone.length < 6 || !variantId || body.consent !== true)
+        bad('Проверьте контактные данные и согласие на ответ');
+      const { rows } = await db.query(`SELECT v.id,p.id AS product_id,p.name,v.label
+        FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
+        WHERE v.id=$1 AND p.active=true AND v.active=true AND v.sale_status='unavailable'`, [variantId]);
+      if (!rows.length) bad('Этот товар уже доступен или не найден', 409);
+      const id = randomUUID();
+      const locale = ['ru','es','uk'].includes(body.locale) ? body.locale : 'ru';
+      const message = `Запрос на поступление: ${rows[0].name} · ${rows[0].label}`;
+      await db.query(`INSERT INTO service_requests
+        (id,kind,email,contact_name,contact_phone,product_id,variant_id,message,locale)
+        VALUES($1,'availability',$2,$3,$4,$5,$6,$7,$8)`,
+      [id,email,name,phone,rows[0].product_id,variantId,message,locale]);
+      try { await notifyServiceRequest({ id, kind:'availability', email, locale, message,
+        name, phone }); }
+      catch (error) { console.error('Availability notification failed:', error.message); }
+      return json(res, 202, { accepted:true, id });
     }
     if (pathname === '/api/service-requests' && req.method === 'POST') {
       if (!enabled('SUPPORT_ENABLED') || !emailReady()) bad('Приём обращений ещё не включён', 503);

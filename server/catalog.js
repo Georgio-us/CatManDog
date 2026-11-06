@@ -73,12 +73,15 @@ export async function importCatalog(db, items = products) {
       [product.id, product.name, product.brand, product.category, product.pet, product.imagePath,
         product.description, JSON.stringify(product.details), product.foodType, product.source]);
       await client.query(`INSERT INTO catalog_variants(id,product_id,label,image_path,description,details,
-        source_price_cents,source_orderable,availability,source,imported_at)
-        VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,now()) ON CONFLICT(id) DO NOTHING`,
+        source_price_cents,source_orderable,availability,sale_status,source,imported_at)
+        VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,now()) ON CONFLICT(id) DO NOTHING`,
       [variant.id, variant.productId, variant.label, variant.imagePath, variant.description,
         JSON.stringify(variant.details), variant.sourcePriceCents,variant.sourceOrderable,
         variant.source.availabilityStatus === 'pending' ? 'pending' :
-          variant.sourceOrderable ? 'source_on_demand' : 'unavailable', variant.source]);
+          variant.sourceOrderable ? 'source_on_demand' : 'unavailable',
+        /^(?:heybo pet|heiba pet|heybopet)$/i.test(product.brand || '') ? 'preorder' :
+          /^(?:advance|hill[’']s)$/i.test(product.brand || '') ? 'unavailable' : 'available',
+        variant.source]);
       // Existing launch variants may have been imported before retail research was completed.
       // Fill only empty reference prices; never replace an owner-approved or edited price.
       if (Object.hasOwn(yaguRetailBenchmarks, variant.source.supplier?.sku) && variant.sourcePriceCents) {
@@ -121,6 +124,15 @@ export async function importCatalog(db, items = products) {
         await client.query("INSERT INTO catalog_migrations(name) VALUES('retired_products_archived')");
       }
       await publishSelectedLaunchImages(client);
+      const salePolicyMigration = await client.query("SELECT name FROM catalog_migrations WHERE name='initial_brand_sale_status_2026_11_06'");
+      if (!salePolicyMigration.rows.length) {
+        await client.query(`UPDATE catalog_variants v SET sale_status=CASE
+          WHEN lower(p.brand) IN ('heybo pet','heiba pet','heybopet') THEN 'preorder'
+          WHEN lower(p.brand) IN ('advance','hill’s','hill''s') THEN 'unavailable'
+          ELSE 'available' END,updated_at=now()
+          FROM catalog_products p WHERE p.id=v.product_id AND p.active=true AND v.active=true`);
+        await client.query("INSERT INTO catalog_migrations(name) VALUES('initial_brand_sale_status_2026_11_06')");
+      }
       // The owner set a retail price for this model; its two color variants remain
       // unavailable for checkout until Tina confirms which colors she can supply.
       await client.query(`UPDATE catalog_variants SET price_override_cents=5490,
@@ -158,11 +170,9 @@ export async function catalogSnapshot(db) {
       sourcing_availability: sourcingAvailability,
       selected_supplier_units: supplier?.selectedUnits || 0,
       supplier_source_count: supplier?.sourceCount || 0,
-      // Sale policy is independent from stock. Payment readiness still follows the
-      // older reservation flow until delivery and fulfillment are migrated.
-      orderable: row.sale_status !== 'unavailable' && sourcingAvailability !== 'unavailable' &&
-        row.price_confirmed && row.source_orderable &&
-        (sourcingAvailability !== 'on_hand' || row.stock_quantity > 0) &&
+      // Sale policy is independent from physical stock. A confirmed retail price is
+      // still required before checkout can charge the customer.
+      orderable: row.sale_status !== 'unavailable' && row.price_confirmed &&
         (row.price_override_cents ?? row.source_price_cents) > 0
     };
   });
