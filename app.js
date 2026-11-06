@@ -15,7 +15,7 @@ import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=customer-product-detail-1';
 
 import { homeDirections, activeHomeLanding } from './collections.js?v=cat-assortment-1';
-import { installLocale, intlLocale, locale, translate } from './locale.js?v=checkout-address-1';
+import { installLocale, intlLocale, locale, translate } from './locale.js?v=yagu-studio-1';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
