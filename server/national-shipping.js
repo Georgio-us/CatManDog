@@ -1,4 +1,5 @@
 import { sendcloudReady, sendcloudShippingOptions } from './sendcloud.js';
+import { nationalDeliveryFeeCents, isMainlandPostcode } from '../shipping-policy.js';
 
 // Only a mass explicitly attached to a SKU can be used for a carrier quote.
 // Package and carrier measurements are confirmed when the label is created.
@@ -67,19 +68,29 @@ export function pricedShippingOptions(options) {
   }).sort((a, b) => a.priceCents - b.priceCents);
 }
 
-export async function nationalShippingQuote({ postalCode, lines, variants, quoteOptions = sendcloudShippingOptions }) {
-  if (!sendcloudReady()) return { available: false, reason: 'carrier_not_configured' };
-  if (!/^\d{5}$/.test(String(postalCode || ''))) return { available: false, reason: 'invalid_postcode' };
+export async function nationalShippingQuote({ postalCode, lines, variants, productsCents,
+  freeDelivery = false, quoteOptions = sendcloudShippingOptions }) {
+  if (!isMainlandPostcode(postalCode)) return { available: false, reason: 'unsupported_postcode' };
+  const deliveryCents = nationalDeliveryFeeCents(productsCents, freeDelivery);
   const measured = cartParcel(lines, variants);
-  if (!measured.available) return measured;
-  const options = pricedShippingOptions(await quoteOptions({ postalCode,
-    parcels: [measured.parcel] }));
-  if (!options.length) return { available: false, reason: 'no_carrier_quote',
-    weightKg: measured.weightKg, quoteWeightKg: measured.quoteWeightKg,
-    parcel: measured.parcel, packagingVerified: false };
+  if (!measured.available || !sendcloudReady()) return {
+    available: true, deliveryCents, carrierEstimateAvailable: false,
+    missingVariantIds: measured.missingVariantIds || [] };
+  let options;
+  try {
+    options = pricedShippingOptions(await quoteOptions({ postalCode,
+      parcels: [measured.parcel] }));
+  } catch {
+    options = [];
+  }
+  if (!options.length) return { available: true, deliveryCents,
+    carrierEstimateAvailable: false, weightKg: measured.weightKg,
+    quoteWeightKg: measured.quoteWeightKg, parcel: measured.parcel,
+    packagingVerified: false };
   const selected = options[0];
   return { available: true, weightKg: measured.weightKg,
     quoteWeightKg: measured.quoteWeightKg, parcel: measured.parcel,
-    packagingVerified: false, carrier: selected.carrier,
-    optionCode: selected.code, deliveryCents: selected.priceCents };
+    packagingVerified: false, carrierEstimateAvailable: true, carrier: selected.carrier,
+    optionCode: selected.code, carrierCents: selected.priceCents,
+    deliveryCents };
 }

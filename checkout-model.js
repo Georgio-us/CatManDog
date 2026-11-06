@@ -1,5 +1,8 @@
-export const FREE_DELIVERY_FROM = 49;
-export const DELIVERY_FEE = 3.99;
+import { LOCAL_FREE_DELIVERY_FROM_CENTS, LOCAL_DELIVERY_FEE_CENTS,
+  isMainlandPostcode } from './shipping-policy.js';
+
+export const FREE_DELIVERY_FROM = LOCAL_FREE_DELIVERY_FROM_CENTS / 100;
+export const DELIVERY_FEE = LOCAL_DELIVERY_FEE_CENTS / 100;
 
 const cents = amount => Math.round(Number(amount) * 100);
 
@@ -66,6 +69,8 @@ export function validateCheckout(values, now = new Date()) {
   if (field('deliveryRegion') !== 'national' && !/^460\d{2}$/.test(field('postcode')))
     return 'Укажите почтовый индекс в городе Валенсия';
   if (field('deliveryRegion') === 'national' && !field('city')) return 'Укажите город доставки';
+  if (field('deliveryRegion') === 'national' && !isMainlandPostcode(field('postcode')))
+    return 'Сейчас отправляем заказы только по материковой Испании';
   if (!field('street') || !field('building')) return 'Укажите улицу и номер дома';
   if (field('deliveryRegion') === 'national') return null;
   if (field('deliveryMode') === 'preorder') return null;

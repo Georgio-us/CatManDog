@@ -133,6 +133,12 @@ function publicQuote(quote) {
     deliverySlot: quote.deliverySlot, promoCode: quote.promoCode };
 }
 
+function publicNationalShipping(shipping) {
+  if (!shipping) return null;
+  return { available: shipping.available, reason: shipping.reason || null,
+    deliveryCents: shipping.available ? shipping.deliveryCents : null };
+}
+
 async function liveCatalogSnapshot(db) {
   const list = await catalogSnapshot(db);
   const { rows } = await db.query('SELECT id,reserved_quantity FROM catalog_variants WHERE reserved_quantity>0');
@@ -202,8 +208,11 @@ async function createOrder(db, payload, customer) {
       FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
       WHERE v.id=ANY($1::text[]) AND v.active=true AND p.active=true FOR UPDATE OF v`, [ids]);
     const promo = await promoFor(client, payload.promoCode, customer, { email, phone }, true);
+    const productsQuote = priceQuote(lines, variants.rows, promo);
     const shipping = delivery.mode === 'national'
-      ? await nationalShippingQuote({ postalCode: address.postcode, lines, variants: variants.rows }) : null;
+      ? await nationalShippingQuote({ postalCode: address.postcode, lines, variants: variants.rows,
+        productsCents: productsQuote.subtotalCents - productsQuote.discountCents,
+        freeDelivery: promo?.free_delivery === true }) : null;
     if (shipping && !shipping.available) bad('Для этой корзины доставка по Испании пока недоступна');
     const quote = priceQuote(lines, variants.rows, promo, shipping?.deliveryCents ?? null);
     if (!quote.orderable) bad('Один из товаров пока нельзя заказать');
@@ -223,8 +232,10 @@ async function createOrder(db, payload, customer) {
       street: cap(address.street, 120), building: cap(address.building, 16),
       apartment: cap(address.apartment, 80), note: cap(address.note, 300), verified: false };
     const cleanDelivery = delivery.mode === 'national'
-      ? { mode:'national', carrier: shipping.carrier, optionCode: shipping.optionCode,
-        weightKg: shipping.weightKg, quoteWeightKg: shipping.quoteWeightKg, reserved:false }
+      ? { mode:'national', carrier: shipping.carrier || null,
+        optionCode: shipping.optionCode || null,
+        weightKg: shipping.weightKg ?? null, quoteWeightKg: shipping.quoteWeightKg ?? null,
+        reserved:false }
       : delivery.mode === 'soon' ? { mode: 'soon', reserved: false }
       : delivery.mode === 'slot' ? { mode:'slot', date:delivery.date,
         window:delivery.window, reserved:false }
@@ -269,7 +280,8 @@ async function createOrder(db, payload, customer) {
     if (promo) await client.query('UPDATE promo_codes SET used_count=used_count+1 WHERE code=$1', [promo.code]);
     const session = await createStripeCheckout({ id: orderId, number, email,
       items: quote.items, subtotal_cents: quote.subtotalCents, discount_cents: quote.discountCents,
-      delivery_cents: quote.deliveryCents, total_cents: quote.totalCents }, payload.locale);
+      delivery_cents: quote.deliveryCents, delivery_mode: delivery.mode,
+      total_cents: quote.totalCents }, payload.locale);
     await client.query(`UPDATE orders SET stripe_checkout_session_id=$2,stripe_checkout_url=$3,
       payment_expires_at=to_timestamp($4),payment_status='pending',updated_at=now() WHERE id=$1`,
     [orderId, session.id, session.url, session.expires_at]);
@@ -1917,13 +1929,22 @@ export async function handleApi(db, req, res, pathname) {
       const promo = await promoFor(db, body.promoCode, customer,
         { email: body.email, phone: body.phone });
       const variants = await liveCatalogSnapshot(db);
+      const productsQuote = priceQuote(body.items, variants, promo);
       const shipping = body.delivery?.mode === 'national'
         ? await nationalShippingQuote({ postalCode: body.address?.postcode,
-          lines: body.items, variants }) : null;
+          lines: body.items, variants,
+          productsCents: productsQuote.subtotalCents - productsQuote.discountCents,
+          freeDelivery: promo?.free_delivery === true }) : null;
       const quote = priceQuote(body.items, variants, promo,
         shipping?.available ? shipping.deliveryCents : null);
-      return json(res, 200, { ...publicQuote(quote),
-        nationalShipping: shipping,
+      const publicResult = publicQuote(quote);
+      if (shipping && !shipping.available) {
+        publicResult.deliveryCents = null;
+        publicResult.totalCents = null;
+        publicResult.orderable = false;
+      }
+      return json(res, 200, { ...publicResult,
+        nationalShipping: publicNationalShipping(shipping),
         nationalCheckoutEnabled: enabled('NATIONAL_CHECKOUT_ENABLED') });
     }
     if (pathname === '/api/checkout/shipping-quote' && req.method === 'POST') {
@@ -1931,9 +1952,16 @@ export async function handleApi(db, req, res, pathname) {
       const body = await readJson(req);
       if (!Array.isArray(body.items) || !body.items.length || body.items.length > 50)
         bad('Проверьте корзину');
+      const customer = await currentCustomer(db, req);
+      const promo = await promoFor(db, body.promoCode, customer,
+        { email: body.email, phone: body.phone });
+      const variants = await liveCatalogSnapshot(db);
+      const productsQuote = priceQuote(body.items, variants, promo);
       const shipping = await nationalShippingQuote({ postalCode: body.postcode,
-        lines: body.items, variants: await liveCatalogSnapshot(db) });
-      return json(res, 200, { ...shipping,
+        lines: body.items, variants,
+        productsCents: productsQuote.subtotalCents - productsQuote.discountCents,
+        freeDelivery: promo?.free_delivery === true });
+      return json(res, 200, { ...publicNationalShipping(shipping),
         nationalCheckoutEnabled: enabled('NATIONAL_CHECKOUT_ENABLED') });
     }
     if (pathname.startsWith('/api/admin/')) return await adminRoute(db, req, res, pathname);

@@ -23,7 +23,7 @@ test('Stripe session uses only server order total and an idempotency key', () =>
   let request;
   const order = { id: '9d8eb25b-c75b-4ed6-bf6a-a34b94385141', number: 'CMD-10001',
     email: 'buyer@example.com', subtotal_cents: 5318, discount_cents: 400,
-    delivery_cents: 399, total_cents: 5317,
+    delivery_cents: 399, delivery_mode: 'national', total_cents: 5317,
     items: [{ name: 'Корм', variantLabel: '2 кг', qty: 2, lineCents: 5318 }] };
   const session = await createStripeCheckout(order, 'es', async (url, options) => {
     request = { url, options, params: new URLSearchParams(options.body) };
@@ -36,6 +36,8 @@ test('Stripe session uses only server order total and an idempotency key', () =>
   assert.equal(request.options.headers['Idempotency-Key'], `catmandog-order-${order.id}`);
   assert.equal(request.params.get('line_items[0][price_data][unit_amount]'), '4918');
   assert.equal(request.params.get('line_items[1][price_data][unit_amount]'), '399');
+  assert.equal(request.params.get('line_items[1][price_data][product_data][name]'),
+    'Envío a España peninsular');
   assert.equal(request.params.get('client_reference_id'), order.id);
   assert.equal(request.params.get('payment_method_types[0]'), 'card');
   assert.match(request.params.get('success_url'), /checkout\/confirmation\?session_id=\{CHECKOUT_SESSION_ID\}/);

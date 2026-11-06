@@ -70,7 +70,9 @@ export async function createStripeCheckout(order, language = 'es', fetcher = fet
     params.set(`line_items[${index}][price_data][currency]`, 'eur');
     params.set(`line_items[${index}][price_data][unit_amount]`, String(order.delivery_cents));
     params.set(`line_items[${index}][price_data][product_data][name]`,
-      language === 'ru' ? 'Доставка по Валенсии' : 'Entrega en València');
+      order.delivery_mode === 'national'
+        ? language === 'ru' ? 'Доставка по материковой Испании' : 'Envío a España peninsular'
+        : language === 'ru' ? 'Доставка по Валенсии' : 'Entrega en València');
     params.set(`line_items[${index}][quantity]`, '1');
     charged += order.delivery_cents;
   }

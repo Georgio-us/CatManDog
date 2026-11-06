@@ -1,13 +1,17 @@
 import { deliveryTiming, availableDeliverySlots } from '../checkout-model.js';
+import { LOCAL_DELIVERY_FEE_CENTS, LOCAL_FREE_DELIVERY_FROM_CENTS,
+  isMainlandPostcode } from '../shipping-policy.js';
 
-export const DELIVERY_FEE_CENTS = 399;
-export const FREE_DELIVERY_FROM_CENTS = 4900;
+export const DELIVERY_FEE_CENTS = LOCAL_DELIVERY_FEE_CENTS;
+export const FREE_DELIVERY_FROM_CENTS = LOCAL_FREE_DELIVERY_FROM_CENTS;
 
 export function validateAddress(address, deliveryMode = 'slot') {
   if (!address || typeof address !== 'object') return 'Укажите адрес доставки';
   if (deliveryMode === 'national') {
     if (!String(address.city || '').trim()) return 'Укажите город доставки';
     if (!/^\d{5}$/.test(String(address.postcode || ''))) return 'Укажите почтовый индекс Испании';
+    if (!isMainlandPostcode(address.postcode))
+      return 'Сейчас отправляем заказы только по материковой Испании';
   } else {
     if (address.city !== 'València') return 'Пока доставляем только по городу Валенсия';
     if (!/^460\d{2}$/.test(String(address.postcode || ''))) return 'Укажите почтовый индекс в городе Валенсия';

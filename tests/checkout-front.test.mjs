@@ -85,6 +85,27 @@ test('Valencia cart reaches delivery review without creating an order while paym
   }
 });
 
+test('national checkout shows the approved customer delivery bands', () => {
+  const previousFormData = globalThis.FormData;
+  globalThis.FormData = class {
+    entries() { return [['deliveryRegion', 'national']][Symbol.iterator](); }
+    has() { return false; }
+  };
+  try {
+    const ui = createCheckoutUI({ escape:String, icon:() => '', money:value => `${value.toFixed(2)} €`,
+      imageBlock:() => '', getItems:() => [{ productId:'rc', variantId:'rc-2kg',
+        name:'Royal Canin', variant:'2 кг', qty:1, price:29.09 }],
+      isReady:() => true, getPromo:() => null, applyPromo:() => {}, render:() => {} });
+    ui.change({ name:'deliveryRegion', value:'national', form:{} });
+    const html = ui.page();
+    assert.match(html, /Материковая Испания/);
+    assert.match(html, /До 49 € - 9,99 €, от 49 € - 3,99 €, от 99 € - бесплатно/);
+    assert.doesNotMatch(html, /тариф по весу|условная коробка|без IVA/);
+  } finally {
+    globalThis.FormData = previousFormData;
+  }
+});
+
 test('live checkout presents the exact variant without creating a fictitious order', () => {
   const ui = createCheckoutUI({ escape: String, icon: () => '', money: value => `${value.toFixed(2)} €`,
     imageBlock: () => '', getItems: () => [{ productId: 'rc-sterilised', variantId: 'rc-sterilised-4000g', name: 'Royal Canin Sterilised 37', variant: '4 кг', qty: 2, price: 36.31 }],
