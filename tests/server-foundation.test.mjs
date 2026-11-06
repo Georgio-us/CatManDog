@@ -5,7 +5,7 @@ import { catalogRows, importCatalog, catalogSnapshot } from '../server/catalog.j
 import { priceQuote, validateAddress, validateDelivery } from '../server/pricing.js';
 import { hashPassword, verifyPassword, sessionCookie } from '../server/auth.js';
 import { applyServerPrices, applyServerCatalog } from '../server-prices.js';
-import { canBuy } from '../variants.js';
+import { canBuy, catalogPrice } from '../variants.js';
 import { handleApi } from '../server/api.js';
 import { retiredProductIds } from '../catalog-policy.js';
 
@@ -47,20 +47,21 @@ test('full catalog import archives retired rows once and preserves edited produc
   assert.equal(queries.at(-1)[0], 'COMMIT');
 });
 
-test('public catalog reads all active SKUs but blocks a SKU without a priced supplier link', async () => {
+test('public catalog keeps the sale status separate from payment readiness', async () => {
   let query, parameters;
   const db = { async query(sql, params) {
     if (sql.includes('FROM supplier_catalog_matches')) return { rows: [] };
     query = sql; parameters = params;
     return { rows: [{ variant_id:'cmd-sku-new',product_id:'cmd-new',name:'Новый товар',
       source_price_cents:null,price_override_cents:1299,price_confirmed:true,
-      source_orderable:true,availability:'source_on_demand',stock_quantity:null }] };
+      source_orderable:true,availability:'source_on_demand',sale_status:'available',stock_quantity:null }] };
   } };
   const rows = await catalogSnapshot(db);
   assert.match(query, /p\.active=true AND v\.active=true/);
   assert.doesNotMatch(query, /p\.id = ANY/);
   assert.equal(parameters, undefined);
   assert.equal(rows[0].sale_price_cents, 1299);
+  assert.equal(rows[0].sale_status, 'available');
   assert.equal(rows[0].orderable, false);
   assert.equal(rows[0].sourcing_availability, 'unavailable');
 });
@@ -248,6 +249,24 @@ test('storefront disables cart actions for reserved stock and supplier-disabled 
   ]);
   assert.equal(canBuy(products[0].variants[0]), false);
   assert.equal(canBuy(products[1].variants[0]), false);
+});
+
+test('explicit sale status overrides stock and sourcing but keeps the retail price requirement', () => {
+  const products = [];
+  const catalogProducts = [];
+  applyServerCatalog(products, catalogProducts, [
+    { variant_id:'open',product_id:'food',name:'Food',brand:'Brand',category:'Корм',pet:'cat',
+      label:'1 кг',price_confirmed:true,priceCents:1299,source_orderable:false,
+      availability:'unavailable',sourcingAvailability:'unavailable',availableForCart:true,
+      saleStatus:'available' },
+    { variant_id:'closed',product_id:'treat',name:'Treat',brand:'Brand',category:'Лакомства',pet:'cat',
+      label:'1 шт',price_confirmed:true,priceCents:299,source_orderable:true,
+      availability:'on_hand',sourcingAvailability:'on_hand',availableForCart:false,
+      saleStatus:'unavailable' }
+  ]);
+  assert.equal(canBuy(products[0].variants[0]), true);
+  assert.equal(canBuy(products[1].variants[0]), false);
+  assert.equal(catalogPrice(products[1]).amount, 2.99);
 });
 
 test('selected supplier preview remains addable while unsourced SKU is blocked', () => {

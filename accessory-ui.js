@@ -4,6 +4,7 @@ import { retailResearch, retailResearchBlock, provisionalPriceBlock, provisional
 
 const availabilityCopy = {
   ru: {
+    available: ['Доступно к заказу', 'Выберите этот вариант и укажите удобное время при оформлении. Детали доставки подтвердим после заказа.'],
     pending: ['Наличие уточняется', 'Наличие этой фасовки уточняем. Пока её нельзя оформить.'],
     on_hand: ['В наличии', 'Товар есть у нас. При оформлении можно будет выбрать удобный интервал доставки по Валенсии. Точное время мы подтвердим после заказа.'],
     source_on_demand: ['Под заказ', 'Эту фасовку закажем у поставщика. Срок доставки уточним до оплаты.'],
@@ -11,6 +12,7 @@ const availabilityCopy = {
     add: 'Добавить в корзину', order: 'Заказать с доставкой'
   },
   es: {
+    available: ['Disponible para pedir', 'Elige este formato e indica cuándo te viene bien recibirlo. Confirmaremos los detalles de entrega después del pedido.'],
     pending: ['Disponibilidad pendiente', 'Estamos comprobando la disponibilidad de este formato. Todavía no se puede pedir.'],
     on_hand: ['Disponible', 'Tenemos este formato. Al realizar el pedido podrás indicar la franja de entrega que prefieras en València. Confirmaremos la hora después.'],
     source_on_demand: ['Por encargo', 'Pediremos este formato al proveedor. Confirmaremos el plazo de entrega antes del pago.'],
@@ -18,6 +20,7 @@ const availabilityCopy = {
     add: 'Añadir a la cesta', order: 'Pedir con entrega'
   },
   uk: {
+    available: ['Доступно для замовлення', 'Виберіть цей варіант і зручний час під час оформлення. Деталі доставки підтвердимо після замовлення.'],
     pending: ['Наявність уточнюється', 'Наявність цього формату уточнюємо. Поки його не можна замовити.'],
     on_hand: ['У наявності', 'Товар є в нас. Час доставки у Валенсії підтвердимо після замовлення.'],
     source_on_demand: ['Під замовлення', 'Замовимо цей формат у постачальника. Строк доставки уточнимо до оплати.'],
@@ -27,6 +30,7 @@ const availabilityCopy = {
 };
 
 function customerAvailability(variant) {
+  if (variant.saleStatus) return variant.saleStatus === 'preorder' ? 'source_on_demand' : variant.saleStatus;
   if (variant.serverSourcingAvailability) return variant.serverSourcingAvailability;
   const raw = variant.serverAvailabilityStatus || variant.availabilityStatus;
   if (raw === 'unavailable' || ['out-of-stock', 'outOfStock', 'discontinued'].includes(raw)) return 'unavailable';
@@ -42,7 +46,7 @@ export function accessoryDetail(product, helpers) {
   const p = resolveVariant(product, variantId);
   if (!p) return '';
   const price = storefrontPrice(p);
-  const specialAvailability = Boolean(p.serverSourcingAvailability);
+  const specialAvailability = Boolean(p.saleStatus || p.serverSourcingAvailability);
   const t = availabilityCopy[language] || availabilityCopy.ru;
   const state = customerAvailability(p);
   const allowed = canBuy(p) && state !== 'pending' && state !== 'unavailable';
@@ -65,6 +69,6 @@ export function accessoryDetail(product, helpers) {
   const selectedAvailability = specialAvailability
     ? `<div class="availability-selected availability-selected-${state}" role="status"><strong>${escape(t[state][0])}</strong><p>${escape(t[state][1])}</p></div>` : '';
   const buyable = specialAvailability ? allowed : canBuy(p) && state !== 'unavailable';
-  const action = specialAvailability ? (state === 'on_hand' ? t.add : state === 'source_on_demand' ? t.order : t[state][0]) : (buyable ? 'Добавить в корзину' : 'Вариант недоступен');
+  const action = specialAvailability ? (['on_hand','available'].includes(state) ? t.add : state === 'source_on_demand' ? t.order : t[state][0]) : (buyable ? 'Добавить в корзину' : 'Вариант недоступен');
   return `<div class="page">${crumbs(product.name)}<div class="detail-grid">${imageBlock(p.image,'detail-image')}<div class="detail-copy"><span class="eyebrow">${escape(p.line || p.brand || '')}</span><h1>${escape(p.name || product.name)}</h1>${variants?`<p class="variant-current">${escape(label)}: ${escape(translate(p.label))}</p>`:''}<span class="detail-price-label">${variants?'Цена выбранного варианта':'Цена товара'}</span><div class="detail-price">${displayPrice}</div><p class="retail-note">${demo?'Цена уточняется':p.serverPriceConfirmed?'Цена с IVA':research?(p.retailPrice?.type==='recommended'?'Рекомендованная розничная цена':'Розничный ориентир'):provisionalPriceLabel(p)|| (p.retailPrice?.type==='recommended'?'Рекомендованная розничная цена':'Временная розничная цена')}${!research&&!demo&&p.packageWeightKg?` · ${money(price/p.packageWeightKg)} / кг`:''}${specialAvailability?'':`<br>${escape(availability)}`}</p><p>${escape(translate(p.description || ''))}</p><span class="size-label">${escape(label)}</span><div class="size-options variant-options ${specialAvailability?'availability-options':''}" aria-label="${escape(label)}">${optionMarkup}</div>${selectedAvailability}<div class="buy-row">${buyable?`<div class="quantity"><button data-detail-qty="-1" aria-label="Уменьшить количество">${icon('minus')}</button><span id="detail-qty">${quantity}</span><button data-detail-qty="1" aria-label="Увеличить количество">${icon('plus')}</button></div>`:''}<button class="button" ${buyable?`data-buy="${escape(product.id)}"`:'disabled'}>${escape(action)} ${buyable?icon(state === 'source_on_demand' && specialAvailability ? 'arrow' : 'bag'):''}</button><button class="icon-button favorite-detail ${favorites.includes(product.id)?'selected':''}" data-favorite="${escape(product.id)}" aria-label="В избранное" aria-pressed="${favorites.includes(product.id)}">${icon('heart')}</button></div>${specialAvailability&&demo?'':retailResearchBlock(p,{escape,money})}${specialAvailability&&demo?'':provisionalPriceBlock(p,{escape,money})}<details open><summary>${p.category==='Корм'?'О корме':'О товаре'}</summary><ul>${(p.details || []).map(d=>`<li>${escape(translate(d))}</li>`).join('')}</ul></details><details open><summary>Информация о товаре</summary><p>Бренд: ${escape(p.brand || '')}${sku?`<br>Артикул: ${escape(sku)}`:''}${!sourcingReview&&p.supplier?.sku&&p.supplier.sku!==sku?`<br>Артикул поставщика: ${escape(p.supplier.sku)}`:''}${p.ean?`<br>EAN: ${escape(p.ean)}`:''}${p.weight?`<br>Упаковка: ${escape(p.weight)}`:''}<br>${escape(specialAvailability?t[state][0]:availability)}</p>${sourcingReview?'':source('Карточка поставщика',p.supplier?.name,p.supplier?.url)+(p.productSource?.url===p.supplier?.url?'':source(['supplier','retailer'].includes(p.productSource?.kind)?'Источник товара':'Описание производителя',p.productSource?.name,p.productSource?.url))+source(p.image?.generated?'Исходное фото':'Источник фото',p.imageSource?.name,p.imageSource?.pageUrl)}${research||p.pricingBasis?'':source(demo?'Источник информации о цене':p.retailPrice?.type==='recommended'?'Рекомендованная розничная цена':'Розничный ориентир',p.retailPrice?.sourceName,p.retailPrice?.sourceUrl)}</details>${supplierTermsDetail(product,p,{escape,money})}</div></div></div>${goodTogether(product)}`;
 }

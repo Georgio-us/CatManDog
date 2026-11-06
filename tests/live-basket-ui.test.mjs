@@ -24,15 +24,15 @@ test('real basket uses server availability and calculates separate delivery per 
   const separate = renderLiveBasket({ ...helpers, cart, grouping: 'separate' });
   assert.match(separate, /data-live-checkout-group="stock"/);
   assert.match(separate, /49\.38 €/);
-  assert.match(separate, /Сначала оформите товары в наличии/);
-  assert.match(separate, /Заказ 1 - в наличии/);
+  assert.match(separate, /Сначала оформите товары с обычной доставкой/);
+  assert.match(separate, /Заказ 1 - обычная доставка/);
   assert.match(separate, /Заказ 2 - под заказ/);
 });
 
 test('unconfirmed availability cannot appear as stock or enter checkout', () => {
   const pendingCart = [{ id: 'food', productId: 'food', variantId: 'food-pending', qty: 1 }];
   const html = renderLiveBasket({ ...helpers, cart: pendingCart, grouping: 'together' });
-  assert.match(html, /Наличие уточняется/);
+  assert.match(html, /Недоступно/);
   assert.match(html, /id="checkout"[^>]*disabled/);
   assert.doesNotMatch(html, /Товары в наличии/);
   assert.match(html, /74\.99 €/);
@@ -53,7 +53,7 @@ test('supplier-linked SKU keeps its retail price in the basket but cannot check 
   const linkedProduct = { ...product, variants: [pendingSale] };
   const html = renderLiveBasket({ ...helpers, products: [linkedProduct],
     cart: [{ id: 'food', productId: 'food', variantId: 'food-small', qty: 1 }], grouping: 'together' });
-  assert.match(html, /В наличии/);
+  assert.match(html, /Доступно к заказу/);
   assert.match(html, /5\.09 €/);
   assert.match(html, /id="checkout"[^>]*disabled/);
   assert.doesNotMatch(html, /Демонстрационная цена/);

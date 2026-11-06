@@ -770,6 +770,7 @@ button:hover:not(:disabled) {
   pointer-events: none;
 }
 
+.product-availability-available,
 .product-availability-stock,
 .product-availability-mixed { background: var(--lime); }
 .product-availability-unavailable { background: #e5e7e0; }

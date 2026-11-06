@@ -251,6 +251,21 @@ nav{overflow-x:auto;padding-bottom:4px}nav button{white-space:nowrap}
 .catalog-view-switch{display:flex;gap:24px;border-bottom:1px solid var(--catalog-line)}
 .catalog-view-switch button{padding:11px 1px 13px;border:0;border-bottom:3px solid transparent;border-radius:0;background:none;color:#777d73;font-size:14px;font-weight:800}
 .catalog-view-switch button[aria-pressed=true]{border-color:#bfdf51;color:#22251f}
+.catalog-sale-summary{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 18px}
+.catalog-sale-summary span{padding:10px 14px;border:1px solid var(--catalog-line);border-radius:12px;background:#fff;color:#596254;font-size:13px}
+.catalog-sale-summary strong{color:#22251f;font-size:18px}
+.catalog-sale-controls{display:flex;align-items:end;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.catalog-sale-controls label{display:grid;gap:6px;color:#626a5d;font-size:11px;font-weight:700}
+.catalog-sale-controls select,.catalog-sale-select{min-height:42px;padding:8px 32px 8px 12px;border:1px solid #dce0d7;border-radius:10px;background:#fff;color:#22251f;font:inherit;font-size:13px}
+.catalog-sale-controls button{min-height:42px;padding:8px 15px;border:1px solid #d5e8a4;border-radius:10px;background:#d8f273;color:#22251f;font-size:13px;font-weight:800}
+.catalog-sale-table-wrap{overflow-x:auto;border:1px solid var(--catalog-line);border-radius:14px;background:#fff}
+.catalog-sale-table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+.catalog-sale-table th,.catalog-sale-table td{padding:13px 15px;border-bottom:1px solid var(--catalog-line);vertical-align:middle}
+.catalog-sale-table tr:last-child td{border-bottom:0}
+.catalog-sale-table th{color:#626a5d;font-size:11px;white-space:nowrap}
+.catalog-sale-table td:first-child{min-width:240px}
+.catalog-sale-table td small{display:block;margin-top:4px;color:#777d73;font-size:11px;overflow-wrap:anywhere}
+.catalog-sale-table td:nth-child(4){white-space:nowrap}
 .catalog-filters{display:grid;grid-template-columns:minmax(220px,2fr) repeat(3,minmax(130px,1fr));gap:10px;margin:19px 0}
 .catalog-filters label,.request-toolbar label{display:grid;gap:7px;min-width:0;color:#626a5d;font-size:11px;font-weight:700}
 .catalog-filters input,.catalog-filters select,.request-toolbar input,.request-toolbar select{width:100%;min-width:0;max-width:none;min-height:44px;padding:10px 13px;border:1px solid #dce0d7;border-radius:10px;background-color:#fff;color:#22251f;font:inherit;font-size:13px}

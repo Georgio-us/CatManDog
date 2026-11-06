@@ -37,6 +37,8 @@ CREATE TABLE IF NOT EXISTS catalog_variants (
   active boolean NOT NULL DEFAULT true,
   availability text NOT NULL DEFAULT 'source_on_demand'
     CHECK (availability IN ('on_hand', 'source_on_demand', 'pending', 'unavailable')),
+  sale_status text NOT NULL DEFAULT 'available'
+    CHECK (sale_status IN ('available', 'preorder', 'unavailable')),
   stock_quantity integer CHECK (stock_quantity >= 0),
   tax_rate_bps integer CHECK (tax_rate_bps BETWEEN 0 AND 10000),
   reorder_point integer NOT NULL DEFAULT 2 CHECK (reorder_point BETWEEN 0 AND 99998),
@@ -50,6 +52,8 @@ ALTER TABLE catalog_variants DROP CONSTRAINT IF EXISTS catalog_variants_availabi
 ALTER TABLE catalog_variants ADD CONSTRAINT catalog_variants_availability_check
   CHECK (availability IN ('on_hand', 'source_on_demand', 'pending', 'unavailable'));
 ALTER TABLE catalog_variants ADD COLUMN IF NOT EXISTS source_orderable boolean NOT NULL DEFAULT true;
+ALTER TABLE catalog_variants ADD COLUMN IF NOT EXISTS sale_status text NOT NULL DEFAULT 'available'
+  CHECK (sale_status IN ('available', 'preorder', 'unavailable'));
 ALTER TABLE catalog_variants ADD COLUMN IF NOT EXISTS image_path text;
 ALTER TABLE catalog_variants ADD COLUMN IF NOT EXISTS description text NOT NULL DEFAULT '';
 ALTER TABLE catalog_variants ADD COLUMN IF NOT EXISTS details jsonb NOT NULL DEFAULT '[]'::jsonb;

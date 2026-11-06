@@ -141,7 +141,7 @@ export async function catalogSnapshot(db) {
     p.description,p.details,p.food_type,v.image_path AS variant_image_path,
     v.description AS variant_description,v.details AS variant_details,
     v.label,v.source_price_cents,v.price_override_cents,v.purchase_price_cents,
-    v.price_confirmed,v.source_orderable,v.availability,v.stock_quantity,v.reorder_point,v.target_stock,
+    v.price_confirmed,v.source_orderable,v.availability,v.sale_status,v.stock_quantity,v.reorder_point,v.target_stock,
     v.tax_rate_bps,v.display_priority
     FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
     WHERE p.active=true AND v.active=true
@@ -158,10 +158,10 @@ export async function catalogSnapshot(db) {
       sourcing_availability: sourcingAvailability,
       selected_supplier_units: supplier?.selectedUnits || 0,
       supplier_source_count: supplier?.sourceCount || 0,
-      // Selection for the first basket is a storefront scenario, not received stock.
-      // A real payment still needs an approved price and physical stock when on hand.
-      orderable: sourcingAvailability !== 'unavailable' && row.price_confirmed &&
-        row.source_orderable && row.availability !== 'unavailable' &&
+      // Sale policy is independent from stock. Payment readiness still follows the
+      // older reservation flow until delivery and fulfillment are migrated.
+      orderable: row.sale_status !== 'unavailable' && sourcingAvailability !== 'unavailable' &&
+        row.price_confirmed && row.source_orderable &&
         (sourcingAvailability !== 'on_hand' || row.stock_quantity > 0) &&
         (row.price_override_cents ?? row.source_price_cents) > 0
     };

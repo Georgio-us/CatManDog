@@ -29,6 +29,7 @@ let productBrand = 'all';
 let productPet = 'all';
 let productVisibleCount = 40;
 let catalogView = 'products';
+let saleStatusFilter = 'all';
 let openedProductId = '';
 let variantRows = [];
 let variantSearch = '';
@@ -219,6 +220,31 @@ function renderProductList() {
   const target = $('catalog-product-list');
   if (!target) return;
   const needle = productSearch.trim().toLocaleLowerCase('ru');
+  if (catalogView === 'sale-status') {
+    const matching = variantRows.filter(item =>
+      (productBrand === 'all' || item.brand === productBrand) &&
+      (saleStatusFilter === 'all' || item.sale_status === saleStatusFilter) &&
+      (!needle || `${item.name} ${item.brand} ${item.category} ${item.label} ${item.variant_id}`.toLocaleLowerCase('ru').includes(needle)));
+    const labels = { available:'Доступно к заказу', preorder:'Под заказ', unavailable:'Недоступно' };
+    const counts = Object.fromEntries(Object.keys(labels).map(status =>
+      [status, variantRows.filter(item => item.sale_status === status).length]));
+    target.className = 'catalog-sale-workspace';
+    target.innerHTML = `<div class="catalog-sale-summary">${Object.entries(labels).map(([status,label]) =>
+      `<span><strong>${counts[status]}</strong> ${label}</span>`).join('')}</div>
+      <div class="catalog-sale-controls"><label>Статус<select id="catalog-sale-filter"><option value="all">Все статусы</option>${Object.entries(labels).map(([status,label]) =>
+      `<option value="${status}" ${saleStatusFilter === status ? 'selected' : ''}>${label}</option>`).join('')}</select></label>
+      <label>Бренд<select id="catalog-sale-brand"><option value="all">Все бренды</option>${[...new Set(variantRows.map(item => item.brand).filter(Boolean))].sort((a,b) => a.localeCompare(b,'ru')).map(brand =>
+      `<option value="${escape(brand)}" ${productBrand === brand ? 'selected' : ''}>${escape(brand)}</option>`).join('')}</select></label>
+      <label>Изменить ${productBrand === 'all' ? 'все SKU' : `бренд ${escape(productBrand)}`}<select id="catalog-sale-bulk"><option value="">Выберите статус</option>${Object.entries(labels).map(([status,label]) =>
+      `<option value="${status}">${label}</option>`).join('')}</select></label><button type="button" data-sale-bulk>Применить к ${productBrand === 'all' ? 'всему каталогу' : 'бренду'}</button></div>
+      <div class="catalog-sale-table-wrap"><table class="catalog-sale-table"><thead><tr><th>Товар и SKU</th><th>Бренд</th><th>Категория</th><th>Цена продажи</th><th>Статус продажи</th></tr></thead><tbody>${matching.slice(0,productVisibleCount).map(item =>
+      `<tr><td><strong>${escape(item.name)}</strong><small>${escape(item.label)} · ${escape(item.variant_id)}</small></td><td>${escape(item.brand || 'Без бренда')}</td><td>${escape(item.category || '')}</td><td>${item.sale_price_cents ? euros(item.sale_price_cents) : 'Цена уточняется'}</td><td><select class="catalog-sale-select" data-sale-variant="${escape(item.variant_id)}" aria-label="Статус продажи ${escape(item.name)} ${escape(item.label)}">${Object.entries(labels).map(([status,label]) =>
+      `<option value="${status}" ${item.sale_status === status ? 'selected' : ''}>${label}</option>`).join('')}</select></td></tr>`).join('')}</tbody></table></div>`;
+    $('catalog-product-count').textContent = `Показано ${Math.min(matching.length, productVisibleCount)} из ${matching.length} SKU`;
+    $('catalog-product-more').hidden = matching.length <= productVisibleCount;
+    $('catalog-product-all').hidden = matching.length <= productVisibleCount;
+    return;
+  }
   if (catalogView === 'brands') {
     const unbranded = unbrandedProducts();
     const brands = [...brandDirectoryRows(), ...(unbranded.length ? [{name:'Бренд не указан',key:'__unbranded__',products:unbranded.length,
@@ -251,7 +277,8 @@ function renderProducts() {
     <div class="catalog-heading"><div><h2>Продукция</h2><p>${productRows.length} товаров · ${catalogBrandCount()} брендов с товарами · ${catalogSkuCount()} SKU${unbrandedProducts().length ? ` · ${unbrandedProducts().length} без бренда` : ''}</p></div>
       <button type="button" class="catalog-sourcing-link" data-go-tab="brands">Прайсы и связи SKU</button></div>
     <div class="catalog-view-switch" role="group" aria-label="Вид каталога"><button type="button" data-catalog-view="products" aria-pressed="${catalogView === 'products'}">Товары</button>
-      <button type="button" data-catalog-view="brands" aria-pressed="${catalogView === 'brands'}">Бренды</button></div>
+      <button type="button" data-catalog-view="brands" aria-pressed="${catalogView === 'brands'}">Бренды</button>
+      <button type="button" data-catalog-view="sale-status" aria-pressed="${catalogView === 'sale-status'}">Статусы SKU</button></div>
     <div class="catalog-filters"><label>Поиск<input id="catalog-product-search" type="search" value="${escape(productSearch)}" placeholder="Название, бренд или артикул"></label>
       ${catalogView === 'products' ? `<label>Категория<select id="catalog-category"><option value="all">Все категории</option>${categories.map(item => `<option value="${escape(item)}" ${item === productCategory ? 'selected' : ''}>${escape(item)}</option>`).join('')}</select></label>
       <label>Бренд<select id="catalog-brand"><option value="all">Все бренды</option>${brands.map(item => `<option value="${escape(item)}" ${item === productBrand ? 'selected' : ''}>${escape(item)}</option>`).join('')}${unbrandedProducts().length ? `<option value="__unbranded__" ${productBrand === '__unbranded__' ? 'selected' : ''}>Бренд не указан</option>` : ''}</select></label>
@@ -1121,6 +1148,16 @@ $('admin-content').addEventListener('input', event => {
     productVisibleCount = 40;
     renderProductList();
   }
+  if (event.target.id === 'catalog-sale-filter') {
+    saleStatusFilter = event.target.value;
+    productVisibleCount = 40;
+    renderProductList();
+  }
+  if (event.target.id === 'catalog-sale-brand') {
+    productBrand = event.target.value;
+    productVisibleCount = 40;
+    renderProducts();
+  }
   if (event.target.id === 'admin-variant-search') {
     variantSearch = event.target.value;
     renderVariantList();
@@ -1165,6 +1202,25 @@ async function importGenericSupplierCatalog(snapshot) {
   message(result.alreadyImported ? 'Этот прайс уже был загружен' : `Загружено ${result.imported} позиций`);
 }
 $('admin-content').addEventListener('change', async event => {
+  if (event.target.matches('[data-sale-variant]')) {
+    const select = event.target;
+    const row = variantRows.find(item => item.variant_id === select.dataset.saleVariant);
+    if (!row) return;
+    const previous = row.sale_status || 'available';
+    const labels = { available:'Доступно к заказу', preorder:'Под заказ', unavailable:'Недоступно' };
+    if (!window.confirm(`Изменить статус ${row.name} · ${row.label} на «${labels[select.value]}»?`)) {
+      select.value = previous;
+      return;
+    }
+    select.disabled = true;
+    try {
+      await api(`/api/admin/variants/${encodeURIComponent(row.variant_id)}/sale-status`, 'PATCH', { status: select.value });
+      row.sale_status = select.value;
+      renderProductList();
+      message('Статус продажи сохранён');
+    } catch (error) { select.value = previous; select.disabled = false; message(error.message); }
+    return;
+  }
   if (event.target.id === 'sourcing-bundle-upload') {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -1258,6 +1314,23 @@ $('admin-content').addEventListener('change', async event => {
   }
 });
 $('admin-content').addEventListener('click', async event => {
+  if (event.target.closest('[data-sale-bulk]')) {
+    const status = $('catalog-sale-bulk')?.value;
+    const labels = { available:'Доступно к заказу', preorder:'Под заказ', unavailable:'Недоступно' };
+    if (!labels[status]) { message('Выберите статус продажи'); return; }
+    const brand = productBrand === 'all' ? '' : productBrand;
+    const count = variantRows.filter(item => !brand || item.brand === brand).length;
+    if (!window.confirm(`Изменить статус ${count} SKU ${brand ? `бренда ${brand}` : 'всего каталога'} на «${labels[status]}»?`)) return;
+    const button = event.target.closest('[data-sale-bulk]');
+    button.disabled = true;
+    try {
+      const result = await api('/api/admin/variants/sale-status', 'PATCH', { status, brand });
+      variantRows = (await api('/api/admin/variants')).variants;
+      renderProductList();
+      message(`Обновлено ${result.updated} SKU`);
+    } catch (error) { button.disabled = false; message(error.message); }
+    return;
+  }
   if (event.target.closest('[data-apply-selected-prices]')) {
     const button = event.target.closest('[data-apply-selected-prices]');
     button.disabled = true;
@@ -1346,7 +1419,7 @@ $('admin-content').addEventListener('click', async event => {
     return;
   }
   if (event.target.closest('#catalog-product-all')) {
-    productVisibleCount = productRows.length;
+    productVisibleCount = catalogView === 'sale-status' ? variantRows.length : productRows.length;
     renderProductList();
     return;
   }

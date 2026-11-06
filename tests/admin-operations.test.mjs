@@ -71,7 +71,7 @@ test('public catalog exposes sourced references without inventing a sale price',
   assert.equal(output.state.body.variants[1].referencePriceCents, null);
 });
 
-test('public catalog marks reserved stock and supplier-disabled SKUs unavailable to the cart', async () => {
+test('sale status controls cart availability independently of stock and supplier terms', async () => {
   const db = { async query(sql) {
     if (sql.includes('FROM supplier_catalog_matches m')) return { rows: [
       { variant_id: 'reserved', source_count: 1, selected_units: 2 },
@@ -80,10 +80,10 @@ test('public catalog marks reserved stock and supplier-disabled SKUs unavailable
     if (sql.includes('FROM catalog_variants v JOIN catalog_products p')) return { rows: [
       { variant_id: 'reserved', product_id: 'food', source_price_cents: 2000,
         price_override_cents: 2500, price_confirmed: true, source_orderable: true,
-        availability: 'on_hand', stock_quantity: 2, reserved_quantity: 0 },
+        availability: 'on_hand', sale_status: 'available', stock_quantity: 2, reserved_quantity: 0 },
       { variant_id: 'disabled', product_id: 'food', source_price_cents: 2000,
         price_override_cents: 2500, price_confirmed: true, source_orderable: false,
-        availability: 'source_on_demand', stock_quantity: null, reserved_quantity: 0 }
+        availability: 'source_on_demand', sale_status: 'unavailable', stock_quantity: null, reserved_quantity: 0 }
     ] };
     if (sql.includes('reserved_quantity>0')) return { rows: [{ id: 'reserved', reserved_quantity: 2 }] };
     throw new Error(`Unexpected query: ${sql}`);
@@ -92,7 +92,7 @@ test('public catalog marks reserved stock and supplier-disabled SKUs unavailable
   await handleApi(db, { method: 'GET', headers: {}, socket: { remoteAddress: 'test-stock-cart' } },
     output.res, '/api/catalog');
   assert.equal(output.state.status, 200);
-  assert.deepEqual(output.state.body.variants.map(row => row.availableForCart), [false, false]);
+  assert.deepEqual(output.state.body.variants.map(row => row.availableForCart), [true, false]);
 });
 
 test('old bearer key alone cannot read or modify the admin API', async () => {

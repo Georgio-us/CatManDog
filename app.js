@@ -143,9 +143,9 @@ function card(p){
   const family=hasVariants(p)&&p.variants.length>1;
   const pricing=catalogPrice(p);
   const sku=resolveVariant(p);
-  const sourcingStates=snapshots(p).map(variant=>variant.serverSourcingAvailability).filter(Boolean);
-  const copy={ru:{stock:'В наличии',supplier:'Под заказ',mixed:'В наличии и под заказ',unavailable:'Нет в наличии'},es:{stock:'Disponible',supplier:'Por encargo',mixed:'Disponible y por encargo',unavailable:'No disponible'},uk:{stock:'У наявності',supplier:'Під замовлення',mixed:'У наявності та під замовлення',unavailable:'Немає в наявності'}}[locale()]||{stock:'В наличии',supplier:'Под заказ',mixed:'В наличии и под заказ',unavailable:'Нет в наличии'};
-  const status=sourcingStates.includes('on_hand')&&sourcingStates.includes('source_on_demand')?'mixed':sourcingStates.includes('on_hand')?'stock':sourcingStates.includes('source_on_demand')?'supplier':sourcingStates.length?'unavailable':null;
+  const sourcingStates=snapshots(p).map(variant=>variant.saleStatus || variant.serverSourcingAvailability).filter(Boolean);
+  const copy={ru:{stock:'В наличии',available:'Доступно к заказу',supplier:'Под заказ',mixed:'Доступно и под заказ',unavailable:'Недоступно'},es:{stock:'Disponible',available:'Disponible para pedir',supplier:'Por encargo',mixed:'Disponible y por encargo',unavailable:'No disponible'},uk:{stock:'У наявності',available:'Доступно для замовлення',supplier:'Під замовлення',mixed:'Доступно та під замовлення',unavailable:'Недоступно'}}[locale()]||{stock:'В наличии',available:'Доступно к заказу',supplier:'Под заказ',mixed:'Доступно и под заказ',unavailable:'Недоступно'};
+  const status=sourcingStates.includes('available')&&(sourcingStates.includes('preorder')||sourcingStates.includes('source_on_demand'))?'mixed':sourcingStates.includes('available')?'available':sourcingStates.includes('preorder')?'supplier':sourcingStates.includes('on_hand')&&sourcingStates.includes('source_on_demand')?'mixed':sourcingStates.includes('on_hand')?'stock':sourcingStates.includes('source_on_demand')?'supplier':sourcingStates.length?'unavailable':null;
   const availabilityTag=status?`<span class="product-availability-tag product-availability-${status}">${escape(copy[status])}</span>`:'';
   const configure=family||p.gift||!canBuy(sku);
   const actionLabel=family?'Выбрать вариант':p.gift?'Выбрать набор':!canBuy(sku)?'К товару':'В корзину';

@@ -1602,6 +1602,48 @@ async function adminRoute(db, req, res, path) {
   if (path === '/api/admin/variants' && req.method === 'GET') {
     return json(res, 200, { variants: await liveCatalogSnapshot(db) });
   }
+  const saleStatusVariant = path.match(/^\/api\/admin\/variants\/([^/]+)\/sale-status$/);
+  if (saleStatusVariant && req.method === 'PATCH') {
+    const body = await readJson(req);
+    if (!['available','preorder','unavailable'].includes(body.status)) bad('Некорректный статус продажи');
+    const variantId = decodeURIComponent(saleStatusVariant[1]);
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const { rows } = await client.query(`UPDATE catalog_variants v SET sale_status=$2,updated_at=now()
+        FROM catalog_products p WHERE v.id=$1 AND p.id=v.product_id AND p.active=true AND v.active=true
+          AND coalesce(p.source->>'gift','')='' AND coalesce(p.source->>'catalogHidden','false')!='true'
+        RETURNING v.id,v.sale_status`, [variantId, body.status]);
+      if (!rows.length) bad('SKU не найден', 404);
+      await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+        VALUES($1,$2,'variant_sale_status_updated',$3,$4)`,
+      [randomUUID(), operator.id, variantId, { status: body.status }]);
+      await client.query('COMMIT');
+      return json(res, 200, { ok: true, status: body.status });
+    } catch (error) { await client.query('ROLLBACK'); throw error; }
+    finally { client.release(); }
+  }
+  if (path === '/api/admin/variants/sale-status' && req.method === 'PATCH') {
+    const body = await readJson(req);
+    if (!['available','preorder','unavailable'].includes(body.status)) bad('Некорректный статус продажи');
+    const brand = cap(body.brand, 150);
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const { rows } = await client.query(`UPDATE catalog_variants v SET sale_status=$1,updated_at=now()
+        FROM catalog_products p WHERE p.id=v.product_id AND p.active=true AND v.active=true
+          AND coalesce(p.source->>'gift','')=''
+          AND coalesce(p.source->>'catalogHidden','false')!='true'
+          AND ($2::text='' OR lower(p.brand)=lower($2))
+          AND v.sale_status IS DISTINCT FROM $1 RETURNING v.id`, [body.status, brand]);
+      await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+        VALUES($1,$2,'variant_sale_status_bulk_updated',$3,$4)`,
+      [randomUUID(), operator.id, brand || 'all', { status: body.status, count: rows.length }]);
+      await client.query('COMMIT');
+      return json(res, 200, { ok: true, updated: rows.length });
+    } catch (error) { await client.query('ROLLBACK'); throw error; }
+    finally { client.release(); }
+  }
   const variantSalePrice = path.match(/^\/api\/admin\/variants\/([^/]+)\/sale-price$/);
   if (variantSalePrice && req.method === 'PATCH') {
     const body = await readJson(req);
@@ -1803,10 +1845,8 @@ export async function handleApi(db, req, res, pathname) {
         priceCents: entry.price_confirmed ? price_override_cents ?? source_price_cents : null,
         referencePriceCents: entry.price_confirmed ? null : source_price_cents,
         sourcingAvailability: sourcing_availability,
-        availableForCart: entry.source_orderable && entry.availability !== 'unavailable' &&
-          sourcing_availability !== 'unavailable' &&
-          (sourcing_availability !== 'on_hand' || stock_quantity <= 0 ||
-            stock_quantity - reserved_quantity > 0),
+        saleStatus: entry.sale_status,
+        availableForCart: entry.sale_status !== 'unavailable',
         availability: entry.availability })) });
     }
     if (pathname === '/api/coupon/activate' && req.method === 'POST') {

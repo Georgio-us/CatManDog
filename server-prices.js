@@ -82,6 +82,7 @@ export function applyServerCatalog(products, catalogProducts, entries) {
       // Keep the stock record separate from checkout eligibility. An unconfirmed
       // price can block checkout without turning supplier stock into "sold out".
       sku.serverAvailabilityStatus = row.availability;
+      sku.saleStatus = row.saleStatus || row.sale_status || null;
       sku.serverSourcingAvailability = row.sourcingAvailability || null;
       sku.serverSourceOrderable = row.source_orderable === true;
       sku.serverAvailableForCart = row.availableForCart === true;
