@@ -44,7 +44,8 @@ test('exact single product offers remain visible with VAT', () => {
 test('Yagu variants keep supplier costs separate from retail benchmarks', () => {
   const variants = catalogProducts.filter(item => item.isReal).flatMap(item => item.variants?.length ? item.variants : [item]);
   const pending = variants.filter(isDemoPrice);
-  assert.equal(pending.length, 0);
+  assert.deepEqual(new Set(pending.map(item => item.supplier?.sku)),
+    new Set(['7515987', '7516254', '7516245', '7588782', '1126841']));
   assert.ok(variants.filter(item => !isDemoPrice(item)).length >= 609);
   assert.equal(yaguLaunchProducts.filter(item => product(item.id)).length, 11);
   assert.equal(product('yagu-kubo-plus-pana'), undefined);

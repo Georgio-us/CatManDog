@@ -8,6 +8,7 @@ import { heybopetProducts } from './heybopet-products.js?v=r2-media-1';
 import { treatsCareProducts } from './treats-care-products.js?v=r2-media-1';
 import { yaguProducts, expandYaguCare } from './yagu-products.js?v=r2-media-1';
 import { yaguLaunchProducts } from './yagu-launch-products.js';
+import { yaguExpansionProducts, expandYaguColourVariants } from './yagu-expansion-products.js';
 import { ownatProducts } from './ownat-products.js?v=r2-media-1';
 import { dogProducts } from './dog-products.js?v=r2-media-1';
 import { launchHeyboPetProducts } from './launch-heybopet-products.js';
@@ -15,7 +16,7 @@ import { applyChuruRetailFormats } from './churu-retail-formats.js';
 
 const foodProducts = [...expandPriorityFood(expandRoyalCaninFood(originalFoodProducts)), ...ownatProducts];
 
-export const categories = ["Корм", "Лакомства", "Наполнитель", "Игрушки и аксессуары", "Миски и поилки", "Переноски", "Окна и балконы", "Уход", "Подарочные наборы"];
+export const categories = ["Корм", "Лакомства", "Наполнитель", "Лотки", "Игрушки и аксессуары", "Миски и поилки", "Переноски", "Окна и балконы", "Уход", "Подарочные наборы"];
 
 const demoProducts = [
   {
@@ -406,7 +407,7 @@ const mergeCategory = product => {
 };
 // Kubo Plus has no comparable retail price yet, so its six variants stay out of the storefront.
 const yaguStorefrontProducts = yaguLaunchProducts.filter(product => product.id !== 'yagu-kubo-plus-pana');
-export const products = applyChuruRetailFormats(applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy([...foodProducts, ...dogProducts, ...expandYaguCare(treatsCareProducts), ...yaguProducts, ...yaguStorefrontProducts, ...catalogHeybopetProducts, ...launchHeyboPetProducts, ...demoProducts.map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)]).map(mergeCategory))));
+export const products = applyChuruRetailFormats(applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy([...foodProducts, ...dogProducts, ...expandYaguCare(treatsCareProducts), ...expandYaguColourVariants(yaguProducts), ...yaguStorefrontProducts, ...yaguExpansionProducts, ...catalogHeybopetProducts, ...launchHeyboPetProducts, ...demoProducts.map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)]).map(mergeCategory))));
 export const catalogProducts = products.filter(p => !p.catalogHidden);
 
 export { articles } from './journal-content.js';

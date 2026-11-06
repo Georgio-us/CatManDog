@@ -65,6 +65,7 @@ function catalogImagePath(value) {
   const path = cap(value, 500);
   if (path && !path.startsWith('/assets/') &&
       !path.startsWith('/media/churu-formats-2026-11-05/') &&
+      !path.startsWith('/media/yagu/') &&
       !path.startsWith('https://img.catmandog.es/'))
     bad('Для фото используйте адрес изображения CatManDog');
   return path;

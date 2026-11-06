@@ -6,7 +6,7 @@ function catalogImage(path, previousImages, alt) {
     catch { return null; }
   };
   const previous = previousImages.find(image => image?.src && imagePath(image.src) === imagePath(path));
-  const studioAsset = /\/(?:assets\/(?:launch-studio-[^/]+|[^/]+\/editorial)|media\/(?:launch-studio|churu-formats)-[^/]+)\//u.test(path);
+  const studioAsset = /\/(?:assets\/(?:launch-studio-[^/]+|[^/]+\/editorial)|media\/(?:launch-studio|churu-formats)-[^/]+|media\/yagu)\//u.test(path);
   return { ...(previous || {}), src: path, alt,
     presentation: studioAsset ? 'editorial' : previous?.presentation };
 }
