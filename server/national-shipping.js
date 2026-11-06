@@ -49,20 +49,15 @@ function cents(value) {
   return Number.isFinite(numeric) && numeric > 0 ? Math.round(numeric * 100) : null;
 }
 
-export function pricedShippingOptions(options, weightKg = null) {
+export function pricedShippingOptions(options) {
   return options.flatMap(option => {
     if (option.functionalities?.last_mile !== 'home_delivery') return [];
     const quoted = Array.isArray(option.quotes) ? option.quotes
-      .filter(quote => {
-        if (weightKg === null) return true;
-        const min = quote.weight?.min?.value == null ? NaN : Number(quote.weight.min.value);
-        const max = quote.weight?.max?.value == null ? NaN : Number(quote.weight.max.value);
-        return (!Number.isFinite(min) || weightKg >= min) &&
-          (!Number.isFinite(max) || weightKg <= max);
-      })
       .map(quote => cents(quote.price?.total ?? quote.price?.total_price))
       .filter(Number.isInteger) : [];
-    const priceCents = quoted.length ? Math.min(...quoted) : cents(option.quote?.total_price ?? option.quote?.price ??
+    // Sendcloud already selects the billable tier, including volumetric weight.
+    // If it returns several quotes, use the highest total to avoid undercharging.
+    const priceCents = quoted.length ? Math.max(...quoted) : cents(option.quote?.total_price ?? option.quote?.price ??
       option.total_price ?? option.price);
     const code = option.shipping_option_code || option.code || option.id;
     if (!priceCents || !code) return [];
@@ -77,7 +72,7 @@ export async function nationalShippingQuote({ postalCode, lines, variants, quote
   const measured = cartParcel(lines, variants);
   if (!measured.available) return measured;
   const options = pricedShippingOptions(await quoteOptions({ postalCode,
-    parcels: [measured.parcel] }), measured.quoteWeightKg);
+    parcels: [measured.parcel] }));
   if (!options.length) return { available: false, reason: 'no_carrier_quote',
     weightKg: measured.weightKg, quoteWeightKg: measured.quoteWeightKg };
   const selected = options[0];

@@ -41,13 +41,12 @@ test('only priced carrier options are accepted', () => {
     { code: 'pickup', functionalities: { last_mile:'service_point' },
       quotes: [{ price: { total: { value: '2', currency: 'EUR' } } }] }
   ]).map(option => [option.code, option.priceCents]), [['b', 540], ['a', 725]]);
-  assert.deepEqual(pricedShippingOptions([{ code: 'tiered',
-    functionalities: { last_mile:'home_delivery' }, quotes: [
-    { weight: { min: { value: '0' }, max: { value: '2' } },
-      price: { total: { value: '4.00', currency: 'EUR' } } },
-    { weight: { min: { value: '2' }, max: { value: '5' } },
-      price: { total: { value: '7.00', currency: 'EUR' } } }
-  ] }], 2.5)[0].priceCents, 700);
+  assert.deepEqual(pricedShippingOptions([{ code: 'volumetric',
+    functionalities: { last_mile:'home_delivery' },
+    parcel_billed_weights: [{ value:'4.001', volumetric:true }],
+    quotes: [{ weight: { min: { value:'4.001' }, max: { value:'5.001' } },
+      price: { total: { value:'6.31', currency:'EUR' } } }] }
+  ])[0].priceCents, 631);
 });
 
 test('national address and price require the carrier fee while Valencia rules remain intact', () => {
