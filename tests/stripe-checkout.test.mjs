@@ -39,7 +39,7 @@ test('Stripe session uses only server order total and an idempotency key', () =>
   assert.equal(request.params.get('line_items[1][price_data][product_data][name]'),
     'Envío a España peninsular');
   assert.equal(request.params.get('client_reference_id'), order.id);
-  assert.equal(request.params.get('payment_method_types[0]'), 'card');
+  assert.equal(request.params.has('payment_method_types[0]'), false);
   assert.match(request.params.get('success_url'), /checkout\/confirmation\?session_id=\{CHECKOUT_SESSION_ID\}/);
 }));
 

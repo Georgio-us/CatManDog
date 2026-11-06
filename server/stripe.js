@@ -47,8 +47,6 @@ export async function createStripeCheckout(order, language = 'es', fetcher = fet
     'payment_intent_data[metadata][order_id]': order.id,
     expires_at: String(Math.floor(Date.now() / 1000) + 3600)
   });
-  // Card payments are the launch default. Other methods can be enabled deliberately later.
-  params.append('payment_method_types[0]', 'card');
   let remainingDiscount = order.discount_cents;
   let charged = 0;
   let index = 0;
