@@ -81,7 +81,7 @@ export function availabilityScenarioDetail(product, helpers) {
           <button type="button" class="button" ${actionAttribute}>${escape(action)} ${status === 'unavailable' && !flowEnabled ? '' : icon(status === 'on_hand' ? 'bag' : 'arrow')}</button>
           <button type="button" class="icon-button favorite-detail ${favorites.includes(product.id) ? 'selected' : ''}" data-favorite="${escape(product.id)}" aria-label="В избранное" aria-pressed="${favorites.includes(product.id)}">${icon('heart')}</button></div>
         <p class="availability-preview-feedback" data-preview-feedback role="status" hidden></p>
-        <details open><summary>${language === 'es' ? 'Sobre este alimento' : 'О корме'}</summary><ul>${(selected.details || product.details || []).map(detail => `<li>${escape(detail)}</li>`).join('')}</ul></details>
+        <details class="customer-product-details"><summary>${language === 'es' ? 'Sobre este alimento' : 'О корме'}<span class="customer-details-chevron">${icon('arrow')}</span></summary><ul>${(selected.details || product.details || []).map(detail => `<li>${escape(detail)}</li>`).join('')}</ul></details>
       </div></div></div>${goodTogether(product)}`;
 }
 

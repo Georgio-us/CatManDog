@@ -1,11 +1,11 @@
-import { es, esPatterns } from './locales/es.js?v=coupon-qr-2';
+import { es, esPatterns } from './locales/es.js?v=customer-product-detail-1';
 import { esProductText } from './locales/product-es.js';
-import { esDetails } from './locales/details-es.js';
-import { uk, ukPatterns } from './locales/uk.js?v=coupon-qr-2';
+import { esDetails } from './locales/details-es.js?v=customer-product-detail-1';
+import { uk, ukPatterns } from './locales/uk.js?v=customer-product-detail-1';
 import { ukExtra } from './locales/uk-extra.js?v=ukrainian-public-2';
 import { ukProductNames } from './locales/uk-product-names.js';
 import { ukProductCopy } from './locales/uk-product-copy.js';
-import { ukDetails } from './locales/uk-details.js';
+import { ukDetails } from './locales/uk-details.js?v=customer-product-detail-1';
 import { churuFormatsEs, churuFormatsUk } from './locales/churu-formats.js';
 import { seoCategoryForPath } from './seo-categories.js';
 import { deliveryStatusEs, deliveryStatusUk } from './locales/delivery-status.js';

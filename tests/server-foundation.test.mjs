@@ -260,6 +260,20 @@ test('database image conversion keeps studio presentation only for the same asse
   assert.equal(products[0].variants[1].image.presentation, undefined);
 });
 
+test('database image conversion recognizes newly published studio assets', () => {
+  const products = [{ id: 'churu', variants: [{ id: 'churu-box' }] }];
+  const catalogProducts = [...products];
+  applyServerCatalog(products, catalogProducts, [{
+    product_id: 'churu', variant_id: 'churu-box', name: 'Churu', brand: 'Churu',
+    category: 'Лакомства', pet: 'cat', label: '20 тюбиков',
+    image_path: 'https://img.catmandog.es/assets/launch-studio-2026-11-04/churu-salmon-pollo-20x14g.webp',
+    variant_image_path: 'https://img.catmandog.es/assets/launch-studio-2026-11-04/churu-salmon-pollo-20x14g.webp',
+    price_confirmed: true, priceCents: 1449, availability: 'source_on_demand'
+  }]);
+  assert.equal(products[0].image.presentation, 'editorial');
+  assert.equal(products[0].variants[0].image.presentation, 'editorial');
+});
+
 test('storefront disables cart actions for reserved stock and supplier-disabled variants', () => {
   const products = [];
   const catalogProducts = [];

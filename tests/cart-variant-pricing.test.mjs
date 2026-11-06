@@ -19,7 +19,7 @@ test('catalogue range and selected variant use storefront prices', () => {
   assert.equal(matchesHomePrice(twoKgOnly, 28), false); // A lower competitor offer must not pass the storefront filter
 });
 
-test('product detail shows the chosen price and keeps researched offers separate', () => {
+test('product detail shows the chosen price without internal retail research', () => {
   globalThis.location = { hostname: 'localhost' };
   const html = accessoryDetail(family, {
     crumbs: () => '', imageBlock: () => '', escape: String, icon: () => '',
@@ -27,8 +27,23 @@ test('product detail shows the chosen price and keeps researched offers separate
   });
   assert.match(html, /Фасовка: 4 кг|Вес: 4 кг|Вариант: 4 кг/);
   assert.match(html, /<div class="detail-price">36\.31 €<\/div>/);
-  assert.match(html, /Precios observados en otras tiendas/);
+  assert.doesNotMatch(html, /Precios observados en otras tiendas|Цены в изученных магазинах|Карточка поставщика|Исходное фото/);
+  assert.match(html, /<details class="customer-product-details">/);
+  assert.doesNotMatch(html, /<details[^>]* open/);
   assert.doesNotMatch(html, /<div class="detail-price">36\.31 € - 36\.49 €<\/div>/);
+});
+
+test('Churu page keeps format information without supplier links or duplicated sections', () => {
+  const churu = catalogProducts.find(product => product.id === 'tc-4e50c58957');
+  const html = accessoryDetail(churu, {
+    crumbs: () => '', imageBlock: () => '', escape: String, icon: () => '<svg></svg>',
+    favorites: [], goodTogether: () => '', money: euro,
+    variantId: 'tc-4e50c58957-carton48'
+  });
+  assert.match(html, /В коробе 12 закрытых пачек/);
+  assert.match(html, /Транспортная коробка на изображении показана условно/);
+  assert.equal((html.match(/<details/g) || []).length, 1);
+  assert.doesNotMatch(html, /<details[^>]* open|Информация о товаре|Исходное фото|Источник товара|Карточка поставщика|Цены в изученных магазинах/);
 });
 
 test('Sterilised 37 keeps its retail price when supplier availability changes', () => {
@@ -56,7 +71,7 @@ test('Sterilised 37 keeps its retail price when supplier availability changes', 
   assert.match(unconfirmed, /<div class="detail-price">36\.31 €<\/div>/);
   assert.doesNotMatch(unconfirmed, /Демонстрационная цена/);
   assert.match(unconfirmed, /data-buy="rc-sterilised"[^>]*>Заказать с доставкой/);
-  assert.match(unconfirmed, /Цены в изученных магазинах|Precios observados en otras tiendas/);
+  assert.doesNotMatch(unconfirmed, /Цены в изученных магазинах|Precios observados en otras tiendas|Розничный ориентир/);
 });
 
 test('Sterilised 37 product-specific flow shows the four requested delivery states', () => {

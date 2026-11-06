@@ -1,9 +1,9 @@
 import { applyCatalogPolicy } from './catalog-policy.js';
 import { applyRetailUpdates } from './retail-updates.js?v=retail-coverage-1';
 import { applyProvisionalPrices } from './provisional-prices.js';
-import { foodProducts as originalFoodProducts } from './food-products.js?v=r2-media-1';
+import { foodProducts as originalFoodProducts } from './food-products.js?v=customer-product-detail-1';
 import { expandRoyalCaninFood } from './royal-canin-products.js?v=r2-media-1';
-import { expandPriorityFood } from './priority-food-products.js?v=r2-media-1';
+import { expandPriorityFood } from './priority-food-products.js?v=customer-product-detail-1';
 import { heybopetProducts } from './heybopet-products.js?v=r2-media-1';
 import { treatsCareProducts } from './treats-care-products.js?v=r2-media-1';
 import { yaguProducts, expandYaguCare } from './yagu-products.js?v=r2-media-1';
@@ -359,7 +359,7 @@ const demoProducts = [
     "details": [
       "Хэллоуин: мышка Cotton, Crunchy 60 г и бандана Pumpkin Mood",
       "Новый год: зайчик Sage, Pure 25 г и шапочка Little Elf",
-      "Подарочная упаковка и открытка включены; предзаказ пока демонстрационный"
+      "Подарочная упаковка и открытка включены; оформление набора пока недоступно"
     ],
     "optionLabel": "Праздник",
     "isNew": true,

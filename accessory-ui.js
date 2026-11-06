@@ -1,6 +1,15 @@
-import { hasSupplierTerms, supplierTermsDetail } from './supplier-terms.js';
-import { hasVariants, resolveVariant, storefrontPrice, isDemoPrice, canBuy } from './variants.js?v=delivery-status-3';
-import { retailResearch, retailResearchBlock, provisionalPriceBlock, provisionalPriceLabel } from './retail-research.js?v=delivery-status-3';
+import { hasVariants, resolveVariant, storefrontPrice, canBuy } from './variants.js?v=delivery-status-3';
+
+function customerDetails(details, translate, escape, category, icon) {
+  const useful = (details || []).filter(detail => {
+    const text = String(detail).trim();
+    return text && !/^Упаковка\s*:/iu.test(text) &&
+      !/^Для (кошек|собак)$/iu.test(text) &&
+      !/^Используйте по инструкции на упаковке производителя$/iu.test(text);
+  });
+  if (!useful.length) return '';
+  return `<details class="customer-product-details"><summary>${category === 'Корм' ? 'О корме' : 'О товаре'}<span class="customer-details-chevron">${icon('arrow')}</span></summary><ul>${useful.map(detail => `<li>${escape(translate(detail))}</li>`).join('')}</ul></details>`;
+}
 
 const availabilityCopy = {
   ru: {
@@ -51,15 +60,9 @@ export function accessoryDetail(product, helpers) {
   const state = customerAvailability(p);
   const allowed = canBuy(p) && state !== 'pending' && state !== 'unavailable';
   const requestable = p.saleStatus === 'unavailable';
-  const demo = isDemoPrice(p);
-  const research = retailResearch(p);
   const displayPrice = price === null ? 'Цена уточняется' : money(price);
   const variants = hasVariants(product) && product.variants.length > 1;
-  const sku = p.manufacturerSku || p.model || (hasSupplierTerms(product) ? null : p.supplier?.sku);
   const label = product.optionLabel || p.optionLabel || 'Вариант';
-  const source = (title,name,url) => url?.startsWith('research/supplier-files/') && !['localhost','127.0.0.1','[::1]'].includes(location.hostname) ? `<p>${escape(title)} - ${escape(name || '')}</p>` : url ? `<p><a class="text-link" href="${escape(url)}" target="_blank" rel="noopener noreferrer">${escape(title)} - ${escape(name || '')}</a></p>` : '';
-  const sourcingReview = hasSupplierTerms(product);
-  const availability = { pending:'Наличие уточняется', on_hand:'На складе', source_on_demand:'Под заказ', available:'Наличие указано в каталоге источника', 'in-stock':'Наличие указано в каталоге источника', unavailable:'Этот вариант сейчас недоступен', 'out-of-stock':'Этот вариант сейчас недоступен', outOfStock:'Этот вариант сейчас недоступен', discontinued:'Этот вариант снят с продажи' }[p.availabilityStatus] || 'Наличие уточняется';
   const optionMarkup = specialAvailability && variants
     ? product.variants.map(v => {
       const optionState = customerAvailability(v);
@@ -71,5 +74,7 @@ export function accessoryDetail(product, helpers) {
     ? `<div class="availability-selected availability-selected-${state}" role="status"><strong>${escape(t[state][0])}</strong><p>${escape(t[state][1])}</p></div>` : '';
   const buyable = specialAvailability ? allowed : canBuy(p) && state !== 'unavailable';
   const action = requestable ? t.request : specialAvailability ? (['on_hand','available'].includes(state) ? t.add : state === 'source_on_demand' ? t.order : t[state][0]) : (buyable ? 'Добавить в корзину' : 'Вариант недоступен');
-  return `<div class="page">${crumbs(product.name)}<div class="detail-grid">${imageBlock(p.image,'detail-image')}<div class="detail-copy"><span class="eyebrow">${escape(p.line || p.brand || '')}</span><h1>${escape(p.name || product.name)}</h1>${variants?`<p class="variant-current">${escape(label)}: ${escape(translate(p.label))}</p>`:''}<span class="detail-price-label">${variants?'Цена выбранного варианта':'Цена товара'}</span><div class="detail-price">${displayPrice}</div><p class="retail-note">${demo?'Цена уточняется':p.serverPriceConfirmed?'Цена с IVA':research?(p.retailPrice?.type==='recommended'?'Рекомендованная розничная цена':'Розничный ориентир'):provisionalPriceLabel(p)|| (p.retailPrice?.type==='recommended'?'Рекомендованная розничная цена':'Временная розничная цена')}${!research&&!demo&&p.packageWeightKg?` · ${money(price/p.packageWeightKg)} / кг`:''}${specialAvailability?'':`<br>${escape(availability)}`}</p><p>${escape(translate(p.description || ''))}</p><span class="size-label">${escape(label)}</span><div class="size-options variant-options ${specialAvailability?'availability-options':''}" aria-label="${escape(label)}">${optionMarkup}</div>${selectedAvailability}<div class="buy-row">${buyable?`<div class="quantity"><button data-detail-qty="-1" aria-label="Уменьшить количество">${icon('minus')}</button><span id="detail-qty">${quantity}</span><button data-detail-qty="1" aria-label="Увеличить количество">${icon('plus')}</button></div>`:''}<button class="button" ${buyable?`data-buy="${escape(product.id)}"`:requestable?`data-request-availability="${escape(p.id)}"`:'disabled'}>${escape(action)} ${buyable?icon(state === 'source_on_demand' && specialAvailability ? 'arrow' : 'bag'):requestable?icon('arrow'):''}</button><button class="icon-button favorite-detail ${favorites.includes(product.id)?'selected':''}" data-favorite="${escape(product.id)}" aria-label="В избранное" aria-pressed="${favorites.includes(product.id)}">${icon('heart')}</button></div>${specialAvailability&&demo?'':retailResearchBlock(p,{escape,money})}${specialAvailability&&demo?'':provisionalPriceBlock(p,{escape,money})}<details open><summary>${p.category==='Корм'?'О корме':'О товаре'}</summary><ul>${(p.details || []).map(d=>`<li>${escape(translate(d))}</li>`).join('')}</ul></details><details open><summary>Информация о товаре</summary><p>Бренд: ${escape(p.brand || '')}${sku?`<br>Артикул: ${escape(sku)}`:''}${!sourcingReview&&p.supplier?.sku&&p.supplier.sku!==sku?`<br>Артикул поставщика: ${escape(p.supplier.sku)}`:''}${p.ean?`<br>EAN: ${escape(p.ean)}`:''}${p.weight?`<br>Упаковка: ${escape(p.weight)}`:''}<br>${escape(specialAvailability?t[state][0]:availability)}</p>${sourcingReview?'':source('Карточка поставщика',p.supplier?.name,p.supplier?.url)+(p.productSource?.url===p.supplier?.url?'':source(['supplier','retailer'].includes(p.productSource?.kind)?'Источник товара':'Описание производителя',p.productSource?.name,p.productSource?.url))+source(p.image?.generated?'Исходное фото':'Источник фото',p.imageSource?.name,p.imageSource?.pageUrl)}${research||p.pricingBasis?'':source(demo?'Источник информации о цене':p.retailPrice?.type==='recommended'?'Рекомендованная розничная цена':'Розничный ориентир',p.retailPrice?.sourceName,p.retailPrice?.sourceUrl)}</details>${supplierTermsDetail(product,p,{escape,money})}</div></div></div>${goodTogether(product)}`;
+  const priceNote = price === null ? '' : `<p class="retail-note">Цена с IVA${p.packageWeightKg ? ` · ${money(price / p.packageWeightKg)} / кг` : ''}${specialAvailability ? '' : `<br>${escape(buyable ? 'Доступно к заказу' : t[state][0])}`}</p>`;
+  return `<div class="page">${crumbs(product.name)}<div class="detail-grid">${imageBlock(p.image,'detail-image')}<div class="detail-copy"><span class="eyebrow">${escape(p.line || p.brand || '')}</span><h1>${escape(p.name || product.name)}</h1>${variants?`<p class="variant-current">${escape(label)}: ${escape(translate(p.label))}</p>`:''}<span class="detail-price-label">${variants?'Цена выбранного варианта':'Цена товара'}</span><div class="detail-price">${displayPrice}</div>${priceNote}<p>${escape(translate(p.description || ''))}</p><span class="size-label">${escape(label)}</span><div class="size-options variant-options ${specialAvailability?'availability-options':''}" aria-label="${escape(label)}">${optionMarkup}</div>${selectedAvailability}<div class="buy-row">${buyable?`<div class="quantity"><button data-detail-qty="-1" aria-label="Уменьшить количество">${icon('minus')}</button><span id="detail-qty">${quantity}</span><button data-detail-qty="1" aria-label="Увеличить количество">${icon('plus')}</button></div>`:''}<button class="button" ${buyable?`data-buy="${escape(product.id)}"`:requestable?`data-request-availability="${escape(p.id)}"`:'disabled'}>${escape(action)} ${buyable?icon(state === 'source_on_demand' && specialAvailability ? 'arrow' : 'bag'):requestable?icon('arrow'):''}</button><button class="icon-button favorite-detail ${favorites.includes(product.id)?'selected':''}" data-favorite="${escape(product.id)}" aria-label="В избранное" aria-pressed="${favorites.includes(product.id)}">${icon('heart')}</button></div>${customerDetails(p.details, translate, escape, p.category, icon)}</div></div></div>${goodTogether(product)}`;
+
 }
