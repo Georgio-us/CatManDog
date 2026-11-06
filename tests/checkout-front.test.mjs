@@ -100,12 +100,75 @@ test('national checkout shows the approved customer delivery bands', () => {
       isReady:() => true, getPromo:() => null, applyPromo:() => {}, render:() => {} });
     ui.change({ name:'deliveryRegion', value:'national', form:{} });
     const html = ui.page();
-    assert.match(html, /Материковая Испания/);
+    assert.match(html, /Другой город/);
     assert.match(html, /До 49 € - 9,99 €, от 49 € - 3,99 €, от 99 € - бесплатно/);
     assert.doesNotMatch(html, /тариф по весу|условная коробка|без IVA/);
   } finally {
     globalThis.FormData = previousFormData;
   }
+});
+
+test('signed-in checkout pre-fills the saved address and saves updates only when selected', () => {
+  const previous = { FormData: globalThis.FormData, location: globalThis.location };
+  const slot = availableDeliverySlots(new Date())[0];
+  const values = { name: 'Ana', email: 'ana@example.es', phone: '+34 600 000 000',
+    deliveryRegion: 'local', city: 'València', postcode: '46001', street: 'Carrer de la Pau',
+    building: '12', apartment: '2', deliveryMode: 'slot',
+    deliverySlot: `${slot.date}|${slot.window}`, saveDetails: 'on' };
+  let saved = null;
+  globalThis.location = { hash: '' };
+  globalThis.FormData = class {
+    constructor(form) { this.values = form.values; }
+    entries() { return Object.entries(this.values)[Symbol.iterator](); }
+    has(name) { return Object.hasOwn(this.values, name); }
+  };
+  try {
+    const ui = createCheckoutUI({ escape: String, icon: () => '', money: value => `${value.toFixed(2)} €`,
+      imageBlock: () => '', getItems: () => [{ productId: 'rc', variantId: 'rc-400g',
+        name: 'Royal Canin', variant: '400 г', qty: 1, price: 5.09 }],
+      isReady: () => true, getPromo: () => null, applyPromo: () => {}, render: () => {},
+      getCheckoutProfile: () => ({ accountId: 'account-1', name: 'Ana', email: 'ana@example.es',
+        phone: '+34 600 000 000', deliveryRegion: 'local', postcode: '46001',
+        street: 'Carrer de la Pau', building: '12', apartment: '2' }),
+      saveCheckoutProfile: async profile => { saved = profile; } });
+    const html = ui.page();
+    assert.match(html, /name="email"[^>]*value="ana@example.es"/);
+    assert.match(html, /name="postcode"[^>]*value="46001"/);
+    assert.match(html, /name="saveDetails"/);
+    const form = { matches: selector => selector === '[data-checkout-form]', values,
+      querySelector: () => ({ textContent: '' }) };
+    ui.submit(form);
+    assert.equal(saved?.postcode, '46001');
+    saved = null;
+    delete values.saveDetails;
+    ui.submit(form);
+    assert.equal(saved, null);
+  } finally { Object.assign(globalThis, previous); }
+});
+
+test('signing in from checkout keeps the address already typed by the guest', () => {
+  const previousFormData = globalThis.FormData;
+  let account = null;
+  globalThis.FormData = class {
+    constructor(form) { this.values = form.values; }
+    entries() { return Object.entries(this.values)[Symbol.iterator](); }
+    has() { return false; }
+  };
+  try {
+    const ui = createCheckoutUI({ escape: String, icon: () => '', money: value => `${value.toFixed(2)} €`,
+      imageBlock: () => '', getItems: () => [{ productId: 'rc', variantId: 'rc-400g',
+        name: 'Royal Canin', variant: '400 г', qty: 1, price: 5.09 }],
+      isReady: () => true, getPromo: () => null, applyPromo: () => {}, render: () => {},
+      getCheckoutProfile: () => account });
+    ui.capture({ values: { deliveryRegion: 'national', city: 'Madrid', postcode: '28001',
+      name: 'Ana', email: 'ana@example.es', phone: '+34 600 000 000' } });
+    account = { accountId: 'account-1', deliveryRegion: 'local', city: 'València',
+      postcode: '46001', name: 'Saved user', email: 'saved@example.es' };
+    const html = ui.page();
+    assert.match(html, /name="city" value="Madrid"/);
+    assert.match(html, /name="postcode"[^>]*value="28001"/);
+    assert.match(html, /name="name"[^>]*value="Ana"/);
+  } finally { globalThis.FormData = previousFormData; }
 });
 
 test('live checkout presents the exact variant without creating a fictitious order', () => {
@@ -115,9 +178,11 @@ test('live checkout presents the exact variant without creating a fictitious ord
   const html = ui.page();
   assert.match(html, /4 кг · 2 шт × 36\.31 €/);
   assert.match(html, /72\.62 €/);
-  assert.match(html, /Доставка по материковой Испании/);
-  assert.match(html, /После проверки/);
-  assert.match(html, /name="city" value=""\s+required/);
+  assert.match(html, /value="local" checked/);
+  assert.match(html, /Удобный интервал · 3,99 €, бесплатно от 49 €/);
+  assert.match(html, /name="city" value="València"/);
+  assert.match(html, /Доставка по Валенсии/);
+  assert.match(html, /Бесплатно/);
   assert.match(html, /Приём заказов|Оплата станет доступна/);
   assert.doesNotMatch(html, /прототип|демонстрационный заказ/i);
   assert.match(ui.resultPage('accepted'), /Заказ не найден/);

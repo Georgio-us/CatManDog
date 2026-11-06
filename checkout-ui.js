@@ -1,13 +1,17 @@
 import { checkoutTotals, availableDeliverySlots, FREE_DELIVERY_FROM, DELIVERY_FEE, validateCheckout } from './checkout-model.js?v=shipping-policy-1';
-import { locale } from './locale.js?v=spain-delivery-1';
+import { locale } from './locale.js?v=checkout-address-1';
 
 export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems, isReady, getPromo, applyPromo,
-  refreshPromo = async () => {}, findOrder, productLabel, getCheckoutContext = () => ({}), render, onPaid }) {
-  let formValues = { deliveryRegion: 'national' };
+  refreshPromo = async () => {}, findOrder, productLabel, getCheckoutContext = () => ({}),
+  getCheckoutProfile = () => null, saveCheckoutProfile = async () => {}, render, onPaid }) {
+  let formValues = { deliveryRegion: 'local' };
+  let profileAccountId = null;
+  let draftTouched = false;
   let promoError = '';
   let preview = null;
   let servicePreview = null;
   let supportEnabled = false;
+  let accountsEnabled = false;
   let paymentsEnabled = false;
   let paymentError = '';
   let paymentReturn = null;
@@ -21,6 +25,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
       if (!response.ok) return;
       const config = await response.json();
       supportEnabled = config.supportEnabled === true;
+      accountsEnabled = config.accountsEnabled === true;
       paymentsEnabled = config.paymentsEnabled === true && config.ordersEnabled === true;
       if (/^#\/(support|returns|checkout)/.test(location.hash)) render();
     } catch { /* The local file preview has no API */ }
@@ -29,6 +34,19 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
   const cartSignature = items => JSON.stringify(items.map(item => [item.productId, item.variantId, item.qty, item.price]));
   const field = (name, fallback = '') => e(formValues[name] ?? fallback);
   const checked = name => formValues[name] ? 'checked' : '';
+  function syncProfile() {
+    const profile = getCheckoutProfile();
+    const accountId = profile?.accountId || null;
+    if (accountId !== profileAccountId) {
+      profileAccountId = accountId;
+      const { accountId: ignored, ...saved } = profile || {};
+      formValues = accountId
+        ? { deliveryRegion: 'local', ...saved, ...(draftTouched ? formValues : {}) }
+        : { deliveryRegion: 'local' };
+      if (!accountId) draftTouched = false;
+    }
+    return Boolean(profile);
+  }
   const purchaseTermsLink = () => locale() === 'es'
     ? '<a class="text-link" href="/purchase-terms-es.html">Condiciones de compra y devoluciones</a>'
     : locale() === 'uk'
@@ -51,12 +69,16 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
   };
 
   function page() {
+    const signedIn = syncProfile();
     const items = getItems();
     if (!items.length) return `<div class="page checkout-page"><h1>Оформление заказа</h1><p>Корзина пуста</p><a class="button" href="#/catalog">Выбрать товары ${icon('arrow')}</a></div>`;
     if (!isReady()) return `<div class="page checkout-page"><h1>Проверьте варианты в корзине</h1><p>Для оформления каждому товару нужна конкретная фасовка и цена</p><a class="button" href="#/cart">Вернуться в корзину ${icon('arrow')}</a></div>`;
     const context = getCheckoutContext();
     const promo = getPromo();
-    return `<div class="page checkout-page rc-flow-page live-order-page"><div class="checkout-head"><a class="text-link" href="#/cart">${icon('arrow')} Вернуться в корзину</a><span>${formValues.deliveryRegion === 'national' ? 'Доставка по материковой Испании' : 'Доставка по городу Валенсия'}</span></div>${progress(1)}<div class="rc-flow-heading"><h1>${context.group === 'stock' ? 'Доставка доступных товаров' : 'Оформление заказа'}</h1><p>${context.group === 'stock' ? 'Это первый из двух заказов. Товары под заказ останутся в корзине для отдельного оформления' : context.hasSupplier ? 'Товары под заказ доставим после поступления. Срок согласуем отдельно перед приёмом оплаты' : 'Укажите, куда привезти покупки. Перед оплатой покажем все данные ещё раз'}</p></div><div class="checkout-layout rc-flow-layout"><form id="checkout-form" class="checkout-form" data-checkout-form><section class="checkout-section"><div class="checkout-section-head"><span>01</span><div><h2>Как с вами связаться</h2><p>${paymentsEnabled ? 'Email нужен для связи по заказу; статус оплаты появится в кабинете' : 'Подтверждение заказа придёт на email после подключения отправки уведомлений'}</p></div></div><div class="checkout-fields"><label>Имя и фамилия<input name="name" required autocomplete="name" maxlength="100" value="${field('name')}" placeholder="Как к вам обращаться"></label><label>Email<input type="email" name="email" required autocomplete="email" maxlength="160" value="${field('email')}" placeholder="name@example.com"></label><label>Телефон<input type="tel" name="phone" required autocomplete="tel" minlength="6" maxlength="24" value="${field('phone')}" placeholder="+34 600 000 000"></label><label class="checkout-check"><input type="checkbox" name="whatsapp" ${checked('whatsapp')}><span>Можно связаться со мной в WhatsApp по этому номеру</span></label></div></section><section class="checkout-section"><div class="checkout-section-head"><span>02</span><div><h2>Куда доставить</h2><p>Выберите способ доставки для вашего адреса</p></div></div><div class="checkout-delivery-options"><label class="checkout-choice"><input type="radio" name="deliveryRegion" value="national" ${formValues.deliveryRegion === 'national' ? 'checked' : ''}><span><strong>Материковая Испания</strong><small>Отправка перевозчиком</small></span></label><label class="checkout-choice"><input type="radio" name="deliveryRegion" value="local" ${formValues.deliveryRegion === 'local' ? 'checked' : ''}><span><strong>Валенсия</strong><small>Доставка лично в выбранный интервал</small></span></label></div><div class="checkout-fields"><label>Город<input name="city" value="${field('city', formValues.deliveryRegion === 'national' ? '' : 'València')}" ${formValues.deliveryRegion === 'national' ? '' : 'readonly'} required autocomplete="address-level2"></label><label>Почтовый индекс<input name="postcode" required inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code" value="${field('postcode')}" placeholder="${formValues.deliveryRegion === 'national' ? '28001' : '46001'}"></label><label class="checkout-wide">Улица<input name="street" required autocomplete="address-line1" maxlength="120" value="${field('street')}" placeholder="Название улицы"></label><label>Номер дома<input name="building" required maxlength="16" value="${field('building')}" placeholder="12"></label><label>Квартира, этаж, дверь <small>Если есть</small><input name="apartment" autocomplete="address-line2" maxlength="80" value="${field('apartment')}" placeholder="2 этаж, дверь 4"></label><label class="checkout-wide">Комментарий для доставки <small>Необязательно</small><textarea name="note" rows="2" maxlength="300" placeholder="Код домофона или удобный вход">${field('note')}</textarea></label></div><p class="checkout-help">${formValues.deliveryRegion === 'national' ? 'Доставка: 9,99 € до 49 €, 3,99 € от 49 €, бесплатно от 99 €' : paymentsEnabled ? 'Проверьте адрес: доставку по Валенсии подтвердим после оформления' : 'Адрес пока не проверяется по карте. Точную зону доставки подтвердим после подключения сервера.'}</p></section>${deliveryStep(context)}<section class="checkout-section"><div class="checkout-section-head"><span>04</span><div><h2>Скидка и оплата</h2><p>${paymentsEnabled ? 'После проверки заказа перейдёте на защищённую страницу Stripe' : 'Онлайн-оплата появится после подключения Stripe'}</p></div></div><div class="checkout-promo"><label>Промокод<input name="promoCode" value="${field('promoCode', promo?.code || '')}" maxlength="40" placeholder="Введите код"></label><button type="button" class="button outline" data-checkout-promo>Применить</button></div>${promoError ? `<p class="checkout-error" role="alert">${e(promoError)}</p>` : ''}<div class="checkout-payment">${icon('shield')} <span>${paymentsEnabled ? 'Оплата картой через Stripe. Данные карты вводятся только на защищённой странице Stripe' : 'Карта онлайн - подключим перед приёмом заказов. Данные карты здесь не вводятся.'}</span></div></section><p class="checkout-help">${purchaseTermsLink()}</p><p class="checkout-error" data-checkout-error role="alert"></p><button class="button checkout-next" type="submit">Проверить данные ${icon('arrow')}</button><p class="checkout-help">${paymentsEnabled ? 'На следующем шаге проверьте заказ и перейдите к оплате' : 'На следующем шаге проверьте данные. Оплата станет доступна после включения приёма заказов.'}</p></form>${summary(items, promo)}</div><div class="checkout-after"><a href="#/support">Нужна помощь с заказом ${icon('arrow')}</a><a href="#/returns">Как оформить возврат ${icon('arrow')}</a></div></div>`;
+    const saveControls = signedIn
+      ? `<label class="checkout-check checkout-save-details"><input type="checkbox" name="saveDetails" ${checked('saveDetails')}><span>Сохранить контакты и адрес в аккаунте для следующего заказа</span></label>`
+      : accountsEnabled ? '<p class="checkout-account-note">Можно оформить без регистрации. Для сохранения адреса на будущее: <a class="text-link" href="#/account/login?return=checkout">Войти</a> или <a class="text-link" href="#/account/register?return=checkout">Создать аккаунт</a></p>' : '';
+    return `<div class="page checkout-page rc-flow-page live-order-page"><div class="checkout-head"><a class="text-link" href="#/cart">${icon('arrow')} Вернуться в корзину</a><span>${formValues.deliveryRegion === 'national' ? 'Доставка по материковой Испании' : 'Доставка по городу Валенсия'}</span></div>${progress(1)}<div class="rc-flow-heading"><h1>${context.group === 'stock' ? 'Доставка доступных товаров' : 'Оформление заказа'}</h1><p>${context.group === 'stock' ? 'Это первый из двух заказов. Товары под заказ останутся в корзине для отдельного оформления' : context.hasSupplier ? 'Товары под заказ доставим после поступления. Срок согласуем отдельно перед приёмом оплаты' : 'Укажите, куда привезти покупки. Перед оплатой покажем все данные ещё раз'}</p></div><div class="checkout-layout rc-flow-layout"><form id="checkout-form" class="checkout-form" data-checkout-form><section class="checkout-section"><div class="checkout-section-head"><span>01</span><div><h2>Как с вами связаться</h2><p>${paymentsEnabled ? 'Email нужен для связи по заказу; статус оплаты появится в кабинете' : 'Подтверждение заказа придёт на email после подключения отправки уведомлений'}</p></div></div><div class="checkout-fields"><label>Имя и фамилия<input name="name" required autocomplete="name" maxlength="100" value="${field('name')}" placeholder="Как к вам обращаться"></label><label>Email<input type="email" name="email" required autocomplete="email" maxlength="160" value="${field('email')}" placeholder="name@example.com"></label><label>Телефон<input type="tel" name="phone" required autocomplete="tel" minlength="6" maxlength="24" value="${field('phone')}" placeholder="+34 600 000 000"></label><label class="checkout-check"><input type="checkbox" name="whatsapp" ${checked('whatsapp')}><span>Можно связаться со мной в WhatsApp по этому номеру</span></label></div></section><section class="checkout-section"><div class="checkout-section-head"><span>02</span><div><h2>Куда доставить</h2><p>Выберите способ доставки для вашего адреса</p></div></div><div class="checkout-delivery-options"><label class="checkout-choice"><input type="radio" name="deliveryRegion" value="local" ${formValues.deliveryRegion === 'local' ? 'checked' : ''}><span><strong>Валенсия</strong><small>Удобный интервал · 3,99 €, бесплатно от 49 €</small></span></label><label class="checkout-choice"><input type="radio" name="deliveryRegion" value="national" ${formValues.deliveryRegion === 'national' ? 'checked' : ''}><span><strong>Другой город</strong><small>Отправка по материковой Испании</small></span></label></div><div class="checkout-fields"><label>Город${formValues.deliveryRegion === 'national' ? `<input name="city" value="${field('city')}" required autocomplete="address-level2" placeholder="Например, Madrid">` : `<span class="checkout-city-fixed">València</span><input type="hidden" name="city" value="València">`}</label><label>Почтовый индекс<input name="postcode" required inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code" value="${field('postcode')}" placeholder="${formValues.deliveryRegion === 'national' ? '28001' : '46001'}"></label><label class="checkout-wide">Улица<input name="street" required autocomplete="address-line1" maxlength="120" value="${field('street')}" placeholder="Название улицы"></label><label>Номер дома<input name="building" required maxlength="16" value="${field('building')}" placeholder="12"></label><label>Квартира, этаж, дверь <small>Если есть</small><input name="apartment" autocomplete="address-line2" maxlength="80" value="${field('apartment')}" placeholder="2 этаж, дверь 4"></label><label class="checkout-wide">Комментарий для доставки <small>Необязательно</small><textarea name="note" rows="2" maxlength="300" placeholder="Код домофона или удобный вход">${field('note')}</textarea></label></div>${saveControls}<p class="checkout-help">${formValues.deliveryRegion === 'national' ? 'Доставка: 9,99 € до 49 €, 3,99 € от 49 €, бесплатно от 99 €' : paymentsEnabled ? 'Проверьте адрес: доставку по Валенсии подтвердим после оформления' : 'Адрес пока не проверяется по карте. Точную зону доставки подтвердим после подключения сервера.'}</p></section>${deliveryStep(context)}<section class="checkout-section"><div class="checkout-section-head"><span>04</span><div><h2>Скидка и оплата</h2><p>${paymentsEnabled ? 'После проверки заказа перейдёте на защищённую страницу Stripe' : 'Онлайн-оплата появится после подключения Stripe'}</p></div></div><div class="checkout-promo"><label>Промокод<input name="promoCode" value="${field('promoCode', promo?.code || '')}" maxlength="40" placeholder="Введите код"></label><button type="button" class="button outline" data-checkout-promo>Применить</button></div>${promoError ? `<p class="checkout-error" role="alert">${e(promoError)}</p>` : ''}<div class="checkout-payment">${icon('shield')} <span>${paymentsEnabled ? 'Оплата картой через Stripe. Данные карты вводятся только на защищённой странице Stripe' : 'Карта онлайн - подключим перед приёмом заказов. Данные карты здесь не вводятся.'}</span></div></section><p class="checkout-help">${purchaseTermsLink()}</p><p class="checkout-error" data-checkout-error role="alert"></p><button class="button checkout-next" type="submit">Проверить данные ${icon('arrow')}</button><p class="checkout-help">${paymentsEnabled ? 'На следующем шаге проверьте заказ и перейдите к оплате' : 'На следующем шаге проверьте данные. Оплата станет доступна после включения приёма заказов.'}</p></form>${summary(items, promo)}</div><div class="checkout-after"><a href="#/support">Нужна помощь с заказом ${icon('arrow')}</a><a href="#/returns">Как оформить возврат ${icon('arrow')}</a></div></div>`;
   }
 
   function previewPage() {
@@ -126,11 +148,16 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
   }
 
   function remember(form) {
-    const values = Object.fromEntries(new FormData(form).entries());
-    values.whatsapp = new FormData(form).has('whatsapp');
+    const formData = new FormData(form);
+    const values = Object.fromEntries(formData.entries());
+    values.whatsapp = formData.has('whatsapp');
+    values.saveDetails = formData.has('saveDetails');
     formValues = values;
+    draftTouched = true;
     return values;
   }
+
+  function capture(form) { if (form) remember(form); }
 
   async function startPayment(button) {
     if (!paymentsEnabled || getCheckoutContext().pricesConfirmed === false ||
@@ -285,6 +312,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
       if (error) { form.querySelector('[data-checkout-error]').textContent = error; return; }
       const items = getItems();
       if (!items.length || !isReady()) { form.querySelector('[data-checkout-error]').textContent = 'Проверьте товары и варианты в корзине'; return; }
+      if (values.saveDetails) void saveCheckoutProfile(values).catch(() => {});
       if (values.deliveryMode === 'national') {
         form.querySelector('[data-checkout-error]').textContent = 'Рассчитываем доставку по Испании';
         const lines = items.map(item => ({ productId: item.productId, variantId: item.variantId, qty: item.qty }));
@@ -331,6 +359,6 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     document.getElementById('service-preview')?.remove();
   }
 
-  return { page, previewPage, resultPage, servicePage, click, change, submit,
+  return { page, previewPage, resultPage, servicePage, click, change, submit, capture,
     initialize, invalidateService, isSupportEnabled: () => supportEnabled };
 }

@@ -1,5 +1,5 @@
 import { createUsefulUI } from './useful.js?v=ukrainian-public-3';
-import { createAccountUI } from './account.js?v=delivery-status-4';
+import { createAccountUI } from './account.js?v=checkout-address-1';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=delivery-status-3';
 import { accessoryDetail } from './accessory-ui.js?v=spain-delivery-1';
 import { availabilityScenarioDetail, availabilityScenarioFeedback } from './availability-scenario.js?v=spain-delivery-1';
@@ -9,13 +9,13 @@ import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
 import { categories, products, catalogProducts, articles } from './data.js?v=customer-product-detail-1';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=customer-product-detail-1';
-import { createCheckoutUI } from './checkout-ui.js?v=spain-delivery-1';
+import { createCheckoutUI } from './checkout-ui.js?v=checkout-address-1';
 import { availabilityRequestPage } from './availability-request-ui.js';
 import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=customer-product-detail-1';
 
 import { homeDirections, activeHomeLanding } from './collections.js?v=cat-assortment-1';
-import { installLocale, intlLocale, locale, translate } from './locale.js?v=spain-delivery-1';
+import { installLocale, intlLocale, locale, translate } from './locale.js?v=checkout-address-1';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
@@ -61,6 +61,8 @@ const checkoutPromo = () => account.promo();
 const useful = createUsefulUI({ escape, icon, store: account.store, render, notify, syncChanges: account.syncChanges });
 const checkout = createCheckoutUI({
   escape, icon, money, imageBlock, render,
+  getCheckoutProfile: () => account.checkoutProfile(),
+  saveCheckoutProfile: values => account.saveCheckoutProfile(values),
   onPaid: paidItems => {
     account.couponPaid();
     void account.refreshPromo().then(render).catch(() => {});
@@ -380,6 +382,7 @@ function updateGiftDetail(){
   document.querySelector('#gift-buy').innerHTML=(offer.preorder?'Предзаказать набор':'Добавить набор')+' '+icon('bag');
   document.querySelector('#gift-order-note').textContent=offer.preorder?'Предзаказ подарочного набора пока недоступен. Дату отправки сообщим при запуске':'Упаковка входит в цену. Оформление заказов пока недоступно';
 }
+app.addEventListener('click',event=>{const link=event.target.closest('a[href^="#/account/"]');if(link)checkout.capture(link.closest('[data-checkout-form]'));});
 app.addEventListener('click',event=>{const button=event.target.closest('button');if(!button)return;if(rcFlow.click(button,detailQuantity))return;account.click(button);useful.click(button);if(button.hasAttribute('data-configure'))location.hash='/product/'+button.dataset.configure;if(button.hasAttribute('data-gift-season')){giftState=normalizeGift({...giftState,season:button.dataset.giftSeason});updateGiftDetail();}if(button.hasAttribute('data-gift-preset')){giftState=applyGiftPreset(giftState,button.dataset.giftPreset);updateGiftDetail();}if(button.hasAttribute('data-gift-buy'))add(button.dataset.giftBuy,null,detailQuantity,giftState);if(button.hasAttribute('data-add'))add(button.dataset.add);if(button.hasAttribute('data-buy'))add(button.dataset.buy,selectedSize,detailQuantity,undefined,selectedVariantId);if(button.hasAttribute('data-variant'))selectVariant(button.dataset.variant);if(button.hasAttribute('data-favorite')){const id=button.dataset.favorite;favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];persist();if(route().path==='/favorites'){render();return;}document.querySelectorAll(`[data-favorite="${id}"]`).forEach(b=>{b.classList.toggle('selected',favorites.includes(id));b.setAttribute('aria-pressed',String(favorites.includes(id)));b.setAttribute('aria-label',`${favorites.includes(id)?'Убрать из избранного':'В избранное'}: ${products.find(p=>p.id===id).name}`);});notify(favorites.includes(id)?'Сохранено в избранном':'Удалено из избранного');}if(button.hasAttribute('data-home-more')){homeVisible+=8;refreshHomeCatalog('data-home-more','');}if(button.hasAttribute('data-food-type'))setParam('foodType',button.dataset.foodType);if(button.hasAttribute('data-pet'))setParam('pet',button.dataset.pet);if(button.hasAttribute('data-category'))setParam('category',button.dataset.category);if(button.hasAttribute('data-reset')){priceLimit=catalogPriceMax;location.hash='/catalog';render();}if(button.hasAttribute('data-size')){selectedSize=button.dataset.size;document.querySelectorAll('[data-size]').forEach(b=>{b.classList.toggle('active',b===button);b.setAttribute('aria-pressed',String(b===button));});}if(button.hasAttribute('data-detail-qty')){detailQuantity=Math.max(1,Math.min(99,detailQuantity+Number(button.dataset.detailQty)));document.querySelector('#detail-qty').textContent=detailQuantity;}if(button.hasAttribute('data-cart-qty')){const i=Number(button.dataset.cartQty);cart[i].qty+=Number(button.dataset.delta);if(cart[i].qty<1)cart.splice(i,1);else cart[i].qty=Math.min(99,cart[i].qty);persist();render();}if(button.hasAttribute('data-remove')){cart.splice(Number(button.dataset.remove),1);persist();render();notify('Товар удалён из корзины');}if(button.hasAttribute('data-journal-category')){journalCategory=button.dataset.journalCategory;render();}if(button.id==='checkout'&&!button.disabled){checkoutGroup=button.dataset.liveCheckoutGroup==='stock'?'stock':'all';try{sessionStorage.setItem('catmandog-checkout-group',checkoutGroup);}catch{}announceCommerce('begin_checkout',checkoutCart().map(item=>{const product=products.find(p=>p.id===(item.productId||item.id));return analyticsItem(product,cartSku(item,products),item.qty);}));location.hash='/checkout';}});
 app.addEventListener('click',event=>{const button=event.target.closest('[data-preview-action]');if(!button)return;const feedback=document.querySelector('[data-preview-feedback]');if(!feedback)return;feedback.textContent=availabilityScenarioFeedback(locale());feedback.hidden=false;});
 app.addEventListener('change',event=>{rcFlow.update(event.target);if(event.target.hasAttribute('data-gift-choice')){const field=event.target.dataset.giftChoice;giftState=normalizeGift({...giftState,[field]:event.target.value,...(field==='accessorySize'?{}:{preset:'custom'})});updateGiftDetail();document.querySelector(`[data-gift-choice="${field}"]`)?.focus();}if(event.target.id==='sort')setParam('sort',event.target.value);});

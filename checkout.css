@@ -16,6 +16,10 @@
 .checkout-fields label small { font-size: 11px; color: var(--muted); font-weight: 400; }
 .checkout-fields input:not([type="checkbox"]):not([type="file"]), .checkout-fields select, .checkout-fields textarea, .checkout-schedule input, .checkout-promo input { width: 100%; min-width: 0; border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; background: #fff; color: var(--ink); font: inherit; outline-offset: 2px; }
 .checkout-fields input[readonly]:not([type="checkbox"]):not([type="file"]) { background: var(--surface); }
+.checkout-city-fixed { display: flex; align-items: center; min-height: 48px; border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; background: var(--surface); color: var(--ink); font-weight: 650; }
+.checkout-save-details { margin-top: 20px; }
+.checkout-account-note { margin: 20px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.checkout-account-note .text-link { color: var(--ink); }
 .checkout-fields textarea { resize: none; min-height: 140px; }
 .checkout-fields input[type="file"] { max-width: 100%; font: inherit; color: var(--muted); font-weight: 400; }
 .checkout-fields input[type="file"]::file-selector-button { margin-right: 12px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 99px; background: var(--surface); color: var(--ink); font: inherit; font-weight: 650; cursor: pointer; }
@@ -27,7 +31,7 @@
 .checkout-check input { width: 18px; height: 18px; accent-color: var(--ink); flex: none; margin: 1px 0 0; }
 .checkout-delivery-options { display: grid; gap: 10px; }
 .checkout-choice { display: flex; align-items: flex-start; gap: 12px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px; cursor: pointer; }
-.checkout-choice:has(input:checked) { border-color: var(--ink); background: #f9faef; }
+.checkout-choice:has(input:checked) { border-color: var(--ink); background: #f1fad0; box-shadow: inset 4px 0 0 var(--lime); }
 .checkout-choice input { flex: none; accent-color: var(--ink); margin: 5px 0 0; }
 .checkout-choice span { display: grid; gap: 2px; }
 .checkout-choice small { color: var(--muted); font-size: 12px; }

@@ -21,6 +21,20 @@ test('cabinet input cannot inject orders and keeps plans scoped to a saved pet',
   assert.throws(() => normalizeCabinet({ pets: [{ id: 'not-uuid', name: 'Лео', species: 'cat' }] }));
 });
 
+test('saved checkout address is limited to contact and delivery fields', () => {
+  const result = normalizeCabinet({ pets: [], human: { checkout: {
+    name: 'Ana', email: 'ana@example.es', phone: '+34 600 000 000', whatsapp: true,
+    deliveryRegion: 'national', city: 'Madrid', postcode: '28001',
+    street: 'Gran Vía', building: '12', apartment: '2',
+    paymentCard: 'should never be saved', orderStatus: 'paid'
+  } } });
+  assert.deepEqual(result.data.human.checkout, {
+    name: 'Ana', email: 'ana@example.es', phone: '+34 600 000 000', whatsapp: true,
+    deliveryRegion: 'national', city: 'Madrid', postcode: '28001',
+    street: 'Gran Vía', building: '12', apartment: '2'
+  });
+});
+
 test('signed-in profile loads from API and saves without writing it to browser storage', async () => {
   const previous = { fetch: globalThis.fetch, localStorage: globalThis.localStorage,
     location: globalThis.location };
@@ -52,6 +66,12 @@ test('signed-in profile loads from API and saves without writing it to browser s
     await ui.syncChanges();
     assert.equal(writes[0].revision, 0);
     assert.equal(writes[0].cabinet.pets[0].name, 'Лео.');
+    assert.equal(entries.has('catmandog-pet-account-v1'), false);
+    await ui.saveCheckoutProfile({ name:'Ana', email:'ana@example.es', phone:'+34 600 000 000',
+      deliveryRegion:'national', city:'Madrid', postcode:'28001', street:'Gran Vía',
+      building:'12', apartment:'2' });
+    assert.equal(writes[1].cabinet.human.checkout.postcode, '28001');
+    assert.equal(ui.checkoutProfile().city, 'Madrid');
     assert.equal(entries.has('catmandog-pet-account-v1'), false);
   } finally {
     globalThis.fetch = previous.fetch;

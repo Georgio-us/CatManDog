@@ -39,6 +39,12 @@ test('account email uses the public HTTPS domain and an individual one-time link
     }, 'es', 'pet');
     assert.match(JSON.parse(sent.options.body).text,
       /https:\/\/catmandog\.es\/#\/account\/reset\?token=reset-pet-token&return=pet/);
+    await sendAccountLink('pet@example.test', 'verify', 'checkout-token', async (url, options) => {
+      sent = { url, options };
+      return { ok: true };
+    }, 'es', 'checkout');
+    assert.match(JSON.parse(sent.options.body).text,
+      /https:\/\/catmandog\.es\/#\/account\/verify\?token=checkout-token&return=checkout/);
     process.env.PUBLIC_BASE_URL = 'http://catmandog.es/';
     assert.equal(emailReady(), false);
   } finally {

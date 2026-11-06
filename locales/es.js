@@ -1,6 +1,15 @@
 // Spanish copy is written and reviewed here. Russian remains the source language
 // for internal category IDs, routes and saved customer data.
 export const es = {
+  'Удобный интервал · 3,99 €, бесплатно от 49 €': 'Franja a elegir · 3,99 €, gratis desde 49 €',
+  'Другой город': 'Otra ciudad',
+  'Отправка по материковой Испании': 'Envío a la España peninsular',
+  'Например, Madrid': 'Por ejemplo, Madrid',
+  'Сохранить контакты и адрес в аккаунте для следующего заказа': 'Guardar mis datos y dirección en la cuenta para el próximo pedido',
+  'Можно оформить без регистрации. Для сохранения адреса на будущее:': 'Puedes comprar sin registrarte. Para guardar tu dirección para futuras compras:',
+  'Создайте аккаунт, чтобы сохранить адрес для следующих покупок': 'Crea una cuenta para guardar tu dirección para futuras compras',
+  'Войдите, чтобы использовать сохранённый адрес': 'Inicia sesión para usar tu dirección guardada',
+  'Продолжить без регистрации': 'Continuar sin registrarte',
   'Где доставляем': 'Dónde entregamos',
   'Доставляем по городу Валенсия и отправляем заказы по материковой Испании. Способ и итоговую стоимость доставки покажем при оформлении заказа.': 'Entregamos en la ciudad de València y enviamos pedidos a la España peninsular. Verás la modalidad y el coste final del envío al realizar el pedido.',
   'Доставка стоит 3,99 € при сумме товаров после скидки меньше 49 €. От 49 € доставка бесплатная. Купон на доставку может сделать её бесплатной и для меньшего заказа.': 'En València, la entrega cuesta 3,99 € si el importe de los productos después del descuento es inferior a 49 €. A partir de 49 € es gratuita. Un cupón de envío puede hacerla gratuita también para pedidos de menor importe.',

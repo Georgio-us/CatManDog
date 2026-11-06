@@ -54,7 +54,7 @@ export async function sendServiceReply(to, requestId, message, fetcher = fetch, 
 export async function sendAccountLink(to, kind, token, fetcher = fetch, language = 'ru', returnTo = '') {
   if (!emailReady()) throw new Error('Почтовая отправка не настроена');
   const base = new URL(process.env.PUBLIC_BASE_URL);
-  base.hash = `/account/${kind === 'verify' ? 'verify' : 'reset'}?token=${token}${returnTo === 'pet' ? '&return=pet' : ''}`;
+  base.hash = `/account/${kind === 'verify' ? 'verify' : 'reset'}?token=${token}${['pet', 'checkout'].includes(returnTo) ? '&return=' + returnTo : ''}`;
   const url = base.toString();
   const spanish = language === 'es';
   const ukrainian = language === 'uk';

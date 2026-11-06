@@ -99,7 +99,8 @@ async function issueAccountLink(db, customerId, kind, email, language = 'ru', pr
     VALUES($1,$2,$3,$4,now()+($5::integer * interval '1 minute'),$6)`,
   [randomUUID(), customerId, kind, tokenDigest(token), kind === 'verify' ? 1440 : 30,
     kind === 'verify' ? cap(promoCode, 40) || null : null]);
-  await sendAccountLink(email, kind, token, fetch, language, returnTo === 'pet' ? 'pet' : '');
+  await sendAccountLink(email, kind, token, fetch, language,
+    ['pet', 'checkout'].includes(returnTo) ? returnTo : '');
 }
 
 function rateLimit(req, group, limit, minutes = 15) {

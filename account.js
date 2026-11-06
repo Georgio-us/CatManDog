@@ -2,7 +2,7 @@ import { createAccountStore } from './account-store.js?v=delivery-status-4';
 import { createAccountApi } from './account-api.js?v=coupon-qr-1';
 import { accountTools } from './useful.js?v=ukrainian-public-3';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
-import { intlLocale, locale } from './locale.js?v=coupon-qr-2';
+import { intlLocale, locale } from './locale.js?v=checkout-address-1';
 const store = createAccountStore(localStorage);
 const api = createAccountApi();
 
@@ -63,7 +63,9 @@ export function createAccountUI(helpers) {
   const pendingPromoKey = 'catmandog-pending-promo';
   const petCardIntent = () => location.pathname === '/pet' || location.hash?.startsWith('#/pet') ||
     new URLSearchParams((location.hash || '').split('?')[1] || '').get('return') === 'pet';
-  const afterSignIn = hadCoupon => petCardIntent() ? '/pet' : hadCoupon ? '/coupon' : '/account';
+  const checkoutIntent = () => new URLSearchParams((location.hash || '').split('?')[1] || '').get('return') === 'checkout';
+  const authReturn = () => petCardIntent() ? '?return=pet' : checkoutIntent() ? '?return=checkout' : '';
+  const afterSignIn = hadCoupon => petCardIntent() ? '/pet' : checkoutIntent() ? '/checkout' : hadCoupon ? '/coupon' : '/account';
   function rememberPromo(code) {
     try { localStorage.setItem(pendingPromoKey, JSON.stringify({ code: String(code).trim().slice(0, 40), at: Date.now() })); }
     catch { /* Storage unavailable */ }
@@ -156,7 +158,7 @@ export function createAccountUI(helpers) {
         message.textContent = error.message;
         if (error.status === 409 && mode === 'signin') {
           const link = document.createElement('a');
-          link.href = '#/account/login' + (petCardIntent() ? '?return=pet' : '');
+          link.href = '#/account/login' + authReturn();
           link.className = 'text-link';
           link.textContent = 'Войти по паролю';
           message.append(' ', link);
@@ -262,15 +264,15 @@ export function createAccountUI(helpers) {
     const title = registering ? 'Создать аккаунт' : recovering ? 'Восстановить пароль' : resetting ? 'Новый пароль' : checking ? 'Проверьте почту' : verifying ? 'Подтверждаем email' : 'Войти в кабинет';
     const params = new URLSearchParams(location.hash.split('?')[1] || '');
     const token = params.get('token') || '';
-    const authReturn = petCardIntent() ? '?return=pet' : '';
+    const returnQuery = authReturn();
     const emailForm = `<form class="pet-panel pet-form" data-account-form="${checking && pendingLinkKind === 'verify' ? 'resend-verification' : 'recover'}"><label class="pet-field">${checking ? 'Проверить или исправить email' : 'Email'}<input type="email" name="email" required maxlength="160" autocomplete="email" value="${e(pendingEmail)}"></label><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit" ${accountsEnabled && emailEnabled ? '' : 'disabled'}>${checking ? 'Отправить ссылку ещё раз' : 'Получить ссылку'} ${icon('arrow')}</button></form>`;
     const passwordForm = `<form class="pet-panel pet-form" data-account-form="reset"><input type="hidden" name="token" value="${e(token)}"><label class="pet-field">Новый пароль<input type="password" name="password" required minlength="12" maxlength="200" autocomplete="new-password"></label><label class="pet-field">Повторите пароль<input type="password" name="passwordConfirm" required minlength="12" maxlength="200" autocomplete="new-password"></label><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit" ${token && accountsEnabled ? '' : 'disabled'}>Сохранить пароль ${icon('arrow')}</button></form>`;
     const authForm = `<form class="pet-panel pet-form" data-account-form="${registering ? 'register' : 'login'}">${registering ? '<label class="pet-field">Ваше имя<input name="name" maxlength="100" autocomplete="name"></label>' : ''}<label class="pet-field">Email<input type="email" name="email" required maxlength="160" autocomplete="email"></label><label class="pet-field">Пароль<input type="password" name="password" required minlength="12" maxlength="200" autocomplete="${registering ? 'new-password' : 'current-password'}"></label>${registering ? '<label class="pet-field">Повторите пароль<input type="password" name="passwordConfirm" required minlength="12" maxlength="200" autocomplete="new-password"></label>' : ''}<p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit" ${accountsEnabled && (!registering || emailEnabled) ? '' : 'disabled'}>${registering ? 'Зарегистрироваться' : 'Войти'} ${icon('arrow')}</button>${accountsEnabled && (!registering || emailEnabled) ? '' : '<p class="pet-form-hint">Регистрация и вход станут доступны после подключения почтовых писем</p>'}</form>`;
-    const content = verifying ? `<p class="pet-intro-copy" role="status">${e(authStatus || 'Проверяем ссылку из письма')}</p><a class="text-link" href="#/account/check-email${authReturn}">Запросить новую ссылку</a>`
+    const content = verifying ? `<p class="pet-intro-copy" role="status">${e(authStatus || 'Проверяем ссылку из письма')}</p><a class="text-link" href="#/account/check-email${returnQuery}">Запросить новую ссылку</a>`
       : resetting ? `<p class="pet-intro-copy">Введите новый пароль для вашего аккаунта</p>${passwordForm}`
-      : checking ? `<p class="pet-intro-copy" role="status">${pendingEmail ? `Запрос принят для <strong class="pet-auth-address">${e(pendingEmail)}</strong>. ` : ''}Если указанный email связан с аккаунтом, письмо со ссылкой придёт на почту. Проверьте также папку «Спам».</p>${emailForm}<div class="pet-auth-links"><a class="text-link" href="#/account/login${authReturn}">Вернуться ко входу</a><a class="text-link" href="#/account/register${authReturn}">Создать аккаунт</a></div>`
-      : recovering ? `<p class="pet-intro-copy">Укажите email, который использовали при регистрации. Мы отправим ссылку для создания нового пароля, если адрес связан с аккаунтом.</p>${emailForm}<div class="pet-auth-links"><a class="text-link" href="#/account/login${authReturn}">Вернуться ко входу</a><a class="text-link" href="#/account/register${authReturn}">Создать аккаунт</a></div>`
-      : `<p class="pet-intro-copy">${registering ? 'Сохраните питомцев и планы в своём аккаунте' : 'Ваши питомцы и планы будут доступны на ваших устройствах'}</p>${authForm}${googleClientId ? '<div class="pet-google-divider"><span>или</span></div><div class="pet-google-control" data-google-mode="signin"></div><p class="pet-form-error" data-google-error role="alert"></p>' : ''}<div class="pet-auth-links"><a class="text-link" href="#/account/${registering ? 'login' : 'register'}${authReturn}">${registering ? 'Уже есть аккаунт' : 'Создать аккаунт'}</a>${!registering ? `<a class="text-link" href="#/account/recover${authReturn}">Забыли пароль?</a>` : ''}</div>`;
+      : checking ? `<p class="pet-intro-copy" role="status">${pendingEmail ? `Запрос принят для <strong class="pet-auth-address">${e(pendingEmail)}</strong>. ` : ''}Если указанный email связан с аккаунтом, письмо со ссылкой придёт на почту. Проверьте также папку «Спам».</p>${emailForm}<div class="pet-auth-links"><a class="text-link" href="#/account/login${returnQuery}">Вернуться ко входу</a><a class="text-link" href="#/account/register${returnQuery}">Создать аккаунт</a></div>`
+      : recovering ? `<p class="pet-intro-copy">Укажите email, который использовали при регистрации. Мы отправим ссылку для создания нового пароля, если адрес связан с аккаунтом.</p>${emailForm}<div class="pet-auth-links"><a class="text-link" href="#/account/login${returnQuery}">Вернуться ко входу</a><a class="text-link" href="#/account/register${returnQuery}">Создать аккаунт</a></div>`
+      : `<p class="pet-intro-copy">${checkoutIntent() ? registering ? 'Создайте аккаунт, чтобы сохранить адрес для следующих покупок' : 'Войдите, чтобы использовать сохранённый адрес' : registering ? 'Сохраните питомцев и планы в своём аккаунте' : 'Ваши питомцы и планы будут доступны на ваших устройствах'}</p>${authForm}${googleClientId ? '<div class="pet-google-divider"><span>или</span></div><div class="pet-google-control" data-google-mode="signin"></div><p class="pet-form-error" data-google-error role="alert"></p>' : ''}<div class="pet-auth-links"><a class="text-link" href="#/account/${registering ? 'login' : 'register'}${returnQuery}">${registering ? 'Уже есть аккаунт' : 'Создать аккаунт'}</a>${!registering ? `<a class="text-link" href="#/account/recover${returnQuery}">Забыли пароль?</a>` : ''}${checkoutIntent() ? '<a class="text-link" href="#/checkout">Продолжить без регистрации</a>' : ''}</div>`;
     return `<div class="page pet-onboarding pet-auth-page"><div class="pet-auth-panel"><span class="pet-eyebrow">Кабинет с хвостиком</span><h1>${title}</h1>${content}</div></div>`;
   }
   const emptyPanel = (title, text, action = 'Выбрать товары', href = '#/catalog?pet=cat') => `<div class="pet-empty">${icon('paw')}<h3>${title}</h3><p>${text}</p><a class="button outline" href="${href}">${action}</a></div>`;
@@ -430,8 +432,8 @@ export function createAccountUI(helpers) {
         try {
           const result = await api[kind]({ email: values.get('email'), password: values.get('password'),
             name: values.get('name'), ...(kind === 'register' ?
-              { promoCode: pendingPromoCode(), returnTo: petCardIntent() ? 'pet' : '' } : {}) });
-          if (kind === 'register') { pendingEmail = result.email; pendingLinkKind = 'verify'; navigate('/account/check-email' + (petCardIntent() ? '?return=pet' : '')); }
+              { promoCode: pendingPromoCode(), returnTo: petCardIntent() ? 'pet' : checkoutIntent() ? 'checkout' : '' } : {}) });
+          if (kind === 'register') { pendingEmail = result.email; pendingLinkKind = 'verify'; navigate('/account/check-email' + authReturn()); }
           else {
             const hasCoupon = !!pendingPromoCode();
             await refreshCustomer(); await loadRemote(); navigate(afterSignIn(hasCoupon));
@@ -440,7 +442,7 @@ export function createAccountUI(helpers) {
           if (kind === 'login' && error.status === 403) {
             pendingEmail = String(values.get('email') || '');
             pendingLinkKind = 'verify';
-            navigate('/account/check-email' + (petCardIntent() ? '?return=pet' : ''));
+            navigate('/account/check-email' + authReturn());
           }
           throw error;
         } finally { button.disabled = false; }
@@ -449,16 +451,17 @@ export function createAccountUI(helpers) {
       if (kind === 'recover' || kind === 'resend-verification') {
         pendingEmail = String(values.get('email') || '');
         pendingLinkKind = kind === 'recover' ? 'reset' : 'verify';
-        if (kind === 'recover') await api.recover(pendingEmail, petCardIntent() ? 'pet' : '');
-        else await api.resendVerification(pendingEmail, petCardIntent() ? 'pet' : '');
-        navigate('/account/check-email' + (petCardIntent() ? '?return=pet' : ''));
+        const returnTo = petCardIntent() ? 'pet' : checkoutIntent() ? 'checkout' : '';
+        if (kind === 'recover') await api.recover(pendingEmail, returnTo);
+        else await api.resendVerification(pendingEmail, returnTo);
+        navigate('/account/check-email' + authReturn());
         notify('Проверьте адрес и почту');
         return;
       }
       if (kind === 'reset') {
         if (values.get('password') !== values.get('passwordConfirm')) throw new Error('Пароли не совпадают');
         await api.reset(values.get('token'), values.get('password'));
-        navigate('/account/login' + (petCardIntent() ? '?return=pet' : ''));
+        navigate('/account/login' + authReturn());
         notify('Пароль обновлён. Войдите с новым паролем');
         return;
       }
@@ -506,6 +509,26 @@ export function createAccountUI(helpers) {
     guestCoupon = null;
     try { localStorage.removeItem(pendingPromoKey); } catch { /* Storage unavailable */ }
   }
+  function checkoutProfile() {
+    if (store.mode() !== 'remote' || !customer) return null;
+    const human = store.get().human || {};
+    return { accountId: customer.id, ...(human.checkout || {}),
+      name: human.checkout?.name || human.name || customer.name || '',
+      email: human.checkout?.email || customer.email || '',
+      phone: human.checkout?.phone || customer.phone || '' };
+  }
+  async function saveCheckoutProfile(values) {
+    if (store.mode() !== 'remote' || !customer) return;
+    store.saveHuman({ checkout: {
+      name: values.name, email: values.email, phone: values.phone,
+      whatsapp: values.whatsapp === true,
+      deliveryRegion: values.deliveryRegion, city: values.city,
+      postcode: values.postcode, street: values.street,
+      building: values.building, apartment: values.apartment
+    } });
+    await syncChanges();
+  }
   return { page, click, change, dismissChoices, escapeChoices, submit, store, initialize, syncChanges,
-    handleLink, afterRender, applyPromo, refreshPromo, promo, couponPaid };
+    handleLink, afterRender, applyPromo, refreshPromo, promo, couponPaid,
+    checkoutProfile, saveCheckoutProfile };
 }

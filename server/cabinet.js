@@ -26,6 +26,17 @@ export function normalizeCabinet(input) {
   const ids = new Set(pets.map(p => p.id));
   if (ids.size !== pets.length) fail('Питомец повторяется');
   const human = input.human && typeof input.human === 'object' ? input.human : {};
+  const checkout = human.checkout && typeof human.checkout === 'object' && !Array.isArray(human.checkout)
+    ? human.checkout : null;
+  const deliveryRegion = checkout?.deliveryRegion === 'national' ? 'national' : 'local';
+  const savedCheckout = checkout ? {
+    name: clean(checkout.name, 100), email: clean(checkout.email, 160),
+    phone: clean(checkout.phone, 24), whatsapp: checkout.whatsapp === true,
+    deliveryRegion,
+    city: deliveryRegion === 'local' ? 'València' : clean(checkout.city, 100),
+    postcode: clean(checkout.postcode, 5), street: clean(checkout.street, 120),
+    building: clean(checkout.building, 16), apartment: clean(checkout.apartment, 80)
+  } : null;
   const reminders = list(input.reminders, 100).map(item => ({
     id: petId(item.id), petId: petId(item.petId), title: clean(item.title, 120),
     date: date(item.date), productId: clean(item.productId, 180), done: item.done === true
@@ -43,7 +54,8 @@ export function normalizeCabinet(input) {
     activePetId: ids.has(input.activePetId) ? input.activePetId : pets[0]?.id || null,
     human: { name: clean(human.name, 80), email: clean(human.email, 160),
       telegram: clean(human.telegram, 33), orderUpdates: human.orderUpdates === true,
-      reminders: human.reminders === true, offers: human.offers === true },
+      reminders: human.reminders === true, offers: human.offers === true,
+      checkout: savedCheckout },
     reminders, trips,
     clinics: map(input.clinics, value => clean(value, 80)),
     tripDrafts: map(input.tripDrafts, value => ({
