@@ -568,7 +568,9 @@ async function adminRoute(db, req, res, path) {
     if (!configured) return json(res, 200, { configured, reachable: false });
     try {
       const options = await sendcloudShippingOptions({ postalCode: '28001', parcels: [
-        { weightKg: 2, lengthCm: 30, widthCm: 20, heightCm: 15 }
+        verify === 'details'
+          ? { weightKg: 2.5, lengthCm: 40, widthCm: 30, heightCm: 20 }
+          : { weightKg: 2, lengthCm: 30, widthCm: 20, heightCm: 15 }
       ] });
       return json(res, 200, { configured, reachable: true, optionCount: options.length,
         nationalCheckoutEnabled: enabled('NATIONAL_CHECKOUT_ENABLED'),
