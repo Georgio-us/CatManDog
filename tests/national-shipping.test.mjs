@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { cartParcel, pricedShippingOptions, skuWeightKg } from '../server/national-shipping.js';
+import { cartParcel, nationalShippingQuote, pricedShippingOptions, skuWeightKg } from '../server/national-shipping.js';
 import { validateCheckout } from '../checkout-model.js';
 import { validateAddress, validateDelivery, priceQuote } from '../server/pricing.js';
 
@@ -47,6 +47,32 @@ test('only priced carrier options are accepted', () => {
     quotes: [{ weight: { min: { value:'4.001' }, max: { value:'5.001' } },
       price: { total: { value:'6.31', currency:'EUR' } } }] }
   ])[0].priceCents, 631);
+});
+
+test('national quote exposes the assumed parcel size and keeps it unverified', async () => {
+  const before = { public:process.env.SENDCLOUD_PUBLIC_KEY, secret:process.env.SENDCLOUD_SECRET_KEY };
+  process.env.SENDCLOUD_PUBLIC_KEY = 'test-public';
+  process.env.SENDCLOUD_SECRET_KEY = 'test-secret';
+  try {
+    const quote = await nationalShippingQuote({ postalCode:'28001',
+      lines:[{ productId:'rc', variantId:'rc-2kg', qty:1 }],
+      variants:[{ product_id:'rc', variant_id:'rc-2kg', category:'Корм', label:'2 кг' }],
+      quoteOptions:async input => {
+        assert.deepEqual(input.parcels, [{ weightKg:2.5, lengthCm:40, widthCm:30, heightCm:20 }]);
+        return [{ code:'carrier', carrier_name:'Carrier',
+          functionalities:{ last_mile:'home_delivery' },
+          quotes:[{ price:{ total:{ value:'7.25', currency:'EUR' } } }] }];
+      } });
+    assert.equal(quote.available, true);
+    assert.equal(quote.deliveryCents, 725);
+    assert.equal(quote.packagingVerified, false);
+    assert.deepEqual(quote.parcel, { weightKg:2.5, lengthCm:40, widthCm:30, heightCm:20 });
+  } finally {
+    if (before.public === undefined) delete process.env.SENDCLOUD_PUBLIC_KEY;
+    else process.env.SENDCLOUD_PUBLIC_KEY = before.public;
+    if (before.secret === undefined) delete process.env.SENDCLOUD_SECRET_KEY;
+    else process.env.SENDCLOUD_SECRET_KEY = before.secret;
+  }
 });
 
 test('national address and price require the carrier fee while Valencia rules remain intact', () => {

@@ -63,6 +63,8 @@ export function validateCheckout(values, now = new Date()) {
   if (!/^\d{5}$/.test(field('postcode'))) return 'Укажите почтовый индекс из пяти цифр';
   if (field('deliveryRegion') !== 'national' && field('city') !== 'València')
     return 'Укажите город Валенсия';
+  if (field('deliveryRegion') !== 'national' && !/^460\d{2}$/.test(field('postcode')))
+    return 'Укажите почтовый индекс в городе Валенсия';
   if (field('deliveryRegion') === 'national' && !field('city')) return 'Укажите город доставки';
   if (!field('street') || !field('building')) return 'Укажите улицу и номер дома';
   if (field('deliveryRegion') === 'national') return null;

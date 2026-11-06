@@ -44,8 +44,10 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
   const itemsList = items => `<div class="checkout-items rc-flow-summary-list">${items.map(item => `<div class="checkout-item rc-flow-summary-item">${imageBlock(item.image)}<div><strong>${e(item.name)}</strong><small>${e(item.variant || '1 шт')} · ${item.qty} шт × ${money(item.price)}</small>${item.fulfillment ? `<small>${item.fulfillment === 'supplier' ? 'Под заказ · 24-48 часов' : item.fulfillment === 'stock' ? 'Обычная доставка' : 'Недоступно'}</small>` : ''}</div><strong>${money(item.price * item.qty)}</strong></div>`).join('')}</div>`;
   const summary = (items, promo, national = null) => {
     const pendingNational = formValues.deliveryRegion === 'national' && !national;
+    const assumedParcel = national?.parcel;
+    const parcelDimensions = assumedParcel ? `${assumedParcel.lengthCm} × ${assumedParcel.widthCm} × ${assumedParcel.heightCm} см` : 'неизвестного размера';
     const totals = checkoutTotals(items, promo, national?.deliveryCents ?? null);
-    return `<aside class="checkout-summary rc-flow-summary"><h2>Ваш заказ</h2>${itemsList(items)}<div class="summary-line rc-flow-total-line"><span>Товары</span><strong>${money(totals.subtotal)}</strong></div>${totals.discount ? `<div class="summary-line rc-flow-total-line"><span>Промокод ${e(promo.code || '')}</span><strong>−${money(totals.discount)}</strong></div>` : ''}<div class="summary-line rc-flow-total-line"><span>${national ? 'Ориентир доставки без IVA' : pendingNational ? 'Доставка по Испании' : 'Доставка по Валенсии'}</span><strong>${pendingNational ? 'После расчёта' : national ? money(totals.delivery) : totals.freeDelivery ? 'Бесплатно' : money(totals.delivery)}</strong></div><div class="summary-line total rc-flow-total-line rc-flow-total"><span>${national || pendingNational ? 'Итого к оплате' : 'Итого с IVA'}</span><strong>${national || pendingNational ? 'После проверки' : money(totals.total)}</strong></div><p class="checkout-caption">${pendingNational ? 'Укажите индекс и проверьте данные, чтобы получить стоимость отправки.' : national ? `Вес товаров ${national.weightKg} кг. Ориентир перевозчика рассчитан по предполагаемой коробке и не включает IVA. Итоговую стоимость доставки покажем после проверки упаковки и налогов.` : `Бесплатная доставка от ${money(FREE_DELIVERY_FROM)} после скидки или по купону на доставку. Ниже порога - ${money(DELIVERY_FEE)}.`}</p></aside>`;
+    return `<aside class="checkout-summary rc-flow-summary"><h2>Ваш заказ</h2>${itemsList(items)}<div class="summary-line rc-flow-total-line"><span>Товары</span><strong>${money(totals.subtotal)}</strong></div>${totals.discount ? `<div class="summary-line rc-flow-total-line"><span>Промокод ${e(promo.code || '')}</span><strong>−${money(totals.discount)}</strong></div>` : ''}<div class="summary-line rc-flow-total-line"><span>${national ? 'Ориентир доставки без IVA' : pendingNational ? 'Доставка по Испании' : 'Доставка по Валенсии'}</span><strong>${pendingNational ? 'После расчёта' : national ? money(totals.delivery) : totals.freeDelivery ? 'Бесплатно' : money(totals.delivery)}</strong></div><div class="summary-line total rc-flow-total-line rc-flow-total"><span>${national || pendingNational ? 'Итого к оплате' : 'Итого с IVA'}</span><strong>${national || pendingNational ? 'После проверки' : money(totals.total)}</strong></div><p class="checkout-caption">${pendingNational ? 'Укажите индекс и проверьте данные, чтобы получить стоимость отправки.' : national ? `Вес товаров ${national.weightKg} кг. Для предварительного тарифа передана условная коробка ${parcelDimensions}. Цена перевозчика без IVA, стоимости коробки и возможных доплат. Итог доставки подтвердим после проверки реальной упаковки.` : `Бесплатная доставка от ${money(FREE_DELIVERY_FROM)} после скидки или по купону на доставку. Ниже порога - ${money(DELIVERY_FEE)}.`}</p></aside>`;
   };
 
   function page() {
@@ -62,6 +64,8 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     if (!isReady() || !preview || preview.signature !== cartSignature(items)) return `<div class="page checkout-page"><h1>Проверьте корзину ещё раз</h1><p>Состав заказа изменился или данные оформления не сохранились после обновления страницы</p><a class="button" href="#/checkout">К оформлению ${icon('arrow')}</a></div>`;
     const { values, promo } = preview;
     const context = getCheckoutContext();
+    if (values.deliveryMode === 'slot' && validateCheckout(values))
+      return `<div class="page checkout-page"><h1>Интервал больше недоступен</h1><p>Выберите другой день и время доставки</p><a class="button" href="#/checkout">Изменить доставку ${icon('arrow')}</a></div>`;
     const paymentAvailable = paymentsEnabled && context.pricesConfirmed !== false &&
       (values.deliveryMode !== 'national' || shippingQuote?.nationalCheckoutEnabled === true);
     const address = `${values.street}, ${values.building}${values.apartment ? ', ' + values.apartment : ''}, ${values.postcode} ${values.city}`;
@@ -136,6 +140,8 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     const items = getItems();
     const { values, promo } = preview;
     try {
+      const deliveryError = validateCheckout(values);
+      if (deliveryError) throw new Error(deliveryError);
       const request = (path, body) => fetch(path, { method: 'POST', credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
       const lines = items.map(item => ({ productId: item.productId, variantId: item.variantId, qty: item.qty }));

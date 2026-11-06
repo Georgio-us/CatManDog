@@ -33,6 +33,7 @@ export function cartParcel(lines, variants) {
   if (weightKg > 20) return { available: false, reason: 'parcel_too_heavy', missingVariantIds: [] };
   // Quote the next half-kilogram tier rather than understating the carrier weight.
   const quoteWeightKg = Math.ceil((weightKg + 0.05) * 2) / 2;
+  // These dimensions are quote assumptions, not measured CatManDog parcels.
   const box = quoteWeightKg <= 2.5 ? [40, 30, 20]
     : quoteWeightKg <= 10 ? [60, 40, 25] : [70, 45, 30];
   return { available: true, weightKg: Number(weightKg.toFixed(3)), quoteWeightKg,
@@ -74,9 +75,11 @@ export async function nationalShippingQuote({ postalCode, lines, variants, quote
   const options = pricedShippingOptions(await quoteOptions({ postalCode,
     parcels: [measured.parcel] }));
   if (!options.length) return { available: false, reason: 'no_carrier_quote',
-    weightKg: measured.weightKg, quoteWeightKg: measured.quoteWeightKg };
+    weightKg: measured.weightKg, quoteWeightKg: measured.quoteWeightKg,
+    parcel: measured.parcel, packagingVerified: false };
   const selected = options[0];
   return { available: true, weightKg: measured.weightKg,
-    quoteWeightKg: measured.quoteWeightKg, carrier: selected.carrier,
+    quoteWeightKg: measured.quoteWeightKg, parcel: measured.parcel,
+    packagingVerified: false, carrier: selected.carrier,
     optionCode: selected.code, deliveryCents: selected.priceCents };
 }

@@ -43,8 +43,46 @@ test('checkout requires a complete city address and a future requested time', ()
   assert.equal(validateCheckout(valid, now), null);
   assert.match(validateCheckout({ ...valid, postcode: '4600' }, now), /пять|пяти/);
   assert.match(validateCheckout({ ...valid, city: 'Paterna' }, now), /Валенсия/);
+  assert.match(validateCheckout({ ...valid, postcode: '28001' }, now), /индекс.*Валенсия/);
   assert.match(validateCheckout({ ...valid, deliveryMode: 'scheduled', deliveryDate: '2026-10-19', deliveryTime: '16:00' }, now), /не раньше/);
   assert.equal(validateCheckout({ ...valid, deliveryMode: 'scheduled', deliveryDate: '2026-10-19', deliveryTime: '18:00' }, now), null);
+});
+
+test('Valencia cart reaches delivery review without creating an order while payments are closed', () => {
+  const previous = { FormData: globalThis.FormData, location: globalThis.location };
+  const slot = availableDeliverySlots(new Date())[0];
+  const values = { name:'Антон', email:'anton@example.com', phone:'+34 600 000 000',
+    deliveryRegion:'local', city:'València', postcode:'46001', street:'Carrer de la Pau',
+    building:'12', deliveryMode:'slot', deliverySlot:`${slot.date}|${slot.window}` };
+  let checkoutStarted = false;
+  globalThis.location = { hash:'' };
+  globalThis.FormData = class {
+    constructor(form) { this.values = form.values; }
+    entries() { return Object.entries(this.values)[Symbol.iterator](); }
+    has(name) { return Object.hasOwn(this.values, name); }
+  };
+  try {
+    const ui = createCheckoutUI({ escape:String, icon:() => '', money:value => `${value.toFixed(2)} €`,
+      imageBlock:() => '', getItems:() => [{ productId:'rc-sterilised',
+        variantId:'rc-sterilised-400g', name:'Royal Canin Sterilised 37',
+        variant:'400 г', qty:1, price:5.13 }], isReady:() => true,
+      getPromo:() => null, applyPromo:() => {}, render:() => { checkoutStarted = true; } });
+    assert.match(ui.page(), new RegExp(slot.label));
+    const error = { textContent:'' };
+    ui.submit({ matches:selector => selector === '[data-checkout-form]', values,
+      querySelector:() => error });
+    assert.equal(error.textContent, '');
+    assert.equal(location.hash, '/checkout/preview');
+    const review = ui.previewPage();
+    assert.match(review, /Royal Canin Sterilised 37/);
+    assert.match(review, /400 г/);
+    assert.match(review, /9\.12 €/);
+    assert.match(review, /Приём заказов пока закрыт/);
+    assert.match(review, /disabled>Перейти к оплате/);
+    assert.equal(checkoutStarted, false);
+  } finally {
+    Object.assign(globalThis, previous);
+  }
 });
 
 test('live checkout presents the exact variant without creating a fictitious order', () => {
