@@ -16,7 +16,7 @@ import { applyChuruRetailFormats } from './churu-retail-formats.js';
 
 const foodProducts = [...expandPriorityFood(expandRoyalCaninFood(originalFoodProducts)), ...ownatProducts];
 
-export const categories = ["Корм", "Лакомства", "Наполнитель", "Лотки", "Игрушки и аксессуары", "Миски и поилки", "Переноски", "Окна и балконы", "Уход", "Подарочные наборы"];
+export const categories = ["Корм", "Лакомства", "Наполнитель", "Игрушки и аксессуары", "Миски и поилки", "Переноски", "Окна и балконы", "Уход", "Подарочные наборы"];
 
 const demoProducts = [
   {

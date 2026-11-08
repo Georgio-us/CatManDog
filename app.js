@@ -7,7 +7,7 @@ import { createRoyalCaninFlow } from './rc-sterilised-flow.js?v=7';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=spain-delivery-1';
 import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
-import { categories, products, catalogProducts, articles } from './data.js?v=customer-product-detail-1';
+import { categories, products, catalogProducts, articles } from './data.js?v=category-trays-1';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=customer-product-detail-1';
 import { createCheckoutUI } from './checkout-ui.js?v=checkout-address-1';
 import { availabilityRequestPage } from './availability-request-ui.js';
@@ -120,7 +120,7 @@ function notify(text,{cartAction=false}={}){
   toastTimer=setTimeout(hideToast,cartAction?5500:2800);
 }
 function updateHeader(){const count=cart.reduce((n,x)=>n+x.qty,0);document.querySelector('#cart-link').innerHTML=icon('bag')+(count?`<span class="cart-count">${count}</span>`:'');document.querySelector('#cart-link').setAttribute('aria-label',locale()==='es'?`Cesta: ${count} ${count===1?'producto':'productos'}`:`Корзина: ${itemCount(count)}`);}
-function route(){const category=seoCategoryForPath(location.pathname);const cleanPath=(category||location.pathname==='/catalogo')?'/catalog':location.pathname==='/pet'?'/pet':location.pathname==='/revista'?'/journal':location.pathname.startsWith('/revista/')?location.pathname.replace(/^\/revista\//u,'/journal/'):'/';const raw=location.hash.slice(1)||`${cleanPath}${location.search}`;const [path,query]=raw.split('?');const params=new URLSearchParams(query);if(category&&!location.hash){params.set('pet',category.pet);params.set('group',category.group);}if(['Игрушки','Аксессуары'].includes(params.get('category')))params.set('category','Игрушки и аксессуары');return {path,params};}
+function route(){const category=seoCategoryForPath(location.pathname);const cleanPath=(category||location.pathname==='/catalogo')?'/catalog':location.pathname==='/pet'?'/pet':location.pathname==='/revista'?'/journal':location.pathname.startsWith('/revista/')?location.pathname.replace(/^\/revista\//u,'/journal/'):'/';const raw=location.hash.slice(1)||`${cleanPath}${location.search}`;const [path,query]=raw.split('?');const params=new URLSearchParams(query);if(category&&!location.hash){params.set('pet',category.pet);params.set('group',category.group);}if(['Игрушки','Аксессуары'].includes(params.get('category')))params.set('category','Игрушки и аксессуары');if(['Лотки','Лотки и гигиена'].includes(params.get('category')))params.set('category','Наполнитель');return {path,params};}
 const journalHref = id => locale()==='es' ? `/revista${id?`/${encodeURIComponent(id)}`:''}` : `#/journal${id?`/${encodeURIComponent(id)}`:''}`;
 let lastCommerceView = '';
 function announceView() {
@@ -188,7 +188,7 @@ function favoritePage(){
   return `<div class="page">${crumbs('Избранное')}<h1 class="page-title">Избранное${selected.length?` <span class="muted">(${selected.length})</span>`:''}</h1>${selected.length?`<div class="product-grid">${selected.map(card).join('')}</div>`:empty('Пока здесь пусто','Сохраняйте понравившиеся товары сердечком, чтобы вернуться к ним позже','В каталог','#/catalog')}</div>`;
 }
 function service(){return `<section class="service" aria-label="Наш подход"><div class="service-item">${icon('leaf')}<div><h3>Выбрано с заботой</h3><p>Продуманные вещи для маленьких и больших ежедневных ритуалов</p></div></div><div class="service-item">${icon('truck')}<div><h3>Удобно каждый день</h3><p>Всё необходимое для вашего питомца - в одном месте</p></div></div><div class="service-item">${icon('heart')}<div><h3>Всегда рядом</h3><p>Помогаем разобраться, выбрать и сделать жизнь вместе лучше</p></div></div></section>`;}
-const categoryKey = p => p.category === 'Лотки и гигиена' ? 'Наполнитель' : p.category;
+const categoryKey = p => ['Лотки', 'Лотки и гигиена'].includes(p.category) ? 'Наполнитель' : p.category;
 function homeCatalogProducts(){
   let list = catalogProducts.filter(p => matchesPet(p,homePet) && (!homeGroup || homeGroupForProduct(p) === homeGroup));
   if(homeBrand) list = list.filter(p => p.brand === homeBrand);
