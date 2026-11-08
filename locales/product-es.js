@@ -3,6 +3,9 @@ import { catalogProducts } from '../data.js';
 // Catalogue names keep registered brand/line names. Descriptions below are
 // original Spanish copy based on the facts already present in each product.
 const copy = {
+  'royal-canin-chihuahua-adult': [null, 'Pienso seco para chihuahuas adultos a partir de los 8 meses'],
+  'royal-canin-gastrointestinal-kitten-dry': ['Royal Canin Gastrointestinal Kitten - pienso seco', 'Pienso veterinario seco para gatitos con digestión sensible'],
+  'cmd-source-0f4a3ef9889b8ff3': [null, 'Pienso seco ACANA Grass-Fed Lamb con cordero para perros'],
   'rc-sterilised': [null, 'Pienso completo para gatos esterilizados adultos de 1 a 7 años. Su contenido de grasa adaptado ayuda a controlar el peso.'],
   'leonardo-poultry': [null, 'Pienso sin cereales con ave para gatos adultos. La receta utiliza amaranto en lugar de cereales.'],
   'hills-ster': [null, 'Pienso completo con pollo para gatos esterilizados adultos de 1 a 6 años. Una dieta equilibrada para el día a día.'],

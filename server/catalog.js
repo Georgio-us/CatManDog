@@ -124,9 +124,54 @@ export async function importCatalog(db, items = products) {
         await client.query("INSERT INTO catalog_migrations(name) VALUES('retired_products_archived')");
       }
       await publishSelectedLaunchImages(client);
+      // Publish the three exact formats requested after confirmed customer demand.
+      // Store retail and purchase amounts in different columns. The veterinary
+      // item has no purchase offer; the ACANA 11.4 kg retail benchmark is below
+      // undiscounted landed cost, so both remain unavailable for checkout.
+      const demandMigration = 'confirmed_demand_formats_2026_11_08';
+      const demandDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [demandMigration]);
+      if (!demandDone.rowCount) {
+        for (const [id, retailCents, purchaseCents, saleStatus, availability] of [
+          ['royal-canin-chihuahua-adult-3kg', 2969, 2055, 'available', 'source_on_demand'],
+          ['royal-canin-gastrointestinal-kitten-dry-2kg', 3669, null, 'unavailable', 'unavailable'],
+          ['acana-grass-fed-lamb-11-4kg', 8949, 8122, 'unavailable', 'pending']
+        ]) {
+          await client.query(`UPDATE catalog_variants SET
+            price_override_cents=coalesce(price_override_cents,$2),
+            purchase_price_cents=coalesce(purchase_price_cents,$3),
+            price_confirmed=true,sale_status=$4,availability=$5,
+            tax_rate_bps=coalesce(tax_rate_bps,1000),updated_at=now()
+            WHERE id=$1`, [id, retailCents, purchaseCents, saleStatus, availability]);
+        }
+        await client.query(`UPDATE catalog_products SET
+          image_path='/media/confirmed-demand-2026-11-08/acana-grass-fed-lamb-11-4kg.webp',
+          description=CASE WHEN description='' THEN
+            'Сухой корм ACANA Grass-Fed Lamb с ягнёнком для собак' ELSE description END,
+          source=source||jsonb_build_object('defaultVariantId','acana-grass-fed-lamb-11-4kg')
+          WHERE id='cmd-source-0f4a3ef9889b8ff3'`);
+        await client.query(`UPDATE catalog_variants SET display_priority=1
+          WHERE id='acana-grass-fed-lamb-11-4kg'`);
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [demandMigration]);
+      }
+      // The supplier catalogs may already have been imported before these
+      // storefront variants existed. Match only the exact supplier article.
+      for (const [variantId, brand, article] of [
+        ['royal-canin-chihuahua-adult-3kg', 'Royal Canin', '2210400'],
+        ['acana-grass-fed-lamb-11-4kg', 'ACANA', 'ACS203']
+      ]) {
+        await client.query(`INSERT INTO supplier_catalog_matches
+          (item_id,source_id,variant_id,match_method)
+          SELECT i.id,i.source_id,$1,'catalog'
+          FROM supplier_catalog_items i JOIN supplier_catalog_sources s ON s.id=i.source_id
+          WHERE s.brand=$2 AND i.article=$3
+          ORDER BY s.price_date DESC,s.imported_at DESC LIMIT 1
+          ON CONFLICT DO NOTHING`, [variantId, brand, article]);
+      }
       const salePolicyMigration = await client.query("SELECT name FROM catalog_migrations WHERE name='initial_brand_sale_status_2026_11_06'");
       if (!salePolicyMigration.rows.length) {
         await client.query(`UPDATE catalog_variants v SET sale_status=CASE
+          WHEN v.id IN ('royal-canin-gastrointestinal-kitten-dry-2kg',
+            'acana-grass-fed-lamb-11-4kg') THEN 'unavailable'
           WHEN lower(p.brand) IN ('heybo pet','heiba pet','heybopet') THEN 'preorder'
           WHEN lower(p.brand) IN ('advance','hill’s','hill''s') THEN 'unavailable'
           ELSE 'available' END,updated_at=now()

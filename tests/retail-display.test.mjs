@@ -62,7 +62,8 @@ test('Yagu variants keep supplier costs separate from retail benchmarks', () => 
 });
 
 test('first dog assortment has 22 families and 43 priced variants with separate purchase fields', () => {
-  const dogs = catalogProducts.filter(item => item.pet === 'dog' && !item.id.startsWith('yagu-'));
+  const dogs = catalogProducts.filter(item => item.pet === 'dog' && !item.id.startsWith('yagu-')
+    && !['royal-canin-chihuahua-adult', 'cmd-source-0f4a3ef9889b8ff3'].includes(item.id));
   const variants = dogs.flatMap(item => item.variants);
   assert.equal(dogs.length, 22);
   assert.equal(variants.length, 43);

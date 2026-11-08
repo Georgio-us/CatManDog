@@ -24,6 +24,20 @@ test('catalog import keeps variant identity and source prices separate from purc
   assert.ok(rows.every(row => row.variant.source.purchasePrice === null || row.variant.source.purchasePrice === undefined));
   assert.ok(rows.every(row => !retiredProductIds.has(row.product.id)));
 });
+test('confirmed-demand formats use exact SKUs and local studio images', () => {
+  const rows = catalogRows();
+  for (const [id, ean, image] of [
+    ['royal-canin-chihuahua-adult-3kg', '3182550747820', 'royal-canin-chihuahua-adult-3kg.webp'],
+    ['royal-canin-gastrointestinal-kitten-dry-2kg', '3182550906258', 'royal-canin-gastrointestinal-kitten-2kg.webp'],
+    ['acana-grass-fed-lamb-11-4kg', '064992570125', 'acana-grass-fed-lamb-11-4kg.webp']
+  ]) {
+    const row = rows.find(item => item.variant.id === id);
+    assert.ok(row, id);
+    assert.equal(row.variant.source.ean, ean);
+    assert.ok((row.variant.imagePath || row.product.imagePath).endsWith(image));
+    assert.equal(row.variant.source.purchasePrice, undefined);
+  }
+});
 test('full catalog import archives retired rows once and preserves edited products', async () => {
   const queries = [];
   const db = { connect: async () => ({
