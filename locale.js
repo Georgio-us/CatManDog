@@ -1,11 +1,11 @@
 import { es, esPatterns } from './locales/es.js?v=checkout-address-1';
-import { esProductText } from './locales/product-es.js';
-import { esDetails } from './locales/details-es.js?v=customer-product-detail-1';
+import { esProductText } from './locales/product-es.js?v=confirmed-demand-20261108';
+import { esDetails } from './locales/details-es.js?v=confirmed-demand-20261108';
 import { uk, ukPatterns } from './locales/uk.js?v=customer-product-detail-1';
 import { ukExtra } from './locales/uk-extra.js?v=checkout-address-1';
-import { ukProductNames } from './locales/uk-product-names.js';
+import { ukProductNames } from './locales/uk-product-names.js?v=confirmed-demand-20261108';
 import { ukProductCopy } from './locales/uk-product-copy.js';
-import { ukDetails } from './locales/uk-details.js?v=customer-product-detail-1';
+import { ukDetails } from './locales/uk-details.js?v=confirmed-demand-20261108';
 import { churuFormatsEs, churuFormatsUk } from './locales/churu-formats.js';
 import { seoCategoryForPath } from './seo-categories.js';
 import { deliveryStatusEs, deliveryStatusUk } from './locales/delivery-status.js';
