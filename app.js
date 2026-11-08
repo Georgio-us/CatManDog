@@ -7,7 +7,7 @@ import { createRoyalCaninFlow } from './rc-sterilised-flow.js?v=7';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=spain-delivery-1';
 import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
-import { categories, products, catalogProducts, articles } from './data.js?v=category-trays-1';
+import { categories, products, catalogProducts, articles } from './data.js?v=confirmed-demand-20261108';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=customer-product-detail-1';
 import { createCheckoutUI } from './checkout-ui.js?v=checkout-address-1';
 import { availabilityRequestPage } from './availability-request-ui.js';
