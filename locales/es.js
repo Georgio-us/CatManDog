@@ -14,6 +14,7 @@ export const es = {
   'Отправка перевозчиком, срок уточним после оформления': 'Envío por transportista; confirmaremos el plazo después de realizar el pedido',
   'Заказ пока не создан. Товары и контактные данные не отправлены.': 'El pedido todavía no se ha creado. No se han enviado los productos ni los datos de contacto.',
   'Рассчитываем доставку по Испании': 'Calculando el envío a España',
+  'Проверим заказ и откроем защищённую страницу Stripe': 'Comprobaremos el pedido y abriremos la página segura de Stripe',
   'Удобный интервал · 3,99 €, бесплатно от 49 €': 'Franja a elegir · 3,99 €, gratis desde 49 €',
   'Другой город': 'Otra ciudad',
   'Отправка по материковой Испании': 'Envío a la España peninsular',
