@@ -93,6 +93,7 @@ test('sale status controls cart availability independently of stock and supplier
     output.res, '/api/catalog');
   assert.equal(output.state.status, 200);
   assert.deepEqual(output.state.body.variants.map(row => row.availableForCart), [true, false]);
+  assert.deepEqual(output.state.body.variants.map(row => row.orderable), [true, false]);
 });
 
 test('old bearer key alone cannot read or modify the admin API', async () => {

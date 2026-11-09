@@ -147,8 +147,8 @@ async function liveCatalogSnapshot(db) {
   return list.map(row => {
     const reservedQuantity = reserved.get(row.variant_id) || 0;
     return { ...row, reserved_quantity: reservedQuantity,
-      orderable: row.orderable && (row.sale_status || row.availability !== 'on_hand' ||
-        row.stock_quantity - reservedQuantity > 0) };
+      orderable: Boolean(row.orderable && (row.sale_status || row.availability !== 'on_hand' ||
+        row.stock_quantity - reservedQuantity > 0)) };
   });
 }
 
