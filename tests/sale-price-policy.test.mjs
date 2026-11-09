@@ -65,3 +65,8 @@ test('server snapshot keeps price approval when checkout quotes a database-only 
   assert.equal(quote.items[0].unitPriceCents, 1200);
   assert.equal(quote.items[0].sourceMode, 'source_on_demand');
 });
+
+test('a stale cart variant is rejected as bad input rather than a server failure', () => {
+  assert.throws(() => priceQuote([{ productId: 'old-product', variantId: 'missing', qty: 1 }], []),
+    error => error.status === 400 && error.message === 'Вариант товара не найден');
+});

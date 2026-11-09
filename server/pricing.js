@@ -5,6 +5,7 @@ import { salePriceDecision } from './sale-price-policy.js';
 
 export const DELIVERY_FEE_CENTS = LOCAL_DELIVERY_FEE_CENTS;
 export const FREE_DELIVERY_FROM_CENTS = LOCAL_FREE_DELIVERY_FROM_CENTS;
+const invalidQuote = message => Object.assign(new Error(message), { status: 400 });
 
 export function validateAddress(address, deliveryMode = 'slot') {
   if (!address || typeof address !== 'object') return 'Укажите адрес доставки';
@@ -43,21 +44,21 @@ export function validateDelivery(delivery, now = new Date()) {
 }
 
 export function priceQuote(lines, variants, promo = null, shippingCents = null) {
-  if (!Array.isArray(lines) || !lines.length || lines.length > 50) throw new Error('Корзина пуста или слишком велика');
+  if (!Array.isArray(lines) || !lines.length || lines.length > 50) throw invalidQuote('Корзина пуста или слишком велика');
   const byId = new Map(variants.map(variant => [variant.variant_id, variant]));
   const seen = new Set();
   const items = lines.map(line => {
     const id = String(line?.variantId || '');
     const variant = byId.get(id);
-    if (!variant || variant.product_id !== line.productId) throw new Error('Вариант товара не найден');
-    if (seen.has(id)) throw new Error('Повторяющийся вариант в корзине');
+    if (!variant || variant.product_id !== line.productId) throw invalidQuote('Вариант товара не найден');
+    if (seen.has(id)) throw invalidQuote('Повторяющийся вариант в корзине');
     seen.add(id);
-    if (!Number.isInteger(line.qty) || line.qty < 1 || line.qty > 99) throw new Error('Некорректное количество');
+    if (!Number.isInteger(line.qty) || line.qty < 1 || line.qty > 99) throw invalidQuote('Некорректное количество');
     const decision = typeof variant.price_accepted === 'boolean'
       ? { priceCents: variant.sale_price_cents, accepted: variant.price_accepted }
       : salePriceDecision(variant);
     const price = decision.priceCents;
-    if (!Number.isInteger(price) || price <= 0) throw new Error('Цена товара уточняется');
+    if (!Number.isInteger(price) || price <= 0) throw invalidQuote('Цена товара уточняется');
     const saleStatus = variant.sale_status;
     const sourceMode = saleStatus === 'preorder' ? 'source_on_demand' :
       saleStatus === 'available' ?
