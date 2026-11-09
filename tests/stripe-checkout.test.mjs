@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHmac } from 'node:crypto';
-import { createStripeCheckout, stripeReady, verifyStripeEvent } from '../server/stripe.js';
+import { createStripeCheckout, stripeMode, stripeReady, verifyStripeEvent } from '../server/stripe.js';
 import { handleApi } from '../server/api.js';
 
 function withStripeEnv(fn) {
@@ -50,6 +50,21 @@ test('Stripe rejects an unexpected payment amount', () => withStripeEnv(async ()
     items: [{ name: 'Корм', variantLabel: '2 кг', qty: 1, lineCents: 5317 }] }, 'es', async () => ({ ok: true,
     async json() { return { id: 'cs_test_123', url: 'https://checkout.stripe.com/c/pay/cs_test_123',
       amount_total: 1, currency: 'eur' }; } })), /корректную страницу/);
+}));
+
+test('restricted live key creates only live checkout sessions', () => withStripeEnv(async () => {
+  process.env.STRIPE_SECRET_KEY = 'rk_live_example';
+  assert.equal(stripeReady(), true);
+  assert.equal(stripeMode(), 'live');
+  const order = { id: '9d8eb25b-c75b-4ed6-bf6a-a34b94385141', email: 'buyer@example.com',
+    subtotal_cents: 1500, discount_cents: 0, delivery_cents: 0, total_cents: 1500,
+    items: [{ name: 'Корм', variantLabel: '400 г', qty: 1, lineCents: 1500 }] };
+  const response = id => ({ ok: true, async json() { return { id,
+    url: 'https://checkout.stripe.com/c/pay/session', amount_total: 1500, currency: 'eur' }; } });
+  await assert.rejects(createStripeCheckout(order, 'es', async () => response('cs_test_123')),
+    /корректную страницу/);
+  const session = await createStripeCheckout(order, 'es', async () => response('cs_live_123'));
+  assert.equal(session.id, 'cs_live_123');
 }));
 
 test('Stripe webhook accepts only signed fresh unmodified raw body', () => withStripeEnv(() => {

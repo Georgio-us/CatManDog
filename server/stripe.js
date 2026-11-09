@@ -4,12 +4,12 @@ const secretKey = () => process.env.STRIPE_SECRET_KEY || '';
 const webhookSecret = () => process.env.STRIPE_WEBHOOK_SECRET || '';
 
 export function stripeReady() {
-  return /^sk_(test|live)_/.test(secretKey()) && /^whsec_/.test(webhookSecret()) &&
+  return /^(sk|rk)_(test|live)_/.test(secretKey()) && /^whsec_/.test(webhookSecret()) &&
     /^https:\/\/catmandog\.es\/?$/.test(process.env.PUBLIC_BASE_URL || '');
 }
 
 export function stripeMode() {
-  return secretKey().startsWith('sk_live_') ? 'live' : 'test';
+  return /^(sk|rk)_live_/.test(secretKey()) ? 'live' : 'test';
 }
 
 export function verifyStripeEvent(raw, signature, now = Date.now()) {
@@ -83,7 +83,7 @@ export async function createStripeCheckout(order, language = 'es', fetcher = fet
     signal: AbortSignal.timeout(15000)
   });
   const session = await response.json().catch(() => ({}));
-  if (!response.ok || !/^cs_(test|live)_/.test(session.id || '') ||
+  if (!response.ok || !session.id?.startsWith(`cs_${stripeMode()}_`) ||
       !/^https:\/\/checkout\.stripe\.com\//.test(session.url || '') ||
       session.amount_total !== order.total_cents || session.currency !== 'eur')
     throw Object.assign(new Error('Stripe не создал корректную страницу оплаты'), { status: 502 });
