@@ -7,7 +7,7 @@ import { normalizedEmail, validEmail, hashPassword, verifyPassword, currentCusto
   createSession, cookieToken, tokenDigest, sessionCookie, clearSessionCookie, isAdmin } from './auth.js';
 import { loadCabinet, saveCabinet } from './cabinet.js';
 import { emailReady, sendAccountLink,
-  notifyServiceRequest, sendServiceReply } from './email.js';
+  notifyServiceRequest, sendServiceReply, sendOrderConfirmation } from './email.js';
 import { googleClientId, verifyGoogleCredential, googleOwnsEmail } from './google-auth.js';
 import { currentStaff, createStaffSession, staffCookie, clearStaffCookie,
   revokeStaffSession, bootstrapOwner } from './staff.js';
@@ -27,7 +27,8 @@ import { churuRepackOptions } from '../churu-retail-formats.js';
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
 const enabled = name => process.env[name] === 'true';
-const ordersReady = () => stripeReady() && enabled('ORDERS_ENABLED') && enabled('PAYMENTS_ENABLED');
+const ordersReady = () => stripeReady() && emailReady() &&
+  enabled('ORDERS_ENABLED') && enabled('PAYMENTS_ENABLED');
 async function checkoutAllowed(db, req) {
   if (!ordersReady()) return false;
   if (stripeMode() === 'live') return true;
@@ -247,11 +248,12 @@ async function createOrder(db, payload, customer) {
     const deliveryTaxRate = billingProfile.rows[0]?.delivery_tax_rate_bps ?? null;
     const inserted = await client.query(`INSERT INTO orders(id,number,customer_id,customer_name,email,buyer_phone,phone,whatsapp_opt_in,
       delivery_address,delivery_preference,subtotal_cents,discount_cents,delivery_cents,delivery_tax_rate_bps,total_cents,
-      promo_code,idempotency_key,stock_state) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,'reserved')
+      promo_code,idempotency_key,stock_state,locale) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,'reserved',$18)
       ON CONFLICT(idempotency_key) DO NOTHING RETURNING id,number`,
     [orderId, number, customer?.id || null, name, email, normalizeBuyerPhone(phone), phone, !!payload.whatsapp,
       cleanAddress, cleanDelivery, quote.subtotalCents, quote.discountCents,
-      quote.deliveryCents, deliveryTaxRate, quote.totalCents, quote.promoCode, idempotency]);
+      quote.deliveryCents, deliveryTaxRate, quote.totalCents, quote.promoCode, idempotency,
+      ['ru','es','uk'].includes(payload.locale) ? payload.locale : 'ru']);
     if (!inserted.rows.length) {
       const duplicate = await client.query(`SELECT id,number,email,stripe_checkout_url,payment_expires_at
         FROM orders WHERE idempotency_key=$1`, [idempotency]);
@@ -323,6 +325,26 @@ async function releasePaymentReservation(client, order) {
     SET used_count=greatest(0,used_count-1) WHERE code=$1`, [order.promo_code]);
 }
 
+async function deliverOrderConfirmation(client, orderId) {
+  await client.query('BEGIN');
+  try {
+    const { rows } = await client.query(`SELECT id,number,email,locale,delivery_address,delivery_preference,
+      subtotal_cents,discount_cents,delivery_cents,total_cents,
+      payment_status,confirmation_sent_at FROM orders WHERE id=$1 FOR UPDATE`, [orderId]);
+    const order = rows[0];
+    if (order?.payment_status === 'paid' && !order.confirmation_sent_at) {
+      const items = await client.query(`SELECT name,variant_label,quantity,unit_price_cents
+        FROM order_items WHERE order_id=$1 ORDER BY id`, [orderId]);
+      await sendOrderConfirmation(order, items.rows);
+      await client.query('UPDATE orders SET confirmation_sent_at=now() WHERE id=$1', [orderId]);
+    }
+    await client.query('COMMIT');
+  } catch (error) {
+    await client.query('ROLLBACK');
+    throw error;
+  }
+}
+
 async function handleStripeWebhook(db, req, res) {
   const event = verifyStripeEvent(await readWebhookBody(req), req.headers['stripe-signature']);
   if (!/^evt_/.test(event.id || '') || event.livemode !== (stripeMode() === 'live'))
@@ -335,6 +357,7 @@ async function handleStripeWebhook(db, req, res) {
       session.metadata?.order_id !== session.client_reference_id || session.currency !== 'eur')
     bad('Некорректная сессия оплаты', 400);
   const client = await db.connect();
+  let committed = false;
   try {
     await client.query('BEGIN');
     const found = await client.query(`SELECT id,total_cents,payment_status,stock_state,promo_code,
@@ -345,7 +368,13 @@ async function handleStripeWebhook(db, req, res) {
       bad('Сумма или заказ Stripe не совпадают', 409);
     const inserted = await client.query(`INSERT INTO stripe_events(id,type,order_id)
       VALUES($1,$2,$3) ON CONFLICT DO NOTHING RETURNING id`, [event.id, event.type, order.id]);
-    if (!inserted.rows.length) { await client.query('COMMIT'); return json(res, 200, { received: true }); }
+    if (!inserted.rows.length) {
+      await client.query('COMMIT');
+      committed = true;
+      if (order.payment_status === 'paid' && emailReady())
+        await deliverOrderConfirmation(client, order.id);
+      return json(res, 200, { received: true });
+    }
     const paid = (event.type === 'checkout.session.completed' && session.payment_status === 'paid') ||
       event.type === 'checkout.session.async_payment_succeeded';
     const failed = ['checkout.session.async_payment_failed', 'checkout.session.expired'].includes(event.type);
@@ -370,8 +399,10 @@ async function handleStripeWebhook(db, req, res) {
       [order.id, session.id]);
     }
     await client.query('COMMIT');
+    committed = true;
+    if (paid && emailReady()) await deliverOrderConfirmation(client, order.id);
     return json(res, 200, { received: true });
-  } catch (error) { await client.query('ROLLBACK'); throw error; }
+  } catch (error) { if (!committed) await client.query('ROLLBACK'); throw error; }
   finally { client.release(); }
 }
 

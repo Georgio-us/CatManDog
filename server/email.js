@@ -18,6 +18,36 @@ async function sendEmail(to, subject, message, fetcher = fetch) {
   if (!response.ok) throw new Error('Почтовый сервис не принял письмо');
 }
 
+export async function sendOrderConfirmation(order, items, fetcher = fetch) {
+  const language = ['ru', 'es', 'uk'].includes(order.locale) ? order.locale : 'ru';
+  const euros = cents => `${(Number(cents) / 100).toFixed(2).replace('.', ',')} €`;
+  const labels = language === 'es'
+    ? { subject: 'Confirmación de pedido', intro: 'Hemos recibido el pago de tu pedido',
+      delivery: 'Entrega', subtotal: 'Productos', discount: 'Descuento', address: 'Dirección',
+      preference: 'Entrega solicitada', total: 'Total con IVA', contact: 'Confirmaremos los detalles de la entrega contigo',
+      terms: 'Condiciones de compra y devoluciones', seller: 'Vendedor' }
+    : language === 'uk'
+      ? { subject: 'Підтвердження замовлення', intro: 'Ми отримали оплату за ваше замовлення',
+        delivery: 'Доставка', subtotal: 'Товари', discount: 'Знижка', address: 'Адреса',
+        preference: 'Побажання щодо доставки', total: 'Разом з IVA', contact: 'Ми зв’яжемося з вами, щоб підтвердити деталі доставки',
+        terms: 'Умови купівлі та повернення', seller: 'Продавець' }
+      : { subject: 'Подтверждение заказа', intro: 'Мы получили оплату за ваш заказ',
+        delivery: 'Доставка', subtotal: 'Товары', discount: 'Скидка', address: 'Адрес',
+        preference: 'Пожелание по доставке', total: 'Итого с IVA', contact: 'Мы свяжемся с вами, чтобы подтвердить детали доставки',
+        terms: 'Условия покупки и возврата', seller: 'Продавец' };
+  const termsPage = language === 'es' ? 'purchase-terms-es.html'
+    : language === 'uk' ? 'purchase-terms-uk.html' : 'purchase-terms.html';
+  const lines = items.map(item => `${item.name} - ${item.variant_label} × ${item.quantity}: ${euros(item.unit_price_cents * item.quantity)}`);
+  const address = order.delivery_address || {};
+  const destination = [address.street, address.building, address.apartment,
+    address.postcode, address.city, 'España'].filter(Boolean).join(', ');
+  const delivery = order.delivery_preference || {};
+  const preference = delivery.mode === 'slot' ? [delivery.date, delivery.window].filter(Boolean).join(' · ')
+    : delivery.mode === 'preorder' ? '24-48 h' : delivery.mode === 'national' ? 'España peninsular' : '';
+  const text = `${labels.intro} ${order.number}\n\n${lines.join('\n')}\n${labels.subtotal}: ${euros(order.subtotal_cents)}\n${labels.discount}: -${euros(order.discount_cents)}\n${labels.delivery}: ${euros(order.delivery_cents)}\n${labels.total}: ${euros(order.total_cents)}\n\n${labels.address}: ${destination}\n${labels.preference}: ${preference}\n${labels.contact}.\n\n${labels.seller}: PUZANOV HEORHII (CatManDog)\nsupport@catmandog.es · +34 665 240 277\n${labels.terms}: https://catmandog.es/${termsPage}\n`;
+  await sendEmail(order.email, `${labels.subject} ${order.number} - CatManDog`, text, fetcher);
+}
+
 export async function notifyServiceRequest(request, fetcher = fetch) {
   const kind = request.kind === 'return' ? 'возврат' : request.kind === 'availability' ? 'поступление товара' : 'вопрос';
   const order = request.orderNumber ? `Заказ: ${request.orderNumber}\n` : '';

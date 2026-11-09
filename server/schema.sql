@@ -332,6 +332,9 @@ ALTER TABLE orders ADD COLUMN IF NOT EXISTS stripe_checkout_url text;
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS stripe_payment_intent_id text;
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS payment_expires_at timestamptz;
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS buyer_phone text;
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS locale text NOT NULL DEFAULT 'ru'
+  CHECK (locale IN ('ru','es','uk'));
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS confirmation_sent_at timestamptz;
 UPDATE orders SET buyer_phone=right(regexp_replace(phone,'[^0-9]','','g'),9)
   WHERE buyer_phone IS NULL AND length(regexp_replace(phone,'[^0-9]','','g'))>=9;
 CREATE INDEX IF NOT EXISTS orders_buyer_phone_idx ON orders(buyer_phone);
