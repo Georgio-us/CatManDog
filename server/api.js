@@ -2058,11 +2058,15 @@ export async function handleApi(db, req, res, pathname) {
       const url = new URL(req.url || '/', 'https://catmandog.es');
       const sessionId = url.searchParams.get('session_id') || '';
       if (!/^cs_(test|live)_[A-Za-z0-9]+$/.test(sessionId)) bad('Некорректная сессия оплаты');
-      const { rows } = await db.query(`SELECT number,payment_status,total_cents FROM orders
+      const { rows } = await db.query(`SELECT id,number,payment_status,total_cents,promo_code FROM orders
         WHERE stripe_checkout_session_id=$1`, [sessionId]);
       if (!rows[0]) bad('Заказ не найден', 404);
+      const items = rows[0].payment_status === 'paid'
+        ? (await db.query(`SELECT product_id AS "productId",variant_id AS "variantId",
+            quantity AS qty FROM order_items WHERE order_id=$1`, [rows[0].id])).rows : [];
       return json(res, 200, { number: rows[0].number,
-        paymentStatus: rows[0].payment_status, totalCents: rows[0].total_cents });
+        paymentStatus: rows[0].payment_status, totalCents: rows[0].total_cents,
+        promoApplied: Boolean(rows[0].promo_code), items });
     }
     if (pathname === '/api/me/orders' && req.method === 'GET') {
       const customer = await currentCustomer(db, req);

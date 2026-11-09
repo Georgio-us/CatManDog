@@ -227,8 +227,11 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
       paymentReturn = { sessionId, ...(response.ok ? result : { error: result.error || 'Заказ пока не найден' }) };
       if (result.paymentStatus === 'paid') {
         try {
-          const saved = JSON.parse(sessionStorage.getItem('catmandog-payment-attempt') || 'null');
-          if (saved?.cartSignature === cartSignature(getItems())) remainingAfterPayment = onPaid?.(getItems()) === true;
+          const clearedKey = `catmandog-paid-session:${sessionId}`;
+          if (!localStorage.getItem(clearedKey) && Array.isArray(result.items)) {
+            remainingAfterPayment = onPaid?.(result.items, result.promoApplied === true) === true;
+            localStorage.setItem(clearedKey, '1');
+          }
           sessionStorage.removeItem('catmandog-payment-attempt');
         } catch { /* Local storage can be unavailable */ }
       }

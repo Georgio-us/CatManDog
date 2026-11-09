@@ -9,7 +9,7 @@ import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
 import { categories, products, catalogProducts, articles } from './data.js?v=confirmed-demand-20261108';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=customer-product-detail-1';
-import { createCheckoutUI } from './checkout-ui.js?v=checkout-promo-choice-20261109';
+import { createCheckoutUI } from './checkout-ui.js?v=checkout-paid-cart-20261109';
 import { availabilityRequestPage } from './availability-request-ui.js';
 import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=customer-product-detail-1';
@@ -63,11 +63,15 @@ const checkout = createCheckoutUI({
   escape, icon, money, imageBlock, render,
   getCheckoutProfile: () => account.checkoutProfile(),
   saveCheckoutProfile: values => account.saveCheckoutProfile(values),
-  onPaid: paidItems => {
-    account.couponPaid();
+  onPaid: (paidItems, promoApplied) => {
+    if (promoApplied) account.couponPaid();
     void account.refreshPromo().then(render).catch(() => {});
-    const paid = new Set(paidItems.map(item => `${item.productId}|${item.variantId || ''}`));
-    cart = cart.filter(item => !paid.has(`${item.productId || item.id}|${item.variantId || ''}`));
+    for (const item of paidItems) {
+      const line = cart.find(entry => (entry.productId || entry.id) === item.productId &&
+        (entry.variantId || '') === (item.variantId || ''));
+      if (line) line.qty -= Math.max(0, Number(item.qty) || 0);
+    }
+    cart = cart.filter(item => item.qty > 0);
     checkoutGroup = 'all';
     try { sessionStorage.removeItem('catmandog-checkout-group'); } catch {}
     persist();
