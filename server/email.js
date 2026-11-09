@@ -15,7 +15,7 @@ async function sendEmail(to, subject, message, fetcher = fetch) {
       text: message, reply_to: 'support@catmandog.es' }),
     signal: AbortSignal.timeout(10000)
   });
-  if (!response.ok) throw new Error('Почтовый сервис не принял письмо');
+  if (!response.ok) throw new Error(`Почтовый сервис не принял письмо (${response.status || 'ошибка'})`);
 }
 
 export async function sendOrderConfirmation(order, items, fetcher = fetch) {

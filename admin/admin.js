@@ -124,7 +124,11 @@ function orderCard(order) {
       <span class="admin-muted">Не забронировано, адрес не проверен</span></div>
     <div><strong>Оплата и склад</strong>${escape(order.payment_status)}<br>${(order.items || []).some(item => item.sourceMode === 'on_hand')
       ? escape(({ reserved:'Товар зарезервирован',released:'Резерв снят',consumed:'Выдан со склада',legacy:'Старый учёт' })[order.stock_state] || '')
-      : (order.items || []).some(item => item.sourceMode === 'open_order') ? 'Комплектация после заказа' : 'Товар под заказ'}</div></div>
+      : (order.items || []).some(item => item.sourceMode === 'open_order') ? 'Комплектация после заказа' : 'Товар под заказ'}</div>
+    <div><strong>Подтверждение по email</strong>${order.confirmation_sent_at ? 'Отправлено' : order.payment_status === 'paid' ? 'Не отправлено' : 'После оплаты'}
+      ${order.confirmation_error ? `<br><span class="admin-muted">${escape(order.confirmation_error)}</span>` : ''}
+      ${order.payment_status === 'paid' && !order.confirmation_sent_at
+        ? `<form data-email-confirmation="${escape(order.id)}"><button type="submit">Повторить отправку</button></form>` : ''}</div></div>
     <ul class="admin-items">${(order.items || []).map(item => `<li>${escape(item.name)} · ${escape(item.variantLabel)} - ${item.qty} шт × ${euros(item.unitPriceCents)} · ${item.sourceMode === 'on_hand' ? 'на складе' : item.sourceMode === 'open_order' ? 'комплектация после заказа' : 'под заказ'}</li>`).join('')}</ul>
     <form data-order-id="${escape(order.id)}"><label>Статус<select name="status">${['received','packing','delivering','delivered','cancelled'].map(status =>
       `<option value="${status}" ${status === order.status ? 'selected' : ''}>${({received:'Получен',packing:'Собираем',delivering:'Везём',delivered:'Доставлен',cancelled:'Отменён'})[status]}</option>`).join('')}</select></label>
@@ -1738,6 +1742,10 @@ $('admin-content').addEventListener('submit', async event => {
         supplierId: values.get('supplierId'), quantity: Number(values.get('quantity')),
         unitCostCents: price === '' ? null : Math.round(Number(price) * 100),
         note: values.get('note'), idempotencyKey: values.get('idempotencyKey') });
+    }
+    else if (form.dataset.emailConfirmation) {
+      const result = await api(`/api/admin/orders/${encodeURIComponent(form.dataset.emailConfirmation)}/confirmation`, 'POST');
+      message(result.sent ? 'Подтверждение отправлено' : result.error || 'Письмо не отправлено');
     }
     else if (form.dataset.orderId) await api(`/api/admin/orders/${encodeURIComponent(form.dataset.orderId)}/status`, 'PATCH',
       { status: values.get('status'), note: values.get('note') });

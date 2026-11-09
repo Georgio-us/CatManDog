@@ -228,7 +228,8 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
         try {
           const clearedKey = `catmandog-paid-session:${sessionId}`;
           if (!localStorage.getItem(clearedKey) && Array.isArray(result.items)) {
-            remainingAfterPayment = onPaid?.(result.items, result.promoApplied === true) === true;
+            remainingAfterPayment = onPaid?.(result.items, result.promoApplied === true,
+              { ...result, sessionId }) === true;
             localStorage.setItem(clearedKey, '1');
           }
           sessionStorage.removeItem('catmandog-payment-attempt');

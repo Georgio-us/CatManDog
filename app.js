@@ -9,7 +9,7 @@ import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
 import { categories, products, catalogProducts, articles } from './data.js?v=confirmed-demand-20261108';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=customer-product-detail-1';
-import { createCheckoutUI } from './checkout-ui.js?v=mainland-checkout-20261109';
+import { createCheckoutUI } from './checkout-ui.js?v=launch-checks-20261109';
 import { availabilityRequestPage } from './availability-request-ui.js';
 import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=sale-price-policy-20261109';
@@ -20,7 +20,7 @@ import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
 import { analyticsItem, announceCommerce } from './analytics-events.js?v=delivery-status-3';
-import { installAnalytics } from './analytics-consent.js?v=ukrainian-public-2';
+import { installAnalytics } from './analytics-consent.js?v=launch-checks-20261109';
 import { matchesCatalogSearch, catalogSuggestions } from './catalog-search.js';
 
 const app = document.querySelector('#app');
@@ -63,7 +63,18 @@ const checkout = createCheckoutUI({
   escape, icon, money, imageBlock, render,
   getCheckoutProfile: () => account.checkoutProfile(),
   saveCheckoutProfile: values => account.saveCheckoutProfile(values),
-  onPaid: (paidItems, promoApplied) => {
+  onPaid: (paidItems, promoApplied, payment) => {
+    if (payment.sessionId?.startsWith('cs_live_') && payment.number) {
+      announceCommerce('purchase', paidItems.map(item => {
+        const product = products.find(candidate => candidate.id === item.productId);
+        const variant = product?.variants?.find(candidate => candidate.id === item.variantId);
+        const analytics = analyticsItem(product, variant, item.qty);
+        return analytics && { ...analytics,
+          ...(Number.isInteger(item.unitPriceCents) ? { price: item.unitPriceCents / 100 } : {}) };
+      }), { transaction_id: payment.number,
+        value: Math.max(0, (payment.subtotalCents - payment.discountCents) / 100),
+        shipping: payment.deliveryCents / 100 });
+    }
     if (promoApplied) account.couponPaid();
     void account.refreshPromo().then(render).catch(() => {});
     for (const item of paidItems) {

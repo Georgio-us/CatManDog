@@ -8,9 +8,9 @@ import { seoCategories, seoCategoryPath } from '../seo-categories.js';
 test('the first sitemap contains only real public pages with Spanish editorial content', async () => {
   const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gu)].map(match => match[1]);
-  assert.deepEqual(urls, ['https://catmandog.es/', 'https://catmandog.es/revista',
+  assert.deepEqual(urls, ['https://catmandog.es/', 'https://catmandog.es/catalogo', 'https://catmandog.es/revista',
     ...articlesEs.map(article => `https://catmandog.es/revista/${article.id}`)]);
-  assert.equal(urls.some(url => /catalog|product|admin|#/u.test(url)), false);
+  assert.equal(urls.some(url => /product|admin|#/u.test(url)), false);
   for (const article of articlesEs) {
     const html = await seoDocument(`/revista/${article.id}`);
     assert.match(html, new RegExp(`<h1>${article.title}</h1>`, 'u'));
@@ -20,10 +20,11 @@ test('the first sitemap contains only real public pages with Spanish editorial c
   }
 });
 
-test('catalog landing remains outside search until products are ready', async () => {
+test('catalog landing is indexable while category pages remain outside search', async () => {
   const catalog = await seoDocument('/catalogo');
-  assert.match(catalog, /<meta name="robots" content="noindex,follow">/u);
+  assert.doesNotMatch(catalog, /<meta name="robots" content="noindex/u);
   assert.match(catalog, /<h1>Catálogo para gatos y perros<\/h1>/u);
+  assert.match(catalog, /<a class="article-card" href="\/catalogo\/gatos\/pienso-seco">/u);
   assert.equal(await seoDocument('/revista/unknown'), null);
   const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
   assert.equal(seoCategoryPath('cat', 'dry-food'), '/catalogo/gatos/pienso-seco');

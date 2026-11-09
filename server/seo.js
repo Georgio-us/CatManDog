@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { articlesEs } from '../journal-content-es.js';
-import { seoCategoryForPath } from '../seo-categories.js';
+import { seoCategories, seoCategoryForPath } from '../seo-categories.js';
 
 const origin = 'https://catmandog.es';
 const shell = new URL('../index.html', import.meta.url);
@@ -9,6 +9,8 @@ const escapeHtml = value => String(value).replace(/[&<>"']/g, character =>
 
 const articleLinks = articlesEs.map(article =>
   `<a class="article-card" href="/revista/${article.id}"><div class="article-meta"><span>${escapeHtml(article.section)}</span><span>${escapeHtml(article.time)}</span></div><h3>${escapeHtml(article.title)}</h3><p>${escapeHtml(article.summary)}</p></a>`).join('');
+const categoryLinks = seoCategories.map(category =>
+  `<a class="article-card" href="${category.path}"><h2>${escapeHtml(category.title)}</h2><p>${escapeHtml(category.intro)}</p></a>`).join('');
 
 function pageData(pathname) {
   const category = seoCategoryForPath(pathname);
@@ -19,9 +21,10 @@ function pageData(pathname) {
   };
   if (pathname === '/catalogo') return {
     title: 'Catálogo de productos para gatos y perros | CatManDog',
-    description: 'Explora el catálogo de CatManDog para gatos y perros',
-    robots: 'noindex,follow',
-    content: '<div class="page"><h1>Catálogo para gatos y perros</h1><p>Explora las categorías y los productos de CatManDog</p></div>'
+    description: 'Explora comida, arena y accesorios para gatos y perros en CatManDog. Consulta marcas, formatos y precios antes de elegir',
+    content: `<div class="page"><div class="journal-top"><h1>Catálogo para gatos y perros</h1>
+      <p>Encuentra comida, arena y accesorios para tus compañeros. Compara marcas, formatos y precios en cada ficha de producto</p></div>
+      <div class="journal-grid">${categoryLinks}</div></div>`
   };
   if (pathname === '/revista') return {
     title: 'Revista sobre mascotas | CatManDog',
@@ -61,7 +64,7 @@ export async function serveSeo(req, res, pathname) {
   res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8',
     'Content-Length': Buffer.byteLength(body), 'Cache-Control': 'no-cache',
     'X-Content-Type-Options': 'nosniff',
-    ...(pathname.startsWith('/catalogo') ? { 'X-Robots-Tag': 'noindex' } : {}) });
+    ...(pathname.startsWith('/catalogo/') ? { 'X-Robots-Tag': 'noindex' } : {}) });
   res.end(req.method === 'HEAD' ? undefined : body);
   return true;
 }

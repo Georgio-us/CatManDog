@@ -3,17 +3,21 @@ import assert from 'node:assert/strict';
 import { createHmac } from 'node:crypto';
 import { handleApi } from '../server/api.js';
 
-test('a paid Stripe event emails the order once, including the charged total and delivery', async () => {
+test('a paid Stripe event keeps payment confirmed and retries a failed email once', async () => {
   const names = ['STRIPE_SECRET_KEY','STRIPE_WEBHOOK_SECRET','PUBLIC_BASE_URL',
     'RESEND_API_KEY','RESEND_FROM'];
   const old = Object.fromEntries(names.map(name => [name, process.env[name]]));
   const oldFetch = globalThis.fetch;
+  const oldError = console.error;
   Object.assign(process.env, { STRIPE_SECRET_KEY:'sk_test_example',
     STRIPE_WEBHOOK_SECRET:'whsec_example', PUBLIC_BASE_URL:'https://catmandog.es',
     RESEND_API_KEY:'re_test_example', RESEND_FROM:'CatManDog <orders@catmandog.es>' });
   const sent = [];
+  let failNext = true;
+  console.error = () => {};
   globalThis.fetch = async (url, options) => {
     sent.push({ url, ...JSON.parse(options.body) });
+    if (failNext) { failNext = false; return { ok:false, status:422 }; }
     return { ok:true };
   };
   try {
@@ -37,7 +41,10 @@ test('a paid Stripe event emails the order once, including the charged total and
       if (sql.includes('FROM order_items WHERE order_id')) return { rows:[
         { name:'Royal Canin Sterilised 37', variant_label:'2 кг', quantity:2, unit_price_cents:2659 }
       ] };
-      if (sql.includes('SET confirmation_sent_at=now()')) order.confirmation_sent_at=new Date();
+      if (sql.includes('SET confirmation_error=$2')) order.confirmation_error='Почтовый сервис не принял письмо (422)';
+      if (sql.includes('SET confirmation_sent_at=now()')) {
+        order.confirmation_sent_at=new Date(); order.confirmation_error=null;
+      }
       return { rows:[] };
     }, release() {} };
     const db = { async connect() { return client } };
@@ -53,15 +60,22 @@ test('a paid Stripe event emails the order once, including the charged total and
     const respond = () => ({ writeHead(code) { assert.equal(code,200) },
       end(body) { assert.deepEqual(JSON.parse(body),{ received:true }) } });
     await handleApi(db,request(),respond(),'/api/stripe/webhook');
+    assert.equal(order.payment_status,'paid');
+    assert.equal(order.confirmation_sent_at,null);
+    assert.match(order.confirmation_error,/422/);
     await handleApi(db,request(),respond(),'/api/stripe/webhook');
-    assert.equal(sent.length,1);
-    assert.equal(sent[0].to[0],'buyer@example.test');
-    assert.match(sent[0].text,/CMD-10001/);
-    assert.match(sent[0].text,/53,17 €/);
-    assert.match(sent[0].text,/Calle Prueba, 1/);
-    assert.match(sent[0].text,/purchase-terms-es\.html/);
+    await handleApi(db,request(),respond(),'/api/stripe/webhook');
+    assert.equal(sent.length,2);
+    assert.ok(order.confirmation_sent_at);
+    assert.equal(order.confirmation_error,null);
+    assert.equal(sent[1].to[0],'buyer@example.test');
+    assert.match(sent[1].text,/CMD-10001/);
+    assert.match(sent[1].text,/53,17 €/);
+    assert.match(sent[1].text,/Calle Prueba, 1/);
+    assert.match(sent[1].text,/purchase-terms-es\.html/);
   } finally {
     globalThis.fetch=oldFetch;
+    console.error=oldError;
     for (const name of names) {
       if (old[name] === undefined) delete process.env[name];
       else process.env[name]=old[name];

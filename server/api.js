@@ -329,8 +329,15 @@ async function deliverOrderConfirmation(client, orderId) {
     if (order?.payment_status === 'paid' && !order.confirmation_sent_at) {
       const items = await client.query(`SELECT name,variant_label,quantity,unit_price_cents
         FROM order_items WHERE order_id=$1 ORDER BY id`, [orderId]);
-      await sendOrderConfirmation(order, items.rows);
-      await client.query('UPDATE orders SET confirmation_sent_at=now() WHERE id=$1', [orderId]);
+      try {
+        await sendOrderConfirmation(order, items.rows);
+        await client.query(`UPDATE orders SET confirmation_sent_at=now(),confirmation_error=NULL
+          WHERE id=$1`, [orderId]);
+      } catch (error) {
+        await client.query(`UPDATE orders SET confirmation_error=$2 WHERE id=$1`,
+          [orderId, String(error.message || 'Не удалось отправить письмо').slice(0, 300)]);
+        console.error('Order confirmation email failed', order.number, error.message);
+      }
     }
     await client.query('COMMIT');
   } catch (error) {
@@ -1679,12 +1686,27 @@ async function adminRoute(db, req, res, path) {
   if (path === '/api/admin/orders' && req.method === 'GET') {
     const { rows } = await db.query(`SELECT o.id,o.number,o.customer_name,o.email,o.phone,o.delivery_address,
       o.delivery_preference,o.status,o.payment_status,o.stock_state,o.total_cents,o.created_at,
+      o.confirmation_sent_at,o.confirmation_error,
       COALESCE(json_agg(json_build_object('name',i.name,'variantLabel',i.variant_label,
       'qty',i.quantity,'unitPriceCents',i.unit_price_cents,'sourceMode',i.source_mode))
       FILTER (WHERE i.id IS NOT NULL),'[]') AS items
       FROM orders o LEFT JOIN order_items i ON i.order_id=o.id GROUP BY o.id
       ORDER BY o.created_at DESC LIMIT 100`);
     return json(res, 200, { orders: rows });
+  }
+  const confirmation = path.match(/^\/api\/admin\/orders\/([^/]+)\/confirmation$/);
+  if (confirmation && req.method === 'POST') {
+    if (!validUuid(confirmation[1])) bad('Некорректный заказ');
+    if (!emailReady()) bad('Почтовая отправка не настроена', 503);
+    const client = await db.connect();
+    try {
+      await deliverOrderConfirmation(client, confirmation[1]);
+      const { rows } = await client.query(`SELECT payment_status,confirmation_sent_at,confirmation_error
+        FROM orders WHERE id=$1`, [confirmation[1]]);
+      if (!rows.length) bad('Заказ не найден', 404);
+      if (rows[0].payment_status !== 'paid') bad('Оплата ещё не подтверждена', 409);
+      return json(res, 200, { sent: Boolean(rows[0].confirmation_sent_at), error: rows[0].confirmation_error });
+    } finally { client.release(); }
   }
   if (path === '/api/admin/service-requests' && req.method === 'GET') {
     const params = new URL(req.url, 'http://localhost').searchParams;
@@ -2065,14 +2087,18 @@ export async function handleApi(db, req, res, pathname) {
       const url = new URL(req.url || '/', 'https://catmandog.es');
       const sessionId = url.searchParams.get('session_id') || '';
       if (!/^cs_(test|live)_[A-Za-z0-9]+$/.test(sessionId)) bad('Некорректная сессия оплаты');
-      const { rows } = await db.query(`SELECT id,number,payment_status,total_cents,promo_code FROM orders
+      const { rows } = await db.query(`SELECT id,number,payment_status,total_cents,subtotal_cents,
+        discount_cents,delivery_cents,promo_code FROM orders
         WHERE stripe_checkout_session_id=$1`, [sessionId]);
       if (!rows[0]) bad('Заказ не найден', 404);
       const items = rows[0].payment_status === 'paid'
         ? (await db.query(`SELECT product_id AS "productId",variant_id AS "variantId",
-            quantity AS qty FROM order_items WHERE order_id=$1`, [rows[0].id])).rows : [];
+            quantity AS qty,unit_price_cents AS "unitPriceCents"
+            FROM order_items WHERE order_id=$1`, [rows[0].id])).rows : [];
       return json(res, 200, { number: rows[0].number,
         paymentStatus: rows[0].payment_status, totalCents: rows[0].total_cents,
+        subtotalCents: rows[0].subtotal_cents, discountCents: rows[0].discount_cents,
+        deliveryCents: rows[0].delivery_cents,
         promoApplied: Boolean(rows[0].promo_code), items });
     }
     if (pathname === '/api/me/orders' && req.method === 'GET') {

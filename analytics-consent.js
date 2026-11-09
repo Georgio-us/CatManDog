@@ -1,6 +1,6 @@
 const CONSENT_KEY = 'catmandog-analytics-consent-v1';
 const MEASUREMENT_ID = 'G-CTTBQ7PJP9';
-const COMMERCE_EVENTS = new Set(['view_item_list', 'select_item', 'view_item', 'add_to_cart', 'begin_checkout']);
+const COMMERCE_EVENTS = new Set(['view_item_list', 'select_item', 'view_item', 'add_to_cart', 'begin_checkout', 'purchase']);
 
 export function publicPageLocation(location) {
   const path = location.pathname;
@@ -108,6 +108,9 @@ export function installAnalytics(language) {
   });
   window.addEventListener('catmandog:commerce', ({ detail }) => {
     if (!enabled || !COMMERCE_EVENTS.has(detail?.event)) return;
+    if (detail.event === 'purchase' &&
+        (typeof detail.ecommerce?.transaction_id !== 'string' ||
+          !Number.isFinite(detail.ecommerce?.value))) return;
     const items = detail.ecommerce?.items;
     if (!Array.isArray(items) || !items.length) return;
     const cleanItems = items.map(item => ({
@@ -117,7 +120,12 @@ export function installAnalytics(language) {
     }));
     window.gtag('event', detail.event, {
       currency: 'EUR', items: cleanItems,
-      ...(typeof detail.ecommerce.item_list_id === 'string' ? { item_list_id: detail.ecommerce.item_list_id } : {})
+      ...(typeof detail.ecommerce.item_list_id === 'string' ? { item_list_id: detail.ecommerce.item_list_id } : {}),
+      ...(detail.event === 'purchase' && typeof detail.ecommerce.transaction_id === 'string'
+        && Number.isFinite(detail.ecommerce.value)
+        ? { transaction_id: detail.ecommerce.transaction_id, value: detail.ecommerce.value,
+          ...(Number.isFinite(detail.ecommerce.shipping) ? { shipping: detail.ecommerce.shipping } : {}) }
+        : {})
     });
   });
   return { pageView };

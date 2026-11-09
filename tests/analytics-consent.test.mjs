@@ -55,11 +55,18 @@ test('Google tag and commerce events start only after acceptance; rejected visit
     assert.equal(scripts.length, 1);
     assert.match(scripts[0].src, /^https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-/);
     listeners['catmandog:commerce']({ detail: { event: 'add_to_cart', ecommerce: { items: [{ item_id: 'sku', email: 'private@example.com', price: 12 }] } } });
+    listeners['catmandog:commerce']({ detail: { event: 'purchase', ecommerce: {
+      transaction_id: 'CMD-10001', value: 12, shipping: 3.99,
+      items: [{ item_id: 'sku', item_name: 'Food', quantity: 1, price: 12, email: 'private@example.com' }] } } });
     const commands = globalThis.window.dataLayer.map(args => [...args]);
     assert.deepEqual(commands[0].slice(0,2), ['consent','default']);
     assert.equal(commands[0][2].analytics_storage, 'denied');
     assert.equal(commands.some(args => args[0] === 'event' && args[1] === 'page_view'), true);
     assert.equal(commands.some(args => args[0] === 'event' && args[1] === 'add_to_cart'), true);
+    const purchase = commands.find(args => args[0] === 'event' && args[1] === 'purchase');
+    assert.equal(purchase[2].transaction_id, 'CMD-10001');
+    assert.equal(purchase[2].value, 12);
+    assert.equal(purchase[2].shipping, 3.99);
     assert.equal(JSON.stringify(commands).includes('private@example.com'), false);
 
     reject.listeners.click();
