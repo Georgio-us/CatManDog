@@ -181,13 +181,13 @@ function renderProductDetail() {
       availability: variant.availability
     };
     const sale = live?.price_override_cents ?? live?.source_price_cents;
-    const confirmed = live?.price_confirmed === true;
+    const confirmed = live?.price_accepted === true;
     const saleInput = confirmed && sale ? (sale / 100).toFixed(2) :
       live?.price_override_cents ? (live.price_override_cents / 100).toFixed(2) : '';
     const stock = live?.stock_quantity === null || live?.stock_quantity === undefined
       ? 'Остаток не указан' : `На складе ${live.stock_quantity}`;
     return `<details class="catalog-sku" data-catalog-sku="${escape(variant.id)}"><summary><span><strong>${escape(variant.label)}</strong><small>${escape(variant.id)}</small></span>
-      <span>${sale ? euros(sale) : 'Цена не указана'}<small>${confirmed ? 'Цена подтверждена' : 'Цена не подтверждена'}</small></span>
+      <span>${sale ? euros(sale) : 'Цена не указана'}<small>${confirmed ? 'Цена для продажи установлена' : 'Цена уточняется'}</small></span>
       <span>${stock}</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
       <div class="catalog-sku-body"><div class="catalog-sku-facts"><span>Доступность: ${escape(({on_hand:'На складе',source_on_demand:'Под заказ',pending:'Уточняется',unavailable:'Недоступен'})[live?.availability] || 'Не указана')}</span>
@@ -196,9 +196,8 @@ function renderProductDetail() {
           <label>Цена продажи, €<input type="number" name="priceEuros" min="0.01" step="0.01" required value="${saleInput}" placeholder="Введите цену"></label>
           <div class="catalog-price-discounts" role="group" aria-label="Скидка от текущей цены"><button type="button" data-price-discount="5" ${confirmed ? '' : 'disabled'}>-5%</button>
             <button type="button" data-price-discount="10" ${confirmed ? '' : 'disabled'}>-10%</button></div>
-          <label class="catalog-price-confirm"><input type="checkbox" name="priceConfirmed" ${confirmed ? 'checked' : ''}> Цена проверена</label>
           <button type="submit" class="catalog-price-save">Сохранить цену</button>
-          <small class="catalog-price-note">Скидка считается от текущей подтверждённой цены. Закупочная цена не меняется</small></form>` : '<p>Данные цены пока не загружены</p>'}
+          <small class="catalog-price-note">Сохранение устанавливает цену продажи. Скидка считается от текущей цены. Закупочная цена не меняется</small></form>` : '<p>Данные цены пока не загружены</p>'}
         <details class="catalog-product-offers" data-product-offers-id="${escape(variant.id)}"><summary>Закупочные предложения для этого SKU <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="offer-content">Загружаю</div></details></div></details>`;
   }).join('');
   $('admin-content').innerHTML = `<section class="product-workspace product-detail">
@@ -238,7 +237,7 @@ function renderProductList() {
       <label>Изменить ${productBrand === 'all' ? 'все SKU' : `бренд ${escape(productBrand)}`}<select id="catalog-sale-bulk"><option value="">Выберите статус</option>${Object.entries(labels).map(([status,label]) =>
       `<option value="${status}">${label}</option>`).join('')}</select></label><button type="button" data-sale-bulk>Применить к ${productBrand === 'all' ? 'всему каталогу' : 'бренду'}</button></div>
       <div class="catalog-sale-table-wrap"><table class="catalog-sale-table"><thead><tr><th>Товар и SKU</th><th>Бренд</th><th>Категория</th><th>Цена продажи</th><th>Статус продажи</th></tr></thead><tbody>${matching.slice(0,productVisibleCount).map(item =>
-      `<tr><td><strong>${escape(item.name)}</strong><small>${escape(item.label)} · ${escape(item.variant_id)}</small></td><td>${escape(item.brand || 'Без бренда')}</td><td>${escape(item.category || '')}</td><td>${item.sale_price_cents ? euros(item.sale_price_cents) : 'Цена уточняется'}</td><td><select class="catalog-sale-select" data-sale-variant="${escape(item.variant_id)}" aria-label="Статус продажи ${escape(item.name)} ${escape(item.label)}">${Object.entries(labels).map(([status,label]) =>
+      `<tr><td><strong>${escape(item.name)}</strong><small>${escape(item.label)} · ${escape(item.variant_id)}</small></td><td>${escape(item.brand || 'Без бренда')}</td><td>${escape(item.category || '')}</td><td>${item.price_accepted && item.sale_price_cents ? euros(item.sale_price_cents) : 'Цена уточняется'}</td><td><select class="catalog-sale-select" data-sale-variant="${escape(item.variant_id)}" aria-label="Статус продажи ${escape(item.name)} ${escape(item.label)}">${Object.entries(labels).map(([status,label]) =>
       `<option value="${status}" ${item.sale_status === status ? 'selected' : ''}>${label}</option>`).join('')}</select></td></tr>`).join('')}</tbody></table></div>`;
     $('catalog-product-count').textContent = `Показано ${Math.min(matching.length, productVisibleCount)} из ${matching.length} SKU`;
     $('catalog-product-more').hidden = matching.length <= productVisibleCount;
@@ -346,14 +345,14 @@ async function loadCustomerDetail(details) {
 function auditRow(row) {
   const sale = row.price_override_cents ?? row.source_price_cents;
   const cost = row.purchase_price_cents ?? row.supplier_cost_cents;
-  const needs = [!row.price_confirmed && 'Цена', cost === null && 'Закупка',
+  const needs = [!row.price_accepted && 'Цена', cost === null && 'Закупка',
     row.tax_rate_bps === null && 'IVA',
     !row.supplier_name && 'Поставщик'].filter(Boolean).join(', ');
   return `<article class="audit-row" data-search="${escape([row.name,row.brand,row.label,row.variant_id,row.supplier_name].join(' ').toLowerCase())}"
     data-issues="${escape(needs.toLowerCase())}" data-pet="${escape(row.pet)}">
     <div class="audit-identity"><strong>${escape(row.name)}</strong><small>${escape(row.brand || '')} · ${escape(row.label)} · ${escape(row.variant_id)}</small>
       <small>На складе: ${row.stock_quantity ?? 'не указано'} · Резерв: ${row.reserved_quantity || 0}</small></div>
-    <div><small>Продажа</small><strong>${sale ? euros(sale) : 'Нет цены'}</strong></div>
+    <div><small>Продажа</small><strong>${sale ? euros(sale) : 'Нет цены'}</strong>${row.price_review ? `<small>${escape(row.price_review)}</small>` : ''}${row.gross_spread_cents !== null && row.gross_spread_cents <= 0 ? '<small>Цена не покрывает закупку; доставка, упаковка и эквайринг считаются отдельно</small>' : ''}</div>
     <div><small>Закупка</small><strong>${cost === null ? 'Не указана' : euros(cost)}</strong></div>
     <div><small>Поставщик</small><strong>${escape(row.supplier_name || 'Не выбран')}</strong></div>
     <div><small>IVA</small><strong>${row.tax_rate_bps === null ? 'Не указана' : `${row.tax_rate_bps / 100}%`}</strong></div>
@@ -368,16 +367,16 @@ function auditRow(row) {
     </details></article>`;
 }
 function renderAudit() {
-  const missingPrice = auditRows.filter(row => !row.price_confirmed).length;
+  const missingPrice = auditRows.filter(row => !row.price_accepted).length;
   const missingCost = auditRows.filter(row => row.purchase_price_cents === null && row.supplier_cost_cents === null).length;
   const missingSupplier = auditRows.filter(row => !row.supplier_name).length;
   const missingTax = auditRows.filter(row => row.tax_rate_bps === null).length;
-  $('admin-content').innerHTML = `<div class="audit-intro"><h2>Проверка данных товаров</h2><p>Это список конкретных фасовок, где нужно подтвердить цену продажи, закупку, ставку IVA или поставщика. Приоритет и заметка помогают отметить, что проверять первым. Предложение поставщика заполняйте только по полученному прайсу или договору.</p></div><div class="audit-overview"><div><strong>${auditRows.length}</strong><span>SKU в каталоге</span></div>
-    <div><strong>${missingPrice}</strong><span>Цен проверить</span></div><div><strong>${missingCost}</strong><span>Без закупочной цены</span></div>
+  $('admin-content').innerHTML = `<div class="audit-intro"><h2>Проверка данных товаров</h2><p>Здесь видны фасовки без установленной цены продажи и внутренние замечания к расчётам. Закупка, IVA и поставщик учитываются отдельно и сами по себе не блокируют оформление. Доставка, упаковка и эквайринг проверяются при оценке доходности заказа.</p></div><div class="audit-overview"><div><strong>${auditRows.length}</strong><span>SKU в каталоге</span></div>
+    <div><strong>${missingPrice}</strong><span>Без цены для оплаты</span></div><div><strong>${missingCost}</strong><span>Без закупочной цены</span></div>
     <div><strong>${missingSupplier}</strong><span>Без поставщика</span></div>
     <div><strong>${missingTax}</strong><span>Без ставки IVA</span></div></div>
     <div class="audit-toolbar"><label>Поиск SKU<input id="audit-search" type="search" placeholder="Название, бренд или артикул"></label>
-      <label>Показать<select id="audit-filter"><option value="all">Все варианты</option><option value="price">Цена не подтверждена</option>
+      <label>Показать<select id="audit-filter"><option value="all">Все варианты</option><option value="price">Без цены для оплаты</option>
         <option value="cost">Нет закупочной цены</option><option value="supplier">Нет поставщика</option>
         <option value="tax">Нет ставки IVA</option></select></label>
       <label>Питомец<select id="audit-pet"><option value="all">Кошки и собаки</option><option value="cat">Кошки</option><option value="dog">Собаки</option></select></label></div>
@@ -397,7 +396,7 @@ function filterAudit() {
     const row = auditRows[index];
     const visible = (!query || element.dataset.search.includes(query)) &&
       (pet === 'all' || row.pet === pet) &&
-      (filter === 'all' || (filter === 'price' && !row.price_confirmed) ||
+      (filter === 'all' || (filter === 'price' && !row.price_accepted) ||
       (filter === 'cost' && row.purchase_price_cents === null && row.supplier_cost_cents === null) ||
       (filter === 'supplier' && !row.supplier_name) ||
       (filter === 'tax' && row.tax_rate_bps === null));
@@ -1706,7 +1705,7 @@ $('admin-content').addEventListener('submit', async event => {
       if (!eurosValue || !/^\d+(?:[.,]\d{1,2})?$/.test(eurosValue) || cents <= 0)
         throw new Error('Введите корректную цену в евро');
       await api(`/api/admin/variants/${encodeURIComponent(form.dataset.salePrice)}/sale-price`, 'PATCH',
-        { priceCents: cents, priceConfirmed: values.has('priceConfirmed') });
+        { priceCents: cents });
     }
     else if (form.dataset.reviewId) await api(`/api/admin/variants/${encodeURIComponent(form.dataset.reviewId)}/review`, 'PATCH',
       { priority: Number(values.get('priority')), note: values.get('note') });

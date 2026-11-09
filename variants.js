@@ -13,6 +13,7 @@ export const isDemoPrice = sku => !!sku && confirmedPrice(sku) === null;
 export const storefrontPrice = sku => sku?.storefrontRetired ? null : confirmedPrice(sku);
 export function canBuy(sku) {
   if (sku?.saleStatus) return storefrontPrice(sku) !== null &&
+    sku.serverPriceConfirmed !== false && sku.serverAvailableForCart !== false &&
     !sku.storefrontRetired && sku.saleStatus !== 'unavailable';
   return storefrontPrice(sku) !== null && !sku.storefrontRetired &&
     sku.serverAvailableForCart !== false &&

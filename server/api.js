@@ -23,6 +23,7 @@ import { applyMatchedPrices } from './matched-pricing.js';
 import { activatePaperCoupon, normalizeBuyerPhone, resolvePromo,
   savedPaperCoupon } from './promo.js';
 import { churuRepackOptions } from '../churu-retail-formats.js';
+import { salePriceDecision } from './sale-price-policy.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
@@ -124,14 +125,11 @@ async function promoFor(db, code, customer, identity = null, lock = false, skipS
 }
 
 function publicQuote(quote) {
-  const canSource = enabled('SOURCE_ON_DEMAND_PAYMENT_ENABLED');
-  return { items: quote.items.map(({ orderable, sourceMode, ...item }) => ({ ...item,
-      orderable: orderable && (sourceMode !== 'source_on_demand' || item.saleStatus === 'preorder' || canSource),
+  return { items: quote.items.map(({ sourceMode, ...item }) => ({ ...item,
       availability: sourceMode })),
     subtotalCents: quote.subtotalCents, discountCents: quote.discountCents,
     deliveryCents: quote.deliveryCents, totalCents: quote.totalCents,
-    orderable: quote.orderable && (canSource || quote.items.every(item =>
-      item.sourceMode !== 'source_on_demand' || item.saleStatus === 'preorder')),
+    orderable: quote.orderable,
     addressVerification: quote.addressVerification,
     deliverySlot: quote.deliverySlot, promoCode: quote.promoCode };
 }
@@ -199,7 +197,7 @@ async function createOrder(db, payload, customer) {
     }
     const ids = lines.map(line => cap(line.variantId, 180));
     const variants = await client.query(`SELECT v.id AS variant_id,v.product_id,v.label,v.source->>'weight' AS declared_weight,
-      v.source->>'packageWeightKg' AS package_weight_kg,
+      v.source->>'packageWeightKg' AS package_weight_kg,v.source AS price_source,
       p.category,v.source_price_cents,
       v.price_override_cents,v.price_confirmed,v.source_orderable,v.availability,v.sale_status,v.tax_rate_bps,
       v.stock_quantity,v.reserved_quantity,p.name,
@@ -220,9 +218,6 @@ async function createOrder(db, payload, customer) {
     if (shipping && !shipping.available) bad('Для этой корзины доставка по Испании пока недоступна');
     const quote = priceQuote(lines, variants.rows, promo, shipping?.deliveryCents ?? null);
     if (!quote.orderable) bad('Один из товаров пока нельзя заказать');
-    if (!enabled('SOURCE_ON_DEMAND_PAYMENT_ENABLED') && quote.items.some(item =>
-      item.sourceMode === 'source_on_demand' && item.saleStatus !== 'preorder'))
-      bad('Для оплаты доступны только товары с подтверждённым наличием');
     if (delivery.mode !== 'national' && variants.rows.every(row => row.sale_status)) {
       const requiresPreorder = quote.items.some(item => item.saleStatus === 'preorder');
       if (delivery.mode !== (requiresPreorder ? 'preorder' : 'slot'))
@@ -1208,7 +1203,7 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { ok: true });
   }
   if (path === '/api/admin/overview' && req.method === 'GET') {
-    const [catalog, orders, requests, top, purchases, coverage, customers, coupon] = await Promise.all([
+    const [catalog, orders, requests, top, purchases, coverage, customers, coupon, salePrices] = await Promise.all([
       db.query(`SELECT count(*)::integer AS total,
         count(*) FILTER (WHERE v.price_confirmed=false)::integer AS unconfirmed_prices,
         count(*) FILTER (WHERE v.purchase_price_cents IS NULL AND so.cost_cents IS NULL)::integer AS missing_costs,
@@ -1246,15 +1241,20 @@ async function adminRoute(db, req, res, path) {
           AND o.payment_status IN ('awaiting_payment','pending')
           AND o.stock_state='reserved') AS pending_uses
         FROM promo_codes p WHERE p.kind='paper_shared'
-        ORDER BY p.expires_at DESC NULLS LAST LIMIT 1`)
+        ORDER BY p.expires_at DESC NULLS LAST LIMIT 1`),
+      catalogSnapshot(db)
     ]);
+    catalog.rows[0].unconfirmed_prices = salePrices.filter(row => !row.price_accepted).length;
+    for (const group of coverage.rows)
+      group.unconfirmed_prices = salePrices.filter(row => row.pet === group.pet &&
+        row.category === group.category && !row.price_accepted).length;
     return json(res, 200, { catalog: catalog.rows[0], orders: orders.rows[0],
       requests: requests.rows[0], topPaidSkus: top.rows, purchases: purchases.rows[0],
       coverage: coverage.rows, customers: customers.rows[0], coupon: coupon.rows[0] || null });
   }
   if (path === '/api/admin/sku-audit' && req.method === 'GET') {
     const { rows } = await db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.category,p.pet,
-      v.label,v.source_price_cents,v.price_override_cents,v.purchase_price_cents,
+      v.label,v.source AS price_source,v.source_price_cents,v.price_override_cents,v.purchase_price_cents,
       v.price_confirmed,v.source_orderable,v.availability,v.stock_quantity,v.reserved_quantity,v.tax_rate_bps,
       v.display_priority,v.review_note,v.reviewed_at,
       so.cost_cents AS supplier_cost_cents,so.vat_included AS supplier_vat_included,
@@ -1264,7 +1264,14 @@ async function adminRoute(db, req, res, path) {
       LEFT JOIN suppliers s ON s.id=so.supplier_id
       WHERE p.active=true AND v.active=true
       ORDER BY p.name,v.label LIMIT 2000`);
-    return json(res, 200, { variants: rows });
+    return json(res, 200, { variants: rows.map(({ price_source, ...row }) => {
+      const price = salePriceDecision({ ...row, price_source });
+      const cost = row.purchase_price_cents ?? row.supplier_cost_cents;
+      return { ...row, price_accepted: price.accepted, price_basis: price.basis,
+        price_review: price.review, sale_price_cents: price.accepted ? price.priceCents : null,
+        gross_spread_cents: Number.isInteger(cost) && price.accepted
+          ? price.priceCents - cost : null };
+    }) });
   }
   if (path === '/api/admin/replenishment' && req.method === 'GET') {
     const { rows } = await db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.pet,
@@ -1752,15 +1759,16 @@ async function adminRoute(db, req, res, path) {
     const price = Number(body.priceCents);
     if (!Number.isInteger(price) || price <= 0 || price > 100000000)
       bad('Укажите корректную цену продажи');
-    if (typeof body.priceConfirmed !== 'boolean') bad('Укажите статус проверки цены');
+    // Saving a new retail price is the owner's explicit pricing decision.
+    // There is no separate checkbox for every SKU.
     const { rows } = await db.query(`UPDATE catalog_variants
       SET price_override_cents=$1,price_confirmed=$2,updated_at=now()
       WHERE id=$3 RETURNING source_price_cents,purchase_price_cents`,
-    [price, body.priceConfirmed, variantId]);
+    [price, true, variantId]);
     if (!rows.length) bad('Вариант не найден', 404);
     await db.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
       VALUES($1,$2,'variant_sale_price_updated',$3,$4)`, [randomUUID(), operator.id, variantId,
-      { priceCents: price, priceConfirmed: body.priceConfirmed }]);
+      { priceCents: price, priceConfirmed: true }]);
     return json(res, 200, { ok: true, priceCents: price });
   }
   const variant = path.match(/^\/api\/admin\/variants\/([^/]+)$/);
@@ -1934,7 +1942,7 @@ export async function handleApi(db, req, res, pathname) {
       { ordersEnabled: paymentAccess, accountsEnabled: enabled('ACCOUNTS_ENABLED'),
         emailEnabled: emailReady(), googleClientId: enabled('ACCOUNTS_ENABLED') ? googleClientId() : null,
         paymentsEnabled: paymentAccess,
-        sourcePaymentsEnabled: enabled('SOURCE_ON_DEMAND_PAYMENT_ENABLED'),
+        sourcePaymentsEnabled: paymentAccess,
         supportEnabled: enabled('SUPPORT_ENABLED') && emailReady() });
     }
     if (pathname === '/api/catalog' && req.method === 'GET') {
@@ -1942,9 +1950,10 @@ export async function handleApi(db, req, res, pathname) {
       return json(res, 200, { variants: list.map(({ price_override_cents, source_price_cents,
         purchase_price_cents, sale_price_cents, stock_quantity, reserved_quantity, reorder_point, target_stock,
         tax_rate_bps, selected_supplier_units, supplier_source_count, sourcing_availability,
+        price_basis,price_review,
         ...entry }) => ({ ...entry,
-        priceCents: entry.price_confirmed ? price_override_cents ?? source_price_cents : null,
-        referencePriceCents: entry.price_confirmed ? null : source_price_cents,
+        priceCents: entry.price_accepted ? sale_price_cents : null,
+        referencePriceCents: entry.price_accepted ? null : source_price_cents,
         sourcingAvailability: sourcing_availability,
         saleStatus: entry.sale_status,
         availableForCart: entry.sale_status !== 'unavailable',

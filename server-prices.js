@@ -1,4 +1,4 @@
-import { hasVariants } from './variants.js?v=delivery-status-3';
+import { hasVariants } from './variants.js?v=sale-price-policy-20261109';
 
 function catalogImage(path, previousImages, alt) {
   const imagePath = value => {
@@ -94,17 +94,17 @@ export function applyServerCatalog(products, catalogProducts, entries) {
           row.availability === 'unavailable' ||
           (row.availability === 'on_hand' && row.stock_quantity <= 0)
           ? 'unavailable' : row.availability);
-      sku.serverPriceConfirmed = row.price_confirmed === true;
-      if (row.price_confirmed === true && Number.isInteger(row.priceCents) && row.priceCents > 0) {
+      sku.serverPriceConfirmed = row.price_accepted === true ||
+        (row.price_accepted === undefined && row.price_confirmed === true);
+      if (sku.serverPriceConfirmed && Number.isInteger(row.priceCents) && row.priceCents > 0) {
         sku.price = row.priceCents / 100;
         sku.priceStatus = 'confirmed';
-      } else if (Number.isFinite(sku.price) && sku.price > 0 &&
-          ['confirmed', 'temporary'].includes(sku.priceStatus)) {
-        // Keep the researched storefront price when the database has no approved sale price.
-        // Supplier availability and price confirmation do not erase that research.
       } else if (Number.isInteger(row.referencePriceCents) && row.referencePriceCents > 0) {
         sku.price = row.referencePriceCents / 100;
         sku.priceStatus = 'temporary';
+      } else if (Number.isFinite(sku.price) && sku.price > 0 &&
+          ['confirmed', 'temporary'].includes(sku.priceStatus)) {
+        // A documented retail price remains visible even if checkout is blocked.
       } else {
         sku.price = null;
         sku.priceStatus = 'pending';

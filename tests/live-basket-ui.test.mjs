@@ -62,11 +62,11 @@ test('supplier-linked SKU keeps its retail price in the basket but cannot check 
   assert.doesNotMatch(html, /Демонстрационная цена/);
 });
 
-test('available SKU with an indicative retail price can inspect delivery but cannot pay yet', () => {
+test('basket does not describe a fixed displayed price as merely indicative', () => {
   const previewSku = { ...product.variants[0], saleStatus:'available',
     serverPriceConfirmed:false, priceStatus:'temporary' };
   const html = renderLiveBasket({ ...helpers, products:[{ ...product, variants:[previewSku] }],
     cart:[{ id:'food', productId:'food', variantId:'food-small', qty:1 }], grouping:'together' });
-  assert.match(html, /id="checkout" data-live-checkout-group="all"/);
-  assert.match(html, /оплата откроется после подтверждения цен/);
+  assert.match(html, /id="checkout"[^>]*disabled/);
+  assert.doesNotMatch(html, /оплата откроется после подтверждения цен/);
 });

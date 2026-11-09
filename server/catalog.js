@@ -4,6 +4,7 @@ import { snapshots, confirmedPrice, canBuy } from '../variants.js';
 import { yaguRetailBenchmarks } from '../yagu-retail-benchmarks.js';
 import { supplierSourcingByVariant } from './sourcing-status.js';
 import { launchSelectedImageMap } from '../launch-selected-image-map.js';
+import { salePriceDecision } from './sale-price-policy.js';
 
 const cents = value => Number.isFinite(value) && value > 0 ? Math.round(value * 100) : null;
 const imagePath = image => typeof image === 'string' ? image : image?.src || null;
@@ -197,7 +198,7 @@ export async function catalogSnapshot(db) {
   const [{ rows }, supplierStates] = await Promise.all([db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.category,p.pet,p.image_path,
     p.description,p.details,p.food_type,v.image_path AS variant_image_path,
     v.description AS variant_description,v.details AS variant_details,
-    v.label,v.source->>'weight' AS declared_weight,
+    v.label,v.source AS price_source,v.source->>'weight' AS declared_weight,
     v.source->>'packageWeightKg' AS package_weight_kg,
     v.source_price_cents,v.price_override_cents,v.purchase_price_cents,
     v.price_confirmed,v.source_orderable,v.availability,v.sale_status,v.stock_quantity,v.reorder_point,v.target_stock,
@@ -207,20 +208,19 @@ export async function catalogSnapshot(db) {
       AND coalesce(p.source->>'gift','')='' AND coalesce(p.source->>'catalogHidden','false')!='true'
     ORDER BY p.name,v.display_priority DESC,v.label`),
     supplierSourcingByVariant(db)]);
-  return rows.map(row => {
+  return rows.map(({ price_source, ...row }) => {
     const supplier = supplierStates.get(row.variant_id);
+    const price = salePriceDecision({ ...row, price_source });
     const sourcingAvailability = ['unavailable', 'pending'].includes(row.availability)
       ? 'unavailable' : row.availability === 'on_hand' && row.stock_quantity > 0
       ? 'on_hand' : supplier ? 'source_on_demand' : 'unavailable';
     return {
-      ...row, sale_price_cents: row.price_override_cents ?? row.source_price_cents,
+      ...row, sale_price_cents: price.priceCents, price_accepted: price.accepted,
+      price_basis: price.basis, price_review: price.review,
       sourcing_availability: sourcingAvailability,
       selected_supplier_units: supplier?.selectedUnits || 0,
       supplier_source_count: supplier?.sourceCount || 0,
-      // Sale policy is independent from physical stock. A confirmed retail price is
-      // still required before checkout can charge the customer.
-      orderable: row.sale_status !== 'unavailable' && row.price_confirmed &&
-        (row.price_override_cents ?? row.source_price_cents) > 0
+      orderable: row.sale_status !== 'unavailable' && price.accepted
     };
   });
 }

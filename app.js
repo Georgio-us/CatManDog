@@ -1,18 +1,18 @@
 import { createUsefulUI } from './useful.js?v=ukrainian-public-3';
 import { createAccountUI } from './account.js?v=checkout-address-1';
-import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=delivery-status-3';
-import { accessoryDetail } from './accessory-ui.js?v=spain-delivery-1';
+import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
+import { accessoryDetail } from './accessory-ui.js?v=sale-price-policy-20261109';
 import { availabilityScenarioDetail, availabilityScenarioFeedback } from './availability-scenario.js?v=spain-delivery-1';
 import { createRoyalCaninFlow } from './rc-sterilised-flow.js?v=7';
-import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=spain-delivery-1';
+import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=sale-price-policy-20261109';
 import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
 import { categories, products, catalogProducts, articles } from './data.js?v=confirmed-demand-20261108';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=customer-product-detail-1';
-import { createCheckoutUI } from './checkout-ui.js?v=checkout-paid-cart-20261109';
+import { createCheckoutUI } from './checkout-ui.js?v=sale-price-policy-20261109';
 import { availabilityRequestPage } from './availability-request-ui.js';
 import { orderVariantId } from './order-progress.js';
-import { applyServerCatalog } from './server-prices.js?v=customer-product-detail-1';
+import { applyServerCatalog } from './server-prices.js?v=sale-price-policy-20261109';
 
 import { homeDirections, activeHomeLanding } from './collections.js?v=cat-assortment-1';
 import { installLocale, intlLocale, locale, translate } from './locale.js?v=confirmed-demand-20261108';
@@ -87,7 +87,7 @@ const checkout = createCheckoutUI({
   }),
   isReady: () => checkoutCart().length > 0 && checkoutCart().every(item => {
     const sku = cartSku(item, products);
-    return cartUnitPrice(item) !== null && canBuy(sku);
+    return cartUnitPrice(item) !== null && sku?.serverPriceConfirmed !== false && canBuy(sku);
   }),
   getCheckoutContext: () => ({ group: checkoutGroup === 'stock' && checkoutCart().length < cart.length ? 'stock' : 'all',
     hasSupplier: checkoutCart().some(item => fulfillmentState(cartSku(item, products)) === 'supplier'),

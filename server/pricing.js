@@ -1,6 +1,7 @@
 import { deliveryTiming, availableDeliverySlots } from '../checkout-model.js';
 import { LOCAL_DELIVERY_FEE_CENTS, LOCAL_FREE_DELIVERY_FROM_CENTS,
   isMainlandPostcode } from '../shipping-policy.js';
+import { salePriceDecision } from './sale-price-policy.js';
 
 export const DELIVERY_FEE_CENTS = LOCAL_DELIVERY_FEE_CENTS;
 export const FREE_DELIVERY_FROM_CENTS = LOCAL_FREE_DELIVERY_FROM_CENTS;
@@ -52,10 +53,9 @@ export function priceQuote(lines, variants, promo = null, shippingCents = null) 
     if (seen.has(id)) throw new Error('Повторяющийся вариант в корзине');
     seen.add(id);
     if (!Number.isInteger(line.qty) || line.qty < 1 || line.qty > 99) throw new Error('Некорректное количество');
-    const price = variant.price_confirmed
-      ? variant.price_override_cents ?? variant.source_price_cents
-      : variant.source_price_cents;
-    if (!Number.isInteger(price) || price <= 0) throw new Error('Цена товара ещё не подтверждена');
+    const decision = salePriceDecision(variant);
+    const price = decision.priceCents;
+    if (!Number.isInteger(price) || price <= 0) throw new Error('Цена товара уточняется');
     const saleStatus = variant.sale_status;
     const sourceMode = saleStatus === 'preorder' ? 'source_on_demand' :
       saleStatus === 'available' ?
@@ -65,8 +65,8 @@ export function priceQuote(lines, variants, promo = null, shippingCents = null) 
     return { productId: variant.product_id, variantId: id, name: variant.name, saleStatus,
       variantLabel: variant.label, qty: line.qty, unitPriceCents: price,
       lineCents: price * line.qty, sourceMode,
-      orderable: saleStatus ? !!variant.price_confirmed && saleStatus !== 'unavailable' :
-        !!variant.price_confirmed && variant.source_orderable !== false &&
+      orderable: saleStatus ? decision.accepted && saleStatus !== 'unavailable' :
+        decision.accepted && variant.source_orderable !== false &&
         variant.sourcing_availability !== 'unavailable' && variant.supplier_matched !== false &&
         variant.availability !== 'unavailable' &&
         (variant.availability !== 'on_hand' ||
