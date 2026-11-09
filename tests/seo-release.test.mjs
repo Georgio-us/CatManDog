@@ -9,7 +9,9 @@ test('the first sitemap contains only real public pages with Spanish editorial c
   const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gu)].map(match => match[1]);
   assert.deepEqual(urls, ['https://catmandog.es/', 'https://catmandog.es/catalogo', 'https://catmandog.es/revista',
-    ...articlesEs.map(article => `https://catmandog.es/revista/${article.id}`)]);
+    ...articlesEs.map(article => `https://catmandog.es/revista/${article.id}`),
+    'https://catmandog.es/legal-es.html', 'https://catmandog.es/purchase-terms-es.html',
+    'https://catmandog.es/privacy-es.html']);
   assert.equal(urls.some(url => /product|admin|#/u.test(url)), false);
   for (const article of articlesEs) {
     const html = await seoDocument(`/revista/${article.id}`);
