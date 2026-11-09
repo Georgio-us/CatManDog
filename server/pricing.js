@@ -53,7 +53,9 @@ export function priceQuote(lines, variants, promo = null, shippingCents = null) 
     if (seen.has(id)) throw new Error('Повторяющийся вариант в корзине');
     seen.add(id);
     if (!Number.isInteger(line.qty) || line.qty < 1 || line.qty > 99) throw new Error('Некорректное количество');
-    const decision = salePriceDecision(variant);
+    const decision = typeof variant.price_accepted === 'boolean'
+      ? { priceCents: variant.sale_price_cents, accepted: variant.price_accepted }
+      : salePriceDecision(variant);
     const price = decision.priceCents;
     if (!Number.isInteger(price) || price <= 0) throw new Error('Цена товара уточняется');
     const saleStatus = variant.sale_status;

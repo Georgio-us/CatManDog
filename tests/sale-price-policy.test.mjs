@@ -54,3 +54,14 @@ test('owner price is separate from purchase cost and unavailable status still bl
   assert.equal(priceQuote([{ productId: row.product_id, variantId: row.variant_id, qty: 1 }],
     [{ ...row, sale_status: 'unavailable' }]).orderable, false);
 });
+
+test('server snapshot keeps price approval when checkout quotes a database-only SKU', () => {
+  const row = { variant_id: 'database-only', product_id: 'database-product',
+    name: 'Товар', label: '1 шт', source_price_cents: 1200, price_override_cents: null,
+    price_confirmed: false, sale_price_cents: 1200, price_accepted: true,
+    sale_status: 'preorder', availability: 'source_on_demand', stock_quantity: 0 };
+  const quote = priceQuote([{ productId: row.product_id, variantId: row.variant_id, qty: 1 }], [row]);
+  assert.equal(quote.orderable, true);
+  assert.equal(quote.items[0].unitPriceCents, 1200);
+  assert.equal(quote.items[0].sourceMode, 'source_on_demand');
+});
