@@ -119,8 +119,9 @@ function orderCard(order) {
   const delivery = order.delivery_preference || {};
   return `<article class="admin-card"><div class="admin-variant-top"><h2>${escape(order.number)}</h2><strong>${euros(order.total_cents)}</strong></div>
     <div class="admin-grid"><div><strong>Покупатель</strong>${escape(order.customer_name)}<br>${escape(order.email)}<br>${escape(order.phone)}</div>
-    <div><strong>Адрес</strong>${escape(address.street)}, ${escape(address.building)}<br>${escape(address.postcode)} València<br>${escape(address.apartment || '')}<br>${escape(address.note || '')}</div>
-    <div><strong>Время</strong>${delivery.mode === 'soon' ? 'Как можно скорее' : `${escape(delivery.date)} ${escape(delivery.time)}`}<br>
+    <div><strong>Адрес</strong>${escape(address.street)}, ${escape(address.building)}<br>${escape(address.postcode)} ${escape(address.city || '')}<br>${escape(address.apartment || '')}<br>${escape(address.note || '')}</div>
+    <div><strong>Время</strong>${delivery.mode === 'national' ? 'Отправка перевозчиком' :
+      delivery.mode === 'soon' ? 'Как можно скорее' : `${escape(delivery.date)} ${escape(delivery.time)}`}<br>
       <span class="admin-muted">Не забронировано, адрес не проверен</span></div>
     <div><strong>Оплата и склад</strong>${escape(order.payment_status)}<br>${(order.items || []).some(item => item.sourceMode === 'on_hand')
       ? escape(({ reserved:'Товар зарезервирован',released:'Резерв снят',consumed:'Выдан со склада',legacy:'Старый учёт' })[order.stock_state] || '')
