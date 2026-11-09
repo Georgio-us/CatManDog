@@ -4,6 +4,7 @@ import { snapshots, confirmedPrice, canBuy } from '../variants.js';
 import { yaguRetailBenchmarks } from '../yagu-retail-benchmarks.js';
 import { supplierSourcingByVariant } from './sourcing-status.js';
 import { launchSelectedImageMap } from '../launch-selected-image-map.js';
+import { selectedAcanaOrijenFormats } from '../acana-orijen-selected-formats.js';
 import { salePriceDecision } from './sale-price-policy.js';
 
 const cents = value => Number.isFinite(value) && value > 0 ? Math.round(value * 100) : null;
@@ -127,8 +128,8 @@ export async function importCatalog(db, items = products) {
       await publishSelectedLaunchImages(client);
       // Publish the three exact formats requested after confirmed customer demand.
       // Store retail and purchase amounts in different columns. The veterinary
-      // item has no purchase offer; the ACANA 11.4 kg retail benchmark is below
-      // undiscounted landed cost, so both remain unavailable for checkout.
+      // item has no purchase offer; the ACANA 11.4 kg benchmark is below
+      // undiscounted landed cost and is corrected by a later migration.
       const demandMigration = 'confirmed_demand_formats_2026_11_08';
       const demandDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [demandMigration]);
       if (!demandDone.rowCount) {
@@ -168,11 +169,85 @@ export async function importCatalog(db, items = products) {
           ORDER BY s.price_date DESC,s.imported_at DESC LIMIT 1
           ON CONFLICT DO NOTHING`, [variantId, brand, article]);
       }
+      // The 11 exact package sizes from the revised paid and bonus baskets.
+      // Keep the B2B tariff (ex IVA) separate from the customer retail price.
+      const selectedFormatsMigration = 'acana_orijen_selected_formats_2026_11_09';
+      const selectedFormatsDone = await client.query(
+        'SELECT 1 FROM catalog_migrations WHERE name=$1', [selectedFormatsMigration]);
+      if (!selectedFormatsDone.rowCount) {
+        for (const item of selectedAcanaOrijenFormats) {
+          await client.query(`UPDATE catalog_products SET active=true WHERE id=$1`, [item.productId]);
+          await client.query(`UPDATE catalog_variants SET
+            source_price_cents=CASE WHEN price_override_cents IS NULL
+              THEN $2 ELSE source_price_cents END,
+            purchase_price_cents=coalesce(purchase_price_cents,$3),
+            tax_rate_bps=coalesce(tax_rate_bps,1000),
+            image_path=$4,
+            source_orderable=true,availability='source_on_demand',sale_status='available',
+            display_priority=greatest(display_priority,1),updated_at=now()
+            WHERE id=$1`, [item.id, Math.round(item.retail * 100),
+            Math.round(item.tariff * 100),
+            `/media/acana-orijen-selected-2026-11-09/${item.image}`]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)',
+          [selectedFormatsMigration]);
+      }
+      await client.query(`UPDATE catalog_products SET
+        image_path='/media/acana-orijen-selected-2026-11-09/orijen-original-dog-11-4kg.webp',
+        source=jsonb_set(source,'{defaultVariantId}',to_jsonb($1::text),true)
+        WHERE id='dog-orijen-original'
+          AND (source->>'defaultVariantId') IS DISTINCT FROM $1`,
+      ['dog-orijen-original-11-4kg']);
+      // Supplier sheets may be imported after the storefront catalogue.
+      // Recheck exact articles on every import so those later sources link too.
+      for (const item of selectedAcanaOrijenFormats) {
+        await client.query(`INSERT INTO supplier_catalog_matches
+          (item_id,source_id,variant_id,match_method)
+          SELECT i.id,i.source_id,$1,'catalog'
+          FROM supplier_catalog_items i JOIN supplier_catalog_sources s ON s.id=i.source_id
+          WHERE lower(s.brand)=lower($2) AND i.article=$3 AND i.shop_price_cents>0
+          ORDER BY s.price_date DESC,s.imported_at DESC LIMIT 1
+          ON CONFLICT DO NOTHING`, [item.id, item.brand, item.article]);
+      }
+      // This demand SKU was blocked because its old 89.49 EUR retail benchmark
+      // was below the 90.48 EUR undiscounted landed purchase cost. Publish it at
+      // a documented cost floor while preserving the supplier tariff separately.
+      const lambFloorMigration = 'acana_lamb_cost_floor_2026_11_09';
+      const lambFloorDone = await client.query(
+        'SELECT 1 FROM catalog_migrations WHERE name=$1', [lambFloorMigration]);
+      if (!lambFloorDone.rowCount) {
+        await client.query(`UPDATE catalog_variants SET
+          source_price_cents=9299,price_override_cents=NULL,price_confirmed=false,
+          purchase_price_cents=coalesce(purchase_price_cents,8122),
+          tax_rate_bps=coalesce(tax_rate_bps,1000),
+          availability='source_on_demand',sale_status='available',updated_at=now()
+          WHERE id='acana-grass-fed-lamb-11-4kg'
+            AND (price_override_cents IS NULL OR price_override_cents=8949)`);
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)',
+          [lambFloorMigration]);
+      }
+      const gastroFallbackMigration = 'gastro_kitten_retail_fallback_2026_11_09';
+      const gastroFallbackDone = await client.query(
+        'SELECT 1 FROM catalog_migrations WHERE name=$1', [gastroFallbackMigration]);
+      if (!gastroFallbackDone.rowCount) {
+        const gastro = products.find(product =>
+          product.id === 'royal-canin-gastrointestinal-kitten-dry')?.variants?.[0];
+        if (gastro) {
+          await client.query(`UPDATE catalog_variants SET
+            source_price_cents=3669,
+            price_override_cents=CASE WHEN price_override_cents=3669
+              THEN NULL ELSE price_override_cents END,
+            source_orderable=true,availability='source_on_demand',
+            sale_status='available',source=source||$2::jsonb,updated_at=now()
+            WHERE id=$1 AND (price_override_cents IS NULL OR price_override_cents=3669)`,
+          [gastro.id, JSON.stringify(gastro)]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)',
+          [gastroFallbackMigration]);
+      }
       const salePolicyMigration = await client.query("SELECT name FROM catalog_migrations WHERE name='initial_brand_sale_status_2026_11_06'");
       if (!salePolicyMigration.rows.length) {
         await client.query(`UPDATE catalog_variants v SET sale_status=CASE
-          WHEN v.id IN ('royal-canin-gastrointestinal-kitten-dry-2kg',
-            'acana-grass-fed-lamb-11-4kg') THEN 'unavailable'
           WHEN lower(p.brand) IN ('heybo pet','heiba pet','heybopet') THEN 'preorder'
           WHEN lower(p.brand) IN ('advance','hill’s','hill''s') THEN 'unavailable'
           ELSE 'available' END,updated_at=now()

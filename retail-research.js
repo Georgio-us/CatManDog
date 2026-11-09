@@ -106,7 +106,7 @@ export function provisionalPriceLabel(sku) {
 
 export function provisionalPriceBlock(sku, { escape, money }) {
   const basis = sku?.pricingBasis;
-  if (!basis || basis.kind === 'exact_retail') return '';
+  if (!basis || basis.kind === 'exact_retail' || basis.kind === 'supplier_cost_floor' || basis.kind === 'retail_source_floor') return '';
   const spanish = locale() === 'es';
   if (basis.kind === 'supplier_quote_candidate') {
     const local = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
@@ -137,11 +137,11 @@ export function provisionalPriceBlock(sku, { escape, money }) {
   }
   if (locale() === 'uk') {
     const note = `${basis.sampleSize > 1 ? `Медіана ${basis.sampleSize} порівнянних пропозицій` : 'Ціна порівнянного товару'} - орієнтир з IVA для розрахунку. Ціну продажу цього варіанта ще не підтверджено`;
-    return `<section class="retail-research" aria-label="Ціновий орієнтир за аналогами"><h2>Орієнтир за аналогами</h2><p class="retail-research-range">${money(basis.amount)}</p><p class="retail-research-note">${note}</p>${basis.analogueMinEUR != null ? `<p>Діапазон цін аналогів - ${money(basis.analogueMinEUR)} - ${money(basis.analogueMaxEUR)}</p>` : ''}<p>${escape(translate(basis.group))} - ${escape(translate(basis.note))}</p><p><a class="text-link" href="${escape(basis.exampleUrl)}" target="_blank" rel="noopener noreferrer">Приклад - ${escape(basis.exampleRetailer)}, ${money(basis.examplePriceEUR)}</a></p></section>`;
+    return `<section class="retail-research" aria-label="Ціновий орієнтир за аналогами"><h2>Орієнтир за аналогами</h2><p class="retail-research-range">${money(basis.amount)}</p><p class="retail-research-note">${note}</p>${basis.analogueMinEUR != null ? `<p>Діапазон цін аналогів - ${money(basis.analogueMinEUR)} - ${money(basis.analogueMaxEUR)}</p>` : ''}<p>${escape(translate(basis.group))} - ${escape(translate(basis.note))}</p><p><a class="text-link" href="${escape(basis.exampleUrl)}" target="_blank" rel="noopener noreferrer">Приклад - ${escape(basis.exampleRetailer || 'Магазин')}, ${money(basis.examplePriceEUR ?? basis.amount)}</a></p></section>`;
   }
   const heading = spanish ? 'Precio orientativo de productos similares' : 'Розничный ориентир по аналогам';
   const note = spanish
     ? `${basis.sampleSize > 1 ? `Mediana de ${basis.sampleSize} ofertas comparables` : 'Precio de un producto comparable'} - referencia con IVA para el cálculo; el precio de venta de este formato todavía no está confirmado`
     : `${basis.sampleSize > 1 ? `Медиана ${basis.sampleSize} сопоставимых предложений` : 'Цена сопоставимого товара'} - ориентир с IVA для расчёта, розничная цена этого варианта пока не подтверждена`;
-  return `<section class="retail-research" aria-label="${heading}"><h2>${spanish ? 'Referencia de productos similares' : 'Ориентир по аналогам'}</h2><p class="retail-research-range">${money(basis.amount)}</p><p class="retail-research-note">${note}</p>${basis.analogueMinEUR != null ? `<p>${spanish ? 'Rango de precios comparables' : 'Диапазон аналогов'} - ${money(basis.analogueMinEUR)} - ${money(basis.analogueMaxEUR)}</p>` : ''}<p>${escape(translate(basis.group))} - ${escape(translate(basis.note))}</p><p><a class="text-link" href="${escape(basis.exampleUrl)}" target="_blank" rel="noopener noreferrer">${spanish ? 'Ejemplo' : 'Пример'} - ${escape(basis.exampleRetailer)}, ${money(basis.examplePriceEUR)}</a></p></section>`;
+  return `<section class="retail-research" aria-label="${heading}"><h2>${spanish ? 'Referencia de productos similares' : 'Ориентир по аналогам'}</h2><p class="retail-research-range">${money(basis.amount)}</p><p class="retail-research-note">${note}</p>${basis.analogueMinEUR != null ? `<p>${spanish ? 'Rango de precios comparables' : 'Диапазон аналогов'} - ${money(basis.analogueMinEUR)} - ${money(basis.analogueMaxEUR)}</p>` : ''}<p>${escape(translate(basis.group))} - ${escape(translate(basis.note))}</p><p><a class="text-link" href="${escape(basis.exampleUrl)}" target="_blank" rel="noopener noreferrer">${spanish ? 'Ejemplo' : 'Пример'} - ${escape(basis.exampleRetailer || (spanish ? 'Tienda' : 'Магазин'))}, ${money(basis.examplePriceEUR ?? basis.amount)}</a></p></section>`;
 }

@@ -6,6 +6,7 @@ import { productRetailResearch, productDisplayedPriceSummary, retailResearch, re
 import { isDemoPrice, normalizeCart } from '../variants.js';
 import { retiredProductIds } from '../catalog-policy.js';
 import { yaguLaunchProducts } from '../yagu-launch-products.js';
+import { selectedAcanaOrijenFormats } from '../acana-orijen-selected-formats.js';
 
 const product = id => catalogProducts.find(item => item.id === id);
 const variant = id => catalogProducts.flatMap(item => item.variants?.length ? item.variants : [item]).find(item => item.id === id);
@@ -44,8 +45,7 @@ test('exact single product offers remain visible with VAT', () => {
 test('Yagu variants keep supplier costs separate from retail benchmarks', () => {
   const variants = catalogProducts.filter(item => item.isReal).flatMap(item => item.variants?.length ? item.variants : [item]);
   const pending = variants.filter(isDemoPrice);
-  assert.deepEqual(new Set(pending.map(item => item.supplier?.sku)),
-    new Set(['7515987', '7516254', '7516245', '7588782', '1126841']));
+  assert.deepEqual(new Set(pending.map(item => item.supplier?.sku)), new Set());
   assert.ok(variants.filter(item => !isDemoPrice(item)).length >= 609);
   assert.equal(yaguLaunchProducts.filter(item => product(item.id)).length, 11);
   assert.equal(product('yagu-kubo-plus-pana'), undefined);
@@ -61,16 +61,33 @@ test('Yagu variants keep supplier costs separate from retail benchmarks', () => 
   assert.equal(new Set(variants.map(item => item.id)).size, variants.length);
 });
 
-test('first dog assortment has 22 families and 43 priced variants with separate purchase fields', () => {
+test('first dog assortment retains its 22 original families and 43 priced variants', () => {
+  const selectedIds = new Set(selectedAcanaOrijenFormats.map(item => item.id));
+  const addedFamilies = new Set(selectedAcanaOrijenFormats.map(item => item.productId));
   const dogs = catalogProducts.filter(item => item.pet === 'dog' && !item.id.startsWith('yagu-')
-    && !['royal-canin-chihuahua-adult', 'cmd-source-0f4a3ef9889b8ff3'].includes(item.id));
-  const variants = dogs.flatMap(item => item.variants);
+    && !['royal-canin-chihuahua-adult', 'cmd-source-0f4a3ef9889b8ff3'].includes(item.id)
+    && (!addedFamilies.has(item.id) || item.variants.some(variant => !selectedIds.has(variant.id))));
+  const variants = dogs.flatMap(item => item.variants.filter(variant => !selectedIds.has(variant.id)));
   assert.equal(dogs.length, 22);
   assert.equal(variants.length, 43);
   assert.equal(new Set(variants.map(item => item.id)).size, 43);
   assert.deepEqual(variants.filter(isDemoPrice).map(item => item.id), []);
   assert.ok(variants.every(item => item.purchasePrice === null && item.purchasePriceStatus === 'pending'));
   assert.equal(variants.filter(item => item.pricingBasis?.kind === 'analogue_single').length, 8);
+});
+
+test('revised Adrián basket has exact formats, separate costs and studio images', () => {
+  assert.equal(selectedAcanaOrijenFormats.length, 11);
+  for (const item of selectedAcanaOrijenFormats) {
+    const found = variant(item.id);
+    assert.ok(found, item.id);
+    assert.equal(found.supplier.sku, item.article);
+    assert.equal(found.supplierTariffExVat, item.tariff);
+    assert.equal(found.price, item.retail);
+    assert.match(found.image.src, /^\/media\/acana-orijen-selected-2026-11-09\//);
+    assert.equal(found.availabilityStatus, 'source_on_demand');
+    assert.equal(found.saleStatus, 'available');
+  }
 });
 
 test('removed products are absent from every live catalog path and old carts', () => {

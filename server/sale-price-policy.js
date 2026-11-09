@@ -35,6 +35,18 @@ export function salePriceDecision(row) {
     if (basis.kind === 'scaled_pack' && basis.sourceUrl && basis.sourcePackGrams > 0)
       return { priceCents, accepted: true, basis: 'calculated_pack',
         review: 'Цена рассчитана по другой фасовке; проверить при следующем обновлении' };
+    if (basis.kind === 'supplier_cost_floor' && basis.sourceFile && basis.competitorUrl &&
+        Number.isFinite(basis.supplierCostExVat) && Number.isFinite(basis.taxRate) &&
+        Number.isFinite(basis.recargoRate) &&
+        priceCents > Math.ceil(basis.supplierCostExVat *
+          (1 + basis.taxRate + basis.recargoRate) * 100))
+      return { priceCents, accepted: true, basis: 'supplier_cost_floor',
+        review: 'Розница конкурента ниже базовой закупки с налогами; цена выше себестоимости без скидки' };
+    if (basis.kind === 'retail_source_floor' && basis.sourceUrl &&
+        Number.isFinite(basis.sourceCostInclVat) &&
+        priceCents > Math.ceil(basis.sourceCostInclVat * 100))
+      return { priceCents, accepted: true, basis: 'retail_source_floor',
+        review: 'Резервная закупка в рознице; проверить остаток и доставку при заказе' };
   }
   if (retail?.sourceUrl && retail.checkedAt && cents(retail.amount) === priceCents &&
       (!basis || basis.kind === 'exact_retail'))

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { catalogRows } from '../server/catalog.js';
 import { salePriceDecision } from '../server/sale-price-policy.js';
 import { priceQuote } from '../server/pricing.js';
+import { selectedAcanaOrijenFormats } from '../acana-orijen-selected-formats.js';
 
 const variants = new Map(catalogRows().map(row => [row.variant.id, row]));
 const rowFor = (id, changes = {}) => {
@@ -44,6 +45,31 @@ test('researched Yagu prices reach checkout without a purchase-price substitutio
     assert.equal(priceQuote([{ productId: row.product_id, variantId: id, qty: 1 }],
       [row]).orderable, true, id);
   }
+});
+
+test('all revised Adrián formats use their own retail price and remain orderable', () => {
+  for (const item of selectedAcanaOrijenFormats) {
+    const row = rowFor(item.id, { purchase_price_cents: Math.round(item.tariff * 100) });
+    const decision = salePriceDecision(row);
+    assert.equal(decision.accepted, true, item.id);
+    assert.equal(decision.priceCents, Math.round(item.retail * 100), item.id);
+    assert.ok(decision.priceCents > Math.ceil(item.tariff * 111.4), item.id);
+    const quote = priceQuote([{ productId: row.product_id, variantId: item.id, qty: 1 }], [row]);
+    assert.equal(quote.orderable, true, item.id);
+    assert.equal(quote.items[0].sourceMode, 'open_order', item.id);
+  }
+});
+
+test('confirmed demand can use retail fallback while B2B veterinary price is absent', () => {
+  const gastro = rowFor('royal-canin-gastrointestinal-kitten-dry-2kg',
+    { purchase_price_cents: null });
+  assert.equal(salePriceDecision(gastro).basis, 'retail_source_floor');
+  assert.equal(priceQuote([{ productId: gastro.product_id,
+    variantId: gastro.variant_id, qty: 1 }], [gastro]).orderable, true);
+  const lamb = rowFor('acana-grass-fed-lamb-11-4kg');
+  assert.equal(salePriceDecision(lamb).basis, 'supplier_cost_floor');
+  assert.equal(priceQuote([{ productId: lamb.product_id,
+    variantId: lamb.variant_id, qty: 1 }], [lamb]).orderable, true);
 });
 
 test('unverified supplier model and unsourced gift concepts remain blocked', () => {

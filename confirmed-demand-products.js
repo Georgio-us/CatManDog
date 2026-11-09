@@ -55,11 +55,17 @@ export const confirmedDemandProducts = [
       id: 'royal-canin-gastrointestinal-kitten-dry-2kg', label: '2 кг', weight: '2 кг',
       packageWeightKg: 2, ean: '3182550906258',
       price: 36.69, priceStatus: 'confirmed',
-      retailPrice: { amount: 36.69, currency: 'EUR', status: 'confirmed',
-        sourceName: 'Kiwoko', checkedAt: '2026-11-08',
+      pricingBasis: { kind: 'retail_source_floor', amount: 36.69,
+        checkedAt: '2026-11-09', sourceCostInclVat: 33.59,
+        sourceName: 'Kiwoko',
         sourceUrl: 'https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-seca/royal-canin-veterinary-gastrointestinal-pienso-para-gatitos/ROY1228000_M.html' },
+      retailPrice: { amount: 33.59, currency: 'EUR', status: 'confirmed',
+        sourceName: 'Kiwoko', checkedAt: '2026-11-09',
+        sourceUrl: 'https://www.kiwoko.com/gatos/comida-para-gatos/dietas-veterinarias/alimentacion-seca/royal-canin-veterinary-gastrointestinal-pienso-para-gatitos/ROY1228000_M.html' },
+      retailFulfilment: { name: 'Kiwoko', article: 'ROY1228200',
+        unitCostInclVat: 33.59, checkedAt: '2026-11-09' },
       supplier: null,
-      availabilityStatus: 'unavailable', saleStatus: 'unavailable'
+      availabilityStatus: 'source_on_demand', saleStatus: 'available'
     }]
   },
   {
@@ -92,14 +98,19 @@ export const confirmedDemandProducts = [
         packageWeightKg: 11.4, ean: '064992570125',
         image: { src: `${imageRoot}/acana-grass-fed-lamb-11-4kg.webp`,
           alt: 'ACANA Grass-Fed Lamb - 11,4 кг в студийном свете' },
-        price: 89.49, priceStatus: 'confirmed',
+        price: 92.99, priceStatus: 'confirmed',
         retailPrice: { amount: 89.49, currency: 'EUR', status: 'confirmed',
           sourceName: 'Kiwoko', checkedAt: '2026-11-08',
           sourceUrl: 'https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-natural/acana-singles-grass-fed-cordero-pienso-para-perros/ACAAL02_M.html' },
+        pricingBasis: { kind: 'supplier_cost_floor', amount: 92.99,
+          checkedAt: '2026-11-09', sourceFile: 'ACANA-ORIJEN-B2B-CATALOG-2026-10-31.md',
+          supplierCostExVat: 81.22, taxRate: 0.10, recargoRate: 0.014,
+          competitorPrice: 89.49,
+          competitorUrl: 'https://www.kiwoko.com/perros/comida-para-perros/pienso-seco-para-perros/pienso-natural/acana-singles-grass-fed-cordero-pienso-para-perros/ACAAL02_M.html' },
         supplier: { name: 'Distrivet', sku: 'ACS203', sourceFile: 'Tarifa Champion Petfoods 2026' },
-        // At the base tariff, IVA and recargo bring cost to 90.48 EUR.
-        // Adrián has not yet confirmed the 20% first-order discount or stock.
-        availabilityStatus: 'pending', saleStatus: 'unavailable'
+        // Base tariff plus IVA and recargo is 90.48 EUR. The new retail price
+        // stays above this cost without relying on the first-order discount.
+        availabilityStatus: 'source_on_demand', saleStatus: 'available'
       }
     ]
   }
