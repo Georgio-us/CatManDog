@@ -192,6 +192,42 @@ export async function importCatalog(db, items = products) {
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)',
           [selectedFormatsMigration]);
       }
+      // An earlier catalogue load wrote a uniform 20% markup as confirmed
+      // overrides. Replace only those exact formula values with the researched
+      // retail price; preserve any distinct owner-edited amount.
+      const retailReconcileMigration = 'selected_retail_reconcile_2026_11_09';
+      const retailReconcileDone = await client.query(
+        'SELECT 1 FROM catalog_migrations WHERE name=$1', [retailReconcileMigration]);
+      if (!retailReconcileDone.rowCount) {
+        const previousAutoCents = new Map([
+          ['acana-adult-dog-11-4kg', 8484],
+          ['acana-puppy-11-4kg', 8488],
+          ['acana-dog-red-meat-11-4kg', 8220],
+          ['acana-light-fit-6kg', 5095],
+          ['dog-orijen-original-11-4kg', 10847],
+          ['acana-classics-red-meat-9-7kg', 6955],
+          ['acana-classics-wild-coast-9-7kg', 7132],
+          ['acana-puppy-small-breed-6kg', 5095],
+          ['acana-wild-prairie-6kg', 5979],
+          ['orijen-regional-red-6kg', 8708],
+          ['acana-senior-6kg', 5095]
+        ]);
+        for (const item of selectedAcanaOrijenFormats) {
+          await client.query(`UPDATE catalog_variants SET
+            source_price_cents=$2,price_override_cents=NULL,
+            price_confirmed=false,updated_at=now()
+            WHERE id=$1 AND price_override_cents=$3`,
+          [item.id, Math.round(item.retail * 100), previousAutoCents.get(item.id)]);
+        }
+        await client.query(`UPDATE catalog_variants SET
+          source_price_cents=9299,price_override_cents=NULL,
+          price_confirmed=false,source_orderable=true,
+          availability='source_on_demand',sale_status='available',updated_at=now()
+          WHERE id='acana-grass-fed-lamb-11-4kg'
+            AND price_override_cents=10858`);
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)',
+          [retailReconcileMigration]);
+      }
       await client.query(`UPDATE catalog_products SET
         image_path='/media/acana-orijen-selected-2026-11-09/orijen-original-dog-11-4kg.webp',
         source=jsonb_set(source,'{defaultVariantId}',to_jsonb($1::text),true)
@@ -220,9 +256,9 @@ export async function importCatalog(db, items = products) {
           source_price_cents=9299,price_override_cents=NULL,price_confirmed=false,
           purchase_price_cents=coalesce(purchase_price_cents,8122),
           tax_rate_bps=coalesce(tax_rate_bps,1000),
-          availability='source_on_demand',sale_status='available',updated_at=now()
+          source_orderable=true,availability='source_on_demand',sale_status='available',updated_at=now()
           WHERE id='acana-grass-fed-lamb-11-4kg'
-            AND (price_override_cents IS NULL OR price_override_cents=8949)`);
+            AND (price_override_cents IS NULL OR price_override_cents IN (8949,10858))`);
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)',
           [lambFloorMigration]);
       }
