@@ -117,8 +117,8 @@ function rateLimit(req, group, limit, minutes = 15) {
   if (counters.size > 10000) for (const [entry, counter] of counters) if (counter.until < now) counters.delete(entry);
 }
 
-async function promoFor(db, code, customer, identity = null, lock = false) {
-  const automatic = !code ? await savedPaperCoupon(db, customer) : null;
+async function promoFor(db, code, customer, identity = null, lock = false, skipSavedPromo = false) {
+  const automatic = !code && !skipSavedPromo ? await savedPaperCoupon(db, customer) : null;
   return resolvePromo(db, code || (automatic?.status === 'ready' ? automatic.code : ''),
     customer, identity, lock);
 }
@@ -210,7 +210,8 @@ async function createOrder(db, payload, customer) {
           WHERE i.id=(v.source#>>'{retailFormat,sourceItemId}') AND i.shop_price_cents>0)) AS supplier_matched
       FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
       WHERE v.id=ANY($1::text[]) AND v.active=true AND p.active=true FOR UPDATE OF v`, [ids]);
-    const promo = await promoFor(client, payload.promoCode, customer, { email, phone }, true);
+    const promo = await promoFor(client, payload.promoCode, customer, { email, phone }, true,
+      payload.skipSavedPromo === true);
     const productsQuote = priceQuote(lines, variants.rows, promo);
     const shipping = delivery.mode === 'national'
       ? await nationalShippingQuote({ postalCode: address.postcode, lines, variants: variants.rows,
@@ -1960,7 +1961,7 @@ export async function handleApi(db, req, res, pathname) {
       const body = await readJson(req);
       const customer = await currentCustomer(db, req);
       const promo = await promoFor(db, body.promoCode, customer,
-        { email: body.email, phone: body.phone });
+        { email: body.email, phone: body.phone }, false, body.skipSavedPromo === true);
       const variants = await liveCatalogSnapshot(db);
       const productsQuote = priceQuote(body.items, variants, promo);
       const shipping = body.delivery?.mode === 'national'
@@ -1987,7 +1988,7 @@ export async function handleApi(db, req, res, pathname) {
         bad('Проверьте корзину');
       const customer = await currentCustomer(db, req);
       const promo = await promoFor(db, body.promoCode, customer,
-        { email: body.email, phone: body.phone });
+        { email: body.email, phone: body.phone }, false, body.skipSavedPromo === true);
       const variants = await liveCatalogSnapshot(db);
       const productsQuote = priceQuote(body.items, variants, promo);
       const shipping = await nationalShippingQuote({ postalCode: body.postcode,

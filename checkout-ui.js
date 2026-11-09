@@ -175,7 +175,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
         headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
       const lines = items.map(item => ({ productId: item.productId, variantId: item.variantId, qty: item.qty }));
       const quoteResponse = await request('/api/checkout/quote', { items: lines,
-        promoCode: promo?.code || '', email: values.email, phone: values.phone,
+        promoCode: promo?.code || '', skipSavedPromo: promoSkipped, email: values.email, phone: values.phone,
         address: { postcode: values.postcode }, delivery: { mode: values.deliveryMode } });
       const quote = await quoteResponse.json().catch(() => ({}));
       if (!quoteResponse.ok || !quote.orderable) throw new Error(quote.error || 'Проверьте цену и наличие товаров');
@@ -195,7 +195,8 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
       const key = saved?.signature === signature ? saved.key : crypto.randomUUID();
       sessionStorage.setItem('catmandog-payment-attempt', JSON.stringify({ key, signature,
         cartSignature: preview.signature }));
-      const payload = { items: lines, promoCode: promo?.code || '', idempotencyKey: key, locale: locale(),
+      const payload = { items: lines, promoCode: promo?.code || '', skipSavedPromo: promoSkipped,
+        idempotencyKey: key, locale: locale(),
         name: values.name, email: values.email, phone: values.phone, whatsapp: values.whatsapp,
         address: { city: values.city, postcode: values.postcode, street: values.street,
           building: values.building, apartment: values.apartment, note: values.note },
@@ -331,7 +332,8 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
         void fetch('/api/checkout/shipping-quote', { method: 'POST', credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ items: lines, postcode: values.postcode,
-            promoCode: selectedPromo()?.code || '', email: values.email, phone: values.phone }) })
+            promoCode: selectedPromo()?.code || '', skipSavedPromo: promoSkipped,
+            email: values.email, phone: values.phone }) })
           .then(async response => {
             if (!response.ok) throw new Error('Не удалось рассчитать доставку');
             const result = await response.json();
