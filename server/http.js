@@ -54,6 +54,7 @@ export async function serveStatic(req, res, pathname) {
   res.writeHead(200, { 'Content-Type': types[extname(file)] || 'application/octet-stream',
     'Content-Length': info.size, 'X-Content-Type-Options': 'nosniff',
     'Cache-Control': adminAsset ? 'no-store' :
+      ['sitemap.xml', 'robots.txt'].includes(parts[0]) ||
       ['.html', '.js', '.css'].includes(extname(file)) ? 'no-cache' : 'public, max-age=3600',
     ...(adminAsset ? { 'X-Frame-Options': 'DENY', 'Referrer-Policy': 'no-referrer',
       'Content-Security-Policy': "frame-ancestors 'none'" } : {}) });
