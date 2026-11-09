@@ -5,10 +5,11 @@ import { articlesEs } from '../journal-content-es.js';
 import { seoDocument } from '../server/seo.js';
 import { seoCategories, seoCategoryPath } from '../seo-categories.js';
 
-test('the first sitemap contains only real public pages with Spanish editorial content', async () => {
+test('the sitemap contains only released public pages with Spanish editorial content', async () => {
   const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gu)].map(match => match[1]);
-  assert.deepEqual(urls, ['https://catmandog.es/', 'https://catmandog.es/catalogo', 'https://catmandog.es/revista',
+  assert.deepEqual(urls, ['https://catmandog.es/', 'https://catmandog.es/catalogo',
+    'https://catmandog.es/catalogo/gatos/pienso-seco', 'https://catmandog.es/revista',
     ...articlesEs.map(article => `https://catmandog.es/revista/${article.id}`),
     'https://catmandog.es/legal-es.html', 'https://catmandog.es/purchase-terms-es.html',
     'https://catmandog.es/privacy-es.html']);
@@ -22,7 +23,7 @@ test('the first sitemap contains only real public pages with Spanish editorial c
   }
 });
 
-test('catalog landing is indexable while category pages remain outside search', async () => {
+test('catalog landing and the released category are indexable', async () => {
   const catalog = await seoDocument('/catalogo');
   assert.doesNotMatch(catalog, /<meta name="robots" content="noindex/u);
   assert.match(catalog, /<h1>Catálogo para gatos y perros<\/h1>/u);
@@ -32,8 +33,9 @@ test('catalog landing is indexable while category pages remain outside search', 
   assert.equal(seoCategoryPath('cat', 'dry-food'), '/catalogo/gatos/pienso-seco');
   for (const category of seoCategories) {
     const html = await seoDocument(category.path);
-    assert.match(html, /<meta name="robots" content="noindex,follow">/u);
+    if (category.indexable) assert.doesNotMatch(html, /<meta name="robots" content="noindex/u);
+    else assert.match(html, /<meta name="robots" content="noindex,follow">/u);
     assert.ok(html.includes(`<h1 class="page-title">${category.title}</h1>`));
-    assert.equal(sitemap.includes(category.path), false);
+    assert.equal(sitemap.includes(category.path), Boolean(category.indexable));
   }
 });

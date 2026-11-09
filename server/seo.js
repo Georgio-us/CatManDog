@@ -16,7 +16,7 @@ function pageData(pathname) {
   const category = seoCategoryForPath(pathname);
   if (category) return {
     title: `${category.title} | CatManDog`, description: category.description,
-    robots: 'noindex,follow',
+    robots: category.indexable ? null : 'noindex,follow',
     content: `<div class="page"><h1 class="page-title">${escapeHtml(category.title)}</h1><p class="lead">${escapeHtml(category.intro)}</p><p><a class="text-link" href="/catalogo">Todo el catálogo</a></p></div>`
   };
   if (pathname === '/catalogo') return {
@@ -64,7 +64,7 @@ export async function serveSeo(req, res, pathname) {
   res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8',
     'Content-Length': Buffer.byteLength(body), 'Cache-Control': 'no-cache',
     'X-Content-Type-Options': 'nosniff',
-    ...(pathname.startsWith('/catalogo/') ? { 'X-Robots-Tag': 'noindex' } : {}) });
+    ...(seoCategoryForPath(pathname)?.indexable === false ? { 'X-Robots-Tag': 'noindex' } : {}) });
   res.end(req.method === 'HEAD' ? undefined : body);
   return true;
 }

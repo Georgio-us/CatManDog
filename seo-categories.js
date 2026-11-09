@@ -1,8 +1,8 @@
-// Category pages are prepared for navigation but stay out of the sitemap until
-// the assortment, prices and availability are approved for real orders.
+// Release category pages to search one at a time as their assortment is reviewed.
 export const seoCategories = [
   {
     path: '/catalogo/gatos/pienso-seco', pet: 'cat', group: 'dry-food',
+    indexable: true,
     title: 'Pienso seco para gatos',
     description: 'Explora el pienso seco para gatos en CatManDog: formatos, marcas y opciones para distintas etapas de vida',
     intro: 'Compara formatos y características de los alimentos secos para gatos antes de elegir el que mejor encaje con tu compañero'
