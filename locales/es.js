@@ -1,6 +1,19 @@
 // Spanish copy is written and reviewed here. Russian remains the source language
 // for internal category IDs, routes and saved customer data.
 export const es = {
+  'Валенсия': 'València',
+  'Удобное время доставки можно указать при оформлении': 'Podrás elegir la franja de entrega al finalizar el pedido',
+  'Укажите, куда привезти покупки. Перед оплатой покажем все данные ещё раз': 'Indícanos dónde recibir tu compra. Podrás revisar todos los datos antes de pagar.',
+  'Доставка: 9,99 € до 49 €, 3,99 € от 49 €, бесплатно от 99 €': 'Envío: 9,99 € hasta 49 €, 3,99 € desde 49 €, gratis desde 99 €',
+  'До 49 € - 9,99 €, от 49 € - 3,99 €, от 99 € - бесплатно': 'Hasta 49 € - 9,99 €, desde 49 € - 3,99 €, desde 99 € - gratis',
+  'Срок и точную дату сообщим после передачи посылки перевозчику': 'Te comunicaremos el plazo y la fecha exacta tras entregar el paquete al transportista',
+  'После проверки': 'Tras la comprobación',
+  'Итого к оплате': 'Total a pagar',
+  'Доставка по материковой Испании: до 49 € - 9,99 €, от 49 € - 3,99 €, от 99 € - бесплатно. Проверьте адрес и стоимость доставки перед оплатой.': 'Envío a la España peninsular: 9,99 € hasta 49 €, 3,99 € desde 49 €, gratis desde 99 €. Comprueba la dirección y el coste de envío antes de pagar.',
+  'Стоимость доставки рассчитана по сумме товаров после скидки. Срок сообщим после передачи посылки перевозчику.': 'El coste de envío se calcula sobre el importe de los productos tras el descuento. Te comunicaremos el plazo tras entregar el paquete al transportista.',
+  'Отправка перевозчиком, срок уточним после оформления': 'Envío por transportista; confirmaremos el plazo después de realizar el pedido',
+  'Заказ пока не создан. Товары и контактные данные не отправлены.': 'El pedido todavía no se ha creado. No se han enviado los productos ni los datos de contacto.',
+  'Рассчитываем доставку по Испании': 'Calculando el envío a España',
   'Удобный интервал · 3,99 €, бесплатно от 49 €': 'Franja a elegir · 3,99 €, gratis desde 49 €',
   'Другой город': 'Otra ciudad',
   'Отправка по материковой Испании': 'Envío a la España peninsular',

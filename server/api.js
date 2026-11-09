@@ -178,8 +178,6 @@ async function createOrder(db, payload, customer) {
   const delivery = payload.delivery;
   const deliveryError = validateDelivery(delivery);
   if (deliveryError) bad(deliveryError);
-  if (delivery.mode === 'national' && !enabled('NATIONAL_CHECKOUT_ENABLED'))
-    bad('Доставка по Испании пока не открыта для оплаты', 503);
   const lines = payload.items;
   if (!Array.isArray(lines) || !lines.length || lines.length > 50) bad('Проверьте корзину');
   const client = await db.connect();
@@ -604,7 +602,7 @@ async function adminRoute(db, req, res, path) {
     const verify = new URL(req.url, 'https://catmandog.es').searchParams.get('verify');
     if (!['1', 'details'].includes(verify))
       return json(res, 200, { configured,
-        nationalCheckoutEnabled: enabled('NATIONAL_CHECKOUT_ENABLED') });
+        nationalCheckoutEnabled: true });
     rateLimit(req, 'sendcloud-verify', 6);
     if (!configured) return json(res, 200, { configured, reachable: false });
     try {
@@ -614,7 +612,7 @@ async function adminRoute(db, req, res, path) {
           : { weightKg: 2, lengthCm: 30, widthCm: 20, heightCm: 15 }
       ] });
       return json(res, 200, { configured, reachable: true, optionCount: options.length,
-        nationalCheckoutEnabled: enabled('NATIONAL_CHECKOUT_ENABLED'),
+        nationalCheckoutEnabled: true,
         ...(verify === 'details' ? { sample: options.slice(0, 2) } : {}) });
     } catch (error) {
       return json(res, 502, { configured, reachable: false, error: error.message });
@@ -1988,7 +1986,7 @@ export async function handleApi(db, req, res, pathname) {
       }
       return json(res, 200, { ...publicResult,
         nationalShipping: publicNationalShipping(shipping),
-        nationalCheckoutEnabled: enabled('NATIONAL_CHECKOUT_ENABLED') });
+        nationalCheckoutEnabled: true });
     }
     if (pathname === '/api/checkout/shipping-quote' && req.method === 'POST') {
       rateLimit(req, 'shipping-quote', 30);
@@ -2005,7 +2003,7 @@ export async function handleApi(db, req, res, pathname) {
         productsCents: productsQuote.subtotalCents - productsQuote.discountCents,
         freeDelivery: promo?.free_delivery === true });
       return json(res, 200, { ...publicNationalShipping(shipping),
-        nationalCheckoutEnabled: enabled('NATIONAL_CHECKOUT_ENABLED') });
+        nationalCheckoutEnabled: true });
     }
     if (pathname.startsWith('/api/admin/')) return await adminRoute(db, req, res, pathname);
     if (pathname.startsWith('/api/auth/') && req.method === 'POST') return await authRoute(db, req, res, pathname);
