@@ -1,5 +1,30 @@
-// Public retail observations checked on 2026-10-29. Supplier costs are stored separately.
+// Public retail observations checked through 2026-11-09. Supplier costs are stored separately.
 export const yaguRetailBenchmarks = {
+  "7515987": {
+    "amount": 6.46, "kind": "exact_ean", "sourceName": "eBay ES",
+    "sourceUrl": "https://www.ebay.es/itm/168648873005", "referenceSku": "5414365456535",
+    "checkedAt": "2026-11-09", "note": "Тот же коврик Duvo+ 21,5 × 15 × 1 см, EAN производителя совпадает"
+  },
+  "7516254": {
+    "amount": 3.49, "kind": "analogue_single", "sourceName": "CatManDog",
+    "sourceUrl": "https://cuddlymascotas.com/products/trixie-hueso-cuerda-junior",
+    "checkedAt": "2026-11-09", "note": "Цена CatManDog ниже аналога Trixie 15 см 80 г за 3,95 €; Duvo+ 50 г"
+  },
+  "7516245": {
+    "amount": 3.49, "kind": "analogue_single", "sourceName": "CatManDog",
+    "sourceUrl": "https://cuddlymascotas.com/products/trixie-hueso-cuerda-junior",
+    "checkedAt": "2026-11-09", "note": "Цена CatManDog ниже аналога Trixie 15 см 80 г за 3,95 €; Duvo+ 50 г"
+  },
+  "7588782": {
+    "amount": 15.99, "kind": "analogue_single", "sourceName": "CatManDog",
+    "sourceUrl": "https://es.meintierdiscount.de/Gatos-Juguetes-para-gatos-Tunel-para-gatos%2C369%2C1k.htm",
+    "checkedAt": "2026-11-09", "note": "Точная D&D Lana в ЕС имеет обычную цену 13,99 €, но CatManDog ставит 15,99 € из-за себестоимости; выше ориентира"
+  },
+  "1126841": {
+    "amount": 10.08, "kind": "same_model_other_colour", "sourceName": "MisMascotas",
+    "sourceUrl": "https://www.mismascotas.es/collections/perros?page=5",
+    "checkedAt": "2026-11-09", "note": "Yagu Petral Reflectante Pink 10,08 €; Aqua T1 в листинге не найден"
+  },
   "1127352": {
     "amount": 23.45,
     "kind": "exact_sku",

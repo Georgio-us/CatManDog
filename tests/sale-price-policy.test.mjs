@@ -36,8 +36,19 @@ test('a draft override cannot replace the sourced price or reach payment', () =>
     [row]).orderable, false);
 });
 
-test('missing price and unverified supplier model remain blocked', () => {
-  for (const id of ['yagu-7588782-studio', 'heybopet-hbzh-icb-19']) {
+test('researched Yagu prices reach checkout without a purchase-price substitution', () => {
+  for (const id of ['yagu-7588782-studio', 'yagu-7515987-studio',
+    'yagu-7516254-studio', 'yagu-7516245-studio', 'yagu-1126841-studio']) {
+    const row = rowFor(id);
+    assert.equal(salePriceDecision(row).accepted, true, id);
+    assert.equal(priceQuote([{ productId: row.product_id, variantId: id, qty: 1 }],
+      [row]).orderable, true, id);
+  }
+});
+
+test('unverified supplier model and unsourced gift concepts remain blocked', () => {
+  for (const id of ['heybopet-hbzh-icb-19', 'birthday-bandana',
+    'halloween-bandana', 'elf-hat']) {
     const row = rowFor(id);
     assert.equal(salePriceDecision(row).accepted, false, id);
     if (row.source_price_cents) assert.equal(priceQuote([{

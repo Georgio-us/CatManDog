@@ -8,6 +8,11 @@ const photo = (sku, alt) => ({
 });
 
 const retail = {
+  '7515987': [6.46, 'eBay ES - та же модель и EAN', 'https://www.ebay.es/itm/168648873005'],
+  '7516254': [3.49, 'CatManDog - по аналогу Trixie 15 см', 'https://cuddlymascotas.com/products/trixie-hueso-cuerda-junior'],
+  '7516245': [3.49, 'CatManDog - по аналогу Trixie 15 см', 'https://cuddlymascotas.com/products/trixie-hueso-cuerda-junior'],
+  '7588782': [15.99, 'CatManDog - по D&D Lana в ЕС', 'https://es.meintierdiscount.de/Gatos-Juguetes-para-gatos-Tunel-para-gatos%2C369%2C1k.htm'],
+  '1126841': [10.08, 'CatManDog - по Yagu Petral Pink', 'https://www.mismascotas.es/collections/perros?page=5'],
   '7514968': [18.30, 'MisMascotas', 'https://www.mismascotas.es/collections/gatos?resultsPerPage=99999'],
   M0295: [7.91, 'Menforsan', 'https://menforsan.com/es/champus-para-gatos/241-champu-muy-suave-para-gatos-300ml.html'],
   '7514697': [14.65, 'Endanea', 'https://endaneamascotas.com/juguetes/80488-duvo-bentonita-white-sensitive-black-carbon-12kg-5414365426880.html'],
@@ -30,6 +35,7 @@ const retail = {
 function snapshot(sku, label, common) {
   const benchmark = retail[sku];
   const amount = benchmark?.[0] ?? null;
+  const analogue = ['7516254', '7516245', '7588782', '1126841'].includes(sku);
   return {
     ...common, id: `yagu-${sku}-studio`, label, sizes: [label],
     price: amount, priceStatus: amount === null ? 'pending' : 'temporary',
@@ -38,8 +44,12 @@ function snapshot(sku, label, common) {
     availabilityStatus: 'pending',
     ...(benchmark ? { retailPrice: {
       amount, currency: 'EUR', status: 'temporary', type: 'retail',
-      sourceName: benchmark[1], sourceUrl: benchmark[2], checkedAt: '2026-11-06',
+      sourceName: benchmark[1], sourceUrl: benchmark[2], checkedAt: analogue || sku === '7515987' ? '2026-11-09' : '2026-11-06',
       taxIncluded: true, shippingIncluded: false
+    } } : {}),
+    ...(analogue ? { pricingBasis: {
+      kind: 'analogue_single', amount, checkedAt: '2026-11-09',
+      exampleUrl: benchmark[2]
     } } : {}),
     image: photo(sku, `${common.brand} ${sku}`),
     supplier: { name: 'Grupo Yagu', sku, url: supplierUrl(sku) }

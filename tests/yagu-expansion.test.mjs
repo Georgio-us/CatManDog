@@ -29,12 +29,13 @@ test('sale unit and provisional retail price stay explicit', () => {
     assert.match(bySku.get(sku).label, /15 × 60 г/);
     assert.match(bySku.get(sku).details.join(' '), /Цена указана за короб/);
   }
-  for (const sku of ['7515987','7516254','7516245','7588782','1126841']) {
-    assert.equal(bySku.get(sku).price, null);
-    assert.equal(bySku.get(sku).priceStatus, 'pending');
-  }
-  for (const sku of skus.filter(sku => !['7515987','7516254','7516245','7588782','1126841'].includes(sku))) {
+  for (const sku of skus) {
     assert.ok(bySku.get(sku).price > 0);
     assert.equal(bySku.get(sku).retailPrice?.type, 'retail');
   }
+  assert.equal(bySku.get('7588782').price, 15.99);
+  assert.equal(bySku.get('7515987').price, 6.46);
+  assert.equal(bySku.get('7516254').price, 3.49);
+  assert.equal(bySku.get('7516245').price, 3.49);
+  assert.equal(bySku.get('1126841').price, 10.08);
 });
