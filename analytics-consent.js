@@ -1,6 +1,8 @@
 const CONSENT_KEY = 'catmandog-analytics-consent-v1';
 const MEASUREMENT_ID = 'G-CTTBQ7PJP9';
-const COMMERCE_EVENTS = new Set(['view_item_list', 'select_item', 'view_item', 'add_to_cart', 'begin_checkout', 'purchase']);
+const COMMERCE_EVENTS = new Set(['view_item_list', 'select_item', 'view_item', 'add_to_cart', 'remove_from_cart',
+  'view_cart', 'begin_checkout', 'add_shipping_info', 'add_payment_info', 'purchase']);
+const VISIT_ALERT_KEY = 'catmandog-visit-alerted';
 
 export function publicPageLocation(location) {
   const path = location.pathname;
@@ -22,17 +24,17 @@ export function publicPageLocation(location) {
 export function consentCopy(language) {
   return language === 'uk' ? {
     title: 'Аналітика сайту',
-    description: 'З вашого дозволу ми використовуємо Google Analytics, щоб розуміти, які сторінки й товари цікавлять відвідувачів. До вашої згоди аналітика не завантажується.',
+    description: 'З вашого дозволу ми використовуємо Google Analytics, щоб розуміти, які сторінки й товари цікавлять відвідувачів. Власник також може отримати анонімне сповіщення про відвідування. До вашої згоди аналітика не завантажується.',
     accept: 'Прийняти', reject: 'Відхилити', settings: 'Налаштування аналітики',
     privacy: 'Конфіденційність'
   } : language === 'ru' ? {
     title: 'Аналитика сайта',
-    description: 'С вашего разрешения мы используем Google Analytics, чтобы понимать, какие страницы и товары полезны посетителям. До согласия аналитика не загружается.',
+    description: 'С вашего разрешения мы используем Google Analytics, чтобы понимать, какие страницы и товары полезны посетителям. Владелец также может получить анонимное уведомление о посещении. До согласия аналитика не загружается.',
     accept: 'Принять', reject: 'Отклонить', settings: 'Настройки аналитики',
     privacy: 'Конфиденциальность'
   } : {
     title: 'Analítica del sitio',
-    description: 'Con tu permiso, usamos Google Analytics para entender qué páginas y productos interesan a quienes nos visitan. No cargamos la analítica antes de tu consentimiento.',
+    description: 'Con tu permiso, usamos Google Analytics para entender qué páginas y productos interesan a quienes nos visitan. El propietario también puede recibir un aviso anónimo de la visita. No cargamos la analítica antes de tu consentimiento.',
     accept: 'Aceptar', reject: 'Rechazar', settings: 'Preferencias de analítica',
     privacy: 'Privacidad'
   };
@@ -55,6 +57,7 @@ export function installAnalytics(language) {
   try { choice = localStorage.getItem(CONSENT_KEY); } catch { choice = null; }
   let enabled = false;
   let lastPage = null;
+  let visitAlerted = false;
 
   function enable() {
     if (enabled) return;
@@ -80,6 +83,17 @@ export function installAnalytics(language) {
     if (!page || page === lastPage) return;
     lastPage = page;
     window.gtag('event', 'page_view', { page_location: page, page_title: 'CatManDog' });
+    if (!visitAlerted && typeof window.fetch === 'function') {
+      try { visitAlerted = sessionStorage.getItem(VISIT_ALERT_KEY) === '1'; }
+      catch { /* Session storage may be unavailable */ }
+      if (!visitAlerted) {
+        visitAlerted = true;
+        try { sessionStorage.setItem(VISIT_ALERT_KEY, '1'); }
+        catch { /* Session storage may be unavailable */ }
+        void window.fetch('/api/telemetry/visit', { method: 'POST', credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' }, body: '{}' }).catch(() => {});
+      }
+    }
   }
 
   panel.hidden = choice === 'accepted' || choice === 'rejected';

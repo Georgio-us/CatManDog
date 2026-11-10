@@ -3,7 +3,8 @@ import { locale } from './locale.js?v=checkout-address-1';
 
 export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems, isReady, getPromo, applyPromo,
   refreshPromo = async () => {}, findOrder, productLabel, getCheckoutContext = () => ({}),
-  getCheckoutProfile = () => null, saveCheckoutProfile = async () => {}, render, onPaid }) {
+  getCheckoutProfile = () => null, saveCheckoutProfile = async () => {}, render, onPaid,
+  onPaymentStart = () => {} }) {
   let formValues = { deliveryRegion: 'local' };
   let profileAccountId = null;
   let draftTouched = false;
@@ -208,6 +209,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
       const result = await response.json().catch(() => ({}));
       if (!response.ok || !/^https:\/\/checkout\.stripe\.com\//.test(result.url || ''))
         throw new Error(result.error || 'Не удалось открыть безопасную оплату');
+      onPaymentStart();
       location.assign(result.url);
     } catch (error) {
       await refreshPromo().catch(() => {});

@@ -14,10 +14,13 @@ test('analytics page locations omit searches and private routes', () => {
 });
 
 test('Google tag and commerce events start only after acceptance; rejected visits stay local', () => {
-  const previous = { document: globalThis.document, window: globalThis.window, localStorage: globalThis.localStorage };
+  const previous = { document: globalThis.document, window: globalThis.window,
+    localStorage: globalThis.localStorage, sessionStorage: globalThis.sessionStorage };
   const listeners = {};
   const scripts = [];
   const values = new Map();
+  const sessionValues = new Map();
+  const visitRequests = [];
   const element = () => ({ textContent: '', listeners: {}, addEventListener(type, fn) { this.listeners[type] = fn; }, focus() {} });
   const title = element(), description = element(), privacy = element();
   const accept = element(), reject = element(), settings = element();
@@ -33,26 +36,39 @@ test('Google tag and commerce events start only after acceptance; rejected visit
   };
   globalThis.window = {
     location: { origin: 'https://catmandog.es', pathname: '/', hash: '', reload() { reloads++; } },
+    fetch(url, options) { visitRequests.push({ url, options }); return Promise.resolve({ ok: true }); },
     addEventListener(type, fn) { listeners[type] = fn; }
   };
   globalThis.localStorage = {
     getItem(key) { return values.get(key) ?? null; }, setItem(key, value) { values.set(key, value); }
+  };
+  globalThis.sessionStorage = {
+    getItem(key) { return sessionValues.get(key) ?? null; },
+    setItem(key, value) { sessionValues.set(key, value); }
   };
   try {
     const analytics = installAnalytics('es');
     assert.equal(panel.hidden, false);
     assert.equal(scripts.length, 0);
     analytics.pageView();
+    assert.equal(visitRequests.length, 0);
     listeners['catmandog:commerce']({ detail: { event: 'add_to_cart', ecommerce: { items: [{ item_id: 'sku', email: 'private@example.com' }] } } });
     assert.equal(globalThis.window.dataLayer, undefined);
 
     reject.listeners.click();
     assert.equal(values.get('catmandog-analytics-consent-v1'), 'rejected');
     assert.equal(scripts.length, 0);
+    assert.equal(visitRequests.length, 0);
     settings.listeners.click();
     accept.listeners.click();
     assert.equal(values.get('catmandog-analytics-consent-v1'), 'accepted');
     assert.equal(scripts.length, 1);
+    assert.equal(visitRequests.length, 1);
+    assert.equal(visitRequests[0].url, '/api/telemetry/visit');
+    assert.equal(visitRequests[0].options.method, 'POST');
+    globalThis.window.location.hash = '#/product/leonardo-1';
+    analytics.pageView();
+    assert.equal(visitRequests.length, 1);
     assert.match(scripts[0].src, /^https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-/);
     listeners['catmandog:commerce']({ detail: { event: 'add_to_cart', ecommerce: { items: [{ item_id: 'sku', email: 'private@example.com', price: 12 }] } } });
     listeners['catmandog:commerce']({ detail: { event: 'purchase', ecommerce: {
@@ -76,5 +92,6 @@ test('Google tag and commerce events start only after acceptance; rejected visit
     globalThis.document = previous.document;
     globalThis.window = previous.window;
     globalThis.localStorage = previous.localStorage;
+    globalThis.sessionStorage = previous.sessionStorage;
   }
 });

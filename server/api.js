@@ -24,6 +24,7 @@ import { activatePaperCoupon, normalizeBuyerPhone, resolvePromo,
   savedPaperCoupon } from './promo.js';
 import { churuRepackOptions } from '../churu-retail-formats.js';
 import { salePriceDecision } from './sale-price-policy.js';
+import { sendTelegramVisitAlert, telegramReady } from './telegram.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
@@ -384,7 +385,7 @@ async function handleStripeWebhook(db, req, res) {
     if (paid && order.payment_status !== 'paid') {
       if (order.payment_status === 'failed' || order.stock_state === 'released')
         throw new Error('Оплата поступила после освобождения резерва');
-      await client.query(`UPDATE orders SET payment_status='paid',
+      await client.query(`UPDATE orders SET payment_status='paid',telegram_alert_pending=true,
         stripe_checkout_session_id=coalesce(stripe_checkout_session_id,$2),
         stripe_payment_intent_id=$3,updated_at=now() WHERE id=$1`,
       [order.id, session.id, typeof session.payment_intent === 'string' ? session.payment_intent : null]);
@@ -1952,6 +1953,17 @@ export async function handleApi(db, req, res, pathname) {
       return await handleStripeWebhook(db, req, res);
     }
     if (!sameOrigin(req) && !['GET','HEAD'].includes(req.method)) bad('Источник запроса не разрешён', 403);
+    if (pathname === '/api/telemetry/visit' && req.method === 'POST') {
+      if (!enabled('TELEGRAM_VISIT_ALERTS_ENABLED') || !telegramReady())
+        return json(res, 200, { accepted: false });
+      rateLimit(req, 'telegram-visit', 30, 60);
+      await readJson(req, 256);
+      try { return json(res, 200, { accepted: await sendTelegramVisitAlert() }); }
+      catch (error) {
+        console.error('Telegram visit alert failed:', error.message);
+        return json(res, 200, { accepted: false });
+      }
+    }
     if (pathname === '/api/health') {
       if (!db) return json(res, 503, { ok: false, database: 'not_configured' });
       await db.query('SELECT 1');
