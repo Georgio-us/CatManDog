@@ -13,7 +13,7 @@ const articleLinks = articlesEs.map(article =>
   `<a class="article-card" href="/revista/${article.id}"><div class="article-meta"><span>${escapeHtml(article.section)}</span><span>${escapeHtml(article.time)}</span></div><h3>${escapeHtml(article.title)}</h3><p>${escapeHtml(article.summary)}</p></a>`).join('');
 const categoryLinks = seoCategories.map(category =>
   `<a class="article-card" href="${category.path}"><h2>${escapeHtml(category.title)}</h2><p>${escapeHtml(category.intro)}</p></a>`).join('');
-const productLinks = categoryPath => seoProducts.filter(item => item.categoryPath === categoryPath).map(item =>
+const productLinks = categoryPath => seoProducts.filter(item => item.indexable && item.categoryPath === categoryPath).map(item =>
   `<a class="article-card" href="${item.path}"><h2>${escapeHtml(products.find(product => product.id === item.id)?.name || item.title)}</h2><p>${escapeHtml(item.description)}</p></a>`).join('');
 
 function pageData(pathname) {
@@ -21,10 +21,15 @@ function pageData(pathname) {
   if (publishedProduct) {
     const product = products.find(item => item.id === publishedProduct.id);
     if (!product) return null;
-    const formats = product.variants?.map(variant => escapeHtml(variant.label.replace(/ кг$/u, ' kg').replace(/ г$/u, ' g'))) || [];
+    const formats = (product.variants?.map(variant => variant.label) || product.sizes || [])
+      .map(label => escapeHtml(label.replace(/ кг$/u, ' kg').replace(/ г$/u, ' g')));
+    const description = publishedProduct.description ||
+      `Consulta los formatos y detalles de ${product.name} en CatManDog`;
+    const image = product.image?.src || (typeof product.image === 'string' ? product.image : '');
     return {
-      title: `${publishedProduct.title} | CatManDog`, description: publishedProduct.description,
-      content: `<div class="page"><article class="editorial-article"><header class="editorial-header"><p class="editorial-kicker">${escapeHtml(product.brand)}</p><h1>${escapeHtml(product.name)}</h1><p class="editorial-deck">${escapeHtml(publishedProduct.description)}</p></header><div class="editorial-body"><img src="${escapeHtml(product.image?.src || '')}" alt="${escapeHtml(product.name)}" width="640" height="640"><h2>Formatos disponibles</h2><p>${formats.join(', ')}</p><a class="text-link" href="${publishedProduct.categoryPath}">Pienso seco para gatos</a></div></article></div>`
+      title: `${publishedProduct.title || product.name} | CatManDog`, description,
+      robots: publishedProduct.indexable ? null : 'noindex,follow',
+      content: `<div class="page"><article class="editorial-article"><header class="editorial-header"><p class="editorial-kicker">${escapeHtml(product.brand || product.category || '')}</p><h1>${escapeHtml(product.name)}</h1><p class="editorial-deck">${escapeHtml(description)}</p></header><div class="editorial-body">${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" width="640" height="640">` : ''}${formats.length ? `<h2>Formatos disponibles</h2><p>${formats.join(', ')}</p>` : ''}<a class="text-link" href="${publishedProduct.categoryPath}">${publishedProduct.indexable ? 'Pienso seco para gatos' : 'Todo el catálogo'}</a></div></article></div>`
     };
   }
   const category = seoCategoryForPath(pathname);
@@ -75,10 +80,12 @@ export async function serveSeo(req, res, pathname) {
   if (req.method !== 'GET' && req.method !== 'HEAD') return false;
   const body = await seoDocument(pathname);
   if (!body) return false;
+  const noindex = seoCategoryForPath(pathname)?.indexable === false ||
+    seoProductForPath(pathname)?.indexable === false;
   res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8',
     'Content-Length': Buffer.byteLength(body), 'Cache-Control': 'no-cache',
     'X-Content-Type-Options': 'nosniff',
-    ...(seoCategoryForPath(pathname)?.indexable === false ? { 'X-Robots-Tag': 'noindex' } : {}) });
+    ...(noindex ? { 'X-Robots-Tag': 'noindex' } : {}) });
   res.end(req.method === 'HEAD' ? undefined : body);
   return true;
 }

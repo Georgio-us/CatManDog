@@ -1,3 +1,5 @@
+import { productHref } from './seo-products.js';
+
 const copy = {
   ru: { title:'Сообщить о поступлении', intro:'Оставьте контакты, и мы сообщим, когда сможем предложить этот товар',
     name:'Имя', phone:'Телефон', consent:'Согласен на обработку контактов для ответа на этот запрос',
@@ -16,7 +18,7 @@ const copy = {
 export function availabilityRequestPage(product, variant, { language = 'ru', escape, icon, defaults = {}, sent = false, error = '' }) {
   const t = copy[language] || copy.ru;
   const privacy = language === 'es' ? '/privacy-es.html' : language === 'uk' ? '/privacy-uk.html' : '/privacy.html';
-  const productUrl = `#/product/${encodeURIComponent(product.id)}?variant=${encodeURIComponent(variant.id)}`;
+  const productUrl = `${productHref(product.id)}?variant=${encodeURIComponent(variant.id)}`;
   const image = variant.image?.src || variant.image || product.image?.src || product.image;
   return `<div class="page checkout-page availability-request-page"><a class="rc-flow-back" href="${productUrl}">${icon('arrow')} ${t.back}</a>
     <div class="rc-flow-heading"><h1>${t.title}</h1><p>${t.intro}</p></div>

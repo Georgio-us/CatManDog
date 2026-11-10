@@ -1,5 +1,6 @@
 import { products } from './data.js?v=cat-assortment-1';
 import { locale } from './locale.js?v=ukrainian-public-3';
+import { productHref } from './seo-products.js';
 
 const toys = ['mouse', 'rope', 'rabbit'];
 const treats = ['creamy-treats', 'crunchy-treats', 'pure-treats'];
@@ -62,7 +63,7 @@ export function giftHome(helpers, showAll = true) {
     <div class="gift-section-head"><div><h2 id="gift-heading">Подарок С хвостиком</h2><p>В гости, на праздник или просто потому, что любите</p></div>${showAll?'<a class="text-link" href="#/gifts">Все подарочные наборы</a>':''}</div>
     <div class="gift-grid">${items.map(item => {
       const p = find(item.id);
-      return `<article class="gift-card"><a class="gift-media" href="#/product/${p.id}" aria-label="${item.title}">${imageBlock(p.image)}</a><div class="gift-card-top"><span>${item.note}</span><strong>${item.price}</strong></div><h3><a href="#/product/${p.id}">${item.title}</a></h3><p>${item.text}</p><a class="gift-action" href="#/product/${p.id}">${item.action} ${icon('arrow')}</a>${p.gift === 'season' ? '<a class="season-alternative" href="#/product/gift-season?season=newyear">Новый год · предзаказ · 34,90 €</a>' : ''}</article>`;
+      return `<article class="gift-card"><a class="gift-media" href="${productHref(p.id)}" aria-label="${item.title}">${imageBlock(p.image)}</a><div class="gift-card-top"><span>${item.note}</span><strong>${item.price}</strong></div><h3><a href="${productHref(p.id)}">${item.title}</a></h3><p>${item.text}</p><a class="gift-action" href="${productHref(p.id)}">${item.action} ${icon('arrow')}</a>${p.gift === 'season' ? `<a class="season-alternative" href="${productHref('gift-season')}?season=newyear">Новый год · предзаказ · 34,90 €</a>` : ''}</article>`;
     }).join('')}</div>
   </section>`;
 }
@@ -87,7 +88,7 @@ export function giftOptions(product, state, helpers) {
 export function giftSummary(product, state, helpers) {
   const { money, imageBlock } = helpers;
   const offer = giftOffer(product, state);
-  return `<h3>Что внутри</h3><ul class="gift-contents">${offer.items.map(p=>`<li><a href="#/product/${p.id}">${imageBlock(p.image)}<span>${p.name}<small>${p.id.includes('bandana')?offer.config.accessorySize+' · 1 шт':p.sizes[0]==='1 шт'?'1 шт':p.sizes[0]+' · 1 шт'}</small></span></a></li>`).join('')}</ul><div class="gift-wrapping"><span>Подарочная коробка, лента и открытка</span><strong>${product.gift==='personal'?money(5.6):'Включены'}</strong></div>`;
+  return `<h3>Что внутри</h3><ul class="gift-contents">${offer.items.map(p=>`<li><a href="${productHref(p.id)}">${imageBlock(p.image)}<span>${p.name}<small>${p.id.includes('bandana')?offer.config.accessorySize+' · 1 шт':p.sizes[0]==='1 шт'?'1 шт':p.sizes[0]+' · 1 шт'}</small></span></a></li>`).join('')}</ul><div class="gift-wrapping"><span>Подарочная коробка, лента и открытка</span><strong>${product.gift==='personal'?money(5.6):'Включены'}</strong></div>`;
 }
 
 export function giftDetail(product, state, helpers) {

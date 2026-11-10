@@ -1,12 +1,12 @@
 import { createUsefulUI } from './useful.js?v=ukrainian-public-3';
-import { createAccountUI } from './account.js?v=checkout-address-1';
+import { createAccountUI } from './account.js?v=product-urls-20261110';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
 import { accessoryDetail } from './accessory-ui.js?v=sale-price-policy-20261109';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=product-url-20261110';
 import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
 import { categories, products, catalogProducts, articles } from './data.js?v=confirmed-demand-20261108';
-import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=customer-product-detail-1';
+import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=product-urls-20261110';
 import { createCheckoutUI } from './checkout-ui.js?v=launch-checks-20261109';
 import { availabilityRequestPage } from './availability-request-ui.js';
 import { orderVariantId } from './order-progress.js';

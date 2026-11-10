@@ -2,9 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { articlesEs } from '../journal-content-es.js';
-import { seoDocument } from '../server/seo.js';
+import { catalogProducts } from '../data.js';
+import { seoDocument, serveSeo } from '../server/seo.js';
 import { seoCategories, seoCategoryPath } from '../seo-categories.js';
-import { seoProductForPath, productHref } from '../seo-products.js';
+import { seoProducts, seoProductForPath, productHref } from '../seo-products.js';
 
 test('the sitemap contains only released public pages with Spanish editorial content', async () => {
   const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
@@ -25,11 +26,11 @@ test('the sitemap contains only released public pages with Spanish editorial con
   }
 });
 
-test('the first published product has a crawlable page and old products keep their route', async () => {
+test('the first published product remains indexable', async () => {
   const path = '/producto/royal-canin-sterilised-37';
   const html = await seoDocument(path);
   assert.equal(productHref('rc-sterilised'), path);
-  assert.equal(productHref('leonardo-poultry'), '#/product/leonardo-poultry');
+  assert.equal(productHref('leonardo-poultry'), '/producto/leonardo-adult-gf-poultry');
   assert.equal(seoProductForPath(path)?.id, 'rc-sterilised');
   assert.match(html, /<h1>Royal Canin Sterilised 37<\/h1>/u);
   assert.match(html, /<link rel="canonical" href="https:\/\/catmandog\.es\/producto\/royal-canin-sterilised-37">/u);
@@ -37,6 +38,27 @@ test('the first published product has a crawlable page and old products keep the
   assert.match(html, /<img src="https:\/\/img\.catmandog\.es\/assets\/food\/editorial\/rc-sterilised-v1\.webp"/u);
   assert.doesNotMatch(html, /<meta name="robots" content="noindex/u);
   assert.equal(await seoDocument('/producto/unknown'), null);
+});
+
+test('every public product has a distinct permanent URL while unreleased pages stay out of the index', async () => {
+  assert.equal(seoProducts.length, catalogProducts.length);
+  assert.equal(new Set(seoProducts.map(product => product.path)).size, catalogProducts.length);
+  for (const product of catalogProducts) {
+    const path = productHref(product.id);
+    assert.match(path, /^\/producto\/[a-z0-9-]+$/u);
+    assert.equal(seoProductForPath(path)?.id, product.id);
+  }
+  const path = productHref('leonardo-poultry');
+  const html = await seoDocument(path);
+  assert.match(html, /<h1>Leonardo Adult GF Poultry<\/h1>/u);
+  assert.match(html, /<link rel="canonical" href="https:\/\/catmandog\.es\/producto\/leonardo-adult-gf-poultry">/u);
+  assert.match(html, /<meta name="robots" content="noindex,follow">/u);
+  let headers;
+  const response = { writeHead(_status, value) { headers = value; }, end() {} };
+  assert.equal(await serveSeo({ method: 'HEAD' }, response, path), true);
+  assert.equal(headers['X-Robots-Tag'], 'noindex');
+  const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
+  assert.equal(sitemap.includes(path), false);
 });
 
 test('catalog landing and the released category are indexable', async () => {
