@@ -350,6 +350,18 @@ export async function importCatalog(db, items = products) {
         }
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [boilerplateMigration]);
       }
+      const missingPhotoMigration = 'unsourced_accessory_photo_placeholder_2026_11_10';
+      const missingPhotoDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [missingPhotoMigration]);
+      if (!missingPhotoDone.rows.length) {
+        const ids = ['birthday-bandana', 'halloween-bandana', 'elf-hat'];
+        const image = '/media/catalog/photo-pending.svg';
+        await client.query(`UPDATE catalog_products SET image_path=$2
+          WHERE id=ANY($1::text[]) AND coalesce(image_path,'')=''`, [ids, image]);
+        await client.query(`UPDATE catalog_variants SET image_path=$2,updated_at=now()
+          WHERE id=ANY($1::text[]) AND coalesce(image_path,'')=''`, [ids, image]);
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [missingPhotoMigration]);
+      }
       // The owner set a retail price for this model; its two color variants remain
       // unavailable for checkout until Tina confirms which colors she can supply.
       await client.query(`UPDATE catalog_variants SET price_override_cents=5490,
