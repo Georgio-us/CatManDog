@@ -362,6 +362,20 @@ export async function importCatalog(db, items = products) {
           WHERE id=ANY($1::text[]) AND coalesce(image_path,'')=''`, [ids, image]);
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [missingPhotoMigration]);
       }
+      const leonardoCopyMigration = 'leonardo_poultry_verified_copy_2026_11_10';
+      const leonardoCopyDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [leonardoCopyMigration]);
+      if (!leonardoCopyDone.rows.length) {
+        const copy = catalogEditorialContent['leonardo-poultry'];
+        const oldDescription = 'Беззерновой сухой корм с птицей для взрослых кошек Амарант заменяет злаки в повседневной рецептуре';
+        await client.query(`UPDATE catalog_products SET description=$2,details=$3::jsonb
+          WHERE id=$1 AND description=$4`,
+        ['leonardo-poultry', copy.description, JSON.stringify(copy.details), oldDescription]);
+        await client.query(`UPDATE catalog_variants SET description=$2,details=$3::jsonb,updated_at=now()
+          WHERE product_id=$1 AND description=$4`,
+        ['leonardo-poultry', copy.description, JSON.stringify(copy.details), oldDescription]);
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [leonardoCopyMigration]);
+      }
       // The owner set a retail price for this model; its two color variants remain
       // unavailable for checkout until Tina confirms which colors she can supply.
       await client.query(`UPDATE catalog_variants SET price_override_cents=5490,

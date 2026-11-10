@@ -1,6 +1,11 @@
 // Product-specific facts checked against the European manufacturer pages.
 // These URLs are editorial evidence, not customer-facing links or price sources.
 export const catalogEditorialContent = {
+  'leonardo-poultry': {
+    source: 'https://www.leonardo-catfood.com/leonardo-adult-gf-poultry-1.8-kg',
+    description: 'LEONARDO Adult GF Poultry - беззерновой сухой корм для взрослых кошек. В составе 30% свежего мяса птицы, 22% белка птицы и 15% амаранта. Амарант - растение, семена которого в этой рецептуре используют вместо злаков.',
+    details: ['Для взрослых кошек от 1 года', '30% свежего мяса птицы и 22% белка птицы', 'Амарант 15% вместо злаков']
+  },
   'cmd-source-f025a9dbc9d479c7': {
     source: 'https://emea.acana.com/en/dogs/dog-food/eu-aca-adult.html',
     description: 'ACANA Adult Dog - сухой рацион для взрослых собак. В рецептуре сочетаются курица, индейка и хек; доля ингредиентов животного происхождения по данным производителя составляет 60%.',

@@ -9,16 +9,21 @@ import { canBuy, catalogPrice } from '../variants.js';
 import { handleApi } from '../server/api.js';
 import { retiredProductIds } from '../catalog-policy.js';
 import { catalogEditorialContent } from '../catalog-editorial-content.js';
+import { editorialEs, editorialUk } from '../locales/editorial-translations.js';
 
-test('verified editorial copy is distinct for the fourteen previously empty products', () => {
+test('verified editorial copy is distinct and translated for each curated product', () => {
   const entries = Object.entries(catalogEditorialContent);
-  assert.equal(entries.length, 14);
+  assert.equal(entries.length, 15);
   assert.equal(new Set(entries.map(([,copy]) => copy.description)).size, entries.length);
   for (const [id, copy] of entries) {
-    assert.ok(id.startsWith('cmd-source-'));
+    assert.ok(id.startsWith('cmd-source-') || id === 'leonardo-poultry');
     assert.ok(copy.source.startsWith('https://'));
     assert.ok(copy.description.length > 100);
     assert.ok(copy.details.length >= 3);
+    for (const source of [copy.description, ...copy.details]) {
+      assert.ok(editorialEs[source], `missing Spanish copy: ${source}`);
+      assert.ok(editorialUk[source], `missing Ukrainian copy: ${source}`);
+    }
     assert.doesNotMatch(`${copy.description} ${copy.details.join(' ')}`,
       /Свежая вода|Норму кормления|Фасовку выберите/i);
   }

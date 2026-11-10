@@ -10,6 +10,7 @@ import { churuFormatsEs, churuFormatsUk } from './locales/churu-formats.js';
 import { seoCategoryForPath } from './seo-categories.js';
 import { deliveryStatusEs, deliveryStatusUk } from './locales/delivery-status.js';
 import { yaguExpansionEs, yaguExpansionUk } from './locales/yagu-expansion.js?v=product-content-20261110';
+import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=editorial-copy-20261110';
 
 const storageKey = 'catmandog-language';
 const saved = (() => { try { return localStorage.getItem(storageKey); } catch { return null; } })();
@@ -44,8 +45,8 @@ export function translate(value) {
   const whitespace = value.match(/^(\s*)([\s\S]*?)(\s*)$/);
   const source = whitespace?.[2] ?? value;
   let result = language === 'uk'
-    ? yaguExpansionUk[source] ?? deliveryStatusUk[source] ?? uk[source] ?? ukExtra[source] ?? churuFormatsUk[source] ?? ukProductNames[source] ?? ukProductCopy(source) ?? ukDetails[source] ?? esProductText[source] ?? esDetails[source]
-    : yaguExpansionEs[source] ?? deliveryStatusEs[source] ?? es[source] ?? churuFormatsEs[source] ?? esProductText[source] ?? esDetails[source];
+    ? editorialUk[source] ?? yaguExpansionUk[source] ?? deliveryStatusUk[source] ?? uk[source] ?? ukExtra[source] ?? churuFormatsUk[source] ?? ukProductNames[source] ?? ukProductCopy(source) ?? ukDetails[source] ?? esProductText[source] ?? esDetails[source]
+    : editorialEs[source] ?? yaguExpansionEs[source] ?? deliveryStatusEs[source] ?? es[source] ?? churuFormatsEs[source] ?? esProductText[source] ?? esDetails[source];
   if (result === undefined) {
     result = source;
     for (const [pattern, replacement] of language === 'uk' ? ukPatterns : esPatterns) {
