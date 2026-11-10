@@ -4,6 +4,7 @@ import { applyServerCatalog } from '../server-prices.js';
 import { orderedVariants } from '../product-content.js';
 import { normalizeCart, cartSku, storefrontPrice, canBuy } from '../variants.js';
 import { accessoryDetail } from '../accessory-ui.js';
+import { availabilityRequestPage } from '../availability-request-ui.js';
 
 test('server catalog gives newly imported food a sorted selector and exact basket price', () => {
   const products = [];
@@ -50,4 +51,10 @@ test('server-unavailable legacy single SKU opens a request instead of a purchase
     money:value=>`${value} €`, language:'ru' });
   assert.match(html, /data-request-availability="birthday-bandana"/);
   assert.doesNotMatch(html, /data-buy=/);
+  const request = availabilityRequestPage(products[0], products[0], {
+    escape:value=>value, icon:()=>'', language:'ru'
+  });
+  assert.match(request, /role="dialog" aria-modal="true"/);
+  assert.match(request, /name="email"/);
+  assert.match(request, /name="phone"/);
 });
