@@ -14,6 +14,14 @@ export function customerFacts(details) {
 
 export function orderedVariants(product) {
   const variants = product.variants || [];
-  if (product.optionLabel !== 'Фасовка' || !variants.every(variant => Number(variant.packageWeightKg) > 0)) return variants;
-  return [...variants].sort((a, b) => a.packageWeightKg - b.packageWeightKg);
+  if (product.category !== 'Корм' && product.optionLabel !== 'Фасовка') return variants;
+  const weight = variant => {
+    const stored = Number(variant.packageWeightKg);
+    if (stored > 0) return stored;
+    const match = String(variant.label || '').match(/^(\d+(?:[,.]\d+)?)\s*(кг|г)(?:\s|$)/iu);
+    if (!match) return null;
+    return Number(match[1].replace(',', '.')) * (match[2] === 'г' ? 0.001 : 1);
+  };
+  if (!variants.every(variant => weight(variant) > 0)) return variants;
+  return [...variants].sort((a, b) => weight(a) - weight(b));
 }

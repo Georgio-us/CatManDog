@@ -1,5 +1,5 @@
 import { hasVariants, resolveVariant, storefrontPrice, canBuy } from './variants.js?v=sale-price-policy-20261109';
-import { customerFacts, orderedVariants } from './product-content.js';
+import { customerFacts, orderedVariants } from './product-content.js?v=catalog-sku-audit-20261110';
 
 export function customerDetails(details, translate, escape, category) {
   const useful = customerFacts(details);

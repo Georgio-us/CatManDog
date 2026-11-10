@@ -1,4 +1,5 @@
 import { hasVariants } from './variants.js?v=sale-price-policy-20261109';
+import { orderedVariants } from './product-content.js?v=catalog-sku-audit-20261110';
 
 function catalogImage(path, previousImages, alt) {
   const imagePath = value => {
@@ -59,6 +60,7 @@ export function applyServerCatalog(products, catalogProducts, entries) {
     product.category = first.category;
     product.pet = first.pet;
     product.foodType = first.food_type || undefined;
+    if (product.category === 'Корм' && rows.length > 1) product.optionLabel = 'Фасовка';
     product.description = first.description || '';
     product.details = Array.isArray(first.details) ? first.details : [];
     product.displayPriority = Math.max(...rows.map(row => Number(row.display_priority) || 0));
@@ -70,6 +72,8 @@ export function applyServerCatalog(products, catalogProducts, entries) {
         pet: product.pet, image: product.image, description: product.description,
         details: product.details, isReal: true });
       sku.label = row.label;
+      const packageWeightKg = Number(row.package_weight_kg);
+      if (packageWeightKg > 0) sku.packageWeightKg = packageWeightKg;
       sku.name = product.name;
       sku.brand = product.brand;
       sku.category = product.category;
@@ -113,7 +117,9 @@ export function applyServerCatalog(products, catalogProducts, entries) {
     });
     if (!original || Array.isArray(original.variants) || rows.length > 1) {
       product.variants = variants;
-      if (product.displayPriority > 0 || !variants.some(variant => variant.id === product.defaultVariantId))
+      if (product.category === 'Корм' && variants.length > 1)
+        product.defaultVariantId = orderedVariants(product)[0].id;
+      else if (product.displayPriority > 0 || !variants.some(variant => variant.id === product.defaultVariantId))
         product.defaultVariantId = variants[0].id;
     }
     next.push(product);
