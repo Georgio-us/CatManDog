@@ -2,6 +2,7 @@ export const esDetails = {
   'Набор сменных фильтров для поилки HeyboPet': 'Juego de filtros de recambio para la fuente HeyboPet',
   'Сменные фильтры для питьевого фонтана HeyboPet HB-PWFS-S30S: задерживают частицы и загрязнения в воде': 'Filtros de recambio para la fuente HeyboPet HB-PWFS-S30S: retienen partículas e impurezas del agua',
   'Сменные фильтры для питьевых фонтанов: помогают задерживать частицы и загрязнения в воде': 'Filtros de recambio para fuentes de agua: ayudan a retener partículas e impurezas',
+  'Универсальные сменные фильтры для питьевых фонтанов, совместимые с большинством моделей и задерживающие частицы и загрязнения в воде': 'Filtros universales de recambio para fuentes de agua, compatibles con la mayoría de modelos y capaces de retener partículas e impurezas',
   'В коробочке 3 сменных фильтра': 'La caja contiene 3 filtros de recambio',
   'Совместимость подтверждена с моделью HB-PWFS-S30S': 'Compatibilidad confirmada con el modelo HB-PWFS-S30S',
   'Совместимость с другими моделями поилок не подтверждена': 'No se ha confirmado la compatibilidad con otros modelos de fuentes',
