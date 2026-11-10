@@ -34,4 +34,28 @@ export const launchHeyboPetProducts = [{
       availabilityStatus: 'unavailable'
     }
   ]
+}, {
+  id: 'heybopet-pwf-filters-3',
+  name: 'HeyboPet - сменные фильтры для фонтана, 3 шт',
+  brand: 'Heybo Pet',
+  category: 'Миски и поилки',
+  pet: 'cat',
+  isReal: true,
+  model: 'PWF',
+  manufacturerSku: 'PWF',
+  image: `${base}heybopet-pwf-filters-3.webp`,
+  description: 'Набор сменных фильтров для поилки HeyboPet',
+  details: ['В коробочке 3 сменных фильтра'],
+  optionLabel: 'Набор',
+  defaultVariantId: 'heybopet-pwf-filters-3-box',
+  variants: [{
+    id: 'heybopet-pwf-filters-3-box',
+    label: '3 фильтра',
+    image: `${base}heybopet-pwf-filters-3.webp`,
+    price: 6.99,
+    priceStatus: 'confirmed',
+    availabilityStatus: 'unavailable',
+    supplier: { sku: 'PWF', saleUnit: '1 box of 3 filters', minimumBoxes: 20,
+      unitCostInclVat: 4.60 }
+  }]
 }];

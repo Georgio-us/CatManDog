@@ -375,6 +375,7 @@ export const seoProductSlugs = Object.freeze({
   "heybopet-drying-cabinet": "heybo-pet-sushilnyi-boks",
   "heybopet-fresh-food-cooker": "heybo-pet-pribor-dlya-prigotovleniya-korma",
   "heybopet-hb-pwfs-s30s": "heybopet-besprovodnoi-fontan-3-l",
+  "heybopet-pwf-filters-3": "heybopet-smennye-filtry-dlya-fontana-3-sht",
   "halloween-bandana": "bandana-pumpkin-mood",
   "elf-hat": "prazdnichnaya-shapochka-little-elf",
   "birthday-bandana": "bandana-birthday-star",

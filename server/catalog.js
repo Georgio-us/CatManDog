@@ -296,6 +296,13 @@ export async function importCatalog(db, items = products) {
         price_confirmed=true WHERE id = ANY($1::text[])
           AND price_override_cents IS NULL AND price_confirmed=false`,
       [['heybopet-hb-pwfs-s30s-black','heybopet-hb-pwfs-s30s-white']]);
+      // PWF is sold as one box of three filters. The supplier MOQ is 20 boxes,
+      // so keep checkout unavailable until the first batch is actually received.
+      await client.query(`UPDATE catalog_variants SET
+        price_override_cents=699,price_confirmed=true,
+        purchase_price_cents=coalesce(purchase_price_cents,460),updated_at=now()
+        WHERE id='heybopet-pwf-filters-3-box'
+          AND price_override_cents IS NULL AND price_confirmed=false`);
     }
     await client.query('COMMIT');
     return rows.length;

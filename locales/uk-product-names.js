@@ -5,6 +5,7 @@ export const ukProductNames = {
   "Royal Canin Gastrointestinal Kitten - сухой корм": "Royal Canin Gastrointestinal Kitten - сухий корм",
   ...yaguExpansionUkNames,
   "HeyboPet - беспроводной фонтан 3 л": "HeyboPet - бездротовий фонтан 3 л",
+  "HeyboPet - сменные фильтры для фонтана, 3 шт": "HeyboPet - змінні фільтри для фонтанчика, 3 шт",
   "Churu - лосось и курица": "Churu - лосось і курка",
   "Churu - тунец": "Churu - тунець",
   "Churu - курица": "Churu - курка",

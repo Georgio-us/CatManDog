@@ -1,4 +1,7 @@
 export const esDetails = {
+  'Набор сменных фильтров для поилки HeyboPet': 'Juego de filtros de recambio para la fuente HeyboPet',
+  'В коробочке 3 сменных фильтра': 'La caja contiene 3 filtros de recambio',
+  '3 фильтра': '3 filtros',
   'Для чихуахуа': 'Para chihuahuas',
   'Ветеринарная диета': 'Dieta veterinaria',
   'Сухой корм для взрослых чихуахуа от 8 месяцев': 'Pienso seco para chihuahuas adultos a partir de los 8 meses',

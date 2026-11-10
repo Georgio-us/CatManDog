@@ -1,6 +1,7 @@
 // Ukrainian copy for the storefront. Russian remains the source for IDs and saved data.
 export const uk = {
   'HeyboPet - беспроводной фонтан 3 л': 'HeyboPet - бездротовий фонтан 3 л',
+  'HeyboPet - сменные фильтры для фонтана, 3 шт': 'HeyboPet - змінні фільтри для фонтанчика, 3 шт',
   'Аккумуляторный фонтан с резервуаром из нержавеющей стали и датчиком движения':
     'Акумуляторний фонтан із резервуаром із неіржавної сталі та датчиком руху',
   'CatManDog - главная': 'CatManDog - головна',

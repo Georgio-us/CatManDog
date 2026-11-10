@@ -38,6 +38,7 @@ export const es = {
   'Цены включают IVA. Стоимость доставки зависит от адреса: по Валенсии бесплатно от 49 €, по материковой Испании - от 99 € после скидки': 'Los precios incluyen IVA. El coste de envío depende de la dirección: gratis en València a partir de 49 € y en la España peninsular a partir de 99 € después del descuento',
   'Цены включают IVA. Стоимость доставки зависит от адреса: по Валенсии бесплатно от 49 €, по материковой Испании - от 99 € после скидки. Для каждого заказа доставка рассчитывается отдельно': 'Los precios incluyen IVA. El coste de envío depende de la dirección: gratis en València a partir de 49 € y en la España peninsular a partir de 99 € después del descuento. El envío se calcula por separado para cada pedido',
   'HeyboPet - беспроводной фонтан 3 л': 'HeyboPet - fuente inalámbrica de 3 l',
+  'HeyboPet - сменные фильтры для фонтана, 3 шт': 'HeyboPet - filtros de recambio para fuente, 3 unidades',
   'Аккумуляторный фонтан с резервуаром из нержавеющей стали и датчиком движения':
     'Fuente recargable con depósito de acero inoxidable y sensor de movimiento',
   'Поиск по каталогу': 'Buscar en el catálogo',
