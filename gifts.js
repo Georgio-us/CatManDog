@@ -1,6 +1,6 @@
 import { products } from './data.js?v=cat-assortment-1';
 import { locale } from './locale.js?v=ukrainian-public-3';
-import { productHref } from './seo-products.js';
+import { productHref } from './seo-products.js?v=all-product-urls-20261110';
 
 const toys = ['mouse', 'rope', 'rabbit'];
 const treats = ['creamy-treats', 'crunchy-treats', 'pure-treats'];

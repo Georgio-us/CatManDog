@@ -1,6 +1,6 @@
 import { checkoutTotals } from './checkout-model.js';
 import { cartSku, storefrontPrice, canBuy } from './variants.js?v=sale-price-policy-20261109';
-import { productHref } from './seo-products.js';
+import { productHref } from './seo-products.js?v=all-product-urls-20261110';
 
 export function fulfillmentState(sku) {
   if (sku?.saleStatus) return sku.saleStatus === 'available' ? 'stock' :

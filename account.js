@@ -3,7 +3,7 @@ import { createAccountApi } from './account-api.js?v=coupon-qr-1';
 import { accountTools } from './useful.js?v=ukrainian-public-3';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
 import { intlLocale, locale } from './locale.js?v=checkout-address-1';
-import { productHref } from './seo-products.js';
+import { productHref } from './seo-products.js?v=all-product-urls-20261110';
 const store = createAccountStore(localStorage);
 const api = createAccountApi();
 

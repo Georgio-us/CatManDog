@@ -1,4 +1,4 @@
-import { productHref } from './seo-products.js';
+import { productHref } from './seo-products.js?v=all-product-urls-20261110';
 
 const copy = {
   ru: { title:'Сообщить о поступлении', intro:'Оставьте контакты, и мы сообщим, когда сможем предложить этот товар',
