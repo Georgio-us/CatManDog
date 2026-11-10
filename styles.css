@@ -1415,10 +1415,7 @@ button:hover:not(:disabled) {
 .availability-selected strong { font-size: 15px; }
 .availability-selected p { margin: 5px 0 0; color: var(--muted); font-size: 14px; }
 .availability-selected-on_hand { background: #f7f9ee; }
-.availability-selected-supplier_48h { background: #f7f5ef; }
 .availability-selected-unavailable { background: #f7f7f5; }
-
-.availability-preview-feedback { font-size: 13px; color: var(--muted); line-height: 1.5; }
 
 @media (max-width: 600px) {
   .availability-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }

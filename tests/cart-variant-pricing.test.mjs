@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 
 import { catalogProducts } from '../data.js';
 import { accessoryDetail } from '../accessory-ui.js';
-import { availabilityScenarioDetail } from '../availability-scenario.js';
 import { matchesHomePrice } from '../home-catalog.js';
 import { catalogPrice, cartSku, normalizeCart, sameCartSku, storefrontPrice } from '../variants.js';
 
@@ -72,23 +71,6 @@ test('Sterilised 37 keeps its retail price when supplier availability changes', 
   assert.doesNotMatch(unconfirmed, /Демонстрационная цена/);
   assert.match(unconfirmed, /data-buy="rc-sterilised"[^>]*>Заказать с доставкой/);
   assert.doesNotMatch(unconfirmed, /Цены в изученных магазинах|Precios observados en otras tiendas|Розничный ориентир/);
-});
-
-test('Sterilised 37 product-specific flow shows the four requested delivery states', () => {
-  const detail = variantId => availabilityScenarioDetail(family, {
-    crumbs: () => '', imageBlock: () => '', escape: String, icon: () => '',
-    favorites: [], money: euro, goodTogether: () => '', variantId, language: 'ru'
-  });
-  const inStock = detail('rc-sterilised-2000g');
-  assert.match(inStock, /400 г<\/strong><small>В наличии<\/small>/);
-  assert.match(inStock, /2 кг<\/strong><small>В наличии<\/small>/);
-  assert.match(inStock, /4 кг<\/strong><small>Под заказ · 24-48 ч<\/small>/);
-  assert.match(inStock, /10 кг<\/strong><small>Нет в наличии<\/small>/);
-  assert.ok(inStock.includes(`<div class="detail-price">${euro(family.variants.find(variant => variant.id === 'rc-sterilised-2000g').price)}</div>`));
-  assert.doesNotMatch(inStock, /Демонстрационная цена/);
-  assert.match(inStock, /data-preview-action="on_hand"/);
-  assert.match(detail('rc-sterilised-4000g'), /data-preview-action="supplier_48h"/);
-  assert.match(detail('rc-sterilised-10000g'), /<button type="button" class="button" disabled>/);
 });
 
 test('cart keeps distinct variants and an exact unit price', () => {
