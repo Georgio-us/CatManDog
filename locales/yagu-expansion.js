@@ -37,6 +37,8 @@ const pair = {
   'Bow Wow Immunity - лакомства для собак': ['Bow Wow Immunity - premios para perros', 'Bow Wow Immunity - ласощі для собак'],
   'Bow Wow Beef Bites - лакомства для собак': ['Bow Wow Beef Bites - premios para perros', 'Bow Wow Beef Bites - ласощі для собак'],
   'Короб из 15 отдельных пакетов лакомства по 60 г': ['Caja de 15 bolsas individuales de premios de 60 g', 'Коробка з 15 окремих пакетів ласощів по 60 г'],
+  'Мягкие лакомства Bow Wow Immunity с говяжьим коллагеном, шиповником и клюквой. Короб из 15 пакетов по 60 г.': ['Premios blandos Bow Wow Immunity con colágeno bovino, escaramujo y arándano rojo. Caja de 15 bolsas de 60 g.', 'М’які ласощі Bow Wow Immunity з яловичим колагеном, шипшиною та журавлиною. Коробка з 15 пакетів по 60 г.'],
+  'Мягкие кусочки Bow Wow Beef Bites с говядиной и говяжьим коллагеном. Короб из 15 пакетов по 60 г.': ['Bocaditos blandos Bow Wow Beef Bites con vacuno y colágeno bovino. Caja de 15 bolsas de 60 g.', 'М’які шматочки Bow Wow Beef Bites з яловичиною та яловичим колагеном. Коробка з 15 пакетів по 60 г.'],
   'Лакомства для собак': ['Premios para perros', 'Ласощі для собак'],
   'Короб 15 × 60 г': ['Caja de 15 × 60 g', 'Коробка 15 × 60 г'],
   'Цена указана за короб 15 × 60 г': ['El precio corresponde a la caja de 15 × 60 g', 'Ціну вказано за коробку 15 × 60 г'],

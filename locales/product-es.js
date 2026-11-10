@@ -7,7 +7,7 @@ const copy = {
   'royal-canin-gastrointestinal-kitten-dry': ['Royal Canin Gastrointestinal Kitten - pienso seco', 'Pienso veterinario seco para gatitos con digestión sensible'],
   'cmd-source-0f4a3ef9889b8ff3': [null, 'Pienso seco ACANA Grass-Fed Lamb con cordero para perros'],
   'rc-sterilised': [null, 'Pienso completo para gatos esterilizados adultos de 1 a 7 años. Su contenido de grasa adaptado ayuda a controlar el peso.'],
-  'leonardo-poultry': [null, 'Pienso sin cereales con ave para gatos adultos. La receta utiliza amaranto en lugar de cereales.'],
+  'leonardo-poultry': [null, 'Pienso seco sin cereales con ave para gatos adultos. Sus ingredientes principales son carne fresca de ave (30 %), proteína de ave (22 %) y amaranto (15 %).'],
   'hills-ster': [null, 'Pienso completo con pollo para gatos esterilizados adultos de 1 a 6 años. Una dieta equilibrada para el día a día.'],
   'acana-grasslands': [null, 'Pienso completo sin cereales para gatos y gatitos. Contiene una elevada proporción de ingredientes de origen animal.'],
   'advance-urinary': [null, 'Pienso dietético completo para gatos adultos. La gama Urinary tiene un contenido moderado de magnesio e ingredientes que acidifican la orina. Consulta con tu veterinario antes de utilizar una dieta veterinaria.'],

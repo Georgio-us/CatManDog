@@ -90,7 +90,7 @@ export const yaguExpansionProducts = [
   one('7514697', '12 кг', { name: 'Duvo+ Black Carbon - наполнитель для кошек', brand: 'Duvo+', category: 'Наполнитель', pet: 'cat', tag: 'Бентонитовый наполнитель',
     description: 'Бентонитовый наполнитель с активированным углём', details: ['Мешок 12 кг', 'Учитывайте вес мешка при доставке'] }),
   one('40BW822', 'Короб 15 × 60 г', { name: 'Bow Wow Immunity - лакомства для собак', brand: 'Bow Wow', category: 'Лакомства', pet: 'dog', tag: 'Лакомства для собак',
-    description: 'Короб из 15 отдельных пакетов лакомства по 60 г',
+    description: 'Мягкие лакомства Bow Wow Immunity с говяжьим коллагеном, шиповником и клюквой. Короб из 15 пакетов по 60 г.',
     details: ['Цена указана за короб 15 × 60 г', 'На изображении показан один пакет из короба'] }),
   family({ id: 'yagu-cosmo-pana-ancha-t2', name: 'Yagu Cosmo Pana Ancha T2', pet: 'dog', tag: 'Лежанка с бортиком',
     optionLabel: 'Цвет', description: 'Лежанка для собаки из фактурной ткани с мягким бортиком',
@@ -117,7 +117,7 @@ export const yaguExpansionProducts = [
   one('1126845', 'Aqua, T2', { name: 'Yagu Ramal Reflectante - поводок', pet: 'dog', tag: 'Поводок для собаки',
     description: 'Поводок в цвете aqua со светоотражающими элементами', details: ['Длина 120 см', 'Ширина 1,5 см'] }),
   one('40BW230', 'Короб 15 × 60 г', { name: 'Bow Wow Beef Bites - лакомства для собак', brand: 'Bow Wow', category: 'Лакомства', pet: 'dog', tag: 'Лакомства для собак',
-    description: 'Короб из 15 отдельных пакетов лакомства по 60 г',
+    description: 'Мягкие кусочки Bow Wow Beef Bites с говядиной и говяжьим коллагеном. Короб из 15 пакетов по 60 г.',
     details: ['Цена указана за короб 15 × 60 г', 'На изображении показан один пакет из короба'] })
 ];
 

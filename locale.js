@@ -1,15 +1,15 @@
 import { es, esPatterns } from './locales/es.js?v=checkout-copy-20261110';
-import { esProductText } from './locales/product-es.js?v=confirmed-demand-20261108';
-import { esDetails } from './locales/details-es.js?v=confirmed-demand-20261108';
+import { esProductText } from './locales/product-es.js?v=product-content-20261110';
+import { esDetails } from './locales/details-es.js?v=product-content-20261110';
 import { uk, ukPatterns } from './locales/uk.js?v=checkout-copy-20261110';
 import { ukExtra } from './locales/uk-extra.js?v=checkout-copy-20261110';
 import { ukProductNames } from './locales/uk-product-names.js?v=confirmed-demand-20261108';
-import { ukProductCopy } from './locales/uk-product-copy.js';
-import { ukDetails } from './locales/uk-details.js?v=confirmed-demand-20261108';
+import { ukProductCopy } from './locales/uk-product-copy.js?v=product-content-20261110';
+import { ukDetails } from './locales/uk-details.js?v=product-content-20261110';
 import { churuFormatsEs, churuFormatsUk } from './locales/churu-formats.js';
 import { seoCategoryForPath } from './seo-categories.js';
 import { deliveryStatusEs, deliveryStatusUk } from './locales/delivery-status.js';
-import { yaguExpansionEs, yaguExpansionUk } from './locales/yagu-expansion.js';
+import { yaguExpansionEs, yaguExpansionUk } from './locales/yagu-expansion.js?v=product-content-20261110';
 
 const storageKey = 'catmandog-language';
 const saved = (() => { try { return localStorage.getItem(storageKey); } catch { return null; } })();

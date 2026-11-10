@@ -1,14 +1,14 @@
 import { applyCatalogPolicy } from './catalog-policy.js';
 import { applyRetailUpdates } from './retail-updates.js?v=retail-coverage-1';
 import { applyProvisionalPrices } from './provisional-prices.js';
-import { foodProducts as originalFoodProducts } from './food-products.js?v=customer-product-detail-1';
+import { foodProducts as originalFoodProducts } from './food-products.js?v=product-content-20261110';
 import { expandRoyalCaninFood } from './royal-canin-products.js?v=r2-media-1';
 import { expandPriorityFood } from './priority-food-products.js?v=customer-product-detail-1';
 import { heybopetProducts } from './heybopet-products.js?v=r2-media-1';
 import { treatsCareProducts } from './treats-care-products.js?v=r2-media-1';
 import { yaguProducts, expandYaguCare } from './yagu-products.js?v=r2-media-1';
 import { yaguLaunchProducts } from './yagu-launch-products.js';
-import { yaguExpansionProducts, expandYaguColourVariants } from './yagu-expansion-products.js';
+import { yaguExpansionProducts, expandYaguColourVariants } from './yagu-expansion-products.js?v=product-content-20261110';
 import { ownatProducts } from './ownat-products.js?v=r2-media-1';
 import { dogProducts } from './dog-products.js?v=r2-media-1';
 import { launchHeyboPetProducts } from './launch-heybopet-products.js';

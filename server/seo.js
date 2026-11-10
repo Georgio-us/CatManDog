@@ -1,6 +1,10 @@
 import { readFile } from 'node:fs/promises';
 import { articlesEs } from '../journal-content-es.js';
 import { products } from '../data.js';
+import { esProductText } from '../locales/product-es.js';
+import { esDetails } from '../locales/details-es.js';
+import { yaguExpansionEs } from '../locales/yagu-expansion.js';
+import { customerFacts, orderedVariants } from '../product-content.js';
 import { seoCategories, seoCategoryForPath } from '../seo-categories.js';
 import { seoProducts, seoProductForPath } from '../seo-products.js';
 
@@ -21,15 +25,17 @@ function pageData(pathname) {
   if (publishedProduct) {
     const product = products.find(item => item.id === publishedProduct.id);
     if (!product) return null;
-    const formats = (product.variants?.map(variant => variant.label) || product.sizes || [])
+    const formats = (product.variants?.length ? orderedVariants(product).map(variant => variant.label) : product.sizes || [])
       .map(label => escapeHtml(label.replace(/ кг$/u, ' kg').replace(/ г$/u, ' g')));
     const description = publishedProduct.description ||
-      `Consulta los formatos y detalles de ${product.name} en CatManDog`;
+      esProductText[product.description] || yaguExpansionEs[product.description] || product.name;
     const image = product.image?.src || (typeof product.image === 'string' ? product.image : '');
+    const facts = customerFacts(product.details).map(detail => esDetails[detail] || yaguExpansionEs[detail] ||
+      (!/[А-Яа-яЁё]/u.test(detail) ? detail : null)).filter(Boolean);
     return {
       title: `${publishedProduct.title || product.name} | CatManDog`, description,
       robots: publishedProduct.indexable ? null : 'noindex,follow',
-      content: `<div class="page"><article class="editorial-article"><header class="editorial-header"><p class="editorial-kicker">${escapeHtml(product.brand || product.category || '')}</p><h1>${escapeHtml(product.name)}</h1><p class="editorial-deck">${escapeHtml(description)}</p></header><div class="editorial-body">${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" width="640" height="640">` : ''}${formats.length ? `<h2>Formatos disponibles</h2><p>${formats.join(', ')}</p>` : ''}<a class="text-link" href="${publishedProduct.categoryPath}">${publishedProduct.indexable ? 'Pienso seco para gatos' : 'Todo el catálogo'}</a></div></article></div>`
+      content: `<div class="page"><article class="editorial-article"><header class="editorial-header"><p class="editorial-kicker">${escapeHtml(product.brand || product.category || '')}</p><h1>${escapeHtml(product.name)}</h1><p class="editorial-deck">${escapeHtml(description)}</p></header><div class="editorial-body">${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" width="640" height="640">` : ''}${facts.length ? `<h2>Sobre el producto</h2><ul>${facts.map(fact => `<li>${escapeHtml(fact)}</li>`).join('')}</ul>` : ''}${formats.length ? `<h2>Formatos disponibles</h2><p>${formats.join(', ')}</p>` : ''}<a class="text-link" href="${publishedProduct.categoryPath}">${publishedProduct.indexable ? 'Pienso seco para gatos' : 'Todo el catálogo'}</a></div></article></div>`
     };
   }
   const category = seoCategoryForPath(pathname);

@@ -1834,7 +1834,7 @@ details ul {
 }
 
 .customer-details-chevron svg { width: 100%; height: 100%; }
-.customer-product-details[open] .customer-details-chevron { transform: rotate(90deg); }
+.customer-product-details[open] .customer-details-chevron { transform: rotate(180deg); }
 
 .prose {
   max-width: 760px;
