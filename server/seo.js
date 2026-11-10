@@ -1,6 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import { articlesEs } from '../journal-content-es.js';
+import { products } from '../data.js';
 import { seoCategories, seoCategoryForPath } from '../seo-categories.js';
+import { seoProducts, seoProductForPath } from '../seo-products.js';
 
 const origin = 'https://catmandog.es';
 const shell = new URL('../index.html', import.meta.url);
@@ -11,13 +13,25 @@ const articleLinks = articlesEs.map(article =>
   `<a class="article-card" href="/revista/${article.id}"><div class="article-meta"><span>${escapeHtml(article.section)}</span><span>${escapeHtml(article.time)}</span></div><h3>${escapeHtml(article.title)}</h3><p>${escapeHtml(article.summary)}</p></a>`).join('');
 const categoryLinks = seoCategories.map(category =>
   `<a class="article-card" href="${category.path}"><h2>${escapeHtml(category.title)}</h2><p>${escapeHtml(category.intro)}</p></a>`).join('');
+const productLinks = categoryPath => seoProducts.filter(item => item.categoryPath === categoryPath).map(item =>
+  `<a class="article-card" href="${item.path}"><h2>${escapeHtml(products.find(product => product.id === item.id)?.name || item.title)}</h2><p>${escapeHtml(item.description)}</p></a>`).join('');
 
 function pageData(pathname) {
+  const publishedProduct = seoProductForPath(pathname);
+  if (publishedProduct) {
+    const product = products.find(item => item.id === publishedProduct.id);
+    if (!product) return null;
+    const formats = product.variants?.map(variant => escapeHtml(variant.label.replace(/ кг$/u, ' kg').replace(/ г$/u, ' g'))) || [];
+    return {
+      title: `${publishedProduct.title} | CatManDog`, description: publishedProduct.description,
+      content: `<div class="page"><article class="editorial-article"><header class="editorial-header"><p class="editorial-kicker">${escapeHtml(product.brand)}</p><h1>${escapeHtml(product.name)}</h1><p class="editorial-deck">${escapeHtml(publishedProduct.description)}</p></header><div class="editorial-body"><img src="${escapeHtml(product.image?.src || '')}" alt="${escapeHtml(product.name)}" width="640" height="640"><h2>Formatos disponibles</h2><p>${formats.join(', ')}</p><a class="text-link" href="${publishedProduct.categoryPath}">Pienso seco para gatos</a></div></article></div>`
+    };
+  }
   const category = seoCategoryForPath(pathname);
   if (category) return {
     title: `${category.title} | CatManDog`, description: category.description,
     robots: category.indexable ? null : 'noindex,follow',
-    content: `<div class="page"><h1 class="page-title">${escapeHtml(category.title)}</h1><p class="lead">${escapeHtml(category.intro)}</p><p><a class="text-link" href="/catalogo">Todo el catálogo</a></p></div>`
+    content: `<div class="page"><h1 class="page-title">${escapeHtml(category.title)}</h1><p class="lead">${escapeHtml(category.intro)}</p><p><a class="text-link" href="/catalogo">Todo el catálogo</a></p>${productLinks(pathname)}</div>`
   };
   if (pathname === '/catalogo') return {
     title: 'Catálogo de productos para gatos y perros | CatManDog',
