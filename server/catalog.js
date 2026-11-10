@@ -290,6 +290,17 @@ export async function importCatalog(db, items = products) {
           FROM catalog_products p WHERE p.id=v.product_id AND p.active=true AND v.active=true`);
         await client.query("INSERT INTO catalog_migrations(name) VALUES('initial_brand_sale_status_2026_11_06')");
       }
+      const unpricedRequestMigration = 'unpriced_customer_request_2026_11_10';
+      const unpricedRequestDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [unpricedRequestMigration]);
+      if (!unpricedRequestDone.rows.length) {
+        await client.query(`UPDATE catalog_variants SET sale_status='unavailable',updated_at=now()
+          WHERE id = ANY($1::text[]) AND price_confirmed=false`, [[
+          'heybopet-hbzh-icb-19', 'heybopet-hbzh-icb-24',
+          'birthday-bandana', 'halloween-bandana', 'elf-hat'
+        ]]);
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [unpricedRequestMigration]);
+      }
       // The owner set a retail price for this model; its two color variants remain
       // unavailable for checkout until Tina confirms which colors she can supply.
       await client.query(`UPDATE catalog_variants SET price_override_cents=5490,

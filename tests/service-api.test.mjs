@@ -2,6 +2,57 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { handleApi } from '../server/api.js';
 
+test('availability request accepts one reply channel and blocks checkout for unpriced SKU', async () => {
+  const keys = ['RESEND_API_KEY', 'RESEND_FROM', 'PUBLIC_BASE_URL'];
+  const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]));
+  const originalFetch = globalThis.fetch;
+  const sent = [];
+  const stored = [];
+  try {
+    process.env.RESEND_API_KEY = 'test-key';
+    process.env.RESEND_FROM = 'CatManDog <no-reply@notify.catmandog.es>';
+    process.env.PUBLIC_BASE_URL = 'https://catmandog.es/';
+    globalThis.fetch = async (_url, options) => {
+      sent.push(JSON.parse(options.body));
+      return { ok: true };
+    };
+    const db = { async query(sql, params) {
+      if (sql.includes('FROM catalog_variants v JOIN catalog_products p')) {
+        assert.match(sql, /v\.price_confirmed=false/);
+        return { rows: [{ product_id:'hat', name:'Праздничная шапочка', label:'1 шт' }] };
+      }
+      if (sql.startsWith('INSERT INTO service_requests')) {
+        stored.push(params);
+        return { rowCount: 1 };
+      }
+      throw new Error(`Unexpected SQL: ${sql}`);
+    } };
+    const run = async (body, suffix) => {
+      const req = { method:'POST', headers:{}, socket:{ remoteAddress:`test-availability-${suffix}` },
+        async *[Symbol.asyncIterator]() { yield JSON.stringify(body); } };
+      let status;
+      const res = { writeHead(code) { status=code; }, end() {} };
+      await handleApi(db, req, res, '/api/availability-requests');
+      return status;
+    };
+    const base = { name:'Тест', variantId:'elf-hat', consent:true };
+    assert.equal(await run({ ...base, phone:'+34600111222' }, 'phone'), 202);
+    assert.equal(stored[0][1], '');
+    assert.equal(sent.length, 1);
+    assert.equal(sent[0].to[0], 'support@catmandog.es');
+    assert.equal(await run({ ...base, email:'buyer@example.test' }, 'email'), 202);
+    assert.equal(sent.length, 3);
+    assert.equal(sent[2].to[0], 'buyer@example.test');
+    assert.equal(await run(base, 'empty'), 400);
+    assert.equal(stored.length, 2);
+  } finally {
+    globalThis.fetch = originalFetch;
+    for (const [key,value] of Object.entries(previous)) {
+      if (value === undefined) delete process.env[key]; else process.env[key] = value;
+    }
+  }
+});
+
 test('support API stores the request and emails the team and buyer', async () => {
   const keys = ['SUPPORT_ENABLED', 'RESEND_API_KEY', 'RESEND_FROM', 'PUBLIC_BASE_URL'];
   const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]));

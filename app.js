@@ -478,6 +478,12 @@ app.addEventListener('submit', async event => {
   const variantId = form.dataset.availabilityRequest;
   const values = Object.fromEntries(new FormData(form).entries());
   const button = form.querySelector('[type="submit"]');
+  if (!values.email?.trim() && !values.phone?.trim()) {
+    form.querySelector('.checkout-error').textContent = locale() === 'es'
+      ? 'Indica tu email o teléfono' : locale() === 'uk'
+        ? 'Вкажіть email або телефон' : 'Укажите email или телефон';
+    return;
+  }
   button.disabled = true;
   try {
     const response = await fetch('/api/availability-requests', { method:'POST', credentials:'same-origin',

@@ -2132,11 +2132,13 @@ export async function handleApi(db, req, res, pathname) {
       const email = normalizedEmail(body.email);
       const phone = cap(body.phone, 24);
       const variantId = cap(body.variantId, 180);
-      if (!name || !validEmail(email) || phone.length < 6 || !variantId || body.consent !== true)
+      if (!name || (email && !validEmail(email)) || (!email && phone.length < 6) ||
+          (phone && phone.length < 6) || !variantId || body.consent !== true)
         bad('Проверьте контактные данные и согласие на ответ');
       const { rows } = await db.query(`SELECT v.id,p.id AS product_id,p.name,v.label
         FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
-        WHERE v.id=$1 AND p.active=true AND v.active=true AND v.sale_status='unavailable'`, [variantId]);
+        WHERE v.id=$1 AND p.active=true AND v.active=true
+          AND (v.sale_status='unavailable' OR v.price_confirmed=false)`, [variantId]);
       if (!rows.length) bad('Этот товар уже доступен или не найден', 409);
       const id = randomUUID();
       const locale = ['ru','es','uk'].includes(body.locale) ? body.locale : 'ru';
