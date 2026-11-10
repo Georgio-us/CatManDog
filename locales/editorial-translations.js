@@ -1,4 +1,5 @@
 import { catalogEditorialContent } from '../catalog-editorial-content.js';
+import { catalogEditorialCats } from '../catalog-editorial-cats.js';
 
 // Translations of verified catalog copy. Match the server's exact source text so
 // hydrated product and variant descriptions cannot fall back to Russian.
@@ -102,6 +103,10 @@ const detailCopy = {
 };
 
 const pairs = [
+  ...Object.values(catalogEditorialCats).flatMap(copy => [
+    [copy.description, [copy.esDescription, copy.ukDescription]],
+    ...copy.details.map((detail, index) => [detail, [copy.esDetails[index], copy.ukDetails[index]]])
+  ]),
   ...Object.entries(descriptionByProduct).map(([id, values]) => [catalogEditorialContent[id].description, values]),
   ...Object.entries(detailCopy),
   ['Беззерновой сухой корм с птицей для взрослых кошек Амарант заменяет злаки в повседневной рецептуре', [
