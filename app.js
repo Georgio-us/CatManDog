@@ -10,7 +10,7 @@ import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOpt
 import { createCheckoutUI } from './checkout-ui.js?v=telegram-funnel-20261110';
 import { availabilityRequestPage } from './availability-request-ui.js?v=all-product-urls-20261110';
 import { orderVariantId } from './order-progress.js';
-import { applyServerCatalog } from './server-prices.js?v=catalog-sku-audit-20261110';
+import { applyServerCatalog } from './server-prices.js?v=unavailable-single-20261110';
 
 import { homeDirections, activeHomeLanding } from './collections.js?v=cat-assortment-1';
 import { installLocale, intlLocale, locale, translate } from './locale.js?v=editorial-copy-20261110';

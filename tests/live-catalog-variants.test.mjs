@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { applyServerCatalog } from '../server-prices.js';
 import { orderedVariants } from '../product-content.js';
 import { normalizeCart, cartSku, storefrontPrice, canBuy } from '../variants.js';
+import { accessoryDetail } from '../accessory-ui.js';
 
 test('server catalog gives newly imported food a sorted selector and exact basket price', () => {
   const products = [];
@@ -27,4 +28,26 @@ test('server catalog gives newly imported food a sorted selector and exact baske
   const sku = cartSku(cart[0], products);
   assert.equal(storefrontPrice(sku), 4.95);
   assert.equal(canBuy(sku), true);
+});
+
+test('server-unavailable legacy single SKU opens a request instead of a purchase', () => {
+  const legacy = { id:'birthday-bandana', name:'Бандана Birthday Star', price:8.9,
+    priceStatus:'confirmed', image:37, sizes:['XS','S'], category:'Аксессуары' };
+  const products = [legacy];
+  const visible = [legacy];
+  applyServerCatalog(products, visible, [{
+    product_id:'birthday-bandana', variant_id:'birthday-bandana',
+    name:legacy.name, category:legacy.category, pet:'cat', label:'1 шт',
+    image_path:'/media/catalog/photo-pending.svg', description:'Праздничная бандана',
+    details:[], availability:'source_on_demand', saleStatus:'unavailable',
+    source_orderable:true, availableForCart:false, price_confirmed:false,
+    price_accepted:false, referencePriceCents:890
+  }]);
+  assert.equal(products[0].isReal, true);
+  assert.equal(canBuy(products[0]), false);
+  const html = accessoryDetail(products[0], { crumbs:()=>'', imageBlock:()=>'',
+    escape:value=>value, icon:()=>'', favorites:[], goodTogether:()=>'',
+    money:value=>`${value} €`, language:'ru' });
+  assert.match(html, /data-request-availability="birthday-bandana"/);
+  assert.doesNotMatch(html, /data-buy=/);
 });

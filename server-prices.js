@@ -52,6 +52,9 @@ export function applyServerCatalog(products, catalogProducts, entries) {
     const original = current.get(id);
     const product = original || { id, isReal: true, tag: '', line: first.brand || 'CatManDog',
       optionLabel: 'Вариант', defaultVariantId: first.variant_id, variants: [] };
+    // A legacy boot card may have no variants. Once the server provides this SKU,
+    // render it through the server-aware detail flow so sale status is respected.
+    product.isReal = true;
     const previousProductImage = product.image;
     const previousVariantImages = new Map((Array.isArray(product.variants) ? product.variants : [])
       .map(variant => [variant.id, variant.image]));
