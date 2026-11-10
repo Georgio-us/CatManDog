@@ -5,7 +5,7 @@ import { accessoryDetail, customerDetails } from './accessory-ui.js?v=catalog-sk
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=all-product-urls-20261110';
 import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
-import { categories, products, catalogProducts, articles } from './data.js?v=editorial-cats-20261110';
+import { categories, products, catalogProducts, articles } from './data.js?v=editorial-dogs-20261110';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=product-urls-20261110';
 import { createCheckoutUI } from './checkout-ui.js?v=telegram-funnel-20261110';
 import { availabilityRequestPage } from './availability-request-ui.js?v=request-dialog-20261110';
@@ -13,7 +13,7 @@ import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=unavailable-single-20261110';
 
 import { homeDirections, activeHomeLanding } from './collections.js?v=cat-assortment-1';
-import { installLocale, intlLocale, locale, translate } from './locale.js?v=editorial-cats-20261110';
+import { installLocale, intlLocale, locale, translate } from './locale.js?v=editorial-dogs-20261110';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';

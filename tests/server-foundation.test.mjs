@@ -13,10 +13,10 @@ import { editorialEs, editorialUk } from '../locales/editorial-translations.js';
 
 test('verified editorial copy is distinct and translated for each curated product', () => {
   const entries = Object.entries(catalogEditorialContent);
-  assert.equal(entries.length, 27);
+  assert.equal(entries.length, 37);
   assert.equal(new Set(entries.map(([,copy]) => copy.description)).size, entries.length);
   for (const [id, copy] of entries) {
-    assert.ok(id.startsWith('cmd-source-') || id === 'leonardo-poultry' || id.startsWith('acana-') || id.startsWith('orijen-'));
+    assert.ok(id.startsWith('cmd-source-') || id === 'leonardo-poultry' || id.startsWith('acana-') || id.startsWith('orijen-') || id.startsWith('dog-orijen-'));
     assert.ok(copy.source.startsWith('https://'));
     assert.ok(copy.description.length > 100);
     assert.ok(copy.details.length >= 3);

@@ -8,6 +8,7 @@ import { selectedAcanaOrijenFormats } from '../acana-orijen-selected-formats.js'
 import { salePriceDecision } from './sale-price-policy.js';
 import { catalogEditorialContent } from '../catalog-editorial-content.js';
 import { catalogEditorialCats } from '../catalog-editorial-cats.js';
+import { catalogEditorialDogs } from '../catalog-editorial-dogs.js';
 
 const cents = value => Number.isFinite(value) && value > 0 ? Math.round(value * 100) : null;
 const imagePath = image => typeof image === 'string' ? image : image?.src || null;
@@ -386,10 +387,24 @@ export async function importCatalog(db, items = products) {
             WHERE id=$1 AND description=$4`,
           [productId, copy.description, JSON.stringify(copy.details), copy.previousDescription]);
           await client.query(`UPDATE catalog_variants SET description=$2,details=$3::jsonb,updated_at=now()
-            WHERE product_id=$1 AND description=$4`,
+            WHERE product_id=$1 AND (description=$4 OR btrim(description)='')`,
           [productId, copy.description, JSON.stringify(copy.details), copy.previousDescription]);
         }
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [catCopyMigration]);
+      }
+      const dogCopyMigration = 'verified_dog_recipe_copy_2026_11_10';
+      const dogCopyDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [dogCopyMigration]);
+      if (!dogCopyDone.rows.length) {
+        for (const [productId, copy] of Object.entries(catalogEditorialDogs)) {
+          await client.query(`UPDATE catalog_products SET description=$2,details=$3::jsonb
+            WHERE id=$1 AND description=$4`,
+          [productId, copy.description, JSON.stringify(copy.details), copy.previousDescription]);
+          await client.query(`UPDATE catalog_variants SET description=$2,details=$3::jsonb,updated_at=now()
+            WHERE product_id=$1 AND (description=$4 OR btrim(description)='')`,
+          [productId, copy.description, JSON.stringify(copy.details), copy.previousDescription]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [dogCopyMigration]);
       }
       // The owner set a retail price for this model; its two color variants remain
       // unavailable for checkout until Tina confirms which colors she can supply.
