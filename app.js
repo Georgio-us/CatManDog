@@ -15,7 +15,7 @@ import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=sale-price-policy-20261109';
 
 import { homeDirections, activeHomeLanding } from './collections.js?v=cat-assortment-1';
-import { installLocale, intlLocale, locale, translate } from './locale.js?v=mainland-checkout-20261109';
+import { installLocale, intlLocale, locale, translate } from './locale.js?v=checkout-copy-20261110';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
@@ -31,6 +31,14 @@ const paths = {map:'<path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2V5Zm6-2v16m6-14v16"
 const icon = name => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name] || paths.heart}</svg>`;
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const itemCount = n => locale() === 'es' ? `${n} ${n === 1 ? 'producto' : 'productos'}` : `${n} ${({one:'товар',few:'товара',many:'товаров',other:'товара'})[new Intl.PluralRules('ru-RU').select(n)]}`;
+const variantCount = n => {
+  if (locale() === 'es') return `${n} ${n === 1 ? 'formato' : 'formatos'}`;
+  const language = locale() === 'uk' ? 'uk' : 'ru';
+  const forms = language === 'uk'
+    ? { one: 'варіант', few: 'варіанти', many: 'варіантів', other: 'варіанта' }
+    : { one: 'вариант', few: 'варианта', many: 'вариантов', other: 'варианта' };
+  return `${n} ${forms[new Intl.PluralRules(language).select(n)]}`;
+};
 const money = value => Number.isFinite(value) ? new Intl.NumberFormat(intlLocale(),{style:'currency',currency:'EUR',currencyDisplay:'narrowSymbol'}).format(value) : locale() === 'es' ? 'No disponible' : 'Недоступно';
 function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)) ?? fallback;}catch{return fallback;}}
 let cart = normalizeCart(read('catmandog-cart',[]), products);
@@ -177,7 +185,7 @@ function card(p){
   const actionLabel=family?'Выбрать вариант':p.gift?'Выбрать набор':!canBuy(sku)?'К товару':'В корзину';
   const caption=pricing.amount===null?'':family?(p.id.startsWith('yagu-')?'Цена зависит от размера':'Цена зависит от фасовки'):'Цена с IVA';
   const displayPrice=pricing.amount===null?'Цена уточняется':pricing.min!==pricing.max?`${money(pricing.min)} - ${money(pricing.max)}`:`${p.gift==='personal'?'от ':''}${money(pricing.amount)}`;
-  return `<article class="product-card ${p.isReal?'real-product-card':''}"><a class="product-card-open" href="#/product/${escape(p.id)}" aria-label="Открыть товар: ${escape(p.name)}"></a><div class="product-media">${imageBlock(p.image)}<span class="product-tag">${escape(p.tag||'')}</span>${availabilityTag}<button class="icon-button favorite ${favorites.includes(p.id)?'selected':''}" data-favorite="${escape(p.id)}" aria-label="${favorites.includes(p.id)?'Убрать из избранного':'В избранное'}: ${escape(p.name)}" aria-pressed="${favorites.includes(p.id)}">${icon('heart')}</button></div><div class="product-info"><small>${escape(p.brand||'CatManDog')}${p.weight?` · ${escape(p.weight)}`:''}${family?` · ${(locale()==='es'?`${p.variants.length} formatos`:itemCount(p.variants.length).replace('товар','вариант'))}`:''}</small><div class="product-title"><h3>${escape(p.name)} <span class="product-open-cue">${icon('arrow')}</span></h3></div><span class="retail-label" ${caption?'':'aria-hidden="true"'}>${caption}</span><div class="product-price"><div class="product-price-values"><span>${displayPrice}</span>${!pricing.demo&&!family&&p.old?`<span class="old-price">${money(p.old)}</span>`:''}</div><button class="product-card-action" ${configure?'data-configure':'data-add'}="${escape(p.id)}" aria-label="${actionLabel}: ${escape(p.name)}">${actionLabel}${icon(configure?'arrow':'bag')}</button></div></div></article>`;
+  return `<article class="product-card ${p.isReal?'real-product-card':''}"><a class="product-card-open" href="#/product/${escape(p.id)}" aria-label="Открыть товар: ${escape(p.name)}"></a><div class="product-media">${imageBlock(p.image)}<span class="product-tag">${escape(p.tag||'')}</span>${availabilityTag}<button class="icon-button favorite ${favorites.includes(p.id)?'selected':''}" data-favorite="${escape(p.id)}" aria-label="${favorites.includes(p.id)?'Убрать из избранного':'В избранное'}: ${escape(p.name)}" aria-pressed="${favorites.includes(p.id)}">${icon('heart')}</button></div><div class="product-info"><small>${escape(p.brand||'CatManDog')}${p.weight?` · ${escape(p.weight)}`:''}${family?` · ${variantCount(p.variants.length)}`:''}</small><div class="product-title"><h3>${escape(p.name)} <span class="product-open-cue">${icon('arrow')}</span></h3></div><span class="retail-label" ${caption?'':'aria-hidden="true"'}>${caption}</span><div class="product-price"><div class="product-price-values"><span>${displayPrice}</span>${!pricing.demo&&!family&&p.old?`<span class="old-price">${money(p.old)}</span>`:''}</div><button class="product-card-action" ${configure?'data-configure':'data-add'}="${escape(p.id)}" aria-label="${actionLabel}: ${escape(p.name)}">${actionLabel}${icon(configure?'arrow':'bag')}</button></div></div></article>`;
 }
 function goodTogether(product){
   const suggestions=recommendForProduct(product,catalogProducts,{cart});

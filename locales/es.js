@@ -288,6 +288,7 @@ export const es = {
   'Название улицы': 'Nombre de la calle',
   'Номер дома': 'Número',
   'Квартира, этаж, дверь': 'Piso, escalera y puerta',
+  '2 этаж, дверь 4': '2.º piso, puerta 4',
   'Если есть': 'Si procede',
   'Комментарий для доставки': 'Indicaciones para la entrega',
   'Необязательно': 'Opcional',
