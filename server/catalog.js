@@ -6,6 +6,7 @@ import { supplierSourcingByVariant } from './sourcing-status.js';
 import { launchSelectedImageMap } from '../launch-selected-image-map.js';
 import { selectedAcanaOrijenFormats } from '../acana-orijen-selected-formats.js';
 import { salePriceDecision } from './sale-price-policy.js';
+import { catalogEditorialContent } from '../catalog-editorial-content.js';
 
 const cents = value => Number.isFinite(value) && value > 0 ? Math.round(value * 100) : null;
 const imagePath = image => typeof image === 'string' ? image : image?.src || null;
@@ -300,6 +301,25 @@ export async function importCatalog(db, items = products) {
           'birthday-bandana', 'halloween-bandana', 'elf-hat'
         ]]);
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [unpricedRequestMigration]);
+      }
+      const editorialMigration = 'verified_product_copy_2026_11_10';
+      const editorialDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [editorialMigration]);
+      if (!editorialDone.rows.length) {
+        for (const [productId, copy] of Object.entries(catalogEditorialContent)) {
+          await client.query(`UPDATE catalog_products SET
+            description=CASE WHEN btrim(description)='' THEN $2 ELSE description END,
+            details=CASE WHEN details='[]'::jsonb THEN $3::jsonb ELSE details END
+            WHERE id=$1 AND (btrim(description)='' OR details='[]'::jsonb)`,
+          [productId, copy.description, JSON.stringify(copy.details)]);
+          await client.query(`UPDATE catalog_variants SET
+            description=CASE WHEN btrim(description)='' THEN $2 ELSE description END,
+            details=CASE WHEN details='[]'::jsonb THEN $3::jsonb ELSE details END,
+            updated_at=now()
+            WHERE product_id=$1 AND (btrim(description)='' OR details='[]'::jsonb)`,
+          [productId, copy.description, JSON.stringify(copy.details)]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [editorialMigration]);
       }
       // The owner set a retail price for this model; its two color variants remain
       // unavailable for checkout until Tina confirms which colors she can supply.

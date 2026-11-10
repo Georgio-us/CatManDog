@@ -8,6 +8,21 @@ import { applyServerPrices, applyServerCatalog } from '../server-prices.js';
 import { canBuy, catalogPrice } from '../variants.js';
 import { handleApi } from '../server/api.js';
 import { retiredProductIds } from '../catalog-policy.js';
+import { catalogEditorialContent } from '../catalog-editorial-content.js';
+
+test('verified editorial copy is distinct for the fourteen previously empty products', () => {
+  const entries = Object.entries(catalogEditorialContent);
+  assert.equal(entries.length, 14);
+  assert.equal(new Set(entries.map(([,copy]) => copy.description)).size, entries.length);
+  for (const [id, copy] of entries) {
+    assert.ok(id.startsWith('cmd-source-'));
+    assert.ok(copy.source.startsWith('https://'));
+    assert.ok(copy.description.length > 100);
+    assert.ok(copy.details.length >= 3);
+    assert.doesNotMatch(`${copy.description} ${copy.details.join(' ')}`,
+      /Свежая вода|Норму кормления|Фасовку выберите/i);
+  }
+});
 
 test('catalog schema migrates existing availability constraint for pending supplier stock', () => {
   const schema = readFileSync(new URL('../server/schema.sql', import.meta.url), 'utf8');
