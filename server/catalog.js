@@ -321,6 +321,35 @@ export async function importCatalog(db, items = products) {
         }
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [editorialMigration]);
       }
+      const boilerplateMigration = 'remove_customer_copy_boilerplate_2026_11_10';
+      const boilerplateDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [boilerplateMigration]);
+      if (!boilerplateDone.rows.length) {
+        const cleanDetails = table => `UPDATE ${table} AS entry SET details=(
+          SELECT coalesce(jsonb_agg(to_jsonb(item.value) ORDER BY item.ordinality),'[]'::jsonb)
+          FROM jsonb_array_elements_text(entry.details) WITH ORDINALITY AS item(value,ordinality)
+          WHERE item.value !~* '^(Норму кормления|Свежая вода|Фасовку выберите перед добавлением в корзину|Используйте по инструкции на упаковке производителя)'
+            AND item.value !~* '^(Сухой|Влажный) корм( для кошек)?$'
+            AND item.value !~* '^(Сухой )?полнорационный (сухой )?корм$'
+        ) WHERE EXISTS (SELECT 1 FROM jsonb_array_elements_text(entry.details) AS item(value)
+          WHERE item.value ~* '^(Норму кормления|Свежая вода|Фасовку выберите перед добавлением в корзину|Используйте по инструкции на упаковке производителя)'
+            OR item.value ~* '^(Сухой|Влажный) корм( для кошек)?$'
+            OR item.value ~* '^(Сухой )?полнорационный (сухой )?корм$')`;
+        await client.query(cleanDetails('catalog_products'));
+        await client.query(cleanDetails('catalog_variants'));
+        for (const [productId, copy] of Object.entries(catalogEditorialContent)) {
+          await client.query(`UPDATE catalog_variants v SET
+            description=CASE WHEN v.description='Сухой корм '||p.name||' для собак'
+              THEN $2 ELSE v.description END,
+            details=CASE WHEN v.details='[]'::jsonb THEN $3::jsonb ELSE v.details END,
+            updated_at=now()
+            FROM catalog_products p WHERE p.id=v.product_id AND p.id=$1
+              AND (v.description='Сухой корм '||p.name||' для собак'
+                OR v.details='[]'::jsonb)`,
+          [productId, copy.description, JSON.stringify(copy.details)]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [boilerplateMigration]);
+      }
       // The owner set a retail price for this model; its two color variants remain
       // unavailable for checkout until Tina confirms which colors she can supply.
       await client.query(`UPDATE catalog_variants SET price_override_cents=5490,
