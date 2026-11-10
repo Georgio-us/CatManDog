@@ -44,8 +44,12 @@ export const launchHeyboPetProducts = [{
   model: 'PWF',
   manufacturerSku: 'PWF',
   image: `${base}heybopet-pwf-filters-3.webp`,
-  description: 'Набор сменных фильтров для поилки HeyboPet',
-  details: ['В коробочке 3 сменных фильтра'],
+  description: 'Сменные фильтры для питьевого фонтана HeyboPet HB-PWFS-S30S: задерживают частицы и загрязнения в воде',
+  details: [
+    'В коробочке 3 сменных фильтра',
+    'Совместимость подтверждена с моделью HB-PWFS-S30S',
+    'Совместимость с другими моделями поилок не подтверждена'
+  ],
   optionLabel: 'Набор',
   defaultVariantId: 'heybopet-pwf-filters-3-box',
   variants: [{

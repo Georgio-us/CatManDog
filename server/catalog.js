@@ -303,6 +303,21 @@ export async function importCatalog(db, items = products) {
         purchase_price_cents=coalesce(purchase_price_cents,460),updated_at=now()
         WHERE id='heybopet-pwf-filters-3-box'
           AND price_override_cents IS NULL AND price_confirmed=false`);
+      // Update only the original imported copy so an owner's later product edit wins.
+      const filterCopy = 'Сменные фильтры для питьевого фонтана HeyboPet HB-PWFS-S30S: задерживают частицы и загрязнения в воде';
+      const filterDetails = JSON.stringify([
+        'В коробочке 3 сменных фильтра',
+        'Совместимость подтверждена с моделью HB-PWFS-S30S',
+        'Совместимость с другими моделями поилок не подтверждена'
+      ]);
+      await client.query(`UPDATE catalog_products SET description=$2,details=$3::jsonb
+        WHERE id=$1 AND description='Набор сменных фильтров для поилки HeyboPet'
+          AND details='["В коробочке 3 сменных фильтра"]'::jsonb`,
+      ['heybopet-pwf-filters-3', filterCopy, filterDetails]);
+      await client.query(`UPDATE catalog_variants SET description=$2,details=$3::jsonb
+        WHERE id=$1 AND description='Набор сменных фильтров для поилки HeyboPet'
+          AND details='["В коробочке 3 сменных фильтра"]'::jsonb`,
+      ['heybopet-pwf-filters-3-box', filterCopy, filterDetails]);
     }
     await client.query('COMMIT');
     return rows.length;
