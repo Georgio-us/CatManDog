@@ -13,8 +13,8 @@ import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=unavailable-single-20261110';
 
 import { activeHomeLanding } from './collections.js?v=cat-assortment-1';
-import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=first-assortment-20261111';
-import { installLocale, intlLocale, locale, translate } from './locale.js?v=home-shortcuts-20261111';
+import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=expanded-assortment-20261111';
+import { installLocale, intlLocale, locale, translate } from './locale.js?v=expanded-shortcuts-20261111';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
@@ -175,7 +175,7 @@ const categoryLabel = name => name === 'Наполнитель' ? 'Наполн�
 function imageBlock(index,extra=''){
   if(index && typeof index==='object'){
     const studio=index.presentation==='editorial'||
-      /\/(?:assets\/(?:launch-studio-[^/]+|[^/]+\/editorial)|media\/(?:launch-studio|churu-formats)-[^/]+)\//u.test(index.src);
+      /(?:\/assets\/(?:launch-studio-[^/]+|[^/]+\/editorial)\/|\/media\/(?:launch-studio|churu-formats|confirmed-demand)-[^/]+\/|\/media\/yagu\/[^/]+-studio-v\d+\.webp)/u.test(index.src);
     const alt=String(index.alt||'').replace(/\s*-\s*студийное изображение(?: рецептуры)?$/iu,'');
     return `<div class="product-image real-product-image ${studio?'editorial-product-image ':''}${extra}"><img src="${escape(index.src)}" alt="${escape(alt)}" loading="lazy" decoding="async"></div>`;
   }
@@ -194,7 +194,7 @@ function card(p){
   const actionLabel=family?'Выбрать вариант':p.gift?'Выбрать набор':!canBuy(sku)?'К товару':'В корзину';
   const caption=pricing.amount===null?'':family?(p.id.startsWith('yagu-')?'Цена зависит от размера':'Цена зависит от фасовки'):'Цена с IVA';
   const displayPrice=pricing.amount===null?'Цена уточняется':pricing.min!==pricing.max?`${money(pricing.min)} - ${money(pricing.max)}`:`${p.gift==='personal'?'от ':''}${money(pricing.amount)}`;
-  return `<article class="product-card ${p.isReal?'real-product-card':''}"><a class="product-card-open" href="${escape(productHref(p.id))}" data-product-id="${escape(p.id)}" aria-label="Открыть товар: ${escape(p.name)}"></a><div class="product-media">${imageBlock(p.image)}<span class="product-tag">${escape(p.tag||'')}</span>${availabilityTag}<button class="icon-button favorite ${favorites.includes(p.id)?'selected':''}" data-favorite="${escape(p.id)}" aria-label="${favorites.includes(p.id)?'Убрать из избранного':'В избранное'}: ${escape(p.name)}" aria-pressed="${favorites.includes(p.id)}">${icon('heart')}</button></div><div class="product-info"><small>${escape(p.brand||'CatManDog')}${p.weight?` · ${escape(p.weight)}`:''}${family?` · ${variantCount(p.variants.length)}`:''}</small><div class="product-title"><h3>${escape(p.name)} <span class="product-open-cue">${icon('arrow')}</span></h3></div><span class="retail-label" ${caption?'':'aria-hidden="true"'}>${caption}</span><div class="product-price"><div class="product-price-values"><span>${displayPrice}</span>${!pricing.demo&&!family&&p.old?`<span class="old-price">${money(p.old)}</span>`:''}</div><button class="product-card-action" ${configure?'data-configure':'data-add'}="${escape(p.id)}" aria-label="${actionLabel}: ${escape(p.name)}">${actionLabel}${icon(configure?'arrow':'bag')}</button></div></div></article>`;
+  return `<article class="product-card ${p.isReal?'real-product-card':''}"><a class="product-card-open" href="${escape(productHref(p.id))}" data-product-id="${escape(p.id)}" aria-label="Открыть товар: ${escape(p.name)}"></a><div class="product-media">${imageBlock(p.image)}${p.tag?.trim()?`<span class="product-tag">${escape(p.tag)}</span>`:''}${availabilityTag}<button class="icon-button favorite ${favorites.includes(p.id)?'selected':''}" data-favorite="${escape(p.id)}" aria-label="${favorites.includes(p.id)?'Убрать из избранного':'В избранное'}: ${escape(p.name)}" aria-pressed="${favorites.includes(p.id)}">${icon('heart')}</button></div><div class="product-info"><small>${escape(p.brand||'CatManDog')}${p.weight?` · ${escape(p.weight)}`:''}${family?` · ${variantCount(p.variants.length)}`:''}</small><div class="product-title"><h3>${escape(p.name)} <span class="product-open-cue">${icon('arrow')}</span></h3></div><span class="retail-label" ${caption?'':'aria-hidden="true"'}>${caption}</span><div class="product-price"><div class="product-price-values"><span>${displayPrice}</span>${!pricing.demo&&!family&&p.old?`<span class="old-price">${money(p.old)}</span>`:''}</div><button class="product-card-action" ${configure?'data-configure':'data-add'}="${escape(p.id)}" aria-label="${actionLabel}: ${escape(p.name)}">${actionLabel}${icon(configure?'arrow':'bag')}</button></div></div></article>`;
 }
 function goodTogether(product){
   const suggestions=recommendForProduct(product,catalogProducts,{cart});

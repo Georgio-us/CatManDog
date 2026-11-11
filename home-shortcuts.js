@@ -8,7 +8,13 @@ export const homeShortcutIds = {
     'leonardo-light',
     'acana-indoor',
     'royalcanin-93e8aeca',
-    'orijen-original'
+    'orijen-original',
+    'yagu-7845778',
+    'yagu-9235038',
+    'yagu-9235044',
+    'yagu-7815320',
+    'yagu-7517046',
+    'yagu-7515988'
   ],
   dog: [
     'cmd-source-f025a9dbc9d479c7',
@@ -16,8 +22,20 @@ export const homeShortcutIds = {
     'royal-canin-chihuahua-adult',
     'cmd-source-11acbc9ed4d69f1c',
     'cmd-source-0f4a3ef9889b8ff3',
-    'cmd-source-puppy-small-breed'
+    'cmd-source-puppy-small-breed',
+    'yagu-7515987-studio',
+    'yagu-duvo-cotton-bone-xs',
+    'dog-duvo-huggi-rabbit',
+    'dog-mp-sensibowl-slomo',
+    'yagu-7571307-studio',
+    'dog-yagu-harness-blue'
   ]
+};
+
+const shortcutTags = {
+  'cmd-source-f025a9dbc9d479c7': 'Для взрослых собак',
+  'cmd-source-11acbc9ed4d69f1c': 'Для щенков',
+  'cmd-source-puppy-small-breed': 'Для щенков мелких пород'
 };
 
 export function homeShortcutProducts(products, pet) {
@@ -29,8 +47,8 @@ export function homeShortcutProducts(products, pet) {
 
 export function homeShortcuts(products, icon, escape) {
   const cards = [
-    { pet: 'cat', title: 'Наш выбор для кошек', description: 'Корм и лакомства для разных возрастов и привычек', brands: 'Royal Canin · Leonardo · ACANA · Churu' },
-    { pet: 'dog', title: 'Наш выбор для собак', description: 'Повседневные рационы, корм для щенков и крупных пород', brands: 'ACANA · ORIJEN · Royal Canin' }
+    { pet: 'cat', title: 'Наш выбор для кошек', description: 'Корм, лакомства, поилки и игры для кошек', brands: 'Royal Canin · Leonardo · ACANA · Churu · EBI' },
+    { pet: 'dog', title: 'Наш выбор для собак', description: 'Корм, миски и игрушки для собак', brands: 'ACANA · ORIJEN · Royal Canin · Duvo+' }
   ];
   return `<section class="editorial-promos home-shortcuts" aria-label="Подборки товаров">
     ${cards.map(({ pet, title, description, brands }) => {
@@ -53,8 +71,8 @@ export function homeShortcutLanding(products, pet, { crumbs, card, icon }) {
   const cat = pet === 'cat';
   const title = cat ? 'Подборка для кошек' : 'Подборка для собак';
   const intro = cat
-    ? 'Корм и лакомства для разных возрастов - от повседневного рациона до небольшого угощения'
-    : 'Корм для взрослых собак и щенков, разных пород и потребностей';
+    ? 'Корм и лакомства, поилки, миски и вещи для игр'
+    : 'Корм для взрослых собак и щенков, миски и вещи для игр';
   const list = homeShortcutProducts(products, pet);
   return `<div class="page shortcut-page">${crumbs(title)}
     <div class="shortcut-intro"><span class="eyebrow">Подборка CatManDog</span><h1 class="page-title">${title}</h1>
@@ -63,7 +81,8 @@ export function homeShortcutLanding(products, pet, { crumbs, card, icon }) {
         <a href="#/picks/dog" ${!cat ? 'aria-current="page"' : ''}>Для собак</a>
       </nav></div>
     <section class="section shortcut-products" aria-label="${title}">
-      <div class="product-grid">${list.map(card).join('')}</div>
+      <div class="product-grid">${list.map(product => card(shortcutTags[product.id] && !product.tag
+        ? { ...product, tag: shortcutTags[product.id] } : product)).join('')}</div>
       <a class="text-link shortcut-all" href="#/catalog?pet=${pet}">Весь каталог ${icon('arrow')}</a>
     </section>
   </div>`;
