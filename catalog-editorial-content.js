@@ -2,10 +2,12 @@
 // These URLs are editorial evidence, not customer-facing links or price sources.
 import { catalogEditorialCats } from './catalog-editorial-cats.js';
 import { catalogEditorialDogs } from './catalog-editorial-dogs.js';
+import { catalogEditorialRoyalCanin } from './catalog-editorial-royal-canin.js';
 
 export const catalogEditorialContent = {
   ...catalogEditorialCats,
   ...catalogEditorialDogs,
+  ...catalogEditorialRoyalCanin,
   'leonardo-poultry': {
     source: 'https://www.leonardo-catfood.com/leonardo-adult-gf-poultry-1.8-kg',
     description: 'LEONARDO Adult GF Poultry - беззерновой сухой корм для взрослых кошек. В составе 30% свежего мяса птицы, 22% белка птицы и 15% амаранта. Амарант - растение, семена которого в этой рецептуре используют вместо злаков.',

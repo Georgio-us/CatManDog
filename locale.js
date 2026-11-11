@@ -10,7 +10,7 @@ import { churuFormatsEs, churuFormatsUk } from './locales/churu-formats.js';
 import { seoCategoryForPath } from './seo-categories.js';
 import { deliveryStatusEs, deliveryStatusUk } from './locales/delivery-status.js';
 import { yaguExpansionEs, yaguExpansionUk } from './locales/yagu-expansion.js?v=product-content-20261110';
-import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=editorial-dogs-20261110';
+import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=editorial-rc-20261111';
 
 const storageKey = 'catmandog-language';
 const saved = (() => { try { return localStorage.getItem(storageKey); } catch { return null; } })();
