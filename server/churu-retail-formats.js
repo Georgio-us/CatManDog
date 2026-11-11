@@ -157,3 +157,67 @@ export async function publishChuruAdditionalFormats(db) {
     throw error;
   } finally { client.release(); }
 }
+
+// The dog assortment is sold as sealed consumer packs, while Albet quotes
+// cartons. Match each exact article and store the per-pack cost separately
+// from the customer price. Existing owner edits always take precedence.
+export async function publishChuruDogAssortment(db) {
+  const dog = products.filter(product => product.id.startsWith('churu-dog-') &&
+    product.id !== 'churu-dog-chicken');
+  if (dog.length !== 11) throw new Error('Expected eleven new Churu DOG products');
+  const client = await db.connect();
+  try {
+    await client.query('BEGIN');
+    await client.query('SELECT pg_advisory_xact_lock(1043319)');
+    const sourceId = 'albet-churu-dog-2026-11-11';
+    const migration = 'churu_dog_assortment_2026_11_11';
+    const done = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [migration]);
+    if (done.rowCount) {
+      await client.query('COMMIT');
+      return;
+    }
+    await client.query(`INSERT INTO supplier_catalog_sources
+      (id,supplier_name,brand,price_date,source_file,shop_price_tax_basis,retail_price_tax_basis)
+      VALUES($1,'Albet','Churu','2026-11-11',
+        'DOG-TREATS-CATALOG-2026-11-11.md','excludes_iva','excludes_iva')
+      ON CONFLICT(id) DO NOTHING`, [sourceId]);
+    for (const [index, product] of dog.entries()) {
+      const variant = product.variants[0];
+      const purchase = variant.supplierPurchase;
+      const sku = variant.supplier.sku;
+      const itemId = `${sourceId}:${sku}`;
+      await client.query(`INSERT INTO supplier_catalog_items
+        (id,source_id,article,name,line,weight,ean,shop_price_cents,
+          recommended_price_cents,raw_prices,source_row)
+        VALUES($1,$2,$3,$4,$5,$6,'',$7,$8,$9::jsonb,$10)
+        ON CONFLICT(id) DO NOTHING`, [itemId, sourceId, sku, product.name,
+        product.line, `${purchase.packsPerCarton} × ${variant.label}`,
+        Math.round(purchase.cartonPriceExVat * 100),
+        Math.round(purchase.recommendedCartonExVat * 100),
+        JSON.stringify({ sourceUrl: variant.supplier.url,
+          purchaseUnit: 'carton', consumerPacks: purchase.packsPerCarton,
+          consumerEan: variant.ean || null, ivaRate: 0.10 }), index + 1]);
+      await client.query(`INSERT INTO supplier_catalog_matches
+        (item_id,source_id,variant_id,match_method)
+        VALUES($1,$2,$3,'catalog') ON CONFLICT DO NOTHING`,
+      [itemId, sourceId, variant.id]);
+      const retailCents = Math.round(variant.price * 100);
+      await client.query(`UPDATE catalog_variants SET
+        source_price_cents=coalesce(source_price_cents,$3),
+        price_override_cents=coalesce(price_override_cents,$3),
+        purchase_price_cents=coalesce(purchase_price_cents,$4),
+        price_confirmed=CASE WHEN price_override_cents IS NULL OR price_override_cents=$3
+          THEN true ELSE price_confirmed END,
+        tax_rate_bps=coalesce(tax_rate_bps,1000),
+        source_orderable=true,availability='source_on_demand',sale_status='available',
+        updated_at=now() WHERE id=$1 AND product_id=$2`,
+      [variant.id, product.id, retailCents,
+        Math.round(variant.purchasePrice * 100)]);
+    }
+    await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [migration]);
+    await client.query('COMMIT');
+  } catch (error) {
+    await client.query('ROLLBACK');
+    throw error;
+  } finally { client.release(); }
+}
