@@ -1,8 +1,8 @@
-import { es, esPatterns } from './locales/es.js?v=checkout-copy-20261110';
+import { es, esPatterns } from './locales/es.js?v=home-shortcuts-20261111';
 import { esProductText } from './locales/product-es.js?v=product-content-20261110';
 import { esDetails } from './locales/details-es.js?v=product-content-20261110';
 import { uk, ukPatterns } from './locales/uk.js?v=checkout-copy-20261110';
-import { ukExtra } from './locales/uk-extra.js?v=checkout-copy-20261110';
+import { ukExtra } from './locales/uk-extra.js?v=home-shortcuts-20261111';
 import { ukProductNames } from './locales/uk-product-names.js?v=confirmed-demand-20261108';
 import { ukProductCopy } from './locales/uk-product-copy.js?v=product-content-20261110';
 import { ukDetails } from './locales/uk-details.js?v=product-content-20261110';

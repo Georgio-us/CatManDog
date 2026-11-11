@@ -1,6 +1,18 @@
 // Spanish copy is written and reviewed here. Russian remains the source language
 // for internal category IDs, routes and saved customer data.
 export const es = {
+  'Подборки': 'Selecciones',
+  'Подборки товаров': 'Selecciones de productos',
+  'Подборка CatManDog': 'Selección CatManDog',
+  'Наш выбор для кошек': 'Nuestra selección para gatos',
+  'Наш выбор для собак': 'Nuestra selección para perros',
+  'Подборка для кошек': 'Selección para gatos',
+  'Подборка для собак': 'Selección para perros',
+  'Корм и лакомства для разных возрастов и привычек': 'Pienso y premios para distintas edades y preferencias',
+  'Повседневные рационы, корм для щенков и крупных пород': 'Pienso diario, para cachorros y razas grandes',
+  'Посмотреть товары': 'Ver productos',
+  'Корм и лакомства для разных возрастов - от повседневного рациона до небольшого угощения': 'Pienso y premios para distintas edades, desde la alimentación diaria hasta un pequeño capricho',
+  'Корм для взрослых собак и щенков, разных пород и потребностей': 'Pienso para perros adultos y cachorros de distintas razas y necesidades',
   'Валенсия': 'València',
   'Удобное время доставки можно указать при оформлении': 'Podrás elegir la franja de entrega al finalizar el pedido',
   'Укажите, куда привезти покупки. Перед оплатой покажем все данные ещё раз': 'Indícanos dónde recibir tu compra. Podrás revisar todos los datos antes de pagar.',
