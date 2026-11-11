@@ -6,6 +6,10 @@ import { catalogProducts } from '../data.js';
 import { seoDocument, serveSeo } from '../server/seo.js';
 import { seoCategories, seoCategoryPath } from '../seo-categories.js';
 import { seoProducts, seoProductForPath, productHref } from '../seo-products.js';
+import { catalogEditorialCats } from '../catalog-editorial-cats.js';
+import { catalogEditorialDogs } from '../catalog-editorial-dogs.js';
+import { catalogEditorialRoyalCanin } from '../catalog-editorial-royal-canin.js';
+import { catalogEditorialLeonardo } from '../catalog-editorial-leonardo.js';
 
 test('the sitemap contains only released public pages with Spanish editorial content', async () => {
   const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
@@ -49,10 +53,10 @@ test('every public product has a distinct permanent URL while unreleased pages s
     assert.match(path, /^\/producto\/[a-z0-9-]+$/u);
     assert.equal(seoProductForPath(path)?.id, product.id);
   }
-  const path = productHref('acana-first-feast');
+  const path = productHref('hills-ster');
   const html = await seoDocument(path);
-  assert.match(html, /<h1>Acana First Feast<\/h1>/u);
-  assert.match(html, /<link rel="canonical" href="https:\/\/catmandog\.es\/producto\/acana-first-feast">/u);
+  assert.match(html, /<h1>Hill’s Science Plan Sterilised Cat Adult Chicken<\/h1>/u);
+  assert.match(html, /<link rel="canonical" href="https:\/\/catmandog\.es\/producto\/hill-s-science-plan-sterilised-cat-adult-chicken">/u);
   assert.match(html, /<meta name="robots" content="noindex,follow">/u);
   let headers;
   const response = { writeHead(_status, value) { headers = value; }, end() {} };
@@ -64,7 +68,7 @@ test('every public product has a distinct permanent URL while unreleased pages s
 
 test('the verified product release has unique Spanish source content and crawlable category links', async () => {
   const released = seoProducts.filter(product => product.indexable);
-  assert.equal(released.length, 32);
+  assert.equal(released.length, 51);
   const descriptions = new Set();
   for (const product of released) {
     const html = await seoDocument(product.path);
@@ -78,6 +82,33 @@ test('the verified product release has unique Spanish source content and crawlab
     descriptions.add(description);
     const category = await seoDocument(product.categoryPath);
     assert.match(category, new RegExp(`<a class="article-card" href="${product.path}">`, 'u'));
+  }
+});
+
+test('released editorial products serve the same verified Spanish copy as the storefront', async () => {
+  const editorial = { ...catalogEditorialCats, ...catalogEditorialDogs,
+    ...catalogEditorialRoyalCanin, ...catalogEditorialLeonardo };
+  const releasedEditorial = Object.entries(editorial)
+    .filter(([id]) => seoProducts.some(product => product.id === id && product.indexable));
+  assert.equal(releasedEditorial.length, 30);
+  for (const [id, copy] of releasedEditorial) {
+    const path = productHref(id);
+    const html = await seoDocument(path);
+    assert.ok(copy.source && copy.esDescription.length > 100, id);
+    assert.ok(html.includes(copy.esDescription.replace(/&/gu, '&amp;')), id);
+    for (const fact of copy.esDetails) assert.ok(html.includes(fact), `${id}: ${fact}`);
+  }
+});
+
+test('thin legacy descriptions stay out of the index until their product facts are verified', async () => {
+  const held = ['leonardo-fresh-beef', 'leonardo-fresh-duck', 'leonardo-fresh-salmon',
+    'dog-rc-mini-adult', 'dog-rc-medium-adult', 'dog-rc-mini-digestive',
+    'dog-ownat-ultra-medium', 'dog-ownat-just-gf-chicken', 'dog-ownat-gf-prime',
+    'dog-ownat-author-duck'];
+  for (const id of held) {
+    const product = seoProducts.find(entry => entry.id === id);
+    assert.equal(product?.indexable, false, id);
+    assert.match(await seoDocument(product.path), /<meta name="robots" content="noindex,follow">/u);
   }
 });
 

@@ -5,18 +5,25 @@ import { seoProductSlugs } from './seo-product-slugs.js';
 const releasedByCategory = {
   '/catalogo/gatos/pienso-seco': [
     'rc-sterilised', 'leonardo-poultry', 'acana-grasslands', 'orijen-original',
-    'rc-kitten', 'leonardo-salmon', 'rc-digestive', 'leonardo-fresh-beef',
-    'leonardo-fresh-duck', 'leonardo-fresh-salmon', 'ownat-classic-kitten',
+    'rc-kitten', 'leonardo-salmon', 'rc-digestive', 'ownat-classic-kitten',
     'ownat-classic-daily-care', 'ownat-classic-fish', 'ownat-classic-light',
     'ownat-classic-hairball', 'ownat-classic-sterilized', 'ownat-just-adult-chicken',
     'ownat-just-sterilized', 'ownat-just-sterilized-fish',
-    'ownat-author-fresh-oily-fish-poultry', 'ownat-author-sterilized-fresh-chicken'
+    'ownat-author-fresh-oily-fish-poultry', 'ownat-author-sterilized-fresh-chicken',
+    'acana-first-feast', 'acana-indoor', 'acana-bountiful', 'acana-homestead',
+    'acana-wild-prairie', 'acana-pacifica', 'acana-hp-indoor',
+    'orijen-six-fish', 'orijen-kitten', 'orijen-guardian8',
+    'rc-fit', 'rc-indoor', 'rc-kitten-regular', 'rc-mother-babycat',
+    'rc-hairball', 'rc-sensible', 'leonardo-light', 'leonardo-kitten',
+    'leonardo-adult-duck', 'leonardo-maxi', 'leonardo-kitten-gf'
   ],
   '/catalogo/gatos/comida-humeda': ['rc-wet', 'leonardo-chicken', 'leonardo-turkey'],
   '/catalogo/perros/pienso-seco': [
-    'dog-rc-mini-adult', 'dog-rc-medium-adult', 'dog-rc-mini-digestive',
-    'dog-ownat-ultra-medium', 'dog-ownat-just-gf-chicken', 'dog-ownat-gf-prime',
-    'dog-ownat-author-duck', 'dog-orijen-fit-trim'
+    'dog-orijen-fit-trim',
+    'dog-orijen-original', 'dog-orijen-puppy', 'dog-orijen-six-fish',
+    'dog-orijen-small-breed', 'cmd-source-classics-red-meat',
+    'cmd-source-classics-wild-coast', 'cmd-source-puppy-small-breed',
+    'cmd-source-acana-senior'
   ]
 };
 const releasedCategoryById = new Map(Object.entries(releasedByCategory)

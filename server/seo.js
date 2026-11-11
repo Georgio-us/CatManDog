@@ -3,6 +3,7 @@ import { articlesEs } from '../journal-content-es.js';
 import { products } from '../data.js';
 import { esProductText } from '../locales/product-es.js';
 import { esDetails } from '../locales/details-es.js';
+import { editorialEs } from '../locales/editorial-translations.js';
 import { yaguExpansionEs } from '../locales/yagu-expansion.js';
 import { customerFacts, orderedVariants } from '../product-content.js';
 import { seoCategories, seoCategoryForPath } from '../seo-categories.js';
@@ -18,12 +19,14 @@ const articleLinks = articlesEs.map(article =>
 const categoryLinks = seoCategories.filter(category => category.indexable).map(category =>
   `<a class="article-card" href="${category.path}"><h2>${escapeHtml(category.title)}</h2><p>${escapeHtml(category.intro)}</p></a>`).join('');
 const productDescription = (product, publishedProduct) => publishedProduct.description ||
-  esProductText[product.description] || yaguExpansionEs[product.description] || product.name;
+  editorialEs[product.description] || esProductText[product.description] ||
+  yaguExpansionEs[product.description] || product.name;
+const productName = product => editorialEs[product.name] || esProductText[product.name] || product.name;
 const productLinks = categoryPath => seoProducts
   .filter(item => item.indexable && item.categoryPath === categoryPath)
   .map(item => {
     const product = products.find(entry => entry.id === item.id);
-    return `<a class="article-card" href="${item.path}"><h2>${escapeHtml(product.name)}</h2><p>${escapeHtml(productDescription(product, item))}</p></a>`;
+    return `<a class="article-card" href="${item.path}"><h2>${escapeHtml(productName(product))}</h2><p>${escapeHtml(productDescription(product, item))}</p></a>`;
   }).join('');
 
 function pageData(pathname) {
@@ -35,12 +38,16 @@ function pageData(pathname) {
       .map(label => escapeHtml(label.replace(/ кг$/u, ' kg').replace(/ г$/u, ' g')));
     const description = productDescription(product, publishedProduct);
     const image = product.image?.src || (typeof product.image === 'string' ? product.image : '');
-    const facts = customerFacts(product.details).map(detail => esDetails[detail] || yaguExpansionEs[detail] ||
+    const facts = customerFacts(product.details).map(detail => editorialEs[detail] || esDetails[detail] || yaguExpansionEs[detail] ||
       (!/[А-Яа-яЁё]/u.test(detail) ? detail : null)).filter(Boolean);
+    const name = productName(product);
+    const categoryLabel = publishedProduct.indexable
+      ? seoCategoryForPath(publishedProduct.categoryPath)?.title || 'Todo el catálogo'
+      : 'Todo el catálogo';
     return {
-      title: `${publishedProduct.title || product.name} | CatManDog`, description,
+      title: `${publishedProduct.title || name} | CatManDog`, description,
       robots: publishedProduct.indexable ? null : 'noindex,follow',
-      content: `<div class="page"><article class="editorial-article"><header class="editorial-header"><p class="editorial-kicker">${escapeHtml(product.brand || product.category || '')}</p><h1>${escapeHtml(product.name)}</h1><p class="editorial-deck">${escapeHtml(description)}</p></header><div class="editorial-body">${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" width="640" height="640">` : ''}${facts.length ? `<h2>Sobre el producto</h2><ul>${facts.map(fact => `<li>${escapeHtml(fact)}</li>`).join('')}</ul>` : ''}${formats.length ? `<h2>Formatos disponibles</h2><p>${formats.join(', ')}</p>` : ''}<a class="text-link" href="${publishedProduct.categoryPath}">${publishedProduct.indexable ? 'Pienso seco para gatos' : 'Todo el catálogo'}</a></div></article></div>`
+      content: `<div class="page"><article class="editorial-article"><header class="editorial-header"><p class="editorial-kicker">${escapeHtml(product.brand || product.category || '')}</p><h1>${escapeHtml(name)}</h1><p class="editorial-deck">${escapeHtml(description)}</p></header><div class="editorial-body">${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(name)}" width="640" height="640">` : ''}${facts.length ? `<h2>Sobre el producto</h2><ul>${facts.map(fact => `<li>${escapeHtml(fact)}</li>`).join('')}</ul>` : ''}${formats.length ? `<h2>Formatos disponibles</h2><p>${formats.join(', ')}</p>` : ''}<a class="text-link" href="${publishedProduct.categoryPath}">${escapeHtml(categoryLabel)}</a></div></article></div>`
     };
   }
   const category = seoCategoryForPath(pathname);
