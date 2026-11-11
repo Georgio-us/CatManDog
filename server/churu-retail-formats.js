@@ -82,3 +82,78 @@ export async function publishChuruRetailFormatDetails(db) {
     throw error;
   } finally { client.release(); }
 }
+
+// Add the next exact Albet lines without changing the owner's existing Churu prices.
+// The supplier buys one carton; the storefront sells distinct sealed formats.
+export async function publishChuruAdditionalFormats(db) {
+  const additions = [
+    { productId: 'tc-713f42fb9a', article: '946512', name: 'Churu Kitten курица',
+      ean: '4262365730589', row: 6 },
+    { productId: 'churu-dog-chicken', article: '940300', name: 'Churu DOG курица',
+      ean: '8859387701060', row: 7 }
+  ];
+  const client = await db.connect();
+  try {
+    await client.query('BEGIN');
+    await client.query('SELECT pg_advisory_xact_lock(1043319)');
+    const migration = 'churu_kitten_dog_formats_2026_11_11';
+    const done = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [migration]);
+    if (done.rows.length) {
+      await client.query('COMMIT');
+      return;
+    }
+    const sourceId = 'albet-churu-2026-11-03';
+    await client.query(`INSERT INTO supplier_catalog_sources
+      (id,supplier_name,brand,price_date,source_file,shop_price_tax_basis,retail_price_tax_basis)
+      VALUES($1,'Albet','Churu','2026-11-03',
+        'ALBET-LIVE-AUDIT-2026-11-03.md','excludes_iva','excludes_iva')
+      ON CONFLICT(id) DO NOTHING`, [sourceId]);
+    for (const item of additions) {
+      const product = products.find(candidate => candidate.id === item.productId);
+      if (!product || product.variants.length !== 3)
+        throw new Error(`Missing Churu format family: ${item.productId}`);
+      const itemId = `${sourceId}:${item.article}`;
+      await client.query(`INSERT INTO supplier_catalog_items
+        (id,source_id,article,name,line,weight,ean,shop_price_cents,
+          recommended_price_cents,minimum_price_cents,raw_prices,source_row)
+        VALUES($1,$2,$3,$4,'Inaba CIAO / Churu','12 × 4 × 14 г',$5,2112,
+          3589,NULL,$6::jsonb,$7)
+        ON CONFLICT(id) DO NOTHING`, [itemId, sourceId, item.article, item.name,
+        item.ean, JSON.stringify({ source: 'Authenticated Albet catalog, 2026-11-03',
+          reference: 'ALBET-LIVE-AUDIT-2026-11-03.md', unit: 'purchase carton' }), item.row]);
+      await client.query(`INSERT INTO supplier_catalog_matches
+        (item_id,source_id,variant_id,match_method)
+        VALUES($1,$2,$3,'catalog') ON CONFLICT DO NOTHING`,
+      [itemId, sourceId, `${item.productId}-reference-pack`]);
+      if (item.productId === 'tc-713f42fb9a') {
+        await client.query(`UPDATE catalog_products SET description=$2,details=$3::jsonb
+          WHERE id=$1 AND description='Churu Kitten - курица - 4 × 14 г'`,
+        [product.id, product.description, JSON.stringify(product.details)]);
+      }
+      for (const variant of product.variants) {
+        const format = variant.retailFormat;
+        const priceCents = Math.round(variant.price * 100);
+        const purchaseCents = Math.round(2112 * format.units / 48);
+        const result = await client.query(`UPDATE catalog_variants SET
+          source_price_cents=$3,
+          price_override_cents=coalesce(price_override_cents,$3),
+          price_confirmed=CASE WHEN price_override_cents IS NULL OR price_override_cents=$3
+            THEN true ELSE price_confirmed END,
+          purchase_price_cents=coalesce(purchase_price_cents,$4),
+          tax_rate_bps=coalesce(tax_rate_bps,1000),
+          image_path=$5,description=$6,details=$7::jsonb,
+          source_orderable=true,availability='source_on_demand',sale_status='available',
+          source=jsonb_set(source,'{retailFormat}',$8::jsonb,true),updated_at=now()
+          WHERE id=$1 AND product_id=$2`, [variant.id, product.id, priceCents,
+          purchaseCents, variant.image?.src || null, variant.description || product.description,
+          JSON.stringify(variant.details || []), JSON.stringify(format)]);
+        if (result.rowCount !== 1) throw new Error(`Missing Churu SKU: ${variant.id}`);
+      }
+    }
+    await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [migration]);
+    await client.query('COMMIT');
+  } catch (error) {
+    await client.query('ROLLBACK');
+    throw error;
+  } finally { client.release(); }
+}

@@ -69,6 +69,8 @@ function catalogImagePath(value) {
   const path = cap(value, 500);
   if (path && !path.startsWith('/assets/') &&
       !path.startsWith('/media/churu-formats-2026-11-05/') &&
+      !path.startsWith('/media/churu-dog-2026-11-11/') &&
+      !path.startsWith('/media/churu-kitten-2026-11-11/') &&
       !path.startsWith('/media/confirmed-demand-2026-11-08/') &&
       !path.startsWith('/media/acana-orijen-selected-2026-11-09/') &&
       !path.startsWith('/media/yagu/') &&

@@ -71,6 +71,7 @@ const copy = {
   'tc-768abf17c2': ['Churu - atún con vieira', 'Premio cremoso Churu de atún con vieira. Formato de 4 × 14 g.'],
   'tc-dc3d6d94c2': ['Churu - pollo con queso', 'Premio cremoso Churu de pollo con queso. Formato de 4 × 14 g.'],
   'tc-713f42fb9a': ['Churu Kitten - pollo', 'Premio cremoso Churu Kitten de pollo. Formato de 4 × 14 g.'],
+  'churu-dog-chicken': ['Churu DOG - pollo', 'Premio cremoso Churu DOG de pollo para perros. Formato de 4 × 14 g.'],
   'tc-4b391892b7': ['Churu Hairball Control - salmón', 'Premio cremoso Churu Hairball Control de salmón. Formato de 4 × 14 g.'],
   'tc-82b5e1f561': ['Catit Creamy - pollo con cordero', 'Premio cremoso Catit Creamy de pollo con cordero. Formato de 4 × 10 g.'],
   'tc-c4fc3a3e21': ['Catit Creamy - salmón con gambas', 'Premio cremoso Catit Creamy de salmón con gambas. Formato de 4 × 10 g.'],

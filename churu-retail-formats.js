@@ -11,14 +11,38 @@ const factoryPacks = new Map([
   ['tc-4e50c58957', '940001'],
   ['tc-0707caf730', '940003'],
   ['tc-768abf17c2', '940004'],
-  ['tc-dc3d6d94c2', '940007']
+  ['tc-dc3d6d94c2', '940007'],
+  ['tc-713f42fb9a', '946512'],
+  ['churu-dog-chicken', '940300']
 ]);
 const studioBase = '/media/churu-formats-2026-11-05';
 const flavorImages = {
   '940001': { stick: 'churu-tuna-stick.webp', carton48: 'churu-tuna-carton48.webp' },
   '940003': { stick: 'churu-chicken-stick.webp', carton48: 'churu-chicken-carton48.webp' },
   '940004': { stick: 'churu-tuna-scallop-stick.webp', carton48: 'churu-tuna-scallop-carton48.webp' },
-  '940007': { stick: 'churu-chicken-cheese-stick.webp', carton48: 'churu-chicken-cheese-carton48.webp' }
+  '940007': { stick: 'churu-chicken-cheese-stick.webp', carton48: 'churu-chicken-cheese-carton48.webp' },
+  '946512': { stick: '/media/churu-kitten-2026-11-11/churu-kitten-chicken-stick.webp',
+    carton48: '/media/churu-kitten-2026-11-11/churu-kitten-chicken-carton48.webp' },
+  '940300': { stick: '/media/churu-dog-2026-11-11/churu-dog-chicken-stick.webp',
+    carton48: '/media/churu-dog-2026-11-11/churu-dog-chicken-carton48.webp' }
+};
+const formatImage = (code, kind) => {
+  const file = flavorImages[code][kind];
+  return file.startsWith('/') ? file : `${studioBase}/${file}`;
+};
+const expandedCopy = {
+  '946512': {
+    description: 'Кремовое лакомство с курицей для котят в четырёх запечатанных тюбиках',
+    details: ['Для котят до одного года', 'Курица в составе', 'Четыре тюбика по 14 г'],
+    stickDescription: 'Один запечатанный тюбик Churu Kitten с курицей для котят',
+    cartonDescription: 'Короб из 12 закрытых пачек Churu Kitten с курицей, по четыре тюбика в каждой'
+  },
+  '940300': {
+    description: 'Кремовое лакомство с курицей для собак в четырёх запечатанных тюбиках',
+    details: ['Для собак', 'Курица в составе', 'Четыре тюбика по 14 г'],
+    stickDescription: 'Один запечатанный тюбик Churu DOG с курицей для собак',
+    cartonDescription: 'Короб из 12 закрытых пачек Churu DOG с курицей, по четыре тюбика в каждой'
+  }
 };
 
 const price = cents => cents / 100;
@@ -46,16 +70,26 @@ export function applyChuruRetailFormats(products) {
     if (!code) return product;
     const original = product.variants.find(variant => variant.id === product.defaultVariantId);
     const sourceItemId = `albet-churu-2026-11-03:${code}`;
-    const pack = format(original, original.id, '4 тюбика × 14 г', 'pack4', sourceItemId, 4);
+    const copy = expandedCopy[code];
+    const pack = { ...format(original, original.id, '4 тюбика × 14 г', 'pack4', sourceItemId, 4),
+      ...(copy ? { availabilityStatus: 'source_on_demand' } : {}),
+      ...(copy ? { description: copy.description, details: copy.details } : {}) };
     const stick = { ...format(original, `${product.id}-stick`, '1 тюбик × 14 г', 'stick', sourceItemId, 1),
-      image: { src: `${studioBase}/${flavorImages[code].stick}`,
-        alt: `${product.name} - один тюбик 14 г` }, availabilityStatus: 'unavailable' };
+      image: { src: formatImage(code, 'stick'),
+        alt: `${product.name} - один тюбик 14 г` },
+      availabilityStatus: copy ? 'source_on_demand' : 'unavailable',
+      ...(copy ? { description: copy.stickDescription,
+        details: ['Один запечатанный тюбик 14 г', copy.details[0]] } : {}) };
     const carton = { ...format(original, `${product.id}-carton48`, 'Короб 12 пачек × 4 тюбика',
       'carton48', sourceItemId, 48),
-      image: { src: `${studioBase}/${flavorImages[code].carton48}`,
+      image: { src: formatImage(code, 'carton48'),
         alt: `${product.name} - 12 упаковок по 4 тюбика` },
-      availabilityStatus: 'source_on_demand' };
+      availabilityStatus: 'source_on_demand',
+      ...(copy ? { description: copy.cartonDescription,
+        details: ['12 закрытых пачек по 4 тюбика', 'Всего 48 тюбиков по 14 г',
+          'Транспортная коробка на изображении показана условно'] } : {}) };
     return { ...product, price: pack.price, priceStatus: 'confirmed',
+      ...(copy ? { description: copy.description, details: copy.details } : {}),
       variants: [pack, stick, carton] };
   });
 
@@ -93,6 +127,8 @@ export const churuPurchaseUnit = Object.freeze({
   '940003': { sticks: 48, wholesaleCents: 2112 },
   '940004': { sticks: 48, wholesaleCents: 2112 },
   '940007': { sticks: 48, wholesaleCents: 2112 },
+  '946512': { sticks: 48, wholesaleCents: 2112 },
+  '940300': { sticks: 48, wholesaleCents: 2112 },
   '949577': { sticks: 20, wholesaleCents: 834 }
 });
 

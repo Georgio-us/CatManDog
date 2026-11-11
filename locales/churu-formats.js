@@ -35,11 +35,42 @@ export const churuFormatsEs = {
   'В коробе 10 тюбиков с лососем и 10 тюбиков с лососем и курицей':
     'La caja contiene 10 tubos de salmón y 10 de salmón con pollo',
   'Один запечатанный тюбик со вкусом лосося': 'Un tubo cerrado de salmón',
-  'Один запечатанный тюбик со вкусом лосося с курицей': 'Un tubo cerrado de salmón con pollo'
+  'Один запечатанный тюбик со вкусом лосося с курицей': 'Un tubo cerrado de salmón con pollo',
+  'Churu DOG - курица': 'Churu DOG - pollo',
+  'Churu DOG с курицей - пачка из четырёх тюбиков':
+    'Churu DOG de pollo - sobre de cuatro tubos',
+  'Churu DOG с курицей - один тюбик 14 г':
+    'Churu DOG de pollo - un tubo de 14 g',
+  'Churu DOG с курицей - 12 упаковок по 4 тюбика':
+    'Churu DOG de pollo - 12 sobres de cuatro tubos',
+  'Churu Kitten - курица - 4 × 14 г': 'Churu Kitten - pollo - 4 × 14 g',
+  'Кремовое лакомство с курицей для котят в четырёх запечатанных тюбиках':
+    'Premio cremoso de pollo para gatitos en cuatro tubos cerrados',
+  'Кремовое лакомство с курицей для собак в четырёх запечатанных тюбиках':
+    'Premio cremoso de pollo para perros en cuatro tubos cerrados',
+  'Один запечатанный тюбик Churu Kitten с курицей для котят':
+    'Un tubo cerrado Churu Kitten de pollo para gatitos',
+  'Один запечатанный тюбик Churu DOG с курицей для собак':
+    'Un tubo cerrado Churu DOG de pollo para perros',
+  'Короб из 12 закрытых пачек Churu Kitten с курицей, по четыре тюбика в каждой':
+    'Caja de 12 sobres cerrados Churu Kitten de pollo, con cuatro tubos por sobre',
+  'Короб из 12 закрытых пачек Churu DOG с курицей, по четыре тюбика в каждой':
+    'Caja de 12 sobres cerrados Churu DOG de pollo, con cuatro tubos por sobre',
+  'Для котят до одного года': 'Para gatitos menores de un año',
+  'Для собак': 'Para perros',
+  'Курица в составе': 'Con pollo',
+  'Четыре тюбика по 14 г': 'Cuatro tubos de 14 g'
 };
 
 export const churuFormatsUk = {
   'Churu - лосось и курица': 'Churu - лосось і курка',
+  'Churu DOG с курицей - пачка из четырёх тюбиков':
+    'Churu DOG із куркою - пачка з чотирьох тюбиків',
+  'Churu DOG с курицей - один тюбик 14 г':
+    'Churu DOG із куркою - один тюбик 14 г',
+  'Churu DOG с курицей - 12 упаковок по 4 тюбика':
+    'Churu DOG із куркою - 12 пачок по 4 тюбики',
+  'Churu Kitten - курица - 4 × 14 г': 'Churu Kitten - курка - 4 × 14 г',
   'Кремовые лакомства Churu со вкусами лосося и лосося с курицей':
     'Кремові ласощі Churu зі смаками лосося та лосося з куркою',
   '4 тюбика × 14 г': '4 тюбики × 14 г',
@@ -69,9 +100,27 @@ export const churuFormatsUk = {
     'У коробі 10 тюбиків із лососем і 10 із лососем та куркою',
   'Один запечатанный тюбик со вкусом лосося': 'Один запечатаний тюбик зі смаком лосося',
   'Один запечатанный тюбик со вкусом лосося с курицей':
-    'Один запечатаний тюбик зі смаком лосося з куркою'
+    'Один запечатаний тюбик зі смаком лосося з куркою',
+  'Кремовое лакомство с курицей для котят в четырёх запечатанных тюбиках':
+    'Кремові ласощі з куркою для кошенят у чотирьох запечатаних тюбиках',
+  'Кремовое лакомство с курицей для собак в четырёх запечатанных тюбиках':
+    'Кремові ласощі з куркою для собак у чотирьох запечатаних тюбиках',
+  'Один запечатанный тюбик Churu Kitten с курицей для котят':
+    'Один запечатаний тюбик Churu Kitten з куркою для кошенят',
+  'Один запечатанный тюбик Churu DOG с курицей для собак':
+    'Один запечатаний тюбик Churu DOG з куркою для собак',
+  'Короб из 12 закрытых пачек Churu Kitten с курицей, по четыре тюбика в каждой':
+    'Короб із 12 закритих пачок Churu Kitten із куркою, по чотири тюбики в кожній',
+  'Короб из 12 закрытых пачек Churu DOG с курицей, по четыре тюбика в каждой':
+    'Короб із 12 закритих пачок Churu DOG із куркою, по чотири тюбики в кожній',
+  'Для котят до одного года': 'Для кошенят до одного року',
+  'Для собак': 'Для собак',
+  'Курица в составе': 'Курка в складі',
+  'Четыре тюбика по 14 г': 'Чотири тюбики по 14 г'
 };
 
+flavors.push(['Churu Kitten - курица', 'Churu Kitten - pollo', 'Churu Kitten - курка']);
+flavors.push(['Churu DOG - курица', 'Churu DOG - pollo', 'Churu DOG - курка']);
 for (const [source, es, uk] of flavors) {
   churuFormatsEs[`${source} - один тюбик 14 г`] = `${es} - un tubo de 14 g`;
   churuFormatsEs[`${source} - 12 упаковок по 4 тюбика`] = `${es} - 12 sobres de 4 tubos`;

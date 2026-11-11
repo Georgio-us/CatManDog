@@ -281,6 +281,7 @@ export const seoProductSlugs = Object.freeze({
   "tc-768abf17c2": "churu-tunets-s-grebeshkom",
   "tc-dc3d6d94c2": "churu-kuritsa-s-syrom",
   "tc-713f42fb9a": "churu-kitten-kuritsa",
+  "churu-dog-chicken": "churu-dog-kuritsa",
   "tc-4b391892b7": "churu-hairball-control-losos",
   "tc-82b5e1f561": "catit-creamy-kuritsa-s-yagnenkom",
   "tc-c4fc3a3e21": "catit-creamy-losos-s-krevetkami",

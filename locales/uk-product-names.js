@@ -12,6 +12,7 @@ export const ukProductNames = {
   "Churu - тунец с гребешком": "Churu - тунець із гребінцем",
   "Churu - курица с сыром": "Churu - курка із сиром",
   "Churu Kitten - курица": "Churu Kitten - курка",
+  "Churu DOG - курица": "Churu DOG - курка",
   "Churu Hairball Control - лосось": "Churu Hairball Control - лосось",
   "Catit Creamy - курица с ягнёнком": "Catit Creamy - курка з ягнятиною",
   "Catit Creamy - лосось с креветками": "Catit Creamy - лосось із креветками",

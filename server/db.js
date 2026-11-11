@@ -3,7 +3,8 @@ import { Pool } from 'pg';
 import { importCatalog } from './catalog.js';
 import { applySelectedPrices } from './selected-pricing.js';
 import { applyMatchedPrices } from './matched-pricing.js';
-import { publishChuruRetailFormats, publishChuruRetailFormatDetails } from './churu-retail-formats.js';
+import { publishChuruRetailFormats, publishChuruRetailFormatDetails,
+  publishChuruAdditionalFormats } from './churu-retail-formats.js';
 
 export function createDatabase(url = process.env.DATABASE_URL) {
   if (!url) return null;
@@ -28,6 +29,7 @@ export async function initializeDatabase(db) {
   const count = await importCatalog(db);
   await publishChuruRetailFormats(db);
   await publishChuruRetailFormatDetails(db);
+  await publishChuruAdditionalFormats(db);
   console.info(`Catalog imported: ${count} variants`);
   try {
     const pricing = await applySelectedPrices(db, null, { automatic: true });
