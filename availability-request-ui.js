@@ -20,7 +20,7 @@ export function availabilityRequestPage(product, variant, { language = 'ru', esc
   const privacy = language === 'es' ? '/privacy-es.html' : language === 'uk' ? '/privacy-uk.html' : '/privacy.html';
   const productUrl = `${productHref(product.id)}?variant=${encodeURIComponent(variant.id)}`;
   const image = variant.image?.src || variant.image || product.image?.src || product.image;
-  return `<div class="availability-request-overlay"><div class="availability-request-dialog" role="dialog" aria-modal="true" aria-labelledby="availability-request-title"><div class="page checkout-page availability-request-page"><a class="rc-flow-back" href="${productUrl}">${icon('arrow')} ${t.back}</a>
+  return `<div class="availability-request-overlay"><div class="availability-request-dialog" role="dialog" aria-modal="true" aria-labelledby="availability-request-title" tabindex="-1"><div class="page checkout-page availability-request-page"><a class="rc-flow-back" href="${productUrl}">${icon('arrow')} ${t.back}</a>
     <div class="rc-flow-heading"><h1 id="availability-request-title">${t.title}</h1><p>${t.intro}</p></div>
     <div class="availability-request-product">${typeof image === 'string' && image ? `<img src="${escape(image)}" alt="">` : ''}<div><strong>${escape(product.name)}</strong><span>${escape(variant.label)}</span></div></div>
     ${sent ? `<div class="checkout-preview-notice" role="status">${icon('check')}<div><strong>${t.sent}</strong><p>${t.thanks}</p></div></div>` :
