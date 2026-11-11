@@ -57,4 +57,7 @@ test('server-unavailable legacy single SKU opens a request instead of a purchase
   assert.match(request, /role="dialog" aria-modal="true"/);
   assert.match(request, /name="email"/);
   assert.match(request, /name="phone"/);
+  assert.match(request, /<select name="size" required>/);
+  assert.match(request, /<option value="XS"/);
+  assert.match(request, /<option value="S"/);
 });

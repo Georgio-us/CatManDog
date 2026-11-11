@@ -2157,9 +2157,15 @@ export async function handleApi(db, req, res, pathname) {
         WHERE v.id=$1 AND p.active=true AND v.active=true
           AND (v.sale_status='unavailable' OR v.price_confirmed=false)`, [variantId]);
       if (!rows.length) bad('Этот товар уже доступен или не найден', 409);
+      const sizeOptions = {
+        'birthday-bandana': ['XS', 'S'],
+        'halloween-bandana': ['XS', 'S']
+      }[rows[0].product_id];
+      const size = cap(body.size, 30);
+      if (sizeOptions && !sizeOptions.includes(size)) bad('Выберите размер товара');
       const id = randomUUID();
       const locale = ['ru','es','uk'].includes(body.locale) ? body.locale : 'ru';
-      const message = `Запрос на поступление: ${rows[0].name} · ${rows[0].label}`;
+      const message = `Запрос на поступление: ${rows[0].name} · ${rows[0].label}${sizeOptions ? ` · размер ${size}` : ''}`;
       await db.query(`INSERT INTO service_requests
         (id,kind,email,contact_name,contact_phone,product_id,variant_id,message,locale)
         VALUES($1,'availability',$2,$3,$4,$5,$6,$7,$8)`,

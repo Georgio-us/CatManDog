@@ -8,7 +8,7 @@ import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, 
 import { categories, products, catalogProducts, articles } from './data.js?v=editorial-leonardo-20261111';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=product-urls-20261110';
 import { createCheckoutUI } from './checkout-ui.js?v=telegram-funnel-20261110';
-import { availabilityRequestPage } from './availability-request-ui.js?v=request-dialog-20261111';
+import { availabilityRequestPage } from './availability-request-ui.js?v=request-size-20261111';
 import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=unavailable-single-20261110';
 
@@ -492,10 +492,11 @@ app.addEventListener('submit', async event => {
     const response = await fetch('/api/availability-requests', { method:'POST', credentials:'same-origin',
       headers:{ 'Content-Type':'application/json' },
       body:JSON.stringify({ variantId, name:values.name, email:values.email, phone:values.phone,
+        size:values.size,
         consent:values.consent === 'on', locale:locale() }) });
     const result = await response.json();
     if (!response.ok || !result.accepted) throw new Error(result.error || 'Не удалось отправить запрос');
-    availabilityRequestState = { variantId, sent:true };
+    availabilityRequestState = { variantId, sent:true, values };
   } catch (error) {
     availabilityRequestState = { variantId, error:error.message, values };
   }

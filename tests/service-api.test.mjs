@@ -19,6 +19,8 @@ test('availability request accepts one reply channel and blocks checkout for unp
     const db = { async query(sql, params) {
       if (sql.includes('FROM catalog_variants v JOIN catalog_products p')) {
         assert.match(sql, /v\.price_confirmed=false/);
+        if (params[0] === 'birthday-bandana')
+          return { rows: [{ product_id:'birthday-bandana', name:'Бандана Birthday Star', label:'1 шт' }] };
         return { rows: [{ product_id:'hat', name:'Праздничная шапочка', label:'1 шт' }] };
       }
       if (sql.startsWith('INSERT INTO service_requests')) {
@@ -45,6 +47,10 @@ test('availability request accepts one reply channel and blocks checkout for unp
     assert.equal(sent[2].to[0], 'buyer@example.test');
     assert.equal(await run(base, 'empty'), 400);
     assert.equal(stored.length, 2);
+    assert.equal(await run({ ...base, variantId:'birthday-bandana', phone:'+34600111222' }, 'missing-size'), 400);
+    assert.equal(await run({ ...base, variantId:'birthday-bandana', size:'M', phone:'+34600111222' }, 'wrong-size'), 400);
+    assert.equal(await run({ ...base, variantId:'birthday-bandana', size:'XS', phone:'+34600111222' }, 'size'), 202);
+    assert.match(stored[2][6], /размер XS/);
   } finally {
     globalThis.fetch = originalFetch;
     for (const [key,value] of Object.entries(previous)) {

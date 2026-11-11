@@ -2,15 +2,15 @@ import { productHref } from './seo-products.js?v=all-product-urls-20261110';
 
 const copy = {
   ru: { title:'Сообщить о поступлении', intro:'Оставьте контакты, и мы сообщим, когда сможем предложить этот товар',
-    name:'Имя', phone:'Телефон / WhatsApp', contact:'Укажите email или телефон, чтобы мы могли ответить', consent:'Согласен на обработку контактов для ответа на этот запрос',
+    name:'Имя', size:'Размер', chooseSize:'Выберите размер', phone:'Телефон / WhatsApp', contact:'Укажите email или телефон, чтобы мы могли ответить', consent:'Согласен на обработку контактов для ответа на этот запрос',
     send:'Отправить запрос', sent:'Запрос получен', thanks:'Мы свяжемся с вами, когда товар станет доступен',
     back:'К товару', error:'Не удалось отправить запрос. Попробуйте ещё раз' },
   es: { title:'Avísame cuando esté disponible', intro:'Déjanos tus datos y te avisaremos cuando podamos ofrecer este producto',
-    name:'Nombre', phone:'Teléfono / WhatsApp', contact:'Indica tu email o teléfono para que podamos responderte', consent:'Acepto el tratamiento de mis datos para responder a esta solicitud',
+    name:'Nombre', size:'Talla', chooseSize:'Elige una talla', phone:'Teléfono / WhatsApp', contact:'Indica tu email o teléfono para que podamos responderte', consent:'Acepto el tratamiento de mis datos para responder a esta solicitud',
     send:'Enviar solicitud', sent:'Solicitud recibida', thanks:'Te avisaremos cuando el producto esté disponible',
     back:'Volver al producto', error:'No se pudo enviar la solicitud. Inténtalo de nuevo' },
   uk: { title:'Повідомити про надходження', intro:'Залиште контакти, і ми повідомимо, коли зможемо запропонувати цей товар',
-    name:'Ім’я', phone:'Телефон / WhatsApp', contact:'Вкажіть email або телефон, щоб ми могли відповісти', consent:'Погоджуюся на обробку контактів для відповіді на цей запит',
+    name:'Ім’я', size:'Розмір', chooseSize:'Виберіть розмір', phone:'Телефон / WhatsApp', contact:'Вкажіть email або телефон, щоб ми могли відповісти', consent:'Погоджуюся на обробку контактів для відповіді на цей запит',
     send:'Надіслати запит', sent:'Запит отримано', thanks:'Ми зв’яжемося з вами, коли товар стане доступним',
     back:'До товару', error:'Не вдалося надіслати запит. Спробуйте ще раз' }
 };
@@ -20,11 +20,14 @@ export function availabilityRequestPage(product, variant, { language = 'ru', esc
   const privacy = language === 'es' ? '/privacy-es.html' : language === 'uk' ? '/privacy-uk.html' : '/privacy.html';
   const productUrl = `${productHref(product.id)}?variant=${encodeURIComponent(variant.id)}`;
   const image = variant.image?.src || variant.image || product.image?.src || product.image;
+  const sizes = Array.isArray(product.sizes) && product.sizes.length > 1 ? product.sizes : [];
+  const chosenSize = sizes.includes(defaults.size) ? defaults.size : '';
   return `<div class="availability-request-overlay"><div class="availability-request-dialog" role="dialog" aria-modal="true" aria-labelledby="availability-request-title" tabindex="-1"><div class="page checkout-page availability-request-page"><a class="rc-flow-back" href="${productUrl}">${icon('arrow')} ${t.back}</a>
     <div class="rc-flow-heading"><h1 id="availability-request-title">${t.title}</h1><p>${t.intro}</p></div>
-    <div class="availability-request-product">${typeof image === 'string' && image ? `<img src="${escape(image)}" alt="">` : ''}<div><strong>${escape(product.name)}</strong><span>${escape(variant.label)}</span></div></div>
+    <div class="availability-request-product">${typeof image === 'string' && image ? `<img src="${escape(image)}" alt="">` : ''}<div><strong>${escape(product.name)}</strong><span>${escape(variant.label)}${sent && chosenSize ? ` · ${escape(t.size)} ${escape(chosenSize)}` : ''}</span></div></div>
     ${sent ? `<div class="checkout-preview-notice" role="status">${icon('check')}<div><strong>${t.sent}</strong><p>${t.thanks}</p></div></div>` :
     `<form class="checkout-form availability-request-form" data-availability-request="${escape(variant.id)}"><div class="checkout-fields">
+      ${sizes.length ? `<label class="checkout-wide">${t.size}<select name="size" required><option value="">${t.chooseSize}</option>${sizes.map(size => `<option value="${escape(size)}" ${size === chosenSize ? 'selected' : ''}>${escape(size)}</option>`).join('')}</select></label>` : ''}
       <label>${t.name}<input name="name" required maxlength="100" autocomplete="name" value="${escape(defaults.name || '')}"></label>
       <label>Email<input name="email" type="email" maxlength="160" autocomplete="email" value="${escape(defaults.email || '')}"></label>
       <label>${t.phone}<input name="phone" type="tel" minlength="6" maxlength="24" autocomplete="tel" value="${escape(defaults.phone || '')}"></label>
