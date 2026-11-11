@@ -22,6 +22,8 @@ import { productHref, seoProductForPath } from './seo-products.js?v=all-product-
 import { analyticsItem, announceCommerce } from './analytics-events.js?v=delivery-status-3';
 import { installAnalytics } from './analytics-consent.js?v=visit-details-20261111';
 import { matchesCatalogSearch, catalogSuggestions } from './catalog-search.js';
+import { rememberProductOrigin, productOrigin, requestProductReturn,
+  takeProductReturnScroll } from './product-return.js';
 
 const app = document.querySelector('#app');
 installLocale();
@@ -145,6 +147,28 @@ function notify(text,{cartAction=false}={}){
 }
 function updateHeader(){const count=cart.reduce((n,x)=>n+x.qty,0);document.querySelector('#cart-link').innerHTML=icon('bag')+(count?`<span class="cart-count">${count}</span>`:'');document.querySelector('#cart-link').setAttribute('aria-label',locale()==='es'?`Cesta: ${count} ${count===1?'producto':'productos'}`:`Корзина: ${itemCount(count)}`);}
 function route(){const category=seoCategoryForPath(location.pathname);const product=seoProductForPath(location.pathname);const cleanPath=product?`/product/${product.id}`:(category||location.pathname==='/catalogo')?'/catalog':location.pathname==='/pet'?'/pet':location.pathname==='/revista'?'/journal':location.pathname.startsWith('/revista/')?location.pathname.replace(/^\/revista\//u,'/journal/'):'/';const raw=location.hash.slice(1)||`${cleanPath}${location.search}`;const [path,query]=raw.split('?');const params=new URLSearchParams(query);if(category&&!location.hash){params.set('pet',category.pet);params.set('group',category.group);}if(['Игрушки','Аксессуары'].includes(params.get('category')))params.set('category','Игрушки и аксессуары');if(['Лотки','Лотки и гигиена'].includes(params.get('category')))params.set('category','Наполнитель');return {path,params};}
+document.addEventListener('click', event => {
+  const returnLink = event.target.closest('[data-product-return]');
+  if (returnLink) {
+    const id = route().path.split('/')[2];
+    const product = products.find(item => item.id === id || item.variants?.some(variant => variant.id === id));
+    const origin = productOrigin(product?.id);
+    if (origin && returnLink.getAttribute('href') === origin.url) requestProductReturn(origin);
+    return;
+  }
+  const target = event.target.closest('a[href], button[data-configure]');
+  if (!target) return;
+  const href = target.getAttribute('href') || '';
+  const id = target.dataset.configure || target.dataset.productId ||
+    (href.startsWith('/producto/') ? seoProductForPath(new URL(href, location.origin).pathname)?.id : null) ||
+    (href.startsWith('#/product/') ? href.slice('#/product/'.length).split('?')[0] : null);
+  if (!id || route().path === `/product/${id}`) return;
+  const sourcePath = route().path;
+  if (!['/', '/catalog', '/favorites', '/picks/cat', '/picks/dog'].includes(sourcePath) &&
+      !sourcePath.startsWith('/product/')) return;
+  rememberProductOrigin(id, { url: location.pathname + location.search + location.hash,
+    path: sourcePath, scrollY: window.scrollY });
+}, true);
 const journalHref = id => locale()==='es' ? `/revista${id?`/${encodeURIComponent(id)}`:''}` : `#/journal${id?`/${encodeURIComponent(id)}`:''}`;
 let lastCommerceView = '';
 const cartCommerceItems = lines => lines.map(item => {
@@ -181,7 +205,27 @@ function imageBlock(index,extra=''){
   }
   return `<div class="product-image ${extra}" style="${imageStyle(index)}"></div>`;
 }
-function crumbs(title){return `<div class="breadcrumbs"><a href="#/">Главная</a><span>/</span><span>${escape(title)}</span></div>`;}
+function crumbs(title){
+  const path = route().path;
+  if (!path.startsWith('/product/'))
+    return `<div class="breadcrumbs"><a href="#/">Главная</a><span>/</span><span>${escape(title)}</span></div>`;
+  const id = path.split('/')[2];
+  const product = products.find(item => item.id === id || item.variants?.some(variant => variant.id === id));
+  const origin = productOrigin(product?.id);
+  const destination = origin?.url || `/#/catalog?pet=${product?.pet === 'dog' ? 'dog' : 'cat'}`;
+  const previousProduct = origin?.path?.startsWith('/product/')
+    ? products.find(item => item.id === origin.path.split('/')[2]) : null;
+  const source = origin?.path === '/picks/cat' ? 'Подборка для кошек' :
+    origin?.path === '/picks/dog' ? 'Подборка для собак' :
+      origin?.path === '/favorites' ? 'Избранное' : origin?.path === '/' ? 'Главная' :
+        previousProduct?.name || 'Каталог';
+  const back = locale() === 'es' ? `Volver ${source === 'Главная' ? 'al inicio' : source === 'Каталог' ? 'al catálogo' : source === 'Избранное' ? 'a favoritos' : previousProduct ? 'al producto' : 'a la selección'}` :
+    locale() === 'uk' ? `Назад ${source === 'Главная' ? 'на головну' : source === 'Каталог' ? 'до каталогу' : source === 'Избранное' ? 'до обраного' : previousProduct ? 'до товару' : 'до добірки'}` :
+      `Назад ${source === 'Главная' ? 'на главную' : source === 'Каталог' ? 'в каталог' : source === 'Избранное' ? 'в избранное' : previousProduct ? 'к товару' : 'к подборке'}`;
+  const sourceCrumb = source === 'Главная' ? '' : `<span>/</span><a href="${escape(destination)}" data-product-return>${escape(translate(source))}</a>`;
+  const navigationLabel = { ru: 'Путь по каталогу', es: 'Ruta del catálogo', uk: 'Шлях каталогом' }[locale()] || 'Путь по каталогу';
+  return `<nav class="product-navigation" aria-label="${navigationLabel}"><div class="breadcrumbs"><a href="/#/">Главная</a>${sourceCrumb}<span>/</span><span>${escape(title)}</span></div><a class="product-back-link" href="${escape(destination)}" data-product-return>${icon('arrow')}<span>${escape(back)}</span></a></nav>`;
+}
 function card(p){
   const family=hasVariants(p)&&p.variants.length>1;
   const pricing=catalogPrice(p);
@@ -378,7 +422,12 @@ function info(id){
   return notFound();
 }
 function notFound(){return `<div class="page">${empty('Эта страница убежала','Но все любимые вещи по-прежнему на месте','На главную','#/')}</div>`;}
-function render(){if(catalogLoading){app.innerHTML=`<div class="page" role="status">${{ru:'Загружаем каталог',uk:'Завантажуємо каталог',es:'Cargando catálogo'}[locale()] || 'Загружаем каталог'}</div>`;return;}const {path}=route();let html;if(path==='/pet'||path==='/join'||path.startsWith('/account')||path==='/coupon')html=account.page(path,route().params);else if(path.startsWith('/useful'))html=useful.page(path,route().params);else if(path==='/')html=home();else if(path==='/catalog')html=catalog();else if(path==='/gifts')html=giftLanding(giftHelpers);else if(path==='/active-home')html=activeHomeLanding(giftHelpers);else if(path.startsWith('/picks/'))html=homeShortcutLanding(catalogProducts,path.split('/')[2],giftHelpers)||notFound();else if(path.startsWith('/product/'))html=detail(path.split('/')[2]);else if(path==='/availability-request')html=availabilityPage();else if(path==='/cart')html=cartPage();else if(path==='/checkout')html=checkout.page();else if(path==='/checkout/preview')html=checkout.previewPage();else if(path==='/checkout/confirmation')html=checkout.resultPage('accepted',route().params);else if(path==='/checkout/payment-error')html=checkout.resultPage('failed',route().params);else if(path==='/checkout/status')html=checkout.resultPage('status',route().params);else if(path==='/support')html=checkout.servicePage('support',route().params);else if(path==='/returns')html=checkout.servicePage('return',route().params);else if(path==='/favorites')html=favoritePage();else if(path==='/journal')html=journal();else if(path.startsWith('/journal/'))html=article(path.split('/')[2]);else if(path==='/about')html=about();else if(path.startsWith('/info/'))html=info(path.split('/')[2]);else html=notFound();app.innerHTML=html;if(path==='/availability-request')app.querySelector('.availability-request-dialog')?.focus({preventScroll:true});document.title=`${(path.startsWith('/account') && account.store.activePet() ? 'Кабинет ' + account.store.activePet().name : null) || ({'/useful':'Полезное','/useful/clinics':'Ветклиники Валенсии','/useful/travel':'В дорогу вместе','/account':'Кабинет с хвостиком','/coupon':'Купон на 10%','/join':'Знакомство с питомцем','/pet':'Профиль питомца','/':'Хорошая жизнь с хвостиком','/catalog':'Каталог','/gifts':'Подарочные наборы','/active-home':'Дом для активного кота','/picks/cat':'Подборка для кошек','/picks/dog':'Подборка для собак','/cart':'Корзина','/checkout':'Оформление заказа','/checkout/preview':'Проверка заказа','/checkout/confirmation':'Подтверждение заказа','/checkout/payment-error':'Ошибка оплаты','/checkout/status':'Статус заказа','/support':'Помощь с заказом','/returns':'Возврат','/availability-request':'Сообщить о поступлении','/journal':'Журнал','/favorites':'Избранное','/about':'О нас'})[path]||'Для хорошей жизни'} · CatManDog`;if(path.startsWith('/journal/'))document.title=`${displayArticles.find(item=>item.id===path.split('/')[2])?.title||translate('Журнал')} · CatManDog`;if(path.startsWith('/product/')){const id=path.split('/')[2];const product=products.find(item=>item.id===id||item.variants?.some(variant=>variant.id===id));if(product)document.title=`${product.name} · CatManDog`;}document.title = locale()==='ru' ? document.title : translate(document.title.split(' · CatManDog')[0])+' · CatManDog';const categoryPage=!location.hash?seoCategoryForPath(location.pathname):null;if(categoryPage)document.title=`${categoryPage.title} · CatManDog`;const productPage=!location.hash?seoProductForPath(location.pathname):null;if(productPage)document.title=`${productPage.title} · CatManDog`;document.querySelector('nav').classList.remove('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded','false');document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')===location.hash?'page':'false'));updateHeader();account.afterRender();announceView();analytics.pageView();}
+function restoreProductReturnScroll(){
+  if (catalogLoading) return;
+  const y = takeProductReturnScroll(location.pathname + location.search + location.hash);
+  if (y !== null) requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, y)));
+}
+function render(){if(catalogLoading){app.innerHTML=`<div class="page" role="status">${{ru:'Загружаем каталог',uk:'Завантажуємо каталог',es:'Cargando catálogo'}[locale()] || 'Загружаем каталог'}</div>`;return;}const {path}=route();let html;if(path==='/pet'||path==='/join'||path.startsWith('/account')||path==='/coupon')html=account.page(path,route().params);else if(path.startsWith('/useful'))html=useful.page(path,route().params);else if(path==='/')html=home();else if(path==='/catalog')html=catalog();else if(path==='/gifts')html=giftLanding(giftHelpers);else if(path==='/active-home')html=activeHomeLanding(giftHelpers);else if(path.startsWith('/picks/'))html=homeShortcutLanding(catalogProducts,path.split('/')[2],giftHelpers)||notFound();else if(path.startsWith('/product/'))html=detail(path.split('/')[2]);else if(path==='/availability-request')html=availabilityPage();else if(path==='/cart')html=cartPage();else if(path==='/checkout')html=checkout.page();else if(path==='/checkout/preview')html=checkout.previewPage();else if(path==='/checkout/confirmation')html=checkout.resultPage('accepted',route().params);else if(path==='/checkout/payment-error')html=checkout.resultPage('failed',route().params);else if(path==='/checkout/status')html=checkout.resultPage('status',route().params);else if(path==='/support')html=checkout.servicePage('support',route().params);else if(path==='/returns')html=checkout.servicePage('return',route().params);else if(path==='/favorites')html=favoritePage();else if(path==='/journal')html=journal();else if(path.startsWith('/journal/'))html=article(path.split('/')[2]);else if(path==='/about')html=about();else if(path.startsWith('/info/'))html=info(path.split('/')[2]);else html=notFound();app.innerHTML=html;if(path==='/availability-request')app.querySelector('.availability-request-dialog')?.focus({preventScroll:true});document.title=`${(path.startsWith('/account') && account.store.activePet() ? 'Кабинет ' + account.store.activePet().name : null) || ({'/useful':'Полезное','/useful/clinics':'Ветклиники Валенсии','/useful/travel':'В дорогу вместе','/account':'Кабинет с хвостиком','/coupon':'Купон на 10%','/join':'Знакомство с питомцем','/pet':'Профиль питомца','/':'Хорошая жизнь с хвостиком','/catalog':'Каталог','/gifts':'Подарочные наборы','/active-home':'Дом для активного кота','/picks/cat':'Подборка для кошек','/picks/dog':'Подборка для собак','/cart':'Корзина','/checkout':'Оформление заказа','/checkout/preview':'Проверка заказа','/checkout/confirmation':'Подтверждение заказа','/checkout/payment-error':'Ошибка оплаты','/checkout/status':'Статус заказа','/support':'Помощь с заказом','/returns':'Возврат','/availability-request':'Сообщить о поступлении','/journal':'Журнал','/favorites':'Избранное','/about':'О нас'})[path]||'Для хорошей жизни'} · CatManDog`;if(path.startsWith('/journal/'))document.title=`${displayArticles.find(item=>item.id===path.split('/')[2])?.title||translate('Журнал')} · CatManDog`;if(path.startsWith('/product/')){const id=path.split('/')[2];const product=products.find(item=>item.id===id||item.variants?.some(variant=>variant.id===id));if(product)document.title=`${product.name} · CatManDog`;}document.title = locale()==='ru' ? document.title : translate(document.title.split(' · CatManDog')[0])+' · CatManDog';const categoryPage=!location.hash?seoCategoryForPath(location.pathname):null;if(categoryPage)document.title=`${categoryPage.title} · CatManDog`;const productPage=!location.hash?seoProductForPath(location.pathname):null;if(productPage)document.title=`${productPage.title} · CatManDog`;document.querySelector('nav').classList.remove('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded','false');document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')===location.hash?'page':'false'));updateHeader();account.afterRender();announceView();analytics.pageView();restoreProductReturnScroll();}
 function setParam(key,value){const {params}=route();if(key==='category'||key==='pet'){['foodType','brand','group','feature','maxPrice'].forEach(name=>params.delete(name));}value?params.set(key,value):params.delete(key);location.hash=`/catalog${params.size?'?'+params.toString():''}`;}
 function add(id,size,qty=1,config,variantId){
   const p=products.find(p=>p.id===id);if(!p)return;

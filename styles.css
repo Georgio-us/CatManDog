@@ -656,6 +656,35 @@ button:hover:not(:disabled) {
   margin: 8px 0 30px;
 }
 
+.product-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 8px 0 30px;
+}
+
+.product-navigation .breadcrumbs { margin: 0; flex-wrap: wrap; }
+.product-navigation .breadcrumbs a { color: inherit; }
+
+.product-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.product-back-link:hover { background: var(--surface); }
+.product-back-link:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.product-back-link svg { width: 16px; height: 16px; transform: rotate(180deg); }
+
 .page-title {
   font-size: 48px;
   letter-spacing: -2px;
@@ -3175,6 +3204,10 @@ details .text-link {
     font-size: 10px;
     margin-bottom: 22px;
   }
+
+  .product-navigation { align-items: flex-start; flex-direction: column; margin-bottom: 22px; }
+  .product-navigation .breadcrumbs { margin: 0; }
+  .product-back-link { font-size: 12px; padding: 9px 12px; }
 
   .lead {
     font-size: 14px;
