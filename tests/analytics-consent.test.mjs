@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { consentCopy, installAnalytics, publicPageLocation } from '../analytics-consent.js';
+import { consentCopy, installAnalytics, publicPageLocation, visitSource } from '../analytics-consent.js';
 
 test('analytics page locations omit searches and private routes', () => {
   const location = { origin: 'https://catmandog.es', pathname: '/catalogo/gatos/pienso-seco', hash: '', search: '?q=private' };
@@ -9,6 +9,11 @@ test('analytics page locations omit searches and private routes', () => {
   assert.equal(publicPageLocation({ ...location, pathname: '/', hash: '#/account?pet=Leo' }), null);
   assert.equal(publicPageLocation({ ...location, pathname: '/catalogo', hash: '#/account?pet=Leo' }), null);
   assert.equal(publicPageLocation({ ...location, pathname: '/', hash: '#/support?order=CMD-001' }), null);
+  assert.equal(publicPageLocation({ ...location, pathname: '/producto/leonardo-adult', hash: '' }), 'https://catmandog.es/producto/leonardo-adult');
+  assert.equal(visitSource('https://www.google.es/search?q=private', location.origin), 'search');
+  assert.equal(visitSource('https://www.instagram.com/catmandog', location.origin), 'social');
+  assert.equal(visitSource('https://catmandog.es/catalogo', location.origin), 'internal');
+  assert.equal(visitSource('', location.origin), 'direct');
   assert.equal(consentCopy('es').reject, 'Rechazar');
   assert.equal(consentCopy('ru').accept, 'Принять');
 });
@@ -30,7 +35,7 @@ test('Google tag and commerce events start only after acceptance; rejected visit
   } };
   let reloads = 0;
   globalThis.document = {
-    cookie: '', head: { append(script) { scripts.push(script); } },
+    cookie: '', referrer: 'https://www.google.es/search?q=private', head: { append(script) { scripts.push(script); } },
     createElement() { return {}; },
     querySelector(selector) { return { '#analytics-consent': panel, '#analytics-settings': settings }[selector]; }
   };
@@ -66,6 +71,7 @@ test('Google tag and commerce events start only after acceptance; rejected visit
     assert.equal(visitRequests.length, 1);
     assert.equal(visitRequests[0].url, '/api/telemetry/visit');
     assert.equal(visitRequests[0].options.method, 'POST');
+    assert.deepEqual(JSON.parse(visitRequests[0].options.body), { page: '/', source: 'search' });
     globalThis.window.location.hash = '#/product/leonardo-1';
     analytics.pageView();
     assert.equal(visitRequests.length, 1);

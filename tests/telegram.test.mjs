@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { orderAlertText, sendTelegramOrderAlert, telegramReady,
+import { orderAlertText, visitAlertText, sendTelegramOrderAlert, telegramReady,
   startTelegramOrderAlerts } from '../server/telegram.js';
+import { currentVisitStaff, staffVisitCookie } from '../server/staff.js';
+import { handleApi } from '../server/api.js';
 
 const env = { TELEGRAM_BOT_TOKEN: '12345:example_token', TELEGRAM_CHAT_ID: '-1001234567890' };
 const order = { id: 12, number: 'CMD-1024', total_cents: 3203,
@@ -24,6 +26,63 @@ test('Telegram order notification contains only the order reference and amount',
   assert.equal(request.options.method, 'POST');
   assert.equal(JSON.parse(request.options.body).chat_id, env.TELEGRAM_CHAT_ID);
   assert.match(request.url, /^https:\/\/api\.telegram\.org\/bot/);
+});
+
+test('visit alert distinguishes verified owner without leaking private URLs', async () => {
+  const text = visitAlertText({ page: '/#/product/leonardo-adult', source: 'search', owner: true });
+  assert.match(text, /вход владельца подтверждён/);
+  assert.match(text, /leonardo-adult/);
+  assert.match(text, /поиск/);
+  const unknown = visitAlertText({ page: '/#/account?email=private@example.com',
+    source: 'https://private.example.com', owner: false });
+  assert.match(unknown, /владелец не распознан/);
+  assert.doesNotMatch(unknown, /private@example.com|private.example.com/);
+  assert.match(visitAlertText({ source: 'constructor' }), /Источник: неизвестен/);
+  const cookie = staffVisitCookie('a'.repeat(64), true);
+  assert.match(cookie, /Path=\/api\/telemetry/);
+  const db = { async query() { return { rows: [{ role: 'owner' }] }; } };
+  assert.equal((await currentVisitStaff(db, { headers: { cookie: `cmd_staff_visit=${'a'.repeat(64)}` } })).role, 'owner');
+});
+
+test('visit endpoint verifies the owner server-side before sending Telegram', async () => {
+  const keys = ['TELEGRAM_BOT_TOKEN', 'TELEGRAM_CHAT_ID', 'TELEGRAM_VISIT_ALERTS_ENABLED'];
+  const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]));
+  const originalFetch = globalThis.fetch;
+  const sent = [];
+  try {
+    process.env.TELEGRAM_BOT_TOKEN = env.TELEGRAM_BOT_TOKEN;
+    process.env.TELEGRAM_CHAT_ID = env.TELEGRAM_CHAT_ID;
+    process.env.TELEGRAM_VISIT_ALERTS_ENABLED = 'true';
+    globalThis.fetch = async (_url, options) => {
+      sent.push(JSON.parse(options.body).text);
+      return { ok: true, json: async () => ({ ok: true }) };
+    };
+    const db = { async query(sql) {
+      if (sql.includes('FROM staff_sessions')) return { rows: [{ role: 'owner' }] };
+      throw new Error(`Unexpected SQL: ${sql}`);
+    } };
+    const run = async (cookie, ip) => {
+      const req = { method: 'POST', headers: { host: 'catmandog.es', origin: 'https://catmandog.es', cookie },
+        socket: { remoteAddress: ip },
+        async *[Symbol.asyncIterator]() { yield JSON.stringify({ page: '/#/product/leonardo-adult',
+          source: 'search', owner: true }); } };
+      let status, body;
+      const res = { writeHead(value) { status = value; }, end(value) { body = JSON.parse(value); } };
+      await handleApi(db, req, res, '/api/telemetry/visit');
+      assert.equal(status, 200);
+      assert.equal(body.accepted, true);
+    };
+    await run('', 'test-visit-unknown');
+    await run(`cmd_staff_visit=${'a'.repeat(64)}`, 'test-visit-owner');
+    assert.match(sent[0], /владелец не распознан/);
+    assert.match(sent[1], /вход владельца подтверждён/);
+  } finally {
+    globalThis.fetch = originalFetch;
+    for (const key of keys) {
+      if (previous[key] === undefined) delete process.env[key];
+      else process.env[key] = previous[key];
+    }
+  }
 });
 
 test('failed Telegram delivery leaves the paid order pending for retry', async () => {

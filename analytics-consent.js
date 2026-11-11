@@ -8,17 +8,30 @@ export function publicPageLocation(location) {
   const path = location.pathname;
   if (location.hash) {
     const route = location.hash.slice(1).split('?')[0];
-    if (/^\/(?:catalog|journal(?:\/[a-z0-9-]+)?|product\/[a-z0-9-]+)$/i.test(route)) {
+    if (/^\/(?:catalog|journal(?:\/[a-z0-9-]+)?|product\/[a-z0-9-]+|picks\/(?:cat|dog))$/i.test(route)) {
       return `${location.origin}/#${route}`;
     }
     if (route === '/') return `${location.origin}/`;
     return null;
   }
   if (path === '/' || path === '/catalogo' || path === '/revista' ||
+      /^\/producto\/[a-z0-9-]+$/i.test(path) ||
       /^\/(?:revista|catalogo\/(?:gatos|perros))\/[a-z0-9/-]+$/i.test(path)) {
     return `${location.origin}${path}`;
   }
   return null;
+}
+
+export function visitSource(referrer, origin) {
+  if (!referrer) return 'direct';
+  try {
+    const url = new URL(referrer);
+    if (url.origin === origin) return 'internal';
+    const host = url.hostname.toLowerCase();
+    if (/(^|\.)(?:google\.[a-z.]+|bing\.com|duckduckgo\.com|yahoo\.com|ecosia\.org)$/.test(host)) return 'search';
+    if (/(^|\.)(?:instagram\.com|facebook\.com|fb\.com|tiktok\.com|pinterest\.com|youtube\.com|x\.com)$/.test(host)) return 'social';
+    return 'other';
+  } catch { return 'direct'; }
 }
 
 export function consentCopy(language) {
@@ -90,8 +103,11 @@ export function installAnalytics(language) {
         visitAlerted = true;
         try { sessionStorage.setItem(VISIT_ALERT_KEY, '1'); }
         catch { /* Session storage may be unavailable */ }
+        const publicUrl = new URL(page);
+        const visit = { page: `${publicUrl.pathname}${publicUrl.hash}`,
+          source: visitSource(document.referrer, window.location.origin) };
         void window.fetch('/api/telemetry/visit', { method: 'POST', credentials: 'same-origin',
-          headers: { 'Content-Type': 'application/json' }, body: '{}' }).catch(() => {});
+          headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(visit) }).catch(() => {});
       }
     }
   }

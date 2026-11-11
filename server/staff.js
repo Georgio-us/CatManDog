@@ -3,6 +3,7 @@ import { tokenDigest } from './auth.js';
 
 const SESSION_AGE_MS = 8 * 60 * 60 * 1000;
 const cookieName = 'cmd_staff_session';
+const visitCookieName = 'cmd_staff_visit';
 
 export function staffToken(req) {
   const match = String(req.headers.cookie || '').match(/(?:^|;\s*)cmd_staff_session=([a-f0-9]{64})(?:;|$)/);
@@ -15,6 +16,23 @@ export function staffCookie(token, secure) {
 
 export function clearStaffCookie(secure) {
   return `${cookieName}=; HttpOnly; SameSite=Strict; Path=/api/admin; Max-Age=0${secure ? '; Secure' : ''}`;
+}
+
+export function staffVisitCookie(token, secure) {
+  return `${visitCookieName}=${token}; HttpOnly; SameSite=Strict; Path=/api/telemetry; Max-Age=${SESSION_AGE_MS / 1000}${secure ? '; Secure' : ''}`;
+}
+
+export function clearStaffVisitCookie(secure) {
+  return `${visitCookieName}=; HttpOnly; SameSite=Strict; Path=/api/telemetry; Max-Age=0${secure ? '; Secure' : ''}`;
+}
+
+export async function currentVisitStaff(db, req) {
+  const token = String(req.headers.cookie || '').match(/(?:^|;\s*)cmd_staff_visit=([a-f0-9]{64})(?:;|$)/)?.[1];
+  if (!token) return null;
+  const { rows } = await db.query(`SELECT a.id,a.role FROM staff_sessions s
+    JOIN staff_accounts a ON a.id=s.staff_id
+    WHERE s.token_hash=$1 AND s.expires_at>now() AND a.active=true`, [tokenDigest(token)]);
+  return rows[0] || null;
 }
 
 export async function currentStaff(db, req) {

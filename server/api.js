@@ -9,7 +9,8 @@ import { loadCabinet, saveCabinet } from './cabinet.js';
 import { emailReady, sendAccountLink,
   notifyServiceRequest, sendServiceReply, sendOrderConfirmation } from './email.js';
 import { googleClientId, verifyGoogleCredential, googleOwnsEmail } from './google-auth.js';
-import { currentStaff, createStaffSession, staffCookie, clearStaffCookie,
+import { currentStaff, currentVisitStaff, createStaffSession, staffCookie, clearStaffCookie,
+  staffToken, staffVisitCookie, clearStaffVisitCookie,
   revokeStaffSession, bootstrapOwner } from './staff.js';
 import { financePreview } from './finance.js';
 import { backupConfiguration, listBackups } from './backup.js';
@@ -574,7 +575,7 @@ async function adminRoute(db, req, res, path) {
     const owner = await bootstrapOwner(db, identity);
     const token = await createStaffSession(db, owner.id);
     return json(res, 200, { role: owner.role, name: owner.name, email: owner.email },
-      { 'Set-Cookie': staffCookie(token, secure(req)) });
+      { 'Set-Cookie': [staffCookie(token, secure(req)), staffVisitCookie(token, secure(req))] });
   }
   if (path === '/api/admin/login' && req.method === 'POST') {
     rateLimit(req, 'staff-login', 12, 15);
@@ -590,11 +591,12 @@ async function adminRoute(db, req, res, path) {
     await db.query('UPDATE staff_accounts SET last_login_at=now() WHERE id=$1', [account.id]);
     const token = await createStaffSession(db, account.id);
     return json(res, 200, { role: account.role, name: account.name, email: account.email },
-      { 'Set-Cookie': staffCookie(token, secure(req)) });
+      { 'Set-Cookie': [staffCookie(token, secure(req)), staffVisitCookie(token, secure(req))] });
   }
   if (path === '/api/admin/logout' && req.method === 'POST') {
     await revokeStaffSession(db, req);
-    return json(res, 200, { ok: true }, { 'Set-Cookie': clearStaffCookie(secure(req)) });
+    return json(res, 200, { ok: true }, { 'Set-Cookie': [clearStaffCookie(secure(req)),
+      clearStaffVisitCookie(secure(req))] });
   }
   const operator = await currentStaff(db, req);
   const customer = operator ? null : await currentCustomer(db, req);
@@ -605,7 +607,8 @@ async function adminRoute(db, req, res, path) {
   if (!fullAdmin && !supportStaff) bad('Доступ закрыт', 403);
   if (path === '/api/admin/access' && req.method === 'GET')
     return json(res, 200, { role: fullAdmin ? 'admin' : 'support',
-      name: operator?.name || customer?.name || '', email: operator?.email || customer?.email });
+      name: operator?.name || customer?.name || '', email: operator?.email || customer?.email },
+    fullAdmin ? { 'Set-Cookie': staffVisitCookie(staffToken(req), secure(req)) } : {});
   if (!fullAdmin && !path.startsWith('/api/admin/service-requests')) bad('Доступ закрыт', 403);
   if (path === '/api/admin/sendcloud/status' && req.method === 'GET') {
     const configured = sendcloudReady();
@@ -1957,8 +1960,22 @@ export async function handleApi(db, req, res, pathname) {
       if (!enabled('TELEGRAM_VISIT_ALERTS_ENABLED') || !telegramReady())
         return json(res, 200, { accepted: false });
       rateLimit(req, 'telegram-visit', 30, 60);
-      await readJson(req, 256);
-      try { return json(res, 200, { accepted: await sendTelegramVisitAlert() }); }
+      const body = await readJson(req, 256);
+      let owner = false;
+      if (db) {
+        const staff = await currentVisitStaff(db, req);
+        owner = staff?.role === 'owner';
+        if (!owner) {
+          const customer = await currentCustomer(db, req);
+          if (customer?.emailVerified) {
+            const { rows } = await db.query(`SELECT EXISTS(SELECT 1 FROM staff_accounts
+              WHERE email=$1 AND role='owner' AND active=true) AS allowed`, [customer.email]);
+            owner = rows[0]?.allowed === true;
+          }
+        }
+      }
+      try { return json(res, 200, { accepted: await sendTelegramVisitAlert({
+        page: body?.page, source: body?.source, owner }) }); }
       catch (error) {
         console.error('Telegram visit alert failed:', error.message);
         return json(res, 200, { accepted: false });

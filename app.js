@@ -20,7 +20,7 @@ import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
 import { productHref, seoProductForPath } from './seo-products.js?v=all-product-urls-20261110';
 import { analyticsItem, announceCommerce } from './analytics-events.js?v=delivery-status-3';
-import { installAnalytics } from './analytics-consent.js?v=telegram-funnel-20261110';
+import { installAnalytics } from './analytics-consent.js?v=visit-details-20261111';
 import { matchesCatalogSearch, catalogSuggestions } from './catalog-search.js';
 
 const app = document.querySelector('#app');

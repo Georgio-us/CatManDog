@@ -30,8 +30,24 @@ async function sendMessage(text, fetcher, env) {
 export const sendTelegramOrderAlert = (order, fetcher = fetch, env = process.env) =>
   sendMessage(orderAlertText(order), fetcher, env);
 
-export const sendTelegramVisitAlert = (fetcher = fetch, env = process.env) =>
-  sendMessage('Новый посетитель на CatManDog. Подробности в Google Analytics 4', fetcher, env);
+export function visitAlertText({ page, source, owner } = {}) {
+  const safePage = typeof page === 'string' && page.length <= 120 &&
+    (/^\/$/.test(page) || /^\/\#\/(?:catalog|journal(?:\/[a-z0-9-]+)?|product\/[a-z0-9-]+|picks\/(?:cat|dog))$/i.test(page) ||
+      /^\/(?:catalogo|revista|producto\/[a-z0-9-]+|(?:revista|catalogo\/(?:gatos|perros))\/[a-z0-9/-]+)$/i.test(page))
+    ? page : 'неизвестна';
+  const sources = { direct: 'прямой или неизвестен', internal: 'переход внутри сайта',
+    search: 'поиск', social: 'соцсети', other: 'другой сайт' };
+  const safeSource = typeof source === 'string' && Object.hasOwn(sources, source)
+    ? sources[source] : 'неизвестен';
+  return `Посещение CatManDog\n` +
+    `Браузер: ${owner === true ? 'вход владельца подтверждён' : 'владелец не распознан'}\n` +
+    `Первая страница: ${safePage}\n` +
+    `Источник: ${safeSource}\n` +
+    'Подробнее: Google Analytics 4';
+}
+
+export const sendTelegramVisitAlert = (visit, fetcher = fetch, env = process.env) =>
+  sendMessage(visitAlertText(visit), fetcher, env);
 
 export function startTelegramOrderAlerts(db, { intervalMs = 30000, fetcher = fetch,
   env = process.env } = {}) {
