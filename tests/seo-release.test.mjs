@@ -11,8 +11,9 @@ test('the sitemap contains only released public pages with Spanish editorial con
   const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gu)].map(match => match[1]);
   assert.deepEqual(urls, ['https://catmandog.es/', 'https://catmandog.es/catalogo',
-    'https://catmandog.es/catalogo/gatos/pienso-seco',
-    'https://catmandog.es/producto/royal-canin-sterilised-37', 'https://catmandog.es/revista',
+    ...seoCategories.filter(category => category.indexable).map(category => `https://catmandog.es${category.path}`),
+    ...seoProducts.filter(product => product.indexable).map(product => `https://catmandog.es${product.path}`),
+    'https://catmandog.es/revista',
     ...articlesEs.map(article => `https://catmandog.es/revista/${article.id}`),
     'https://catmandog.es/legal-es.html', 'https://catmandog.es/purchase-terms-es.html',
     'https://catmandog.es/privacy-es.html']);
@@ -48,10 +49,10 @@ test('every public product has a distinct permanent URL while unreleased pages s
     assert.match(path, /^\/producto\/[a-z0-9-]+$/u);
     assert.equal(seoProductForPath(path)?.id, product.id);
   }
-  const path = productHref('leonardo-poultry');
+  const path = productHref('acana-first-feast');
   const html = await seoDocument(path);
-  assert.match(html, /<h1>Leonardo Adult GF Poultry<\/h1>/u);
-  assert.match(html, /<link rel="canonical" href="https:\/\/catmandog\.es\/producto\/leonardo-adult-gf-poultry">/u);
+  assert.match(html, /<h1>Acana First Feast<\/h1>/u);
+  assert.match(html, /<link rel="canonical" href="https:\/\/catmandog\.es\/producto\/acana-first-feast">/u);
   assert.match(html, /<meta name="robots" content="noindex,follow">/u);
   let headers;
   const response = { writeHead(_status, value) { headers = value; }, end() {} };
@@ -59,6 +60,25 @@ test('every public product has a distinct permanent URL while unreleased pages s
   assert.equal(headers['X-Robots-Tag'], 'noindex');
   const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
   assert.equal(sitemap.includes(path), false);
+});
+
+test('the verified product release has unique Spanish source content and crawlable category links', async () => {
+  const released = seoProducts.filter(product => product.indexable);
+  assert.equal(released.length, 32);
+  const descriptions = new Set();
+  for (const product of released) {
+    const html = await seoDocument(product.path);
+    const title = html.match(/<h1>([^<]+)<\/h1>/u)?.[1];
+    const description = html.match(/<meta name="description" content="([^"]+)">/u)?.[1];
+    assert.ok(title && description, product.path);
+    assert.doesNotMatch(title + description, /[А-Яа-яЁё]/u, product.path);
+    assert.match(html, /<img src="[^"]+" alt="[^"]+" width="640" height="640">/u, product.path);
+    assert.doesNotMatch(html, /<meta name="robots" content="noindex/u, product.path);
+    assert.equal(descriptions.has(description), false, product.path);
+    descriptions.add(description);
+    const category = await seoDocument(product.categoryPath);
+    assert.match(category, new RegExp(`<a class="article-card" href="${product.path}">`, 'u'));
+  }
 });
 
 test('catalog landing and the released category are indexable', async () => {

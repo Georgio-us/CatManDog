@@ -23,11 +23,11 @@ test('visible products do not reuse another product description', () => {
   assert.equal(new Set(descriptions).size, catalogProducts.length);
 });
 
-test('the Leonardo server page uses product facts and ordered formats while remaining unreleased', async () => {
+test('the released Leonardo server page uses product facts and ordered formats', async () => {
   const html = await seoDocument('/producto/leonardo-adult-gf-poultry');
   assert.match(html, /carne fresca de ave \(30 %\)/u);
   assert.match(html, /Ingredientes principales/u);
   assert.match(html, /300 g, 1,8 kg, 7,5 kg/u);
   assert.doesNotMatch(html, /Consulta los formatos y detalles/u);
-  assert.match(html, /<meta name="robots" content="noindex,follow">/u);
+  assert.doesNotMatch(html, /<meta name="robots" content="noindex/u);
 });

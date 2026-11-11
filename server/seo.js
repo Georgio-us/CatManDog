@@ -15,10 +15,16 @@ const escapeHtml = value => String(value).replace(/[&<>"']/g, character =>
 
 const articleLinks = articlesEs.map(article =>
   `<a class="article-card" href="/revista/${article.id}"><div class="article-meta"><span>${escapeHtml(article.section)}</span><span>${escapeHtml(article.time)}</span></div><h3>${escapeHtml(article.title)}</h3><p>${escapeHtml(article.summary)}</p></a>`).join('');
-const categoryLinks = seoCategories.map(category =>
+const categoryLinks = seoCategories.filter(category => category.indexable).map(category =>
   `<a class="article-card" href="${category.path}"><h2>${escapeHtml(category.title)}</h2><p>${escapeHtml(category.intro)}</p></a>`).join('');
-const productLinks = categoryPath => seoProducts.filter(item => item.indexable && item.categoryPath === categoryPath).map(item =>
-  `<a class="article-card" href="${item.path}"><h2>${escapeHtml(products.find(product => product.id === item.id)?.name || item.title)}</h2><p>${escapeHtml(item.description)}</p></a>`).join('');
+const productDescription = (product, publishedProduct) => publishedProduct.description ||
+  esProductText[product.description] || yaguExpansionEs[product.description] || product.name;
+const productLinks = categoryPath => seoProducts
+  .filter(item => item.indexable && item.categoryPath === categoryPath)
+  .map(item => {
+    const product = products.find(entry => entry.id === item.id);
+    return `<a class="article-card" href="${item.path}"><h2>${escapeHtml(product.name)}</h2><p>${escapeHtml(productDescription(product, item))}</p></a>`;
+  }).join('');
 
 function pageData(pathname) {
   const publishedProduct = seoProductForPath(pathname);
@@ -27,8 +33,7 @@ function pageData(pathname) {
     if (!product) return null;
     const formats = (product.variants?.length ? orderedVariants(product).map(variant => variant.label) : product.sizes || [])
       .map(label => escapeHtml(label.replace(/ кг$/u, ' kg').replace(/ г$/u, ' g')));
-    const description = publishedProduct.description ||
-      esProductText[product.description] || yaguExpansionEs[product.description] || product.name;
+    const description = productDescription(product, publishedProduct);
     const image = product.image?.src || (typeof product.image === 'string' ? product.image : '');
     const facts = customerFacts(product.details).map(detail => esDetails[detail] || yaguExpansionEs[detail] ||
       (!/[А-Яа-яЁё]/u.test(detail) ? detail : null)).filter(Boolean);

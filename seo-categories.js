@@ -1,4 +1,4 @@
-// Release category pages to search one at a time as their assortment is reviewed.
+// Release category pages once their linked assortment has passed the SEO audit.
 export const seoCategories = [
   {
     path: '/catalogo/gatos/pienso-seco', pet: 'cat', group: 'dry-food',
@@ -9,6 +9,7 @@ export const seoCategories = [
   },
   {
     path: '/catalogo/gatos/comida-humeda', pet: 'cat', group: 'wet-food',
+    indexable: true,
     title: 'Comida húmeda para gatos',
     description: 'Descubre comida húmeda para gatos y compara recetas, formatos y necesidades en CatManDog',
     intro: 'Encuentra distintas recetas y formatos de comida húmeda para gatos y revisa cada opción con calma'
@@ -27,6 +28,7 @@ export const seoCategories = [
   },
   {
     path: '/catalogo/perros/pienso-seco', pet: 'dog', group: 'dry-food',
+    indexable: true,
     title: 'Pienso seco para perros',
     description: 'Compara pienso seco para perros por formato, marca y necesidades en CatManDog',
     intro: 'Explora alimentos secos para perros y compara formatos y necesidades antes de elegir'
