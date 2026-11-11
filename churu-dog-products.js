@@ -80,8 +80,8 @@ const makeProduct = (choice, formatId) => {
   const title = formatId === 'bites' ? 'Churu Bites DOG' : 'Churu DOG';
   const name = `${title} - ${choice.taste}, ${format.label}`;
   const description = formatId === 'bites'
-    ? `Мягкие кусочки с кремовой начинкой, вкус ${choice.taste}. В пачке 8 порций по 12 г`
-    : `Кремовое лакомство для собак, вкус ${choice.taste}. В пачке ${format.label}`;
+    ? `Мягкие кусочки с кремовой начинкой, вкус ${choice.taste}, 8 порций по 12 г`
+    : `Кремовое лакомство для собак со вкусом ${choice.taste}, ${format.label}`;
   const supplier = { name: 'Albet', sku, url };
   const purchase = {
     cartonPriceExVat: format.wholesaleCarton,
