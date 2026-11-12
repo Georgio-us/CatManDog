@@ -17,7 +17,8 @@
 .checkout-fields input:not([type="checkbox"]):not([type="file"]), .checkout-fields select, .checkout-fields textarea, .checkout-schedule input, .checkout-promo input { width: 100%; min-width: 0; border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; background: #fff; color: var(--ink); font: inherit; outline-offset: 2px; }
 .checkout-fields input[readonly]:not([type="checkbox"]):not([type="file"]) { background: var(--surface); }
 .checkout-city-fixed { display: flex; align-items: center; min-height: 48px; border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; background: var(--surface); color: var(--ink); font-weight: 650; }
-.checkout-save-details { margin-top: 20px; }
+.checkout-save-details { display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); font-size: 13px; font-weight: 500; line-height: 1.5; cursor: pointer; }
+.checkout-save-details input { margin-top: 2px; }
 .checkout-account-note { margin: 20px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
 .checkout-account-note .text-link { color: var(--ink); }
 .checkout-fields textarea { resize: none; min-height: 140px; }
