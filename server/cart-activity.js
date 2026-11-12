@@ -111,8 +111,15 @@ export async function listObservedCarts(db) {
     EXISTS(SELECT 1 FROM orders o WHERE o.cart_session_id=c.id
       AND o.payment_status='paid') AS has_paid_order,
     (SELECT o.number FROM orders o WHERE o.cart_session_id=c.id
-      ORDER BY o.created_at DESC LIMIT 1) AS order_number
-    FROM observed_carts c ORDER BY c.updated_at DESC LIMIT 100`);
+      ORDER BY (o.payment_status='paid') DESC,o.created_at DESC LIMIT 1) AS order_number,
+    (SELECT coalesce(jsonb_agg(jsonb_build_object('name',i.name,
+      'variant_label',i.variant_label,'quantity',i.quantity) ORDER BY i.id),'[]'::jsonb)
+      FROM order_items i WHERE i.order_id=(SELECT o.id FROM orders o
+        WHERE o.cart_session_id=c.id AND o.payment_status='paid'
+        ORDER BY o.created_at DESC LIMIT 1)) AS purchased_items
+    FROM observed_carts c
+    WHERE NOT EXISTS(SELECT 1 FROM orders t WHERE t.cart_session_id=c.id AND t.is_test=true)
+    ORDER BY c.updated_at DESC LIMIT 100`);
   return rows;
 }
 

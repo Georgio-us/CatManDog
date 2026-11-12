@@ -748,14 +748,14 @@ async function adminRoute(db, req, res, path) {
   if (path === '/api/admin/finance' && req.method === 'GET') {
     const [profile, totals, orders, taxCoverage] = await Promise.all([
       db.query('SELECT * FROM billing_profile WHERE id=true'),
-      db.query(`SELECT count(*) FILTER (WHERE payment_status='paid' AND status!='cancelled')::integer AS paid_orders,
-        coalesce(sum(total_cents) FILTER (WHERE payment_status='paid' AND status!='cancelled'),0)::bigint AS paid_total_cents,
+      db.query(`SELECT count(*) FILTER (WHERE is_test=false AND payment_status='paid' AND status!='cancelled')::integer AS paid_orders,
+        coalesce(sum(total_cents) FILTER (WHERE is_test=false AND payment_status='paid' AND status!='cancelled'),0)::bigint AS paid_total_cents,
         count(*) FILTER (WHERE is_test=true AND payment_status='paid' AND status!='cancelled')::integer AS test_paid_orders,
         coalesce(sum(total_cents) FILTER (WHERE is_test=true AND payment_status='paid' AND status!='cancelled'),0)::bigint AS test_paid_total_cents,
-        count(*) FILTER (WHERE payment_status IN ('awaiting_payment','pending'))::integer AS awaiting_orders,
-        count(*) FILTER (WHERE payment_status='refunded')::integer AS refunded_orders
+        count(*) FILTER (WHERE is_test=false AND payment_status IN ('awaiting_payment','pending'))::integer AS awaiting_orders,
+        count(*) FILTER (WHERE is_test=false AND payment_status='refunded')::integer AS refunded_orders
         FROM orders`),
-      db.query(`SELECT o.id,o.number,o.customer_name,o.payment_status,o.status,o.total_cents,o.created_at,
+      db.query(`SELECT o.id,o.number,o.customer_name,o.payment_status,o.status,o.total_cents,o.created_at,o.is_test,
         count(i.id) FILTER (WHERE i.tax_rate_bps IS NULL)::integer AS lines_without_tax,
         o.delivery_cents>0 AND o.delivery_tax_rate_bps IS NULL AS delivery_tax_missing
         FROM orders o LEFT JOIN order_items i ON i.order_id=o.id
@@ -824,9 +824,9 @@ async function adminRoute(db, req, res, path) {
         WHERE p.customer_id=c.id) pet_counts ON true
       LEFT JOIN LATERAL (SELECT count(*)::integer AS order_count,
         coalesce(sum(o.total_cents) FILTER (WHERE o.payment_status='paid' AND o.status!='cancelled'),0)::integer AS paid_total_cents,
-        max(o.created_at) AS last_order_at FROM orders o WHERE o.customer_id=c.id) order_counts ON true
+        max(o.created_at) AS last_order_at FROM orders o WHERE o.customer_id=c.id AND o.is_test=false) order_counts ON true
       LEFT JOIN LATERAL (SELECT o.phone FROM orders o WHERE o.customer_id=c.id
-        ORDER BY o.created_at DESC LIMIT 1) last_order_contact ON true
+        AND o.is_test=false ORDER BY o.created_at DESC LIMIT 1) last_order_contact ON true
       WHERE $1='' OR strpos(lower(c.email),$1)>0 OR strpos(lower(c.name),$1)>0
         OR strpos(lower(coalesce(nullif(c.phone,''),last_order_contact.phone,'')),$1)>0
       ORDER BY coalesce(order_counts.last_order_at,c.created_at) DESC,c.id DESC
@@ -841,10 +841,10 @@ async function adminRoute(db, req, res, path) {
       db.query(`SELECT id,email,name,phone,email_verified_at,
         google_sub IS NOT NULL AS google_linked,password_hash IS NOT NULL AS has_password,created_at
         FROM customers WHERE id=$1`, [customerId]),
-      db.query(`SELECT id,name,species,created_at FROM pets WHERE customer_id=$1
+      db.query(`SELECT id,name,species,profile->>'sex' AS sex,created_at FROM pets WHERE customer_id=$1
         ORDER BY created_at,name LIMIT 30`, [customerId]),
       db.query(`SELECT number,status,payment_status,total_cents,created_at
-        FROM orders WHERE customer_id=$1 ORDER BY created_at DESC LIMIT 30`, [customerId])
+        FROM orders WHERE customer_id=$1 AND is_test=false ORDER BY created_at DESC LIMIT 30`, [customerId])
     ]);
     if (!account.rows.length) bad('Покупатель не найден', 404);
     return json(res, 200, { customer: account.rows[0], pets: pets.rows, orders: orders.rows });
@@ -1045,7 +1045,7 @@ async function adminRoute(db, req, res, path) {
         LEFT JOIN LATERAL (SELECT sum(oi.quantity) AS quantity,
           count(DISTINCT oi.order_id) AS order_count FROM order_items oi
           JOIN orders o ON o.id=oi.order_id WHERE oi.variant_id=v.id
-          AND o.payment_status='paid' AND o.status!='cancelled') sales ON true
+          AND o.payment_status='paid' AND o.status!='cancelled' AND o.is_test=false) sales ON true
         LEFT JOIN LATERAL (SELECT sum(poi.ordered_quantity) AS ordered_quantity,
           sum(poi.received_quantity) AS received_quantity,
           count(DISTINCT poi.purchase_order_id) AS order_count
@@ -1066,7 +1066,7 @@ async function adminRoute(db, req, res, path) {
         LEFT JOIN LATERAL (SELECT sum(oi.quantity) AS quantity,
           count(DISTINCT oi.order_id) AS order_count FROM order_items oi
           JOIN orders o ON o.id=oi.order_id WHERE oi.variant_id=v.id
-          AND o.payment_status='paid' AND o.status!='cancelled') sales ON true
+          AND o.payment_status='paid' AND o.status!='cancelled' AND o.is_test=false) sales ON true
         LEFT JOIN LATERAL (SELECT sum(poi.ordered_quantity) AS ordered_quantity,
           sum(poi.received_quantity) AS received_quantity,
           count(DISTINCT poi.purchase_order_id) AS order_count
@@ -1287,6 +1287,7 @@ async function adminRoute(db, req, res, path) {
   if (path === '/api/admin/sku-audit' && req.method === 'GET') {
     const { rows } = await db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.category,p.pet,
       v.label,v.source AS price_source,v.source->'purchaseQuote' AS purchase_quote,
+      v.source->'supplier'->>'name' AS documented_supplier_name,
       v.source_price_cents,v.price_override_cents,v.purchase_price_cents,
       v.price_confirmed,v.source_orderable,v.availability,v.stock_quantity,v.reserved_quantity,v.tax_rate_bps,
       v.display_priority,v.review_note,v.reviewed_at,

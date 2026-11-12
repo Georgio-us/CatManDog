@@ -35,7 +35,9 @@ test('missing rates and seller details never produce a misleading IVA total', ()
 
 test('owner alone can read the financial overview', async () => {
   let role = 'owner';
+  const queries = [];
   const db = { async query(sql) {
+    queries.push(sql);
     if (sql.includes('FROM staff_sessions')) return { rows:[{ id:'staff-1', role }] };
     if (sql.includes('FROM billing_profile')) return { rows:[] };
     if (sql.includes('FROM orders') && sql.includes('paid_orders')) return { rows:[{
@@ -56,6 +58,10 @@ test('owner alone can read the financial overview', async () => {
     return state;
   }
   assert.equal((await read()).status, 200);
+  const totalsQuery = queries.find(sql => sql.includes('paid_orders'));
+  assert.match(totalsQuery, /is_test=false AND payment_status='paid'/);
+  assert.match(totalsQuery, /is_test=true AND payment_status='paid'/);
+  assert.ok(queries.some(sql => sql.includes('o.is_test') && sql.includes('FROM orders o LEFT JOIN order_items')));
   role = 'support';
   assert.equal((await read()).status, 403);
 });
