@@ -43,6 +43,9 @@
 .pet-stat-grid strong { font-size: 31px; line-height: 1.3; margin: 15px 0 9px; letter-spacing: -1px; }
 .pet-stat-grid small { font-size: 11px; color: var(--muted); overflow-wrap: anywhere; }
 .pet-dashboard-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+.pet-live-order-cta { display: flex; align-items: center; gap: 16px; padding: 18px 22px; margin: 0 0 24px; border-radius: 18px; background: #eef8ba; color: var(--ink); }
+.pet-live-order-cta strong { margin-left: auto; font-size: 22px; }
+.pet-live-order-cta svg { width: 20px; height: 20px; }
 .pet-dashboard-tools { display: grid; gap: 10px; margin-top: 18px; }
 .pet-dashboard-tools a { display: flex; align-items: center; gap: 10px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 12px; }
 .pet-dashboard-tools a svg { width: 17px; height: 17px; }
@@ -105,6 +108,11 @@
 .pet-page-head { margin-bottom: 30px; }
 .pet-order-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
 .pet-order-grid .pet-order { border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+.pet-live-order-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 7px; color: var(--muted); font-size: 12px; }
+.pet-live-order-item a, .pet-live-order-item { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.pet-live-order-item .product-image { width: 56px; height: 56px; flex: none; border-radius: 8px; }
+.pet-live-order-item span { display: grid; gap: 4px; }
+.pet-live-order-item small { color: var(--muted); }
 .pet-form { display: grid; gap: 22px; }
 .pet-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 .pet-field { display: flex; flex-direction: column; gap: 8px; font-size: 12px; font-weight: 600; min-width: 0; }

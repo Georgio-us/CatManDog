@@ -1,7 +1,7 @@
-import { es, esPatterns } from './locales/es.js?v=cat-merchandising-20261112';
+import { es, esPatterns } from './locales/es.js?v=live-orders-20261112';
 import { esProductText } from './locales/product-es.js?v=product-content-20261110';
 import { esDetails } from './locales/details-es.js?v=product-content-20261110';
-import { uk, ukPatterns } from './locales/uk.js?v=picks-uk-20261112';
+import { uk, ukPatterns } from './locales/uk.js?v=live-orders-20261112';
 import { ukExtra } from './locales/uk-extra.js?v=cat-merchandising-20261112';
 import { ukProductNames } from './locales/uk-product-names.js?v=picks-seo-20261112';
 import { ukProductCopy } from './locales/uk-product-copy.js?v=product-content-20261110';

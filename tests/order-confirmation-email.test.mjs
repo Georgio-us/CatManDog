@@ -73,6 +73,12 @@ test('a paid Stripe event keeps payment confirmed and retries a failed email onc
     assert.match(sent[1].text,/53,17 €/);
     assert.match(sent[1].text,/Calle Prueba, 1/);
     assert.match(sent[1].text,/purchase-terms-es\.html/);
+    assert.match(sent[1].html,/CatManDog-full-black-transparent\.png/);
+    assert.match(sent[1].html,/Royal Canin Sterilised 37/);
+    assert.match(sent[1].html,/2 кг · 2 × 26,59 €/);
+    assert.match(sent[1].html,/53,17 €/);
+    assert.match(sent[1].html,/Calle Prueba, 1, 46001, València/);
+    assert.match(sent[1].html,/https:\/\/catmandog\.es\/#\/account\/orders/);
   } finally {
     globalThis.fetch=oldFetch;
     console.error=oldError;

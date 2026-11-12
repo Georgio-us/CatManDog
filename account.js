@@ -1,14 +1,14 @@
 import { createAccountStore } from './account-store.js?v=delivery-status-4';
-import { createAccountApi } from './account-api.js?v=coupon-qr-1';
+import { createAccountApi } from './account-api.js?v=live-orders-20261112';
 import { accountTools } from './useful.js?v=ukrainian-public-3';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
-import { intlLocale, locale } from './locale.js?v=checkout-address-1';
+import { intlLocale, locale } from './locale.js?v=live-orders-20261112';
 import { productHref } from './seo-products.js?v=all-product-urls-20261110';
 const store = createAccountStore(localStorage);
 const api = createAccountApi();
 
 const preferenceOptions = ['Сухой корм', 'Влажный корм', 'Без зерна', 'Стерилизован', 'Чувствительное пищеварение', 'Игрушки с кошачьей мятой'];
-const sections = [['', 'Мой кабинет', 'paw'], ['promos', 'Промокоды', 'gift'], ['supplies', 'Мои запасы', 'calendar'], ['care', 'Мои инструменты', 'map'], ['profile', 'Мой профиль', 'cat'], ['human', 'Мой человек', 'heart']];
+const sections = [['', 'Мой кабинет', 'paw'], ['orders', 'Мои заказы', 'bag'], ['promos', 'Промокоды', 'gift'], ['supplies', 'Мои запасы', 'calendar'], ['care', 'Мои инструменты', 'map'], ['profile', 'Мой профиль', 'cat'], ['human', 'Мой человек', 'heart']];
 const statuses = { packing: 'Собираем коробку', received: 'Демозаказ сохранён', delivering: 'Везём к вам', delivered: 'Коробка доставлена' };
 const dateLabel = value => new Intl.DateTimeFormat(intlLocale(), { day: 'numeric', month: 'long' }).format(new Date(value + 'T12:00:00'));
 const petYears = birthdayValue => {
@@ -61,12 +61,16 @@ export function createAccountUI(helpers) {
   let googleBusy = false;
   let guestCoupon = null;
   let couponError = '';
+  let remoteOrders = null;
+  let remoteOrdersError = '';
   const pendingPromoKey = 'catmandog-pending-promo';
   const petCardIntent = () => location.pathname === '/pet' || location.hash?.startsWith('#/pet') ||
     new URLSearchParams((location.hash || '').split('?')[1] || '').get('return') === 'pet';
   const checkoutIntent = () => new URLSearchParams((location.hash || '').split('?')[1] || '').get('return') === 'checkout';
-  const authReturn = () => petCardIntent() ? '?return=pet' : checkoutIntent() ? '?return=checkout' : '';
-  const afterSignIn = hadCoupon => petCardIntent() ? '/pet' : checkoutIntent() ? '/checkout' : hadCoupon ? '/coupon' : '/account';
+  const ordersIntent = () => location.hash?.startsWith('#/account/orders') ||
+    new URLSearchParams((location.hash || '').split('?')[1] || '').get('return') === 'orders';
+  const authReturn = () => petCardIntent() ? '?return=pet' : checkoutIntent() ? '?return=checkout' : ordersIntent() ? '?return=orders' : '';
+  const afterSignIn = hadCoupon => petCardIntent() ? '/pet' : checkoutIntent() ? '/checkout' : ordersIntent() ? '/account/orders' : hadCoupon ? '/coupon' : '/account';
   function rememberPromo(code) {
     try { localStorage.setItem(pendingPromoKey, JSON.stringify({ code: String(code).trim().slice(0, 40), at: Date.now() })); }
     catch { /* Storage unavailable */ }
@@ -186,8 +190,17 @@ export function createAccountUI(helpers) {
   async function loadRemote() {
     const snapshot = await api.cabinet();
     store.connectRemote(snapshot.cabinet, snapshot.revision, api.saveCabinet);
+    await refreshOrders(false);
     await refreshPromo();
     await claimPendingPromo();
+  }
+  async function refreshOrders(updateView = true) {
+    if (store.mode() !== 'remote') return;
+    try {
+      remoteOrders = (await api.orders()).orders;
+      remoteOrdersError = '';
+    } catch (error) { remoteOrdersError = error.message; }
+    if (updateView && location.hash.startsWith('#/account/orders')) render();
   }
   async function initialize() {
     const arrivedWithCoupon = !!capturePromoLink();
@@ -291,7 +304,7 @@ export function createAccountUI(helpers) {
     return `<div class="page pet-onboarding">${pageNote()}<div class="pet-onboarding-grid"><div><span class="pet-eyebrow">У каждого хвоста - свой кабинет</span><h1>Давайте знакомиться<br>Как тебя зовут?</h1><p class="pet-intro-copy">Твои коробки, привычки и маленькие радости - в одном месте. А твой человек поможет всё заполнить.</p><form class="pet-panel pet-onboarding-form" data-account-form="join">${petFields()}${!adding ? '<label class="pet-field">Как зовут твоего человека <span>Необязательно</span><input name="humanName" maxlength="80" autocomplete="given-name" placeholder="Можно просто имя"></label>' : ''}<input type="hidden" name="ref" value="${e(params.get('ref') || '')}"><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">${adding ? 'Добавить питомца' : store.mode() === 'remote' ? 'Сохранить профиль питомца' : 'Создать мой кабинет'} ${icon('arrow')}</button><p class="pet-form-hint">${store.mode() === 'remote' ? 'Профиль сохранится в вашем аккаунте' : 'Профиль сохранится на этом устройстве'}</p></form>${!adding && store.mode() === 'personal' && store.activePet() ? '<a class="text-link pet-demo-link" href="#/account">Открыть мой кабинет</a><br>' : ''}${!adding && store.mode() !== 'remote' ? '<a class="text-link pet-demo-link" href="#/account/login">Войти в аккаунт</a>' : '<div class="pet-onboarding-links"><a class="text-link" href="#/account">Вернуться в кабинет</a><button class="text-link" data-account-exit>Выйти из аккаунта</button></div>'}</div><aside class="pet-onboarding-story"><img src="https://img.catmandog.es/assets/hero-happy.png" alt="Кот и собака отдыхают дома"><div><span class="pet-eyebrow">Хорошо быть собой</span><h2>Здесь всё<br>про тебя</h2><p>Когда заканчивается корм<br>Когда хочется новой игрушки<br>Когда у тебя день рождения</p></div></aside></div></div>`;
   }
   function emptyAccount() {
-    return `<div class="page pet-account">${pageNote()}<section class="pet-panel pet-empty-account"><span class="pet-eyebrow">Кабинет с хвостиком</span><h1>Вы вошли в аккаунт</h1><p class="pet-empty-account-email">${e(customer?.email || store.get().human.email || '')}</p><p class="pet-muted">Питомца можно добавить позже</p><div class="pet-empty-account-actions"><a class="button" href="#/join">Добавить питомца ${icon('arrow')}</a><a class="button outline" href="#/catalog">Перейти в каталог</a>${customer?.canManageStore ? '<a class="button outline" href="/admin">Управление магазином</a>' : ''}</div><button class="text-link" data-account-exit>Выйти из аккаунта</button></section>${promoPanel()}</div>`;
+    return `<div class="page pet-account">${pageNote()}<section class="pet-panel pet-empty-account"><span class="pet-eyebrow">Кабинет с хвостиком</span><h1>Вы вошли в аккаунт</h1><p class="pet-empty-account-email">${e(customer?.email || store.get().human.email || '')}</p><p class="pet-muted">Питомца можно добавить позже</p><div class="pet-empty-account-actions"><a class="button" href="#/account/orders">Мои заказы ${icon('arrow')}</a><a class="button outline" href="#/join">Добавить питомца</a><a class="button outline" href="#/catalog">Перейти в каталог</a>${customer?.canManageStore ? '<a class="button outline" href="/admin">Управление магазином</a>' : ''}</div><button class="text-link" data-account-exit>Выйти из аккаунта</button></section>${promoPanel()}</div>`;
   }
   function couponPage() {
     const knownCoupon = store.mode() === 'remote' ? store.remoteCoupon() || guestCoupon : guestCoupon;
@@ -325,7 +338,7 @@ export function createAccountUI(helpers) {
   function dashboard(pet, data) {
     const reminders = data.reminders.filter(r => r.petId === pet.id && !r.done);
     const trips = (data.trips || []).filter(t => t.petId === pet.id);
-    return `<div class="pet-welcome"><div><span class="pet-eyebrow">Мой маленький мир</span><h1>Привет, ${e(pet.name)}</h1><p>Всё для твоей хорошей жизни с хвостиком</p></div>${petIcon(pet)}</div>${store.mode() === 'remote' ? promoPanel() : ''}<div class="pet-stat-grid pet-stat-grid-two"><a href="#/account/supplies"><span>${icon('calendar')} Мои планы</span><strong>${reminders.length}</strong><small>Покупки, о которых стоит помнить</small></a><a href="#/account/care"><span>${icon('compass')} Мои поездки</span><strong>${trips.length}</strong><small>Сохранённые маршруты и чек-листы</small></a></div><div class="pet-dashboard-grid"><section class="pet-panel"><div class="pet-panel-head"><h2>Мои планы</h2><a class="text-link" href="#/account/supplies">Все планы</a></div>${reminders.length ? reminders.slice(0, 3).map(reminderRow).join('') : '<p class="pet-muted">Планов пока нет</p>'}<a class="pet-inline-link" href="#/account/supplies">${icon('plus')} Запланировать покупку</a></section><section class="pet-panel"><div class="pet-panel-head"><h2>Мои инструменты</h2><a class="text-link" href="#/account/care">Открыть</a></div><div class="pet-dashboard-tools"><a href="#/useful/clinics">${icon('map')} Найти ветеринарную клинику ${icon('arrow')}</a><a href="#/useful/travel">${icon('compass')} Собрать чек-лист поездки ${icon('arrow')}</a></div></section></div><section class="pet-profile-summary pet-panel">${petIcon(pet)}<div><span class="pet-eyebrow">Пара слов обо мне</span><h2 data-no-translate>${e(pet.name)}</h2><p>${e(pet.breed || (pet.species === 'dog' ? 'Любимая собака' : 'Любимая домашняя кошка'))} · ${e(ageLabel(pet))}</p><div class="pet-chips">${(pet.preferences || []).map(v => `<span>${e(v)}</span>`).join('')}</div></div><a class="text-link" href="#/account/profile">Мой профиль</a></section>`;
+    return `<div class="pet-welcome"><div><span class="pet-eyebrow">Мой маленький мир</span><h1>Привет, ${e(pet.name)}</h1><p>Всё для твоей хорошей жизни с хвостиком</p></div>${petIcon(pet)}</div>${store.mode() === 'remote' ? `<a class="pet-live-order-cta" href="#/account/orders"><span>Мои заказы</span><strong>${Array.isArray(remoteOrders) ? remoteOrders.length : '...'}</strong>${icon('arrow')}</a>` : ''}${store.mode() === 'remote' ? promoPanel() : ''}<div class="pet-stat-grid pet-stat-grid-two"><a href="#/account/supplies"><span>${icon('calendar')} Мои планы</span><strong>${reminders.length}</strong><small>Покупки, о которых стоит помнить</small></a><a href="#/account/care"><span>${icon('compass')} Мои поездки</span><strong>${trips.length}</strong><small>Сохранённые маршруты и чек-листы</small></a></div><div class="pet-dashboard-grid"><section class="pet-panel"><div class="pet-panel-head"><h2>Мои планы</h2><a class="text-link" href="#/account/supplies">Все планы</a></div>${reminders.length ? reminders.slice(0, 3).map(reminderRow).join('') : '<p class="pet-muted">Планов пока нет</p>'}<a class="pet-inline-link" href="#/account/supplies">${icon('plus')} Запланировать покупку</a></section><section class="pet-panel"><div class="pet-panel-head"><h2>Мои инструменты</h2><a class="text-link" href="#/account/care">Открыть</a></div><div class="pet-dashboard-tools"><a href="#/useful/clinics">${icon('map')} Найти ветеринарную клинику ${icon('arrow')}</a><a href="#/useful/travel">${icon('compass')} Собрать чек-лист поездки ${icon('arrow')}</a></div></section></div><section class="pet-profile-summary pet-panel">${petIcon(pet)}<div><span class="pet-eyebrow">Пара слов обо мне</span><h2 data-no-translate>${e(pet.name)}</h2><p>${e(pet.breed || (pet.species === 'dog' ? 'Любимая собака' : 'Любимая домашняя кошка'))} · ${e(ageLabel(pet))}</p><div class="pet-chips">${(pet.preferences || []).map(v => `<span>${e(v)}</span>`).join('')}</div></div><a class="text-link" href="#/account/profile">Мой профиль</a></section>`;
   }
   function orderDetailPage(pet, order) {
     const subtotal = order.items.reduce((sum, item) => sum + item.price * item.qty, 0);
@@ -350,6 +363,40 @@ export function createAccountUI(helpers) {
     }
     return `<div class="pet-page-head"><span class="pet-eyebrow">Коробки для ${e(pet.name)}</span><h1>Мои заказы</h1><p>Что уже приехало и что мы ещё собираем</p></div>${list.length ? `<div class="pet-order-grid">${list.map(o => orderCard(o)).join('')}</div>` : `<section class="pet-panel">${emptyPanel('Первая коробка ещё впереди', store.mode() === 'remote' ? 'После первого настоящего заказа он появится здесь' : 'Выбери товары и сохрани демозаказ в корзине')}</section>`}`;
   }
+  function liveOrdersPage(orderId = '') {
+    const heading = '<div class="pet-page-head"><span class="pet-eyebrow">Покупки CatManDog</span><h1>Мои заказы</h1><p>Здесь сохранены ваши заказы и их текущий статус</p><button class="pet-small-button" type="button" data-account-refresh-orders>Обновить заказы</button></div>';
+    if (remoteOrdersError) return `${heading}<section class="pet-panel"><p role="alert">${e(remoteOrdersError)}</p><button class="button outline" type="button" data-account-refresh-orders>Повторить загрузку</button></section>`;
+    if (!Array.isArray(remoteOrders)) return `${heading}<p class="pet-muted" role="status">Загружаем заказы</p>`;
+    const formattedDate = value => {
+      const date = new Date(value);
+      return Number.isNaN(date.getTime()) ? '' : new Intl.DateTimeFormat(intlLocale(), { dateStyle: 'medium' }).format(date);
+    };
+    const status = order => order.payment_status === 'paid'
+      ? ({ received: 'Заказ принят', packing: 'Собираем заказ', delivering: 'Заказ в пути', delivered: 'Заказ доставлен' })[order.status] || 'Оплата подтверждена'
+      : order.payment_status === 'refunded' ? 'Оплата возвращена'
+        : order.payment_status === 'failed' ? 'Оплата не прошла' : 'Ожидаем подтверждение оплаты';
+    const itemRow = item => {
+      const product = productFor(item);
+      const image = product ? imageBlock(product.image) : icon('bag');
+      const name = item.name || product?.name || 'Товар';
+      const label = item.label || '';
+      const href = item.productId ? productHref(item.productId) : '';
+      const content = `${image}<span><strong>${e(name)}</strong><small>${e(label)} · ${Number(item.qty) || 0} шт × ${money(Number(item.unitPriceCents) / 100)}</small></span>`;
+      return `<li><div class="pet-live-order-item">${href ? `<a href="${e(href)}">${content}</a>` : content}</div><strong>${money(Number(item.unitPriceCents) * Number(item.qty) / 100)}</strong></li>`;
+    };
+    if (orderId) {
+      const order = remoteOrders.find(entry => entry.id === orderId);
+      if (!order) return `${heading}<section class="pet-panel"><p>Заказ не найден в вашем аккаунте</p><a class="text-link" href="#/account/orders">Все заказы</a></section>`;
+      const address = order.delivery_address || {};
+      const delivery = order.delivery_preference || {};
+      const destination = [address.street, address.building, address.apartment, address.postcode, address.city].filter(Boolean).join(', ');
+      const preference = delivery.mode === 'slot' ? [delivery.date, delivery.window].filter(Boolean).join(' · ')
+        : delivery.mode === 'preorder' ? '24-48 ч' : delivery.mode === 'national' ? 'Доставка по Испании' : '';
+      return `<div class="pet-page-head"><a class="text-link" href="#/account/orders">${icon('arrow')} Все заказы</a><span class="pet-eyebrow">${e(status(order))}</span><h1>Заказ ${e(order.number)}</h1><p>${e(formattedDate(order.created_at))}</p></div><div class="pet-order-detail"><section class="pet-panel"><h2>Товары в заказе</h2><ul class="pet-order-detail-items pet-live-order-items">${(order.items || []).map(itemRow).join('')}</ul><div class="summary-line"><span>Товары</span><strong>${money(Number(order.subtotal_cents) / 100)}</strong></div>${Number(order.discount_cents) ? `<div class="summary-line"><span>Скидка</span><strong>-${money(Number(order.discount_cents) / 100)}</strong></div>` : ''}<div class="summary-line"><span>Доставка</span><strong>${money(Number(order.delivery_cents) / 100)}</strong></div><div class="summary-line total"><span>Итого с IVA</span><strong>${money(Number(order.total_cents) / 100)}</strong></div></section><section class="pet-panel"><h2>Доставка</h2><p>${e(destination)}</p>${preference ? `<p>${e(preference)}</p>` : ''}<p class="pet-muted">Точное время доставки подтвердим по контактам из заказа</p></section><div class="pet-order-detail-actions"><a class="button outline" href="#/support?order=${encodeURIComponent(order.number)}">Помощь с заказом ${icon('arrow')}</a></div></div>`;
+    }
+    if (!remoteOrders.length) return `${heading}<section class="pet-panel"><p>Заказов пока нет</p><a class="text-link" href="#/catalog">Посмотреть товары</a></section>`;
+    return `${heading}<div class="pet-order-grid">${remoteOrders.map(order => `<article class="pet-order"><div class="pet-order-head"><div><strong>${e(order.number)}</strong><span>${e(formattedDate(order.created_at))}</span></div><span class="pet-status">${e(status(order))}</span></div><ul class="pet-live-order-list">${(order.items || []).map(item => `<li>${e(item.name || 'Товар')}${item.label ? ` · ${e(item.label)}` : ''} × ${Number(item.qty) || 0}</li>`).join('')}</ul><div class="pet-order-bottom"><strong>${money(Number(order.total_cents) / 100)}</strong><a class="pet-small-button" href="#/account/orders/${encodeURIComponent(order.id)}">Детали заказа ${icon('arrow')}</a></div></article>`).join('')}</div>`;
+  }
   function suppliesPage(pet, data) {
     const list = data.reminders.filter(r => r.petId === pet.id);
     return `<div class="pet-page-head"><span class="pet-eyebrow">Чтобы всё нужное было под лапой</span><h1>Мои запасы</h1><p>Запланированные покупки для ${e(pet.name)} - без автоматических заказов и списаний</p></div><div class="pet-dashboard-grid"><section class="pet-panel"><h2>Мои планы</h2>${list.length ? list.map(reminderRow).join('') : '<p class="pet-muted">Пока ничего не запланировано</p>'}</section><form class="pet-panel pet-form" data-account-form="reminder"><h2>Добавить в планы</h2><label class="pet-field">Что понадобится<input name="title" required maxlength="120" placeholder="Например, наполнитель"></label><label class="pet-field">Когда понадобится<input name="date" type="date" required min="${new Date().toISOString().slice(0, 10)}"></label><label class="pet-field">Товар <span>Необязательно</span><select name="productId"><option value="">Выберу позже</option>${products.filter(p => !p.catalogHidden && p.pet !== 'dog').map(p => `<option value="${e(p.id)}">${e(p.name)}</option>`).join('')}</select></label><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">Сохранить план ${icon('plus')}</button></form></div>`;
@@ -367,16 +414,20 @@ export function createAccountUI(helpers) {
     if (path === '/coupon') return couponPage();
     if (['login','register','recover','reset','verify','check-email'].includes(path.split('/')[2]) && path.startsWith('/account/')) return authPage(path.split('/')[2]);
     if (path === '/join' || path === '/account/welcome') return onboarding(params);
+    if (path.startsWith('/account/orders') && store.mode() !== 'remote' && accountsEnabled) return authPage('login');
     const pet = store.activePet();
-    if (!pet) return store.mode() === 'remote' ? emptyAccount() : accountsEnabled ? authPage('login') : onboarding(params);
+    if (!pet) return store.mode() === 'remote'
+      ? path.startsWith('/account/orders') ? `<div class="page pet-account"><a class="text-link" href="#/account">${icon('arrow')} Мой кабинет</a>${liveOrdersPage(path.split('/')[3])}</div>` : emptyAccount()
+      : accountsEnabled ? authPage('login') : onboarding(params);
     const data = store.get();
     const section = path.split('/')[2] || '';
-    const content = section === 'care' ? accountTools({ pet, data, escape: e, icon }) : section === 'promos' && store.mode() === 'remote' ? promoPanel() : section === 'supplies' ? suppliesPage(pet, data) : section === 'profile' ? profilePage(pet) : section === 'human' ? humanPage(data) : section === 'orders' && store.mode() === 'demo' ? ordersPage(pet, data, path.split('/')[3]) : dashboard(pet, data);
-    return `<div class="page pet-account">${pageNote()}<div class="pet-account-layout"><aside class="pet-sidebar"><a class="pet-account-brand" href="#/account">${icon('paw')} Кабинет с хвостиком</a><div class="pet-switcher" role="group" aria-label="Мои питомцы">${data.pets.map(p => `<button data-account-pet="${e(p.id)}" aria-pressed="${p.id === pet.id}" class="${p.id === pet.id ? 'active' : ''}">${petIcon(p)}<span data-no-translate>${e(p.name)}</span>${p.id === pet.id ? icon('check') : ''}</button>`).join('')}</div><a class="pet-add" href="#/join?add=1">${icon('plus')} Добавить питомца</a><nav class="pet-navigation" aria-label="Разделы кабинета">${sections.filter(([key]) => key !== 'promos' || store.mode() === 'remote').map(([key, label, glyph]) => `<a href="#/account${key ? '/' + key : ''}" ${section === key ? 'aria-current="page"' : ''}>${icon(glyph)} ${label}</a>`).join('')}</nav>${customer?.canManageStore ? `<a class="pet-admin-entry" href="/admin">${icon('shield')} Управление магазином ${icon('arrow')}</a>` : ''}<button class="pet-exit" data-account-exit>${icon('arrow')} ${store.mode() === 'demo' ? 'Создать свой кабинет' : store.mode() === 'remote' ? 'Выйти из аккаунта' : 'Закрыть кабинет'}</button><p class="pet-sidebar-note">Каждому хвостику<br>немного больше заботы</p></aside><div class="pet-account-content">${content}</div></div></div>`;
+    const content = section === 'care' ? accountTools({ pet, data, escape: e, icon }) : section === 'promos' && store.mode() === 'remote' ? promoPanel() : section === 'supplies' ? suppliesPage(pet, data) : section === 'profile' ? profilePage(pet) : section === 'human' ? humanPage(data) : section === 'orders' ? store.mode() === 'remote' ? liveOrdersPage(path.split('/')[3]) : ordersPage(pet, data, path.split('/')[3]) : dashboard(pet, data);
+    return `<div class="page pet-account">${pageNote()}<div class="pet-account-layout"><aside class="pet-sidebar"><a class="pet-account-brand" href="#/account">${icon('paw')} Кабинет с хвостиком</a><div class="pet-switcher" role="group" aria-label="Мои питомцы">${data.pets.map(p => `<button data-account-pet="${e(p.id)}" aria-pressed="${p.id === pet.id}" class="${p.id === pet.id ? 'active' : ''}">${petIcon(p)}<span data-no-translate>${e(p.name)}</span>${p.id === pet.id ? icon('check') : ''}</button>`).join('')}</div><a class="pet-add" href="#/join?add=1">${icon('plus')} Добавить питомца</a><nav class="pet-navigation" aria-label="Разделы кабинета">${sections.filter(([key]) => (key !== 'promos' || store.mode() === 'remote') && (key !== 'orders' || store.mode() !== 'personal')).map(([key, label, glyph]) => `<a href="#/account${key ? '/' + key : ''}" ${section === key ? 'aria-current="page"' : ''}>${icon(glyph)} ${label}</a>`).join('')}</nav>${customer?.canManageStore ? `<a class="pet-admin-entry" href="/admin">${icon('shield')} Управление магазином ${icon('arrow')}</a>` : ''}<button class="pet-exit" data-account-exit>${icon('arrow')} ${store.mode() === 'demo' ? 'Создать свой кабинет' : store.mode() === 'remote' ? 'Выйти из аккаунта' : 'Закрыть кабинет'}</button><p class="pet-sidebar-note">Каждому хвостику<br>немного больше заботы</p></aside><div class="pet-account-content">${content}</div></div></div>`;
   }
   async function click(button) {
     if (button.hasAttribute('data-account-pet')) { store.switchPet(button.dataset.accountPet); render(); await syncChanges().catch(() => {}); }
-    if (button.hasAttribute('data-account-exit')) { if (store.mode() === 'remote') { try { await api.logout(); setCustomer(null); store.disconnectRemote(); navigate('/account/login'); } catch (error) { notify(error.message); } } else { store.open('personal'); navigate('/account/welcome'); } }
+    if (button.hasAttribute('data-account-exit')) { if (store.mode() === 'remote') { try { await api.logout(); setCustomer(null); store.disconnectRemote(); remoteOrders = null; remoteOrdersError = ''; navigate('/account/login'); } catch (error) { notify(error.message); } } else { store.open('personal'); navigate('/account/welcome'); } }
+    if (button.hasAttribute('data-account-refresh-orders')) await refreshOrders();
     if (button.hasAttribute('data-account-reminder')) { store.toggleReminder(button.dataset.accountReminder); render(); await syncChanges().catch(() => {}); }
     if (button.hasAttribute('data-account-repeat')) {
       const order = store.get().orders.find(o => o.id === button.dataset.accountRepeat && o.petId === store.activePet()?.id);
@@ -433,7 +484,7 @@ export function createAccountUI(helpers) {
         try {
           const result = await api[kind]({ email: values.get('email'), password: values.get('password'),
             name: values.get('name'), ...(kind === 'register' ?
-              { promoCode: pendingPromoCode(), returnTo: petCardIntent() ? 'pet' : checkoutIntent() ? 'checkout' : '' } : {}) });
+              { promoCode: pendingPromoCode(), returnTo: petCardIntent() ? 'pet' : checkoutIntent() ? 'checkout' : ordersIntent() ? 'orders' : '' } : {}) });
           if (kind === 'register') { pendingEmail = result.email; pendingLinkKind = 'verify'; navigate('/account/check-email' + authReturn()); }
           else {
             const hasCoupon = !!pendingPromoCode();
@@ -452,7 +503,7 @@ export function createAccountUI(helpers) {
       if (kind === 'recover' || kind === 'resend-verification') {
         pendingEmail = String(values.get('email') || '');
         pendingLinkKind = kind === 'recover' ? 'reset' : 'verify';
-        const returnTo = petCardIntent() ? 'pet' : checkoutIntent() ? 'checkout' : '';
+        const returnTo = petCardIntent() ? 'pet' : checkoutIntent() ? 'checkout' : ordersIntent() ? 'orders' : '';
         if (kind === 'recover') await api.recover(pendingEmail, returnTo);
         else await api.resendVerification(pendingEmail, returnTo);
         navigate('/account/check-email' + authReturn());
@@ -531,5 +582,5 @@ export function createAccountUI(helpers) {
   }
   return { page, click, change, dismissChoices, escapeChoices, submit, store, initialize, syncChanges,
     handleLink, afterRender, applyPromo, refreshPromo, promo, couponPaid,
-    checkoutProfile, saveCheckoutProfile };
+    checkoutProfile, saveCheckoutProfile, refreshOrders };
 }

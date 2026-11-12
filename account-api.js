@@ -1,4 +1,4 @@
-import { locale } from './locale.js?v=coupon-qr-2';
+import { locale } from './locale.js?v=live-orders-20261112';
 
 export function createAccountApi(fetcher = fetch) {
   async function request(path, method = 'GET', body) {
@@ -28,6 +28,7 @@ export function createAccountApi(fetcher = fetch) {
     claimPromo: code => request('/api/me/promo', 'POST', { code }),
     activateCoupon: code => request('/api/coupon/activate', 'POST', { code }),
     cabinet: () => request('/api/me/cabinet'),
+    orders: () => request('/api/me/orders'),
     saveCabinet: (cabinet, revision) => request('/api/me/cabinet', 'PUT', { cabinet, revision })
   };
 }

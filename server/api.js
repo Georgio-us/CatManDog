@@ -113,7 +113,7 @@ async function issueAccountLink(db, customerId, kind, email, language = 'ru', pr
   [randomUUID(), customerId, kind, tokenDigest(token), kind === 'verify' ? 1440 : 30,
     kind === 'verify' ? cap(promoCode, 40) || null : null]);
   await sendAccountLink(email, kind, token, fetch, language,
-    ['pet', 'checkout'].includes(returnTo) ? returnTo : '');
+    ['pet', 'checkout', 'orders'].includes(returnTo) ? returnTo : '');
 }
 
 function rateLimit(req, group, limit, minutes = 15) {
@@ -2180,11 +2180,16 @@ export async function handleApi(db, req, res, pathname) {
     if (pathname === '/api/me/orders' && req.method === 'GET') {
       const customer = await currentCustomer(db, req);
       if (!customer) bad('Войдите в кабинет', 401);
-      const { rows } = await db.query(`SELECT o.*,COALESCE(json_agg(json_build_object('productId',i.product_id,
+      const { rows } = await db.query(`SELECT o.id,o.number,o.created_at,o.status,o.payment_status,
+        o.delivery_address,o.delivery_preference,o.subtotal_cents,o.discount_cents,
+        o.delivery_cents,o.total_cents,
+        COALESCE(json_agg(json_build_object('productId',i.product_id,
         'variantId',i.variant_id,'name',i.name,'label',i.variant_label,'qty',i.quantity,
         'unitPriceCents',i.unit_price_cents)) FILTER (WHERE i.id IS NOT NULL),'[]') AS items
-        FROM orders o LEFT JOIN order_items i ON i.order_id=o.id WHERE o.customer_id=$1
-        GROUP BY o.id ORDER BY o.created_at DESC`, [customer.id]);
+        FROM orders o LEFT JOIN order_items i ON i.order_id=o.id
+        WHERE o.customer_id=$1 OR (o.customer_id IS NULL AND $3=true AND lower(o.email)=lower($2))
+        GROUP BY o.id ORDER BY o.created_at DESC`,
+      [customer.id, customer.email, customer.emailVerified === true]);
       return json(res, 200, { orders: rows });
     }
     if (pathname === '/api/availability-requests' && req.method === 'POST') {

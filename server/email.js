@@ -1,3 +1,5 @@
+import { renderOrderEmail } from './order-email.js';
+
 export function emailReady() {
   try {
     return !!process.env.RESEND_API_KEY && !!process.env.RESEND_FROM &&
@@ -5,14 +7,14 @@ export function emailReady() {
   } catch { return false; }
 }
 
-async function sendEmail(to, subject, message, fetcher = fetch) {
+async function sendEmail(to, subject, message, fetcher = fetch, html = null) {
   if (!emailReady()) throw new Error('Почтовая отправка не настроена');
   const response = await fetcher('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
       'Content-Type': 'application/json' },
     body: JSON.stringify({ from: process.env.RESEND_FROM, to: [to], subject,
-      text: message, reply_to: 'support@catmandog.es' }),
+      text: message, ...(html ? { html } : {}), reply_to: 'support@catmandog.es' }),
     signal: AbortSignal.timeout(10000)
   });
   if (!response.ok) throw new Error(`Почтовый сервис не принял письмо (${response.status || 'ошибка'})`);
@@ -22,19 +24,19 @@ export async function sendOrderConfirmation(order, items, fetcher = fetch) {
   const language = ['ru', 'es', 'uk'].includes(order.locale) ? order.locale : 'ru';
   const euros = cents => `${(Number(cents) / 100).toFixed(2).replace('.', ',')} €`;
   const labels = language === 'es'
-    ? { subject: 'Confirmación de pedido', intro: 'Hemos recibido el pago de tu pedido',
+    ? { subject: 'Confirmación de pedido', paid: 'Pago confirmado', intro: 'Hemos recibido el pago de tu pedido',
       delivery: 'Entrega', subtotal: 'Productos', discount: 'Descuento', address: 'Dirección',
       preference: 'Entrega solicitada', total: 'Total con IVA', contact: 'Confirmaremos los detalles de la entrega contigo',
-      terms: 'Condiciones de compra y devoluciones', seller: 'Vendedor' }
+      terms: 'Condiciones de compra y devoluciones', seller: 'Vendedor', orders: 'Ver mis pedidos' }
     : language === 'uk'
-      ? { subject: 'Підтвердження замовлення', intro: 'Ми отримали оплату за ваше замовлення',
+      ? { subject: 'Підтвердження замовлення', paid: 'Оплату підтверджено', intro: 'Ми отримали оплату за ваше замовлення',
         delivery: 'Доставка', subtotal: 'Товари', discount: 'Знижка', address: 'Адреса',
         preference: 'Побажання щодо доставки', total: 'Разом з IVA', contact: 'Ми зв’яжемося з вами, щоб підтвердити деталі доставки',
-        terms: 'Умови купівлі та повернення', seller: 'Продавець' }
-      : { subject: 'Подтверждение заказа', intro: 'Мы получили оплату за ваш заказ',
+        terms: 'Умови купівлі та повернення', seller: 'Продавець', orders: 'Мої замовлення' }
+      : { subject: 'Подтверждение заказа', paid: 'Оплата подтверждена', intro: 'Мы получили оплату за ваш заказ',
         delivery: 'Доставка', subtotal: 'Товары', discount: 'Скидка', address: 'Адрес',
         preference: 'Пожелание по доставке', total: 'Итого с IVA', contact: 'Мы свяжемся с вами, чтобы подтвердить детали доставки',
-        terms: 'Условия покупки и возврата', seller: 'Продавец' };
+        terms: 'Условия покупки и возврата', seller: 'Продавец', orders: 'Мои заказы' };
   const termsPage = language === 'es' ? 'purchase-terms-es.html'
     : language === 'uk' ? 'purchase-terms-uk.html' : 'purchase-terms.html';
   const lines = items.map(item => `${item.name} - ${item.variant_label} × ${item.quantity}: ${euros(item.unit_price_cents * item.quantity)}`);
@@ -45,7 +47,8 @@ export async function sendOrderConfirmation(order, items, fetcher = fetch) {
   const preference = delivery.mode === 'slot' ? [delivery.date, delivery.window].filter(Boolean).join(' · ')
     : delivery.mode === 'preorder' ? '24-48 h' : delivery.mode === 'national' ? 'España peninsular' : '';
   const text = `${labels.intro} ${order.number}\n\n${lines.join('\n')}\n${labels.subtotal}: ${euros(order.subtotal_cents)}\n${labels.discount}: -${euros(order.discount_cents)}\n${labels.delivery}: ${euros(order.delivery_cents)}\n${labels.total}: ${euros(order.total_cents)}\n\n${labels.address}: ${destination}\n${labels.preference}: ${preference}\n${labels.contact}.\n\n${labels.seller}: PUZANOV HEORHII (CatManDog)\nsupport@catmandog.es · +34 665 240 277\n${labels.terms}: https://catmandog.es/${termsPage}\n`;
-  await sendEmail(order.email, `${labels.subject} ${order.number} - CatManDog`, text, fetcher);
+  const html = renderOrderEmail(order, items, labels, euros, destination, preference, termsPage);
+  await sendEmail(order.email, `${labels.subject} ${order.number} - CatManDog`, text, fetcher, html);
 }
 
 export async function notifyServiceRequest(request, fetcher = fetch) {
@@ -84,7 +87,7 @@ export async function sendServiceReply(to, requestId, message, fetcher = fetch, 
 export async function sendAccountLink(to, kind, token, fetcher = fetch, language = 'ru', returnTo = '') {
   if (!emailReady()) throw new Error('Почтовая отправка не настроена');
   const base = new URL(process.env.PUBLIC_BASE_URL);
-  base.hash = `/account/${kind === 'verify' ? 'verify' : 'reset'}?token=${token}${['pet', 'checkout'].includes(returnTo) ? '&return=' + returnTo : ''}`;
+  base.hash = `/account/${kind === 'verify' ? 'verify' : 'reset'}?token=${token}${['pet', 'checkout', 'orders'].includes(returnTo) ? '&return=' + returnTo : ''}`;
   const url = base.toString();
   const spanish = language === 'es';
   const ukrainian = language === 'uk';

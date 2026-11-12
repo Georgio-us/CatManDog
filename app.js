@@ -1,5 +1,5 @@
 import { createUsefulUI } from './useful.js?v=ukrainian-public-3';
-import { createAccountUI } from './account.js?v=product-urls-20261110';
+import { createAccountUI } from './account.js?v=live-orders-20261112';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
 import { accessoryDetail, customerDetails } from './accessory-ui.js?v=churu-cat-editorial-20261112';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=all-product-urls-20261110';
@@ -15,7 +15,7 @@ import { applyServerCatalog } from './server-prices.js?v=unavailable-single-2026
 import { activeHomeLanding } from './collections.js?v=cat-assortment-1';
 import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=picks-seo-20261112';
 import { handleCatPickClick } from './cat-picks.js?v=picks-seo-20261112';
-import { installLocale, intlLocale, locale, translate } from './locale.js?v=address-check-20261112';
+import { installLocale, intlLocale, locale, translate } from './locale.js?v=live-orders-20261112';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
@@ -97,6 +97,7 @@ const checkout = createCheckoutUI({
     }
     if (promoApplied) account.couponPaid();
     void account.refreshPromo().then(render).catch(() => {});
+    void account.refreshOrders();
     for (const item of paidItems) {
       const line = cart.find(entry => (entry.productId || entry.id) === item.productId &&
         (entry.variantId || '') === (item.variantId || ''));
