@@ -13,8 +13,8 @@ import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=unavailable-single-20261110';
 
 import { activeHomeLanding } from './collections.js?v=cat-assortment-1';
-import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=cat-editorial-20261112';
-import { handleCatPickClick } from './cat-picks.js';
+import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=cat-editorial-fountain-20261112';
+import { handleCatPickClick } from './cat-picks.js?v=cat-editorial-fountain-20261112';
 import { installLocale, intlLocale, locale, translate } from './locale.js?v=cat-merchandising-20261112';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';

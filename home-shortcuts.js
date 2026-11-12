@@ -1,5 +1,5 @@
 import { canBuy, snapshots } from './variants.js';
-import { catPickLanding } from './cat-picks.js';
+import { catPickLanding } from './cat-picks.js?v=cat-editorial-fountain-20261112';
 
 // Editorial order follows the planned first assortment, not inferred sales popularity.
 export const homeShortcutIds = {
