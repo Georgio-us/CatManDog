@@ -19,7 +19,7 @@ export const seoCategories = [
     indexable: true,
     title: 'Premios para gatos',
     description: 'Explora los premios cremosos Churu para gatos y gatitos: pollo, atún y combinaciones con queso o vieira',
-    intro: 'Compara los ingredientes de cada sabor Churu y elige entre un tubo, una caja de cuatro o un formato mayor'
+    intro: 'Compara los ingredientes de cada sabor Churu y elige entre un tubo, un paquete de cuatro o una caja de 48'
   },
   {
     path: '/catalogo/gatos/arena', pet: 'cat', group: 'litter',
