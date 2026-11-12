@@ -146,24 +146,24 @@ function observedCartCard(cart) {
   const status = cart.has_paid_order
     ? items.length ? 'Есть оплаченный заказ, в корзине остались товары' : 'Заказ оплачен'
     : items.length ? idle ? 'Оформление не завершено, нет действий более 30 минут'
-      : 'Корзина в процессе' : 'Корзина очищена';
+      : 'Корзина в процессе' : cart.had_items ? 'Корзина очищена' : 'Товары не добавляли';
   return `<article class="admin-card observed-cart" data-observed-cart="${escape(cart.id)}">
-    <div class="admin-variant-top"><div><h2>Корзина ${escape(cart.id.slice(0, 8))}</h2>
+    <div class="admin-variant-top"><div><h2>Сеанс ${escape(cart.id.slice(0, 8))}</h2>
       <p class="admin-muted">${escape(status)}</p></div>
       <strong>${escape(cartTime(cart.updated_at))}</strong></div>
     <div class="admin-grid"><div><strong>Текущий этап</strong>${escape(cartStageLabel[cart.current_stage] || cart.current_stage)}</div>
       <div><strong>Дошёл до</strong>${escape(cartStageLabel[cart.furthest_stage] || cart.furthest_stage)}</div>
-      <div><strong>Первое добавление</strong>${escape(cartTime(cart.created_at))}</div>
+      <div><strong>Первое наблюдение</strong>${escape(cartTime(cart.created_at))}</div>
       ${cart.order_number ? `<div><strong>Заказ</strong>${escape(cart.order_number)}</div>` : ''}</div>
-    <ul class="admin-items">${items.length ? items.map(item => `<li>${escape(item.name)}${item.label ? ` · ${escape(item.label)}` : ''} · ${Number(item.qty)} шт</li>`).join('') : '<li>Сейчас товаров нет</li>'}</ul>
+    <ul class="admin-items">${items.length ? items.map(item => `<li>${escape(item.name)}${item.label ? ` · ${escape(item.label)}` : ''} · ${Number(item.qty)} шт${item.unresolved ? ' · SKU не найден в каталоге' : ''}</li>`).join('') : '<li>Сейчас товаров нет</li>'}</ul>
     <button type="button" data-cart-history="${escape(cart.id)}" aria-expanded="false">История изменений</button>
     <div class="observed-cart-history" hidden></div></article>`;
 }
 function renderObservedCarts(carts) {
-  $('admin-content').innerHTML = `<section class="observed-carts-head"><h2>Корзины посетителей</h2>
+  $('admin-content').innerHTML = `<section class="observed-carts-head"><h2>Посетители и корзины</h2>
     <button type="button" data-carts-refresh>Обновить</button></section>
-    <p class="admin-muted">Показаны последние 100 корзин посетителей, согласившихся на аналитику. Без имени и контактов до оформления заказа. Данные хранятся 30 дней</p>
-    ${carts.length ? carts.map(observedCartCard).join('') : '<p class="admin-card">Пока нет начатых корзин с согласием на аналитику</p>'}`;
+    <p class="admin-muted">Показаны последние 100 посетителей, согласившихся на аналитику, и состояние их корзин. Без имени и контактов до оформления заказа. Данные хранятся 30 дней</p>
+    ${carts.length ? carts.map(observedCartCard).join('') : '<p class="admin-card">Пока нет посещений с согласием на аналитику</p>'}`;
 }
 function renderCartEvents(events) {
   return events.length ? `<ol class="admin-items">${events.map(event => {
@@ -1058,7 +1058,7 @@ async function load() {
     if (tab === 'carts') {
       const carts = (await api('/api/admin/carts')).carts;
       renderObservedCarts(carts);
-      message(`Корзин: ${carts.length}`);
+      message(`Посетителей с согласием: ${carts.length}`);
       return;
     }
     if (tab === 'audit') {

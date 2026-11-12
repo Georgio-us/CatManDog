@@ -63,6 +63,33 @@ test('server saves canonical product names and the latest stage without visitor 
   assert.equal(JSON.stringify({ row, events }).includes('private@example.com'), false);
 });
 
+test('consented visit with no items is recorded, and an unknown SKU does not erase the basket', async () => {
+  let row = null;
+  const client = { release() {}, async query(sql, args = []) {
+    if (/^(BEGIN|COMMIT|ROLLBACK)$/.test(sql)) return { rows: [] };
+    if (sql.includes('SELECT v.id,v.product_id,p.name,v.label')) return { rows: [] };
+    if (sql.includes('INSERT INTO observed_carts')) {
+      row ||= { items: [], current_stage: 'cart', furthest_stage: 'cart' };
+      return { rows: [] };
+    }
+    if (sql.includes('FROM observed_carts WHERE id=$1 FOR UPDATE')) return { rows: row ? [{ ...row }] : [] };
+    if (sql.includes('UPDATE observed_carts SET items')) {
+      row = { items: JSON.parse(args[1]), current_stage: args[2], furthest_stage: args[3] };
+      return { rows: [] };
+    }
+    if (sql.includes('INSERT INTO observed_cart_events')) return { rows: [] };
+    throw new Error(`Unexpected SQL: ${sql.slice(0, 50)}`);
+  } };
+  const db = { connect: async () => client };
+  assert.deepEqual(await saveObservedCart(db, { cartId, stage: 'cart', items: [] }), { accepted: true });
+  assert.deepEqual(row.items, []);
+  await saveObservedCart(db, { cartId, stage: 'cart', items: [
+    { productId: 'missing-product', variantId: 'missing-variant', qty: 2 }
+  ] });
+  assert.deepEqual(row.items, [{ productId: 'missing-product', variantId: 'missing-variant', qty: 2,
+    name: 'Товар без связи с каталогом', label: 'missing-product / missing-variant', unresolved: true }]);
+});
+
 test('anonymous cart stays on the device until analytics consent and can be revoked', async () => {
   const previous = { window: globalThis.window, localStorage: globalThis.localStorage,
     fetch: globalThis.fetch };
@@ -101,5 +128,45 @@ test('anonymous cart stays on the device until analytics consent and can be revo
     globalThis.window = previous.window;
     globalThis.localStorage = previous.localStorage;
     globalThis.fetch = previous.fetch;
+  }
+});
+
+test('a failed cart update retries automatically while consent remains active', async () => {
+  const previous = { window: globalThis.window, localStorage: globalThis.localStorage,
+    fetch: globalThis.fetch, setTimeout: globalThis.setTimeout,
+    clearTimeout: globalThis.clearTimeout, warn: console.warn };
+  const values = new Map([['catmandog-analytics-consent-v1', 'accepted']]);
+  const scheduled = [];
+  const requests = [];
+  globalThis.window = { addEventListener() {} };
+  globalThis.localStorage = { getItem: key => values.get(key) ?? null,
+    setItem: (key, value) => values.set(key, value), removeItem: key => values.delete(key) };
+  globalThis.setTimeout = callback => { scheduled.push(callback); return scheduled.length; };
+  globalThis.clearTimeout = () => {};
+  console.warn = () => {};
+  globalThis.fetch = async (_path, options) => {
+    requests.push(JSON.parse(options.body));
+    if (requests.length === 1) throw new Error('Network unavailable');
+    return { ok: true };
+  };
+  try {
+    const items = [{ productId: 'food', variantId: 'food-400g', qty: 1 }];
+    const activity = createCartActivity(() => items);
+    activity.sync();
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(scheduled.length, 1);
+    scheduled[0]();
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(requests.length, 2);
+    assert.deepEqual(requests[1].items, items);
+    values.set('catmandog-analytics-consent-v1', 'rejected');
+    await activity.revoke();
+  } finally {
+    globalThis.window = previous.window;
+    globalThis.localStorage = previous.localStorage;
+    globalThis.fetch = previous.fetch;
+    globalThis.setTimeout = previous.setTimeout;
+    globalThis.clearTimeout = previous.clearTimeout;
+    console.warn = previous.warn;
   }
 });

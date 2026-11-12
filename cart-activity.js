@@ -8,6 +8,8 @@ export function createCartActivity(getItems, getStage = () => 'cart') {
   if (!validId(cartId)) cartId = null;
   let queue = Promise.resolve();
   let lastSent = '';
+  let retryTimer = null;
+  let retryCount = 0;
 
   const consented = () => {
     try { return localStorage.getItem(CONSENT_KEY) === 'accepted'; }
@@ -26,14 +28,15 @@ export function createCartActivity(getItems, getStage = () => 'cart') {
         if (validId(stored)) cartId = stored;
       } catch { /* Browser storage can be unavailable */ }
     }
-    if (!items.length && !cartId) return;
     if (!cartId) {
       cartId = crypto.randomUUID();
-      try { localStorage.setItem(ID_KEY, cartId); } catch { return; }
+      try { localStorage.setItem(ID_KEY, cartId); } catch { /* Keep this session in memory */ }
     }
     const payload = { cartId, stage, items, ...(touch ? { touch: true } : {}) };
     const serialized = JSON.stringify(payload);
     if (serialized === lastSent && !touch) return;
+    if (retryTimer) clearTimeout(retryTimer);
+    retryTimer = null;
     lastSent = serialized;
     queue = queue.catch(() => {}).then(async () => {
       const response = await fetch('/api/telemetry/cart', { method: 'POST',
@@ -41,7 +44,17 @@ export function createCartActivity(getItems, getStage = () => 'cart') {
         headers: { 'Content-Type': 'application/json' },
         body: serialized });
       if (!response.ok) throw new Error('Не удалось сохранить состояние корзины');
-    }).catch(() => { if (lastSent === serialized) lastSent = ''; });
+      retryCount = 0;
+    }).catch(error => {
+      if (lastSent !== serialized || !consented()) return;
+      lastSent = '';
+      retryCount += 1;
+      console.warn('Cart activity sync failed:', error);
+      retryTimer = setTimeout(() => {
+        retryTimer = null;
+        sync(getStage(), true);
+      }, Math.min(60000, 2000 * 2 ** Math.min(retryCount - 1, 5)));
+    });
   }
 
   function revoke() {
@@ -49,6 +62,9 @@ export function createCartActivity(getItems, getStage = () => 'cart') {
     const removedId = cartId;
     cartId = null;
     lastSent = '';
+    if (retryTimer) clearTimeout(retryTimer);
+    retryTimer = null;
+    retryCount = 0;
     queue = queue.catch(() => {}).then(async () => {
       const response = await fetch('/api/telemetry/cart', {
         method: 'DELETE', credentials: 'same-origin', keepalive: true,

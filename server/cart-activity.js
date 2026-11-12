@@ -59,7 +59,8 @@ async function namedCartItems(client, items) {
     const source = item.variantId ? byVariant.get(item.variantId)
       : byProduct.get(item.productId) || gifts.get(item.productId);
     if (!source || (item.variantId && source.product_id !== item.productId))
-      throw Object.assign(new Error('Товар больше не найден'), { status: 400 });
+      return { ...item, name: 'Товар без связи с каталогом',
+        label: [item.productId, item.variantId].filter(Boolean).join(' / '), unresolved: true };
     return { ...item, name: source.name, label: source.label || '' };
   });
 }
@@ -70,7 +71,7 @@ export async function saveObservedCart(db, body) {
   try {
     await client.query('BEGIN');
     const items = await namedCartItems(client, input.items);
-    if (items.length) await client.query(`INSERT INTO observed_carts(id)
+    await client.query(`INSERT INTO observed_carts(id)
       VALUES($1) ON CONFLICT DO NOTHING`, [input.cartId]);
     const existing = await client.query(`SELECT items,current_stage,furthest_stage
       FROM observed_carts WHERE id=$1 FOR UPDATE`, [input.cartId]);
@@ -104,6 +105,9 @@ export async function deleteObservedCart(db, cartId) {
 export async function listObservedCarts(db) {
   const { rows } = await db.query(`SELECT c.id,c.items,c.current_stage,c.furthest_stage,
     c.created_at,c.updated_at,
+    EXISTS(SELECT 1 FROM observed_cart_events e,
+      LATERAL jsonb_array_elements(e.changes) change
+      WHERE e.cart_id=c.id AND (change->>'delta')::integer > 0) AS had_items,
     EXISTS(SELECT 1 FROM orders o WHERE o.cart_session_id=c.id
       AND o.payment_status='paid') AS has_paid_order,
     (SELECT o.number FROM orders o WHERE o.cart_session_id=c.id
