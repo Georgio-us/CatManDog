@@ -39,12 +39,13 @@ test('server-unavailable legacy single SKU opens a request instead of a purchase
   applyServerCatalog(products, visible, [{
     product_id:'birthday-bandana', variant_id:'birthday-bandana',
     name:legacy.name, category:legacy.category, pet:'cat', label:'1 шт',
-    image_path:'/media/catalog/photo-pending.svg', description:'Праздничная бандана',
+    image_path:null, description:'Праздничная бандана',
     details:[], availability:'source_on_demand', saleStatus:'unavailable',
     source_orderable:true, availableForCart:false, price_confirmed:false,
     price_accepted:false, referencePriceCents:890
   }]);
   assert.equal(products[0].isReal, true);
+  assert.equal(products[0].image, 37);
   assert.equal(canBuy(products[0]), false);
   const html = accessoryDetail(products[0], { crumbs:()=>'', imageBlock:()=>'',
     escape:value=>value, icon:()=>'', favorites:[], goodTogether:()=>'',
