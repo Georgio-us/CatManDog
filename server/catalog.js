@@ -90,7 +90,8 @@ export async function importCatalog(db, items = products) {
         JSON.stringify(variant.details), variant.sourcePriceCents,variant.sourceOrderable,
         variant.source.availabilityStatus === 'pending' ? 'pending' :
           variant.sourceOrderable ? 'source_on_demand' : 'unavailable',
-        /^(?:heybo pet|heiba pet|heybopet)$/i.test(product.brand || '') ? 'preorder' :
+        variant.source.saleStatus === 'available' ? 'available' :
+          /^(?:heybo pet|heiba pet|heybopet)$/i.test(product.brand || '') ? 'preorder' :
           /^(?:advance|hill[’']s)$/i.test(product.brand || '') ? 'unavailable' : 'available',
         variant.source]);
       // A confirmed B2B purchase quote belongs in its own column. Existing owner
@@ -548,6 +549,22 @@ export async function importCatalog(db, items = products) {
         purchase_price_cents=coalesce(purchase_price_cents,460),updated_at=now()
         WHERE id='heybopet-pwf-filters-3-box'
           AND price_override_cents IS NULL AND price_confirmed=false`);
+      // Tina's updated proforma confirms a first batch of 20 fountains and 20
+      // filter boxes. They can be ordered by customers, but stock stays at zero
+      // until the shipment is received and recorded.
+      const heyboFirstBatchMigration = 'heybopet_first_batch_orderable_2026_11_12';
+      const heyboFirstBatchDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [heyboFirstBatchMigration]);
+      if (!heyboFirstBatchDone.rows.length) {
+        await client.query(`UPDATE catalog_variants SET
+          sale_status='available',source_orderable=true,
+          availability='source_on_demand',updated_at=now()
+          WHERE id = ANY($1::text[]) AND sale_status='preorder'`,
+        [['heybopet-hb-pwfs-s30s-black','heybopet-hb-pwfs-s30s-white',
+          'heybopet-pwf-filters-3-box']]);
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)',
+          [heyboFirstBatchMigration]);
+      }
       // Update only the original imported copy so an owner's later product edit wins.
       const filterCopy = 'Универсальные сменные фильтры для питьевых фонтанов, совместимые с большинством моделей и задерживающие частицы и загрязнения в воде';
       const filterDetails = JSON.stringify([

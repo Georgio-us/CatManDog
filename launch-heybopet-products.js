@@ -23,7 +23,8 @@ export const launchHeyboPetProducts = [{
       image: `${base}heybopet-hb-pwfs-s30s-black.webp`,
       price: 54.90,
       priceStatus: 'confirmed',
-      availabilityStatus: 'unavailable'
+      availabilityStatus: 'source_on_demand',
+      saleStatus: 'available'
     },
     {
       id: 'heybopet-hb-pwfs-s30s-white',
@@ -31,7 +32,8 @@ export const launchHeyboPetProducts = [{
       image: `${base}heybopet-hb-pwfs-s30s-white.webp`,
       price: 54.90,
       priceStatus: 'confirmed',
-      availabilityStatus: 'unavailable'
+      availabilityStatus: 'source_on_demand',
+      saleStatus: 'available'
     }
   ]
 }, {
@@ -56,7 +58,8 @@ export const launchHeyboPetProducts = [{
     image: `${base}heybopet-pwf-filters-3.webp`,
     price: 6.99,
     priceStatus: 'confirmed',
-    availabilityStatus: 'unavailable',
+    availabilityStatus: 'source_on_demand',
+    saleStatus: 'available',
     supplier: { sku: 'PWF', saleUnit: '1 box of 3 filters', minimumBoxes: 20,
       unitCostInclVat: 4.60 }
   }]
