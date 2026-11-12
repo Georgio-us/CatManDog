@@ -29,13 +29,15 @@ test('Telegram order notification contains only the order reference and amount',
 });
 
 test('visit alert distinguishes verified owner without leaking private URLs', async () => {
-  const text = visitAlertText({ page: '/#/product/leonardo-adult', source: 'search', owner: true });
-  assert.match(text, /вход владельца подтверждён/);
+  const text = visitAlertText({ page: '/#/product/leonardo-adult', source: 'search',
+    owner: true, cartId: '641c5edb-152a-4788-9053-e880270a023e' });
+  assert.match(text, /вход подтверждён/);
   assert.match(text, /leonardo-adult/);
   assert.match(text, /поиск/);
+  assert.match(text, /ID корзины, если появится: 641c5edb/);
   const unknown = visitAlertText({ page: '/#/account?email=private@example.com',
     source: 'https://private.example.com', owner: false });
-  assert.match(unknown, /владелец не распознан/);
+  assert.match(unknown, /вход не подтверждён/);
   assert.doesNotMatch(unknown, /private@example.com|private.example.com/);
   assert.match(visitAlertText({ source: 'constructor' }), /Источник: неизвестен/);
   const cookie = staffVisitCookie('a'.repeat(64), true);
@@ -74,8 +76,8 @@ test('visit endpoint verifies the owner server-side before sending Telegram', as
     };
     await run('', 'test-visit-unknown');
     await run(`cmd_staff_visit=${'a'.repeat(64)}`, 'test-visit-owner');
-    assert.match(sent[0], /владелец не распознан/);
-    assert.match(sent[1], /вход владельца подтверждён/);
+    assert.match(sent[0], /вход не подтверждён/);
+    assert.match(sent[1], /вход подтверждён/);
   } finally {
     globalThis.fetch = originalFetch;
     for (const key of keys) {

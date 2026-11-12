@@ -20,6 +20,12 @@ export function createCartActivity(getItems, getStage = () => 'cart') {
   function sync(stage = 'cart', touch = false) {
     if (!consented()) return;
     const items = currentItems();
+    if (!cartId) {
+      try {
+        const stored = localStorage.getItem(ID_KEY);
+        if (validId(stored)) cartId = stored;
+      } catch { /* Browser storage can be unavailable */ }
+    }
     if (!items.length && !cartId) return;
     if (!cartId) {
       cartId = crypto.randomUUID();

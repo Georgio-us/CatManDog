@@ -3,6 +3,8 @@ const MEASUREMENT_ID = 'G-CTTBQ7PJP9';
 const COMMERCE_EVENTS = new Set(['view_item_list', 'select_item', 'view_item', 'add_to_cart', 'remove_from_cart',
   'view_cart', 'begin_checkout', 'add_shipping_info', 'add_payment_info', 'purchase']);
 const VISIT_ALERT_KEY = 'catmandog-visit-alerted';
+const CART_ID_KEY = 'catmandog-observed-cart-v1';
+const validCartId = value => /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i.test(value || '');
 
 export function publicPageLocation(location) {
   const path = location.pathname;
@@ -71,6 +73,9 @@ export function installAnalytics(language) {
   let enabled = false;
   let lastPage = null;
   let visitAlerted = false;
+  // Keep the entry context before the visitor browses to another route or accepts analytics.
+  const entryPage = publicPageLocation(window.location);
+  const entrySource = visitSource(document.referrer, window.location.origin);
 
   function enable() {
     if (enabled) return;
@@ -90,6 +95,17 @@ export function installAnalytics(language) {
     document.head.append(script);
   }
 
+  function anonymousCartId() {
+    try {
+      let id = localStorage.getItem(CART_ID_KEY);
+      if (!validCartId(id)) {
+        id = crypto.randomUUID();
+        localStorage.setItem(CART_ID_KEY, id);
+      }
+      return id;
+    } catch { return null; }
+  }
+
   function pageView() {
     if (!enabled) return;
     const page = publicPageLocation(window.location);
@@ -103,9 +119,9 @@ export function installAnalytics(language) {
         visitAlerted = true;
         try { sessionStorage.setItem(VISIT_ALERT_KEY, '1'); }
         catch { /* Session storage may be unavailable */ }
-        const publicUrl = new URL(page);
+        const publicUrl = new URL(entryPage || page);
         const visit = { page: `${publicUrl.pathname}${publicUrl.hash}`,
-          source: visitSource(document.referrer, window.location.origin) };
+          source: entrySource, cartId: anonymousCartId() };
         void window.fetch('/api/telemetry/visit', { method: 'POST', credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(visit) }).catch(() => {});
       }

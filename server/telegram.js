@@ -30,19 +30,21 @@ async function sendMessage(text, fetcher, env) {
 export const sendTelegramOrderAlert = (order, fetcher = fetch, env = process.env) =>
   sendMessage(orderAlertText(order), fetcher, env);
 
-export function visitAlertText({ page, source, owner } = {}) {
+export function visitAlertText({ page, source, owner, cartId } = {}) {
   const safePage = typeof page === 'string' && page.length <= 120 &&
     (/^\/$/.test(page) || /^\/\#\/(?:catalog|journal(?:\/[a-z0-9-]+)?|product\/[a-z0-9-]+|picks\/(?:cat|dog))$/i.test(page) ||
       /^\/(?:catalogo|revista|producto\/[a-z0-9-]+|(?:revista|catalogo\/(?:gatos|perros))\/[a-z0-9/-]+)$/i.test(page))
     ? page : 'неизвестна';
-  const sources = { direct: 'прямой или неизвестен', internal: 'переход внутри сайта',
+  const sources = { direct: 'источник не передан браузером', internal: 'переход внутри сайта',
     search: 'поиск', social: 'соцсети', other: 'другой сайт' };
   const safeSource = typeof source === 'string' && Object.hasOwn(sources, source)
     ? sources[source] : 'неизвестен';
   return `Посещение CatManDog\n` +
-    `Браузер: ${owner === true ? 'вход владельца подтверждён' : 'владелец не распознан'}\n` +
-    `Первая страница: ${safePage}\n` +
+    `Владелец: ${owner === true ? 'вход подтверждён' : 'вход не подтверждён'}\n` +
+    `Страница входа: ${safePage}\n` +
     `Источник: ${safeSource}\n` +
+    (typeof cartId === 'string' && /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i.test(cartId)
+      ? `ID корзины, если появится: ${cartId.slice(0, 8)}\n` : '') +
     'Подробнее: Google Analytics 4';
 }
 

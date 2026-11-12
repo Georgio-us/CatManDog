@@ -1990,7 +1990,8 @@ export async function handleApi(db, req, res, pathname) {
         }
       }
       try { return json(res, 200, { accepted: await sendTelegramVisitAlert({
-        page: body?.page, source: body?.source, owner }) }); }
+        page: body?.page, source: body?.source, owner,
+        cartId: validCartId(body?.cartId) ? body.cartId : null }) }); }
       catch (error) {
         console.error('Telegram visit alert failed:', error.message);
         return json(res, 200, { accepted: false });
