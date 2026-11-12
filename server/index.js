@@ -5,6 +5,7 @@ import { serveStatic } from './http.js';
 import { serveSeo } from './seo.js';
 import { startBackupScheduler } from './backup.js';
 import { startTelegramOrderAlerts } from './telegram.js';
+import { startObservedCartCleanup } from './cart-activity.js';
 
 const port = Number(process.env.PORT || 8080);
 const db = createDatabase();
@@ -40,4 +41,5 @@ const server = createServer(async (req, res) => {
 server.listen(port, '0.0.0.0', () => console.info(`CatManDog listening on ${port}`));
 const stopBackups = startBackupScheduler(initialized ? db : null);
 const stopTelegramAlerts = startTelegramOrderAlerts(initialized ? db : null);
-process.on('SIGTERM', () => { stopBackups(); stopTelegramAlerts(); server.close(() => db?.end()); });
+const stopCartCleanup = startObservedCartCleanup(initialized ? db : null);
+process.on('SIGTERM', () => { stopBackups(); stopTelegramAlerts(); stopCartCleanup(); server.close(() => db?.end()); });

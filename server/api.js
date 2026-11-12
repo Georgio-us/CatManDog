@@ -26,6 +26,8 @@ import { activatePaperCoupon, normalizeBuyerPhone, resolvePromo,
 import { churuRepackOptions } from '../churu-retail-formats.js';
 import { salePriceDecision } from './sale-price-policy.js';
 import { sendTelegramVisitAlert, telegramReady } from './telegram.js';
+import { saveObservedCart, deleteObservedCart, listObservedCarts,
+  observedCartEvents, validCartId } from './cart-activity.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
@@ -228,6 +230,10 @@ async function createOrder(db, payload, customer) {
         bad('Проверьте выбранный способ доставки');
     }
     const orderId = randomUUID();
+    const cartSessionId = validCartId(payload.cartId) ? payload.cartId.toLowerCase() : null;
+    const cartSession = cartSessionId ? await client.query(
+      'SELECT id FROM observed_carts WHERE id=$1', [cartSessionId]) : { rows: [] };
+    const linkedCartId = cartSession.rows[0]?.id || null;
     const numberResult = await client.query("SELECT 'CMD-' || nextval('order_number_seq') AS number");
     const number = numberResult.rows[0].number;
     const cleanAddress = { city: delivery.mode === 'national' ? cap(address.city, 100) : 'València',
@@ -248,12 +254,12 @@ async function createOrder(db, payload, customer) {
     const deliveryTaxRate = billingProfile.rows[0]?.delivery_tax_rate_bps ?? null;
     const inserted = await client.query(`INSERT INTO orders(id,number,customer_id,customer_name,email,buyer_phone,phone,whatsapp_opt_in,
       delivery_address,delivery_preference,subtotal_cents,discount_cents,delivery_cents,delivery_tax_rate_bps,total_cents,
-      promo_code,idempotency_key,stock_state,locale) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,'reserved',$18)
+      promo_code,idempotency_key,stock_state,locale,cart_session_id) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,'reserved',$18,$19)
       ON CONFLICT(idempotency_key) DO NOTHING RETURNING id,number`,
     [orderId, number, customer?.id || null, name, email, normalizeBuyerPhone(phone), phone, !!payload.whatsapp,
       cleanAddress, cleanDelivery, quote.subtotalCents, quote.discountCents,
       quote.deliveryCents, deliveryTaxRate, quote.totalCents, quote.promoCode, idempotency,
-      ['ru','es','uk'].includes(payload.locale) ? payload.locale : 'ru']);
+      ['ru','es','uk'].includes(payload.locale) ? payload.locale : 'ru', linkedCartId]);
     if (!inserted.rows.length) {
       const duplicate = await client.query(`SELECT id,number,email,stripe_checkout_url,payment_expires_at
         FROM orders WHERE idempotency_key=$1`, [idempotency]);
@@ -263,6 +269,8 @@ async function createOrder(db, payload, customer) {
       await client.query('COMMIT');
       return { url: duplicate.rows[0].stripe_checkout_url, orderNumber: duplicate.rows[0].number };
     }
+    if (linkedCartId) await client.query(`UPDATE observed_carts SET current_stage='payment',
+      furthest_stage='payment',updated_at=now() WHERE id=$1`, [linkedCartId]);
     for (const item of quote.items) {
       await client.query(`INSERT INTO order_items(id,order_id,product_id,variant_id,name,variant_label,quantity,
         unit_price_cents,source_mode,tax_rate_bps) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
@@ -612,6 +620,11 @@ async function adminRoute(db, req, res, path) {
       name: operator?.name || customer?.name || '', email: operator?.email || customer?.email },
     fullAdmin ? { 'Set-Cookie': staffVisitCookie(staffToken(req), secure(req)) } : {});
   if (!fullAdmin && !path.startsWith('/api/admin/service-requests')) bad('Доступ закрыт', 403);
+  if (path === '/api/admin/carts' && req.method === 'GET')
+    return json(res, 200, { carts: await listObservedCarts(db) });
+  const cartHistory = path.match(/^\/api\/admin\/carts\/([^/]+)\/events$/);
+  if (cartHistory && req.method === 'GET')
+    return json(res, 200, { events: await observedCartEvents(db, cartHistory[1]) });
   if (path === '/api/admin/sendcloud/status' && req.method === 'GET') {
     const configured = sendcloudReady();
     const verify = new URL(req.url, 'https://catmandog.es').searchParams.get('verify');
@@ -1989,6 +2002,21 @@ export async function handleApi(db, req, res, pathname) {
       return json(res, 200, { ok: true, database: 'connected' });
     }
     if (!db) bad('База данных ещё не подключена', 503);
+    if (pathname === '/api/telemetry/cart' && ['POST','DELETE'].includes(req.method)) {
+      rateLimit(req, 'cart-activity', 120, 15);
+      const body = await readJson(req, 24576);
+      if (req.method === 'DELETE')
+        return json(res, 200, await deleteObservedCart(db, body.cartId));
+      const staff = await currentVisitStaff(db, req);
+      if (staff?.role === 'owner') return json(res, 200, { accepted: false });
+      const customer = await currentCustomer(db, req);
+      if (customer?.emailVerified) {
+        const owner = await db.query(`SELECT EXISTS(SELECT 1 FROM staff_accounts
+          WHERE email=$1 AND role='owner' AND active=true) AS allowed`, [customer.email]);
+        if (owner.rows[0]?.allowed) return json(res, 200, { accepted: false });
+      }
+      return json(res, 200, await saveObservedCart(db, body));
+    }
     if (pathname === '/api/config' && req.method === 'GET') {
       const paymentAccess = await checkoutAllowed(db, req);
       return json(res, 200,

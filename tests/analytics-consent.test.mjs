@@ -18,7 +18,7 @@ test('analytics page locations omit searches and private routes', () => {
   assert.equal(consentCopy('ru').accept, 'Принять');
 });
 
-test('Google tag and commerce events start only after acceptance; rejected visits stay local', () => {
+test('Google tag and commerce events start only after acceptance; rejected visits stay local', async () => {
   const previous = { document: globalThis.document, window: globalThis.window,
     localStorage: globalThis.localStorage, sessionStorage: globalThis.sessionStorage };
   const listeners = {};
@@ -92,6 +92,7 @@ test('Google tag and commerce events start only after acceptance; rejected visit
     assert.equal(JSON.stringify(commands).includes('private@example.com'), false);
 
     reject.listeners.click();
+    await new Promise(resolve => setImmediate(resolve));
     assert.equal(reloads, 1);
     assert.equal(values.get('catmandog-analytics-consent-v1'), 'rejected');
   } finally {

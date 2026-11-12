@@ -37,17 +37,17 @@ export function visitSource(referrer, origin) {
 export function consentCopy(language) {
   return language === 'uk' ? {
     title: 'Аналітика сайту',
-    description: 'З вашого дозволу ми використовуємо Google Analytics, щоб розуміти, які сторінки й товари цікавлять відвідувачів. Власник також може отримати анонімне сповіщення про відвідування. До вашої згоди аналітика не завантажується.',
+    description: 'З вашого дозволу ми використовуємо Google Analytics і зберігаємо склад та етап кошика, щоб розуміти, де покупці зупиняються. Власник також може отримати анонімне сповіщення про відвідування. До вашої згоди аналітика не завантажується.',
     accept: 'Прийняти', reject: 'Відхилити', settings: 'Налаштування аналітики',
     privacy: 'Конфіденційність'
   } : language === 'ru' ? {
     title: 'Аналитика сайта',
-    description: 'С вашего разрешения мы используем Google Analytics, чтобы понимать, какие страницы и товары полезны посетителям. Владелец также может получить анонимное уведомление о посещении. До согласия аналитика не загружается.',
+    description: 'С вашего разрешения мы используем Google Analytics и сохраняем состав и этап корзины, чтобы понимать, где покупатели останавливаются. Владелец также может получить анонимное уведомление о посещении. До согласия аналитика не загружается.',
     accept: 'Принять', reject: 'Отклонить', settings: 'Настройки аналитики',
     privacy: 'Конфиденциальность'
   } : {
     title: 'Analítica del sitio',
-    description: 'Con tu permiso, usamos Google Analytics para entender qué páginas y productos interesan a quienes nos visitan. El propietario también puede recibir un aviso anónimo de la visita. No cargamos la analítica antes de tu consentimiento.',
+    description: 'Con tu permiso, usamos Google Analytics y guardamos el contenido y la etapa de la cesta para saber dónde se detienen los compradores. El propietario también puede recibir un aviso anónimo de la visita. No activamos la analítica antes de tu consentimiento.',
     accept: 'Aceptar', reject: 'Rechazar', settings: 'Preferencias de analítica',
     privacy: 'Privacidad'
   };
@@ -121,11 +121,18 @@ export function installAnalytics(language) {
     panel.hidden = true;
     enable();
     pageView();
+    if (typeof window.dispatchEvent === 'function' && typeof CustomEvent === 'function')
+      window.dispatchEvent(new CustomEvent('catmandog:analytics-consent', { detail: { accepted: true } }));
   });
   panel.querySelector('[data-analytics-reject]').addEventListener('click', () => {
     choice = 'rejected';
     try { localStorage.setItem(CONSENT_KEY, choice); } catch { /* No persistent storage */ }
     panel.hidden = true;
+    const pending = [];
+    if (typeof window.dispatchEvent === 'function' && typeof CustomEvent === 'function')
+      window.dispatchEvent(new CustomEvent('catmandog:analytics-consent', {
+        detail: { accepted: false, waitUntil: promise => pending.push(promise) }
+      }));
     if (enabled) {
       for (const cookie of document.cookie.split(';')) {
         const name = cookie.trim().split('=')[0];
@@ -133,7 +140,7 @@ export function installAnalytics(language) {
         document.cookie = `${name}=; Max-Age=0; Path=/`;
         document.cookie = `${name}=; Max-Age=0; Path=/; Domain=.catmandog.es`;
       }
-      window.location.reload();
+      void Promise.allSettled(pending).then(() => window.location.reload());
     }
   });
   window.addEventListener('catmandog:commerce', ({ detail }) => {

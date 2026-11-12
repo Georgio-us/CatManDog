@@ -4,7 +4,7 @@ import { locale } from './locale.js?v=checkout-address-1';
 export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems, isReady, getPromo, applyPromo,
   refreshPromo = async () => {}, findOrder, productLabel, getCheckoutContext = () => ({}),
   getCheckoutProfile = () => null, saveCheckoutProfile = async () => {}, render, onPaid,
-  onPaymentStart = () => {} }) {
+  onPaymentStart = () => {}, getCartActivityId = () => null }) {
   let formValues = { deliveryRegion: 'local' };
   let profileAccountId = null;
   let draftTouched = false;
@@ -196,7 +196,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
       sessionStorage.setItem('catmandog-payment-attempt', JSON.stringify({ key, signature,
         cartSignature: preview.signature }));
       const payload = { items: lines, promoCode: promo?.code || '', skipSavedPromo: promoSkipped,
-        idempotencyKey: key, locale: locale(),
+        idempotencyKey: key, locale: locale(), cartId: getCartActivityId(),
         name: values.name, email: values.email, phone: values.phone, whatsapp: values.whatsapp,
         address: { city: values.city, postcode: values.postcode, street: values.street,
           building: values.building, apartment: values.apartment, note: values.note },

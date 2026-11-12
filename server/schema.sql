@@ -522,3 +522,29 @@ CREATE TABLE IF NOT EXISTS customer_promos (
   created_at timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY(customer_id,code)
 );
+
+CREATE TABLE IF NOT EXISTS observed_carts (
+  id uuid PRIMARY KEY,
+  items jsonb NOT NULL DEFAULT '[]'::jsonb,
+  current_stage text NOT NULL DEFAULT 'cart'
+    CHECK (current_stage IN ('cart','checkout','review','payment')),
+  furthest_stage text NOT NULL DEFAULT 'cart'
+    CHECK (furthest_stage IN ('cart','checkout','review','payment')),
+  created_at timestamptz NOT NULL DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS observed_carts_updated_idx ON observed_carts(updated_at DESC);
+
+CREATE TABLE IF NOT EXISTS observed_cart_events (
+  id uuid PRIMARY KEY,
+  cart_id uuid NOT NULL REFERENCES observed_carts(id) ON DELETE CASCADE,
+  changes jsonb NOT NULL DEFAULT '[]'::jsonb,
+  stage text NOT NULL CHECK (stage IN ('cart','checkout','review','payment')),
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS observed_cart_events_cart_idx
+  ON observed_cart_events(cart_id,created_at DESC);
+
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS cart_session_id uuid
+  REFERENCES observed_carts(id) ON DELETE SET NULL;
+CREATE INDEX IF NOT EXISTS orders_cart_session_idx ON orders(cart_session_id);

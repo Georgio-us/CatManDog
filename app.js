@@ -21,6 +21,7 @@ import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
 import { productHref, seoProductForPath } from './seo-products.js?v=all-product-urls-20261110';
 import { analyticsItem, announceCommerce } from './analytics-events.js?v=delivery-status-3';
 import { installAnalytics } from './analytics-consent.js?v=visit-details-20261111';
+import { createCartActivity } from './cart-activity.js?v=20261112';
 import { matchesCatalogSearch, catalogSuggestions } from './catalog-search.js';
 import { rememberProductOrigin, productOrigin, requestProductReturn,
   takeProductReturnScroll } from './product-return.js';
@@ -56,6 +57,7 @@ let favorites = read('catmandog-favorites',[]); if(!Array.isArray(favorites))fav
 let catalogPriceMax = Math.max(100, Math.ceil(Math.max(...catalogProducts.map(p => catalogPrice(p).max ?? 0)) / 10) * 10);
 let catalogUnavailable = false;
 let catalogLoading = ['http:', 'https:'].includes(location.protocol);
+const cartActivity = createCartActivity(() => catalogLoading ? [] : cart, () => activityStage());
 const displayedMinPrice = p => catalogPrice(p).min;
 let homePet='cat', homeGroup='', homeBrand='', homePrice='', homeFeature='', homeVisible=8, selectedSize='', detailQuantity=1, priceLimit=catalogPriceMax, journalCategory='Все материалы';
 let selectedVariantId=null;
@@ -72,7 +74,11 @@ const checkoutPromo = () => account.promo();
 const useful = createUsefulUI({ escape, icon, store: account.store, render, notify, syncChanges: account.syncChanges });
 const checkout = createCheckoutUI({
   escape, icon, money, imageBlock, render,
-  onPaymentStart: () => announceCommerce('add_payment_info', cartCommerceItems(checkoutCart())),
+  getCartActivityId: () => cartActivity.id(),
+  onPaymentStart: () => {
+    cartActivity.sync('payment');
+    announceCommerce('add_payment_info', cartCommerceItems(checkoutCart()));
+  },
   getCheckoutProfile: () => account.checkoutProfile(),
   saveCheckoutProfile: values => account.saveCheckoutProfile(values),
   onPaid: (paidItems, promoApplied, payment) => {
@@ -133,7 +139,8 @@ const checkout = createCheckoutUI({
     return `${variant?.name || parent?.name || item.name || 'Товар'}${item.size ? ' · ' + item.size : ''}`;
   }
 });
-function persist(){try{localStorage.setItem('catmandog-cart',JSON.stringify(cart));localStorage.setItem('catmandog-favorites',JSON.stringify(favorites));}catch{}updateHeader();}
+function persist(){try{localStorage.setItem('catmandog-cart',JSON.stringify(cart));localStorage.setItem('catmandog-favorites',JSON.stringify(favorites));}catch{}updateHeader();cartActivity.sync(activityStage());}
+function activityStage(){const path=route().path;return path==='/checkout/preview'?'review':path==='/checkout'?'checkout':'cart';}
 function hideToast(){document.querySelector('#toast').classList.remove('visible');lastCartAddition=null;}
 function notify(text,{cartAction=false}={}){
   const el=document.querySelector('#toast');
@@ -176,6 +183,7 @@ const cartCommerceItems = lines => lines.map(item => {
   return analyticsItem(product, cartSku(item, products), item.qty);
 });
 function announceView() {
+  cartActivity.sync(activityStage());
   const { path, params } = route();
   const key = `${location.pathname}${location.search}${location.hash}`;
   if (key === lastCommerceView) return;

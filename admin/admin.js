@@ -135,6 +135,45 @@ function orderCard(order) {
       `<option value="${status}" ${status === order.status ? 'selected' : ''}>${({received:'Получен',packing:'Собираем',delivering:'Везём',delivered:'Доставлен',cancelled:'Отменён'})[status]}</option>`).join('')}</select></label>
     <label>Заметка<input name="note" maxlength="300" class="wide-input" placeholder="Необязательно"></label><button>Сохранить статус</button></form></article>`;
 }
+const cartStageLabel = { cart: 'Корзина', checkout: 'Контакты и доставка',
+  review: 'Проверка заказа', payment: 'Переход к оплате' };
+const cartTime = value => new Date(value).toLocaleString('ru-RU', {
+  timeZone: 'Europe/Madrid', day: '2-digit', month: '2-digit', year: 'numeric',
+  hour: '2-digit', minute: '2-digit' });
+function observedCartCard(cart) {
+  const items = Array.isArray(cart.items) ? cart.items : [];
+  const idle = Date.now() - new Date(cart.updated_at).getTime() > 30 * 60 * 1000;
+  const status = cart.has_paid_order
+    ? items.length ? 'Есть оплаченный заказ, в корзине остались товары' : 'Заказ оплачен'
+    : items.length ? idle ? 'Оформление не завершено, нет действий более 30 минут'
+      : 'Корзина в процессе' : 'Корзина очищена';
+  return `<article class="admin-card observed-cart" data-observed-cart="${escape(cart.id)}">
+    <div class="admin-variant-top"><div><h2>Корзина ${escape(cart.id.slice(0, 8))}</h2>
+      <p class="admin-muted">${escape(status)}</p></div>
+      <strong>${escape(cartTime(cart.updated_at))}</strong></div>
+    <div class="admin-grid"><div><strong>Текущий этап</strong>${escape(cartStageLabel[cart.current_stage] || cart.current_stage)}</div>
+      <div><strong>Дошёл до</strong>${escape(cartStageLabel[cart.furthest_stage] || cart.furthest_stage)}</div>
+      <div><strong>Первое добавление</strong>${escape(cartTime(cart.created_at))}</div>
+      ${cart.order_number ? `<div><strong>Заказ</strong>${escape(cart.order_number)}</div>` : ''}</div>
+    <ul class="admin-items">${items.length ? items.map(item => `<li>${escape(item.name)}${item.label ? ` · ${escape(item.label)}` : ''} · ${Number(item.qty)} шт</li>`).join('') : '<li>Сейчас товаров нет</li>'}</ul>
+    <button type="button" data-cart-history="${escape(cart.id)}" aria-expanded="false">История изменений</button>
+    <div class="observed-cart-history" hidden></div></article>`;
+}
+function renderObservedCarts(carts) {
+  $('admin-content').innerHTML = `<section class="observed-carts-head"><h2>Корзины посетителей</h2>
+    <button type="button" data-carts-refresh>Обновить</button></section>
+    <p class="admin-muted">Показаны последние 100 корзин посетителей, согласившихся на аналитику. Без имени и контактов до оформления заказа. Данные хранятся 30 дней</p>
+    ${carts.length ? carts.map(observedCartCard).join('') : '<p class="admin-card">Пока нет начатых корзин с согласием на аналитику</p>'}`;
+}
+function renderCartEvents(events) {
+  return events.length ? `<ol class="admin-items">${events.map(event => {
+    const changes = Array.isArray(event.changes) ? event.changes : [];
+    const summary = changes.length ? changes.map(item =>
+      `${item.delta > 0 ? 'Добавлено' : 'Убрано'} ${Math.abs(item.delta)} шт: ${escape(item.name)}${item.label ? ` · ${escape(item.label)}` : ''}`).join('<br>')
+      : `Этап: ${escape(cartStageLabel[event.stage] || event.stage)}`;
+    return `<li><time>${escape(cartTime(event.created_at))}</time><br>${summary}</li>`;
+  }).join('')}</ol>` : '<p class="admin-muted">Изменений пока нет</p>';
+}
 function variantCard(variant) {
   const price = variant.price_override_cents ?? variant.source_price_cents;
   return `<article class="admin-card"><div class="admin-variant-top"><div><h2>${escape(variant.name)}</h2>
@@ -1016,6 +1055,12 @@ async function load() {
       message('Сводка магазина');
       return;
     }
+    if (tab === 'carts') {
+      const carts = (await api('/api/admin/carts')).carts;
+      renderObservedCarts(carts);
+      message(`Корзин: ${carts.length}`);
+      return;
+    }
     if (tab === 'audit') {
       const [audit, supplierData] = await Promise.all([api('/api/admin/sku-audit'), api('/api/admin/suppliers')]);
       auditRows = audit.variants;
@@ -1104,6 +1149,10 @@ $('admin-lock').addEventListener('click', async () => {
   setupLogin();
 });
 setupLogin();
+setInterval(() => {
+  if (tab === 'carts' && activeRole === 'admin' && !document.hidden &&
+      !document.querySelector('.observed-cart-history:not([hidden])')) void load();
+}, 30000);
 document.querySelectorAll('[data-tab]').forEach(button => button.addEventListener('click', () => {
   tab = button.dataset.tab;
   if (tab === 'brands') brandName = '';
@@ -1318,6 +1367,23 @@ $('admin-content').addEventListener('change', async event => {
   }
 });
 $('admin-content').addEventListener('click', async event => {
+  if (event.target.closest('[data-carts-refresh]')) { await load(); return; }
+  const historyButton = event.target.closest('[data-cart-history]');
+  if (historyButton) {
+    const container = historyButton.nextElementSibling;
+    const opening = container.hidden;
+    container.hidden = !opening;
+    historyButton.setAttribute('aria-expanded', String(opening));
+    if (opening && !container.dataset.loaded) {
+      container.textContent = 'Загружаю историю';
+      try {
+        const result = await api(`/api/admin/carts/${encodeURIComponent(historyButton.dataset.cartHistory)}/events`);
+        container.innerHTML = renderCartEvents(result.events);
+        container.dataset.loaded = 'true';
+      } catch (error) { container.textContent = error.message; }
+    }
+    return;
+  }
   if (event.target.closest('[data-sale-bulk]')) {
     const status = $('catalog-sale-bulk')?.value;
     const labels = { available:'Доступно к заказу', preorder:'Под заказ', unavailable:'Недоступно' };

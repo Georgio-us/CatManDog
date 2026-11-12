@@ -351,3 +351,9 @@ nav{overflow-x:auto;padding-bottom:4px}nav button{white-space:nowrap}
 .catalog-offer-list li span{color:#6f756a}
 @media(max-width:760px){.catalog-tile{aspect-ratio:auto}.catalog-tile-open{min-height:270px}.catalog-tile-media{height:140px}.catalog-tile-body{min-height:130px}}
 @media(max-width:520px){.catalog-price-form>label:first-child{flex-basis:100%}.catalog-price-save{width:100%}.catalog-tile-media{height:130px}.catalog-offer-list li{display:grid}}
+nav{flex-wrap:wrap}
+.observed-carts-head{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.observed-carts-head h2{margin:0}
+.observed-cart .admin-items{margin:16px 0}
+.observed-cart-history{border-top:1px solid #e0e3db;margin-top:16px;padding-top:12px}
+.observed-cart-history li{margin-bottom:10px}
