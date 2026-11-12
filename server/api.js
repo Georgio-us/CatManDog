@@ -1286,7 +1286,8 @@ async function adminRoute(db, req, res, path) {
   }
   if (path === '/api/admin/sku-audit' && req.method === 'GET') {
     const { rows } = await db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.category,p.pet,
-      v.label,v.source AS price_source,v.source_price_cents,v.price_override_cents,v.purchase_price_cents,
+      v.label,v.source AS price_source,v.source->'purchaseQuote' AS purchase_quote,
+      v.source_price_cents,v.price_override_cents,v.purchase_price_cents,
       v.price_confirmed,v.source_orderable,v.availability,v.stock_quantity,v.reserved_quantity,v.tax_rate_bps,
       v.display_priority,v.review_note,v.reviewed_at,
       so.cost_cents AS supplier_cost_cents,so.vat_included AS supplier_vat_included,

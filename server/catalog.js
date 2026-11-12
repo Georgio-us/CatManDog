@@ -103,6 +103,13 @@ export async function importCatalog(db, items = products) {
           WHERE id=$1 AND purchase_price_cents IS NULL`,
         [variant.id, cents(variant.source.purchasePrice)]);
       }
+      // A historical quote is evidence, not a currently orderable purchase cost.
+      if (variant.source.purchaseQuote) {
+        await client.query(`UPDATE catalog_variants
+          SET source=jsonb_set(source,'{purchaseQuote}',$2::jsonb,true),updated_at=now()
+          WHERE id=$1 AND source->'purchaseQuote' IS DISTINCT FROM $2::jsonb`,
+        [variant.id, JSON.stringify(variant.source.purchaseQuote)]);
+      }
       // Existing launch variants may have been imported before retail research was completed.
       // Fill only empty reference prices; never replace an owner-approved or edited price.
       if (Object.hasOwn(yaguRetailBenchmarks, variant.source.supplier?.sku) && variant.sourcePriceCents) {

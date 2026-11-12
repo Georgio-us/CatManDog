@@ -1785,6 +1785,15 @@ export const yaguProducts = [
         "availabilityStatus": "pending",
         "tag": "Для лакомств",
         "line": "Duvo+ · Lila - 18 × 16 × 1 см",
+        "purchaseQuote": {
+          "supplier": "Yagu",
+          "article": "7515988",
+          "priceCents": 336,
+          "taxBasis": "excludes_iva",
+          "checkedAt": "2026-11-12",
+          "orderable": false,
+          "url": "https://odoo.grupoyagu.com/shop/product/7515988-duvo-alfombra-goma-lamer-forma-gato-lila-18-x-16-x-1-cm-46775?search=7515988"
+        },
         "weight": "Lila - 18 × 16 × 1 см",
         "sizes": [
           "Lila - 18 × 16 × 1 см"

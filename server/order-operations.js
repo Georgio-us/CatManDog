@@ -50,6 +50,7 @@ export function summarizeOrder(order, items, demandByVariant = new Map()) {
       taxRateBps: item.tax_rate_bps, taxCents: taxLine?.taxCents ?? null,
       purchaseCostCents: cost.cents, purchaseCostGrossCents: cost.grossCents,
       purchaseCostBasis: cost.basis, purchaseCostSource: cost.source,
+      purchaseQuote: item.purchase_quote || null,
       physicalStock: physical, committedQuantity: commitments,
       stockPosition, orderStockDelta: !order.is_test && order.payment_status === 'paid' &&
         activeStatuses.has(order.status) && item.source_mode !== 'on_hand' ? -item.quantity : 0 };
@@ -82,6 +83,7 @@ export async function loadAdminOrders(db) {
     db.query(`SELECT i.order_id,i.variant_id,i.name,i.variant_label,i.quantity,
       i.unit_price_cents,i.source_mode,i.tax_rate_bps,
       v.stock_quantity,v.reserved_quantity,v.purchase_price_cents,
+      v.source->'purchaseQuote' AS purchase_quote,
       so.cost_cents AS offer_cost_cents,so.vat_included AS offer_vat_included,
       s.name AS offer_supplier,catalog.shop_price_cents AS catalog_cost_cents,
       catalog.shop_price_tax_basis AS catalog_tax_basis,

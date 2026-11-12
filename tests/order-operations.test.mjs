@@ -17,7 +17,9 @@ const line = overrides => ({ variant_id:'rc-sterilised-2000g', name:'Royal Canin
 test('paid source order shows negative stock position without changing physical stock', () => {
   const result = summarizeOrder(order, [line(),
     line({ variant_id:'yagu-mat', name:'Duvo+', unit_price_cents:678,
-      tax_rate_bps:null, purchase_price_cents:null, catalog_cost_cents:null }),
+      tax_rate_bps:null, purchase_price_cents:null, catalog_cost_cents:null,
+      purchase_quote:{ supplier:'Yagu', priceCents:336, taxBasis:'excludes_iva',
+        checkedAt:'2026-11-12', orderable:false } }),
     line({ variant_id:'dentalife', name:'Dentalife', unit_price_cents:209,
       tax_rate_bps:null, purchase_price_cents:null, catalog_cost_cents:null })],
   new Map([['rc-sterilised-2000g',3],['yagu-mat',1],['dentalife',1]]));
@@ -27,6 +29,9 @@ test('paid source order shows negative stock position without changing physical 
   assert.equal(result.items[0].taxCents, 223);
   assert.equal(result.items[0].purchaseCostCents, 2014);
   assert.equal(result.items[0].purchaseCostGrossCents, 2215);
+  assert.equal(result.items[1].purchaseCostCents, null);
+  assert.equal(result.items[1].purchaseQuote.priceCents, 336);
+  assert.equal(result.items[1].purchaseQuote.orderable, false);
   assert.equal(result.purchaseTotalCents, null);
   assert.equal(result.merchandiseSpreadCents, null);
   assert.equal(result.taxComplete, false);
