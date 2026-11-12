@@ -148,9 +148,13 @@ function orderCard(order) {
     <p class="admin-muted">Закупка - по текущим прайсам, не фактическая оплата поставщику. Разница по товарам не учитывает стоимость доставки, эквайринг, упаковку и возможный recargo${order.missingCostCount ? ` · Позиций без полной себестоимости: ${order.missingCostCount}` : ''}${order.is_test ? ' · Тестовый заказ не создаёт потребность в закупке' : ''}</p>
     <div class="admin-grid"><div><strong>Покупатель</strong>${escape(order.customer_name)}<br>${escape(order.email)}<br>${escape(order.phone)}</div>
     <div><strong>Адрес</strong>${escape(address.street)}, ${escape(address.building)}<br>${escape(address.postcode)} ${escape(address.city || '')}<br>${escape(address.apartment || '')}<br>${escape(address.note || '')}</div>
-    <div><strong>Время</strong>${delivery.mode === 'national' ? 'Отправка перевозчиком' :
-      delivery.mode === 'soon' ? 'Как можно скорее' : `${escape(delivery.date)} ${escape(delivery.time)}`}<br>
-      <span class="admin-muted">${delivery.reserved ? 'Время подтверждено' : 'Время не забронировано'} · ${address.verified ? 'Адрес проверен' : 'Адрес требует проверки'}</span></div>
+    <div><strong>Доставка</strong>${delivery.mode === 'national' ? 'Отправка перевозчиком' :
+      delivery.mode === 'preorder' ? 'Под заказ, ориентир 24-48 часов' :
+      delivery.mode === 'soon' ? 'Как можно скорее' :
+      `${escape(delivery.date || '')} ${escape(delivery.window || delivery.time || '')}`}<br>
+      <span class="admin-muted">${delivery.mode === 'slot' || delivery.mode === 'scheduled'
+        ? delivery.reserved ? 'Интервал подтверждён' : 'Интервал выбран покупателем, точное время нужно подтвердить'
+        : delivery.mode === 'national' ? 'Передайте отправление перевозчику' : 'Срок нужно согласовать с покупателем'} · ${address.verified ? 'Адрес проверен' : 'Сверьте адрес перед отправкой'}</span></div>
     <div><strong>Комплектация</strong>${(order.items || []).some(item => item.sourceMode === 'on_hand')
       ? escape(({ reserved:'Товар зарезервирован',released:'Резерв снят',consumed:'Выдан со склада',legacy:'Старый учёт' })[order.stock_state] || '')
       : (order.items || []).some(item => item.sourceMode === 'open_order') ? 'Нужно получить товар для заказа' : 'Товар под заказ'}</div>
