@@ -3,27 +3,46 @@ import { canBuy, snapshots } from './variants.js';
 // Editorial order follows the planned first assortment, not inferred sales popularity.
 export const homeShortcutIds = {
   cat: [
-    'rc-sterilised',
-    'tc-4e50c58957',
     'leonardo-light',
-    'acana-indoor',
+    'tc-4e50c58957',
+    'rc-sterilised',
+    'acana-homestead',
+    'leonardo-fresh-salmon',
+    'tc-0707caf730',
+    'rc-kitten-regular',
+    'orijen-kitten',
+    'leonardo-wet-pure-chicken',
+    'tc-768abf17c2',
+    'rc-wet',
+    'acana-pacifica',
+    'tc-dc3d6d94c2',
     'royalcanin-93e8aeca',
+    'cmd-source-694e05cdc1b2582c',
     'orijen-original',
+    'orijen-six-fish',
+    'orijen-guardian8',
+    'leonardo-wet-kitten',
     'heybopet-hb-pwfs-s30s',
     'heybopet-pwf-filters-3',
-    'yagu-7845778',
-    'yagu-9235038',
-    'yagu-9235044',
-    'yagu-9235150-studio',
+    'yagu-2170004',
+    'yagu-7514697-studio',
+    'yagu-2170014',
+    'yagu-2170001',
+    'yagu-9235036',
     'yagu-9235121',
     'yagu-9235142',
-    'yagu-9235036',
-    'yagu-7815320',
     'yagu-7515817',
     'yagu-7517019',
     'yagu-7514629',
-    'yagu-7517046',
-    'yagu-7515988'
+    'yagu-7514626',
+    'yagu-7514968-studio',
+    'yagu-7515988',
+    'yagu-donut-neutral',
+    'yagu-misi-pana',
+    'yagu-sorolla-backpack',
+    'yagu-7515812',
+    'yagu-7552371',
+    'yagu-M0295-studio'
   ],
   dog: [
     'cmd-source-f025a9dbc9d479c7',
@@ -56,7 +75,7 @@ export function homeShortcutProducts(products, pet) {
 
 export function homeShortcuts(products, icon, escape) {
   const cards = [
-    { pet: 'cat', title: 'Наш выбор для кошек', description: 'Корм, лакомства, поилки и игры для кошек', brands: 'Royal Canin · Leonardo · ACANA · Churu · EBI' },
+    { pet: 'cat', title: 'Наш выбор для кошек', description: 'Корм, лакомства, поилки и игры для кошек', brands: 'Leonardo · Churu · Royal Canin · ACANA · HeyboPet' },
     { pet: 'dog', title: 'Наш выбор для собак', description: 'Корм, миски и игрушки для собак', brands: 'ACANA · ORIJEN · Royal Canin · Duvo+' }
   ];
   return `<section class="editorial-promos home-shortcuts" aria-label="Подборки товаров">
@@ -80,7 +99,7 @@ export function homeShortcutLanding(products, pet, { crumbs, card, icon }) {
   const cat = pet === 'cat';
   const title = cat ? 'Подборка для кошек' : 'Подборка для собак';
   const intro = cat
-    ? 'Корм и лакомства, поилки, миски и вещи для игр'
+    ? 'Корм и лакомства, поилки, наполнители и вещи для игр'
     : 'Корм для взрослых собак и щенков, миски и вещи для игр';
   const list = homeShortcutProducts(products, pet);
   return `<div class="page shortcut-page">${crumbs(title)}
