@@ -28,6 +28,12 @@ const releasedByCategory = {
     'dog-rc-medium-adult', 'dog-rc-mini-digestive',
     'dog-ownat-ultra-medium', 'dog-ownat-just-gf-chicken',
     'dog-ownat-gf-prime', 'dog-ownat-author-duck'
+  ],
+  '/catalogo/perros/premios': [
+    'churu-dog-chicken', 'churu-dog-tuna-pack4', 'churu-dog-tuna-pack8',
+    'churu-dog-tuna-bites', 'churu-dog-salmon-pack4', 'churu-dog-salmon-pack8',
+    'churu-dog-salmon-bites', 'churu-dog-cheese-pack4', 'churu-dog-cheese-pack8',
+    'churu-dog-cheese-bites', 'churu-dog-chicken-pack8', 'churu-dog-chicken-bites'
   ]
 };
 const releasedCategoryById = new Map(Object.entries(releasedByCategory)

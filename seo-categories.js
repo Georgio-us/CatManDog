@@ -32,6 +32,13 @@ export const seoCategories = [
     title: 'Pienso seco para perros',
     description: 'Compara pienso seco para perros por formato, marca y necesidades en CatManDog',
     intro: 'Explora alimentos secos para perros y compara formatos y necesidades antes de elegir'
+  },
+  {
+    path: '/catalogo/perros/premios', pet: 'dog', group: 'treats',
+    indexable: true,
+    title: 'Premios para perros',
+    description: 'Descubre los premios Churu para perros: tubos cremosos de pollo, atún, salmón o queso y bocaditos con relleno suave',
+    intro: 'Compara sabores, ingredientes y formatos de Churu DOG. Hay tubos cremosos de 14 o 20 g y bocaditos blandos en porciones individuales'
   }
 ];
 
