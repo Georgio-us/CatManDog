@@ -14,7 +14,7 @@ import { applyServerCatalog } from './server-prices.js?v=unavailable-single-2026
 
 import { activeHomeLanding } from './collections.js?v=cat-assortment-1';
 import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=cat-merchandising-20261112';
-import { installLocale, intlLocale, locale, translate } from './locale.js?v=expanded-shortcuts-v2-20261111';
+import { installLocale, intlLocale, locale, translate } from './locale.js?v=cat-merchandising-20261112';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';

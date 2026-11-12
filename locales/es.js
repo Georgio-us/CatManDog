@@ -16,6 +16,7 @@ export const es = {
   'Корм, лакомства, поилки и игры для кошек': 'Pienso, premios, fuentes y juegos para gatos',
   'Корм, миски и игрушки для собак': 'Pienso, comederos y juguetes para perros',
   'Корм и лакомства, поилки, миски и вещи для игр': 'Pienso y premios, fuentes, comederos y juguetes',
+  'Корм и лакомства, поилки, наполнители и вещи для игр': 'Pienso y premios, fuentes, arenas y juguetes',
   'Корм для взрослых собак и щенков, миски и вещи для игр': 'Pienso para perros adultos y cachorros, comederos y juguetes',
   'Цена зависит от упаковки': 'El precio depende del paquete',
   'Цена зависит от цвета': 'El precio depende del color',
