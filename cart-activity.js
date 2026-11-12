@@ -17,7 +17,7 @@ export function createCartActivity(getItems, getStage = () => 'cart') {
     productId: item.productId || item.id, variantId: item.variantId || null, qty: item.qty
   }));
 
-  function sync(stage = 'cart') {
+  function sync(stage = 'cart', touch = false) {
     if (!consented()) return;
     const items = currentItems();
     if (!items.length && !cartId) return;
@@ -25,9 +25,9 @@ export function createCartActivity(getItems, getStage = () => 'cart') {
       cartId = crypto.randomUUID();
       try { localStorage.setItem(ID_KEY, cartId); } catch { return; }
     }
-    const payload = { cartId, stage, items };
+    const payload = { cartId, stage, items, ...(touch ? { touch: true } : {}) };
     const serialized = JSON.stringify(payload);
-    if (serialized === lastSent) return;
+    if (serialized === lastSent && !touch) return;
     lastSent = serialized;
     queue = queue.catch(() => {}).then(async () => {
       const response = await fetch('/api/telemetry/cart', { method: 'POST',
@@ -61,6 +61,9 @@ export function createCartActivity(getItems, getStage = () => 'cart') {
   window.addEventListener('catmandog:analytics-consent', event => {
     if (event.detail?.accepted) sync(getStage());
     else event.detail?.waitUntil?.(revoke());
+  });
+  if (typeof document !== 'undefined') document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') sync(getStage(), true);
   });
   if (!consented() && cartId) void revoke();
   return { sync, id: () => consented() ? cartId : null, revoke };

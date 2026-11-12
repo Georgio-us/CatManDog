@@ -183,10 +183,10 @@ const cartCommerceItems = lines => lines.map(item => {
   return analyticsItem(product, cartSku(item, products), item.qty);
 });
 function announceView() {
-  cartActivity.sync(activityStage());
   const { path, params } = route();
   const key = `${location.pathname}${location.search}${location.hash}`;
   if (key === lastCommerceView) return;
+  cartActivity.sync(activityStage(), true);
   lastCommerceView = key;
   if (path === '/catalog') {
     const list = filteredProducts(params).slice(0, 20).map(product => analyticsItem(product));

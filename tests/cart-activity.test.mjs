@@ -56,6 +56,10 @@ test('server saves canonical product names and the latest stage without visitor 
   assert.equal(row.current_stage, 'review');
   assert.equal(row.furthest_stage, 'review');
   assert.deepEqual(events.map(item => item.map(change => change.delta)), [[2], []]);
+  await saveObservedCart(db, { cartId, stage: 'review', touch: true, items: [
+    { productId: 'food', variantId: 'food-400g', qty: 2 }
+  ] });
+  assert.equal(events.length, 2);
   assert.equal(JSON.stringify({ row, events }).includes('private@example.com'), false);
 });
 

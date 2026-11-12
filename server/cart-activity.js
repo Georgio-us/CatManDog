@@ -81,12 +81,12 @@ export async function saveObservedCart(db, body) {
     const row = existing.rows[0];
     const changes = cartChanges(row.items, items);
     const stageChanged = row.current_stage !== input.stage;
-    if (changes.length || stageChanged) {
+    if (changes.length || stageChanged || body.touch === true) {
       const furthest = stages[Math.max(stages.indexOf(row.furthest_stage), stages.indexOf(input.stage))];
       await client.query(`UPDATE observed_carts SET items=$2,current_stage=$3,
         furthest_stage=$4,updated_at=now() WHERE id=$1`,
       [input.cartId, JSON.stringify(items), input.stage, furthest]);
-      await client.query(`INSERT INTO observed_cart_events(id,cart_id,changes,stage)
+      if (changes.length || stageChanged) await client.query(`INSERT INTO observed_cart_events(id,cart_id,changes,stage)
         VALUES($1,$2,$3,$4)`, [randomUUID(), input.cartId, JSON.stringify(changes), input.stage]);
     }
     await client.query('COMMIT');
