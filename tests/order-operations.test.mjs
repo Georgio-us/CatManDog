@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { summarizeOrder } from '../server/order-operations.js';
+import { summarizeOrder, loadStockCommitments, loadOpenOrderDemand } from '../server/order-operations.js';
 
 const order = {
   number:'CMD-10004', payment_status:'paid', status:'received',
@@ -41,4 +41,16 @@ test('gross merchandise spread is shown only with complete comparable costs', ()
   assert.equal(complete.merchandiseSpreadCents, 449);
   assert.equal(complete.taxTotalCents, 223);
   assert.equal(complete.taxComplete, true);
+});
+
+test('explicit test orders stay in history but do not add customer stock demand', async () => {
+  const testOrder = summarizeOrder({ ...order, subtotal_cents:2449, total_cents:2449,
+    delivery_cents:0, is_test:true }, [line()], new Map());
+  assert.equal(testOrder.items[0].orderStockDelta, 0);
+  const db = { async query(sql) {
+    assert.match(sql, /o\.is_test=false/);
+    return { rows:[] };
+  } };
+  assert.equal((await loadStockCommitments(db)).size, 0);
+  assert.deepEqual(await loadOpenOrderDemand(db), []);
 });

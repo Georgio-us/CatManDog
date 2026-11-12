@@ -750,6 +750,8 @@ async function adminRoute(db, req, res, path) {
       db.query('SELECT * FROM billing_profile WHERE id=true'),
       db.query(`SELECT count(*) FILTER (WHERE payment_status='paid' AND status!='cancelled')::integer AS paid_orders,
         coalesce(sum(total_cents) FILTER (WHERE payment_status='paid' AND status!='cancelled'),0)::bigint AS paid_total_cents,
+        count(*) FILTER (WHERE is_test=true AND payment_status='paid' AND status!='cancelled')::integer AS test_paid_orders,
+        coalesce(sum(total_cents) FILTER (WHERE is_test=true AND payment_status='paid' AND status!='cancelled'),0)::bigint AS test_paid_total_cents,
         count(*) FILTER (WHERE payment_status IN ('awaiting_payment','pending'))::integer AS awaiting_orders,
         count(*) FILTER (WHERE payment_status='refunded')::integer AS refunded_orders
         FROM orders`),
@@ -1244,16 +1246,16 @@ async function adminRoute(db, req, res, path) {
         FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
         LEFT JOIN supplier_offers so ON so.variant_id=v.id AND so.preferred=true
         WHERE p.active=true AND v.active=true`),
-      db.query(`SELECT count(*) FILTER (WHERE status IN ('received','packing','delivering'))::integer AS open_orders,
-        count(*) FILTER (WHERE payment_status='paid' AND status!='cancelled' AND
+      db.query(`SELECT count(*) FILTER (WHERE is_test=false AND status IN ('received','packing','delivering'))::integer AS open_orders,
+        count(*) FILTER (WHERE is_test=false AND payment_status='paid' AND status!='cancelled' AND
           created_at>=now()-interval '30 days')::integer AS paid_orders_30d,
-        coalesce(sum(total_cents) FILTER (WHERE payment_status='paid' AND
+        coalesce(sum(total_cents) FILTER (WHERE is_test=false AND payment_status='paid' AND
           status!='cancelled' AND created_at>=now()-interval '30 days'),0)::integer AS paid_total_30d
         FROM orders`),
       db.query("SELECT count(*)::integer AS new_requests FROM service_requests WHERE status='new'"),
       db.query(`SELECT i.variant_id,i.name,sum(i.quantity)::integer AS quantity
         FROM order_items i JOIN orders o ON o.id=i.order_id
-        WHERE o.payment_status='paid' AND o.status!='cancelled'
+        WHERE o.payment_status='paid' AND o.status!='cancelled' AND o.is_test=false
         GROUP BY i.variant_id,i.name ORDER BY quantity DESC LIMIT 5`),
       db.query(`SELECT count(*)::integer AS open_purchase_orders FROM purchase_orders
         WHERE status IN ('draft','ordered','partially_received')`),

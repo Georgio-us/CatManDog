@@ -123,7 +123,7 @@ function orderCard(order) {
     failed:'Оплата не прошла', refunded:'Возвращён' }[order.payment_status] || order.payment_status;
   const cost = order.purchaseTotalCents === null ? 'Не рассчитана полностью' : euros(order.purchaseTotalCents);
   const spread = order.merchandiseSpreadCents === null ? 'Не рассчитана полностью' : euros(order.merchandiseSpreadCents);
-  return `<article class="admin-card order-card"><div class="admin-variant-top"><div><h2>${escape(order.number)} · ${escape(fulfillment)}</h2>
+  return `<article class="admin-card order-card"><div class="admin-variant-top"><div><h2>${escape(order.number)} · ${order.is_test ? 'Тестовый · ' : ''}${escape(fulfillment)}</h2>
     <p class="admin-muted">Оформлен ${escape(cartTime(order.created_at))}${order.paid_at ? ` · Оплачен ${escape(cartTime(order.paid_at))}` : ''}</p></div>
     <strong>${euros(order.total_cents)}</strong></div>
     <div class="order-figures"><div><span>Оплата</span><strong>${escape(payment)}</strong></div>
@@ -131,7 +131,7 @@ function orderCard(order) {
       <div><span>Закупка товаров</span><strong>${cost}</strong></div>
       <div><span>Разница по товарам</span><strong>${spread}</strong></div>
       <div><span>IVA в заказе</span><strong>${order.taxComplete ? euros(order.taxTotalCents) : 'Не рассчитана полностью'}</strong></div></div>
-    <p class="admin-muted">Закупка - по текущим прайсам, не фактическая оплата поставщику. Разница по товарам не учитывает стоимость доставки, эквайринг, упаковку и возможный recargo${order.missingCostCount ? ` · ${order.missingCostCount} позиций без полной себестоимости` : ''}</p>
+    <p class="admin-muted">Закупка - по текущим прайсам, не фактическая оплата поставщику. Разница по товарам не учитывает стоимость доставки, эквайринг, упаковку и возможный recargo${order.missingCostCount ? ` · Позиций без полной себестоимости: ${order.missingCostCount}` : ''}${order.is_test ? ' · Тестовый заказ не создаёт потребность в закупке' : ''}</p>
     <div class="admin-grid"><div><strong>Покупатель</strong>${escape(order.customer_name)}<br>${escape(order.email)}<br>${escape(order.phone)}</div>
     <div><strong>Адрес</strong>${escape(address.street)}, ${escape(address.building)}<br>${escape(address.postcode)} ${escape(address.city || '')}<br>${escape(address.apartment || '')}<br>${escape(address.note || '')}</div>
     <div><strong>Время</strong>${delivery.mode === 'national' ? 'Отправка перевозчиком' :
@@ -996,6 +996,7 @@ function renderFinance(data) {
     <div class="finance-totals"><div><strong>${euros(totals.paid_total_cents || 0)}</strong><span>Оплачено · ${totals.paid_orders || 0} заказов</span></div>
     <div><strong>${totals.awaiting_orders || 0}</strong><span>Ожидают оплаты</span></div>
     <div><strong>${totals.refunded_orders || 0}</strong><span>Возвращены</span></div></div></section>
+    <p class="admin-muted">Из оплаченного: тестовые заказы - ${totals.test_paid_orders || 0}, ${euros(totals.test_paid_total_cents || 0)}. Они сохранены в истории платежей, но не создают потребность в товаре</p>
     <section class="admin-card"><h2>Что нужно заполнить</h2>
       <p>${missingProfile.length ? `Реквизиты: ${escape(missingProfile.join(', '))}` : 'Основные реквизиты заполнены'}</p>
       <p>Ставки IVA SKU: ${data.taxCoverage?.missing_sku_rates ?? 0} из ${data.taxCoverage?.active_skus ?? 0} без проверки${profile.delivery_tax_rate_bps === null || profile.delivery_tax_rate_bps === undefined ? ' · ставка доставки не указана' : ''}</p>

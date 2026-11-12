@@ -51,7 +51,7 @@ export function summarizeOrder(order, items, demandByVariant = new Map()) {
       purchaseCostCents: cost.cents, purchaseCostGrossCents: cost.grossCents,
       purchaseCostBasis: cost.basis, purchaseCostSource: cost.source,
       physicalStock: physical, committedQuantity: commitments,
-      stockPosition, orderStockDelta: order.payment_status === 'paid' &&
+      stockPosition, orderStockDelta: !order.is_test && order.payment_status === 'paid' &&
         activeStatuses.has(order.status) && item.source_mode !== 'on_hand' ? -item.quantity : 0 };
   });
   const completeCost = lines.every(line => line.purchaseCostGrossCents !== null);
@@ -72,7 +72,7 @@ export async function loadAdminOrders(db) {
   const { rows: orders } = await db.query(`SELECT o.id,o.number,o.customer_name,o.email,o.phone,
     o.delivery_address,o.delivery_preference,o.status,o.payment_status,o.stock_state,
     o.subtotal_cents,o.discount_cents,o.delivery_cents,o.delivery_tax_rate_bps,
-    o.total_cents,o.created_at,o.confirmation_sent_at,o.confirmation_error,
+    o.total_cents,o.created_at,o.is_test,o.confirmation_sent_at,o.confirmation_error,
     (SELECT max(e.created_at) FROM order_events e
       WHERE e.order_id=o.id AND e.type='payment_paid') AS paid_at
     FROM orders o ORDER BY o.created_at DESC LIMIT 100`);
@@ -99,7 +99,7 @@ export async function loadAdminOrders(db) {
       WHERE i.order_id=ANY($1::uuid[]) ORDER BY i.id`, [ids]),
     db.query(`SELECT i.variant_id,sum(i.quantity)::integer AS quantity
       FROM order_items i JOIN orders o ON o.id=i.order_id
-      WHERE i.source_mode!='on_hand' AND o.payment_status='paid'
+      WHERE i.source_mode!='on_hand' AND o.payment_status='paid' AND o.is_test=false
         AND o.status IN ('received','packing','delivering')
       GROUP BY i.variant_id`)
   ]);
@@ -112,7 +112,7 @@ export async function loadAdminOrders(db) {
 export async function loadStockCommitments(db) {
   const { rows } = await db.query(`SELECT i.variant_id,sum(i.quantity)::integer AS quantity
     FROM order_items i JOIN orders o ON o.id=i.order_id
-    WHERE i.source_mode!='on_hand' AND o.payment_status='paid'
+    WHERE i.source_mode!='on_hand' AND o.payment_status='paid' AND o.is_test=false
       AND o.status IN ('received','packing','delivering')
     GROUP BY i.variant_id`);
   return new Map(rows.map(row => [row.variant_id, row.quantity]));
@@ -126,7 +126,7 @@ export async function loadOpenOrderDemand(db) {
     FROM order_items i JOIN orders o ON o.id=i.order_id
     LEFT JOIN catalog_variants v ON v.id=i.variant_id
     LEFT JOIN catalog_products p ON p.id=v.product_id
-    WHERE i.source_mode!='on_hand' AND o.payment_status='paid'
+    WHERE i.source_mode!='on_hand' AND o.payment_status='paid' AND o.is_test=false
       AND o.status IN ('received','packing','delivering')
     GROUP BY i.variant_id,p.name,v.label,p.brand,v.stock_quantity
     ORDER BY min(o.created_at),i.variant_id`);

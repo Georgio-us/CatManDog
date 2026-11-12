@@ -325,6 +325,11 @@ CREATE INDEX IF NOT EXISTS orders_customer_id_idx ON orders(customer_id);
 CREATE INDEX IF NOT EXISTS orders_created_at_idx ON orders(created_at DESC);
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS stock_state text NOT NULL DEFAULT 'legacy'
   CHECK (stock_state IN ('legacy','reserved','released','consumed'));
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS is_test boolean NOT NULL DEFAULT false;
+UPDATE orders SET is_test=true WHERE
+  (number='CMD-10001' AND customer_name='CatManDog TEST' AND email='fahrengheit1@gmail.com') OR
+  (number='CMD-10002' AND customer_name='Тест CatManDog' AND email='support@catmandog.es') OR
+  (number='CMD-10003' AND customer_name='Тест' AND email='test@example.com');
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS delivery_tax_rate_bps integer
   CHECK (delivery_tax_rate_bps BETWEEN 0 AND 10000);
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS stripe_checkout_session_id text UNIQUE;
