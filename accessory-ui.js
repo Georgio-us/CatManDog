@@ -1,5 +1,6 @@
 import { hasVariants, resolveVariant, storefrontPrice, canBuy } from './variants.js?v=sale-price-policy-20261109';
 import { customerFacts, orderedVariants } from './product-content.js?v=catalog-sku-audit-20261110';
+import { catalogEditorialChuruCat } from './catalog-editorial-churu-cat.js';
 
 export function customerDetails(details, translate, escape, category) {
   const useful = customerFacts(details);
@@ -57,6 +58,11 @@ export function accessoryDetail(product, helpers) {
   const allowed = canBuy(p) && state !== 'pending' && state !== 'unavailable';
   const requestable = p.saleStatus === 'unavailable';
   const displayPrice = price === null ? 'Цена уточняется' : money(price);
+  const editorial = catalogEditorialChuruCat[product.id];
+  const useEditorial = editorial && product.description === editorial.description;
+  const displayDescription = useEditorial ? product.description : p.description;
+  const displayDetails = useEditorial
+    ? [...new Set([...(p.details || []), ...(product.details || [])])] : p.details;
   const variants = hasVariants(product) && product.variants.length > 1;
   const displayVariants = orderedVariants(product);
   const label = product.optionLabel || p.optionLabel || 'Вариант';
@@ -73,6 +79,6 @@ export function accessoryDetail(product, helpers) {
   const action = requestable ? t.request : !buyable && p.serverPriceConfirmed === false
     ? t.pricePending : specialAvailability ? (['on_hand','available'].includes(state) ? t.add : state === 'source_on_demand' ? t.order : t[state][0]) : (buyable ? 'Добавить в корзину' : 'Вариант недоступен');
   const priceNote = price === null ? '' : `<p class="retail-note">Цена с IVA${p.packageWeightKg ? ` · ${money(price / p.packageWeightKg)} / кг` : ''}${specialAvailability ? '' : `<br>${escape(buyable ? 'Доступно к заказу' : t[state][0])}`}</p>`;
-  return `<div class="page">${crumbs(product.name)}<div class="detail-grid">${imageBlock(p.image,'detail-image')}<div class="detail-copy"><span class="eyebrow">${escape(p.line || p.brand || '')}</span><h1>${escape(p.name || product.name)}</h1>${variants?`<p class="variant-current">${escape(label)}: ${escape(translate(p.label))}</p>`:''}<span class="detail-price-label">${variants?'Цена выбранного варианта':'Цена товара'}</span><div class="detail-price">${displayPrice}</div>${priceNote}<p>${escape(translate(p.description || ''))}</p><span class="size-label">${escape(label)}</span><div class="size-options variant-options ${specialAvailability?'availability-options':''}" aria-label="${escape(label)}">${optionMarkup}</div>${selectedAvailability}<div class="buy-row">${buyable?`<div class="quantity"><button data-detail-qty="-1" aria-label="Уменьшить количество">${icon('minus')}</button><span id="detail-qty">${quantity}</span><button data-detail-qty="1" aria-label="Увеличить количество">${icon('plus')}</button></div>`:''}<button class="button" ${buyable?`data-buy="${escape(product.id)}"`:requestable?`data-request-availability="${escape(p.id)}"`:'disabled'}>${escape(action)} ${buyable?icon(state === 'source_on_demand' && specialAvailability ? 'arrow' : 'bag'):requestable?icon('arrow'):''}</button><button class="icon-button favorite-detail ${favorites.includes(product.id)?'selected':''}" data-favorite="${escape(product.id)}" aria-label="В избранное" aria-pressed="${favorites.includes(product.id)}">${icon('heart')}</button></div>${customerDetails(p.details, translate, escape, p.category)}</div></div></div>${goodTogether(product)}`;
+  return `<div class="page">${crumbs(product.name)}<div class="detail-grid">${imageBlock(p.image,'detail-image')}<div class="detail-copy"><span class="eyebrow">${escape(p.line || p.brand || '')}</span><h1>${escape(p.name || product.name)}</h1>${variants?`<p class="variant-current">${escape(label)}: ${escape(translate(p.label))}</p>`:''}<span class="detail-price-label">${variants?'Цена выбранного варианта':'Цена товара'}</span><div class="detail-price">${displayPrice}</div>${priceNote}<p>${escape(translate(displayDescription || ''))}</p><span class="size-label">${escape(label)}</span><div class="size-options variant-options ${specialAvailability?'availability-options':''}" aria-label="${escape(label)}">${optionMarkup}</div>${selectedAvailability}<div class="buy-row">${buyable?`<div class="quantity"><button data-detail-qty="-1" aria-label="Уменьшить количество">${icon('minus')}</button><span id="detail-qty">${quantity}</span><button data-detail-qty="1" aria-label="Увеличить количество">${icon('plus')}</button></div>`:''}<button class="button" ${buyable?`data-buy="${escape(product.id)}"`:requestable?`data-request-availability="${escape(p.id)}"`:'disabled'}>${escape(action)} ${buyable?icon(state === 'source_on_demand' && specialAvailability ? 'arrow' : 'bag'):requestable?icon('arrow'):''}</button><button class="icon-button favorite-detail ${favorites.includes(product.id)?'selected':''}" data-favorite="${escape(product.id)}" aria-label="В избранное" aria-pressed="${favorites.includes(product.id)}">${icon('heart')}</button></div>${customerDetails(displayDetails, translate, escape, p.category)}</div></div></div>${goodTogether(product)}`;
 
 }

@@ -1,7 +1,7 @@
 import { createUsefulUI } from './useful.js?v=ukrainian-public-3';
 import { createAccountUI } from './account.js?v=product-urls-20261110';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
-import { accessoryDetail, customerDetails } from './accessory-ui.js?v=catalog-sku-audit-20261110';
+import { accessoryDetail, customerDetails } from './accessory-ui.js?v=churu-cat-editorial-20261112';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=all-product-urls-20261110';
 import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';

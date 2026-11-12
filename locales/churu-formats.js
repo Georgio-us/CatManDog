@@ -122,6 +122,8 @@ export const churuFormatsUk = {
 flavors.push(['Churu Kitten - курица', 'Churu Kitten - pollo', 'Churu Kitten - курка']);
 flavors.push(['Churu DOG - курица', 'Churu DOG - pollo', 'Churu DOG - курка']);
 for (const [source, es, uk] of flavors) {
+  churuFormatsEs[`${source} - 4 × 14 г`] = `${es} - 4 × 14 g`;
+  churuFormatsUk[`${source} - 4 × 14 г`] = `${uk} - 4 × 14 г`;
   churuFormatsEs[`${source} - один тюбик 14 г`] = `${es} - un tubo de 14 g`;
   churuFormatsEs[`${source} - 12 упаковок по 4 тюбика`] = `${es} - 12 sobres de 4 tubos`;
   churuFormatsUk[`${source} - один тюбик 14 г`] = `${uk} - один тюбик 14 г`;

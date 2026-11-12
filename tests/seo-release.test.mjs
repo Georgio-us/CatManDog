@@ -13,6 +13,8 @@ import { catalogEditorialLeonardo } from '../catalog-editorial-leonardo.js';
 import { catalogEditorialHeld } from '../catalog-editorial-held.js';
 import { catalogEditorialChuruDog } from '../catalog-editorial-churu-dog.js';
 import { catalogEditorialAcanaWet } from '../catalog-editorial-acana-wet.js';
+import { catalogEditorialChuruCat } from '../catalog-editorial-churu-cat.js';
+import { accessoryDetail } from '../accessory-ui.js';
 
 test('the sitemap contains only released public pages with Spanish editorial content', async () => {
   const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
@@ -71,7 +73,7 @@ test('every public product has a distinct permanent URL while unreleased pages s
 
 test('the verified product release has unique Spanish source content and crawlable category links', async () => {
   const released = seoProducts.filter(product => product.indexable);
-  assert.equal(released.length, 79);
+  assert.equal(released.length, 84);
   const descriptions = new Set();
   for (const product of released) {
     const html = await seoDocument(product.path);
@@ -91,16 +93,33 @@ test('the verified product release has unique Spanish source content and crawlab
 test('released editorial products serve the same verified Spanish copy as the storefront', async () => {
   const editorial = { ...catalogEditorialCats, ...catalogEditorialDogs,
     ...catalogEditorialRoyalCanin, ...catalogEditorialLeonardo, ...catalogEditorialHeld,
-    ...catalogEditorialChuruDog, ...catalogEditorialAcanaWet };
+    ...catalogEditorialChuruDog, ...catalogEditorialAcanaWet, ...catalogEditorialChuruCat };
   const releasedEditorial = Object.entries(editorial)
     .filter(([id]) => seoProducts.some(product => product.id === id && product.indexable));
-  assert.equal(releasedEditorial.length, 58);
+  assert.equal(releasedEditorial.length, 63);
   for (const [id, copy] of releasedEditorial) {
     const path = productHref(id);
     const html = await seoDocument(path);
     assert.ok(copy.source && copy.esDescription.length > 100, id);
     assert.ok(html.includes(copy.esDescription.replace(/&/gu, '&amp;')), id);
     for (const fact of copy.esDetails) assert.ok(html.includes(fact), `${id}: ${fact}`);
+  }
+});
+
+test('Churu cat sale units retain their price formats and show the verified recipe', () => {
+  for (const [id, copy] of Object.entries(catalogEditorialChuruCat)) {
+    const product = catalogProducts.find(entry => entry.id === id);
+    assert.equal(product?.description, copy.description, id);
+    assert.equal(product.variants.length, 3, id);
+    for (const variant of product.variants) {
+      const html = accessoryDetail(product, {
+        crumbs: () => '', imageBlock: () => '', escape: String,
+        icon: () => '<svg></svg>', favorites: [], goodTogether: () => '',
+        money: value => `${value} €`, variantId: variant.id
+      });
+      assert.ok(html.includes(copy.description), `${id}: ${variant.id}`);
+    }
+    assert.match(product.variants[2].description, /12 закрытых пачек|Короб из 12 закрытых пачек/u);
   }
 });
 

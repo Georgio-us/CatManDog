@@ -23,6 +23,10 @@ const releasedByCategory = {
     'acana-wet-beef', 'acana-wet-chicken', 'acana-wet-kitten',
     'acana-wet-lamb', 'acana-wet-salmon', 'acana-wet-tuna'
   ],
+  '/catalogo/gatos/premios': [
+    'tc-4e50c58957', 'tc-0707caf730', 'tc-768abf17c2',
+    'tc-dc3d6d94c2', 'tc-713f42fb9a'
+  ],
   '/catalogo/perros/pienso-seco': [
     'dog-orijen-fit-trim',
     'dog-orijen-original', 'dog-orijen-puppy', 'dog-orijen-six-fish',

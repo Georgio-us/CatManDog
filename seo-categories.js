@@ -15,6 +15,13 @@ export const seoCategories = [
     intro: 'Encuentra distintas recetas y formatos de comida húmeda para gatos y revisa cada opción con calma'
   },
   {
+    path: '/catalogo/gatos/premios', pet: 'cat', group: 'treats',
+    indexable: true,
+    title: 'Premios para gatos',
+    description: 'Explora los premios cremosos Churu para gatos y gatitos: pollo, atún y combinaciones con queso o vieira',
+    intro: 'Compara los ingredientes de cada sabor Churu y elige entre un tubo, una caja de cuatro o un formato mayor'
+  },
+  {
     path: '/catalogo/gatos/arena', pet: 'cat', group: 'litter',
     title: 'Arena para gatos',
     description: 'Compara tipos de arena para gatos, materiales y formatos en el catálogo de CatManDog',
