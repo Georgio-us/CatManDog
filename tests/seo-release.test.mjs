@@ -10,6 +10,7 @@ import { catalogEditorialCats } from '../catalog-editorial-cats.js';
 import { catalogEditorialDogs } from '../catalog-editorial-dogs.js';
 import { catalogEditorialRoyalCanin } from '../catalog-editorial-royal-canin.js';
 import { catalogEditorialLeonardo } from '../catalog-editorial-leonardo.js';
+import { catalogEditorialHeld } from '../catalog-editorial-held.js';
 
 test('the sitemap contains only released public pages with Spanish editorial content', async () => {
   const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
@@ -68,7 +69,7 @@ test('every public product has a distinct permanent URL while unreleased pages s
 
 test('the verified product release has unique Spanish source content and crawlable category links', async () => {
   const released = seoProducts.filter(product => product.indexable);
-  assert.equal(released.length, 51);
+  assert.equal(released.length, 61);
   const descriptions = new Set();
   for (const product of released) {
     const html = await seoDocument(product.path);
@@ -87,10 +88,10 @@ test('the verified product release has unique Spanish source content and crawlab
 
 test('released editorial products serve the same verified Spanish copy as the storefront', async () => {
   const editorial = { ...catalogEditorialCats, ...catalogEditorialDogs,
-    ...catalogEditorialRoyalCanin, ...catalogEditorialLeonardo };
+    ...catalogEditorialRoyalCanin, ...catalogEditorialLeonardo, ...catalogEditorialHeld };
   const releasedEditorial = Object.entries(editorial)
     .filter(([id]) => seoProducts.some(product => product.id === id && product.indexable));
-  assert.equal(releasedEditorial.length, 30);
+  assert.equal(releasedEditorial.length, 40);
   for (const [id, copy] of releasedEditorial) {
     const path = productHref(id);
     const html = await seoDocument(path);
@@ -100,12 +101,19 @@ test('released editorial products serve the same verified Spanish copy as the st
   }
 });
 
-test('thin legacy descriptions stay out of the index until their product facts are verified', async () => {
-  const held = ['leonardo-fresh-beef', 'leonardo-fresh-duck', 'leonardo-fresh-salmon',
+test('former thin pages use their verified recipe copy and the new Churu formats remain held', async () => {
+  const verified = ['leonardo-fresh-beef', 'leonardo-fresh-duck', 'leonardo-fresh-salmon',
     'dog-rc-mini-adult', 'dog-rc-medium-adult', 'dog-rc-mini-digestive',
     'dog-ownat-ultra-medium', 'dog-ownat-just-gf-chicken', 'dog-ownat-gf-prime',
     'dog-ownat-author-duck'];
-  for (const id of held) {
+  for (const id of verified) {
+    const product = seoProducts.find(entry => entry.id === id);
+    assert.equal(product?.indexable, true, id);
+    const html = await seoDocument(product.path);
+    assert.ok(html.includes(catalogEditorialHeld[id].esDescription.replace(/&/gu, '&amp;')), id);
+    assert.doesNotMatch(html, /<meta name="robots" content="noindex/u);
+  }
+  for (const id of ['churu-dog-tuna-pack4', 'churu-dog-salmon-pack8', 'churu-dog-chicken-bites']) {
     const product = seoProducts.find(entry => entry.id === id);
     assert.equal(product?.indexable, false, id);
     assert.match(await seoDocument(product.path), /<meta name="robots" content="noindex,follow">/u);

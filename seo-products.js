@@ -1,6 +1,6 @@
 import { seoProductSlugs } from './seo-product-slugs.js';
 
-// Each released family passed the 2026-11-11 catalog, price, source, copy and image audit.
+// Each released family passed the current catalog, price, source, copy and image audit.
 // Keep this list explicit: a newly imported product must not become indexable by accident.
 const releasedByCategory = {
   '/catalogo/gatos/pienso-seco': [
@@ -15,7 +15,8 @@ const releasedByCategory = {
     'orijen-six-fish', 'orijen-kitten', 'orijen-guardian8',
     'rc-fit', 'rc-indoor', 'rc-kitten-regular', 'rc-mother-babycat',
     'rc-hairball', 'rc-sensible', 'leonardo-light', 'leonardo-kitten',
-    'leonardo-adult-duck', 'leonardo-maxi', 'leonardo-kitten-gf'
+    'leonardo-adult-duck', 'leonardo-maxi', 'leonardo-kitten-gf',
+    'leonardo-fresh-beef', 'leonardo-fresh-duck', 'leonardo-fresh-salmon'
   ],
   '/catalogo/gatos/comida-humeda': ['rc-wet', 'leonardo-chicken', 'leonardo-turkey'],
   '/catalogo/perros/pienso-seco': [
@@ -23,7 +24,10 @@ const releasedByCategory = {
     'dog-orijen-original', 'dog-orijen-puppy', 'dog-orijen-six-fish',
     'dog-orijen-small-breed', 'cmd-source-classics-red-meat',
     'cmd-source-classics-wild-coast', 'cmd-source-puppy-small-breed',
-    'cmd-source-acana-senior'
+    'cmd-source-acana-senior', 'dog-rc-mini-adult',
+    'dog-rc-medium-adult', 'dog-rc-mini-digestive',
+    'dog-ownat-ultra-medium', 'dog-ownat-just-gf-chicken',
+    'dog-ownat-gf-prime', 'dog-ownat-author-duck'
   ]
 };
 const releasedCategoryById = new Map(Object.entries(releasedByCategory)

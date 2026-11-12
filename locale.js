@@ -7,6 +7,7 @@ import { ukProductNames } from './locales/uk-product-names.js?v=confirmed-demand
 import { ukProductCopy } from './locales/uk-product-copy.js?v=product-content-20261110';
 import { ukDetails } from './locales/uk-details.js?v=product-content-20261110';
 import { churuFormatsEs, churuFormatsUk } from './locales/churu-formats.js';
+import { churuDogEs, churuDogUk } from './locales/churu-dog.js';
 import { seoCategoryForPath } from './seo-categories.js';
 import { deliveryStatusEs, deliveryStatusUk } from './locales/delivery-status.js';
 import { yaguExpansionEs, yaguExpansionUk } from './locales/yagu-expansion.js?v=product-content-20261110';
@@ -45,8 +46,8 @@ export function translate(value) {
   const whitespace = value.match(/^(\s*)([\s\S]*?)(\s*)$/);
   const source = whitespace?.[2] ?? value;
   let result = language === 'uk'
-    ? editorialUk[source] ?? yaguExpansionUk[source] ?? deliveryStatusUk[source] ?? uk[source] ?? ukExtra[source] ?? churuFormatsUk[source] ?? ukProductNames[source] ?? ukProductCopy(source) ?? ukDetails[source] ?? esProductText[source] ?? esDetails[source]
-    : editorialEs[source] ?? yaguExpansionEs[source] ?? deliveryStatusEs[source] ?? es[source] ?? churuFormatsEs[source] ?? esProductText[source] ?? esDetails[source];
+    ? editorialUk[source] ?? churuDogUk[source] ?? yaguExpansionUk[source] ?? deliveryStatusUk[source] ?? uk[source] ?? ukExtra[source] ?? churuFormatsUk[source] ?? ukProductNames[source] ?? ukProductCopy(source) ?? ukDetails[source] ?? esProductText[source] ?? esDetails[source]
+    : editorialEs[source] ?? churuDogEs[source] ?? yaguExpansionEs[source] ?? deliveryStatusEs[source] ?? es[source] ?? churuFormatsEs[source] ?? esProductText[source] ?? esDetails[source];
   if (result === undefined) {
     result = source;
     for (const [pattern, replacement] of language === 'uk' ? ukPatterns : esPatterns) {

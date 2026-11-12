@@ -1,9 +1,11 @@
 import { yaguExpansionUkNames } from './yagu-expansion.js';
+import { churuDogUkNames } from './churu-dog.js';
 
 // Ukrainian product names. Brand and registered line names remain unchanged.
 export const ukProductNames = {
   "Royal Canin Gastrointestinal Kitten - сухой корм": "Royal Canin Gastrointestinal Kitten - сухий корм",
   ...yaguExpansionUkNames,
+  ...churuDogUkNames,
   "HeyboPet - беспроводной фонтан 3 л": "HeyboPet - бездротовий фонтан 3 л",
   "HeyboPet - сменные фильтры для фонтана, 3 шт": "HeyboPet - змінні фільтри для фонтанчика, 3 шт",
   "Churu - лосось и курица": "Churu - лосось і курка",

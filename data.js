@@ -16,10 +16,7 @@ import { applyChuruRetailFormats } from './churu-retail-formats.js';
 import { churuDogProducts } from './churu-dog-products.js';
 import { confirmedDemandProducts } from './confirmed-demand-products.js';
 import { withSelectedAcanaOrijenFormats } from './acana-orijen-selected-formats.js';
-import { catalogEditorialCats } from './catalog-editorial-cats.js';
-import { catalogEditorialDogs } from './catalog-editorial-dogs.js';
-import { catalogEditorialRoyalCanin } from './catalog-editorial-royal-canin.js';
-import { catalogEditorialLeonardo } from './catalog-editorial-leonardo.js';
+import { catalogEditorialContent } from './catalog-editorial-content.js';
 
 const foodProducts = [...expandPriorityFood(expandRoyalCaninFood(originalFoodProducts)), ...ownatProducts];
 
@@ -415,7 +412,7 @@ const mergeCategory = product => {
 // Kubo Plus has no comparable retail price yet, so its six variants stay out of the storefront.
 const yaguStorefrontProducts = yaguLaunchProducts.filter(product => product.id !== 'yagu-kubo-plus-pana');
 export const products = applyChuruRetailFormats(applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy(withSelectedAcanaOrijenFormats([...foodProducts, ...dogProducts, ...confirmedDemandProducts, ...churuDogProducts, ...expandYaguCare(treatsCareProducts), ...expandYaguColourVariants(yaguProducts), ...yaguStorefrontProducts, ...yaguExpansionProducts, ...catalogHeybopetProducts, ...launchHeyboPetProducts, ...demoProducts.map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)])).map(mergeCategory)))).map(product => {
-  const copy = catalogEditorialCats[product.id] || catalogEditorialDogs[product.id] || catalogEditorialRoyalCanin[product.id] || catalogEditorialLeonardo[product.id];
+  const copy = catalogEditorialContent[product.id];
   if (!copy || product.description !== copy.previousDescription) return product;
   return {
     ...product, description: copy.description, details: copy.details,

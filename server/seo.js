@@ -4,6 +4,7 @@ import { products } from '../data.js';
 import { esProductText } from '../locales/product-es.js';
 import { esDetails } from '../locales/details-es.js';
 import { editorialEs } from '../locales/editorial-translations.js';
+import { churuDogEs } from '../locales/churu-dog.js';
 import { yaguExpansionEs } from '../locales/yagu-expansion.js';
 import { customerFacts, orderedVariants } from '../product-content.js';
 import { seoCategories, seoCategoryForPath } from '../seo-categories.js';
@@ -19,9 +20,9 @@ const articleLinks = articlesEs.map(article =>
 const categoryLinks = seoCategories.filter(category => category.indexable).map(category =>
   `<a class="article-card" href="${category.path}"><h2>${escapeHtml(category.title)}</h2><p>${escapeHtml(category.intro)}</p></a>`).join('');
 const productDescription = (product, publishedProduct) => publishedProduct.description ||
-  editorialEs[product.description] || esProductText[product.description] ||
+  editorialEs[product.description] || churuDogEs[product.description] || esProductText[product.description] ||
   yaguExpansionEs[product.description] || product.name;
-const productName = product => editorialEs[product.name] || esProductText[product.name] || product.name;
+const productName = product => editorialEs[product.name] || churuDogEs[product.name] || esProductText[product.name] || product.name;
 const productLinks = categoryPath => seoProducts
   .filter(item => item.indexable && item.categoryPath === categoryPath)
   .map(item => {

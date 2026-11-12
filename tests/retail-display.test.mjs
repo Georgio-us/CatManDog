@@ -65,8 +65,8 @@ test('first dog assortment retains its 22 original families and 43 priced varian
   const selectedIds = new Set(selectedAcanaOrijenFormats.map(item => item.id));
   const addedFamilies = new Set(selectedAcanaOrijenFormats.map(item => item.productId));
   const dogs = catalogProducts.filter(item => item.pet === 'dog' && !item.id.startsWith('yagu-')
-    && !['royal-canin-chihuahua-adult', 'cmd-source-0f4a3ef9889b8ff3',
-      'churu-dog-chicken'].includes(item.id)
+    && !item.id.startsWith('churu-dog-')
+    && !['royal-canin-chihuahua-adult', 'cmd-source-0f4a3ef9889b8ff3'].includes(item.id)
     && (!addedFamilies.has(item.id) || item.variants.some(variant => !selectedIds.has(variant.id))));
   const variants = dogs.flatMap(item => item.variants.filter(variant => !selectedIds.has(variant.id)));
   assert.equal(dogs.length, 22);

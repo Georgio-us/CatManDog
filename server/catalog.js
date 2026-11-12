@@ -11,6 +11,7 @@ import { catalogEditorialCats } from '../catalog-editorial-cats.js';
 import { catalogEditorialDogs } from '../catalog-editorial-dogs.js';
 import { catalogEditorialRoyalCanin } from '../catalog-editorial-royal-canin.js';
 import { catalogEditorialLeonardo } from '../catalog-editorial-leonardo.js';
+import { catalogEditorialHeld } from '../catalog-editorial-held.js';
 
 const cents = value => Number.isFinite(value) && value > 0 ? Math.round(value * 100) : null;
 const imagePath = image => typeof image === 'string' ? image : image?.src || null;
@@ -89,6 +90,15 @@ export async function importCatalog(db, items = products) {
         /^(?:heybo pet|heiba pet|heybopet)$/i.test(product.brand || '') ? 'preorder' :
           /^(?:advance|hill[’']s)$/i.test(product.brand || '') ? 'unavailable' : 'available',
         variant.source]);
+      // A confirmed B2B purchase quote belongs in its own column. Existing owner
+      // edits take precedence, and the customer price is never used as a fallback.
+      if (variant.source.purchasePriceStatus === 'confirmed' &&
+          variant.source.purchasePriceTaxIncluded === false &&
+          cents(variant.source.purchasePrice)) {
+        await client.query(`UPDATE catalog_variants SET purchase_price_cents=$2
+          WHERE id=$1 AND purchase_price_cents IS NULL`,
+        [variant.id, cents(variant.source.purchasePrice)]);
+      }
       // Existing launch variants may have been imported before retail research was completed.
       // Fill only empty reference prices; never replace an owner-approved or edited price.
       if (Object.hasOwn(yaguRetailBenchmarks, variant.source.supplier?.sku) && variant.sourcePriceCents) {
@@ -435,6 +445,20 @@ export async function importCatalog(db, items = products) {
           [productId, copy.description, JSON.stringify(copy.details), copy.previousDescription]);
         }
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [leonardoBatchMigration]);
+      }
+      const heldCopyMigration = 'verified_legacy_recipe_copy_2026_11_12';
+      const heldCopyDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [heldCopyMigration]);
+      if (!heldCopyDone.rows.length) {
+        for (const [productId, copy] of Object.entries(catalogEditorialHeld)) {
+          await client.query(`UPDATE catalog_products SET description=$2,details=$3::jsonb
+            WHERE id=$1 AND description=$4`,
+          [productId, copy.description, JSON.stringify(copy.details), copy.previousDescription]);
+          await client.query(`UPDATE catalog_variants SET description=$2,details=$3::jsonb,updated_at=now()
+            WHERE product_id=$1 AND (description=$4 OR btrim(description)='')`,
+          [productId, copy.description, JSON.stringify(copy.details), copy.previousDescription]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [heldCopyMigration]);
       }
       // The owner set a retail price for this model; its two color variants remain
       // unavailable for checkout until Tina confirms which colors she can supply.

@@ -13,10 +13,10 @@ import { editorialEs, editorialUk } from '../locales/editorial-translations.js';
 
 test('verified editorial copy is distinct and translated for each curated product', () => {
   const entries = Object.entries(catalogEditorialContent);
-  assert.equal(entries.length, 48);
+  assert.equal(entries.length, 58);
   assert.equal(new Set(entries.map(([,copy]) => copy.description)).size, entries.length);
   for (const [id, copy] of entries) {
-    assert.ok(id.startsWith('cmd-source-') || id.startsWith('leonardo-') || id.startsWith('acana-') || id.startsWith('orijen-') || id.startsWith('dog-orijen-') || id.startsWith('rc-'));
+    assert.ok(id.startsWith('cmd-source-') || id.startsWith('leonardo-') || id.startsWith('acana-') || id.startsWith('orijen-') || id.startsWith('dog-') || id.startsWith('rc-'));
     assert.ok(copy.source.startsWith('https://'));
     assert.ok(copy.description.length > 100);
     assert.ok(copy.details.length >= 3);
@@ -41,7 +41,8 @@ test('catalog import keeps variant identity and source prices separate from purc
   assert.equal(new Set(rows.map(row => row.variant.id)).size, rows.length);
   assert.ok(rows.some(row => row.variant.id === 'rc-sterilised-2000g'));
   assert.ok(rows.every(row => row.variant.sourcePriceCents === null || row.variant.sourcePriceCents > 0));
-  assert.ok(rows.every(row => row.variant.source.purchasePrice === null || row.variant.source.purchasePrice === undefined));
+  assert.ok(rows.every(row => !Number.isFinite(row.variant.source.purchasePrice) ||
+    Math.round(row.variant.source.purchasePrice * 100) !== row.variant.sourcePriceCents));
   assert.ok(rows.every(row => !retiredProductIds.has(row.product.id)));
 });
 test('confirmed-demand formats use exact SKUs and local studio images', () => {
