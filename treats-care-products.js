@@ -3101,6 +3101,17 @@ export const treatsCareProducts = [
         "isNew": true,
         "tag": "Дополнительный уход",
         "line": "Dentalife · 40 г",
+        "purchaseQuote": {
+          "supplier": "Albet",
+          "article": "880559",
+          "priceCents": 893,
+          "unitsPerPurchase": 8,
+          "taxBasis": "excludes_iva",
+          "taxRateBps": 1000,
+          "checkedAt": "2026-11-12",
+          "orderable": true,
+          "url": "https://www.albet.es/dentalife-gato"
+        },
         "sizes": [
           "40 г"
         ],

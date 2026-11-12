@@ -45,6 +45,19 @@ const $ = id => document.getElementById(id);
 const escape = value => String(value ?? '').replace(/[&<>"']/g, char =>
   ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[char]);
 const euros = cents => new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'}).format(cents / 100);
+function purchaseQuoteHtml(quote) {
+  if (!quote || !Number.isInteger(quote.priceCents)) return '';
+  const units = Number.isInteger(quote.unitsPerPurchase) && quote.unitsPerPurchase > 1
+    ? quote.unitsPerPurchase : 1;
+  const tax = quote.taxBasis === 'excludes_iva' ? 'без IVA' :
+    quote.taxBasis === 'includes_iva' ? 'с IVA' : 'ставка IVA не указана';
+  const format = units > 1 ? ` за ${units} шт (≈${euros(Math.round(quote.priceCents / units))}/шт)` : '';
+  const fallback = quote.fallback;
+  const fallbackLink = fallback && /^https:\/\//.test(fallback.url || '')
+    ? ` · Альтернатива: <a href="${escape(fallback.url)}" target="_blank" rel="noopener noreferrer">${escape(fallback.supplier)}</a> ${euros(fallback.priceCents)} с IVA, доставка отдельно`
+    : '';
+  return `Котировка ${escape(quote.supplier || '')}: ${euros(quote.priceCents)}${format} ${tax}, ${escape(quote.checkedAt || '')}${quote.orderable === false ? ' · Сейчас заказать у поставщика нельзя' : ''}${fallbackLink}`;
+}
 const countNoun = (count, one, few, many) => {
   const lastTwo = count % 100;
   if (lastTwo >= 11 && lastTwo <= 14) return many;
@@ -148,9 +161,7 @@ function orderCard(order) {
       <br><span class="admin-muted">IVA: ${item.taxRateBps === null ? 'ставка не указана' : `${item.taxRateBps / 100}% · ${euros(item.taxCents)}`}
       · Закупка: ${item.purchaseCostCents === null ? 'не подтверждена' : `${euros(item.purchaseCostCents)} за шт ${item.purchaseCostBasis === 'includes_iva' ? 'с IVA' : item.purchaseCostBasis === 'excludes_iva' ? 'без IVA' : 'налоговый статус не указан'}`}
       ${item.purchaseCostSource ? `· ${escape(item.purchaseCostSource)}` : ''}
-      ${item.purchaseCostCents === null && item.purchaseQuote?.priceCents
-        ? `· Котировка ${escape(item.purchaseQuote.supplier || '')} ${euros(item.purchaseQuote.priceCents)} ${item.purchaseQuote.taxBasis === 'excludes_iva' ? 'без IVA' : item.purchaseQuote.taxBasis === 'includes_iva' ? 'с IVA' : 'налоговый статус не указан'} от ${escape(item.purchaseQuote.checkedAt || '')}${item.purchaseQuote.orderable === false ? ' · Сейчас заказать у поставщика нельзя' : ''}`
-        : ''}
+      ${item.purchaseCostCents === null && item.purchaseQuote ? `· ${purchaseQuoteHtml(item.purchaseQuote)}` : ''}
       · ${item.sourceMode === 'on_hand' ? 'из нашего склада' : `для этого заказа нужно ${item.qty} шт`}
       · Позиция склада ${item.stockPosition > 0 ? '+' : ''}${item.stockPosition} шт${item.orderStockDelta ? `, вклад этого заказа ${item.orderStockDelta} шт` : ''}</span></li>`).join('')}</ul>
     <p class="admin-muted">Доставка для покупателя: ${euros(order.delivery_cents)} · IVA доставки: ${order.deliveryTaxRateBps === null ? 'ставка не указана' : `${order.deliveryTaxRateBps / 100}%`}</p>
@@ -422,9 +433,7 @@ function auditRow(row) {
       <small>На складе: ${row.stock_quantity ?? 'не указано'} · Резерв: ${row.reserved_quantity || 0}</small></div>
     <div><small>Продажа</small><strong>${sale ? euros(sale) : 'Нет цены'}</strong>${row.price_review ? `<small>${escape(row.price_review)}</small>` : ''}${row.gross_spread_cents !== null && row.gross_spread_cents <= 0 ? '<small>Цена не покрывает закупку; доставка, упаковка и эквайринг считаются отдельно</small>' : ''}</div>
     <div><small>Закупка</small><strong>${cost === null ? 'Не подтверждена' : euros(cost)}</strong>
-      ${cost === null && row.purchase_quote?.priceCents
-        ? `<small>Котировка ${escape(row.purchase_quote.supplier || '')}: ${euros(row.purchase_quote.priceCents)} ${row.purchase_quote.taxBasis === 'excludes_iva' ? 'без IVA' : row.purchase_quote.taxBasis === 'includes_iva' ? 'с IVA' : ''}, ${escape(row.purchase_quote.checkedAt || '')}${row.purchase_quote.orderable === false ? ' · Сейчас заказать нельзя' : ''}</small>`
-        : ''}</div>
+      ${cost === null && row.purchase_quote ? `<small>${purchaseQuoteHtml(row.purchase_quote)}</small>` : ''}</div>
     <div><small>Поставщик</small><strong>${escape(row.supplier_name || 'Не выбран')}</strong></div>
     <div><small>IVA</small><strong>${row.tax_rate_bps === null ? 'Не указана' : `${row.tax_rate_bps / 100}%`}</strong></div>
     <div><small>Ревизия</small><strong class="${needs ? 'audit-warning' : 'audit-ready'}">${escape(needs || 'Данные заполнены')}</strong></div>

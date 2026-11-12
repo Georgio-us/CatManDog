@@ -1792,6 +1792,13 @@ export const yaguProducts = [
           "taxBasis": "excludes_iva",
           "checkedAt": "2026-11-12",
           "orderable": false,
+          "fallback": {
+            "supplier": "MisMascotas",
+            "priceCents": 678,
+            "taxBasis": "includes_iva",
+            "checkedAt": "2026-11-12",
+            "url": "https://www.mismascotas.es/products/duvo-alfombra-goma-lamer-forma-gato-lila-18-x-16-x-1-cm-46775?variant=57986148696446"
+          },
           "url": "https://odoo.grupoyagu.com/shop/product/7515988-duvo-alfombra-goma-lamer-forma-gato-lila-18-x-16-x-1-cm-46775?search=7515988"
         },
         "weight": "Lila - 18 × 16 × 1 см",
