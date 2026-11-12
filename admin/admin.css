@@ -357,4 +357,8 @@ nav{flex-wrap:wrap}
 .observed-cart .admin-items{margin:16px 0}
 .observed-cart-history{border-top:1px solid #e0e3db;margin-top:16px;padding-top:12px}
 .observed-cart-history li{margin-bottom:10px}
+.admin-test-history>summary,.admin-paid-carts>summary,.finance-settings-panel>summary,.finance-test-history>summary,.admin-operations-review>summary{display:flex;justify-content:space-between;align-items:center;gap:12px;list-style:none;cursor:pointer;font-weight:700}
+.admin-test-history>summary::-webkit-details-marker,.admin-paid-carts>summary::-webkit-details-marker,.finance-settings-panel>summary::-webkit-details-marker,.finance-test-history>summary::-webkit-details-marker,.admin-operations-review>summary::-webkit-details-marker{display:none}
+.admin-test-history>summary svg,.admin-paid-carts>summary svg,.finance-settings-panel>summary svg,.finance-test-history>summary svg,.admin-operations-review>summary svg{width:18px;height:18px;flex:none;transition:transform .2s}
+.admin-test-history[open]>summary svg,.admin-paid-carts[open]>summary svg,.finance-settings-panel[open]>summary svg,.finance-test-history[open]>summary svg,.admin-operations-review[open]>summary svg{transform:rotate(180deg)}
 .order-figures{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;margin:15px 0}.order-figures>div{display:grid;gap:5px;padding:12px;border:1px solid #e0e3db;border-radius:12px}.order-figures span{font-size:13px;color:#62675e}.order-figures strong{font-size:17px}.order-card .admin-items li{margin:10px 0;line-height:1.45}

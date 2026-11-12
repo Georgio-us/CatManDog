@@ -45,6 +45,7 @@ let showTestOrders = false;
 const $ = id => document.getElementById(id);
 const escape = value => String(value ?? '').replace(/[&<>"']/g, char =>
   ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[char]);
+const disclosureIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
 const euros = cents => new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'}).format(cents / 100);
 function purchaseQuoteHtml(quote) {
   if (!quote || !Number.isInteger(quote.priceCents)) return '';
@@ -179,7 +180,7 @@ function renderOrders(orders) {
   const tests = orders.filter(order => order.is_test);
   $('admin-content').innerHTML = `<section class="admin-section-head"><div><h2>Заказы покупателей</h2><p class="admin-muted">Оплаченные и ожидающие обработки заказы магазина</p></div></section>
     ${real.length ? real.map(orderCard).join('') : '<p class="admin-card">Заказов покупателей пока нет</p>'}
-    ${tests.length ? `<details class="admin-card admin-test-history" ${showTestOrders ? 'open' : ''}><summary>История тестовых заказов · ${tests.length}</summary>
+    ${tests.length ? `<details class="admin-card admin-test-history" ${showTestOrders ? 'open' : ''}><summary>История тестовых заказов · ${tests.length}${disclosureIcon}</summary>
       <p class="admin-muted">Тестовые заказы не входят в выручку и потребность в закупке</p>${tests.map(orderCard).join('')}</details>` : ''}`;
 }
 const cartStageLabel = { cart: 'Корзина', checkout: 'Контакты и доставка',
@@ -215,7 +216,7 @@ function renderObservedCarts(carts) {
     <button type="button" data-carts-refresh>Обновить</button></section>
     <p class="admin-muted">Показаны последние 100 сеансов с согласием на аналитику. До заказа имя и контакты не собираются. Данные хранятся 30 дней</p>
     ${active.length ? active.map(observedCartCard).join('') : '<p class="admin-card">Незавершённых корзин сейчас нет</p>'}
-    ${paid.length ? `<details class="admin-card"><summary>Оплаченные корзины · ${paid.length}</summary>${paid.map(observedCartCard).join('')}</details>` : ''}`;
+    ${paid.length ? `<details class="admin-card admin-paid-carts"><summary>Оплаченные корзины · ${paid.length}${disclosureIcon}</summary>${paid.map(observedCartCard).join('')}</details>` : ''}`;
 }
 function renderCartEvents(events) {
   return events.length ? `<ol class="admin-items">${events.map(event => {
@@ -1037,7 +1038,7 @@ function renderFinance(data) {
       <div><strong>${euros(order.total_cents)}</strong><small>${escape(order.payment_status === 'paid' ? 'Оплачен' : 'Не оплачен')} · ${order.lines_without_tax || order.delivery_tax_missing ? 'Ставки IVA требуют проверки' : 'Ставки IVA сохранены'}</small></div>
       <button type="button" data-finance-order="${escape(order.id)}">Проверить расчёт</button>
       <div class="finance-preview" id="finance-preview-${escape(order.id)}" hidden></div></article>`).join('')}</div>` : '<p class="admin-card">Реальных заказов пока нет</p>'}</section>
-    <details class="admin-card finance-settings-panel"><summary>Реквизиты и IVA для будущих счетов</summary>
+    <details class="admin-card finance-settings-panel"><summary>Реквизиты и IVA для будущих счетов${disclosureIcon}</summary>
     <p class="admin-muted">Эти поля нужны для подготовки счетов и внутреннего расчёта IVA. Сейчас форма не выпускает счета и не блокирует продажи. Контакты магазина указаны в <a href="/legal.html" target="_blank" rel="noopener noreferrer">юридической информации</a></p>
     <p class="admin-muted">${missingProfile.length ? `Не заполнено: ${escape(missingProfile.join(', '))}` : 'Основные реквизиты заполнены'} · Ставка IVA не указана у ${data.taxCoverage?.missing_sku_rates ?? 0} из ${data.taxCoverage?.active_skus ?? 0} SKU</p>
     <form data-finance-settings class="finance-settings">
@@ -1051,7 +1052,7 @@ function renderFinance(data) {
       <label>IVA доставки, %<input name="deliveryTaxPercent" type="number" min="0" max="100" step="0.01" value="${profile.delivery_tax_rate_bps === null || profile.delivery_tax_rate_bps === undefined ? '' : profile.delivery_tax_rate_bps / 100}" placeholder="После проверки"></label>
       <button type="submit">Сохранить данные</button></form>
     <p class="admin-muted">Новые ставки применяются к будущим заказам. Ставки товаров задаются в разделе «Цены и остатки»</p></details>
-    ${testOrders.length ? `<details class="admin-card finance-test-history"><summary>История тестовых платежей · ${testOrders.length}</summary><p class="admin-muted">${totals.test_paid_orders || 0} оплаченных тестовых заказов на ${euros(totals.test_paid_total_cents || 0)} не входят в выручку магазина</p><ul>${testOrders.map(order => `<li>${escape(order.number)} · ${euros(order.total_cents)} · ${escape(order.payment_status === 'paid' ? 'Оплачен' : 'Не оплачен')}</li>`).join('')}</ul></details>` : ''}`;
+    ${testOrders.length ? `<details class="admin-card finance-test-history"><summary>История тестовых платежей · ${testOrders.length}${disclosureIcon}</summary><p class="admin-muted">${totals.test_paid_orders || 0} оплаченных тестовых заказов на ${euros(totals.test_paid_total_cents || 0)} не входят в выручку магазина</p><ul>${testOrders.map(order => `<li>${escape(order.number)} · ${euros(order.total_cents)} · ${escape(order.payment_status === 'paid' ? 'Оплачен' : 'Не оплачен')}</li>`).join('')}</ul></details>` : ''}`;
 }
 async function loadFinancePreview(button) {
   const host = document.getElementById(`finance-preview-${button.dataset.financeOrder}`);
@@ -1076,27 +1077,29 @@ async function loadFinancePreview(button) {
 }
 function renderOverview(data) {
   const { catalog, orders, requests, topPaidSkus, purchases, coverage = [], customers = {} } = data;
-  $('admin-content').innerHTML = `<div class="audit-overview overview-grid">
-    <div><strong>${catalog.total}</strong><span>SKU в каталоге</span></div>
-    <div><strong>${catalog.unconfirmed_prices}</strong><span>Цен проверить</span></div>
-    <div><strong>${catalog.missing_costs}</strong><span>Без закупочной цены</span></div>
-    <div><strong>${catalog.missing_tax_rates}</strong><span>Без ставки IVA</span></div>
-    <div><strong>${catalog.missing_suppliers}</strong><span>Без закреплённого поставщика</span></div>
-    <div><strong>${catalog.low_stock}</strong><span>Мало товара на складе</span></div>
-    <div><strong>${purchases.open_purchase_orders}</strong><span>Заявок поставщикам в работе</span></div>
+  $('admin-content').innerHTML = `<section><h2>Заказы и покупатели</h2><div class="audit-overview overview-grid">
     <div><strong>${orders.open_orders}</strong><span>Заказов в работе</span></div>
-    <div><strong>${customers.registered ?? 0}</strong><span>Аккаунтов покупателей</span></div>
+    <div><strong>${euros(orders.paid_total_30d)}</strong><span>Оплачено за 30 дней · ${orders.paid_orders_30d} ${countNoun(orders.paid_orders_30d,'заказ','заказа','заказов')}</span></div>
     <div><strong>${requests.new_requests}</strong><span>Новых обращений</span></div>
-    <div><strong>${euros(orders.paid_total_30d)}</strong><span>Оплачено за 30 дней · ${orders.paid_orders_30d} заказов</span></div>
-  </div><section class="admin-card"><h2>Что проверить сейчас</h2>
-    <div class="overview-actions"><button type="button" data-go-tab="audit">Проверить данные SKU</button>
-    <button type="button" data-go-tab="products">Открыть продукцию</button>
-    <button type="button" data-go-tab="replenishment">Товары к закупке</button>
-    <button type="button" data-go-tab="purchases">Открыть закупки</button>
-    <button type="button" data-go-tab="orders">Открыть заказы</button>
-    <button type="button" data-go-tab="customers">Открыть покупателей</button>
-    <button type="button" data-go-tab="finance">Финансы и реквизиты</button>
-    <button type="button" data-go-tab="requests">Открыть обращения</button></div></section>
+    <div><strong>${customers.registered ?? 0}</strong><span>Аккаунтов покупателей</span></div>
+  </div></section><section class="admin-card"><h2>Работа магазина</h2>
+    <div class="overview-actions"><button type="button" data-go-tab="orders">Заказы</button>
+    <button type="button" data-go-tab="replenishment">Что нужно получить</button>
+    <button type="button" data-go-tab="requests">Обращения</button>
+    <button type="button" data-go-tab="customers">Покупатели</button>
+    <button type="button" data-go-tab="finance">Финансы</button></div></section>
+    <details class="admin-card admin-operations-review"><summary>Ревизия каталога · ${catalog.total} SKU${disclosureIcon}</summary>
+    <p class="admin-muted">Прайс или бренд в исходных данных и закреплённый поставщик для закупки - разные связи. Показатели ниже помогают проверить данные каталога, но сами по себе не означают запрет продажи</p>
+    <div class="audit-overview overview-grid">
+      <div><strong>${catalog.unconfirmed_prices}</strong><span>Цен проверить</span></div>
+      <div><strong>${catalog.missing_costs}</strong><span>Без закупочной цены</span></div>
+      <div><strong>${catalog.missing_tax_rates}</strong><span>Без ставки IVA</span></div>
+      <div><strong>${catalog.missing_suppliers}</strong><span>Без закреплённого поставщика</span></div>
+      <div><strong>${catalog.low_stock}</strong><span>Мало товара на складе</span></div>
+      <div><strong>${purchases.open_purchase_orders}</strong><span>Заявок поставщикам в работе</span></div>
+    </div><div class="overview-actions"><button type="button" data-go-tab="audit">Ревизия SKU</button>
+      <button type="button" data-go-tab="products">Продукция</button>
+      <button type="button" data-go-tab="purchases">Закупки</button></div></details>
     <section class="admin-card"><h2>Ассортимент по категориям</h2>
       <div class="coverage-list">${coverage.map(item => `<button type="button" data-coverage-category="${escape(item.category)}" data-coverage-pet="${escape(item.pet)}"><strong>${escape(item.pet === 'cat' ? 'Кошки' : item.pet === 'dog' ? 'Собаки' : 'Оба')} · ${escape(item.category)}</strong>
         <span>${item.products} товаров · ${item.variants} SKU</span>
