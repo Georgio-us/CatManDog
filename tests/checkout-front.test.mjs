@@ -108,6 +108,30 @@ test('national checkout shows the approved customer delivery bands', () => {
   }
 });
 
+test('local checkout keeps a later delivery day selectable without showing every interval at once', () => {
+  const originalFormData = globalThis.FormData;
+  const later = availableDeliverySlots(new Date(), 7).find(slot => slot.day === 3);
+  globalThis.FormData = class {
+    entries() { return [['deliveryRegion', 'local'], ['deliveryDay', later.date],
+      ['deliverySlot', `${later.date}|10-14`]][Symbol.iterator](); }
+    has() { return false; }
+  };
+  try {
+    const ui = createCheckoutUI({ escape: String, icon: () => '', money: value => `${value.toFixed(2)} €`,
+      imageBlock: () => '', getItems: () => [{ productId: 'rc', variantId: 'rc-2kg',
+        name: 'Royal Canin', variant: '2 кг', qty: 1, price: 29.09 }],
+      isReady: () => true, getPromo: () => null, applyPromo: () => {}, render: () => {} });
+    ui.change({ name: 'deliveryDay', form: {} });
+    const html = ui.page();
+    assert.match(html, new RegExp(`value="${later.date}" selected`));
+    assert.match(html, new RegExp(`name="deliverySlot" value="${later.date}\\|10-14"`));
+    assert.equal((html.match(/name="deliverySlot"/g) || []).length, 3);
+    assert.equal(validateCheckout({ name: 'Ana', email: 'ana@example.es', phone: '+34600000000',
+      city: 'València', postcode: '46001', street: 'Carrer de la Pau', building: '1',
+      deliveryMode: 'slot', deliverySlot: `${later.date}|10-14` }), null);
+  } finally { globalThis.FormData = originalFormData; }
+});
+
 test('signed-in checkout pre-fills the saved address and saves updates only when selected', () => {
   const previous = { FormData: globalThis.FormData, location: globalThis.location };
   const slot = availableDeliverySlots(new Date())[0];

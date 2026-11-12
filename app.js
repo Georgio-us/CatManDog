@@ -7,7 +7,7 @@ import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
 import { categories, products, catalogProducts, articles } from './data.js?v=editorial-leonardo-20261111';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=product-urls-20261110';
-import { createCheckoutUI } from './checkout-ui.js?v=telegram-funnel-20261110';
+import { createCheckoutUI } from './checkout-ui.js?v=delivery-picker-20261112';
 import { availabilityRequestPage } from './availability-request-ui.js?v=request-size-20261111';
 import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=unavailable-single-20261110';
