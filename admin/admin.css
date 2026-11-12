@@ -357,3 +357,4 @@ nav{flex-wrap:wrap}
 .observed-cart .admin-items{margin:16px 0}
 .observed-cart-history{border-top:1px solid #e0e3db;margin-top:16px;padding-top:12px}
 .observed-cart-history li{margin-bottom:10px}
+.order-figures{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;margin:15px 0}.order-figures>div{display:grid;gap:5px;padding:12px;border:1px solid #e0e3db;border-radius:12px}.order-figures span{font-size:13px;color:#62675e}.order-figures strong{font-size:17px}.order-card .admin-items li{margin:10px 0;line-height:1.45}

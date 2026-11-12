@@ -117,20 +117,40 @@ async function setupLogin() {
 function orderCard(order) {
   const address = order.delivery_address || {};
   const delivery = order.delivery_preference || {};
-  return `<article class="admin-card"><div class="admin-variant-top"><h2>${escape(order.number)}</h2><strong>${euros(order.total_cents)}</strong></div>
+  const fulfillment = { received:'Ожидает комплектации', packing:'Собираем',
+    delivering:'Везём', delivered:'Доставлен', cancelled:'Отменён' }[order.status] || order.status;
+  const payment = { paid:'Оплачен', pending:'Ожидает оплаты', awaiting_payment:'Ожидает оплаты',
+    failed:'Оплата не прошла', refunded:'Возвращён' }[order.payment_status] || order.payment_status;
+  const cost = order.purchaseTotalCents === null ? 'Не рассчитана полностью' : euros(order.purchaseTotalCents);
+  const spread = order.merchandiseSpreadCents === null ? 'Не рассчитана полностью' : euros(order.merchandiseSpreadCents);
+  return `<article class="admin-card order-card"><div class="admin-variant-top"><div><h2>${escape(order.number)} · ${escape(fulfillment)}</h2>
+    <p class="admin-muted">Оформлен ${escape(cartTime(order.created_at))}${order.paid_at ? ` · Оплачен ${escape(cartTime(order.paid_at))}` : ''}</p></div>
+    <strong>${euros(order.total_cents)}</strong></div>
+    <div class="order-figures"><div><span>Оплата</span><strong>${escape(payment)}</strong></div>
+      <div><span>Товары</span><strong>${euros(order.merchandiseGrossCents)}</strong></div>
+      <div><span>Закупка товаров</span><strong>${cost}</strong></div>
+      <div><span>Разница по товарам</span><strong>${spread}</strong></div>
+      <div><span>IVA в заказе</span><strong>${order.taxComplete ? euros(order.taxTotalCents) : 'Не рассчитана полностью'}</strong></div></div>
+    <p class="admin-muted">Закупка - по текущим прайсам, не фактическая оплата поставщику. Разница по товарам не учитывает стоимость доставки, эквайринг, упаковку и возможный recargo${order.missingCostCount ? ` · ${order.missingCostCount} позиций без полной себестоимости` : ''}</p>
     <div class="admin-grid"><div><strong>Покупатель</strong>${escape(order.customer_name)}<br>${escape(order.email)}<br>${escape(order.phone)}</div>
     <div><strong>Адрес</strong>${escape(address.street)}, ${escape(address.building)}<br>${escape(address.postcode)} ${escape(address.city || '')}<br>${escape(address.apartment || '')}<br>${escape(address.note || '')}</div>
     <div><strong>Время</strong>${delivery.mode === 'national' ? 'Отправка перевозчиком' :
       delivery.mode === 'soon' ? 'Как можно скорее' : `${escape(delivery.date)} ${escape(delivery.time)}`}<br>
-      <span class="admin-muted">Не забронировано, адрес не проверен</span></div>
-    <div><strong>Оплата и склад</strong>${escape(order.payment_status)}<br>${(order.items || []).some(item => item.sourceMode === 'on_hand')
+      <span class="admin-muted">${delivery.reserved ? 'Время подтверждено' : 'Время не забронировано'} · ${address.verified ? 'Адрес проверен' : 'Адрес требует проверки'}</span></div>
+    <div><strong>Комплектация</strong>${(order.items || []).some(item => item.sourceMode === 'on_hand')
       ? escape(({ reserved:'Товар зарезервирован',released:'Резерв снят',consumed:'Выдан со склада',legacy:'Старый учёт' })[order.stock_state] || '')
-      : (order.items || []).some(item => item.sourceMode === 'open_order') ? 'Комплектация после заказа' : 'Товар под заказ'}</div>
+      : (order.items || []).some(item => item.sourceMode === 'open_order') ? 'Нужно получить товар для заказа' : 'Товар под заказ'}</div>
     <div><strong>Подтверждение по email</strong>${order.confirmation_sent_at ? 'Отправлено' : order.payment_status === 'paid' ? 'Не отправлено' : 'После оплаты'}
       ${order.confirmation_error ? `<br><span class="admin-muted">${escape(order.confirmation_error)}</span>` : ''}
       ${order.payment_status === 'paid' && !order.confirmation_sent_at
         ? `<form data-email-confirmation="${escape(order.id)}"><button type="submit">Повторить отправку</button></form>` : ''}</div></div>
-    <ul class="admin-items">${(order.items || []).map(item => `<li>${escape(item.name)} · ${escape(item.variantLabel)} - ${item.qty} шт × ${euros(item.unitPriceCents)} · ${item.sourceMode === 'on_hand' ? 'на складе' : item.sourceMode === 'open_order' ? 'комплектация после заказа' : 'под заказ'}</li>`).join('')}</ul>
+    <ul class="admin-items">${(order.items || []).map(item => `<li><strong>${escape(item.name)} · ${escape(item.variantLabel)}</strong> - ${item.qty} шт × ${euros(item.unitPriceCents)}
+      <br><span class="admin-muted">IVA: ${item.taxRateBps === null ? 'ставка не указана' : `${item.taxRateBps / 100}% · ${euros(item.taxCents)}`}
+      · Закупка: ${item.purchaseCostCents === null ? 'не подтверждена' : `${euros(item.purchaseCostCents)} за шт ${item.purchaseCostBasis === 'includes_iva' ? 'с IVA' : item.purchaseCostBasis === 'excludes_iva' ? 'без IVA' : 'налоговый статус не указан'}`}
+      ${item.purchaseCostSource ? `· ${escape(item.purchaseCostSource)}` : ''}
+      · ${item.sourceMode === 'on_hand' ? 'из нашего склада' : `для этого заказа нужно ${item.qty} шт`}
+      · Позиция склада ${item.stockPosition > 0 ? '+' : ''}${item.stockPosition} шт${item.orderStockDelta ? `, вклад этого заказа ${item.orderStockDelta} шт` : ''}</span></li>`).join('')}</ul>
+    <p class="admin-muted">Доставка для покупателя: ${euros(order.delivery_cents)} · IVA доставки: ${order.deliveryTaxRateBps === null ? 'ставка не указана' : `${order.deliveryTaxRateBps / 100}%`}</p>
     <form data-order-id="${escape(order.id)}"><label>Статус<select name="status">${['received','packing','delivering','delivered','cancelled'].map(status =>
       `<option value="${status}" ${status === order.status ? 'selected' : ''}>${({received:'Получен',packing:'Собираем',delivering:'Везём',delivered:'Доставлен',cancelled:'Отменён'})[status]}</option>`).join('')}</select></label>
     <label>Заметка<input name="note" maxlength="300" class="wide-input" placeholder="Необязательно"></label><button>Сохранить статус</button></form></article>`;
@@ -179,8 +199,9 @@ function variantCard(variant) {
   return `<article class="admin-card"><div class="admin-variant-top"><div><h2>${escape(variant.name)}</h2>
     <span class="admin-muted">${escape(variant.label)} · ${escape(variant.variant_id)}</span></div>
     <span>${price ? euros(price) : 'Без цены'}</span></div>
-    <p class="admin-muted">Зарезервировано: ${variant.reserved_quantity || 0} · Доступно:
-      ${variant.stock_quantity === null ? 'не указано' : Math.max(0, variant.stock_quantity - (variant.reserved_quantity || 0))}</p>
+    <p class="admin-muted">Физически на складе: ${variant.stock_quantity ?? 0} · Резерв своего склада: ${variant.reserved_quantity || 0}
+      · К получению по оплаченным заказам: ${variant.committed_quantity || 0}
+      · Позиция склада: ${variant.stock_position > 0 ? '+' : ''}${variant.stock_position ?? 0}</p>
     <form data-variant-id="${escape(variant.variant_id)}"><label>Цена продажи, центы<input type="number" name="priceCents" min="1" value="${variant.price_override_cents ?? ''}" placeholder="Исходная: ${variant.source_price_cents ?? '-'}"></label>
     <label>Закупка, центы<input type="number" name="purchasePriceCents" min="0" value="${variant.purchase_price_cents ?? ''}"></label>
     <label>Доступность<select name="availability">${['source_on_demand','on_hand','unavailable'].map(mode =>
@@ -785,9 +806,14 @@ function renderBrands() {
       <aside class="brand-inspector" id="brand-inspector" aria-live="polite"></aside></div></section>`;
   renderBrandRows();
 }
-function renderReplenishment(variants) {
+function renderReplenishment(variants, customerDemand = []) {
   $('admin-content').innerHTML = `<section class="admin-card"><h2>Товары к закупке</h2>
-    <p class="admin-muted">Каждый SKU попадает сюда при достижении своего порога с учётом резерва. Количество рассчитано до целевого запаса и минимальной партии поставщика. Заказ поставщику автоматически не отправляется</p></section>
+    <p class="admin-muted">Здесь отдельно показаны оплаченные клиентские заказы, которые нужно комплектовать, и пополнение своего склада. Заказ поставщику автоматически не отправляется</p></section>
+    <section class="admin-card"><h2>Нужно получить для заказов</h2>
+      ${customerDemand.length ? `<ul class="admin-items">${customerDemand.map(row => `<li><strong>${escape(row.name || row.variant_id)} · ${escape(row.label || '')}</strong>
+        - ${row.quantity} шт · ${escape(row.order_numbers)} · Физически ${row.physical_stock} шт · Позиция склада ${row.physical_stock - row.quantity} шт</li>`).join('')}</ul>` : '<p>Нет оплаченных заказов, ожидающих товар</p>'}</section>
+    <section class="admin-card"><h2>Пополнение своего склада</h2>
+      <p class="admin-muted">Количество рассчитано до целевого запаса и минимальной партии поставщика</p></section>
     ${variants.length ? `<div class="replenishment-list">${variants.map(row => `<article class="admin-card replenishment-row">
       <div><h2>${escape(row.name)}</h2><p class="admin-muted">${escape(row.brand || '')} · ${escape(row.label)} · ${escape(row.variant_id)}</p></div>
       <div><strong>${row.available_quantity} доступно</strong><small>На складе ${row.stock_quantity ?? 0} · Резерв ${row.reserved_quantity} · Порог ${row.reorder_point}</small>
@@ -1113,9 +1139,9 @@ async function load() {
       return;
     }
     if (tab === 'replenishment') {
-      const { variants } = await api('/api/admin/replenishment');
-      renderReplenishment(variants);
-      message(`К закупке: ${variants.length}`);
+      const { variants, customerDemand } = await api('/api/admin/replenishment');
+      renderReplenishment(variants, customerDemand);
+      message(`К получению для заказов: ${customerDemand.length} SKU · Пополнение: ${variants.length}`);
       return;
     }
     if (tab === 'purchases') {

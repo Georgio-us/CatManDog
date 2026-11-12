@@ -185,6 +185,8 @@ test('replenishment uses each SKU threshold and includes a suggested quantity', 
       return { rows:[{ variant_id:'sku-1', available_quantity:3,
         reorder_point:3, target_stock:12, incoming_quantity:4, suggested_quantity:5 }] };
     }
+    if (sql.includes('FROM order_items i JOIN orders o') &&
+      sql.includes('source_mode')) return { rows:[] };
     throw new Error(`Unexpected SQL: ${sql}`);
   } };
   const req = { method:'GET', headers:{ cookie:`cmd_staff_session=${'d'.repeat(64)}` },
@@ -193,6 +195,7 @@ test('replenishment uses each SKU threshold and includes a suggested quantity', 
   await handleApi(db, req, res, '/api/admin/replenishment');
   assert.equal(state.status, 200);
   assert.equal(state.body.variants[0].suggested_quantity, 5);
+  assert.deepEqual(state.body.customerDemand, []);
 });
 
 test('only the owner can publish a product and changes are audited', async () => {

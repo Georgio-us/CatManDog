@@ -13,6 +13,7 @@ import { currentStaff, currentVisitStaff, createStaffSession, staffCookie, clear
   staffToken, staffVisitCookie, clearStaffVisitCookie,
   revokeStaffSession, bootstrapOwner } from './staff.js';
 import { financePreview } from './finance.js';
+import { loadAdminOrders, loadStockCommitments, loadOpenOrderDemand } from './order-operations.js';
 import { backupConfiguration, listBackups } from './backup.js';
 import { createStripeCheckout, stripeMode, stripeReady, verifyStripeEvent } from './stripe.js';
 import { sendcloudReady, sendcloudShippingOptions } from './sendcloud.js';
@@ -1300,7 +1301,8 @@ async function adminRoute(db, req, res, path) {
     }) });
   }
   if (path === '/api/admin/replenishment' && req.method === 'GET') {
-    const { rows } = await db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.pet,
+    const [stock, customerDemand] = await Promise.all([
+    db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.pet,
       v.label,v.stock_quantity,v.reserved_quantity,v.reorder_point,v.target_stock,
       coalesce(v.stock_quantity,0)-v.reserved_quantity AS available_quantity,
       incoming.incoming_quantity,
@@ -1319,8 +1321,9 @@ async function adminRoute(db, req, res, path) {
         WHERE poi.variant_id=v.id AND po.status IN ('ordered','partially_received')) incoming ON true
       WHERE p.active=true AND v.active=true AND v.availability='on_hand'
         AND coalesce(v.stock_quantity,0)-v.reserved_quantity<=v.reorder_point
-      ORDER BY available_quantity,p.name,v.label LIMIT 500`);
-    return json(res, 200, { variants: rows });
+      ORDER BY available_quantity,p.name,v.label LIMIT 500`),
+    loadOpenOrderDemand(db)]);
+    return json(res, 200, { variants: stock.rows, customerDemand });
   }
   const review = path.match(/^\/api\/admin\/variants\/([^/]+)\/review$/);
   if (review && req.method === 'PATCH') {
@@ -1705,15 +1708,7 @@ async function adminRoute(db, req, res, path) {
     } finally { client.release(); }
   }
   if (path === '/api/admin/orders' && req.method === 'GET') {
-    const { rows } = await db.query(`SELECT o.id,o.number,o.customer_name,o.email,o.phone,o.delivery_address,
-      o.delivery_preference,o.status,o.payment_status,o.stock_state,o.total_cents,o.created_at,
-      o.confirmation_sent_at,o.confirmation_error,
-      COALESCE(json_agg(json_build_object('name',i.name,'variantLabel',i.variant_label,
-      'qty',i.quantity,'unitPriceCents',i.unit_price_cents,'sourceMode',i.source_mode))
-      FILTER (WHERE i.id IS NOT NULL),'[]') AS items
-      FROM orders o LEFT JOIN order_items i ON i.order_id=o.id GROUP BY o.id
-      ORDER BY o.created_at DESC LIMIT 100`);
-    return json(res, 200, { orders: rows });
+    return json(res, 200, { orders: await loadAdminOrders(db) });
   }
   const confirmation = path.match(/^\/api\/admin\/orders\/([^/]+)\/confirmation$/);
   if (confirmation && req.method === 'POST') {
@@ -1749,7 +1744,13 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { requests: rows.slice(0,25), hasMore: rows.length > 25 });
   }
   if (path === '/api/admin/variants' && req.method === 'GET') {
-    return json(res, 200, { variants: await liveCatalogSnapshot(db) });
+    const [variants, commitments] = await Promise.all([
+      liveCatalogSnapshot(db), loadStockCommitments(db)
+    ]);
+    return json(res, 200, { variants: variants.map(variant => ({ ...variant,
+      committed_quantity: commitments.get(variant.variant_id) || 0,
+      stock_position: (variant.stock_quantity ?? 0) - variant.reserved_quantity -
+        (commitments.get(variant.variant_id) || 0) })) });
   }
   const saleStatusVariant = path.match(/^\/api\/admin\/variants\/([^/]+)\/sale-status$/);
   if (saleStatusVariant && req.method === 'PATCH') {
