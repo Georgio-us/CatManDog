@@ -62,6 +62,8 @@ test('Catalog descriptions and details do not fall back to Russian or Spanish', 
   });
   assert.deepEqual(untranslated, []);
   assert.equal(ukrainian.translate('Влажный корм NutriPlus с ягнёнком для собак'), 'Вологий корм NutriPlus із ягням для собак');
+  assert.equal(ukrainian.translate('Yagu · T2 · шея 25-27 см - T4 · шея 35-37 см · 3 варианта'),
+    'Yagu · T2 · шия 25-27 см - T4 · шия 35-37 см · 3 варіанти');
 });
 
 test('The retail price comparison follows the Ukrainian selection', () => {

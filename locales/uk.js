@@ -514,6 +514,8 @@ export const uk = {
 };
 
 export const ukPatterns = [
+  [/^шея (.+)$/u, (_, size) => `шия ${size}`],
+  [/^(\d+) варианта$/u, (_, count) => `${count} варіанти`],
   [/^Бесплатная доставка от (.+) после скидки или по купону на доставку\. Ниже порога - (.+)\.$/u, (_, threshold, fee) => `Безплатна доставка від ${threshold} після знижки або з купоном на доставку. До цього порога доставка коштує ${fee}.`],
   [/^Корзина: (\d+) товар(?:а|ов)?$/u, (_, n) => `Кошик: ${n} ${new Intl.PluralRules('uk').select(Number(n)) === 'one' ? 'товар' : new Intl.PluralRules('uk').select(Number(n)) === 'few' ? 'товари' : 'товарів'}`],
   [/^(\d+) товар(?:а|ов)?$/u, (_, n) => `${n} ${new Intl.PluralRules('uk').select(Number(n)) === 'one' ? 'товар' : new Intl.PluralRules('uk').select(Number(n)) === 'few' ? 'товари' : 'товарів'}`],
