@@ -16,6 +16,8 @@ test('checkout refreshes a coupon activated on another device before payment', a
   };
   globalThis.fetch = async path => {
     if (path === '/api/config') return Response.json({ paymentsEnabled: true, ordersEnabled: true });
+    if (path === '/api/checkout/address-check')
+      return Response.json({ city: 'València', postcode: '46001', local: true });
     if (path === '/api/checkout/quote') return Response.json({ totalCents: 4899, orderable: true,
       promoCode: 'CMD2-OTHER-DEVICE' });
     if (path === '/api/checkout/start') { starts += 1; throw new Error('Payment should wait for review'); }
@@ -29,10 +31,12 @@ test('checkout refreshes a coupon activated on another device before payment', a
         promo = { code: 'CMD2-OTHER-DEVICE', percent: 10 };
       }, render: () => { rendered += 1; } });
     await ui.initialize();
-    ui.submit({ matches: value => value === '[data-checkout-form]', values: {
+    ui.submit({ matches: value => value === '[data-checkout-form]',
+      querySelector: () => ({ textContent: '' }), values: {
       name: 'Антон', email: 'anton@example.com', phone: '+34 600 000 000', city: 'València',
       postcode: '46001', street: 'Carrer de la Pau', building: '12', deliveryMode: 'scheduled',
       deliveryDate: '2099-10-19', deliveryTime: '18:00' } });
+    await new Promise(resolve => setImmediate(resolve));
     ui.click({ hasAttribute: name => name === 'data-checkout-pay', disabled: false });
     for (let i = 0; i < 10 && rendered < 2; i += 1) await new Promise(resolve => setImmediate(resolve));
     assert.equal(starts, 0);

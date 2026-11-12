@@ -1,6 +1,7 @@
 import { randomUUID, randomBytes, createHash } from 'node:crypto';
 import { catalogSnapshot } from './catalog.js';
 import { priceQuote, validateAddress, validateDelivery } from './pricing.js';
+import { verifyDeliveryAddress } from './address-validation.js';
 import { nationalShippingQuote } from './national-shipping.js';
 import { json, readJson, sameOrigin } from './http.js';
 import { normalizedEmail, validEmail, hashPassword, verifyPassword, currentCustomer,
@@ -187,6 +188,8 @@ async function createOrder(db, payload, customer) {
   const delivery = payload.delivery;
   const deliveryError = validateDelivery(delivery);
   if (deliveryError) bad(deliveryError);
+  const verifiedAddress = await verifyDeliveryAddress(address,
+    delivery.mode === 'national' ? 'national' : 'local');
   const lines = payload.items;
   if (!Array.isArray(lines) || !lines.length || lines.length > 50) bad('Проверьте корзину');
   const client = await db.connect();
@@ -237,10 +240,10 @@ async function createOrder(db, payload, customer) {
     const linkedCartId = cartSession.rows[0]?.id || null;
     const numberResult = await client.query("SELECT 'CMD-' || nextval('order_number_seq') AS number");
     const number = numberResult.rows[0].number;
-    const cleanAddress = { city: delivery.mode === 'national' ? cap(address.city, 100) : 'València',
+    const cleanAddress = { city: cap(verifiedAddress.city, 100),
       country: 'ES', postcode: cap(address.postcode, 5),
       street: cap(address.street, 120), building: cap(address.building, 16),
-      apartment: cap(address.apartment, 80), note: cap(address.note, 300), verified: false };
+      apartment: cap(address.apartment, 80), note: cap(address.note, 300), verified: true };
     const cleanDelivery = delivery.mode === 'national'
       ? { mode:'national', carrier: shipping.carrier || null,
         optionCode: shipping.optionCode || null,
@@ -2047,6 +2050,14 @@ export async function handleApi(db, req, res, pathname) {
       const body = await readJson(req);
       const customer = await currentCustomer(db, req);
       return json(res, 200, { coupon: await activatePaperCoupon(db, body.code, customer) });
+    }
+    if (pathname === '/api/checkout/address-check' && req.method === 'POST') {
+      rateLimit(req, 'address-check', 30);
+      const body = await readJson(req);
+      const mode = body.deliveryRegion === 'national' ? 'national' : 'local';
+      const addressError = validateAddress(body.address, mode === 'national' ? 'national' : 'slot');
+      if (addressError) bad(addressError);
+      return json(res, 200, await verifyDeliveryAddress(body.address, mode));
     }
     if (pathname === '/api/checkout/quote' && req.method === 'POST') {
       rateLimit(req, 'quote', 100);

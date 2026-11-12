@@ -10,7 +10,7 @@ import { churuFormatsEs, churuFormatsUk } from './locales/churu-formats.js';
 import { churuDogEs, churuDogUk } from './locales/churu-dog.js';
 import { seoCategoryForPath } from './seo-categories.js';
 import { seoPickForPath } from './seo-picks.js';
-import { deliveryStatusEs, deliveryStatusUk } from './locales/delivery-status.js';
+import { deliveryStatusEs, deliveryStatusUk } from './locales/delivery-status.js?v=address-check-20261112';
 import { yaguExpansionEs, yaguExpansionUk } from './locales/yagu-expansion.js?v=product-content-20261110';
 import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=editorial-leonardo-20261111';
 import { shellTranslations } from './shell-translations.js';

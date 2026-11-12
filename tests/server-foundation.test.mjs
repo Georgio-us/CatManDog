@@ -202,10 +202,10 @@ test('public quote never uses a draft sale price before confirmation', () => {
   assert.equal(quote.orderable, false);
 });
 
-test('address and desired delivery time remain marked for manual verification', () => {
+test('basic address fields and desired delivery time are checked before geocoding', () => {
   const address = { city:'València', postcode:'46001', street:'Carrer de la Pau', building:'12' };
   assert.equal(validateAddress(address), null);
-  assert.ok(validateAddress({ ...address, city:'Paterna' }));
+  assert.ok(validateAddress({ ...address, city:'' }));
   assert.ok(validateAddress({ ...address, postcode:'28001' }));
   const future = new Date('2026-10-19T08:00:00Z');
   assert.equal(validateDelivery({ mode:'scheduled', date:'2026-10-20', time:'18:00' }, future), null);

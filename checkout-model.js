@@ -64,10 +64,10 @@ export function validateCheckout(values, now = new Date()) {
   const field = name => String(values[name] || '').trim();
   if (!field('name') || !field('email') || !field('phone')) return 'Укажите имя, email и телефон';
   if (!/^\d{5}$/.test(field('postcode'))) return 'Укажите почтовый индекс из пяти цифр';
-  if (field('deliveryRegion') !== 'national' && field('city') !== 'València')
-    return 'Укажите город Валенсия';
-  if (field('deliveryRegion') !== 'national' && !/^460\d{2}$/.test(field('postcode')))
-    return 'Укажите почтовый индекс в городе Валенсия';
+  if (field('deliveryRegion') !== 'national' && !field('city'))
+    return 'Укажите город доставки';
+  if (field('deliveryRegion') !== 'national' && !/^46\d{3}$/.test(field('postcode')))
+    return 'Для местной доставки укажите индекс провинции Валенсия';
   if (field('deliveryRegion') === 'national' && !field('city')) return 'Укажите город доставки';
   if (field('deliveryRegion') === 'national' && !isMainlandPostcode(field('postcode')))
     return 'Сейчас отправляем заказы только по материковой Испании';

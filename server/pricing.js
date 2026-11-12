@@ -15,8 +15,9 @@ export function validateAddress(address, deliveryMode = 'slot') {
     if (!isMainlandPostcode(address.postcode))
       return 'Сейчас отправляем заказы только по материковой Испании';
   } else {
-    if (address.city !== 'València') return 'Для доставки в выбранный интервал укажите город Валенсия';
-    if (!/^460\d{2}$/.test(String(address.postcode || ''))) return 'Укажите почтовый индекс в городе Валенсия';
+    if (!String(address.city || '').trim()) return 'Укажите город доставки';
+    if (!/^46\d{3}$/.test(String(address.postcode || '')))
+      return 'Для местной доставки укажите индекс провинции Валенсия';
   }
   if (!String(address.street || '').trim() || !String(address.building || '').trim()) return 'Укажите улицу и номер дома';
   return null;

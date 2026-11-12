@@ -42,7 +42,7 @@ test('checkout requires a complete city address and a future requested time', ()
     city: 'València', postcode: '46001', street: 'Carrer de la Pau', building: '12', deliveryMode: 'soon' };
   assert.equal(validateCheckout(valid, now), null);
   assert.match(validateCheckout({ ...valid, postcode: '4600' }, now), /пять|пяти/);
-  assert.match(validateCheckout({ ...valid, city: 'Paterna' }, now), /Валенсия/);
+  assert.match(validateCheckout({ ...valid, city: '' }, now), /город/);
   assert.match(validateCheckout({ ...valid, postcode: '28001' }, now), /индекс.*Валенсия/);
   assert.match(validateCheckout({ ...valid, deliveryMode: 'scheduled', deliveryDate: '2026-10-19', deliveryTime: '16:00' }, now), /не раньше/);
   assert.equal(validateCheckout({ ...valid, deliveryMode: 'scheduled', deliveryDate: '2026-10-19', deliveryTime: '18:00' }, now), null);
@@ -100,7 +100,7 @@ test('national checkout shows the approved customer delivery bands', () => {
       isReady:() => true, getPromo:() => null, applyPromo:() => {}, render:() => {} });
     ui.change({ name:'deliveryRegion', value:'national', form:{} });
     const html = ui.page();
-    assert.match(html, /Другой город/);
+    assert.match(html, /Остальная материковая Испания/);
     assert.match(html, /До 49 € - 9,99 €, от 49 € - 3,99 €, от 99 € - бесплатно/);
     assert.doesNotMatch(html, /тариф по весу|условная коробка|без IVA/);
   } finally {
