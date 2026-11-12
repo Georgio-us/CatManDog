@@ -40,6 +40,12 @@ test('Ukrainian is a public language and translates the shopping flow', () => {
   ]) assert.equal(ukrainian.translate(source), expected, source);
 });
 
+test('Spanish SEO shell returns to the saved language for navigation and footer', () => {
+  assert.equal(ukrainian.translate(ukrainian.restoreShellText('Catálogo')), 'Каталог');
+  assert.equal(ukrainian.translate(ukrainian.restoreShellText('Selección para gatos')), 'Добірка для котів');
+  assert.equal(ukrainian.translate(ukrainian.restoreShellText('Envíos y devoluciones')), 'Доставка та повернення');
+});
+
 test('Ukrainian copy covers every storefront key in the Spanish dictionary', () => {
   const missing = Object.keys(es).filter(key => !(key in uk) && !(key in ukExtra));
   assert.deepEqual(missing, []);

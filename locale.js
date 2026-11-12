@@ -13,6 +13,7 @@ import { seoPickForPath } from './seo-picks.js';
 import { deliveryStatusEs, deliveryStatusUk } from './locales/delivery-status.js';
 import { yaguExpansionEs, yaguExpansionUk } from './locales/yagu-expansion.js?v=product-content-20261110';
 import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=editorial-leonardo-20261111';
+import { shellTranslations } from './shell-translations.js';
 
 const storageKey = 'catmandog-language';
 const saved = (() => { try { return localStorage.getItem(storageKey); } catch { return null; } })();
@@ -22,6 +23,39 @@ const language = seoPath === '/revista' || seoPath.startsWith('/revista/') || !!
 const translatedNodes = new WeakMap();
 const translatedAttributes = new WeakMap();
 const attributes = ['aria-label', 'title', 'placeholder', 'alt'];
+const shellSource = new Map();
+for (const [russian, spanish] of Object.entries(shellTranslations)) {
+  if (!shellSource.has(spanish)) shellSource.set(spanish, russian);
+}
+const shellSourceEntries = [...shellSource].sort((a, b) => b[0].length - a[0].length);
+
+export function restoreShellText(value) {
+  return shellSourceEntries.reduce((text, [spanish, russian]) => text.replaceAll(spanish, russian), value);
+}
+
+function restoreSeoShell() {
+  if (language === 'es') return;
+  for (const root of document.querySelectorAll('.announcement, .header, #search-form, .footer')) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
+    let node = root;
+    do {
+      if (node.nodeType === Node.TEXT_NODE) node.nodeValue = restoreShellText(node.nodeValue);
+      else if (node.nodeType === Node.ELEMENT_NODE) {
+        for (const name of attributes) {
+          const value = node.getAttribute(name);
+          if (value !== null) node.setAttribute(name, restoreShellText(value));
+        }
+      }
+      node = walker.nextNode();
+    } while (node);
+  }
+  const journal = document.querySelector('.footer a[href="/revista"]');
+  if (journal?.textContent.trim() === 'Журнал') journal.textContent = 'Полезный журнал';
+  for (const page of ['legal', 'privacy', 'purchase-terms']) {
+    document.querySelectorAll(`.footer a[href="/${page}-es.html"]`)
+      .forEach(link => link.setAttribute('href', `/${page}.html`));
+  }
+}
 
 export const locale = () => language;
 export const intlLocale = () => ({ es: 'es-ES', ru: 'ru-RU', uk: 'uk-UA' })[language];
@@ -97,6 +131,9 @@ function textNode(node) {
 function elementAttributes(element) {
   if (language !== 'es' && element.tagName === 'A') {
     const href = element.getAttribute('href');
+    if (href === '/catalogo' || href?.startsWith('/catalogo?')) {
+      element.setAttribute('href', `/#/catalog${href.slice('/catalogo'.length)}`);
+    }
     const pick = seoPickForPath(href);
     if (pick) element.setAttribute('href', `#/picks/${pick.pet}`);
     if (href === '/revista' || href?.startsWith('/revista/')) {
@@ -153,6 +190,7 @@ function translateTree(root) {
 }
 
 export function installLocale() {
+  restoreSeoShell();
   document.documentElement.lang = language;
   if (language !== 'ru') {
     const description = document.querySelector('meta[name="description"]');
@@ -202,7 +240,7 @@ export function installLocale() {
     });
   }
   if (language === 'ru') {
-    document.querySelectorAll('a[href^="/selecciones/"]').forEach(elementAttributes);
+    document.querySelectorAll('a[href^="/selecciones/"], a[href^="/catalogo"], a[href^="/revista"]').forEach(elementAttributes);
     return;
   }
   translateTree(document.body);

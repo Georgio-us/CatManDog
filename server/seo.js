@@ -11,6 +11,7 @@ import { customerFacts, orderedVariants } from '../product-content.js';
 import { seoCategories, seoCategoryForPath } from '../seo-categories.js';
 import { seoProducts, seoProductForPath } from '../seo-products.js';
 import { seoPickForPath } from '../seo-picks.js';
+import { shellTranslations } from '../shell-translations.js';
 
 const origin = 'https://catmandog.es';
 const shell = new URL('../index.html', import.meta.url);
@@ -23,49 +24,6 @@ const articleImages = {
   home: 'https://img.catmandog.es/assets/journal-home-v2.webp',
   play: 'https://img.catmandog.es/assets/journal-play-v2.webp',
   travel: 'https://img.catmandog.es/assets/journal-travel-v2.webp'
-};
-const shellTranslations = {
-  'Маленькие радости Большая любовь': 'Pequeñas alegrías Gran amor',
-  'CatManDog - главная': 'CatManDog - inicio',
-  'Главная навигация': 'Navegación principal',
-  'Язык сайта': 'Idioma del sitio',
-  'Подборка для кошек': 'Selección para gatos',
-  'Подборка для собак': 'Selección para perros',
-  'Подборки': 'Selecciones',
-  'Для кошек': 'Para gatos',
-  'Для собак': 'Para perros',
-  'Каталог': 'Catálogo',
-  'Полезное': 'Recursos',
-  'Журнал': 'Revista',
-  'О нас': 'Sobre nosotros',
-  'Поиск товаров': 'Buscar productos',
-  'Избранное': 'Favoritos',
-  'Кабинет питомца': 'Perfil de tu mascota',
-  'Управление магазином': 'Administración de la tienda',
-  'Корзина': 'Cesta',
-  'Открыть меню': 'Abrir menú',
-  'Что ищем для вашего питомца?': '¿Qué buscas para tu mascota?',
-  'Корм, миска, любимая игрушка…': 'Pienso, comedero, juguete favorito…',
-  'Закрыть поиск': 'Cerrar búsqueda',
-  'Найти': 'Buscar',
-  'Для них Для вас': 'Para ellos Para ti',
-  'Для хорошей жизни вместе': 'Para disfrutar de la vida juntos',
-  'За покупками': 'De compras',
-  'Все товары': 'Todos los productos',
-  'Рядом с вами': 'Cerca de ti',
-  'Полезные инструменты': 'Recursos útiles',
-  'О CatManDog': 'Sobre CatManDog',
-  'Полезный журнал': 'Revista',
-  'Доставка и возврат': 'Envíos y devoluciones',
-  'Оформить возврат': 'Solicitar una devolución',
-  'Есть вопрос?': '¿Tienes alguna pregunta?',
-  'С радостью поможем выбрать': 'Te ayudamos a elegir',
-  'то, что подойдёт вашему питомцу': 'lo que necesita tu mascota',
-  'Помощь с заказом': 'Ayuda con tu pedido',
-  'С заботой о каждом хвосте': 'Con cariño para cada mascota',
-  'Юридическая информация': 'Información legal',
-  'Условия покупки и возврата': 'Condiciones de compra y devolución',
-  'Конфиденциальность': 'Privacidad'
 };
 function spanishShell(template) {
   return Object.entries(shellTranslations).sort((a, b) => b[0].length - a[0].length)
