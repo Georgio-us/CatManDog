@@ -138,7 +138,7 @@ export function catPickLanding(list, { crumbs, card, icon, escape }, language = 
   const mainFood = get('leonardo-light');
   const fountain = get('heybopet-hb-pwfs-s30s');
   const filters = get('heybopet-pwf-filters-3');
-  const fountainImage = fountain?.variants?.find(variant => variant.id.endsWith('-white'))?.image || imageSrc(fountain);
+  const fountainImage = imageSrc(fountain?.variants?.find(variant => variant.id.endsWith('-white'))) || imageSrc(fountain);
   const starts = [
     { key: 'sterilised', title: t.sterilised, detail: t.sterilisedCopy, product: get('leonardo-light') || get('rc-sterilised') },
     { key: 'kitten', title: t.kitten, detail: t.kittenCopy, product: get('rc-kitten-regular') },
