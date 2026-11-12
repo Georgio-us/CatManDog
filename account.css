@@ -185,8 +185,7 @@
 .pet-auth-panel > .pet-demo-link { margin-right: 25px; }
 .pet-google-divider { display: flex; align-items: center; gap: 18px; margin: 20px 0; color: var(--muted); font-size: 12px; }
 .pet-google-divider::before, .pet-google-divider::after { content: ''; flex: 1; border-top: 1px solid #e5e5df; }
-.pet-google-control { min-height: 44px; width: fit-content; max-width: 100%; margin-inline: auto; display: flex; align-items: center; justify-content: center; }
-.pet-google-control iframe { max-width: 100%; }
+.pet-google-control { min-height: 44px; width: fit-content; max-width: calc(100% - 20px); margin-inline: auto; display: flex; align-items: center; justify-content: center; }
 .pet-auth-panel [data-google-error] { max-width: 340px; margin: 12px auto 0; line-height: 1.5; text-align: center; }
 .pet-auth-panel [data-google-error] a { color: var(--ink); white-space: nowrap; }
 .pet-google-link { margin-top: 24px; }
