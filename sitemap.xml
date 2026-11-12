@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://catmandog.es/</loc></url>
   <url><loc>https://catmandog.es/catalogo</loc></url>
+  <url><loc>https://catmandog.es/selecciones/gatos</loc></url>
+  <url><loc>https://catmandog.es/selecciones/perros</loc></url>
   <url><loc>https://catmandog.es/catalogo/gatos/pienso-seco</loc></url>
   <url><loc>https://catmandog.es/catalogo/gatos/comida-humeda</loc></url>
   <url><loc>https://catmandog.es/catalogo/gatos/premios</loc></url>

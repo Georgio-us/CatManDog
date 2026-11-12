@@ -17,6 +17,7 @@ export function publicPageLocation(location) {
     return null;
   }
   if (path === '/' || path === '/catalogo' || path === '/revista' ||
+      path === '/selecciones/gatos' || path === '/selecciones/perros' ||
       /^\/producto\/[a-z0-9-]+$/i.test(path) ||
       /^\/(?:revista|catalogo\/(?:gatos|perros))\/[a-z0-9/-]+$/i.test(path)) {
     return `${location.origin}${path}`;

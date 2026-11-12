@@ -1,4 +1,5 @@
 import { productHref } from './seo-products.js';
+import { pickHref } from './seo-picks.js';
 
 const wetIds = new Set([
   'leonardo-wet-pure-chicken', 'leonardo-wet-kitten',
@@ -130,6 +131,8 @@ function groupsFor(product) {
 
 export function catPickLanding(list, { crumbs, card, icon, escape }, language = 'ru') {
   const t = copy[language] || copy.ru;
+  const catHref = language === 'es' ? pickHref('cat') : '#/picks/cat';
+  const dogHref = language === 'es' ? pickHref('dog') : '#/picks/dog';
   const byId = new Map(list.map(product => [product.id, product]));
   const get = id => byId.get(id);
   const img = (product, className = '') => product && imageSrc(product)
@@ -160,8 +163,8 @@ export function catPickLanding(list, { crumbs, card, icon, escape }, language = 
     <header class="cat-picks-intro">
       <h1>${escape(t.title)}</h1><p>${escape(t.intro)}</p>
       <nav class="shortcut-tabs" aria-label="${escape(t.title)}">
-        <a href="#/picks/cat" aria-current="page">${language === 'es' ? 'Gatos' : language === 'uk' ? 'Для котів' : 'Для кошек'}</a>
-        <a href="#/picks/dog">${language === 'es' ? 'Perros' : language === 'uk' ? 'Для собак' : 'Для собак'}</a>
+        <a href="${catHref}" aria-current="page">${language === 'es' ? 'Gatos' : language === 'uk' ? 'Для котів' : 'Для кошек'}</a>
+        <a href="${dogHref}">${language === 'es' ? 'Perros' : language === 'uk' ? 'Для собак' : 'Для собак'}</a>
       </nav>
     </header>
     <section class="cat-picks-featured" aria-label="${escape(t.title)}">

@@ -3,12 +3,13 @@ import { esProductText } from './locales/product-es.js?v=product-content-2026111
 import { esDetails } from './locales/details-es.js?v=product-content-20261110';
 import { uk, ukPatterns } from './locales/uk.js?v=checkout-copy-20261110';
 import { ukExtra } from './locales/uk-extra.js?v=cat-merchandising-20261112';
-import { ukProductNames } from './locales/uk-product-names.js?v=confirmed-demand-20261108';
+import { ukProductNames } from './locales/uk-product-names.js?v=picks-seo-20261112';
 import { ukProductCopy } from './locales/uk-product-copy.js?v=product-content-20261110';
 import { ukDetails } from './locales/uk-details.js?v=product-content-20261110';
 import { churuFormatsEs, churuFormatsUk } from './locales/churu-formats.js';
 import { churuDogEs, churuDogUk } from './locales/churu-dog.js';
 import { seoCategoryForPath } from './seo-categories.js';
+import { seoPickForPath } from './seo-picks.js';
 import { deliveryStatusEs, deliveryStatusUk } from './locales/delivery-status.js';
 import { yaguExpansionEs, yaguExpansionUk } from './locales/yagu-expansion.js?v=product-content-20261110';
 import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=editorial-leonardo-20261111';
@@ -16,7 +17,7 @@ import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=
 const storageKey = 'catmandog-language';
 const saved = (() => { try { return localStorage.getItem(storageKey); } catch { return null; } })();
 const seoPath = globalThis.location?.pathname || '';
-const language = seoPath === '/revista' || seoPath.startsWith('/revista/') || !!seoCategoryForPath(seoPath)
+const language = seoPath === '/revista' || seoPath.startsWith('/revista/') || !!seoCategoryForPath(seoPath) || !!seoPickForPath(seoPath)
   ? 'es' : saved === 'ru' || saved === 'es' || saved === 'uk' ? saved : 'es';
 const translatedNodes = new WeakMap();
 const translatedAttributes = new WeakMap();
@@ -29,6 +30,16 @@ export function setLocale(value) {
   try {
     localStorage.setItem(storageKey, value);
   } catch { /* Private browsing */ }
+  const pick = seoPickForPath(location.pathname);
+  if (value !== 'es' && pick) {
+    location.assign(`/#/picks/${pick.pet}`);
+    return;
+  }
+  const hashPick = (location.hash || '').match(/^#\/picks\/(cat|dog)(?:\?|$)/u);
+  if (value === 'es' && hashPick) {
+    location.assign(hashPick[1] === 'cat' ? '/selecciones/gatos' : '/selecciones/perros');
+    return;
+  }
   if (value !== 'es' && (location.pathname === '/revista' || location.pathname.startsWith('/revista/'))) {
     location.assign(`/${location.search}#/journal${location.pathname.slice('/revista'.length)}`);
     return;
@@ -86,6 +97,8 @@ function textNode(node) {
 function elementAttributes(element) {
   if (language !== 'es' && element.tagName === 'A') {
     const href = element.getAttribute('href');
+    const pick = seoPickForPath(href);
+    if (pick) element.setAttribute('href', `#/picks/${pick.pet}`);
     if (href === '/revista' || href?.startsWith('/revista/')) {
       element.setAttribute('href', `#/journal${href.slice('/revista'.length)}`);
     }
@@ -188,7 +201,10 @@ export function installLocale() {
       trigger.focus();
     });
   }
-  if (language === 'ru') return;
+  if (language === 'ru') {
+    document.querySelectorAll('a[href^="/selecciones/"]').forEach(elementAttributes);
+    return;
+  }
   translateTree(document.body);
   const observer = new MutationObserver(changes => {
     for (const change of changes) {

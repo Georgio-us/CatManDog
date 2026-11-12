@@ -33,7 +33,7 @@ export const sendTelegramOrderAlert = (order, fetcher = fetch, env = process.env
 export function visitAlertText({ page, source, owner, cartId } = {}) {
   const safePage = typeof page === 'string' && page.length <= 120 &&
     (/^\/$/.test(page) || /^\/\#\/(?:catalog|journal(?:\/[a-z0-9-]+)?|product\/[a-z0-9-]+|picks\/(?:cat|dog))$/i.test(page) ||
-      /^\/(?:catalogo|revista|producto\/[a-z0-9-]+|(?:revista|catalogo\/(?:gatos|perros))\/[a-z0-9/-]+)$/i.test(page))
+      /^\/(?:catalogo|revista|selecciones\/(?:gatos|perros)|producto\/[a-z0-9-]+|(?:revista|catalogo\/(?:gatos|perros))\/[a-z0-9/-]+)$/i.test(page))
     ? page : 'неизвестна';
   const sources = { direct: 'источник не передан браузером', internal: 'переход внутри сайта',
     search: 'поиск', social: 'соцсети', other: 'другой сайт' };

@@ -6,6 +6,7 @@ import { catalogProducts } from '../data.js';
 import { seoDocument, serveSeo } from '../server/seo.js';
 import { seoCategories, seoCategoryPath } from '../seo-categories.js';
 import { seoProducts, seoProductForPath, productHref } from '../seo-products.js';
+import { seoPicks } from '../seo-picks.js';
 import { catalogEditorialCats } from '../catalog-editorial-cats.js';
 import { catalogEditorialDogs } from '../catalog-editorial-dogs.js';
 import { catalogEditorialRoyalCanin } from '../catalog-editorial-royal-canin.js';
@@ -20,6 +21,7 @@ test('the sitemap contains only released public pages with Spanish editorial con
   const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gu)].map(match => match[1]);
   assert.deepEqual(urls, ['https://catmandog.es/', 'https://catmandog.es/catalogo',
+    ...seoPicks.map(pick => `https://catmandog.es${pick.path}`),
     ...seoCategories.filter(category => category.indexable).map(category => `https://catmandog.es${category.path}`),
     ...seoProducts.filter(product => product.indexable).map(product => `https://catmandog.es${product.path}`),
     'https://catmandog.es/revista',
@@ -32,6 +34,25 @@ test('the sitemap contains only released public pages with Spanish editorial con
     assert.match(html, new RegExp(`<h1>${article.title}</h1>`, 'u'));
     assert.match(html, new RegExp(`<link rel="canonical" href="https://catmandog.es/revista/${article.id}">`, 'u'));
     assert.match(html, /<p class="editorial-intro">[^<]+<\/p>/u);
+    assert.match(html, /<meta property="og:type" content="article">/u);
+    assert.match(html, /<meta property="og:image" content="https:\/\/img\.catmandog\.es\/assets\/journal-/u);
+    assert.match(html, /<h2>Fuentes<\/h2><ul><li><a href="https:\/\//u);
+    assert.doesNotMatch(html, /<meta name="robots" content="noindex/u);
+  }
+});
+
+test('cat and dog selections have crawlable Spanish pages and distinct canonicals', async () => {
+  for (const pick of seoPicks) {
+    const html = await seoDocument(pick.path);
+    const main = html.match(/<main id="app">([\s\S]*?)<\/main>/u)?.[1];
+    assert.ok(main, pick.path);
+    assert.match(main, new RegExp(`<h1>${pick.title}</h1>`, 'u'));
+    assert.match(main, /href="\/producto\/[a-z0-9-]+"/u);
+    assert.doesNotMatch(main, /[А-Яа-яЁё]/u);
+    assert.match(html, new RegExp(`<link rel="canonical" href="https://catmandog.es${pick.path}">`, 'u'));
+    assert.match(html, new RegExp(`<meta name="description" content="${pick.description}">`, 'u'));
+    assert.match(html, /<nav aria-label="Navegación principal">/u);
+    assert.match(html, /href="\/privacy-es.html">Privacidad<\/a>/u);
     assert.doesNotMatch(html, /<meta name="robots" content="noindex/u);
   }
 });
