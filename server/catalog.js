@@ -475,6 +475,36 @@ export async function importCatalog(db, items = products) {
         }
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [churuDogCopyMigration]);
       }
+      // Older catalog rows used copy from the first Churu DOG import. Match those
+      // exact strings so a later editorial edit by the owner is never overwritten.
+      const churuDogLegacyCopyMigration = 'verified_churu_dog_legacy_copy_2026_11_12';
+      const churuDogLegacyCopyDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [churuDogLegacyCopyMigration]);
+      if (!churuDogLegacyCopyDone.rows.length) {
+        const legacyDescriptions = {
+          'churu-dog-tuna-pack4': 'Кремовое лакомство для собак, вкус курица с тунцом. В пачке 4 тюбика × 14 г',
+          'churu-dog-tuna-pack8': 'Кремовое лакомство для собак, вкус курица с тунцом. В пачке 8 тюбиков × 20 г',
+          'churu-dog-tuna-bites': 'Мягкие кусочки с кремовой начинкой, вкус курица с тунцом. В пачке 8 порций по 12 г',
+          'churu-dog-salmon-pack4': 'Кремовое лакомство для собак, вкус курица с лососем. В пачке 4 тюбика × 14 г',
+          'churu-dog-salmon-pack8': 'Кремовое лакомство для собак, вкус курица с лососем. В пачке 8 тюбиков × 20 г',
+          'churu-dog-salmon-bites': 'Мягкие кусочки с кремовой начинкой, вкус курица с лососем. В пачке 8 порций по 12 г',
+          'churu-dog-cheese-pack4': 'Кремовое лакомство для собак, вкус курица с сыром. В пачке 4 тюбика × 14 г',
+          'churu-dog-cheese-pack8': 'Кремовое лакомство для собак, вкус курица с сыром. В пачке 8 тюбиков × 20 г',
+          'churu-dog-cheese-bites': 'Мягкие кусочки с кремовой начинкой, вкус курица с сыром. В пачке 8 порций по 12 г',
+          'churu-dog-chicken-pack8': 'Кремовое лакомство для собак, вкус курица. В пачке 8 тюбиков × 20 г',
+          'churu-dog-chicken-bites': 'Мягкие кусочки с кремовой начинкой, вкус курица. В пачке 8 порций по 12 г'
+        };
+        for (const [productId, legacyDescription] of Object.entries(legacyDescriptions)) {
+          const copy = catalogEditorialChuruDog[productId];
+          await client.query(`UPDATE catalog_products SET description=$2,details=$3::jsonb
+            WHERE id=$1 AND description=$4`,
+          [productId, copy.description, JSON.stringify(copy.details), legacyDescription]);
+          await client.query(`UPDATE catalog_variants SET description=$2,details=$3::jsonb,updated_at=now()
+            WHERE product_id=$1 AND description=$4`,
+          [productId, copy.description, JSON.stringify(copy.details), legacyDescription]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [churuDogLegacyCopyMigration]);
+      }
       // The owner set a retail price for this model; its two color variants remain
       // unavailable for checkout until Tina confirms which colors she can supply.
       await client.query(`UPDATE catalog_variants SET price_override_cents=5490,
