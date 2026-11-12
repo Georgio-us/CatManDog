@@ -1,4 +1,5 @@
 import { canBuy, snapshots } from './variants.js';
+import { catPickLanding } from './cat-picks.js';
 
 // Editorial order follows the planned first assortment, not inferred sales popularity.
 export const homeShortcutIds = {
@@ -94,14 +95,16 @@ export function homeShortcuts(products, icon, escape) {
   </section>`;
 }
 
-export function homeShortcutLanding(products, pet, { crumbs, card, icon }) {
+export function homeShortcutLanding(products, pet, helpers) {
   if (!homeShortcutIds[pet]) return '';
+  const { crumbs, card, icon } = helpers;
+  const list = homeShortcutProducts(products, pet);
+  if (pet === 'cat') return catPickLanding(list, helpers, helpers.language);
   const cat = pet === 'cat';
   const title = cat ? 'Подборка для кошек' : 'Подборка для собак';
   const intro = cat
     ? 'Корм и лакомства, поилки, наполнители и вещи для игр'
     : 'Корм для взрослых собак и щенков, миски и вещи для игр';
-  const list = homeShortcutProducts(products, pet);
   return `<div class="page shortcut-page">${crumbs(title)}
     <div class="shortcut-intro"><span class="eyebrow">Подборка CatManDog</span><h1 class="page-title">${title}</h1>
       <p class="lead">${intro}</p><nav class="shortcut-tabs" aria-label="Подборки для питомцев">
