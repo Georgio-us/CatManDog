@@ -409,10 +409,6 @@ button:hover:not(:disabled) {
   color: #778529;
 }
 
-.chevron {
-  padding-left: 6px;
-}
-
 .header-actions {
   margin-left: auto;
   display: flex;
@@ -700,12 +696,6 @@ button:hover:not(:disabled) {
 .header nav a[aria-current="page"] {
   text-decoration: underline;
   text-underline-offset: 6px;
-}
-
-.header .chevron {
-  width: 14px;
-  height: 14px;
-  vertical-align: middle;
 }
 
 /* Catalog, product details and cart */
