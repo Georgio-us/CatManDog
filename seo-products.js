@@ -18,7 +18,11 @@ const releasedByCategory = {
     'leonardo-adult-duck', 'leonardo-maxi', 'leonardo-kitten-gf',
     'leonardo-fresh-beef', 'leonardo-fresh-duck', 'leonardo-fresh-salmon'
   ],
-  '/catalogo/gatos/comida-humeda': ['rc-wet', 'leonardo-chicken', 'leonardo-turkey'],
+  '/catalogo/gatos/comida-humeda': [
+    'rc-wet', 'leonardo-chicken', 'leonardo-turkey',
+    'acana-wet-beef', 'acana-wet-chicken', 'acana-wet-kitten',
+    'acana-wet-lamb', 'acana-wet-salmon', 'acana-wet-tuna'
+  ],
   '/catalogo/perros/pienso-seco': [
     'dog-orijen-fit-trim',
     'dog-orijen-original', 'dog-orijen-puppy', 'dog-orijen-six-fish',

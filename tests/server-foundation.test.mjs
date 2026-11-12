@@ -13,7 +13,7 @@ import { editorialEs, editorialUk } from '../locales/editorial-translations.js';
 
 test('verified editorial copy is distinct and translated for each curated product', () => {
   const entries = Object.entries(catalogEditorialContent);
-  assert.equal(entries.length, 70);
+  assert.equal(entries.length, 76);
   assert.equal(new Set(entries.map(([,copy]) => copy.description)).size, entries.length);
   for (const [id, copy] of entries) {
     assert.ok(id.startsWith('cmd-source-') || id.startsWith('leonardo-') || id.startsWith('acana-') || id.startsWith('orijen-') || id.startsWith('dog-') || id.startsWith('rc-') || id.startsWith('churu-dog-'));
