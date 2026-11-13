@@ -1790,8 +1790,8 @@ export const yaguProducts = [
           "article": "7515988",
           "priceCents": 336,
           "taxBasis": "excludes_iva",
-          "checkedAt": "2026-11-12",
-          "orderable": false,
+          "checkedAt": "2026-11-13",
+          "orderable": true,
           "fallback": {
             "supplier": "MisMascotas",
             "priceCents": 678,
