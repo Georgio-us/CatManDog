@@ -48,6 +48,25 @@ test('gross merchandise spread is shown only with complete comparable costs', ()
   assert.equal(complete.taxComplete, true);
 });
 
+test('matching supplier quotes give the paid order a tax-aware purchase cost', () => {
+  const result = summarizeOrder(order, [line(),
+    line({ variant_id:'yagu-7515988-catalog-pack', name:'Duvo+', unit_price_cents:678,
+      tax_rate_bps:null, current_tax_rate_bps:2100, purchase_price_cents:336,
+      catalog_cost_cents:null, purchase_quote:{ supplier:'Yagu', priceCents:336,
+        taxBasis:'excludes_iva', orderable:true } }),
+    line({ variant_id:'tc-2b64c192f5-reference-pack', name:'Dentalife', unit_price_cents:209,
+      tax_rate_bps:null, current_tax_rate_bps:1000, purchase_price_cents:112,
+      catalog_cost_cents:null, purchase_quote:{ supplier:'Albet', priceCents:893,
+        unitsPerPurchase:8, taxBasis:'excludes_iva', orderable:true } })]);
+  assert.equal(result.items[1].purchaseCostGrossCents, 407);
+  assert.equal(result.items[1].purchaseCostSource, 'Yagu');
+  assert.equal(result.items[2].purchaseCostGrossCents, 123);
+  assert.equal(result.items[2].purchaseCostSource, 'Albet');
+  assert.equal(result.purchaseTotalCents, 2745);
+  assert.equal(result.merchandiseSpreadCents, 591);
+  assert.equal(result.taxComplete, false);
+});
+
 test('explicit test orders stay in history but do not add customer stock demand', async () => {
   const testOrder = summarizeOrder({ ...order, subtotal_cents:2449, total_cents:2449,
     delivery_cents:0, is_test:true }, [line()], new Map());

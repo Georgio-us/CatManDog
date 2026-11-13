@@ -6,6 +6,11 @@ function purchaseCost(item) {
   const manual = item.purchase_price_cents;
   const offer = item.offer_cost_cents;
   const catalog = item.catalog_cost_cents;
+  const quote = item.purchase_quote;
+  const quoteUnits = Number.isInteger(quote?.unitsPerPurchase) && quote.unitsPerPurchase > 0
+    ? quote.unitsPerPurchase : 1;
+  const quotedUnitCost = Number.isInteger(quote?.priceCents) && quote.priceCents > 0
+    ? Math.round(quote.priceCents / quoteUnits) : null;
   let cents = null;
   let basis = 'unknown';
   let source = '';
@@ -17,6 +22,10 @@ function purchaseCost(item) {
     } else if (manual === offer) {
       basis = item.offer_vat_included ? 'includes_iva' : 'excludes_iva';
       source = item.offer_supplier || '';
+    } else if (manual === quotedUnitCost &&
+        ['includes_iva', 'excludes_iva'].includes(quote.taxBasis)) {
+      basis = quote.taxBasis;
+      source = quote.supplier || '';
     } else source = 'Цена в карточке SKU';
   } else if (offer !== null && offer !== undefined) {
     cents = offer;
@@ -27,7 +36,7 @@ function purchaseCost(item) {
     basis = item.catalog_tax_basis;
     source = item.catalog_supplier || '';
   }
-  const rate = item.tax_rate_bps;
+  const rate = item.tax_rate_bps ?? item.current_tax_rate_bps;
   const grossCents = cents === null ? null : basis === 'includes_iva' ? cents :
     basis === 'excludes_iva' && Number.isInteger(rate)
       ? Math.round(cents * (1 + rate / 10000)) : null;
@@ -83,6 +92,7 @@ export async function loadAdminOrders(db) {
     db.query(`SELECT i.order_id,i.variant_id,i.name,i.variant_label,i.quantity,
       i.unit_price_cents,i.source_mode,i.tax_rate_bps,
       v.stock_quantity,v.reserved_quantity,v.purchase_price_cents,
+      v.tax_rate_bps AS current_tax_rate_bps,
       v.source->'purchaseQuote' AS purchase_quote,
       so.cost_cents AS offer_cost_cents,so.vat_included AS offer_vat_included,
       s.name AS offer_supplier,catalog.shop_price_cents AS catalog_cost_cents,
