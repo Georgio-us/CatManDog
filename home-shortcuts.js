@@ -53,6 +53,9 @@ export const homeShortcutIds = {
     'cmd-source-11acbc9ed4d69f1c',
     'cmd-source-0f4a3ef9889b8ff3',
     'cmd-source-puppy-small-breed',
+    'yagu-7516214-studio',
+    'yagu-7570677-studio',
+    'yagu-7570651-studio',
     'yagu-7515987-studio',
     'yagu-duvo-cotton-bone-xs',
     'dog-duvo-huggi-rabbit',
@@ -79,15 +82,15 @@ export function homeShortcuts(products, icon, escape, language = 'ru') {
   const cards = {
     ru: [
       { pet: 'cat', title: 'Наш выбор для кошек', description: 'Корм, лакомства, поилки и игры для кошек', brands: 'Leonardo · Churu · Royal Canin · ACANA · HeyboPet' },
-      { pet: 'dog', title: 'Наш выбор для собак', description: 'Корм, миски и игрушки для собак', brands: 'ACANA · ORIJEN · Royal Canin · Duvo+' }
+      { pet: 'dog', title: 'Наш выбор для собак', description: 'Корм, жевательные лакомства и вещи для игр', brands: 'ACANA · ORIJEN · Royal Canin · Duvo+' }
     ],
     es: [
       { pet: 'cat', title: 'Nuestra selección para gatos', description: 'Pienso, premios, fuentes y juegos para gatos', brands: 'Leonardo · Churu · Royal Canin · ACANA · HeyboPet' },
-      { pet: 'dog', title: 'Nuestra selección para perros', description: 'Pienso, comederos y juguetes para perros', brands: 'ACANA · ORIJEN · Royal Canin · Duvo+' }
+      { pet: 'dog', title: 'Nuestra selección para perros', description: 'Pienso, premios para masticar y juguetes para perros', brands: 'ACANA · ORIJEN · Royal Canin · Duvo+' }
     ],
     uk: [
       { pet: 'cat', title: 'Наш вибір для котів', description: 'Корм, ласощі, поїлки та ігри для котів', brands: 'Leonardo · Churu · Royal Canin · ACANA · HeyboPet' },
-      { pet: 'dog', title: 'Наш вибір для собак', description: 'Корм, миски й іграшки для собак', brands: 'ACANA · ORIJEN · Royal Canin · Duvo+' }
+      { pet: 'dog', title: 'Наш вибір для собак', description: 'Корм, жувальні ласощі та речі для гри', brands: 'ACANA · ORIJEN · Royal Canin · Duvo+' }
     ]
   }[language] || [];
   const label = { ru: 'Подборка CatManDog', es: 'Selección CatManDog', uk: 'Добірка CatManDog' }[language];
@@ -116,9 +119,9 @@ export function homeShortcutLanding(products, pet, helpers) {
   if (pet === 'cat') return catPickLanding(list, helpers, helpers.language);
   const language = helpers.language || 'ru';
   const words = {
-    ru: { title: 'Подборка для собак', intro: 'Корм для взрослых собак и щенков, миски и вещи для игр', eyebrow: 'Подборка CatManDog', cats: 'Для кошек', dogs: 'Для собак', all: 'Весь каталог', nav: 'Подборки для питомцев' },
-    es: { title: 'Selección para perros', intro: 'Pienso para perros adultos y cachorros, comederos y juguetes', eyebrow: 'Selección CatManDog', cats: 'Gatos', dogs: 'Perros', all: 'Todo el catálogo', nav: 'Selecciones para mascotas' },
-    uk: { title: 'Добірка для собак', intro: 'Корм для дорослих собак і цуценят, миски та речі для гри', eyebrow: 'Добірка CatManDog', cats: 'Для котів', dogs: 'Для собак', all: 'Увесь каталог', nav: 'Добірки для улюбленців' }
+    ru: { title: 'Подборка для собак', intro: 'Корм для взрослых собак и щенков, жевательные лакомства и вещи для игр', eyebrow: 'Подборка CatManDog', cats: 'Для кошек', dogs: 'Для собак', all: 'Весь каталог', nav: 'Подборки для питомцев' },
+    es: { title: 'Selección para perros', intro: 'Pienso para perros adultos y cachorros, premios para masticar y juguetes', eyebrow: 'Selección CatManDog', cats: 'Gatos', dogs: 'Perros', all: 'Todo el catálogo', nav: 'Selecciones para mascotas' },
+    uk: { title: 'Добірка для собак', intro: 'Корм для дорослих собак і цуценят, жувальні ласощі та речі для гри', eyebrow: 'Добірка CatManDog', cats: 'Для котів', dogs: 'Для собак', all: 'Увесь каталог', nav: 'Добірки для улюбленців' }
   }[language];
   const title = words.title;
   const catHref = language === 'es' ? pickHref('cat') : '#/picks/cat';

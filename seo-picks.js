@@ -8,8 +8,8 @@ export const seoPicks = [
   {
     pet: 'dog', path: '/selecciones/perros',
     title: 'Selección para perros',
-    description: 'Pienso para perros adultos y cachorros, comederos y juguetes elegidos por CatManDog',
-    intro: 'Alimentación y objetos para la vida diaria con tu perro, desde el pienso hasta el juego'
+    description: 'Pienso para perros adultos y cachorros, premios para masticar y juguetes elegidos por CatManDog',
+    intro: 'Alimentación, premios para masticar y objetos para jugar con tu perro'
   }
 ];
 

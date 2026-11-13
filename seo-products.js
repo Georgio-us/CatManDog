@@ -41,7 +41,8 @@ const releasedByCategory = {
     'churu-dog-chicken', 'churu-dog-tuna-pack4', 'churu-dog-tuna-pack8',
     'churu-dog-tuna-bites', 'churu-dog-salmon-pack4', 'churu-dog-salmon-pack8',
     'churu-dog-salmon-bites', 'churu-dog-cheese-pack4', 'churu-dog-cheese-pack8',
-    'churu-dog-cheese-bites', 'churu-dog-chicken-pack8', 'churu-dog-chicken-bites'
+    'churu-dog-cheese-bites', 'churu-dog-chicken-pack8', 'churu-dog-chicken-bites',
+    'yagu-7570677-studio', 'yagu-7570651-studio', 'yagu-7516214-studio'
   ]
 };
 const releasedCategoryById = new Map(Object.entries(releasedByCategory)

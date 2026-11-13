@@ -13,13 +13,13 @@ import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=unavailable-single-20261110';
 
 import { activeHomeLanding } from './collections.js?v=cat-assortment-1';
-import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=picks-seo-20261112';
+import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=dog-chews-20261113';
 import { handleCatPickClick } from './cat-picks.js?v=picks-seo-20261112';
 import { installLocale, intlLocale, locale, translate } from './locale.js?v=yagu-chew-test-20261113';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
-import { productHref, seoProductForPath } from './seo-products.js?v=yagu-chew-test-20261113';
+import { productHref, seoProductForPath } from './seo-products.js?v=dog-chews-20261113';
 import { seoPickForPath } from './seo-picks.js';
 import { analyticsItem, announceCommerce } from './analytics-events.js?v=delivery-status-3';
 import { installAnalytics } from './analytics-consent.js?v=picks-seo-20261112';

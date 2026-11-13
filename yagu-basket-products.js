@@ -1,4 +1,4 @@
-// Six exact Yagu basket SKUs checked in the B2B cart on 2026-11-13.
+// Six Yagu B2B SKUs checked on 2026-11-13; cart membership can change independently.
 // Supplier quotes exclude tax; customer prices include tax and have their own sources.
 const checkedAt = '2026-11-13';
 const cartUrl = 'https://odoo.grupoyagu.com/shop/cart';
