@@ -510,6 +510,51 @@ test('receiving stock records one movement and duplicate submission does not add
   assert.equal(stock, 5);
 });
 
+test('marketing and personal writeoffs use only unreserved stock and are idempotent', async () => {
+  let stock = 5;
+  const reserved = 2;
+  let recorded;
+  const client = { async query(sql, params = []) {
+    if (sql.includes('FROM inventory_movements WHERE idempotency_key=$1'))
+      return { rows:recorded ? [recorded] : [] };
+    if (sql.startsWith('SELECT id,stock_quantity,reserved_quantity,purchase_price_cents'))
+      return { rows:[{ id:'sku-1', stock_quantity:stock, reserved_quantity:reserved,
+        purchase_price_cents:700 }] };
+    if (sql.startsWith('UPDATE catalog_variants SET')) {
+      stock -= params[0];
+      return { rows:[{ stock_quantity:stock, reserved_quantity:reserved }] };
+    }
+    if (sql.startsWith('INSERT INTO inventory_movements')) {
+      recorded = { variant_id:params[1], reason:params[7],
+        delta_on_hand:params[8], note:params[12] };
+    }
+    return { rowCount:1, rows:[] };
+  }, release() {} };
+  const db = { async query(sql) {
+    if (sql.includes('FROM staff_sessions'))
+      return { rows:[{ id:'staff-1', email:'owner@example.test', role:'owner' }] };
+    throw new Error(`Unexpected SQL: ${sql}`);
+  }, async connect() { return client; } };
+  async function writeoff(category, quantity) {
+    const req = { method:'POST', headers:{ cookie:`cmd_staff_session=${'f'.repeat(64)}` },
+      socket:{ remoteAddress:'test-writeoff' },
+      async *[Symbol.asyncIterator]() { yield JSON.stringify({ variantId:'sku-1', category,
+        quantity, note:'Welcome Gift', idempotencyKey:'writeoff_test_key_1234567890' }); } };
+    const { state, res } = response();
+    await handleApi(db, req, res, '/api/admin/inventory-writeoffs');
+    return state;
+  }
+  assert.equal((await writeoff('marketing', 4)).status, 409);
+  assert.equal(stock, 5);
+  const first = await writeoff('marketing', 3);
+  assert.equal(first.status, 201);
+  assert.equal(first.body.expenseCents, 2100);
+  assert.equal(stock, 2);
+  assert.equal((await writeoff('marketing', 3)).body.alreadyRecorded, true);
+  assert.equal(stock, 2);
+  assert.equal((await writeoff('personal', 3)).status, 409);
+});
+
 test('purchase request snapshots the offer and partial receipts increase stock exactly once', async () => {
   const supplierId = '11111111-1111-4111-8111-111111111111';
   let purchase;

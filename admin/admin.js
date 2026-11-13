@@ -967,23 +967,42 @@ async function loadProductOffers(details) {
       : ''}${!catalogPrices.length && !offers.length ? '<p>Для этого варианта предложений пока нет</p>' : ''}`;
   } catch (error) { host.textContent = error.message; }
 }
-function renderDeliveries(deliveries) {
+function renderDeliveries(deliveries, writeoffs) {
+  const stockOptions = deliveryVariants.filter(item =>
+    (item.stock_quantity ?? 0) - (item.reserved_quantity || 0) > 0);
   $('admin-content').innerHTML = `<section class="admin-card delivery-import"><h2>Приёмка по накладной</h2>
-    <p class="admin-muted">Загрузите накладную PDF и при наличии подтверждение оплаты. Система сопоставит SKU, покажет распределение и запишет всю поставку одной операцией</p>
+    <p class="admin-muted">Вся поставка поступает на склад. Личное и подарки можно списать позже отдельным действием</p>
     <form id="delivery-upload" class="delivery-upload">
       <label>Накладная PDF<input name="document" type="file" accept="application/pdf,.pdf" required></label>
       <label>Подтверждение оплаты PDF, PNG или JPEG<input name="proof" type="file" accept="application/pdf,image/png,image/jpeg,.pdf,.png,.jpg,.jpeg"></label>
       <button type="submit">Разобрать накладную</button></form>
     <div id="delivery-preview"></div></section>
+    <section class="admin-card"><h2>Списать со склада</h2>
+      <p class="admin-muted">Выберите товар и причину. Зарезервированные для заказов единицы списать нельзя</p>
+      <form id="inventory-writeoff" class="delivery-writeoff">
+        <input type="hidden" name="idempotencyKey" value="${crypto.randomUUID()}">
+        <label>SKU<input name="variantId" list="writeoff-variant-options" required placeholder="Выберите товар со склада"></label>
+        <datalist id="writeoff-variant-options">${stockOptions.map(item =>
+          `<option value="${escape(item.variant_id)}">${escape(item.name)} · ${escape(item.label)} · свободно ${(item.stock_quantity ?? 0) - (item.reserved_quantity || 0)}</option>`).join('')}</datalist>
+        <label>Количество<input name="quantity" type="number" min="1" max="99999" required></label>
+        <label>Причина<select name="category" required><option value="marketing">Маркетинг и подарки</option>
+          <option value="personal">Личное потребление</option></select></label>
+        <label>Комментарий<input name="note" maxlength="300" placeholder="При необходимости"></label>
+        <button type="submit">Списать</button></form>
+      ${stockOptions.some(item => item.variant_id === 'cmd-source-sku-9c96bc24c8863222') ?
+        '<p class="admin-muted">Чтобы отдельно учесть тюбики из смешанного короба Churu, сначала переведите короб в 20 тюбиков</p><button type="button" data-open-mixed-box>Разобрать 1 короб Churu на тюбики</button>' : ''}
+      ${writeoffs.length ? `<div class="delivery-history"><h3>Последние списания</h3>${writeoffs.map(item =>
+        `<article><strong>${escape(item.name || item.variant_id)} · ${escape(item.label || '')}</strong>
+          <span>${item.reason === 'marketing_expense' ? 'Маркетинг и подарки' : 'Личное потребление'} · ${item.quantity} шт · ${escape(new Date(item.created_at).toLocaleString('ru-RU'))}</span>
+          ${item.unit_cost_cents === null ? '' : `<small>Закупка по карточке без IVA: ${euros(item.unit_cost_cents * item.quantity)}</small>`}
+          ${item.note ? `<small>${escape(item.note)}</small>` : ''}</article>`).join('')}</div>` : ''}</section>
     <section class="admin-card"><h2>Фактические поставки</h2>
       ${deliveries.length ? `<div class="delivery-history">${deliveries.map(item => {
         const lines = Array.isArray(item.lines) ? item.lines : [];
         const newStock = lines.reduce((sum,line)=>sum+(line.newStockUnits||0),0);
-        const gifts = lines.reduce((sum,line)=>sum+(line.giftPieces||0),0);
-        const personal = lines.reduce((sum,line)=>sum+(line.personalPieces||0),0);
         return `<article><strong>${escape(item.supplier_name)} · ${escape(item.document_number)}</strong>
           <span>${escape(String(item.document_date).slice(0,10))} · ${lines.length} строк · ${euros(item.totals.totalCents)}</span>
-          <small>В продаваемый склад: ${newStock} шт · Подарки: ${gifts} шт · Личное: ${personal} шт</small>
+          <small>Добавлено на склад: ${newStock} уп</small>
           <div><a href="/api/admin/supplier-deliveries/${escape(item.id)}/document">Накладная</a>
           ${item.proof_filename ? `<a href="/api/admin/supplier-deliveries/${escape(item.id)}/proof">Подтверждение оплаты</a>` : ''}</div></article>`;
       }).join('')}</div>` : '<p class="admin-muted">Поставок пока нет</p>'}</section>`;
@@ -1007,18 +1026,15 @@ function renderDeliveryPreview(preview) {
       `<form id="delivery-apply"><div class="delivery-lines">${parsed.items.map(line => `
         <fieldset class="delivery-line" data-delivery-code="${escape(line.supplierCode)}">
           <legend>${escape(line.supplierCode)} · ${escape(line.description)}</legend>
-          <div class="delivery-line-facts"><span>Получено ${line.purchaseQuantity} закупочных уп · ${line.retailUnits} продаваемых уп · ${line.physicalPieces} шт внутри</span>
-            <span>Строка ${euros(line.lineCostCents)} без IVA · ${euros(line.unitCostCents)} за продаваемую уп</span>
-            ${line.packagingChanged ? '<strong class="audit-warning">Фасовка отличается от прошлого поступления - проверьте SKU и распределение</strong>' : ''}
-            ${line.existingReceivedUnits ? `<strong>Уже записано по этой накладной: ${line.existingReceivedUnits} продаваемых уп</strong>` : ''}</div>
+          <div class="delivery-line-facts"><span>Получено ${line.purchaseQuantity} закупочных уп · ${line.retailUnits} складских уп · ${line.physicalPieces} шт внутри</span>
+            <span>Строка ${euros(line.lineCostCents)} без IVA · ${euros(line.unitCostCents)} за складскую уп</span>
+            ${line.packagingChanged ? '<strong class="audit-warning">Фасовка отличается от прошлого поступления - проверьте SKU и количество</strong>' : ''}
+            ${line.existingReceivedUnits ? `<strong>Уже записано по этой накладной: ${line.existingReceivedUnits} уп</strong>` : ''}</div>
           <label>SKU сайта<input name="variantId" list="delivery-variant-options" value="${escape(line.variantId || '')}" required></label>
-          <div class="delivery-allocations"><label>На продажу, уп<input name="saleableUnits" type="number" min="0" max="${line.retailUnits}" value="${line.retailUnits}" required></label>
-            <label>На подарки, шт<input name="giftPieces" type="number" min="0" max="${line.physicalPieces}" value="0" required></label>
-            <label>Личное, шт<input name="personalPieces" type="number" min="0" max="${line.physicalPieces}" value="0" required></label></div>
           <small>${escape(line.matchMethod ? `Сопоставлено: ${line.matchMethod}` : 'Не найдено автоматическое соответствие - выберите SKU')} · срок до ${escape(line.expirationDate)}</small>
         </fieldset>`).join('')}</div>
         <datalist id="delivery-variant-options">${variants}</datalist>
-        <p class="admin-muted">Сумма в каждой строке должна сойтись: продаваемые упаковки × единиц внутри + подарки + личное = фактически получено. Уже записанные движения по этому албарану не прибавятся повторно</p>
+        <p class="admin-muted">Все единицы поступят на склад. Уже записанные движения по этой накладной не прибавятся повторно</p>
         <button type="submit">Записать всю накладную</button></form>`}`;
 }
 
@@ -1037,14 +1053,9 @@ async function deliveryFilePayload(file) {
 function deliveryChoices(preview) {
   return preview.parsed.items.map(line => {
     const form = document.querySelector(`[data-delivery-code="${CSS.escape(line.supplierCode)}"]`);
-    const value = name => Number(form.querySelector(`[name="${name}"]`).value);
     const choice = { supplierCode: line.supplierCode,
-      variantId: form.querySelector('[name="variantId"]').value.trim(),
-      saleableUnits: value('saleableUnits'), giftPieces: value('giftPieces'),
-      personalPieces: value('personalPieces') };
-    if (!choice.variantId || choice.saleableUnits * line.piecesPerRetailUnit +
-      choice.giftPieces + choice.personalPieces !== line.physicalPieces)
-      throw new Error(`Распределение ${line.supplierCode} не сходится`);
+      variantId: form.querySelector('[name="variantId"]').value.trim() };
+    if (!choice.variantId) throw new Error(`Не указан SKU для ${line.supplierCode}`);
     return choice;
   });
 }
@@ -1053,7 +1064,8 @@ async function loadStock(details) {
   const host = details.querySelector('.stock-content');
   const names = { receipt:'Приёмка', adjustment:'Инвентаризация', order_reserved:'Резерв заказа',
     order_released:'Снятие резерва', order_fulfilled:'Доставлен заказ',
-    legacy_order_cancelled:'Отмена старого заказа' };
+    legacy_order_cancelled:'Отмена старого заказа', marketing_expense:'Маркетинг и подарки',
+    personal_expense:'Личное потребление' };
   try {
     const { movements } = await api(`/api/admin/inventory-movements?variantId=${encodeURIComponent(variantId)}`);
     host.innerHTML = `<form data-receipt-variant="${escape(variantId)}" class="offer-form">
@@ -1273,8 +1285,12 @@ async function load() {
       return;
     }
     if (tab === 'deliveries') {
-      const { deliveries } = await api('/api/admin/supplier-deliveries');
-      renderDeliveries(deliveries);
+      const [deliveryData, writeoffData, variantData] = await Promise.all([
+        api('/api/admin/supplier-deliveries'), api('/api/admin/inventory-writeoffs'),
+        api('/api/admin/variants')
+      ]);
+      deliveryVariants = variantData.variants;
+      renderDeliveries(deliveryData.deliveries, writeoffData.writeoffs);
       deliveryDraft = null;
       message('Приёмка поставок');
       return;
@@ -1520,6 +1536,19 @@ $('admin-content').addEventListener('change', async event => {
   }
 });
 $('admin-content').addEventListener('click', async event => {
+  const mixedBox = event.target.closest('[data-open-mixed-box]');
+  if (mixedBox) {
+    mixedBox.disabled = true;
+    try {
+      await api('/api/admin/churu/repack', 'POST', {
+        productId: 'cmd-source-694e05cdc1b2582c', operation: 'open-mixed-box',
+        quantity: 1, idempotencyKey: crypto.randomUUID()
+      });
+      await load();
+      message('Короб переведён в 20 отдельных тюбиков');
+    } catch (error) { mixedBox.disabled = false; message(error.message); }
+    return;
+  }
   const testSummary = event.target.closest('.admin-test-history > summary');
   if (testSummary) { showTestOrders = !testSummary.parentElement.open; return; }
   if (event.target.closest('[data-carts-refresh]')) { await load(); return; }
@@ -1902,15 +1931,11 @@ $('admin-content').addEventListener('submit', async event => {
     if (form.id === 'delivery-upload') {
       const documentFile = await deliveryFilePayload(values.get('document'));
       const proofFile = await deliveryFilePayload(values.get('proof')?.size ? values.get('proof') : null);
-      const [preview, variantData] = await Promise.all([
-        api('/api/admin/supplier-deliveries/preview', 'POST',
-          { document: documentFile, proof: proofFile }),
-        api('/api/admin/variants')
-      ]);
+      const preview = await api('/api/admin/supplier-deliveries/preview', 'POST',
+        { document: documentFile, proof: proofFile });
       deliveryDraft = { document: documentFile, proof: proofFile, preview };
-      deliveryVariants = variantData.variants;
       renderDeliveryPreview(preview);
-      message(preview.alreadyImported ? 'Накладная уже записана' : 'Проверьте распределение и запишите поставку');
+      message(preview.alreadyImported ? 'Накладная уже записана' : 'Проверьте SKU и запишите поставку');
       if (submitButton) submitButton.disabled = false;
       return;
     }
@@ -1924,7 +1949,17 @@ $('admin-content').addEventListener('submit', async event => {
       });
       await load();
       message(result.alreadyImported ? 'Накладная уже записана, остатки не задвоены' :
-        `Поставка записана: ${result.lines.reduce((sum, item) => sum + item.newStockUnits, 0)} единиц добавлено на склад`);
+        `Поставка записана: ${result.lines.reduce((sum, item) => sum + item.newStockUnits, 0)} упаковок добавлено на склад`);
+      return;
+    }
+    if (form.id === 'inventory-writeoff') {
+      const result = await api('/api/admin/inventory-writeoffs', 'POST', {
+        variantId: String(values.get('variantId') || '').trim(),
+        quantity: Number(values.get('quantity')), category: values.get('category'),
+        note: values.get('note'), idempotencyKey: values.get('idempotencyKey')
+      });
+      await load();
+      message(result.alreadyRecorded ? 'Списание уже записано' : 'Списание записано');
       return;
     }
     if (form.hasAttribute('data-brand-match')) {

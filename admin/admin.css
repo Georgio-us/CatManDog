@@ -231,12 +231,14 @@ nav{overflow-x:auto;padding-bottom:4px}nav button{white-space:nowrap}
 .admin-card .delivery-line{border:1px solid #dfe3da;border-radius:14px;padding:14px;min-width:0}
 .delivery-line legend{font-weight:700;padding:0 6px}.delivery-line-facts{display:grid;gap:4px;margin-bottom:12px;color:#596057}
 .admin-card .delivery-line>label{width:100%}.admin-card .delivery-line>label input{width:100%;max-width:none}
-.delivery-allocations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0}
-.admin-card .delivery-allocations input{width:100%;max-width:none;min-width:0}.delivery-line small{color:#777d73}
+.delivery-line small{color:#777d73}
 .admin-card #delivery-apply{display:grid;justify-items:start;width:100%}.delivery-history{display:grid;gap:12px;margin-top:16px}
 .delivery-history article{display:grid;gap:5px;border:1px solid #e0e3db;border-radius:12px;padding:14px}
 .delivery-history article>div{display:flex;gap:14px;flex-wrap:wrap}.delivery-history a{color:#243b2b}
-@media(max-width:650px){.admin-card .delivery-upload,.delivery-allocations{grid-template-columns:1fr}}
+.admin-card .delivery-writeoff{display:grid;grid-template-columns:minmax(220px,2fr) minmax(110px,1fr) minmax(170px,1fr) minmax(180px,2fr);gap:12px;align-items:end}
+.admin-card .delivery-writeoff label,.admin-card .delivery-writeoff input,.admin-card .delivery-writeoff select{min-width:0;width:100%;max-width:none}
+.delivery-writeoff button{justify-self:start}.delivery-history h3{margin:0;font-size:16px}
+@media(max-width:650px){.admin-card .delivery-upload,.admin-card .delivery-writeoff{grid-template-columns:1fr}}
 
 /* Product workspace */
 .admin-shell:has(.product-workspace),.admin-shell:has(.request-workspace){max-width:1540px}

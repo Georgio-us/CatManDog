@@ -115,21 +115,14 @@ export async function previewSupplierReceipt(db, payload) {
 }
 
 function choicesFor(items, supplied) {
-  if (!Array.isArray(supplied) || supplied.length !== items.length) bad('Проверьте распределение строк');
+  if (!Array.isArray(supplied) || supplied.length !== items.length) bad('Проверьте сопоставление строк');
   const byCode = new Map(supplied.map(item => [String(item.supplierCode), item]));
   if (byCode.size !== items.length) bad('Повторяются артикулы накладной');
   return items.map(item => {
     const choice = byCode.get(item.supplierCode);
     const variantId = String(choice?.variantId || '').trim();
-    const saleableUnits = Number(choice?.saleableUnits);
-    const giftPieces = Number(choice?.giftPieces);
-    const personalPieces = Number(choice?.personalPieces);
-    if (!variantId || ![saleableUnits,giftPieces,personalPieces].every(value =>
-      Number.isInteger(value) && value >= 0 && value <= 99999) ||
-      saleableUnits * item.piecesPerRetailUnit + giftPieces + personalPieces !== item.physicalPieces)
-      bad(`Распределение строки ${item.supplierCode} не сходится`);
-    if (saleableUnits > item.retailUnits) bad(`Слишком много продаваемых единиц: ${item.supplierCode}`);
-    return { ...item, variantId, saleableUnits, giftPieces, personalPieces };
+    if (!variantId) bad(`Укажите SKU для строки ${item.supplierCode}`);
+    return { ...item, variantId };
   });
 }
 
@@ -169,9 +162,9 @@ export async function applySupplierReceipt(db, payload, staffId) {
           AND position($3 in note)>0`,
       [preview.supplier.id, line.variantId, preview.parsed.documentNumber]);
       const existingUnits = previous.rows[0].quantity;
-      if (existingUnits > line.saleableUnits)
-        bad(`По строке ${line.supplierCode} уже принято больше товара, чем выбрано для продажи`, 409);
-      const stockDelta = line.saleableUnits - existingUnits;
+      if (existingUnits > line.retailUnits)
+        bad(`По строке ${line.supplierCode} уже принято больше товара, чем указано в накладной`, 409);
+      const stockDelta = line.retailUnits - existingUnits;
       if (stockDelta > 0) {
         const changed = await client.query(`UPDATE catalog_variants
           SET stock_quantity=coalesce(stock_quantity,0)+$1,availability='on_hand',updated_at=now()
@@ -217,8 +210,7 @@ export async function applySupplierReceipt(db, payload, staffId) {
       recorded.push({ supplierCode: line.supplierCode, variantId: line.variantId,
         description: line.description, ean: line.ean, purchaseQuantity: line.purchaseQuantity,
         retailUnits: line.retailUnits, piecesPerRetailUnit: line.piecesPerRetailUnit,
-        physicalPieces: line.physicalPieces, saleableUnits: line.saleableUnits,
-        giftPieces: line.giftPieces, personalPieces: line.personalPieces,
+        physicalPieces: line.physicalPieces,
         existingReceivedUnits: existingUnits, newStockUnits: stockDelta,
         unitCostCents: line.unitCostCents, lineCostCents: line.lineCostCents,
         expirationDate: line.expirationDate });
@@ -237,9 +229,7 @@ export async function applySupplierReceipt(db, payload, staffId) {
       VALUES($1,$2,'supplier_delivery_imported',$3,$4)`,
     [randomUUID(),staffId,receiptId,{ supplierId: preview.supplier.id,
       documentNumber: preview.parsed.documentNumber,documentSha256: files.document.sha256,
-      lines: recorded.length,newStockUnits: recorded.reduce((sum,item)=>sum+item.newStockUnits,0),
-      giftPieces: recorded.reduce((sum,item)=>sum+item.giftPieces,0),
-      personalPieces: recorded.reduce((sum,item)=>sum+item.personalPieces,0) }]);
+      lines: recorded.length,newStockUnits: recorded.reduce((sum,item)=>sum+item.newStockUnits,0) }]);
     await client.query('COMMIT');
     return { id: receiptId, alreadyImported: false, lines: recorded,
       totals: preview.parsed.totals, proofAmountMatches: preview.proofAmountMatches };

@@ -646,6 +646,75 @@ async function adminRoute(db, req, res, path) {
       'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer' });
     return res.end(file.bytes);
   }
+  if (path === '/api/admin/inventory-writeoffs' && req.method === 'GET') {
+    const { rows } = await db.query(`SELECT m.id,m.variant_id,p.name,v.label,
+      -m.delta_on_hand AS quantity,m.reason,m.unit_cost_cents,m.note,m.created_at
+      FROM inventory_movements m
+      LEFT JOIN catalog_variants v ON v.id=m.variant_id
+      LEFT JOIN catalog_products p ON p.id=v.product_id
+      WHERE m.reason IN ('marketing_expense','personal_expense')
+      ORDER BY m.created_at DESC LIMIT 100`);
+    return json(res, 200, { writeoffs: rows });
+  }
+  if (path === '/api/admin/inventory-writeoffs' && req.method === 'POST') {
+    const body = await readJson(req);
+    const variantId = cap(body.variantId, 180);
+    const quantity = Number(body.quantity);
+    const reason = body.category === 'marketing' ? 'marketing_expense' :
+      body.category === 'personal' ? 'personal_expense' : null;
+    const key = cap(body.idempotencyKey, 100);
+    const note = cap(body.note, 300);
+    if (!variantId || !reason || !Number.isInteger(quantity) || quantity < 1 || quantity > 99999 ||
+      !/^[a-zA-Z0-9_-]{20,100}$/.test(key)) bad('Проверьте данные списания');
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const existing = await client.query(`SELECT variant_id,reason,delta_on_hand,note
+        FROM inventory_movements WHERE idempotency_key=$1`, [key]);
+      if (existing.rows[0]) {
+        const previous = existing.rows[0];
+        if (previous.variant_id !== variantId || previous.reason !== reason ||
+          previous.delta_on_hand !== -quantity || previous.note !== note)
+          bad('Ключ списания уже использован для другого действия', 409);
+        await client.query('COMMIT');
+        return json(res, 200, { ok: true, alreadyRecorded: true });
+      }
+      const locked = await client.query(`SELECT id,stock_quantity,reserved_quantity,purchase_price_cents
+        FROM catalog_variants WHERE id=$1 FOR UPDATE`, [variantId]);
+      const variant = locked.rows[0];
+      if (!variant) bad('SKU не найден', 404);
+      const afterLock = await client.query(`SELECT variant_id,reason,delta_on_hand,note
+        FROM inventory_movements WHERE idempotency_key=$1`, [key]);
+      if (afterLock.rows[0]) {
+        const previous = afterLock.rows[0];
+        if (previous.variant_id !== variantId || previous.reason !== reason ||
+          previous.delta_on_hand !== -quantity || previous.note !== note)
+          bad('Ключ списания уже использован для другого действия', 409);
+        await client.query('COMMIT');
+        return json(res, 200, { ok: true, alreadyRecorded: true });
+      }
+      if ((variant.stock_quantity ?? 0) - variant.reserved_quantity < quantity)
+        bad('Недостаточно свободного остатка для списания', 409);
+      const changed = await client.query(`UPDATE catalog_variants SET
+        stock_quantity=coalesce(stock_quantity,0)-$1,
+        availability=CASE WHEN coalesce(stock_quantity,0)-$1=0 THEN 'source_on_demand'
+          ELSE availability END,updated_at=now()
+        WHERE id=$2 RETURNING stock_quantity,reserved_quantity`, [quantity, variantId]);
+      await recordInventoryMovement(client, { variantId, staffId: operator.id,
+        unitCostCents: variant.purchase_price_cents, idempotencyKey: key, reason,
+        deltaOnHand: -quantity, onHandAfter: changed.rows[0].stock_quantity,
+        reservedAfter: changed.rows[0].reserved_quantity, note });
+      await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+        VALUES($1,$2,'inventory_writeoff',$3,$4)`, [randomUUID(),operator.id,variantId,
+        { category: body.category,quantity,unitCostCents: variant.purchase_price_cents,note }]);
+      await client.query('COMMIT');
+      return json(res, 201, { ok: true, alreadyRecorded: false,
+        remaining: changed.rows[0].stock_quantity,
+        expenseCents: variant.purchase_price_cents === null ? null :
+          variant.purchase_price_cents * quantity });
+    } catch (error) { await client.query('ROLLBACK'); throw error; }
+    finally { client.release(); }
+  }
   if (path === '/api/admin/carts' && req.method === 'GET')
     return json(res, 200, { carts: await listObservedCarts(db) });
   const cartHistory = path.match(/^\/api\/admin\/carts\/([^/]+)\/events$/);
