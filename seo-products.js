@@ -1,4 +1,4 @@
-import { seoProductSlugs } from './seo-product-slugs.js';
+import { seoProductSlugs } from './seo-product-slugs.js?v=yagu-basket-20261113';
 
 // Each released family passed the current catalog, price, source, copy and image audit.
 // Keep this list explicit: a newly imported product must not become indexable by accident.
