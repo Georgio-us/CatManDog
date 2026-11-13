@@ -7,6 +7,7 @@ import { esDetails } from '../locales/details-es.js';
 import { editorialEs } from '../locales/editorial-translations.js';
 import { churuDogEs } from '../locales/churu-dog.js';
 import { yaguExpansionEs } from '../locales/yagu-expansion.js';
+import { yaguBasketEs } from '../locales/yagu-basket.js';
 import { customerFacts, orderedVariants } from '../product-content.js';
 import { seoCategories, seoCategoryForPath } from '../seo-categories.js';
 import { seoProducts, seoProductForPath } from '../seo-products.js';
@@ -36,8 +37,8 @@ const categoryLinks = seoCategories.filter(category => category.indexable).map(c
   `<a class="article-card" href="${category.path}"><h2>${escapeHtml(category.title)}</h2><p>${escapeHtml(category.intro)}</p></a>`).join('');
 const productDescription = (product, publishedProduct) => publishedProduct.description ||
   editorialEs[product.description] || churuDogEs[product.description] || esProductText[product.description] ||
-  yaguExpansionEs[product.description] || product.name;
-const productName = product => editorialEs[product.name] || churuDogEs[product.name] || esProductText[product.name] || product.name;
+  yaguBasketEs[product.description] || yaguExpansionEs[product.description] || product.name;
+const productName = product => editorialEs[product.name] || churuDogEs[product.name] || yaguBasketEs[product.name] || esProductText[product.name] || product.name;
 const productLinks = categoryPath => seoProducts
   .filter(item => item.indexable && item.categoryPath === categoryPath)
   .map(item => {
@@ -54,7 +55,7 @@ function pageData(pathname) {
       .map(label => escapeHtml(label.replace(/ кг$/u, ' kg').replace(/ г$/u, ' g')));
     const description = productDescription(product, publishedProduct);
     const image = product.image?.src || (typeof product.image === 'string' ? product.image : '');
-    const facts = customerFacts(product.details).map(detail => editorialEs[detail] || esDetails[detail] || yaguExpansionEs[detail] ||
+    const facts = customerFacts(product.details).map(detail => editorialEs[detail] || esDetails[detail] || yaguBasketEs[detail] || yaguExpansionEs[detail] ||
       (!/[А-Яа-яЁё]/u.test(detail) ? detail : null)).filter(Boolean);
     const name = productName(product);
     const categoryLabel = publishedProduct.indexable
