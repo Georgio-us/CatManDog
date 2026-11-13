@@ -381,6 +381,8 @@ export const seoProductSlugs = Object.freeze({
   "yagu-7570675-studio": "duvo-farmz-govyazhya-traheya-250-g",
   "yagu-7570677-studio": "duvo-farmz-kurinye-lapki-250-g",
   "yagu-7570678-studio": "duvo-farmz-govyazhi-zhily-350-g",
+  "yagu-7570651-studio": "duvo-farmz-govyazhi-kopyta-6-sht",
+  "yagu-7516214-studio": "duvo-meat-sushenaya-utinaya-grudka-100-g",
   "heybopet-faucet-fountain": "heybo-pet-fontan-so-struei-iz-krana",
   "heybopet-induction-fountain": "heybo-pet-kvadratnyi-induktsionnyi-fontan",
   "heybopet-app-fountain": "heybo-pet-fontan-s-prilozheniem",

@@ -9,6 +9,8 @@ export const ukProductNames = {
   "Duvo+ Farmz - говяжья трахея 250 г": "Duvo+ Farmz - яловича трахея 250 г",
   "Duvo+ Farmz - сушёные куриные лапки 250 г": "Duvo+ Farmz - сушені курячі лапки 250 г",
   "Duvo+ Farmz - говяжьи жилы 350 г": "Duvo+ Farmz - яловичі жили 350 г",
+  "Duvo+ Farmz - говяжьи копыта, 6 шт": "Duvo+ Farmz - яловичі копита, 6 шт",
+  "Duvo+ Meat! - сушёная утиная грудка 100 г": "Duvo+ Meat! - сушена качина грудка 100 г",
   "Royal Canin Gastrointestinal Kitten - сухой корм": "Royal Canin Gastrointestinal Kitten - сухий корм",
   "Royal Canin Kitten - соус": "Royal Canin Kitten - у соусі",
   "Moderna CatConcept - лоток, лежанка и когтеточка": "Moderna CatConcept - лоток, лежанка й дряпка",

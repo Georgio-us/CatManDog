@@ -10,6 +10,7 @@ import { yaguProducts, expandYaguCare } from './yagu-products.js?v=r2-media-1';
 import { yaguLaunchProducts } from './yagu-launch-products.js';
 import { yaguExpansionProducts, expandYaguColourVariants } from './yagu-expansion-products.js?v=product-content-20261110';
 import { yaguBasketProducts } from './yagu-basket-products.js?v=20261113';
+import { yaguChewTestProducts } from './yagu-chew-test-products.js?v=20261113';
 import { ownatProducts } from './ownat-products.js?v=r2-media-1';
 import { dogProducts } from './dog-products.js?v=r2-media-1';
 import { launchHeyboPetProducts } from './launch-heybopet-products.js';
@@ -412,7 +413,7 @@ const mergeCategory = product => {
 };
 // Kubo Plus has no comparable retail price yet, so its six variants stay out of the storefront.
 const yaguStorefrontProducts = yaguLaunchProducts.filter(product => product.id !== 'yagu-kubo-plus-pana');
-export const products = applyChuruRetailFormats(applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy(withSelectedAcanaOrijenFormats([...foodProducts, ...dogProducts, ...confirmedDemandProducts, ...churuDogProducts, ...expandYaguCare(treatsCareProducts), ...expandYaguColourVariants(yaguProducts), ...yaguStorefrontProducts, ...yaguExpansionProducts, ...yaguBasketProducts, ...catalogHeybopetProducts, ...launchHeyboPetProducts, ...demoProducts.map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)])).map(mergeCategory)))).map(product => {
+export const products = applyChuruRetailFormats(applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy(withSelectedAcanaOrijenFormats([...foodProducts, ...dogProducts, ...confirmedDemandProducts, ...churuDogProducts, ...expandYaguCare(treatsCareProducts), ...expandYaguColourVariants(yaguProducts), ...yaguStorefrontProducts, ...yaguExpansionProducts, ...yaguBasketProducts, ...yaguChewTestProducts, ...catalogHeybopetProducts, ...launchHeyboPetProducts, ...demoProducts.map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)])).map(mergeCategory)))).map(product => {
   const copy = catalogEditorialContent[product.id];
   if (!copy || product.description !== copy.previousDescription) return product;
   return {
