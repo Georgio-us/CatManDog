@@ -13,6 +13,7 @@ test('selections show real available catalog products in each language', () => {
     const products = homeShortcutProducts(catalogProducts, pet);
     assert.ok(products.length > 0);
     assert.ok(products.every(product => product.pet === pet));
+    if (pet === 'dog') assert.equal(products.length, 40);
   }
   const spanishHome = homeShortcuts(catalogProducts, helpers.icon, helpers.escape, 'es');
   assert.match(spanishHome, /href="\/selecciones\/gatos"/u);
@@ -27,7 +28,11 @@ test('selections show real available catalog products in each language', () => {
     ['uk', 'Добірка для собак', '#/picks/cat']
   ]) {
     const html = homeShortcutLanding(catalogProducts, 'dog', { ...helpers, language });
-    assert.ok(html.includes(`<h1 class="page-title">${title}</h1>`));
+    assert.ok(html.includes(`<h1>${title}</h1>`));
     assert.ok(html.includes(`href="${href}"`));
+    assert.match(html, /acana-grass-fed-lamb-11-4kg/u);
+    assert.match(html, /cat-pick-pairs-grid/u);
+    assert.match(html, /cat-pick-filters/u);
+    assert.match(html, /cat-pick-more/u);
   }
 });

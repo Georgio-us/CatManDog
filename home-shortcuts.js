@@ -1,5 +1,6 @@
 import { canBuy, snapshots } from './variants.js';
 import { catPickLanding } from './cat-picks.js?v=picks-seo-20261112';
+import { dogPickLanding } from './dog-picks.js?v=dog-editorial-20261113';
 import { pickHref } from './seo-picks.js';
 
 // Editorial order follows the planned first assortment, not inferred sales popularity.
@@ -47,28 +48,47 @@ export const homeShortcutIds = {
     'yagu-M0295-studio'
   ],
   dog: [
-    'cmd-source-f025a9dbc9d479c7',
-    'dog-orijen-original',
-    'royal-canin-chihuahua-adult',
-    'cmd-source-11acbc9ed4d69f1c',
     'cmd-source-0f4a3ef9889b8ff3',
-    'cmd-source-puppy-small-breed',
     'yagu-7516214-studio',
+    'cmd-source-f025a9dbc9d479c7',
+    'cmd-source-11acbc9ed4d69f1c',
+    'royal-canin-chihuahua-adult',
+    'churu-dog-chicken',
+    'yagu-7515987-studio',
+    'dog-mp-sensibowl-slomo',
+    'cmd-source-3b6cbf7e0c31efab',
+    'dog-orijen-original',
+    'cmd-source-classics-red-meat',
+    'cmd-source-classics-wild-coast',
+    'cmd-source-acana-senior',
+    'cmd-source-67755e1e1068c6f6',
+    'cmd-source-puppy-small-breed',
+    'dog-orijen-puppy',
+    'dog-orijen-small-breed',
+    'dog-orijen-six-fish',
+    'dog-rc-mini-adult',
+    'dog-rc-medium-adult',
+    'dog-rc-maxi-adult',
+    'dog-ownat-ultra-medium',
+    'dog-ownat-gf-prime',
+    'dog-ownat-wetline-chicken',
+    'dog-nutriplus-wet-lamb',
+    'churu-dog-tuna-pack4',
+    'churu-dog-salmon-pack4',
+    'churu-dog-chicken-bites',
+    'churu-dog-tuna-bites',
+    'yagu-40BW230-studio',
+    'yagu-7570675-studio',
     'yagu-7570677-studio',
     'yagu-7570651-studio',
-    'yagu-7515987-studio',
+    'yagu-7570678-studio',
     'yagu-duvo-cotton-bone-xs',
     'dog-duvo-huggi-rabbit',
-    'dog-mp-sensibowl-slomo',
     'yagu-7571307-studio',
-    'dog-yagu-harness-blue'
+    'yagu-cosmo-pana-ancha-t2',
+    'yagu-1126841-studio',
+    'yagu-1126845-studio'
   ]
-};
-
-const shortcutTags = {
-  'cmd-source-f025a9dbc9d479c7': { ru: 'Для взрослых собак', es: 'Para perros adultos', uk: 'Для дорослих собак' },
-  'cmd-source-11acbc9ed4d69f1c': { ru: 'Для щенков', es: 'Para cachorros', uk: 'Для цуценят' },
-  'cmd-source-puppy-small-breed': { ru: 'Для щенков мелких пород', es: 'Para cachorros de razas pequeñas', uk: 'Для цуценят малих порід' }
 };
 
 export function homeShortcutProducts(products, pet) {
@@ -100,9 +120,11 @@ export function homeShortcuts(products, icon, escape, language = 'ru') {
     ${cards.map(({ pet, title, description, brands }) => {
       const list = homeShortcutProducts(products, pet);
       const lead = list[0];
-      const image = lead?.image?.src || lead?.image;
+      const leadVariant = pet === 'dog' && lead?.variants?.find(variant => variant.id === 'acana-grass-fed-lamb-11-4kg');
+      const image = leadVariant?.image?.src || lead?.image?.src || lead?.image;
+      const imageAlt = leadVariant?.image?.alt || lead?.image?.alt || lead?.name;
       return `<a class="editorial-promo shortcut-${pet}" href="${language === 'es' ? pickHref(pet) : `#/picks/${pet}`}">
-        ${image ? `<img class="shortcut-image" src="${escape(image)}" alt="${escape(lead.image?.alt || lead.name)}" loading="lazy">` : ''}
+        ${image ? `<img class="shortcut-image" src="${escape(image)}" alt="${escape(imageAlt)}" loading="lazy">` : ''}
         <div class="promo-copy"><span class="direction-label">${label}</span><h2>${title}</h2>
           <p>${description}</p><span class="shortcut-brands">${brands}</span>
           <span class="promo-link">${action} ${icon('arrow')}</span>
@@ -114,28 +136,8 @@ export function homeShortcuts(products, icon, escape, language = 'ru') {
 
 export function homeShortcutLanding(products, pet, helpers) {
   if (!homeShortcutIds[pet]) return '';
-  const { crumbs, card, icon } = helpers;
   const list = homeShortcutProducts(products, pet);
   if (pet === 'cat') return catPickLanding(list, helpers, helpers.language);
-  const language = helpers.language || 'ru';
-  const words = {
-    ru: { title: 'Подборка для собак', intro: 'Корм для взрослых собак и щенков, жевательные лакомства и вещи для игр', eyebrow: 'Подборка CatManDog', cats: 'Для кошек', dogs: 'Для собак', all: 'Весь каталог', nav: 'Подборки для питомцев' },
-    es: { title: 'Selección para perros', intro: 'Pienso para perros adultos y cachorros, premios para masticar y juguetes', eyebrow: 'Selección CatManDog', cats: 'Gatos', dogs: 'Perros', all: 'Todo el catálogo', nav: 'Selecciones para mascotas' },
-    uk: { title: 'Добірка для собак', intro: 'Корм для дорослих собак і цуценят, жувальні ласощі та речі для гри', eyebrow: 'Добірка CatManDog', cats: 'Для котів', dogs: 'Для собак', all: 'Увесь каталог', nav: 'Добірки для улюбленців' }
-  }[language];
-  const title = words.title;
-  const catHref = language === 'es' ? pickHref('cat') : '#/picks/cat';
-  const dogHref = language === 'es' ? pickHref('dog') : '#/picks/dog';
-  return `<div class="page shortcut-page">${crumbs(title)}
-    <div class="shortcut-intro"><span class="eyebrow">${words.eyebrow}</span><h1 class="page-title">${title}</h1>
-      <p class="lead">${words.intro}</p><nav class="shortcut-tabs" aria-label="${words.nav}">
-        <a href="${catHref}">${words.cats}</a>
-        <a href="${dogHref}" aria-current="page">${words.dogs}</a>
-      </nav></div>
-    <section class="section shortcut-products" aria-label="${title}">
-      <div class="product-grid">${list.map(product => card(shortcutTags[product.id] && !product.tag
-        ? { ...product, tag: shortcutTags[product.id][language] } : product)).join('')}</div>
-      <a class="text-link shortcut-all" href="${language === 'es' ? `/catalogo?pet=${pet}` : `/#/catalog?pet=${pet}`}">${words.all} ${icon('arrow')}</a>
-    </section>
-  </div>`;
+  if (pet === 'dog') return dogPickLanding(list, helpers, helpers.language);
+  return '';
 }
