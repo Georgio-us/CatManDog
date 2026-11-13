@@ -6,11 +6,12 @@
     "assets:r2": "node scripts/r2-sync.js"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.13.0"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1152.0",
     "google-auth-library": "^10.9.1",
+    "pdfjs-dist": "^6.5.438",
     "pg": "^8.23.1"
   }
 }

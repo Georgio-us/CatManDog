@@ -457,6 +457,42 @@ CREATE INDEX IF NOT EXISTS inventory_movements_order_idx ON inventory_movements(
 CREATE INDEX IF NOT EXISTS inventory_movements_purchase_item_idx
   ON inventory_movements(purchase_order_item_id);
 
+-- Physical supplier deliveries, separate from orders placed in supplier cabinets.
+-- PDF and payment evidence are private database records, never public static files.
+CREATE TABLE IF NOT EXISTS supplier_delivery_imports (
+  id uuid PRIMARY KEY,
+  supplier_id uuid NOT NULL REFERENCES suppliers(id) ON DELETE RESTRICT,
+  document_number text NOT NULL,
+  supplier_order text NOT NULL DEFAULT '',
+  document_date date NOT NULL,
+  document_sha256 text NOT NULL UNIQUE,
+  document_filename text NOT NULL,
+  document_mime text NOT NULL DEFAULT 'application/pdf',
+  document_bytes bytea NOT NULL,
+  proof_filename text,
+  proof_mime text,
+  proof_sha256 text,
+  proof_bytes bytea,
+  proof_amounts_cents jsonb NOT NULL DEFAULT '[]'::jsonb,
+  totals jsonb NOT NULL,
+  lines jsonb NOT NULL,
+  created_by uuid REFERENCES staff_accounts(id) ON DELETE SET NULL,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  UNIQUE(supplier_id,document_number)
+);
+CREATE INDEX IF NOT EXISTS supplier_delivery_imports_supplier_idx
+  ON supplier_delivery_imports(supplier_id,document_date DESC);
+CREATE TABLE IF NOT EXISTS supplier_delivery_mappings (
+  supplier_id uuid NOT NULL REFERENCES suppliers(id) ON DELETE CASCADE,
+  supplier_code text NOT NULL,
+  variant_id text NOT NULL REFERENCES catalog_variants(id) ON DELETE RESTRICT,
+  retail_units_per_purchase_unit integer NOT NULL CHECK (retail_units_per_purchase_unit BETWEEN 1 AND 99999),
+  pieces_per_retail_unit integer NOT NULL CHECK (pieces_per_retail_unit BETWEEN 1 AND 99999),
+  updated_by uuid REFERENCES staff_accounts(id) ON DELETE SET NULL,
+  updated_at timestamptz NOT NULL DEFAULT now(),
+  PRIMARY KEY(supplier_id,supplier_code)
+);
+
 CREATE TABLE IF NOT EXISTS churu_repack_batches (
   idempotency_key text PRIMARY KEY,
   product_id text NOT NULL REFERENCES catalog_products(id),

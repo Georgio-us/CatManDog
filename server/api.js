@@ -20,6 +20,8 @@ import { createStripeCheckout, stripeMode, stripeReady, verifyStripeEvent } from
 import { sendcloudReady, sendcloudShippingOptions } from './sendcloud.js';
 import { importSupplierCatalog } from './supplier-catalog.js';
 import { importSupplierDrafts } from './supplier-drafts.js';
+import { previewSupplierReceipt, applySupplierReceipt,
+  listSupplierReceipts, receiptFile } from './supplier-receipt-import.js';
 import { launchCatalog, saveLaunchOrder } from './launch-scenario.js';
 import { selectedPriceRows, applySelectedPrices } from './selected-pricing.js';
 import { applyMatchedPrices } from './matched-pricing.js';
@@ -624,6 +626,26 @@ async function adminRoute(db, req, res, path) {
       name: operator?.name || customer?.name || '', email: operator?.email || customer?.email },
     fullAdmin ? { 'Set-Cookie': staffVisitCookie(staffToken(req), secure(req)) } : {});
   if (!fullAdmin && !path.startsWith('/api/admin/service-requests')) bad('Доступ закрыт', 403);
+  if (path === '/api/admin/supplier-deliveries' && req.method === 'GET')
+    return json(res, 200, { deliveries: await listSupplierReceipts(db) });
+  if (path === '/api/admin/supplier-deliveries/preview' && req.method === 'POST') {
+    rateLimit(req, 'supplier-delivery-preview', 30, 15);
+    return json(res, 200, await previewSupplierReceipt(db, await readJson(req, 12_000_000)));
+  }
+  if (path === '/api/admin/supplier-deliveries/apply' && req.method === 'POST') {
+    rateLimit(req, 'supplier-delivery-apply', 20, 15);
+    return json(res, 200, await applySupplierReceipt(db, await readJson(req, 12_000_000),
+      operator.id));
+  }
+  const deliveryFile = path.match(/^\/api\/admin\/supplier-deliveries\/([a-f0-9-]+)\/(document|proof)$/);
+  if (deliveryFile && req.method === 'GET') {
+    const file = await receiptFile(db, deliveryFile[1], deliveryFile[2]);
+    res.writeHead(200, { 'Content-Type': file.mime,
+      'Content-Length': file.bytes.length, 'Cache-Control': 'private, no-store',
+      'Content-Disposition': `attachment; filename="supplier-${deliveryFile[2]}.${file.mime === 'application/pdf' ? 'pdf' : file.mime === 'image/png' ? 'png' : 'jpg'}"`,
+      'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer' });
+    return res.end(file.bytes);
+  }
   if (path === '/api/admin/carts' && req.method === 'GET')
     return json(res, 200, { carts: await listObservedCarts(db) });
   const cartHistory = path.match(/^\/api\/admin\/carts\/([^/]+)\/events$/);
