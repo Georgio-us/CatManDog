@@ -5,7 +5,7 @@ import { accessoryDetail, customerDetails } from './accessory-ui.js?v=churu-cat-
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=all-product-urls-20261110';
 import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
-import { categories, products, catalogProducts, articles } from './data.js?v=yagu-chew-test-20261113';
+import { categories, products, catalogProducts, articles } from './data.js?v=mobile-cards-20261115';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=product-urls-20261110';
 import { createCheckoutUI } from './checkout-ui.js?v=address-check-20261112';
 import { availabilityRequestPage } from './availability-request-ui.js?v=request-size-20261111';
@@ -13,9 +13,9 @@ import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=unavailable-single-20261110';
 
 import { activeHomeLanding } from './collections.js?v=cat-assortment-1';
-import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=dog-editorial-20261113';
+import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=mobile-cards-20261115';
 import { handleCatPickClick } from './cat-picks.js?v=picks-seo-20261112';
-import { installLocale, intlLocale, locale, translate } from './locale.js?v=yagu-chew-test-20261113';
+import { installLocale, intlLocale, locale, translate } from './locale.js?v=mobile-cards-20261115';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';

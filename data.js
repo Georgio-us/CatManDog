@@ -413,11 +413,25 @@ const mergeCategory = product => {
 };
 // Kubo Plus has no comparable retail price yet, so its six variants stay out of the storefront.
 const yaguStorefrontProducts = yaguLaunchProducts.filter(product => product.id !== 'yagu-kubo-plus-pana');
+const merchandisingTags = {
+  'cmd-source-f025a9dbc9d479c7': 'Для взрослых',
+  'cmd-source-11acbc9ed4d69f1c': 'Для щенков',
+  'cmd-source-3b6cbf7e0c31efab': 'С красным мясом',
+  'cmd-source-classics-red-meat': 'С красным мясом',
+  'cmd-source-classics-wild-coast': 'С рыбой',
+  'cmd-source-acana-senior': 'Для пожилых собак',
+  'cmd-source-67755e1e1068c6f6': 'Контроль веса',
+  'cmd-source-puppy-small-breed': 'Для щенков',
+  'heybopet-hb-pwfs-s30s': 'Беспроводная поилка',
+  'heybopet-pwf-filters-3': 'Сменные фильтры'
+};
 export const products = applyChuruRetailFormats(applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy(withSelectedAcanaOrijenFormats([...foodProducts, ...dogProducts, ...confirmedDemandProducts, ...churuDogProducts, ...expandYaguCare(treatsCareProducts), ...expandYaguColourVariants(yaguProducts), ...yaguStorefrontProducts, ...yaguExpansionProducts, ...yaguBasketProducts, ...yaguChewTestProducts, ...catalogHeybopetProducts, ...launchHeyboPetProducts, ...demoProducts.map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)])).map(mergeCategory)))).map(product => {
   const copy = catalogEditorialContent[product.id];
-  if (!copy || product.description !== copy.previousDescription) return product;
+  const tag = !product.tag && merchandisingTags[product.id];
+  const taggedProduct = tag ? { ...product, tag } : product;
+  if (!copy || product.description !== copy.previousDescription) return taggedProduct;
   return {
-    ...product, description: copy.description, details: copy.details,
+    ...taggedProduct, description: copy.description, details: copy.details,
     ...(product.variants ? { variants: product.variants.map(variant => variant.description === copy.previousDescription
       ? { ...variant, description: copy.description, details: copy.details }
       : variant) } : {})

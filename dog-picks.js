@@ -163,7 +163,7 @@ export function dogPickLanding(list, { crumbs, card, icon, escape }, language = 
       <div class="cat-pick-home-grid">${home.map((item, index) => `<article class="cat-pick-home-card ${index === 0 ? 'cat-pick-home-main' : ''}"><div><h3>${escape(item.product.name)}</h3><p>${escape(item.detail)}</p>${link(item.product, t.viewProduct)}</div>${img(item.product)}</article>`).join('')}</div>
     </section>
     <section class="cat-pick-section cat-pick-catalog" id="dog-pick-products" aria-labelledby="dog-pick-catalog-title" data-active-filter="all" data-visible-count="12">
-      <div class="cat-pick-section-head"><h2 id="dog-pick-catalog-title">${escape(t.all)} <span>${list.length}</span></h2><p>${escape(t.allIntro)}</p></div>
+      <div class="cat-pick-section-head"><h2 id="dog-pick-catalog-title">${escape(t.all)}</h2><p>${escape(t.allIntro)}</p></div>
       <div class="cat-pick-filters" role="group" aria-label="${escape(t.all)}">${t.filters.map(([key, label]) => `<button type="button" data-cat-pick-filter="${key}" aria-pressed="${key === 'all'}">${escape(label)}</button>`).join('')}</div>
       <div class="product-grid cat-pick-product-grid">${list.map((product, index) => `<div class="cat-pick-product" data-cat-pick-groups="${groupsFor(product)}" ${index >= 12 ? 'hidden' : ''}>${card(product.id === mainFood?.id ? mainFoodImage : product)}</div>`).join('')}</div>
       <button type="button" class="cat-pick-more" data-cat-pick-more ${list.length <= 12 ? 'hidden' : ''}>${escape(t.more)} ${icon('arrow')}</button>

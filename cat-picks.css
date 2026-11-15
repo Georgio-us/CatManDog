@@ -166,13 +166,6 @@
   letter-spacing: var(--heading-tracking);
 }
 
-.cat-pick-section-head h2 span {
-  color: var(--muted);
-  font-size: .5em;
-  font-weight: 600;
-  vertical-align: middle;
-}
-
 .cat-pick-section-head p {
   max-width: 370px;
   margin: 0;
@@ -464,7 +457,7 @@
 
 @media (max-width: 760px) {
   .cat-picks-page {
-    padding-inline: 18px;
+    padding-inline: var(--gutter);
   }
 
   .cat-picks-page .breadcrumbs {
@@ -615,7 +608,7 @@
 
   .cat-pick-product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
+    gap: 36px 20px;
   }
 }
 

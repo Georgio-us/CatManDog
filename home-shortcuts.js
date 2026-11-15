@@ -1,6 +1,6 @@
 import { canBuy, snapshots } from './variants.js';
-import { catPickLanding } from './cat-picks.js?v=picks-seo-20261112';
-import { dogPickLanding } from './dog-picks.js?v=dog-editorial-20261113';
+import { catPickLanding } from './cat-picks.js?v=mobile-cards-20261115';
+import { dogPickLanding } from './dog-picks.js?v=mobile-cards-20261115';
 import { pickHref } from './seo-picks.js';
 
 // Editorial order follows the planned first assortment, not inferred sales popularity.
