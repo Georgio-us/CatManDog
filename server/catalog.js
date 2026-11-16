@@ -90,7 +90,8 @@ export async function importCatalog(db, items = products) {
         JSON.stringify(variant.details), variant.sourcePriceCents,variant.sourceOrderable,
         variant.source.availabilityStatus === 'pending' ? 'pending' :
           variant.sourceOrderable ? 'source_on_demand' : 'unavailable',
-        variant.source.saleStatus === 'available' ? 'available' :
+        variant.source.saleStatus === 'unavailable' ? 'unavailable' :
+          variant.source.saleStatus === 'available' ? 'available' :
           /^(?:heybo pet|heiba pet|heybopet)$/i.test(product.brand || '') ? 'preorder' :
           /^(?:advance|hill[’']s)$/i.test(product.brand || '') ? 'unavailable' : 'available',
         variant.source]);
@@ -317,6 +318,17 @@ export async function importCatalog(db, items = products) {
         await client.query("INSERT INTO catalog_migrations(name) VALUES('initial_brand_sale_status_2026_11_06')");
       }
       const unpricedRequestMigration = 'unpriced_customer_request_2026_11_10';
+      const dogActivityMigration = 'yagu_dog_activity_availability_2026_11_16';
+      const dogActivityDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [dogActivityMigration]);
+      if (!dogActivityDone.rows.length) {
+        await client.query(`UPDATE catalog_variants SET sale_status='unavailable',
+          source_orderable=false,availability='unavailable',updated_at=now()
+          WHERE id = ANY($1::text[])`, [[
+          'yagu-7500016-activity', 'yagu-7575324-activity', 'yagu-7517008-activity'
+        ]]);
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [dogActivityMigration]);
+      }
       const unpricedRequestDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
         [unpricedRequestMigration]);
       if (!unpricedRequestDone.rows.length) {
