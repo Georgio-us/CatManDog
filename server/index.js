@@ -6,7 +6,9 @@ import { serveSeo } from './seo.js';
 import { startBackupScheduler } from './backup.js';
 import { startTelegramOrderAlerts } from './telegram.js';
 import { startObservedCartCleanup } from './cart-activity.js';
+import { isStaging, stagingAuthorized, validateStagingEnvironment } from './environment.js';
 
+validateStagingEnvironment();
 const port = Number(process.env.PORT || 8080);
 const db = createDatabase();
 let initialized = false;
@@ -16,10 +18,16 @@ if (db) {
     initialized = true;
   } catch (error) { console.error('Database initialization failed:', error.message); }
 }
+if (isStaging() && !initialized) throw new Error('Staging database initialization failed');
 
 const server = createServer(async (req, res) => {
   try {
     const url = new URL(req.url || '/', 'http://localhost');
+    if (!stagingAuthorized(req, url.pathname)) {
+      res.writeHead(401, { 'WWW-Authenticate': 'Basic realm="CatManDog test", charset="UTF-8"',
+        'Cache-Control': 'no-store', 'Content-Type': 'text/plain; charset=utf-8' });
+      return res.end('Тестовая среда CatManDog: требуется вход');
+    }
     if (url.pathname.startsWith('/api/')) return await handleApi(initialized ? db : null, req, res, url.pathname);
     if (await serveSeo(req, res, url.pathname)) return;
     if (process.env.R2_MEDIA_REDIRECT_ENABLED !== 'false' && url.pathname.startsWith('/assets/')) {
@@ -40,6 +48,6 @@ const server = createServer(async (req, res) => {
 
 server.listen(port, '0.0.0.0', () => console.info(`CatManDog listening on ${port}`));
 const stopBackups = startBackupScheduler(initialized ? db : null);
-const stopTelegramAlerts = startTelegramOrderAlerts(initialized ? db : null);
+const stopTelegramAlerts = startTelegramOrderAlerts(initialized && !isStaging() ? db : null);
 const stopCartCleanup = startObservedCartCleanup(initialized ? db : null);
 process.on('SIGTERM', () => { stopBackups(); stopTelegramAlerts(); stopCartCleanup(); server.close(() => db?.end()); });

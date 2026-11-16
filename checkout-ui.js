@@ -29,6 +29,15 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
       const response = await fetch('/api/config', { credentials: 'same-origin' });
       if (!response.ok) return;
       const config = await response.json();
+      const stagingBanner = globalThis.document?.querySelector?.('#staging-banner');
+      if (stagingBanner && config.testEnvironment === true) {
+        stagingBanner.textContent = locale() === 'es'
+          ? 'ENTORNO DE PRUEBAS - pagos simulados, pedidos sin entrega'
+          : locale() === 'uk'
+            ? 'ТЕСТОВЕ СЕРЕДОВИЩЕ - тестові платежі, замовлення без доставки'
+            : 'ТЕСТОВАЯ СРЕДА - тестовая оплата, заказы без доставки';
+        stagingBanner.hidden = false;
+      }
       supportEnabled = config.supportEnabled === true;
       accountsEnabled = config.accountsEnabled === true;
       paymentsEnabled = config.paymentsEnabled === true && config.ordersEnabled === true;

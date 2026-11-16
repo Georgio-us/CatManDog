@@ -1,3 +1,5 @@
+.staging-banner:not([hidden]) { padding: 9px 20px; background: #252923; color: #fff;
+  text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .03em; }
 .checkout-page { padding-bottom: 90px; }
 .checkout-page h1 { font-size: clamp(42px, 5vw, 68px); }
 .checkout-head { display: flex; justify-content: space-between; gap: 20px; align-items: center; margin: 8px 0 24px; color: var(--muted); font-size: 13px; }

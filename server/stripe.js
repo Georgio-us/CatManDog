@@ -1,11 +1,19 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
+import { isStaging } from './environment.js';
 
 const secretKey = () => process.env.STRIPE_SECRET_KEY || '';
 const webhookSecret = () => process.env.STRIPE_WEBHOOK_SECRET || '';
 
 export function stripeReady() {
-  return /^(sk|rk)_(test|live)_/.test(secretKey()) && /^whsec_/.test(webhookSecret()) &&
-    /^https:\/\/catmandog\.es\/?$/.test(process.env.PUBLIC_BASE_URL || '');
+  if (!/^(sk|rk)_(test|live)_/.test(secretKey()) || !/^whsec_/.test(webhookSecret())) return false;
+  if (isStaging()) {
+    try {
+      const base = new URL(process.env.PUBLIC_BASE_URL);
+      return /^(sk|rk)_test_/.test(secretKey()) && base.protocol === 'https:' &&
+        !['catmandog.es', 'www.catmandog.es'].includes(base.hostname);
+    } catch { return false; }
+  }
+  return /^https:\/\/catmandog\.es\/?$/.test(process.env.PUBLIC_BASE_URL || '');
 }
 
 export function stripeMode() {

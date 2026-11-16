@@ -30,16 +30,18 @@ import { activatePaperCoupon, normalizeBuyerPhone, resolvePromo,
 import { churuRepackOptions } from '../churu-retail-formats.js';
 import { salePriceDecision } from './sale-price-policy.js';
 import { sendTelegramVisitAlert, telegramReady } from './telegram.js';
+import { isStaging } from './environment.js';
 import { saveObservedCart, deleteObservedCart, listObservedCarts,
   observedCartEvents, validCartId } from './cart-activity.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
 const enabled = name => process.env[name] === 'true';
-const ordersReady = () => stripeReady() && emailReady() &&
+const ordersReady = () => stripeReady() && (isStaging() || emailReady()) &&
   enabled('ORDERS_ENABLED') && enabled('PAYMENTS_ENABLED');
 async function checkoutAllowed(db, req) {
   if (!ordersReady()) return false;
+  if (isStaging()) return true;
   if (stripeMode() === 'live') return true;
   const customer = await currentCustomer(db, req);
   if (!customer?.emailVerified) return false;
@@ -264,12 +266,13 @@ async function createOrder(db, payload, customer, manual = null) {
     const deliveryTaxRate = billingProfile.rows[0]?.delivery_tax_rate_bps ?? null;
     const inserted = await client.query(`INSERT INTO orders(id,number,customer_id,customer_name,email,buyer_phone,phone,whatsapp_opt_in,
       delivery_address,delivery_preference,subtotal_cents,discount_cents,delivery_cents,delivery_tax_rate_bps,total_cents,
-      promo_code,idempotency_key,stock_state,locale,cart_session_id) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,'reserved',$18,$19)
+      promo_code,idempotency_key,stock_state,locale,cart_session_id,is_test) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,'reserved',$18,$19,$20)
       ON CONFLICT(idempotency_key) DO NOTHING RETURNING id,number`,
     [orderId, number, customer?.id || null, name, email, normalizeBuyerPhone(phone), phone, !!payload.whatsapp,
       cleanAddress, cleanDelivery, quote.subtotalCents, quote.discountCents,
       quote.deliveryCents, deliveryTaxRate, quote.totalCents, quote.promoCode, idempotency,
-      ['ru','es','uk'].includes(payload.locale) ? payload.locale : 'ru', linkedCartId]);
+      ['ru','es','uk'].includes(payload.locale) ? payload.locale : 'ru', linkedCartId,
+      stripeMode() === 'test']);
     if (!inserted.rows.length) {
       const duplicate = await client.query(`SELECT id,number,email,stripe_checkout_url,payment_expires_at
         FROM orders WHERE idempotency_key=$1`, [idempotency]);
@@ -406,10 +409,11 @@ async function handleStripeWebhook(db, req, res) {
     if (paid && order.payment_status !== 'paid') {
       if (order.payment_status === 'failed' || order.stock_state === 'released')
         throw new Error('Оплата поступила после освобождения резерва');
-      await client.query(`UPDATE orders SET payment_status='paid',telegram_alert_pending=true,
+      await client.query(`UPDATE orders SET payment_status='paid',telegram_alert_pending=$4,
         stripe_checkout_session_id=coalesce(stripe_checkout_session_id,$2),
         stripe_payment_intent_id=$3,updated_at=now() WHERE id=$1`,
-      [order.id, session.id, typeof session.payment_intent === 'string' ? session.payment_intent : null]);
+      [order.id, session.id, typeof session.payment_intent === 'string' ? session.payment_intent : null,
+        !isStaging()]);
       await client.query(`INSERT INTO order_events(id,order_id,type,actor)
         VALUES($1,$2,'payment_paid','stripe')`, [randomUUID(), order.id]);
     } else if (failed && order.payment_status !== 'paid' && order.payment_status !== 'failed') {
@@ -2164,7 +2168,8 @@ export async function handleApi(db, req, res, pathname) {
         emailEnabled: emailReady(), googleClientId: enabled('ACCOUNTS_ENABLED') ? googleClientId() : null,
         paymentsEnabled: paymentAccess,
         sourcePaymentsEnabled: paymentAccess,
-        supportEnabled: enabled('SUPPORT_ENABLED') && emailReady() });
+        supportEnabled: enabled('SUPPORT_ENABLED') && emailReady(),
+        testEnvironment: isStaging() });
     }
     if (pathname === '/api/catalog' && req.method === 'GET') {
       const list = await liveCatalogSnapshot(db);

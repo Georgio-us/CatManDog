@@ -1,6 +1,8 @@
 import { renderOrderEmail } from './order-email.js';
+import { isStaging } from './environment.js';
 
 export function emailReady() {
+  if (isStaging()) return false;
   try {
     return !!process.env.RESEND_API_KEY && !!process.env.RESEND_FROM &&
       new URL(process.env.PUBLIC_BASE_URL).protocol === 'https:';
