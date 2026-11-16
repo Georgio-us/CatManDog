@@ -1,5 +1,6 @@
 import { yaguExpansionUkNames } from './yagu-expansion.js';
 import { churuDogUkNames } from './churu-dog.js';
+import { yaguToyExpansionUk } from './yagu-toy-expansion.js';
 
 // Ukrainian product names. Brand and registered line names remain unchanged.
 export const ukProductNames = {
@@ -15,6 +16,8 @@ export const ukProductNames = {
   "Royal Canin Kitten - соус": "Royal Canin Kitten - у соусі",
   "Moderna CatConcept - лоток, лежанка и когтеточка": "Moderna CatConcept - лоток, лежанка й дряпка",
   ...yaguExpansionUkNames,
+  ...Object.fromEntries(Object.entries(yaguToyExpansionUk)
+    .filter(([key]) => key.startsWith('Duvo+'))),
   ...churuDogUkNames,
   "HeyboPet - беспроводной фонтан 3 л": "HeyboPet - бездротовий фонтан 3 л",
   "HeyboPet - сменные фильтры для фонтана, 3 шт": "HeyboPet - змінні фільтри для фонтанчика, 3 шт",

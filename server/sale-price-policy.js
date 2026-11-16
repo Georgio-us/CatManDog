@@ -24,6 +24,16 @@ export function salePriceDecision(row) {
     return { priceCents, accepted: false, basis: basis.kind,
       review: 'Соответствие модели в предложении поставщика не подтверждено' };
   if (basis?.checkedAt && cents(basis.amount) === priceCents) {
+    if (basis.kind === 'market_comparison' && basis.offers?.some(offer => offer.url) &&
+        source.purchasePriceStatus === 'confirmed' &&
+        source.purchasePriceTaxIncluded === false &&
+        Number.isFinite(source.purchasePrice) &&
+        Number.isFinite(basis.conservativePurchaseTaxPercent) &&
+        Number.isFinite(basis.minimumMarginPercent) &&
+        (priceCents - Math.ceil(source.purchasePrice *
+          (1 + basis.conservativePurchaseTaxPercent / 100) * 100)) / priceCents * 100 >=
+          basis.minimumMarginPercent)
+      return { priceCents, accepted: true, basis: 'market_comparison', review: null };
     if (basis.kind === 'exact_retail' && basis.offers?.some(offer => offer.url))
       return { priceCents, accepted: true, basis: 'exact_retail', review: null };
     if (basis.kind === 'analogue_median' && basis.sampleSize >= 2 && basis.exampleUrl)

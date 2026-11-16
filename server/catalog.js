@@ -15,6 +15,7 @@ import { catalogEditorialHeld } from '../catalog-editorial-held.js';
 import { catalogEditorialChuruDog } from '../catalog-editorial-churu-dog.js';
 import { catalogEditorialAcanaWet } from '../catalog-editorial-acana-wet.js';
 import { catalogEditorialChuruCat } from '../catalog-editorial-churu-cat.js';
+import { publishYaguToys } from './yagu-toy-publication.js';
 
 const cents = value => Number.isFinite(value) && value > 0 ? Math.round(value * 100) : null;
 const imagePath = image => typeof image === 'string' ? image : image?.src || null;
@@ -119,6 +120,7 @@ export async function importCatalog(db, items = products) {
             AND price_confirmed=false`, [variant.id, variant.sourcePriceCents]);
       }
     }
+    if (items === products) await publishYaguToys(client);
     if (items === products) {
       const localMigration = await client.query("SELECT name FROM catalog_migrations WHERE name='local_only_products_archived'");
       if (!localMigration.rows.length) {
