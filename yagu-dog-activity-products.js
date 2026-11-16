@@ -13,11 +13,11 @@ const items = [
     description: 'Лёгкий рельефный мяч с пищалкой для активной игры на суше и в воде',
     details: ['Один мяч диаметром 5,5 см', 'Термопластичная резина TPR',
       'Плавает в воде', 'Цвет в поставке может отличаться от изображения', 'Игра под присмотром'],
-    cost: 2.70, price: 7.93, orderable: true, tag: 'Мяч для игры',
+    cost: 2.70, price: 5.00, orderable: true, tag: 'Мяч для игры',
     url: 'https://odoo.grupoyagu.com/shop/product/7514503-duvo-juguete-perro-tpr-bola-sonido-5-5-cm-27134?category=1532',
-    benchmark: 'https://www.mismascotas.es/collections/pelotas-para-perros',
-    basis: { kind: 'exact_retail', offers: [{ name: 'MisMascotas', amount: 7.93,
-      url: 'https://www.mismascotas.es/collections/pelotas-para-perros' }] }
+    benchmark: 'https://www.paraperrosygatos.es/collections/caucho-y-goma',
+    basis: { kind: 'exact_retail', offers: [{ name: 'ParaPerrosYGatos', amount: 5.00,
+      url: 'https://www.paraperrosygatos.es/collections/caucho-y-goma' }] }
   },
   {
     sku: '7500016', name: 'Duvo+ - резиновый мяч для зубов', label: '7 см, цвет ассорти',
@@ -25,11 +25,11 @@ const items = [
     details: ['Один мяч диаметром 7 см', 'Ароматизированная резина',
       'Три цвета в ассортименте', 'Цвет в поставке может отличаться от изображения',
       'Игра под присмотром'],
-    cost: 4.40, price: 14.52, orderable: false, tag: 'Мяч для игры',
+    cost: 4.40, price: 6.75, orderable: false, tag: 'Мяч для игры',
     url: 'https://odoo.grupoyagu.com/shop/product/duvo-juguete-perro-goma-bola-dental-con-sabor-mix-7-cm-30584?category=1527',
-    benchmark: 'https://www.mismascotas.es/collections/pelotas-para-perros',
-    basis: { kind: 'exact_retail', offers: [{ name: 'MisMascotas', amount: 14.52,
-      url: 'https://www.mismascotas.es/collections/pelotas-para-perros' }] },
+    benchmark: 'https://www.paraperrosygatos.es/collections/caucho-y-goma',
+    basis: { kind: 'exact_retail', offers: [{ name: 'ParaPerrosYGatos', amount: 6.75,
+      url: 'https://www.paraperrosygatos.es/collections/caucho-y-goma' }] },
     purchasePack: { units: 6, source: 'https://grupoyagu.com/image/data/demeter/products/DETALLES/TARIFAS/CATALOGOS/CATALOGO%20GRUPO%20YAGU.pdf',
       note: 'Historical Yagu catalogue says Bolsa 6 uds.; current minimum order quantity requires confirmation' }
   },
@@ -38,25 +38,24 @@ const items = [
     description: 'Резиновый диск в форме блина от штанги для броска и совместной игры',
     details: ['Размер 22,8 × 22,8 × 1,7 см', 'Форма с двумя отверстиями для захвата',
       'Игра под присмотром'],
-    cost: 8.46, price: 16.99, orderable: false, tag: 'Диск для игры',
+    cost: 8.46, price: 13.99, orderable: false, tag: 'Диск для игры',
     url: 'https://odoo.grupoyagu.com/shop/product/7575324-duvo-bite-me-juguete-perro-goma-disco-pesas-22-8-x-22-8-x-1-7-cm-32820?category=1527',
-    benchmark: 'https://www.mismascotas.es/juguetes-perros/38015-duvo-bite-me-juguete-perro-goma-dawg-sience-t-l-27-x-24-x-25-cm.html',
+    benchmark: 'https://www.paraperrosygatos.es/collections/caucho-y-goma',
     basis: { kind: 'analogue_single', exampleUrl:
-      'https://www.mismascotas.es/juguetes-perros/38015-duvo-bite-me-juguete-perro-goma-dawg-sience-t-l-27-x-24-x-25-cm.html',
-      note: 'CatManDog proposal; comparable Bite Me rubber toy is 18.85 EUR, no exact disc PVP found' }
+      'https://www.paraperrosygatos.es/collections/caucho-y-goma',
+      note: 'CatManDog proposal; comparable 22 cm dog frisbee is 13.99 EUR, no exact Bite Me disc PVP found' }
   },
   {
     sku: '7517008', name: 'Duvo+ - игрушка для лакомств', label: '14,5 × 10 см',
     description: 'Вращающаяся игрушка с регулируемыми отверстиями выдаёт лакомства во время игры',
     details: ['Размер 14,5 × 10 см', 'Регулируемые отверстия меняют сложность',
       'Наполняется сухими лакомствами', 'Игра под присмотром'],
-    cost: 8.54, price: 15.99, orderable: false, tag: 'Для лакомств',
+    cost: 8.54, price: 13.39, orderable: false, tag: 'Для лакомств',
     url: 'https://odoo.grupoyagu.com/shop/product/7517008-duvo-juguete-perro-sacapremios-14-5-x-10-cm-27121?category=1533',
-    benchmark: 'https://www.mismascotas.es/products/duvo-juguete-perro-sacapremios-145-x-10-cm?variant=57558395519358',
+    benchmark: 'https://crazypet.es/perros/duvoplus/juguete-perro-sacapremios',
     basis: { kind: 'exact_retail', offers: [
-      { name: 'CrazyPet', amount: 13.39, url: 'https://crazypet.es/perros/duvoplus/juguete-perro-sacapremios' },
-      { name: 'MisMascotas', amount: 18.53, url: 'https://www.mismascotas.es/products/duvo-juguete-perro-sacapremios-145-x-10-cm?variant=57558395519358' }
-    ], note: 'CatManDog proposal between two exact-model retail offers' }
+      { name: 'CrazyPet', amount: 13.39, url: 'https://crazypet.es/perros/duvoplus/juguete-perro-sacapremios' }
+    ], note: 'CatManDog price follows the lowest checked exact-model retail offer' }
   }
 ];
 

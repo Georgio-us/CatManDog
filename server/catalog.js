@@ -329,6 +329,25 @@ export async function importCatalog(db, items = products) {
         ]]);
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [dogActivityMigration]);
       }
+      const dogActivityPriceMigration = 'yagu_dog_activity_market_prices_2026_11_16';
+      const dogActivityPriceDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [dogActivityPriceMigration]);
+      if (!dogActivityPriceDone.rows.length) {
+        for (const [id, previousCents, retailCents] of [
+          ['yagu-7514503-activity', 793, 500],
+          ['yagu-7500016-activity', 1452, 675],
+          ['yagu-7575324-activity', 1699, 1399],
+          ['yagu-7517008-activity', 1599, 1339]
+        ]) {
+          const source = products.find(product => product.id === id)?.variants?.[0];
+          await client.query(`UPDATE catalog_variants SET source_price_cents=$3,
+            source=source||$4::jsonb,updated_at=now()
+            WHERE id=$1 AND source_price_cents=$2 AND price_override_cents IS NULL
+              AND price_confirmed=false`,
+          [id, previousCents, retailCents, JSON.stringify(source)]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [dogActivityPriceMigration]);
+      }
       const unpricedRequestDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
         [unpricedRequestMigration]);
       if (!unpricedRequestDone.rows.length) {
