@@ -2,12 +2,12 @@ import { createUsefulUI } from './useful.js?v=yagu-toys-20261116';
 import { createAccountUI } from './account.js?v=yagu-toys-20261116';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
 import { accessoryDetail, customerDetails } from './accessory-ui.js?v=churu-cat-editorial-20261112';
-import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=yagu-toys-20261116';
+import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=checkout-launch-20261116';
 import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
 import { categories, products, catalogProducts, articles } from './data.js?v=yagu-toys-20261116';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=yagu-toys-20261116';
-import { createCheckoutUI } from './checkout-ui.js?v=yagu-toys-20261116';
+import { createCheckoutUI } from './checkout-ui.js?v=checkout-launch-20261116';
 import { availabilityRequestPage } from './availability-request-ui.js?v=yagu-toys-20261116';
 import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=unavailable-single-20261110';
@@ -47,11 +47,12 @@ const variantCount = n => {
 const money = value => Number.isFinite(value) ? new Intl.NumberFormat(intlLocale(),{style:'currency',currency:'EUR',currencyDisplay:'narrowSymbol'}).format(value) : locale() === 'es' ? 'No disponible' : 'Недоступно';
 function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)) ?? fallback;}catch{return fallback;}}
 let cart = normalizeCart(read('catmandog-cart',[]), products);
+const CUSTOMER_SPLIT_CHECKOUT_ENABLED = false;
 let basketGrouping = read('catmandog-delivery-grouping','together') === 'separate' ? 'separate' : 'together';
 let checkoutGroup = (() => { try { return sessionStorage.getItem('catmandog-checkout-group') === 'stock' ? 'stock' : 'all'; } catch { return 'all'; } })();
 function checkoutCart() {
   const groups = basketGroups(cart, products);
-  return checkoutGroup === 'stock' && basketGrouping === 'separate' && groups.stock.length && groups.supplier.length
+  return CUSTOMER_SPLIT_CHECKOUT_ENABLED && checkoutGroup === 'stock' && basketGrouping === 'separate' && groups.stock.length && groups.supplier.length
     ? groups.stock.map(entry => entry.item) : cart;
 }
 function cartUnitPrice(item){const p=products.find(p=>p.id===(item.productId||item.id));return p?.gift?legacyCartUnitPrice(item):storefrontPrice(cartSku(item,products));}
@@ -412,7 +413,8 @@ function updateCatalogSearch(query){
 function empty(title,text,label,link){return `<div class="empty-state"><h2>${title}</h2><p>${text}</p><a class="button" href="${link}">${label}</a></div>`;}
 function detail(id,preserveSelection=false){const p=products.find(p=>p.id===id)||products.find(p=>hasVariants(p)&&p.variants.some(v=>v.id===id));if(!p)return notFound();if(p.storefrontRetired)return `<div class="page">${crumbs('Каталог')}${empty('Товар больше не представлен','Мы обновили ассортимент - посмотрите актуальные товары для вашего питомца','В каталог','#/catalog')}</div>`;if(!preserveSelection){selectedVariantId=hasVariants(p)?(route().params.get('variant')||(p.id!==id?id:p.defaultVariantId)||p.variants[0].id):null;detailQuantity=1;}const selected=resolveVariant(p,selectedVariantId);if(!selected)return notFound();selectedSize=selected.sizes?.[0]||selected.label||'';if(hasVariants(p)||(p.isReal&&!canBuy(p))){return accessoryDetail(p,{crumbs,imageBlock,escape,icon,favorites,goodTogether,money,translate,variantId:selectedVariantId,quantity:detailQuantity,language:locale()});}if(p.gift){giftState=normalizeGift({season:route().params.get('season')});return giftDetail(p,giftState,giftHelpers);}return `<div class="page">${crumbs(p.name)}<div class="detail-grid">${imageBlock(p.image,'detail-image')}<div class="detail-copy"><span class="eyebrow">${p.line}</span><h1>${p.name}</h1><div class="detail-price">${money(p.price)} ${p.old?`<span class="old-price">${money(p.old)}</span>`:''}</div>${p.isReal?`<p class="retail-note">Цена с IVA${p.packageWeightKg ? ` · ${money(p.price/p.packageWeightKg)} / кг` : ''}</p>`:''}<p>${p.description}</p><span class="size-label">${p.optionLabel||'Размер'}</span><div class="size-options" aria-label="Вариант товара">${p.sizes.map((s,i)=>`<button class="size ${i===0?'active':''}" data-size="${s}" aria-pressed="${i===0}">${s}</button>`).join('')}</div><div class="buy-row"><div class="quantity"><button data-detail-qty="-1" aria-label="Уменьшить количество">${icon('minus')}</button><span id="detail-qty">1</span><button data-detail-qty="1" aria-label="Увеличить количество">${icon('plus')}</button></div><button class="button" data-buy="${p.id}">Добавить в корзину ${icon('bag')}</button><button class="icon-button favorite-detail ${favorites.includes(p.id)?'selected':''}" data-favorite="${p.id}" aria-label="В избранное" aria-pressed="${favorites.includes(p.id)}">${icon('heart')}</button></div><div class="detail-service">${icon('check')} Выбирайте то, что подходит именно вашему питомцу<br>Доставка и возврат: <a class="text-link" href="#/info/delivery">подробнее</a></div>${customerDetails(p.details, translate, escape, p.category)}</div></div></div>${goodTogether(p)}`;}
 function cartPage() {
-  return renderLiveBasket({ cart, products, promo: checkoutPromo(), grouping: basketGrouping,
+  return renderLiveBasket({ cart, products, promo: checkoutPromo(), grouping: CUSTOMER_SPLIT_CHECKOUT_ENABLED ? basketGrouping : 'together',
+    allowSplit: CUSTOMER_SPLIT_CHECKOUT_ENABLED,
     escape, icon, money, imageBlock });
 }
 function availabilityPage() {

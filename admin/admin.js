@@ -40,6 +40,7 @@ let customerSearchTimer;
 let requestSearch = '';
 let requestStatus = 'all';
 let requestPage = 0;
+let openedRequestId = null;
 let requestSearchTimer;
 let showTestOrders = false;
 let deliveryDraft = null;
@@ -1087,16 +1088,26 @@ async function loadStock(details) {
       </li>`).join('')}</ol>` : '<p>Движений пока нет</p>'}`;
   } catch (error) { host.textContent = error.message; }
 }
+function urgentPaymentPanel(request) {
+  if (request.payment_status === 'paid') return '<p class="admin-muted">Ссылка оплачена</p>';
+  if (request.stripe_checkout_url && new Date(request.payment_expires_at) > new Date())
+    return `<div class="admin-card"><strong>Персональная ссылка на оплату</strong><input readonly value="${escape(request.stripe_checkout_url)}" aria-label="Ссылка на оплату"><p>Отправьте ссылку покупателю после звонка. Она действует 1 час. Заказ ${escape(request.order_number || '')}</p></div>`;
+  if (request.order_number && request.payment_status !== 'failed')
+    return '<p class="admin-muted">Срок ссылки истёк. Дождитесь подтверждения Stripe</p>';
+  if (request.status === 'resolved') return '<p class="admin-muted">Заявка закрыта без оплаты</p>';
+  return `<form data-urgent-offer="${escape(request.id)}" data-products-cents="${Number(request.payload?.productsCents) || 0}" class="admin-reply-form"><strong>После звонка с покупателем</strong><p>Согласуйте состав заказа, дату, время и стоимость доставки до создания ссылки</p><label>Дата доставки<input type="date" name="date" required></label><label>Время доставки<input type="time" name="time" required></label><label>Доставка, €<input type="number" name="deliveryEuros" min="0" max="100" step="0.01" required></label><output class="admin-muted" data-urgent-total>Итого: ${euros(request.payload?.productsCents || 0)}</output><button type="submit">Создать ссылку на оплату</button></form>`;
+}
 function requestCard(request) {
   const statusLabel = {new:'Новое',in_progress:'В работе',resolved:'Закрыто'}[request.status] || 'Новое';
   const date = new Date(request.created_at).toLocaleString('ru-RU', {dateStyle:'short',timeStyle:'short'});
-  return `<article class="request-item"><details><summary><span class="request-kind">${request.kind === 'return' ? 'Возврат' : request.kind === 'availability' ? 'Запрос товара' : 'Поддержка'}</span>
+  return `<article class="request-item"><details ${request.id === openedRequestId ? 'open' : ''}><summary><span class="request-kind">${request.kind === 'return' ? 'Возврат' : request.kind === 'availability' ? 'Запрос товара' : request.kind === 'urgent' ? 'Срочная доставка' : 'Поддержка'}</span>
     <span class="request-identity"><strong>${escape(request.email)}</strong><small>${escape(request.message)}</small></span>
     <span class="request-status request-status-${escape(request.status)}">${statusLabel}</span><time>${escape(date)}</time>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
     <div class="request-detail"><div class="request-facts">${request.kind === 'availability' ? `<span>Контакт: ${escape(request.contact_name)} · ${escape(request.contact_phone)}</span>` : `<span>Заказ: ${escape(request.order_number || 'Не указан')}</span>`}<span>Язык: ${request.locale === 'es' ? 'испанский' : request.locale === 'uk' ? 'украинский' : 'русский'}</span>
-      ${request.product_id ? `<span>Товар: ${escape(request.product_id)}${request.variant_id ? ` · ${escape(request.variant_id)}` : ''}${request.quantity ? ` · ${request.quantity} шт` : ''}</span>` : ''}</div>
+      ${request.kind === 'urgent' ? `<span>Контакт: ${escape(request.contact_name)} · ${escape(request.contact_phone)}</span><span>Товары: ${euros(request.payload?.productsCents || 0)}</span>` : ''}${request.product_id ? `<span>Товар: ${escape(request.product_id)}${request.variant_id ? ` · ${escape(request.variant_id)}` : ''}${request.quantity ? ` · ${request.quantity} шт` : ''}</span>` : ''}</div>
       <p>${escape(request.message)}</p>${request.last_reply_at ? `<div class="request-last-reply"><strong>Последний ответ · ${escape(new Date(request.last_reply_at).toLocaleString('ru-RU'))}</strong><p>${escape(request.last_reply_message || '')}</p></div>` : ''}
+      ${request.kind === 'urgent' ? urgentPaymentPanel(request) : ''}
       <form data-reply-id="${escape(request.id)}" class="admin-reply-form"><label>Ответ покупателю<textarea name="message" rows="4" minlength="2" maxlength="4000" required placeholder="${request.locale === 'es' ? 'Напишите ответ покупателю на испанском' : 'Напишите ответ покупателю на русском'}"></textarea></label><button type="submit">Отправить ответ</button></form>
       <form data-request-id="${escape(request.id)}" class="request-status-form"><label>Статус<select name="status">${['new','in_progress','resolved'].map(status =>
         `<option value="${status}" ${status === request.status ? 'selected' : ''}>${({new:'Новое',in_progress:'В работе',resolved:'Закрыто'})[status]}</option>`).join('')}</select></label><button>Сохранить статус</button></form></div></details></article>`;
@@ -1330,6 +1341,15 @@ document.querySelectorAll('[data-tab]').forEach(button => button.addEventListene
   load();
 }));
 $('admin-content').addEventListener('input', event => {
+  if (event.target.name === 'deliveryEuros' && event.target.form?.dataset.urgentOffer) {
+    const form = event.target.form;
+    const delivery = Number(event.target.value);
+    const total = form.querySelector('[data-urgent-total]');
+    if (total) total.textContent = Number.isFinite(delivery) && delivery >= 0
+      ? `Итого: ${euros(Number(form.dataset.productsCents) + Math.round(delivery * 100))}`
+      : 'Укажите стоимость доставки';
+    return;
+  }
   if (event.target.id === 'brand-directory-search') {
     brandDirectorySearch = event.target.value;
     filterBrandDirectory();
@@ -1928,6 +1948,7 @@ $('admin-content').addEventListener('submit', async event => {
   const submitButton = form.querySelector('button[type="submit"], button:not([type])');
   if (submitButton) submitButton.disabled = true;
   try {
+    let formResultMessage = '';
     if (form.id === 'delivery-upload') {
       const documentFile = await deliveryFilePayload(values.get('document'));
       const proofFile = await deliveryFilePayload(values.get('proof')?.size ? values.get('proof') : null);
@@ -2034,6 +2055,14 @@ $('admin-content').addEventListener('submit', async event => {
     }
     else if (form.dataset.orderId) await api(`/api/admin/orders/${encodeURIComponent(form.dataset.orderId)}/status`, 'PATCH',
       { status: values.get('status'), note: values.get('note') });
+    else if (form.dataset.urgentOffer) {
+      const deliveryEuros = Number(values.get('deliveryEuros'));
+      if (!Number.isFinite(deliveryEuros) || deliveryEuros < 0) throw new Error('Укажите стоимость доставки');
+      const result = await api(`/api/admin/service-requests/${encodeURIComponent(form.dataset.urgentOffer)}/payment-link`, 'POST',
+        { date: values.get('date'), time: values.get('time'), deliveryCents: Math.round(deliveryEuros * 100) });
+      openedRequestId = form.dataset.urgentOffer;
+      formResultMessage = `Ссылка для заказа ${result.orderNumber} создана. Скопируйте её из открытой заявки`;
+    }
     else if (form.dataset.replyId) await api(`/api/admin/service-requests/${encodeURIComponent(form.dataset.replyId)}/reply`, 'POST',
       { message: values.get('message') });
     else if (form.dataset.requestId) await api(`/api/admin/service-requests/${encodeURIComponent(form.dataset.requestId)}/status`, 'PATCH',
@@ -2056,6 +2085,6 @@ $('admin-content').addEventListener('submit', async event => {
         .find(item => item.dataset.catalogSku === form.dataset.salePrice);
       if (selected) selected.open = true;
     }
-    message(form.dataset.replyId ? 'Ответ отправлен' : 'Сохранено');
+    message(formResultMessage || (form.dataset.replyId ? 'Ответ отправлен' : 'Сохранено'));
   } catch (error) { message(error.message); if (submitButton) submitButton.disabled = false; }
 });

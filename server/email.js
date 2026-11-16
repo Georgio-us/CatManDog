@@ -44,7 +44,8 @@ export async function sendOrderConfirmation(order, items, fetcher = fetch) {
   const destination = [address.street, address.building, address.apartment,
     address.postcode, address.city, 'España'].filter(Boolean).join(', ');
   const delivery = order.delivery_preference || {};
-  const preference = delivery.mode === 'slot' ? [delivery.date, delivery.window].filter(Boolean).join(' · ')
+  const preference = delivery.mode === 'slot' || delivery.mode === 'scheduled'
+    ? [delivery.date, delivery.window || delivery.time].filter(Boolean).join(' · ')
     : delivery.mode === 'preorder' ? '24-48 h' : delivery.mode === 'national' ? 'España peninsular' : '';
   const text = `${labels.intro} ${order.number}\n\n${lines.join('\n')}\n${labels.subtotal}: ${euros(order.subtotal_cents)}\n${labels.discount}: -${euros(order.discount_cents)}\n${labels.delivery}: ${euros(order.delivery_cents)}\n${labels.total}: ${euros(order.total_cents)}\n\n${labels.address}: ${destination}\n${labels.preference}: ${preference}\n${labels.contact}.\n\n${labels.seller}: PUZANOV HEORHII (CatManDog)\nsupport@catmandog.es · +34 665 240 277\n${labels.terms}: https://catmandog.es/${termsPage}\n`;
   const html = renderOrderEmail(order, items, labels, euros, destination, preference, termsPage);
@@ -52,7 +53,8 @@ export async function sendOrderConfirmation(order, items, fetcher = fetch) {
 }
 
 export async function notifyServiceRequest(request, fetcher = fetch) {
-  const kind = request.kind === 'return' ? 'возврат' : request.kind === 'availability' ? 'поступление товара' : 'вопрос';
+  const kind = request.kind === 'return' ? 'возврат' : request.kind === 'availability' ? 'поступление товара'
+    : request.kind === 'urgent' ? 'срочная доставка' : 'вопрос';
   const order = request.orderNumber ? `Заказ: ${request.orderNumber}\n` : '';
   const subject = `Новое обращение CatManDog - ${kind}`;
   const inbox = process.env.SUPPORT_INBOX || 'support@catmandog.es';
@@ -63,10 +65,10 @@ export async function notifyServiceRequest(request, fetcher = fetch) {
       : request.locale === 'uk' ? 'Ми отримали ваше звернення - CatManDog'
         : 'Мы получили ваше обращение - CatManDog',
     request.locale === 'es'
-      ? `Hola:\n\n${request.kind === 'availability' ? 'Hemos recibido tu solicitud. Te avisaremos cuando podamos ofrecerte este producto.' : `Hemos recibido tu consulta${request.orderNumber ? ` sobre el pedido ${request.orderNumber}` : ''}. Te responderemos a este correo.`}\n\nNúmero de consulta: ${request.id}\n\nCatManDog`
+      ? `Hola:\n\n${request.kind === 'availability' ? 'Hemos recibido tu solicitud. Te avisaremos cuando podamos ofrecerte este producto.' : request.kind === 'urgent' ? 'Hemos recibido tu solicitud de entrega urgente. Comprobaremos los productos y te llamaremos antes del pago.' : `Hemos recibido tu consulta${request.orderNumber ? ` sobre el pedido ${request.orderNumber}` : ''}. Te responderemos a este correo.`}\n\nNúmero de consulta: ${request.id}\n\nCatManDog`
       : request.locale === 'uk'
-        ? `Вітаємо! ${request.kind === 'availability' ? 'Ми отримали ваш запит і повідомимо, коли зможемо запропонувати цей товар.' : `Ми отримали ваше звернення${request.orderNumber ? ` щодо замовлення ${request.orderNumber}` : ''} і відповімо на цей email.`}\n\nНомер звернення: ${request.id}\n\nCatManDog`
-        : `Здравствуйте! ${request.kind === 'availability' ? 'Мы получили ваш запрос и сообщим, когда сможем предложить этот товар.' : `Мы получили ваше обращение${request.orderNumber ? ` по заказу ${request.orderNumber}` : ''} и ответим на этот email.`}\n\nНомер обращения: ${request.id}\n\nCatManDog`, fetcher)] : [])];
+        ? `Вітаємо! ${request.kind === 'availability' ? 'Ми отримали ваш запит і повідомимо, коли зможемо запропонувати цей товар.' : request.kind === 'urgent' ? 'Ми отримали запит на термінову доставку. Перевіримо товари та зателефонуємо до оплати.' : `Ми отримали ваше звернення${request.orderNumber ? ` щодо замовлення ${request.orderNumber}` : ''} і відповімо на цей email.`}\n\nНомер звернення: ${request.id}\n\nCatManDog`
+        : `Здравствуйте! ${request.kind === 'availability' ? 'Мы получили ваш запрос и сообщим, когда сможем предложить этот товар.' : request.kind === 'urgent' ? 'Мы получили заявку на срочную доставку. Проверим товары и позвоним до оплаты.' : `Мы получили ваше обращение${request.orderNumber ? ` по заказу ${request.orderNumber}` : ''} и ответим на этот email.`}\n\nНомер обращения: ${request.id}\n\nCatManDog`, fetcher)] : [])];
   const notifications = await Promise.allSettled(notices);
   if (notifications.some(result => result.status === 'rejected'))
     throw new Error('Не удалось отправить одно или несколько писем об обращении');

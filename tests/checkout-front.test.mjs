@@ -213,14 +213,15 @@ test('live checkout presents the exact variant without creating a fictitious ord
   assert.match(ui.servicePage('return'), /не отправляется и не сохраняется/);
 });
 
-test('supplier checkout asks for a later preferred date and cannot promise delivery today', () => {
+test('supplier items use the same preferred delivery flow as the rest of the basket', () => {
   const ui = createCheckoutUI({ escape: String, icon: () => '', money: value => `${value.toFixed(2)} €`,
     imageBlock: () => '', getItems: () => [{ productId: 'food', variantId: 'food-4kg', name: 'Корм',
       variant: '4 кг', qty: 1, price: 36.31, fulfillment: 'supplier' }],
     isReady: () => true, getCheckoutContext: () => ({ hasSupplier: true }), getPromo: () => null,
     applyPromo: () => {}, render: () => {} });
   const html = ui.page();
-  assert.match(html, /Под заказ/);
-  assert.match(html, /Срок согласуем отдельно/);
-  assert.doesNotMatch(html, /Сегодня, как можно скорее/);
+  assert.match(html, /Желаемое время доставки/);
+  assert.match(html, /После оплаты мы свяжемся с вами и уточним время/);
+  assert.match(html, /Нужно срочно/);
+  assert.doesNotMatch(html, /24-48 часов|Срок согласуем отдельно/);
 });

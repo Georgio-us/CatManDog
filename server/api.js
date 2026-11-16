@@ -175,7 +175,7 @@ async function recordInventoryMovement(client, values) {
     values.onHandAfter, values.reservedAfter, values.note || '', values.purchaseOrderItemId || null]);
 }
 
-async function createOrder(db, payload, customer) {
+async function createOrder(db, payload, customer, manual = null) {
   if (!ordersReady())
     bad('Приём заказов ещё не включён', 503);
   const idempotency = cap(payload.idempotencyKey, 100);
@@ -228,11 +228,15 @@ async function createOrder(db, payload, customer) {
         productsCents: productsQuote.subtotalCents - productsQuote.discountCents,
         freeDelivery: promo?.free_delivery === true }) : null;
     if (shipping && !shipping.available) bad('Для этой корзины доставка по Испании пока недоступна');
-    const quote = priceQuote(lines, variants.rows, promo, shipping?.deliveryCents ?? null);
+    const quote = priceQuote(lines, variants.rows, promo, manual?.deliveryCents ?? shipping?.deliveryCents ?? null);
     if (!quote.orderable) bad('Один из товаров пока нельзя заказать');
-    if (delivery.mode !== 'national' && variants.rows.every(row => row.sale_status)) {
-      const requiresPreorder = quote.items.some(item => item.saleStatus === 'preorder');
-      if (delivery.mode !== (requiresPreorder ? 'preorder' : 'slot'))
+    if (manual?.expectedSubtotalCents != null && quote.subtotalCents !== manual.expectedSubtotalCents)
+      bad('Цена товаров изменилась. Проверьте заявку и согласуйте сумму заново', 409);
+    if (manual?.expectedProductsCents != null &&
+        quote.subtotalCents - quote.discountCents !== manual.expectedProductsCents)
+      bad('Скидка изменилась. Проверьте заявку и согласуйте сумму заново', 409);
+    if (!manual && delivery.mode !== 'national' && variants.rows.every(row => row.sale_status)) {
+      if (delivery.mode !== 'slot')
         bad('Проверьте выбранный способ доставки');
     }
     const orderId = randomUUID();
@@ -255,7 +259,7 @@ async function createOrder(db, payload, customer) {
       : delivery.mode === 'slot' ? { mode:'slot', date:delivery.date,
         window:delivery.window, reserved:false }
       : delivery.mode === 'preorder' ? { mode:'preorder', estimateHours:[24,48], reserved:false }
-      : { mode: 'scheduled', date: delivery.date, time: delivery.time, reserved: false };
+      : { mode: 'scheduled', date: delivery.date, time: delivery.time, reserved: Boolean(manual) };
     const billingProfile = await client.query('SELECT delivery_tax_rate_bps FROM billing_profile WHERE id=true');
     const deliveryTaxRate = billingProfile.rows[0]?.delivery_tax_rate_bps ?? null;
     const inserted = await client.query(`INSERT INTO orders(id,number,customer_id,customer_name,email,buyer_phone,phone,whatsapp_opt_in,
@@ -1828,7 +1832,8 @@ async function adminRoute(db, req, res, path) {
     const search = cap(params.get('q'), 160);
     const status = ['new','in_progress','resolved'].includes(params.get('status')) ? params.get('status') : null;
     const { rows } = await db.query(`SELECT r.id,r.kind,r.email,r.locale,r.product_id,r.variant_id,r.quantity,
-      r.message,r.status,r.created_at,COALESCE(o.number,r.order_number_input) AS order_number,
+      r.message,r.status,r.created_at,r.contact_name,r.contact_phone,r.payload,
+      COALESCE(o.number,r.order_number_input) AS order_number,o.stripe_checkout_url,o.payment_expires_at,o.payment_status,
       (SELECT sent_at FROM service_request_replies WHERE request_id=r.id
         ORDER BY sent_at DESC LIMIT 1) AS last_reply_at,
       (SELECT message FROM service_request_replies WHERE request_id=r.id
@@ -2035,6 +2040,41 @@ async function adminRoute(db, req, res, path) {
       return json(res, 200, { ok: true });
     } catch (error) { await client.query('ROLLBACK'); throw error; }
     finally { client.release(); }
+  }
+  const urgentOffer = path.match(/^\/api\/admin\/service-requests\/([a-f0-9-]+)\/payment-link$/);
+  if (urgentOffer && req.method === 'POST') {
+    if (!fullAdmin) bad('Доступ закрыт', 403);
+    const body = await readJson(req);
+    const request = (await db.query(`SELECT id,kind,email,contact_name,contact_phone,payload,locale,order_id,status
+      FROM service_requests WHERE id=$1`, [urgentOffer[1]])).rows[0];
+    if (!request || request.kind !== 'urgent') bad('Срочная заявка не найдена', 404);
+    if (request.status === 'resolved') bad('Заявка закрыта', 409);
+    if (request.order_id) {
+      const existing = (await db.query(`SELECT number,stripe_checkout_url,payment_expires_at,payment_status
+        FROM orders WHERE id=$1`, [request.order_id])).rows[0];
+      if (existing?.payment_status === 'paid') bad('Заявка уже оплачена', 409);
+      if (existing?.stripe_checkout_url && existing.payment_expires_at > new Date())
+        return json(res, 200, { url: existing.stripe_checkout_url, orderNumber: existing.number });
+      if (existing?.payment_status !== 'failed')
+        bad('Дождитесь подтверждения истечения предыдущей ссылки', 409);
+    }
+    const deliveryCents = Number(body.deliveryCents);
+    if (!Number.isInteger(deliveryCents) || deliveryCents < 0 || deliveryCents > 10000)
+      bad('Укажите согласованную стоимость доставки в центах');
+    const delivery = { mode: 'scheduled', date: cap(body.date, 10), time: cap(body.time, 5) };
+    const source = request.payload || {};
+    const attemptKey = request.order_id ? `urgent_${request.id}_${request.order_id}` : `urgent_${request.id}`;
+    const result = await createOrder(db, { idempotencyKey: attemptKey, locale: request.locale,
+      promoCode: source.promoCode, skipSavedPromo: source.skipSavedPromo,
+      items: source.items, name: request.contact_name, email: request.email,
+      phone: request.contact_phone, whatsapp: source.whatsapp,
+      address: source.address, delivery }, null,
+    { deliveryCents, expectedSubtotalCents: source.subtotalCents,
+      expectedProductsCents: source.productsCents });
+    await db.query(`UPDATE service_requests SET order_id=(SELECT id FROM orders WHERE number=$2),
+      status='in_progress' WHERE id=$1 AND order_id IS NOT DISTINCT FROM $3`,
+    [request.id, result.orderNumber, request.order_id]);
+    return json(res, 201, result);
   }
   const service = path.match(/^\/api\/admin\/service-requests\/([^/]+)\/status$/);
   if (service && req.method === 'PATCH') {
@@ -2251,6 +2291,46 @@ export async function handleApi(db, req, res, pathname) {
       const body = await readJson(req);
       const customer = await currentCustomer(db, req);
       return json(res, 201, await createOrder(db, body, customer));
+    }
+    if (pathname === '/api/urgent-requests' && req.method === 'POST') {
+      if (!await checkoutAllowed(db, req)) bad('Приём заявок ещё не включён', 503);
+      rateLimit(req, 'urgent-request', 5, 60);
+      const body = await readJson(req);
+      const name = cap(body.name, 100);
+      const email = normalizedEmail(body.email);
+      const phone = cap(body.phone, 24);
+      const deadline = cap(body.deadline, 160);
+      if (!name || !validEmail(email) || phone.length < 6 || deadline.length < 3)
+        bad('Укажите контакты и желаемое время');
+      const addressError = validateAddress(body.address, 'slot');
+      if (addressError) bad(addressError);
+      const verified = await verifyDeliveryAddress(body.address, 'local');
+      const variants = await liveCatalogSnapshot(db);
+      const customer = await currentCustomer(db, req);
+      const promo = await promoFor(db, body.promoCode, customer, { email, phone }, false,
+        body.skipSavedPromo === true);
+      const quote = priceQuote(body.items, variants, promo);
+      if (!quote.orderable) bad('Один из товаров пока нельзя заказать');
+      const address = { city: cap(verified.city, 100), postcode: cap(body.address.postcode, 5),
+        street: cap(body.address.street, 120), building: cap(body.address.building, 16),
+        apartment: cap(body.address.apartment, 80), note: cap(body.address.note, 300) };
+      const items = quote.items.map(item => ({ productId: item.productId,
+        variantId: item.variantId, qty: item.qty }));
+      const details = quote.items.map(item => `${item.name} · ${item.variantLabel} × ${item.qty}`).join('\n');
+      const id = randomUUID();
+      const language = ['ru','es','uk'].includes(body.locale) ? body.locale : 'ru';
+      const payload = { items, address, deadline, whatsapp: body.whatsapp === true,
+        promoCode: promo?.code || '', skipSavedPromo: body.skipSavedPromo === true,
+        subtotalCents: quote.subtotalCents,
+        productsCents: quote.subtotalCents - quote.discountCents, itemDetails: details };
+      const message = `Желаемое время: ${deadline}\nАдрес: ${address.street}, ${address.building}, ${address.postcode} ${address.city}\n${details}`;
+      await db.query(`INSERT INTO service_requests(id,kind,email,contact_name,contact_phone,
+        message,locale,payload) VALUES($1,'urgent',$2,$3,$4,$5,$6,$7)`,
+      [id, email, name, phone, message, language, payload]);
+      try { await notifyServiceRequest({ id, kind: 'urgent', email, locale: language,
+        message, name, phone }); }
+      catch (error) { console.error('Urgent request notification failed:', error.message); }
+      return json(res, 202, { accepted: true, id });
     }
     if (pathname === '/api/checkout/status' && req.method === 'GET') {
       const url = new URL(req.url || '/', 'https://catmandog.es');

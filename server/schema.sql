@@ -521,9 +521,10 @@ CREATE TABLE IF NOT EXISTS service_requests (
 ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS order_number_input text;
 ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS contact_name text NOT NULL DEFAULT '';
 ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS contact_phone text NOT NULL DEFAULT '';
+ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS payload jsonb NOT NULL DEFAULT '{}'::jsonb;
 ALTER TABLE service_requests DROP CONSTRAINT IF EXISTS service_requests_kind_check;
 ALTER TABLE service_requests ADD CONSTRAINT service_requests_kind_check
-  CHECK (kind IN ('support','return','availability'));
+  CHECK (kind IN ('support','return','availability','urgent'));
 ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS locale text NOT NULL DEFAULT 'ru'
   CHECK (locale IN ('ru','es','uk'));
 
