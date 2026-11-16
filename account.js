@@ -1,9 +1,9 @@
 import { createAccountStore } from './account-store.js?v=delivery-status-4';
-import { createAccountApi } from './account-api.js?v=live-orders-20261112';
-import { accountTools } from './useful.js?v=ukrainian-public-3';
+import { createAccountApi } from './account-api.js?v=yagu-toys-20261116';
+import { accountTools } from './useful.js?v=yagu-toys-20261116';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
-import { intlLocale, locale } from './locale.js?v=live-orders-20261112';
-import { productHref } from './seo-products.js?v=all-product-urls-20261110';
+import { intlLocale, locale } from './locale.js?v=yagu-toys-20261116';
+import { productHref } from './seo-products.js?v=yagu-toys-20261116';
 const store = createAccountStore(localStorage);
 const api = createAccountApi();
 

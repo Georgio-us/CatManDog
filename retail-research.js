@@ -1,6 +1,6 @@
 import { retailObservations } from './retail-observations.js';
 import { isDemoPrice } from './variants.js?v=delivery-status-3';
-import { locale, translate } from './locale.js?v=ukrainian-public-3';
+import { locale, translate } from './locale.js?v=yagu-toys-20261116';
 
 const localized = (spanish, russian, ukrainian) => locale() === 'es' ? spanish : locale() === 'uk' ? ukrainian : russian;
 

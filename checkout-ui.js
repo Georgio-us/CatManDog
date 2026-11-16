@@ -1,5 +1,5 @@
 import { checkoutTotals, availableDeliverySlots, FREE_DELIVERY_FROM, DELIVERY_FEE, validateCheckout } from './checkout-model.js?v=address-check-20261112';
-import { locale, intlLocale, translate } from './locale.js?v=address-check-20261112';
+import { locale, intlLocale, translate } from './locale.js?v=yagu-toys-20261116';
 
 export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems, isReady, getPromo, applyPromo,
   refreshPromo = async () => {}, findOrder, productLabel, getCheckoutContext = () => ({}),

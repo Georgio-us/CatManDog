@@ -1,4 +1,4 @@
-import { locale } from './locale.js?v=live-orders-20261112';
+import { locale } from './locale.js?v=yagu-toys-20261116';
 
 export function createAccountApi(fetcher = fetch) {
   async function request(path, method = 'GET', body) {

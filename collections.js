@@ -1,4 +1,4 @@
-import { catalogProducts } from './data.js?v=cat-assortment-1';
+import { catalogProducts } from './data.js?v=yagu-toys-20261116';
 
 export const activeHomeGroups = [
   { title: 'Потянуться и поточить когти', text: 'Напольная когтеточка: поставили в любимом месте, переставили вместе с мебелью', ids: ['yagu-7502810', 'yagu-7515812', 'yagu-7515817'] },

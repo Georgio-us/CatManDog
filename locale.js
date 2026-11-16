@@ -3,7 +3,7 @@ import { esProductText } from './locales/product-es.js?v=product-content-2026111
 import { esDetails } from './locales/details-es.js?v=product-content-20261110';
 import { uk, ukPatterns } from './locales/uk.js?v=live-orders-20261112';
 import { ukExtra } from './locales/uk-extra.js?v=mobile-cards-20261115';
-import { ukProductNames } from './locales/uk-product-names.js?v=picks-seo-20261112';
+import { ukProductNames } from './locales/uk-product-names.js?v=yagu-toys-20261116';
 import { ukProductCopy } from './locales/uk-product-copy.js?v=product-content-20261110';
 import { ukDetails } from './locales/uk-details.js?v=product-content-20261110';
 import { churuFormatsEs, churuFormatsUk } from './locales/churu-formats.js';
