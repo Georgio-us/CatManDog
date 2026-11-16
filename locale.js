@@ -11,7 +11,7 @@ import { churuDogEs, churuDogUk } from './locales/churu-dog.js';
 import { seoCategoryForPath } from './seo-categories.js';
 import { seoPickForPath } from './seo-picks.js';
 import { deliveryStatusEs, deliveryStatusUk } from './locales/delivery-status.js?v=address-check-20261112';
-import { yaguExpansionEs, yaguExpansionUk } from './locales/yagu-expansion.js?v=product-content-20261110';
+import { yaguExpansionEs, yaguExpansionUk } from './locales/yagu-expansion.js?v=dog-activity-20261116';
 import { yaguBasketEs, yaguBasketUk } from './locales/yagu-basket.js?v=20261113';
 import { yaguChewTestEs, yaguChewTestUk } from './locales/yagu-chew-test.js?v=20261113';
 import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=editorial-leonardo-20261111';
