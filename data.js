@@ -9,6 +9,7 @@ import { treatsCareProducts } from './treats-care-products.js?v=r2-media-1';
 import { yaguProducts, expandYaguCare } from './yagu-products.js?v=r2-media-1';
 import { yaguLaunchProducts } from './yagu-launch-products.js';
 import { yaguExpansionProducts, expandYaguColourVariants } from './yagu-expansion-products.js?v=product-content-20261110';
+import { yaguDogActivityProducts } from './yagu-dog-activity-products.js';
 import { yaguBasketProducts } from './yagu-basket-products.js?v=20261113';
 import { yaguChewTestProducts } from './yagu-chew-test-products.js?v=20261113';
 import { ownatProducts } from './ownat-products.js?v=r2-media-1';
@@ -425,7 +426,7 @@ const merchandisingTags = {
   'heybopet-hb-pwfs-s30s': 'Беспроводная поилка',
   'heybopet-pwf-filters-3': 'Сменные фильтры'
 };
-export const products = applyChuruRetailFormats(applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy(withSelectedAcanaOrijenFormats([...foodProducts, ...dogProducts, ...confirmedDemandProducts, ...churuDogProducts, ...expandYaguCare(treatsCareProducts), ...expandYaguColourVariants(yaguProducts), ...yaguStorefrontProducts, ...yaguExpansionProducts, ...yaguBasketProducts, ...yaguChewTestProducts, ...catalogHeybopetProducts, ...launchHeyboPetProducts, ...demoProducts.map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)])).map(mergeCategory)))).map(product => {
+export const products = applyChuruRetailFormats(applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy(withSelectedAcanaOrijenFormats([...foodProducts, ...dogProducts, ...confirmedDemandProducts, ...churuDogProducts, ...expandYaguCare(treatsCareProducts), ...expandYaguColourVariants(yaguProducts), ...yaguStorefrontProducts, ...yaguExpansionProducts, ...yaguDogActivityProducts, ...yaguBasketProducts, ...yaguChewTestProducts, ...catalogHeybopetProducts, ...launchHeyboPetProducts, ...demoProducts.map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)])).map(mergeCategory)))).map(product => {
   const copy = catalogEditorialContent[product.id];
   const tag = !product.tag && merchandisingTags[product.id];
   const taggedProduct = tag ? { ...product, tag } : product;
