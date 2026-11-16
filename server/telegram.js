@@ -5,12 +5,45 @@ export function telegramReady(env = process.env) {
     /^-?\d+$/.test(env.TELEGRAM_CHAT_ID || '');
 }
 
+const oneLine = (value, limit = 160) => String(value ?? '')
+  .replace(/[\u0000-\u001f\u007f-\u009f\u202a-\u202e\u2066-\u2069]+/g, ' ')
+  .trim().slice(0, limit);
+
+const madridTime = value => {
+  if (!value || Number.isNaN(new Date(value).getTime())) return '';
+  return new Intl.DateTimeFormat('ru-RU', { timeZone: 'Europe/Madrid',
+    day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit',
+    minute: '2-digit', hourCycle: 'h23' }).format(new Date(value));
+};
+
+function deliverySummary(delivery = {}) {
+  if (delivery.mode === 'slot')
+    return `Желаемая доставка: ${[oneLine(delivery.date, 10), oneLine(delivery.window, 30)].filter(Boolean).join(', ')}`;
+  if (delivery.mode === 'scheduled')
+    return `${delivery.reserved ? 'Согласованная доставка' : 'Желаемая доставка'}: ${[oneLine(delivery.date, 10), oneLine(delivery.time, 10)].filter(Boolean).join(', ')}`;
+  if (delivery.mode === 'national') return 'Доставка: по материковой Испании, срок уточняется';
+  if (delivery.mode === 'preorder') return 'Доставка: срок согласуется';
+  if (delivery.mode === 'soon') return 'Желаемая доставка: как можно скорее';
+  return 'Доставка: уточняется';
+}
+
 export function orderAlertText(order) {
   const amount = (Number(order.total_cents) / 100).toFixed(2).replace('.', ',');
-  const test = order.stripe_checkout_session_id?.startsWith('cs_test_');
-  return `${test ? 'Тестовый оплаченный заказ' : 'Новый оплаченный заказ'} CatManDog\n` +
-    `Номер: ${order.number}\nСумма: ${amount} €\n` +
-    'Детали: https://catmandog.es/admin';
+  const test = order.is_test === true || order.stripe_checkout_session_id?.startsWith('cs_test_');
+  const address = order.delivery_address || {};
+  const destination = [address.street, address.building, address.apartment,
+    address.postcode, address.city].map(part => oneLine(part, 120)).filter(Boolean).join(', ');
+  const paidAt = madridTime(order.paid_at || order.created_at);
+  return `${test ? '🧪 ТЕСТОВЫЙ ОПЛАЧЕННЫЙ ЗАКАЗ' : '❗️ НОВЫЙ ОПЛАЧЕННЫЙ ЗАКАЗ'} CatManDog\n` +
+    `Номер: ${oneLine(order.number, 40)}\n` +
+    (paidAt ? `${order.paid_at ? 'Оплачен' : 'Оформлен'}: ${paidAt} (Валенсия)\n` : '') +
+    `Клиент: ${oneLine(order.customer_name, 100) || 'Не указано'}\n` +
+    `Телефон: ${oneLine(order.phone || order.buyer_phone, 40) || 'Не указан'}${order.whatsapp_opt_in ? ' (WhatsApp)' : ''}\n` +
+    `Email: ${oneLine(order.email, 160) || 'Не указан'}\n` +
+    `Адрес: ${destination || 'Не указан'}\n` +
+    `${deliverySummary(order.delivery_preference)}\n` +
+    `Сумма: ${amount} €\n` +
+    'Заказ в админке: https://catmandog.es/admin';
 }
 
 async function sendMessage(text, fetcher, env) {
@@ -64,7 +97,11 @@ export function startTelegramOrderAlerts(db, { intervalMs = 30000, fetcher = fet
         for (let i = 0; i < 10; i += 1) {
           await client.query('BEGIN');
           try {
-            const { rows } = await client.query(`SELECT id,number,total_cents,stripe_checkout_session_id
+            const { rows } = await client.query(`SELECT id,number,customer_name,email,phone,buyer_phone,
+              whatsapp_opt_in,delivery_address,delivery_preference,total_cents,
+              stripe_checkout_session_id,is_test,created_at,
+              (SELECT max(e.created_at) FROM order_events e
+                WHERE e.order_id=orders.id AND e.type='payment_paid') AS paid_at
               FROM orders WHERE telegram_alert_pending=true AND payment_status='paid'
               AND (telegram_alert_attempted_at IS NULL OR telegram_alert_attempted_at < now() - interval '5 minutes')
               ORDER BY created_at LIMIT 1 FOR UPDATE SKIP LOCKED`);
