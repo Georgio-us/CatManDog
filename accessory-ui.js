@@ -10,28 +10,28 @@ export function customerDetails(details, translate, escape, category) {
 
 const availabilityCopy = {
   ru: {
-    available: ['Доступно к заказу', 'Выберите этот вариант и укажите удобное время при оформлении. Детали доставки подтвердим после заказа.'],
+    available: ['Доступно к заказу', 'Доставка за 24-48 часов. Удобное время можно указать при оформлении.'],
     pending: ['Наличие уточняется', 'Наличие этой фасовки уточняем. Пока её нельзя оформить.'],
-    on_hand: ['В наличии', 'Товар есть у нас. Способ и стоимость доставки вы увидите при оформлении заказа.'],
-    source_on_demand: ['Под заказ', 'Эту фасовку закажем у поставщика. Срок доставки уточним до оплаты.'],
+    on_hand: ['В наличии', 'Доставка за 24-48 часов. Стоимость покажем при оформлении заказа.'],
+    source_on_demand: ['Под заказ', 'Доставка за 24-48 часов. Эту фасовку закажем у поставщика.'],
     unavailable: ['Пока недоступно', 'Оставьте запрос, и мы сообщим, когда сможем предложить этот вариант.'],
-    add: 'Добавить в корзину', order: 'Заказать с доставкой', request:'Сообщить о поступлении', pricePending:'Цена уточняется'
+    add: 'Добавить в корзину', order: 'Заказать с доставкой', request:'Сообщить о поступлении', pricePending:'Цена уточняется', delivery:'Доставка за 24-48 часов'
   },
   es: {
-    available: ['Disponible para pedir', 'Elige este formato e indica cuándo te viene bien recibirlo. Confirmaremos los detalles de entrega después del pedido.'],
+    available: ['Disponible para pedir', 'Entrega en 24-48 horas. Indica cuándo te viene bien recibirlo al finalizar el pedido.'],
     pending: ['Disponibilidad pendiente', 'Estamos comprobando la disponibilidad de este formato. Todavía no se puede pedir.'],
-    on_hand: ['Disponible', 'Tenemos este formato. Verás las opciones y el coste de entrega al realizar el pedido.'],
-    source_on_demand: ['Por encargo', 'Pediremos este formato al proveedor. Confirmaremos el plazo de entrega antes del pago.'],
+    on_hand: ['Disponible', 'Entrega en 24-48 horas. Verás el coste al finalizar el pedido.'],
+    source_on_demand: ['Por encargo', 'Entrega en 24-48 horas. Pediremos este formato al proveedor.'],
     unavailable: ['No disponible ahora', 'Déjanos una solicitud y te avisaremos cuando podamos ofrecer este formato.'],
-    add: 'Añadir a la cesta', order: 'Pedir con entrega', request:'Avisadme cuando esté disponible', pricePending:'Precio pendiente de confirmar'
+    add: 'Añadir a la cesta', order: 'Pedir con entrega', request:'Avisadme cuando esté disponible', pricePending:'Precio pendiente de confirmar', delivery:'Entrega en 24-48 horas'
   },
   uk: {
-    available: ['Доступно для замовлення', 'Виберіть цей варіант і зручний час під час оформлення. Деталі доставки підтвердимо після замовлення.'],
+    available: ['Доступно для замовлення', 'Доставка за 24-48 годин. Зручний час можна вказати під час оформлення.'],
     pending: ['Наявність уточнюється', 'Наявність цього формату уточнюємо. Поки його не можна замовити.'],
-    on_hand: ['У наявності', 'Товар є в нас. Спосіб і вартість доставки ви побачите під час оформлення замовлення.'],
-    source_on_demand: ['Під замовлення', 'Замовимо цей формат у постачальника. Строк доставки уточнимо до оплати.'],
+    on_hand: ['У наявності', 'Доставка за 24-48 годин. Вартість покажемо під час оформлення замовлення.'],
+    source_on_demand: ['Під замовлення', 'Доставка за 24-48 годин. Замовимо цей формат у постачальника.'],
     unavailable: ['Поки недоступно', 'Залиште запит, і ми повідомимо, коли зможемо запропонувати цей варіант.'],
-    add: 'Додати до кошика', order: 'Замовити з доставкою', request:'Повідомити про надходження', pricePending:'Ціна уточнюється'
+    add: 'Додати до кошика', order: 'Замовити з доставкою', request:'Повідомити про надходження', pricePending:'Ціна уточнюється', delivery:'Доставка за 24-48 годин'
   }
 };
 
@@ -80,6 +80,6 @@ export function accessoryDetail(product, helpers) {
     ? t.pricePending : specialAvailability ? (['on_hand','available'].includes(state) ? t.add : state === 'source_on_demand' ? t.order : t[state][0]) : (buyable ? 'Добавить в корзину' : 'Вариант недоступен');
   const weightUnit = language === 'es' ? 'kg' : 'кг';
   const priceNote = price === null ? '' : `<p class="retail-note">Цена с IVA${p.packageWeightKg ? ` · ${money(price / p.packageWeightKg)} / ${weightUnit}` : ''}${specialAvailability ? '' : `<br>${escape(buyable ? 'Доступно к заказу' : t[state][0])}`}</p>`;
-  return `<div class="page">${crumbs(product.name)}<div class="detail-grid">${imageBlock(p.image,'detail-image')}<div class="detail-copy"><span class="eyebrow">${escape(p.line || p.brand || '')}</span><h1>${escape(p.name || product.name)}</h1>${variants?`<p class="variant-current">${escape(label)}: ${escape(translate(p.label))}</p>`:''}<span class="detail-price-label">${variants?'Цена выбранного варианта':'Цена товара'}</span><div class="detail-price">${displayPrice}</div>${priceNote}<p>${escape(translate(displayDescription || ''))}</p><span class="size-label">${escape(label)}</span><div class="size-options variant-options ${specialAvailability?'availability-options':''}" aria-label="${escape(label)}">${optionMarkup}</div>${selectedAvailability}<div class="buy-row">${buyable?`<div class="quantity"><button data-detail-qty="-1" aria-label="Уменьшить количество">${icon('minus')}</button><span id="detail-qty">${quantity}</span><button data-detail-qty="1" aria-label="Увеличить количество">${icon('plus')}</button></div>`:''}<button class="button" ${buyable?`data-buy="${escape(product.id)}"`:requestable?`data-request-availability="${escape(p.id)}"`:'disabled'}>${escape(action)} ${buyable?icon(state === 'source_on_demand' && specialAvailability ? 'arrow' : 'bag'):requestable?icon('arrow'):''}</button><button class="icon-button favorite-detail ${favorites.includes(product.id)?'selected':''}" data-favorite="${escape(product.id)}" aria-label="В избранное" aria-pressed="${favorites.includes(product.id)}">${icon('heart')}</button></div>${customerDetails(displayDetails, translate, escape, p.category)}</div></div></div>${goodTogether(product)}`;
+  return `<div class="page">${crumbs(product.name)}<div class="detail-grid">${imageBlock(p.image,'detail-image')}<div class="detail-copy"><span class="eyebrow">${escape(p.line || p.brand || '')}</span><h1>${escape(p.name || product.name)}</h1>${variants?`<p class="variant-current">${escape(label)}: ${escape(translate(p.label))}</p>`:''}<span class="detail-price-label">${variants?'Цена выбранного варианта':'Цена товара'}</span><div class="detail-price">${displayPrice}</div>${priceNote}<p>${escape(translate(displayDescription || ''))}</p><span class="size-label">${escape(label)}</span><div class="size-options variant-options ${specialAvailability?'availability-options':''}" aria-label="${escape(label)}">${optionMarkup}</div>${selectedAvailability}<div class="buy-row">${buyable?`<div class="quantity"><button data-detail-qty="-1" aria-label="Уменьшить количество">${icon('minus')}</button><span id="detail-qty">${quantity}</span><button data-detail-qty="1" aria-label="Увеличить количество">${icon('plus')}</button></div>`:''}<button class="button" ${buyable?`data-buy="${escape(product.id)}"`:requestable?`data-request-availability="${escape(p.id)}"`:'disabled'}>${escape(action)} ${buyable?icon(state === 'source_on_demand' && specialAvailability ? 'arrow' : 'bag'):requestable?icon('arrow'):''}</button><button class="icon-button favorite-detail ${favorites.includes(product.id)?'selected':''}" data-favorite="${escape(product.id)}" aria-label="В избранное" aria-pressed="${favorites.includes(product.id)}">${icon('heart')}</button></div>${buyable?`<div class="detail-service">${icon('check')} ${escape(t.delivery)}</div>`:''}${customerDetails(displayDetails, translate, escape, p.category)}</div></div></div>${goodTogether(product)}`;
 
 }

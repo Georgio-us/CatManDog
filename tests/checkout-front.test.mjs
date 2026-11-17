@@ -224,7 +224,7 @@ test('supplier items use the same preferred delivery flow as the rest of the bas
     applyPromo: () => {}, render: () => {} });
   const html = ui.page();
   assert.match(html, /Желаемое время доставки/);
-  assert.match(html, /после оплаты мы подтвердим возможность доставки/);
+  assert.match(html, /Доставка за 24-48 часов/);
   assert.match(html, /Нужно срочно/);
-  assert.doesNotMatch(html, /24-48 часов|Срок согласуем отдельно/);
+  assert.doesNotMatch(html, /Срок согласуем отдельно/);
 });

@@ -27,6 +27,9 @@ test('Spanish articles are complete editorial texts', () => {
 });
 
 test('dynamic shopping labels translate the product name', () => {
+  assert.equal(translate('Доставка за 24-48 часов'), 'Entrega en 24-48 horas');
+  assert.equal(translate('Доставка за 24-48 часов. Укажите адрес и удобное время'),
+    'Entrega en 24-48 horas. Indica la dirección y el horario que prefieras');
   assert.equal(translate('Открыть товар: Набор «В гости с подарком»'),
     'Ver producto: Caja «Una visita con regalo»');
   assert.equal(translate('Мышка Cotton · 5,50 €'), 'Ratón Cotton · 5,50 €');
