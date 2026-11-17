@@ -1,4 +1,5 @@
 import { catalogEditorialContent } from '../catalog-editorial-content.js';
+import { catalogEditorialNextNames } from '../catalog-editorial-next.js';
 
 // Translations of verified catalog copy. Match the server's exact source text so
 // hydrated product and variant descriptions cannot fall back to Russian.
@@ -102,6 +103,7 @@ const detailCopy = {
 };
 
 const pairs = [
+  ...Object.entries(catalogEditorialNextNames),
   ...Object.values(catalogEditorialContent).filter(copy => copy.esDescription && copy.ukDescription).flatMap(copy => [
     [copy.description, [copy.esDescription, copy.ukDescription]],
     ...copy.details.map((detail, index) => [detail, [copy.esDetails[index], copy.ukDetails[index]]])

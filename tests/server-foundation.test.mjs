@@ -10,13 +10,14 @@ import { handleApi } from '../server/api.js';
 import { retiredProductIds } from '../catalog-policy.js';
 import { catalogEditorialContent } from '../catalog-editorial-content.js';
 import { editorialEs, editorialUk } from '../locales/editorial-translations.js';
+import { catalogEditorialNext } from '../catalog-editorial-next.js';
 
 test('verified editorial copy is distinct and translated for each curated product', () => {
   const entries = Object.entries(catalogEditorialContent);
-  assert.equal(entries.length, 81);
+  assert.equal(entries.length, 111);
   assert.equal(new Set(entries.map(([,copy]) => copy.description)).size, entries.length);
   for (const [id, copy] of entries) {
-    assert.ok(id.startsWith('cmd-source-') || id.startsWith('leonardo-') || id.startsWith('acana-') || id.startsWith('orijen-') || id.startsWith('dog-') || id.startsWith('rc-') || id.startsWith('churu-dog-') || id.startsWith('tc-'));
+    assert.ok(id.startsWith('cmd-source-') || id.startsWith('leonardo-') || id.startsWith('acana-') || id.startsWith('orijen-') || id.startsWith('dog-') || id.startsWith('rc-') || id.startsWith('churu-dog-') || id.startsWith('tc-') || id.startsWith('royalcanin-'));
     assert.ok(copy.source.startsWith('https://'));
     assert.ok(copy.description.length > 100);
     assert.ok(copy.details.length >= 3);
@@ -87,6 +88,16 @@ test('full catalog import archives retired rows once and preserves edited produc
   const retired = queries.find(([sql, params]) => sql.startsWith('UPDATE catalog_products SET active=false') &&
     params?.[0]?.includes('kong-scrunchie'));
   assert.ok(retired[1][0].includes('kong-scrunchie') && retired[1][0].includes('trixie-balcony-chair'));
+  for (const [id, copy] of Object.entries(catalogEditorialNext)) {
+    for (const table of ['catalog_products', 'catalog_variants']) {
+      const update = queries.find(([sql, params]) =>
+        sql.startsWith(`UPDATE ${table} SET description=$2,details=$3::jsonb`) &&
+        params?.[0] === id && params?.[1] === copy.description);
+      assert.ok(update, `${id}: ${table} has a copy migration`);
+      assert.match(update[0], /WHERE (?:id|product_id)=\$1 AND description=\$4/u);
+      assert.equal(update[1][3], copy.previousDescription);
+    }
+  }
   assert.equal(queries.at(-1)[0], 'COMMIT');
 });
 
