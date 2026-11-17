@@ -1,5 +1,5 @@
 import { createUsefulUI } from './useful.js?v=yagu-toys-20261116';
-import { createAccountUI } from './account.js?v=yagu-toys-20261116';
+import { createAccountUI } from './account.js?v=recurring-orders-20261117';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
 import { accessoryDetail, customerDetails } from './accessory-ui.js?v=churu-cat-editorial-20261112';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=checkout-launch-20261116';
@@ -7,7 +7,8 @@ import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
 import { categories, products, catalogProducts, articles } from './data.js?v=yagu-toys-20261116';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=yagu-toys-20261116';
-import { createCheckoutUI } from './checkout-ui.js?v=staging-checkout-20261116';
+import { createCheckoutUI } from './checkout-ui.js?v=recurring-orders-20261117';
+import { normalizeRecurringDraft, recurringChoiceFromCart, renderRecurringCart } from './recurring-cart.js';
 import { availabilityRequestPage } from './availability-request-ui.js?v=yagu-toys-20261116';
 import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=unavailable-single-20261110';
@@ -15,7 +16,7 @@ import { applyServerCatalog } from './server-prices.js?v=unavailable-single-2026
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
 import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=mobile-cards-20261115';
 import { handleCatPickClick } from './cat-picks.js?v=picks-seo-20261112';
-import { installLocale, intlLocale, locale, translate } from './locale.js?v=yagu-toys-20261116';
+import { installLocale, intlLocale, locale, translate } from './locale.js?v=recurring-orders-20261117';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
@@ -47,6 +48,12 @@ const variantCount = n => {
 const money = value => Number.isFinite(value) ? new Intl.NumberFormat(intlLocale(),{style:'currency',currency:'EUR',currencyDisplay:'narrowSymbol'}).format(value) : locale() === 'es' ? 'No disponible' : 'Недоступно';
 function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)) ?? fallback;}catch{return fallback;}}
 let cart = normalizeCart(read('catmandog-cart',[]), products);
+let recurringDraft = (() => { try { return JSON.parse(sessionStorage.getItem('catmandog-recurring-draft') || 'null'); }
+  catch { return null; } })();
+function saveRecurringDraft() {
+  recurringDraft = normalizeRecurringDraft(recurringDraft, cart);
+  try { sessionStorage.setItem('catmandog-recurring-draft', JSON.stringify(recurringDraft)); } catch {}
+}
 const CUSTOMER_SPLIT_CHECKOUT_ENABLED = false;
 let basketGrouping = read('catmandog-delivery-grouping','together') === 'separate' ? 'separate' : 'together';
 let checkoutGroup = (() => { try { return sessionStorage.getItem('catmandog-checkout-group') === 'stock' ? 'stock' : 'all'; } catch { return 'all'; } })();
@@ -77,6 +84,9 @@ const checkoutPromo = () => account.promo();
 const useful = createUsefulUI({ escape, icon, store: account.store, render, notify, syncChanges: account.syncChanges });
 const checkout = createCheckoutUI({
   escape, icon, money, imageBlock, render,
+  getRecurringChoice: () => account.isSignedIn() ? recurringChoiceFromCart(recurringDraft, checkoutCart()) : null,
+  recurringAccountEmail: () => account.customerEmail(),
+  isSignedIn: () => account.isSignedIn(),
   getCartActivityId: () => cartActivity.id(),
   onPaymentStart: () => {
     cartActivity.sync('payment');
@@ -99,12 +109,15 @@ const checkout = createCheckoutUI({
     if (promoApplied) account.couponPaid();
     void account.refreshPromo().then(render).catch(() => {});
     void account.refreshOrders();
+    void account.refreshRecurring();
     for (const item of paidItems) {
       const line = cart.find(entry => (entry.productId || entry.id) === item.productId &&
         (entry.variantId || '') === (item.variantId || ''));
       if (line) line.qty -= Math.max(0, Number(item.qty) || 0);
     }
     cart = cart.filter(item => item.qty > 0);
+    recurringDraft = null;
+    try { sessionStorage.removeItem('catmandog-recurring-draft'); } catch {}
     checkoutGroup = 'all';
     try { sessionStorage.removeItem('catmandog-checkout-group'); } catch {}
     persist();
@@ -415,6 +428,9 @@ function detail(id,preserveSelection=false){const p=products.find(p=>p.id===id)|
 function cartPage() {
   return renderLiveBasket({ cart, products, promo: checkoutPromo(), grouping: CUSTOMER_SPLIT_CHECKOUT_ENABLED ? basketGrouping : 'together',
     allowSplit: CUSTOMER_SPLIT_CHECKOUT_ENABLED,
+    recurringHtml: renderRecurringCart({ cart, products, draft: recurringDraft,
+      signedIn: account.isSignedIn(), accountsAvailable: account.recurringAvailable(),
+      language: locale(), escape, icon }),
     escape, icon, money, imageBlock });
 }
 function availabilityPage() {
@@ -566,6 +582,24 @@ app.addEventListener('submit', async event => {
   render();
 });
 app.addEventListener('change', event => {
+  if (event.target.hasAttribute('data-recurring-enable') || event.target.hasAttribute('data-recurring-item') ||
+      event.target.hasAttribute('data-recurring-weeks')) {
+    recurringDraft = normalizeRecurringDraft(recurringDraft, cart);
+    if (event.target.hasAttribute('data-recurring-enable')) {
+      recurringDraft.enabled = event.target.checked;
+      if (recurringDraft.enabled && !recurringDraft.items.length)
+        recurringDraft.items = cart.map(item => `${item.productId || item.id}|${item.variantId || ''}`);
+    }
+    if (event.target.hasAttribute('data-recurring-weeks')) recurringDraft.cadenceWeeks = Number(event.target.value);
+    if (event.target.hasAttribute('data-recurring-item')) {
+      const keys = new Set(recurringDraft.items);
+      if (event.target.checked) keys.add(event.target.value); else keys.delete(event.target.value);
+      recurringDraft.items = [...keys];
+    }
+    saveRecurringDraft();
+    render();
+    return;
+  }
   if (event.target.name === 'live-delivery-grouping') {
     basketGrouping = event.target.value === 'separate' ? 'separate' : 'together';
     try { localStorage.setItem('catmandog-delivery-grouping', JSON.stringify(basketGrouping)); } catch {}

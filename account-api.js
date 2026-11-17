@@ -29,6 +29,9 @@ export function createAccountApi(fetcher = fetch) {
     activateCoupon: code => request('/api/coupon/activate', 'POST', { code }),
     cabinet: () => request('/api/me/cabinet'),
     orders: () => request('/api/me/orders'),
+    recurringOrders: () => request('/api/me/recurring-orders'),
+    createRecurringOrder: body => request('/api/me/recurring-orders', 'POST', body),
+    updateRecurringOrder: (id, body) => request(`/api/me/recurring-orders/${encodeURIComponent(id)}`, 'PATCH', body),
     saveCabinet: (cabinet, revision) => request('/api/me/cabinet', 'PUT', { cabinet, revision })
   };
 }

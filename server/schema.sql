@@ -368,6 +368,22 @@ CREATE TABLE IF NOT EXISTS order_items (
   source_mode text NOT NULL CHECK (source_mode IN ('on_hand','open_order','source_on_demand'))
 );
 CREATE INDEX IF NOT EXISTS order_items_order_id_idx ON order_items(order_id);
+
+CREATE TABLE IF NOT EXISTS recurring_orders (
+  id uuid PRIMARY KEY,
+  customer_id uuid NOT NULL REFERENCES customers(id) ON DELETE CASCADE,
+  source_order_id uuid NOT NULL UNIQUE REFERENCES orders(id) ON DELETE CASCADE,
+  items jsonb NOT NULL,
+  cadence_weeks integer NOT NULL CHECK (cadence_weeks IN (2,4,6)),
+  status text NOT NULL DEFAULT 'active' CHECK (status IN ('active','paused','cancelled')),
+  next_review_on date NOT NULL,
+  last_reviewed_at timestamptz,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS recurring_orders_customer_idx ON recurring_orders(customer_id,created_at DESC);
+CREATE INDEX IF NOT EXISTS recurring_orders_due_idx ON recurring_orders(next_review_on) WHERE status='active';
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS recurring_intent jsonb;
 ALTER TABLE order_items DROP CONSTRAINT IF EXISTS order_items_source_mode_check;
 ALTER TABLE order_items ADD CONSTRAINT order_items_source_mode_check
   CHECK (source_mode IN ('on_hand','open_order','source_on_demand'));

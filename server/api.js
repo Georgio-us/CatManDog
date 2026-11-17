@@ -33,6 +33,9 @@ import { sendTelegramVisitAlert, telegramReady } from './telegram.js';
 import { isStaging } from './environment.js';
 import { saveObservedCart, deleteObservedCart, listObservedCarts,
   observedCartEvents, validCartId } from './cart-activity.js';
+import { recurringChoice, activateRecurringIntent, createRecurringFromPurchase,
+  listRecurringForCustomer, updateRecurringForCustomer, listRecurringDue,
+  markRecurringReviewed } from './recurring-orders.js';
 
 const counters = new Map();
 const cap = (value, length) => String(value || '').trim().slice(0, length);
@@ -117,7 +120,7 @@ async function issueAccountLink(db, customerId, kind, email, language = 'ru', pr
   [randomUUID(), customerId, kind, tokenDigest(token), kind === 'verify' ? 1440 : 30,
     kind === 'verify' ? cap(promoCode, 40) || null : null]);
   await sendAccountLink(email, kind, token, fetch, language,
-    ['pet', 'checkout', 'orders'].includes(returnTo) ? returnTo : '');
+    ['pet', 'checkout', 'orders', 'cart'].includes(returnTo) ? returnTo : '');
 }
 
 function rateLimit(req, group, limit, minutes = 15) {
@@ -232,6 +235,11 @@ async function createOrder(db, payload, customer, manual = null) {
     if (shipping && !shipping.available) bad('Для этой корзины доставка по Испании пока недоступна');
     const quote = priceQuote(lines, variants.rows, promo, manual?.deliveryCents ?? shipping?.deliveryCents ?? null);
     if (!quote.orderable) bad('Один из товаров пока нельзя заказать');
+    if (payload.recurring && (!customer?.emailVerified || customer.email.toLowerCase() !== email.toLowerCase()))
+      bad('Войдите в кабинет с email этого заказа, чтобы сохранить регулярную покупку', 403);
+    const recurring = payload.recurring ? recurringChoice(payload.recurring,
+      quote.items.map(item => ({ productId: item.productId, variantId: item.variantId,
+        name: item.name, label: item.variantLabel, qty: item.qty }))) : null;
     if (manual?.expectedSubtotalCents != null && quote.subtotalCents !== manual.expectedSubtotalCents)
       bad('Цена товаров изменилась. Проверьте заявку и согласуйте сумму заново', 409);
     if (manual?.expectedProductsCents != null &&
@@ -266,13 +274,13 @@ async function createOrder(db, payload, customer, manual = null) {
     const deliveryTaxRate = billingProfile.rows[0]?.delivery_tax_rate_bps ?? null;
     const inserted = await client.query(`INSERT INTO orders(id,number,customer_id,customer_name,email,buyer_phone,phone,whatsapp_opt_in,
       delivery_address,delivery_preference,subtotal_cents,discount_cents,delivery_cents,delivery_tax_rate_bps,total_cents,
-      promo_code,idempotency_key,stock_state,locale,cart_session_id,is_test) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,'reserved',$18,$19,$20)
+      promo_code,idempotency_key,stock_state,locale,cart_session_id,is_test,recurring_intent) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,'reserved',$18,$19,$20,$21)
       ON CONFLICT(idempotency_key) DO NOTHING RETURNING id,number`,
     [orderId, number, customer?.id || null, name, email, normalizeBuyerPhone(phone), phone, !!payload.whatsapp,
       cleanAddress, cleanDelivery, quote.subtotalCents, quote.discountCents,
       quote.deliveryCents, deliveryTaxRate, quote.totalCents, quote.promoCode, idempotency,
       ['ru','es','uk'].includes(payload.locale) ? payload.locale : 'ru', linkedCartId,
-      stripeMode() === 'test']);
+      stripeMode() === 'test', recurring ? JSON.stringify(recurring) : null]);
     if (!inserted.rows.length) {
       const duplicate = await client.query(`SELECT id,number,email,stripe_checkout_url,payment_expires_at
         FROM orders WHERE idempotency_key=$1`, [idempotency]);
@@ -388,7 +396,7 @@ async function handleStripeWebhook(db, req, res) {
   let committed = false;
   try {
     await client.query('BEGIN');
-    const found = await client.query(`SELECT id,total_cents,payment_status,stock_state,promo_code,
+    const found = await client.query(`SELECT id,total_cents,payment_status,stock_state,promo_code,recurring_intent,
       stripe_checkout_session_id FROM orders WHERE id=$1 FOR UPDATE`, [session.client_reference_id]);
     const order = found.rows[0];
     if (!order || order.total_cents !== session.amount_total ||
@@ -416,6 +424,7 @@ async function handleStripeWebhook(db, req, res) {
         !isStaging()]);
       await client.query(`INSERT INTO order_events(id,order_id,type,actor)
         VALUES($1,$2,'payment_paid','stripe')`, [randomUUID(), order.id]);
+      if (order.recurring_intent) await activateRecurringIntent(client, order.id);
     } else if (failed && order.payment_status !== 'paid' && order.payment_status !== 'failed') {
       await releasePaymentReservation(client, order);
       await client.query(`UPDATE orders SET payment_status='failed',status='cancelled',
@@ -1816,6 +1825,13 @@ async function adminRoute(db, req, res, path) {
   if (path === '/api/admin/orders' && req.method === 'GET') {
     return json(res, 200, { orders: await loadAdminOrders(db) });
   }
+  if (path === '/api/admin/recurring-orders' && req.method === 'GET')
+    return json(res, 200, { orders: await listRecurringDue(db) });
+  const recurringReview = path.match(/^\/api\/admin\/recurring-orders\/([a-f0-9-]+)\/reviewed$/);
+  if (recurringReview && req.method === 'POST') {
+    await markRecurringReviewed(db, recurringReview[1]);
+    return json(res, 200, { ok: true });
+  }
   const confirmation = path.match(/^\/api\/admin\/orders\/([^/]+)\/confirmation$/);
   if (confirmation && req.method === 'POST') {
     if (!validUuid(confirmation[1])) bad('Некорректный заказ');
@@ -2342,18 +2358,21 @@ export async function handleApi(db, req, res, pathname) {
       const sessionId = url.searchParams.get('session_id') || '';
       if (!/^cs_(test|live)_[A-Za-z0-9]+$/.test(sessionId)) bad('Некорректная сессия оплаты');
       const { rows } = await db.query(`SELECT id,number,payment_status,total_cents,subtotal_cents,
-        discount_cents,delivery_cents,promo_code FROM orders
+        discount_cents,delivery_cents,promo_code,recurring_intent FROM orders
         WHERE stripe_checkout_session_id=$1`, [sessionId]);
       if (!rows[0]) bad('Заказ не найден', 404);
       const items = rows[0].payment_status === 'paid'
         ? (await db.query(`SELECT product_id AS "productId",variant_id AS "variantId",
             quantity AS qty,unit_price_cents AS "unitPriceCents"
             FROM order_items WHERE order_id=$1`, [rows[0].id])).rows : [];
-      return json(res, 200, { number: rows[0].number,
+      const recurringSaved = rows[0].payment_status === 'paid' && rows[0].recurring_intent
+        ? (await db.query('SELECT 1 FROM recurring_orders WHERE source_order_id=$1', [rows[0].id])).rowCount > 0
+        : false;
+      return json(res, 200, { number: rows[0].number, orderId: rows[0].id,
         paymentStatus: rows[0].payment_status, totalCents: rows[0].total_cents,
         subtotalCents: rows[0].subtotal_cents, discountCents: rows[0].discount_cents,
         deliveryCents: rows[0].delivery_cents,
-        promoApplied: Boolean(rows[0].promo_code), items });
+        promoApplied: Boolean(rows[0].promo_code), recurringSaved, items });
     }
     if (pathname === '/api/me/orders' && req.method === 'GET') {
       const customer = await currentCustomer(db, req);
@@ -2369,6 +2388,26 @@ export async function handleApi(db, req, res, pathname) {
         GROUP BY o.id ORDER BY o.created_at DESC`,
       [customer.id, customer.email, customer.emailVerified === true]);
       return json(res, 200, { orders: rows });
+    }
+    if (pathname === '/api/me/recurring-orders' && ['GET','POST'].includes(req.method)) {
+      if (!enabled('ACCOUNTS_ENABLED')) bad('Кабинет пока не подключён', 503);
+      const customer = await currentCustomer(db, req);
+      if (!customer) bad('Войдите в кабинет', 401);
+      if (req.method === 'GET') return json(res, 200,
+        { orders: await listRecurringForCustomer(db, customer.id) });
+      rateLimit(req, 'recurring-order', 12);
+      const body = await readJson(req);
+      if (!validUuid(body.orderId)) bad('Некорректный номер заказа');
+      const id = await createRecurringFromPurchase(db, customer, body.orderId, body);
+      return json(res, 201, { id });
+    }
+    const recurringUpdate = pathname.match(/^\/api\/me\/recurring-orders\/([a-f0-9-]+)$/);
+    if (recurringUpdate && req.method === 'PATCH') {
+      const customer = await currentCustomer(db, req);
+      if (!customer) bad('Войдите в кабинет', 401);
+      rateLimit(req, 'recurring-order', 20);
+      await updateRecurringForCustomer(db, customer.id, recurringUpdate[1], await readJson(req));
+      return json(res, 200, { ok: true });
     }
     if (pathname === '/api/availability-requests' && req.method === 'POST') {
       rateLimit(req, 'availability-request', 8, 60);

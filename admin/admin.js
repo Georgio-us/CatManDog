@@ -186,6 +186,16 @@ function renderOrders(orders) {
     ${tests.length ? `<details class="admin-card admin-test-history" ${showTestOrders ? 'open' : ''}><summary>История тестовых заказов · ${tests.length}${disclosureIcon}</summary>
       <p class="admin-muted">Тестовые заказы не входят в выручку и потребность в закупке</p>${tests.map(orderCard).join('')}</details>` : ''}`;
 }
+function renderRecurringOrders(orders) {
+  const date = value => new Intl.DateTimeFormat('ru-RU', { timeZone: 'Europe/Madrid',
+    day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${String(value).slice(0,10)}T12:00:00`));
+  $('admin-content').innerHTML = `<section class="admin-section-head"><div><h2>Регулярные заказы</h2><p class="admin-muted">Планы, которым скоро нужна ручная проверка. До согласования не создавайте новый платёж</p></div></section>
+    ${orders.length ? orders.map(order => `<article class="admin-card"><div class="admin-variant-top"><div><h2>${escape(order.customerName || 'Покупатель')}</h2><p>${escape(order.email)} · ${escape(order.phone || '')}</p></div><strong>${escape(date(order.nextReviewOn))}</strong></div>
+      <ul class="admin-items">${(order.items || []).map(item => `<li>${escape(item.name)}${item.label ? ` · ${escape(item.label)}` : ''} × ${Number(item.qty) || 1}</li>`).join('')}</ul>
+      <p class="admin-muted">${order.isTest ? 'Тестовый платёж · ' : ''}Каждые ${Number(order.cadenceWeeks)} недели · Адрес: ${escape([order.deliveryAddress?.street,order.deliveryAddress?.building,order.deliveryAddress?.postcode,order.deliveryAddress?.city].filter(Boolean).join(', '))}</p>
+      <p class="admin-muted">Проверьте доступность, текущую цену и доставку, затем свяжитесь с покупателем. Оплата только после его согласия</p>
+      <button type="button" data-recurring-reviewed="${escape(order.id)}">Проверка проведена</button></article>`).join('') : '<p class="admin-card">Планов для проверки пока нет</p>'}`;
+}
 const cartStageLabel = { cart: 'Корзина', checkout: 'Контакты и доставка',
   review: 'Проверка заказа', payment: 'Переход к оплате' };
 const cartTime = value => new Date(value).toLocaleString('ru-RU', {
@@ -1181,8 +1191,9 @@ async function loadFinancePreview(button) {
       <p class="admin-muted">${missing.length ? `Для будущего оформления нужно заполнить: ${escape(missing.join(', '))}` : 'Расчёт заполнен, выпуск фактуры пока не подключён'}</p>`;
   } catch (error) { host.textContent = error.message; }
 }
-function renderOverview(data) {
+function renderOverview(data, recurringDue = []) {
   const { catalog, orders, requests, topPaidSkus, purchases, coverage = [], customers = {} } = data;
+  const realRecurringDue = recurringDue.filter(plan => !plan.isTest).length;
   $('admin-content').innerHTML = `<section><h2>Заказы и покупатели</h2><div class="audit-overview overview-grid">
     <div><strong>${orders.open_orders}</strong><span>Заказов в работе</span></div>
     <div><strong>${euros(orders.paid_total_30d)}</strong><span>Оплачено за 30 дней · ${orders.paid_orders_30d} ${countNoun(orders.paid_orders_30d,'заказ','заказа','заказов')}</span></div>
@@ -1194,6 +1205,7 @@ function renderOverview(data) {
     <button type="button" data-go-tab="requests">Обращения</button>
     <button type="button" data-go-tab="customers">Покупатели</button>
     <button type="button" data-go-tab="finance">Финансы</button></div></section>
+    <section class="admin-card"><h2>Повторные покупки к проверке</h2><p class="admin-muted">${realRecurringDue ? `${realRecurringDue} ${countNoun(realRecurringDue,'план','плана','планов')} скоро потребуют проверки товаров, цены и доставки` : 'Сейчас реальных планов для проверки нет'}</p><button type="button" data-go-tab="recurring">Открыть регулярные заказы</button></section>
     <details class="admin-card admin-operations-review"><summary>Ревизия каталога · ${catalog.total} SKU${disclosureIcon}</summary>
     <p class="admin-muted">Прайс или бренд в исходных данных и закреплённый поставщик для закупки - разные связи. Показатели ниже помогают проверить данные каталога, но сами по себе не означают запрет продажи</p>
     <div class="audit-overview overview-grid">
@@ -1219,7 +1231,9 @@ async function load() {
   message('Загружаю данные');
   try {
     if (tab === 'overview') {
-      renderOverview(await api('/api/admin/overview'));
+      const [overview, recurring] = await Promise.all([
+        api('/api/admin/overview'), api('/api/admin/recurring-orders')]);
+      renderOverview(overview, recurring.orders);
       message('Сводка магазина');
       return;
     }
@@ -1307,6 +1321,12 @@ async function load() {
       return;
     }
     if (tab === 'requests') { await loadRequests(); return; }
+    if (tab === 'recurring') {
+      const result = await api('/api/admin/recurring-orders');
+      renderRecurringOrders(result.orders);
+      message(`Планов для проверки: ${result.orders.length}`);
+      return;
+    }
     const path = { orders:'/api/admin/orders', variants:'/api/admin/variants' }[tab];
     const result = await api(path);
     if (tab === 'variants') {
@@ -1556,6 +1576,14 @@ $('admin-content').addEventListener('change', async event => {
   }
 });
 $('admin-content').addEventListener('click', async event => {
+  const reviewed = event.target.closest('[data-recurring-reviewed]');
+  if (reviewed) {
+    reviewed.disabled = true;
+    try { await api(`/api/admin/recurring-orders/${encodeURIComponent(reviewed.dataset.recurringReviewed)}/reviewed`, 'POST');
+      await load(); message('Проверка отмечена. Следующий срок обновлён'); }
+    catch (error) { reviewed.disabled = false; message(error.message); }
+    return;
+  }
   const mixedBox = event.target.closest('[data-open-mixed-box]');
   if (mixedBox) {
     mixedBox.disabled = true;

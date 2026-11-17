@@ -1,12 +1,13 @@
 import { checkoutTotals, availableDeliverySlots, FREE_DELIVERY_FROM, DELIVERY_FEE, validateCheckout } from './checkout-model.js?v=address-check-20261112';
-import { locale, intlLocale, translate } from './locale.js?v=checkout-launch-20261116';
+import { locale, intlLocale, translate } from './locale.js?v=recurring-orders-20261117';
 
 const LEGACY_PREORDER_CHECKOUT_ENABLED = false;
 
 export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems, isReady, getPromo, applyPromo,
   refreshPromo = async () => {}, findOrder, productLabel, getCheckoutContext = () => ({}),
   getCheckoutProfile = () => null, saveCheckoutProfile = async () => {}, render, onPaid,
-  onPaymentStart = () => {}, getCartActivityId = () => null }) {
+  onPaymentStart = () => {}, getCartActivityId = () => null,
+  getRecurringChoice = () => null, recurringAccountEmail = () => '', isSignedIn = () => false }) {
   let formValues = { deliveryRegion: 'local' };
   let profileAccountId = null;
   let draftTouched = false;
@@ -125,10 +126,13 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     if (values.deliveryMode === 'slot' && validateCheckout(values))
       return `<div class="page checkout-page"><h1>Интервал больше недоступен</h1><p>Выберите другой день и время доставки</p><a class="button" href="#/checkout">Изменить доставку ${icon('arrow')}</a></div>`;
     const paymentAvailable = paymentsEnabled && context.pricesConfirmed !== false;
+    const recurring = getRecurringChoice();
+    const recurringPreview = recurring && values.deliveryMode !== 'urgent'
+      ? `<section class="checkout-section recurring-review"><h2>Регулярный заказ</h2><p>${recurring.items.length ? `После оплаты сохраним ${recurring.items.length} ${recurring.items.length === 1 ? 'товар' : 'товара'} для проверки каждые ${recurring.cadenceWeeks} недели. Будущие покупки оплачиваются только после вашего подтверждения` : 'Выберите товары для повторения в корзине'}</p><a class="text-link" href="#/cart">Изменить выбор ${icon('arrow')}</a></section>` : '';
     const address = `${values.street}, ${values.building}${values.apartment ? ', ' + values.apartment : ''}, ${values.postcode} ${values.city}`;
     const when = values.deliveryMode === 'urgent' ? `${({ ru: 'Срочно', es: 'Urgente', uk: 'Терміново' })[locale()]}: ${values.deadline}` : values.deliveryMode === 'national' ? 'Отправка перевозчиком, срок уточним после оформления' : values.deliveryMode === 'preorder' ? 'Ориентир 24-48 часов' : values.deliveryMode === 'slot' ? `${values.deliverySlot?.replace('|', ', ')} по Валенсии` : values.deliveryMode === 'soon' ? 'Сегодня, как можно скорее' : `${values.deliveryDate}, ${values.deliveryTime}`;
     const states = values.deliveryMode === 'urgent' ? `<section class="checkout-state-examples"><h2>${urgentSent ? 'Заявка отправлена' : 'Срочная заявка'}</h2><p>${urgentSent ? 'Мы проверим товары и доставку, затем позвоним вам. Оплата пока не требуется' : paymentAvailable ? 'Мы проверим возможность срочной доставки и позвоним. После согласования отправим персональную ссылку на оплату' : 'Приём заявок пока закрыт'}</p>${paymentError ? `<p class="checkout-error" role="alert">${e(paymentError)}</p>` : ''}${!urgentSent && paymentAvailable ? `<button type="button" class="button" data-urgent-send>Отправить заявку ${icon('arrow')}</button>` : ''}</section>` : paymentAvailable ? `<section class="checkout-state-examples"><h2>Оплата картой</h2><p>Проверим заказ и откроем защищённую страницу Stripe</p>${paymentError ? `<p class="checkout-error" role="alert">${e(paymentError)}</p>` : ''}${purchaseTermsNote()}<button type="button" class="button" data-checkout-pay>Перейти к оплате ${icon('arrow')}</button></section>` : `<section class="checkout-state-examples"><h2>Оплата картой</h2><p>${context.pricesConfirmed === false ? 'Для одного из товаров цена продажи ещё не установлена. Оплата пока недоступна, заказ не создан' : 'Приём заказов пока закрыт. Товары и контактные данные не отправлены'}</p><button type="button" class="button" disabled>Перейти к оплате ${icon('arrow')}</button></section>`;
-    return `<div class="page checkout-page rc-flow-page live-order-page">${progress(2, values.deliveryMode === 'urgent')}<div class="rc-flow-heading"><h1>Всё верно?</h1><p>${values.deliveryMode === 'urgent' ? 'Проверьте данные перед отправкой заявки' : 'Проверьте данные и итоговую сумму перед оплатой'}</p></div><div class="checkout-layout rc-flow-layout"><div class="checkout-preview"><section class="checkout-section"><h2>Доставка</h2><dl><div><dt>Получатель</dt><dd>${e(values.name)}</dd></div><div><dt>Адрес</dt><dd>${e(address)}</dd></div><div><dt>Когда удобно</dt><dd>${e(when)}</dd></div><div><dt>Телефон</dt><dd>${e(values.phone)}${values.whatsapp ? ' · WhatsApp' : ''}</dd></div><div><dt>Email</dt><dd>${e(values.email)}</dd></div>${values.note ? `<div><dt>Комментарий</dt><dd>${e(values.note)}</dd></div>` : ''}</dl></section><div class="checkout-preview-notice">${icon('shield')} <div><strong>${urgentSent && values.deliveryMode === 'urgent' ? 'Заявка отправлена' : 'Заказ пока не создан'}</strong><p>${paymentAvailable ? values.deliveryMode === 'urgent' ? urgentSent ? 'Заявка получена. Мы проверим товары и позвоним для согласования доставки.' : 'Заявку отправим без оплаты. Сначала позвоним и согласуем доставку.' : 'После оплаты проверим товары и свяжемся с вами, чтобы уточнить доставку.' : 'Заказ пока не создан. Товары и контактные данные не отправлены.'}</p></div></div><a class="button outline" href="#/checkout">Изменить данные ${icon('arrow')}</a>${states}</div>${summary(items, promo, values.deliveryMode === 'national' ? shippingQuote : null)}</div></div>`;
+    return `<div class="page checkout-page rc-flow-page live-order-page">${progress(2, values.deliveryMode === 'urgent')}<div class="rc-flow-heading"><h1>Всё верно?</h1><p>${values.deliveryMode === 'urgent' ? 'Проверьте данные перед отправкой заявки' : 'Проверьте данные и итоговую сумму перед оплатой'}</p></div><div class="checkout-layout rc-flow-layout"><div class="checkout-preview"><section class="checkout-section"><h2>Доставка</h2><dl><div><dt>Получатель</dt><dd>${e(values.name)}</dd></div><div><dt>Адрес</dt><dd>${e(address)}</dd></div><div><dt>Когда удобно</dt><dd>${e(when)}</dd></div><div><dt>Телефон</dt><dd>${e(values.phone)}${values.whatsapp ? ' · WhatsApp' : ''}</dd></div><div><dt>Email</dt><dd>${e(values.email)}</dd></div>${values.note ? `<div><dt>Комментарий</dt><dd>${e(values.note)}</dd></div>` : ''}</dl></section>${recurringPreview}<div class="checkout-preview-notice">${icon('shield')} <div><strong>${urgentSent && values.deliveryMode === 'urgent' ? 'Заявка отправлена' : 'Заказ пока не создан'}</strong><p>${paymentAvailable ? values.deliveryMode === 'urgent' ? urgentSent ? 'Заявка получена. Мы проверим товары и позвоним для согласования доставки.' : 'Заявку отправим без оплаты. Сначала позвоним и согласуем доставку.' : 'После оплаты проверим товары и свяжемся с вами, чтобы уточнить доставку.' : 'Заказ пока не создан. Товары и контактные данные не отправлены.'}</p></div></div><a class="button outline" href="#/checkout">Изменить данные ${icon('arrow')}</a>${states}</div>${summary(items, promo, values.deliveryMode === 'national' ? shippingQuote : null)}</div></div>`;
   }
 
   function resultPage(kind, params = new URLSearchParams()) {
@@ -202,6 +206,10 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     const items = getItems();
     const { values, promo } = preview;
     try {
+      const recurring = getRecurringChoice();
+      if (recurring && !recurring.items.length) throw new Error('Выберите товары для регулярного заказа в корзине');
+      if (recurring && recurringAccountEmail().toLowerCase() !== String(values.email).toLowerCase())
+        throw new Error('Для регулярного заказа укажите email вашего кабинета');
       const deliveryError = validateCheckout(values);
       if (deliveryError) throw new Error(deliveryError);
       const request = (path, body) => fetch(path, { method: 'POST', credentials: 'same-origin',
@@ -222,14 +230,14 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
           throw new Error('Скидка обновлена. Проверьте итог и нажмите оплату ещё раз');
         throw new Error(`Итоговая цена изменилась: ${money(quote.totalCents / 100)}. Обновите корзину перед оплатой`);
       }
-      const signature = JSON.stringify([preview.signature, values, promo?.code || '']);
+      const signature = JSON.stringify([preview.signature, values, promo?.code || '', recurring]);
       let saved;
       try { saved = JSON.parse(sessionStorage.getItem('catmandog-payment-attempt') || 'null'); } catch { /* Invalid draft */ }
       const key = saved?.signature === signature ? saved.key : crypto.randomUUID();
       sessionStorage.setItem('catmandog-payment-attempt', JSON.stringify({ key, signature,
         cartSignature: preview.signature }));
       const payload = { items: lines, promoCode: promo?.code || '', skipSavedPromo: promoSkipped,
-        idempotencyKey: key, locale: locale(), cartId: getCartActivityId(),
+        idempotencyKey: key, locale: locale(), cartId: getCartActivityId(), recurring,
         name: values.name, email: values.email, phone: values.phone, whatsapp: values.whatsapp,
         address: { city: values.city, postcode: values.postcode, street: values.street,
           building: values.building, apartment: values.apartment, note: values.note },
@@ -311,6 +319,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     return `<div class="page checkout-page checkout-result"><h1>${paid ? 'Оплата подтверждена' : 'Проверяем оплату'}</h1>
       <p class="checkout-lead">${paid ? 'Мы проверим заказ и свяжемся с вами для уточнения доставки' : state.error || 'Подтверждение от платёжной системы ещё не поступило'}</p>
       ${state.number ? `<div class="checkout-preview-notice">${icon('shield')}<div><strong>Заказ ${e(state.number)}</strong><p>Сумма ${money(state.totalCents / 100)}</p></div></div>` : ''}
+      ${paid ? `<section class="checkout-section recurring-after-payment"><h2>${state.recurringSaved ? 'Регулярный заказ сохранён' : 'Повторять эту покупку?'}</h2><p>${state.recurringSaved ? 'Следующие покупки сначала проверим с вами. Автоматических списаний нет' : 'Выберите товары и период в кабинете. Перед каждым повтором уточним наличие, цену и доставку - оплата после вашего подтверждения'}</p><a class="button outline" href="${isSignedIn() && state.orderId ? `#/account/orders/${encodeURIComponent(state.orderId)}` : '#/account/login?return=orders'}">${state.recurringSaved ? 'Управлять регулярным заказом' : 'Настроить регулярный заказ'} ${icon('arrow')}</a></section>` : ''}
       <div class="checkout-result-actions"><a class="button outline" href="#/account/orders">Мои заказы ${icon('arrow')}</a>
       ${paid ? remainingAfterPayment ? '<a class="button" href="#/cart">Оформить оставшиеся товары</a>' : '<a class="text-link" href="#/catalog">Продолжить покупки</a>' : '<button type="button" class="button" data-payment-refresh>Проверить ещё раз</button>'}</div></div>`;
   }
