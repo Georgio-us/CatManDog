@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { consentCopy, installAnalytics, publicPageLocation, visitSource } from '../analytics-consent.js';
+import { consentCopy, installAnalytics, publicPageLocation, visitSource,
+  visitPlatform } from '../analytics-consent.js';
 
 test('analytics page locations omit searches and private routes', () => {
   const location = { origin: 'https://catmandog.es', pathname: '/catalogo/gatos/pienso-seco', hash: '', search: '?q=private' };
@@ -14,6 +15,9 @@ test('analytics page locations omit searches and private routes', () => {
   assert.equal(visitSource('https://www.instagram.com/catmandog', location.origin), 'social');
   assert.equal(visitSource('https://catmandog.es/catalogo', location.origin), 'internal');
   assert.equal(visitSource('', location.origin), 'direct');
+  assert.equal(visitPlatform('?utm_source=instagram&utm_campaign=launch', ''), 'instagram');
+  assert.equal(visitPlatform('', 'https://l.instagram.com/'), 'instagram');
+  assert.equal(visitPlatform('', ''), null);
   assert.equal(consentCopy('es').reject, 'Rechazar');
   assert.equal(consentCopy('ru').accept, 'Принять');
 });
@@ -75,7 +79,9 @@ test('Google tag and commerce events start only after acceptance; rejected visit
     const visit = JSON.parse(visitRequests[0].options.body);
     assert.equal(visit.page, '/');
     assert.equal(visit.source, 'search');
+    assert.equal(visit.platform, null);
     assert.match(visit.cartId, /^[a-f0-9-]{36}$/);
+    assert.match(visit.visitId, /^[a-f0-9-]{36}$/);
     assert.equal(values.get('catmandog-observed-cart-v1'), visit.cartId);
     globalThis.window.location.hash = '#/product/leonardo-1';
     analytics.pageView();
@@ -99,6 +105,9 @@ test('Google tag and commerce events start only after acceptance; rejected visit
     reject.listeners.click();
     await new Promise(resolve => setImmediate(resolve));
     assert.equal(reloads, 1);
+    assert.equal(visitRequests[1].url, '/api/telemetry/visit');
+    assert.equal(visitRequests[1].options.method, 'DELETE');
+    assert.equal(JSON.parse(visitRequests[1].options.body).cartId, visit.cartId);
     assert.equal(values.get('catmandog-analytics-consent-v1'), 'rejected');
   } finally {
     globalThis.document = previous.document;

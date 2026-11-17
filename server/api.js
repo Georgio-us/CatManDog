@@ -30,6 +30,7 @@ import { activatePaperCoupon, normalizeBuyerPhone, resolvePromo,
 import { churuRepackOptions } from '../churu-retail-formats.js';
 import { salePriceDecision } from './sale-price-policy.js';
 import { sendTelegramVisitAlert, telegramReady } from './telegram.js';
+import { recordSiteVisit, deleteSiteVisitor } from './visit-analytics.js';
 import { isStaging } from './environment.js';
 import { saveObservedCart, deleteObservedCart, listObservedCarts,
   observedCartEvents, validCartId } from './cart-activity.js';
@@ -2130,27 +2131,32 @@ export async function handleApi(db, req, res, pathname) {
       return await handleStripeWebhook(db, req, res);
     }
     if (!sameOrigin(req) && !['GET','HEAD'].includes(req.method)) bad('Источник запроса не разрешён', 403);
+    if (pathname === '/api/telemetry/visit' && req.method === 'DELETE') {
+      const body = await readJson(req, 128);
+      return json(res, 200, { removed: db ? await deleteSiteVisitor(db, body?.cartId) : false });
+    }
     if (pathname === '/api/telemetry/visit' && req.method === 'POST') {
-      if (!enabled('TELEGRAM_VISIT_ALERTS_ENABLED') || !telegramReady())
+      if (!db || !enabled('TELEGRAM_VISIT_ALERTS_ENABLED') || !telegramReady())
         return json(res, 200, { accepted: false });
       rateLimit(req, 'telegram-visit', 30, 60);
-      const body = await readJson(req, 256);
+      const body = await readJson(req, 512);
       let owner = false;
-      if (db) {
-        const staff = await currentVisitStaff(db, req);
-        owner = staff?.role === 'owner';
-        if (!owner) {
-          const customer = await currentCustomer(db, req);
-          if (customer?.emailVerified) {
-            const { rows } = await db.query(`SELECT EXISTS(SELECT 1 FROM staff_accounts
-              WHERE email=$1 AND role='owner' AND active=true) AS allowed`, [customer.email]);
-            owner = rows[0]?.allowed === true;
-          }
+      const staff = await currentVisitStaff(db, req);
+      owner = staff?.role === 'owner';
+      if (!owner) {
+        const customer = await currentCustomer(db, req);
+        if (customer?.emailVerified) {
+          const { rows } = await db.query(`SELECT EXISTS(SELECT 1 FROM staff_accounts
+            WHERE email=$1 AND role='owner' AND active=true) AS allowed`, [customer.email]);
+          owner = rows[0]?.allowed === true;
         }
       }
-      try { return json(res, 200, { accepted: await sendTelegramVisitAlert({
-        page: body?.page, source: body?.source, owner,
-        cartId: validCartId(body?.cartId) ? body.cartId : null }) }); }
+      if (owner) return json(res, 200, { accepted: false, owner: true });
+      try {
+        const stats = await recordSiteVisit(db, body);
+        return json(res, 200, { accepted: stats
+          ? await sendTelegramVisitAlert({ page: body?.page, ...stats }) : false });
+      }
       catch (error) {
         console.error('Telegram visit alert failed:', error.message);
         return json(res, 200, { accepted: false });

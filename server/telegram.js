@@ -63,22 +63,31 @@ async function sendMessage(text, fetcher, env) {
 export const sendTelegramOrderAlert = (order, fetcher = fetch, env = process.env) =>
   sendMessage(orderAlertText(order), fetcher, env);
 
-export function visitAlertText({ page, source, owner, cartId } = {}) {
+export function visitAlertText({ page, source, visitorNumber, visitCount,
+  visits_today, visitors_today, instagram_today } = {}) {
   const safePage = typeof page === 'string' && page.length <= 120 &&
     (/^\/$/.test(page) || /^\/\#\/(?:catalog|journal(?:\/[a-z0-9-]+)?|product\/[a-z0-9-]+|picks\/(?:cat|dog))$/i.test(page) ||
       /^\/(?:catalogo|revista|selecciones\/(?:gatos|perros)|producto\/[a-z0-9-]+|(?:revista|catalogo\/(?:gatos|perros))\/[a-z0-9/-]+)$/i.test(page))
     ? page : 'неизвестна';
-  const sources = { direct: 'источник не передан браузером', internal: 'переход внутри сайта',
-    search: 'поиск', social: 'соцсети', other: 'другой сайт' };
+  const sources = { direct: 'прямой переход или источник скрыт', internal: 'переход внутри сайта',
+    search: 'поиск', social: 'соцсети', other: 'другой сайт', instagram: 'Instagram',
+    facebook: 'Facebook', tiktok: 'TikTok', youtube: 'YouTube', pinterest: 'Pinterest',
+    unknown: 'неизвестен' };
   const safeSource = typeof source === 'string' && Object.hasOwn(sources, source)
     ? sources[source] : 'неизвестен';
-  return `Посещение CatManDog\n` +
-    `Владелец: ${owner === true ? 'вход подтверждён' : 'вход не подтверждён'}\n` +
-    `Страница входа: ${safePage}\n` +
-    `Источник: ${safeSource}\n` +
-    (typeof cartId === 'string' && /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i.test(cartId)
-      ? `ID корзины, если появится: ${cartId.slice(0, 8)}\n` : '') +
-    'Подробнее: Google Analytics 4';
+  const number = Number.isSafeInteger(visitorNumber) && visitorNumber > 0 ? visitorNumber : null;
+  const count = Number.isSafeInteger(visitCount) && visitCount > 0 ? visitCount : null;
+  const dailyVisits = Number.isSafeInteger(visits_today) ? visits_today : null;
+  const dailyVisitors = Number.isSafeInteger(visitors_today) ? visitors_today : null;
+  const instagram = Number.isSafeInteger(instagram_today) ? instagram_today : null;
+  return `${count === 1 ? '👋 Новый посетитель' : '🔁 Повторный визит'}${number ? ` №${number}` : ''}\n` +
+    (count ? `Это ${count}-й визит с этого браузера\n` : '') +
+    `📍 Источник: ${safeSource}\n` +
+    `📄 Первая страница: ${safePage}\n` +
+    (dailyVisits !== null && dailyVisitors !== null
+      ? `📊 Сегодня: ${dailyVisits} визитов · ${dailyVisitors} браузеров\n` : '') +
+    (instagram !== null ? `📸 Из Instagram сегодня: ${instagram}\n` : '') +
+    'Счёт по браузерам, посетившим сайт с согласием на аналитику';
 }
 
 export const sendTelegramVisitAlert = (visit, fetcher = fetch, env = process.env) =>

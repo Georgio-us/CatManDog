@@ -23,7 +23,7 @@ import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
 import { productHref, seoProductForPath } from './seo-products.js?v=yagu-toys-20261116';
 import { seoPickForPath } from './seo-picks.js';
 import { analyticsItem, announceCommerce } from './analytics-events.js?v=delivery-status-3';
-import { installAnalytics } from './analytics-consent.js?v=picks-seo-20261112';
+import { installAnalytics } from './analytics-consent.js?v=visit-stats-20261117';
 import { createCartActivity } from './cart-activity.js?v=cart-reliability-20261112';
 import { matchesCatalogSearch, catalogSuggestions } from './catalog-search.js';
 import { rememberProductOrigin, productOrigin, requestProductReturn,

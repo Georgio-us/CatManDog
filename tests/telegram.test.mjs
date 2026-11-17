@@ -48,16 +48,18 @@ test('test payments stay clearly separate and customer text cannot forge notific
   assert.match(text, /Согласованная доставка: 2026-11-18, 17:00/);
 });
 
-test('visit alert distinguishes verified owner without leaking private URLs', async () => {
-  const text = visitAlertText({ page: '/#/product/leonardo-adult', source: 'search',
-    owner: true, cartId: '641c5edb-152a-4788-9053-e880270a023e' });
-  assert.match(text, /вход подтверждён/);
+test('visit alert shows new and repeat browser counts without leaking private URLs', async () => {
+  const text = visitAlertText({ page: '/#/product/leonardo-adult', source: 'instagram',
+    visitorNumber: 12, visitCount: 1, visits_today: 8, visitors_today: 6,
+    instagram_today: 4 });
+  assert.match(text, /👋 Новый посетитель №12/);
   assert.match(text, /leonardo-adult/);
-  assert.match(text, /поиск/);
-  assert.match(text, /ID корзины, если появится: 641c5edb/);
+  assert.match(text, /Источник: Instagram/);
+  assert.match(text, /Сегодня: 8 визитов · 6 браузеров/);
+  assert.match(text, /Из Instagram сегодня: 4/);
   const unknown = visitAlertText({ page: '/#/account?email=private@example.com',
-    source: 'https://private.example.com', owner: false });
-  assert.match(unknown, /вход не подтверждён/);
+    source: 'https://private.example.com', visitorNumber: 12, visitCount: 3 });
+  assert.match(unknown, /🔁 Повторный визит №12/);
   assert.doesNotMatch(unknown, /private@example.com|private.example.com/);
   assert.match(visitAlertText({ source: 'constructor' }), /Источник: неизвестен/);
   const cookie = staffVisitCookie('a'.repeat(64), true);
@@ -66,7 +68,7 @@ test('visit alert distinguishes verified owner without leaking private URLs', as
   assert.equal((await currentVisitStaff(db, { headers: { cookie: `cmd_staff_visit=${'a'.repeat(64)}` } })).role, 'owner');
 });
 
-test('visit endpoint verifies the owner server-side before sending Telegram', async () => {
+test('visit endpoint counts consented browsers and excludes a verified owner', async () => {
   const keys = ['TELEGRAM_BOT_TOKEN', 'TELEGRAM_CHAT_ID', 'TELEGRAM_VISIT_ALERTS_ENABLED'];
   const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]));
   const originalFetch = globalThis.fetch;
@@ -79,25 +81,36 @@ test('visit endpoint verifies the owner server-side before sending Telegram', as
       sent.push(JSON.parse(options.body).text);
       return { ok: true, json: async () => ({ ok: true }) };
     };
+    const client = { async query(sql) {
+      if (sql.includes('FROM site_visit_events WHERE visit_id')) return { rows: [] };
+      if (sql.includes('INSERT INTO site_visitors'))
+        return { rows: [{ visitor_number: '7', visit_count: 1 }] };
+      if (sql.includes('AS visits_today'))
+        return { rows: [{ visits_today: 3, visitors_today: 2, instagram_today: 2 }] };
+      return { rows: [] };
+    }, release() {} };
     const db = { async query(sql) {
       if (sql.includes('FROM staff_sessions')) return { rows: [{ role: 'owner' }] };
       throw new Error(`Unexpected SQL: ${sql}`);
-    } };
+    }, async connect() { return client; } };
     const run = async (cookie, ip) => {
       const req = { method: 'POST', headers: { host: 'catmandog.es', origin: 'https://catmandog.es', cookie },
         socket: { remoteAddress: ip },
         async *[Symbol.asyncIterator]() { yield JSON.stringify({ page: '/#/product/leonardo-adult',
-          source: 'search', owner: true }); } };
+          source: 'social', platform: 'instagram', owner: true,
+          cartId: '641c5edb-152a-4788-9053-e880270a023e',
+          visitId: '241c5edb-152a-4788-9053-e880270a023e' }); } };
       let status, body;
       const res = { writeHead(value) { status = value; }, end(value) { body = JSON.parse(value); } };
       await handleApi(db, req, res, '/api/telemetry/visit');
       assert.equal(status, 200);
-      assert.equal(body.accepted, true);
+      return body;
     };
-    await run('', 'test-visit-unknown');
-    await run(`cmd_staff_visit=${'a'.repeat(64)}`, 'test-visit-owner');
-    assert.match(sent[0], /вход не подтверждён/);
-    assert.match(sent[1], /вход подтверждён/);
+    assert.equal((await run('', 'test-visit-unknown')).accepted, true);
+    assert.equal((await run(`cmd_staff_visit=${'a'.repeat(64)}`, 'test-visit-owner')).owner, true);
+    assert.equal(sent.length, 1);
+    assert.match(sent[0], /Новый посетитель №7/);
+    assert.match(sent[0], /Источник: Instagram/);
   } finally {
     globalThis.fetch = originalFetch;
     for (const key of keys) {

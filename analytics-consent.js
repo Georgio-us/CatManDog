@@ -3,6 +3,7 @@ const MEASUREMENT_ID = 'G-CTTBQ7PJP9';
 const COMMERCE_EVENTS = new Set(['view_item_list', 'select_item', 'view_item', 'add_to_cart', 'remove_from_cart',
   'view_cart', 'begin_checkout', 'add_shipping_info', 'add_payment_info', 'purchase']);
 const VISIT_ALERT_KEY = 'catmandog-visit-alerted';
+const VISIT_SESSION_KEY = 'catmandog-visit-session-v1';
 const CART_ID_KEY = 'catmandog-observed-cart-v1';
 const validCartId = value => /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i.test(value || '');
 
@@ -35,6 +36,26 @@ export function visitSource(referrer, origin) {
     if (/(^|\.)(?:instagram\.com|facebook\.com|fb\.com|tiktok\.com|pinterest\.com|youtube\.com|x\.com)$/.test(host)) return 'social';
     return 'other';
   } catch { return 'direct'; }
+}
+
+export function visitPlatform(search, referrer) {
+  const platform = value => {
+    const name = String(value || '').toLowerCase();
+    if (['instagram', 'ig', 'l.instagram.com'].includes(name)) return 'instagram';
+    if (['facebook', 'fb', 'm.facebook.com'].includes(name)) return 'facebook';
+    if (['tiktok', 'youtube', 'pinterest'].includes(name)) return name;
+    return null;
+  };
+  try {
+    const tagged = platform(new URLSearchParams(search).get('utm_source'));
+    if (tagged) return tagged;
+    const host = new URL(referrer).hostname.toLowerCase();
+    if (/(^|\.)instagram\.com$/.test(host)) return 'instagram';
+    if (/(^|\.)(facebook\.com|fb\.com)$/.test(host)) return 'facebook';
+    for (const name of ['tiktok', 'youtube', 'pinterest'])
+      if (host === `${name}.com` || host.endsWith(`.${name}.com`)) return name;
+  } catch { /* Referrer can be empty or unavailable */ }
+  return null;
 }
 
 export function consentCopy(language) {
@@ -76,7 +97,10 @@ export function installAnalytics(language) {
   let visitAlerted = false;
   // Keep the entry context before the visitor browses to another route or accepts analytics.
   const entryPage = publicPageLocation(window.location);
-  const entrySource = visitSource(document.referrer, window.location.origin);
+  const entryCampaign = window.location.search ||
+    (window.location.hash.includes('?') ? `?${window.location.hash.split('?').slice(1).join('?')}` : '');
+  const entryPlatform = visitPlatform(entryCampaign, document.referrer);
+  const entrySource = entryPlatform ? 'social' : visitSource(document.referrer, window.location.origin);
 
   function enable() {
     if (enabled) return;
@@ -107,6 +131,17 @@ export function installAnalytics(language) {
     } catch { return null; }
   }
 
+  function visitSessionId() {
+    try {
+      let id = sessionStorage.getItem(VISIT_SESSION_KEY);
+      if (!validCartId(id)) {
+        id = crypto.randomUUID();
+        sessionStorage.setItem(VISIT_SESSION_KEY, id);
+      }
+      return id;
+    } catch { return crypto.randomUUID(); }
+  }
+
   function pageView() {
     if (!enabled) return;
     const page = publicPageLocation(window.location);
@@ -122,7 +157,8 @@ export function installAnalytics(language) {
         catch { /* Session storage may be unavailable */ }
         const publicUrl = new URL(entryPage || page);
         const visit = { page: `${publicUrl.pathname}${publicUrl.hash}`,
-          source: entrySource, cartId: anonymousCartId() };
+          source: entrySource, platform: entryPlatform,
+          cartId: anonymousCartId(), visitId: visitSessionId() };
         void window.fetch('/api/telemetry/visit', { method: 'POST', credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(visit) }).catch(() => {});
       }
@@ -142,10 +178,16 @@ export function installAnalytics(language) {
       window.dispatchEvent(new CustomEvent('catmandog:analytics-consent', { detail: { accepted: true } }));
   });
   panel.querySelector('[data-analytics-reject]').addEventListener('click', () => {
+    let previousId = null;
+    try { previousId = localStorage.getItem(CART_ID_KEY); } catch {}
     choice = 'rejected';
     try { localStorage.setItem(CONSENT_KEY, choice); } catch { /* No persistent storage */ }
     panel.hidden = true;
     const pending = [];
+    if (validCartId(previousId)) pending.push(window.fetch('/api/telemetry/visit', {
+      method: 'DELETE', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ cartId: previousId }) }).catch(() => {}));
     if (typeof window.dispatchEvent === 'function' && typeof CustomEvent === 'function')
       window.dispatchEvent(new CustomEvent('catmandog:analytics-consent', {
         detail: { accepted: false, waitUntil: promise => pending.push(promise) }

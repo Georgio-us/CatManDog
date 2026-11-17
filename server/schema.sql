@@ -595,6 +595,21 @@ CREATE TABLE IF NOT EXISTS observed_carts (
 );
 CREATE INDEX IF NOT EXISTS observed_carts_updated_idx ON observed_carts(updated_at DESC);
 
+CREATE TABLE IF NOT EXISTS site_visitors (
+  visitor_number bigint GENERATED ALWAYS AS IDENTITY UNIQUE,
+  cart_id uuid PRIMARY KEY,
+  visit_count integer NOT NULL DEFAULT 1,
+  first_seen_at timestamptz NOT NULL DEFAULT now(),
+  last_seen_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS site_visit_events (
+  visit_id uuid PRIMARY KEY,
+  cart_id uuid NOT NULL REFERENCES site_visitors(cart_id) ON DELETE CASCADE,
+  source text NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS site_visit_events_created_idx ON site_visit_events(created_at DESC);
+
 CREATE TABLE IF NOT EXISTS observed_cart_events (
   id uuid PRIMARY KEY,
   cart_id uuid NOT NULL REFERENCES observed_carts(id) ON DELETE CASCADE,
