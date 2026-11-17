@@ -36,19 +36,17 @@ function valenciaTime(date) {
 
 export const DELIVERY_WINDOWS = [
   { id:'10-14', label:'10:00-14:00', start:10 },
-  { id:'14-18', label:'14:00-18:00', start:14 },
-  { id:'18-22', label:'18:00-22:00', start:18 }
+  { id:'14-20', label:'14:00-20:00', start:14 }
 ];
 
 export function availableDeliverySlots(now = new Date(), days = 7) {
   const local = valenciaTime(now);
-  const hour = Number(local.time.slice(0,2));
-  const minute = Number(local.time.slice(3));
   const base = new Date(`${local.date}T12:00:00Z`);
-  return Array.from({ length: days }, (_, offset) => {
+  return Array.from({ length: days }, (_, index) => {
+    const offset = index + 1;
     const date = new Date(base.getTime() + offset * 86400000).toISOString().slice(0,10);
-    return DELIVERY_WINDOWS.filter(window => offset > 0 || hour * 60 + minute < window.start * 60)
-      .map(window => ({ date, window: window.id, label: window.label, day: offset }));
+    return DELIVERY_WINDOWS.map(window => ({ date, window: window.id, label: window.label,
+      day: offset }));
   }).flat();
 }
 
@@ -80,10 +78,10 @@ export function validateCheckout(values, now = new Date()) {
       ? null : 'Выберите доступный интервал доставки';
   }
   const timing = deliveryTiming(now);
-  if (field('deliveryMode') === 'soon' && !timing.todayAvailable) return 'Сегодня уже нет доступного времени - выберите другую дату';
+  if (field('deliveryMode') === 'soon') return 'Для доставки сегодня выберите «Нужно срочно»';
   if (field('deliveryMode') === 'scheduled') {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(field('deliveryDate')) || !/^\d{2}:\d{2}$/.test(field('deliveryTime'))) return 'Укажите желаемые дату и время';
-    if (`${field('deliveryDate')}T${field('deliveryTime')}` < `${timing.date}T${timing.time}`) return 'Выберите время не раньше доступного ориентира';
-  } else if (field('deliveryMode') !== 'soon') return 'Выберите время доставки';
+    if (field('deliveryDate') <= timing.today) return 'Для обычной доставки выберите день не раньше завтрашнего';
+  } else return 'Выберите время доставки';
   return null;
 }

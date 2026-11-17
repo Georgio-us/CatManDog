@@ -19,20 +19,21 @@ test('Valencia delivery timing has a two-hour lead and crosses midnight', () => 
   assert.deepEqual(late, { today: '2026-10-19', date: '2026-10-20', time: '02:00', todayAvailable: false });
 });
 
-test('delivery windows advance with Valencia time and reject expired choices', () => {
+test('ordinary delivery begins tomorrow in Valencia with two requested windows', () => {
   const morning = new Date('2026-11-06T07:00:00Z');
   const afterFirst = new Date('2026-11-06T09:00:00Z');
   const afterLast = new Date('2026-11-06T18:00:00Z');
-  assert.deepEqual(availableDeliverySlots(morning, 1).map(slot => slot.window),
-    ['10-14', '14-18', '18-22']);
-  assert.deepEqual(availableDeliverySlots(afterFirst, 1).map(slot => slot.window),
-    ['14-18', '18-22']);
-  assert.deepEqual(availableDeliverySlots(afterLast, 1), []);
+  for (const now of [morning, afterFirst, afterLast]) {
+    const slots = availableDeliverySlots(now, 1);
+    assert.deepEqual(slots.map(slot => slot.window), ['10-14', '14-20']);
+    assert.equal(slots[0].date, '2026-11-07');
+    assert.equal(slots[0].day, 1);
+  }
   const values = { name:'Антон',email:'anton@example.com',phone:'+34 600 000 000',
     city:'València',postcode:'46001',street:'Carrer de la Pau',building:'12',
     deliveryMode:'slot',deliverySlot:'2026-11-06|10-14' };
-  assert.equal(validateCheckout(values, morning), null);
-  assert.match(validateCheckout(values, afterFirst), /доступный интервал/);
+  assert.match(validateCheckout(values, morning), /доступный интервал/);
+  assert.equal(validateCheckout({ ...values, deliverySlot: '2026-11-07|10-14' }, afterFirst), null);
   assert.equal(validateCheckout({ ...values, deliveryMode:'preorder' }, afterLast), null);
 });
 
@@ -40,12 +41,12 @@ test('checkout requires a complete city address and a future requested time', ()
   const now = new Date('2026-10-19T13:00:00Z');
   const valid = { name: 'Антон', email: 'anton@example.com', phone: '+34 600 000 000',
     city: 'València', postcode: '46001', street: 'Carrer de la Pau', building: '12', deliveryMode: 'soon' };
-  assert.equal(validateCheckout(valid, now), null);
+  assert.match(validateCheckout(valid, now), /Нужно срочно/);
   assert.match(validateCheckout({ ...valid, postcode: '4600' }, now), /пять|пяти/);
   assert.match(validateCheckout({ ...valid, city: '' }, now), /город/);
   assert.match(validateCheckout({ ...valid, postcode: '28001' }, now), /индекс.*Валенсия/);
-  assert.match(validateCheckout({ ...valid, deliveryMode: 'scheduled', deliveryDate: '2026-10-19', deliveryTime: '16:00' }, now), /не раньше/);
-  assert.equal(validateCheckout({ ...valid, deliveryMode: 'scheduled', deliveryDate: '2026-10-19', deliveryTime: '18:00' }, now), null);
+  assert.match(validateCheckout({ ...valid, deliveryMode: 'scheduled', deliveryDate: '2026-10-19', deliveryTime: '18:00' }, now), /завтрашнего/);
+  assert.equal(validateCheckout({ ...valid, deliveryMode: 'scheduled', deliveryDate: '2026-10-20', deliveryTime: '18:00' }, now), null);
 });
 
 test('Valencia cart reaches delivery review without creating an order while payments are closed', () => {
@@ -125,7 +126,9 @@ test('local checkout keeps a later delivery day selectable without showing every
     const html = ui.page();
     assert.match(html, new RegExp(`value="${later.date}" selected`));
     assert.match(html, new RegExp(`name="deliverySlot" value="${later.date}\\|10-14"`));
-    assert.equal((html.match(/name="deliverySlot"/g) || []).length, 3);
+    assert.equal((html.match(/name="deliverySlot"/g) || []).length, 2);
+    assert.match(html, /Xirivella/);
+    assert.match(html, /mailto:support@catmandog\.es\?subject=Local%20delivery%20address/);
     assert.equal(validateCheckout({ name: 'Ana', email: 'ana@example.es', phone: '+34600000000',
       city: 'València', postcode: '46001', street: 'Carrer de la Pau', building: '1',
       deliveryMode: 'slot', deliverySlot: `${later.date}|10-14` }), null);
@@ -221,7 +224,7 @@ test('supplier items use the same preferred delivery flow as the rest of the bas
     applyPromo: () => {}, render: () => {} });
   const html = ui.page();
   assert.match(html, /Желаемое время доставки/);
-  assert.match(html, /После оплаты мы свяжемся с вами и уточним время/);
+  assert.match(html, /после оплаты мы подтвердим возможность доставки/);
   assert.match(html, /Нужно срочно/);
   assert.doesNotMatch(html, /24-48 часов|Срок согласуем отдельно/);
 });

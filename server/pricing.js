@@ -23,7 +23,7 @@ export function validateAddress(address, deliveryMode = 'slot') {
   return null;
 }
 
-export function validateDelivery(delivery, now = new Date()) {
+export function validateDelivery(delivery, now = new Date(), allowSameDay = false) {
   if (!delivery || typeof delivery !== 'object') return 'Укажите время доставки';
   if (delivery.mode === 'national') return null;
   if (delivery.mode === 'preorder') return null;
@@ -31,7 +31,7 @@ export function validateDelivery(delivery, now = new Date()) {
     option.date === delivery.date && option.window === delivery.window)
     ? null : 'Выберите доступный интервал доставки';
   const earliest = deliveryTiming(now);
-  if (delivery.mode === 'soon') return earliest.todayAvailable ? null : 'Сегодня уже нет доступного времени';
+  if (delivery.mode === 'soon') return 'Для доставки сегодня отправьте срочный запрос';
   if (delivery.mode !== 'scheduled') return 'Выберите способ доставки';
   if (!/^\d{4}-\d{2}-\d{2}$/.test(String(delivery.date || '')) ||
       !/^\d{2}:\d{2}$/.test(String(delivery.time || ''))) return 'Укажите дату и время';
@@ -40,6 +40,8 @@ export function validateDelivery(delivery, now = new Date()) {
   const check = new Date(Date.UTC(year, month - 1, day));
   if (check.getUTCFullYear() !== year || check.getUTCMonth() + 1 !== month ||
       check.getUTCDate() !== day || hour > 23 || minute > 59) return 'Некорректные дата или время';
+  if (!allowSameDay && delivery.date <= earliest.today)
+    return 'Для обычной доставки выберите день не раньше завтрашнего';
   if (`${delivery.date}T${delivery.time}` < `${earliest.date}T${earliest.time}`) return 'Выберите время позже доступного ориентира';
   return null;
 }

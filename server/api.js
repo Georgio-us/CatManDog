@@ -194,7 +194,7 @@ async function createOrder(db, payload, customer, manual = null) {
   const addressError = validateAddress(address, payload.delivery?.mode);
   if (addressError) bad(addressError);
   const delivery = payload.delivery;
-  const deliveryError = validateDelivery(delivery);
+  const deliveryError = validateDelivery(delivery, new Date(), Boolean(manual));
   if (deliveryError) bad(deliveryError);
   const verifiedAddress = await verifyDeliveryAddress(address,
     delivery.mode === 'national' ? 'national' : 'local');

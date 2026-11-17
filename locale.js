@@ -1,8 +1,8 @@
-import { es, esPatterns } from './locales/es.js?v=mobile-cards-20261115';
+import { es, esPatterns } from './locales/es.js?v=local-zone-20261117';
 import { esProductText } from './locales/product-es.js?v=product-content-20261110';
 import { esDetails } from './locales/details-es.js?v=product-content-20261110';
 import { uk, ukPatterns } from './locales/uk.js?v=live-orders-20261112';
-import { ukExtra } from './locales/uk-extra.js?v=mobile-cards-20261115';
+import { ukExtra } from './locales/uk-extra.js?v=local-zone-20261117';
 import { ukProductNames } from './locales/uk-product-names.js?v=yagu-toys-20261116';
 import { ukProductCopy } from './locales/uk-product-copy.js?v=product-content-20261110';
 import { ukDetails } from './locales/uk-details.js?v=product-content-20261110';
@@ -10,14 +10,14 @@ import { churuFormatsEs, churuFormatsUk } from './locales/churu-formats.js';
 import { churuDogEs, churuDogUk } from './locales/churu-dog.js';
 import { seoCategoryForPath } from './seo-categories.js';
 import { seoPickForPath } from './seo-picks.js';
-import { deliveryStatusEs, deliveryStatusUk } from './locales/delivery-status.js?v=address-check-20261112';
+import { deliveryStatusEs, deliveryStatusUk } from './locales/delivery-status.js?v=local-zone-20261117';
 import { yaguExpansionEs, yaguExpansionUk } from './locales/yagu-expansion.js?v=dog-activity-20261116';
 import { yaguToyExpansionEs, yaguToyExpansionUk } from './locales/yagu-toy-expansion.js';
 import { yaguBasketEs, yaguBasketUk } from './locales/yagu-basket.js?v=20261113';
 import { yaguChewTestEs, yaguChewTestUk } from './locales/yagu-chew-test.js?v=20261113';
 import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=editorial-leonardo-20261111';
 import { shellTranslations } from './shell-translations.js';
-import { checkoutLaunchEs, checkoutLaunchUk } from './locales/checkout-launch.js';
+import { checkoutLaunchEs, checkoutLaunchUk } from './locales/checkout-launch.js?v=local-zone-20261117';
 import { recurringEs, recurringUk, recurringPatternsEs, recurringPatternsUk } from './locales/recurring.js';
 
 const storageKey = 'catmandog-language';

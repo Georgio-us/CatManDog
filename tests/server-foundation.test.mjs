@@ -211,8 +211,10 @@ test('basic address fields and desired delivery time are checked before geocodin
   assert.equal(validateDelivery({ mode:'scheduled', date:'2026-10-20', time:'18:00' }, future), null);
   assert.ok(validateDelivery({ mode:'scheduled', date:'2026-10-20', time:'99:00' }, future));
   assert.equal(priceQuote([{ ...lines[0], qty:1 }], [variant]).addressVerification, 'manual_required');
-  assert.equal(validateDelivery({ mode:'slot', date:'2026-10-20', window:'14-18' }, future), null);
+  assert.equal(validateDelivery({ mode:'slot', date:'2026-10-20', window:'14-20' }, future), null);
   assert.ok(validateDelivery({ mode:'slot', date:'2026-10-19', window:'10-14' }, future));
+  assert.ok(validateDelivery({ mode:'soon' }, future));
+  assert.ok(validateDelivery({ mode:'scheduled', date:'2026-10-19', time:'18:00' }, future));
   assert.equal(validateDelivery({ mode:'preorder' }, future), null);
 });
 

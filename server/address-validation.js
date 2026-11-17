@@ -1,10 +1,11 @@
 import { isMainlandPostcode } from '../shipping-policy.js';
+import { readFileSync } from 'node:fs';
 
 // CartoCiudad is the Spanish public address register (CC BY 4.0).
 // Check the complete address: a postcode prefix alone cannot establish the delivery zone.
 const GEOCODER_URL = 'https://www.cartociudad.es/geocoder/api/geocoder/candidates';
-const VALENCIA_ORIGIN = { lat: 39.45282181, lng: -0.33749143 };
-const LOCAL_RADIUS_KM = 20;
+const urbanDistricts = JSON.parse(readFileSync(new URL('./local-delivery-districts.json', import.meta.url),
+  'utf8')).features;
 const cache = new Map();
 
 const normalized = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
@@ -14,13 +15,33 @@ const streetName = value => normalized(value).split(' ').filter(word =>
     'paseo', 'de', 'del', 'la', 'las', 'el', 'els', 'les', 'los', 'l', 'd'].includes(word)).join(' ');
 const error = message => Object.assign(new Error(message), { status: 400 });
 
-function distanceKm(a, b) {
-  const radians = degrees => degrees * Math.PI / 180;
-  const lat = radians(b.lat - a.lat);
-  const lng = radians(b.lng - a.lng);
-  const arc = Math.sin(lat / 2) ** 2 + Math.cos(radians(a.lat)) *
-    Math.cos(radians(b.lat)) * Math.sin(lng / 2) ** 2;
-  return 6371 * 2 * Math.atan2(Math.sqrt(arc), Math.sqrt(1 - arc));
+function pointInRing(point, ring) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const a = ring[j];
+    const b = ring[i];
+    const cross = (point[0] - a[0]) * (b[1] - a[1]) - (point[1] - a[1]) * (b[0] - a[0]);
+    if (Math.abs(cross) < 1e-12 && point[0] >= Math.min(a[0], b[0]) &&
+        point[0] <= Math.max(a[0], b[0]) && point[1] >= Math.min(a[1], b[1]) &&
+        point[1] <= Math.max(a[1], b[1])) return true;
+    if ((a[1] > point[1]) !== (b[1] > point[1]) &&
+        point[0] < (b[0] - a[0]) * (point[1] - a[1]) / (b[1] - a[1]) + a[0]) inside = !inside;
+  }
+  return inside;
+}
+
+function inUrbanDistrict(point) {
+  return urbanDistricts.some(({ geometry }) => geometry.type === 'Polygon' &&
+    pointInRing(point, geometry.coordinates[0]) &&
+    !geometry.coordinates.slice(1).some(hole => pointInRing(point, hole)));
+}
+
+function localDeliveryZone(candidate) {
+  if (candidate.provinceCode !== '46') return false;
+  // Xirivella is included as a nearby service area even though it is another municipality.
+  if (String(candidate.muniCode) === '46110' ||
+      ['xirivella', 'chirivella'].includes(normalized(candidate.muni))) return true;
+  return inUrbanDistrict([Number(candidate.lng), Number(candidate.lat)]);
 }
 
 export async function verifyDeliveryAddress(address, mode, fetchImpl = fetch) {
@@ -62,12 +83,11 @@ export async function verifyDeliveryAddress(address, mode, fetchImpl = fetch) {
       [candidate.muni, candidate.poblacion].some(place => normalized(place) === normalized(city));
   });
   if (!matched) throw error('Улица, дом, город и почтовый индекс не совпали. Проверьте адрес');
-  if (mode === 'local' && (matched.provinceCode !== '46' ||
-      distanceKm(VALENCIA_ORIGIN, { lat: Number(matched.lat), lng: Number(matched.lng) }) > LOCAL_RADIUS_KM))
-    throw error('Адрес вне зоны местной доставки. Выберите доставку по Испании');
+  const local = localDeliveryZone(matched);
+  if (mode === 'local' && !local)
+    throw error('Адрес вне зоны местной доставки. Выберите доставку по Испании или напишите нам для проверки адреса');
 
-  const value = { city: matched.muni || city, postcode, local: matched.provinceCode === '46' &&
-    distanceKm(VALENCIA_ORIGIN, { lat: Number(matched.lat), lng: Number(matched.lng) }) <= LOCAL_RADIUS_KM };
+  const value = { city: matched.muni || city, postcode, local };
   if (cache.size > 500) cache.clear();
   cache.set(key, { value, expires: Date.now() + 24 * 60 * 60 * 1000 });
   return value;
