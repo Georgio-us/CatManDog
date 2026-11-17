@@ -8,6 +8,10 @@ import { storefrontPrice } from './variants.js?v=sale-price-policy-20261109';
 import { recurringProductCard } from './recurring-product-ui.js?v=recurring-cards-20261117';
 const store = createAccountStore(localStorage);
 const api = createAccountApi();
+const announceAccountAnalytics = (event, method) => {
+  if (typeof window !== 'undefined' && typeof CustomEvent === 'function')
+    window.dispatchEvent(new CustomEvent('catmandog:account-analytics', { detail: { event, method } }));
+};
 
 const preferenceOptions = ['Сухой корм', 'Влажный корм', 'Без зерна', 'Стерилизован', 'Чувствительное пищеварение', 'Игрушки с кошачьей мятой'];
 const sections = [['', 'Мой кабинет', 'paw'], ['orders', 'Мои заказы', 'bag'], ['recurring', 'Регулярные заказы', 'refresh'], ['promos', 'Промокоды', 'gift'], ['supplies', 'Мои запасы', 'calendar'], ['care', 'Мои инструменты', 'map'], ['profile', 'Мой профиль', 'cat'], ['human', 'Мой человек', 'heart']];
@@ -158,6 +162,7 @@ export function createAccountUI(helpers) {
       } else if (mode === 'signin') {
         const hasCoupon = !!pendingPromoCode();
         await api.googleSignIn(response.credential);
+        announceAccountAnalytics('login', 'google');
         await refreshCustomer();
         await loadRemote();
         navigate(afterSignIn(hasCoupon));
@@ -258,6 +263,7 @@ export function createAccountUI(helpers) {
     render();
     try {
       const verified = await api.verify(token);
+      announceAccountAnalytics('sign_up', 'email');
       if (verified.promoCodeProcessed && !verified.promoError) localStorage.removeItem(pendingPromoKey);
       await refreshCustomer();
       await loadRemote();
@@ -563,6 +569,7 @@ export function createAccountUI(helpers) {
               { promoCode: pendingPromoCode(), returnTo: petCardIntent() ? 'pet' : checkoutIntent() ? 'checkout' : cartIntent() ? 'cart' : ordersIntent() ? 'orders' : '' } : {}) });
           if (kind === 'register') { pendingEmail = result.email; pendingLinkKind = 'verify'; navigate('/account/check-email' + authReturn()); }
           else {
+            announceAccountAnalytics('login', 'email');
             const hasCoupon = !!pendingPromoCode();
             await refreshCustomer(); await loadRemote(); navigate(afterSignIn(hasCoupon));
           }

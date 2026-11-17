@@ -1,5 +1,5 @@
 import { createUsefulUI } from './useful.js?v=yagu-toys-20261116';
-import { createAccountUI } from './account.js?v=recurring-cards-20261117';
+import { createAccountUI } from './account.js?v=account-analytics-20261117';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
 import { accessoryDetail, customerDetails } from './accessory-ui.js?v=churu-cat-editorial-20261112';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=recurring-cards-20261117';
@@ -23,7 +23,7 @@ import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
 import { productHref, seoProductForPath } from './seo-products.js?v=yagu-toys-20261116';
 import { seoPickForPath } from './seo-picks.js';
 import { analyticsItem, announceCommerce } from './analytics-events.js?v=delivery-status-3';
-import { installAnalytics } from './analytics-consent.js?v=visit-stats-20261117';
+import { installAnalytics } from './analytics-consent.js?v=funnel-pages-20261117';
 import { createCartActivity } from './cart-activity.js?v=cart-reliability-20261112';
 import { matchesCatalogSearch, catalogSuggestions } from './catalog-search.js';
 import { rememberProductOrigin, productOrigin, requestProductReturn,

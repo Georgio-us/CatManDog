@@ -11,7 +11,7 @@ export function publicPageLocation(location) {
   const path = location.pathname;
   if (location.hash) {
     const route = location.hash.slice(1).split('?')[0];
-    if (/^\/(?:catalog|journal(?:\/[a-z0-9-]+)?|product\/[a-z0-9-]+|picks\/(?:cat|dog))$/i.test(route)) {
+    if (/^\/(?:catalog|journal(?:\/[a-z0-9-]+)?|product\/[a-z0-9-]+|picks\/(?:cat|dog)|cart|checkout|account\/(?:login|register))$/i.test(route)) {
       return `${location.origin}/#${route}`;
     }
     if (route === '/') return `${location.origin}/`;
@@ -223,6 +223,11 @@ export function installAnalytics(language) {
           ...(Number.isFinite(detail.ecommerce.shipping) ? { shipping: detail.ecommerce.shipping } : {}) }
         : {})
     });
+  });
+  window.addEventListener('catmandog:account-analytics', ({ detail }) => {
+    if (!enabled || !['sign_up', 'login'].includes(detail?.event)) return;
+    if (!['email', 'google'].includes(detail?.method)) return;
+    window.gtag('event', detail.event, { method: detail.method });
   });
   return { pageView };
 }

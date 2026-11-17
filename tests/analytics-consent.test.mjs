@@ -7,6 +7,9 @@ test('analytics page locations omit searches and private routes', () => {
   const location = { origin: 'https://catmandog.es', pathname: '/catalogo/gatos/pienso-seco', hash: '', search: '?q=private' };
   assert.equal(publicPageLocation(location), 'https://catmandog.es/catalogo/gatos/pienso-seco');
   assert.equal(publicPageLocation({ ...location, pathname: '/', hash: '#/product/leonardo-1?ref=email' }), 'https://catmandog.es/#/product/leonardo-1');
+  assert.equal(publicPageLocation({ ...location, pathname: '/', hash: '#/cart' }), 'https://catmandog.es/#/cart');
+  assert.equal(publicPageLocation({ ...location, pathname: '/', hash: '#/checkout?promo=SECRET' }), 'https://catmandog.es/#/checkout');
+  assert.equal(publicPageLocation({ ...location, pathname: '/', hash: '#/account/register?return=checkout' }), 'https://catmandog.es/#/account/register');
   assert.equal(publicPageLocation({ ...location, pathname: '/', hash: '#/account?pet=Leo' }), null);
   assert.equal(publicPageLocation({ ...location, pathname: '/catalogo', hash: '#/account?pet=Leo' }), null);
   assert.equal(publicPageLocation({ ...location, pathname: '/', hash: '#/support?order=CMD-001' }), null);
@@ -62,6 +65,7 @@ test('Google tag and commerce events start only after acceptance; rejected visit
     analytics.pageView();
     assert.equal(visitRequests.length, 0);
     listeners['catmandog:commerce']({ detail: { event: 'add_to_cart', ecommerce: { items: [{ item_id: 'sku', email: 'private@example.com' }] } } });
+    listeners['catmandog:account-analytics']({ detail: { event: 'login', method: 'email' } });
     assert.equal(globalThis.window.dataLayer, undefined);
 
     reject.listeners.click();
@@ -88,6 +92,7 @@ test('Google tag and commerce events start only after acceptance; rejected visit
     assert.equal(visitRequests.length, 1);
     assert.match(scripts[0].src, /^https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-/);
     listeners['catmandog:commerce']({ detail: { event: 'add_to_cart', ecommerce: { items: [{ item_id: 'sku', email: 'private@example.com', price: 12 }] } } });
+    listeners['catmandog:account-analytics']({ detail: { event: 'sign_up', method: 'email', email: 'private@example.com' } });
     listeners['catmandog:commerce']({ detail: { event: 'purchase', ecommerce: {
       transaction_id: 'CMD-10001', value: 12, shipping: 3.99,
       items: [{ item_id: 'sku', item_name: 'Food', quantity: 1, price: 12, email: 'private@example.com' }] } } });
@@ -96,6 +101,7 @@ test('Google tag and commerce events start only after acceptance; rejected visit
     assert.equal(commands[0][2].analytics_storage, 'denied');
     assert.equal(commands.some(args => args[0] === 'event' && args[1] === 'page_view'), true);
     assert.equal(commands.some(args => args[0] === 'event' && args[1] === 'add_to_cart'), true);
+    assert.equal(commands.some(args => args[0] === 'event' && args[1] === 'sign_up' && args[2].method === 'email'), true);
     const purchase = commands.find(args => args[0] === 'event' && args[1] === 'purchase');
     assert.equal(purchase[2].transaction_id, 'CMD-10001');
     assert.equal(purchase[2].value, 12);
