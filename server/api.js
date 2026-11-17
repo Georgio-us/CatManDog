@@ -9,7 +9,8 @@ import { normalizedEmail, validEmail, hashPassword, verifyPassword, currentCusto
 import { loadCabinet, saveCabinet } from './cabinet.js';
 import { emailReady, sendAccountLink,
   notifyServiceRequest, sendServiceReply, sendOrderConfirmation } from './email.js';
-import { googleClientId, verifyGoogleCredential, googleOwnsEmail } from './google-auth.js';
+import { googleClientId, verifyGoogleCredential, googleOwnsEmail,
+  ownerGoogleEmailAlias } from './google-auth.js';
 import { currentStaff, currentVisitStaff, createStaffSession, staffCookie, clearStaffCookie,
   staffToken, staffVisitCookie, clearStaffVisitCookie,
   revokeStaffSession, bootstrapOwner } from './staff.js';
@@ -503,8 +504,13 @@ async function authRoute(db, req, res, path) {
     }
     let account = (await db.query('SELECT id,email,name FROM customers WHERE google_sub=$1',
       [identity.sub])).rows[0];
-    if (account && account.email !== identity.email)
-      bad('Email аккаунта Google изменился. Обратитесь в поддержку', 409);
+    if (account && account.email !== identity.email) {
+      const owner = (await db.query(`SELECT google_sub,email,role,active FROM staff_accounts
+        WHERE google_sub=$1 AND email=$2 AND role='owner' AND active=true`,
+      [identity.sub, account.email])).rows[0];
+      if (!ownerGoogleEmailAlias(identity, owner))
+        bad('Email аккаунта Google изменился. Обратитесь в поддержку', 409);
+    }
     if (!account) {
       const existing = (await db.query('SELECT id,email,name,google_sub,email_verified_at FROM customers WHERE email=$1', [identity.email])).rows[0];
       if (existing) {
@@ -617,11 +623,12 @@ async function adminRoute(db, req, res, path) {
     let identity;
     try { identity = await verifyGoogleCredential(body.credential); }
     catch { bad('Не удалось подтвердить Google', 401); }
-    const { rows } = await db.query(`SELECT id,email,name,role FROM staff_accounts
+    const { rows } = await db.query(`SELECT id,google_sub,email,name,role,active FROM staff_accounts
       WHERE google_sub=$1 AND active=true`, [identity.sub]);
     const account = rows[0];
     if (!account) bad('Доступ закрыт', 403);
-    if (account.email !== identity.email) bad('Email Google изменился. Обратитесь к владельцу', 403);
+    if (account.email !== identity.email && !ownerGoogleEmailAlias(identity, account))
+      bad('Email Google изменился. Обратитесь к владельцу', 403);
     await db.query('UPDATE staff_accounts SET last_login_at=now() WHERE id=$1', [account.id]);
     const token = await createStaffSession(db, account.id);
     return json(res, 200, { role: account.role, name: account.name, email: account.email },

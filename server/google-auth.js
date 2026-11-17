@@ -28,3 +28,11 @@ export function googleOwnsEmail(identity) {
   return identity.email.endsWith('@gmail.com') ||
     Boolean(identity.hostedDomain && identity.email.endsWith(`@${identity.hostedDomain}`));
 }
+
+// The owner's existing Google account now reports the shop address. Keep its
+// original account email for orders and allow this address only for the same sub.
+export function ownerGoogleEmailAlias(identity, owner) {
+  return identity?.email === 'info@catmandog.es' && owner?.role === 'owner' &&
+    owner.active === true && owner.google_sub === identity.sub &&
+    owner.email !== identity.email;
+}

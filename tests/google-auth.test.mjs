@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { googleClientId, verifyGoogleCredential, googleOwnsEmail } from '../server/google-auth.js';
+import { googleClientId, verifyGoogleCredential, googleOwnsEmail,
+  ownerGoogleEmailAlias } from '../server/google-auth.js';
 
 test('Google credential is checked against the configured audience and verified email', async () => {
   const previous = process.env.GOOGLE_CLIENT_ID;
@@ -30,4 +31,19 @@ test('automatic linking is limited to Google-hosted addresses', () => {
   assert.equal(googleOwnsEmail({ email: 'person@company.es', hostedDomain: 'company.es' }), true);
   assert.equal(googleOwnsEmail({ email: 'person@example.com', hostedDomain: '' }), false);
   assert.equal(googleOwnsEmail({ email: 'person@other.es', hostedDomain: 'company.es' }), false);
+});
+
+test('shop email alias preserves the existing Google owner identity', () => {
+  const owner = { google_sub: 'owner-google-id', email: 'owner@example.test',
+    role: 'owner', active: true };
+  assert.equal(ownerGoogleEmailAlias({ sub: owner.google_sub,
+    email: 'info@catmandog.es' }, owner), true);
+  assert.equal(ownerGoogleEmailAlias({ sub: 'other-google-id',
+    email: 'info@catmandog.es' }, owner), false);
+  assert.equal(ownerGoogleEmailAlias({ sub: owner.google_sub,
+    email: 'other@catmandog.es' }, owner), false);
+  assert.equal(ownerGoogleEmailAlias({ sub: owner.google_sub,
+    email: 'info@catmandog.es' }, { ...owner, role: 'support' }), false);
+  assert.equal(ownerGoogleEmailAlias({ sub: owner.google_sub,
+    email: 'info@catmandog.es' }, { ...owner, active: false }), false);
 });
