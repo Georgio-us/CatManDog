@@ -17,7 +17,7 @@ import { yaguBasketEs, yaguBasketUk } from './locales/yagu-basket.js?v=20261113'
 import { yaguChewTestEs, yaguChewTestUk } from './locales/yagu-chew-test.js?v=20261113';
 import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=editorial-leonardo-20261111';
 import { shellTranslations } from './shell-translations.js';
-import { checkoutLaunchEs, checkoutLaunchUk } from './locales/checkout-launch.js?v=delivery-24-48-20261117';
+import { checkoutLaunchEs, checkoutLaunchUk } from './locales/checkout-launch.js?v=checkout-ux2-20261117';
 import { recurringEs, recurringUk, recurringPatternsEs, recurringPatternsUk } from './locales/recurring.js';
 
 const storageKey = 'catmandog-language';
