@@ -1,3 +1,5 @@
+import { INTERNAL_BROWSER_KEY, isInternalBrowser } from './analytics-audience.js';
+
 const CONSENT_KEY = 'catmandog-analytics-consent-v1';
 const MEASUREMENT_ID = 'G-CTTBQ7PJP9';
 const COMMERCE_EVENTS = new Set(['view_item_list', 'select_item', 'view_item', 'add_to_cart', 'remove_from_cart',
@@ -81,6 +83,14 @@ export function installAnalytics(language) {
   const panel = document.querySelector('#analytics-consent');
   const settings = document.querySelector('#analytics-settings');
   if (!panel || !settings) return { pageView() {} };
+  if (isInternalBrowser()) {
+    panel.hidden = true;
+    settings.hidden = true;
+    return { pageView() {} };
+  }
+  window.addEventListener('storage', event => {
+    if (event.key === INTERNAL_BROWSER_KEY && event.newValue === '1') window.location.reload();
+  });
   const copy = consentCopy(language);
   panel.querySelector('h2').textContent = copy.title;
   panel.querySelector('p').textContent = copy.description;

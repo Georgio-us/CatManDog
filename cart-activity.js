@@ -1,3 +1,5 @@
+import { isInternalBrowser } from './analytics-audience.js';
+
 const ID_KEY = 'catmandog-observed-cart-v1';
 const CONSENT_KEY = 'catmandog-analytics-consent-v1';
 const validId = value => /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i.test(value || '');
@@ -11,10 +13,11 @@ export function createCartActivity(getItems, getStage = () => 'cart') {
   let retryTimer = null;
   let retryCount = 0;
 
-  const consented = () => {
+  const hasConsent = () => {
     try { return localStorage.getItem(CONSENT_KEY) === 'accepted'; }
     catch { return false; }
   };
+  const consented = () => hasConsent() && !isInternalBrowser();
   const currentItems = () => getItems().map(item => ({
     productId: item.productId || item.id, variantId: item.variantId || null, qty: item.qty
   }));
@@ -87,6 +90,6 @@ export function createCartActivity(getItems, getStage = () => 'cart') {
   if (typeof document !== 'undefined') document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') sync(getStage(), true);
   });
-  if (!consented() && cartId) void revoke();
+  if (!hasConsent() && cartId) void revoke();
   return { sync, id: () => consented() ? cartId : null, revoke };
 }

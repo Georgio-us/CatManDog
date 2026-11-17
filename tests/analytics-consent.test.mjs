@@ -2,6 +2,40 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { consentCopy, installAnalytics, publicPageLocation, visitSource,
   visitPlatform } from '../analytics-consent.js';
+import { INTERNAL_BROWSER_KEY, isInternalBrowser, markInternalBrowser } from '../analytics-audience.js';
+
+test('staff browser marker persists without storing an identity', () => {
+  const values = new Map();
+  const storage = { getItem: key => values.get(key), setItem: (key, value) => values.set(key, value) };
+  assert.equal(isInternalBrowser(storage), false);
+  assert.equal(markInternalBrowser(storage), true);
+  assert.deepEqual([...values], [[INTERNAL_BROWSER_KEY, '1']]);
+  assert.equal(isInternalBrowser(storage), true);
+});
+
+test('marked staff browser does not load analytics or announce visits', () => {
+  const previous = { document: globalThis.document, window: globalThis.window,
+    localStorage: globalThis.localStorage };
+  const panel = { hidden: false };
+  const settings = { hidden: false };
+  const scripts = [];
+  globalThis.document = { querySelector: selector => ({ '#analytics-consent': panel,
+    '#analytics-settings': settings })[selector], head: { append: script => scripts.push(script) } };
+  globalThis.window = { location: { origin: 'https://catmandog.es', pathname: '/', hash: '' },
+    fetch() { throw new Error('Internal visit must not be sent'); } };
+  globalThis.localStorage = { getItem: key => key === INTERNAL_BROWSER_KEY ? '1' : 'accepted' };
+  try {
+    installAnalytics('es').pageView();
+    assert.equal(panel.hidden, true);
+    assert.equal(settings.hidden, true);
+    assert.equal(scripts.length, 0);
+    assert.equal(globalThis.window.dataLayer, undefined);
+  } finally {
+    globalThis.document = previous.document;
+    globalThis.window = previous.window;
+    globalThis.localStorage = previous.localStorage;
+  }
+});
 
 test('analytics page locations omit searches and private routes', () => {
   const location = { origin: 'https://catmandog.es', pathname: '/catalogo/gatos/pienso-seco', hash: '', search: '?q=private' };

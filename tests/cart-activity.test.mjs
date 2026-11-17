@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { cartInput, cartChanges, saveObservedCart } from '../server/cart-activity.js';
 import { createCartActivity } from '../cart-activity.js';
+import { INTERNAL_BROWSER_KEY } from '../analytics-audience.js';
 
 const cartId = '641c5edb-152a-4788-9053-e880270a023e';
 
@@ -124,6 +125,30 @@ test('anonymous cart stays on the device until analytics consent and can be revo
     await activity.revoke();
     assert.equal(requests[2].options.method, 'DELETE');
     assert.equal(values.has('catmandog-observed-cart-v1'), false);
+  } finally {
+    globalThis.window = previous.window;
+    globalThis.localStorage = previous.localStorage;
+    globalThis.fetch = previous.fetch;
+  }
+});
+
+test('marked staff browser does not publish cart activity', async () => {
+  const previous = { window: globalThis.window, localStorage: globalThis.localStorage,
+    fetch: globalThis.fetch };
+  const values = new Map([['catmandog-analytics-consent-v1', 'accepted'],
+    [INTERNAL_BROWSER_KEY, '1'], ['catmandog-observed-cart-v1', cartId]]);
+  const requests = [];
+  globalThis.localStorage = { getItem: key => values.get(key) ?? null,
+    setItem: (key, value) => values.set(key, value), removeItem: key => values.delete(key) };
+  globalThis.window = { addEventListener() {} };
+  globalThis.fetch = async (...args) => { requests.push(args); return { ok: true }; };
+  try {
+    const activity = createCartActivity(() => [{ productId: 'food', qty: 1 }]);
+    activity.sync('checkout', true);
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(activity.id(), null);
+    assert.equal(requests.length, 0);
+    assert.equal(values.get('catmandog-observed-cart-v1'), cartId);
   } finally {
     globalThis.window = previous.window;
     globalThis.localStorage = previous.localStorage;

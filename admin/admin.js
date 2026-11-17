@@ -1,3 +1,5 @@
+import { markInternalBrowser } from '../analytics-audience.js';
+
 let tab = 'overview';
 let auditRows = [];
 let suppliers = [];
@@ -80,6 +82,9 @@ async function api(path, method = 'GET', body, accessKey = '') {
 }
 function message(value) { $('admin-message').textContent = value; }
 function openPanel(role) {
+  $('admin-analytics-status').textContent = markInternalBrowser()
+    ? 'Этот браузер исключён из статистики посетителей и корзин'
+    : 'Не удалось исключить этот браузер из статистики';
   activeRole = role;
   $('admin-login').hidden = true;
   $('admin-panel').hidden = false;
