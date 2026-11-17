@@ -1,4 +1,4 @@
-// Copy prepared for the next SEO batch. Keep these pages on noindex until review.
+// Verified copy for the 30 product families released in the next SEO batch.
 // Sources refer to the exact European recipes; percentages are not inferred from names.
 const copy = (source, previousDescription, description, esDescription, ukDescription,
   details, esDetails, ukDetails) => ({

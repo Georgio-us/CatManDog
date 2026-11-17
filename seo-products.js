@@ -16,12 +16,23 @@ const releasedByCategory = {
     'rc-fit', 'rc-indoor', 'rc-kitten-regular', 'rc-mother-babycat',
     'rc-hairball', 'rc-sensible', 'leonardo-light', 'leonardo-kitten',
     'leonardo-adult-duck', 'leonardo-maxi', 'leonardo-kitten-gf',
-    'leonardo-fresh-beef', 'leonardo-fresh-duck', 'leonardo-fresh-salmon'
+    'leonardo-fresh-beef', 'leonardo-fresh-duck', 'leonardo-fresh-salmon',
+    'rc-urinary', 'rc-light', 'leonardo-senior', 'leonardo-senior-gf',
+    'leonardo-complete', 'rc-persian', 'leonardo-fish', 'leonardo-lamb'
   ],
   '/catalogo/gatos/comida-humeda': [
     'rc-wet', 'leonardo-chicken', 'leonardo-turkey',
     'acana-wet-beef', 'acana-wet-chicken', 'acana-wet-kitten',
-    'acana-wet-lamb', 'acana-wet-salmon', 'acana-wet-tuna'
+    'acana-wet-lamb', 'acana-wet-salmon', 'acana-wet-tuna',
+    'leonardo-wet-kitten', 'leonardo-wet-rabbit', 'leonardo-wet-buffalo',
+    'leonardo-wet-pheasant', 'leonardo-wet-lamb-cranberry',
+    'leonardo-wet-duck-cheese', 'leonardo-wet-fish-shrimp',
+    'leonardo-wet-trout-catnip', 'leonardo-wet-meat-menu',
+    'leonardo-wet-pure-turkey', 'royalcanin-8d039848',
+    'royalcanin-659556dc', 'royalcanin-a510d4e9',
+    'royalcanin-f2600773', 'royalcanin-d861a238',
+    'royalcanin-6168e429', 'royalcanin-e34b38d7',
+    'royalcanin-9f8011d7', 'royalcanin-7f8c2e4e'
   ],
   '/catalogo/gatos/premios': [
     'tc-4e50c58957', 'tc-0707caf730', 'tc-768abf17c2',
@@ -35,7 +46,8 @@ const releasedByCategory = {
     'cmd-source-acana-senior', 'dog-rc-mini-adult',
     'dog-rc-medium-adult', 'dog-rc-mini-digestive',
     'dog-ownat-ultra-medium', 'dog-ownat-just-gf-chicken',
-    'dog-ownat-gf-prime', 'dog-ownat-author-duck'
+    'dog-ownat-gf-prime', 'dog-ownat-author-duck',
+    'dog-rc-mini-puppy', 'dog-rc-maxi-adult', 'dog-ownat-classic-complet'
   ],
   '/catalogo/perros/premios': [
     'churu-dog-chicken', 'churu-dog-tuna-pack4', 'churu-dog-tuna-pack8',

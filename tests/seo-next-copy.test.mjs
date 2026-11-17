@@ -5,12 +5,12 @@ import { products } from '../data.js';
 import { catalogEditorialNext } from '../catalog-editorial-next.js';
 import { editorialEs, editorialUk } from '../locales/editorial-translations.js';
 import { seoProductForId } from '../seo-products.js';
-import { seoDocument } from '../server/seo.js';
+import { seoDocument, serveSeo } from '../server/seo.js';
 import { accessoryDetail } from '../accessory-ui.js';
 
 const escapeHtml = value => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;');
 
-test('the 30 next-batch recipes have distinct copy in three languages while remaining noindex', async () => {
+test('the 30 verified recipes are indexable with distinct copy in three languages', async () => {
   const entries = Object.entries(catalogEditorialNext);
   assert.equal(entries.length, 30);
   const descriptions = [new Set(), new Set(), new Set()];
@@ -23,8 +23,8 @@ test('the 30 next-batch recipes have distinct copy in three languages while rema
     assert.ok(product && seo, id);
     assert.equal(product.description, copy.description, id);
     assert.deepEqual(product.details, copy.details, id);
-    assert.equal(seo.indexable, false, id);
-    assert.equal(sitemap.includes(`https://catmandog.es${seo.path}</loc>`), false, id);
+    assert.equal(seo.indexable, true, id);
+    assert.equal(sitemap.includes(`https://catmandog.es${seo.path}</loc>`), true, id);
     assert.match(copy.source, /^https:\/\//u, id);
     assert.equal(copy.details.length, 3, id);
 
@@ -51,7 +51,12 @@ test('the 30 next-batch recipes have distinct copy in three languages while rema
       variantCount += 1;
     }
     const html = await seoDocument(seo.path);
-    assert.match(html, /<meta name="robots" content="noindex,follow">/u, id);
+    assert.doesNotMatch(html, /<meta name="robots" content="noindex/u, id);
+    assert.match(html, new RegExp(`<link rel="canonical" href="https://catmandog.es${seo.path}">`, 'u'), id);
+    let headers;
+    const response = { writeHead(_status, value) { headers = value; }, end() {} };
+    assert.equal(await serveSeo({ method: 'HEAD' }, response, seo.path), true, id);
+    assert.equal(headers['X-Robots-Tag'], undefined, id);
     assert.ok(html.includes(escapeHtml(copy.esDescription)), `${id}: Spanish HTML`);
     for (const detail of copy.esDetails) assert.ok(html.includes(escapeHtml(detail)), `${id}: HTML detail`);
     assert.doesNotMatch(html.match(/<main id="app">([\s\S]*?)<\/main>/u)?.[1] || '',

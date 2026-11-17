@@ -15,6 +15,7 @@ import { catalogEditorialHeld } from '../catalog-editorial-held.js';
 import { catalogEditorialChuruDog } from '../catalog-editorial-churu-dog.js';
 import { catalogEditorialAcanaWet } from '../catalog-editorial-acana-wet.js';
 import { catalogEditorialChuruCat } from '../catalog-editorial-churu-cat.js';
+import { catalogEditorialNext } from '../catalog-editorial-next.js';
 import { accessoryDetail } from '../accessory-ui.js';
 
 test('the sitemap contains only released public pages with Spanish editorial content', async () => {
@@ -94,7 +95,7 @@ test('every public product has a distinct permanent URL while unreleased pages s
 
 test('the verified product release has unique Spanish source content and crawlable category links', async () => {
   const released = seoProducts.filter(product => product.indexable);
-  assert.equal(released.length, 87);
+  assert.equal(released.length, 117);
   const descriptions = new Set();
   for (const product of released) {
     const html = await seoDocument(product.path);
@@ -114,10 +115,11 @@ test('the verified product release has unique Spanish source content and crawlab
 test('released editorial products serve the same verified Spanish copy as the storefront', async () => {
   const editorial = { ...catalogEditorialCats, ...catalogEditorialDogs,
     ...catalogEditorialRoyalCanin, ...catalogEditorialLeonardo, ...catalogEditorialHeld,
-    ...catalogEditorialChuruDog, ...catalogEditorialAcanaWet, ...catalogEditorialChuruCat };
+    ...catalogEditorialChuruDog, ...catalogEditorialAcanaWet, ...catalogEditorialChuruCat,
+    ...catalogEditorialNext };
   const releasedEditorial = Object.entries(editorial)
     .filter(([id]) => seoProducts.some(product => product.id === id && product.indexable));
-  assert.equal(releasedEditorial.length, 63);
+  assert.equal(releasedEditorial.length, 93);
   for (const [id, copy] of releasedEditorial) {
     const path = productHref(id);
     const html = await seoDocument(path);
