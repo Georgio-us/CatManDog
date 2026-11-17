@@ -135,6 +135,25 @@ test('local checkout keeps a later delivery day selectable without showing every
   } finally { globalThis.FormData = originalFormData; }
 });
 
+test('switching from urgent local delivery to national clears the urgent checkout state', () => {
+  const originalFormData = globalThis.FormData;
+  globalThis.FormData = class {
+    entries() { return [['deliveryRegion', 'national'], ['urgent', 'yes']][Symbol.iterator](); }
+    has() { return false; }
+  };
+  try {
+    const ui = createCheckoutUI({ escape: String, icon: () => '', money: value => `${value.toFixed(2)} €`,
+      imageBlock: () => '', getItems: () => [{ productId: 'rc', variantId: 'rc-2kg',
+        name: 'Royal Canin', variant: '2 кг', qty: 1, price: 29.09 }],
+      isReady: () => true, getPromo: () => null, applyPromo: () => {}, render: () => {} });
+    ui.change({ name: 'deliveryRegion', value: 'national', form: {} });
+    const html = ui.page();
+    assert.match(html, /Доставка по материковой Испании/);
+    assert.match(html, /<span>3<\/span>Оплата/);
+    assert.doesNotMatch(html, /Оплата только после звонка|На следующем шаге проверьте и отправьте заявку/);
+  } finally { globalThis.FormData = originalFormData; }
+});
+
 test('signed-in checkout pre-fills the saved address and saves updates only when selected', () => {
   const previous = { FormData: globalThis.FormData, location: globalThis.location };
   const slot = availableDeliverySlots(new Date())[0];

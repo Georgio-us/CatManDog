@@ -34,6 +34,19 @@ test('street and house number must match the official address', async () => {
     /не совпали/);
 });
 
+test('a bilingual official street name accepts either listed name', async () => {
+  const portal = candidate({ address: 'CALLE PEU DE LA CREU / PIE DE LA CRUZ 12, València',
+    portalNumber: 12, extension: null, postalCode: '46001', muni: 'València',
+    poblacion: 'València', lat: 39.4734018, lng: -0.3809343 });
+  const base = { city: 'València', postcode: '46001', building: '12' };
+  for (const street of ['Calle Peu de la Creu', 'Calle Pie de la Cruz']) {
+    assert.equal((await verifyDeliveryAddress({ ...base, street }, 'local', response([portal]))).local,
+      true);
+  }
+  await assert.rejects(verifyDeliveryAddress({ ...base, street: 'Calle Colón' },
+    'local', response([portal])), /не совпали/);
+});
+
 test('local delivery covers the core districts and excludes Pobles del Nord', async () => {
   for (const [name, lat, lng] of [
     ['Patraix', 39.45779268, -0.40064487],

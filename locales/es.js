@@ -102,6 +102,7 @@ export const es = {
   'Проверьте адрес: доставку по Валенсии подтвердим после оформления': 'Comprueba la dirección: confirmaremos la entrega en València después de realizar el pedido',
   'После проверки заказа перейдёте на защищённую страницу Stripe': 'Tras revisar el pedido, pasarás a la página segura de Stripe',
   'Оплата картой через Stripe. Данные карты вводятся только на защищённой странице Stripe': 'Pago con tarjeta a través de Stripe. Introducirás los datos de la tarjeta únicamente en la página segura de Stripe.',
+  'Оплата картой через Stripe. После оплаты свяжемся с вами и уточним доставку': 'Pago con tarjeta a través de Stripe. Después del pago, contactaremos contigo para concretar la entrega',
   'На следующем шаге проверьте заказ и перейдите к оплате': 'En el siguiente paso, revisa el pedido y continúa con el pago',
   'Оплата картой': 'Pago con tarjeta',
   'Сначала проверим цену и наличие, затем откроем защищённую страницу Stripe': 'Primero comprobaremos el precio y la disponibilidad; después abriremos la página segura de Stripe',

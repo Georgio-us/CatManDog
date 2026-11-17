@@ -79,7 +79,7 @@ export async function verifyDeliveryAddress(address, mode, fetchImpl = fetch) {
     if (house[2] && normalized(candidate.extension) !== normalized(house[2])) return false;
     const candidateStreet = String(candidate.address || '').split(',')[0]
       .replace(/\s+\d+(?:\s+[a-z])?$/i, '');
-    return streetName(candidateStreet) === streetName(street) &&
+    return candidateStreet.split(/\s*\/\s*/).some(alias => streetName(alias) === streetName(street)) &&
       [candidate.muni, candidate.poblacion].some(place => normalized(place) === normalized(city));
   });
   if (!matched) throw error('Улица, дом, город и почтовый индекс не совпали. Проверьте адрес');
