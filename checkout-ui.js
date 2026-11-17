@@ -1,5 +1,5 @@
 import { checkoutTotals, availableDeliverySlots, FREE_DELIVERY_FROM, DELIVERY_FEE, validateCheckout } from './checkout-model.js?v=local-zone-20261117';
-import { locale, intlLocale, translate } from './locale.js?v=local-zone-20261117';
+import { locale, intlLocale, translate } from './locale.js?v=checkout-ux-20261117';
 
 const LEGACY_PREORDER_CHECKOUT_ENABLED = false;
 

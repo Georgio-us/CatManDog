@@ -1,8 +1,8 @@
-import { es, esPatterns } from './locales/es.js?v=delivery-24-48-20261117';
+import { es, esPatterns } from './locales/es.js?v=checkout-ux-20261117';
 import { esProductText } from './locales/product-es.js?v=product-content-20261110';
 import { esDetails } from './locales/details-es.js?v=product-content-20261110';
 import { uk, ukPatterns } from './locales/uk.js?v=live-orders-20261112';
-import { ukExtra } from './locales/uk-extra.js?v=delivery-24-48-20261117';
+import { ukExtra } from './locales/uk-extra.js?v=checkout-ux-20261117';
 import { ukProductNames } from './locales/uk-product-names.js?v=yagu-toys-20261116';
 import { ukProductCopy } from './locales/uk-product-copy.js?v=product-content-20261110';
 import { ukDetails } from './locales/uk-details.js?v=product-content-20261110';
