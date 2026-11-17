@@ -1,4 +1,5 @@
-import { cartSku } from './variants.js?v=sale-price-policy-20261109';
+import { cartSku, storefrontPrice } from './variants.js?v=sale-price-policy-20261109';
+import { recurringProductCard } from './recurring-product-ui.js?v=recurring-cards-20261117';
 
 export const recurringKey = item => `${item.productId || item.id}|${item.variantId || ''}`;
 export const recurringWeeks = [2, 4, 6];
@@ -20,18 +21,39 @@ export function recurringChoiceFromCart(value, cart) {
 }
 
 export function renderRecurringCart({ cart, products, draft, signedIn, accountsAvailable, language = 'ru',
-  escape, icon }) {
+  escape, icon, imageBlock, money }) {
   if (!accountsAvailable || !cart.length) return '';
   const current = normalizeRecurringDraft(draft, cart);
   const names = { ru: ['Покупать регулярно', 'Выберите товары и период. Перед каждым следующим заказом мы проверим наличие, цену и доставку. Оплата только после вашего подтверждения'],
     es: ['Comprar periódicamente', 'Elige productos y frecuencia. Antes de cada nuevo pedido comprobaremos disponibilidad, precio y entrega. Pagarás solo después de confirmar'],
     uk: ['Купувати регулярно', 'Оберіть товари та період. Перед кожним наступним замовленням ми перевіримо наявність, ціну й доставку. Оплата лише після вашого підтвердження'] };
   const [heading, description] = names[language] || names.ru;
-  if (!signedIn) return `<section class="rc-flow-panel recurring-cart-card"><h2>${heading}</h2><p>${description}</p><a class="text-link" href="#/account/login?return=cart">Войти, чтобы настроить регулярный заказ ${icon('arrow')}</a></section>`;
-  return `<section class="rc-flow-panel recurring-cart-card"><label class="recurring-main-toggle"><input type="checkbox" data-recurring-enable ${current.enabled ? 'checked' : ''}><span><strong>${heading}</strong><small>${description}</small></span></label>${current.enabled ? `<fieldset class="recurring-cart-items"><legend>Какие товары повторять</legend>${cart.map(item => {
+  const labels = {
+    ru: { step: 'Шаг 1 · Корзина', guest: 'Выбрать товары можно здесь до оформления или после оплаты в кабинете',
+      login: 'Войти, чтобы настроить регулярный заказ', legend: 'Выберите товары для повтора',
+      frequency: 'Как часто', selected: 'Вы выбираете товары сейчас, до оформления. План сохранится после оплаты этой покупки. Следующую покупку и её цену согласуем с вами отдельно',
+      idle: 'Можно выбрать нужные товары сейчас или вернуться к ним после оплаты в кабинете' },
+    es: { step: 'Paso 1 · Cesta', guest: 'Puedes elegir los productos aquí antes de pagar o después en tu cuenta',
+      login: 'Iniciar sesión para programar compras periódicas', legend: 'Elige los productos que quieres repetir',
+      frequency: 'Frecuencia', selected: 'Elige los productos antes de finalizar la compra. Guardaremos el plan después del pago. Confirmaremos contigo la próxima compra y su precio',
+      idle: 'Puedes elegir los productos ahora o después del pago en tu cuenta' },
+    uk: { step: 'Крок 1 · Кошик', guest: 'Товари можна вибрати тут до оформлення або після оплати в кабінеті',
+      login: 'Увійти, щоб налаштувати регулярне замовлення', legend: 'Оберіть товари для повторення',
+      frequency: 'Як часто', selected: 'Виберіть товари зараз, до оформлення. План збережеться після оплати цієї покупки. Наступну покупку та її ціну узгодимо з вами окремо',
+      idle: 'Можна вибрати товари зараз або повернутися до них після оплати в кабінеті' }
+  }[language] || null;
+  const copy = labels || { step: 'Шаг 1 · Корзина', guest: '', login: 'Войти', legend: 'Выберите товары для повтора',
+    frequency: 'Как часто', selected: '', idle: '' };
+  const cadenceLabel = weeks => language === 'es' ? `Cada ${weeks} semanas`
+    : language === 'uk' ? `Кожні ${weeks} ${weeks === 6 ? 'тижнів' : 'тижні'}`
+      : `Каждые ${weeks} ${weeks === 6 ? 'недель' : 'недели'}`;
+  if (!signedIn) return `<section class="rc-flow-panel recurring-cart-card"><span class="recurring-step-label">${copy.step}</span><h2>${heading}</h2><p>${description}</p><p>${copy.guest}</p><a class="text-link" href="#/account/login?return=cart">${copy.login} ${icon('arrow')}</a></section>`;
+  return `<section class="rc-flow-panel recurring-cart-card"><span class="recurring-step-label">${copy.step}</span><label class="recurring-main-toggle"><input type="checkbox" data-recurring-enable ${current.enabled ? 'checked' : ''}><span><strong>${heading}</strong><small>${description}</small></span></label>${current.enabled ? `<fieldset class="recurring-cart-items"><legend>${copy.legend}</legend>${cart.map(item => {
     const sku = cartSku(item, products);
     const product = products.find(entry => entry.id === (item.productId || item.id));
     const key = recurringKey(item);
-    return `<label><input type="checkbox" data-recurring-item value="${escape(key)}" ${current.items.includes(key) ? 'checked' : ''}><span>${escape(product?.name || sku?.name || 'Товар')} · ${escape(sku?.label || item.variantLabel || 'Вариант')} × ${item.qty}</span></label>`;
-  }).join('')}</fieldset><label class="recurring-cadence">Как часто<select data-recurring-weeks>${recurringWeeks.map(weeks => `<option value="${weeks}" ${current.cadenceWeeks === weeks ? 'selected' : ''}>Каждые ${weeks} ${weeks === 2 || weeks === 4 ? 'недели' : 'недель'}</option>`).join('')}</select></label><p class="rc-flow-help">Регулярный заказ сохранится после оплаты этой покупки. Будущие покупки не оплачиваются автоматически</p>` : ''}</section>`;
+    return recurringProductCard({ item: { ...item, displayPrice: storefrontPrice(sku) }, sku, product,
+      imageBlock, escape, money, language, selected: current.items.includes(key),
+      input: `<input type="checkbox" data-recurring-item value="${escape(key)}" ${current.items.includes(key) ? 'checked' : ''}>` });
+  }).join('')}</fieldset><label class="recurring-cadence">${copy.frequency}<select data-recurring-weeks>${recurringWeeks.map(weeks => `<option value="${weeks}" ${current.cadenceWeeks === weeks ? 'selected' : ''}>${cadenceLabel(weeks)}</option>`).join('')}</select></label><p class="rc-flow-help">${copy.selected}</p>` : `<p class="rc-flow-help">${copy.idle}</p>`}</section>`;
 }

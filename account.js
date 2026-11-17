@@ -4,6 +4,8 @@ import { accountTools } from './useful.js?v=yagu-toys-20261116';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
 import { intlLocale, locale } from './locale.js?v=recurring-orders-20261117';
 import { productHref } from './seo-products.js?v=yagu-toys-20261116';
+import { storefrontPrice } from './variants.js?v=sale-price-policy-20261109';
+import { recurringProductCard } from './recurring-product-ui.js?v=recurring-cards-20261117';
 const store = createAccountStore(localStorage);
 const api = createAccountApi();
 
@@ -415,8 +417,20 @@ export function createAccountUI(helpers) {
     return `<fieldset class="recurring-account-items"><legend>Какие товары повторять</legend>${(order.items || []).map((item, index) => {
       const key = `${item.productId}|${item.variantId}`;
       const checked = selected ? chosen.has(key) : true;
-      return `<label><input type="checkbox" name="item" value="${index}" ${checked ? 'checked' : ''}><span>${e(item.name || 'Товар')}${item.label ? ` · ${e(item.label)}` : ''} × ${Number(item.qty) || 1}</span></label>`;
+      const product = products.find(entry => entry.id === item.productId);
+      const sku = productFor(item);
+      return recurringProductCard({ item: { ...item, displayPrice: storefrontPrice(sku) }, sku, product,
+        imageBlock, escape: e, money, language: locale(), selected: checked,
+        input: `<input type="checkbox" name="item" value="${index}" ${checked ? 'checked' : ''}>` });
     }).join('')}</fieldset>`;
+  }
+  function recurringReadOnlyItems(items) {
+    return `<div class="recurring-account-items recurring-account-readonly">${items.map(item => {
+      const product = products.find(entry => entry.id === item.productId);
+      const sku = productFor(item);
+      return recurringProductCard({ item: { ...item, displayPrice: storefrontPrice(sku) }, sku,
+        product, imageBlock, escape: e, money, language: locale() });
+    }).join('')}</div>`;
   }
   function recurringOfferForOrder(order) {
     if (recurringOrdersError) return `<section class="pet-panel"><h2>Регулярный заказ</h2><p role="alert">${e(recurringOrdersError)}</p></section>`;
@@ -435,7 +449,7 @@ export function createAccountUI(helpers) {
       const date = new Date(`${String(plan.nextReviewOn).slice(0,10)}T12:00:00`);
       const next = Number.isNaN(date.getTime()) ? '' : new Intl.DateTimeFormat(intlLocale(), { dateStyle: 'medium' }).format(date);
       const statusText = {active:'Активен',paused:'На паузе',cancelled:'Отменён'}[plan.status] || plan.status;
-      return `<section class="pet-panel recurring-account-plan"><div class="recurring-account-head"><h2>${order ? `Покупка ${e(order.number)}` : 'Регулярная покупка'}</h2><span class="pet-status">${e(statusText)}</span></div><p class="pet-muted">${plan.status === 'active' ? `Следующая проверка около ${e(next)}` : 'Новых проверок пока не будет'}. Это ориентир для связи, заказ и оплата автоматически не создаются</p>${order && plan.status !== 'cancelled' ? `<form class="pet-form recurring-account-form" data-account-form="recurring-update" data-plan-id="${e(plan.id)}" data-order-id="${e(order.id)}">${recurringItemChoices(order, plan.items)}<label class="pet-field">Период<select name="cadenceWeeks">${recurringCadenceOptions(plan.cadenceWeeks)}</select></label><p class="pet-form-error" data-account-error role="alert"></p><button class="button outline" type="submit">Сохранить изменения</button></form>` : `<ul class="recurring-account-summary">${(plan.items || []).map(item => `<li>${e(item.name)}${item.label ? ` · ${e(item.label)}` : ''} × ${Number(item.qty) || 1}</li>`).join('')}</ul>`}<div class="recurring-account-actions">${plan.status === 'active' ? `<button type="button" class="pet-small-button" data-recurring-status="paused" data-plan-id="${e(plan.id)}">Поставить на паузу</button>` : plan.status === 'paused' ? `<button type="button" class="pet-small-button" data-recurring-status="active" data-plan-id="${e(plan.id)}">Возобновить</button>` : ''}${plan.status !== 'cancelled' ? `<button type="button" class="pet-small-button" data-recurring-status="cancelled" data-plan-id="${e(plan.id)}">Отменить план</button>` : ''}</div></section>`;
+      return `<section class="pet-panel recurring-account-plan"><div class="recurring-account-head"><h2>${order ? `Покупка ${e(order.number)}` : 'Регулярная покупка'}</h2><span class="pet-status">${e(statusText)}</span></div><p class="pet-muted">${plan.status === 'active' ? `Следующая проверка около ${e(next)}` : 'Новых проверок пока не будет'}. Это ориентир для связи, заказ и оплата автоматически не создаются</p>${order && plan.status !== 'cancelled' ? `<form class="pet-form recurring-account-form" data-account-form="recurring-update" data-plan-id="${e(plan.id)}" data-order-id="${e(order.id)}">${recurringItemChoices(order, plan.items)}<label class="pet-field">Период<select name="cadenceWeeks">${recurringCadenceOptions(plan.cadenceWeeks)}</select></label><p class="pet-form-error" data-account-error role="alert"></p><button class="button outline" type="submit">Сохранить изменения</button></form>` : `${recurringReadOnlyItems(plan.items || [])}`}<div class="recurring-account-actions">${plan.status === 'active' ? `<button type="button" class="pet-small-button" data-recurring-status="paused" data-plan-id="${e(plan.id)}">Поставить на паузу</button>` : plan.status === 'paused' ? `<button type="button" class="pet-small-button" data-recurring-status="active" data-plan-id="${e(plan.id)}">Возобновить</button>` : ''}${plan.status !== 'cancelled' ? `<button type="button" class="pet-small-button" data-recurring-status="cancelled" data-plan-id="${e(plan.id)}">Отменить план</button>` : ''}</div></section>`;
     }).join('')}</div>`;
   }
   function suppliesPage(pet, data) {

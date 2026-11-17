@@ -118,3 +118,23 @@
 .recurring-review p, .recurring-after-payment p { max-width: 600px; color: var(--muted); line-height: 1.55; }
 .recurring-after-payment .button { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; }
 .recurring-after-payment .button svg { width: 16px; height: 16px; }
+.recurring-step-label { display: block; margin-bottom: 16px; color: #596c4c; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.recurring-cart-card .recurring-main-toggle { margin-bottom: 22px; }
+.recurring-cart-items { max-width: none; padding: 18px; gap: 12px; }
+.recurring-cart-items legend { font-size: 14px; }
+.recurring-cart-items .recurring-product-card { display: grid; }
+.recurring-product-card { display: grid; grid-template-columns: 20px 76px minmax(0,1fr) auto; gap: 13px; align-items: center; min-width: 0; padding: 12px; border: 1px solid var(--line); border-radius: 14px; background: white; color: var(--ink); cursor: pointer; }
+.recurring-product-card.is-selected { border-color: #a8bd79; background: #fbfdf5; }
+.recurring-product-card:focus-within { outline: 2px solid #8ca65a; outline-offset: 2px; }
+.recurring-product-card > input { width: 18px; height: 18px; margin: 0; accent-color: var(--ink); }
+.recurring-product-photo { display: block; width: 76px; height: 76px; overflow: hidden; border-radius: 10px; background: var(--surface); }
+.recurring-product-photo .product-image, .recurring-product-missing { display: block; width: 100%; height: 100%; border-radius: inherit; }
+.recurring-product-photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.recurring-product-details { display: grid; gap: 4px; min-width: 0; line-height: 1.3; }
+.recurring-product-details strong { display: -webkit-box; min-height: 2.6em; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 14px; overflow-wrap: anywhere; }
+.recurring-product-details .recurring-product-variant { display: block; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+.recurring-product-details small { color: var(--muted); font-size: 10px; overflow-wrap: anywhere; }
+.recurring-product-price { display: grid; gap: 5px; align-self: end; text-align: right; white-space: nowrap; }
+.recurring-product-price small { color: var(--muted); font-size: 10px; }
+.recurring-product-price strong { font-size: 14px; font-variant-numeric: tabular-nums; }
+@media (max-width: 600px) { .recurring-product-card { grid-template-columns: 20px 64px minmax(0,1fr); gap: 10px; padding: 10px; } .recurring-product-photo { width: 64px; height: 64px; } .recurring-product-price { grid-column: 3; text-align: left; white-space: normal; } .recurring-cart-items { padding: 12px; } }

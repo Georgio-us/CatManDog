@@ -1,5 +1,5 @@
 import { createUsefulUI } from './useful.js?v=yagu-toys-20261116';
-import { createAccountUI } from './account.js?v=recurring-orders-20261117';
+import { createAccountUI } from './account.js?v=recurring-cards-20261117';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
 import { accessoryDetail, customerDetails } from './accessory-ui.js?v=churu-cat-editorial-20261112';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=checkout-launch-20261116';
@@ -8,7 +8,7 @@ import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, 
 import { categories, products, catalogProducts, articles } from './data.js?v=yagu-toys-20261116';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=yagu-toys-20261116';
 import { createCheckoutUI } from './checkout-ui.js?v=recurring-orders-20261117';
-import { normalizeRecurringDraft, recurringChoiceFromCart, renderRecurringCart } from './recurring-cart.js';
+import { normalizeRecurringDraft, recurringChoiceFromCart, renderRecurringCart } from './recurring-cart.js?v=recurring-cards-20261117';
 import { availabilityRequestPage } from './availability-request-ui.js?v=yagu-toys-20261116';
 import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=unavailable-single-20261110';
@@ -221,12 +221,12 @@ function announceView() {
 function imageStyle(index){if(typeof index==='string')return `background-image:url('${index}');background-size:cover;background-position:center`; const tile=index%8;return `--px:${(tile%4)*100/3}%;--py:${Math.floor(tile/4)*100}%;--product-sheet:url('https://img.catmandog.es/assets/products-cats-${Math.floor(index/8)+1}.png')`;}
 function categoryImageStyle(name){if(name==='Лакомства')return "--category-sheet:url('https://img.catmandog.es/assets/category-treats-v2.webp');--category-size:cover;--category-radius:0;--px:center;--py:center";const tile=({Корм:0,Наполнитель:1,'Игрушки и аксессуары':2,'Миски и поилки':4,Переноски:5,'Окна и балконы':6,Уход:7})[name]??0;return `--px:${(tile%4)*100/3}%;--py:${Math.floor(tile/4)*100}%;--category-sheet:url('https://img.catmandog.es/assets/categories-open.png')`;}
 const categoryLabel = name => name === 'Наполнитель' ? 'Наполнители и лотки' : name;
-function imageBlock(index,extra=''){
+function imageBlock(index,extra='',decorative=false){
   if(index && typeof index==='object'){
     const studio=index.presentation==='editorial'||
       /(?:\/assets\/(?:launch-studio-[^/]+|[^/]+\/editorial)\/|\/media\/(?:launch-studio|churu-formats|confirmed-demand)-[^/]+\/|\/media\/yagu\/[^/]+-studio-v\d+\.webp)/u.test(index.src);
     const alt=String(index.alt||'').replace(/\s*-\s*студийное изображение(?: рецептуры)?$/iu,'');
-    return `<div class="product-image real-product-image ${studio?'editorial-product-image ':''}${extra}"><img src="${escape(index.src)}" alt="${escape(alt)}" loading="lazy" decoding="async"></div>`;
+    return `<div class="product-image real-product-image ${studio?'editorial-product-image ':''}${extra}"><img src="${escape(index.src)}" alt="${decorative ? '' : escape(alt)}" loading="lazy" decoding="async"></div>`;
   }
   return `<div class="product-image ${extra}" style="${imageStyle(index)}"></div>`;
 }
@@ -430,7 +430,7 @@ function cartPage() {
     allowSplit: CUSTOMER_SPLIT_CHECKOUT_ENABLED,
     recurringHtml: renderRecurringCart({ cart, products, draft: recurringDraft,
       signedIn: account.isSignedIn(), accountsAvailable: account.recurringAvailable(),
-      language: locale(), escape, icon }),
+      language: locale(), escape, icon, imageBlock, money }),
     escape, icon, money, imageBlock });
 }
 function availabilityPage() {

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { recurringChoice, selectedRecurringItems, activateRecurringIntent,
   createRecurringFromPurchase, updateRecurringForCustomer } from '../server/recurring-orders.js';
 import { normalizeRecurringDraft, recurringChoiceFromCart } from '../recurring-cart.js';
+import { recurringProductCard } from '../recurring-product-ui.js';
 
 const purchased = [
   { productId: 'food', variantId: 'food-1', name: 'Корм', label: '1 кг', qty: 2 },
@@ -27,6 +28,23 @@ test('cart keeps only current items in a regular order draft', () => {
   assert.deepEqual(draft.items, ['food|food-1']);
   assert.deepEqual(recurringChoiceFromCart(draft, cart), { cadenceWeeks: 4,
     items: [{ productId: 'food', variantId: 'food-1', qty: 2 }] });
+});
+
+test('regular order product card shows the exact retail SKU, image and retail price', () => {
+  const html = recurringProductCard({ item: { productId: 'toy', variantId: 'yagu-7517019-catalog-pack',
+    qty: 1, displayPrice: 1.99 }, product: { name: 'Игрушечные мышки', image: { src: '/toy.webp' } },
+  sku: { id: 'yagu-7517019-catalog-pack', label: '2 шт', image: { src: '/toy.webp' } },
+  escape: String, money: value => `${value} €`, imageBlock: image => `<img src="${image.src}" alt="">`,
+  input: '<input type="checkbox" checked>', selected: true });
+  assert.match(html, /Игрушечные мышки/);
+  assert.match(html, /Артикул 7517019/);
+  assert.match(html, /src="\/toy.webp"/);
+  assert.match(html, /Цена на витрине/);
+  assert.match(html, /1.99 €/);
+  const unknown = recurringProductCard({ item: { name: 'Товар', qty: 1, displayPrice: null },
+    escape: String, money: () => 'wrong', imageBlock: () => '', language: 'ru' });
+  assert.match(unknown, /Цена уточняется/);
+  assert.doesNotMatch(unknown, /wrong/);
 });
 
 test('paid account intent creates one plan and no future payment', async () => {
