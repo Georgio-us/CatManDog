@@ -19,6 +19,7 @@ import { launchHeyboPetProducts } from './launch-heybopet-products.js';
 import { applyChuruRetailFormats } from './churu-retail-formats.js';
 import { churuDogProducts } from './churu-dog-products.js';
 import { confirmedDemandProducts } from './confirmed-demand-products.js';
+import { catsAtelierProducts } from './cats-atelier-products.js';
 import { withSelectedAcanaOrijenFormats } from './acana-orijen-selected-formats.js';
 import { catalogEditorialContent } from './catalog-editorial-content.js';
 
@@ -427,7 +428,7 @@ const merchandisingTags = {
   'heybopet-hb-pwfs-s30s': 'Беспроводная поилка',
   'heybopet-pwf-filters-3': 'Сменные фильтры'
 };
-export const products = applyChuruRetailFormats(applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy(withSelectedAcanaOrijenFormats([...foodProducts, ...dogProducts, ...confirmedDemandProducts, ...churuDogProducts, ...expandYaguCare(treatsCareProducts), ...expandYaguColourVariants(yaguProducts), ...yaguStorefrontProducts, ...yaguExpansionProducts, ...yaguDogActivityProducts, ...yaguToyExpansionProducts, ...yaguBasketProducts, ...yaguChewTestProducts, ...catalogHeybopetProducts, ...launchHeyboPetProducts, ...demoProducts.map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)])).map(mergeCategory)))).map(product => {
+export const products = applyChuruRetailFormats(applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy(withSelectedAcanaOrijenFormats([...foodProducts, ...dogProducts, ...confirmedDemandProducts, ...churuDogProducts, ...expandYaguCare(treatsCareProducts), ...expandYaguColourVariants(yaguProducts), ...yaguStorefrontProducts, ...yaguExpansionProducts, ...yaguDogActivityProducts, ...yaguToyExpansionProducts, ...yaguBasketProducts, ...yaguChewTestProducts, ...catalogHeybopetProducts, ...launchHeyboPetProducts, ...catsAtelierProducts, ...demoProducts.map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)])).map(mergeCategory)))).map(product => {
   const copy = catalogEditorialContent[product.id];
   const tag = !product.tag && merchandisingTags[product.id];
   const taggedProduct = tag ? { ...product, tag } : product;

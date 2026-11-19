@@ -19,6 +19,7 @@ import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=
 import { shellTranslations } from './shell-translations.js';
 import { checkoutLaunchEs, checkoutLaunchUk } from './locales/checkout-launch.js?v=checkout-ux2-20261117';
 import { recurringEs, recurringUk, recurringPatternsEs, recurringPatternsUk } from './locales/recurring.js';
+import { catsAtelierEs, catsAtelierUk } from './locales/cats-atelier.js';
 
 const storageKey = 'catmandog-language';
 const saved = (() => { try { return localStorage.getItem(storageKey); } catch { return null; } })();
@@ -96,8 +97,8 @@ export function translate(value) {
   const whitespace = value.match(/^(\s*)([\s\S]*?)(\s*)$/);
   const source = whitespace?.[2] ?? value;
   let result = language === 'uk'
-    ? recurringUk[source] ?? checkoutLaunchUk[source] ?? editorialUk[source] ?? churuDogUk[source] ?? yaguToyExpansionUk[source] ?? yaguChewTestUk[source] ?? yaguBasketUk[source] ?? yaguExpansionUk[source] ?? deliveryStatusUk[source] ?? uk[source] ?? ukExtra[source] ?? churuFormatsUk[source] ?? ukProductNames[source] ?? ukProductCopy(source) ?? ukDetails[source] ?? esProductText[source] ?? esDetails[source]
-    : recurringEs[source] ?? checkoutLaunchEs[source] ?? editorialEs[source] ?? churuDogEs[source] ?? yaguToyExpansionEs[source] ?? yaguChewTestEs[source] ?? yaguBasketEs[source] ?? yaguExpansionEs[source] ?? deliveryStatusEs[source] ?? es[source] ?? churuFormatsEs[source] ?? esProductText[source] ?? esDetails[source];
+    ? catsAtelierUk[source] ?? recurringUk[source] ?? checkoutLaunchUk[source] ?? editorialUk[source] ?? churuDogUk[source] ?? yaguToyExpansionUk[source] ?? yaguChewTestUk[source] ?? yaguBasketUk[source] ?? yaguExpansionUk[source] ?? deliveryStatusUk[source] ?? uk[source] ?? ukExtra[source] ?? churuFormatsUk[source] ?? ukProductNames[source] ?? ukProductCopy(source) ?? ukDetails[source] ?? esProductText[source] ?? esDetails[source]
+    : catsAtelierEs[source] ?? recurringEs[source] ?? checkoutLaunchEs[source] ?? editorialEs[source] ?? churuDogEs[source] ?? yaguToyExpansionEs[source] ?? yaguChewTestEs[source] ?? yaguBasketEs[source] ?? yaguExpansionEs[source] ?? deliveryStatusEs[source] ?? es[source] ?? churuFormatsEs[source] ?? esProductText[source] ?? esDetails[source];
   if (result === undefined) {
     result = source;
     for (const [pattern, replacement] of language === 'uk' ? [...recurringPatternsUk, ...ukPatterns] : [...recurringPatternsEs, ...esPatterns]) {
