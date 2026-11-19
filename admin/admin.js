@@ -435,7 +435,7 @@ function renderVariants() {
   const shortages = variantRows.filter(item => item.stock_position < 0).length;
   $('admin-content').innerHTML = `<section class="admin-card"><h2>Склад</h2><p class="admin-muted">Свободно - после оплаченных заказов. Число внесённых единиц зависит от сверки поставок и коробок</p>
     <div class="stock-filters" role="group" aria-label="Показать товары"><button type="button" data-stock-view="on_hand" aria-pressed="${stockView === 'on_hand'}">Учтено на складе · ${physicallyListed}</button><button type="button" data-stock-view="shortage" aria-pressed="${stockView === 'shortage'}">Нужно приобрести · ${shortages}</button><button type="button" data-stock-view="all" aria-pressed="${stockView === 'all'}">Все SKU</button></div></section>
-    <details class="admin-card"><summary>Загрузить подтверждённую стоимость партии</summary><p class="admin-muted">Суммы с IVA, recargo, доставкой и комиссией записываются отдельно от тарифа. Количество на складе не меняется. Перед записью проверяется точное количество каждого SKU</p><form data-verified-purchase-costs><label>JSON со строками партии<textarea name="items" rows="8" required placeholder='[{"variantId":"...","documentRef":"...","quantity":1,"totalCostCents":1000}]'></textarea></label><button type="submit">Сохранить стоимость</button></form></details>
+    <details class="admin-card"><summary>Загрузить подтверждённую стоимость партии</summary><p class="admin-muted">Суммы с IVA, recargo, доставкой и комиссией записываются отдельно от тарифа. Количество на складе не меняется. Перед записью проверяется точное количество каждого SKU</p><form data-verified-purchase-costs><label>Файл JSON со строками партии<input name="costFile" type="file" accept="application/json,.json"></label><label>Или вставьте JSON<textarea name="items" rows="5" placeholder='[{"variantId":"...","documentRef":"...","quantity":1,"totalCostCents":1000}]'></textarea></label><button type="submit">Сохранить стоимость</button></form></details>
     <div class="audit-toolbar"><label>Найти товар<input id="admin-variant-search" value="${escape(variantSearch)}" placeholder="Название, бренд или артикул"></label><span id="admin-variant-count"></span></div><div id="admin-variant-list"></div>`;
   renderVariantList();
 }
@@ -2067,7 +2067,8 @@ $('admin-content').addEventListener('submit', async event => {
     }
     if (form.hasAttribute('data-verified-purchase-costs')) {
       let items;
-      try { items = JSON.parse(String(values.get('items') || '')); }
+      const file = form.elements.costFile?.files?.[0];
+      try { items = JSON.parse(file ? await file.text() : String(values.get('items') || '')); }
       catch { throw new Error('Проверьте формат JSON'); }
       const result = await api('/api/admin/verified-purchase-costs', 'POST', { items });
       await load();
