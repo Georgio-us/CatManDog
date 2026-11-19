@@ -248,7 +248,8 @@ async function createOrder(db, payload, customer, manual = null) {
         quote.subtotalCents - quote.discountCents !== manual.expectedProductsCents)
       bad('Скидка изменилась. Проверьте заявку и согласуйте сумму заново', 409);
     if (!manual && delivery.mode !== 'national' && variants.rows.every(row => row.sale_status)) {
-      if (delivery.mode !== 'slot')
+      if (delivery.mode !== 'slot' && !(delivery.mode === 'preorder' &&
+        variants.rows.some(row => row.product_id.startsWith('cats-atelier-'))))
         bad('Проверьте выбранный способ доставки');
     }
     const orderId = randomUUID();
@@ -270,7 +271,7 @@ async function createOrder(db, payload, customer, manual = null) {
       : delivery.mode === 'soon' ? { mode: 'soon', reserved: false }
       : delivery.mode === 'slot' ? { mode:'slot', date:delivery.date,
         window:delivery.window, reserved:false }
-      : delivery.mode === 'preorder' ? { mode:'preorder', estimateHours:[24,48], reserved:false }
+      : delivery.mode === 'preorder' ? { mode:'preorder', estimateBusinessDays:[4,6], reserved:false }
       : { mode: 'scheduled', date: delivery.date, time: delivery.time, reserved: Boolean(manual) };
     const billingProfile = await client.query('SELECT delivery_tax_rate_bps FROM billing_profile WHERE id=true');
     const deliveryTaxRate = billingProfile.rows[0]?.delivery_tax_rate_bps ?? null;
