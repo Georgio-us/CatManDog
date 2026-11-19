@@ -2203,7 +2203,8 @@ export async function handleApi(db, req, res, pathname) {
     if (pathname === '/api/catalog' && req.method === 'GET') {
       const list = await liveCatalogSnapshot(db);
       return json(res, 200, { variants: list.map(({ price_override_cents, source_price_cents,
-        purchase_price_cents, sale_price_cents, stock_quantity, reserved_quantity, reorder_point, target_stock,
+        purchase_price_cents, sale_price_cents, stock_quantity, reserved_quantity, committed_quantity,
+        reorder_point, target_stock,
         tax_rate_bps, selected_supplier_units, supplier_source_count, sourcing_availability,
         price_basis,price_review,pickup_available,
         ...entry }) => ({ ...entry,

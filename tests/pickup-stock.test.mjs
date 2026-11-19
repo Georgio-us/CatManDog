@@ -7,6 +7,8 @@ test('pickup includes only free physical stock, not supplier availability or res
   const rows = [
     { variant_id: 'free', availability: 'on_hand', stock_quantity: 2, reserved_quantity: 1 },
     { variant_id: 'reserved', availability: 'on_hand', stock_quantity: 1, reserved_quantity: 1 },
+    { variant_id: 'committed', availability: 'on_hand', stock_quantity: 1,
+      reserved_quantity: 0, committed_quantity: 1 },
     { variant_id: 'supplier', availability: 'source_on_demand', stock_quantity: 0, reserved_quantity: 0 },
     { variant_id: 'pending', availability: 'pending', stock_quantity: 3, reserved_quantity: 0 }
   ].map(row => ({ ...row, product_id: row.variant_id, name: row.variant_id,
