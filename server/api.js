@@ -15,7 +15,8 @@ import { currentStaff, currentVisitStaff, createStaffSession, staffCookie, clear
   staffToken, staffVisitCookie, clearStaffVisitCookie,
   revokeStaffSession, bootstrapOwner } from './staff.js';
 import { financePreview } from './finance.js';
-import { loadAdminOrders, loadStockCommitments, loadOpenOrderDemand } from './order-operations.js';
+import { loadAdminOrders, loadStockCommitments, loadOpenOrderDemand,
+  loadCommercialPositionAdjustments } from './order-operations.js';
 import { backupConfiguration, listBackups } from './backup.js';
 import { createStripeCheckout, stripeMode, stripeReady, verifyStripeEvent } from './stripe.js';
 import { sendcloudReady, sendcloudShippingOptions } from './sendcloud.js';
@@ -220,6 +221,11 @@ async function createOrder(db, payload, customer, manual = null) {
       p.category,v.source_price_cents,
       v.price_override_cents,v.price_confirmed,v.source_orderable,v.availability,v.sale_status,v.tax_rate_bps,
       v.stock_quantity,v.reserved_quantity,p.name,
+      (SELECT coalesce(sum(i.quantity),0)::integer FROM order_items i
+        JOIN orders o ON o.id=i.order_id WHERE i.variant_id=v.id
+          AND i.source_mode!='on_hand' AND o.payment_status='paid'
+          AND o.is_test=false AND o.status IN ('received','packing','delivering'))
+        AS committed_quantity,
       (EXISTS (SELECT 1 FROM supplier_catalog_matches m
         JOIN supplier_catalog_items i ON i.id=m.item_id
         WHERE m.variant_id=v.id AND i.shop_price_cents>0)
@@ -1877,13 +1883,13 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { requests: rows.slice(0,25), hasMore: rows.length > 25 });
   }
   if (path === '/api/admin/variants' && req.method === 'GET') {
-    const [variants, commitments] = await Promise.all([
-      liveCatalogSnapshot(db), loadStockCommitments(db)
+    const [variants, commitments, adjustments] = await Promise.all([
+      liveCatalogSnapshot(db), loadStockCommitments(db), loadCommercialPositionAdjustments(db)
     ]);
     return json(res, 200, { variants: variants.map(variant => ({ ...variant,
       committed_quantity: commitments.get(variant.variant_id) || 0,
-      stock_position: (variant.stock_quantity ?? 0) - variant.reserved_quantity -
-        (commitments.get(variant.variant_id) || 0) })) });
+      stock_position: (variant.stock_quantity ?? 0) +
+        (adjustments.get(variant.variant_id) || 0) })) });
   }
   const saleStatusVariant = path.match(/^\/api\/admin\/variants\/([^/]+)\/sale-status$/);
   if (saleStatusVariant && req.method === 'PATCH') {
@@ -2029,29 +2035,40 @@ async function adminRoute(db, req, res, path) {
         bad('Обработка заказа возможна после подтверждения оплаты', 409);
       let nextStockState = order.stock_state;
       if (['cancelled','delivered'].includes(body.status)) {
-        const items = await client.query(`SELECT variant_id,quantity FROM order_items
-          WHERE order_id=$1 AND source_mode='on_hand' ORDER BY variant_id`, [order.id]);
+        const items = await client.query(`SELECT variant_id,quantity,source_mode FROM order_items
+          WHERE order_id=$1 ORDER BY variant_id`, [order.id]);
         for (const item of items.rows) {
           let changed;
           let reason;
           let deltaOnHand = 0;
           let deltaReserved = 0;
-          if (body.status === 'cancelled' && order.stock_state === 'reserved') {
+          if (body.status === 'cancelled' && order.stock_state === 'reserved' &&
+              item.source_mode === 'on_hand') {
             changed = await client.query(`UPDATE catalog_variants SET reserved_quantity=reserved_quantity-$1,
               updated_at=now() WHERE id=$2 AND reserved_quantity>=$1
               RETURNING stock_quantity,reserved_quantity`, [item.quantity, item.variant_id]);
             reason = 'order_released'; deltaReserved = -item.quantity;
-          } else if (body.status === 'cancelled' && order.stock_state === 'legacy') {
+          } else if (body.status === 'cancelled' && order.stock_state === 'legacy' &&
+              item.source_mode === 'on_hand') {
             changed = await client.query(`UPDATE catalog_variants SET stock_quantity=coalesce(stock_quantity,0)+$1,
               updated_at=now() WHERE id=$2 RETURNING stock_quantity,reserved_quantity`,
             [item.quantity, item.variant_id]);
             reason = 'legacy_order_cancelled'; deltaOnHand = item.quantity;
-          } else if (body.status === 'delivered' && order.stock_state === 'reserved') {
-            changed = await client.query(`UPDATE catalog_variants SET stock_quantity=stock_quantity-$1,
-              reserved_quantity=reserved_quantity-$1,updated_at=now()
-              WHERE id=$2 AND stock_quantity>=$1 AND reserved_quantity>=$1
-              RETURNING stock_quantity,reserved_quantity`, [item.quantity, item.variant_id]);
-            reason = 'order_fulfilled'; deltaOnHand = -item.quantity; deltaReserved = -item.quantity;
+          } else if (body.status === 'delivered' &&
+              (order.stock_state === 'reserved' ||
+                (order.stock_state === 'legacy' && item.source_mode !== 'on_hand'))) {
+            if (item.source_mode === 'on_hand') {
+              changed = await client.query(`UPDATE catalog_variants SET stock_quantity=stock_quantity-$1,
+                reserved_quantity=reserved_quantity-$1,updated_at=now()
+                WHERE id=$2 AND stock_quantity>=$1 AND reserved_quantity>=$1
+                RETURNING stock_quantity,reserved_quantity`, [item.quantity, item.variant_id]);
+              deltaReserved = -item.quantity;
+            } else {
+              changed = await client.query(`UPDATE catalog_variants SET stock_quantity=stock_quantity-$1,
+                updated_at=now() WHERE id=$2 AND stock_quantity>=$1
+                RETURNING stock_quantity,reserved_quantity`, [item.quantity, item.variant_id]);
+            }
+            reason = 'order_fulfilled'; deltaOnHand = -item.quantity;
           }
           if (changed) {
             if (!changed.rows.length) bad('Остаток заказа не найден или изменён', 409);

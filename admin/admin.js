@@ -166,7 +166,8 @@ function orderCard(order) {
         : delivery.mode === 'national' ? 'Передайте отправление перевозчику' : 'Срок нужно согласовать с покупателем'} · ${address.verified ? 'Адрес проверен' : 'Сверьте адрес перед отправкой'}</span></div>
     <div><strong>Комплектация</strong>${(order.items || []).some(item => item.sourceMode === 'on_hand')
       ? escape(({ reserved:'Товар зарезервирован',released:'Резерв снят',consumed:'Выдан со склада',legacy:'Старый учёт' })[order.stock_state] || '')
-      : (order.items || []).some(item => item.sourceMode === 'open_order') ? 'Нужно получить товар для заказа' : 'Товар под заказ'}</div>
+      : (order.items || []).some(item => item.sourceMode === 'open_order') ?
+        'Оформлен под заказ - сверьте физическое наличие' : 'Товар под заказ'}</div>
     <div><strong>Подтверждение по email</strong>${order.confirmation_sent_at ? 'Отправлено' : order.payment_status === 'paid' ? 'Не отправлено' : 'После оплаты'}
       ${order.confirmation_error ? `<br><span class="admin-muted">${escape(order.confirmation_error)}</span>` : ''}
       ${order.payment_status === 'paid' && !order.confirmation_sent_at
@@ -176,8 +177,8 @@ function orderCard(order) {
       · Закупка: ${item.purchaseCostCents === null ? 'не подтверждена' : `${euros(item.purchaseCostCents)} за шт ${item.purchaseCostBasis === 'includes_iva' ? 'с IVA' : item.purchaseCostBasis === 'excludes_iva' ? 'без IVA' : 'налоговый статус не указан'}`}
       ${item.purchaseCostSource ? `· ${escape(item.purchaseCostSource)}` : ''}
       ${item.purchaseCostCents === null && item.purchaseQuote ? `· ${purchaseQuoteHtml(item.purchaseQuote)}` : ''}
-      · ${item.sourceMode === 'on_hand' ? 'из нашего склада' : `для этого заказа нужно ${item.qty} шт`}
-      · Позиция склада ${item.stockPosition > 0 ? '+' : ''}${item.stockPosition} шт${item.orderStockDelta ? `, вклад этого заказа ${item.orderStockDelta} шт` : ''}</span></li>`).join('')}</ul>
+      · ${item.sourceMode === 'on_hand' ? 'из нашего склада' : 'оформлен под заказ'}
+      · Позиция покупок и оплат ${item.stockPosition > 0 ? '+' : ''}${item.stockPosition} шт${item.orderStockDelta ? `, вклад этого заказа ${item.orderStockDelta} шт` : ''}</span></li>`).join('')}</ul>
     <p class="admin-muted">Доставка для покупателя: ${euros(order.delivery_cents)} · IVA доставки: ${order.deliveryTaxRateBps === null ? 'ставка не указана' : `${order.deliveryTaxRateBps / 100}%`}</p>
     <form data-order-id="${escape(order.id)}"><label>Статус<select name="status">${['received','packing','delivering','delivered','cancelled'].map(status =>
       `<option value="${status}" ${status === order.status ? 'selected' : ''}>${({received:'Получен',packing:'Собираем',delivering:'Везём',delivered:'Доставлен',cancelled:'Отменён'})[status]}</option>`).join('')}</select></label>
@@ -251,8 +252,8 @@ function variantCard(variant) {
     <span class="admin-muted">${escape(variant.label)} · ${escape(variant.variant_id)}</span></div>
     <span>${price ? euros(price) : 'Без цены'}</span></div>
     <p class="admin-muted">Физически на складе: ${variant.stock_quantity ?? 0} · Резерв своего склада: ${variant.reserved_quantity || 0}
-      · К получению по оплаченным заказам: ${variant.committed_quantity || 0}
-      · Позиция склада: ${variant.stock_position > 0 ? '+' : ''}${variant.stock_position ?? 0}</p>
+      · Открытый спрос под заказ: ${variant.committed_quantity || 0}
+      · Позиция покупок и оплат: ${variant.stock_position > 0 ? '+' : ''}${variant.stock_position ?? 0}</p>
     <form data-variant-id="${escape(variant.variant_id)}"><label>Цена продажи, центы<input type="number" name="priceCents" min="1" value="${variant.price_override_cents ?? ''}" placeholder="Исходная: ${variant.source_price_cents ?? '-'}"></label>
     <label>Закупка, центы<input type="number" name="purchasePriceCents" min="0" value="${variant.purchase_price_cents ?? ''}"></label>
     <label>Доступность<select name="availability">${['source_on_demand','on_hand','unavailable'].map(mode =>
@@ -863,7 +864,7 @@ function renderReplenishment(variants, customerDemand = []) {
     <p class="admin-muted">Здесь отдельно показаны оплаченные клиентские заказы, которые нужно комплектовать, и пополнение своего склада. Заказ поставщику автоматически не отправляется</p></section>
     <section class="admin-card"><h2>Нужно получить для заказов</h2>
       ${customerDemand.length ? `<ul class="admin-items">${customerDemand.map(row => `<li><strong>${escape(row.name || row.variant_id)} · ${escape(row.label || '')}</strong>
-        - ${row.quantity} шт · ${escape(row.order_numbers)} · Физически ${row.physical_stock} шт · Позиция склада ${row.physical_stock - row.quantity} шт</li>`).join('')}</ul>` : '<p>Нет оплаченных заказов, ожидающих товар</p>'}</section>
+        - ${row.quantity} шт в открытых заказах · ${escape(row.order_numbers)} · Физически ${row.physical_stock} шт · Нужно покрыть ${-row.stock_position} шт · Позиция ${row.stock_position} шт</li>`).join('')}</ul>` : '<p>Нет дефицита по оплаченным заказам</p>'}</section>
     <section class="admin-card"><h2>Пополнение своего склада</h2>
       <p class="admin-muted">Количество рассчитано до целевого запаса и минимальной партии поставщика</p></section>
     ${variants.length ? `<div class="replenishment-list">${variants.map(row => `<article class="admin-card replenishment-row">

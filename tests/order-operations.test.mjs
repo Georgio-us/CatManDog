@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { summarizeOrder, loadStockCommitments, loadOpenOrderDemand } from '../server/order-operations.js';
+import { summarizeOrder, loadStockCommitments, loadOpenOrderDemand,
+  loadCommercialPositionAdjustments } from '../server/order-operations.js';
 
 const order = {
   number:'CMD-10004', payment_status:'paid', status:'received',
@@ -77,4 +78,30 @@ test('explicit test orders stay in history but do not add customer stock demand'
   } };
   assert.equal((await loadStockCommitments(db)).size, 0);
   assert.deepEqual(await loadOpenOrderDemand(db), []);
+});
+
+test('commercial position counts paid units after delivery and reverses physical fulfillment', async () => {
+  const db = { async query(sql) {
+    assert.match(sql, /o\.payment_status='paid' AND o\.is_test=false/);
+    assert.match(sql, /m\.reason='order_fulfilled'/);
+    assert.doesNotMatch(sql, /o\.status IN \('received','packing','delivering'\)/);
+    return { rows:[{ variant_id:'ordered', adjustment:-1 },
+      { variant_id:'delivered', adjustment:0 }] };
+  } };
+  const positions = await loadCommercialPositionAdjustments(db);
+  assert.equal(0 + positions.get('ordered'), -1);
+  assert.equal(0 + positions.get('delivered'), 0);
+});
+
+test('purchase list shows only the uncovered part of paid demand', async () => {
+  const db = { async query(sql) {
+    if (sql.includes('SELECT variant_id,sum(delta)')) return { rows:[
+      { variant_id:'short', adjustment:-2 }, { variant_id:'covered', adjustment:-1 }] };
+    return { rows:[
+      { variant_id:'short', name:'Short', physical_stock:1, quantity:2, order_numbers:'CMD-1' },
+      { variant_id:'covered', name:'Covered', physical_stock:1, quantity:1,
+        order_numbers:'CMD-2' }] };
+  } };
+  const rows = await loadOpenOrderDemand(db);
+  assert.deepEqual(rows.map(row => [row.variant_id, row.stock_position]), [['short', -1]]);
 });

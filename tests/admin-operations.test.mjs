@@ -185,8 +185,8 @@ test('replenishment uses each SKU threshold and includes a suggested quantity', 
       return { rows:[{ variant_id:'sku-1', available_quantity:3,
         reorder_point:3, target_stock:12, incoming_quantity:4, suggested_quantity:5 }] };
     }
-    if (sql.includes('FROM order_items i JOIN orders o') &&
-      sql.includes('source_mode')) return { rows:[] };
+    if (sql.includes('FROM order_items i JOIN orders o') ||
+      sql.includes('SELECT variant_id,sum(delta)')) return { rows:[] };
     throw new Error(`Unexpected SQL: ${sql}`);
   } };
   const req = { method:'GET', headers:{ cookie:`cmd_staff_session=${'d'.repeat(64)}` },
@@ -380,8 +380,8 @@ test('cancelling an order releases its reservation once and cannot reopen it', a
   const movements = [];
   const client = { async query(sql, params) {
     if (sql.startsWith('SELECT id,status,stock_state,payment_status')) return { rows:[{ ...order }] };
-    if (sql.startsWith('SELECT variant_id,quantity FROM order_items'))
-      return { rows:[{ variant_id:'sku-1', quantity:2 }] };
+    if (sql.startsWith('SELECT variant_id,quantity,source_mode FROM order_items'))
+      return { rows:[{ variant_id:'sku-1', quantity:2, source_mode:'on_hand' }] };
     if (sql.includes('SET reserved_quantity=reserved_quantity-$1')) {
       reserved -= params[0]; return { rows:[{ stock_quantity:physical, reserved_quantity:reserved }] };
     }
@@ -441,8 +441,8 @@ test('delivering a paid order consumes physical stock and reservation once', asy
   let movements = 0;
   const client = { async query(sql, params) {
     if (sql.startsWith('SELECT id,status,stock_state,payment_status')) return { rows:[{ ...order }] };
-    if (sql.startsWith('SELECT variant_id,quantity FROM order_items'))
-      return { rows:[{ variant_id:'sku-1', quantity:2 }] };
+    if (sql.startsWith('SELECT variant_id,quantity,source_mode FROM order_items'))
+      return { rows:[{ variant_id:'sku-1', quantity:2, source_mode:'on_hand' }] };
     if (sql.includes('SET stock_quantity=stock_quantity-$1')) {
       physical -= params[0]; reserved -= params[0];
       return { rows:[{ stock_quantity:physical, reserved_quantity:reserved }] };
@@ -469,6 +469,45 @@ test('delivering a paid order consumes physical stock and reservation once', asy
   assert.equal(physical, 3);
   assert.equal(reserved, 0);
   assert.equal(movements, 1);
+});
+
+test('delivering a paid source order consumes its received unit once', async () => {
+  const order = { id:'order-source', status:'packing', stock_state:'reserved', payment_status:'paid' };
+  let physical = 1;
+  const movements = [];
+  const client = { async query(sql, params) {
+    if (sql.startsWith('SELECT id,status,stock_state,payment_status')) return { rows:[{ ...order }] };
+    if (sql.startsWith('SELECT variant_id,quantity,source_mode FROM order_items'))
+      return { rows:[{ variant_id:'sku-source', quantity:1, source_mode:'open_order' }] };
+    if (sql.includes('SET stock_quantity=stock_quantity-$1')) {
+      if (physical < params[0]) return { rows:[] };
+      physical -= params[0];
+      return { rows:[{ stock_quantity:physical, reserved_quantity:0 }] };
+    }
+    if (sql.startsWith('INSERT INTO inventory_movements')) { movements.push(params); return { rowCount:1 }; }
+    if (sql.startsWith('UPDATE orders SET status=')) {
+      [order.status,order.stock_state] = params; return { rowCount:1 };
+    }
+    return { rowCount:1, rows:[] };
+  }, release() {} };
+  const db = { async query(sql) {
+    if (sql.includes('FROM staff_sessions'))
+      return { rows:[{ id:'staff-1', email:'owner@example.test', role:'owner' }] };
+    throw new Error(`Unexpected SQL: ${sql}`);
+  }, async connect() { return client; } };
+  const req = { method:'PATCH', headers:{ cookie:`cmd_staff_session=${'e'.repeat(64)}` },
+    socket:{ remoteAddress:'test-source-delivery' },
+    async *[Symbol.asyncIterator]() { yield JSON.stringify({ status:'delivered' }); } };
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const { state, res } = response();
+    await handleApi(db, req, res, '/api/admin/orders/order-source/status');
+    assert.equal(state.status, 200);
+  }
+  assert.equal(physical, 0);
+  assert.equal(movements.length, 1);
+  assert.equal(movements[0][7], 'order_fulfilled');
+  assert.equal(movements[0][8], -1);
+  assert.equal(movements[0][9], 0);
 });
 
 test('receiving stock records one movement and duplicate submission does not add it twice', async () => {

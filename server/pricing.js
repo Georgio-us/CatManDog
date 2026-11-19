@@ -66,7 +66,8 @@ export function priceQuote(lines, variants, promo = null, shippingCents = null, 
     const sourceMode = saleStatus === 'preorder' ? 'source_on_demand' :
       saleStatus === 'available' ?
         (variant.availability === 'on_hand' &&
-          variant.stock_quantity - (variant.reserved_quantity ?? 0) >= line.qty
+          variant.stock_quantity - (variant.reserved_quantity ?? 0) -
+            (variant.committed_quantity ?? 0) >= line.qty
           ? 'on_hand' : 'open_order') : variant.availability;
     return { productId: variant.product_id, variantId: id, name: variant.name, saleStatus,
       variantLabel: variant.label, qty: line.qty, unitPriceCents: price,
@@ -76,7 +77,8 @@ export function priceQuote(lines, variants, promo = null, shippingCents = null, 
         variant.sourcing_availability !== 'unavailable' && variant.supplier_matched !== false &&
         variant.availability !== 'unavailable' &&
         (variant.availability !== 'on_hand' ||
-          variant.stock_quantity - (variant.reserved_quantity ?? 0) >= line.qty) };
+          variant.stock_quantity - (variant.reserved_quantity ?? 0) -
+            (variant.committed_quantity ?? 0) >= line.qty) };
   });
   const subtotalCents = items.reduce((sum, item) => sum + item.lineCents, 0);
   const percent = promo?.percent_off ?? 0;

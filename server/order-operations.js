@@ -51,8 +51,9 @@ export function summarizeOrder(order, items, demandByVariant = new Map()) {
   const lines = items.map(item => {
     const cost = purchaseCost(item);
     const physical = item.stock_quantity ?? 0;
-    const commitments = demandByVariant.get(item.variant_id) || 0;
-    const stockPosition = physical - (item.reserved_quantity || 0) - commitments;
+    const entry = demandByVariant.get(item.variant_id);
+    const commitments = typeof entry === 'number' ? entry : entry?.demand || 0;
+    const stockPosition = physical + (typeof entry === 'number' ? -entry : entry?.adjustment || 0);
     const taxLine = taxByVariant.get(item.variant_id);
     return { name: item.name, variantId: item.variant_id, variantLabel: item.variant_label,
       qty: item.quantity, unitPriceCents: item.unit_price_cents, sourceMode: item.source_mode,
@@ -62,7 +63,7 @@ export function summarizeOrder(order, items, demandByVariant = new Map()) {
       purchaseQuote: item.purchase_quote || null,
       physicalStock: physical, committedQuantity: commitments,
       stockPosition, orderStockDelta: !order.is_test && order.payment_status === 'paid' &&
-        activeStatuses.has(order.status) && item.source_mode !== 'on_hand' ? -item.quantity : 0 };
+        activeStatuses.has(order.status) ? -item.quantity : 0 };
   });
   const completeCost = lines.every(line => line.purchaseCostGrossCents !== null);
   const purchaseTotalCents = completeCost ? lines.reduce((sum, line) =>
@@ -88,7 +89,7 @@ export async function loadAdminOrders(db) {
     FROM orders o ORDER BY o.created_at DESC LIMIT 100`);
   if (!orders.length) return [];
   const ids = orders.map(order => order.id);
-  const [items, demand] = await Promise.all([
+  const [items, demand, adjustments] = await Promise.all([
     db.query(`SELECT i.order_id,i.variant_id,i.name,i.variant_label,i.quantity,
       i.unit_price_cents,i.source_mode,i.tax_rate_bps,
       v.stock_quantity,v.reserved_quantity,v.purchase_price_cents,
@@ -111,13 +112,17 @@ export async function loadAdminOrders(db) {
       WHERE i.order_id=ANY($1::uuid[]) ORDER BY i.id`, [ids]),
     db.query(`SELECT i.variant_id,sum(i.quantity)::integer AS quantity
       FROM order_items i JOIN orders o ON o.id=i.order_id
-      WHERE i.source_mode!='on_hand' AND o.payment_status='paid' AND o.is_test=false
+      WHERE o.payment_status='paid' AND o.is_test=false
         AND o.status IN ('received','packing','delivering')
-      GROUP BY i.variant_id`)
+      GROUP BY i.variant_id`),
+    loadCommercialPositionAdjustments(db)
   ]);
   const byOrder = new Map(orders.map(order => [order.id, []]));
   for (const item of items.rows) byOrder.get(item.order_id)?.push(item);
-  const demandByVariant = new Map(demand.rows.map(row => [row.variant_id, row.quantity]));
+  const demandByVariant = new Map(demand.rows.map(row => [row.variant_id,
+    { demand: row.quantity, adjustment: adjustments.get(row.variant_id) || 0 }]));
+  for (const [variantId, adjustment] of adjustments)
+    if (!demandByVariant.has(variantId)) demandByVariant.set(variantId, { demand: 0, adjustment });
   return orders.map(order => summarizeOrder(order, byOrder.get(order.id), demandByVariant));
 }
 
@@ -130,17 +135,41 @@ export async function loadStockCommitments(db) {
   return new Map(rows.map(row => [row.variant_id, row.quantity]));
 }
 
+// The physical count is reduced at fulfillment for own-stock orders. Add that
+// physical movement back before subtracting every paid unit, including delivered
+// orders. Pending checkout reservations never change the commercial position.
+export async function loadCommercialPositionAdjustments(db) {
+  const { rows } = await db.query(`SELECT variant_id,sum(delta)::integer AS adjustment FROM (
+    SELECT i.variant_id,-i.quantity AS delta
+    FROM order_items i JOIN orders o ON o.id=i.order_id
+    WHERE o.payment_status='paid' AND o.is_test=false AND o.status!='cancelled'
+    UNION ALL
+    SELECT m.variant_id,-m.delta_on_hand AS delta
+    FROM inventory_movements m JOIN orders o ON o.id=m.order_id
+    WHERE m.reason='order_fulfilled' AND o.status!='cancelled'
+    UNION ALL
+    SELECT i.variant_id,i.quantity AS delta
+    FROM order_items i JOIN orders o ON o.id=i.order_id
+    WHERE i.source_mode='on_hand' AND o.payment_status='paid'
+      AND o.status!='cancelled' AND NOT EXISTS (
+        SELECT 1 FROM inventory_movements r WHERE r.order_id=o.id
+          AND r.variant_id=i.variant_id AND r.reason='order_reserved')
+  ) movements GROUP BY variant_id`);
+  return new Map(rows.map(row => [row.variant_id, Number(row.adjustment)]));
+}
+
 export async function loadOpenOrderDemand(db) {
-  const { rows } = await db.query(`SELECT i.variant_id,p.name,v.label,p.brand,
+  const [{ rows }, adjustments] = await Promise.all([db.query(`SELECT i.variant_id,p.name,v.label,p.brand,
     coalesce(v.stock_quantity,0) AS physical_stock,
     sum(i.quantity)::integer AS quantity,
     string_agg(DISTINCT o.number, ', ' ORDER BY o.number) AS order_numbers
     FROM order_items i JOIN orders o ON o.id=i.order_id
     LEFT JOIN catalog_variants v ON v.id=i.variant_id
     LEFT JOIN catalog_products p ON p.id=v.product_id
-    WHERE i.source_mode!='on_hand' AND o.payment_status='paid' AND o.is_test=false
+    WHERE o.payment_status='paid' AND o.is_test=false
       AND o.status IN ('received','packing','delivering')
     GROUP BY i.variant_id,p.name,v.label,p.brand,v.stock_quantity
-    ORDER BY min(o.created_at),i.variant_id`);
-  return rows;
+    ORDER BY min(o.created_at),i.variant_id`), loadCommercialPositionAdjustments(db)]);
+  return rows.map(row => ({ ...row, stock_position: Number(row.physical_stock) +
+    (adjustments.get(row.variant_id) || 0) })).filter(row => row.stock_position < 0);
 }
