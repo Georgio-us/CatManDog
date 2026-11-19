@@ -1089,6 +1089,41 @@ button:hover:not(:disabled) {
   margin-bottom: 16px;
 }
 
+/* Physical pickup catalog */
+.pickup-page .breadcrumbs { margin-bottom: 38px; }
+.pickup-header { margin-bottom: 32px; }
+.pickup-page .page-title { max-width: 980px; margin: 0 0 20px; font-size: clamp(40px, 5vw, 72px); line-height: 1.08; }
+.pickup-page .lead { max-width: 760px; margin: 0; line-height: 1.5; }
+.pickup-pet-tabs { gap: 12px; margin: 0 0 36px; flex-wrap: wrap; }
+.pickup-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 40px; align-items: start; }
+.pickup-sidebar { min-width: 0; border-top: 1px solid var(--line); padding-top: 20px; }
+.pickup-sidebar h2 { font-size: 14px; margin: 0 0 18px; }
+.pickup-categories { display: flex; flex-direction: column; align-items: stretch; gap: 2px; }
+.pickup-category { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; min-height: 38px; padding: 9px 0; color: var(--muted); font-size: 13px; line-height: 1.4; text-decoration: none; }
+.pickup-category span { font-size: 11px; color: var(--muted); }
+.pickup-category:hover, .pickup-category.active { color: var(--ink); }
+.pickup-category.active { font-weight: 700; }
+.pickup-category:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+.pickup-results { min-width: 0; }
+.pickup-results .results-count { margin: 2px 0 20px; }
+.pickup-results .product-grid { grid-template-columns: repeat(var(--catalog-columns), minmax(0, 1fr)); }
+
+@media (max-width: 760px) {
+  .pickup-page .breadcrumbs { margin-bottom: 26px; }
+  .pickup-header { margin-bottom: 26px; }
+  .pickup-page .page-title { font-size: clamp(34px, 8vw, 48px); letter-spacing: -1.5px; }
+  .pickup-page .lead { font-size: 15px; }
+  .pickup-pet-tabs { gap: 8px; margin-bottom: 28px; }
+  .pickup-layout { display: block; }
+  .pickup-sidebar { padding-top: 18px; margin-bottom: 24px; }
+  .pickup-sidebar h2 { margin-bottom: 12px; }
+  .pickup-categories { flex-direction: row; overflow-x: auto; gap: 8px; padding: 0 2px 10px; scrollbar-width: thin; }
+  .pickup-category { flex: 0 0 auto; align-items: center; min-height: 38px; padding: 8px 13px; border-radius: 99px; background: var(--surface); white-space: nowrap; }
+  .pickup-category.active { color: white; background: var(--ink); }
+  .pickup-category.active span { color: white; }
+  .pickup-results .results-count { margin-bottom: 16px; }
+}
+
 .empty-state {
   padding: 55px 0;
   text-align: center;

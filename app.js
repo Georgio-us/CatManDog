@@ -269,21 +269,31 @@ function card(p){
 }
 function pickupPage(){
   const copy={
-    es:{title:'Disponible para recogida',intro:'Productos que tenemos físicamente en València. Consulta el formato y escríbenos para acordar la recogida',all:'Todos',cat:'Para gatos',dog:'Para perros',empty:'Todavía no hay productos confirmados para recogida',unavailable:'No podemos comprobar la disponibilidad ahora',contact:'Consultar la recogida',view:'Ver producto',price:'Precio con IVA',unknown:'Precio por confirmar'},
-    ru:{title:'Доступно к самовывозу',intro:'Товары, которые физически находятся у нас в Валенсии. Выберите вариант и напишите нам, чтобы согласовать самовывоз',all:'Все',cat:'Для кошек',dog:'Для собак',empty:'Пока нет подтверждённых товаров для самовывоза',unavailable:'Сейчас не удаётся проверить наличие',contact:'Согласовать самовывоз',view:'Смотреть товар',price:'Цена с IVA',unknown:'Цена уточняется'},
-    uk:{title:'Доступно для самовивозу',intro:'Товари, які фізично знаходяться у нас у Валенсії. Виберіть варіант і напишіть нам, щоб узгодити самовивіз',all:'Усі',cat:'Для котів',dog:'Для собак',empty:'Поки немає підтверджених товарів для самовивозу',unavailable:'Зараз не вдається перевірити наявність',contact:'Узгодити самовивіз',view:'Переглянути товар',price:'Ціна з IVA',unknown:'Ціна уточнюється'}
+    es:{title:'Disponible para recogida',intro:'Productos que tenemos físicamente en València. Consulta el formato y escríbenos para acordar la recogida',all:'Todos',cat:'Para gatos',dog:'Para perros',categories:'Categorías',allProducts:'Todos los productos',empty:'Todavía no hay productos confirmados para recogida',unavailable:'No podemos comprobar la disponibilidad ahora',contact:'Consultar la recogida',view:'Ver producto',price:'Precio con IVA',unknown:'Precio por confirmar'},
+    ru:{title:'Доступно к самовывозу',intro:'Товары, которые физически находятся у нас в Валенсии. Выберите вариант и напишите нам, чтобы согласовать самовывоз',all:'Все',cat:'Для кошек',dog:'Для собак',categories:'Категории',allProducts:'Все товары',empty:'Пока нет подтверждённых товаров для самовывоза',unavailable:'Сейчас не удаётся проверить наличие',contact:'Согласовать самовывоз',view:'Смотреть товар',price:'Цена с IVA',unknown:'Цена уточняется'},
+    uk:{title:'Доступно для самовивозу',intro:'Товари, які фізично знаходяться у нас у Валенсії. Виберіть варіант і напишіть нам, щоб узгодити самовивіз',all:'Усі',cat:'Для котів',dog:'Для собак',categories:'Категорії',allProducts:'Усі товари',empty:'Поки немає підтверджених товарів для самовивозу',unavailable:'Зараз не вдається перевірити наявність',contact:'Узгодити самовивіз',view:'Переглянути товар',price:'Ціна з IVA',unknown:'Ціна уточнюється'}
   }[locale()]||{};
-  const selectedPet=route().params.get('pet');
-  const list=catalogProducts.flatMap(product=>snapshots(product)
+  const params=route().params;
+  const selectedPet=['cat','dog'].includes(params.get('pet'))?params.get('pet'):'';
+  const available=catalogProducts.flatMap(product=>snapshots(product)
     .filter(sku=>sku.pickupAvailable===true && sku.saleStatus!=='unavailable' && !sku.storefrontRetired &&
       (!selectedPet || product.pet===selectedPet))
     .map(sku=>({product,sku})));
+  const groups=homeGroupsForPet(selectedPet||'cat',[...new Set(available.map(item=>item.product))]);
+  if(!selectedPet){
+    const known=new Set(groups.map(group=>group.id));
+    homeGroupsForPet('dog',[...new Set(available.map(item=>item.product))]).forEach(group=>{if(!known.has(group.id)){groups.push(group);known.add(group.id);}});
+  }
+  const selectedGroup=groups.some(group=>group.id===params.get('group'))?params.get('group'):'';
+  const list=selectedGroup?available.filter(({product})=>homeGroupForProduct(product)===selectedGroup):available;
+  const pickupHref=group=>{const query=new URLSearchParams();if(selectedPet)query.set('pet',selectedPet);if(group)query.set('group',group);return `/recogida${query.size?`?${query}`:''}`;};
+  const categoryLinks=[{id:'',label:copy.allProducts},...groups.map(group=>({id:group.id,label:translate(group.label)}))].map(group=>`<a class="pickup-category ${selectedGroup===group.id?'active':''}" href="${escape(pickupHref(group.id))}" ${selectedGroup===group.id?'aria-current="page"':''}>${escape(group.label)}<span>${group.id?available.filter(({product})=>homeGroupForProduct(product)===group.id).length:available.length}</span></a>`).join('');
   const cards=list.map(({product,sku})=>{
     const href=`${productHref(product.id)}?variant=${encodeURIComponent(sku.id)}`;
     const price=storefrontPrice(sku);
     return `<article class="product-card real-product-card"><a class="product-card-open" href="${escape(href)}" aria-label="${escape(copy.view)}: ${escape(product.name)} ${escape(sku.label||'')}"></a><div class="product-media">${imageBlock(sku.image||product.image)}<span class="product-availability-tag product-availability-stock">${escape(copy.title)}</span></div><div class="product-info"><small>${escape(product.brand||'CatManDog')}${sku.label?` · ${escape(sku.label)}`:''}</small><div class="product-title"><h3>${escape(product.name)} <span class="product-open-cue">${icon('arrow')}</span></h3></div><span class="retail-label">${escape(copy.price)}</span><div class="product-price"><div class="product-price-values"><span>${price===null?escape(copy.unknown):money(price)}</span></div><a class="product-card-action" href="${escape(href)}">${escape(copy.view)}${icon('arrow')}</a></div></div></article>`;
   }).join('');
-  return `<div class="page pickup-page">${crumbs(copy.title)}<h1 class="page-title">${escape(copy.title)}</h1><p class="lead">${escape(copy.intro)}</p><div class="pet-tabs" role="group" aria-label="${escape(copy.title)}">${[['',copy.all],['cat',copy.cat],['dog',copy.dog]].map(([pet,label])=>`<a class="pill ${selectedPet===pet||(!selectedPet&&!pet)?'active':''}" href="/recogida${pet?`?pet=${pet}`:''}" ${selectedPet===pet||(!selectedPet&&!pet)?'aria-current="page"':''}>${escape(label)}</a>`).join('')}</div><p class="results-count" role="status">${catalogUnavailable?escape(copy.unavailable):itemCount(list.length)}</p>${list.length?`<div class="product-grid">${cards}</div>`:empty(catalogUnavailable?copy.unavailable:copy.empty,'',copy.contact,'/#/support')}</div>`;
+  return `<div class="page pickup-page">${crumbs(copy.title)}<header class="pickup-header"><h1 class="page-title">${escape(copy.title)}</h1><p class="lead">${escape(copy.intro)}</p></header><div class="pet-tabs pickup-pet-tabs" role="group" aria-label="${escape(copy.title)}">${[['',copy.all],['cat',copy.cat],['dog',copy.dog]].map(([pet,label])=>`<a class="pill ${selectedPet===pet?'active':''}" href="/recogida${pet?`?pet=${pet}`:''}" ${selectedPet===pet?'aria-current="page"':''}>${escape(label)}</a>`).join('')}</div><div class="pickup-layout"><aside class="pickup-sidebar"><h2>${escape(copy.categories)}</h2><nav class="pickup-categories" aria-label="${escape(copy.categories)}">${categoryLinks}</nav></aside><div class="pickup-results"><p class="results-count" role="status">${catalogUnavailable?escape(copy.unavailable):itemCount(list.length)}</p>${list.length?`<div class="product-grid">${cards}</div>`:empty(catalogUnavailable?copy.unavailable:copy.empty,'',copy.contact,'/#/support')}</div></div></div>`;
 }
 function goodTogether(product){
   const suggestions=recommendForProduct(product,catalogProducts,{cart});
