@@ -157,7 +157,7 @@ function orderCard(order) {
   const spread = order.merchandiseSpreadCents === null ? 'Не рассчитана полностью' : euros(order.merchandiseSpreadCents);
   const verifiedCostCount = (order.items || []).filter(item => item.purchaseCostBasis === 'verified_landed').length;
   const costBasisNote = verifiedCostCount === (order.items || []).length && verifiedCostCount
-    ? 'Закупка товаров - фактическая стоимость по документам и платежам.'
+    ? 'Закупка товаров - полная известная стоимость партии по документам и подтверждённым расходам.'
     : verifiedCostCount
       ? `Фактическая стоимость подтверждена для ${verifiedCostCount} из ${(order.items || []).length} позиций; остальные рассчитаны по текущим прайсам или ожидают сверки.`
       : 'Закупка товаров рассчитана по текущим прайсам или ожидает сверки с фактической оплатой.';
@@ -189,7 +189,7 @@ function orderCard(order) {
         ? `<form data-email-confirmation="${escape(order.id)}"><button type="submit">Повторить отправку</button></form>` : ''}</div></div>
     <ul class="admin-items">${(order.items || []).map(item => `<li><strong>${escape(item.name)} · ${escape(item.variantLabel)}</strong> - ${item.qty} шт × ${euros(item.unitPriceCents)}
       <br><span class="admin-muted">IVA: ${item.taxRateBps === null ? 'ставка не указана' : `${item.taxRateBps / 100}% · ${euros(item.taxCents)}`}
-      · Закупка: ${item.purchaseCostCents === null ? 'не подтверждена' : `${euros(item.purchaseCostCents)} за шт ${item.purchaseCostBasis === 'verified_landed' ? 'фактически уплачено' : item.purchaseCostBasis === 'includes_iva' ? 'с IVA' : item.purchaseCostBasis === 'excludes_iva' ? 'без IVA' : 'налоговый статус не указан'}`}
+      · Закупка: ${item.purchaseCostCents === null ? 'не подтверждена' : `${euros(item.purchaseCostCents)} за шт ${item.purchaseCostBasis === 'verified_landed' ? 'полная стоимость партии' : item.purchaseCostBasis === 'includes_iva' ? 'с IVA' : item.purchaseCostBasis === 'excludes_iva' ? 'без IVA' : 'налоговый статус не указан'}`}
       ${item.purchaseCostSource ? `· ${escape(item.purchaseCostSource)}` : ''}
       ${item.purchaseCostCents === null && item.purchaseQuote ? `· ${purchaseQuoteHtml(item.purchaseQuote)}` : ''}
       · ${item.sourceMode === 'on_hand' ? 'из нашего склада' : 'оформлен под заказ'}
