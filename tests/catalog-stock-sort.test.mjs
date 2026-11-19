@@ -64,7 +64,7 @@ test('unavailable cards go below every supplier-orderable card', () => {
   const unavailable = variant('unavailable', { saleStatus: 'unavailable',
     serverSourcingAvailability: 'source_on_demand' });
   const noSource = variant('no-source', { saleStatus: 'available',
-    serverSourcingAvailability: 'unavailable' });
+    serverSourcingAvailability: 'unavailable', serverAvailableForCart: false });
   const supplier = variant('supplier', { saleStatus: 'available',
     serverSourcingAvailability: 'source_on_demand', serverSourceOrderable: true });
   const committedButReorderable = variant('committed', { pickupAvailable: false,
@@ -79,4 +79,13 @@ test('unavailable cards go below every supplier-orderable card', () => {
   assert.equal(canSourceProduct(mixed), true);
   assert.deepEqual(sortStockFirst([unavailable, noSource, supplier, committedButReorderable, mixed])
     .map(product => product.id), ['supplier', 'committed', 'mixed', 'unavailable', 'no-source']);
+});
+
+test('cards offered for purchase stay ahead of visibly unavailable cards', () => {
+  const offered = { id: 'offered', variants: [{ saleStatus: 'available',
+    serverAvailableForCart: true, serverSourcingAvailability: 'unavailable' }] };
+  const unavailable = { id: 'unavailable', variants: [{ saleStatus: 'unavailable',
+    serverAvailableForCart: false }] };
+  assert.deepEqual(sortStockFirst([unavailable, offered]).map(item => item.id),
+    ['offered', 'unavailable']);
 });

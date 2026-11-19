@@ -24,7 +24,8 @@ export function canSourceProduct(product) {
     variant.storefrontRetired !== true &&
     variant.saleStatus !== 'unavailable' &&
     variant.serverAvailableForCart !== false &&
-    ((variant.serverSourceOrderable === true &&
+    (['available', 'preorder'].includes(variant.saleStatus) ||
+      (variant.serverSourceOrderable === true &&
         variant.serverSourcingAvailability === 'source_on_demand') ||
       (variant.serverSourceOrderable === true &&
         variant.serverSourcingAvailability === 'on_hand') ||

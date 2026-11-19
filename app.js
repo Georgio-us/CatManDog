@@ -26,7 +26,7 @@ import { analyticsItem, announceCommerce } from './analytics-events.js?v=deliver
 import { installAnalytics } from './analytics-consent.js?v=internal-browser-20261117';
 import { createCartActivity } from './cart-activity.js?v=internal-browser-20261117';
 import { matchesCatalogSearch, catalogSuggestions } from './catalog-search.js';
-import { sortStockFirst } from './catalog-stock-sort.js?v=stock-first-20261119';
+import { sortStockFirst } from './catalog-stock-sort.js?v=stock-first-20261119b';
 import { rememberProductOrigin, productOrigin, requestProductReturn,
   takeProductReturnScroll } from './product-return.js';
 
