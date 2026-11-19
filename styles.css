@@ -2175,21 +2175,20 @@ details ul {
 }
 
 .home-shortcuts .editorial-promo:after {
-  background: linear-gradient(90deg, #f2f5e9 0%, #f2f5e9 45%, #f2f5e9bb 63%, transparent 80%);
+  background: linear-gradient(90deg, #f2f5e9 0%, #f2f5e9ee 28%, #f2f5e988 48%, transparent 68%);
 }
 
 .home-shortcuts .shortcut-dog:after {
-  background: linear-gradient(90deg, #f1f0eb 0%, #f1f0eb 45%, #f1f0ebbb 63%, transparent 80%);
+  background: linear-gradient(90deg, #f1f0eb 0%, #f1f0ebee 28%, #f1f0eb88 48%, transparent 68%);
 }
 
 .home-shortcuts .shortcut-image {
-  width: 43%;
-  height: calc(100% - 42px);
-  right: 20px;
-  top: 21px;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  top: 0;
   object-fit: cover;
   object-position: center;
-  border-radius: 16px;
 }
 
 .home-shortcuts .promo-copy {
@@ -4288,12 +4287,12 @@ details .text-link {
 @media (max-width: 760px) {
   .home-shortcuts .editorial-promo,
   .home-shortcuts .editorial-promo:last-child {
-    min-height: 290px;
+    min-height: 0;
   }
   .home-shortcuts .promo-copy {
-    min-height: 290px;
-    width: 69%;
-    padding: 28px 22px;
+    min-height: 210px;
+    width: 100%;
+    padding: 22px 24px 24px;
   }
   .home-shortcuts .promo-copy h2,
   .home-shortcuts .editorial-promo:last-child .promo-copy h2 {
@@ -4301,23 +4300,21 @@ details .text-link {
     font-size: 29px;
   }
   .home-shortcuts .shortcut-image {
-    width: 42%;
-    height: 215px;
-    right: 12px;
-    top: 37px;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 190px;
+    object-position: center 48%;
   }
-  .home-shortcuts .shortcut-cat:after {
-    background: linear-gradient(90deg, #f2f5e9 0%, #f2f5e9 42%, #f2f5e9cc 70%, transparent 94%);
-  }
-  .home-shortcuts .shortcut-dog:after {
-    background: linear-gradient(90deg, #f1f0eb 0%, #f1f0eb 42%, #f1f0ebcc 70%, transparent 94%);
+  .home-shortcuts .editorial-promo:after {
+    display: none;
   }
 }
 
 @media (max-width: 420px) {
   .home-shortcuts .promo-copy {
-    width: 72%;
-    padding: 24px 18px;
+    width: 100%;
+    padding: 20px 18px 22px;
   }
   .home-shortcuts .promo-copy h2,
   .home-shortcuts .editorial-promo:last-child .promo-copy h2 {
@@ -4328,9 +4325,9 @@ details .text-link {
     font-size: 12px;
   }
   .home-shortcuts .shortcut-image {
-    width: 39%;
-    height: 178px;
-    top: 55px;
+    width: 100%;
+    height: 175px;
+    top: 0;
   }
   .shortcut-brands {
     max-width: 190px;

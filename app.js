@@ -14,7 +14,7 @@ import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=pickup-tags-20261119';
 
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
-import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=mobile-cards-20261115';
+import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=editorial-shortcuts-20261119';
 import { handleCatPickClick } from './cat-picks.js?v=picks-seo-20261112';
 import { installLocale, intlLocale, locale, translate } from './locale.js?v=pickup-main-nav-20261119';
 import { articlesEs } from './journal-content-es.js?v=es-1';

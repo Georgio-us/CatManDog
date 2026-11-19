@@ -116,15 +116,15 @@ export function homeShortcuts(products, icon, escape, language = 'ru') {
   const label = { ru: 'Подборка CatManDog', es: 'Selección CatManDog', uk: 'Добірка CatManDog' }[language];
   const action = { ru: 'Посмотреть товары', es: 'Ver productos', uk: 'Переглянути товари' }[language];
   const landmark = { ru: 'Подборки товаров', es: 'Selecciones de productos', uk: 'Добірки товарів' }[language];
+  const images = {
+    cat: { src: '/media/home-shortcuts/cat-editorial-v1.webp', alt: { ru: 'Кошка играет дома', es: 'Un gato juega en casa', uk: 'Кіт грається вдома' } },
+    dog: { src: '/media/home-shortcuts/dog-editorial-v1.webp', alt: { ru: 'Собака отдыхает дома', es: 'Un perro descansa en casa', uk: 'Собака відпочиває вдома' } }
+  };
   return `<section class="editorial-promos home-shortcuts" aria-label="${landmark}">
     ${cards.map(({ pet, title, description, brands }) => {
-      const list = homeShortcutProducts(products, pet);
-      const lead = list[0];
-      const leadVariant = pet === 'dog' && lead?.variants?.find(variant => variant.id === 'acana-grass-fed-lamb-11-4kg');
-      const image = leadVariant?.image?.src || lead?.image?.src || lead?.image;
-      const imageAlt = leadVariant?.image?.alt || lead?.image?.alt || lead?.name;
+      const image = images[pet];
       return `<a class="editorial-promo shortcut-${pet}" href="${language === 'es' ? pickHref(pet) : `#/picks/${pet}`}">
-        ${image ? `<img class="shortcut-image" src="${escape(image)}" alt="${escape(imageAlt)}" loading="lazy">` : ''}
+        <img class="shortcut-image" src="${image.src}" alt="${image.alt[language]}" loading="lazy">
         <div class="promo-copy"><span class="direction-label">${label}</span><h2>${title}</h2>
           <p>${description}</p><span class="shortcut-brands">${brands}</span>
           <span class="promo-link">${action} ${icon('arrow')}</span>
