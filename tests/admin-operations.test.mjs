@@ -172,6 +172,41 @@ test('stock plans require a target above the reorder point and are saved with an
     params[3].after.reorder_point === 3 && params[3].after.target_stock === 12));
 });
 
+test('verified purchase costs require the exact existing stock and never receive it again', async () => {
+  const writes = [];
+  let currentQuantity = 20;
+  const client = { async query(sql, params) {
+    writes.push([sql, params]);
+    if (sql.includes('SELECT id,stock_quantity FROM catalog_variants'))
+      return { rows:[{ id:'hbp-white',stock_quantity:currentQuantity }] };
+    return { rows:[],rowCount:1 };
+  }, release() {} };
+  const db = { async query(sql) {
+    if (sql.includes('FROM staff_sessions')) return { rows:[{
+      id:'staff-1',email:'owner@example.test',role:'owner' }] };
+    throw new Error(`Unexpected SQL: ${sql}`);
+  }, async connect() { return client; } };
+  const request = () => ({ method:'POST',
+    headers:{ cookie:`cmd_staff_session=${'c'.repeat(64)}` },
+    socket:{remoteAddress:'test-verified-cost'},
+    async *[Symbol.asyncIterator]() { yield JSON.stringify({ items:[{
+      variantId:'hbp-white',documentRef:'HB261112001',quantity:20,
+      totalCostCents:58539 }] }); } });
+  currentQuantity = 19;
+  const rejected = response();
+  await handleApi(db,request(),rejected.res,'/api/admin/verified-purchase-costs');
+  assert.equal(rejected.state.status,409);
+  assert.equal(writes.some(([sql]) => sql.includes('INSERT INTO verified_purchase_costs')),false);
+  currentQuantity = 20;
+  const accepted = response();
+  await handleApi(db,request(),accepted.res,'/api/admin/verified-purchase-costs');
+  assert.equal(accepted.state.status,200);
+  assert.equal(accepted.state.body.saved,1);
+  assert.ok(writes.some(([sql,params]) => sql.includes('INSERT INTO verified_purchase_costs') &&
+    params[0] === 'hbp-white' && params[3] === 58539));
+  assert.equal(writes.some(([sql]) => sql.includes('SET stock_quantity')),false);
+});
+
 test('replenishment uses each SKU threshold and includes a suggested quantity', async () => {
   const db = { async query(sql) {
     if (sql.includes('FROM staff_sessions')) return { rows:[{
