@@ -49,6 +49,19 @@ test('gross merchandise spread is shown only with complete comparable costs', ()
   assert.equal(complete.taxComplete, true);
 });
 
+test('verified paid batch cost takes precedence over old supplier tariff', () => {
+  const result = summarizeOrder({ ...order, subtotal_cents:5490, total_cents:5490,
+    delivery_cents:0 }, [line({ variant_id:'heybopet-hb-pwfs-s30s-white',
+    unit_price_cents:5490, purchase_price_cents:2650,
+    catalog_cost_cents:2650, verified_quantity:20,
+    verified_total_cost_cents:58539, verified_document_ref:'HB261112001' })]);
+  assert.equal(result.items[0].purchaseCostBasis, 'verified_landed');
+  assert.equal(result.items[0].purchaseCostGrossCents, 2927);
+  assert.equal(result.items[0].purchaseCostSource, 'HB261112001');
+  assert.equal(result.merchandiseSpreadCents, 2563);
+  assert.equal(result.costIsEstimate, false);
+});
+
 test('matching supplier quotes give the paid order a tax-aware purchase cost', () => {
   const result = summarizeOrder(order, [line(),
     line({ variant_id:'yagu-7515988-catalog-pack', name:'Duvo+', unit_price_cents:678,

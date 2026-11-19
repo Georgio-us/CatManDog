@@ -476,6 +476,20 @@ CREATE INDEX IF NOT EXISTS inventory_movements_order_idx ON inventory_movements(
 CREATE INDEX IF NOT EXISTS inventory_movements_purchase_item_idx
   ON inventory_movements(purchase_order_item_id);
 
+-- Verified, fully loaded cost of the currently received batch for a SKU.
+-- Separate from the supplier tariff stored on catalog_variants. This table
+-- never changes stock quantities and can be replaced when a new batch arrives.
+CREATE TABLE IF NOT EXISTS verified_purchase_costs (
+  variant_id text PRIMARY KEY REFERENCES catalog_variants(id) ON DELETE CASCADE,
+  document_ref text NOT NULL,
+  quantity integer NOT NULL CHECK (quantity > 0),
+  total_cost_cents integer NOT NULL CHECK (total_cost_cents >= 0),
+  nominal_cost_cents integer CHECK (nominal_cost_cents >= 0),
+  note text NOT NULL DEFAULT '',
+  created_by uuid REFERENCES staff_accounts(id) ON DELETE SET NULL,
+  updated_at timestamptz NOT NULL DEFAULT now()
+);
+
 CREATE TABLE IF NOT EXISTS inventory_receipt_documents (
   movement_id uuid PRIMARY KEY REFERENCES inventory_movements(id) ON DELETE CASCADE,
   filename text NOT NULL,

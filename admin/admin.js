@@ -257,11 +257,13 @@ function renderCartEvents(events) {
 }
 function variantCard(variant) {
   const price = variant.price_override_cents ?? variant.source_price_cents;
+  const verified = variant.verified_purchase_cost;
   const position = Number(variant.stock_position || 0);
   const activePaid = Number(variant.active_paid_quantity || 0);
   return `<article class="admin-card stock-card"><div class="admin-variant-top"><div><h2>${escape(variant.name)}</h2>
     <span class="admin-muted">${escape(variant.label)} · ${escape(variant.variant_id)}</span></div>
     <span>${price ? euros(price) : 'Без цены'}</span></div>
+    <p class="admin-muted">Фактическая стоимость партии: ${verified ? `${euros(verified.total_cost_cents)} за ${verified.quantity} шт · ${escape(verified.document_ref)}` : 'Не связана с SKU'}${verified?.nominal_cost_cents === 1 ? ' · бонус: условная закупочная цена 0,01 €' : ''}</p>
     <div class="stock-balance"><strong class="${position < 0 ? 'stock-shortage' : ''}">${position < 0 ? `Нужно приобрести ${-position} шт` : `Свободно после оплат ${position} шт`}</strong>
       <span>Внесено в складской учёт: ${variant.stock_quantity ?? 0} шт · Оплачено, ещё не выдано: ${activePaid ? `−${activePaid}` : '0'} шт</span></div>
     <details data-stock-id="${escape(variant.variant_id)}"><summary>Учесть поступление и посмотреть движения</summary><div class="stock-content">Загружаю</div></details>
@@ -433,6 +435,7 @@ function renderVariants() {
   const shortages = variantRows.filter(item => item.stock_position < 0).length;
   $('admin-content').innerHTML = `<section class="admin-card"><h2>Склад</h2><p class="admin-muted">Свободно - после оплаченных заказов. Число внесённых единиц зависит от сверки поставок и коробок</p>
     <div class="stock-filters" role="group" aria-label="Показать товары"><button type="button" data-stock-view="on_hand" aria-pressed="${stockView === 'on_hand'}">Учтено на складе · ${physicallyListed}</button><button type="button" data-stock-view="shortage" aria-pressed="${stockView === 'shortage'}">Нужно приобрести · ${shortages}</button><button type="button" data-stock-view="all" aria-pressed="${stockView === 'all'}">Все SKU</button></div></section>
+    <details class="admin-card"><summary>Загрузить подтверждённую стоимость партии</summary><p class="admin-muted">Суммы с IVA, recargo, доставкой и комиссией записываются отдельно от тарифа. Количество на складе не меняется. Перед записью проверяется точное количество каждого SKU</p><form data-verified-purchase-costs><label>JSON со строками партии<textarea name="items" rows="8" required placeholder='[{"variantId":"...","documentRef":"...","quantity":1,"totalCostCents":1000}]'></textarea></label><button type="submit">Сохранить стоимость</button></form></details>
     <div class="audit-toolbar"><label>Найти товар<input id="admin-variant-search" value="${escape(variantSearch)}" placeholder="Название, бренд или артикул"></label><span id="admin-variant-count"></span></div><div id="admin-variant-list"></div>`;
   renderVariantList();
 }
@@ -2060,6 +2063,15 @@ $('admin-content').addEventListener('submit', async event => {
       brandMatchEditing = false;
       renderBrands();
       message('Сопоставление товара обновлено');
+      return;
+    }
+    if (form.hasAttribute('data-verified-purchase-costs')) {
+      let items;
+      try { items = JSON.parse(String(values.get('items') || '')); }
+      catch { throw new Error('Проверьте формат JSON'); }
+      const result = await api('/api/admin/verified-purchase-costs', 'POST', { items });
+      await load();
+      message(`Стоимость сохранена для ${result.saved} SKU без изменения остатков`);
       return;
     }
     if (form.hasAttribute('data-purchase-create')) {

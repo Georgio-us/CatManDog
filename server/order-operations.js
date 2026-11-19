@@ -3,6 +3,12 @@ import { financePreview } from './finance.js';
 const activeStatuses = new Set(['received', 'packing', 'delivering']);
 
 function purchaseCost(item) {
+  if (item.verified_total_cost_cents !== null && item.verified_total_cost_cents !== undefined &&
+      Number(item.verified_quantity) > 0) {
+    const cents = Math.round(Number(item.verified_total_cost_cents) / Number(item.verified_quantity));
+    return { cents, basis: 'verified_landed', source: item.verified_document_ref || '',
+      grossCents: cents };
+  }
   const manual = item.purchase_price_cents;
   const offer = item.offer_cost_cents;
   const catalog = item.catalog_cost_cents;
@@ -93,6 +99,9 @@ export async function loadAdminOrders(db) {
     db.query(`SELECT i.order_id,i.variant_id,i.name,i.variant_label,i.quantity,
       i.unit_price_cents,i.source_mode,i.tax_rate_bps,
       v.stock_quantity,v.reserved_quantity,v.purchase_price_cents,
+      verified.quantity AS verified_quantity,
+      verified.total_cost_cents AS verified_total_cost_cents,
+      verified.document_ref AS verified_document_ref,
       v.tax_rate_bps AS current_tax_rate_bps,
       v.source->'purchaseQuote' AS purchase_quote,
       so.cost_cents AS offer_cost_cents,so.vat_included AS offer_vat_included,
@@ -101,6 +110,7 @@ export async function loadAdminOrders(db) {
       catalog.supplier_name AS catalog_supplier
       FROM order_items i
       LEFT JOIN catalog_variants v ON v.id=i.variant_id
+      LEFT JOIN verified_purchase_costs verified ON verified.variant_id=i.variant_id
       LEFT JOIN supplier_offers so ON so.variant_id=i.variant_id AND so.preferred=true
       LEFT JOIN suppliers s ON s.id=so.supplier_id
       LEFT JOIN LATERAL (SELECT ci.shop_price_cents,cs.shop_price_tax_basis,

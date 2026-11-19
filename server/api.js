@@ -1813,6 +1813,58 @@ async function adminRoute(db, req, res, path) {
       WHERE m.variant_id=$1 ORDER BY m.created_at DESC LIMIT 100`, [variantId]);
     return json(res, 200, { movements: rows });
   }
+  if (path === '/api/admin/verified-purchase-costs' && req.method === 'POST') {
+    const body = await readJson(req);
+    const items = body.items;
+    if (!Array.isArray(items) || !items.length || items.length > 100) bad('Укажите от 1 до 100 позиций');
+    const ids = new Set();
+    for (const item of items) {
+      if (!item || typeof item.variantId !== 'string' || !item.variantId ||
+          typeof item.documentRef !== 'string' || !item.documentRef.trim() ||
+          item.documentRef.length > 120 || !Number.isInteger(item.quantity) ||
+          item.quantity < 1 || item.quantity > 99999 ||
+          !Number.isInteger(item.totalCostCents) || item.totalCostCents < 0 ||
+          item.totalCostCents > 100000000 ||
+          (item.nominalCostCents !== undefined && item.nominalCostCents !== null &&
+            (!Number.isInteger(item.nominalCostCents) || item.nominalCostCents < 0 ||
+              item.nominalCostCents > 100000000)) || ids.has(item.variantId))
+        bad('Проверьте артикулы и суммы партии');
+      ids.add(item.variantId);
+    }
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const { rows } = await client.query(`SELECT id,stock_quantity FROM catalog_variants
+        WHERE id=ANY($1::text[]) FOR UPDATE`, [[...ids]]);
+      const byId = new Map(rows.map(row => [row.id, row]));
+      for (const item of items) {
+        const current = byId.get(item.variantId);
+        if (!current) bad(`SKU ${item.variantId} не найден`, 404);
+        if (Number(current.stock_quantity || 0) !== item.quantity)
+          bad(`Остаток ${item.variantId} изменился. Повторите сверку`, 409);
+      }
+      for (const item of items) {
+        await client.query(`INSERT INTO verified_purchase_costs
+          (variant_id,document_ref,quantity,total_cost_cents,nominal_cost_cents,note,created_by)
+          VALUES($1,$2,$3,$4,$5,$6,$7)
+          ON CONFLICT (variant_id) DO UPDATE SET
+            document_ref=excluded.document_ref,quantity=excluded.quantity,
+            total_cost_cents=excluded.total_cost_cents,
+            nominal_cost_cents=excluded.nominal_cost_cents,note=excluded.note,
+            created_by=excluded.created_by,updated_at=now()`,
+        [item.variantId, item.documentRef.trim(), item.quantity,item.totalCostCents,
+          item.nominalCostCents ?? null,cap(item.note,300),operator.id]);
+      }
+      await client.query(`INSERT INTO admin_audit_events(id,staff_id,action,target_id,details)
+        VALUES($1,$2,'verified_purchase_costs_saved',$3,$4)`,
+      [randomUUID(),operator.id,'first-purchases',{
+        items:items.map(item=>({variantId:item.variantId,documentRef:item.documentRef,
+          quantity:item.quantity,totalCostCents:item.totalCostCents}))}]);
+      await client.query('COMMIT');
+      return json(res,200,{ok:true,saved:items.length});
+    } catch (error) { await client.query('ROLLBACK'); throw error; }
+    finally { client.release(); }
+  }
   const receiptDocument = path.match(/^\/api\/admin\/inventory-movements\/([a-f0-9-]+)\/evidence$/);
   if (receiptDocument && req.method === 'GET') {
     const { rows } = await db.query(`SELECT mime,bytes FROM inventory_receipt_documents
@@ -1965,16 +2017,20 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { requests: rows.slice(0,25), hasMore: rows.length > 25 });
   }
   if (path === '/api/admin/variants' && req.method === 'GET') {
-    const [variants, commitments, adjustments, activeDemand] = await Promise.all([
+    const [variants, commitments, adjustments, activeDemand, verifiedCosts] = await Promise.all([
       liveCatalogSnapshot(db), loadStockCommitments(db), loadCommercialPositionAdjustments(db),
       db.query(`SELECT i.variant_id,sum(i.quantity)::integer AS quantity
         FROM order_items i JOIN orders o ON o.id=i.order_id
         WHERE o.payment_status='paid' AND o.is_test=false
           AND o.status IN ('received','packing','delivering')
-        GROUP BY i.variant_id`)
+        GROUP BY i.variant_id`),
+      db.query(`SELECT variant_id,document_ref,quantity,total_cost_cents,nominal_cost_cents
+        FROM verified_purchase_costs`)
     ]);
     const activeByVariant = new Map(activeDemand.rows.map(row => [row.variant_id, row.quantity]));
+    const verifiedByVariant = new Map(verifiedCosts.rows.map(row => [row.variant_id, row]));
     return json(res, 200, { variants: variants.map(variant => ({ ...variant,
+      verified_purchase_cost: verifiedByVariant.get(variant.variant_id) || null,
       committed_quantity: commitments.get(variant.variant_id) || 0,
       active_paid_quantity: activeByVariant.get(variant.variant_id) || 0,
       stock_position: (variant.stock_quantity ?? 0) +
