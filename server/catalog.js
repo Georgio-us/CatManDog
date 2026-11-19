@@ -320,6 +320,21 @@ export async function importCatalog(db, items = products) {
           FROM catalog_products p WHERE p.id=v.product_id AND p.active=true AND v.active=true`);
         await client.query("INSERT INTO catalog_migrations(name) VALUES('initial_brand_sale_status_2026_11_06')");
       }
+      const acanaWetUnavailableMigration = 'acana_wet_unavailable_2026_11_19';
+      const acanaWetUnavailableDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [acanaWetUnavailableMigration]);
+      if (!acanaWetUnavailableDone.rows.length) {
+        // The owner confirmed that the current distributor cannot supply these
+        // six wet-food SKUs. Preserve any physical stock and the retail price.
+        await client.query(`UPDATE catalog_variants SET sale_status='unavailable',
+          source_orderable=false,availability='unavailable',updated_at=now()
+          WHERE product_id = ANY($1::text[]) AND coalesce(stock_quantity,0)=0`, [[
+          'acana-wet-kitten', 'acana-wet-chicken', 'acana-wet-tuna',
+          'acana-wet-lamb', 'acana-wet-salmon', 'acana-wet-beef'
+        ]]);
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)',
+          [acanaWetUnavailableMigration]);
+      }
       const unpricedRequestMigration = 'unpriced_customer_request_2026_11_10';
       const dogActivityMigration = 'yagu_dog_activity_availability_2026_11_16';
       const dogActivityDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',

@@ -80,6 +80,13 @@ test('full catalog import archives retired rows once and preserves edited produc
     assert.equal(imported.find(([, params]) => params?.[0] === example.variant.id)?.[1][9], expected);
   }
   assert.ok(queries.some(([sql]) => sql.includes("initial_brand_sale_status_2026_11_06")));
+  const acanaWet = queries.find(([sql, params]) => sql.includes("sale_status='unavailable'") &&
+    params?.[0]?.includes('acana-wet-kitten'));
+  assert.deepEqual(acanaWet?.[1][0], [
+    'acana-wet-kitten', 'acana-wet-chicken', 'acana-wet-tuna',
+    'acana-wet-lamb', 'acana-wet-salmon', 'acana-wet-beef'
+  ]);
+  assert.match(acanaWet[0], /coalesce\(stock_quantity,0\)=0/);
   const yaguRetailBackfill = queries.find(([sql, params]) =>
     sql.startsWith('UPDATE catalog_variants SET source_price_cents=$2') && params?.[0] === 'yagu-1128036');
   assert.equal(yaguRetailBackfill?.[1][1], 3826);
