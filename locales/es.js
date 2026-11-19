@@ -206,6 +206,7 @@ export const es = {
   'Фильтры товаров': 'Filtros de productos',
   'Сортировка товаров': 'Ordenar productos',
   'По умолчанию': 'Relevancia',
+  'Сначала в наличии': 'Primero en stock',
   'Сначала дешевле': 'Precio: de menor a mayor',
   'Сначала дороже': 'Precio: de mayor a menor',
   'По названию': 'Nombre',
