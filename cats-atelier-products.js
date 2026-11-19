@@ -2204,4 +2204,7 @@ export const catsAtelierProducts = [
     "supplierLeadTime": "2-3 рабочих дня на изготовление, затем ориентировочно 2-3 рабочих дня на доставку из Польши",
     "productType": "wall"
   }
-];
+].map(product => ({
+  ...product,
+  description: `${product.description} Модель: ${product.name.replace('Cat’s Atelier - ', '')}, артикул ${product.manufacturerSku}.`
+}));

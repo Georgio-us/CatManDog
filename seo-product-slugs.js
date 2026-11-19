@@ -1,3 +1,5 @@
+import { catsAtelierProducts } from './cats-atelier-products.js';
+
 // Stable URL slugs for the current public catalog. Keep existing values when product names change.
 export const seoProductSlugs = Object.freeze({
   "rc-sterilised": "royal-canin-sterilised-37",
@@ -427,4 +429,7 @@ export const seoProductSlugs = Object.freeze({
   "yagu-7571305-toy": "duvo-lona-caballo-perro",
   "yagu-7571300-toy": "duvo-lona-rugby-perro",
   "yagu-7571319-toy": "duvo-peluche-vaca-perro",
+  ...Object.fromEntries(catsAtelierProducts.map(product => [
+    product.id, `cats-atelier-${product.manufacturerSku.toLowerCase()}`
+  ])),
 });

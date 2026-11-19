@@ -1,3 +1,5 @@
+import { catsAtelierProducts } from '../cats-atelier-products.js';
+
 export const catsAtelierEs = {
   "Для стены": "Para pared",
   "Настенная полка для отдыха и перемещения кошки по вертикали. Устанавливается на подходящую стену.": "Estante de pared para que el gato descanse y se mueva en vertical. Se instala en una pared adecuada.",
@@ -88,6 +90,7 @@ export const catsAtelierEs = {
   "Cat’s Atelier - настенная полка Wave 95 см": "Cat’s Atelier - estante de pared Wave 95 cm",
   "Cat’s Atelier - настенная полка Arc 95 см": "Cat’s Atelier - estante de pared Arc 95 cm"
 };
+
 export const catsAtelierUk = {
   "Для стены": "Для стіни",
   "Настенная полка для отдыха и перемещения кошки по вертикали. Устанавливается на подходящую стену.": "Настінна полиця для відпочинку та переміщення кота по вертикалі. Встановлюється на відповідну стіну.",
@@ -178,3 +181,14 @@ export const catsAtelierUk = {
   "Cat’s Atelier - настенная полка Wave 95 см": "Cat’s Atelier - настінна полиця Wave 95 см",
   "Cat’s Atelier - настенная полка Arc 95 см": "Cat’s Atelier - настінна полиця Arc 95 см"
 };
+
+for (const product of catsAtelierProducts) {
+  const base = product.description.slice(0, product.description.indexOf(' Модель: '));
+  const esName = catsAtelierEs[product.name]?.replace('Cat’s Atelier - ', '');
+  const ukName = catsAtelierUk[product.name]?.replace('Cat’s Atelier - ', '');
+  if (!catsAtelierEs[base] || !catsAtelierUk[base] || !esName || !ukName) {
+    throw new Error(`Missing Cat’s Atelier translation for ${product.manufacturerSku}`);
+  }
+  catsAtelierEs[product.description] = `${catsAtelierEs[base]} Modelo: ${esName}, referencia ${product.manufacturerSku}.`;
+  catsAtelierUk[product.description] = `${catsAtelierUk[base]} Модель: ${ukName}, артикул ${product.manufacturerSku}.`;
+}

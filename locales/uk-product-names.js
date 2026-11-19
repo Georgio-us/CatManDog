@@ -1,9 +1,11 @@
 import { yaguExpansionUkNames } from './yagu-expansion.js';
 import { churuDogUkNames } from './churu-dog.js';
 import { yaguToyExpansionUk } from './yagu-toy-expansion.js';
+import { catsAtelierUk } from './cats-atelier.js';
 
 // Ukrainian product names. Brand and registered line names remain unchanged.
 export const ukProductNames = {
+  ...catsAtelierUk,
   "Duvo+ Beauty - ножницы для когтей": "Duvo+ Beauty - ножиці для кігтів",
   "Duvo+ Beauty - когтерез L": "Duvo+ Beauty - кігтеріз L",
   "Duvo+ White Sensitive Baby Powder - наполнитель 12 кг": "Duvo+ White Sensitive Baby Powder - наповнювач 12 кг",

@@ -1,4 +1,4 @@
-import { seoProductSlugs } from './seo-product-slugs.js?v=yagu-toys-20261116';
+import { seoProductSlugs } from './seo-product-slugs.js?v=cats-atelier-20261119';
 
 // Each released family passed the current catalog, price, source, copy and image audit.
 // Keep this list explicit: a newly imported product must not become indexable by accident.
