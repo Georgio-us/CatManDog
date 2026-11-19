@@ -11,7 +11,7 @@ import { createCheckoutUI } from './checkout-ui.js?v=checkout-ux2-20261117';
 import { normalizeRecurringDraft, recurringChoiceFromCart, renderRecurringCart } from './recurring-cart.js?v=recurring-cards-20261117';
 import { availabilityRequestPage } from './availability-request-ui.js?v=yagu-toys-20261116';
 import { orderVariantId } from './order-progress.js';
-import { applyServerCatalog } from './server-prices.js?v=pickup-20261119';
+import { applyServerCatalog } from './server-prices.js?v=pickup-tags-20261119';
 
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
 import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=mobile-cards-20261115';

@@ -1,6 +1,11 @@
 import { hasVariants } from './variants.js?v=sale-price-policy-20261109';
 import { orderedVariants } from './product-content.js?v=catalog-sku-audit-20261110';
 
+const catalogTags = {
+  'cmd-source-39c2d5db76be47f7': 'Мелкие породы',
+  'cmd-source-5d1bd37fc7a7c699': 'С курицей и злаками'
+};
+
 function catalogImage(path, previousImages, alt) {
   const imagePath = value => {
     try { return new URL(value, 'https://catmandog.es').pathname.replace(/\.(?:png|jpe?g|webp)$/iu, ''); }
@@ -52,6 +57,7 @@ export function applyServerCatalog(products, catalogProducts, entries) {
     const original = current.get(id);
     const product = original || { id, isReal: true, tag: '', line: first.brand || 'CatManDog',
       optionLabel: 'Вариант', defaultVariantId: first.variant_id, variants: [] };
+    if (!product.tag && catalogTags[id]) product.tag = catalogTags[id];
     // A legacy boot card may have no variants. Once the server provides this SKU,
     // render it through the server-aware detail flow so sale status is respected.
     product.isReal = true;
