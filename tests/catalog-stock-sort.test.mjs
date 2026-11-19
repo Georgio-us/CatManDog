@@ -1,102 +1,58 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { canSourceProduct, hasFreeStock, keepAvailabilityOrder, sortStockFirst } from '../catalog-stock-sort.js';
+import { canSourceProduct, keepUnavailableLast } from '../catalog-stock-sort.js';
 
-test('default catalog order leads with free physical stock', () => {
-  const supplier = { id: 'supplier', variants: [{ pickupAvailable: false,
-    serverSourcingAvailability: 'source_on_demand', serverSourceOrderable: true,
-    saleStatus: 'available' }] };
-  const stock = { id: 'stock', variants: [{ pickupAvailable: true, saleStatus: 'available' }] };
-  const committed = { id: 'committed', variants: [{ pickupAvailable: false,
-    serverSourcingAvailability: 'unavailable', saleStatus: 'available' }] };
-  const mixed = { id: 'mixed', variants: [
-    { pickupAvailable: false }, { pickupAvailable: true, saleStatus: 'available' }
-  ] };
-  assert.deepEqual(sortStockFirst([supplier, stock, committed, mixed]).map(item => item.id),
-    ['stock', 'mixed', 'supplier', 'committed']);
-});
+const card = (id, variants) => ({ id, variants });
 
-test('stocked opening mixes brands and categories, skipping absent featured items', () => {
-  const stocked = (id, brand, category, foodType) => ({ id, brand, category, foodType,
-    variants: [{ pickupAvailable: true, saleStatus: 'available' }] });
-  const products = [
-    stocked('dog-orijen-original', 'Orijen', 'Корм', 'dry'),
-    stocked('acana-first-feast', 'Acana', 'Корм', 'dry'),
-    stocked('rc-wet', 'Royal Canin', 'Корм', 'wet'),
-    stocked('leonardo-light', 'Leonardo', 'Корм', 'dry'),
-    stocked('heybopet-hb-pwfs-s30s', 'Heybo Pet', 'Миски и поилки'),
-    stocked('another-dry', 'Acana', 'Корм', 'dry'),
-    stocked('another-wet', 'Leonardo', 'Корм', 'wet')
+test('default catalog preserves incoming order among purchasable cards', () => {
+  const cards = [
+    card('supplier-churu', [{ saleStatus: 'available', pickupAvailable: false }]),
+    card('unavailable-advance', [{ saleStatus: 'unavailable' }]),
+    card('stocked-wet', [{ saleStatus: 'available', pickupAvailable: true }]),
+    card('supplier-leonardo', [{ saleStatus: 'preorder', pickupAvailable: false }]),
+    card('stocked-litter', [{ saleStatus: 'available', pickupAvailable: true }])
   ];
-  assert.deepEqual(sortStockFirst(products).slice(0, 5).map(item => item.id), [
-    'heybopet-hb-pwfs-s30s', 'leonardo-light', 'rc-wet', 'acana-first-feast',
-    'dog-orijen-original'
+  assert.deepEqual(keepUnavailableLast(cards).map(item => item.id), [
+    'supplier-churu', 'stocked-wet', 'supplier-leonardo', 'stocked-litter',
+    'unavailable-advance'
   ]);
-  const withoutFountain = products.filter(product => product.id !== 'heybopet-hb-pwfs-s30s');
-  assert.equal(sortStockFirst(withoutFountain)[0].id, 'leonardo-light');
 });
 
-test('remaining stocked cards rotate category and brand before supplier cards', () => {
-  const product = (id, brand, category, foodType, pickupAvailable = true) => ({
-    id, brand, category, foodType, variants: [{ pickupAvailable, saleStatus: 'available' }]
-  });
-  const list = [
-    product('dry-1', 'Acana', 'Корм', 'dry'),
-    product('dry-2', 'Acana', 'Корм', 'dry'),
-    product('wet-1', 'Leonardo', 'Корм', 'wet'),
-    product('toy-1', 'Duvo+', 'Игрушки и аксессуары'),
-    { ...product('supplier', 'Ownat', 'Корм', 'dry', false), variants: [{
-      pickupAvailable: false, saleStatus: 'available',
-      serverSourcingAvailability: 'source_on_demand', serverSourceOrderable: true
-    }] }
+test('unavailable products keep their existing order at the end', () => {
+  const cards = [
+    card('advance', [{ saleStatus: 'unavailable' }]),
+    card('hill', [{ saleStatus: 'unavailable' }]),
+    card('rc', [{ saleStatus: 'available', serverAvailableForCart: true }]),
+    card('acana', [{ saleStatus: 'unavailable' }])
   ];
-  assert.deepEqual(sortStockFirst(list).map(item => item.id),
-    ['dry-1', 'wet-1', 'toy-1', 'dry-2', 'supplier']);
+  assert.deepEqual(keepUnavailableLast(cards).map(item => item.id),
+    ['rc', 'advance', 'hill', 'acana']);
 });
 
-test('unavailable or retired variants do not receive physical-stock priority', () => {
-  assert.equal(hasFreeStock({ variants: [{ pickupAvailable: true, saleStatus: 'unavailable' }] }), false);
-  assert.equal(hasFreeStock({ variants: [{ pickupAvailable: true, storefrontRetired: true }] }), false);
-});
-
-test('unavailable cards go below every supplier-orderable card', () => {
-  const variant = (id, options) => ({ id, variants: [options] });
-  const unavailable = variant('unavailable', { saleStatus: 'unavailable',
-    serverSourcingAvailability: 'source_on_demand' });
-  const noSource = variant('no-source', { saleStatus: 'available',
-    serverSourcingAvailability: 'unavailable', serverAvailableForCart: false });
-  const supplier = variant('supplier', { saleStatus: 'available',
-    serverSourcingAvailability: 'source_on_demand', serverSourceOrderable: true });
-  const committedButReorderable = variant('committed', { pickupAvailable: false,
-    saleStatus: 'available', serverSourceOrderable: true,
-    serverSourcingAvailability: 'on_hand' });
-  const mixed = { id: 'mixed', variants: [
+test('any purchasable variant keeps a card available', () => {
+  const mixed = card('mixed', [
     { saleStatus: 'unavailable' },
-    { saleStatus: 'available', serverSourcingAvailability: 'source_on_demand',
-      serverSourceOrderable: true }
-  ] };
-  assert.equal(canSourceProduct(unavailable), false);
+    { saleStatus: 'available', serverAvailableForCart: true }
+  ]);
   assert.equal(canSourceProduct(mixed), true);
-  assert.deepEqual(sortStockFirst([unavailable, noSource, supplier, committedButReorderable, mixed])
-    .map(product => product.id), ['supplier', 'committed', 'mixed', 'unavailable', 'no-source']);
+  assert.deepEqual(keepUnavailableLast([card('unavailable', [{ saleStatus: 'unavailable' }]), mixed])
+    .map(item => item.id), ['mixed', 'unavailable']);
 });
 
-test('cards offered for purchase stay ahead of visibly unavailable cards', () => {
-  const offered = { id: 'offered', variants: [{ saleStatus: 'available',
-    serverAvailableForCart: true, serverSourcingAvailability: 'unavailable' }] };
-  const unavailable = { id: 'unavailable', variants: [{ saleStatus: 'unavailable',
-    serverAvailableForCart: false }] };
-  assert.deepEqual(sortStockFirst([unavailable, offered]).map(item => item.id),
-    ['offered', 'unavailable']);
+test('retired or blocked variants do not hold a card above unavailable items', () => {
+  const blocked = card('blocked', [{ saleStatus: 'available', serverAvailableForCart: false }]);
+  const retired = card('retired', [{ saleStatus: 'available', storefrontRetired: true }]);
+  const offered = card('offered', [{ saleStatus: 'available', serverAvailableForCart: true }]);
+  assert.deepEqual(keepUnavailableLast([blocked, retired, offered]).map(item => item.id),
+    ['offered', 'blocked', 'retired']);
 });
 
-test('price and name sorting retain availability tiers', () => {
-  const item = (id, pickupAvailable, saleStatus) => ({ id, variants: [{
-    pickupAvailable, saleStatus, serverAvailableForCart: saleStatus !== 'unavailable'
-  }] });
-  const unavailable = item('cheap-unavailable', false, 'unavailable');
-  const supplier = item('supplier', false, 'available');
-  const stock = item('stock', true, 'available');
-  assert.deepEqual(keepAvailabilityOrder([unavailable, supplier, stock]).map(x => x.id),
-    ['stock', 'supplier', 'cheap-unavailable']);
+test('after customer price sorting only availability boundary changes', () => {
+  const cards = [
+    card('cheap-unavailable', [{ saleStatus: 'unavailable' }]),
+    card('mid-available', [{ saleStatus: 'available' }]),
+    card('expensive-available', [{ saleStatus: 'available' }])
+  ];
+  assert.deepEqual(keepUnavailableLast(cards).map(item => item.id),
+    ['mid-available', 'expensive-available', 'cheap-unavailable']);
 });
