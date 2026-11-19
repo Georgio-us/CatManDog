@@ -155,6 +155,12 @@ function orderCard(order) {
     failed:'Оплата не прошла', refunded:'Возвращён' }[order.payment_status] || order.payment_status;
   const cost = order.purchaseTotalCents === null ? 'Не рассчитана полностью' : euros(order.purchaseTotalCents);
   const spread = order.merchandiseSpreadCents === null ? 'Не рассчитана полностью' : euros(order.merchandiseSpreadCents);
+  const verifiedCostCount = (order.items || []).filter(item => item.purchaseCostBasis === 'verified_landed').length;
+  const costBasisNote = verifiedCostCount === (order.items || []).length && verifiedCostCount
+    ? 'Закупка товаров - фактическая стоимость по документам и платежам.'
+    : verifiedCostCount
+      ? `Фактическая стоимость подтверждена для ${verifiedCostCount} из ${(order.items || []).length} позиций; остальные рассчитаны по текущим прайсам или ожидают сверки.`
+      : 'Закупка товаров рассчитана по текущим прайсам или ожидает сверки с фактической оплатой.';
   return `<article class="admin-card order-card"><div class="admin-variant-top"><div><h2>${escape(order.number)} · ${order.is_test ? 'Тестовый · ' : ''}${escape(fulfillment)}</h2>
     <p class="admin-muted">Оформлен ${escape(cartTime(order.created_at))}${order.paid_at ? ` · Оплачен ${escape(cartTime(order.paid_at))}` : ''}</p></div>
     <strong>${euros(order.total_cents)}</strong></div>
@@ -163,7 +169,7 @@ function orderCard(order) {
       <div><span>Закупка товаров</span><strong>${cost}</strong></div>
       <div><span>Разница по товарам</span><strong>${spread}</strong></div>
       <div><span>IVA в заказе</span><strong>${order.taxComplete ? euros(order.taxTotalCents) : 'Не рассчитана полностью'}</strong></div></div>
-    <p class="admin-muted">Закупка - по текущим прайсам, не фактическая оплата поставщику. Разница по товарам не учитывает стоимость доставки, эквайринг, упаковку и возможный recargo${order.missingCostCount ? ` · Позиций без полной себестоимости: ${order.missingCostCount}` : ''}${order.is_test ? ' · Тестовый заказ не создаёт потребность в закупке' : ''}</p>
+    <p class="admin-muted">${costBasisNote} Разница по товарам не учитывает расходы на доставку покупателю, эквайринг и упаковку${order.missingCostCount ? ` · Позиций без полной себестоимости: ${order.missingCostCount}` : ''}${order.is_test ? ' · Тестовый заказ не создаёт потребность в закупке' : ''}</p>
     <div class="admin-grid"><div><strong>Покупатель</strong>${escape(order.customer_name)}<br>${escape(order.email)}<br>${escape(order.phone)}</div>
     <div><strong>Адрес</strong>${escape(address.street)}, ${escape(address.building)}<br>${escape(address.postcode)} ${escape(address.city || '')}<br>${escape(address.apartment || '')}<br>${escape(address.note || '')}</div>
     <div><strong>Доставка</strong>${delivery.mode === 'national' ? 'Отправка перевозчиком' :
@@ -183,7 +189,7 @@ function orderCard(order) {
         ? `<form data-email-confirmation="${escape(order.id)}"><button type="submit">Повторить отправку</button></form>` : ''}</div></div>
     <ul class="admin-items">${(order.items || []).map(item => `<li><strong>${escape(item.name)} · ${escape(item.variantLabel)}</strong> - ${item.qty} шт × ${euros(item.unitPriceCents)}
       <br><span class="admin-muted">IVA: ${item.taxRateBps === null ? 'ставка не указана' : `${item.taxRateBps / 100}% · ${euros(item.taxCents)}`}
-      · Закупка: ${item.purchaseCostCents === null ? 'не подтверждена' : `${euros(item.purchaseCostCents)} за шт ${item.purchaseCostBasis === 'includes_iva' ? 'с IVA' : item.purchaseCostBasis === 'excludes_iva' ? 'без IVA' : 'налоговый статус не указан'}`}
+      · Закупка: ${item.purchaseCostCents === null ? 'не подтверждена' : `${euros(item.purchaseCostCents)} за шт ${item.purchaseCostBasis === 'verified_landed' ? 'фактически уплачено' : item.purchaseCostBasis === 'includes_iva' ? 'с IVA' : item.purchaseCostBasis === 'excludes_iva' ? 'без IVA' : 'налоговый статус не указан'}`}
       ${item.purchaseCostSource ? `· ${escape(item.purchaseCostSource)}` : ''}
       ${item.purchaseCostCents === null && item.purchaseQuote ? `· ${purchaseQuoteHtml(item.purchaseQuote)}` : ''}
       · ${item.sourceMode === 'on_hand' ? 'из нашего склада' : 'оформлен под заказ'}
