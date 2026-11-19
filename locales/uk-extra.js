@@ -1,6 +1,7 @@
 // Hand-reviewed Ukrainian copy for the remaining storefront text.
 export const ukExtra = {
   "Подборки": "Добірки",
+  "Самовывоз": "Самовивіз",
   "Подборки товаров": "Добірки товарів",
   "Подборка CatManDog": "Добірка CatManDog",
   "Наш выбор для кошек": "Наш вибір для котів",
