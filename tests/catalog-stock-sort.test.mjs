@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { canSourceProduct, hasFreeStock, sortStockFirst } from '../catalog-stock-sort.js';
+import { canSourceProduct, hasFreeStock, keepAvailabilityOrder, sortStockFirst } from '../catalog-stock-sort.js';
 
 test('default catalog order leads with free physical stock', () => {
   const supplier = { id: 'supplier', variants: [{ pickupAvailable: false,
@@ -88,4 +88,15 @@ test('cards offered for purchase stay ahead of visibly unavailable cards', () =>
     serverAvailableForCart: false }] };
   assert.deepEqual(sortStockFirst([unavailable, offered]).map(item => item.id),
     ['offered', 'unavailable']);
+});
+
+test('price and name sorting retain availability tiers', () => {
+  const item = (id, pickupAvailable, saleStatus) => ({ id, variants: [{
+    pickupAvailable, saleStatus, serverAvailableForCart: saleStatus !== 'unavailable'
+  }] });
+  const unavailable = item('cheap-unavailable', false, 'unavailable');
+  const supplier = item('supplier', false, 'available');
+  const stock = item('stock', true, 'available');
+  assert.deepEqual(keepAvailabilityOrder([unavailable, supplier, stock]).map(x => x.id),
+    ['stock', 'supplier', 'cheap-unavailable']);
 });

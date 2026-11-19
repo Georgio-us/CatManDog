@@ -33,6 +33,15 @@ export function canSourceProduct(product) {
         variant.availabilityStatus === 'source_on_demand')));
 }
 
+export function availabilityRank(product) {
+  return hasFreeStock(product) ? 0 : canSourceProduct(product) ? 1 : 2;
+}
+
+export function keepAvailabilityOrder(products) {
+  products.sort((a, b) => availabilityRank(a) - availabilityRank(b));
+  return products;
+}
+
 export function sortStockFirst(products) {
   const stocked = products.filter(hasFreeStock);
   const orderable = products.filter(product => !hasFreeStock(product) && canSourceProduct(product));
