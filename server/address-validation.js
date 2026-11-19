@@ -1,4 +1,4 @@
-import { isMainlandPostcode } from '../shipping-policy.js';
+import { isMainlandPostcode, isFreeLocalDeliveryAddress } from '../shipping-policy.js';
 import { readFileSync } from 'node:fs';
 
 // CartoCiudad is the Spanish public address register (CC BY 4.0).
@@ -53,6 +53,9 @@ export async function verifyDeliveryAddress(address, mode, fetchImpl = fetch) {
   if (!/^\d{5}$/.test(postcode) || !city || !street || !house)
     throw error('Проверьте город, улицу, номер дома и почтовый индекс');
   if (!isMainlandPostcode(postcode)) throw error('Сейчас доставляем только по материковой Испании');
+  // The owner has confirmed this exact building; CartoCiudad currently returns no portal for it.
+  if (isFreeLocalDeliveryAddress(address))
+    return { city: 'València', postcode: '46024', local: true };
   const key = [postcode, normalized(city), streetName(street), normalized(building), mode].join('|');
   const cached = cache.get(key);
   if (cached && cached.expires > Date.now()) return cached.value;

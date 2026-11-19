@@ -235,7 +235,9 @@ async function createOrder(db, payload, customer, manual = null) {
         productsCents: productsQuote.subtotalCents - productsQuote.discountCents,
         freeDelivery: promo?.free_delivery === true }) : null;
     if (shipping && !shipping.available) bad('Для этой корзины доставка по Испании пока недоступна');
-    const quote = priceQuote(lines, variants.rows, promo, manual?.deliveryCents ?? shipping?.deliveryCents ?? null);
+    const quote = priceQuote(lines, variants.rows, promo,
+      manual?.deliveryCents ?? shipping?.deliveryCents ?? null,
+      manual || delivery.mode === 'national' ? null : address);
     if (!quote.orderable) bad('Один из товаров пока нельзя заказать');
     if (payload.recurring && (!customer?.emailVerified || customer.email.toLowerCase() !== email.toLowerCase()))
       bad('Войдите в кабинет с email этого заказа, чтобы сохранить регулярную покупку', 403);
@@ -2244,7 +2246,8 @@ export async function handleApi(db, req, res, pathname) {
           productsCents: productsQuote.subtotalCents - productsQuote.discountCents,
           freeDelivery: promo?.free_delivery === true }) : null;
       const quote = priceQuote(body.items, variants, promo,
-        shipping?.available ? shipping.deliveryCents : null);
+        shipping?.available ? shipping.deliveryCents : null,
+        body.delivery?.mode === 'national' ? null : body.address);
       const publicResult = publicQuote(quote);
       if (shipping && !shipping.available) {
         publicResult.deliveryCents = null;

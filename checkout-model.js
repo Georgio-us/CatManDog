@@ -1,18 +1,19 @@
-import { LOCAL_FREE_DELIVERY_FROM_CENTS, LOCAL_DELIVERY_FEE_CENTS,
-  isMainlandPostcode } from './shipping-policy.js';
+import { LOCAL_FREE_DELIVERY_FROM_CENTS, LOCAL_DELIVERY_FEE_CENTS, isFreeLocalDeliveryAddress,
+  isMainlandPostcode } from './shipping-policy.js?v=free-local-suissa-20261119';
 
 export const FREE_DELIVERY_FROM = LOCAL_FREE_DELIVERY_FROM_CENTS / 100;
 export const DELIVERY_FEE = LOCAL_DELIVERY_FEE_CENTS / 100;
 
 const cents = amount => Math.round(Number(amount) * 100);
 
-export function checkoutTotals(items, promo = null, shippingCents = null) {
+export function checkoutTotals(items, promo = null, shippingCents = null, address = null) {
   const subtotalCents = items.reduce((sum, item) => sum + cents(item.price) * item.qty, 0);
   const percent = Math.max(0, Math.min(100, Number(promo?.percent) || 0));
   const discountCents = Math.round(subtotalCents * percent / 100);
   const productsCents = subtotalCents - discountCents;
   const deliveryCents = shippingCents === null
-    ? !items.length || productsCents >= cents(FREE_DELIVERY_FROM) || promo?.freeShipping ? 0 : cents(DELIVERY_FEE)
+    ? !items.length || productsCents >= cents(FREE_DELIVERY_FROM) || promo?.freeShipping ||
+      isFreeLocalDeliveryAddress(address) ? 0 : cents(DELIVERY_FEE)
     : shippingCents;
   return {
     subtotal: subtotalCents / 100,

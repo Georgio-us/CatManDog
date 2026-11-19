@@ -1,5 +1,5 @@
 import { deliveryTiming, availableDeliverySlots } from '../checkout-model.js';
-import { LOCAL_DELIVERY_FEE_CENTS, LOCAL_FREE_DELIVERY_FROM_CENTS,
+import { LOCAL_DELIVERY_FEE_CENTS, LOCAL_FREE_DELIVERY_FROM_CENTS, isFreeLocalDeliveryAddress,
   isMainlandPostcode } from '../shipping-policy.js';
 import { salePriceDecision } from './sale-price-policy.js';
 
@@ -46,7 +46,7 @@ export function validateDelivery(delivery, now = new Date(), allowSameDay = fals
   return null;
 }
 
-export function priceQuote(lines, variants, promo = null, shippingCents = null) {
+export function priceQuote(lines, variants, promo = null, shippingCents = null, address = null) {
   if (!Array.isArray(lines) || !lines.length || lines.length > 50) throw invalidQuote('Корзина пуста или слишком велика');
   const byId = new Map(variants.map(variant => [variant.variant_id, variant]));
   const seen = new Set();
@@ -83,7 +83,8 @@ export function priceQuote(lines, variants, promo = null, shippingCents = null) 
   const discountCents = Math.round(subtotalCents * percent / 100);
   const productsCents = subtotalCents - discountCents;
   const deliveryCents = shippingCents === null
-    ? productsCents >= FREE_DELIVERY_FROM_CENTS || promo?.free_delivery ? 0 : DELIVERY_FEE_CENTS
+    ? productsCents >= FREE_DELIVERY_FROM_CENTS || promo?.free_delivery ||
+      isFreeLocalDeliveryAddress(address) ? 0 : DELIVERY_FEE_CENTS
     : shippingCents;
   return { items, subtotalCents, discountCents, deliveryCents,
     totalCents: productsCents + deliveryCents,
