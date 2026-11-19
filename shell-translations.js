@@ -26,6 +26,7 @@ export const shellTranslations = {
   'Для хорошей жизни вместе': 'Para disfrutar de la vida juntos',
   'За покупками': 'De compras',
   'Все товары': 'Todos los productos',
+  'Самовывоз': 'Recogida',
   'Рядом с вами': 'Cerca de ti',
   'Полезные инструменты': 'Recursos útiles',
   'О CatManDog': 'Sobre CatManDog',

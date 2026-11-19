@@ -95,6 +95,7 @@ export function applyServerCatalog(products, catalogProducts, entries) {
       sku.serverSourcingAvailability = row.sourcingAvailability || null;
       sku.serverSourceOrderable = row.source_orderable === true;
       sku.serverAvailableForCart = row.availableForCart === true;
+      sku.pickupAvailable = row.pickupAvailable === true;
       sku.availabilityStatus = sku.serverSourcingAvailability ||
         (row.availability === 'pending' && row.price_confirmed !== true
           ? 'pending' : row.availableForCart === false || row.source_orderable === false ||

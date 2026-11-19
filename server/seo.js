@@ -99,6 +99,12 @@ function pageData(pathname) {
       <p>Encuentra comida, arena y accesorios para tus compañeros. Compara marcas, formatos y precios en cada ficha de producto</p></div>
       <div class="journal-grid">${categoryLinks}</div></div>`
   };
+  if (pathname === '/recogida') return {
+    title: 'Disponible para recogida | CatManDog',
+    description: 'Consulta los productos de CatManDog con disponibilidad física para recogida en València',
+    robots: 'noindex,follow',
+    content: '<div class="page"><h1 class="page-title">Disponible para recogida</h1><p class="lead">Consulta los productos con disponibilidad física para recogida en València</p><p>Cargando disponibilidad actual</p></div>'
+  };
   if (pathname === '/revista') return {
     title: 'Revista sobre mascotas | CatManDog',
     description: 'Ideas y consejos para vivir con gatos y perros: hogar, juegos y viajes',
@@ -140,7 +146,7 @@ export async function serveSeo(req, res, pathname) {
   const body = await seoDocument(pathname);
   if (!body) return false;
   const noindex = seoCategoryForPath(pathname)?.indexable === false ||
-    seoProductForPath(pathname)?.indexable === false;
+    seoProductForPath(pathname)?.indexable === false || pathname === '/recogida';
   res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8',
     'Content-Length': Buffer.byteLength(body), 'Cache-Control': 'no-cache',
     'X-Content-Type-Options': 'nosniff',

@@ -660,7 +660,7 @@ export async function catalogSnapshot(db) {
     v.label,v.source AS price_source,v.source->>'weight' AS declared_weight,
     v.source->>'packageWeightKg' AS package_weight_kg,
     v.source_price_cents,v.price_override_cents,v.purchase_price_cents,
-    v.price_confirmed,v.source_orderable,v.availability,v.sale_status,v.stock_quantity,v.reorder_point,v.target_stock,
+    v.price_confirmed,v.source_orderable,v.availability,v.sale_status,v.stock_quantity,v.reserved_quantity,v.reorder_point,v.target_stock,
     v.tax_rate_bps,v.display_priority
     FROM catalog_variants v JOIN catalog_products p ON p.id=v.product_id
     WHERE p.active=true AND v.active=true
@@ -677,6 +677,8 @@ export async function catalogSnapshot(db) {
       ...row, sale_price_cents: price.priceCents, price_accepted: price.accepted,
       price_basis: price.basis, price_review: price.review,
       sourcing_availability: sourcingAvailability,
+      pickup_available: row.availability === 'on_hand' &&
+        Number(row.stock_quantity) - Number(row.reserved_quantity) > 0,
       selected_supplier_units: supplier?.selectedUnits || 0,
       supplier_source_count: supplier?.sourceCount || 0,
       orderable: row.sale_status !== 'unavailable' && price.accepted
