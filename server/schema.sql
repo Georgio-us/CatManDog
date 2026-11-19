@@ -462,6 +462,7 @@ ALTER TABLE inventory_movements ADD COLUMN IF NOT EXISTS unit_cost_cents integer
 ALTER TABLE inventory_movements ADD COLUMN IF NOT EXISTS idempotency_key text;
 ALTER TABLE inventory_movements ADD COLUMN IF NOT EXISTS purchase_order_item_id uuid
   REFERENCES purchase_order_items(id) ON DELETE SET NULL;
+ALTER TABLE inventory_movements ADD COLUMN IF NOT EXISTS unit_cost_includes_iva boolean;
 ALTER TABLE inventory_movements DROP CONSTRAINT IF EXISTS inventory_movements_reason_check;
 ALTER TABLE inventory_movements ADD CONSTRAINT inventory_movements_reason_check
   CHECK (reason IN ('receipt','adjustment','order_reserved','order_released',
@@ -474,6 +475,15 @@ CREATE INDEX IF NOT EXISTS inventory_movements_variant_idx
 CREATE INDEX IF NOT EXISTS inventory_movements_order_idx ON inventory_movements(order_id);
 CREATE INDEX IF NOT EXISTS inventory_movements_purchase_item_idx
   ON inventory_movements(purchase_order_item_id);
+
+CREATE TABLE IF NOT EXISTS inventory_receipt_documents (
+  movement_id uuid PRIMARY KEY REFERENCES inventory_movements(id) ON DELETE CASCADE,
+  filename text NOT NULL,
+  mime text NOT NULL CHECK (mime IN ('application/pdf','image/png','image/jpeg')),
+  sha256 text NOT NULL,
+  bytes bytea NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
 
 -- Physical supplier deliveries, separate from orders placed in supplier cabinets.
 -- PDF and payment evidence are private database records, never public static files.

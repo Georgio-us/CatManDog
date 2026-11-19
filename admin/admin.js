@@ -35,6 +35,7 @@ let saleStatusFilter = 'all';
 let openedProductId = '';
 let variantRows = [];
 let variantSearch = '';
+let stockView = 'on_hand';
 let customerSearch = '';
 let customerPage = 0;
 let customerLoadSerial = 0;
@@ -52,6 +53,14 @@ const escape = value => String(value ?? '').replace(/[&<>"']/g, char =>
   ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[char]);
 const disclosureIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
 const euros = cents => new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'}).format(cents / 100);
+const eurosInputCents = (value, allowZero = false) => {
+  const amount = String(value || '').trim();
+  if (!amount) return null;
+  if (!/^\d+(?:[.,]\d{1,2})?$/.test(amount)) throw new Error('Укажите цену в евро с точностью до цента');
+  const cents = Math.round(Number(amount.replace(',', '.')) * 100);
+  if (!allowZero && cents === 0) throw new Error('Цена продажи должна быть больше нуля');
+  return cents;
+};
 function purchaseQuoteHtml(quote) {
   if (!quote || !Number.isInteger(quote.priceCents)) return '';
   const units = Number.isInteger(quote.unitsPerPurchase) && quote.unitsPerPurchase > 1
@@ -89,7 +98,7 @@ function openPanel(role) {
   $('admin-login').hidden = true;
   $('admin-panel').hidden = false;
   $('admin-panel-title').textContent = role === 'support' ? 'Обращения покупателей' : 'Управление магазином';
-  $('admin-panel-lead').textContent = role === 'support' ? 'Вопросы и возвраты от покупателей' : 'Ревизия каталога, поставщики и заказы';
+  $('admin-panel-lead').textContent = role === 'support' ? 'Вопросы и возвраты от покупателей' : 'Заказы и склад';
   document.querySelectorAll('[data-full-admin]').forEach(element => { element.hidden = role !== 'admin'; });
   if (role !== 'admin') tab = 'requests';
   document.querySelectorAll('[data-tab]').forEach(item => item.setAttribute('aria-pressed', String(item.dataset.tab === tab)));
@@ -248,14 +257,16 @@ function renderCartEvents(events) {
 }
 function variantCard(variant) {
   const price = variant.price_override_cents ?? variant.source_price_cents;
-  return `<article class="admin-card"><div class="admin-variant-top"><div><h2>${escape(variant.name)}</h2>
+  const position = Number(variant.stock_position || 0);
+  const activePaid = Number(variant.active_paid_quantity || 0);
+  return `<article class="admin-card stock-card"><div class="admin-variant-top"><div><h2>${escape(variant.name)}</h2>
     <span class="admin-muted">${escape(variant.label)} · ${escape(variant.variant_id)}</span></div>
     <span>${price ? euros(price) : 'Без цены'}</span></div>
-    <p class="admin-muted">Физически на складе: ${variant.stock_quantity ?? 0} · Резерв своего склада: ${variant.reserved_quantity || 0}
-      · Открытый спрос под заказ: ${variant.committed_quantity || 0}
-      · Позиция покупок и оплат: ${variant.stock_position > 0 ? '+' : ''}${variant.stock_position ?? 0}</p>
-    <form data-variant-id="${escape(variant.variant_id)}"><label>Цена продажи, центы<input type="number" name="priceCents" min="1" value="${variant.price_override_cents ?? ''}" placeholder="Исходная: ${variant.source_price_cents ?? '-'}"></label>
-    <label>Закупка, центы<input type="number" name="purchasePriceCents" min="0" value="${variant.purchase_price_cents ?? ''}"></label>
+    <div class="stock-balance"><strong class="${position < 0 ? 'stock-shortage' : ''}">${position < 0 ? `Нужно приобрести ${-position} шт` : `Свободно после оплат ${position} шт`}</strong>
+      <span>Внесено в складской учёт: ${variant.stock_quantity ?? 0} шт · Оплачено, ещё не выдано: ${activePaid ? `−${activePaid}` : '0'} шт</span></div>
+    <details data-stock-id="${escape(variant.variant_id)}"><summary>Учесть поступление и посмотреть движения</summary><div class="stock-content">Загружаю</div></details>
+    <details class="stock-settings"><summary>Настройки SKU</summary><form data-variant-id="${escape(variant.variant_id)}"><label>Цена продажи, €<input type="number" name="priceEuros" min="0.01" step="0.01" value="${variant.price_override_cents === null || variant.price_override_cents === undefined ? '' : (variant.price_override_cents / 100).toFixed(2)}" placeholder="Исходная: ${variant.source_price_cents === null || variant.source_price_cents === undefined ? '-' : (variant.source_price_cents / 100).toFixed(2)}"></label>
+    <label>Закупочная цена, €<input type="number" name="purchasePriceEuros" min="0" step="0.01" value="${variant.purchase_price_cents === null || variant.purchase_price_cents === undefined ? '' : (variant.purchase_price_cents / 100).toFixed(2)}"></label>
     <label>Доступность<select name="availability">${['source_on_demand','on_hand','unavailable'].map(mode =>
       `<option value="${mode}" ${mode === variant.availability ? 'selected' : ''}>${({source_on_demand:'Покупаем под заказ',on_hand:'У нас на складе',unavailable:'Недоступен'})[mode]}</option>`).join('')}</select></label>
     <label>Фактически на складе<input type="number" name="stockQuantity" min="0" value="${variant.stock_quantity ?? ''}"></label>
@@ -264,7 +275,7 @@ function variantCard(variant) {
     <label>IVA товара, %<input type="number" name="taxRatePercent" min="0" max="100" step="0.01" value="${variant.tax_rate_bps === null || variant.tax_rate_bps === undefined ? '' : variant.tax_rate_bps / 100}" placeholder="После проверки"></label>
     <label>Причина изменения остатка<input name="stockNote" maxlength="300" class="wide-input" placeholder="Например, инвентаризация"></label>
     <label><input type="checkbox" name="priceConfirmed" ${variant.price_confirmed ? 'checked' : ''}> Цена подтверждена</label>
-    <button>Сохранить</button></form></article>`;
+    <button>Сохранить настройки</button></form></details></article>`;
 }
 const productGroup = product => product.category === 'Корм'
   ? product.food_type === 'dry' ? 'Сухой корм' : product.food_type === 'wet' ? 'Влажный корм' : 'Корм'
@@ -408,12 +419,21 @@ function renderVariantList() {
   const target = $('admin-variant-list');
   if (!target) return;
   const needle = variantSearch.toLocaleLowerCase('ru');
-  const matching = variantRows.filter(item => `${item.name} ${item.brand} ${item.label} ${item.variant_id}`.toLocaleLowerCase('ru').includes(needle));
+  const matching = variantRows.filter(item => {
+    if (!`${item.name} ${item.brand} ${item.label} ${item.variant_id}`.toLocaleLowerCase('ru').includes(needle)) return false;
+    if (needle) return true;
+    return stockView === 'all' || stockView === 'shortage' && item.stock_position < 0 ||
+      stockView === 'on_hand' && (item.stock_quantity ?? 0) > 0;
+  });
   target.innerHTML = matching.slice(0, 40).map(variantCard).join('') || '<p>SKU не найдены</p>';
   $('admin-variant-count').textContent = `Найдено: ${matching.length}${matching.length > 40 ? ' · показаны первые 40' : ''}`;
 }
 function renderVariants() {
-  $('admin-content').innerHTML = `<div class="audit-toolbar"><label>Найти SKU<input id="admin-variant-search" value="${escape(variantSearch)}" placeholder="Товар, бренд или артикул"></label><span id="admin-variant-count"></span></div><div id="admin-variant-list"></div>`;
+  const physicallyListed = variantRows.filter(item => (item.stock_quantity ?? 0) > 0).length;
+  const shortages = variantRows.filter(item => item.stock_position < 0).length;
+  $('admin-content').innerHTML = `<section class="admin-card"><h2>Склад</h2><p class="admin-muted">Свободно - после оплаченных заказов. Число внесённых единиц зависит от сверки поставок и коробок</p>
+    <div class="stock-filters" role="group" aria-label="Показать товары"><button type="button" data-stock-view="on_hand" aria-pressed="${stockView === 'on_hand'}">Учтено на складе · ${physicallyListed}</button><button type="button" data-stock-view="shortage" aria-pressed="${stockView === 'shortage'}">Нужно приобрести · ${shortages}</button><button type="button" data-stock-view="all" aria-pressed="${stockView === 'all'}">Все SKU</button></div></section>
+    <div class="audit-toolbar"><label>Найти товар<input id="admin-variant-search" value="${escape(variantSearch)}" placeholder="Название, бренд или артикул"></label><span id="admin-variant-count"></span></div><div id="admin-variant-list"></div>`;
   renderVariantList();
 }
 const shortDate = value => value ? new Date(value).toLocaleDateString('ru-RU') : 'Нет';
@@ -1092,6 +1112,8 @@ async function loadStock(details) {
         ${suppliers.filter(item => item.active).map(item =>
           `<option value="${escape(item.id)}">${escape(item.name)}</option>`).join('')}</select></label>
       <label>Цена закупки за шт, €<input type="number" name="costEuros" min="0" step="0.01"></label>
+      <label><input type="checkbox" name="costIncludesIva" checked> Закупочная цена включает IVA</label>
+      <label>Чек или фактура<input type="file" name="evidence" accept="application/pdf,image/png,image/jpeg"></label>
       <label>Примечание<input name="note" maxlength="300" placeholder="Поставка или источник"></label>
       <button type="submit">Записать приёмку</button></form>
       <p class="admin-muted">Если поставщик не выбран, добавьте примечание</p>
@@ -1100,7 +1122,9 @@ async function loadStock(details) {
         <span>${item.delta_on_hand > 0 ? '+' : ''}${item.delta_on_hand} на складе ·
           ${item.delta_reserved > 0 ? '+' : ''}${item.delta_reserved} резерв ·
           ${escape(new Date(item.created_at).toLocaleString('ru-RU'))}</span>
-        <small>${escape([item.supplier_name,item.purchase_order_number,item.order_number,item.note].filter(Boolean).join(' · '))}</small>
+        <small>${escape([item.supplier_name,item.purchase_order_number,item.order_number,item.note,
+          item.unit_cost_cents === null ? '' : `Закупка ${euros(item.unit_cost_cents)}${item.unit_cost_includes_iva === null ? '' : item.unit_cost_includes_iva ? ' с IVA' : ' без IVA'}`].filter(Boolean).join(' · '))}
+          ${item.evidence_filename ? `<a href="/api/admin/inventory-movements/${encodeURIComponent(item.id)}/evidence" target="_blank" rel="noopener">Чек или фактура: ${escape(item.evidence_filename)}</a>` : ''}</small>
       </li>`).join('')}</ol>` : '<p>Движений пока нет</p>'}`;
   } catch (error) { host.textContent = error.message; }
 }
@@ -1333,14 +1357,17 @@ async function load() {
       message(`Планов для проверки: ${result.orders.length}`);
       return;
     }
-    const path = { orders:'/api/admin/orders', variants:'/api/admin/variants' }[tab];
-    const result = await api(path);
     if (tab === 'variants') {
+      const [result, supplierData] = await Promise.all([
+        api('/api/admin/variants'), api('/api/admin/suppliers')]);
       variantRows = result.variants;
+      suppliers = supplierData.suppliers;
       renderVariants();
-      message(`Вариантов: ${variantRows.length}`);
+      message(`На складе: ${variantRows.filter(item => (item.stock_quantity ?? 0) > 0).length} SKU · Дефицит: ${variantRows.filter(item => item.stock_position < 0).length} SKU`);
       return;
     }
+    const path = { orders:'/api/admin/orders' }[tab];
+    const result = await api(path);
     renderOrders(result.orders);
     message(`Заказов покупателей: ${result.orders.filter(order => !order.is_test).length}`);
   } catch (error) { message(error.message); }
@@ -1582,6 +1609,13 @@ $('admin-content').addEventListener('change', async event => {
   }
 });
 $('admin-content').addEventListener('click', async event => {
+  const stockFilter = event.target.closest('[data-stock-view]');
+  if (stockFilter) {
+    stockView = stockFilter.dataset.stockView;
+    variantSearch = '';
+    renderVariants();
+    return;
+  }
   const reviewed = event.target.closest('[data-recurring-reviewed]');
   if (reviewed) {
     reviewed.disabled = true;
@@ -2078,9 +2112,12 @@ $('admin-content').addEventListener('submit', async event => {
     }
     else if (form.dataset.receiptVariant) {
       const price = String(values.get('costEuros') || '').trim();
+      const evidenceFile = values.get('evidence');
+      const evidence = evidenceFile?.size ? await deliveryFilePayload(evidenceFile) : null;
       await api('/api/admin/inventory-receipts', 'POST', { variantId: form.dataset.receiptVariant,
         supplierId: values.get('supplierId'), quantity: Number(values.get('quantity')),
         unitCostCents: price === '' ? null : Math.round(Number(price) * 100),
+        costIncludesIva: price === '' ? null : values.has('costIncludesIva'), evidence,
         note: values.get('note'), idempotencyKey: values.get('idempotencyKey') });
     }
     else if (form.dataset.emailConfirmation) {
@@ -2102,8 +2139,8 @@ $('admin-content').addEventListener('submit', async event => {
     else if (form.dataset.requestId) await api(`/api/admin/service-requests/${encodeURIComponent(form.dataset.requestId)}/status`, 'PATCH',
       { status: values.get('status') });
     else await api(`/api/admin/variants/${encodeURIComponent(form.dataset.variantId)}`, 'PATCH', {
-      priceCents: values.get('priceCents') === '' ? null : Number(values.get('priceCents')),
-      purchasePriceCents: values.get('purchasePriceCents') === '' ? null : Number(values.get('purchasePriceCents')),
+      priceCents: eurosInputCents(values.get('priceEuros')),
+      purchasePriceCents: eurosInputCents(values.get('purchasePriceEuros'), true),
       availability: values.get('availability'),
       stockQuantity: values.get('stockQuantity') === '' ? null : Number(values.get('stockQuantity')),
       reorderPoint: Number(values.get('reorderPoint')),

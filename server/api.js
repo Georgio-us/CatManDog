@@ -173,14 +173,33 @@ async function liveCatalogSnapshot(db) {
 }
 
 async function recordInventoryMovement(client, values) {
+  const id = randomUUID();
   await client.query(`INSERT INTO inventory_movements(id,variant_id,order_id,staff_id,supplier_id,
     unit_cost_cents,idempotency_key,reason,delta_on_hand,delta_reserved,on_hand_after,reserved_after,note,
-    purchase_order_item_id)
-    VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)`,
-  [randomUUID(), values.variantId, values.orderId || null, values.staffId || null,
+    purchase_order_item_id,unit_cost_includes_iva)
+    VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)`,
+  [id, values.variantId, values.orderId || null, values.staffId || null,
     values.supplierId || null, values.unitCostCents ?? null, values.idempotencyKey || null,
     values.reason, values.deltaOnHand || 0, values.deltaReserved || 0,
-    values.onHandAfter, values.reservedAfter, values.note || '', values.purchaseOrderItemId || null]);
+    values.onHandAfter, values.reservedAfter, values.note || '', values.purchaseOrderItemId || null,
+    values.unitCostIncludesIva ?? null]);
+  return id;
+}
+
+function receiptEvidence(file) {
+  if (!file) return null;
+  const filename = cap(file.filename, 150);
+  const base64 = String(file.base64 || '');
+  if (!filename || !/^[A-Za-z0-9+/]+={0,2}$/.test(base64) || base64.length > 5_500_000)
+    bad('Проверьте файл чека или фактуры');
+  const bytes = Buffer.from(base64, 'base64');
+  if (!bytes.length || bytes.length > 4_000_000) bad('Файл больше 4 МБ');
+  const pdf = bytes.subarray(0, 5).toString() === '%PDF-';
+  const png = bytes.subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10]));
+  const jpeg = bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
+  const mime = pdf ? 'application/pdf' : png ? 'image/png' : jpeg ? 'image/jpeg' : null;
+  if (!mime || file.mime !== mime) bad('Чек или фактура должны быть PDF, PNG или JPEG');
+  return { bytes, filename, mime, sha256: createHash('sha256').update(bytes).digest('hex') };
 }
 
 async function createOrder(db, payload, customer, manual = null) {
@@ -1781,10 +1800,12 @@ async function adminRoute(db, req, res, path) {
     const variantId = cap(new URL(req.url, 'http://localhost').searchParams.get('variantId'), 180);
     if (!variantId) bad('Укажите вариант');
     const { rows } = await db.query(`SELECT m.id,m.variant_id,m.reason,m.delta_on_hand,m.delta_reserved,
-      m.on_hand_after,m.reserved_after,m.unit_cost_cents,m.note,m.created_at,
+      m.on_hand_after,m.reserved_after,m.unit_cost_cents,m.unit_cost_includes_iva,m.note,m.created_at,
+      d.filename AS evidence_filename,
       o.number AS order_number,po.number AS purchase_order_number,
       s.name AS supplier_name,a.email AS staff_email
-      FROM inventory_movements m LEFT JOIN orders o ON o.id=m.order_id
+      FROM inventory_movements m LEFT JOIN inventory_receipt_documents d ON d.movement_id=m.id
+      LEFT JOIN orders o ON o.id=m.order_id
       LEFT JOIN purchase_order_items poi ON poi.id=m.purchase_order_item_id
       LEFT JOIN purchase_orders po ON po.id=poi.purchase_order_id
       LEFT JOIN suppliers s ON s.id=m.supplier_id
@@ -1792,12 +1813,28 @@ async function adminRoute(db, req, res, path) {
       WHERE m.variant_id=$1 ORDER BY m.created_at DESC LIMIT 100`, [variantId]);
     return json(res, 200, { movements: rows });
   }
+  const receiptDocument = path.match(/^\/api\/admin\/inventory-movements\/([a-f0-9-]+)\/evidence$/);
+  if (receiptDocument && req.method === 'GET') {
+    const { rows } = await db.query(`SELECT mime,bytes FROM inventory_receipt_documents
+      WHERE movement_id=$1`, [receiptDocument[1]]);
+    if (!rows.length) bad('Файл не найден', 404);
+    const file = rows[0];
+    const extension = file.mime === 'application/pdf' ? 'pdf' :
+      file.mime === 'image/png' ? 'png' : 'jpg';
+    res.writeHead(200, { 'Content-Type': file.mime, 'Content-Disposition':
+      `attachment; filename="receipt-${receiptDocument[1]}.${extension}"`,
+      'Cache-Control':'no-store', 'X-Content-Type-Options':'nosniff' });
+    return res.end(file.bytes);
+  }
   if (path === '/api/admin/inventory-receipts' && req.method === 'POST') {
-    const body = await readJson(req);
+    const body = await readJson(req, 5_600_000);
+    const evidence = receiptEvidence(body.evidence);
     const variantId = cap(body.variantId, 180);
     const supplierId = cap(body.supplierId, 36);
     const quantity = Number(body.quantity);
-    const cost = body.unitCostCents === null || body.unitCostCents === '' ? null : Number(body.unitCostCents);
+    const cost = body.unitCostCents == null || body.unitCostCents === '' ? null : Number(body.unitCostCents);
+    const costIncludesIva = cost === null || typeof body.costIncludesIva !== 'boolean'
+      ? null : body.costIncludesIva;
     const note = cap(body.note, 300);
     const key = cap(body.idempotencyKey, 100);
     if (!variantId || (supplierId && !validUuid(supplierId)) ||
@@ -1810,14 +1847,22 @@ async function adminRoute(db, req, res, path) {
       await client.query('BEGIN');
       const variant = await client.query(`SELECT id FROM catalog_variants WHERE id=$1 FOR UPDATE`, [variantId]);
       if (!variant.rows.length) bad('Вариант не найден', 404);
-      const existing = await client.query(`SELECT id,variant_id,delta_on_hand,supplier_id,unit_cost_cents,note
+      const existing = await client.query(`SELECT id,variant_id,delta_on_hand,supplier_id,unit_cost_cents,
+        unit_cost_includes_iva,note
         FROM inventory_movements
         WHERE idempotency_key=$1`, [key]);
       if (existing.rows[0]) {
         const recorded = existing.rows[0];
         if (recorded.variant_id !== variantId || recorded.delta_on_hand !== quantity ||
           (recorded.supplier_id || '') !== supplierId || recorded.unit_cost_cents !== cost ||
+          (recorded.unit_cost_includes_iva ?? null) !== costIncludesIva ||
           recorded.note !== note) bad('Ключ приёмки уже использован с другими данными', 409);
+        if (evidence) {
+          const saved = await client.query(`SELECT sha256 FROM inventory_receipt_documents
+            WHERE movement_id=$1`, [recorded.id]);
+          if (saved.rows[0]?.sha256 !== evidence.sha256)
+            bad('Для этой приёмки уже записан другой файл', 409);
+        }
         await client.query('COMMIT');
         return json(res, 200, { ok: true, alreadyRecorded: true });
       }
@@ -1825,12 +1870,22 @@ async function adminRoute(db, req, res, path) {
         const supplier = await client.query('SELECT id FROM suppliers WHERE id=$1 AND active=true', [supplierId]);
         if (!supplier.rows.length) bad('Поставщик не найден', 404);
       }
+      if (evidence) {
+        const duplicate = await client.query(`SELECT m.id FROM inventory_receipt_documents d
+          JOIN inventory_movements m ON m.id=d.movement_id
+          WHERE m.variant_id=$1 AND d.sha256=$2 LIMIT 1`, [variantId, evidence.sha256]);
+        if (duplicate.rows.length) bad('Этот чек уже учтён для товара. Повторная приёмка не записана', 409);
+      }
       const changed = await client.query(`UPDATE catalog_variants
         SET stock_quantity=coalesce(stock_quantity,0)+$1,availability='on_hand',updated_at=now()
         WHERE id=$2 RETURNING stock_quantity,reserved_quantity`, [quantity, variantId]);
-      await recordInventoryMovement(client, { variantId, staffId: operator.id, supplierId: supplierId || null,
+      const movementId = await recordInventoryMovement(client, { variantId, staffId: operator.id, supplierId: supplierId || null,
         unitCostCents: cost, idempotencyKey: key, reason: 'receipt', deltaOnHand: quantity,
-        onHandAfter: changed.rows[0].stock_quantity, reservedAfter: changed.rows[0].reserved_quantity, note });
+        onHandAfter: changed.rows[0].stock_quantity, reservedAfter: changed.rows[0].reserved_quantity, note,
+        unitCostIncludesIva: costIncludesIva });
+      if (evidence) await client.query(`INSERT INTO inventory_receipt_documents
+        (movement_id,filename,mime,sha256,bytes) VALUES($1,$2,$3,$4,$5)`,
+      [movementId, evidence.filename, evidence.mime, evidence.sha256, evidence.bytes]);
       await client.query('COMMIT');
       return json(res, 201, { ok: true });
     } catch (error) { await client.query('ROLLBACK');
@@ -1883,11 +1938,18 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { requests: rows.slice(0,25), hasMore: rows.length > 25 });
   }
   if (path === '/api/admin/variants' && req.method === 'GET') {
-    const [variants, commitments, adjustments] = await Promise.all([
-      liveCatalogSnapshot(db), loadStockCommitments(db), loadCommercialPositionAdjustments(db)
+    const [variants, commitments, adjustments, activeDemand] = await Promise.all([
+      liveCatalogSnapshot(db), loadStockCommitments(db), loadCommercialPositionAdjustments(db),
+      db.query(`SELECT i.variant_id,sum(i.quantity)::integer AS quantity
+        FROM order_items i JOIN orders o ON o.id=i.order_id
+        WHERE o.payment_status='paid' AND o.is_test=false
+          AND o.status IN ('received','packing','delivering')
+        GROUP BY i.variant_id`)
     ]);
+    const activeByVariant = new Map(activeDemand.rows.map(row => [row.variant_id, row.quantity]));
     return json(res, 200, { variants: variants.map(variant => ({ ...variant,
       committed_quantity: commitments.get(variant.variant_id) || 0,
+      active_paid_quantity: activeByVariant.get(variant.variant_id) || 0,
       stock_position: (variant.stock_quantity ?? 0) +
         (adjustments.get(variant.variant_id) || 0) })) });
   }

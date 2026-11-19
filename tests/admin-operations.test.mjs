@@ -514,17 +514,28 @@ test('receiving stock records one movement and duplicate submission does not add
   const key = 'receipt_test_key_1234567890';
   let stock = 1;
   let recorded;
+  let document;
   const client = { async query(sql, params) {
     if (sql.startsWith('SELECT id FROM catalog_variants')) return { rows:[{ id:'sku-1' }] };
-    if (sql.startsWith('SELECT id,variant_id,delta_on_hand')) return { rows:recorded ? [recorded] : [] };
+    if (sql.startsWith('SELECT id,variant_id,delta_on_hand'))
+      return { rows:recorded?.idempotency_key === params[0] ? [recorded] : [] };
+    if (sql.startsWith('SELECT m.id FROM inventory_receipt_documents'))
+      return { rows:document?.sha256 === params[1] ? [{ id:recorded.id }] : [] };
     if (sql.startsWith('UPDATE catalog_variants')) {
       stock += params[0]; return { rows:[{ stock_quantity:stock, reserved_quantity:0 }] };
     }
     if (sql.startsWith('INSERT INTO inventory_movements')) {
       recorded = { id:params[0], variant_id:params[1], supplier_id:params[4],
-        unit_cost_cents:params[5], delta_on_hand:params[8], note:params[12] };
+        unit_cost_cents:params[5], delta_on_hand:params[8], note:params[12],
+        unit_cost_includes_iva:params[14], idempotency_key:params[6] };
       return { rowCount:1 };
     }
+    if (sql.startsWith('INSERT INTO inventory_receipt_documents')) {
+      document = { movementId:params[0], filename:params[1], mime:params[2], sha256:params[3] };
+      return { rowCount:1 };
+    }
+    if (sql.startsWith('SELECT sha256 FROM inventory_receipt_documents'))
+      return { rows:document ? [{ sha256:document.sha256 }] : [] };
     return { rowCount:1, rows:[] };
   }, release() {} };
   const db = { async query(sql) {
@@ -532,20 +543,26 @@ test('receiving stock records one movement and duplicate submission does not add
       return { rows:[{ id:'staff-1', email:'owner@example.test', role:'owner' }] };
     throw new Error(`Unexpected SQL: ${sql}`);
   }, async connect() { return client; } };
-  async function receipt(quantity) {
+  async function receipt(quantity, evidence = null, idempotencyKey = key) {
     const req = { method:'POST', headers:{ cookie:`cmd_staff_session=${'e'.repeat(64)}` },
       socket:{ remoteAddress:'test-receipt' },
       async *[Symbol.asyncIterator]() { yield JSON.stringify({ variantId:'sku-1', quantity,
-        unitCostCents:500, note:'Поставка 21', idempotencyKey:key }); } };
+        unitCostCents:500, costIncludesIva:true, evidence, note:'Поставка 21', idempotencyKey }); } };
     const { state, res } = response();
     await handleApi(db, req, res, '/api/admin/inventory-receipts');
     return state;
   }
-  assert.equal((await receipt(4)).status, 201);
+  const evidence = { filename:'ticket.png', mime:'image/png',
+    base64:Buffer.from([137,80,78,71,13,10,26,10,1]).toString('base64') };
+  assert.equal((await receipt(4, evidence)).status, 201);
   assert.equal(stock, 5);
-  assert.equal((await receipt(4)).body.alreadyRecorded, true);
+  assert.equal(document.movementId, recorded.id);
+  assert.equal(document.mime, 'image/png');
+  assert.equal((await receipt(4, evidence)).body.alreadyRecorded, true);
   assert.equal(stock, 5);
-  assert.equal((await receipt(3)).status, 409);
+  assert.equal((await receipt(3, evidence)).status, 409);
+  assert.equal(stock, 5);
+  assert.equal((await receipt(4, evidence, 'another_receipt_key_1234567890')).status, 409);
   assert.equal(stock, 5);
 });
 
