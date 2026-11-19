@@ -19,9 +19,23 @@ export function hasFreeStock(product) {
     variant.storefrontRetired !== true);
 }
 
+export function canSourceProduct(product) {
+  return snapshots(product).some(variant =>
+    variant.storefrontRetired !== true &&
+    variant.saleStatus !== 'unavailable' &&
+    variant.serverAvailableForCart !== false &&
+    ((variant.serverSourceOrderable === true &&
+        variant.serverSourcingAvailability === 'source_on_demand') ||
+      (variant.serverSourceOrderable === true &&
+        variant.serverSourcingAvailability === 'on_hand') ||
+      (variant.serverSourcingAvailability == null &&
+        variant.availabilityStatus === 'source_on_demand')));
+}
+
 export function sortStockFirst(products) {
   const stocked = products.filter(hasFreeStock);
-  const remaining = products.filter(product => !hasFreeStock(product));
+  const orderable = products.filter(product => !hasFreeStock(product) && canSourceProduct(product));
+  const unavailable = products.filter(product => !hasFreeStock(product) && !canSourceProduct(product));
   const byId = new Map(stocked.map(product => [product.id, product]));
   const opening = openingIds.flatMap(id => byId.has(id) ? [byId.get(id)] : []);
   const featured = new Set(opening.map(product => product.id));
@@ -44,6 +58,6 @@ export function sortStockFirst(products) {
     }
     arranged.push(pool.splice(best, 1)[0]);
   }
-  products.splice(0, products.length, ...arranged, ...remaining);
+  products.splice(0, products.length, ...arranged, ...orderable, ...unavailable);
   return products;
 }
