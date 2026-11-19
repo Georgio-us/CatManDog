@@ -1125,6 +1125,8 @@ async function loadStock(details) {
         <small>${escape([item.supplier_name,item.purchase_order_number,item.order_number,item.note,
           item.unit_cost_cents === null ? '' : `Закупка ${euros(item.unit_cost_cents)}${item.unit_cost_includes_iva === null ? '' : item.unit_cost_includes_iva ? ' с IVA' : ' без IVA'}`].filter(Boolean).join(' · '))}
           ${item.evidence_filename ? `<a href="/api/admin/inventory-movements/${encodeURIComponent(item.id)}/evidence" target="_blank" rel="noopener">Чек или фактура: ${escape(item.evidence_filename)}</a>` : ''}</small>
+        ${!item.evidence_filename && ['receipt','adjustment'].includes(item.reason) && item.delta_on_hand > 0
+          ? `<form data-movement-evidence="${escape(item.id)}"><label>Добавить чек без изменения остатка<input type="file" name="evidence" accept="application/pdf,image/png,image/jpeg" required></label><button type="submit">Прикрепить</button></form>` : ''}
       </li>`).join('')}</ol>` : '<p>Движений пока нет</p>'}`;
   } catch (error) { host.textContent = error.message; }
 }
@@ -2119,6 +2121,11 @@ $('admin-content').addEventListener('submit', async event => {
         unitCostCents: price === '' ? null : Math.round(Number(price) * 100),
         costIncludesIva: price === '' ? null : values.has('costIncludesIva'), evidence,
         note: values.get('note'), idempotencyKey: values.get('idempotencyKey') });
+    }
+    else if (form.dataset.movementEvidence) {
+      const evidence = await deliveryFilePayload(values.get('evidence'));
+      await api(`/api/admin/inventory-movements/${encodeURIComponent(form.dataset.movementEvidence)}/evidence`,
+        'POST', { evidence });
     }
     else if (form.dataset.emailConfirmation) {
       const result = await api(`/api/admin/orders/${encodeURIComponent(form.dataset.emailConfirmation)}/confirmation`, 'POST');

@@ -1826,6 +1826,33 @@ async function adminRoute(db, req, res, path) {
       'Cache-Control':'no-store', 'X-Content-Type-Options':'nosniff' });
     return res.end(file.bytes);
   }
+  if (receiptDocument && req.method === 'POST') {
+    const body = await readJson(req, 5_600_000);
+    const evidence = receiptEvidence(body.evidence);
+    if (!evidence) bad('Выберите чек или фактуру');
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const { rows } = await client.query(`SELECT id FROM inventory_movements
+        WHERE id=$1 AND reason IN ('receipt','adjustment') AND delta_on_hand>0 FOR UPDATE`,
+      [receiptDocument[1]]);
+      if (!rows.length) bad('Поступление не найдено', 404);
+      const saved = await client.query(`SELECT sha256 FROM inventory_receipt_documents
+        WHERE movement_id=$1`, [receiptDocument[1]]);
+      if (saved.rows.length) {
+        if (saved.rows[0].sha256 !== evidence.sha256)
+          bad('К этому поступлению уже прикреплён другой документ', 409);
+        await client.query('COMMIT');
+        return json(res, 200, { ok:true, alreadyRecorded:true });
+      }
+      await client.query(`INSERT INTO inventory_receipt_documents
+        (movement_id,filename,mime,sha256,bytes) VALUES($1,$2,$3,$4,$5)`,
+      [receiptDocument[1], evidence.filename, evidence.mime, evidence.sha256, evidence.bytes]);
+      await client.query('COMMIT');
+      return json(res, 201, { ok:true });
+    } catch (error) { await client.query('ROLLBACK'); throw error; }
+    finally { client.release(); }
+  }
   if (path === '/api/admin/inventory-receipts' && req.method === 'POST') {
     const body = await readJson(req, 5_600_000);
     const evidence = receiptEvidence(body.evidence);

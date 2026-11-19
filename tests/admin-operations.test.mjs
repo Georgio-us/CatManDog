@@ -566,6 +566,41 @@ test('receiving stock records one movement and duplicate submission does not add
   assert.equal(stock, 5);
 });
 
+test('an existing receipt accepts evidence without changing stock', async () => {
+  const movementId = '11111111-1111-4111-8111-111111111111';
+  const evidence = { filename:'factura.pdf', mime:'application/pdf',
+    base64:Buffer.from('%PDF-1.4 existing receipt').toString('base64') };
+  let document;
+  const client = { async query(sql, params) {
+    if (sql.includes('FROM inventory_movements') && sql.includes('FOR UPDATE'))
+      return { rows:[{ id:movementId }] };
+    if (sql.startsWith('SELECT sha256 FROM inventory_receipt_documents'))
+      return { rows:document ? [{ sha256:document.sha256 }] : [] };
+    if (sql.startsWith('INSERT INTO inventory_receipt_documents')) {
+      document = { movementId:params[0], sha256:params[3] };
+      return { rowCount:1 };
+    }
+    if (sql.startsWith('UPDATE catalog_variants')) throw new Error('Stock must not change');
+    return { rows:[], rowCount:1 };
+  }, release() {} };
+  const db = { async query(sql) {
+    if (sql.includes('FROM staff_sessions'))
+      return { rows:[{ id:'staff-1', email:'owner@example.test', role:'owner' }] };
+    throw new Error(`Unexpected SQL: ${sql}`);
+  }, async connect() { return client; } };
+  async function attach() {
+    const req = { method:'POST', headers:{ cookie:`cmd_staff_session=${'e'.repeat(64)}` },
+      socket:{ remoteAddress:'test-existing-receipt' },
+      async *[Symbol.asyncIterator]() { yield JSON.stringify({ evidence }); } };
+    const { state, res } = response();
+    await handleApi(db, req, res, `/api/admin/inventory-movements/${movementId}/evidence`);
+    return state;
+  }
+  assert.equal((await attach()).status, 201);
+  assert.equal(document.movementId, movementId);
+  assert.equal((await attach()).body.alreadyRecorded, true);
+});
+
 test('marketing and personal writeoffs use only unreserved stock and are idempotent', async () => {
   let stock = 5;
   const reserved = 2;
