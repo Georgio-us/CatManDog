@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { atelierSelection, atelierShelfId, atelierOptionsMarkup } from '../atelier-configuration.js';
 import { productGallery } from '../product-gallery.js';
 import { priceQuote } from '../server/pricing.js';
+import { catsAtelierProducts } from '../cats-atelier-products.js';
 
 const selection = { fabric:'41', wood:'57' };
 const product = {
@@ -17,6 +18,18 @@ test('gallery renders a primary image and selectable, localized secondary images
   assert.match(html, /data-gallery-main/);
   assert.match(html, /data-gallery-index="1"/);
   assert.match(html, /data-gallery-caption="Gancho"/);
+});
+
+test('Flat 75 cm page keeps the studio cover and all eleven supplier photos', () => {
+  const shelf = catsAtelierProducts.find(item => item.id === atelierShelfId);
+  assert.match(shelf.image.src, /SH-W-F75-G-studio-v6\.webp$/);
+  assert.equal(shelf.gallery.length, 11);
+  assert.deepEqual(shelf.gallery.map(image => Number(image.originalSrc.match(/\/(\d+)-thickbox_default\//)?.[1])),
+    [282, 283, 557, 284, 285, 286, 287, 288, 290, 291, 645]);
+  const html = productGallery(shelf, imageBlock, value => value, 'es');
+  assert.match(html, /data-gallery-index="11"/);
+  assert.match(html, /data-gallery-reference="true"/);
+  assert.match(html, /data-gallery-caption="Paleta del tejido DOT"/);
 });
 
 test('supplier-specific options are exact and carry through the priced quote', () => {
