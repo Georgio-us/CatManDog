@@ -599,6 +599,9 @@ ALTER TABLE promo_codes ADD CONSTRAINT promo_codes_paper_shared_rules
 INSERT INTO promo_codes(code,kind,percent_off,free_delivery,active,max_uses,used_count,expires_at)
 VALUES('CMD10-D8E2EYWE','paper_shared',10,false,true,100,0,now() + interval '90 days')
 ON CONFLICT DO NOTHING;
+INSERT INTO promo_codes(code,kind,percent_off,free_delivery,active,max_uses,used_count,expires_at)
+VALUES('SUISSAVECINOS10','paper_shared',10,false,true,100,0,now() + interval '90 days')
+ON CONFLICT DO NOTHING;
 
 CREATE TABLE IF NOT EXISTS customer_promos (
   customer_id uuid NOT NULL REFERENCES customers(id) ON DELETE CASCADE,
