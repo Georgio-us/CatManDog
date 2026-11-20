@@ -1,9 +1,9 @@
 import { createUsefulUI } from './useful.js?v=yagu-toys-20261116';
 import { createAccountUI } from './account.js?v=language-routes-3-20261120';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
-import { accessoryDetail, customerDetails } from './accessory-ui.js?v=atelier-gallery-20261120';
+import { accessoryDetail, customerDetails } from './accessory-ui.js?v=atelier-gallery-fix-20261120';
 import { atelierShelfId, atelierSelection, atelierOptionsMarkup } from './atelier-configuration.js';
-import { productGallery } from './product-gallery.js';
+import { productGallery } from './product-gallery.js?v=atelier-gallery-fix-20261120';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=atelier-config-20261120';
 import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';

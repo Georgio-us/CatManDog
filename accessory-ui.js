@@ -1,7 +1,7 @@
 import { hasVariants, resolveVariant, storefrontPrice, canBuy } from './variants.js?v=sale-price-policy-20261109';
 import { customerFacts, orderedVariants } from './product-content.js?v=catalog-sku-audit-20261110';
 import { catalogEditorialChuruCat } from './catalog-editorial-churu-cat.js';
-import { productGallery } from './product-gallery.js';
+import { productGallery } from './product-gallery.js?v=atelier-gallery-fix-20261120';
 import { atelierShelfId, atelierOptionsMarkup } from './atelier-configuration.js';
 
 export function customerDetails(details, translate, escape, category) {
