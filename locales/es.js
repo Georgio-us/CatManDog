@@ -1,6 +1,7 @@
 // Spanish copy is written and reviewed here. Russian remains the source language
 // for internal category IDs, routes and saved customer data.
 export const es = {
+  'Добавить товары': 'Añadir productos',
   'Подборки': 'Selecciones',
   'Подборки товаров': 'Selecciones de productos',
   'Подборка CatManDog': 'Selección CatManDog',

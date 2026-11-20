@@ -4131,6 +4131,14 @@ details .text-link {
   .language-trigger .language-chevron { width: 10px; height: 10px; }
 }
 
+.legal-language { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px; font-size: 13px }
+.legal-language a { color: var(--ink); padding: 7px 9px; border-radius: 999px; text-decoration: none }
+.legal-language a[aria-current="page"] { background: var(--ink); color: #fff }
+@media (max-width: 600px) {
+  .legal-header, .privacy-header, .terms-header { flex-wrap: wrap; gap: 12px }
+  .legal-language { order: 3; width: 100% }
+}
+
 @media (max-width: 760px) {
   .filters {
     padding-right: 28px;

@@ -1,4 +1,4 @@
-import { es, esPatterns } from './locales/es.js?v=stock-first-20261119';
+import { es, esPatterns } from './locales/es.js?v=language-routes-20261120';
 import { esProductText } from './locales/product-es.js?v=product-content-20261110';
 import { esDetails } from './locales/details-es.js?v=product-content-20261110';
 import { uk, ukPatterns } from './locales/uk.js?v=stock-first-20261119';
@@ -16,17 +16,15 @@ import { yaguToyExpansionEs, yaguToyExpansionUk } from './locales/yagu-toy-expan
 import { yaguBasketEs, yaguBasketUk } from './locales/yagu-basket.js?v=20261113';
 import { yaguChewTestEs, yaguChewTestUk } from './locales/yagu-chew-test.js?v=20261113';
 import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=editorial-leonardo-20261111';
-import { shellTranslations } from './shell-translations.js';
+import { shellTranslations } from './shell-translations.js?v=language-routes-20261120';
 import { checkoutLaunchEs, checkoutLaunchUk } from './locales/checkout-launch.js?v=checkout-ux2-20261117';
 import { recurringEs, recurringUk, recurringPatternsEs, recurringPatternsUk } from './locales/recurring.js';
 import { catsAtelierEs, catsAtelierUk } from './locales/cats-atelier.js';
-import { couponEs, couponUk } from './locales/coupon.js';
+import { couponEs, couponUk } from './locales/coupon.js?v=language-routes-20261120';
 
 const storageKey = 'catmandog-language';
 const saved = (() => { try { return localStorage.getItem(storageKey); } catch { return null; } })();
-const seoPath = globalThis.location?.pathname || '';
-const language = seoPath === '/revista' || seoPath.startsWith('/revista/') || !!seoCategoryForPath(seoPath) || !!seoPickForPath(seoPath)
-  ? 'es' : saved === 'ru' || saved === 'es' || saved === 'uk' ? saved : 'es';
+const language = saved === 'ru' || saved === 'es' || saved === 'uk' ? saved : 'es';
 const translatedNodes = new WeakMap();
 const translatedAttributes = new WeakMap();
 const attributes = ['aria-label', 'title', 'placeholder', 'alt'];
@@ -66,28 +64,28 @@ function restoreSeoShell() {
 
 export const locale = () => language;
 export const intlLocale = () => ({ es: 'es-ES', ru: 'ru-RU', uk: 'uk-UA' })[language];
+export function localizedSeoRoute(pathname, search = '', targetLanguage = language) {
+  if (targetLanguage === 'es') return null;
+  const pick = seoPickForPath(pathname);
+  if (pick) return `/${search}#/picks/${pick.pet}`;
+  if (pathname === '/revista' || pathname.startsWith('/revista/'))
+    return `/${search}#/journal${pathname.slice('/revista'.length)}`;
+  const category = seoCategoryForPath(pathname);
+  if (category) return `/${search}#/catalog?pet=${category.pet}&group=${category.group}`;
+  return null;
+}
 export function setLocale(value) {
   if (value !== 'ru' && value !== 'es' && value !== 'uk') return;
   try {
     localStorage.setItem(storageKey, value);
   } catch { /* Private browsing */ }
-  const pick = seoPickForPath(location.pathname);
-  if (value !== 'es' && pick) {
-    location.assign(`/#/picks/${pick.pet}`);
-    return;
+  if (value !== 'es') {
+    const target = localizedSeoRoute(location.pathname, location.search, value);
+    if (target) { location.assign(target); return; }
   }
   const hashPick = (location.hash || '').match(/^#\/picks\/(cat|dog)(?:\?|$)/u);
   if (value === 'es' && hashPick) {
     location.assign(hashPick[1] === 'cat' ? '/selecciones/gatos' : '/selecciones/perros');
-    return;
-  }
-  if (value !== 'es' && (location.pathname === '/revista' || location.pathname.startsWith('/revista/'))) {
-    location.assign(`/${location.search}#/journal${location.pathname.slice('/revista'.length)}`);
-    return;
-  }
-  const category = seoCategoryForPath(location.pathname);
-  if (value !== 'es' && category) {
-    location.assign(`/${location.search}#/catalog?pet=${category.pet}&group=${category.group}`);
     return;
   }
   location.reload();
@@ -99,7 +97,11 @@ export function translate(value) {
   const source = whitespace?.[2] ?? value;
   let result = language === 'uk'
     ? couponUk[source] ?? catsAtelierUk[source] ?? recurringUk[source] ?? checkoutLaunchUk[source] ?? editorialUk[source] ?? churuDogUk[source] ?? yaguToyExpansionUk[source] ?? yaguChewTestUk[source] ?? yaguBasketUk[source] ?? yaguExpansionUk[source] ?? deliveryStatusUk[source] ?? uk[source] ?? ukExtra[source] ?? churuFormatsUk[source] ?? ukProductNames[source] ?? ukProductCopy(source) ?? ukDetails[source] ?? esProductText[source] ?? esDetails[source]
-    : couponEs[source] ?? catsAtelierEs[source] ?? recurringEs[source] ?? checkoutLaunchEs[source] ?? editorialEs[source] ?? churuDogEs[source] ?? yaguToyExpansionEs[source] ?? yaguChewTestEs[source] ?? yaguBasketEs[source] ?? yaguExpansionEs[source] ?? deliveryStatusEs[source] ?? es[source] ?? churuFormatsEs[source] ?? esProductText[source] ?? esDetails[source];
+    : couponEs[source] ?? catsAtelierEs[source] ?? recurringEs[source] ?? checkoutLaunchEs[source] ?? editorialEs[source] ?? churuDogEs[source] ?? yaguToyExpansionEs[source] ?? yaguChewTestEs[source] ?? yaguBasketEs[source] ?? yaguExpansionEs[source] ?? deliveryStatusEs[source] ?? es[source] ?? churuFormatsEs[source] ?? esProductText[source] ?? esDetails[source] ?? shellTranslations[source];
+  if (result === undefined) {
+    const promoLabel = source.match(/^Промокод ([A-Z0-9_-]+)$/u);
+    if (promoLabel) result = `${language === 'uk' ? 'Промокод' : 'Código promocional'} ${promoLabel[1]}`;
+  }
   if (result === undefined) {
     result = source;
     for (const [pattern, replacement] of language === 'uk' ? [...recurringPatternsUk, ...ukPatterns] : [...recurringPatternsEs, ...esPatterns]) {
