@@ -85,4 +85,6 @@ test('every supplier option group appears on the matching model and validates at
     assert.deepEqual(quote.items[0].configuration, defaults);
   }
   assert.equal(atelierHasOptions('cats-atelier-rd-st'), false);
+  const woodenStep = catsAtelierProducts.find(item => item.manufacturerSku === 'ST-WB-F');
+  assert.equal(woodenStep.gallery.find(image => image.src.endsWith('/575.webp')).caption.es, 'Opciones de tejido');
 });

@@ -3814,9 +3814,9 @@ export const catsAtelierProducts = [
           "uk": "Варіанти тканини"
         },
         "caption": {
-          "ru": "Ступенька и её крепление",
-          "es": "Peldaño y su fijación",
-          "uk": "Сходинка та її кріплення"
+          "ru": "Варианты ткани",
+          "es": "Opciones de tejido",
+          "uk": "Варіанти тканини"
         }
       },
       {
