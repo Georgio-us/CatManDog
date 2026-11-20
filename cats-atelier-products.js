@@ -602,6 +602,15 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/282/cat-window-shelf-the-sunny-spot-75-cm-sh-w-f75-g.jpg"
     },
+    "gallery": [
+      {"src":"https://img.catmandog.es/assets/cats-atelier/details/SH-W-F75-G-cushion-velcro-v1.webp","alt":"Съёмный коврик с креплением к деревянной основе","caption":{"ru":"Съёмный коврик крепится к деревянной основе","es":"La colchoneta extraíble se fija a la base de madera","uk":"Знімний килимок кріпиться до дерев'яної основи"}},
+      {"src":"https://img.catmandog.es/assets/cats-atelier/details/SH-W-F75-G-window-hook-v1.webp","alt":"Металлический крючок на верхней части оконной рамы","caption":{"ru":"Металлический крючок надевается на верхнюю часть оконной рамы","es":"El gancho metálico se coloca sobre la parte superior del marco","uk":"Металевий гачок надягається на верхню частину віконної рами"}},
+      {"src":"https://img.catmandog.es/assets/cats-atelier/details/SH-W-F75-G-stabilizing-cup-v1.webp","alt":"Присоска стабилизирует подвесную полку у стекла","caption":{"ru":"Присоска стабилизирует полку у стекла; вес держат верхние крючки","es":"La ventosa estabiliza la balda junto al cristal; los ganchos superiores soportan el peso","uk":"Присоска стабілізує полицю біля скла; вагу тримають верхні гачки"}},
+      {"src":"https://img.catmandog.es/assets/cats-atelier/details/SH-W-F75-G-zip-cover-v1.webp","alt":"Молния съёмного тканевого чехла","caption":{"ru":"Чехол снимается; на фото видны молния и внутренняя сторона","es":"La funda es extraíble; se ven la cremallera y el reverso","uk":"Чохол знімається; видно блискавку та внутрішній бік"}},
+      {"src":"https://img.catmandog.es/assets/cats-atelier/details/SH-W-F75-G-dot-fabrics-original.jpg","alt":"Фактура и цвета ткани DOT от производителя","caption":{"ru":"Палитра ткани DOT от Cat’s Atelier","es":"Paleta del tejido DOT de Cat’s Atelier","uk":"Палітра тканини DOT від Cat’s Atelier"}},
+      {"src":"https://img.catmandog.es/assets/cats-atelier/details/SH-W-F75-G-wood-finishes-original.jpg","alt":"Четыре отделки деревянной основы от производителя","caption":{"ru":"Четыре варианта отделки дерева от Cat’s Atelier","es":"Cuatro acabados de madera de Cat’s Atelier","uk":"Чотири варіанти оздоблення дерева від Cat’s Atelier"}}
+    ],
+    "configurationType": "atelier-window-shelf-f75-g",
     "manufacturerSku": "SH-W-F75-G",
     "ean": "5906546701454",
     "supplier": {

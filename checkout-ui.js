@@ -47,7 +47,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
     } catch { /* The local file preview has no API */ }
   }
 
-  const cartSignature = items => JSON.stringify(items.map(item => [item.productId, item.variantId, item.qty, item.price]));
+  const cartSignature = items => JSON.stringify(items.map(item => [item.productId, item.variantId, item.qty, item.price, item.configuration || null]));
   const hasAtelierItems = items => items.some(item => String(item.productId || item.id).startsWith('cats-atelier-'));
   const atelierTiming = () => ({ru:'Под заказ: ориентир 4-6 рабочих дней после подтверждения',es:'Por encargo: plazo estimado de 4 a 6 días laborables tras la confirmación',uk:'Під замовлення: орієнтовно 4-6 робочих днів після підтвердження'})[locale()];
   const field = (name, fallback = '') => e(formValues[name] ?? fallback);
@@ -235,7 +235,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
       if (deliveryError) throw new Error(deliveryError);
       const request = (path, body) => fetch(path, { method: 'POST', credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-      const lines = items.map(item => ({ productId: item.productId, variantId: item.variantId, qty: item.qty }));
+      const lines = items.map(item => ({ productId: item.productId, variantId: item.variantId, qty: item.qty, ...(item.configuration ? { configuration:item.configuration } : {}) }));
       const quoteResponse = await request('/api/checkout/quote', { items: lines,
         promoCode: promo?.code || '', skipSavedPromo: promoSkipped, email: values.email, phone: values.phone,
         address: { city: values.city, postcode: values.postcode,
@@ -300,7 +300,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
           address: { city: values.city, postcode: values.postcode, street: values.street,
             building: values.building, apartment: values.apartment, note: values.note },
           items: getItems().map(item => ({ productId: item.productId,
-            variantId: item.variantId, qty: item.qty })) }) });
+            variantId: item.variantId, qty: item.qty, ...(item.configuration ? { configuration:item.configuration } : {}) })) }) });
       const result = await response.json().catch(() => ({}));
       if (!response.ok || !result.accepted) throw new Error(result.error || 'Не удалось отправить заявку');
       urgentSent = result.id;
@@ -435,7 +435,7 @@ export function createCheckoutUI({ escape: e, icon, money, imageBlock, getItems,
         if (values.saveDetails) void saveCheckoutProfile(values).catch(() => {});
         if (values.deliveryMode === 'national') {
           form.querySelector('[data-checkout-error]').textContent = 'Рассчитываем доставку по Испании';
-          const lines = items.map(item => ({ productId: item.productId, variantId: item.variantId, qty: item.qty }));
+          const lines = items.map(item => ({ productId: item.productId, variantId: item.variantId, qty: item.qty, ...(item.configuration ? { configuration:item.configuration } : {}) }));
           void fetch('/api/checkout/shipping-quote', { method: 'POST', credentials: 'same-origin',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ items: lines, postcode: values.postcode,

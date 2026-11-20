@@ -2,6 +2,7 @@ import { deliveryTiming, availableDeliverySlots } from '../checkout-model.js';
 import { LOCAL_DELIVERY_FEE_CENTS, LOCAL_FREE_DELIVERY_FROM_CENTS, isFreeLocalDeliveryAddress,
   isMainlandPostcode } from '../shipping-policy.js';
 import { salePriceDecision } from './sale-price-policy.js';
+import { atelierSelection } from '../atelier-configuration.js';
 
 export const DELIVERY_FEE_CENTS = LOCAL_DELIVERY_FEE_CENTS;
 export const FREE_DELIVERY_FROM_CENTS = LOCAL_FREE_DELIVERY_FROM_CENTS;
@@ -54,8 +55,12 @@ export function priceQuote(lines, variants, promo = null, shippingCents = null, 
     const id = String(line?.variantId || '');
     const variant = byId.get(id);
     if (!variant || variant.product_id !== line.productId) throw invalidQuote('Вариант товара не найден');
-    if (seen.has(id)) throw invalidQuote('Повторяющийся вариант в корзине');
-    seen.add(id);
+    let selection;
+    try { selection = atelierSelection(variant.product_id, line.configuration ?? null); }
+    catch (error) { throw invalidQuote(error.message); }
+    const key = `${id}:${selection ? JSON.stringify(selection.options) : ''}`;
+    if (seen.has(key)) throw invalidQuote('Повторяющийся вариант в корзине');
+    seen.add(key);
     if (!Number.isInteger(line.qty) || line.qty < 1 || line.qty > 99) throw invalidQuote('Некорректное количество');
     const decision = typeof variant.price_accepted === 'boolean'
       ? { priceCents: variant.sale_price_cents, accepted: variant.price_accepted }
@@ -70,7 +75,8 @@ export function priceQuote(lines, variants, promo = null, shippingCents = null, 
             (variant.committed_quantity ?? 0) >= line.qty
           ? 'on_hand' : 'open_order') : variant.availability;
     return { productId: variant.product_id, variantId: id, name: variant.name, saleStatus,
-      variantLabel: variant.label, qty: line.qty, unitPriceCents: price,
+      variantLabel: selection ? `${variant.label} · ${selection.label}` : variant.label,
+      ...(selection ? { configuration: selection.options } : {}), qty: line.qty, unitPriceCents: price,
       lineCents: price * line.qty, sourceMode,
       orderable: saleStatus ? decision.accepted && saleStatus !== 'unavailable' :
         decision.accepted && variant.source_orderable !== false &&
