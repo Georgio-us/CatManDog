@@ -21,11 +21,16 @@ for (const language of ['ru', 'uk', 'es']) {
       assert.equal(current.translate('Без промокода'), 'Quitar código promocional');
       assert.equal(current.translate('Промокод SUISSAVECINOS10'), 'Código promocional SUISSAVECINOS10');
       assert.equal(current.translate('Duvo+ · 350 г · около 10 штук'), 'Duvo+ · 350 g · unas 10 unidades');
+      assert.equal(current.translate('На следующем шаге проверьте данные. Оплата станет доступна после включения приёма заказов.'),
+        'En el siguiente paso, revisa los datos. El pago estará disponible cuando aceptemos pedidos.');
     }
     if (language === 'uk') {
       assert.equal(current.translate('Без промокода'), 'Без промокоду');
       assert.equal(current.translate('Промокод SUISSAVECINOS10'), 'Промокод SUISSAVECINOS10');
       assert.equal(current.translate('Duvo+ · 350 г · около 10 штук'), 'Duvo+ · 350 г · близько 10 штук');
+      assert.equal(current.translate('Выбрано: Сухий корм'), 'Обрано: Сухий корм');
+      assert.equal(current.translate('На следующем шаге проверьте данные. Оплата станет доступна после включения приёма заказов.'),
+        'На наступному кроці перевірте дані. Оплата стане доступною після запуску приймання замовлень.');
     }
   });
 }

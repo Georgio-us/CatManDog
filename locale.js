@@ -1,7 +1,7 @@
 import { es, esPatterns } from './locales/es.js?v=language-routes-20261120';
 import { esProductText } from './locales/product-es.js?v=product-content-20261110';
 import { esDetails } from './locales/details-es.js?v=product-content-20261110';
-import { uk, ukPatterns } from './locales/uk.js?v=stock-first-20261119';
+import { uk, ukPatterns } from './locales/uk.js?v=language-routes-3-20261120';
 import { ukExtra } from './locales/uk-extra.js?v=pickup-main-nav-20261119';
 import { ukProductNames } from './locales/uk-product-names.js?v=yagu-toys-20261116';
 import { ukProductCopy } from './locales/uk-product-copy.js?v=product-content-20261110';
@@ -17,7 +17,7 @@ import { yaguBasketEs, yaguBasketUk } from './locales/yagu-basket.js?v=language-
 import { yaguChewTestEs, yaguChewTestUk } from './locales/yagu-chew-test.js?v=20261113';
 import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=editorial-leonardo-20261111';
 import { shellTranslations } from './shell-translations.js?v=language-routes-20261120';
-import { checkoutLaunchEs, checkoutLaunchUk } from './locales/checkout-launch.js?v=checkout-ux2-20261117';
+import { checkoutLaunchEs, checkoutLaunchUk } from './locales/checkout-launch.js?v=language-routes-3-20261120';
 import { recurringEs, recurringUk, recurringPatternsEs, recurringPatternsUk } from './locales/recurring.js';
 import { catsAtelierEs, catsAtelierUk } from './locales/cats-atelier.js';
 import { couponEs, couponUk } from './locales/coupon.js?v=language-routes-20261120';
