@@ -564,7 +564,7 @@ ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS contact_phone text NOT NUL
 ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS payload jsonb NOT NULL DEFAULT '{}'::jsonb;
 ALTER TABLE service_requests DROP CONSTRAINT IF EXISTS service_requests_kind_check;
 ALTER TABLE service_requests ADD CONSTRAINT service_requests_kind_check
-  CHECK (kind IN ('support','return','availability','urgent'));
+  CHECK (kind IN ('support','return','availability','urgent','coupon'));
 ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS locale text NOT NULL DEFAULT 'ru'
   CHECK (locale IN ('ru','es','uk'));
 

@@ -277,6 +277,16 @@
 .pet-coupon-page .pet-panel > strong { overflow-wrap: anywhere; font-size: 18px; }
 .pet-coupon-page .pet-panel > p { margin: 0; line-height: 1.6; }
 .pet-coupon-page .pet-panel .button { justify-self: start; max-width: 100%; white-space: normal; }
+.pet-coupon-page .pet-coupon-help { margin-top: 20px; }
+.pet-coupon-page .pet-coupon-help h2 { margin: 0; font-size: 22px; line-height: 1.25; }
+.pet-coupon-page .pet-coupon-help > p { color: var(--muted); }
+.pet-coupon-page .pet-coupon-help .pet-field { min-width: 0; }
+.pet-coupon-page .pet-coupon-help small { color: var(--muted); line-height: 1.5; }
+.pet-coupon-page .pet-coupon-help small a { color: var(--ink); text-decoration: underline; }
+.pet-coupon-page .pet-coupon-help .button { margin-top: 2px; }
+.pet-coupon-page .pet-coupon-support { margin-top: 22px; }
+.pet-coupon-page .pet-coupon-support > summary { width: fit-content; max-width: 100%; cursor: pointer; font-size: 13px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.pet-coupon-page .pet-coupon-support > summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
 @media (max-width: 600px) {
   .pet-coupon-page { min-height: auto; padding-top: 36px; padding-bottom: 64px; }
   .pet-coupon-page .pet-auth-panel .pet-intro-copy { margin: 16px 0 24px; }

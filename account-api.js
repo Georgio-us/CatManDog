@@ -27,6 +27,7 @@ export function createAccountApi(fetcher = fetch) {
     promo: () => request('/api/me/promo'),
     claimPromo: code => request('/api/me/promo', 'POST', { code }),
     activateCoupon: code => request('/api/coupon/activate', 'POST', { code }),
+    couponHelp: body => request('/api/coupon/help', 'POST', { ...body, locale: locale() }),
     cabinet: () => request('/api/me/cabinet'),
     orders: () => request('/api/me/orders'),
     recurringOrders: () => request('/api/me/recurring-orders'),

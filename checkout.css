@@ -154,6 +154,7 @@
 }
 .checkout-page .checkout-summary .summary-line > span { min-width: 0; overflow-wrap: anywhere; }
 .checkout-page .checkout-choice span { min-width: 0; line-height: 1.45; }
+.checkout-page .checkout-coupon-help { display: inline-block; margin-top: 16px; font-size: 13px; font-weight: 650; text-decoration: underline; text-underline-offset: 4px; }
 @media (max-width: 600px) {
   .checkout-page .checkout-layout { gap: 38px; }
   .checkout-page .checkout-section { padding: 30px 0 36px; }

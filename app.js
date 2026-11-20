@@ -1,5 +1,5 @@
 import { createUsefulUI } from './useful.js?v=yagu-toys-20261116';
-import { createAccountUI } from './account.js?v=coupon-spacing-20261120';
+import { createAccountUI } from './account.js?v=coupon-help-20261120';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
 import { accessoryDetail, customerDetails } from './accessory-ui.js?v=delivery-24-48-20261117';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=coupon-spacing-20261120';
@@ -7,7 +7,7 @@ import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
 import { categories, products, catalogProducts, articles } from './data.js?v=cats-atelier-card-fit-20261120';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=yagu-toys-20261116';
-import { createCheckoutUI } from './checkout-ui.js?v=coupon-spacing-20261120';
+import { createCheckoutUI } from './checkout-ui.js?v=coupon-help-20261120';
 import { normalizeRecurringDraft, recurringChoiceFromCart, renderRecurringCart } from './recurring-cart.js?v=recurring-cards-20261117';
 import { availabilityRequestPage } from './availability-request-ui.js?v=yagu-toys-20261116';
 import { orderVariantId } from './order-progress.js';
@@ -16,7 +16,7 @@ import { applyServerCatalog } from './server-prices.js?v=cats-atelier-card-fit-2
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
 import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=editorial-shortcuts-20261119';
 import { handleCatPickClick } from './cat-picks.js?v=picks-seo-20261112';
-import { installLocale, intlLocale, locale, translate } from './locale.js?v=cats-atelier-20261119';
+import { installLocale, intlLocale, locale, translate } from './locale.js?v=coupon-help-20261120';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';

@@ -1,8 +1,8 @@
 import { createAccountStore } from './account-store.js?v=delivery-status-4';
-import { createAccountApi } from './account-api.js?v=recurring-orders-20261117';
+import { createAccountApi } from './account-api.js?v=coupon-help-20261120';
 import { accountTools } from './useful.js?v=yagu-toys-20261116';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
-import { intlLocale, locale } from './locale.js?v=recurring-orders-20261117';
+import { intlLocale, locale } from './locale.js?v=coupon-help-20261120';
 import { productHref } from './seo-products.js?v=yagu-toys-20261116';
 import { storefrontPrice } from './variants.js?v=sale-price-policy-20261109';
 import { recurringProductCard } from './recurring-product-ui.js?v=recurring-cards-20261117';
@@ -67,6 +67,8 @@ export function createAccountUI(helpers) {
   let googleBusy = false;
   let guestCoupon = null;
   let couponError = '';
+  let couponAttemptCode = '';
+  let couponHelpResult = null;
   let remoteOrders = null;
   let remoteOrdersError = '';
   let recurringOrders = null;
@@ -326,7 +328,7 @@ export function createAccountUI(helpers) {
   }
   function couponPage() {
     const knownCoupon = store.mode() === 'remote' ? store.remoteCoupon() || guestCoupon : guestCoupon;
-    const code = pendingPromoCode() || knownCoupon?.code || '';
+    const code = couponAttemptCode || pendingPromoCode() || knownCoupon?.code || '';
     const coupon = knownCoupon?.code === code ? knownCoupon : null;
     const label = coupon?.status === 'ready' ? coupon.freeShipping
       ? 'Промокод принят - скидка 10% и бесплатная доставка будут учтены при оформлении заказа'
@@ -336,7 +338,11 @@ export function createAccountUI(helpers) {
       : coupon?.status === 'expired' ? 'Срок действия промокода истёк'
       : coupon?.status === 'limit_reached' ? 'Лимит купонов исчерпан - свяжитесь с нами, мы дадим вам новый промокод'
       : coupon?.status === 'invalid' ? 'Промокод недействителен' : '';
-    return `<div class="page pet-onboarding pet-auth-page pet-coupon-page"><div class="pet-auth-panel"><span class="pet-eyebrow">Купон CatManDog</span><h1>10% на заказ</h1><p class="pet-intro-copy">Введите код или перейдите по ссылке. Можно купить как гость или войти в аккаунт, чтобы сохранить купон.</p>${label ? `<section class="pet-panel"><strong>${e(coupon.code)}</strong><p>${e(label)}</p>${coupon.status === 'ready' ? `<a class="button" href="${getCart?.().length ? '#/checkout' : '#/catalog'}">${getCart?.().length ? 'Продолжить как гость' : 'Выбрать товары'} ${icon('arrow')}</a>` : '<a class="text-link" href="#/support">Связаться с поддержкой</a>'}</section>` : `<form class="pet-panel pet-form" data-account-form="coupon-activate"><label class="pet-field">Промокод<input name="code" required maxlength="40" value="${e(code)}" autocapitalize="characters" autocomplete="off" placeholder="Введите код"></label><p class="pet-form-error" data-account-error role="alert">${e(couponError)}</p><button class="button" type="submit">Применить купон</button></form>`}<div class="pet-auth-links">${accountsEnabled ? '<a class="text-link" href="#/account/login">Войти или зарегистрироваться</a>' : ''}<a class="text-link" href="#/cart">Вернуться в корзину</a></div></div></div>`;
+    const problem = coupon?.status && coupon.status !== 'ready' || !!couponError;
+    const help = couponHelpResult
+      ? `<section class="pet-panel pet-coupon-help" role="status"><h2>Обращение сохранено</h2><p>${couponHelpResult.notified ? 'Мы получили сообщение о промокоде и свяжемся с вами по указанному контакту' : 'Обращение сохранено. Если вопрос срочный, напишите нам на info@catmandog.es'}</p></section>`
+      : `<details class="pet-coupon-support" ${problem ? 'open' : ''}><summary>Промокод не сработал? Сообщить нам</summary><form class="pet-panel pet-form pet-coupon-help" data-account-form="coupon-help"><h2>Не получается использовать промокод?</h2><p>Оставьте телефон или email. Проверим код вручную и свяжемся с вами</p><input type="hidden" name="code" value="${e(code)}"><input type="hidden" name="reason" value="${e(label || couponError || 'Промокод не применился при оформлении')}"><label class="pet-field">Телефон<input type="tel" name="phone" autocomplete="tel" maxlength="40" placeholder="+34 600 000 000"></label><label class="pet-field">Email <span>Если удобнее ответить письмом</span><input type="email" name="email" autocomplete="email" maxlength="160" placeholder="name@example.com"></label><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">Попросить помочь с промокодом</button><small>Используем контакт только для ответа на ваше обращение. <a href="/privacy.html">Конфиденциальность</a></small></form></details>`;
+    return `<div class="page pet-onboarding pet-auth-page pet-coupon-page"><div class="pet-auth-panel"><span class="pet-eyebrow">Купон CatManDog</span><h1>10% на заказ</h1><p class="pet-intro-copy">Введите код или перейдите по ссылке. Можно купить как гость или войти в аккаунт, чтобы сохранить купон.</p>${label ? `<section class="pet-panel"><strong data-no-translate>${e(coupon.code)}</strong><p>${e(label)}</p>${coupon.status === 'ready' ? `<a class="button" href="${getCart?.().length ? '#/checkout' : '#/catalog'}">${getCart?.().length ? 'Продолжить как гость' : 'Выбрать товары'} ${icon('arrow')}</a>` : ''}</section>` : `<form class="pet-panel pet-form" data-account-form="coupon-activate"><label class="pet-field">Промокод<input name="code" required maxlength="40" value="${e(code)}" autocapitalize="characters" autocomplete="off" placeholder="Введите код"></label><p class="pet-form-error" data-account-error role="alert">${e(couponError)}</p><button class="button" type="submit">Применить купон</button></form>`}${help}<div class="pet-auth-links">${accountsEnabled ? '<a class="text-link" href="#/account/login">Войти или зарегистрироваться</a>' : ''}<a class="text-link" href="#/cart">Вернуться в корзину</a></div></div></div>`;
   }
   function promoPanel() {
     const coupon = store.remoteCoupon();
@@ -560,8 +566,25 @@ export function createAccountUI(helpers) {
         return;
       }
       if (kind === 'coupon-activate') {
-        await applyPromo(values.get('code'));
+        couponAttemptCode = String(values.get('code') || '').trim().toUpperCase();
+        couponError = '';
+        couponHelpResult = null;
+        try { await applyPromo(couponAttemptCode); }
+        catch (error) { couponError = error.message; }
         render();
+        return;
+      }
+      if (kind === 'coupon-help') {
+        const phone = String(values.get('phone') || '').trim();
+        const email = String(values.get('email') || '').trim();
+        if (!phone && !email) throw new Error('Укажите телефон или email');
+        const button = form.querySelector('button[type=submit]');
+        button.disabled = true;
+        try {
+          couponHelpResult = await api.couponHelp({ code:values.get('code'),
+            reason:values.get('reason'), phone, email });
+          render();
+        } finally { if (button.isConnected) button.disabled = false; }
         return;
       }
       if (kind === 'register' || kind === 'login') {

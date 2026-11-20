@@ -2011,7 +2011,7 @@ async function adminRoute(db, req, res, path) {
         ORDER BY sent_at DESC LIMIT 1) AS last_reply_message
       FROM service_requests r
       LEFT JOIN orders o ON o.id=r.order_id
-      WHERE ($1::text = '' OR r.email ILIKE '%' || $1 || '%' OR r.message ILIKE '%' || $1 || '%'
+      WHERE ($1::text = '' OR r.email ILIKE '%' || $1 || '%' OR r.message ILIKE '%' || $1 || '%' OR r.contact_phone ILIKE '%' || $1 || '%'
         OR COALESCE(o.number,r.order_number_input,'') ILIKE '%' || $1 || '%')
         AND ($2::text IS NULL OR r.status=$2)
       ORDER BY r.created_at DESC LIMIT 26 OFFSET $3`, [search, status, page * 25]);
@@ -2386,6 +2386,31 @@ export async function handleApi(db, req, res, pathname) {
       const body = await readJson(req);
       const customer = await currentCustomer(db, req);
       return json(res, 200, { coupon: await activatePaperCoupon(db, body.code, customer) });
+    }
+    if (pathname === '/api/coupon/help' && req.method === 'POST') {
+      if (!emailReady()) bad('Приём обращений временно недоступен', 503);
+      rateLimit(req, 'coupon-help', 5, 60);
+      const body = await readJson(req);
+      const code = cap(body.code, 40).toUpperCase();
+      const phone = cap(body.phone, 40);
+      const email = normalizedEmail(body.email);
+      if (!/^[A-Z0-9_-]{4,40}$/.test(code) ||
+          (phone && !normalizeBuyerPhone(phone)) ||
+          (!phone && !validEmail(email)) || (email && !validEmail(email)))
+        bad('Укажите промокод и корректный телефон или email');
+      const reason = cap(body.reason, 240) || 'Промокод не применился';
+      const requestId = randomUUID();
+      const requestLocale = ['es','ru','uk'].includes(body.locale) ? body.locale : 'ru';
+      const message = `Промокод: ${code}\nПричина: ${reason}`;
+      await db.query(`INSERT INTO service_requests
+        (id,kind,email,contact_phone,message,locale,payload)
+        VALUES($1,'coupon',$2,$3,$4,$5,$6)`,
+      [requestId, email, phone, message, requestLocale, { code, reason }]);
+      try { await notifyServiceRequest({ id:requestId, kind:'coupon', email,
+        phone, message, locale:requestLocale }); }
+      catch (error) { console.error('Coupon help notification failed:', error.message);
+        return json(res, 202, { accepted:true, notified:false, id:requestId }); }
+      return json(res, 202, { accepted:true, notified:true, id:requestId });
     }
     if (pathname === '/api/checkout/address-check' && req.method === 'POST') {
       rateLimit(req, 'address-check', 30);

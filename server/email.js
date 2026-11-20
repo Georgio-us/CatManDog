@@ -56,10 +56,11 @@ export async function sendOrderConfirmation(order, items, fetcher = fetch) {
 
 export async function notifyServiceRequest(request, fetcher = fetch) {
   const kind = request.kind === 'return' ? 'возврат' : request.kind === 'availability' ? 'поступление товара'
-    : request.kind === 'urgent' ? 'срочная доставка' : 'вопрос';
+    : request.kind === 'urgent' ? 'срочная доставка' : request.kind === 'coupon' ? 'проблема с купоном' : 'вопрос';
   const order = request.orderNumber ? `Заказ: ${request.orderNumber}\n` : '';
   const subject = `Новое обращение CatManDog - ${kind}`;
-  const inbox = process.env.SUPPORT_INBOX || 'support@catmandog.es';
+  const inbox = request.kind === 'coupon' ? 'info@catmandog.es'
+    : process.env.SUPPORT_INBOX || 'support@catmandog.es';
   const notices = [sendEmail(inbox, subject,
     `Новое обращение ${request.id}\nEmail: ${request.email}\n${request.name ? `Имя: ${request.name}\n` : ''}${request.phone ? `Телефон: ${request.phone}\n` : ''}${order}Сообщение:\n${request.message}\n\nОтветьте клиенту из панели управления`, fetcher),
   ...(request.email ? [sendEmail(request.email,
