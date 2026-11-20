@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { atelierSelection, atelierShelfId, atelierOptionsMarkup } from '../atelier-configuration.js';
+import { atelierSelection, atelierShelfId, atelierOptionsMarkup, atelierHasOptions, atelierDefaults } from '../atelier-configuration.js';
 import { productGallery } from '../product-gallery.js';
 import { priceQuote } from '../server/pricing.js';
 import { catsAtelierProducts } from '../cats-atelier-products.js';
@@ -64,6 +64,25 @@ test('supplier-specific options are exact and carry through the priced quote', (
   assert.equal(quote.items.length, 2);
   assert.equal(quote.items[0].variantLabel, '1 шт · DOT Beige · White');
   assert.deepEqual(quote.items[0].configuration, selection);
-  assert.throws(() => priceQuote([line({ fabric:'999', wood:'57' })], [variant]), /Выберите ткань/);
-  assert.throws(() => priceQuote([{ productId:atelierShelfId, variantId:atelierShelfId, qty:1 }], [variant]), /Выберите ткань/);
+  assert.throws(() => priceQuote([line({ fabric:'999', wood:'57' })], [variant]), /Выберите цвет тканевого чехла/);
+  assert.throws(() => priceQuote([{ productId:atelierShelfId, variantId:atelierShelfId, qty:1 }], [variant]), /Выберите все варианты/);
+});
+
+test('every supplier option group appears on the matching model and validates at checkout', () => {
+  const configured = catsAtelierProducts.filter(item => atelierHasOptions(item.id));
+  assert.equal(configured.length, 38);
+  for (const item of configured) {
+    const defaults = atelierDefaults(item.id);
+    const selection = atelierSelection(item.id, defaults);
+    assert.ok(selection.label);
+    assert.deepEqual(selection.options, defaults);
+    const markup = atelierOptionsMarkup(item.id, defaults, 'es', value => value);
+    for (const key of Object.keys(defaults)) assert.match(markup, new RegExp(`data-atelier-option="${key}"`));
+    assert.throws(() => atelierSelection(item.id, null), /Выберите все варианты/);
+    const quote = priceQuote([{ productId:item.id, variantId:item.id, qty:1, configuration:defaults }],
+      [{ variant_id:item.id, product_id:item.id, name:item.name, label:'1 шт', sale_price_cents:Math.round(item.price*100),
+        price_accepted:true, sale_status:'preorder', availability:'source_on_demand' }]);
+    assert.deepEqual(quote.items[0].configuration, defaults);
+  }
+  assert.equal(atelierHasOptions('cats-atelier-rd-st'), false);
 });
