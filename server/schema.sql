@@ -595,13 +595,16 @@ ALTER TABLE promo_codes ADD CONSTRAINT promo_codes_kind_check
   CHECK (kind IN ('general','second_order','paper_shared'));
 ALTER TABLE promo_codes DROP CONSTRAINT IF EXISTS promo_codes_paper_shared_rules;
 ALTER TABLE promo_codes ADD CONSTRAINT promo_codes_paper_shared_rules
-  CHECK (kind<>'paper_shared' OR (percent_off=10 AND max_uses=100 AND free_delivery=false));
+  CHECK (kind<>'paper_shared' OR (percent_off=10 AND max_uses>0));
 INSERT INTO promo_codes(code,kind,percent_off,free_delivery,active,max_uses,used_count,expires_at)
 VALUES('CMD10-D8E2EYWE','paper_shared',10,false,true,100,0,now() + interval '90 days')
 ON CONFLICT DO NOTHING;
 INSERT INTO promo_codes(code,kind,percent_off,free_delivery,active,max_uses,used_count,expires_at)
-VALUES('SUISSAVECINOS10','paper_shared',10,false,true,100,0,now() + interval '90 days')
-ON CONFLICT DO NOTHING;
+VALUES('SUISSAVECINOS10','paper_shared',10,true,true,40,0,NULL)
+ON CONFLICT(code) DO UPDATE SET kind='paper_shared',percent_off=10,free_delivery=true,
+  active=true,max_uses=40,expires_at=NULL
+WHERE promo_codes.kind='paper_shared' AND promo_codes.percent_off=10
+  AND promo_codes.free_delivery=false AND promo_codes.max_uses=100 AND promo_codes.active=true;
 
 CREATE TABLE IF NOT EXISTS customer_promos (
   customer_id uuid NOT NULL REFERENCES customers(id) ON DELETE CASCADE,

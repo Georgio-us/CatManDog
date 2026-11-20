@@ -16,7 +16,7 @@ export function promoProblem(promo, now = new Date()) {
   if (promo.expires_at && new Date(promo.expires_at) <= now) return 'Срок действия промокода истёк';
   if (promo.max_uses !== null && promo.used_count >= promo.max_uses)
     return promo.kind === 'paper_shared'
-      ? 'Лимит купонов исчерпан - свяжитесь с поддержкой'
+      ? 'Лимит купонов исчерпан - свяжитесь с нами, мы дадим вам новый промокод'
       : 'Промокод уже использован';
   return null;
 }
@@ -49,6 +49,7 @@ export async function couponStatus(db, promo, customer = null, identity = null) 
   const used = promo?.kind === 'paper_shared'
     ? await previousUse(db, promo.code, customer, identity) : null;
   return { code: promo?.code || null, percent: promo?.percent_off || 0,
+    freeShipping: promo?.free_delivery === true,
     expiresAt: promo?.expires_at || null,
     status: used === 'paid' ? 'used' : used ? 'pending_payment'
       : problem === 'Срок действия промокода истёк' ? 'expired'
@@ -60,7 +61,8 @@ export async function activatePaperCoupon(db, rawCode, customer = null) {
   const code = normalizePromoCode(rawCode);
   if (!validCode(code)) fail('Промокод недействителен');
   const promo = await promoRow(db, code);
-  if (!promo || promo.kind !== 'paper_shared' || promo.percent_off !== 10 || promo.max_uses !== 100)
+  if (!promo || promo.kind !== 'paper_shared' || promo.percent_off !== 10 ||
+    !Number.isInteger(promo.max_uses) || promo.max_uses < 1)
     fail('Промокод недействителен');
   const status = await couponStatus(db, promo, customer);
   if (customer && status.status === 'ready') {
@@ -86,7 +88,7 @@ export async function resolvePromo(db, rawCode, customer = null, identity = null
   const promo = await promoRow(db, code, lock);
   if (!promo || promo.kind === 'second_order') fail('Промокод недействителен');
   if (promo.kind === 'paper_shared') {
-    if (promo.percent_off !== 10 || promo.max_uses !== 100 || promo.free_delivery)
+    if (promo.percent_off !== 10 || !Number.isInteger(promo.max_uses) || promo.max_uses < 1)
       fail('Промокод недействителен');
     const use = await previousUse(db, code, customer, identity);
     if (use === 'paid') fail('Вы уже использовали этот промокод');

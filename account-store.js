@@ -87,7 +87,8 @@ export function createAccountStore(storage) {
     toggleReminder(reminderId) { const reminder = data.reminders.find(r => r.id === reminderId && r.petId === data.activePetId); if (reminder) { reminder.done = !reminder.done; save(); } },
     applyPromo(code) { const value = code.trim().toUpperCase(); if (!['WELCOME10', 'LEO10'].includes(value)) throw new Error('В прототипе доступны WELCOME10 и LEO10'); data.promo = value; save(); },
     promo: () => mode === 'remote' ? (remoteCoupon?.status === 'ready'
-      ? { code: remoteCoupon.code, percent: remoteCoupon.percent } : null)
+      ? { code: remoteCoupon.code, percent: remoteCoupon.percent,
+        freeShipping: remoteCoupon.freeShipping === true } : null)
       : data.promo ? { code: data.promo, percent: 10 } : null,
     assignClinic(clinicId) { data.clinics[data.activePetId || 'guest'] = clinicId; save(); },
     tripDraft: () => structuredClone(data.tripDrafts[data.activePetId || 'guest'] || null),

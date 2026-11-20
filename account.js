@@ -328,21 +328,25 @@ export function createAccountUI(helpers) {
     const knownCoupon = store.mode() === 'remote' ? store.remoteCoupon() || guestCoupon : guestCoupon;
     const code = pendingPromoCode() || knownCoupon?.code || '';
     const coupon = knownCoupon?.code === code ? knownCoupon : null;
-    const label = coupon?.status === 'ready' ? 'Промокод принят - скидка 10% будет учтена при оформлении подходящего заказа'
+    const label = coupon?.status === 'ready' ? coupon.freeShipping
+      ? 'Промокод принят - скидка 10% и бесплатная доставка будут учтены при оформлении заказа'
+      : 'Промокод принят - скидка 10% будет учтена при оформлении подходящего заказа'
       : coupon?.status === 'pending_payment' ? 'Купон зарезервирован до завершения оплаты'
       : coupon?.status === 'used' ? 'Вы уже использовали этот промокод'
       : coupon?.status === 'expired' ? 'Срок действия промокода истёк'
-      : coupon?.status === 'limit_reached' ? 'Лимит купонов исчерпан - свяжитесь с поддержкой'
+      : coupon?.status === 'limit_reached' ? 'Лимит купонов исчерпан - свяжитесь с нами, мы дадим вам новый промокод'
       : coupon?.status === 'invalid' ? 'Промокод недействителен' : '';
-    return `<div class="page pet-onboarding pet-auth-page"><div class="pet-auth-panel"><span class="pet-eyebrow">Купон CatManDog</span><h1>10% на заказ</h1><p class="pet-intro-copy">Код с карточки и QR работают одинаково. Можно купить как гость или войти в аккаунт, чтобы сохранить купон.</p>${label ? `<section class="pet-panel"><strong>${e(coupon.code)}</strong><p>${e(label)}</p>${coupon.status === 'ready' ? `<a class="button" href="${getCart?.().length ? '#/checkout' : '#/catalog'}">${getCart?.().length ? 'Продолжить как гость' : 'Выбрать товары'} ${icon('arrow')}</a>` : '<a class="text-link" href="#/support">Связаться с поддержкой</a>'}</section>` : `<form class="pet-panel pet-form" data-account-form="coupon-activate"><label class="pet-field">Код с карточки<input name="code" required maxlength="40" value="${e(code)}" autocapitalize="characters" autocomplete="off" placeholder="Введите код"></label><p class="pet-form-error" data-account-error role="alert">${e(couponError)}</p><button class="button" type="submit">Применить купон</button></form>`}<div class="pet-auth-links">${accountsEnabled ? '<a class="text-link" href="#/account/login">Войти или зарегистрироваться</a>' : ''}<a class="text-link" href="#/cart">Вернуться в корзину</a></div></div></div>`;
+    return `<div class="page pet-onboarding pet-auth-page"><div class="pet-auth-panel"><span class="pet-eyebrow">Купон CatManDog</span><h1>10% на заказ</h1><p class="pet-intro-copy">Введите код или перейдите по ссылке. Можно купить как гость или войти в аккаунт, чтобы сохранить купон.</p>${label ? `<section class="pet-panel"><strong>${e(coupon.code)}</strong><p>${e(label)}</p>${coupon.status === 'ready' ? `<a class="button" href="${getCart?.().length ? '#/checkout' : '#/catalog'}">${getCart?.().length ? 'Продолжить как гость' : 'Выбрать товары'} ${icon('arrow')}</a>` : '<a class="text-link" href="#/support">Связаться с поддержкой</a>'}</section>` : `<form class="pet-panel pet-form" data-account-form="coupon-activate"><label class="pet-field">Промокод<input name="code" required maxlength="40" value="${e(code)}" autocapitalize="characters" autocomplete="off" placeholder="Введите код"></label><p class="pet-form-error" data-account-error role="alert">${e(couponError)}</p><button class="button" type="submit">Применить купон</button></form>`}<div class="pet-auth-links">${accountsEnabled ? '<a class="text-link" href="#/account/login">Войти или зарегистрироваться</a>' : ''}<a class="text-link" href="#/cart">Вернуться в корзину</a></div></div></div>`;
   }
   function promoPanel() {
     const coupon = store.remoteCoupon();
-    const status = coupon?.status === 'ready' ? 'Промокод принят - скидка 10% будет учтена при оформлении подходящего заказа'
+    const status = coupon?.status === 'ready' ? coupon.freeShipping
+      ? 'Промокод принят - скидка 10% и бесплатная доставка будут учтены при оформлении заказа'
+      : 'Промокод принят - скидка 10% будет учтена при оформлении подходящего заказа'
       : coupon?.status === 'used' ? 'Вы уже использовали этот промокод'
       : coupon?.status === 'pending_payment' ? 'Купон зарезервирован до завершения оплаты'
       : coupon?.status === 'expired' ? 'Срок действия промокода истёк'
-      : coupon?.status === 'limit_reached' ? 'Лимит купонов исчерпан - свяжитесь с поддержкой'
+      : coupon?.status === 'limit_reached' ? 'Лимит купонов исчерпан - свяжитесь с нами, мы дадим вам новый промокод'
       : coupon ? 'Промокод недействителен' : '';
     return `<section class="pet-panel pet-promo-panel"><h2>У вас есть промокод?</h2><p>Купон на 10% можно добавить сейчас или позже</p><form class="pet-form" data-account-form="promo"><label class="pet-field">Промокод<input name="code" required maxlength="40" autocomplete="off" autocapitalize="characters" placeholder="Введите код"></label><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">Сохранить промокод</button></form>${status ? `<p class="pet-caption" role="status">${coupon?.code ? `<strong>${e(coupon.code)}</strong> - ` : ''}${e(status)}</p>` : ''}${coupon?.status === 'limit_reached' ? '<a class="text-link" href="#/support">Связаться с поддержкой</a>' : ''}</section>`;
   }
@@ -639,7 +643,8 @@ export function createAccountUI(helpers) {
     return guestCoupon;
   }
   const promo = () => store.mode() === 'remote' ? store.promo()
-    : guestCoupon?.status === 'ready' ? { code: guestCoupon.code, percent: guestCoupon.percent } : null;
+    : guestCoupon?.status === 'ready' ? { code: guestCoupon.code, percent: guestCoupon.percent,
+      freeShipping: guestCoupon.freeShipping === true } : null;
   function couponPaid() {
     guestCoupon = null;
     try { localStorage.removeItem(pendingPromoKey); } catch { /* Storage unavailable */ }
