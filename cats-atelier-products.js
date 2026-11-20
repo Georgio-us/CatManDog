@@ -35,6 +35,83 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/34/cat-shelf-the-double-arch-haven-100-cm-sh-m-da100.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-DA100/637.webp",
+        "originalSrc": "https://catsatelier.com/637-thickbox_default/cat-shelf-the-double-arch-haven-100-cm-sh-m-da100.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-DA100/43.webp",
+        "originalSrc": "https://catsatelier.com/43-thickbox_default/cat-shelf-the-double-arch-haven-100-cm-sh-m-da100.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-DA100/45.webp",
+        "originalSrc": "https://catsatelier.com/45-thickbox_default/cat-shelf-the-double-arch-haven-100-cm-sh-m-da100.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-DA100/46.webp",
+        "originalSrc": "https://catsatelier.com/46-thickbox_default/cat-shelf-the-double-arch-haven-100-cm-sh-m-da100.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-DA100/634.webp",
+        "originalSrc": "https://catsatelier.com/634-thickbox_default/cat-shelf-the-double-arch-haven-100-cm-sh-m-da100.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-M-DA100",
     "ean": "5906546701102",
     "supplier": {
@@ -92,6 +169,53 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/63/cat-wall-shelf-curvaceous-comfort-60-cm-sh-w-a60.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-A60/638.webp",
+        "originalSrc": "https://catsatelier.com/638-thickbox_default/cat-wall-shelf-curvaceous-comfort-60-cm-sh-w-a60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-A60/559.webp",
+        "originalSrc": "https://catsatelier.com/559-thickbox_default/cat-wall-shelf-curvaceous-comfort-60-cm-sh-w-a60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Варианты отделки дерева",
+          "es": "Acabados de madera",
+          "uk": "Варіанти оздоблення дерева"
+        },
+        "caption": {
+          "ru": "Варианты отделки дерева",
+          "es": "Acabados de madera",
+          "uk": "Варіанти оздоблення дерева"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-A60/633.webp",
+        "originalSrc": "https://catsatelier.com/633-thickbox_default/cat-wall-shelf-curvaceous-comfort-60-cm-sh-w-a60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-W-A60",
     "ean": "5906546701027",
     "supplier": {
@@ -147,6 +271,68 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/81/flat-cat-wall-step-st-f1021.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/ST-MB-F/563.webp",
+        "originalSrc": "https://catsatelier.com/563-thickbox_default/flat-cat-wall-step-st-f1021.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Варианты цвета кронштейна",
+          "es": "Opciones de color del soporte",
+          "uk": "Варіанти кольору кронштейна"
+        },
+        "caption": {
+          "ru": "Варианты цвета кронштейна",
+          "es": "Opciones de color del soporte",
+          "uk": "Варіанти кольору кронштейна"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/ST-MB-F/564.webp",
+        "originalSrc": "https://catsatelier.com/564-thickbox_default/flat-cat-wall-step-st-f1021.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Варианты ткани",
+          "es": "Opciones de tejido",
+          "uk": "Варіанти тканини"
+        },
+        "caption": {
+          "ru": "Варианты ткани",
+          "es": "Opciones de tejido",
+          "uk": "Варіанти тканини"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/ST-MB-F/83.webp",
+        "originalSrc": "https://catsatelier.com/83-thickbox_default/flat-cat-wall-step-st-f1021.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Ступенька и её крепление",
+          "es": "Peldaño y su fijación",
+          "uk": "Сходинка та її кріплення"
+        },
+        "caption": {
+          "ru": "Ступенька и её крепление",
+          "es": "Peldaño y su fijación",
+          "uk": "Сходинка та її кріплення"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/ST-MB-F/632.webp",
+        "originalSrc": "https://catsatelier.com/632-thickbox_default/flat-cat-wall-step-st-f1021.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "ST-MB-F",
     "ean": "5906546701270",
     "supplier": {
@@ -203,6 +389,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/105/extra-mattress-cover-for-metal-base-shelf.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-M-60/106.webp",
+        "originalSrc": "https://catsatelier.com/106-thickbox_default/extra-mattress-cover-for-metal-base-shelf.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        },
+        "caption": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-M-60/658.webp",
+        "originalSrc": "https://catsatelier.com/658-thickbox_default/extra-mattress-cover-for-metal-base-shelf.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      }
+    ],
     "manufacturerSku": "CO-M-60",
     "ean": "5906546701584",
     "supplier": {
@@ -260,6 +478,68 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/142/metal-base-cat-wall-shelf-wave-95-cm-symmetrical-left-sh-m-w95-sl.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W95-SL/639.webp",
+        "originalSrc": "https://catsatelier.com/639-thickbox_default/metal-base-cat-wall-shelf-wave-95-cm-symmetrical-left-sh-m-w95-sl.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W95-SL/147.webp",
+        "originalSrc": "https://catsatelier.com/147-thickbox_default/metal-base-cat-wall-shelf-wave-95-cm-symmetrical-left-sh-m-w95-sl.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W95-SL/148.webp",
+        "originalSrc": "https://catsatelier.com/148-thickbox_default/metal-base-cat-wall-shelf-wave-95-cm-symmetrical-left-sh-m-w95-sl.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W95-SL/631.webp",
+        "originalSrc": "https://catsatelier.com/631-thickbox_default/metal-base-cat-wall-shelf-wave-95-cm-symmetrical-left-sh-m-w95-sl.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-M-W95-SL",
     "ean": "5906546701072",
     "supplier": {
@@ -317,6 +597,68 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/149/cat-wall-shelf-playful-curve-left-75-cm-sh-m-w75sl.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-SL/640.webp",
+        "originalSrc": "https://catsatelier.com/640-thickbox_default/cat-wall-shelf-playful-curve-left-75-cm-sh-m-w75sl.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-SL/170.webp",
+        "originalSrc": "https://catsatelier.com/170-thickbox_default/cat-wall-shelf-playful-curve-left-75-cm-sh-m-w75sl.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-SL/171.webp",
+        "originalSrc": "https://catsatelier.com/171-thickbox_default/cat-wall-shelf-playful-curve-left-75-cm-sh-m-w75sl.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-SL/630.webp",
+        "originalSrc": "https://catsatelier.com/630-thickbox_default/cat-wall-shelf-playful-curve-left-75-cm-sh-m-w75sl.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-M-W75-SL",
     "ean": "5906546701232",
     "supplier": {
@@ -374,6 +716,68 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/197/cat-shelf-the-playful-curve-right-75-cm-sh-m-w75ur.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-UR/641.webp",
+        "originalSrc": "https://catsatelier.com/641-thickbox_default/cat-shelf-the-playful-curve-right-75-cm-sh-m-w75ur.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-UR/212.webp",
+        "originalSrc": "https://catsatelier.com/212-thickbox_default/cat-shelf-the-playful-curve-right-75-cm-sh-m-w75ur.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-UR/213.webp",
+        "originalSrc": "https://catsatelier.com/213-thickbox_default/cat-shelf-the-playful-curve-right-75-cm-sh-m-w75ur.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-UR/629.webp",
+        "originalSrc": "https://catsatelier.com/629-thickbox_default/cat-shelf-the-playful-curve-right-75-cm-sh-m-w75ur.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-M-W75-UR",
     "ean": "5906546701294",
     "supplier": {
@@ -431,6 +835,68 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/214/metal-base-cat-wall-shelf-wave-95-cm-unsymmetrical-right-sh-m-w95-ur.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W95-UR/642.webp",
+        "originalSrc": "https://catsatelier.com/642-thickbox_default/metal-base-cat-wall-shelf-wave-95-cm-unsymmetrical-right-sh-m-w95-ur.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W95-UR/231.webp",
+        "originalSrc": "https://catsatelier.com/231-thickbox_default/metal-base-cat-wall-shelf-wave-95-cm-unsymmetrical-right-sh-m-w95-ur.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W95-UR/232.webp",
+        "originalSrc": "https://catsatelier.com/232-thickbox_default/metal-base-cat-wall-shelf-wave-95-cm-unsymmetrical-right-sh-m-w95-ur.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W95-UR/628.webp",
+        "originalSrc": "https://catsatelier.com/628-thickbox_default/metal-base-cat-wall-shelf-wave-95-cm-unsymmetrical-right-sh-m-w95-ur.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-M-W95-UR",
     "ean": "5906546701010",
     "supplier": {
@@ -488,6 +954,113 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/253/cat-shelf-the-cozy-nook-60-cm-sh-f60.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-F-60/643.webp",
+        "originalSrc": "https://catsatelier.com/643-thickbox_default/cat-shelf-the-cozy-nook-60-cm-sh-f60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-F-60/555.webp",
+        "originalSrc": "https://catsatelier.com/555-thickbox_default/cat-shelf-the-cozy-nook-60-cm-sh-f60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Варианты отделки дерева",
+          "es": "Acabados de madera",
+          "uk": "Варіанти оздоблення дерева"
+        },
+        "caption": {
+          "ru": "Варианты отделки дерева",
+          "es": "Acabados de madera",
+          "uk": "Варіанти оздоблення дерева"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-F-60/257.webp",
+        "originalSrc": "https://catsatelier.com/257-thickbox_default/cat-shelf-the-cozy-nook-60-cm-sh-f60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-F-60/259.webp",
+        "originalSrc": "https://catsatelier.com/259-thickbox_default/cat-shelf-the-cozy-nook-60-cm-sh-f60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-F-60/265.webp",
+        "originalSrc": "https://catsatelier.com/265-thickbox_default/cat-shelf-the-cozy-nook-60-cm-sh-f60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-F-60/266.webp",
+        "originalSrc": "https://catsatelier.com/266-thickbox_default/cat-shelf-the-cozy-nook-60-cm-sh-f60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-F-60/627.webp",
+        "originalSrc": "https://catsatelier.com/627-thickbox_default/cat-shelf-the-cozy-nook-60-cm-sh-f60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-F-60",
     "ean": "5906546701089",
     "supplier": {
@@ -545,6 +1118,113 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/267/cat-shelf-the-cozy-nook-75-cm-sh-f75g.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-F75/644.webp",
+        "originalSrc": "https://catsatelier.com/644-thickbox_default/cat-shelf-the-cozy-nook-75-cm-sh-f75g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-F75/556.webp",
+        "originalSrc": "https://catsatelier.com/556-thickbox_default/cat-shelf-the-cozy-nook-75-cm-sh-f75g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Варианты отделки дерева",
+          "es": "Acabados de madera",
+          "uk": "Варіанти оздоблення дерева"
+        },
+        "caption": {
+          "ru": "Варианты отделки дерева",
+          "es": "Acabados de madera",
+          "uk": "Варіанти оздоблення дерева"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-F75/271.webp",
+        "originalSrc": "https://catsatelier.com/271-thickbox_default/cat-shelf-the-cozy-nook-75-cm-sh-f75g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-F75/273.webp",
+        "originalSrc": "https://catsatelier.com/273-thickbox_default/cat-shelf-the-cozy-nook-75-cm-sh-f75g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-F75/279.webp",
+        "originalSrc": "https://catsatelier.com/279-thickbox_default/cat-shelf-the-cozy-nook-75-cm-sh-f75g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-F75/280.webp",
+        "originalSrc": "https://catsatelier.com/280-thickbox_default/cat-shelf-the-cozy-nook-75-cm-sh-f75g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-F75/626.webp",
+        "originalSrc": "https://catsatelier.com/626-thickbox_default/cat-shelf-the-cozy-nook-75-cm-sh-f75g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-W-F75",
     "ean": "5906546701621",
     "supplier": {
@@ -669,6 +1349,68 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/292/cat-window-shelf-the-sunny-spot-75-cm-sh-f75g.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-F60-G/558.webp",
+        "originalSrc": "https://catsatelier.com/558-thickbox_default/cat-window-shelf-the-sunny-spot-75-cm-sh-f75g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Варианты отделки дерева",
+          "es": "Acabados de madera",
+          "uk": "Варіанти оздоблення дерева"
+        },
+        "caption": {
+          "ru": "Варианты отделки дерева",
+          "es": "Acabados de madera",
+          "uk": "Варіанти оздоблення дерева"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-F60-G/297.webp",
+        "originalSrc": "https://catsatelier.com/297-thickbox_default/cat-window-shelf-the-sunny-spot-75-cm-sh-f75g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-F60-G/298.webp",
+        "originalSrc": "https://catsatelier.com/298-thickbox_default/cat-window-shelf-the-sunny-spot-75-cm-sh-f75g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-F60-G/646.webp",
+        "originalSrc": "https://catsatelier.com/646-thickbox_default/cat-window-shelf-the-sunny-spot-75-cm-sh-f75g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      }
+    ],
     "manufacturerSku": "SH-W-F60-G",
     "ean": "5906546701447",
     "supplier": {
@@ -726,6 +1468,68 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/300/cat-shelf-the-arcing-haven-60-cm-sh-m-60.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A60/647.webp",
+        "originalSrc": "https://catsatelier.com/647-thickbox_default/cat-shelf-the-arcing-haven-60-cm-sh-m-60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A60/317.webp",
+        "originalSrc": "https://catsatelier.com/317-thickbox_default/cat-shelf-the-arcing-haven-60-cm-sh-m-60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A60/318.webp",
+        "originalSrc": "https://catsatelier.com/318-thickbox_default/cat-shelf-the-arcing-haven-60-cm-sh-m-60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A60/625.webp",
+        "originalSrc": "https://catsatelier.com/625-thickbox_default/cat-shelf-the-arcing-haven-60-cm-sh-m-60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-M-A60",
     "ean": "5906546701003",
     "supplier": {
@@ -783,6 +1587,68 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/319/cat-shelf-the-arcing-haven-75-cm-sh-m-a75-g.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A75/648.webp",
+        "originalSrc": "https://catsatelier.com/648-thickbox_default/cat-shelf-the-arcing-haven-75-cm-sh-m-a75-g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A75/335.webp",
+        "originalSrc": "https://catsatelier.com/335-thickbox_default/cat-shelf-the-arcing-haven-75-cm-sh-m-a75-g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A75/336.webp",
+        "originalSrc": "https://catsatelier.com/336-thickbox_default/cat-shelf-the-arcing-haven-75-cm-sh-m-a75-g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A75/624.webp",
+        "originalSrc": "https://catsatelier.com/624-thickbox_default/cat-shelf-the-arcing-haven-75-cm-sh-m-a75-g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-M-A75",
     "ean": "5906546701416",
     "supplier": {
@@ -840,6 +1706,113 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/379/cat-window-shelf-the-arcing-view-60-cm-sh-m-a60.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A75-G/649.webp",
+        "originalSrc": "https://catsatelier.com/649-thickbox_default/cat-window-shelf-the-arcing-view-60-cm-sh-m-a60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A75-G/377.webp",
+        "originalSrc": "https://catsatelier.com/377-thickbox_default/cat-window-shelf-the-arcing-view-60-cm-sh-m-a60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A75-G/378.webp",
+        "originalSrc": "https://catsatelier.com/378-thickbox_default/cat-window-shelf-the-arcing-view-60-cm-sh-m-a60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A75-G/381.webp",
+        "originalSrc": "https://catsatelier.com/381-thickbox_default/cat-window-shelf-the-arcing-view-60-cm-sh-m-a60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A75-G/376.webp",
+        "originalSrc": "https://catsatelier.com/376-thickbox_default/cat-window-shelf-the-arcing-view-60-cm-sh-m-a60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Полка у окна",
+          "es": "Estante junto a la ventana",
+          "uk": "Полиця біля вікна"
+        },
+        "caption": {
+          "ru": "Полка у окна",
+          "es": "Estante junto a la ventana",
+          "uk": "Полиця біля вікна"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A75-G/382.webp",
+        "originalSrc": "https://catsatelier.com/382-thickbox_default/cat-window-shelf-the-arcing-view-60-cm-sh-m-a60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A75-G/623.webp",
+        "originalSrc": "https://catsatelier.com/623-thickbox_default/cat-window-shelf-the-arcing-view-60-cm-sh-m-a60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-M-A75-G",
     "ean": "5906546701393",
     "supplier": {
@@ -897,6 +1870,68 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/516/metal-base-cat-wall-shelf-wave-75-cm-symmetrical-right-sh-m-w75sr.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-SR/397.webp",
+        "originalSrc": "https://catsatelier.com/397-thickbox_default/metal-base-cat-wall-shelf-wave-75-cm-symmetrical-right-sh-m-w75sr.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-SR/398.webp",
+        "originalSrc": "https://catsatelier.com/398-thickbox_default/metal-base-cat-wall-shelf-wave-75-cm-symmetrical-right-sh-m-w75sr.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-SR/650.webp",
+        "originalSrc": "https://catsatelier.com/650-thickbox_default/metal-base-cat-wall-shelf-wave-75-cm-symmetrical-right-sh-m-w75sr.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-SR/622.webp",
+        "originalSrc": "https://catsatelier.com/622-thickbox_default/metal-base-cat-wall-shelf-wave-75-cm-symmetrical-right-sh-m-w75sr.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-M-W75-SR",
     "ean": "5906546701171",
     "supplier": {
@@ -954,6 +1989,83 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/400/metal-base-cat-wall-shelf-wave-95-cm-unsymmetrical-left-sh-m-w95-ul.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W95-UL/651.webp",
+        "originalSrc": "https://catsatelier.com/651-thickbox_default/metal-base-cat-wall-shelf-wave-95-cm-unsymmetrical-left-sh-m-w95-ul.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W95-UL/414.webp",
+        "originalSrc": "https://catsatelier.com/414-thickbox_default/metal-base-cat-wall-shelf-wave-95-cm-unsymmetrical-left-sh-m-w95-ul.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W95-UL/415.webp",
+        "originalSrc": "https://catsatelier.com/415-thickbox_default/metal-base-cat-wall-shelf-wave-95-cm-unsymmetrical-left-sh-m-w95-ul.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W95-UL/413.webp",
+        "originalSrc": "https://catsatelier.com/413-thickbox_default/metal-base-cat-wall-shelf-wave-95-cm-unsymmetrical-left-sh-m-w95-ul.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Варианты ткани",
+          "es": "Opciones de tejido",
+          "uk": "Варіанти тканини"
+        },
+        "caption": {
+          "ru": "Варианты ткани",
+          "es": "Opciones de tejido",
+          "uk": "Варіанти тканини"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W95-UL/621.webp",
+        "originalSrc": "https://catsatelier.com/621-thickbox_default/metal-base-cat-wall-shelf-wave-95-cm-unsymmetrical-left-sh-m-w95-ul.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-M-W95-UL",
     "ean": "5906546701126",
     "supplier": {
@@ -1011,6 +2123,68 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/416/metal-base-cat-wall-shelf-wave-75-cm-unsymmetrical-left-sh-m-w75ul.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-UL/652.webp",
+        "originalSrc": "https://catsatelier.com/652-thickbox_default/metal-base-cat-wall-shelf-wave-75-cm-unsymmetrical-left-sh-m-w75ul.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-UL/425.webp",
+        "originalSrc": "https://catsatelier.com/425-thickbox_default/metal-base-cat-wall-shelf-wave-75-cm-unsymmetrical-left-sh-m-w75ul.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-UL/426.webp",
+        "originalSrc": "https://catsatelier.com/426-thickbox_default/metal-base-cat-wall-shelf-wave-75-cm-unsymmetrical-left-sh-m-w75ul.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W75-UL/620.webp",
+        "originalSrc": "https://catsatelier.com/620-thickbox_default/metal-base-cat-wall-shelf-wave-75-cm-unsymmetrical-left-sh-m-w75ul.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-M-W75-UL",
     "ean": "5906546701034",
     "supplier": {
@@ -1067,6 +2241,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/439/extra-mattress-cover-for-wood-base-shelf-60cm.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-W-A60/436.webp",
+        "originalSrc": "https://catsatelier.com/436-thickbox_default/extra-mattress-cover-for-wood-base-shelf-60cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        },
+        "caption": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-W-A60/659.webp",
+        "originalSrc": "https://catsatelier.com/659-thickbox_default/extra-mattress-cover-for-wood-base-shelf-60cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      }
+    ],
     "manufacturerSku": "CO-W-A60",
     "ean": "5906546701515",
     "supplier": {
@@ -1123,6 +2329,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/443/copy-of-extra-mattress-cover-for-wood-base-shelf-95cm.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-W-95/440.webp",
+        "originalSrc": "https://catsatelier.com/440-thickbox_default/copy-of-extra-mattress-cover-for-wood-base-shelf-95cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        },
+        "caption": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-W-95/660.webp",
+        "originalSrc": "https://catsatelier.com/660-thickbox_default/copy-of-extra-mattress-cover-for-wood-base-shelf-95cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      }
+    ],
     "manufacturerSku": "CO-W-95",
     "ean": "5906546701508",
     "supplier": {
@@ -1179,6 +2417,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/446/extra-mattress-cover-for-metal-base-shelf-75cm.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-M-75/444.webp",
+        "originalSrc": "https://catsatelier.com/444-thickbox_default/extra-mattress-cover-for-metal-base-shelf-75cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        },
+        "caption": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-M-75/661.webp",
+        "originalSrc": "https://catsatelier.com/661-thickbox_default/extra-mattress-cover-for-metal-base-shelf-75cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      }
+    ],
     "manufacturerSku": "CO-M-75",
     "ean": "5906546701591",
     "supplier": {
@@ -1235,6 +2505,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/449/extra-mattress-cover-for-metal-base-shelf-95cm.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-M-95/447.webp",
+        "originalSrc": "https://catsatelier.com/447-thickbox_default/extra-mattress-cover-for-metal-base-shelf-95cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        },
+        "caption": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-M-95/662.webp",
+        "originalSrc": "https://catsatelier.com/662-thickbox_default/extra-mattress-cover-for-metal-base-shelf-95cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      }
+    ],
     "manufacturerSku": "CO-M-95",
     "ean": "5906546701614",
     "supplier": {
@@ -1291,6 +2593,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/452/extra-mattress-cover-for-metal-base-shelf-100cm.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-M-100/450.webp",
+        "originalSrc": "https://catsatelier.com/450-thickbox_default/extra-mattress-cover-for-metal-base-shelf-100cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        },
+        "caption": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-M-100/663.webp",
+        "originalSrc": "https://catsatelier.com/663-thickbox_default/extra-mattress-cover-for-metal-base-shelf-100cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      }
+    ],
     "manufacturerSku": "CO-M-100",
     "ean": "5906546701607",
     "supplier": {
@@ -1347,6 +2681,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/455/extra-complete-mattress-for-wood-base-shelf.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/MA-W-60/453.webp",
+        "originalSrc": "https://catsatelier.com/453-thickbox_default/extra-complete-mattress-for-wood-base-shelf.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь матраса",
+          "es": "Detalle del colchón",
+          "uk": "Деталь матраца"
+        },
+        "caption": {
+          "ru": "Деталь матраса",
+          "es": "Detalle del colchón",
+          "uk": "Деталь матраца"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/MA-W-60/664.webp",
+        "originalSrc": "https://catsatelier.com/664-thickbox_default/extra-complete-mattress-for-wood-base-shelf.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      }
+    ],
     "manufacturerSku": "MA-W-60",
     "ean": "5906546701539",
     "supplier": {
@@ -1403,6 +2769,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/458/extra-complete-mattress-for-wood-base-shelf.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/MA-W-95/456.webp",
+        "originalSrc": "https://catsatelier.com/456-thickbox_default/extra-complete-mattress-for-wood-base-shelf.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь матраса",
+          "es": "Detalle del colchón",
+          "uk": "Деталь матраца"
+        },
+        "caption": {
+          "ru": "Деталь матраса",
+          "es": "Detalle del colchón",
+          "uk": "Деталь матраца"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/MA-W-95/665.webp",
+        "originalSrc": "https://catsatelier.com/665-thickbox_default/extra-complete-mattress-for-wood-base-shelf.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      }
+    ],
     "manufacturerSku": "MA-W-95",
     "ean": "5906546701522",
     "supplier": {
@@ -1459,6 +2857,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/461/extra-complete-mattress-for-metal-base-shelf-60cm.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/MA-M-60/459.webp",
+        "originalSrc": "https://catsatelier.com/459-thickbox_default/extra-complete-mattress-for-metal-base-shelf-60cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь матраса",
+          "es": "Detalle del colchón",
+          "uk": "Деталь матраца"
+        },
+        "caption": {
+          "ru": "Деталь матраса",
+          "es": "Detalle del colchón",
+          "uk": "Деталь матраца"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/MA-M-60/666.webp",
+        "originalSrc": "https://catsatelier.com/666-thickbox_default/extra-complete-mattress-for-metal-base-shelf-60cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      }
+    ],
     "manufacturerSku": "MA-M-60",
     "ean": "5906546701577",
     "supplier": {
@@ -1515,6 +2945,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/464/extra-complete-mattress-for-metal-base-shelf-75cm.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/MA-M-75/462.webp",
+        "originalSrc": "https://catsatelier.com/462-thickbox_default/extra-complete-mattress-for-metal-base-shelf-75cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь матраса",
+          "es": "Detalle del colchón",
+          "uk": "Деталь матраца"
+        },
+        "caption": {
+          "ru": "Деталь матраса",
+          "es": "Detalle del colchón",
+          "uk": "Деталь матраца"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/MA-M-75/667.webp",
+        "originalSrc": "https://catsatelier.com/667-thickbox_default/extra-complete-mattress-for-metal-base-shelf-75cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      }
+    ],
     "manufacturerSku": "MA-M-75",
     "ean": "5906546701560",
     "supplier": {
@@ -1571,6 +3033,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/467/extra-complete-mattress-for-metal-base-shelf-95cm.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/MA-M-95/465.webp",
+        "originalSrc": "https://catsatelier.com/465-thickbox_default/extra-complete-mattress-for-metal-base-shelf-95cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь матраса",
+          "es": "Detalle del colchón",
+          "uk": "Деталь матраца"
+        },
+        "caption": {
+          "ru": "Деталь матраса",
+          "es": "Detalle del colchón",
+          "uk": "Деталь матраца"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/MA-M-95/668.webp",
+        "originalSrc": "https://catsatelier.com/668-thickbox_default/extra-complete-mattress-for-metal-base-shelf-95cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      }
+    ],
     "manufacturerSku": "MA-M-95",
     "ean": "5906546701553",
     "supplier": {
@@ -1627,6 +3121,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/470/extra-complete-mattress-for-metal-base-shelf-100cm.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/MA-M-100/468.webp",
+        "originalSrc": "https://catsatelier.com/468-thickbox_default/extra-complete-mattress-for-metal-base-shelf-100cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь матраса",
+          "es": "Detalle del colchón",
+          "uk": "Деталь матраца"
+        },
+        "caption": {
+          "ru": "Деталь матраса",
+          "es": "Detalle del colchón",
+          "uk": "Деталь матраца"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/MA-M-100/669.webp",
+        "originalSrc": "https://catsatelier.com/669-thickbox_default/extra-complete-mattress-for-metal-base-shelf-100cm.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      }
+    ],
     "manufacturerSku": "MA-M-100",
     "ean": "5906546701546",
     "supplier": {
@@ -1684,6 +3210,53 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/477/polka-scienna-dla-kota-wiszaca-fala-95-cm-nl-sh-w-w95l.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-W95-UL/653.webp",
+        "originalSrc": "https://catsatelier.com/653-thickbox_default/polka-scienna-dla-kota-wiszaca-fala-95-cm-nl-sh-w-w95l.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-W95-UL/560.webp",
+        "originalSrc": "https://catsatelier.com/560-thickbox_default/polka-scienna-dla-kota-wiszaca-fala-95-cm-nl-sh-w-w95l.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Варианты отделки дерева",
+          "es": "Acabados de madera",
+          "uk": "Варіанти оздоблення дерева"
+        },
+        "caption": {
+          "ru": "Варианты отделки дерева",
+          "es": "Acabados de madera",
+          "uk": "Варіанти оздоблення дерева"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-W95-UL/619.webp",
+        "originalSrc": "https://catsatelier.com/619-thickbox_default/polka-scienna-dla-kota-wiszaca-fala-95-cm-nl-sh-w-w95l.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-W-W95-UL",
     "ean": "5906546701485",
     "supplier": {
@@ -1741,6 +3314,53 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/485/wood-base-cat-wall-shelf-wave-95-cm-unsymmetrical-right.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-W95-UR/654.webp",
+        "originalSrc": "https://catsatelier.com/654-thickbox_default/wood-base-cat-wall-shelf-wave-95-cm-unsymmetrical-right.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-W95-UR/561.webp",
+        "originalSrc": "https://catsatelier.com/561-thickbox_default/wood-base-cat-wall-shelf-wave-95-cm-unsymmetrical-right.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Варианты отделки дерева",
+          "es": "Acabados de madera",
+          "uk": "Варіанти оздоблення дерева"
+        },
+        "caption": {
+          "ru": "Варианты отделки дерева",
+          "es": "Acabados de madera",
+          "uk": "Варіанти оздоблення дерева"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-W95-UR/618.webp",
+        "originalSrc": "https://catsatelier.com/618-thickbox_default/wood-base-cat-wall-shelf-wave-95-cm-unsymmetrical-right.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-W-W95-UR",
     "ean": "5906546701478",
     "supplier": {
@@ -1798,6 +3418,68 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/579/cat-window-hammock-bed-swing-the-arcing-view-60cm-sh-w-a60-g.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-A60-G/655.webp",
+        "originalSrc": "https://catsatelier.com/655-thickbox_default/cat-window-hammock-bed-swing-the-arcing-view-60cm-sh-w-a60-g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-A60-G/562.webp",
+        "originalSrc": "https://catsatelier.com/562-thickbox_default/cat-window-hammock-bed-swing-the-arcing-view-60cm-sh-w-a60-g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Варианты отделки дерева",
+          "es": "Acabados de madera",
+          "uk": "Варіанти оздоблення дерева"
+        },
+        "caption": {
+          "ru": "Варианты отделки дерева",
+          "es": "Acabados de madera",
+          "uk": "Варіанти оздоблення дерева"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-A60-G/503.webp",
+        "originalSrc": "https://catsatelier.com/503-thickbox_default/cat-window-hammock-bed-swing-the-arcing-view-60cm-sh-w-a60-g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-W-A60-G/501.webp",
+        "originalSrc": "https://catsatelier.com/501-thickbox_default/cat-window-hammock-bed-swing-the-arcing-view-60cm-sh-w-a60-g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      }
+    ],
     "manufacturerSku": "SH-W-A60-G",
     "ean": "5906546701096",
     "supplier": {
@@ -1855,6 +3537,98 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/524/copy-of-cat-window-shelf-the-arcing-view-60-cm-sh-m-a60g.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A60-G/656.webp",
+        "originalSrc": "https://catsatelier.com/656-thickbox_default/copy-of-cat-window-shelf-the-arcing-view-60-cm-sh-m-a60g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A60-G/519.webp",
+        "originalSrc": "https://catsatelier.com/519-thickbox_default/copy-of-cat-window-shelf-the-arcing-view-60-cm-sh-m-a60g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A60-G/520.webp",
+        "originalSrc": "https://catsatelier.com/520-thickbox_default/copy-of-cat-window-shelf-the-arcing-view-60-cm-sh-m-a60g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A60-G/522.webp",
+        "originalSrc": "https://catsatelier.com/522-thickbox_default/copy-of-cat-window-shelf-the-arcing-view-60-cm-sh-m-a60g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A60-G/518.webp",
+        "originalSrc": "https://catsatelier.com/518-thickbox_default/copy-of-cat-window-shelf-the-arcing-view-60-cm-sh-m-a60g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Полка у окна",
+          "es": "Estante junto a la ventana",
+          "uk": "Полиця біля вікна"
+        },
+        "caption": {
+          "ru": "Полка у окна",
+          "es": "Estante junto a la ventana",
+          "uk": "Полиця біля вікна"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A60-G/523.webp",
+        "originalSrc": "https://catsatelier.com/523-thickbox_default/copy-of-cat-window-shelf-the-arcing-view-60-cm-sh-m-a60g.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      }
+    ],
     "manufacturerSku": "SH-M-A60-G",
     "ean": "5906546701195",
     "supplier": {
@@ -1912,6 +3686,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/553/metal-base-cat-wall-shelf-wave-95-cm-symmetrical-right-sh-m-w95-sr.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W95-SP/657.webp",
+        "originalSrc": "https://catsatelier.com/657-thickbox_default/metal-base-cat-wall-shelf-wave-95-cm-symmetrical-right-sh-m-w95-sr.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-W95-SP/617.webp",
+        "originalSrc": "https://catsatelier.com/617-thickbox_default/metal-base-cat-wall-shelf-wave-95-cm-symmetrical-right-sh-m-w95-sr.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-M-W95-SP",
     "ean": "5906546701126",
     "supplier": {
@@ -1967,6 +3773,68 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/577/copy-of-flat-cat-wall-step-st-w-f.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/ST-WB-F/577.webp",
+        "originalSrc": "https://catsatelier.com/577-thickbox_default/copy-of-flat-cat-wall-step-st-w-f.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Ступенька и её крепление",
+          "es": "Peldaño y su fijación",
+          "uk": "Сходинка та її кріплення"
+        },
+        "caption": {
+          "ru": "Ступенька и её крепление",
+          "es": "Peldaño y su fijación",
+          "uk": "Сходинка та її кріплення"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/ST-WB-F/578.webp",
+        "originalSrc": "https://catsatelier.com/578-thickbox_default/copy-of-flat-cat-wall-step-st-w-f.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Варианты цвета кронштейна",
+          "es": "Opciones de color del soporte",
+          "uk": "Варіанти кольору кронштейна"
+        },
+        "caption": {
+          "ru": "Варианты цвета кронштейна",
+          "es": "Opciones de color del soporte",
+          "uk": "Варіанти кольору кронштейна"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/ST-WB-F/575.webp",
+        "originalSrc": "https://catsatelier.com/575-thickbox_default/copy-of-flat-cat-wall-step-st-w-f.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Варианты ткани",
+          "es": "Opciones de tejido",
+          "uk": "Варіанти тканини"
+        },
+        "caption": {
+          "ru": "Ступенька и её крепление",
+          "es": "Peldaño y su fijación",
+          "uk": "Сходинка та її кріплення"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/ST-WB-F/616.webp",
+        "originalSrc": "https://catsatelier.com/616-thickbox_default/copy-of-flat-cat-wall-step-st-w-f.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "ST-WB-F",
     "ean": "5906546701058",
     "supplier": {
@@ -2022,6 +3890,23 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/598/round-wall-mounted-cat-step.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/RD-ST/585.webp",
+        "originalSrc": "https://catsatelier.com/585-thickbox_default/round-wall-mounted-cat-step.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Ступенька и её крепление",
+          "es": "Peldaño y su fijación",
+          "uk": "Сходинка та її кріплення"
+        },
+        "caption": {
+          "ru": "Ступенька и её крепление",
+          "es": "Peldaño y su fijación",
+          "uk": "Сходинка та її кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "RD-ST",
     "ean": "5906546701119",
     "supplier": {
@@ -2078,6 +3963,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/601/extra-mattress-cover-for-wood-base-flat-shelf-60-cm-co-w-f60.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-W-F60/599.webp",
+        "originalSrc": "https://catsatelier.com/599-thickbox_default/extra-mattress-cover-for-wood-base-flat-shelf-60-cm-co-w-f60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        },
+        "caption": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-W-F60/670.webp",
+        "originalSrc": "https://catsatelier.com/670-thickbox_default/extra-mattress-cover-for-wood-base-flat-shelf-60-cm-co-w-f60.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      }
+    ],
     "manufacturerSku": "CO-W-F60",
     "ean": "5906546701119",
     "supplier": {
@@ -2134,6 +4051,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/604/extra-mattress-cover-for-wood-base-shelf-75-cm-co-w-f75.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-W-F75/602.webp",
+        "originalSrc": "https://catsatelier.com/602-thickbox_default/extra-mattress-cover-for-wood-base-shelf-75-cm-co-w-f75.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        },
+        "caption": {
+          "ru": "Деталь съёмного чехла",
+          "es": "Detalle de la funda extraíble",
+          "uk": "Деталь знімного чохла"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/CO-W-F75/671.webp",
+        "originalSrc": "https://catsatelier.com/671-thickbox_default/extra-mattress-cover-for-wood-base-shelf-75-cm-co-w-f75.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        },
+        "caption": {
+          "ru": "Палитра ткани DOT",
+          "es": "Paleta del tejido DOT",
+          "uk": "Палітра тканини DOT"
+        }
+      }
+    ],
     "manufacturerSku": "CO-W-F75",
     "ean": "5906546701133",
     "supplier": {
@@ -2191,6 +4140,38 @@ export const catsAtelierProducts = [
       "generated": true,
       "originalSrc": "https://catsatelier.com/605/cat-wall-shelf-hanging-arch-95-cm-sh-m-a95.jpg"
     },
+    "gallery": [
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A95/606.webp",
+        "originalSrc": "https://catsatelier.com/606-thickbox_default/cat-wall-shelf-hanging-arch-95-cm-sh-m-a95.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        },
+        "caption": {
+          "ru": "Деталь конструкции",
+          "es": "Detalle de construcción",
+          "uk": "Деталь конструкції"
+        }
+      },
+      {
+        "src": "https://img.catmandog.es/assets/cats-atelier/specs/SH-M-A95/615.webp",
+        "originalSrc": "https://catsatelier.com/615-thickbox_default/cat-wall-shelf-hanging-arch-95-cm-sh-m-a95.jpg",
+        "reference": true,
+        "alt": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        },
+        "caption": {
+          "ru": "Детали крепления",
+          "es": "Detalles de fijación",
+          "uk": "Деталі кріплення"
+        }
+      }
+    ],
     "manufacturerSku": "SH-M-A95",
     "ean": "5906546701423",
     "supplier": {

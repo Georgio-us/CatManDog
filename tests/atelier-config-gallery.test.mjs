@@ -32,6 +32,27 @@ test('Flat 75 cm page keeps the studio cover and seven supplier specification ph
   assert.match(html, /data-gallery-caption="Paleta del tejido DOT"/);
 });
 
+test('all Cat’s Atelier models retain a studio cover and localized supplier detail gallery', () => {
+  assert.equal(catsAtelierProducts.length, 39);
+  for (const item of catsAtelierProducts) {
+    assert.match(item.image.src, /^https:\/\/img\.catmandog\.es\/assets\/cats-atelier\//);
+    assert.ok(item.gallery?.length >= 1, `No detail photos: ${item.manufacturerSku}`);
+    const seen = new Set();
+    for (const image of item.gallery) {
+      assert.match(image.src, /^https:\/\/img\.catmandog\.es\/assets\/cats-atelier\//);
+      assert.match(image.originalSrc, /^https:\/\/catsatelier\.com\/\d+-thickbox_default\//);
+      assert.ok(!seen.has(image.originalSrc), `Duplicate photo: ${item.manufacturerSku}`);
+      seen.add(image.originalSrc);
+      for (const language of ['ru','es','uk']) {
+        assert.ok(image.alt[language], `Missing ${language} alt: ${item.manufacturerSku}`);
+        assert.ok(image.caption[language], `Missing ${language} caption: ${item.manufacturerSku}`);
+      }
+    }
+    const html = productGallery(item, imageBlock, value => value, 'uk');
+    assert.match(html, new RegExp(`data-gallery-index="${item.gallery.length}"`));
+  }
+});
+
 test('supplier-specific options are exact and carry through the priced quote', () => {
   const parsed = atelierSelection(atelierShelfId, selection);
   assert.equal(parsed.label, 'DOT Beige · White');
