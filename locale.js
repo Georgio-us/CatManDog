@@ -13,7 +13,7 @@ import { seoPickForPath } from './seo-picks.js';
 import { deliveryStatusEs, deliveryStatusUk } from './locales/delivery-status.js?v=delivery-24-48-20261117';
 import { yaguExpansionEs, yaguExpansionUk } from './locales/yagu-expansion.js?v=dog-activity-20261116';
 import { yaguToyExpansionEs, yaguToyExpansionUk } from './locales/yagu-toy-expansion.js';
-import { yaguBasketEs, yaguBasketUk } from './locales/yagu-basket.js?v=20261113';
+import { yaguBasketEs, yaguBasketUk } from './locales/yagu-basket.js?v=language-routes-20261120';
 import { yaguChewTestEs, yaguChewTestUk } from './locales/yagu-chew-test.js?v=20261113';
 import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=editorial-leonardo-20261111';
 import { shellTranslations } from './shell-translations.js?v=language-routes-20261120';

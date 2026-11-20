@@ -20,10 +20,12 @@ for (const language of ['ru', 'uk', 'es']) {
       assert.equal(current.translate('Добавить товары'), 'Añadir productos');
       assert.equal(current.translate('Без промокода'), 'Quitar código promocional');
       assert.equal(current.translate('Промокод SUISSAVECINOS10'), 'Código promocional SUISSAVECINOS10');
+      assert.equal(current.translate('Duvo+ · 350 г · около 10 штук'), 'Duvo+ · 350 g · unas 10 unidades');
     }
     if (language === 'uk') {
       assert.equal(current.translate('Без промокода'), 'Без промокоду');
       assert.equal(current.translate('Промокод SUISSAVECINOS10'), 'Промокод SUISSAVECINOS10');
+      assert.equal(current.translate('Duvo+ · 350 г · около 10 штук'), 'Duvo+ · 350 г · близько 10 штук');
     }
   });
 }

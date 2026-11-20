@@ -1,5 +1,5 @@
 import { createUsefulUI } from './useful.js?v=yagu-toys-20261116';
-import { createAccountUI } from './account.js?v=coupon-help-20261120';
+import { createAccountUI } from './account.js?v=language-routes-2-20261120';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
 import { accessoryDetail, customerDetails } from './accessory-ui.js?v=delivery-24-48-20261117';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=coupon-spacing-20261120';
@@ -16,7 +16,7 @@ import { applyServerCatalog } from './server-prices.js?v=cats-atelier-card-fit-2
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
 import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=editorial-shortcuts-20261119';
 import { handleCatPickClick } from './cat-picks.js?v=picks-seo-20261112';
-import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from './locale.js?v=language-routes-20261120';
+import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from './locale.js?v=language-routes-2-20261120';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';

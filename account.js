@@ -2,7 +2,7 @@ import { createAccountStore } from './account-store.js?v=delivery-status-4';
 import { createAccountApi } from './account-api.js?v=coupon-help-20261120';
 import { accountTools } from './useful.js?v=yagu-toys-20261116';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
-import { intlLocale, locale } from './locale.js?v=language-routes-20261120';
+import { intlLocale, locale } from './locale.js?v=language-routes-2-20261120';
 import { productHref } from './seo-products.js?v=yagu-toys-20261116';
 import { storefrontPrice } from './variants.js?v=sale-price-policy-20261109';
 import { recurringProductCard } from './recurring-product-ui.js?v=recurring-cards-20261117';
@@ -143,7 +143,7 @@ export function createAccountUI(helpers) {
     if (window.google?.accounts?.id) return Promise.resolve();
     if (!googleScript) googleScript = new Promise((resolve, reject) => {
       const script = document.createElement('script');
-      script.src = 'https://accounts.google.com/gsi/client';
+      script.src = `https://accounts.google.com/gsi/client?hl=${locale()}`;
       script.async = true;
       script.onload = resolve;
       script.onerror = () => reject(new Error('Google-вход временно недоступен'));
