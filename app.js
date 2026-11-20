@@ -5,13 +5,13 @@ import { accessoryDetail, customerDetails } from './accessory-ui.js?v=delivery-2
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=delivery-24-48-20261117';
 import { recommendForProduct } from './recommendations.js?v=delivery-status-3';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
-import { categories, products, catalogProducts, articles } from './data.js?v=cats-atelier-20261119';
+import { categories, products, catalogProducts, articles } from './data.js?v=cats-atelier-card-fit-20261120';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=yagu-toys-20261116';
 import { createCheckoutUI } from './checkout-ui.js?v=cats-atelier-20261119';
 import { normalizeRecurringDraft, recurringChoiceFromCart, renderRecurringCart } from './recurring-cart.js?v=recurring-cards-20261117';
 import { availabilityRequestPage } from './availability-request-ui.js?v=yagu-toys-20261116';
 import { orderVariantId } from './order-progress.js';
-import { applyServerCatalog } from './server-prices.js?v=pickup-tags-20261119';
+import { applyServerCatalog } from './server-prices.js?v=cats-atelier-card-fit-20261120';
 
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
 import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=editorial-shortcuts-20261119';
@@ -225,7 +225,7 @@ const categoryLabel = name => name === 'Наполнитель' ? 'Наполн�
 function imageBlock(index,extra='',decorative=false){
   if(index && typeof index==='object'){
     const studio=index.presentation==='editorial'||
-      /(?:\/assets\/(?:launch-studio-[^/]+|[^/]+\/editorial)\/|\/media\/(?:launch-studio|churu-formats|confirmed-demand)-[^/]+\/|\/media\/yagu\/[^/]+-studio-v\d+\.webp)/u.test(index.src);
+      /(?:\/assets\/(?:launch-studio-[^/]+|cats-atelier|[^/]+\/editorial)\/|\/media\/(?:launch-studio|churu-formats|confirmed-demand)-[^/]+\/|\/media\/yagu\/[^/]+-studio-v\d+\.webp)/u.test(index.src);
     const alt=String(index.alt||'').replace(/\s*-\s*студийное изображение(?: рецептуры)?$/iu,'');
     return `<div class="product-image real-product-image ${studio?'editorial-product-image ':''}${extra}"><img src="${escape(index.src)}" alt="${decorative ? '' : escape(alt)}" loading="lazy" decoding="async"></div>`;
   }

@@ -2206,5 +2206,6 @@ export const catsAtelierProducts = [
   }
 ].map(product => ({
   ...product,
+  image: { ...product.image, presentation: 'editorial' },
   description: `${product.description} Модель: ${product.name.replace('Cat’s Atelier - ', '')}, артикул ${product.manufacturerSku}.`
 }));
