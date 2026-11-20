@@ -16,6 +16,18 @@ const cart = ['food-small', 'food-large'].map(variantId => ({ id: 'food', produc
 const helpers = { products: [product], promo: null, escape: String, icon: () => '<svg></svg>',
   money: value => `${value.toFixed(2)} €`, imageBlock: () => '<div></div>' };
 
+test('Cat’s Atelier shelf shows its preorder estimate in each language', () => {
+  const shelf = { ...product, id: 'cats-atelier-sh-w-f75-g', name: 'Window shelf' };
+  const shelfCart = [{ id: shelf.id, productId: shelf.id, variantId: 'food-large', qty: 1 }];
+  for (const [language, phrase] of [
+    ['ru', '4-6 рабочих дней'], ['es', '4 a 6 días laborables'], ['uk', '4-6 робочих днів']
+  ]) {
+    const html = renderLiveBasket({ ...helpers, products: [shelf], cart: shelfCart, language });
+    assert.match(html, new RegExp(phrase));
+    assert.doesNotMatch(html, /Доставка за 24-48 часов/);
+  }
+});
+
 test('real basket uses server availability and defers delivery cost until the address is chosen', () => {
   assert.equal(basketGroups(cart, [product]).stock.length, 1);
   const one = renderLiveBasket({ ...helpers, cart, grouping: 'together' });
