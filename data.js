@@ -19,7 +19,7 @@ import { launchHeyboPetProducts } from './launch-heybopet-products.js';
 import { applyChuruRetailFormats } from './churu-retail-formats.js';
 import { churuDogProducts } from './churu-dog-products.js';
 import { confirmedDemandProducts } from './confirmed-demand-products.js';
-import { catsAtelierProducts } from './cats-atelier-products.js?v=atelier-supplier-gallery-20261120';
+import { catsAtelierProducts } from './cats-atelier-products.js?v=atelier-spec-gallery-20261120';
 import { withSelectedAcanaOrijenFormats } from './acana-orijen-selected-formats.js';
 import { catalogEditorialContent } from './catalog-editorial-content.js';
 

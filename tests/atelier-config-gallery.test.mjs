@@ -20,14 +20,14 @@ test('gallery renders a primary image and selectable, localized secondary images
   assert.match(html, /data-gallery-caption="Gancho"/);
 });
 
-test('Flat 75 cm page keeps the studio cover and all eleven supplier photos', () => {
+test('Flat 75 cm page keeps the studio cover and seven supplier specification photos', () => {
   const shelf = catsAtelierProducts.find(item => item.id === atelierShelfId);
   assert.match(shelf.image.src, /SH-W-F75-G-studio-v6\.webp$/);
-  assert.equal(shelf.gallery.length, 11);
+  assert.equal(shelf.gallery.length, 7);
   assert.deepEqual(shelf.gallery.map(image => Number(image.originalSrc.match(/\/(\d+)-thickbox_default\//)?.[1])),
-    [282, 283, 557, 284, 285, 286, 287, 288, 290, 291, 645]);
+    [557, 286, 287, 288, 290, 291, 645]);
   const html = productGallery(shelf, imageBlock, value => value, 'es');
-  assert.match(html, /data-gallery-index="11"/);
+  assert.match(html, /data-gallery-index="7"/);
   assert.match(html, /data-gallery-reference="true"/);
   assert.match(html, /data-gallery-caption="Paleta del tejido DOT"/);
 });
