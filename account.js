@@ -4,8 +4,9 @@ import { accountTools } from './useful.js?v=yagu-toys-20261116';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
 import { intlLocale, locale } from './locale.js?v=language-routes-3-20261120';
 import { productHref } from './seo-products.js?v=yagu-toys-20261116';
-import { storefrontPrice } from './variants.js?v=sale-price-policy-20261109';
+import { canBuy, snapshots, storefrontPrice } from './variants.js?v=sale-price-policy-20261109';
 import { recurringProductCard } from './recurring-product-ui.js?v=recurring-cards-20261117';
+import { nextRecurringDate } from './recurring-cart.js?v=recurring-next-date-20261121';
 const store = createAccountStore(localStorage);
 const api = createAccountApi();
 const announceAccountAnalytics = (event, method) => {
@@ -51,7 +52,7 @@ const ageLabel = pet => {
   return pet.species === 'cat' ? locale() === 'es' ? `${catYearsLabel(years)} · unos ${catHumanYears(years)} años humanos` : `${catYearsLabel(years)} · примерно ${catHumanYears(years)} по человеческим меркам` : yearsLabel(years);
 };
 export function createAccountUI(helpers) {
-  const { escape: e, icon, money, products, imageBlock, render, notify, getCart, repeatOrder } = helpers;
+  const { escape: e, icon, money, products, imageBlock, render, notify, getCart, repeatOrder, startRecurringBasket } = helpers;
   if (helpers.publicStore && store.mode() === 'demo') store.open('personal');
   let accountsEnabled = false;
   let authReady = false;
@@ -73,6 +74,10 @@ export function createAccountUI(helpers) {
   let remoteOrdersError = '';
   let recurringOrders = null;
   let recurringOrdersError = '';
+  let builderQuery = '';
+  let builderWeeks = 4;
+  let builderNextDate = nextRecurringDate();
+  const builderItems = new Map();
   const pendingPromoKey = 'catmandog-pending-promo';
   const petCardIntent = () => location.pathname === '/pet' || location.hash?.startsWith('#/pet') ||
     new URLSearchParams((location.hash || '').split('?')[1] || '').get('return') === 'pet';
@@ -134,6 +139,7 @@ export function createAccountUI(helpers) {
     }
   }
   function setCustomer(value) {
+    if (customer?.id !== value?.id) { builderItems.clear(); builderQuery=''; builderWeeks=4; builderNextDate=nextRecurringDate(); }
     customer = value;
     const adminLink = typeof document === 'undefined' ? null : document.querySelector('#admin-link');
     if (adminLink) adminLink.hidden = value?.canManageStore !== true;
@@ -455,20 +461,46 @@ export function createAccountUI(helpers) {
     if (!Array.isArray(recurringOrders)) return '';
     const saved = recurringOrders.find(plan => plan.sourceOrderId === order.id);
     if (saved) return `<section class="pet-panel"><h2>Регулярный заказ сохранён</h2><p>Перед следующим заказом мы уточним наличие, цену и доставку. Автоматических списаний нет</p><a class="button outline" href="#/account/recurring">Управлять планом ${icon('arrow')}</a></section>`;
-    return `<form class="pet-panel pet-form recurring-account-form" data-account-form="recurring-create" data-order-id="${e(order.id)}"><h2>Повторять покупку?</h2><p>Выберите нужные товары и период. Перед следующим заказом мы всё согласуем с вами. Оплата только после вашего подтверждения</p>${recurringItemChoices(order)}<label class="pet-field">Период<select name="cadenceWeeks">${recurringCadenceOptions(4)}</select></label><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">Сохранить регулярный заказ ${icon('check')}</button></form>`;
+    return `<form class="pet-panel pet-form recurring-account-form" data-account-form="recurring-create" data-order-id="${e(order.id)}"><h2>Повторять покупку?</h2><p>Выберите нужные товары и период. Перед следующим заказом мы всё согласуем с вами. Оплата только после вашего подтверждения</p>${recurringItemChoices(order)}<label class="pet-field">${builderCopy().nextDate}<input type="date" name="nextDate" min="${nextRecurringDate()}" value="${nextRecurringDate()}" required></label><label class="pet-field">Период<select name="cadenceWeeks">${recurringCadenceOptions(4)}</select></label><p class="pet-form-error" data-account-error role="alert"></p><button class="button" type="submit">Сохранить регулярный заказ ${icon('check')}</button></form>`;
   }
   function recurringPage() {
     const head = '<div class="pet-page-head"><h1>Регулярные заказы</h1><p>Планируйте повторные покупки. Каждый раз мы сначала уточним наличие, цену и доставку. Автоматических списаний нет</p></div>';
-    if (recurringOrdersError) return `${head}<section class="pet-panel"><p role="alert">${e(recurringOrdersError)}</p><button class="button outline" type="button" data-account-refresh-recurring>Повторить загрузку</button></section>`;
-    if (!Array.isArray(recurringOrders)) return `${head}<p class="pet-muted" role="status">Загружаем планы</p>`;
-    if (!recurringOrders.length) return `${head}<section class="pet-panel"><p>После покупки можно выбрать товары для регулярного заказа</p><a class="button outline" href="#/account/orders">Мои заказы ${icon('arrow')}</a></section>`;
-    return `${head}<div class="recurring-account-list">${recurringOrders.map(plan => {
+    const action={ru:['Новая регулярная корзина','Выберите товары и период. План сохранится после оплаты этой покупки','Собрать корзину'],es:['Nueva cesta periódica','Elige productos y frecuencia. Guardaremos el plan después de pagar esta compra','Preparar la cesta'],uk:['Новий регулярний кошик','Оберіть товари та період. План збережеться після оплати цієї покупки','Зібрати кошик']}[locale()];
+    const build = `<section class="pet-panel recurring-builder-entry"><h2>${action[0]}</h2><p>${action[1]}</p><a class="button" href="#/account/recurring/build">${action[2]} ${icon('arrow')}</a></section>`;
+    if (recurringOrdersError) return `${head}${build}<section class="pet-panel"><p role="alert">${e(recurringOrdersError)}</p><button class="button outline" type="button" data-account-refresh-recurring>Повторить загрузку</button></section>`;
+    if (!Array.isArray(recurringOrders)) return `${head}${build}<p class="pet-muted" role="status">Загружаем планы</p>`;
+    if (!recurringOrders.length) return `${head}${build}`;
+    return `${head}${build}<div class="recurring-account-list">${recurringOrders.map(plan => {
       const order = remoteOrders?.find(entry => entry.id === plan.sourceOrderId);
       const date = new Date(`${String(plan.nextReviewOn).slice(0,10)}T12:00:00`);
       const next = Number.isNaN(date.getTime()) ? '' : new Intl.DateTimeFormat(intlLocale(), { dateStyle: 'medium' }).format(date);
       const statusText = {active:'Активен',paused:'На паузе',cancelled:'Отменён'}[plan.status] || plan.status;
-      return `<section class="pet-panel recurring-account-plan"><div class="recurring-account-head"><h2>${order ? `Покупка ${e(order.number)}` : 'Регулярная покупка'}</h2><span class="pet-status">${e(statusText)}</span></div><p class="pet-muted">${plan.status === 'active' ? `Следующая проверка около ${e(next)}` : 'Новых проверок пока не будет'}. Это ориентир для связи, заказ и оплата автоматически не создаются</p>${order && plan.status !== 'cancelled' ? `<form class="pet-form recurring-account-form" data-account-form="recurring-update" data-plan-id="${e(plan.id)}" data-order-id="${e(order.id)}">${recurringItemChoices(order, plan.items)}<label class="pet-field">Период<select name="cadenceWeeks">${recurringCadenceOptions(plan.cadenceWeeks)}</select></label><p class="pet-form-error" data-account-error role="alert"></p><button class="button outline" type="submit">Сохранить изменения</button></form>` : `${recurringReadOnlyItems(plan.items || [])}`}<div class="recurring-account-actions">${plan.status === 'active' ? `<button type="button" class="pet-small-button" data-recurring-status="paused" data-plan-id="${e(plan.id)}">Поставить на паузу</button>` : plan.status === 'paused' ? `<button type="button" class="pet-small-button" data-recurring-status="active" data-plan-id="${e(plan.id)}">Возобновить</button>` : ''}${plan.status !== 'cancelled' ? `<button type="button" class="pet-small-button" data-recurring-status="cancelled" data-plan-id="${e(plan.id)}">Отменить план</button>` : ''}</div></section>`;
+      return `<section class="pet-panel recurring-account-plan"><div class="recurring-account-head"><h2>${order ? `Покупка ${e(order.number)}` : 'Регулярная покупка'}</h2><span class="pet-status">${e(statusText)}</span></div><p class="pet-muted">${plan.status === 'active' ? `${builderCopy().nextDate}: ${e(next)}` : 'Новых проверок пока не будет'}. Это ориентир для связи, заказ и оплата автоматически не создаются</p>${order && plan.status !== 'cancelled' ? `<form class="pet-form recurring-account-form" data-account-form="recurring-update" data-plan-id="${e(plan.id)}" data-order-id="${e(order.id)}">${recurringItemChoices(order, plan.items)}<label class="pet-field">${builderCopy().nextDate}<input type="date" name="nextDate" min="${nextRecurringDate()}" value="${e(String(plan.nextReviewOn).slice(0,10))}" required></label><label class="pet-field">Период<select name="cadenceWeeks">${recurringCadenceOptions(plan.cadenceWeeks)}</select></label><p class="pet-form-error" data-account-error role="alert"></p><button class="button outline" type="submit">Сохранить изменения</button></form>` : `${recurringReadOnlyItems(plan.items || [])}`}<div class="recurring-account-actions">${plan.status === 'active' ? `<button type="button" class="pet-small-button" data-recurring-status="paused" data-plan-id="${e(plan.id)}">Поставить на паузу</button>` : plan.status === 'paused' ? `<button type="button" class="pet-small-button" data-recurring-status="active" data-plan-id="${e(plan.id)}">Возобновить</button>` : ''}${plan.status !== 'cancelled' ? `<button type="button" class="pet-small-button" data-recurring-status="cancelled" data-plan-id="${e(plan.id)}">Отменить план</button>` : ''}</div></section>`;
     }).join('')}</div>`;
+  }
+  const builderCopy = () => ({
+    ru: { title:'Собрать регулярную корзину', intro:'Выберите товары и период. После оплаты этой покупки мы сохраним план. Следующие заказы и их цену согласуем с вами отдельно', search:'Найти товар', placeholder:'Название или артикул', results:'Товары', selected:'Выбрано для повторения', empty:'Пока ничего не выбрано', none:'Товары не найдены', add:'Добавить', remove:'Убрать', quantity:'Количество', nextDate:'Когда нужен следующий заказ', frequency:'Как часто', continue:'Перейти в корзину', back:'Регулярные заказы', existing:'Товары из обычной корзины сохранятся', useCart:'Взять товары из моей корзины', weeks:n=>`Каждые ${n} ${n===6?'недель':'недели'}` },
+    es: { title:'Preparar una cesta periódica', intro:'Elige productos y frecuencia. Guardaremos el plan después de pagar esta compra. Confirmaremos contigo cada próximo pedido y su precio', search:'Buscar un producto', placeholder:'Nombre o referencia', results:'Productos', selected:'Productos para repetir', empty:'Todavía no has elegido productos', none:'No encontramos productos', add:'Añadir', remove:'Quitar', quantity:'Cantidad', nextDate:'Cuándo necesitas el próximo pedido', frequency:'Frecuencia', continue:'Ir a la cesta', back:'Compras periódicas', existing:'Se conservarán los productos de tu cesta actual', useCart:'Usar los productos de mi cesta', weeks:n=>`Cada ${n} semanas` },
+    uk: { title:'Зібрати регулярний кошик', intro:'Оберіть товари та період. Після оплати цієї покупки ми збережемо план. Наступні замовлення та їхню ціну узгодимо з вами окремо', search:'Знайти товар', placeholder:'Назва або артикул', results:'Товари', selected:'Обрано для повторення', empty:'Поки нічого не обрано', none:'Товарів не знайдено', add:'Додати', remove:'Прибрати', quantity:'Кількість', nextDate:'Коли потрібне наступне замовлення', frequency:'Як часто', continue:'Перейти до кошика', back:'Регулярні замовлення', existing:'Товари у звичайному кошику збережуться', useCart:'Взяти товари з мого кошика', weeks:n=>`Кожні ${n} ${n===6?'тижнів':'тижні'}` }
+  }[locale()] || null);
+  function builderOptions() {
+    return products.flatMap(product => product.catalogHidden || product.gift ? [] : snapshots(product)
+      .filter(sku => canBuy(sku) && !sku.configurationType)
+      .map(sku => ({ product, sku, key:`${product.id}|${sku.id === product.id ? '' : sku.id}` })));
+  }
+  function builderMatches() {
+    const copy=builderCopy();
+    const query=builderQuery.trim().toLocaleLowerCase();
+    if (!query) return '';
+    const matches=builderOptions().filter(({product,sku}) => !query ||
+      [product.name,sku.name,sku.label,sku.manufacturerSku,sku.article,sku.sku,sku.ean]
+        .some(value => String(value||'').toLocaleLowerCase().includes(query))).slice(0,12);
+    return matches.length ? `<h2>${copy.results}</h2>` + matches.map(({product,sku,key}) => `<div class="recurring-builder-result">${recurringProductCard({item:{name:product.name,qty:1,displayPrice:storefrontPrice(sku)},sku,product,imageBlock,escape:e,money,language:locale()})}<button type="button" class="pet-small-button" data-builder-add="${e(key)}">${icon('plus')} ${copy.add}</button></div>`).join('') : `<p class="pet-muted">${copy.none}</p>`;
+  }
+  function recurringBuilderPage() {
+    const copy=builderCopy();
+    const selected=[...builderItems].map(([key,qty])=>({option:builderOptions().find(entry=>entry.key===key),key,qty})).filter(entry=>entry.option && entry.qty>0);
+    return `<div class="pet-page-head"><a class="text-link" href="#/account/recurring">${icon('arrow')} ${copy.back}</a><h1>${copy.title}</h1><p>${copy.intro}</p></div><section class="pet-panel recurring-builder-panel">${getCart?.()?.length ? `<button type="button" class="button outline" data-builder-use-cart>${copy.useCart}</button>` : ''}<label class="pet-field">${copy.search}<input data-builder-search type="search" value="${e(builderQuery)}" placeholder="${copy.placeholder}" autocomplete="off"></label><div class="recurring-builder-results" data-builder-results>${builderMatches()}</div></section><section class="pet-panel recurring-builder-panel"><h2>${copy.selected}</h2><div class="recurring-builder-selected">${selected.length ? selected.map(({option,key,qty})=>`<div class="recurring-builder-choice">${recurringProductCard({item:{name:option.product.name,qty,displayPrice:storefrontPrice(option.sku)},sku:option.sku,product:option.product,imageBlock,escape:e,money,language:locale()})}<div class="recurring-builder-controls"><span>${copy.quantity}</span><button type="button" data-builder-qty="${e(key)}" data-delta="-1" aria-label="${copy.remove}">${icon('minus')}</button><strong>${qty}</strong><button type="button" data-builder-qty="${e(key)}" data-delta="1" aria-label="${copy.add}">${icon('plus')}</button><button type="button" class="pet-small-button" data-builder-remove="${e(key)}">${copy.remove}</button></div></div>`).join('') : `<p class="pet-muted">${copy.empty}</p>`}</div><label class="pet-field recurring-builder-frequency">${copy.nextDate}<input type="date" data-builder-next-date min="${nextRecurringDate()}" value="${e(builderNextDate)}"></label><label class="pet-field recurring-builder-frequency">${copy.frequency}<select data-builder-weeks>${[2,4,6].map(weeks=>`<option value="${weeks}" ${builderWeeks===weeks?'selected':''}>${copy.weeks(weeks)}</option>`).join('')}</select></label><p class="pet-muted">${copy.existing}</p><button type="button" class="button" data-builder-continue ${selected.length?'':'disabled'}>${copy.continue} ${icon('arrow')}</button></section>`;
   }
   function suppliesPage(pet, data) {
     const list = data.reminders.filter(r => r.petId === pet.id);
@@ -490,14 +522,32 @@ export function createAccountUI(helpers) {
     if ((path.startsWith('/account/orders') || path.startsWith('/account/recurring')) && store.mode() !== 'remote' && accountsEnabled) return authPage('login');
     const pet = store.activePet();
     if (!pet) return store.mode() === 'remote'
-      ? path.startsWith('/account/orders') || path.startsWith('/account/recurring') ? `<div class="page pet-account"><a class="text-link" href="#/account">${icon('arrow')} Мой кабинет</a>${path.startsWith('/account/recurring') ? recurringPage() : liveOrdersPage(path.split('/')[3])}</div>` : emptyAccount()
+      ? path.startsWith('/account/orders') || path.startsWith('/account/recurring') ? `<div class="page pet-account"><a class="text-link" href="#/account">${icon('arrow')} Мой кабинет</a>${path === '/account/recurring/build' ? recurringBuilderPage() : path.startsWith('/account/recurring') ? recurringPage() : liveOrdersPage(path.split('/')[3])}</div>` : emptyAccount()
       : accountsEnabled ? authPage('login') : onboarding(params);
     const data = store.get();
     const section = path.split('/')[2] || '';
-    const content = section === 'care' ? accountTools({ pet, data, escape: e, icon }) : section === 'promos' && store.mode() === 'remote' ? promoPanel() : section === 'supplies' ? suppliesPage(pet, data) : section === 'recurring' && store.mode() === 'remote' ? recurringPage() : section === 'profile' ? profilePage(pet) : section === 'human' ? humanPage(data) : section === 'orders' ? store.mode() === 'remote' ? liveOrdersPage(path.split('/')[3]) : ordersPage(pet, data, path.split('/')[3]) : dashboard(pet, data);
+    const content = section === 'care' ? accountTools({ pet, data, escape: e, icon }) : section === 'promos' && store.mode() === 'remote' ? promoPanel() : section === 'supplies' ? suppliesPage(pet, data) : section === 'recurring' && store.mode() === 'remote' ? path === '/account/recurring/build' ? recurringBuilderPage() : recurringPage() : section === 'profile' ? profilePage(pet) : section === 'human' ? humanPage(data) : section === 'orders' ? store.mode() === 'remote' ? liveOrdersPage(path.split('/')[3]) : ordersPage(pet, data, path.split('/')[3]) : dashboard(pet, data);
     return `<div class="page pet-account">${pageNote()}<div class="pet-account-layout"><aside class="pet-sidebar"><a class="pet-account-brand" href="#/account">${icon('paw')} Кабинет с хвостиком</a><div class="pet-switcher" role="group" aria-label="Мои питомцы">${data.pets.map(p => `<button data-account-pet="${e(p.id)}" aria-pressed="${p.id === pet.id}" class="${p.id === pet.id ? 'active' : ''}">${petIcon(p)}<span data-no-translate>${e(p.name)}</span>${p.id === pet.id ? icon('check') : ''}</button>`).join('')}</div><a class="pet-add" href="#/join?add=1">${icon('plus')} Добавить питомца</a><nav class="pet-navigation" aria-label="Разделы кабинета">${sections.filter(([key]) => (key !== 'promos' && key !== 'recurring' || store.mode() === 'remote') && (key !== 'orders' || store.mode() !== 'personal')).map(([key, label, glyph]) => `<a href="#/account${key ? '/' + key : ''}" ${section === key ? 'aria-current="page"' : ''}>${icon(glyph)} ${label}</a>`).join('')}</nav>${customer?.canManageStore ? `<a class="pet-admin-entry" href="/admin">${icon('shield')} Управление магазином ${icon('arrow')}</a>` : ''}<button class="pet-exit" data-account-exit>${icon('arrow')} ${store.mode() === 'demo' ? 'Создать свой кабинет' : store.mode() === 'remote' ? 'Выйти из аккаунта' : 'Закрыть кабинет'}</button><p class="pet-sidebar-note">Каждому хвостику<br>немного больше заботы</p></aside><div class="pet-account-content">${content}</div></div></div>`;
   }
   async function click(button) {
+    if (button.hasAttribute('data-builder-use-cart')) {
+      const options=new Map(builderOptions().map(entry=>[entry.key,entry]));
+      for(const item of getCart?.() || []) { const key=`${item.productId||item.id}|${item.variantId||''}`; if(options.has(key)) builderItems.set(key,Math.min(99,Number(item.qty)||1)); }
+      render();return;
+    }
+    if (button.hasAttribute('data-builder-add')) { const key=button.dataset.builderAdd; if(builderOptions().some(entry=>entry.key===key)) { builderItems.set(key,Math.min(99,(builderItems.get(key)||0)+1)); render(); } return; }
+    if (button.hasAttribute('data-builder-remove')) { builderItems.delete(button.dataset.builderRemove); render(); return; }
+    if (button.hasAttribute('data-builder-qty')) { const key=button.dataset.builderQty; const qty=Math.min(99,(builderItems.get(key)||0)+Number(button.dataset.delta)); if(qty<1) builderItems.delete(key); else builderItems.set(key,qty); render(); return; }
+    if (button.hasAttribute('data-builder-continue')) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(builderNextDate) || builderNextDate < nextRecurringDate()) {
+        notify(({ru:'Выберите будущую дату следующего заказа',es:'Elige una fecha futura para el próximo pedido',uk:'Оберіть майбутню дату наступного замовлення'})[locale()]);
+        return;
+      }
+      const options=builderOptions();
+      const items=[...builderItems].map(([key,qty])=>({option:options.find(entry=>entry.key===key),qty})).filter(entry=>entry.option && entry.qty>0);
+      if(items.length && startRecurringBasket(items.map(({option,qty})=>({productId:option.product.id,variantId:option.sku.id===option.product.id?null:option.sku.id,size:option.sku.label||option.sku.sizes?.[0]||'',qty})),builderWeeks,builderNextDate)) navigate('/cart');
+      return;
+    }
     if (button.hasAttribute('data-account-pet')) { store.switchPet(button.dataset.accountPet); render(); await syncChanges().catch(() => {}); }
     if (button.hasAttribute('data-account-exit')) { if (store.mode() === 'remote') { try { await api.logout(); setCustomer(null); store.disconnectRemote(); remoteOrders = null; remoteOrdersError = ''; recurringOrders = null; recurringOrdersError = ''; navigate('/account/login'); } catch (error) { notify(error.message); } } else { store.open('personal'); navigate('/account/welcome'); } }
     if (button.hasAttribute('data-account-refresh-orders')) { await refreshOrders(); await refreshRecurring(); }
@@ -524,6 +574,8 @@ export function createAccountUI(helpers) {
     }
   }
   function change(target) {
+    if (target.hasAttribute('data-builder-weeks')) { builderWeeks=[2,4,6].includes(Number(target.value))?Number(target.value):4; return; }
+    if (target.hasAttribute('data-builder-next-date')) { builderNextDate=target.value; return; }
     const form = target.closest('[data-account-form="join"], [data-account-form="profile"]');
     if (!form || !['species', 'age', 'birthday'].includes(target.name)) return;
     if (target.matches('.pet-choice-option input')) {
@@ -534,6 +586,12 @@ export function createAccountUI(helpers) {
     }
     const preview = form.querySelector('[data-pet-age-preview]');
     preview.textContent = form.elements.species.value === 'cat' ? catAgePreview(form.elements.birthday.value) : '';
+  }
+  function input(target) {
+    if (!target.hasAttribute('data-builder-search')) return;
+    builderQuery=target.value.slice(0,100);
+    const results=target.closest('.recurring-builder-panel')?.querySelector('[data-builder-results]');
+    if(results) results.innerHTML=builderMatches();
   }
   function dismissChoices(target) {
     document.querySelectorAll('.pet-choice[open]').forEach(choice => {
@@ -561,7 +619,7 @@ export function createAccountUI(helpers) {
         const items = values.getAll('item').map(index => order.items[Number(index)]).filter(Boolean).map(item =>
           ({ productId: item.productId, variantId: item.variantId, qty: Number(item.qty) }));
         if (!items.length) throw new Error('Выберите хотя бы один товар');
-        const choice = { items, cadenceWeeks: Number(values.get('cadenceWeeks')) };
+        const choice = { items, cadenceWeeks: Number(values.get('cadenceWeeks')), nextDate:values.get('nextDate') };
         if (kind === 'recurring-create') await api.createRecurringOrder({ orderId: order.id, ...choice });
         else await api.updateRecurringOrder(form.dataset.planId, choice);
         await refreshRecurring(); notify(kind === 'recurring-create' ? 'Регулярный заказ сохранён' : 'План обновлён');
@@ -693,7 +751,7 @@ export function createAccountUI(helpers) {
     } });
     await syncChanges();
   }
-  return { page, click, change, dismissChoices, escapeChoices, submit, store, initialize, syncChanges,
+  return { page, click, change, input, dismissChoices, escapeChoices, submit, store, initialize, syncChanges,
     handleLink, afterRender, applyPromo, refreshPromo, promo, couponPaid,
     checkoutProfile, saveCheckoutProfile, refreshOrders, refreshRecurring,
     isSignedIn: () => store.mode() === 'remote' && !!customer,

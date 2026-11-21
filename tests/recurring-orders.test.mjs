@@ -19,6 +19,9 @@ test('regular order selects only paid SKUs and quantities', () => {
     [{ productId: 'toy', variantId: 'toy-1', qty: 1 }, { productId: 'toy', variantId: 'toy-1', qty: 1 }]])
     assert.throws(() => selectedRecurringItems(items, purchased), /не совпадают/);
   assert.throws(() => recurringChoice({ cadenceWeeks: 1, items: [purchased[0]] }, purchased), /период/);
+  assert.throws(() => recurringChoice({ cadenceWeeks: 4, nextDate:'2020-01-01', items:[purchased[0]] }, purchased), /будущую дату/);
+  const tomorrow = new Date(Date.now()+2*86400000).toISOString().slice(0,10);
+  assert.equal(recurringChoice({ cadenceWeeks: 4, nextDate:tomorrow, items:[purchased[0]] }, purchased).nextDate,tomorrow);
 });
 
 test('cart keeps only current items in a regular order draft', () => {
@@ -26,7 +29,7 @@ test('cart keeps only current items in a regular order draft', () => {
   const draft = normalizeRecurringDraft({ enabled: true, cadenceWeeks: 4,
     items: ['food|food-1', 'removed|old'] }, cart);
   assert.deepEqual(draft.items, ['food|food-1']);
-  assert.deepEqual(recurringChoiceFromCart(draft, cart), { cadenceWeeks: 4,
+  assert.deepEqual(recurringChoiceFromCart(draft, cart), { cadenceWeeks: 4, nextDate:draft.nextDate,
     items: [{ productId: 'food', variantId: 'food-1', qty: 2 }] });
 });
 
@@ -48,17 +51,19 @@ test('regular order product card shows the exact retail SKU, image and retail pr
 });
 
 test('paid account intent creates one plan and no future payment', async () => {
+  const nextDate=new Date(Date.now()+14*86400000).toISOString().slice(0,10);
   const calls = [];
   const db = { async query(sql, params) {
     calls.push([sql, params]);
     if (sql.includes('FROM orders')) return { rows: [{ customer_id: 'customer', recurring_intent: {
-      cadenceWeeks: 2, items: [{ productId: 'food', variantId: 'food-1', qty: 1 }] } }] };
+      cadenceWeeks: 2, nextDate, items: [{ productId: 'food', variantId: 'food-1', qty: 1 }] } }] };
     if (sql.includes('FROM order_items')) return { rows: purchased };
     return { rows: [{ id: 'plan' }] };
   } };
   assert.equal(await activateRecurringIntent(db, 'order'), 'plan');
   assert.match(calls.at(-1)[0], /ON CONFLICT\(source_order_id\) DO NOTHING/);
   assert.equal(calls.at(-1)[1][4], 2);
+  assert.equal(calls.at(-1)[1][5], nextDate);
   assert.ok(calls.every(([sql]) => !/stripe|payment_intent|INSERT INTO orders/i.test(sql)));
 });
 

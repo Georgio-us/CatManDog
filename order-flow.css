@@ -114,7 +114,9 @@
 .recurring-cart-items label { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.4; overflow-wrap: anywhere; }
 .recurring-cart-items input { flex: none; margin-top: 2px; accent-color: var(--ink); }
 .recurring-cadence { display: grid; gap: 7px; max-width: 240px; font-size: 13px; font-weight: 700; }
-.recurring-cadence select { width: 100%; min-height: 42px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 9px; background: white; }
+.recurring-cadence select, .recurring-cadence input { width: 100%; min-width: 0; min-height: 42px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 9px; background: white; color: var(--ink); font: inherit; }
+.recurring-cart-schedule { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 16px; }
+.recurring-cart-schedule .recurring-cadence { width: min(100%, 240px); }
 .recurring-review p, .recurring-after-payment p { max-width: 600px; color: var(--muted); line-height: 1.55; }
 .recurring-after-payment .button { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; }
 .recurring-after-payment .button svg { width: 16px; height: 16px; }
