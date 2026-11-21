@@ -276,7 +276,8 @@ async function createOrder(db, payload, customer, manual = null) {
       bad('Скидка изменилась. Проверьте заявку и согласуйте сумму заново', 409);
     if (!manual && delivery.mode !== 'national' && variants.rows.every(row => row.sale_status)) {
       if (delivery.mode !== 'slot' && !(delivery.mode === 'preorder' &&
-        variants.rows.some(row => row.product_id.startsWith('cats-atelier-'))))
+        variants.rows.some(row => row.product_id.startsWith('cats-atelier-') ||
+          (row.product_id.startsWith('heybopet-') && (row.availability !== 'on_hand' || row.stock_quantity <= 0)))))
         bad('Проверьте выбранный способ доставки');
     }
     const orderId = randomUUID();
@@ -298,7 +299,11 @@ async function createOrder(db, payload, customer, manual = null) {
       : delivery.mode === 'soon' ? { mode: 'soon', reserved: false }
       : delivery.mode === 'slot' ? { mode:'slot', date:delivery.date,
         window:delivery.window, reserved:false }
-      : delivery.mode === 'preorder' ? { mode:'preorder', estimateBusinessDays:[4,6], reserved:false }
+      : delivery.mode === 'preorder' ? { mode:'preorder',
+        ...(variants.rows.some(row => row.product_id.startsWith('cats-atelier-')) &&
+          !variants.rows.some(row => row.product_id.startsWith('heybopet-') &&
+            (row.availability !== 'on_hand' || row.stock_quantity <= 0))
+          ? { estimateBusinessDays:[4,6] } : {}), reserved:false }
       : { mode: 'scheduled', date: delivery.date, time: delivery.time, reserved: Boolean(manual) };
     const billingProfile = await client.query('SELECT delivery_tax_rate_bps FROM billing_profile WHERE id=true');
     const deliveryTaxRate = billingProfile.rows[0]?.delivery_tax_rate_bps ?? null;

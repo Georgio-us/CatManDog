@@ -24,7 +24,7 @@ export const es = {
   'Цена зависит от варианта': 'El precio depende de la variante',
   'Валенсия': 'València',
   'Доставка за 24-48 часов': 'Entrega en 24-48 horas',
-  'По Валенсии и материковой Испании': 'En València y la España peninsular',
+  'Для большей части каталога по Валенсии и материковой Испании': 'Para la mayor parte del catálogo en València y la España peninsular',
   'Доставка за 24-48 часов. Удобное время можно указать при оформлении': 'Entrega en 24-48 horas. Podrás indicar el horario preferido al finalizar el pedido',
   'Доставка за 24-48 часов. Точное время сообщим после оформления': 'Entrega en 24-48 horas. Concretaremos la hora después de realizar el pedido',
   'Доставка за 24-48 часов перевозчиком': 'Entrega en 24-48 horas por transportista',
