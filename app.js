@@ -572,7 +572,9 @@ if (['http:','https:'].includes(location.protocol)) {
       const previousMax = catalogPriceMax;
       catalogPriceMax = Math.max(100, Math.ceil(Math.max(...catalogProducts.map(p => catalogPrice(p).max ?? 0)) / 10) * 10);
       if (priceLimit === previousMax) priceLimit = catalogPriceMax;
-      cart = normalizeCart(cart, products);
+      // The boot catalog can omit a size that exists in the live catalog.
+      // Re-read the saved SKU before normalizing, so its variant ID survives the reload.
+      cart = normalizeCart(read('catmandog-cart',cart), products);
       catalogLoading = false;
       render();
     }).catch(() => {
