@@ -2,7 +2,7 @@ import { hasVariants, resolveVariant, storefrontPrice, canBuy } from './variants
 import { customerFacts, orderedVariants } from './product-content.js?v=catalog-sku-audit-20261110';
 import { catalogEditorialChuruCat } from './catalog-editorial-churu-cat.js';
 import { productGallery } from './product-gallery.js?v=atelier-gallery-fix-20261120';
-import { atelierHasOptions, atelierOptionsMarkup } from './atelier-configuration.js?v=atelier-all-options-20261120';
+import { atelierHasOptions, atelierOptionsMarkup } from './atelier-configuration.js?v=atelier-click-colors-20261121';
 
 export function customerDetails(details, translate, escape, category) {
   const useful = customerFacts(details);

@@ -56,7 +56,10 @@ test('all Cat’s Atelier models retain a studio cover and localized supplier de
 test('supplier-specific options are exact and carry through the priced quote', () => {
   const parsed = atelierSelection(atelierShelfId, selection);
   assert.equal(parsed.label, 'DOT Beige · White');
-  assert.match(atelierOptionsMarkup(atelierShelfId, selection, 'ru', value => value), /data-atelier-option="wood"/);
+  const markup = atelierOptionsMarkup(atelierShelfId, selection, 'ru', value => value);
+  assert.match(markup, /data-atelier-option="wood"/);
+  assert.match(markup, /<button type="button" class="atelier-swatch selected" data-atelier-swatch="fabric:41"[^>]*aria-pressed="true"/);
+  assert.match(markup, /data-atelier-swatch="fabric:42"[^>]*aria-pressed="false"/);
   const variant = { variant_id:atelierShelfId, product_id:atelierShelfId, name:'Оконная полка', label:'1 шт',
     sale_price_cents:15500, price_accepted:true, sale_status:'preorder', availability:'source_on_demand' };
   const line = options => ({ productId:atelierShelfId, variantId:atelierShelfId, qty:1, configuration:options });
@@ -77,7 +80,10 @@ test('every supplier option group appears on the matching model and validates at
     assert.ok(selection.label);
     assert.deepEqual(selection.options, defaults);
     const markup = atelierOptionsMarkup(item.id, defaults, 'es', value => value);
-    for (const key of Object.keys(defaults)) assert.match(markup, new RegExp(`data-atelier-option="${key}"`));
+    for (const key of Object.keys(defaults)) {
+      assert.match(markup, new RegExp(`data-atelier-option="${key}"`));
+      assert.match(markup, new RegExp(`data-atelier-swatch="${key}:`));
+    }
     assert.throws(() => atelierSelection(item.id, null), /Выберите все варианты/);
     const quote = priceQuote([{ productId:item.id, variantId:item.id, qty:1, configuration:defaults }],
       [{ variant_id:item.id, product_id:item.id, name:item.name, label:'1 шт', sale_price_cents:Math.round(item.price*100),

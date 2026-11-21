@@ -19,7 +19,11 @@ const swatchColors = {
   'DOT Gray':'#a6a7a9','DOT Light Silver-Gray':'#d9dad7',
   'DOT Mint':'#a3b8b6','DOT Mustard':'#c79519','DOT Pastel Pink':'#d9b5ab',
   'White':'#ede9e3','Wenge':'#332d2b','Oak (golden)':'#b87932',
-  'Natural (pine)':'#e6c798','Natural (beech)':'#d9bc91'
+  'Natural (pine)':'#e6c798','Natural (beech)':'#d9bc91',
+  'Beige':'#c9b9ab','Black':'#292728','Brown':'#694838',
+  'Burgund':'#722a39','Cobalt blue':'#245baa','Dark grey (graphite)':'#505157',
+  'Grey':'#9a9b9c','Light beige':'#e0d2bd','Orange':'#d77732',
+  'Caramel (toffee)':'#a66d42','Gray':'#9a9b9c','Natural':'#d9bc91'
 };
 
 export function atelierHasOptions(productId) {
@@ -59,7 +63,7 @@ export function atelierOptionsMarkup(productId, options, language, escape) {
     const label = labels[name][language] || labels[name].ru;
     const choices = group.choices.map(([id,text]) => `<option value="${id}" ${selected[name] === id ? 'selected' : ''}>${escape(text)}</option>`).join('');
     const swatches = group.choices.every(([,text]) => swatchColors[text]) ?
-      `<div class="atelier-swatches" aria-hidden="true">${group.choices.map(([id,text]) => `<span class="atelier-swatch ${selected[name] === id ? 'selected' : ''}" data-atelier-swatch="${name}:${id}" style="--swatch:${swatchColors[text]}" title="${escape(text)}"></span>`).join('')}</div>` : '';
+      `<div class="atelier-swatches" role="group" aria-label="${escape(label)}">${group.choices.map(([id,text]) => `<button type="button" class="atelier-swatch ${selected[name] === id ? 'selected' : ''}" data-atelier-swatch="${name}:${id}" style="--swatch:${swatchColors[text]}" title="${escape(text)}" aria-label="${escape(label)}: ${escape(text)}" aria-pressed="${selected[name] === id}"></button>`).join('')}</div>` : '';
     return `<label class="atelier-option-label">${escape(label)}<select data-atelier-option="${name}" aria-label="${escape(label)}">${choices}</select></label>${swatches}`;
   }).join('');
   return `<div class="atelier-options">${controls}<p class="atelier-selection-summary"><strong>${escape(summaryLabels[language] || summaryLabels.ru)}:</strong> <span id="atelier-selection-summary">${escape(atelierSelection(productId,selected).label)}</span></p></div>`;

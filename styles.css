@@ -1166,8 +1166,9 @@ button:hover:not(:disabled) {
 .atelier-option-label select { display: block; width: 100%; max-width: 430px; margin-top: 8px; padding: 13px 16px; border: 1px solid #d6d6d1; border-radius: 12px; background: #fff; color: #222522; font: inherit; }
 .atelier-option-label select:focus-visible { outline: 3px solid #cffa49; outline-offset: 2px; }
 .atelier-swatches { display: flex; flex-wrap: wrap; gap: 8px; max-width: 430px; margin-top: 11px; }
-.atelier-swatch { width: 23px; height: 23px; border-radius: 50%; background: var(--swatch); border: 1px solid #c8c8c4; box-shadow: inset 0 0 0 2px #fff; }
+.atelier-swatch { width: 34px; height: 34px; padding: 0; flex: 0 0 34px; border-radius: 50%; background: var(--swatch); border: 1px solid #c8c8c4; box-shadow: inset 0 0 0 2px #fff; }
 .atelier-swatch.selected { outline: 2px solid #222522; outline-offset: 2px; }
+.atelier-swatch:focus-visible { outline: 3px solid #738d20; outline-offset: 3px; }
 .atelier-selection-summary { margin: 18px 0 0; font-size: 14px; }
 
 .detail-copy {
