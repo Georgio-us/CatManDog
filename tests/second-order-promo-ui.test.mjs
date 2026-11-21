@@ -65,7 +65,7 @@ test('an invalid scanned code shows a clear message on the coupon page', async (
     const ui = createAccountUI(uiHelpers);
     await ui.initialize();
     assert.equal(globalThis.location.hash, '/coupon');
-    assert.match(ui.page('/coupon', new URLSearchParams()), /role="alert">Промокод недействителен/);
+    assert.match(ui.page('/coupon', new URLSearchParams()), /role="alert">Este código promocional no es válido/);
   } finally { session.restore(); }
 });
 

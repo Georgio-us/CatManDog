@@ -1,5 +1,5 @@
 import { createAccountStore } from './account-store.js?v=delivery-status-4';
-import { createAccountApi } from './account-api.js?v=coupon-help-20261120';
+import { createAccountApi } from './account-api.js?v=localized-api-errors-20261121';
 import { accountTools } from './useful.js?v=yagu-toys-20261116';
 import { orderProgress, orderVariantId as resolveOrderVariantId } from './order-progress.js';
 import { intlLocale, locale } from './locale.js?v=language-routes-3-20261120';

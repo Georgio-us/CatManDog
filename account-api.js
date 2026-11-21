@@ -1,12 +1,24 @@
-import { locale } from './locale.js?v=yagu-toys-20261116';
+import { locale, translate } from './locale.js?v=litter-photos-20261121';
+
+function requestError(message, status) {
+  if (status >= 500) return translate('Сервис временно недоступен. Попробуйте ещё раз позже');
+  const translated = translate(message || 'Не удалось выполнить запрос. Попробуйте ещё раз');
+  return locale() !== 'ru' && translated === message
+    ? translate('Не удалось выполнить запрос. Попробуйте ещё раз') : translated;
+}
 
 export function createAccountApi(fetcher = fetch) {
   async function request(path, method = 'GET', body) {
-    const response = await fetcher(path, { method, credentials: 'same-origin',
-      headers: body === undefined ? undefined : { 'Content-Type': 'application/json' },
-      body: body === undefined ? undefined : JSON.stringify(body) });
+    let response;
+    try {
+      response = await fetcher(path, { method, credentials: 'same-origin',
+        headers: body === undefined ? undefined : { 'Content-Type': 'application/json' },
+        body: body === undefined ? undefined : JSON.stringify(body) });
+    } catch {
+      throw new Error(translate('Не удалось связаться с сервером'));
+    }
     const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw Object.assign(new Error(data.error || 'Не удалось связаться с сервером'),
+    if (!response.ok) throw Object.assign(new Error(requestError(data.error, response.status)),
       { status: response.status });
     return data;
   }

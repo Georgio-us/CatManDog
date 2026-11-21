@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { stagingAuthorized, validateStagingEnvironment } from '../server/environment.js';
+import { requiresDatabaseAtStartup, stagingAuthorized, validateStagingEnvironment } from '../server/environment.js';
 import { stripeReady } from '../server/stripe.js';
 import { claimDatabaseEnvironment } from '../server/db.js';
 
@@ -9,6 +9,13 @@ const base = () => ({ APP_ENV: 'staging', STAGING_DATABASE_URL: 'postgres://test
   STRIPE_WEBHOOK_SECRET: 'whsec_example', STAGING_BASIC_AUTH_USER: 'owner',
   STAGING_BASIC_AUTH_PASSWORD: 'a-long-staging-password', ORDERS_ENABLED: 'true',
   PAYMENTS_ENABLED: 'true' });
+
+test('deployed production and staging require a connected database before serving pages', () => {
+  assert.equal(requiresDatabaseAtStartup({ APP_ENV: 'staging' }), true);
+  assert.equal(requiresDatabaseAtStartup({ APP_ENV: 'production' }), true);
+  assert.equal(requiresDatabaseAtStartup({ RAILWAY_ENVIRONMENT_NAME: 'production' }), true);
+  assert.equal(requiresDatabaseAtStartup({}), false);
+});
 
 test('staging rejects live payment, database, domain and notification settings', () => {
   assert.doesNotThrow(() => validateStagingEnvironment(base()));

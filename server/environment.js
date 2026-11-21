@@ -1,6 +1,8 @@
 import { createHash, timingSafeEqual } from 'node:crypto';
 
 export const isStaging = (env = process.env) => env.APP_ENV === 'staging';
+export const requiresDatabaseAtStartup = (env = process.env) =>
+  isStaging(env) || env.APP_ENV === 'production' || Boolean(env.RAILWAY_ENVIRONMENT_NAME);
 
 export function validateStagingEnvironment(env = process.env) {
   if (!isStaging(env)) return;

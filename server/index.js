@@ -6,7 +6,7 @@ import { serveSeo } from './seo.js';
 import { startBackupScheduler } from './backup.js';
 import { startTelegramOrderAlerts } from './telegram.js';
 import { startObservedCartCleanup } from './cart-activity.js';
-import { isStaging, stagingAuthorized, validateStagingEnvironment } from './environment.js';
+import { isStaging, requiresDatabaseAtStartup, stagingAuthorized, validateStagingEnvironment } from './environment.js';
 
 validateStagingEnvironment();
 const port = Number(process.env.PORT || 8080);
@@ -18,7 +18,7 @@ if (db) {
     initialized = true;
   } catch (error) { console.error('Database initialization failed:', error.message); }
 }
-if (isStaging() && !initialized) throw new Error('Staging database initialization failed');
+if (requiresDatabaseAtStartup() && !initialized) throw new Error('Database initialization failed');
 
 const server = createServer(async (req, res) => {
   try {

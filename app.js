@@ -1,5 +1,5 @@
 import { createUsefulUI } from './useful.js?v=yagu-toys-20261116';
-import { createAccountUI } from './account.js?v=language-routes-3-20261120';
+import { createAccountUI } from './account.js?v=localized-api-errors-20261121';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
 import { accessoryDetail, customerDetails } from './accessory-ui.js?v=delivery-exceptions-20261121';
 import { atelierDescriptionMarkup } from './atelier-description.js';
