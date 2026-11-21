@@ -251,6 +251,31 @@ export async function importCatalog(db, items = products) {
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [invoiceReconcileMigration]);
       }
     }
+    if (items === products) {
+      const finalLitterCountMigration = 'litter_invoice_two_each_2026_11_21';
+      const done = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [finalLitterCountMigration]);
+      if (!done.rows.length) {
+        for (const id of ['cat-litter-uniko-tofu-6l-pack',
+          'cat-litter-sanicat-clumping-unscented-8l-pack']) {
+          const { rows } = await client.query(`SELECT stock_quantity,reserved_quantity
+            FROM catalog_variants WHERE id=$1 FOR UPDATE`, [id]);
+          if (!rows.length) throw new Error(`Missing litter stock SKU ${id}`);
+          const delta = Math.max(0, 2 - Number(rows[0].stock_quantity || 0));
+          if (!delta) continue;
+          const changed = await client.query(`UPDATE catalog_variants SET
+            stock_quantity=coalesce(stock_quantity,0)+$2,availability='on_hand',updated_at=now()
+            WHERE id=$1 RETURNING stock_quantity,reserved_quantity`, [id, delta]);
+          await client.query(`INSERT INTO inventory_movements
+            (id,variant_id,idempotency_key,reason,delta_on_hand,delta_reserved,
+             on_hand_after,reserved_after,note)
+            VALUES($1,$2,$3,'adjustment',$4,0,$5,$6,$7)`,
+          [randomUUID(), id, `litter_two_each_2026_11_21_${id}`, delta,
+            changed.rows[0].stock_quantity, changed.rows[0].reserved_quantity,
+            'Owner corrected invoice count: two units of each of the five litter variants']);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [finalLitterCountMigration]);
+      }
+    }
     if (items === products) await publishYaguToys(client);
     if (items === products) {
       const localMigration = await client.query("SELECT name FROM catalog_migrations WHERE name='local_only_products_archived'");

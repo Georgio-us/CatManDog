@@ -83,9 +83,10 @@ test('full catalog import archives retired rows once and preserves edited produc
   await importCatalog(db);
   assert.ok(queries.every(([sql]) => !sql.startsWith('DELETE FROM catalog_')));
   const litterMovements = queries.filter(([sql]) => sql.includes('INSERT INTO inventory_movements'));
-  assert.equal(litterMovements.length, 9);
-  assert.equal(litterMovements.reduce((total, [, params]) => total + params[3], 0), 8);
+  assert.equal(litterMovements.length, 11);
+  assert.equal(litterMovements.reduce((total, [, params]) => total + params[3], 0), 10);
   assert.ok(litterMovements.every(([, params]) => params[1].startsWith('cat-litter-')));
+  assert.ok([...stock.values()].every(quantity => quantity === 2));
   assert.ok(queries.filter(([sql]) => sql.startsWith('INSERT INTO catalog_products'))
     .every(([sql]) => sql.includes('ON CONFLICT(id) DO NOTHING')));
   assert.ok(queries.filter(([sql]) => sql.startsWith('INSERT INTO catalog_variants'))
