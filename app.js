@@ -18,7 +18,7 @@ import { applyServerCatalog } from './server-prices.js?v=cats-atelier-card-fit-2
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
 import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=editorial-shortcuts-20261119';
 import { handleCatPickClick } from './cat-picks.js?v=picks-seo-20261112';
-import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from './locale.js?v=atelier-related-20261121';
+import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from './locale.js?v=atelier-names-20261121';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
