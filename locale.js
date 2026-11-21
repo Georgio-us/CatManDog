@@ -1,11 +1,11 @@
 import { es, esPatterns } from './locales/es.js?v=language-routes-20261120';
-import { esProductText } from './locales/product-es.js?v=litter-20261121';
-import { esDetails } from './locales/details-es.js?v=litter-20261121';
+import { esProductText } from './locales/product-es.js?v=litter-photos-20261121';
+import { esDetails } from './locales/details-es.js?v=litter-photos-20261121';
 import { uk, ukPatterns } from './locales/uk.js?v=language-routes-3-20261120';
 import { ukExtra } from './locales/uk-extra.js?v=pickup-main-nav-20261119';
-import { ukProductNames } from './locales/uk-product-names.js?v=litter-20261121';
-import { ukProductCopy } from './locales/uk-product-copy.js?v=litter-20261121';
-import { ukDetails } from './locales/uk-details.js?v=litter-20261121';
+import { ukProductNames } from './locales/uk-product-names.js?v=litter-photos-20261121';
+import { ukProductCopy } from './locales/uk-product-copy.js?v=litter-photos-20261121';
+import { ukDetails } from './locales/uk-details.js?v=litter-photos-20261121';
 import { churuFormatsEs, churuFormatsUk } from './locales/churu-formats.js';
 import { churuDogEs, churuDogUk } from './locales/churu-dog.js';
 import { seoCategoryForPath } from './seo-categories.js';

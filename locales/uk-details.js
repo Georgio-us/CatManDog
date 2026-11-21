@@ -1,5 +1,15 @@
 // Ukrainian catalog details, translated from the existing product copy.
 export const ukDetails = {
+  'Упаковка Yommy Tofu Lavanda 6 л': 'Упаковка Yommy Tofu Lavanda 6 л',
+  'Упаковка Yommy Tofu Verde 6 л': 'Упаковка Yommy Tofu Verde 6 л',
+  'Упаковка Uniko Tofu Cat Litter 6 л': 'Упаковка Uniko Tofu Cat Litter 6 л',
+  'Упаковка Uniko Tofu Cat Litter 18 л': 'Упаковка Uniko Tofu Cat Litter 18 л',
+  'Упаковка Sanicat Clumping 8 л без ароматизаторов': 'Упаковка Sanicat Clumping 8 л без ароматизаторів',
+
+  'Лаванда': 'Лаванда',
+  'Зелёный чай': 'Зелений чай',
+  'Аромат зелёного чая': 'Аромат зеленого чаю',
+  'Упаковка 6 или 18 л': 'Упаковка 6 або 18 л',
   'Наполнитель из тофу': 'Наповнювач із тофу',
   'Комкующийся наполнитель': 'Грудкувальний наповнювач',
   'Аромат лаванды': 'Аромат лаванди',

@@ -1,4 +1,14 @@
 export const esDetails = {
+  'Упаковка Yommy Tofu Lavanda 6 л': 'Envase Yommy Tofu Lavanda 6 L',
+  'Упаковка Yommy Tofu Verde 6 л': 'Envase Yommy Tofu Verde 6 L',
+  'Упаковка Uniko Tofu Cat Litter 6 л': 'Envase Uniko Tofu Cat Litter 6 L',
+  'Упаковка Uniko Tofu Cat Litter 18 л': 'Envase Uniko Tofu Cat Litter 18 L',
+  'Упаковка Sanicat Clumping 8 л без ароматизаторов': 'Envase Sanicat Clumping 8 L sin perfume',
+
+  'Лаванда': 'Lavanda',
+  'Зелёный чай': 'Té verde',
+  'Аромат зелёного чая': 'Aroma a té verde',
+  'Упаковка 6 или 18 л': 'Formatos de 6 o 18 L',
   'Наполнитель из тофу': 'Arena de tofu',
   'Комкующийся наполнитель': 'Arena aglomerante',
   'Аромат лаванды': 'Aroma a lavanda',

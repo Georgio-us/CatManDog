@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import { products } from '../data.js';
 import { retiredProductIds } from '../catalog-policy.js';
 import { snapshots, confirmedPrice, canBuy } from '../variants.js';
@@ -137,6 +138,76 @@ export async function importCatalog(db, items = products) {
               AND price_confirmed=false`, [id, priceCents]);
         }
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [litterPriceMigration]);
+      }
+    }
+    if (items === products) {
+      const litterPhotoMigration = 'litter_exact_photos_and_formats_2026_11_21';
+      const done = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [litterPhotoMigration]);
+      if (!done.rows.length) {
+        const previousNames = new Map([
+          ['cat-litter-yommy-tofu-lavanda-6l', 'Yommy Tofu Lavanda - комкующийся наполнитель 6 л'],
+          ['cat-litter-uniko-tofu-18l', 'Uniko Tofu Cat Litter - комкующийся наполнитель 18 л'],
+          ['cat-litter-sanicat-clumping-unscented-8l', 'Sanicat Clumping - комкующийся наполнитель без отдушки 8 л']
+        ]);
+        for (const source of products.filter(product => previousNames.has(product.id))) {
+          await client.query(`UPDATE catalog_products SET
+            name=$2,description=$3,details=$4::jsonb,image_path=$5,source=$6::jsonb
+            WHERE id=$1 AND name=$7 AND image_path IS NULL`,
+          [source.id, source.name, source.description, JSON.stringify(source.details),
+            imagePath(source.image), JSON.stringify(source), previousNames.get(source.id)]);
+          for (const variant of source.variants) {
+            await client.query(`UPDATE catalog_variants SET
+              label=$2,description=$3,details=$4::jsonb,image_path=$5,source=$6::jsonb,updated_at=now()
+              WHERE id=$1 AND image_path IS NULL`,
+            [variant.id, variant.label, variant.description, JSON.stringify(variant.details),
+              imagePath(variant.image), JSON.stringify(variant)]);
+          }
+        }
+        await client.query(`UPDATE catalog_products SET active=false
+          WHERE id='cat-litter-yommy-tofu-pl-6l' AND image_path IS NULL`);
+        await client.query(`UPDATE catalog_variants SET active=false,updated_at=now()
+          WHERE product_id='cat-litter-yommy-tofu-pl-6l' AND stock_quantity=0`);
+        for (const [id, priceCents] of [
+          ['cat-litter-yommy-tofu-verde-6l-pack', 999],
+          ['cat-litter-uniko-tofu-6l-pack', 999]
+        ]) {
+          await client.query(`UPDATE catalog_variants SET price_confirmed=true,updated_at=now()
+            WHERE id=$1 AND source_price_cents=$2 AND price_override_cents IS NULL
+              AND price_confirmed=false`, [id, priceCents]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [litterPhotoMigration]);
+      }
+    }
+    if (items === products) {
+      const litterStockMigration = 'litter_owner_confirmed_minimum_stock_2026_11_21';
+      const done = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [litterStockMigration]);
+      if (!done.rows.length) {
+        // The owner confirmed physical stock and two Sanicat bags. Until the
+        // invoice quantity is transcribed, expose only one of each other SKU.
+        for (const [id, minimum] of [
+          ['cat-litter-yommy-tofu-lavanda-6l-pack', 1],
+          ['cat-litter-yommy-tofu-verde-6l-pack', 1],
+          ['cat-litter-uniko-tofu-6l-pack', 1],
+          ['cat-litter-uniko-tofu-18l-pack', 1],
+          ['cat-litter-sanicat-clumping-unscented-8l-pack', 2]
+        ]) {
+          const { rows } = await client.query(`SELECT stock_quantity,reserved_quantity
+            FROM catalog_variants WHERE id=$1 FOR UPDATE`, [id]);
+          if (!rows.length) throw new Error(`Missing litter stock SKU ${id}`);
+          const delta = Math.max(0, minimum - Number(rows[0].stock_quantity || 0));
+          if (!delta) continue;
+          const changed = await client.query(`UPDATE catalog_variants SET
+            stock_quantity=coalesce(stock_quantity,0)+$2,availability='on_hand',updated_at=now()
+            WHERE id=$1 RETURNING stock_quantity,reserved_quantity`, [id, delta]);
+          await client.query(`INSERT INTO inventory_movements
+            (id,variant_id,idempotency_key,reason,delta_on_hand,delta_reserved,
+             on_hand_after,reserved_after,note)
+            VALUES($1,$2,$3,'adjustment',$4,0,$5,$6,$7)`,
+          [randomUUID(), id, `litter_owner_stock_2026_11_21_${id}`, delta,
+            changed.rows[0].stock_quantity, changed.rows[0].reserved_quantity,
+            'Owner confirmed stock from invoice and package photos; conservative minimum quantity']);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [litterStockMigration]);
       }
     }
     if (items === products) await publishYaguToys(client);
