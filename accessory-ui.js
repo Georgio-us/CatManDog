@@ -52,17 +52,25 @@ function customerAvailability(variant) {
 
 export function accessoryDetail(product, helpers) {
   const { crumbs, imageBlock, escape, icon, favorites, goodTogether, money,
-    translate = value => value, variantId, quantity = 1, language = 'ru', configuration = { fabric:'41', wood:'57' } } = helpers;
+    translate = value => value, variantId, quantity = 1, language = 'ru', configuration = { fabric:'41', wood:'57' }, pickupMode = false } = helpers;
   const p = resolveVariant(product, variantId);
   if (!p) return '';
   const price = storefrontPrice(p);
   const specialAvailability = Boolean(p.saleStatus || p.serverSourcingAvailability);
   const t = availabilityCopy[language] || availabilityCopy.ru;
+  const pickupText = {
+    es:{ready:'Disponible para recoger',missing:'No disponible para recoger',add:'Añadir a la cesta',
+      note:'Después del pago acordaremos contigo cuándo recogerlo'},
+    ru:{ready:'Доступно к самовывозу',missing:'Недоступно к самовывозу',add:'Добавить в корзину',
+      note:'После оплаты согласуем с вами время получения'},
+    uk:{ready:'Доступно для самовивозу',missing:'Недоступно для самовивозу',add:'Додати до кошика',
+      note:'Після оплати узгодимо з вами час отримання'}
+  }[language] || {ready:'Доступно к самовывозу',missing:'Недоступно к самовывозу',add:'Добавить в корзину',note:'После оплаты согласуем время получения'};
   const state = customerAvailability(p);
   const deliveryKind = productDeliveryKind(product, p);
   const timing = deliveryTiming(deliveryKind, language);
   const allowed = canBuy(p) && state !== 'pending' && state !== 'unavailable';
-  const requestable = p.saleStatus === 'unavailable';
+  const requestable = !pickupMode && p.saleStatus === 'unavailable';
   const displayPrice = price === null ? 'Цена уточняется' : money(price);
   const editorial = catalogEditorialChuruCat[product.id];
   const useEditorial = editorial && product.description === editorial.description;
@@ -74,18 +82,22 @@ export function accessoryDetail(product, helpers) {
   const label = product.optionLabel || p.optionLabel || 'Вариант';
   const optionMarkup = specialAvailability && variants
     ? displayVariants.map(v => {
-      const optionState = customerAvailability(v);
-      return `<button type="button" class="size availability-option ${v.id===p.id?'active':''} ${optionState==='unavailable'?'availability-option-unavailable':''}" data-variant="${escape(v.id)}" aria-pressed="${v.id===p.id}"><strong>${escape(translate(v.label))}</strong><small>${escape(t[optionState][0])}</small></button>`;
+      const optionState = pickupMode ? (v.pickupAvailable ? 'on_hand' : 'unavailable') : customerAvailability(v);
+      return `<button type="button" class="size availability-option ${v.id===p.id?'active':''} ${optionState==='unavailable'?'availability-option-unavailable':''}" data-variant="${escape(v.id)}" aria-pressed="${v.id===p.id}"><strong>${escape(translate(v.label))}</strong><small>${escape(pickupMode ? (v.pickupAvailable ? pickupText.ready : pickupText.missing) : t[optionState][0])}</small></button>`;
     }).join('')
     : variants ? displayVariants.map(v=>`<button class="size ${v.id===p.id?'active':''}" data-variant="${escape(v.id)}" aria-pressed="${v.id===p.id}">${escape(translate(v.label))}</button>`).join('')
       : (p.sizes || []).map(s=>`<span class="size active">${escape(s)}</span>`).join('');
-  const selectedAvailability = specialAvailability
-    ? `<div class="availability-selected availability-selected-${state}" role="status"><strong>${escape(t[state][0])}</strong><p>${escape(deliveryKind === 'standard' || state === 'unavailable' || state === 'pending' ? t[state][1] : timing)}</p></div>` : '';
-  const buyable = specialAvailability ? allowed : canBuy(p) && state !== 'unavailable';
-  const action = requestable ? t.request : !buyable && p.serverPriceConfirmed === false
+  const selectedAvailability = pickupMode
+    ? `<div class="availability-selected availability-selected-${p.pickupAvailable ? 'on_hand' : 'unavailable'}" role="status"><strong>${escape(p.pickupAvailable ? pickupText.ready : pickupText.missing)}</strong>${p.pickupAvailable ? `<p>${escape(pickupText.note)}</p>` : ''}</div>`
+    : specialAvailability
+      ? `<div class="availability-selected availability-selected-${state}" role="status"><strong>${escape(t[state][0])}</strong><p>${escape(deliveryKind === 'standard' || state === 'unavailable' || state === 'pending' ? t[state][1] : timing)}</p></div>` : '';
+  const buyable = pickupMode ? p.pickupAvailable === true && canBuy(p)
+    : specialAvailability ? allowed : canBuy(p) && state !== 'unavailable';
+  const action = pickupMode ? buyable ? pickupText.add : pickupText.missing
+    : requestable ? t.request : !buyable && p.serverPriceConfirmed === false
     ? t.pricePending : specialAvailability ? (['on_hand','available'].includes(state) ? t.add : state === 'source_on_demand' ? t.order : t[state][0]) : (buyable ? 'Добавить в корзину' : 'Вариант недоступен');
   const weightUnit = language === 'es' ? 'kg' : 'кг';
-  const priceNote = price === null ? '' : `<p class="retail-note">Цена с IVA${p.packageWeightKg ? ` · ${money(price / p.packageWeightKg)} / ${weightUnit}` : ''}${specialAvailability ? '' : `<br>${escape(buyable ? 'Доступно к заказу' : t[state][0])}`}</p>`;
-  return `<div class="page">${crumbs(product.name)}<div class="detail-grid">${productGallery(p, imageBlock, escape, language)}<div class="detail-copy"><span class="eyebrow">${escape(p.line || p.brand || '')}</span><h1>${escape(p.name || product.name)}</h1>${variants?`<p class="variant-current">${escape(label)}: ${escape(translate(p.label))}</p>`:''}<span class="detail-price-label">${variants?'Цена выбранного варианта':'Цена товара'}</span><div class="detail-price">${displayPrice}</div>${priceNote}${atelierDescriptionMarkup(product, language, escape) || `<p>${escape(translate(displayDescription || ''))}</p>`}${atelierHasOptions(product.id)?atelierOptionsMarkup(product.id,configuration,language,escape):`<span class="size-label">${escape(label)}</span><div class="size-options variant-options ${specialAvailability?'availability-options':''}" aria-label="${escape(label)}">${optionMarkup}</div>`}${selectedAvailability}<div class="buy-row">${buyable?`<div class="quantity"><button data-detail-qty="-1" aria-label="Уменьшить количество">${icon('minus')}</button><span id="detail-qty">${quantity}</span><button data-detail-qty="1" aria-label="Увеличить количество">${icon('plus')}</button></div>`:''}<button class="button" ${buyable?`data-buy="${escape(product.id)}"`:requestable?`data-request-availability="${escape(p.id)}"`:'disabled'}>${escape(action)} ${buyable?icon(state === 'source_on_demand' && specialAvailability ? 'arrow' : 'bag'):requestable?icon('arrow'):''}</button><button class="icon-button favorite-detail ${favorites.includes(product.id)?'selected':''}" data-favorite="${escape(product.id)}" aria-label="В избранное" aria-pressed="${favorites.includes(product.id)}">${icon('heart')}</button></div>${buyable?`<div class="detail-service">${icon('check')} ${escape(timing)} · <a class="text-link" href="#/info/delivery">${({ru:'подробнее',es:'más información',uk:'докладніше'})[language] || 'подробнее'}</a></div>`:''}${customerDetails(displayDetails, translate, escape, p.category)}</div></div></div>${goodTogether(product)}`;
+  const priceNote = price === null ? '' : `<p class="retail-note">Цена с IVA${p.packageWeightKg ? ` · ${money(price / p.packageWeightKg)} / ${weightUnit}` : ''}${specialAvailability || pickupMode ? '' : `<br>${escape(buyable ? 'Доступно к заказу' : t[state][0])}`}</p>`;
+  return `<div class="page">${crumbs(product.name)}<div class="detail-grid">${productGallery(p, imageBlock, escape, language)}<div class="detail-copy"><span class="eyebrow">${escape(p.line || p.brand || '')}</span><h1>${escape(p.name || product.name)}</h1>${variants?`<p class="variant-current">${escape(label)}: ${escape(translate(p.label))}</p>`:''}<span class="detail-price-label">${variants?'Цена выбранного варианта':'Цена товара'}</span><div class="detail-price">${displayPrice}</div>${priceNote}${atelierDescriptionMarkup(product, language, escape) || `<p>${escape(translate(displayDescription || ''))}</p>`}${atelierHasOptions(product.id)?atelierOptionsMarkup(product.id,configuration,language,escape):`<span class="size-label">${escape(label)}</span><div class="size-options variant-options ${specialAvailability?'availability-options':''}" aria-label="${escape(label)}">${optionMarkup}</div>`}${selectedAvailability}<div class="buy-row">${buyable?`<div class="quantity"><button data-detail-qty="-1" aria-label="Уменьшить количество">${icon('minus')}</button><span id="detail-qty">${quantity}</span><button data-detail-qty="1" aria-label="Увеличить количество">${icon('plus')}</button></div>`:''}<button class="button" ${buyable?`data-buy="${escape(product.id)}"`:requestable?`data-request-availability="${escape(p.id)}"`:'disabled'}>${escape(action)} ${buyable?icon(state === 'source_on_demand' && specialAvailability ? 'arrow' : 'bag'):requestable?icon('arrow'):''}</button><button class="icon-button favorite-detail ${favorites.includes(product.id)?'selected':''}" data-favorite="${escape(product.id)}" aria-label="В избранное" aria-pressed="${favorites.includes(product.id)}">${icon('heart')}</button></div>${buyable?`<div class="detail-service">${icon('check')} ${pickupMode ? escape(pickupText.note) : `${escape(timing)} · <a class="text-link" href="#/info/delivery">${({ru:'подробнее',es:'más información',uk:'докладніше'})[language] || 'подробнее'}</a>`}</div>`:''}${customerDetails(displayDetails, translate, escape, p.category)}</div></div></div>${goodTogether(product)}`;
 
 }

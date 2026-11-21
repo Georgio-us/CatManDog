@@ -1119,37 +1119,9 @@ button:hover:not(:disabled) {
 .pickup-results .results-count { margin: 2px 0 20px; }
 .pickup-results .product-grid { grid-template-columns: repeat(var(--catalog-columns), minmax(0, 1fr)); }
 .pickup-page .product-availability-tag { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pickup-basket-bar { position: sticky; bottom: 16px; z-index: 20; display: flex; align-items: center; gap: 14px; width: min(520px, 100%); min-height: 58px; margin: 30px auto 0; padding: 12px 20px; border-radius: 30px; background: var(--ink); color: #fff; text-decoration: none; box-shadow: 0 12px 30px #20221e33; }
+.pickup-basket-bar { position: sticky; bottom: 16px; z-index: 20; display: flex; align-items: center; gap: 14px; width: min(520px, 100%); min-height: 58px; margin: 30px auto 0; padding: 12px 20px; border-radius: 30px; background: var(--lime); color: var(--ink); text-decoration: none; box-shadow: 0 12px 30px #20221e33; }
 .pickup-basket-bar span { flex: 1; font-weight: 700; }
 .pickup-basket-bar svg { width: 22px; height: 22px; flex: none; }
-.pickup-checkout-page { padding-top: 44px; padding-bottom: 80px; }
-.pickup-checkout-page .text-link svg { width: 18px; height: 18px; transform: rotate(180deg); }
-.pickup-checkout-heading { max-width: 650px; margin: 28px 0 36px; }
-.pickup-checkout-heading h1 { font-size: clamp(34px, 4vw, 56px); line-height: 1.1; margin: 0 0 16px; }
-.pickup-checkout-heading p { color: var(--muted); line-height: 1.5; }
-.pickup-checkout-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 330px); gap: 36px; align-items: start; }
-.pickup-checkout-main { min-width: 0; }
-.pickup-basket-list { list-style: none; padding: 0; margin: 0 0 34px; border-top: 1px solid var(--line); }
-.pickup-basket-item { display: grid; grid-template-columns: minmax(0, 1fr) auto auto auto; gap: 16px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--line); }
-.pickup-basket-item strong { min-width: 0; }
-.pickup-basket-item small { display: block; margin-top: 5px; color: var(--muted); }
-.pickup-basket-controls { display: flex; align-items: center; gap: 12px; white-space: nowrap; }
-.pickup-basket-controls button, .pickup-remove { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 50%; background: #fff; cursor: pointer; }
-.pickup-basket-controls svg, .pickup-remove svg { width: 17px; height: 17px; }
-.pickup-contact-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; margin: 20px 0; }
-.pickup-contact-fields label { display: grid; gap: 7px; font-weight: 600; }
-.pickup-contact-fields label:last-child { grid-column: 1 / -1; }
-.pickup-contact-fields input { width: 100%; min-height: 48px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 12px; font: inherit; }
-.pickup-checkout-page form h2, .pickup-checkout-summary h2 { font-size: 22px; margin: 0; }
-.pickup-checkout-page form .button { width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; }
-.pickup-checkout-page form .button svg { width: 18px; height: 18px; }
-.pickup-checkout-page form .button:disabled { opacity: .55; cursor: not-allowed; }
-.pickup-checkout-summary { border: 1px solid var(--line); border-radius: 20px; padding: 24px; }
-.pickup-checkout-summary h2 { margin-bottom: 18px; }
-.pickup-checkout-summary > div { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; }
-.pickup-checkout-summary .pickup-total { margin-top: 12px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 20px; }
-.pickup-notice { padding: 14px 18px; border-radius: 12px; background: #f5f7e9; }
-.pickup-empty { padding: 36px 0; }
 .pickup-confirmation { max-width: 760px; padding-top: 80px; padding-bottom: 100px; }
 .pickup-confirmation h1 { font-size: clamp(36px, 5vw, 60px); }
 .pickup-confirmation p { line-height: 1.5; }
@@ -1169,16 +1141,7 @@ button:hover:not(:disabled) {
   .pickup-category.active span { color: white; }
   .pickup-results .results-count { margin-bottom: 16px; }
   .pickup-basket-bar { bottom: 10px; padding: 12px 16px; }
-  .pickup-checkout-page { padding-top: 28px; }
-  .pickup-checkout-heading { margin: 22px 0 26px; }
-  .pickup-checkout-layout { display: block; }
-  .pickup-checkout-summary { margin-top: 28px; }
-  .pickup-basket-item { grid-template-columns: minmax(0,1fr) auto; gap: 10px; }
-  .pickup-basket-controls { grid-column: 1; grid-row: 2; }
-  .pickup-basket-item > strong { grid-column: 2; grid-row: 1; text-align: right; }
-  .pickup-remove { grid-column: 2; grid-row: 2; justify-self: end; }
-  .pickup-contact-fields { grid-template-columns: 1fr; }
-  .pickup-contact-fields label:last-child { grid-column: auto; }
+
 }
 
 .empty-state {
