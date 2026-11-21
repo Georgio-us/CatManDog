@@ -62,7 +62,10 @@ test('confirmed-demand formats use exact SKUs and local studio images', () => {
 });
 test('full catalog import archives retired rows once and preserves edited products', async () => {
   const queries = [];
-  const stock = new Map();
+  const stock = new Map([
+    ['royalcanin-93e8aeca-85g', 12],
+    ['leonardo-wet-pure-chicken-85g', 16]
+  ]);
   const db = { connect: async () => ({
     query: async (sql, params) => {
       queries.push([sql, params]);
@@ -76,17 +79,26 @@ test('full catalog import archives retired rows once and preserves edited produc
         stock.set(params[0], params[1]);
         return { rows: [{ stock_quantity: params[1], reserved_quantity: 0 }] };
       }
+      if (/UPDATE catalog_variants SET\s+stock_quantity=stock_quantity-10/u.test(sql)) {
+        stock.set(params[0], stock.get(params[0]) - 10);
+        return { rows: [{ stock_quantity: stock.get(params[0]), reserved_quantity: 0 }] };
+      }
       return { rows: [] };
     },
     release() {}
   }) };
   await importCatalog(db);
   assert.ok(queries.every(([sql]) => !sql.startsWith('DELETE FROM catalog_')));
-  const litterMovements = queries.filter(([sql]) => sql.includes('INSERT INTO inventory_movements'));
+  const litterMovements = queries.filter(([sql, params]) => sql.includes('INSERT INTO inventory_movements') &&
+    params?.[1]?.startsWith('cat-litter-'));
   assert.equal(litterMovements.length, 11);
   assert.equal(litterMovements.reduce((total, [, params]) => total + params[3], 0), 10);
   assert.ok(litterMovements.every(([, params]) => params[1].startsWith('cat-litter-')));
-  assert.ok([...stock.values()].every(quantity => quantity === 2));
+  assert.ok([...stock].filter(([id]) => id.startsWith('cat-litter-')).every(([, quantity]) => quantity === 2));
+  assert.equal(stock.get('royalcanin-93e8aeca-85g'), 2);
+  assert.equal(stock.get('leonardo-wet-pure-chicken-85g'), 6);
+  const saleMovements = queries.filter(([sql]) => sql.includes("'manual_sale',-10"));
+  assert.equal(saleMovements.length, 2);
   assert.ok(queries.filter(([sql]) => sql.startsWith('INSERT INTO catalog_products'))
     .every(([sql]) => sql.includes('ON CONFLICT(id) DO NOTHING')));
   assert.ok(queries.filter(([sql]) => sql.startsWith('INSERT INTO catalog_variants'))

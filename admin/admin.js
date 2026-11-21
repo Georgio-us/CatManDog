@@ -1112,7 +1112,7 @@ async function loadStock(details) {
   const names = { receipt:'Приёмка', adjustment:'Инвентаризация', order_reserved:'Резерв заказа',
     order_released:'Снятие резерва', order_fulfilled:'Доставлен заказ',
     legacy_order_cancelled:'Отмена старого заказа', marketing_expense:'Маркетинг и подарки',
-    personal_expense:'Личное потребление' };
+    personal_expense:'Личное потребление', manual_sale:'Продажа вне сайта' };
   try {
     const { movements } = await api(`/api/admin/inventory-movements?variantId=${encodeURIComponent(variantId)}`);
     host.innerHTML = `<form data-receipt-variant="${escape(variantId)}" class="offer-form">

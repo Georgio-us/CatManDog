@@ -865,6 +865,32 @@ export async function importCatalog(db, items = products) {
             details='["В коробочке 3 сменных фильтра","Подходят для фонтанов с фильтром такой же формы и размера","Перед покупкой сравните фильтр с тем, который используется в вашей поилке"]'::jsonb)`,
       ['heybopet-pwf-filters-3-box', filterCopy, filterDetails]);
     }
+    if (items === products) {
+      const saleMigration = 'owner_offsite_pouch_sale_2026_11_21';
+      const recorded = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [saleMigration]);
+      if (!recorded.rows.length) {
+        for (const [id, name, amount] of [
+          ['royalcanin-93e8aeca-85g', 'Royal Canin Kitten 85 g', '14.90'],
+          ['leonardo-wet-pure-chicken-85g', 'Leonardo Finest Selection Pure Chicken 85 g', '13.10']
+        ]) {
+          const { rows: stock } = await client.query(`SELECT stock_quantity,reserved_quantity
+            FROM catalog_variants WHERE id=$1 FOR UPDATE`, [id]);
+          if (!stock.length || Number(stock[0].stock_quantity) - Number(stock[0].reserved_quantity) < 10)
+            throw new Error(`Insufficient free stock for owner-confirmed offsite sale: ${id}`);
+          const { rows: changed } = await client.query(`UPDATE catalog_variants SET
+            stock_quantity=stock_quantity-10,updated_at=now() WHERE id=$1
+            RETURNING stock_quantity,reserved_quantity`, [id]);
+          await client.query(`INSERT INTO inventory_movements
+            (id,variant_id,idempotency_key,reason,delta_on_hand,delta_reserved,
+             on_hand_after,reserved_after,note)
+            VALUES($1,$2,$3,'manual_sale',-10,0,$4,$5,$6)`,
+          [randomUUID(), id, `owner_offsite_sale_2026_11_21_${id}`,
+            changed[0].stock_quantity, changed[0].reserved_quantity,
+            `Owner-confirmed sale of 10 ${name}; EUR ${amount} line; EUR 28.00 total awaiting payment via Ukrainian card; invoice pending`]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [saleMigration]);
+      }
+    }
     await client.query('COMMIT');
     return rows.length;
   } catch (error) {

@@ -447,7 +447,7 @@ CREATE TABLE IF NOT EXISTS inventory_movements (
   idempotency_key text,
   reason text NOT NULL CHECK (reason IN ('receipt','adjustment','order_reserved',
     'order_released','order_fulfilled','legacy_order_cancelled','repack_out','repack_in',
-    'marketing_expense','personal_expense')),
+    'marketing_expense','personal_expense','manual_sale')),
   delta_on_hand integer NOT NULL DEFAULT 0,
   delta_reserved integer NOT NULL DEFAULT 0,
   on_hand_after integer,
@@ -467,7 +467,7 @@ ALTER TABLE inventory_movements DROP CONSTRAINT IF EXISTS inventory_movements_re
 ALTER TABLE inventory_movements ADD CONSTRAINT inventory_movements_reason_check
   CHECK (reason IN ('receipt','adjustment','order_reserved','order_released',
     'order_fulfilled','legacy_order_cancelled','repack_out','repack_in',
-    'marketing_expense','personal_expense'));
+    'marketing_expense','personal_expense','manual_sale'));
 CREATE UNIQUE INDEX IF NOT EXISTS inventory_movements_idempotency_idx
   ON inventory_movements(idempotency_key) WHERE idempotency_key IS NOT NULL;
 CREATE INDEX IF NOT EXISTS inventory_movements_variant_idx
