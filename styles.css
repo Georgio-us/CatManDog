@@ -1119,7 +1119,7 @@ button:hover:not(:disabled) {
 .pickup-results .results-count { margin: 2px 0 20px; }
 .pickup-results .product-grid { grid-template-columns: repeat(var(--catalog-columns), minmax(0, 1fr)); }
 .pickup-page .product-availability-tag { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pickup-basket-bar { position: sticky; bottom: 16px; z-index: 20; display: flex; align-items: center; gap: 14px; width: min(520px, 100%); min-height: 58px; margin: 30px auto 0; padding: 12px 20px; border-radius: 30px; background: var(--ink); color: #fff; text-decoration: none; box-shadow: 0 12px 30px #20221e33; }
+.pickup-basket-bar { position: sticky; bottom: 16px; z-index: 20; display: flex; align-items: center; gap: 14px; width: min(520px, 100%); min-height: 58px; margin: 30px auto 0; padding: 12px 20px; border-radius: 30px; background: var(--lime); color: var(--ink); text-decoration: none; box-shadow: 0 12px 30px #20221e33; }
 .pickup-basket-bar span { flex: 1; font-weight: 700; }
 .pickup-basket-bar svg { width: 22px; height: 22px; flex: none; }
 .pickup-confirmation { max-width: 760px; padding-top: 80px; padding-bottom: 100px; }
