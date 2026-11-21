@@ -160,8 +160,7 @@ export async function importCatalog(db, items = products) {
           // Replace only the exact earlier generated copy. Owner edits win.
           const updated = await client.query(`UPDATE catalog_products SET
             name=$2,description=$3,
-            source=coalesce(source,'{}'::jsonb)||jsonb_build_object('name',$2::text,'description',$3::text),
-            updated_at=now()
+            source=coalesce(source,'{}'::jsonb)||jsonb_build_object('name',$2::text,'description',$3::text)
             WHERE id=$1 AND name=$4 AND description=$5 RETURNING id`,
           [product.id, product.name, product.description, legacy.name, legacy.description]);
           if (!updated.rowCount && !updated.rows.length) continue;
