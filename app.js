@@ -25,7 +25,7 @@ import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from 
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
-import { productHref, seoProductForPath } from './seo-products.js?v=cats-atelier-20261119';
+import { productHref, seoProductForPath } from './seo-products.js?v=litter-routes-20261121';
 import { seoPickForPath } from './seo-picks.js';
 import { analyticsItem, announceCommerce } from './analytics-events.js?v=delivery-status-3';
 import { installAnalytics } from './analytics-consent.js?v=internal-browser-20261117';
