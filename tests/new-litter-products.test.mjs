@@ -1,6 +1,5 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { stat } from 'node:fs/promises';
 import { products } from '../data.js';
 import { catalogRows } from '../server/catalog.js';
 import { salePriceDecision } from '../server/sale-price-policy.js';
@@ -44,8 +43,8 @@ test('five photographed litter formats have distinct SKU prices and translated c
         assert.ok(esDetails[detail], detail);
         assert.ok(ukDetails[detail], detail);
       }
-      assert.ok(variant.image.src.includes('/media/litter-2026-11-21/'));
-      assert.ok((await stat(new URL(`../${variant.image.src.slice(1)}`, import.meta.url))).size > 100_000);
+      assert.match(variant.image.src, /^https:\/\/img\.catmandog\.es\/assets\/litter-studio-2026-11-21\/[\w-]+-studio-v1\.webp$/);
+      assert.equal(variant.image.presentation, 'editorial');
     }
   }
   assert.ok(products.some(item => item.id === 'yagu-2170004'));

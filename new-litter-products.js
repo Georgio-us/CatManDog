@@ -1,6 +1,8 @@
-// Temporary photos are the owner's exact packaging photographs from 2026-11-21.
-// Purchase costs and stock are recorded separately from these customer prices.
-const image = (file, alt) => ({ src: `/media/litter-2026-11-21/${file}.webp`, alt });
+// Studio images are stored in R2; purchase costs and stock remain separate from retail prices.
+const image = (file, alt) => ({
+  src: `https://img.catmandog.es/assets/litter-studio-2026-11-21/${file}-studio-v1.webp`,
+  alt, presentation: 'editorial'
+});
 const variant = (id, label, price, photo, description, details, extra = {}) => ({
   id, label, price, priceStatus: 'confirmed',
   saleStatus: 'available', availabilityStatus: 'source_on_demand',
