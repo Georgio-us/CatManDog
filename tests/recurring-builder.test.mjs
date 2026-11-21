@@ -25,10 +25,13 @@ test('account builder selects a priced SKU, date and cadence for the existing ca
     await ui.initialize();
     const html=ui.page('/account/recurring/build',new URLSearchParams());
     assert.match(html,/Preparar una cesta periódica/);
-    assert.match(html,/data-builder-add="litter\|litter-6l"/);
-    assert.match(html,/19.99 €/);
     assert.match(html,/data-builder-use-cart/);
+    assert.doesNotMatch(html,/data-builder-add/);
     assert.doesNotMatch(html,/Цена уточняется/);
+    ui.input({hasAttribute:name=>name==='data-builder-search',value:'Arena',closest:()=>null});
+    const searched=ui.page('/account/recurring/build',new URLSearchParams());
+    assert.match(searched,/data-builder-add="litter\|litter-6l"/);
+    assert.match(searched,/19.99 €/);
     await ui.click({hasAttribute:name=>name==='data-builder-use-cart',dataset:{}});
     await ui.click({hasAttribute:name=>name==='data-builder-add',dataset:{builderAdd:'litter|litter-18l'}});
     ui.change({hasAttribute:name=>name==='data-builder-weeks',value:'6'});
