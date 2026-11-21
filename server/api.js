@@ -715,9 +715,14 @@ async function adminRoute(db, req, res, path) {
       FROM inventory_movements m
       LEFT JOIN catalog_variants v ON v.id=m.variant_id
       LEFT JOIN catalog_products p ON p.id=v.product_id
-      WHERE m.reason IN ('marketing_expense','personal_expense')
+      LEFT JOIN owner_expenses e ON e.stock_movement_id=m.id
+      WHERE m.reason IN ('marketing_expense','personal_expense') AND e.id IS NULL
       ORDER BY m.created_at DESC LIMIT 100`);
-    return json(res, 200, { writeoffs: rows });
+    const { rows: expenses } = await db.query(`SELECT reference,expense_date,item_name,
+      supplier_sku,variant_id,quantity,total_cost_cents,category,recipient,
+      stock_movement_id,related_sale_reference,note
+      FROM owner_expenses ORDER BY expense_date DESC,created_at DESC LIMIT 100`);
+    return json(res, 200, { writeoffs: rows, expenses });
   }
   if (path === '/api/admin/inventory-writeoffs' && req.method === 'POST') {
     const body = await readJson(req);

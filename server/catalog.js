@@ -915,6 +915,69 @@ export async function importCatalog(db, items = products) {
         }
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [ledgerMigration]);
       }
+      const expenseMigration = 'owner_personal_and_welcome_expenses_2026_11_21';
+      const expenseRecorded = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [expenseMigration]);
+      if (!expenseRecorded.rows.length) {
+        const leonardoId = 'leonardo-wet-pure-chicken-85g';
+        const fountainId = 'heybopet-hb-pwfs-s30s-white';
+        const { rows: balances } = await client.query(`SELECT id,stock_quantity,reserved_quantity
+          FROM catalog_variants WHERE id=ANY($1::text[]) ORDER BY id FOR UPDATE`,
+        [[leonardoId, fountainId]]);
+        const stock = new Map(balances.map(row => [row.id, row]));
+        if (Number(stock.get(leonardoId)?.stock_quantity) !== 6 ||
+            Number(stock.get(fountainId)?.stock_quantity) !== 20 ||
+            Number(stock.get(leonardoId)?.reserved_quantity) > 4 ||
+            Number(stock.get(fountainId)?.reserved_quantity) > 19) {
+          console.warn('Owner expense import paused: live stock differs from the owner-confirmed 6 Leonardo and 20 white fountains');
+        } else {
+          const saleReference = 'neighbor-pouches-2026-11-21';
+          const expenses = [
+            ['leonardo-personal', 'Leonardo Finest Selection Pure Chicken 85 г', '931251',
+              leonardoId, 1, 103, 'personal', 'Коты владельца', null],
+            ['leonardo-anton-gift', 'Leonardo Finest Selection Pure Chicken 85 г', '931251',
+              leonardoId, 1, 102, 'welcome_gift', 'Антон', null],
+            ['churu-personal-three', 'Churu лосось и курица, отдельные тюбики', '949577',
+              null, 3, 138, 'personal', 'Коты владельца', null],
+            ['churu-anton-gift', 'Churu лосось и курица, отдельный тюбик', '949577',
+              null, 1, 46, 'welcome_gift', 'Антон', null],
+            ['churu-neighbor-gift', 'Churu лосось и курица, отдельный тюбик', '949577',
+              null, 1, 46, 'welcome_gift', 'Соседка', saleReference],
+            ['fresh-duck-personal', 'Leonardo Fresh Duck & Poultry 4 кг', '931040',
+              null, 1, 3320, 'personal', 'Коты владельца', null],
+            ['fountain-personal', 'HeyboPet белая поилка HB-PWFS-S30S', 'HB-PWFS-S30S',
+              fountainId, 1, 2927, 'personal', 'Коты владельца', null]
+          ];
+          for (const [suffix,itemName,supplierSku,variantId,quantity,totalCost,category,
+            recipient,relatedSale] of expenses) {
+            const reference = `owner-expense-2026-11-21-${suffix}`;
+            let movementId = null;
+            if (variantId) {
+              const { rows: changed } = await client.query(`UPDATE catalog_variants
+                SET stock_quantity=stock_quantity-$2,updated_at=now()
+                WHERE id=$1 RETURNING stock_quantity,reserved_quantity`, [variantId,quantity]);
+              movementId = randomUUID();
+              await client.query(`INSERT INTO inventory_movements
+                (id,variant_id,idempotency_key,reason,delta_on_hand,delta_reserved,
+                 on_hand_after,reserved_after,note)
+                VALUES($1,$2,$3,$4,$5,0,$6,$7,$8)`,
+              [movementId,variantId,reference,
+                category === 'personal' ? 'personal_expense' : 'marketing_expense',
+                -quantity,changed[0].stock_quantity,changed[0].reserved_quantity,
+                `${recipient}; ${itemName}; фактическая стоимость партии ${totalCost} центов`]);
+            }
+            await client.query(`INSERT INTO owner_expenses
+              (id,reference,expense_date,item_name,supplier_sku,variant_id,quantity,
+               total_cost_cents,category,recipient,stock_movement_id,
+               related_sale_reference,note)
+              VALUES($1,$2,'2026-11-21',$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,
+            [randomUUID(),reference,itemName,supplierSku,variantId,quantity,totalCost,
+              category,recipient,movementId,relatedSale,
+              'Подтверждено владельцем 21.11; дата фактического использования не уточнена']);
+          }
+          await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [expenseMigration]);
+        }
+      }
     }
     await client.query('COMMIT');
     return rows.length;

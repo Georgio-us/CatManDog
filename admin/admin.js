@@ -1038,7 +1038,7 @@ async function loadProductOffers(details) {
       : ''}${!catalogPrices.length && !offers.length ? '<p>Для этого варианта предложений пока нет</p>' : ''}`;
   } catch (error) { host.textContent = error.message; }
 }
-function renderDeliveries(deliveries, writeoffs) {
+function renderDeliveries(deliveries, writeoffs, expenses = []) {
   const stockOptions = deliveryVariants.filter(item =>
     (item.stock_quantity ?? 0) - (item.reserved_quantity || 0) > 0);
   $('admin-content').innerHTML = `<section class="admin-card delivery-import"><h2>Приёмка по накладной</h2>
@@ -1062,6 +1062,11 @@ function renderDeliveries(deliveries, writeoffs) {
         <button type="submit">Списать</button></form>
       ${stockOptions.some(item => item.variant_id === 'cmd-source-sku-9c96bc24c8863222') ?
         '<p class="admin-muted">Чтобы отдельно учесть тюбики из смешанного короба Churu, сначала переведите короб в 20 тюбиков</p><button type="button" data-open-mixed-box>Разобрать 1 короб Churu на тюбики</button>' : ''}
+      ${expenses.length ? `<div class="delivery-history"><h3>Личные расходы и подарки</h3>
+        <p class="admin-muted">Стоимость по фактически оплаченной партии. Подарок соседке уже включён в расчёт её продажи и не вычитается из него повторно</p>
+        ${expenses.map(item => `<article><strong>${escape(item.item_name)}</strong>
+          <span>${item.category === 'personal' ? 'Личное потребление' : 'Welcome gift'} · ${item.quantity} шт · ${escape(item.recipient)} · ${euros(item.total_cost_cents)}</span>
+          <small>${item.stock_movement_id ? 'Списано с продаваемого склада' : 'Изначально вне продаваемого склада'} · ${escape(item.supplier_sku || '')}</small></article>`).join('')}</div>` : ''}
       ${writeoffs.length ? `<div class="delivery-history"><h3>Последние списания</h3>${writeoffs.map(item =>
         `<article><strong>${escape(item.name || item.variant_id)} · ${escape(item.label || '')}</strong>
           <span>${item.reason === 'marketing_expense' ? 'Маркетинг и подарки' : 'Личное потребление'} · ${item.quantity} шт · ${escape(new Date(item.created_at).toLocaleString('ru-RU'))}</span>
@@ -1381,7 +1386,7 @@ async function load() {
         api('/api/admin/variants')
       ]);
       deliveryVariants = variantData.variants;
-      renderDeliveries(deliveryData.deliveries, writeoffData.writeoffs);
+      renderDeliveries(deliveryData.deliveries, writeoffData.writeoffs, writeoffData.expenses);
       deliveryDraft = null;
       message('Приёмка поставок');
       return;

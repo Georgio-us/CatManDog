@@ -504,6 +504,25 @@ CREATE TABLE IF NOT EXISTS external_sale_items (
 CREATE INDEX IF NOT EXISTS external_sales_sale_date_idx
   ON external_sales(sale_date DESC,created_at DESC);
 
+CREATE TABLE IF NOT EXISTS owner_expenses (
+  id uuid PRIMARY KEY,
+  reference text NOT NULL UNIQUE,
+  expense_date date NOT NULL,
+  item_name text NOT NULL,
+  supplier_sku text,
+  variant_id text REFERENCES catalog_variants(id),
+  quantity integer NOT NULL CHECK (quantity > 0),
+  total_cost_cents integer NOT NULL CHECK (total_cost_cents >= 0),
+  category text NOT NULL CHECK (category IN ('personal','welcome_gift')),
+  recipient text NOT NULL,
+  stock_movement_id uuid UNIQUE REFERENCES inventory_movements(id),
+  related_sale_reference text REFERENCES external_sales(reference),
+  note text NOT NULL DEFAULT '',
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS owner_expenses_date_idx
+  ON owner_expenses(expense_date DESC,created_at DESC);
+
 -- Verified, fully loaded cost of the currently received batch for a SKU.
 -- Separate from the supplier tariff stored on catalog_variants. This table
 -- never changes stock quantities and can be replaced when a new batch arrives.
