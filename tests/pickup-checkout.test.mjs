@@ -1,28 +1,34 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { priceQuote } from '../server/pricing.js';
-import { pickupBasketPage } from '../pickup-flow.js';
+import { pickupBasketPage, pickupCheckoutPage } from '../pickup-flow.js';
 import { createStripeCheckout } from '../server/stripe.js';
 import { accessoryDetail } from '../accessory-ui.js';
 
 const product = { id:'litter', name:'Arena Uniko', variants:[{ id:'litter-6l', label:'6 l',
   price:10.99, pickupAvailable:true, saleStatus:'available' }] };
 const cart = [{ productId:'litter', variantId:'litter-6l', size:'6 l', qty:2 }];
-const render = language => pickupBasketPage({cart,products:[product],language,
+const props = language => ({cart,products:[product],language,
   money:value => `${value.toFixed(2)} €`,escape:value => String(value),icon:name => `<svg data-icon="${name}"></svg>`,
+  imageBlock:src => `<div class="product-image"><img src="${src || '/test.webp'}"></div>`,
   promo:{percent:10} });
 
-test('express pickup asks only for contact and shows zero pickup fee in three languages', () => {
+test('pickup reuses the cart cards and checkout sections in three languages', () => {
   for (const [language,title,free] of [
-    ['es','Cesta para recogida','Gratis'],['ru','Корзина самовывоза','Бесплатно'],
-    ['uk','Кошик самовивозу','Безкоштовно']]) {
-    const html = render(language);
+    ['es','Tu cesta','Gratis'],['ru','Ваша корзина','Бесплатно'],
+    ['uk','Ваш кошик','Безкоштовно']]) {
+    const html = pickupBasketPage(props(language));
     assert.match(html,new RegExp(title));
     assert.match(html,new RegExp(free));
-    assert.match(html,/name="phone"/);
-    assert.match(html,/name="email"/);
-    assert.doesNotMatch(html,/name="street"|name="postcode"|name="deliveryDate"/);
+    assert.match(html,/class="rc-flow-basket-item"/);
+    assert.match(html,/class="rc-flow-summary"/);
+    assert.match(html,/#\/pickup-checkout/);
     assert.match(html,/19\.78 €/);
+    const checkout = pickupCheckoutPage(props(language));
+    assert.match(checkout,/class="checkout-section"/);
+    assert.match(checkout,/name="phone"/);
+    assert.match(checkout,/name="email"/);
+    assert.doesNotMatch(checkout,/name="street"|name="postcode"|name="deliveryDate"|Stripe/);
   }
 });
 
