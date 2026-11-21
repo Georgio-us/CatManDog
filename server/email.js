@@ -43,10 +43,23 @@ export async function sendOrderConfirmation(order, items, fetcher = fetch) {
     : language === 'uk' ? 'purchase-terms-uk.html' : 'purchase-terms.html';
   const lines = items.map(item => `${item.name} - ${item.variant_label} × ${item.quantity}: ${euros(item.unit_price_cents * item.quantity)}`);
   const address = order.delivery_address || {};
-  const destination = [address.street, address.building, address.apartment,
+  const pickup = order.delivery_preference?.mode === 'pickup';
+  if (pickup) {
+    labels.delivery = language === 'es' ? 'Recogida' : language === 'uk' ? 'Самовивіз' : 'Самовывоз';
+    labels.address = labels.delivery;
+    labels.preference = language === 'es' ? 'Hora de recogida' : language === 'uk' ? 'Час отримання' : 'Время получения';
+    labels.contact = language === 'es' ? 'Te contactaremos para acordar cuándo recoger el pedido'
+      : language === 'uk' ? 'Зв’яжемося з вами, щоб узгодити час отримання замовлення'
+        : 'Свяжемся с вами, чтобы согласовать время получения заказа';
+  }
+  const destination = pickup ? (language === 'es' ? 'València - acordaremos el punto de recogida contigo'
+    : language === 'uk' ? 'Валенсія - місце отримання узгодимо з вами'
+      : 'Валенсия - место получения согласуем с вами') : [address.street, address.building, address.apartment,
     address.postcode, address.city, 'España'].filter(Boolean).join(', ');
   const delivery = order.delivery_preference || {};
-  const preference = delivery.mode === 'slot' || delivery.mode === 'scheduled'
+  const preference = pickup ? (language === 'es' ? 'Acordaremos la hora después del pago'
+    : language === 'uk' ? 'Узгодимо час після оплати' : 'Согласуем время после оплаты')
+    : delivery.mode === 'slot' || delivery.mode === 'scheduled'
     ? [delivery.date, delivery.window || delivery.time].filter(Boolean).join(' · ')
     : delivery.mode === 'preorder' ? (delivery.estimateBusinessDays ? '4-6 business days (estimated)' : 'Delivery date to be confirmed after checking the supplier') : delivery.mode === 'national' ? 'España peninsular' : '';
   const text = `${labels.intro} ${order.number}\n\n${lines.join('\n')}\n${labels.subtotal}: ${euros(order.subtotal_cents)}\n${labels.discount}: -${euros(order.discount_cents)}\n${labels.delivery}: ${euros(order.delivery_cents)}\n${labels.total}: ${euros(order.total_cents)}\n\n${labels.address}: ${destination}\n${labels.preference}: ${preference}\n${labels.contact}.\n\n${labels.seller}: PUZANOV HEORHII (CatManDog)\nsupport@catmandog.es · +34 665 240 277\n${labels.terms}: https://catmandog.es/${termsPage}\n`;

@@ -149,8 +149,9 @@ async function setupLogin() {
 function orderCard(order) {
   const address = order.delivery_address || {};
   const delivery = order.delivery_preference || {};
-  const fulfillment = { received:'Ожидает комплектации', packing:'Собираем',
-    delivering:'Везём', delivered:'Доставлен', cancelled:'Отменён' }[order.status] || order.status;
+  const pickup = delivery.mode === 'pickup';
+  const fulfillment = (pickup ? {received:'Ожидает подготовки к выдаче',packing:'Готов к выдаче',delivered:'Выдан покупателю',cancelled:'Отменён'} : { received:'Ожидает комплектации', packing:'Собираем',
+    delivering:'Везём', delivered:'Доставлен', cancelled:'Отменён' })[order.status] || order.status;
   const payment = { paid:'Оплачен', pending:'Ожидает оплаты', awaiting_payment:'Ожидает оплаты',
     failed:'Оплата не прошла', refunded:'Возвращён' }[order.payment_status] || order.payment_status;
   const cost = order.purchaseTotalCents === null ? 'Не рассчитана полностью' : euros(order.purchaseTotalCents);
@@ -171,14 +172,14 @@ function orderCard(order) {
       <div><span>IVA в заказе</span><strong>${order.taxComplete ? euros(order.taxTotalCents) : 'Не рассчитана полностью'}</strong></div></div>
     <p class="admin-muted">${costBasisNote} Разница по товарам не учитывает расходы на доставку покупателю, эквайринг и упаковку${order.missingCostCount ? ` · Позиций без полной себестоимости: ${order.missingCostCount}` : ''}${order.is_test ? ' · Тестовый заказ не создаёт потребность в закупке' : ''}</p>
     <div class="admin-grid"><div><strong>Покупатель</strong>${escape(order.customer_name)}<br>${escape(order.email)}<br>${escape(order.phone)}</div>
-    <div><strong>Адрес</strong>${escape(address.street)}, ${escape(address.building)}<br>${escape(address.postcode)} ${escape(address.city || '')}<br>${escape(address.apartment || '')}<br>${escape(address.note || '')}</div>
-    <div><strong>Доставка</strong>${delivery.mode === 'national' ? 'Отправка перевозчиком' :
+    <div><strong>${pickup ? 'Получение' : 'Адрес'}</strong>${pickup ? 'Самовывоз - адрес доставки не требуется' : `${escape(address.street)}, ${escape(address.building)}<br>${escape(address.postcode)} ${escape(address.city || '')}<br>${escape(address.apartment || '')}<br>${escape(address.note || '')}`}</div>
+    <div><strong>Доставка</strong>${pickup ? 'Самовывоз - согласуйте время с покупателем' : delivery.mode === 'national' ? 'Отправка перевозчиком' :
       delivery.mode === 'preorder' ? delivery.estimateBusinessDays ? 'Под заказ, ориентир 4-6 рабочих дней' : 'Под заказ, срок после проверки поставщика' :
       delivery.mode === 'soon' ? 'Как можно скорее' :
       `${escape(delivery.date || '')} ${escape(delivery.window || delivery.time || '')}`}<br>
-      <span class="admin-muted">${delivery.mode === 'slot' || delivery.mode === 'scheduled'
+      <span class="admin-muted">${pickup ? 'Оплаченное не считать выданным до фактической передачи' : delivery.mode === 'slot' || delivery.mode === 'scheduled'
         ? delivery.reserved ? 'Интервал подтверждён' : 'Интервал выбран покупателем, точное время нужно подтвердить'
-        : delivery.mode === 'national' ? 'Передайте отправление перевозчику' : 'Срок нужно согласовать с покупателем'} · ${address.verified ? 'Адрес проверен' : 'Сверьте адрес перед отправкой'}</span></div>
+        : delivery.mode === 'national' ? 'Передайте отправление перевозчику' : 'Срок нужно согласовать с покупателем'}${pickup ? '' : ` · ${address.verified ? 'Адрес проверен' : 'Сверьте адрес перед отправкой'}`}</span></div>
     <div><strong>Комплектация</strong>${(order.items || []).some(item => item.sourceMode === 'on_hand')
       ? escape(({ reserved:'Товар зарезервирован',released:'Резерв снят',consumed:'Выдан со склада',legacy:'Старый учёт' })[order.stock_state] || '')
       : (order.items || []).some(item => item.sourceMode === 'open_order') ?
@@ -195,8 +196,8 @@ function orderCard(order) {
       · ${item.sourceMode === 'on_hand' ? 'из нашего склада' : 'оформлен под заказ'}
       · Позиция покупок и оплат ${item.stockPosition > 0 ? '+' : ''}${item.stockPosition} шт${item.orderStockDelta ? `, вклад этого заказа ${item.orderStockDelta} шт` : ''}</span></li>`).join('')}</ul>
     <p class="admin-muted">Доставка для покупателя: ${euros(order.delivery_cents)} · IVA доставки: ${order.deliveryTaxRateBps === null ? 'ставка не указана' : `${order.deliveryTaxRateBps / 100}%`}</p>
-    <form data-order-id="${escape(order.id)}"><label>Статус<select name="status">${['received','packing','delivering','delivered','cancelled'].map(status =>
-      `<option value="${status}" ${status === order.status ? 'selected' : ''}>${({received:'Получен',packing:'Собираем',delivering:'Везём',delivered:'Доставлен',cancelled:'Отменён'})[status]}</option>`).join('')}</select></label>
+    <form data-order-id="${escape(order.id)}"><label>Статус<select name="status">${(pickup ? ['received','packing','delivered','cancelled'] : ['received','packing','delivering','delivered','cancelled']).map(status =>
+      `<option value="${status}" ${status === order.status ? 'selected' : ''}>${(pickup ? {received:'Получен',packing:'Готов к выдаче',delivered:'Выдан',cancelled:'Отменён'} : {received:'Получен',packing:'Собираем',delivering:'Везём',delivered:'Доставлен',cancelled:'Отменён'})[status]}</option>`).join('')}</select></label>
     <label>Заметка<input name="note" maxlength="300" class="wide-input" placeholder="Необязательно"></label><button>Сохранить статус</button></form></article>`;
 }
 function renderOrders(orders) {

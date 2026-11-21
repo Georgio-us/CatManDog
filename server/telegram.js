@@ -17,6 +17,7 @@ const madridTime = value => {
 };
 
 function deliverySummary(delivery = {}) {
+  if (delivery.mode === 'pickup') return 'Самовывоз: согласовать время выдачи с покупателем';
   if (delivery.mode === 'slot')
     return `Желаемая доставка: ${[oneLine(delivery.date, 10), oneLine(delivery.window, 30)].filter(Boolean).join(', ')}`;
   if (delivery.mode === 'scheduled')
@@ -40,7 +41,7 @@ export function orderAlertText(order) {
     `Клиент: ${oneLine(order.customer_name, 100) || 'Не указано'}\n` +
     `Телефон: ${oneLine(order.phone || order.buyer_phone, 40) || 'Не указан'}${order.whatsapp_opt_in ? ' (WhatsApp)' : ''}\n` +
     `Email: ${oneLine(order.email, 160) || 'Не указан'}\n` +
-    `Адрес: ${destination || 'Не указан'}\n` +
+    (order.delivery_preference?.mode === 'pickup' ? '' : `Адрес: ${destination || 'Не указан'}\n`) +
     `${deliverySummary(order.delivery_preference)}\n` +
     `Сумма: ${amount} €\n` +
     'Заказ в админке: https://catmandog.es/admin';

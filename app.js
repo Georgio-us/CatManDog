@@ -17,6 +17,7 @@ import { normalizeRecurringDraft, recurringChoiceFromCart, renderRecurringCart }
 import { availabilityRequestPage } from './availability-request-ui.js?v=yagu-toys-20261116';
 import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=atelier-long-copy-3-20261121';
+import { pickupBasketPage, pickupConfirmationPage, pickupCopy } from './pickup-flow.js?v=express-pickup-20261121';
 
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
 import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=editorial-shortcuts-20261119';
@@ -54,6 +55,20 @@ const variantCount = n => {
 const money = value => Number.isFinite(value) ? new Intl.NumberFormat(intlLocale(),{style:'currency',currency:'EUR',currencyDisplay:'narrowSymbol'}).format(value) : locale() === 'es' ? 'No disponible' : 'Недоступно';
 function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)) ?? fallback;}catch{return fallback;}}
 let cart = normalizeCart(read('catmandog-cart',[]), products);
+let pickupCart = normalizeCart(read('catmandog-pickup-cart',[]), products);
+let pickupContact = read('catmandog-pickup-contact', {});
+let pickupError = '';
+let pickupBusy = false;
+let pickupPayment = null;
+function savePickupCart() { try { localStorage.setItem('catmandog-pickup-cart', JSON.stringify(pickupCart)); } catch {} }
+function pickupItems() { return pickupCart.map(item => ({ productId:item.productId, variantId:item.variantId, qty:item.qty })); }
+function pickupCount() { return pickupCart.reduce((total,item) => total + item.qty, 0); }
+function pickupBar() {
+  const count = pickupCount();
+  if (!count) return '';
+  const copy = pickupCopy[locale()] || pickupCopy.es;
+  return `<a class="pickup-basket-bar" href="#/pickup-cart">${icon('bag')}<span>${escape(copy.cart)} · ${escape(copy.count(count))}</span>${icon('arrow')}</a>`;
+}
 let recurringDraft = (() => { try { return JSON.parse(sessionStorage.getItem('catmandog-recurring-draft') || 'null'); }
   catch { return null; } })();
 function saveRecurringDraft() {
@@ -274,7 +289,7 @@ function card(p,pickupSku=null){
   const pickupLabel={ru:'Самовывоз',es:'Recogida',uk:'Самовивіз'}[locale()]||'Самовывоз';
   const availabilityTag=pickup?`<span class="product-availability-tag product-availability-stock">${escape(pickupLabel)}</span>`:status?`<span class="product-availability-tag product-availability-${status}">${escape(copy[status])}</span>`:'';
   const configure=family||p.gift||Boolean(p.configurationType)||!canBuy(sku);
-  const actionLabel=family||pickup&&configure?'Выбрать вариант':p.gift?'Выбрать набор':!canBuy(sku)?'К товару':'В корзину';
+  const actionLabel=pickup ? (configure ? {es:'Ver opciones',ru:'Выбрать вариант',uk:'Вибрати варіант'}[locale()] : {es:'Añadir para recoger',ru:'Добавить для самовывоза',uk:'Додати для самовивозу'}[locale()]) : family ? 'Выбрать вариант' : p.gift ? 'Выбрать набор' : !canBuy(sku) ? 'К товару' : 'В корзину';
   const buttonLabel=actionLabel==='В корзину'?'Добавить в корзину':actionLabel;
   const caption=pricing.amount===null?'':family&&pricing.min!==pricing.max
     ? ({ Фасовка:'Цена зависит от фасовки', Упаковка:'Цена зависит от упаковки', Размер:'Цена зависит от размера', Цвет:'Цена зависит от цвета' }[p.optionLabel] || 'Цена зависит от варианта')
@@ -284,19 +299,19 @@ function card(p,pickupSku=null){
   const tag=pickup?(sku.tag?.trim()||p.tag?.trim()):p.tag?.trim();
   const action=pickup&&configure
     ? `<a class="product-card-action" href="${escape(href)}" aria-label="${actionLabel}: ${escape(p.name)} ${escape(sku.label||'')}">${actionLabel}${icon('arrow')}</a>`
-    : `<button class="product-card-action" ${pickup?`data-add-variant="${escape(sku.id)}" data-product-id="${escape(p.id)}"`: `${configure?'data-configure':'data-add'}="${escape(p.id)}"`} aria-label="${actionLabel}: ${escape(p.name)}${pickup&&sku.label?` ${escape(sku.label)}`:''}">${buttonLabel}${icon(configure?'arrow':'bag')}</button>`;
+    : `<button class="product-card-action" ${pickup?`data-pickup-add="${escape(sku.id)}" data-product-id="${escape(p.id)}"`: `${configure?'data-configure':'data-add'}="${escape(p.id)}"`} aria-label="${actionLabel}: ${escape(p.name)}${pickup&&sku.label?` ${escape(sku.label)}`:''}">${buttonLabel}${icon(configure?'arrow':'bag')}</button>`;
   return `<article class="product-card ${p.isReal||pickup?'real-product-card':''}"><a class="product-card-open" href="${escape(href)}" data-product-id="${escape(p.id)}" aria-label="Открыть товар: ${escape(p.name)}${pickup&&sku.label?` ${escape(sku.label)}`:''}"></a><div class="product-media">${imageBlock(pickup?(sku.image||p.image):p.image)}${tag?`<span class="product-tag">${escape(tag)}</span>`:''}${availabilityTag}<button class="icon-button favorite ${favorites.includes(p.id)?'selected':''}" data-favorite="${escape(p.id)}" aria-label="${favorites.includes(p.id)?'Убрать из избранного':'В избранное'}: ${escape(p.name)}" aria-pressed="${favorites.includes(p.id)}">${icon('heart')}</button></div><div class="product-info"><small>${escape(p.brand||'CatManDog')}${pickup&&sku.label?` · ${escape(sku.label)}`:p.weight?` · ${escape(p.weight)}`:''}${family?` · ${variantCount(p.variants.length)}`:''}</small><div class="product-title"><h3>${escape(p.name)} <span class="product-open-cue">${icon('arrow')}</span></h3></div><span class="retail-label" ${caption?'':'aria-hidden="true"'}>${caption}</span><div class="product-price"><div class="product-price-values"><span>${displayPrice}</span>${!pickup&&!pricing.demo&&!family&&p.old?`<span class="old-price">${money(p.old)}</span>`:''}</div>${action}</div></div></article>`;
 }
 function pickupPage(){
   const copy={
-    es:{title:'Disponible para recogida',intro:'Productos que tenemos físicamente en València. Consulta el formato y escríbenos para acordar la recogida',all:'Todos',cat:'Para gatos',dog:'Para perros',categories:'Categorías',allProducts:'Todos los productos',empty:'Todavía no hay productos confirmados para recogida',unavailable:'No podemos comprobar la disponibilidad ahora',contact:'Consultar la recogida',view:'Ver producto',price:'Precio con IVA',unknown:'Precio por confirmar'},
-    ru:{title:'Доступно к самовывозу',intro:'Товары, которые физически находятся у нас в Валенсии. Выберите вариант и напишите нам, чтобы согласовать самовывоз',all:'Все',cat:'Для кошек',dog:'Для собак',categories:'Категории',allProducts:'Все товары',empty:'Пока нет подтверждённых товаров для самовывоза',unavailable:'Сейчас не удаётся проверить наличие',contact:'Согласовать самовывоз',view:'Смотреть товар',price:'Цена с IVA',unknown:'Цена уточняется'},
-    uk:{title:'Доступно для самовивозу',intro:'Товари, які фізично знаходяться у нас у Валенсії. Виберіть варіант і напишіть нам, щоб узгодити самовивіз',all:'Усі',cat:'Для котів',dog:'Для собак',categories:'Категорії',allProducts:'Усі товари',empty:'Поки немає підтверджених товарів для самовивозу',unavailable:'Зараз не вдається перевірити наявність',contact:'Узгодити самовивіз',view:'Переглянути товар',price:'Ціна з IVA',unknown:'Ціна уточнюється'}
+    es:{title:'Disponible para recogida',intro:'Productos que tenemos físicamente en València. Añádelos a la cesta y paga sin indicar dirección. Te contactaremos para acordar la recogida',all:'Todos',cat:'Para gatos',dog:'Para perros',categories:'Categorías',allProducts:'Todos los productos',empty:'Todavía no hay productos confirmados para recogida',unavailable:'No podemos comprobar la disponibilidad ahora',contact:'Consultar la recogida',view:'Ver producto',price:'Precio con IVA',unknown:'Precio por confirmar'},
+    ru:{title:'Доступно к самовывозу',intro:'Товары, которые физически находятся у нас в Валенсии. Добавьте их в корзину и оплатите без адреса. После оплаты согласуем время получения',all:'Все',cat:'Для кошек',dog:'Для собак',categories:'Категории',allProducts:'Все товары',empty:'Пока нет подтверждённых товаров для самовывоза',unavailable:'Сейчас не удаётся проверить наличие',contact:'Согласовать самовывоз',view:'Смотреть товар',price:'Цена с IVA',unknown:'Цена уточняется'},
+    uk:{title:'Доступно для самовивозу',intro:'Товари, які фізично знаходяться у нас у Валенсії. Додайте їх у кошик і оплатіть без адреси. Після оплати узгодимо час отримання',all:'Усі',cat:'Для котів',dog:'Для собак',categories:'Категорії',allProducts:'Усі товари',empty:'Поки немає підтверджених товарів для самовивозу',unavailable:'Зараз не вдається перевірити наявність',contact:'Узгодити самовивіз',view:'Переглянути товар',price:'Ціна з IVA',unknown:'Ціна уточнюється'}
   }[locale()]||{};
   const params=route().params;
   const selectedPet=['cat','dog'].includes(params.get('pet'))?params.get('pet'):'';
   const available=catalogProducts.flatMap(product=>snapshots(product)
-    .filter(sku=>sku.pickupAvailable===true && sku.saleStatus!=='unavailable' && !sku.storefrontRetired &&
+    .filter(sku=>sku.pickupAvailable===true && sku.saleStatus!=='unavailable' && !sku.storefrontRetired && canBuy(sku) &&
       (!selectedPet || product.pet===selectedPet))
     .map(sku=>({product,sku})));
   const groups=homeGroupsForPet(selectedPet||'cat',[...new Set(available.map(item=>item.product))]);
@@ -309,7 +324,7 @@ function pickupPage(){
   const pickupHref=group=>{const query=new URLSearchParams();if(selectedPet)query.set('pet',selectedPet);if(group)query.set('group',group);return `/recogida${query.size?`?${query}`:''}`;};
   const categoryLinks=[{id:'',label:copy.allProducts},...groups.map(group=>({id:group.id,label:translate(group.label)}))].map(group=>`<a class="pickup-category ${selectedGroup===group.id?'active':''}" href="${escape(pickupHref(group.id))}" ${selectedGroup===group.id?'aria-current="page"':''}>${escape(group.label)}<span>${group.id?available.filter(({product})=>homeGroupForProduct(product)===group.id).length:available.length}</span></a>`).join('');
   const cards=list.map(({product,sku})=>card(product,sku)).join('');
-  return `<div class="page pickup-page">${crumbs(copy.title)}<header class="pickup-header"><h1 class="page-title">${escape(copy.title)}</h1><p class="lead">${escape(copy.intro)}</p></header><div class="pet-tabs pickup-pet-tabs" role="group" aria-label="${escape(copy.title)}">${[['',copy.all],['cat',copy.cat],['dog',copy.dog]].map(([pet,label])=>`<a class="pill ${selectedPet===pet?'active':''}" href="/recogida${pet?`?pet=${pet}`:''}" ${selectedPet===pet?'aria-current="page"':''}>${escape(label)}</a>`).join('')}</div><div class="pickup-layout"><aside class="pickup-sidebar"><h2>${escape(copy.categories)}</h2><nav class="pickup-categories" aria-label="${escape(copy.categories)}">${categoryLinks}</nav></aside><div class="pickup-results"><p class="results-count" role="status">${catalogUnavailable?escape(copy.unavailable):itemCount(list.length)}</p>${list.length?`<div class="product-grid">${cards}</div>`:empty(catalogUnavailable?copy.unavailable:copy.empty,'',copy.contact,'/#/support')}</div></div></div>`;
+  return `<div class="page pickup-page">${crumbs(copy.title)}<header class="pickup-header"><h1 class="page-title">${escape(copy.title)}</h1><p class="lead">${escape(copy.intro)}</p></header><div class="pet-tabs pickup-pet-tabs" role="group" aria-label="${escape(copy.title)}">${[['',copy.all],['cat',copy.cat],['dog',copy.dog]].map(([pet,label])=>`<a class="pill ${selectedPet===pet?'active':''}" href="/recogida${pet?`?pet=${pet}`:''}" ${selectedPet===pet?'aria-current="page"':''}>${escape(label)}</a>`).join('')}</div><div class="pickup-layout"><aside class="pickup-sidebar"><h2>${escape(copy.categories)}</h2><nav class="pickup-categories" aria-label="${escape(copy.categories)}">${categoryLinks}</nav></aside><div class="pickup-results"><p class="results-count" role="status">${catalogUnavailable?escape(copy.unavailable):itemCount(list.length)}</p>${list.length?`<div class="product-grid">${cards}</div>`:empty(catalogUnavailable?copy.unavailable:copy.empty,'',copy.contact,'/#/support')}</div></div>${pickupBar()}</div>`;
 }
 function goodTogether(product){
   const suggestions=recommendForProduct(product,catalogProducts,{cart});
@@ -501,7 +516,7 @@ function restoreProductReturnScroll(){
   const y = takeProductReturnScroll(location.pathname + location.search + location.hash);
   if (y !== null) requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, y)));
 }
-function render(){if(catalogLoading){app.innerHTML=`<div class="page" role="status">${{ru:'Загружаем каталог',uk:'Завантажуємо каталог',es:'Cargando catálogo'}[locale()] || 'Загружаем каталог'}</div>`;return;}const {path}=route();let html;if(path==='/pet'||path==='/join'||path.startsWith('/account')||path==='/coupon')html=account.page(path,route().params);else if(path.startsWith('/useful'))html=useful.page(path,route().params);else if(path==='/')html=home();else if(path==='/catalog')html=catalog();else if(path==='/pickup')html=pickupPage();else if(path==='/gifts')html=giftLanding(giftHelpers);else if(path==='/active-home')html=activeHomeLanding(giftHelpers);else if(path.startsWith('/picks/'))html=homeShortcutLanding(catalogProducts,path.split('/')[2],{...giftHelpers,language:locale()})||notFound();else if(path.startsWith('/product/'))html=detail(path.split('/')[2]);else if(path==='/availability-request')html=availabilityPage();else if(path==='/cart')html=cartPage();else if(path==='/checkout')html=checkout.page();else if(path==='/checkout/preview')html=checkout.previewPage();else if(path==='/checkout/confirmation')html=checkout.resultPage('accepted',route().params);else if(path==='/checkout/payment-error')html=checkout.resultPage('failed',route().params);else if(path==='/checkout/status')html=checkout.resultPage('status',route().params);else if(path==='/support')html=checkout.servicePage('support',route().params);else if(path==='/returns')html=checkout.servicePage('return',route().params);else if(path==='/favorites')html=favoritePage();else if(path==='/journal')html=journal();else if(path.startsWith('/journal/'))html=article(path.split('/')[2]);else if(path==='/about')html=about();else if(path.startsWith('/info/'))html=info(path.split('/')[2]);else html=notFound();app.innerHTML=html;if(path==='/availability-request')app.querySelector('.availability-request-dialog')?.focus({preventScroll:true});document.title=`${(path.startsWith('/account') && account.store.activePet() ? 'Кабинет ' + account.store.activePet().name : null) || ({'/useful':'Полезное','/useful/clinics':'Ветклиники Валенсии','/useful/travel':'В дорогу вместе','/account':'Кабинет с хвостиком','/coupon':'Купон на 10%','/join':'Знакомство с питомцем','/pet':'Профиль питомца','/':'Хорошая жизнь с хвостиком','/catalog':'Каталог','/pickup':'Доступно к самовывозу','/gifts':'Подарочные наборы','/active-home':'Дом для активного кота','/picks/cat':'Подборка для кошек','/picks/dog':'Подборка для собак','/cart':'Корзина','/checkout':'Оформление заказа','/checkout/preview':'Проверка заказа','/checkout/confirmation':'Подтверждение заказа','/checkout/payment-error':'Ошибка оплаты','/checkout/status':'Статус заказа','/support':'Помощь с заказом','/returns':'Возврат','/availability-request':'Сообщить о поступлении','/journal':'Журнал','/favorites':'Избранное','/about':'О нас'})[path]||'Для хорошей жизни'} · CatManDog`;if(path.startsWith('/journal/'))document.title=`${displayArticles.find(item=>item.id===path.split('/')[2])?.title||translate('Журнал')} · CatManDog`;if(path.startsWith('/product/')){const id=path.split('/')[2];const product=products.find(item=>item.id===id||item.variants?.some(variant=>variant.id===id));if(product)document.title=`${product.name} · CatManDog`;}document.title = locale()==='ru' ? document.title : translate(document.title.split(' · CatManDog')[0])+' · CatManDog';if(path==='/pickup')document.title=`${{es:'Disponible para recogida',ru:'Доступно к самовывозу',uk:'Доступно для самовивозу'}[locale()]||'Доступно к самовывозу'} · CatManDog`;const categoryPage=!location.hash?seoCategoryForPath(location.pathname):null;if(categoryPage)document.title=`${categoryPage.title} · CatManDog`;const productPage=!location.hash?seoProductForPath(location.pathname):null;if(productPage?.title && locale()==="es")document.title=`${productPage.title} · CatManDog`;const pickPage=!location.hash?seoPickForPath(location.pathname):null;if(pickPage)document.title=`${pickPage.title} · CatManDog`;document.querySelector('nav').classList.remove('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded','false');const currentNavHrefs={'/catalog':['/catalogo','/#/catalog','#/catalog'],'/pickup':['/recogida','#/pickup'],'/picks/cat':['/selecciones/gatos','#/picks/cat'],'/picks/dog':['/selecciones/perros','#/picks/dog'],'/journal':['/revista','#/journal']}[path]||[location.hash];document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',currentNavHrefs.includes(a.getAttribute('href'))?'page':'false'));updateHeader();account.afterRender();announceView();analytics.pageView();restoreProductReturnScroll();}
+function render(){if(catalogLoading){app.innerHTML=`<div class="page" role="status">${{ru:'Загружаем каталог',uk:'Завантажуємо каталог',es:'Cargando catálogo'}[locale()] || 'Загружаем каталог'}</div>`;return;}const {path}=route();let html;if(path==='/pet'||path==='/join'||path.startsWith('/account')||path==='/coupon')html=account.page(path,route().params);else if(path.startsWith('/useful'))html=useful.page(path,route().params);else if(path==='/')html=home();else if(path==='/catalog')html=catalog();else if(path==='/pickup')html=pickupPage();else if(path==='/pickup-cart')html=pickupBasketPage({cart:pickupCart,products,language:locale(),money,escape,icon,promo:checkoutPromo(),contact:pickupContact,error:pickupError,busy:pickupBusy,cancelled:route().params.has('payment')});else if(path==='/pickup-confirmation')html=pickupConfirmationPage({language:locale(),state:pickupPayment,icon});else if(path==='/gifts')html=giftLanding(giftHelpers);else if(path==='/active-home')html=activeHomeLanding(giftHelpers);else if(path.startsWith('/picks/'))html=homeShortcutLanding(catalogProducts,path.split('/')[2],{...giftHelpers,language:locale()})||notFound();else if(path.startsWith('/product/'))html=detail(path.split('/')[2]);else if(path==='/availability-request')html=availabilityPage();else if(path==='/cart')html=cartPage();else if(path==='/checkout')html=checkout.page();else if(path==='/checkout/preview')html=checkout.previewPage();else if(path==='/checkout/confirmation')html=checkout.resultPage('accepted',route().params);else if(path==='/checkout/payment-error')html=checkout.resultPage('failed',route().params);else if(path==='/checkout/status')html=checkout.resultPage('status',route().params);else if(path==='/support')html=checkout.servicePage('support',route().params);else if(path==='/returns')html=checkout.servicePage('return',route().params);else if(path==='/favorites')html=favoritePage();else if(path==='/journal')html=journal();else if(path.startsWith('/journal/'))html=article(path.split('/')[2]);else if(path==='/about')html=about();else if(path.startsWith('/info/'))html=info(path.split('/')[2]);else html=notFound();app.innerHTML=html;if(path==='/availability-request')app.querySelector('.availability-request-dialog')?.focus({preventScroll:true});document.title=`${(path.startsWith('/account') && account.store.activePet() ? 'Кабинет ' + account.store.activePet().name : null) || ({'/useful':'Полезное','/useful/clinics':'Ветклиники Валенсии','/useful/travel':'В дорогу вместе','/account':'Кабинет с хвостиком','/coupon':'Купон на 10%','/join':'Знакомство с питомцем','/pet':'Профиль питомца','/':'Хорошая жизнь с хвостиком','/catalog':'Каталог','/pickup':'Доступно к самовывозу','/pickup-cart':'Корзина самовывоза','/pickup-confirmation':'Заказ самовывоза','/gifts':'Подарочные наборы','/active-home':'Дом для активного кота','/picks/cat':'Подборка для кошек','/picks/dog':'Подборка для собак','/cart':'Корзина','/checkout':'Оформление заказа','/checkout/preview':'Проверка заказа','/checkout/confirmation':'Подтверждение заказа','/checkout/payment-error':'Ошибка оплаты','/checkout/status':'Статус заказа','/support':'Помощь с заказом','/returns':'Возврат','/availability-request':'Сообщить о поступлении','/journal':'Журнал','/favorites':'Избранное','/about':'О нас'})[path]||'Для хорошей жизни'} · CatManDog`;if(path.startsWith('/journal/'))document.title=`${displayArticles.find(item=>item.id===path.split('/')[2])?.title||translate('Журнал')} · CatManDog`;if(path.startsWith('/product/')){const id=path.split('/')[2];const product=products.find(item=>item.id===id||item.variants?.some(variant=>variant.id===id));if(product)document.title=`${product.name} · CatManDog`;}document.title = locale()==='ru' ? document.title : translate(document.title.split(' · CatManDog')[0])+' · CatManDog';if(path==='/pickup')document.title=`${{es:'Disponible para recogida',ru:'Доступно к самовывозу',uk:'Доступно для самовивозу'}[locale()]||'Доступно к самовывозу'} · CatManDog`;const categoryPage=!location.hash?seoCategoryForPath(location.pathname):null;if(categoryPage)document.title=`${categoryPage.title} · CatManDog`;const productPage=!location.hash?seoProductForPath(location.pathname):null;if(productPage?.title && locale()==="es")document.title=`${productPage.title} · CatManDog`;const pickPage=!location.hash?seoPickForPath(location.pathname):null;if(pickPage)document.title=`${pickPage.title} · CatManDog`;document.querySelector('nav').classList.remove('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded','false');const currentNavHrefs={'/catalog':['/catalogo','/#/catalog','#/catalog'],'/pickup':['/recogida','#/pickup'],'/picks/cat':['/selecciones/gatos','#/picks/cat'],'/picks/dog':['/selecciones/perros','#/picks/dog'],'/journal':['/revista','#/journal']}[path]||[location.hash];document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',currentNavHrefs.includes(a.getAttribute('href'))?'page':'false'));updateHeader();account.afterRender();announceView();analytics.pageView();restoreProductReturnScroll();}
 function setParam(key,value){const {params}=route();if(key==='category'||key==='pet'){['foodType','brand','group','feature','maxPrice'].forEach(name=>params.delete(name));}value?params.set(key,value):params.delete(key);location.hash=`/catalog${params.size?'?'+params.toString():''}`;}
 function add(id,size,qty=1,config,variantId){
   const p=products.find(p=>p.id===id);if(!p)return;
@@ -554,7 +569,7 @@ document.addEventListener('keydown',event=>{const input=event.target.closest('[d
 document.addEventListener('click',event=>{const choice=event.target.closest('.search-suggestion');if(choice){closeSearchSuggestions(choice.closest('[data-search-form]'));document.querySelector('#search-form').hidden=true;}else if(!event.target.closest('[data-search-form], #search-toggle'))document.querySelectorAll('[data-search-form]').forEach(closeSearchSuggestions);});
 document.querySelector('#mobile-toggle').addEventListener('click',()=>{const open=document.querySelector('nav').classList.toggle('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded',String(open));});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){if(route().path==='/availability-request'){const variantId=route().params.get('variant');const product=products.find(item=>snapshots(item).some(variant=>variant.id===variantId));if(product){location.assign(`${productHref(product.id)}?variant=${encodeURIComponent(variantId)}`);return;}}account.escapeChoices();document.querySelector('#search-form').hidden=true;document.querySelectorAll('[data-search-form]').forEach(closeSearchSuggestions);document.querySelector('nav').classList.remove('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded','false');}});
-window.addEventListener('hashchange',()=>{if((seoProductForPath(location.pathname)||seoPickForPath(location.pathname))&&location.hash){location.replace('/'+location.hash);return;}document.querySelector('#search-form').hidden=true;render();account.handleLink();window.scrollTo(0,0);});
+window.addEventListener('hashchange',()=>{if(route().path==='/pickup-confirmation'){pickupPayment=null;void checkPickupPayment();}if((seoProductForPath(location.pathname)||seoPickForPath(location.pathname))&&location.hash){location.replace('/'+location.hash);return;}document.querySelector('#search-form').hidden=true;render();account.handleLink();window.scrollTo(0,0);});
 const localizedEntry = !location.hash && localizedSeoRoute(location.pathname, location.search);
 if (localizedEntry) location.replace(localizedEntry);
 else render();
@@ -575,8 +590,10 @@ if (['http:','https:'].includes(location.protocol)) {
       // The boot catalog can omit a size that exists in the live catalog.
       // Re-read the saved SKU before normalizing, so its variant ID survives the reload.
       cart = normalizeCart(read('catmandog-cart',cart), products);
+      pickupCart = normalizeCart(read('catmandog-pickup-cart',pickupCart), products);
       catalogLoading = false;
       render();
+      if (route().path === '/pickup-confirmation') void checkPickupPayment();
     }).catch(() => {
       catalogUnavailable = true;
       applyServerCatalog(products, catalogProducts, []);
@@ -593,6 +610,119 @@ app.addEventListener('submit',event=>{if(event.target.matches('[data-account-for
 
 app.addEventListener('submit', event => { if(event.target.matches('[data-use-form]')) { event.preventDefault(); useful.submit(event.target); } });
 app.addEventListener('change', event => useful.change(event.target));
+app.addEventListener('click', event => {
+  const button = event.target.closest('button');
+  if (!button) return;
+  if (button.hasAttribute('data-pickup-add')) {
+    const product = products.find(item => item.id === button.dataset.productId);
+    const sku = product && resolveVariant(product, button.dataset.pickupAdd);
+    if (!sku?.pickupAvailable || !canBuy(sku)) return;
+    const next = { id:product.id, productId:product.id, variantId:hasVariants(product) ? sku.id : null,
+      variantLabel:sku.label || '', size:sku.label || '', qty:1 };
+    const line = pickupCart.find(item => sameCartSku(item,next));
+    if (line) line.qty = Math.min(99,line.qty+1); else pickupCart.push(next);
+    pickupError = '';
+    savePickupCart();
+    render();
+    document.querySelector('.pickup-basket-bar')?.focus();
+    return;
+  }
+  if (button.hasAttribute('data-pickup-qty') || button.hasAttribute('data-pickup-remove')) {
+    const index = Number(button.dataset.pickupQty ?? button.dataset.pickupRemove);
+    if (!Number.isInteger(index) || !pickupCart[index]) return;
+    if (button.hasAttribute('data-pickup-remove')) pickupCart.splice(index,1);
+    else {
+      pickupCart[index].qty += Number(button.dataset.delta);
+      if (pickupCart[index].qty < 1) pickupCart.splice(index,1);
+      else pickupCart[index].qty = Math.min(99,pickupCart[index].qty);
+    }
+    pickupError = '';
+    savePickupCart();
+    render();
+  }
+  if (button.hasAttribute('data-pickup-refresh')) void checkPickupPayment();
+});
+async function checkPickupPayment() {
+  const sessionId = route().params.get('session_id');
+  if (!/^cs_(test|live)_[A-Za-z0-9]+$/.test(sessionId || '')) return;
+  try {
+    const response = await fetch(`/api/checkout/status?session_id=${encodeURIComponent(sessionId)}`, {credentials:'same-origin'});
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error);
+    pickupPayment = result;
+    if (result.paymentStatus === 'paid') {
+      const marker = `catmandog-pickup-paid:${sessionId}`;
+      if (!sessionStorage.getItem(marker)) {
+        for (const paid of result.items || []) {
+          const line = pickupCart.find(item => item.productId === paid.productId && item.variantId === paid.variantId);
+          if (line) line.qty -= paid.qty;
+        }
+        pickupCart = pickupCart.filter(item => item.qty > 0);
+        savePickupCart();
+        if (result.promoApplied) account.couponPaid();
+        sessionStorage.setItem(marker,'1');
+      }
+      void account.refreshOrders();
+    }
+    if (route().path === '/pickup-confirmation') render();
+  } catch {
+    pickupPayment = null;
+    if (route().path === '/pickup-confirmation') render();
+  }
+}
+app.addEventListener('submit', async event => {
+  const form = event.target.closest('#pickup-checkout-form');
+  if (!form) return;
+  event.preventDefault();
+  if (pickupBusy || !form.reportValidity()) return;
+  const values = Object.fromEntries(new FormData(form));
+  pickupContact = {name:String(values.name || '').trim(),phone:String(values.phone || '').trim(),
+    email:String(values.email || '').trim()};
+  try { localStorage.setItem('catmandog-pickup-contact',JSON.stringify(pickupContact)); } catch {}
+  pickupBusy = true;
+  pickupError = '';
+  render();
+  const copy = pickupCopy[locale()] || pickupCopy.es;
+  try {
+    const items = pickupItems();
+    if (!items.length || pickupCart.some(item => !cartSku(item,products)?.pickupAvailable))
+      throw new Error(copy.unavailable);
+    const promo = checkoutPromo();
+    const request = async path => {
+      const response = await fetch(path,{method:'POST',credentials:'same-origin',
+        headers:{'Content-Type':'application/json'},body:JSON.stringify({items,
+          delivery:{mode:'pickup'},promoCode:promo?.code || '',
+          email:pickupContact.email,phone:pickupContact.phone})});
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || copy.error);
+      return result;
+    };
+    const quote = await request('/api/checkout/quote');
+    if (!quote.orderable || quote.items.some(item => item.availability !== 'on_hand'))
+      throw new Error(copy.unavailable);
+    const shownCents = Math.round(pickupCart.reduce((total,item) =>
+      total + (storefrontPrice(cartSku(item,products)) || 0) * item.qty * 100,0));
+    const discountedCents = shownCents - Math.round(shownCents * (Number(promo?.percent) || 0) / 100);
+    if (quote.totalCents !== discountedCents || quote.deliveryCents !== 0)
+      throw new Error(copy.changed);
+    const signature = JSON.stringify([items,pickupContact,promo?.code || '']);
+    let attempt;
+    try { attempt = JSON.parse(sessionStorage.getItem('catmandog-pickup-attempt') || 'null'); } catch {}
+    const idempotencyKey = attempt?.signature === signature ? attempt.key : crypto.randomUUID();
+    sessionStorage.setItem('catmandog-pickup-attempt',JSON.stringify({signature,key:idempotencyKey}));
+    const response = await fetch('/api/checkout/start',{method:'POST',credentials:'same-origin',
+      headers:{'Content-Type':'application/json'},body:JSON.stringify({items,delivery:{mode:'pickup'},
+        promoCode:promo?.code || '',idempotencyKey,locale:locale(),...pickupContact})});
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || !/^https:\/\/checkout\.stripe\.com\//.test(result.url || ''))
+      throw new Error(result.error || copy.error);
+    location.assign(result.url);
+  } catch (error) {
+    pickupError = error.message || copy.error;
+    pickupBusy = false;
+    render();
+  }
+});
 app.addEventListener('submit', event => {
   if (!event.target.matches('[data-checkout-form], [data-service-form]')) return;
   event.preventDefault();

@@ -207,17 +207,18 @@ async function createOrder(db, payload, customer, manual = null) {
     bad('Приём заказов ещё не включён', 503);
   const idempotency = cap(payload.idempotencyKey, 100);
   if (!/^[a-zA-Z0-9_-]{20,100}$/.test(idempotency)) bad('Повторите оформление заказа');
-  const name = cap(payload.name, 100);
+  const pickup = payload.delivery?.mode === 'pickup' && !manual;
+  const name = cap(payload.name, 100) || (pickup ? 'Клиент самовывоза' : '');
   const email = normalizedEmail(payload.email);
   const phone = cap(payload.phone, 24);
   if (!name || !validEmail(email) || phone.length < 6) bad('Укажите имя, email и телефон');
   const address = payload.address;
-  const addressError = validateAddress(address, payload.delivery?.mode);
+  const addressError = pickup ? null : validateAddress(address, payload.delivery?.mode);
   if (addressError) bad(addressError);
   const delivery = payload.delivery;
-  const deliveryError = validateDelivery(delivery, new Date(), Boolean(manual));
+  const deliveryError = pickup ? null : validateDelivery(delivery, new Date(), Boolean(manual));
   if (deliveryError) bad(deliveryError);
-  const verifiedAddress = await verifyDeliveryAddress(address,
+  const verifiedAddress = pickup ? null : await verifyDeliveryAddress(address,
     delivery.mode === 'national' ? 'national' : 'local');
   const lines = payload.items;
   if (!Array.isArray(lines) || !lines.length || lines.length > 50) bad('Проверьте корзину');
@@ -261,9 +262,11 @@ async function createOrder(db, payload, customer, manual = null) {
         freeDelivery: promo?.free_delivery === true }) : null;
     if (shipping && !shipping.available) bad('Для этой корзины доставка по Испании пока недоступна');
     const quote = priceQuote(lines, variants.rows, promo,
-      manual?.deliveryCents ?? shipping?.deliveryCents ?? null,
-      manual || delivery.mode === 'national' ? null : address);
+      pickup ? 0 : manual?.deliveryCents ?? shipping?.deliveryCents ?? null,
+      pickup || manual || delivery.mode === 'national' ? null : address);
     if (!quote.orderable) bad('Один из товаров пока нельзя заказать');
+    if (pickup && quote.items.some(item => item.sourceMode !== 'on_hand'))
+      bad('Для самовывоза доступны только товары с подтверждённым свободным остатком', 409);
     if (payload.recurring && (!customer?.emailVerified || customer.email.toLowerCase() !== email.toLowerCase()))
       bad('Войдите в кабинет с email этого заказа, чтобы сохранить регулярную покупку', 403);
     const recurring = payload.recurring ? recurringChoice(payload.recurring,
@@ -274,7 +277,7 @@ async function createOrder(db, payload, customer, manual = null) {
     if (manual?.expectedProductsCents != null &&
         quote.subtotalCents - quote.discountCents !== manual.expectedProductsCents)
       bad('Скидка изменилась. Проверьте заявку и согласуйте сумму заново', 409);
-    if (!manual && delivery.mode !== 'national' && variants.rows.every(row => row.sale_status)) {
+    if (!pickup && !manual && delivery.mode !== 'national' && variants.rows.every(row => row.sale_status)) {
       if (delivery.mode !== 'slot' && !(delivery.mode === 'preorder' &&
         variants.rows.some(row => row.product_id.startsWith('cats-atelier-') ||
           (row.product_id.startsWith('heybopet-') && (row.availability !== 'on_hand' || row.stock_quantity <= 0)))))
@@ -287,11 +290,12 @@ async function createOrder(db, payload, customer, manual = null) {
     const linkedCartId = cartSession.rows[0]?.id || null;
     const numberResult = await client.query("SELECT 'CMD-' || nextval('order_number_seq') AS number");
     const number = numberResult.rows[0].number;
-    const cleanAddress = { city: cap(verifiedAddress.city, 100),
+    const cleanAddress = pickup ? {} : { city: cap(verifiedAddress.city, 100),
       country: 'ES', postcode: cap(address.postcode, 5),
       street: cap(address.street, 120), building: cap(address.building, 16),
       apartment: cap(address.apartment, 80), note: cap(address.note, 300), verified: true };
-    const cleanDelivery = delivery.mode === 'national'
+    const cleanDelivery = pickup ? { mode:'pickup', reserved:false }
+      : delivery.mode === 'national'
       ? { mode:'national', carrier: shipping.carrier || null,
         optionCode: shipping.optionCode || null,
         weightKg: shipping.weightKg ?? null, quoteWeightKg: shipping.quoteWeightKg ?? null,
@@ -306,7 +310,7 @@ async function createOrder(db, payload, customer, manual = null) {
           ? { estimateBusinessDays:[4,6] } : {}), reserved:false }
       : { mode: 'scheduled', date: delivery.date, time: delivery.time, reserved: Boolean(manual) };
     const billingProfile = await client.query('SELECT delivery_tax_rate_bps FROM billing_profile WHERE id=true');
-    const deliveryTaxRate = billingProfile.rows[0]?.delivery_tax_rate_bps ?? null;
+    const deliveryTaxRate = pickup ? null : billingProfile.rows[0]?.delivery_tax_rate_bps ?? null;
     const inserted = await client.query(`INSERT INTO orders(id,number,customer_id,customer_name,email,buyer_phone,phone,whatsapp_opt_in,
       delivery_address,delivery_preference,subtotal_cents,discount_cents,delivery_cents,delivery_tax_rate_bps,total_cents,
       promo_code,idempotency_key,stock_state,locale,cart_session_id,is_test,recurring_intent) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,'reserved',$18,$19,$20,$21)
@@ -2172,10 +2176,12 @@ async function adminRoute(db, req, res, path) {
     const client = await db.connect();
     try {
       await client.query('BEGIN');
-      const found = await client.query(`SELECT id,status,stock_state,payment_status
+      const found = await client.query(`SELECT id,status,stock_state,payment_status,delivery_preference
         FROM orders WHERE id=$1 FOR UPDATE`, [status[1]]);
       const order = found.rows[0];
       if (!order) bad('Заказ не найден', 404);
+      if (order.delivery_preference?.mode === 'pickup' && body.status === 'delivering')
+        bad('Заказ самовывоза нельзя передать в доставку', 409);
       if (order.status === body.status) { await client.query('COMMIT'); return json(res, 200, { ok: true }); }
       if (['cancelled','delivered'].includes(order.status)) bad('Закрытый заказ нельзя вернуть в работу', 409);
       if (body.status === 'cancelled' && order.payment_status === 'paid')
@@ -2439,9 +2445,11 @@ export async function handleApi(db, req, res, pathname) {
           productsCents: productsQuote.subtotalCents - productsQuote.discountCents,
           freeDelivery: promo?.free_delivery === true }) : null;
       const quote = priceQuote(body.items, variants, promo,
-        shipping?.available ? shipping.deliveryCents : null,
-        body.delivery?.mode === 'national' ? null : body.address);
+        body.delivery?.mode === 'pickup' ? 0 : shipping?.available ? shipping.deliveryCents : null,
+        ['national','pickup'].includes(body.delivery?.mode) ? null : body.address);
       const publicResult = publicQuote(quote);
+      if (body.delivery?.mode === 'pickup' && quote.items.some(item => item.sourceMode !== 'on_hand'))
+        publicResult.orderable = false;
       if (shipping && !shipping.available) {
         publicResult.deliveryCents = null;
         publicResult.totalCents = null;
