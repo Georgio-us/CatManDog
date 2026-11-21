@@ -54,9 +54,16 @@ test('a product opened from pickup keeps pickup actions and marks unavailable va
   const html = accessoryDetail(detailProduct,{crumbs:()=>'',imageBlock:()=>'',escape:String,
     icon:()=>'',favorites:[],goodTogether:()=>'',money:value=>`${value} €`,translate:value=>value,
     variantId:'litter-6l',quantity:1,language:'es',pickupMode:true});
-  assert.match(html,/Añadir para recoger/);
+  assert.match(html,/Añadir a la cesta/);
+  assert.doesNotMatch(html,/Añadir para recoger/);
   assert.match(html,/No disponible para recoger/);
   assert.doesNotMatch(html,/Entrega en 24-48 horas|Pedir con entrega/);
+  for (const [language,label] of [['ru','Добавить в корзину'],['uk','Додати до кошика']]) {
+    const localized = accessoryDetail(detailProduct,{crumbs:()=>'',imageBlock:()=>'',escape:String,
+      icon:()=>'',favorites:[],goodTogether:()=>'',money:value=>`${value} €`,translate:value=>value,
+      variantId:'litter-6l',quantity:1,language,pickupMode:true});
+    assert.match(localized,new RegExp(label));
+  }
 });
 
 test('Stripe redirects pickup to its own confirmation and basket', async () => {

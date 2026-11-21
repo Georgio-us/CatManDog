@@ -59,13 +59,13 @@ export function accessoryDetail(product, helpers) {
   const specialAvailability = Boolean(p.saleStatus || p.serverSourcingAvailability);
   const t = availabilityCopy[language] || availabilityCopy.ru;
   const pickupText = {
-    es:{ready:'Disponible para recoger',missing:'No disponible para recoger',add:'Añadir para recoger',
+    es:{ready:'Disponible para recoger',missing:'No disponible para recoger',add:'Añadir a la cesta',
       note:'Después del pago acordaremos contigo cuándo recogerlo'},
-    ru:{ready:'Доступно к самовывозу',missing:'Недоступно к самовывозу',add:'Добавить для самовывоза',
+    ru:{ready:'Доступно к самовывозу',missing:'Недоступно к самовывозу',add:'Добавить в корзину',
       note:'После оплаты согласуем с вами время получения'},
-    uk:{ready:'Доступно для самовивозу',missing:'Недоступно для самовивозу',add:'Додати для самовивозу',
+    uk:{ready:'Доступно для самовивозу',missing:'Недоступно для самовивозу',add:'Додати до кошика',
       note:'Після оплати узгодимо з вами час отримання'}
-  }[language] || {ready:'Доступно к самовывозу',missing:'Недоступно к самовывозу',add:'Добавить для самовывоза',note:'После оплаты согласуем время получения'};
+  }[language] || {ready:'Доступно к самовывозу',missing:'Недоступно к самовывозу',add:'Добавить в корзину',note:'После оплаты согласуем время получения'};
   const state = customerAvailability(p);
   const deliveryKind = productDeliveryKind(product, p);
   const timing = deliveryTiming(deliveryKind, language);

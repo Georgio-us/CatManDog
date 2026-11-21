@@ -1,7 +1,7 @@
 import { createUsefulUI } from './useful.js?v=yagu-toys-20261116';
 import { createAccountUI } from './account.js?v=localized-api-errors-20261121';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
-import { accessoryDetail, customerDetails } from './accessory-ui.js?v=pickup-detail-20261121';
+import { accessoryDetail, customerDetails } from './accessory-ui.js?v=pickup-cart-labels-20261121';
 import { atelierDescriptionMarkup } from './atelier-description.js';
 import { deliveryPage } from './delivery-page.js';
 import { productDeliveryKind, deliveryTiming } from './delivery-timing.js';
@@ -302,7 +302,7 @@ function card(p,pickupSku=null){
   const status=sourcingStates.includes('available')&&(sourcingStates.includes('preorder')||sourcingStates.includes('source_on_demand'))?'mixed':sourcingStates.includes('available')?'available':sourcingStates.includes('preorder')?'supplier':sourcingStates.includes('on_hand')&&sourcingStates.includes('source_on_demand')?'mixed':sourcingStates.includes('on_hand')?'stock':sourcingStates.includes('source_on_demand')?'supplier':sourcingStates.length?'unavailable':null;
   const availabilityTag=pickup?'':status?`<span class="product-availability-tag product-availability-${status}">${escape(copy[status])}</span>`:'';
   const configure=family||p.gift||Boolean(p.configurationType)||!canBuy(sku);
-  const actionLabel=pickup ? (configure ? {es:'Ver opciones',ru:'Выбрать вариант',uk:'Вибрати варіант'}[locale()] : {es:'Añadir para recoger',ru:'Добавить для самовывоза',uk:'Додати для самовивозу'}[locale()]) : family ? 'Выбрать вариант' : p.gift ? 'Выбрать набор' : !canBuy(sku) ? 'К товару' : 'В корзину';
+  const actionLabel=pickup ? (configure ? {es:'Elegir formato',ru:'Выбрать вариант',uk:'Вибрати варіант'}[locale()] : {es:'Añadir a la cesta',ru:'Добавить в корзину',uk:'Додати до кошика'}[locale()]) : family ? 'Выбрать вариант' : p.gift ? 'Выбрать набор' : !canBuy(sku) ? 'К товару' : 'В корзину';
   const buttonLabel=actionLabel==='В корзину'?'Добавить в корзину':actionLabel;
   const caption=pricing.amount===null?'':family&&pricing.min!==pricing.max
     ? ({ Фасовка:'Цена зависит от фасовки', Упаковка:'Цена зависит от упаковки', Размер:'Цена зависит от размера', Цвет:'Цена зависит от цвета' }[p.optionLabel] || 'Цена зависит от варианта')
