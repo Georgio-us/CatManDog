@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { catsAtelierProducts } from '../cats-atelier-products.js';
+import { catsAtelierProducts, catsAtelierLegacyCopy } from '../cats-atelier-products.js';
 import { atelierDescription, atelierDescriptionMarkup } from '../atelier-description.js';
 import { accessoryDetail } from '../accessory-ui.js';
 import { atelierDefaults } from '../atelier-configuration.js';
@@ -66,12 +66,13 @@ test('live catalog refresh preserves corrected Cat’s Atelier editorial names a
   const original = structuredClone(bySku('SH-M-A60-G'));
   const expectedName = original.name;
   const expectedDescription = original.description;
+  const legacy = catsAtelierLegacyCopy.get(original.id);
   const products = [original], visible = [original];
   applyServerCatalog(products, visible, [{
     product_id: original.id, variant_id: original.id,
-    name: 'Cat’s Atelier - оконная полка Arc 60 см',
+    name: legacy.name,
     brand: original.brand, category: original.category, pet: 'cat',
-    label: '1 шт', description: 'Старое описание', variant_description: 'Старое описание',
+    label: '1 шт', description: legacy.description, variant_description: legacy.description,
     image_path: original.image.src, details: original.details,
     availability: 'source_on_demand', source_orderable: true,
     availableForCart: true, referencePriceCents: 10000
@@ -79,4 +80,16 @@ test('live catalog refresh preserves corrected Cat’s Atelier editorial names a
   assert.equal(products[0].name, expectedName);
   assert.equal(products[0].description, expectedDescription);
   assert.equal(products[0].image.alt, expectedName);
+  const manuallyEdited = structuredClone(bySku('SH-M-A60-G'));
+  const changed = [manuallyEdited];
+  applyServerCatalog(changed, changed.slice(), [{
+    product_id: manuallyEdited.id, variant_id: manuallyEdited.id,
+    name: 'Название владельца', brand: manuallyEdited.brand,
+    category: manuallyEdited.category, pet: 'cat',
+    label: '1 шт', description: 'Описание владельца',
+    variant_description: 'Описание владельца', details: [],
+    availability: 'source_on_demand', source_orderable: true,
+    availableForCart: true, referencePriceCents: 10000
+  }]);
+  assert.equal(changed[0].name, 'Название владельца');
 });

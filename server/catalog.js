@@ -17,6 +17,7 @@ import { catalogEditorialAcanaWet } from '../catalog-editorial-acana-wet.js';
 import { catalogEditorialChuruCat } from '../catalog-editorial-churu-cat.js';
 import { catalogEditorialNext } from '../catalog-editorial-next.js';
 import { publishYaguToys } from './yagu-toy-publication.js';
+import { catsAtelierLegacyCopy } from '../cats-atelier-products.js';
 
 const cents = value => Number.isFinite(value) && value > 0 ? Math.round(value * 100) : null;
 const imagePath = image => typeof image === 'string' ? image : image?.src || null;
@@ -148,6 +149,29 @@ export async function importCatalog(db, items = products) {
             THEN v.source->'image'->>'src' ELSE NULL END
           FROM catalog_products p WHERE p.id=v.product_id`);
         await client.query("INSERT INTO catalog_migrations(name) VALUES('variant_editor_fields_backfilled')");
+      }
+      const atelierCopyMigration = 'cats_atelier_editorial_copy_2026_11_21';
+      const atelierCopyDone = await client.query(
+        'SELECT 1 FROM catalog_migrations WHERE name=$1', [atelierCopyMigration]);
+      if (!atelierCopyDone.rowCount && !atelierCopyDone.rows.length) {
+        for (const product of products.filter(item => item.brand === 'Cat’s Atelier')) {
+          const legacy = catsAtelierLegacyCopy.get(product.id);
+          if (!legacy) continue;
+          // Replace only the exact earlier generated copy. Owner edits win.
+          const updated = await client.query(`UPDATE catalog_products SET
+            name=$2,description=$3,
+            source=coalesce(source,'{}'::jsonb)||jsonb_build_object('name',$2::text,'description',$3::text),
+            updated_at=now()
+            WHERE id=$1 AND name=$4 AND description=$5 RETURNING id`,
+          [product.id, product.name, product.description, legacy.name, legacy.description]);
+          if (!updated.rowCount && !updated.rows.length) continue;
+          await client.query(`UPDATE catalog_variants SET description=$2,
+            source=coalesce(source,'{}'::jsonb)||jsonb_build_object('name',$3::text,'description',$2::text),
+            updated_at=now()
+            WHERE product_id=$1 AND description=$4`,
+          [product.id, product.description, product.name, legacy.description]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [atelierCopyMigration]);
       }
       const migration = await client.query("SELECT name FROM catalog_migrations WHERE name='retired_products_archived'");
       if (!migration.rows.length) {

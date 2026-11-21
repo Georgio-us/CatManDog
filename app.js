@@ -14,7 +14,7 @@ import { createCheckoutUI } from './checkout-ui.js?v=atelier-delivery-20261120';
 import { normalizeRecurringDraft, recurringChoiceFromCart, renderRecurringCart } from './recurring-cart.js?v=recurring-cards-20261117';
 import { availabilityRequestPage } from './availability-request-ui.js?v=yagu-toys-20261116';
 import { orderVariantId } from './order-progress.js';
-import { applyServerCatalog } from './server-prices.js?v=atelier-long-copy-20261121';
+import { applyServerCatalog } from './server-prices.js?v=atelier-long-copy-2-20261121';
 
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
 import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=editorial-shortcuts-20261119';

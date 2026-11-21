@@ -1,5 +1,6 @@
 import { hasVariants } from './variants.js?v=sale-price-policy-20261109';
 import { orderedVariants } from './product-content.js?v=catalog-sku-audit-20261110';
+import { catsAtelierLegacyCopy } from './cats-atelier-products.js?v=atelier-long-copy-20261121';
 
 const catalogTags = {
   'cmd-source-39c2d5db76be47f7': 'Мелкие породы',
@@ -57,7 +58,9 @@ export function applyServerCatalog(products, catalogProducts, entries) {
     const original = current.get(id);
     const product = original || { id, isReal: true, tag: '', line: first.brand || 'CatManDog',
       optionLabel: 'Вариант', defaultVariantId: first.variant_id, variants: [] };
-    const atelierEditorial = original?.brand === 'Cat’s Atelier' && Boolean(original.manufacturerSku);
+    const legacyAtelier = catsAtelierLegacyCopy.get(id);
+    const atelierEditorial = original?.brand === 'Cat’s Atelier' && legacyAtelier
+      && first.name === legacyAtelier.name && first.description === legacyAtelier.description;
     const editorialName = atelierEditorial ? original.name : null;
     const editorialDescription = atelierEditorial ? original.description : null;
     if (!product.tag && catalogTags[id]) product.tag = catalogTags[id];

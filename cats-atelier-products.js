@@ -16,6 +16,7 @@ const correctedNames = {
   'SH-W-A60-G': 'Cat’s Atelier - оконная деревянная полка Arc 60 см',
   'SH-M-A60-G': 'Cat’s Atelier - оконная металлическая полка Arc 60 см'
 };
+export const catsAtelierLegacyCopy = new Map();
 export const catsAtelierProducts = [
   {
     "id": "cats-atelier-sh-m-da100",
@@ -4212,6 +4213,12 @@ export const catsAtelierProducts = [
     "productType": "wall"
   }
 ].map(product => {
+  catsAtelierLegacyCopy.set(product.id, {
+    name: product.name,
+    description: product.description + ' Модель: '
+      + product.name.replace('Cat’s Atelier - ', '') + ', артикул '
+      + product.manufacturerSku + '.'
+  });
   const name = correctedNames[product.manufacturerSku] || (
     /-(UL|UR)$/.test(product.manufacturerSku)
       ? product.name.replace('симметричная', 'асимметричная')
