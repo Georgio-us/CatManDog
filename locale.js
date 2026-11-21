@@ -19,7 +19,7 @@ import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=
 import { shellTranslations } from './shell-translations.js?v=language-routes-20261120';
 import { checkoutLaunchEs, checkoutLaunchUk } from './locales/checkout-launch.js?v=language-routes-3-20261120';
 import { recurringEs, recurringUk, recurringPatternsEs, recurringPatternsUk } from './locales/recurring.js';
-import { catsAtelierEs, catsAtelierUk } from './locales/cats-atelier.js';
+import { catsAtelierEs, catsAtelierUk } from './locales/cats-atelier.js?v=atelier-related-20261121';
 import { couponEs, couponUk } from './locales/coupon.js?v=language-routes-20261120';
 
 const storageKey = 'catmandog-language';

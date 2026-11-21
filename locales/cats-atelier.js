@@ -1,6 +1,11 @@
 import { catsAtelierProducts } from '../cats-atelier-products.js';
 
 export const catsAtelierEs = {
+  "Сменный матрас для этой полки": "Colchón de recambio para este estante",
+  "Сменный чехол для этой полки": "Funda de recambio para este estante",
+  "Ступенька для подъёма к полке": "Peldaño para subir al estante",
+  "Полка для маршрута по стене": "Estante para un recorrido de pared",
+  "Полка той же серии": "Estante de la misma serie",
   "Для стены": "Para pared",
   "Настенная полка для отдыха и перемещения кошки по вертикали. Устанавливается на подходящую стену.": "Estante de pared para que el gato descanse y se mueva en vertical. Se instala en una pared adecuada.",
   "Монтаж: стена": "Montaje: pared",
@@ -92,6 +97,11 @@ export const catsAtelierEs = {
 };
 
 export const catsAtelierUk = {
+  "Сменный матрас для этой полки": "Змінний матрац для цієї полиці",
+  "Сменный чехол для этой полки": "Змінний чохол для цієї полиці",
+  "Ступенька для подъёма к полке": "Сходинка для підйому до полиці",
+  "Полка для маршрута по стене": "Полиця для маршруту по стіні",
+  "Полка той же серии": "Полиця тієї самої серії",
   "Для стены": "Для стіни",
   "Настенная полка для отдыха и перемещения кошки по вертикали. Устанавливается на подходящую стену.": "Настінна полиця для відпочинку та переміщення кота по вертикалі. Встановлюється на відповідну стіну.",
   "Монтаж: стена": "Монтаж: стіна",

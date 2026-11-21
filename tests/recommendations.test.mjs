@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { recommendForProduct } from '../recommendations.js';
+import { catalogProducts } from '../data.js';
+import { catsAtelierProducts } from '../cats-atelier-products.js';
+import { catsAtelierEs, catsAtelierUk } from '../locales/cats-atelier.js';
 
 const product = (id, name, category, extra = {}) => ({
   id, name, category, pet: 'cat', brand: 'Acana', price: 12,
@@ -66,4 +69,38 @@ test('a feeder does not guess a diet without food in the basket', () => {
   const feeder = product('feeder', 'Автокормушка', 'Миски и поилки');
   const dry = product('dry', 'Acana Adult Chicken', 'Корм', { foodType: 'dry' });
   assert.deepEqual(recommendForProduct(feeder, [feeder, dry]), []);
+});
+
+test('all Cat’s Atelier names and descriptions have Spanish and Ukrainian translations', () => {
+  assert.equal(catsAtelierProducts.length, 39);
+  for (const item of catsAtelierProducts) {
+    for (const dictionary of [catsAtelierEs, catsAtelierUk]) {
+      assert.ok(dictionary[item.name], `${item.manufacturerSku} name`);
+      assert.ok(dictionary[item.description], `${item.manufacturerSku} description`);
+      assert.ok(dictionary[item.tag], `${item.manufacturerSku} tag`);
+      for (const detail of item.details || []) assert.ok(dictionary[detail], `${item.manufacturerSku}: ${detail}`);
+    }
+  }
+});
+
+test('Cat’s Atelier recommendations follow matching parts and never suggest an unrelated bed', () => {
+  const bySku = new Map(catsAtelierProducts.map(item => [item.manufacturerSku, item]));
+  const suggestions = sku => recommendForProduct(bySku.get(sku), catalogProducts)
+    .map(item => item.product.manufacturerSku);
+  assert.deepEqual(suggestions('SH-M-DA100'), ['MA-M-100', 'CO-M-100', 'ST-MB-F']);
+  assert.deepEqual(suggestions('SH-W-A60'), ['MA-W-60', 'CO-W-A60', 'ST-WB-F']);
+  assert.deepEqual(suggestions('CO-W-F60'), ['SH-F-60']);
+  for (const item of catsAtelierProducts) {
+    const related = recommendForProduct(item, catalogProducts);
+    assert.ok(related.length, `no suggestions for ${item.manufacturerSku}`);
+    for (const { product: candidate, reason } of related) {
+      assert.equal(candidate.brand, 'Cat’s Atelier');
+      assert.notEqual(candidate.id, item.id);
+      assert.ok(catsAtelierEs[reason] && catsAtelierUk[reason]);
+    }
+  }
+  const source = bySku.get('SH-M-DA100');
+  const first = recommendForProduct(source, catalogProducts)[0].product;
+  assert.ok(!recommendForProduct(source, catalogProducts, { cart: [{ productId: first.id }] })
+    .some(item => item.product.id === first.id));
 });

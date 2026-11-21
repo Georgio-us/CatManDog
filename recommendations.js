@@ -7,6 +7,54 @@ const compatibleWith = new Map([
   ['yagu-7815320', ['yagu-7845778']]
 ]);
 
+const atelierWoodCovers = {
+  'SH-W-A60':'CO-W-A60', 'SH-W-A60-G':'CO-W-A60',
+  'SH-F-60':'CO-W-F60', 'SH-W-F60-G':'CO-W-F60',
+  'SH-W-F75':'CO-W-F75', 'SH-W-F75-G':'CO-W-F75',
+  'SH-W-W95-UL':'CO-W-95', 'SH-W-W95-UR':'CO-W-95'
+};
+const atelierStepShelves = {
+  'ST-MB-F':['SH-M-A60','SH-M-W75-SL'],
+  'ST-WB-F':['SH-W-A60','SH-W-F75'],
+  'RD-ST':['SH-M-A60','SH-W-A60']
+};
+
+function atelierRecommendations(product, catalog, cartIds, limit) {
+  const sku = product.manufacturerSku;
+  const index = new Map(catalog.filter(item => item.brand === 'Cat’s Atelier')
+    .map(item => [item.manufacturerSku, item]));
+  const planned = [];
+  const add = (code, reason) => { if (code && code !== sku && !planned.some(item => item.code === code)) planned.push({ code, reason }); };
+  const shelf = sku.startsWith('SH-');
+  if (shelf) {
+    const metal = sku.startsWith('SH-M-');
+    const length = sku.match(/(?:60|75|95|100)(?=-|$)/)?.[0];
+    const cover = metal ? `CO-M-${length}` : atelierWoodCovers[sku];
+    const mattress = length && (metal || length === '60' || length === '95')
+      ? `MA-${metal ? 'M' : 'W'}-${length}` : null;
+    add(mattress, 'Сменный матрас для этой полки');
+    add(cover, 'Сменный чехол для этой полки');
+    if (product.productType === 'wall') add(metal ? 'ST-MB-F' : 'ST-WB-F', 'Ступенька для подъёма к полке');
+  } else if (atelierStepShelves[sku]) {
+    for (const code of atelierStepShelves[sku]) add(code, 'Полка для маршрута по стене');
+  } else if (sku.startsWith('CO-') || sku.startsWith('MA-')) {
+    const matchingShelves = [...index.values()].filter(item => item.manufacturerSku?.startsWith('SH-'));
+    const sameMaterialAndLength = candidate => {
+      const length = sku.match(/(?:60|75|95|100)$/)?.[0];
+      return length && candidate.manufacturerSku?.match(/(?:60|75|95|100)(?=-|$)/)?.[0] === length;
+    };
+    const exactCover = candidate => atelierWoodCovers[candidate.manufacturerSku] === sku ||
+      (sku.startsWith('CO-M-') && candidate.manufacturerSku?.startsWith('SH-M-') && sameMaterialAndLength(candidate));
+    const similarMattress = candidate => sku.startsWith('MA-') &&
+      candidate.manufacturerSku?.startsWith(`SH-${sku[3]}-`) && sameMaterialAndLength(candidate);
+    const match = matchingShelves.find(candidate => exactCover(candidate) || similarMattress(candidate));
+    add(match?.manufacturerSku, 'Полка той же серии');
+  }
+  return planned.map(({code,reason}) => ({ product:index.get(code), reason }))
+    .filter(item => item.product && !cartIds.has(item.product.id) && available(item.product))
+    .slice(0,limit);
+}
+
 const text = product => `${product.name || ''} ${product.tag || ''} ${product.segment || ''}`.toLocaleLowerCase('ru');
 const brand = product => (product.brand || '').toLocaleLowerCase('ru').trim();
 const stage = value => /kitten|котят|котен|котён/i.test(value) ? 'kitten'
@@ -131,6 +179,8 @@ export function recommendForProduct(product, catalog, { cart = [], limit = 4 } =
   if (!product || !Array.isArray(catalog) || limit < 1) return [];
   const group = homeGroupForProduct(product);
   const cartIds = new Set(cart.map(item => item.productId || item.id));
+  if (product.brand === 'Cat’s Atelier' && product.manufacturerSku)
+    return atelierRecommendations(product, catalog, cartIds, limit);
   const cartFood = cart.map(item => catalog.find(candidate => candidate.id === (item.productId || item.id)))
     .find(candidate => candidate && foodGroups.has(homeGroupForProduct(candidate)) && samePet(product, candidate));
   const contextFood = ingestibleGroups.has(group) ? product : cartFood;
