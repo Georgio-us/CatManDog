@@ -1,5 +1,21 @@
+import { atelierDescription } from './atelier-description.js';
+
 // Cat’s Atelier assortment from supplier export dated 2026-11-18.
 // Retail prices mirror supplier public prices; purchase costs remain unknown.
+const correctedNames = {
+  'SH-W-A60': 'Cat’s Atelier - настенная деревянная полка Arc 60 см',
+  'SH-M-A60': 'Cat’s Atelier - настенная металлическая полка Arc 60 см',
+  'ST-MB-F': 'Cat’s Atelier - настенная ступенька из МДФ для кошки',
+  'ST-WB-F': 'Cat’s Atelier - настенная деревянная ступенька для кошки',
+  'SH-M-W95-UL': 'Cat’s Atelier - настенная металлическая полка Wave 95 см, асимметричная, левая',
+  'SH-M-W95-UR': 'Cat’s Atelier - настенная металлическая полка Wave 95 см, асимметричная, правая',
+  'SH-W-W95-UL': 'Cat’s Atelier - настенная деревянная полка Wave 95 см, асимметричная, левая',
+  'SH-W-W95-UR': 'Cat’s Atelier - настенная деревянная полка Wave 95 см, асимметричная, правая',
+  'CO-W-A60': 'Cat’s Atelier - чехол матраса для деревянной полки Arc 60 см',
+  'CO-W-F60': 'Cat’s Atelier - чехол матраса для деревянной полки Flat 60 см',
+  'SH-W-A60-G': 'Cat’s Atelier - оконная деревянная полка Arc 60 см',
+  'SH-M-A60-G': 'Cat’s Atelier - оконная металлическая полка Arc 60 см'
+};
 export const catsAtelierProducts = [
   {
     "id": "cats-atelier-sh-m-da100",
@@ -4195,8 +4211,16 @@ export const catsAtelierProducts = [
     "supplierLeadTime": "2-3 рабочих дня на изготовление, затем ориентировочно 2-3 рабочих дня на доставку из Польши",
     "productType": "wall"
   }
-].map(product => ({
-  ...product,
-  image: { ...product.image, presentation: 'editorial' },
-  description: `${product.description} Модель: ${product.name.replace('Cat’s Atelier - ', '')}, артикул ${product.manufacturerSku}.`
-}));
+].map(product => {
+  const name = correctedNames[product.manufacturerSku] || (
+    /-(UL|UR)$/.test(product.manufacturerSku)
+      ? product.name.replace('симметричная', 'асимметричная')
+      : product.name
+  );
+  const corrected = { ...product, name };
+  return {
+    ...corrected,
+    image: { ...product.image, alt: name, presentation: 'editorial' },
+    description: atelierDescription(corrected, 'ru').summary
+  };
+});

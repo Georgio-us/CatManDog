@@ -1,4 +1,5 @@
 import { catsAtelierProducts } from '../cats-atelier-products.js';
+import { atelierDescription } from '../atelier-description.js';
 
 export const catsAtelierEs = {
   "Сменный матрас для этой полки": "Colchón de recambio para este estante",
@@ -192,13 +193,45 @@ export const catsAtelierUk = {
   "Cat’s Atelier - настенная полка Arc 95 см": "Cat’s Atelier - настінна полиця Arc 95 см"
 };
 
+Object.assign(catsAtelierEs, {
+  'Cat’s Atelier - настенная деревянная полка Arc 60 см': 'Cat’s Atelier - estante de pared Arc 60 cm con base de madera',
+  'Cat’s Atelier - настенная металлическая полка Arc 60 см': 'Cat’s Atelier - estante de pared Arc 60 cm con base de metal',
+  'Cat’s Atelier - настенная ступенька из МДФ для кошки': 'Cat’s Atelier - peldaño de pared de MDF para gatos',
+  'Cat’s Atelier - настенная деревянная ступенька для кошки': 'Cat’s Atelier - peldaño de pared de madera para gatos',
+  'Cat’s Atelier - настенная полка Wave 75 см, асимметричная, левая': 'Cat’s Atelier - estante de pared Wave 75 cm, asimétrico izquierdo',
+  'Cat’s Atelier - настенная полка Wave 75 см, асимметричная, правая': 'Cat’s Atelier - estante de pared Wave 75 cm, asimétrico derecho',
+  'Cat’s Atelier - настенная металлическая полка Wave 95 см, асимметричная, левая': 'Cat’s Atelier - estante de pared Wave 95 cm con base de metal, asimétrico izquierdo',
+  'Cat’s Atelier - настенная металлическая полка Wave 95 см, асимметричная, правая': 'Cat’s Atelier - estante de pared Wave 95 cm con base de metal, asimétrico derecho',
+  'Cat’s Atelier - настенная деревянная полка Wave 95 см, асимметричная, левая': 'Cat’s Atelier - estante de pared Wave 95 cm con base de madera, asimétrico izquierdo',
+  'Cat’s Atelier - настенная деревянная полка Wave 95 см, асимметричная, правая': 'Cat’s Atelier - estante de pared Wave 95 cm con base de madera, asimétrico derecho',
+  'Cat’s Atelier - чехол матраса для деревянной полки Arc 60 см': 'Cat’s Atelier - funda de colchón para estante de madera Arc 60 cm',
+  'Cat’s Atelier - чехол матраса для деревянной полки Flat 60 см': 'Cat’s Atelier - funda de colchón para estante de madera Flat 60 cm',
+  'Cat’s Atelier - оконная деревянная полка Arc 60 см': 'Cat’s Atelier - estante de ventana Arc 60 cm con base de madera',
+  'Cat’s Atelier - оконная металлическая полка Arc 60 см': 'Cat’s Atelier - estante de ventana Arc 60 cm con base de metal'
+});
+Object.assign(catsAtelierUk, {
+  'Cat’s Atelier - настенная деревянная полка Arc 60 см': 'Cat’s Atelier - настінна дерев’яна полиця Arc 60 см',
+  'Cat’s Atelier - настенная металлическая полка Arc 60 см': 'Cat’s Atelier - настінна металева полиця Arc 60 см',
+  'Cat’s Atelier - настенная ступенька из МДФ для кошки': 'Cat’s Atelier - настінна сходинка з МДФ для кота',
+  'Cat’s Atelier - настенная деревянная ступенька для кошки': 'Cat’s Atelier - настінна дерев’яна сходинка для кота',
+  'Cat’s Atelier - настенная полка Wave 75 см, асимметричная, левая': 'Cat’s Atelier - настінна полиця Wave 75 см, асиметрична, ліва',
+  'Cat’s Atelier - настенная полка Wave 75 см, асимметричная, правая': 'Cat’s Atelier - настінна полиця Wave 75 см, асиметрична, права',
+  'Cat’s Atelier - настенная металлическая полка Wave 95 см, асимметричная, левая': 'Cat’s Atelier - настінна металева полиця Wave 95 см, асиметрична, ліва',
+  'Cat’s Atelier - настенная металлическая полка Wave 95 см, асимметричная, правая': 'Cat’s Atelier - настінна металева полиця Wave 95 см, асиметрична, права',
+  'Cat’s Atelier - настенная деревянная полка Wave 95 см, асимметричная, левая': 'Cat’s Atelier - настінна дерев’яна полиця Wave 95 см, асиметрична, ліва',
+  'Cat’s Atelier - настенная деревянная полка Wave 95 см, асимметричная, правая': 'Cat’s Atelier - настінна дерев’яна полиця Wave 95 см, асиметрична, права',
+  'Cat’s Atelier - чехол матраса для деревянной полки Arc 60 см': 'Cat’s Atelier - чохол матраца для дерев’яної полиці Arc 60 см',
+  'Cat’s Atelier - чехол матраса для деревянной полки Flat 60 см': 'Cat’s Atelier - чохол матраца для дерев’яної полиці Flat 60 см',
+  'Cat’s Atelier - оконная деревянная полка Arc 60 см': 'Cat’s Atelier - віконна дерев’яна полиця Arc 60 см',
+  'Cat’s Atelier - оконная металлическая полка Arc 60 см': 'Cat’s Atelier - віконна металева полиця Arc 60 см'
+});
+
 for (const product of catsAtelierProducts) {
-  const base = product.description.slice(0, product.description.indexOf(' Модель: '));
-  const esName = catsAtelierEs[product.name]?.replace('Cat’s Atelier - ', '');
-  const ukName = catsAtelierUk[product.name]?.replace('Cat’s Atelier - ', '');
-  if (!catsAtelierEs[base] || !catsAtelierUk[base] || !esName || !ukName) {
+  const es = atelierDescription(product, 'es');
+  const uk = atelierDescription(product, 'uk');
+  if (!es || !uk || !catsAtelierEs[product.name] || !catsAtelierUk[product.name]) {
     throw new Error(`Missing Cat’s Atelier translation for ${product.manufacturerSku}`);
   }
-  catsAtelierEs[product.description] = `${catsAtelierEs[base]} Modelo: ${esName}, referencia ${product.manufacturerSku}.`;
-  catsAtelierUk[product.description] = `${catsAtelierUk[base]} Модель: ${ukName}, артикул ${product.manufacturerSku}.`;
+  catsAtelierEs[product.description] = es.summary;
+  catsAtelierUk[product.description] = uk.summary;
 }

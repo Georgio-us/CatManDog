@@ -1984,6 +1984,27 @@ details ul {
 .customer-details-chevron svg { width: 100%; height: 100%; }
 .customer-product-details[open] .customer-details-chevron { transform: rotate(180deg); }
 
+.atelier-description-intro { margin-bottom: 8px; }
+.atelier-description-more { margin: 0 0 18px; }
+.atelier-description-more summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  list-style: none;
+}
+.atelier-description-more summary::-webkit-details-marker { display: none; }
+.atelier-description-more summary svg { width: 16px; height: 16px; transition: transform var(--motion-duration,.2s); }
+.atelier-description-more[open] summary svg { transform: rotate(180deg); }
+.atelier-description-more .atelier-less-label,
+.atelier-description-more[open] .atelier-more-label { display: none; }
+.atelier-description-more[open] .atelier-less-label { display: inline; }
+.atelier-description-body { max-width: 58ch; padding: 6px 0 0; }
+.atelier-description-body p { margin: 12px 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+
 .prose {
   max-width: 760px;
   margin: auto;
