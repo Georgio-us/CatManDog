@@ -661,6 +661,7 @@ async function checkPickupPayment() {
         savePickupCart();
         if (result.promoApplied) account.couponPaid();
         sessionStorage.setItem(marker,'1');
+        sessionStorage.removeItem('catmandog-pickup-attempt');
       }
       void account.refreshOrders();
     }
@@ -718,7 +719,9 @@ app.addEventListener('submit', async event => {
       throw new Error(result.error || copy.error);
     location.assign(result.url);
   } catch (error) {
-    pickupError = error.message || copy.error;
+    const translated = translate(error.message || '');
+    pickupError = locale() === 'ru' ? error.message || copy.error
+      : translated && translated !== error.message ? translated : copy.error;
     pickupBusy = false;
     render();
   }
