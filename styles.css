@@ -1118,6 +1118,7 @@ button:hover:not(:disabled) {
 .pickup-results { min-width: 0; }
 .pickup-results .results-count { margin: 2px 0 20px; }
 .pickup-results .product-grid { grid-template-columns: repeat(var(--catalog-columns), minmax(0, 1fr)); }
+.pickup-page .product-availability-tag { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 @media (max-width: 760px) {
   .pickup-page .breadcrumbs { margin-bottom: 26px; }
@@ -4168,8 +4169,8 @@ details .text-link {
 }
 
 @media (max-width: 360px) {
-  .catalog-layout .product-grid { grid-template-columns: 1fr; }
-  .catalog-layout .product-card { max-width: 360px; }
+  .catalog-layout .product-grid, .pickup-results .product-grid { grid-template-columns: 1fr; }
+  .catalog-layout .product-card, .pickup-results .product-card { max-width: 360px; }
 }
 
 @media (max-width: 420px) {
