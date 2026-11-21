@@ -10,7 +10,7 @@ import { productGallery } from './product-gallery.js?v=atelier-all-spec-gallerie
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=delivery-exceptions-20261121';
 import { recommendForProduct } from './recommendations.js?v=atelier-related-20261121';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
-import { categories, products, catalogProducts, articles } from './data.js?v=atelier-long-copy-20261121';
+import { categories, products, catalogProducts, articles } from './data.js?v=litter-20261121';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=yagu-toys-20261116';
 import { createCheckoutUI } from './checkout-ui.js?v=delivery-exceptions-20261121';
 import { normalizeRecurringDraft, recurringChoiceFromCart, renderRecurringCart } from './recurring-cart.js?v=recurring-cards-20261117';
@@ -21,7 +21,7 @@ import { applyServerCatalog } from './server-prices.js?v=atelier-long-copy-3-202
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
 import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=editorial-shortcuts-20261119';
 import { handleCatPickClick } from './cat-picks.js?v=picks-seo-20261112';
-import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from './locale.js?v=atelier-long-copy-20261121';
+import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from './locale.js?v=litter-20261121';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
@@ -233,6 +233,7 @@ function imageStyle(index){if(typeof index==='string')return `background-image:u
 function categoryImageStyle(name){if(name==='Лакомства')return "--category-sheet:url('https://img.catmandog.es/assets/category-treats-v2.webp');--category-size:cover;--category-radius:0;--px:center;--py:center";const tile=({Корм:0,Наполнитель:1,'Игрушки и аксессуары':2,'Миски и поилки':4,Переноски:5,'Окна и балконы':6,Уход:7})[name]??0;return `--px:${(tile%4)*100/3}%;--py:${Math.floor(tile/4)*100}%;--category-sheet:url('https://img.catmandog.es/assets/categories-open.png')`;}
 const categoryLabel = name => name === 'Наполнитель' ? 'Наполнители и лотки' : name;
 function imageBlock(index,extra='',decorative=false){
+  if(index?.placeholder) return `<div class="product-image product-image-placeholder ${extra}" aria-hidden="true"><span>CatManDog</span></div>`;
   if(index && typeof index==='object'){
     const studio=index.presentation==='editorial'||
       /(?:\/assets\/(?:launch-studio-[^/]+|cats-atelier|[^/]+\/editorial)\/|\/media\/(?:launch-studio|churu-formats|confirmed-demand)-[^/]+\/|\/media\/yagu\/[^/]+-studio-v\d+\.webp)/u.test(index.src);

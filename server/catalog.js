@@ -122,6 +122,23 @@ export async function importCatalog(db, items = products) {
             AND price_confirmed=false`, [variant.id, variant.sourcePriceCents]);
       }
     }
+    if (items === products) {
+      const litterPriceMigration = 'approved_litter_retail_prices_2026_11_21';
+      const done = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [litterPriceMigration]);
+      if (!done.rows.length) {
+        for (const [id, priceCents] of [
+          ['cat-litter-yommy-tofu-lavanda-6l-pack', 999],
+          ['cat-litter-uniko-tofu-18l-pack', 1999],
+          ['cat-litter-yommy-tofu-pl-6l-pack', 999],
+          ['cat-litter-sanicat-clumping-unscented-8l-pack', 799]
+        ]) {
+          await client.query(`UPDATE catalog_variants SET price_confirmed=true,updated_at=now()
+            WHERE id=$1 AND source_price_cents=$2 AND price_override_cents IS NULL
+              AND price_confirmed=false`, [id, priceCents]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [litterPriceMigration]);
+      }
+    }
     if (items === products) await publishYaguToys(client);
     if (items === products) {
       const localMigration = await client.query("SELECT name FROM catalog_migrations WHERE name='local_only_products_archived'");

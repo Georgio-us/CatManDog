@@ -5,6 +5,10 @@ import { catsAtelierUk } from './cats-atelier.js';
 
 // Ukrainian product names. Brand and registered line names remain unchanged.
 export const ukProductNames = {
+  'Yommy Tofu Lavanda - комкующийся наполнитель 6 л': 'Yommy Tofu Lavanda - грудкувальний наповнювач 6 л',
+  'Uniko Tofu Cat Litter - комкующийся наполнитель 18 л': 'Uniko Tofu Cat Litter - грудкувальний наповнювач 18 л',
+  'Yommy Tofu PL - комкующийся наполнитель 6 л': 'Yommy Tofu PL - грудкувальний наповнювач 6 л',
+  'Sanicat Clumping - комкующийся наполнитель без отдушки 8 л': 'Sanicat Clumping - грудкувальний наповнювач без ароматизаторів 8 л',
   ...catsAtelierUk,
   "Duvo+ Beauty - ножницы для когтей": "Duvo+ Beauty - ножиці для кігтів",
   "Duvo+ Beauty - когтерез L": "Duvo+ Beauty - кігтеріз L",

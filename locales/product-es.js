@@ -3,6 +3,10 @@ import { catalogProducts } from '../data.js';
 // Catalogue names keep registered brand/line names. Descriptions below are
 // original Spanish copy based on the facts already present in each product.
 const copy = {
+  'cat-litter-yommy-tofu-lavanda-6l': ['Yommy Tofu Lavanda - arena aglomerante 6 L', 'Arena aglomerante natural de tofu con aroma a lavanda para el arenero del gato'],
+  'cat-litter-uniko-tofu-18l': ['Uniko Tofu Cat Litter - arena aglomerante 18 L', 'Arena aglomerante natural de tofu para el arenero del gato en formato de 18 L'],
+  'cat-litter-yommy-tofu-pl-6l': ['Yommy Tofu PL - arena aglomerante 6 L', 'Arena aglomerante natural Yommy Tofu PL para el arenero del gato en formato de 6 L'],
+  'cat-litter-sanicat-clumping-unscented-8l': ['Sanicat Clumping - arena aglomerante sin perfume 8 L', 'Arena aglomerante Sanicat Clumping sin perfume para el arenero del gato en formato de 8 L'],
   'royal-canin-chihuahua-adult': [null, 'Pienso seco para chihuahuas adultos a partir de los 8 meses'],
   'royal-canin-gastrointestinal-kitten-dry': ['Royal Canin Gastrointestinal Kitten - pienso seco', 'Pienso veterinario seco para gatitos con digestión sensible'],
   'cmd-source-0f4a3ef9889b8ff3': [null, 'Pienso seco ACANA Grass-Fed Lamb con cordero para perros'],

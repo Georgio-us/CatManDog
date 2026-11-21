@@ -699,6 +699,17 @@ button:hover:not(:disabled) {
 }
 
 /* Catalog, product details and cart */
+.product-image-placeholder {
+  display: grid;
+  place-items: center;
+  background: #efefec;
+  background-image: none;
+  color: #919691;
+  font-size: clamp(13px, 1.5vw, 20px);
+  font-weight: 600;
+  letter-spacing: .08em;
+}
+
 .product-image {
   background-image: var(--product-sheet, url('https://img.catmandog.es/assets/products-sheet.png'));
   background-size: 400% 200%;

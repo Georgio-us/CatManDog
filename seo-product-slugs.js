@@ -429,6 +429,10 @@ export const seoProductSlugs = Object.freeze({
   "yagu-7571305-toy": "duvo-lona-caballo-perro",
   "yagu-7571300-toy": "duvo-lona-rugby-perro",
   "yagu-7571319-toy": "duvo-peluche-vaca-perro",
+  "cat-litter-yommy-tofu-lavanda-6l": "yommy-tofu-lavanda-6l",
+  "cat-litter-uniko-tofu-18l": "uniko-tofu-cat-litter-18l",
+  "cat-litter-yommy-tofu-pl-6l": "yommy-tofu-pl-6l",
+  "cat-litter-sanicat-clumping-unscented-8l": "sanicat-clumping-sin-perfume-8l",
   ...Object.fromEntries(catsAtelierProducts.map(product => [
     product.id, `cats-atelier-${product.manufacturerSku.toLowerCase()}`
   ])),

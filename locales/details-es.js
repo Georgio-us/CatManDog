@@ -1,4 +1,12 @@
 export const esDetails = {
+  'Наполнитель из тофу': 'Arena de tofu',
+  'Комкующийся наполнитель': 'Arena aglomerante',
+  'Аромат лаванды': 'Aroma a lavanda',
+  'Упаковка 6 л': 'Formato de 6 L',
+  'Упаковка 18 л': 'Formato de 18 L',
+  'Без ароматизаторов': 'Sin perfume',
+  'Упаковка 8 л': 'Formato de 8 L',
+
   'Набор сменных фильтров для поилки HeyboPet': 'Juego de filtros de recambio para la fuente HeyboPet',
   'Сменные фильтры для питьевого фонтана HeyboPet HB-PWFS-S30S: задерживают частицы и загрязнения в воде': 'Filtros de recambio para la fuente HeyboPet HB-PWFS-S30S: retienen partículas e impurezas del agua',
   'Сменные фильтры для питьевых фонтанов: помогают задерживать частицы и загрязнения в воде': 'Filtros de recambio para fuentes de agua: ayudan a retener partículas e impurezas',
