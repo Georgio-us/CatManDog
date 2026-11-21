@@ -62,13 +62,20 @@ test('confirmed-demand formats use exact SKUs and local studio images', () => {
 });
 test('full catalog import archives retired rows once and preserves edited products', async () => {
   const queries = [];
+  const stock = new Map();
   const db = { connect: async () => ({
     query: async (sql, params) => {
       queries.push([sql, params]);
       if (/SELECT stock_quantity,reserved_quantity\s+FROM catalog_variants WHERE id=\$1 FOR UPDATE/u.test(sql))
-        return { rows: [{ stock_quantity: 0, reserved_quantity: 0 }] };
-      if (/UPDATE catalog_variants SET\s+stock_quantity=coalesce\(stock_quantity,0\)\+\$2/u.test(sql))
+        return { rows: [{ stock_quantity: stock.get(params[0]) || 0, reserved_quantity: 0 }] };
+      if (/UPDATE catalog_variants SET\s+stock_quantity=coalesce\(stock_quantity,0\)\+\$2/u.test(sql)) {
+        stock.set(params[0], (stock.get(params[0]) || 0) + params[1]);
+        return { rows: [{ stock_quantity: stock.get(params[0]), reserved_quantity: 0 }] };
+      }
+      if (/UPDATE catalog_variants SET\s+stock_quantity=\$2,availability='on_hand'/u.test(sql)) {
+        stock.set(params[0], params[1]);
         return { rows: [{ stock_quantity: params[1], reserved_quantity: 0 }] };
+      }
       return { rows: [] };
     },
     release() {}
@@ -76,8 +83,8 @@ test('full catalog import archives retired rows once and preserves edited produc
   await importCatalog(db);
   assert.ok(queries.every(([sql]) => !sql.startsWith('DELETE FROM catalog_')));
   const litterMovements = queries.filter(([sql]) => sql.includes('INSERT INTO inventory_movements'));
-  assert.equal(litterMovements.length, 5);
-  assert.equal(litterMovements.reduce((total, [, params]) => total + params[3], 0), 6);
+  assert.equal(litterMovements.length, 9);
+  assert.equal(litterMovements.reduce((total, [, params]) => total + params[3], 0), 8);
   assert.ok(litterMovements.every(([, params]) => params[1].startsWith('cat-litter-')));
   assert.ok(queries.filter(([sql]) => sql.startsWith('INSERT INTO catalog_products'))
     .every(([sql]) => sql.includes('ON CONFLICT(id) DO NOTHING')));

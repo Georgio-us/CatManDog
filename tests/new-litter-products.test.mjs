@@ -15,7 +15,7 @@ import { seoProducts } from '../seo-products.js';
 const expected = new Map([
   ['cat-litter-yommy-tofu-lavanda-6l-pack', 999],
   ['cat-litter-yommy-tofu-verde-6l-pack', 999],
-  ['cat-litter-uniko-tofu-6l-pack', 999],
+  ['cat-litter-uniko-tofu-6l-pack', 1099],
   ['cat-litter-uniko-tofu-18l-pack', 1999],
   ['cat-litter-sanicat-clumping-unscented-8l-pack', 799]
 ]);
@@ -64,7 +64,7 @@ test('all five litter SKUs can be quoted without using supplier costs', () => {
   for (const row of variants) assert.equal(salePriceDecision(row).accepted, true);
   const lines = variants.map(row => ({ productId: row.product_id, variantId: row.variant_id, qty: 1 }));
   const quote = priceQuote(lines, variants);
-  assert.equal(quote.subtotalCents, 5795);
+  assert.equal(quote.subtotalCents, 5895);
   assert.equal(quote.orderable, true);
   assert.ok(quote.items.every(item => item.sourceMode === 'open_order'));
 });

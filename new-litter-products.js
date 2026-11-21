@@ -40,7 +40,7 @@ export const newLitterProducts = [
     details: ['Наполнитель из тофу', 'Комкующийся наполнитель', 'Упаковка 6 или 18 л'],
     defaultVariantId: 'cat-litter-uniko-tofu-18l-pack',
     variants: [
-      variant('cat-litter-uniko-tofu-6l-pack', '6 л', 9.99,
+      variant('cat-litter-uniko-tofu-6l-pack', '6 л', 10.99,
         uniko6Photo, 'Натуральный комкующийся наполнитель из тофу для кошачьего лотка в упаковке 6 л',
         ['Наполнитель из тофу', 'Комкующийся наполнитель', 'Упаковка 6 л'],
         { retailResearch: { checkedAt: '2026-11-21', manufacturerRetail: 8.50,

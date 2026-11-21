@@ -210,6 +210,47 @@ export async function importCatalog(db, items = products) {
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [litterStockMigration]);
       }
     }
+    if (items === products) {
+      const invoiceReconcileMigration = 'litter_invoice_stock_and_small_uniko_price_2026_11_21';
+      const done = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [invoiceReconcileMigration]);
+      if (!done.rows.length) {
+        // Retail decision: the owner accepted 10.99 for the 6 L bag after comparing
+        // the maker's 8.50 price and another retailer's 12.20 price.
+        await client.query(`UPDATE catalog_variants SET
+          source_price_cents=1099,price_confirmed=true,
+          source=jsonb_set(source,'{price}','10.99'::jsonb,true),updated_at=now()
+          WHERE id='cat-litter-uniko-tofu-6l-pack' AND source_price_cents=999
+            AND price_override_cents IS NULL`);
+        const targets = [
+          ['cat-litter-yommy-tofu-lavanda-6l-pack', 2],
+          ['cat-litter-yommy-tofu-verde-6l-pack', 2],
+          ['cat-litter-uniko-tofu-6l-pack', 1],
+          ['cat-litter-uniko-tofu-18l-pack', 2],
+          ['cat-litter-sanicat-clumping-unscented-8l-pack', 1]
+        ];
+        for (const [id, target] of targets) {
+          const { rows } = await client.query(`SELECT stock_quantity,reserved_quantity
+            FROM catalog_variants WHERE id=$1 FOR UPDATE`, [id]);
+          if (!rows.length) throw new Error(`Missing litter stock SKU ${id}`);
+          const before = Number(rows[0].stock_quantity || 0);
+          const delta = target - before;
+          if (!delta) continue;
+          if (target < Number(rows[0].reserved_quantity || 0))
+            throw new Error(`Reserved litter exceeds invoice count ${id}`);
+          const changed = await client.query(`UPDATE catalog_variants SET
+            stock_quantity=$2,availability='on_hand',updated_at=now()
+            WHERE id=$1 RETURNING stock_quantity,reserved_quantity`, [id, target]);
+          await client.query(`INSERT INTO inventory_movements
+            (id,variant_id,idempotency_key,reason,delta_on_hand,delta_reserved,
+             on_hand_after,reserved_after,note)
+            VALUES($1,$2,$3,'adjustment',$4,0,$5,$6,$7)`,
+          [randomUUID(), id, `litter_invoice_reconcile_2026_11_21_${id}`, delta,
+            changed.rows[0].stock_quantity, changed.rows[0].reserved_quantity,
+            'Owner invoice count: four Yommy, two Uniko 18 L, one Uniko 6 L, one Sanicat; Yommy split assumed 2+2']);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [invoiceReconcileMigration]);
+      }
+    }
     if (items === products) await publishYaguToys(client);
     if (items === products) {
       const localMigration = await client.query("SELECT name FROM catalog_migrations WHERE name='local_only_products_archived'");
