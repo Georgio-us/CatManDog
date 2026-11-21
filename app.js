@@ -287,6 +287,104 @@ function card(p,pickupSku=null){
     : `<button class="product-card-action" ${pickup?`data-add-variant="${escape(sku.id)}" data-product-id="${escape(p.id)}"`: `${configure?'data-configure':'data-add'}="${escape(p.id)}"`} aria-label="${actionLabel}: ${escape(p.name)}${pickup&&sku.label?` ${escape(sku.label)}`:''}">${buttonLabel}${icon(configure?'arrow':'bag')}</button>`;
   return `<article class="product-card ${p.isReal||pickup?'real-product-card':''}"><a class="product-card-open" href="${escape(href)}" data-product-id="${escape(p.id)}" aria-label="Открыть товар: ${escape(p.name)}${pickup&&sku.label?` ${escape(sku.label)}`:''}"></a><div class="product-media">${imageBlock(pickup?(sku.image||p.image):p.image)}${tag?`<span class="product-tag">${escape(tag)}</span>`:''}${availabilityTag}<button class="icon-button favorite ${favorites.includes(p.id)?'selected':''}" data-favorite="${escape(p.id)}" aria-label="${favorites.includes(p.id)?'Убрать из избранного':'В избранное'}: ${escape(p.name)}" aria-pressed="${favorites.includes(p.id)}">${icon('heart')}</button></div><div class="product-info"><small>${escape(p.brand||'CatManDog')}${pickup&&sku.label?` · ${escape(sku.label)}`:p.weight?` · ${escape(p.weight)}`:''}${family?` · ${variantCount(p.variants.length)}`:''}</small><div class="product-title"><h3>${escape(p.name)} <span class="product-open-cue">${icon('arrow')}</span></h3></div><span class="retail-label" ${caption?'':'aria-hidden="true"'}>${caption}</span><div class="product-price"><div class="product-price-values"><span>${displayPrice}</span>${!pickup&&!pricing.demo&&!family&&p.old?`<span class="old-price">${money(p.old)}</span>`:''}</div>${action}</div></div></article>`;
 }
+// Hand-curated pickup shelf. Keep exact SKU IDs here; filters retain this order.
+// New stock that has not been placed by the owner follows the curated cards.
+const pickupMerchandisingOrder = new Map([
+  'royalcanin-93e8aeca-85g',
+  'acana-first-feast-1800g',
+  'tc-4e50c58957-reference-pack',
+  'cmd-source-sku-056ca5c0a341fff1',
+  'yagu-7570678-studio',
+
+  'yagu-7514697-studio',
+  'leonardo-light-1800g',
+  'dog-orijen-original-6-',
+  'acana-puppy-small-breed-6kg',
+
+  'heybopet-hb-pwfs-s30s-white',
+  'orijen-kitten-340g',
+  'yagu-7517019-catalog-pack',
+  'acana-classics-wild-coast-9-7kg',
+  'yagu-7516254-studio',
+
+  'acana-indoor-1800g',
+  'cat-litter-sanicat-clumping-unscented-8l-pack',
+  'dog-orijen-puppy-6-',
+  'cmd-source-sku-a381b318c9f10c8d',
+
+  'leonardo-wet-pure-chicken-85g',
+  'orijen-original-1800g',
+  'tc-0707caf730-reference-pack',
+  'yagu-7570675-studio',
+  'acana-light-fit-6kg',
+
+  'yagu-7514626-catalog-pack',
+  'acana-pacifica-1800g',
+  'royal-canin-chihuahua-adult-3kg',
+  'acana-adult-dog-11-4kg',
+
+  'cat-litter-uniko-tofu-6l-pack',
+  'rc-kitten-regular-4000g',
+  'heybopet-pwf-filters-3-box',
+  'yagu-7515987-studio',
+  'dog-orijen-six-fish-6-',
+
+  'orijen-six-fish-340g',
+  'yagu-7515817-catalog-pack',
+  'acana-grass-fed-lamb-11-4kg',
+  'cmd-source-sku-e8da119abc72f104',
+
+  'acana-bountiful-1800g',
+  'tc-dc3d6d94c2-reference-pack',
+  'yagu-7514696-studio',
+  'yagu-7516214-studio',
+  'orijen-regional-red-6kg',
+
+  'leonardo-fresh-salmon-1500g',
+  'yagu-7515988-catalog-pack',
+  'cmd-source-sku-b055f90a65e86239',
+  'yagu-7510074-studio',
+
+  'orijen-original-340g',
+  'cat-litter-yommy-tofu-verde-6l-pack',
+  'acana-homestead-1800g',
+  'cmd-source-sku-86be6181dcb9b00a',
+  'dog-orijen-small-breed-4-5-',
+
+  'yagu-1127352',
+  'rc-wet-85g',
+  'cmd-source-sku-f5abb44131a44a05',
+  'dog-orijen-original-11-4kg',
+
+  'tc-768abf17c2-reference-pack',
+  'cat-litter-uniko-tofu-18l-pack',
+  'orijen-six-fish-1800g',
+  'cmd-source-sku-c1f3fa4057017ebb',
+  'acana-classics-red-meat-9-7kg',
+
+  'yagu-7514629-catalog-pack',
+  'acana-bountiful-4500g',
+  'yagu-7516245-studio',
+  'acana-senior-6kg',
+
+  'yagu-1127842',
+  'yagu-M0295-studio',
+  'orijen-original-5400g',
+  'acana-puppy-11-4kg',
+  'acana-wild-prairie-6kg',
+
+  'orijen-kitten-1800g',
+  'cat-litter-yommy-tofu-lavanda-6l-pack',
+  'yagu-1128082',
+  'cmd-source-sku-d31c7ed51af2e7fc',
+
+  'yagu-1128036',
+  'yagu-1127893',
+  'acana-dog-red-meat-11-4kg',
+  'cmd-source-sku-eca654eedc2e3e73',
+  'yagu-7510082-studio'
+].map((id, index) => [id, index]));
+
 function pickupPage(){
   const copy={
     es:{title:'Disponible para recogida',intro:'Productos que tenemos físicamente en València. Consulta el formato y escríbenos para acordar la recogida',all:'Todos',cat:'Para gatos',dog:'Para perros',categories:'Categorías',allProducts:'Todos los productos',empty:'Todavía no hay productos confirmados para recogida',unavailable:'No podemos comprobar la disponibilidad ahora',contact:'Consultar la recogida',view:'Ver producto',price:'Precio con IVA',unknown:'Precio por confirmar'},
@@ -299,6 +397,8 @@ function pickupPage(){
     .filter(sku=>sku.pickupAvailable===true && sku.saleStatus!=='unavailable' && !sku.storefrontRetired &&
       (!selectedPet || product.pet===selectedPet))
     .map(sku=>({product,sku})));
+  available.sort((left,right)=>(pickupMerchandisingOrder.get(left.sku.id)??Infinity)
+    -(pickupMerchandisingOrder.get(right.sku.id)??Infinity));
   const groups=homeGroupsForPet(selectedPet||'cat',[...new Set(available.map(item=>item.product))]);
   if(!selectedPet){
     const known=new Set(groups.map(group=>group.id));
