@@ -41,9 +41,11 @@ export async function createStripeCheckout(order, language = 'es', fetcher = fet
     throw Object.assign(new Error('Сумма заказа слишком мала для оплаты картой'), { status: 400 });
   const base = new URL(process.env.PUBLIC_BASE_URL);
   const success = new URL(base);
-  success.hash = '/checkout/confirmation?session_id={CHECKOUT_SESSION_ID}';
+  success.hash = order.delivery_mode === 'pickup'
+    ? '/pickup-confirmation?session_id={CHECKOUT_SESSION_ID}'
+    : '/checkout/confirmation?session_id={CHECKOUT_SESSION_ID}';
   const cancel = new URL(base);
-  cancel.hash = '/checkout/payment-error';
+  cancel.hash = order.delivery_mode === 'pickup' ? '/pickup-cart?payment=cancelled' : '/checkout/payment-error';
   const params = new URLSearchParams({
     mode: 'payment',
     locale: language === 'ru' ? 'ru' : 'es',
