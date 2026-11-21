@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { priceQuote } from '../server/pricing.js';
 import { pickupBasketPage } from '../pickup-flow.js';
 import { createStripeCheckout } from '../server/stripe.js';
+import { accessoryDetail } from '../accessory-ui.js';
 
 const product = { id:'litter', name:'Arena Uniko', variants:[{ id:'litter-6l', label:'6 l',
   price:10.99, pickupAvailable:true, saleStatus:'available' }] };
@@ -37,6 +38,19 @@ test('pickup quote can sell only enough on-hand units and charges no shipping', 
   const unavailable = priceQuote([{productId:'litter',variantId:'litter-6l',qty:2}],
     [{...variant,reserved_quantity:1}],null,0);
   assert.equal(unavailable.items[0].sourceMode,'open_order');
+});
+
+test('a product opened from pickup keeps pickup actions and marks unavailable variants', () => {
+  const detailProduct = {...product,image:'/test.webp',description:'Arena de tofu',details:[],
+    variants:[{...product.variants[0],name:'Arena Uniko',image:'/test.webp',sizes:['6 l']},
+      {id:'litter-18l',label:'18 l',name:'Arena Uniko',image:'/test.webp',price:19.99,
+        pickupAvailable:false,saleStatus:'available',sizes:['18 l']}],defaultVariantId:'litter-6l'};
+  const html = accessoryDetail(detailProduct,{crumbs:()=>'',imageBlock:()=>'',escape:String,
+    icon:()=>'',favorites:[],goodTogether:()=>'',money:value=>`${value} €`,translate:value=>value,
+    variantId:'litter-6l',quantity:1,language:'es',pickupMode:true});
+  assert.match(html,/Añadir para recoger/);
+  assert.match(html,/No disponible para recoger/);
+  assert.doesNotMatch(html,/Entrega en 24-48 horas|Pedir con entrega/);
 });
 
 test('Stripe redirects pickup to its own confirmation and basket', async () => {
