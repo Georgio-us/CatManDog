@@ -447,7 +447,9 @@ function pickupTogether(product) {
   const copy = {es:'También disponible para recoger',ru:'Ещё можно забрать',uk:'Також можна забрати'}[locale()];
   const suggestions = catalogProducts.filter(candidate => candidate.id !== product.id)
     .map(candidate => ({product:candidate,sku:snapshots(candidate).find(sku => sku.pickupAvailable && canBuy(sku))}))
-    .filter(entry => entry.sku).slice(0,4);
+    .filter(entry => entry.sku && (entry.product.pet === product.pet || entry.product.pet === 'both' || product.pet === 'both'))
+    .sort((a,b) => Number(b.product.category === product.category) - Number(a.product.category === product.category))
+    .slice(0,4);
   return suggestions.length ? `<section class="section recommendations"><div class="section-head"><h2>${copy}</h2><a class="text-link" href="/recogida">${{es:'Ver todos',ru:'Все товары',uk:'Усі товари'}[locale()]}</a></div><div class="product-grid">${suggestions.map(({product,sku}) => card(product,sku)).join('')}</div></section>` : '';
 }
 const journalVisuals={home:{src:'https://img.catmandog.es/assets/journal-home-v2.webp',alt:'Кошка и собака отдыхают вместе на мягкой лежанке'},play:{src:'https://img.catmandog.es/assets/journal-play-v2.webp',alt:'Кошка играет с перьевой удочкой'},travel:{src:'https://img.catmandog.es/assets/journal-travel-v2.webp',alt:'Кошка сидит в открытой переноске'}};
