@@ -1,5 +1,5 @@
 import { createUsefulUI } from './useful.js?v=yagu-toys-20261116';
-import { createAccountUI } from './account.js?v=localized-api-errors-20261121';
+import { createAccountUI } from './account.js?v=recurring-builder-20261121';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
 import { accessoryDetail, customerDetails } from './accessory-ui.js?v=pickup-cart-labels-20261121';
 import { atelierDescriptionMarkup } from './atelier-description.js';
@@ -13,7 +13,7 @@ import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, 
 import { categories, products, catalogProducts, articles } from './data.js?v=litter-studio-20261121';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=yagu-toys-20261116';
 import { createCheckoutUI } from './checkout-ui.js?v=delivery-exceptions-20261121';
-import { normalizeRecurringDraft, recurringChoiceFromCart, renderRecurringCart } from './recurring-cart.js?v=recurring-cards-20261117';
+import { normalizeRecurringDraft, recurringChoiceFromCart, renderRecurringCart, recurringKey } from './recurring-cart.js?v=recurring-next-date-20261121';
 import { availabilityRequestPage } from './availability-request-ui.js?v=yagu-toys-20261116';
 import { orderVariantId } from './order-progress.js';
 import { applyServerCatalog } from './server-prices.js?v=atelier-long-copy-3-20261121';
@@ -111,6 +111,24 @@ let toastTimer;
 let lastCartAddition = null;
 const account = createAccountUI({ escape, icon, money, products, imageBlock, render, notify, publicStore: true,
   getCart: () => cart.map(item => ({ ...item, productId: item.productId || item.id, price: cartUnitPrice(item), name: cartSku(item, products)?.name })),
+  startRecurringBasket: (items, cadenceWeeks, nextDate) => {
+    const selected=[];
+    for(const item of items){
+      const product=products.find(entry=>entry.id===item.productId);
+      const sku=product && resolveVariant(product,item.variantId);
+      if(!sku || !canBuy(sku)) continue;
+      const next={id:product.id,productId:product.id,variantId:hasVariants(product)?sku.id:null,
+        variantLabel:sku.label||'',size:sku.label||item.size||'',qty:Math.min(99,item.qty)};
+      const existing=cart.find(entry=>sameCartSku(entry,next));
+      if(existing) existing.qty=Math.max(existing.qty,next.qty);
+      else cart.push(next);
+      selected.push(recurringKey(next));
+    }
+    if(!selected.length) return false;
+    recurringDraft={enabled:true,cadenceWeeks,nextDate,items:[...new Set(selected)]};
+    persist();saveRecurringDraft();
+    return true;
+  },
   repeatOrder: items => items.forEach(item => add(item.productId, item.size, item.qty, item.giftConfig, item.variantId))
 });
 const checkoutPromo = () => account.promo();
@@ -897,7 +915,7 @@ app.addEventListener('submit', async event => {
 });
 app.addEventListener('change', event => {
   if (event.target.hasAttribute('data-recurring-enable') || event.target.hasAttribute('data-recurring-item') ||
-      event.target.hasAttribute('data-recurring-weeks')) {
+      event.target.hasAttribute('data-recurring-weeks') || event.target.hasAttribute('data-recurring-next-date')) {
     recurringDraft = normalizeRecurringDraft(recurringDraft, cart);
     if (event.target.hasAttribute('data-recurring-enable')) {
       recurringDraft.enabled = event.target.checked;
@@ -905,6 +923,7 @@ app.addEventListener('change', event => {
         recurringDraft.items = cart.map(item => `${item.productId || item.id}|${item.variantId || ''}`);
     }
     if (event.target.hasAttribute('data-recurring-weeks')) recurringDraft.cadenceWeeks = Number(event.target.value);
+    if (event.target.hasAttribute('data-recurring-next-date')) recurringDraft.nextDate = event.target.value;
     if (event.target.hasAttribute('data-recurring-item')) {
       const keys = new Set(recurringDraft.items);
       if (event.target.checked) keys.add(event.target.value); else keys.delete(event.target.value);
@@ -922,7 +941,7 @@ app.addEventListener('change', event => {
   }
   checkout.change(event.target);
 });
-app.addEventListener('input', event => { if (event.target.closest('[data-service-form]')) checkout.invalidateService(); });
+app.addEventListener('input', event => { account.input(event.target); if (event.target.closest('[data-service-form]')) checkout.invalidateService(); });
 app.addEventListener('change', event => { if (event.target.closest('[data-service-form]')) checkout.invalidateService(); });
 app.addEventListener('click', event => {
   const button = event.target.closest('button');

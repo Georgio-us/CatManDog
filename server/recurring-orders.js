@@ -2,6 +2,14 @@ import { randomUUID } from 'node:crypto';
 
 const fail = (message, status = 400) => { throw Object.assign(new Error(message), { status }); };
 export const recurringCadences = [2, 4, 6];
+function desiredNextDate(value) {
+  if (value === undefined || value === null || value === '') return null;
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) fail('Выберите дату следующего заказа');
+  const date = new Date(`${value}T12:00:00Z`);
+  if (Number.isNaN(date.getTime()) || date.toISOString().slice(0,10) !== value ||
+      value <= new Date().toISOString().slice(0,10)) fail('Выберите будущую дату следующего заказа');
+  return value;
+}
 
 export function selectedRecurringItems(selection, purchased) {
   if (!Array.isArray(selection) || !selection.length || selection.length > 50)
@@ -25,7 +33,8 @@ export function recurringChoice(choice, purchased) {
   if (!choice) return null;
   const cadenceWeeks = Number(choice.cadenceWeeks);
   if (!recurringCadences.includes(cadenceWeeks)) fail('Выберите период регулярного заказа');
-  return { cadenceWeeks, items: selectedRecurringItems(choice.items, purchased) };
+  const nextDate=desiredNextDate(choice.nextDate);
+  return { cadenceWeeks, items: selectedRecurringItems(choice.items, purchased), ...(nextDate ? {nextDate} : {}) };
 }
 
 const orderLines = async (db, orderId) => (await db.query(`SELECT product_id AS "productId",
@@ -40,9 +49,9 @@ export async function activateRecurringIntent(db, orderId) {
   const choice = recurringChoice(order.recurring_intent, await orderLines(db, orderId));
   const inserted = await db.query(`INSERT INTO recurring_orders
     (id,customer_id,source_order_id,items,cadence_weeks,next_review_on)
-    VALUES($1,$2,$3,$4,$5,current_date+($5*7))
+    VALUES($1,$2,$3,$4,$5,coalesce($6::date,current_date+($5*7)))
     ON CONFLICT(source_order_id) DO NOTHING RETURNING id`,
-  [randomUUID(), order.customer_id, orderId, JSON.stringify(choice.items), choice.cadenceWeeks]);
+  [randomUUID(), order.customer_id, orderId, JSON.stringify(choice.items), choice.cadenceWeeks, choice.nextDate || null]);
   return inserted.rows[0]?.id || null;
 }
 
@@ -56,9 +65,9 @@ export async function createRecurringFromPurchase(db, customer, orderId, choice)
   const normalized = recurringChoice(choice, await orderLines(db, orderId));
   const inserted = await db.query(`INSERT INTO recurring_orders
     (id,customer_id,source_order_id,items,cadence_weeks,next_review_on)
-    VALUES($1,$2,$3,$4,$5,current_date+($5*7))
+    VALUES($1,$2,$3,$4,$5,coalesce($6::date,current_date+($5*7)))
     ON CONFLICT(source_order_id) DO NOTHING RETURNING id`,
-  [randomUUID(), customer.id, orderId, JSON.stringify(normalized.items), normalized.cadenceWeeks]);
+  [randomUUID(), customer.id, orderId, JSON.stringify(normalized.items), normalized.cadenceWeeks, normalized.nextDate || null]);
   if (!inserted.rows[0]) fail('Для этого заказа регулярный заказ уже сохранён', 409);
   return inserted.rows[0].id;
 }
@@ -73,7 +82,7 @@ export async function listRecurringForCustomer(db, customerId) {
 
 export async function updateRecurringForCustomer(db, customerId, id, change) {
   if (!change || typeof change !== 'object' || Array.isArray(change)) fail('Некорректные изменения');
-  const { rows } = await db.query(`SELECT source_order_id,items,cadence_weeks,status
+  const { rows } = await db.query(`SELECT source_order_id,items,cadence_weeks,status,next_review_on
     FROM recurring_orders WHERE id=$1 AND customer_id=$2`, [id, customerId]);
   const plan = rows[0];
   if (!plan) fail('Регулярный заказ не найден', 404);
@@ -84,11 +93,12 @@ export async function updateRecurringForCustomer(db, customerId, id, change) {
   if (!recurringCadences.includes(cadence)) fail('Выберите период регулярного заказа');
   const items = change.items === undefined ? plan.items
     : selectedRecurringItems(change.items, await orderLines(db, plan.source_order_id));
+  const nextDate=desiredNextDate(change.nextDate);
   await db.query(`UPDATE recurring_orders SET items=$3,cadence_weeks=$4,status=$5,
-    next_review_on=CASE WHEN $5='active' AND ($6!='active' OR $4!=$7)
+    next_review_on=CASE WHEN $8::date IS NOT NULL THEN $8::date WHEN $5='active' AND ($6!='active' OR $4!=$7)
       THEN current_date+($4*7) ELSE next_review_on END,updated_at=now()
     WHERE id=$1 AND customer_id=$2`,
-  [id, customerId, JSON.stringify(items), cadence, status, plan.status, plan.cadence_weeks]);
+  [id, customerId, JSON.stringify(items), cadence, status, plan.status, plan.cadence_weeks, nextDate]);
 }
 
 export async function listRecurringDue(db) {
