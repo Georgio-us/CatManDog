@@ -179,6 +179,34 @@ export async function importCatalog(db, items = products) {
       }
     }
     if (items === products) {
+      const litterStudioMigration = 'litter_studio_r2_images_2026_11_21';
+      const done = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [litterStudioMigration]);
+      if (!done.rows.length) {
+        const base = 'https://img.catmandog.es/assets/litter-studio-2026-11-21/';
+        for (const [id, file] of [
+          ['cat-litter-yommy-tofu-lavanda-6l-pack', 'yommy-tofu-lavanda-6l'],
+          ['cat-litter-yommy-tofu-verde-6l-pack', 'yommy-tofu-verde-6l'],
+          ['cat-litter-uniko-tofu-6l-pack', 'uniko-tofu-6l'],
+          ['cat-litter-uniko-tofu-18l-pack', 'uniko-tofu-18l'],
+          ['cat-litter-sanicat-clumping-unscented-8l-pack', 'sanicat-clumping-8l']
+        ]) {
+          await client.query(`UPDATE catalog_variants SET image_path=$2,updated_at=now()
+            WHERE id=$1 AND image_path=$3`,
+          [id, `${base}${file}-studio-v1.webp`, `/media/litter-2026-11-21/${file}.webp`]);
+        }
+        for (const [id, file] of [
+          ['cat-litter-yommy-tofu-lavanda-6l', 'yommy-tofu-lavanda-6l'],
+          ['cat-litter-uniko-tofu-18l', 'uniko-tofu-18l'],
+          ['cat-litter-sanicat-clumping-unscented-8l', 'sanicat-clumping-8l']
+        ]) {
+          await client.query(`UPDATE catalog_products SET image_path=$2
+            WHERE id=$1 AND image_path=$3`,
+          [id, `${base}${file}-studio-v1.webp`, `/media/litter-2026-11-21/${file}.webp`]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [litterStudioMigration]);
+      }
+    }
+    if (items === products) {
       const litterStockMigration = 'litter_owner_confirmed_minimum_stock_2026_11_21';
       const done = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [litterStockMigration]);
       if (!done.rows.length) {
