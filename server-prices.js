@@ -57,6 +57,9 @@ export function applyServerCatalog(products, catalogProducts, entries) {
     const original = current.get(id);
     const product = original || { id, isReal: true, tag: '', line: first.brand || 'CatManDog',
       optionLabel: 'Вариант', defaultVariantId: first.variant_id, variants: [] };
+    const atelierEditorial = original?.brand === 'Cat’s Atelier' && Boolean(original.manufacturerSku);
+    const editorialName = atelierEditorial ? original.name : null;
+    const editorialDescription = atelierEditorial ? original.description : null;
     if (!product.tag && catalogTags[id]) product.tag = catalogTags[id];
     // A legacy boot card may have no variants. Once the server provides this SKU,
     // render it through the server-aware detail flow so sale status is respected.
@@ -64,16 +67,16 @@ export function applyServerCatalog(products, catalogProducts, entries) {
     const previousProductImage = product.image;
     const previousVariantImages = new Map((Array.isArray(product.variants) ? product.variants : [])
       .map(variant => [variant.id, variant.image]));
-    product.name = first.name;
+    product.name = editorialName || first.name;
     product.brand = first.brand || '';
     product.category = first.category;
     product.pet = first.pet;
     product.foodType = first.food_type || undefined;
     if (product.category === 'Корм' && rows.length > 1) product.optionLabel = 'Фасовка';
-    product.description = first.description || '';
+    product.description = editorialDescription || first.description || '';
     product.details = Array.isArray(first.details) ? first.details : [];
     product.displayPriority = Math.max(...rows.map(row => Number(row.display_priority) || 0));
-    if (first.image_path) product.image = catalogImage(first.image_path, [previousProductImage], first.name);
+    if (first.image_path) product.image = catalogImage(first.image_path, [previousProductImage], product.name);
     const existing = new Map((Array.isArray(product.variants) ? product.variants : []).map(variant => [variant.id, variant]));
     const variants = rows.map(row => {
       const sku = existing.get(row.variant_id) || (row.variant_id === product.id ? product : {
@@ -91,7 +94,7 @@ export function applyServerCatalog(products, catalogProducts, entries) {
         ? catalogImage(row.variant_image_path,
           [previousVariantImages.get(row.variant_id), previousProductImage], product.name)
         : product.image;
-      sku.description = row.variant_description || product.description;
+      sku.description = atelierEditorial ? product.description : row.variant_description || product.description;
       sku.details = Array.isArray(row.variant_details) && row.variant_details.length
         ? row.variant_details : product.details;
       // Keep the stock record separate from checkout eligibility. An unconfirmed

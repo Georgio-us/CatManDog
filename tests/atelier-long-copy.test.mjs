@@ -4,6 +4,7 @@ import { catsAtelierProducts } from '../cats-atelier-products.js';
 import { atelierDescription, atelierDescriptionMarkup } from '../atelier-description.js';
 import { accessoryDetail } from '../accessory-ui.js';
 import { atelierDefaults } from '../atelier-configuration.js';
+import { applyServerCatalog } from '../server-prices.js';
 
 const bySku = sku => catsAtelierProducts.find(product => product.manufacturerSku === sku);
 const escape = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;');
@@ -59,4 +60,23 @@ test('short introduction and expanded copy render in a closed, localized disclos
   assert.match(html, /Más sobre el producto/);
   assert.match(html, /El estante de pared Double Arch de 100 cm/);
   assert.equal(atelierDescriptionMarkup({ brand: 'Other' }, 'ru', escape), '');
+});
+
+test('live catalog refresh preserves corrected Cat’s Atelier editorial names and copy', () => {
+  const original = structuredClone(bySku('SH-M-A60-G'));
+  const expectedName = original.name;
+  const expectedDescription = original.description;
+  const products = [original], visible = [original];
+  applyServerCatalog(products, visible, [{
+    product_id: original.id, variant_id: original.id,
+    name: 'Cat’s Atelier - оконная полка Arc 60 см',
+    brand: original.brand, category: original.category, pet: 'cat',
+    label: '1 шт', description: 'Старое описание', variant_description: 'Старое описание',
+    image_path: original.image.src, details: original.details,
+    availability: 'source_on_demand', source_orderable: true,
+    availableForCart: true, referencePriceCents: 10000
+  }]);
+  assert.equal(products[0].name, expectedName);
+  assert.equal(products[0].description, expectedDescription);
+  assert.equal(products[0].image.alt, expectedName);
 });
