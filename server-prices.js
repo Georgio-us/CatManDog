@@ -1,6 +1,6 @@
 import { hasVariants } from './variants.js?v=sale-price-policy-20261109';
 import { orderedVariants } from './product-content.js?v=catalog-sku-audit-20261110';
-import { catsAtelierLegacyCopy } from './cats-atelier-products.js?v=atelier-long-copy-20261121';
+import { catsAtelierLegacyCopy } from './cats-atelier-products.js?v=atelier-long-copy-2-20261121';
 
 const catalogTags = {
   'cmd-source-39c2d5db76be47f7': 'Мелкие породы',
