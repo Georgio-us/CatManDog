@@ -200,10 +200,34 @@ function orderCard(order) {
       `<option value="${status}" ${status === order.status ? 'selected' : ''}>${(pickup ? {received:'Получен',packing:'Готов к выдаче',delivered:'Выдан',cancelled:'Отменён'} : {received:'Получен',packing:'Собираем',delivering:'Везём',delivered:'Доставлен',cancelled:'Отменён'})[status]}</option>`).join('')}</select></label>
     <label>Заметка<input name="note" maxlength="300" class="wide-input" placeholder="Необязательно"></label><button>Сохранить статус</button></form></article>`;
 }
-function renderOrders(orders) {
+function externalSaleCard(sale) {
+  const day = String(sale.saleDate || '').slice(0, 10).split('-').reverse().join('.');
+  const channel = { privatbank_ua:'Украинская карта · PrivatBank',
+    bank_transfer:'Банковский перевод', cash:'Наличные' }[sale.paymentChannel] || sale.paymentChannel;
+  return `<article class="admin-card order-card"><div class="admin-variant-top"><div>
+    <h2>${escape(sale.customerNote || sale.reference)} · продажа вне сайта</h2>
+    <p class="admin-muted">${escape(day)} · ${escape(channel)} · ${sale.paymentStatus === 'paid' ? 'Оплата получена' : 'Оплата ожидается'}</p>
+    </div><strong>${euros(sale.grossCents)}</strong></div>
+    <ul class="admin-items">${sale.items.map(item => `<li><strong>${escape(item.name)}</strong> · ${item.quantity} шт × ${euros(item.unitPriceCents)}
+      <br><span class="admin-muted">Закупка этой строки: ${euros(item.purchaseCostCents)} · SKU ${escape(item.variantId)} · склад списан</span></li>`).join('')}</ul>
+    <p>Получено: ${euros(sale.grossCents)} · Закупка паучей: ${euros(sale.productCostCents)} · Подарок: ${euros(sale.giftCostCents)} · Разница: <strong>${euros(sale.marginCents)}</strong></p>
+    <p class="admin-muted">Документ: ${sale.documentationStatus === 'recorded' ? 'оформлен' : 'ожидает оформления'} · Подарочный Churu учтён отдельно от продаваемого склада. Склад по этой продаже повторно не списывать.</p></article>`;
+}
+function renderOrders(orders, externalSales = []) {
   const real = orders.filter(order => !order.is_test);
   const tests = orders.filter(order => order.is_test);
-  $('admin-content').innerHTML = `<section class="admin-section-head"><div><h2>Заказы покупателей</h2><p class="admin-muted">Оплаченные и ожидающие обработки заказы магазина</p></div></section>
+  const stripeReceived = real.filter(order => order.payment_status === 'paid')
+    .reduce((sum, order) => sum + Number(order.total_cents || 0), 0);
+  const externalReceived = externalSales.filter(sale => sale.paymentStatus === 'paid')
+    .reduce((sum, sale) => sum + Number(sale.grossCents || 0), 0);
+  $('admin-content').innerHTML = `<section class="admin-section-head"><div><h2>Продажи и оплаты</h2><p class="admin-muted">Заказы сайта и продажи вне сайта показаны отдельно</p></div></section>
+    <section class="admin-card"><h2>Получено по каналам</h2><div class="audit-overview overview-grid">
+      <div><strong>${euros(stripeReceived)}</strong><span>Сайт · Stripe</span></div>
+      <div><strong>${euros(externalReceived)}</strong><span>Вне сайта · другие способы</span></div>
+    </div></section>
+    <section class="admin-section-head"><div><h2>Продажи вне сайта</h2><p class="admin-muted">Фактическая продажа, способ оплаты и расход склада</p></div></section>
+    ${externalSales.length ? externalSales.map(externalSaleCard).join('') : '<p class="admin-card">Продаж вне сайта пока нет</p>'}
+    <section class="admin-section-head"><div><h2>Заказы сайта · Stripe</h2><p class="admin-muted">Оплаченные и ожидающие обработки заказы магазина</p></div></section>
     ${real.length ? real.map(orderCard).join('') : '<p class="admin-card">Заказов покупателей пока нет</p>'}
     ${tests.length ? `<details class="admin-card admin-test-history" ${showTestOrders ? 'open' : ''}><summary>История тестовых заказов · ${tests.length}${disclosureIcon}</summary>
       <p class="admin-muted">Тестовые заказы не входят в выручку и потребность в закупке</p>${tests.map(orderCard).join('')}</details>` : ''}`;
@@ -1378,10 +1402,10 @@ async function load() {
       message(`На складе: ${variantRows.filter(item => (item.stock_quantity ?? 0) > 0).length} SKU · Дефицит: ${variantRows.filter(item => item.stock_position < 0).length} SKU`);
       return;
     }
-    const path = { orders:'/api/admin/orders' }[tab];
-    const result = await api(path);
-    renderOrders(result.orders);
-    message(`Заказов покупателей: ${result.orders.filter(order => !order.is_test).length}`);
+    const [result, external] = await Promise.all([
+      api('/api/admin/orders'), api('/api/admin/external-sales')]);
+    renderOrders(result.orders, external.sales);
+    message(`Заказов сайта: ${result.orders.filter(order => !order.is_test).length} · Продаж вне сайта: ${external.sales.length}`);
   } catch (error) { message(error.message); }
 }
 $('admin-lock').addEventListener('click', async () => {

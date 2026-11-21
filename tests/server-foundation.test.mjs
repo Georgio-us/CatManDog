@@ -83,6 +83,7 @@ test('full catalog import archives retired rows once and preserves edited produc
         stock.set(params[0], stock.get(params[0]) - 10);
         return { rows: [{ stock_quantity: stock.get(params[0]), reserved_quantity: 0 }] };
       }
+      if (/INSERT INTO external_sale_items/u.test(sql)) return { rows: [], rowCount: 1 };
       return { rows: [] };
     },
     release() {}
@@ -99,6 +100,14 @@ test('full catalog import archives retired rows once and preserves edited produc
   assert.equal(stock.get('leonardo-wet-pure-chicken-85g'), 6);
   const saleMovements = queries.filter(([sql]) => sql.includes("'manual_sale',-10"));
   assert.equal(saleMovements.length, 2);
+  const externalSale = queries.find(([sql]) => sql.includes('INSERT INTO external_sales'));
+  assert.equal(externalSale?.[1][1], 'neighbor-pouches-2026-11-21');
+  assert.match(externalSale?.[0] || '', /2800,2279,46,'pending'/u);
+  const linkedSaleItems = queries.filter(([sql]) => sql.includes('INSERT INTO external_sale_items'));
+  assert.deepEqual(linkedSaleItems.map(([, params]) => params.slice(1, 4)), [
+    ['royalcanin-93e8aeca-85g', 149, 1253],
+    ['leonardo-wet-pure-chicken-85g', 131, 1026]
+  ]);
   assert.ok(queries.filter(([sql]) => sql.startsWith('INSERT INTO catalog_products'))
     .every(([sql]) => sql.includes('ON CONFLICT(id) DO NOTHING')));
   assert.ok(queries.filter(([sql]) => sql.startsWith('INSERT INTO catalog_variants'))

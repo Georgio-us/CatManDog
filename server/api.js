@@ -15,6 +15,7 @@ import { currentStaff, currentVisitStaff, createStaffSession, staffCookie, clear
   staffToken, staffVisitCookie, clearStaffVisitCookie,
   revokeStaffSession, bootstrapOwner } from './staff.js';
 import { financePreview } from './finance.js';
+import { listExternalSales } from './external-sales.js';
 import { loadAdminOrders, loadStockCommitments, loadOpenOrderDemand,
   loadCommercialPositionAdjustments } from './order-operations.js';
 import { backupConfiguration, listBackups } from './backup.js';
@@ -1985,6 +1986,8 @@ async function adminRoute(db, req, res, path) {
   if (path === '/api/admin/orders' && req.method === 'GET') {
     return json(res, 200, { orders: await loadAdminOrders(db) });
   }
+  if (path === '/api/admin/external-sales' && req.method === 'GET')
+    return json(res, 200, { sales: await listExternalSales(db) });
   if (path === '/api/admin/recurring-orders' && req.method === 'GET')
     return json(res, 200, { orders: await listRecurringDue(db) });
   const recurringReview = path.match(/^\/api\/admin\/recurring-orders\/([a-f0-9-]+)\/reviewed$/);

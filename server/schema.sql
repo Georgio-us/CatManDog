@@ -476,6 +476,34 @@ CREATE INDEX IF NOT EXISTS inventory_movements_order_idx ON inventory_movements(
 CREATE INDEX IF NOT EXISTS inventory_movements_purchase_item_idx
   ON inventory_movements(purchase_order_item_id);
 
+CREATE TABLE IF NOT EXISTS external_sales (
+  id uuid PRIMARY KEY,
+  reference text NOT NULL UNIQUE,
+  sale_date date NOT NULL,
+  customer_note text NOT NULL DEFAULT '',
+  payment_channel text NOT NULL,
+  payment_status text NOT NULL CHECK (payment_status IN ('pending','paid','refunded')),
+  paid_on date,
+  gross_cents integer NOT NULL CHECK (gross_cents >= 0),
+  product_cost_cents integer NOT NULL CHECK (product_cost_cents >= 0),
+  gift_cost_cents integer NOT NULL DEFAULT 0 CHECK (gift_cost_cents >= 0),
+  documentation_status text NOT NULL DEFAULT 'pending'
+    CHECK (documentation_status IN ('pending','recorded')),
+  note text NOT NULL DEFAULT '',
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS external_sale_items (
+  sale_id uuid NOT NULL REFERENCES external_sales(id) ON DELETE CASCADE,
+  variant_id text NOT NULL REFERENCES catalog_variants(id),
+  quantity integer NOT NULL CHECK (quantity > 0),
+  unit_price_cents integer NOT NULL CHECK (unit_price_cents >= 0),
+  purchase_cost_cents integer NOT NULL CHECK (purchase_cost_cents >= 0),
+  stock_movement_id uuid NOT NULL UNIQUE REFERENCES inventory_movements(id),
+  PRIMARY KEY(sale_id,variant_id)
+);
+CREATE INDEX IF NOT EXISTS external_sales_sale_date_idx
+  ON external_sales(sale_date DESC,created_at DESC);
+
 -- Verified, fully loaded cost of the currently received batch for a SKU.
 -- Separate from the supplier tariff stored on catalog_variants. This table
 -- never changes stock quantities and can be replaced when a new batch arrives.

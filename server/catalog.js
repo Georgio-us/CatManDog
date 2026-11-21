@@ -890,6 +890,31 @@ export async function importCatalog(db, items = products) {
         }
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [saleMigration]);
       }
+      const ledgerMigration = 'owner_offsite_pouch_sale_paid_ledger_2026_11_21';
+      const ledgerRecorded = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [ledgerMigration]);
+      if (!ledgerRecorded.rows.length) {
+        const saleId = randomUUID();
+        await client.query(`INSERT INTO external_sales
+          (id,reference,sale_date,customer_note,payment_channel,payment_status,paid_on,
+           gross_cents,product_cost_cents,gift_cost_cents,documentation_status,note)
+          VALUES($1,$2,$3,$4,$5,'paid',$3,2800,2279,46,'pending',$6)`,
+        [saleId, 'neighbor-pouches-2026-11-21', '2026-11-21', 'Соседка', 'privatbank_ua',
+          'Владелец подтвердил получение оплаты на украинскую карту; банковская сумма и документ отдельно не проверены']);
+        for (const [variantId, unitPriceCents, purchaseCostCents] of [
+          ['royalcanin-93e8aeca-85g', 149, 1253],
+          ['leonardo-wet-pure-chicken-85g', 131, 1026]
+        ]) {
+          const linked = await client.query(`INSERT INTO external_sale_items
+            (sale_id,variant_id,quantity,unit_price_cents,purchase_cost_cents,stock_movement_id)
+            SELECT $1,$2,10,$3,$4,id FROM inventory_movements WHERE idempotency_key=$5`,
+          [saleId, variantId, unitPriceCents, purchaseCostCents,
+            `owner_offsite_sale_2026_11_21_${variantId}`]);
+          if (linked.rowCount !== 1)
+            throw new Error(`Missing stock movement for paid offsite sale: ${variantId}`);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [ledgerMigration]);
+      }
     }
     await client.query('COMMIT');
     return rows.length;
