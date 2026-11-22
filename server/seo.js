@@ -36,10 +36,26 @@ const absoluteImage = image => {
 };
 const price = cents => (cents / 100).toFixed(2);
 const variantUrl = (path, id) => `${origin}${path}?variant=${encodeURIComponent(id)}`;
-const spanishVariantLabel = label => String(label || '')
+export const spanishVariantLabel = label => String(label || '')
+  .replace(/Зелёный чай/giu, 'Té verde')
+  .replace(/Для небольших животных/giu, 'Para animales pequeños')
+  .replace(/Размер\s+([A-Z0-9]+)/giu, 'Talla $1')
+  .replace(/Антрацит/giu, 'Antracita')
+  .replace(/Бежевый/giu, 'Beige')
+  .replace(/Голубой/giu, 'Azul')
+  .replace(/Коричневый/giu, 'Marrón')
+  .replace(/Серый/giu, 'Gris')
+  .replace(/Белый/giu, 'Blanco')
+  .replace(/Лаванда/giu, 'Lavanda')
+  .replace(/около/giu, 'aprox.')
+  .replace(/(\d+)\s*фильтра/giu, '$1 filtros')
   .replace(/(\d+)\s*тюбик(?:а|ов)?/giu, '$1 tubos')
   .replace(/(\d+(?:[,.]\d+)?)\s*кг/gu, '$1 kg')
   .replace(/(\d+(?:[,.]\d+)?)\s*г/gu, '$1 g')
+  .replace(/(\d+(?:[,.]\d+)?)\s*см/gu, '$1 cm')
+  .replace(/(\d+(?:[,.]\d+)?)\s*мл/gu, '$1 ml')
+  .replace(/(\d+(?:[,.]\d+)?)\s*л(?=$|[\s·,])/gu, '$1 L')
+  .replace(/(\d+)\s*штук/gu, '$1 uds.')
   .replace(/(\d+)\s*шт\.?/gu, '$1 uds.');
 
 const articleLinks = articlesEs.map(article =>
@@ -235,7 +251,8 @@ export async function serveMerchantFeed(req, res, pathname, db) {
     const ean = String(variant?.ean || '').replace(/\D/gu, '');
     const size = spanishVariantLabel(row.label || variant?.label);
     const name = published.name || productName(product);
-    const title = size && !name.endsWith(size) ? `${name} - ${size}` : name;
+    const variantTitle = size.split(' · ').filter(part => !name.endsWith(part)).join(' · ');
+    const title = variantTitle ? `${name} - ${variantTitle}` : name;
     const description = productDescription(product, published);
     return `<item><g:id>${escapeXml(row.variant_id)}</g:id><title>${escapeXml(title)}</title><description>${escapeXml(description)}</description><link>${escapeXml(variantUrl(published.path, row.variant_id))}</link><g:image_link>${escapeXml(image)}</g:image_link><g:availability>in_stock</g:availability><g:price>${price(row.sale_price_cents)} EUR</g:price><g:condition>new</g:condition>${product.brand ? `<g:brand>${escapeXml(product.brand)}</g:brand>` : ''}${product.variants?.length > 1 && size ? `<g:item_group_id>${escapeXml(product.id)}</g:item_group_id><g:size>${escapeXml(size)}</g:size>` : ''}${/^\d{8}$|^\d{12,14}$/u.test(ean) ? `<g:gtin>${ean}</g:gtin>` : ''}</item>`;
   }).filter(Boolean);

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { seoDocument, serveMerchantFeed } from '../server/seo.js';
+import { seoDocument, serveMerchantFeed, spanishVariantLabel } from '../server/seo.js';
 import { seoProductForId } from '../seo-products.js';
 import { stockSeoCopy } from '../stock-seo-copy.js';
 
@@ -79,4 +79,13 @@ test('newly released stock pages have substantive Spanish names and descriptions
     assert.ok(copy.description.length >= 110, id);
     assert.doesNotMatch(`${copy.name} ${copy.description}`, /[А-Яа-яЁё]/u, id);
   }
+});
+
+test('stock variant labels in Spanish feed do not retain Russian colors, units or pack notes', () => {
+  const labels=['Размер L','Для небольших животных','8,5 × 4,5 × 6 см',
+    '350 г · около 10 штук','Серый','2 шт - 6 × 5 × 3 см','Голубой','Коричневый',
+    'Белый','3 фильтра','300 мл','8 л','Антрацит · T1 · 52 × 52 × 13 см',
+    'Бежевый · T2 · 65 × 65 × 13 см','Зелёный чай · 6 л','Лаванда · 6 л'];
+  for(const label of labels) assert.doesNotMatch(spanishVariantLabel(label), /[А-Яа-яЁё]/u, label);
+  assert.equal(spanishVariantLabel('350 г · около 10 штук'),'350 g · aprox. 10 uds.');
 });
