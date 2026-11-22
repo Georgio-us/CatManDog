@@ -15,11 +15,27 @@ import { seoCategories, seoCategoryForPath } from '../seo-categories.js';
 import { seoProducts, seoProductForPath } from '../seo-products.js';
 import { seoPickForPath } from '../seo-picks.js';
 import { shellTranslations } from '../shell-translations.js';
+import { catalogSnapshot } from './catalog.js';
 
 const origin = 'https://catmandog.es';
 const shell = new URL('../index.html', import.meta.url);
 const escapeHtml = value => String(value).replace(/[&<>"']/g, character =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[character]);
+const escapeXml = escapeHtml;
+const safeJson = value => JSON.stringify(value).replace(/</gu, '\\u003c');
+const merchantVariant = row => row?.pickup_available && row?.orderable && row?.price_accepted &&
+  Number.isInteger(row.sale_price_cents) && row.sale_price_cents > 0;
+const productImage = (product, row) => row?.variant_image_path || row?.image_path ||
+  product?.image?.src || (typeof product?.image === 'string' ? product.image : '');
+const absoluteImage = image => {
+  if (!image) return '';
+  try {
+    const url = new URL(image, origin);
+    return url.protocol === 'https:' ? url.href : '';
+  } catch { return ''; }
+};
+const price = cents => (cents / 100).toFixed(2);
+const variantUrl = (path, id) => `${origin}${path}?variant=${encodeURIComponent(id)}`;
 
 const articleLinks = articlesEs.map(article =>
   `<a class="article-card" href="/revista/${article.id}"><div class="article-meta"><span>${escapeHtml(article.section)}</span><span>${escapeHtml(article.time)}</span></div><h3>${escapeHtml(article.title)}</h3><p>${escapeHtml(article.summary)}</p></a>`).join('');
@@ -127,9 +143,33 @@ function pageData(pathname) {
   };
 }
 
-export async function seoDocument(pathname) {
+export async function seoDocument(pathname, db = null, selectedVariantId = null) {
   const data = pageData(pathname);
   if (!data) return null;
+  const published = seoProductForPath(pathname);
+  let offerMarkup = '';
+  if (db && published?.indexable) {
+    const product = products.find(item => item.id === published.id);
+    const rows = (await catalogSnapshot(db)).filter(row => row.product_id === published.id);
+    const defaultId = product?.defaultVariantId || product?.variants?.[0]?.defaultVariantId ||
+      product?.variants?.[0]?.id;
+    const selected = rows.find(row => row.variant_id === (selectedVariantId || defaultId));
+    if (merchantVariant(selected)) {
+      const image = absoluteImage(productImage(product, selected));
+      const jsonLd = {
+        '@context': 'https://schema.org', '@type': 'Product',
+        name: productName(product), description: productDescription(product, published),
+        ...(image ? { image: [image] } : {}),
+        sku: selected.variant_id,
+        ...(product.brand ? { brand: { '@type': 'Brand', name: product.brand } } : {}),
+        offers: { '@type': 'Offer', url: variantUrl(pathname, selected.variant_id),
+          priceCurrency: 'EUR', price: price(selected.sale_price_cents),
+          availability: 'https://schema.org/InStock', itemCondition: 'https://schema.org/NewCondition' }
+      };
+      offerMarkup = `<script type="application/ld+json">${safeJson(jsonLd)}</script>`;
+      data.content = data.content.replace('</header>', `</header><p class="product-seo-offer">${escapeHtml(selected.label || '')} - ${price(selected.sale_price_cents)} € · Disponible</p>`);
+    }
+  }
   const template = spanishShell(await readFile(shell, 'utf8'));
   return template
     .replace(/<title>[^<]*<\/title>/u, `<title>${escapeHtml(data.title)}</title>`)
@@ -137,13 +177,14 @@ export async function seoDocument(pathname) {
       `<meta name="description" content="${escapeHtml(data.description)}">`)
     .replace(/<link rel="canonical" href="[^"]*">/u,
       `<link rel="canonical" href="${origin}${pathname}">`)
-    .replace('</head>', `${data.robots ? `<meta name="robots" content="${data.robots}">` : ''}<meta property="og:type" content="${data.type || 'website'}"><meta property="og:title" content="${escapeHtml(data.title)}"><meta property="og:description" content="${escapeHtml(data.description)}"><meta property="og:url" content="${origin}${pathname}">${data.image ? `<meta property="og:image" content="${escapeHtml(data.image)}">` : ''}</head>`)
+    .replace('</head>', `${data.robots ? `<meta name="robots" content="${data.robots}">` : ''}<meta property="og:type" content="${data.type || 'website'}"><meta property="og:title" content="${escapeHtml(data.title)}"><meta property="og:description" content="${escapeHtml(data.description)}"><meta property="og:url" content="${origin}${pathname}">${data.image ? `<meta property="og:image" content="${escapeHtml(data.image)}">` : ''}${offerMarkup}</head>`)
     .replace(/<main id="app">[\s\S]*?<\/main>/u, `<main id="app">${data.content}</main>`);
 }
 
-export async function serveSeo(req, res, pathname) {
+export async function serveSeo(req, res, pathname, db = null) {
   if (req.method !== 'GET' && req.method !== 'HEAD') return false;
-  const body = await seoDocument(pathname);
+  const selectedVariantId = new URL(req.url || pathname, origin).searchParams.get('variant');
+  const body = await seoDocument(pathname, db, selectedVariantId);
   if (!body) return false;
   const noindex = seoCategoryForPath(pathname)?.indexable === false ||
     seoProductForPath(pathname)?.indexable === false || pathname === '/recogida';
@@ -151,6 +192,30 @@ export async function serveSeo(req, res, pathname) {
     'Content-Length': Buffer.byteLength(body), 'Cache-Control': 'no-cache',
     'X-Content-Type-Options': 'nosniff',
     ...(noindex ? { 'X-Robots-Tag': 'noindex' } : {}) });
+  res.end(req.method === 'HEAD' ? undefined : body);
+  return true;
+}
+
+export async function serveMerchantFeed(req, res, pathname, db) {
+  if (pathname !== '/google-products.xml' || !['GET', 'HEAD'].includes(req.method)) return false;
+  if (!db) { res.writeHead(503, { 'Cache-Control': 'no-store' }); res.end(); return true; }
+  const rows = (await catalogSnapshot(db)).filter(merchantVariant);
+  const items = rows.map(row => {
+    const published = seoProducts.find(item => item.id === row.product_id && item.indexable);
+    if (!published) return '';
+    const product = products.find(item => item.id === row.product_id);
+    const image = absoluteImage(productImage(product, row));
+    if (!product || !image) return '';
+    const variant = product.variants?.find(item => item.id === row.variant_id);
+    const ean = String(variant?.ean || '').replace(/\D/gu, '');
+    const title = `${productName(product)} - ${row.label || variant?.label || ''}`.trim();
+    const description = productDescription(product, published);
+    const size = row.label || variant?.label;
+    return `<item><g:id>${escapeXml(row.variant_id)}</g:id><title>${escapeXml(title)}</title><description>${escapeXml(description)}</description><link>${escapeXml(variantUrl(published.path, row.variant_id))}</link><g:image_link>${escapeXml(image)}</g:image_link><g:availability>in_stock</g:availability><g:price>${price(row.sale_price_cents)} EUR</g:price><g:condition>new</g:condition>${product.brand ? `<g:brand>${escapeXml(product.brand)}</g:brand>` : ''}${product.variants?.length > 1 && size ? `<g:item_group_id>${escapeXml(product.id)}</g:item_group_id><g:size>${escapeXml(size)}</g:size>` : ''}${/^\d{8}$|^\d{12,14}$/u.test(ean) ? `<g:gtin>${ean}</g:gtin>` : ''}</item>`;
+  }).filter(Boolean);
+  const body = `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:g="http://base.google.com/ns/1.0"><channel><title>CatManDog - productos en stock</title><link>${origin}</link><description>Productos disponibles para compra en CatManDog</description>${items.join('')}</channel></rss>`;
+  res.writeHead(200, { 'Content-Type': 'application/xml; charset=utf-8', 'Content-Length': Buffer.byteLength(body),
+    'Cache-Control': 'public, max-age=900', 'X-Content-Type-Options': 'nosniff' });
   res.end(req.method === 'HEAD' ? undefined : body);
   return true;
 }
