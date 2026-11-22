@@ -30,6 +30,8 @@ test('Merchant feed publishes only released, priced, physically available varian
   assert.match(response.body, /<g:price>3\.29 EUR<\/g:price>/u);
   assert.match(response.body, /<g:availability>in_stock<\/g:availability>/u);
   assert.match(response.body, /<g:gtin>8859387700674<\/g:gtin>/u);
+  assert.match(response.body, /Churu - atún - 4 tubos × 14 g/u);
+  assert.doesNotMatch(response.body, /[А-Яа-яЁё]/u);
 });
 
 test('product structured data matches the selected in-stock variant', async () => {

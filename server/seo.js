@@ -36,6 +36,11 @@ const absoluteImage = image => {
 };
 const price = cents => (cents / 100).toFixed(2);
 const variantUrl = (path, id) => `${origin}${path}?variant=${encodeURIComponent(id)}`;
+const spanishVariantLabel = label => String(label || '')
+  .replace(/(\d+)\s*тюбик(?:а|ов)?/giu, '$1 tubos')
+  .replace(/(\d+(?:[,.]\d+)?)\s*кг/gu, '$1 kg')
+  .replace(/(\d+(?:[,.]\d+)?)\s*г/gu, '$1 g')
+  .replace(/(\d+)\s*шт\.?/gu, '$1 uds.');
 
 const articleLinks = articlesEs.map(article =>
   `<a class="article-card" href="/revista/${article.id}"><div class="article-meta"><span>${escapeHtml(article.section)}</span><span>${escapeHtml(article.time)}</span></div><h3>${escapeHtml(article.title)}</h3><p>${escapeHtml(article.summary)}</p></a>`).join('');
@@ -167,7 +172,7 @@ export async function seoDocument(pathname, db = null, selectedVariantId = null)
           availability: 'https://schema.org/InStock', itemCondition: 'https://schema.org/NewCondition' }
       };
       offerMarkup = `<script type="application/ld+json">${safeJson(jsonLd)}</script>`;
-      data.content = data.content.replace('</header>', `</header><p class="product-seo-offer">${escapeHtml(selected.label || '')} - ${price(selected.sale_price_cents)} € · Disponible</p>`);
+      data.content = data.content.replace('</header>', `</header><p class="product-seo-offer">${escapeHtml(spanishVariantLabel(selected.label))} - ${price(selected.sale_price_cents)} € · Disponible</p>`);
     }
   }
   const template = spanishShell(await readFile(shell, 'utf8'));
@@ -208,9 +213,10 @@ export async function serveMerchantFeed(req, res, pathname, db) {
     if (!product || !image) return '';
     const variant = product.variants?.find(item => item.id === row.variant_id);
     const ean = String(variant?.ean || '').replace(/\D/gu, '');
-    const title = `${productName(product)} - ${row.label || variant?.label || ''}`.trim();
+    const size = spanishVariantLabel(row.label || variant?.label);
+    const name = productName(product);
+    const title = size && !name.endsWith(size) ? `${name} - ${size}` : name;
     const description = productDescription(product, published);
-    const size = row.label || variant?.label;
     return `<item><g:id>${escapeXml(row.variant_id)}</g:id><title>${escapeXml(title)}</title><description>${escapeXml(description)}</description><link>${escapeXml(variantUrl(published.path, row.variant_id))}</link><g:image_link>${escapeXml(image)}</g:image_link><g:availability>in_stock</g:availability><g:price>${price(row.sale_price_cents)} EUR</g:price><g:condition>new</g:condition>${product.brand ? `<g:brand>${escapeXml(product.brand)}</g:brand>` : ''}${product.variants?.length > 1 && size ? `<g:item_group_id>${escapeXml(product.id)}</g:item_group_id><g:size>${escapeXml(size)}</g:size>` : ''}${/^\d{8}$|^\d{12,14}$/u.test(ean) ? `<g:gtin>${ean}</g:gtin>` : ''}</item>`;
   }).filter(Boolean);
   const body = `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:g="http://base.google.com/ns/1.0"><channel><title>CatManDog - productos en stock</title><link>${origin}</link><description>Productos disponibles para compra en CatManDog</description>${items.join('')}</channel></rss>`;
