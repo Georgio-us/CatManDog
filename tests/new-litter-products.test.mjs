@@ -30,7 +30,7 @@ test('five photographed litter formats have distinct SKU prices and translated c
     assert.ok(esProductText[product.description]);
     assert.ok(ukProductNames[product.name]);
     assert.ok(ukProductCopy(product.description));
-    assert.equal(seoProducts.find(item => item.id === product.id)?.indexable, false);
+    assert.equal(seoProducts.find(item => item.id === product.id)?.indexable, true);
     for (const row of catalogRows([product])) {
       const variant = row.variant.source;
       assert.equal(row.variant.sourcePriceCents, expected.get(variant.id));

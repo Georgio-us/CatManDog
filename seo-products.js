@@ -1,8 +1,21 @@
-import { seoProductSlugs } from './seo-product-slugs.js?v=litter-photos-20261121';
+import { seoProductSlugs } from './seo-product-slugs.js?v=merchant-stock-20261122';
+import { stockSeoCopy } from './stock-seo-copy.js';
 
 // Each released family passed the current catalog, price, source, copy and image audit.
 // Keep this list explicit: a newly imported product must not become indexable by accident.
 const releasedByCategory = {
+  '/catalogo': [
+    'yagu-7510074-studio', 'yagu-7510082-studio', 'yagu-7514697-studio',
+    'yagu-7514626', 'yagu-7514629', 'yagu-7570678-studio',
+    'yagu-7570675-studio', 'yagu-7515817', 'yagu-7514696-studio',
+    'yagu-7515988', 'yagu-7515987-studio', 'yagu-7517019',
+    'yagu-duvo-cotton-bone-xs', 'heybopet-hb-pwfs-s30s',
+    'heybopet-pwf-filters-3', 'yagu-M0295-studio',
+    'cat-litter-sanicat-clumping-unscented-8l', 'cat-litter-uniko-tofu-18l',
+    'yagu-navy-louise-bag', 'yagu-donut-neutral', 'yagu-donut-pana',
+    'yagu-gulliver-pana-green', 'yagu-sorolla-backpack',
+    'cat-litter-yommy-tofu-lavanda-6l'
+  ],
   '/catalogo/gatos/pienso-seco': [
     'rc-sterilised', 'leonardo-poultry', 'acana-grasslands', 'orijen-original',
     'rc-kitten', 'leonardo-salmon', 'rc-digestive', 'ownat-classic-kitten',
@@ -22,6 +35,7 @@ const releasedByCategory = {
   ],
   '/catalogo/gatos/comida-humeda': [
     'rc-wet', 'leonardo-chicken', 'leonardo-turkey',
+    'leonardo-wet-pure-chicken', 'royalcanin-93e8aeca',
     'acana-wet-beef', 'acana-wet-chicken', 'acana-wet-kitten',
     'acana-wet-lamb', 'acana-wet-salmon', 'acana-wet-tuna',
     'leonardo-wet-kitten', 'leonardo-wet-rabbit', 'leonardo-wet-buffalo',
@@ -39,6 +53,13 @@ const releasedByCategory = {
     'tc-dc3d6d94c2', 'tc-713f42fb9a'
   ],
   '/catalogo/perros/pienso-seco': [
+    'cmd-source-f025a9dbc9d479c7', 'cmd-source-39c2d5db76be47f7',
+    'cmd-source-5d1bd37fc7a7c699', 'cmd-source-c26796839ace4c6e',
+    'cmd-source-3b6cbf7e0c31efab', 'cmd-source-0f4a3ef9889b8ff3',
+    'cmd-source-95203d59566cbe4d', 'cmd-source-90d2d4b6858c08cd',
+    'cmd-source-67755e1e1068c6f6', 'cmd-source-11acbc9ed4d69f1c',
+    'cmd-source-5902317db04f9f0e', 'cmd-source-3e01ebf957337e76',
+    'cmd-source-6d56f8fb416a81c4', 'royal-canin-chihuahua-adult',
     'dog-orijen-fit-trim',
     'dog-orijen-original', 'dog-orijen-puppy', 'dog-orijen-six-fish',
     'dog-orijen-small-breed', 'cmd-source-classics-red-meat',
@@ -73,7 +94,8 @@ export const seoProducts = Object.entries(seoProductSlugs).map(([id, slug]) => (
   path: `/producto/${slug}`,
   categoryPath: releasedCategoryById.get(id) || '/catalogo',
   indexable: releasedCategoryById.has(id),
-  ...(editorialOverrides[id] || {})
+  ...(editorialOverrides[id] || {}),
+  ...(stockSeoCopy[id] || {})
 }));
 
 const byPath = new Map(seoProducts.map(product => [product.path, product]));

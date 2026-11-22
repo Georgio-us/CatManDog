@@ -66,21 +66,38 @@ const productLinks = categoryPath => seoProducts
   .filter(item => item.indexable && item.categoryPath === categoryPath)
   .map(item => {
     const product = products.find(entry => entry.id === item.id);
-    return `<a class="article-card" href="${item.path}"><h2>${escapeHtml(productName(product))}</h2><p>${escapeHtml(productDescription(product, item))}</p></a>`;
+    const name = item.name || (product && productName(product));
+    const description = item.description || (product && productDescription(product, item));
+    return name && description ? `<a class="article-card" href="${item.path}"><h2>${escapeHtml(name)}</h2><p>${escapeHtml(description)}</p></a>` : '';
   }).join('');
 
-function pageData(pathname) {
+const defaultVariantId = (product, rows) => {
+  const preferred = product?.defaultVariantId || product?.variants?.[0]?.defaultVariantId ||
+    product?.variants?.[0]?.id;
+  if (rows.some(row => row.variant_id === preferred && merchantVariant(row))) return preferred;
+  return rows.find(merchantVariant)?.variant_id || preferred;
+};
+
+async function pageData(pathname, rows = [], selectedVariantId = null) {
   const publishedProduct = seoProductForPath(pathname);
   if (publishedProduct) {
-    const product = products.find(item => item.id === publishedProduct.id);
+    const staticProduct = products.find(item => item.id === publishedProduct.id);
+    const stockRows = rows;
+    const first = stockRows[0];
+    const product = staticProduct || (first && { id: first.product_id, name: first.name,
+      brand: first.brand, category: first.category, description: first.description,
+      details: first.details, image: { src: first.image_path },
+      variants: stockRows.map(row => ({ id: row.variant_id, label: row.label })) });
     if (!product) return null;
     const formats = (product.variants?.length ? orderedVariants(product).map(variant => variant.label) : product.sizes || [])
       .map(label => escapeHtml(label.replace(/ кг$/u, ' kg').replace(/ г$/u, ' g')));
     const description = productDescription(product, publishedProduct);
-    const image = product.image?.src || (typeof product.image === 'string' ? product.image : '');
+    const selected = stockRows.find(row => row.variant_id ===
+      (selectedVariantId || defaultVariantId(product, stockRows)));
+    const image = productImage(product, selected);
     const facts = customerFacts(product.details).map(detail => editorialEs[detail] || esDetails[detail] || yaguToyExpansionEs[detail] || yaguChewTestEs[detail] || yaguBasketEs[detail] || yaguExpansionEs[detail] ||
       (!/[А-Яа-яЁё]/u.test(detail) ? detail : null)).filter(Boolean);
-    const name = productName(product);
+    const name = publishedProduct.name || productName(product);
     const categoryLabel = publishedProduct.indexable
       ? seoCategoryForPath(publishedProduct.categoryPath)?.title || 'Todo el catálogo'
       : 'Todo el catálogo';
@@ -97,7 +114,7 @@ function pageData(pathname) {
     const links = verified.map(product => {
       const published = seoProducts.find(entry => entry.id === product.id);
       const description = productDescription(product, published);
-      const name = productName(product);
+      const name = published.name || productName(product);
       return `<a class="article-card" href="${published.path}"><h2>${escapeHtml(name)}</h2><p>${escapeHtml(description)}</p></a>`;
     }).join('');
     const other = pick.pet === 'cat' ? '/selecciones/perros' : '/selecciones/gatos';
@@ -118,7 +135,7 @@ function pageData(pathname) {
     description: 'Explora comida, arena y accesorios para gatos y perros en CatManDog. Consulta marcas, formatos y precios antes de elegir',
     content: `<div class="page"><div class="journal-top"><h1>Catálogo para gatos y perros</h1>
       <p>Encuentra comida, arena y accesorios para tus compañeros. Compara marcas, formatos y precios en cada ficha de producto</p></div>
-      <div class="journal-grid">${categoryLinks}</div></div>`
+      <div class="journal-grid">${categoryLinks}</div><h2>Productos disponibles</h2><div class="journal-grid">${productLinks('/catalogo')}</div></div>`
   };
   if (pathname === '/recogida') return {
     title: 'Disponible para recogida | CatManDog',
@@ -149,21 +166,22 @@ function pageData(pathname) {
 }
 
 export async function seoDocument(pathname, db = null, selectedVariantId = null) {
-  const data = pageData(pathname);
-  if (!data) return null;
   const published = seoProductForPath(pathname);
+  const rows = db && published ? (await catalogSnapshot(db)).filter(row => row.product_id === published.id) : [];
+  const data = await pageData(pathname, rows, selectedVariantId);
+  if (!data) return null;
   let offerMarkup = '';
   if (db && published?.indexable) {
-    const product = products.find(item => item.id === published.id);
-    const rows = (await catalogSnapshot(db)).filter(row => row.product_id === published.id);
-    const defaultId = product?.defaultVariantId || product?.variants?.[0]?.defaultVariantId ||
-      product?.variants?.[0]?.id;
+    const product = products.find(item => item.id === published.id) || (rows[0] && {
+      id: published.id, name: rows[0].name, brand: rows[0].brand,
+      description: rows[0].description, image: { src: rows[0].image_path } });
+    const defaultId = defaultVariantId(product, rows);
     const selected = rows.find(row => row.variant_id === (selectedVariantId || defaultId));
     if (merchantVariant(selected)) {
       const image = absoluteImage(productImage(product, selected));
       const jsonLd = {
         '@context': 'https://schema.org', '@type': 'Product',
-        name: productName(product), description: productDescription(product, published),
+        name: published.name || productName(product), description: productDescription(product, published),
         ...(image ? { image: [image] } : {}),
         sku: selected.variant_id,
         ...(product.brand ? { brand: { '@type': 'Brand', name: product.brand } } : {}),
@@ -208,13 +226,15 @@ export async function serveMerchantFeed(req, res, pathname, db) {
   const items = rows.map(row => {
     const published = seoProducts.find(item => item.id === row.product_id && item.indexable);
     if (!published) return '';
-    const product = products.find(item => item.id === row.product_id);
+    const product = products.find(item => item.id === row.product_id) || {
+      id: row.product_id, name: row.name, brand: row.brand, description: row.description,
+      image: { src: row.image_path } };
     const image = absoluteImage(productImage(product, row));
-    if (!product || !image) return '';
+    if (!image) return '';
     const variant = product.variants?.find(item => item.id === row.variant_id);
     const ean = String(variant?.ean || '').replace(/\D/gu, '');
     const size = spanishVariantLabel(row.label || variant?.label);
-    const name = productName(product);
+    const name = published.name || productName(product);
     const title = size && !name.endsWith(size) ? `${name} - ${size}` : name;
     const description = productDescription(product, published);
     return `<item><g:id>${escapeXml(row.variant_id)}</g:id><title>${escapeXml(title)}</title><description>${escapeXml(description)}</description><link>${escapeXml(variantUrl(published.path, row.variant_id))}</link><g:image_link>${escapeXml(image)}</g:image_link><g:availability>in_stock</g:availability><g:price>${price(row.sale_price_cents)} EUR</g:price><g:condition>new</g:condition>${product.brand ? `<g:brand>${escapeXml(product.brand)}</g:brand>` : ''}${product.variants?.length > 1 && size ? `<g:item_group_id>${escapeXml(product.id)}</g:item_group_id><g:size>${escapeXml(size)}</g:size>` : ''}${/^\d{8}$|^\d{12,14}$/u.test(ean) ? `<g:gtin>${ean}</g:gtin>` : ''}</item>`;

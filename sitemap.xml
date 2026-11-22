@@ -74,8 +74,10 @@
   <url><loc>https://catmandog.es/producto/leonardo-finest-selection-duck-cheese</loc></url>
   <url><loc>https://catmandog.es/producto/leonardo-finest-selection-fish-shrimps</loc></url>
   <url><loc>https://catmandog.es/producto/leonardo-finest-selection-pure-turkey</loc></url>
+  <url><loc>https://catmandog.es/producto/leonardo-finest-selection-pure-chicken</loc></url>
   <url><loc>https://catmandog.es/producto/leonardo-finest-selection-trout-catnip</loc></url>
   <url><loc>https://catmandog.es/producto/royal-canin-kitten-pashtet</loc></url>
+  <url><loc>https://catmandog.es/producto/royal-canin-kitten-sous</loc></url>
   <url><loc>https://catmandog.es/producto/ownat-classic-kitten</loc></url>
   <url><loc>https://catmandog.es/producto/ownat-classic-daily-care</loc></url>
   <url><loc>https://catmandog.es/producto/ownat-classic-fish</loc></url>
@@ -102,6 +104,8 @@
   <url><loc>https://catmandog.es/producto/orijen-six-fish-dog</loc></url>
   <url><loc>https://catmandog.es/producto/orijen-small-breed-dog</loc></url>
   <url><loc>https://catmandog.es/producto/orijen-fit-trim-dog</loc></url>
+  <url><loc>https://catmandog.es/producto/royal-canin-chihuahua-adult</loc></url>
+  <url><loc>https://catmandog.es/producto/acana-grass-fed-lamb</loc></url>
   <url><loc>https://catmandog.es/producto/churu-tunets</loc></url>
   <url><loc>https://catmandog.es/producto/churu-kuritsa</loc></url>
   <url><loc>https://catmandog.es/producto/churu-tunets-s-grebeshkom</loc></url>
@@ -119,13 +123,49 @@
   <url><loc>https://catmandog.es/producto/churu-bites-dog-pollo-queso</loc></url>
   <url><loc>https://catmandog.es/producto/churu-dog-pollo-8-tubos</loc></url>
   <url><loc>https://catmandog.es/producto/churu-bites-dog-pollo</loc></url>
+  <url><loc>https://catmandog.es/producto/duvo-square-tunnel-kogtetochka</loc></url>
+  <url><loc>https://catmandog.es/producto/duvo-kovrik-dlya-vylizyvaniya</loc></url>
+  <url><loc>https://catmandog.es/producto/duvo-nabor-igrushechnykh-myshek</loc></url>
+  <url><loc>https://catmandog.es/producto/duvo-eco-igrushka-rybka</loc></url>
+  <url><loc>https://catmandog.es/producto/duvo-eco-igrushka-myshka</loc></url>
+  <url><loc>https://catmandog.es/producto/yagu-donut-antiestres</loc></url>
+  <url><loc>https://catmandog.es/producto/yagu-donut-pana-ancha</loc></url>
+  <url><loc>https://catmandog.es/producto/yagu-gulliver-pana-green</loc></url>
+  <url><loc>https://catmandog.es/producto/yagu-mochila-sorolla</loc></url>
+  <url><loc>https://catmandog.es/producto/yagu-bolso-navy-louise</loc></url>
+  <url><loc>https://catmandog.es/producto/duvo-kovrik-dlya-vylizyvaniya-yagu-7515987-studio</loc></url>
+  <url><loc>https://catmandog.es/producto/menforsan-myagkii-shampun-dlya-koshek</loc></url>
+  <url><loc>https://catmandog.es/producto/duvo-khlopkovaya-kostochka-xs</loc></url>
+  <url><loc>https://catmandog.es/producto/duvo-black-carbon-napolnitel-dlya-koshek</loc></url>
+  <url><loc>https://catmandog.es/producto/duvo-beauty-nozhnitsy-dlya-kogtei</loc></url>
+  <url><loc>https://catmandog.es/producto/duvo-beauty-kogterez-l</loc></url>
+  <url><loc>https://catmandog.es/producto/duvo-white-sensitive-baby-powder-napolnitel-12-kg</loc></url>
+  <url><loc>https://catmandog.es/producto/duvo-farmz-govyazhya-traheya-250-g</loc></url>
   <url><loc>https://catmandog.es/producto/duvo-farmz-kurinye-lapki-250-g</loc></url>
+  <url><loc>https://catmandog.es/producto/duvo-farmz-govyazhi-zhily-350-g</loc></url>
   <url><loc>https://catmandog.es/producto/duvo-farmz-govyazhi-kopyta-6-sht</loc></url>
   <url><loc>https://catmandog.es/producto/duvo-meat-sushenaya-utinaya-grudka-100-g</loc></url>
+  <url><loc>https://catmandog.es/producto/heybopet-besprovodnoi-fontan-3-l</loc></url>
+  <url><loc>https://catmandog.es/producto/heybopet-smennye-filtry-dlya-fontana-3-sht</loc></url>
+  <url><loc>https://catmandog.es/producto/acana-adult-dog</loc></url>
+  <url><loc>https://catmandog.es/producto/acana-adult-small-breed</loc></url>
+  <url><loc>https://catmandog.es/producto/acana-classics-prairie-poultry</loc></url>
+  <url><loc>https://catmandog.es/producto/acana-dog-coldwater-fish</loc></url>
+  <url><loc>https://catmandog.es/producto/acana-highest-protein-ranchlands</loc></url>
+  <url><loc>https://catmandog.es/producto/acana-singles-beef-with-pumpkin</loc></url>
+  <url><loc>https://catmandog.es/producto/acana-singles-free-run-duck</loc></url>
+  <url><loc>https://catmandog.es/producto/acana-puppy</loc></url>
+  <url><loc>https://catmandog.es/producto/acana-dog-red-meat</loc></url>
+  <url><loc>https://catmandog.es/producto/acana-light-fit</loc></url>
   <url><loc>https://catmandog.es/producto/acana-classics-red-meat</loc></url>
   <url><loc>https://catmandog.es/producto/acana-classics-wild-coast</loc></url>
   <url><loc>https://catmandog.es/producto/acana-puppy-small-breed</loc></url>
+  <url><loc>https://catmandog.es/producto/acana-highest-protein-wild-prairie</loc></url>
+  <url><loc>https://catmandog.es/producto/orijen-regional-red-cmd-source-6d56f8fb416a81c4</loc></url>
   <url><loc>https://catmandog.es/producto/acana-senior</loc></url>
+  <url><loc>https://catmandog.es/producto/yommy-tofu-lavanda-6l</loc></url>
+  <url><loc>https://catmandog.es/producto/uniko-tofu-cat-litter-18l</loc></url>
+  <url><loc>https://catmandog.es/producto/sanicat-clumping-sin-perfume-8l</loc></url>
   <url><loc>https://catmandog.es/revista</loc></url>
   <url><loc>https://catmandog.es/revista/home</loc></url>
   <url><loc>https://catmandog.es/revista/play</loc></url>
