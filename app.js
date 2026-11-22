@@ -1,18 +1,18 @@
 import { createUsefulUI } from './useful.js?v=yagu-toys-20261116';
-import { createAccountUI } from './account.js?v=recurring-builder-compact-20261121';
+import { createAccountUI } from './account.js?v=delivery-regions-20261122';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
-import { accessoryDetail, customerDetails } from './accessory-ui.js?v=pickup-cart-labels-20261121';
+import { accessoryDetail, customerDetails } from './accessory-ui.js?v=delivery-regions-20261122';
 import { atelierDescriptionMarkup } from './atelier-description.js';
-import { deliveryPage } from './delivery-page.js';
-import { productDeliveryKind, deliveryTiming } from './delivery-timing.js';
+import { deliveryPage } from './delivery-page.js?v=delivery-regions-20261122';
+import { productDeliveryKind, deliveryTiming } from './delivery-timing.js?v=delivery-regions-20261122';
 import { atelierHasOptions, atelierDefaults, atelierSelection, atelierOptionsMarkup } from './atelier-configuration.js?v=atelier-click-colors-20261121';
 import { productGallery } from './product-gallery.js?v=atelier-all-spec-galleries-20261120';
-import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=delivery-exceptions-20261121';
+import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=delivery-regions-20261122';
 import { recommendForProduct } from './recommendations.js?v=atelier-related-20261121';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
 import { categories, products, catalogProducts, articles } from './data.js?v=litter-studio-20261121';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=yagu-toys-20261116';
-import { createCheckoutUI } from './checkout-ui.js?v=delivery-exceptions-20261121';
+import { createCheckoutUI } from './checkout-ui.js?v=delivery-regions-20261122';
 import { normalizeRecurringDraft, recurringChoiceFromCart, renderRecurringCart, recurringKey } from './recurring-cart.js?v=recurring-next-date-20261121';
 import { availabilityRequestPage } from './availability-request-ui.js?v=yagu-toys-20261116';
 import { orderVariantId } from './order-progress.js';
@@ -22,7 +22,7 @@ import { pickupBasketPage, pickupCheckoutPage, pickupConfirmationPage, pickupCop
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
 import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=editorial-shortcuts-20261119';
 import { handleCatPickClick } from './cat-picks.js?v=picks-seo-20261112';
-import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from './locale.js?v=litter-photos-20261121';
+import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from './locale.js?v=delivery-regions-20261122';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';
@@ -490,7 +490,7 @@ function favoritePage(){
   const selected=products.filter(item=>favorites.includes(item.id));
   return `<div class="page">${crumbs('Избранное')}<h1 class="page-title">Избранное${selected.length?` <span class="muted">(${selected.length})</span>`:''}</h1>${selected.length?`<div class="product-grid">${selected.map(product=>card(product)).join('')}</div>`:empty('Пока здесь пусто','Сохраняйте понравившиеся товары сердечком, чтобы вернуться к ним позже','В каталог','#/catalog')}</div>`;
 }
-function service(){return `<section class="service" aria-label="Наш подход"><div class="service-item">${icon('leaf')}<div><h3>Выбрано с заботой</h3><p>Продуманные вещи для маленьких и больших ежедневных ритуалов</p></div></div><div class="service-item">${icon('truck')}<div><h3>Доставка за 24-48 часов</h3><p>Для большей части каталога по Валенсии и материковой Испании</p></div></div><div class="service-item">${icon('heart')}<div><h3>Всегда рядом</h3><p>Помогаем разобраться, выбрать и сделать жизнь вместе лучше</p></div></div></section>`;}
+function service(){return `<section class="service" aria-label="Наш подход"><div class="service-item">${icon('leaf')}<div><h3>Выбрано с заботой</h3><p>Продуманные вещи для маленьких и больших ежедневных ритуалов</p></div></div><div class="service-item">${icon('truck')}<div><h3>Доставка по Валенсии и материковой Испании</h3><p>По Валенсии - 24-48 часов, по материку - 2-4 рабочих дня для обычных товаров</p></div></div><div class="service-item">${icon('heart')}<div><h3>Всегда рядом</h3><p>Помогаем разобраться, выбрать и сделать жизнь вместе лучше</p></div></div></section>`;}
 const categoryKey = p => ['Лотки', 'Лотки и гигиена'].includes(p.category) ? 'Наполнитель' : p.category;
 function homeCatalogProducts(){
   let list = catalogProducts.filter(p => matchesPet(p,homePet) && (!homeGroup || homeGroupForProduct(p) === homeGroup));

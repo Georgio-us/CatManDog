@@ -4,7 +4,7 @@ import { catalogEditorialChuruCat } from './catalog-editorial-churu-cat.js';
 import { productGallery } from './product-gallery.js?v=atelier-gallery-fix-20261120';
 import { atelierHasOptions, atelierOptionsMarkup } from './atelier-configuration.js?v=atelier-click-colors-20261121';
 import { atelierDescriptionMarkup } from './atelier-description.js';
-import { productDeliveryKind, deliveryTiming } from './delivery-timing.js';
+import { productDeliveryKind, deliveryTiming } from './delivery-timing.js?v=delivery-regions-20261122';
 
 export function customerDetails(details, translate, escape, category) {
   const useful = customerFacts(details);
@@ -14,28 +14,28 @@ export function customerDetails(details, translate, escape, category) {
 
 const availabilityCopy = {
   ru: {
-    available: ['Доступно к заказу', 'Доставка за 24-48 часов. Удобное время можно указать при оформлении.'],
+    available: ['Доступно к заказу', 'По Валенсии доставим за 24-48 часов, по материковой Испании - за 2-4 рабочих дня.'],
     pending: ['Наличие уточняется', 'Наличие этой фасовки уточняем. Пока её нельзя оформить.'],
-    on_hand: ['В наличии', 'Доставка за 24-48 часов. Стоимость покажем при оформлении заказа.'],
-    source_on_demand: ['Под заказ', 'Доставка за 24-48 часов. Эту фасовку закажем у поставщика.'],
+    on_hand: ['В наличии', 'По Валенсии доставим за 24-48 часов, по материковой Испании - за 2-4 рабочих дня. Стоимость покажем при оформлении.'],
+    source_on_demand: ['Под заказ', 'Эту фасовку закажем у поставщика. Срок зависит от поставки и адреса; уточним его после проверки заказа.'],
     unavailable: ['Пока недоступно', 'Оставьте запрос, и мы сообщим, когда сможем предложить этот вариант.'],
-    add: 'Добавить в корзину', order: 'Заказать с доставкой', request:'Сообщить о поступлении', pricePending:'Цена уточняется', delivery:'Доставка за 24-48 часов'
+    add: 'Добавить в корзину', order: 'Заказать с доставкой', request:'Сообщить о поступлении', pricePending:'Цена уточняется', delivery:'Валенсия: 24-48 часов · материк: 2-4 рабочих дня'
   },
   es: {
-    available: ['Disponible para pedir', 'Entrega en 24-48 horas. Indica cuándo te viene bien recibirlo al finalizar el pedido.'],
+    available: ['Disponible para pedir', 'Entrega en València en 24-48 horas y en la España peninsular en 2-4 días laborables.'],
     pending: ['Disponibilidad pendiente', 'Estamos comprobando la disponibilidad de este formato. Todavía no se puede pedir.'],
-    on_hand: ['Disponible', 'Entrega en 24-48 horas. Verás el coste al finalizar el pedido.'],
-    source_on_demand: ['Por encargo', 'Entrega en 24-48 horas. Pediremos este formato al proveedor.'],
+    on_hand: ['Disponible', 'Entrega en València en 24-48 horas y en la España peninsular en 2-4 días laborables. Verás el coste al finalizar el pedido.'],
+    source_on_demand: ['Por encargo', 'Pediremos este formato al proveedor. El plazo depende del suministro y de la dirección; lo confirmaremos tras revisar el pedido.'],
     unavailable: ['No disponible ahora', 'Déjanos una solicitud y te avisaremos cuando podamos ofrecer este formato.'],
-    add: 'Añadir a la cesta', order: 'Pedir con entrega', request:'Avisadme cuando esté disponible', pricePending:'Precio pendiente de confirmar', delivery:'Entrega en 24-48 horas'
+    add: 'Añadir a la cesta', order: 'Pedir con entrega', request:'Avisadme cuando esté disponible', pricePending:'Precio pendiente de confirmar', delivery:'València: 24-48 horas · península: 2-4 días laborables'
   },
   uk: {
-    available: ['Доступно для замовлення', 'Доставка за 24-48 годин. Зручний час можна вказати під час оформлення.'],
+    available: ['Доступно для замовлення', 'Доставка у Валенсії за 24-48 годин, материковою Іспанією - за 2-4 робочі дні.'],
     pending: ['Наявність уточнюється', 'Наявність цього формату уточнюємо. Поки його не можна замовити.'],
-    on_hand: ['У наявності', 'Доставка за 24-48 годин. Вартість покажемо під час оформлення замовлення.'],
-    source_on_demand: ['Під замовлення', 'Доставка за 24-48 годин. Замовимо цей формат у постачальника.'],
+    on_hand: ['У наявності', 'Доставка у Валенсії за 24-48 годин, материковою Іспанією - за 2-4 робочі дні. Вартість покажемо під час оформлення.'],
+    source_on_demand: ['Під замовлення', 'Замовимо цей формат у постачальника. Строк залежить від постачання й адреси; уточнимо його після перевірки замовлення.'],
     unavailable: ['Поки недоступно', 'Залиште запит, і ми повідомимо, коли зможемо запропонувати цей варіант.'],
-    add: 'Додати до кошика', order: 'Замовити з доставкою', request:'Повідомити про надходження', pricePending:'Ціна уточнюється', delivery:'Доставка за 24-48 годин'
+    add: 'Додати до кошика', order: 'Замовити з доставкою', request:'Повідомити про надходження', pricePending:'Ціна уточнюється', delivery:'Валенсія: 24-48 годин · материк: 2-4 робочі дні'
   }
 };
 
