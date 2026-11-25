@@ -421,6 +421,7 @@ export const seoProductSlugs = Object.freeze({
   "cmd-source-classics-wild-coast": "acana-classics-wild-coast",
   "cmd-source-puppy-small-breed": "acana-puppy-small-breed",
   "cmd-source-90d2d4b6858c08cd": "acana-highest-protein-wild-prairie",
+  "cmd-source-4c1d8462a78eb6de": "acana-highest-protein-pacifica",
   "cmd-source-6d56f8fb416a81c4": "orijen-regional-red-cmd-source-6d56f8fb416a81c4",
   "cmd-source-acana-senior": "acana-senior",
   "cmd-source-694e05cdc1b2582c": "churu-losos-i-kuritsa",

@@ -1,4 +1,4 @@
-import { seoProductSlugs } from './seo-product-slugs.js?v=royal-canin-20261125';
+import { seoProductSlugs } from './seo-product-slugs.js?v=acana-pacifica-route-20261125';
 import { stockSeoCopy } from './stock-seo-copy.js';
 
 // Each released family passed the current catalog, price, source, copy and image audit.
@@ -26,6 +26,7 @@ const releasedByCategory = {
     'acana-first-feast', 'acana-indoor', 'acana-bountiful', 'acana-homestead',
     'acana-wild-prairie', 'acana-pacifica', 'acana-hp-indoor',
     'orijen-six-fish', 'orijen-kitten', 'orijen-guardian8',
+    'orijen-fit-trim', 'orijen-regional-red',
     'rc-fit', 'rc-indoor', 'rc-kitten-regular', 'rc-mother-babycat',
     'rc-hairball', 'rc-sensible', 'leonardo-light', 'leonardo-kitten',
     'leonardo-adult-duck', 'leonardo-maxi', 'leonardo-kitten-gf',

@@ -93,9 +93,17 @@ test('every public product has a distinct permanent URL while unreleased pages s
   assert.equal(sitemap.includes(path), false);
 });
 
+test('database-only ACANA Pacifica has a stable product URL without premature indexing', () => {
+  const id = 'cmd-source-4c1d8462a78eb6de';
+  const path = '/producto/acana-highest-protein-pacifica';
+  assert.equal(productHref(id), path);
+  assert.equal(seoProductForPath(path)?.id, id);
+  assert.equal(seoProductForPath(path)?.indexable, false);
+});
+
 test('the verified product release has unique Spanish source content and crawlable category links', async () => {
   const released = seoProducts.filter(product => product.indexable);
-  assert.equal(released.length, 160);
+  assert.equal(released.length, 162);
   const descriptions = new Set();
   for (const product of released) {
     if (!catalogProducts.some(item => item.id === product.id)) continue;
@@ -120,7 +128,7 @@ test('released editorial products serve the same verified Spanish copy as the st
     ...catalogEditorialNext };
   const releasedEditorial = Object.entries(editorial)
     .filter(([id]) => seoProducts.some(product => product.id === id && product.indexable));
-  assert.equal(releasedEditorial.length, 95);
+  assert.equal(releasedEditorial.length, 97);
   for (const [id, copy] of releasedEditorial) {
     const path = productHref(id);
     const html = await seoDocument(path);
