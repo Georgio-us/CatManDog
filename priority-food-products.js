@@ -9706,7 +9706,7 @@ const recipes = [
     "id": "leonardo-wet-senior-beef",
     "existingId": null,
     "researchRecipeId": "leonardo-a8fa1682",
-    "name": "Leonardo Finest Selection Senior Pure Beef",
+    "name": "Leonardo Finest Selection Senior Veal Pure",
     "brand": "Leonardo",
     "category": "Корм",
     "pet": "cat",
@@ -9734,7 +9734,7 @@ const recipes = [
       "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-a8fa1682.jpg",
       "presentation": "editorial",
       "generated": true,
-      "alt": "Leonardo Finest Selection Senior Pure Beef"
+      "alt": "Leonardo Finest Selection Senior Veal Pure"
     },
     "imageSource": {
       "name": "Leonardo",
@@ -9770,7 +9770,7 @@ const recipes = [
     "id": "leonardo-wet-beef-vegetables",
     "existingId": null,
     "researchRecipeId": "leonardo-ce1bb081",
-    "name": "Leonardo Finest Selection Beef & Vegetables",
+    "name": "Leonardo Finest Selection Veal + Vegetables",
     "brand": "Leonardo",
     "category": "Корм",
     "pet": "cat",
@@ -9798,7 +9798,7 @@ const recipes = [
       "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-ce1bb081.jpg",
       "presentation": "editorial",
       "generated": true,
-      "alt": "Leonardo Finest Selection Beef & Vegetables"
+      "alt": "Leonardo Finest Selection Veal + Vegetables"
     },
     "imageSource": {
       "name": "Leonardo",
@@ -9898,7 +9898,7 @@ const recipes = [
     "id": "leonardo-wet-venison-blueberries",
     "existingId": null,
     "researchRecipeId": "leonardo-fa83dd83",
-    "name": "Leonardo Finest Selection Venison & Blueberries",
+    "name": "Leonardo Finest Selection Venison + Bilberries",
     "brand": "Leonardo",
     "category": "Корм",
     "pet": "cat",
@@ -9926,7 +9926,7 @@ const recipes = [
       "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-fa83dd83.jpg",
       "presentation": "editorial",
       "generated": true,
-      "alt": "Leonardo Finest Selection Venison & Blueberries"
+      "alt": "Leonardo Finest Selection Venison + Bilberries"
     },
     "imageSource": {
       "name": "Leonardo",

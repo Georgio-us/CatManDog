@@ -65,6 +65,8 @@ const releasedByCategory = {
     'leonardo-wet-pheasant', 'leonardo-wet-lamb-cranberry',
     'leonardo-wet-duck-cheese', 'leonardo-wet-fish-shrimp',
     'leonardo-wet-trout-catnip', 'leonardo-wet-meat-menu',
+    'leonardo-wet-senior-beef', 'leonardo-wet-beef-vegetables',
+    'leonardo-wet-venison-blueberries',
     'leonardo-wet-pure-turkey', 'royalcanin-8d039848',
     'royalcanin-659556dc', 'royalcanin-a510d4e9',
     'royalcanin-f2600773', 'royalcanin-d861a238',

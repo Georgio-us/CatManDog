@@ -222,6 +222,18 @@ export async function seoDocument(pathname, db = null, selectedVariantId = null)
 
 export async function serveSeo(req, res, pathname, db = null) {
   if (req.method !== 'GET' && req.method !== 'HEAD') return false;
+  const correctedLeonardoPaths = {
+    '/producto/leonardo-finest-selection-senior-pure-beef': '/producto/leonardo-finest-selection-senior-veal-pure',
+    '/producto/leonardo-finest-selection-beef-vegetables': '/producto/leonardo-finest-selection-veal-vegetables',
+    '/producto/leonardo-finest-selection-venison-blueberries': '/producto/leonardo-finest-selection-venison-bilberries'
+  };
+  if (correctedLeonardoPaths[pathname]) {
+    const query = new URL(req.url || pathname, origin).search;
+    res.writeHead(301, { Location: correctedLeonardoPaths[pathname] + query,
+      'Cache-Control': 'public, max-age=3600' });
+    res.end();
+    return true;
+  }
   const selectedVariantId = new URL(req.url || pathname, origin).searchParams.get('variant');
   const body = await seoDocument(pathname, db, selectedVariantId);
   if (!body) return false;

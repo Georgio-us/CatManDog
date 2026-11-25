@@ -3,6 +3,7 @@ import { catalogEditorialOpenAudit } from '../catalog-editorial-open-audit.js';
 import { catalogEditorialRoyalCaninNext } from '../catalog-editorial-royal-canin-next.js';
 import { catalogEditorialRoyalCaninWave3 } from '../catalog-editorial-royal-canin-wave3.js';
 import { catalogEditorialLeonardoWave4 } from '../catalog-editorial-leonardo-wave4.js';
+import { catalogEditorialLeonardoCorrections } from '../catalog-editorial-leonardo-corrections.js';
 import { catalogEditorialNextNames } from '../catalog-editorial-next.js';
 
 // Translations of verified catalog copy. Match the server's exact source text so
@@ -153,6 +154,8 @@ const pairs = [
     [copy.esDescription, copy.ukDescription]]),
   ...Object.values(catalogEditorialLeonardoWave4).map(copy => [copy.previousDescription,
     [copy.esDescription, copy.ukDescription]]),
+  ...Object.values(catalogEditorialLeonardoCorrections).map(copy => [copy.name,
+    [copy.esName, copy.ukName]]),
   ...Object.entries(descriptionByProduct).map(([id, values]) => [catalogEditorialContent[id].description, values]),
   ...Object.entries(detailCopy),
   ['Беззерновой сухой корм с птицей для взрослых кошек Амарант заменяет злаки в повседневной рецептуре', [

@@ -92,7 +92,8 @@ export function setLocale(value) {
 }
 
 export function translate(value) {
-  if (language === 'ru' || typeof value !== 'string' || !/[А-Яа-яЁё]/.test(value)) return value;
+  if (language === 'ru' || typeof value !== 'string' ||
+      (!/[А-Яа-яЁё]/.test(value) && !editorialEs[value] && !editorialUk[value])) return value;
   const whitespace = value.match(/^(\s*)([\s\S]*?)(\s*)$/);
   const source = whitespace?.[2] ?? value;
   let result = language === 'uk'

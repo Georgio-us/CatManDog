@@ -21,6 +21,7 @@ import { catalogEditorialOpenAudit } from '../catalog-editorial-open-audit.js';
 import { catalogEditorialRoyalCaninNext } from '../catalog-editorial-royal-canin-next.js';
 import { catalogEditorialRoyalCaninWave3 } from '../catalog-editorial-royal-canin-wave3.js';
 import { catalogEditorialLeonardoWave4 } from '../catalog-editorial-leonardo-wave4.js';
+import { catalogEditorialLeonardoCorrections } from '../catalog-editorial-leonardo-corrections.js';
 import { publishYaguToys } from './yagu-toy-publication.js';
 import { catsAtelierLegacyCopy, catsAtelierProducts } from '../cats-atelier-products.js';
 import { seedInitialSalesLedger } from './initial-sales-ledger.js';
@@ -794,6 +795,25 @@ export async function importCatalog(db, items = products) {
           [productId, copy.description, JSON.stringify(copy.details), copy.previousDescription]);
         }
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [leonardoWave4Migration]);
+      }
+      const leonardoCorrectionMigration = 'leonardo_exact_recipe_names_2026_11_25';
+      const leonardoCorrectionDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [leonardoCorrectionMigration]);
+      if (!leonardoCorrectionDone.rows.length) {
+        for (const [productId, copy] of Object.entries(catalogEditorialLeonardoCorrections)) {
+          // Guard both name and old copy so an owner's later edit cannot be overwritten.
+          const changed = await client.query(`UPDATE catalog_products SET name=$2,description=$3,
+            details=$4::jsonb,source=source||jsonb_build_object('name',$2::text,'description',$3::text)
+            WHERE id=$1 AND name=$5 AND description=$6 RETURNING id`,
+          [productId, copy.name, copy.description, JSON.stringify(copy.details),
+            copy.previousName, copy.previousDescription]);
+          if (changed.rowCount) {
+            await client.query(`UPDATE catalog_variants SET description=$2,details=$3::jsonb,updated_at=now()
+              WHERE product_id=$1 AND description=$4`,
+            [productId, copy.description, JSON.stringify(copy.details), copy.previousDescription]);
+          }
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [leonardoCorrectionMigration]);
       }
       const heldCopyMigration = 'verified_legacy_recipe_copy_2026_11_12';
       const heldCopyDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
