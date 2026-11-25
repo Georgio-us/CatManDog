@@ -77,7 +77,7 @@ export function applyChuruRetailFormats(products) {
     const stick = { ...format(original, `${product.id}-stick`, '1 тюбик × 14 г', 'stick', sourceItemId, 1),
       image: { src: formatImage(code, 'stick'),
         alt: `${product.name} - один тюбик 14 г` },
-      availabilityStatus: copy ? 'source_on_demand' : 'unavailable',
+      availabilityStatus: 'source_on_demand',
       ...(copy ? { description: copy.stickDescription,
         details: ['Один запечатанный тюбик 14 г', copy.details[0]] } : {}) };
     const carton = { ...format(original, `${product.id}-carton48`, 'Короб 12 пачек × 4 тюбика',
@@ -111,7 +111,7 @@ export function applyChuruRetailFormats(products) {
     image: { src: `${studioBase}/churu-${suffix}-stick.webp`,
       alt: `Churu ${flavor} - один тюбик 14 г` },
     description: `Кремовое лакомство Churu со вкусом ${flavor} в одном тюбике 14 г`,
-    availabilityStatus: 'unavailable',
+    availabilityStatus: 'source_on_demand',
     retailFormat: { kind: 'stick', units: 1, sourceItemId,
       sourceUnitsPerPurchaseUnit: 10 },
     details: [`Один запечатанный тюбик со вкусом ${flavor}`,

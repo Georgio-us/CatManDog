@@ -893,6 +893,21 @@ export async function importCatalog(db, items = products) {
         [productId, copy.description, JSON.stringify(copy.details), previousDescription]);
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [churuMixedFormatsCopy]);
       }
+      const churuLooseSaleMigration = 'churu_loose_sale_enabled_2026_11_25';
+      const churuLooseSaleDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [churuLooseSaleMigration]);
+      if (!churuLooseSaleDone.rows.length) {
+        for (const product of products.filter(item => item.brand === 'Churu')) {
+          for (const variant of product.variants || []) {
+            if (variant.retailFormat?.kind !== 'stick') continue;
+            await client.query(`UPDATE catalog_variants SET source_orderable=true,
+              availability=CASE WHEN availability='unavailable' THEN 'source_on_demand' ELSE availability END,
+              sale_status=CASE WHEN sale_status='unavailable' THEN 'available' ELSE sale_status END,
+              updated_at=now() WHERE id=$1 AND product_id=$2`, [variant.id, product.id]);
+          }
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [churuLooseSaleMigration]);
+      }
       const leonardoImageAltMigration = 'leonardo_recipe_image_alt_2026_11_25';
       const leonardoImageAltDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
         [leonardoImageAltMigration]);

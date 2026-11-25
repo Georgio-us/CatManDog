@@ -22,9 +22,7 @@ test('Churu purchase cartons map to distinct retail formats and approved prices'
     assert.equal(churuPurchaseUnit[product.variants[0].retailFormat.sourceItemId.split(':').at(-1)].sticks, 48);
     assert.deepEqual(product.variants.map(variant => variant.retailFormat.sourceUnitsPerPurchaseUnit),
       [48,48,48]);
-    assert.equal(product.variants[1].availabilityStatus,
-      ['tc-713f42fb9a', 'churu-dog-chicken'].includes(product.id)
-        ? 'source_on_demand' : 'unavailable');
+    assert.equal(product.variants[1].availabilityStatus, 'source_on_demand');
     assert.equal(product.variants[2].availabilityStatus, 'source_on_demand');
     assert.doesNotMatch(product.variants[1].description, /4 × 14/);
     assert.match(product.variants[2].description, /12 закрытых пачек/);
@@ -39,7 +37,7 @@ test('Churu purchase cartons map to distinct retail formats and approved prices'
   assert.equal(mixed.variants[1].retailFormat.sourceUnitsPerPurchaseUnit, 10);
   assert.equal(mixed.variants[2].retailFormat.sourceUnitsPerPurchaseUnit, 10);
   assert.equal(mixed.variants[0].retailFormat.sourceUnitsPerPurchaseUnit, 20);
-  assert.ok(mixed.variants.slice(1).every(variant => variant.availabilityStatus === 'unavailable'));
+  assert.ok(mixed.variants.slice(1).every(variant => variant.availabilityStatus === 'source_on_demand'));
   assert.ok(mixed.variants.slice(1).every(variant =>
     existsSync(new URL(`..${variant.image.src}`, import.meta.url))));
   assert.equal(churuPurchaseUnit['949577'].wholesaleCents, 834);
@@ -52,6 +50,9 @@ test('Churu retail formats import as separate customer SKUs without changing sup
   const rows = catalogRows().filter(row => row.variant.source.retailFormat);
   assert.equal(rows.length, 21);
   assert.equal(new Set(rows.map(row => row.variant.id)).size, 21);
+  assert.equal(rows.filter(row => row.variant.source.retailFormat.kind === 'stick').length, 8);
+  assert.ok(rows.filter(row => row.variant.source.retailFormat.kind === 'stick')
+    .every(row => row.variant.sourceOrderable));
   assert.equal(rows.find(row => row.variant.id === 'cmd-source-sku-9c96bc24c8863222')
     .variant.sourcePriceCents, 1449);
   assert.equal(churuPurchaseUnit['940001'].wholesaleCents, 2112);
