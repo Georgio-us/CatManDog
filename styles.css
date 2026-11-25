@@ -4474,3 +4474,35 @@ details .text-link {
 @media (max-width: 760px) {
   .hero-search .search-suggestions:not([hidden]) { max-height: min(300px, 34vh); }
 }
+
+@media (min-width: 1051px) and (max-width: 1190px) {
+  .header { position: relative; }
+  .header nav {
+    display: none;
+    position: absolute;
+    inset: 100% 0 auto;
+    padding: 22px;
+    background: white;
+    box-shadow: 0 15px 20px #0001;
+  }
+  .header nav.open {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 16px;
+  }
+  .header .mobile-toggle { display: flex; }
+}
+@media (max-width: 420px) {
+  .header > .brand { width: 72px; }
+  .header-actions { gap: 3px; }
+  .header-actions .icon-button { width: 26px; }
+  .header-actions #search-toggle { padding-inline: 6px; font-size: 12px; }
+}
+@media (max-width: 360px) {
+  .header { padding-inline: 8px; gap: 4px; }
+  .header > .brand { width: 66px; }
+  .header-actions .language-trigger { width: 47px; }
+  .header-actions .icon-button { width: 24px; }
+  .header-actions #search-toggle { padding-inline: 5px; font-size: 11px; }
+}
