@@ -4409,13 +4409,34 @@ details .text-link {
   min-height: 36px;
   padding: 0 9px;
   gap: 5px;
-  border-radius: 10px;
-  background: #e8f0d4;
-  color: #243415;
+  border-radius: 99px;
+  background: var(--lime);
+  color: var(--ink);
   font-size: 13px;
   font-weight: 700;
 }
-.header-actions #search-toggle:hover { background: #dce8c2; }
+.header-actions #search-toggle:hover,
+.hero-search-controls .button:hover { background: #c8e64f; }
+.hero-search-controls .button { background: var(--lime); color: var(--ink); }
+
+#favorites-link { position: relative; }
+#favorites-link.has-favorites svg {
+  fill: var(--lime);
+  stroke: #748b23;
+}
+
+@media (min-width: 1051px) {
+  .header { gap: clamp(14px, 2vw, 32px); padding-inline: clamp(20px, 3.4vw, 64px); }
+  .header > .brand { width: clamp(100px, 8.6vw, 140px); }
+  .header nav { gap: clamp(11px, 1.45vw, 24px); white-space: nowrap; font-size: 13px; }
+  .header-actions { gap: clamp(7px, 1vw, 16px); flex: none; }
+}
+@media (min-width: 1051px) and (max-width: 1190px) {
+  .header nav { gap: 10px; font-size: 12px; }
+  .header-actions .icon-button { width: 30px; }
+  .header-actions #search-toggle { width: auto; }
+}
+
 .hero-search {
   position: relative;
   width: min(100%, 430px);
