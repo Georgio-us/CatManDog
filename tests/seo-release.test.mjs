@@ -103,7 +103,7 @@ test('database-only ACANA Pacifica has a stable product URL without premature in
 
 test('the verified product release has unique Spanish source content and crawlable category links', async () => {
   const released = seoProducts.filter(product => product.indexable);
-  assert.equal(released.length, 162);
+  assert.equal(released.length, 183);
   const descriptions = new Set();
   for (const product of released) {
     if (!catalogProducts.some(item => item.id === product.id)) continue;

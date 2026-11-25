@@ -77,7 +77,7 @@ const categoryLinks = seoCategories.filter(category => category.indexable).map(c
 const productDescription = (product, publishedProduct) => publishedProduct.description ||
   editorialEs[product.description] || churuDogEs[product.description] || esProductText[product.description] ||
   yaguToyExpansionEs[product.description] || yaguChewTestEs[product.description] || yaguBasketEs[product.description] || yaguExpansionEs[product.description] || product.name;
-const productName = product => editorialEs[product.name] || churuDogEs[product.name] || yaguToyExpansionEs[product.name] || yaguChewTestEs[product.name] || yaguBasketEs[product.name] || esProductText[product.name] || product.name;
+const productName = product => editorialEs[product.name] || churuDogEs[product.name] || yaguToyExpansionEs[product.name] || yaguChewTestEs[product.name] || yaguBasketEs[product.name] || yaguExpansionEs[product.name] || esProductText[product.name] || product.name;
 const productLinks = categoryPath => seoProducts
   .filter(item => item.indexable && item.categoryPath === categoryPath)
   .map(item => {

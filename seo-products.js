@@ -1,5 +1,6 @@
 import { seoProductSlugs } from './seo-product-slugs.js?v=acana-pacifica-route-20261125';
 import { stockSeoCopy } from './stock-seo-copy.js';
+import { seoWave2Copy } from './seo-wave2-copy.js';
 
 // Each released family passed the current catalog, price, source, copy and image audit.
 // Keep this list explicit: a newly imported product must not become indexable by accident.
@@ -14,7 +15,18 @@ const releasedByCategory = {
     'cat-litter-sanicat-clumping-unscented-8l', 'cat-litter-uniko-tofu-18l',
     'yagu-navy-louise-bag', 'yagu-donut-neutral', 'yagu-donut-pana',
     'yagu-gulliver-pana-green', 'yagu-sorolla-backpack',
-    'cat-litter-yommy-tofu-lavanda-6l'
+    'cat-litter-yommy-tofu-lavanda-6l',
+    'yagu-7571307-studio', 'yagu-7571313-studio',
+    'yagu-7514503-activity', 'yagu-7521059-toy',
+    'yagu-7521060-toy', 'yagu-7517033-toy',
+    'yagu-7517023-toy', 'yagu-7512843-toy',
+    'yagu-7571304-toy', 'yagu-7571301-toy',
+    'yagu-7571305-toy', 'yagu-7571300-toy',
+    'yagu-7571319-toy', 'yagu-9235142',
+    'yagu-9235121', 'yagu-9235036',
+    'yagu-9235123', 'yagu-9235071',
+    'yagu-9235038', 'yagu-9235044',
+    'yagu-7552371'
   ],
   '/catalogo/gatos/pienso-seco': [
     'rc-sterilised', 'leonardo-poultry', 'acana-grasslands', 'orijen-original',
@@ -96,7 +108,8 @@ export const seoProducts = Object.entries(seoProductSlugs).map(([id, slug]) => (
   categoryPath: releasedCategoryById.get(id) || '/catalogo',
   indexable: releasedCategoryById.has(id),
   ...(editorialOverrides[id] || {}),
-  ...(stockSeoCopy[id] || {})
+  ...(stockSeoCopy[id] || {}),
+  ...(seoWave2Copy[id] || {})
 }));
 
 const byPath = new Map(seoProducts.map(product => [product.path, product]));
