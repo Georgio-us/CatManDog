@@ -48,6 +48,11 @@ let requestSearchTimer;
 let showTestOrders = false;
 let deliveryDraft = null;
 let deliveryVariants = [];
+let manualChoices = [];
+let manualPackaging = [];
+let manualMode = '';
+let manualLines = [];
+let manualGift = null;
 const $ = id => document.getElementById(id);
 const escape = value => String(value ?? '').replace(/[&<>"']/g, char =>
   ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[char]);
@@ -1286,7 +1291,8 @@ function renderOverview(data, recurringDue = [], salesDashboard = { totals: {}, 
     ? `${Math.round(totals.cashResultCents / totals.receivedCents * 1000) / 10}%` : 'Не рассчитана';
   $('admin-content').innerHTML = `<section class="sales-home"><div class="sales-home-heading"><div><h2>Продажи магазина</h2>
     <p class="admin-muted">Все оплаченные покупки через сайт и вне сайта, без тестов</p></div>
-    <button type="button" data-go-tab="orders">Открыть продажи</button></div>
+    <div class="sales-home-actions"><button type="button" data-manual-open="sale">${plusIcon} Продажа</button><button type="button" data-manual-open="personal">${plusIcon} Покупка для себя</button></div></div>
+    <section id="manual-operation-panel" class="admin-card manual-operation" hidden></section>
     <div class="audit-overview overview-grid sales-home-metrics">
       <div><strong>${totals.purchases ?? 0}</strong><span>Покупки всего · ${totals.sitePurchases ?? 0} на сайте, ${totals.externalPurchases ?? 0} вне сайта</span></div>
       <div><strong>${euros(totals.receivedCents || 0)}</strong><span>Получено от покупателей</span></div>
@@ -1326,6 +1332,76 @@ function renderOverview(data, recurringDue = [], salesDashboard = { totals: {}, 
       ${sale.kind === 'site' && sale.status !== 'delivered' ? '<p class="admin-muted">Передача покупателю в системе не отмечена</p>' : ''}
       </div></details>`).join('') : '<p class="admin-card">Оплаченных покупок пока нет</p>'}</div></section>
     ${realRecurringDue ? `<div class="sales-home-alert"><strong>Регулярные заказы к проверке: ${realRecurringDue}</strong><button type="button" data-go-tab="recurring">Открыть</button></div>` : ''}`;
+}
+const plusIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
+function manualLineHtml(item, index, gift = false) {
+  return `<div class="manual-line" data-manual-line="${gift ? 'gift' : index}">
+    ${item.imagePath ? `<img src="${escape(item.imagePath)}" alt="">` : '<span class="sales-home-no-image"></span>'}
+    <div><strong>${escape(item.name)}</strong><small>${escape(item.label)} · ${escape(item.variantId)} · на складе ${item.available} шт</small></div>
+    <label>Шт<input name="quantity" type="number" min="1" max="${item.available}" value="${item.quantity || 1}" required></label>
+    ${manualMode === 'sale' && !gift ? `<label>Цена продажи, €<input name="price" inputmode="decimal" value="${item.priceCents === null ? '' : (item.priceCents / 100).toFixed(2)}" placeholder="Укажите цену" required></label>` : ''}
+    <label>Закупка с налогами, €/шт<input name="cost" inputmode="decimal" value="${item.costCents === null ? '' : (item.costCents / 100).toFixed(2)}" placeholder="Укажите стоимость" required></label>
+    <button type="button" data-manual-remove="${gift ? 'gift' : index}" aria-label="Убрать товар"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button></div>`;
+}
+function renderManualResults() {
+  const host = $('manual-search-results');
+  if (!host) return;
+  const query = $('manual-search')?.value.trim().toLocaleLowerCase() || '';
+  host.innerHTML = query.length < 2 ? '<p class="admin-muted">Введите название или SKU</p>' :
+    manualChoices.filter(item => `${item.name} ${item.label} ${item.variantId}`.toLocaleLowerCase().includes(query))
+      .slice(0, 12).map(item => `<div class="manual-result"><span><strong>${escape(item.name)}</strong><small>${escape(item.label)} · ${escape(item.variantId)} · ${item.available} шт · ${item.priceCents === null ? 'Цена уточняется' : euros(item.priceCents)}</small></span><button type="button" data-manual-add="${escape(item.variantId)}">Добавить</button>${manualMode === 'sale' ? `<button type="button" data-manual-gift="${escape(item.variantId)}">Подарок</button>` : ''}</div>`).join('') || '<p class="admin-muted">На складе нет подходящего SKU</p>';
+}
+function renderManualPanel() {
+  const host = $('manual-operation-panel');
+  if (!host) return;
+  host.hidden = false;
+  host.innerHTML = `<div class="manual-head"><div><h2>${manualMode === 'sale' ? 'Продажа вне сайта' : 'Покупка для себя'}</h2><p class="admin-muted">${manualMode === 'sale' ? 'Запишите уже полученную оплату и фактически выданные товары' : 'Запишите товары, взятые со склада для себя'}</p></div><button type="button" data-manual-close aria-label="Закрыть">Закрыть</button></div>
+    <label class="manual-search-label">Найти товар<input id="manual-search" type="search" autocomplete="off" placeholder="Название или SKU"></label><div id="manual-search-results" class="manual-results"></div>
+    <form id="manual-operation-form"><input type="hidden" name="idempotencyKey" value="${crypto.randomUUID()}">
+      <h3>Товары</h3><div class="manual-lines">${manualLines.map((item,index) => manualLineHtml(item,index)).join('') || '<p class="admin-muted">Пока не выбраны</p>'}</div>
+      ${manualMode === 'sale' ? `<h3>Покупатель и оплата</h3><div class="manual-fields"><label>Покупатель<input name="customer" maxlength="140" placeholder="Имя или контакт" required></label><label>Получено, €<input name="received" inputmode="decimal" value="${(manualLines.reduce((sum,item) => sum + (item.priceCents || 0) * (item.quantity || 1),0) / 100).toFixed(2)}" required></label><label>Способ оплаты<select name="payment"><option value="cash">Наличные</option><option value="bank_transfer">Банковский перевод</option><option value="card_terminal">Терминал</option><option value="uah_card_transfer">Перевод гривны на карту</option><option value="privatbank_ua">PrivatBank</option><option value="other">Другое</option></select></label></div>
+      <h3>Выданная упаковка</h3><div class="manual-materials">${manualPackaging.map(item => `<label>${escape(item.name)} <small>${euros(Math.round(item.cost1e4 / 100))}/шт</small><input name="material-${escape(item.code)}" type="number" min="0" max="999" value="0"></label>`).join('')}</div>
+      <h3>Подарок товаром</h3><div class="manual-lines">${manualGift ? manualLineHtml(manualGift,0,true) : '<p class="admin-muted">Если подарок был, найдите его выше и нажмите «Подарок»</p>'}</div>
+      <h3>Фактически оплаченные расходы</h3><div class="manual-fields"><label>Транспорт, €<input name="deliveryCost" inputmode="decimal" placeholder="Если был"></label><label>Другой расход<input name="otherDescription" maxlength="140" placeholder="Что оплачено"></label><label>Сумма другого расхода, €<input name="otherCost" inputmode="decimal" placeholder="Если был"></label></div>` : ''}
+      <p id="manual-summary" class="manual-summary"></p><button type="submit" class="manual-save">${manualMode === 'sale' ? 'Подтвердить полученную оплату и сохранить' : 'Записать личный расход'}</button></form>`;
+  renderManualResults();
+  updateManualSummary();
+}
+function captureManualLines() {
+  document.querySelectorAll('.manual-line').forEach(row => {
+    const item = row.dataset.manualLine === 'gift' ? manualGift : manualLines[Number(row.dataset.manualLine)];
+    if (!item) return;
+    item.quantity = Number(row.querySelector('[name=quantity]')?.value || 1);
+    const price = row.querySelector('[name=price]');
+    const cost = row.querySelector('[name=cost]');
+    if (price) { try { item.priceCents = eurosInputCents(price.value, true); } catch { item.priceCents = null; } }
+    if (cost) { try { item.costCents = eurosInputCents(cost.value, true); } catch { item.costCents = null; } }
+  });
+}
+function updateManualRows() {
+  const lists = document.querySelectorAll('#manual-operation-panel .manual-lines');
+  if (lists[0]) lists[0].innerHTML = manualLines.map((item,index) => manualLineHtml(item,index)).join('') || '<p class="admin-muted">Пока не выбраны</p>';
+  if (lists[1]) lists[1].innerHTML = manualGift ? manualLineHtml(manualGift,0,true) : '<p class="admin-muted">Если подарок был, найдите его выше и нажмите «Подарок»</p>';
+  const received = document.querySelector('#manual-operation-form [name=received]');
+  if (received && !received.dataset.touched) received.value =
+    (manualLines.reduce((sum,item) => sum + (item.priceCents || 0) * (item.quantity || 1),0) / 100).toFixed(2);
+  updateManualSummary();
+}
+function updateManualSummary() {
+  const host = $('manual-summary');
+  if (!host) return;
+  if (manualMode === 'personal') {
+    host.textContent = `Личный расход по закупке: ${euros(manualLines.reduce((sum,item) => sum + (item.costCents || 0) * (item.quantity || 1),0))}`;
+    return;
+  }
+  const merchandise = manualLines.reduce((sum,item) => sum + (item.priceCents || 0) * (item.quantity || 1),0);
+  const receivedInput = document.querySelector('#manual-operation-form [name=received]');
+  let received = null;
+  try { received = eurosInputCents(receivedInput?.value, true); } catch { /* Поле проверится при сохранении */ }
+  const difference = received === null ? '' : received < merchandise
+    ? ` · скидка ${euros(merchandise - received)}` : received > merchandise
+      ? ` · сверх цены товаров ${euros(received - merchandise)}` : '';
+  host.textContent = `Товары ${euros(merchandise)} · получено ${received === null ? 'уточняется' : euros(received)}${difference}`;
 }
 async function load() {
   message('Загружаю данные');
@@ -1682,6 +1758,48 @@ $('admin-content').addEventListener('change', async event => {
   }
 });
 $('admin-content').addEventListener('click', async event => {
+  const manualOpen = event.target.closest('[data-manual-open]');
+  if (manualOpen) {
+    manualMode = manualOpen.dataset.manualOpen;
+    manualLines = [];
+    manualGift = null;
+    try {
+      const choices = await api('/api/admin/manual-operation/choices');
+      manualChoices = choices.variants;
+      manualPackaging = choices.packaging;
+      renderManualPanel();
+      $('manual-search')?.focus();
+    } catch (error) { message(error.message); }
+    return;
+  }
+  if (event.target.closest('[data-manual-close]')) {
+    $('manual-operation-panel').hidden = true;
+    return;
+  }
+  const manualAdd = event.target.closest('[data-manual-add],[data-manual-gift]');
+  if (manualAdd) {
+    captureManualLines();
+    const variantId = manualAdd.dataset.manualAdd || manualAdd.dataset.manualGift;
+    const item = manualChoices.find(choice => choice.variantId === variantId);
+    if (!item) return;
+    if (manualAdd.dataset.manualGift) {
+      manualGift = { ...item, quantity: 1 };
+    } else {
+      const existing = manualLines.find(line => line.variantId === variantId);
+      if (existing) existing.quantity = Math.min(item.available, existing.quantity + 1);
+      else manualLines.push({ ...item, quantity: 1 });
+    }
+    updateManualRows();
+    return;
+  }
+  const manualRemove = event.target.closest('[data-manual-remove]');
+  if (manualRemove) {
+    captureManualLines();
+    if (manualRemove.dataset.manualRemove === 'gift') manualGift = null;
+    else manualLines.splice(Number(manualRemove.dataset.manualRemove), 1);
+    updateManualRows();
+    return;
+  }
   const stockFilter = event.target.closest('[data-stock-view]');
   if (stockFilter) {
     stockView = stockFilter.dataset.stockView;
@@ -2081,6 +2199,21 @@ $('admin-content').addEventListener('click', async event => {
     if (!details.open) loadStock(details);
   }
 });
+$('admin-content').addEventListener('input', event => {
+  if (event.target.id === 'manual-search') renderManualResults();
+  if (event.target.name === 'received') event.target.dataset.touched = '1';
+  if (event.target.closest('#manual-operation-panel') && event.target.id !== 'manual-search') {
+    if (event.target.closest('.manual-line')) {
+      captureManualLines();
+      if (!document.querySelector('#manual-operation-form [name=received]')?.dataset.touched) {
+        const received = document.querySelector('#manual-operation-form [name=received]');
+        if (received) received.value = (manualLines.reduce((sum,item) =>
+          sum + (item.priceCents || 0) * (item.quantity || 1),0) / 100).toFixed(2);
+      }
+    }
+    updateManualSummary();
+  }
+});
 $('admin-content').addEventListener('submit', async event => {
   const form = event.target.closest('form');
   if (!form) return;
@@ -2090,6 +2223,44 @@ $('admin-content').addEventListener('submit', async event => {
   if (submitButton) submitButton.disabled = true;
   try {
     let formResultMessage = '';
+    if (form.id === 'manual-operation-form') {
+      captureManualLines();
+      if (!manualLines.length) throw new Error('Добавьте хотя бы один товар');
+      const toLine = item => {
+        if (!Number.isInteger(item.quantity) || item.quantity < 1 || item.quantity > item.available)
+          throw new Error(`Проверьте количество: ${item.name}`);
+        if (!Number.isInteger(item.costCents)) throw new Error(`Укажите фактическую закупку с налогами: ${item.name}`);
+        if (manualMode === 'sale' && item !== manualGift && !Number.isInteger(item.priceCents))
+          throw new Error(`Укажите цену продажи: ${item.name}`);
+        return { variantId: item.variantId, quantity: item.quantity,
+          unitCostCents: item.costCents,
+          ...(item === manualGift ? {} : manualMode === 'sale' ? { unitPriceCents: item.priceCents } : {}) };
+      };
+      const body = { kind: manualMode, idempotencyKey: values.get('idempotencyKey'),
+        items: manualLines.map(toLine) };
+      if (manualMode === 'sale') {
+        body.customer = values.get('customer');
+        body.paymentChannel = values.get('payment');
+        body.receivedCents = eurosInputCents(values.get('received'));
+        body.packaging = Object.fromEntries(manualPackaging.map(item =>
+          [item.code, Number(values.get(`material-${item.code}`) || 0)]));
+        if (manualGift) body.gift = toLine(manualGift);
+        body.expenses = [];
+        if (values.get('deliveryCost')) body.expenses.push({ kind: 'delivery',
+          description: 'Транспорт', amountCents: eurosInputCents(values.get('deliveryCost')) });
+        if (values.get('otherCost')) {
+          if (!String(values.get('otherDescription') || '').trim())
+            throw new Error('Укажите, что оплачено дополнительно');
+          body.expenses.push({ kind: 'other', description: values.get('otherDescription'),
+            amountCents: eurosInputCents(values.get('otherCost')) });
+        }
+      }
+      const result = await api('/api/admin/manual-operation', 'POST', body);
+      await load();
+      message(result.alreadyRecorded ? 'Операция уже записана, остатки не списаны повторно' :
+        manualMode === 'sale' ? 'Продажа записана, остатки и расходы обновлены' : 'Личный расход записан, остатки обновлены');
+      return;
+    }
     if (form.dataset.saleExpense) {
       await api('/api/admin/sales-expenses', 'POST', {
         saleKind: form.dataset.saleExpense, saleId: form.dataset.saleId,

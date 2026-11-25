@@ -38,7 +38,7 @@ export function buildSalesDashboard(orders, externalSales, totals, personalExpen
       customer: sale.customerNote || 'Покупатель не указан', date: sale.saleDate,
       grossCents: money(sale.grossCents),
       merchandiseCents: money(sale.grossCents) - money(sale.extraReceivedCents),
-      discountCents: 0, deliveryRevenueCents: 0,
+      discountCents: money(sale.discountCents), deliveryRevenueCents: 0,
       stripeFeeCents: 0,
       extraReceivedCents: money(sale.extraReceivedCents),
       productCostCents: money(sale.productCostCents),

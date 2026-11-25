@@ -1,7 +1,7 @@
 export async function listExternalSales(db) {
   const { rows } = await db.query(`SELECT s.id,s.reference,s.sale_date,s.customer_note,
     s.payment_channel,s.payment_status,s.paid_on,s.gross_cents,s.product_cost_cents,
-    s.date_basis,s.extra_received_cents,
+    s.date_basis,s.extra_received_cents,s.discount_cents,
     s.gift_cost_cents,s.gift_description,s.documentation_status,s.note,s.created_at,
     coalesce((SELECT sum(p.quantity*p.unit_cost_1e4) FROM sale_packaging_items p
       WHERE p.external_sale_id=s.id),0)::integer AS packaging_cost_1e4,
@@ -33,6 +33,7 @@ export async function listExternalSales(db) {
       grossCents: row.gross_cents, productCostCents: row.product_cost_cents,
       dateBasis: row.date_basis || 'sale',
       extraReceivedCents: row.extra_received_cents || 0,
+      discountCents: row.discount_cents || 0,
       giftCostCents: row.gift_cost_cents,
       giftDescription: row.gift_description || '',
       packagingCostCents: Math.round(Number(row.packaging_cost_1e4 || 0) / 100),
