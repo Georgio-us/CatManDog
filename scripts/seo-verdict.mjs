@@ -75,6 +75,7 @@ export const seoVerdict = ({ product, variants, copy, translations, review, tech
     }
     if (review.note) evidence.push(review.note);
     if (review.sourceUrl) evidence.push(review.sourceUrl);
+    if (review.imageEvidenceUrl) evidence.push(`Образец фото: ${review.imageEvidenceUrl}`);
     if (review.reviewedAt) evidence.push(`Проверено ${review.reviewedAt}`);
   }
   if (product.indexable && !liveChecked) {

@@ -32,8 +32,12 @@
       "tc-82b5e1f561-reference-pack"
     ],
     "editorialSha256": "f16f683d1765e1c543efaa0c886e7c673ae602bd75feb8a2ec7e2046744616e6",
-    "imageIdentityVerified": false,
-    "note": "Рецептура и продаваемая единица сверены с производителем в SEO wave 7; визуальная идентичность фото отдельно не подтверждена"
+    "imageIdentityVerified": true,
+    "note": "Фото сверено с официальной упаковкой Catit: Chicken with Lamb, зелёная пачка, 4 тюбика; локализованный испанский вариант упаковки",
+    "imageEvidenceUrl": "https://www.catit.com/wp-content/uploads/2026/04/44452-WEB_Catit-Creamy-Chicken-with-Lamb_PACKAGING-OLD.jpg",
+    "imagePaths": {
+      "tc-82b5e1f561-reference-pack": "https://img.catmandog.es/assets/treats-care/editorial/tc-82b5e1f561-v1.webp"
+    }
   },
   "tc-c4fc3a3e21": {
     "productId": "tc-c4fc3a3e21",
@@ -44,8 +48,12 @@
       "tc-c4fc3a3e21-reference-pack"
     ],
     "editorialSha256": "a097a8316bd9085eef14eef63a643a4baddc79d9f5163f2394e574a6f5331450",
-    "imageIdentityVerified": false,
-    "note": "Рецептура и продаваемая единица сверены с производителем в SEO wave 7; визуальная идентичность фото отдельно не подтверждена"
+    "imageIdentityVerified": true,
+    "note": "Фото сверено с официальной упаковкой Catit: Atlantic Salmon with Prawns, синяя пачка, 4 тюбика; локализованный испанский вариант упаковки",
+    "imageEvidenceUrl": "https://www.catit.com/wp-content/uploads/2026/04/44453-WEB_Catit-Creamy-Salmon-with-Prawns_PACKAGING-OLD.jpg",
+    "imagePaths": {
+      "tc-c4fc3a3e21-reference-pack": "https://img.catmandog.es/assets/treats-care/editorial/tc-c4fc3a3e21-v1.webp"
+    }
   },
   "tc-719843e78f": {
     "productId": "tc-719843e78f",
