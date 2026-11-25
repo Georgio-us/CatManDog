@@ -123,6 +123,56 @@ export function prioritizePetCatalog(products, pet) {
   ];
 }
 
+const categoryHighlights = {
+  'Корм': [
+    'rc-sterilised', 'dog-ownat-wetline-chicken', 'leonardo-wet-pure-chicken',
+    'cmd-source-f025a9dbc9d479c7', 'acana-first-feast', 'dog-orijen-original',
+    'royalcanin-93e8aeca', 'dog-nutriplus-wet-lamb', 'orijen-original',
+    'cmd-source-11acbc9ed4d69f1c', 'leonardo-light', 'royal-canin-chihuahua-adult'
+  ],
+  'Лакомства': [
+    'tc-4e50c58957', 'yagu-7570678-studio', 'churu-dog-chicken',
+    'tc-0707caf730', 'yagu-7516214-studio', 'tc-768abf17c2',
+    'yagu-7570675-studio', 'churu-dog-salmon-bites'
+  ],
+  'Наполнитель': [
+    'cat-litter-yommy-tofu-lavanda-6l', 'yagu-7514697-studio',
+    'yagu-9235142', 'yagu-2170001', 'yagu-2170004'
+  ],
+  'Миски и поилки': [
+    'dog-mp-sensibowl-slomo', 'heybopet-hb-pwfs-s30s', 'heybopet-pwf-filters-3',
+    'yagu-9235038', 'yagu-7845778'
+  ],
+  'Окна и балконы': [
+    'yagu-duvo-balcony-net', 'cats-atelier-sh-w-f60-g',
+    'cats-atelier-sh-w-a60-g', 'cats-atelier-sh-m-a60-g'
+  ],
+  'Уход': [
+    'yagu-7510074-studio', 'yagu-M0295-studio', 'tc-7934eaf44b'
+  ]
+};
+
+const categoryForGroup = {
+  'dry-food': 'Корм', 'wet-food': 'Корм', treats: 'Лакомства',
+  litter: 'Наполнитель', trays: 'Наполнитель',
+  bowls: 'Миски и поилки', drinkers: 'Миски и поилки',
+  windows: 'Окна и балконы', care: 'Уход'
+};
+
+export function prioritizeCatalogCategory(products, category, group) {
+  const highlights = categoryHighlights[category || categoryForGroup[group]];
+  if (!highlights) return products;
+  const byId = new Map(products.map(product => [product.id, product]));
+  const featured = [];
+  for (const id of highlights) {
+    const product = byId.get(id);
+    if (!product || !snapshots(product).some(canBuy)) continue;
+    featured.push(product);
+    byId.delete(id);
+  }
+  return [...featured, ...byId.values()];
+}
+
 const definitions = [
   ['dry-food', 'Сухой корм'],
   ['wet-food', 'Влажный корм'],

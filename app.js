@@ -9,7 +9,7 @@ import { atelierHasOptions, atelierDefaults, atelierSelection, atelierOptionsMar
 import { productGallery } from './product-gallery.js?v=atelier-all-spec-galleries-20261120';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=delivery-regions-20261122';
 import { recommendForProduct } from './recommendations.js?v=atelier-related-20261121';
-import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet, homeCatOrder, homeDogOrder, homeFeaturedVariant, prioritizeHomeShelf, prioritizePetCatalog } from './home-catalog.js?v=pets-catalog-rows';
+import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet, homeCatOrder, homeDogOrder, homeFeaturedVariant, prioritizeHomeShelf, prioritizePetCatalog, prioritizeCatalogCategory } from './home-catalog.js?v=category-shelves';
 import { categories, products, catalogProducts, articles } from './data.js?v=royal-canin-order-20261125';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=yagu-toys-20261116';
 import { createCheckoutUI } from './checkout-ui.js?v=delivery-regions-20261122';
@@ -20,7 +20,7 @@ import { applyServerCatalog } from './server-prices.js?v=atelier-long-copy-3-202
 import { pickupBasketPage, pickupCheckoutPage, pickupConfirmationPage, pickupCopy } from './pickup-flow.js?v=pickup-shared-ui-20261121';
 
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
-import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=editorial-shortcuts-20261119';
+import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=selection-shelves';
 import { handleCatPickClick } from './cat-picks.js?v=picks-seo-20261112';
 import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from './locale.js?v=store-search-royal-canin-20261125';
 import { articlesEs } from './journal-content-es.js?v=es-1';
@@ -439,6 +439,17 @@ const pickupMerchandisingOrder = new Map([
   'yagu-7510082-studio'
 ].map((id, index) => [id, index]));
 
+const dogPickupHighlights = new Map([
+  'cmd-source-sku-056ca5c0a341fff1',
+  'yagu-7570678-studio',
+  'yagu-7515987-studio',
+  'yagu-1128082',
+  'dog-orijen-original-6-',
+  'yagu-7516214-studio',
+  'yagu-7516254-studio',
+  'yagu-7510074-studio'
+].map((id, index) => [id, index]));
+
 function pickupPage(){
   const copy={
     es:{title:'Disponible para recogida',intro:'Productos que tenemos físicamente en València. Añádelos a la cesta y paga sin indicar dirección. Te contactaremos para acordar la recogida',all:'Todos',cat:'Para gatos',dog:'Para perros',categories:'Categorías',allProducts:'Todos los productos',empty:'Todavía no hay productos confirmados para recogida',unavailable:'No podemos comprobar la disponibilidad ahora',contact:'Consultar la recogida',view:'Ver producto',price:'Precio con IVA',unknown:'Precio por confirmar'},
@@ -453,6 +464,10 @@ function pickupPage(){
     .map(sku=>({product,sku})));
   available.sort((left,right)=>(pickupMerchandisingOrder.get(left.sku.id)??Infinity)
     -(pickupMerchandisingOrder.get(right.sku.id)??Infinity));
+  if(selectedPet==='dog'&&!params.get('group')){
+    available.sort((left,right)=>(dogPickupHighlights.get(left.sku.id)??Infinity)
+      -(dogPickupHighlights.get(right.sku.id)??Infinity));
+  }
   const groups=homeGroupsForPet(selectedPet||'cat',[...new Set(available.map(item=>item.product))]);
   if(!selectedPet){
     const known=new Set(groups.map(group=>group.id));
@@ -602,7 +617,7 @@ function homeUseful(){
 }
 function home(){return `<section class="hero"><img src="https://img.catmandog.es/assets/hero-happy.png" alt="Золотистый ретривер и серая кошка на диване" fetchpriority="high"><div class="hero-copy"><h1>Хорошая<br>жизнь<br>С хвостиком</h1><p>Всё, что нужно для счастливой жизни кошек, собак и их людей</p><form class="hero-search search-combo" data-search-form="hero" role="search"><label for="hero-search">Поиск товаров</label><div class="hero-search-controls"><input id="hero-search" data-search-input type="search" placeholder="Найти товар или бренд" autocomplete="off" aria-controls="hero-search-suggestions" aria-expanded="false"><button class="button" type="submit">Найти</button></div><div class="search-suggestions" id="hero-search-suggestions" hidden></div></form><a class="text-link" href="/catalogo">В каталог</a><span class="hero-note">С заботой о каждом хвосте</span></div></section><section class="section"><div class="section-head"><h2>Их любимые вещи</h2><a class="text-link" href="#/catalog">Весь каталог</a></div><div class="categories">${categories.filter(c=>c!=='Подарочные наборы').map((c,i)=>`<a class="category" href="#/catalog?category=${encodeURIComponent(c)}"><div class="category-image" style="${categoryImageStyle(c)}"></div><span>${categoryLabel(c)}</span></a>`).join('')}</div></section>${homeShortcuts(catalogProducts,icon,escape,locale())}<section class="section home-catalog" id="home-catalog" aria-labelledby="home-catalog-title">${homeCatalog()}</section>${service()}<section class="section journal-section"><div class="section-head journal-section-head"><div><span class="eyebrow">Идеи для жизни вместе</span><h2>Журнал о питомцах</h2><p class="journal-intro">Про уютный дом, игры и поездки с питомцем</p></div><a class="text-link" href="${journalHref()}">Весь журнал</a></div><div class="journal-grid">${displayArticles.map(articleCard).join('')}</div></section>${homeUseful()}<section class="brand-story"><h2>Они делают нашу жизнь лучше<br>А мы - их</h2><div><p>CatManDog - про жизнь вместе Про утренние прогулки, тёплые носы и вещи, которые помогают заботиться каждый день</p><a class="text-link" href="#/about">Ближе познакомиться</a></div></section>`;}
 function foodFilters(params){return `<div class="food-filters"><div class="food-types" aria-label="Тип корма">${[['','Весь корм'],['dry','Сухой'],['wet','Влажный']].map(([value,label])=>`<button class="pill ${(params.get('foodType')||'')===value?'active':''}" data-food-type="${value}" aria-pressed="${(params.get('foodType')||'')===value}">${label}</button>`).join('')}</div><label class="food-brand">Бренд <select id="food-brand"><option value="">Все бренды</option>${[...new Set(catalogProducts.filter(p=>p.isReal&&p.category==='Корм').map(p=>p.brand))].sort((a,b)=>a.localeCompare(b)).map(brand=>`<option value="${escape(brand)}" ${params.get('brand')===brand?'selected':''}>${escape(brand)}</option>`).join('')}</select></label></div>`;}
-function filteredProducts(params){let list=catalogProducts.filter(p=>(!params.get('pet')||p.pet===params.get('pet')||p.pet==='both')&&(!params.get('category')||categoryKey(p)===params.get('category'))&&(params.get('maxPrice')||displayedMinPrice(p)===null||displayedMinPrice(p)<=priceLimit));if(params.get('group'))list=list.filter(p=>homeGroupForProduct(p)===params.get('group'));if(params.get('group')&&params.get('brand'))list=list.filter(p=>p.brand===params.get('brand'));if(params.get('group')&&params.get('feature'))list=list.filter(p=>matchesHomeFeature(p,params.get('group'),params.get('feature')));if(params.get('maxPrice'))list=list.filter(p=>matchesHomePrice(p,params.get('maxPrice')));if(params.get('category')==='Корм')list=list.filter(p=>(!params.get('foodType')||p.foodType===params.get('foodType'))&&(!params.get('brand')||p.brand===params.get('brand')));const q=params.get('q')||'';const pet=params.get('pet');const sort=params.get('sort');if(!q&&(!sort||sort==='popular')&&!params.get('category')&&!params.get('group'))return prioritizePetCatalog(list,pet);if(q)list=findStoreProducts(list,q).map(hit=>hit.entry.product);switch(params.get('sort')){case 'low':list.sort((a,b)=>(displayedMinPrice(a)??Infinity)-(displayedMinPrice(b)??Infinity));break;case 'high':list.sort((a,b)=>displayedMinPrice(a)!==null&&displayedMinPrice(b)!==null?displayedMinPrice(b)-displayedMinPrice(a):displayedMinPrice(a)!==null?-1:displayedMinPrice(b)!==null?1:0);break;case 'name':list.sort((a,b)=>translate(a.name).localeCompare(translate(b.name),intlLocale()));}keepUnavailableLast(list);return list;}
+function filteredProducts(params){let list=catalogProducts.filter(p=>(!params.get('pet')||p.pet===params.get('pet')||p.pet==='both')&&(!params.get('category')||categoryKey(p)===params.get('category'))&&(params.get('maxPrice')||displayedMinPrice(p)===null||displayedMinPrice(p)<=priceLimit));if(params.get('group'))list=list.filter(p=>homeGroupForProduct(p)===params.get('group'));if(params.get('group')&&params.get('brand'))list=list.filter(p=>p.brand===params.get('brand'));if(params.get('group')&&params.get('feature'))list=list.filter(p=>matchesHomeFeature(p,params.get('group'),params.get('feature')));if(params.get('maxPrice'))list=list.filter(p=>matchesHomePrice(p,params.get('maxPrice')));if(params.get('category')==='Корм')list=list.filter(p=>(!params.get('foodType')||p.foodType===params.get('foodType'))&&(!params.get('brand')||p.brand===params.get('brand')));const q=params.get('q')||'';const pet=params.get('pet');const sort=params.get('sort');if(!q&&(!sort||sort==='popular')){const category=params.get('category');const group=params.get('group');if(!category&&!group)return prioritizePetCatalog(list,pet);list=prioritizeCatalogCategory(list,category,group);}if(q)list=findStoreProducts(list,q).map(hit=>hit.entry.product);switch(params.get('sort')){case 'low':list.sort((a,b)=>(displayedMinPrice(a)??Infinity)-(displayedMinPrice(b)??Infinity));break;case 'high':list.sort((a,b)=>displayedMinPrice(a)!==null&&displayedMinPrice(b)!==null?displayedMinPrice(b)-displayedMinPrice(a):displayedMinPrice(a)!==null?-1:displayedMinPrice(b)!==null?1:0);break;case 'name':list.sort((a,b)=>translate(a.name).localeCompare(translate(b.name),intlLocale()));}keepUnavailableLast(list);return list;}
 function catalogSelection(params){
   const group=homeGroups.find(item=>item.id===params.get('group'));
   if(!group)return '';
