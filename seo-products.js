@@ -40,7 +40,14 @@ const releasedByCategory = {
     'cats-atelier-sh-w-w95-ur', 'cats-atelier-sh-w-a60-g',
     'cats-atelier-sh-m-a60-g', 'cats-atelier-sh-m-w95-sp',
     'cats-atelier-st-wb-f', 'cats-atelier-rd-st',
-    'cats-atelier-sh-m-a95'
+    'cats-atelier-sh-m-a95',
+    'cats-atelier-co-m-60', 'cats-atelier-co-w-a60',
+    'cats-atelier-co-w-95', 'cats-atelier-co-m-75',
+    'cats-atelier-co-m-95', 'cats-atelier-co-m-100',
+    'cats-atelier-ma-w-60', 'cats-atelier-ma-w-95',
+    'cats-atelier-ma-m-60', 'cats-atelier-ma-m-75',
+    'cats-atelier-ma-m-95', 'cats-atelier-ma-m-100',
+    'cats-atelier-co-w-f60', 'cats-atelier-co-w-f75'
   ],
   '/catalogo/gatos/pienso-seco': [
     'rc-sterilised-senior', 'rc-maine-coon', 'rc-british',
