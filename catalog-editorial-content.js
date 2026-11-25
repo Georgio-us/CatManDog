@@ -102,9 +102,9 @@ export const catalogEditorialContent = {
     details: ['Утка как единственный источник животного белка', 'С грушей', 'Без зерновых ингредиентов']
   },
   'cmd-source-694e05cdc1b2582c': {
-    source: 'https://inabafoods-europe.com/products/main-ingredient/salmon/',
-    description: 'Churu Variedades Salmón y Pollo - набор кремовых лакомств для кошек со вкусами лосося и курицы. В коробке 20 тюбиков по 14 г, которые можно давать отдельно или добавлять к корму.',
-    details: ['Ассорти вкусов лосося и курицы', '20 тюбиков по 14 г', 'Кремовая текстура']
+    source: 'https://inabafoods-europe.com/product/salmon-churu-20p-salmon-chicken-variety/',
+    description: 'Churu Variedades Salmón y Pollo - кремовое лакомство для кошек с двумя рецептами: лосось и лосось с курицей. Можно выбрать короб из 20 тюбиков по 14 г или отдельный тюбик нужного вкуса.',
+    details: ['Два рецепта: лосось и лосось с курицей', 'Короб 20 × 14 г или отдельный тюбик 14 г', 'Кремовая текстура']
   },
   'cmd-source-6d56f8fb416a81c4': {
     source: 'https://emea.orijenpetfoods.com/en/eu-ori-ns-ori-regionalred.html',

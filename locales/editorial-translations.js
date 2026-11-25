@@ -65,8 +65,8 @@ const descriptionByProduct = {
     'ACANA Singles Free-Run Duck поєднує качку та грушу. У рецептурі є м’ясо й субпродукти качки; за даними виробника, з качки походять 50 % інгредієнтів.'
   ],
   'cmd-source-694e05cdc1b2582c': [
-    'Churu Variedades Salmón y Pollo es un surtido de premios cremosos para gatos con sabores a salmón y pollo. La caja contiene 20 tubos de 14 g para ofrecer por separado o añadir a la comida.',
-    'Churu Variedades Salmón y Pollo - набір кремових ласощів для котів зі смаками лосося та курки. У коробці 20 тюбиків по 14 г; їх можна давати окремо або додавати до корму.'
+    'Churu Variedades Salmón y Pollo es un premio cremoso para gatos con dos recetas: salmón y salmón con pollo. Puedes elegir la caja de 20 tubos de 14 g o un tubo individual del sabor que prefieras.',
+    'Churu Variedades Salmón y Pollo - кремові ласощі для котів із двома рецептами: лосось і лосось із куркою. Можна вибрати коробку з 20 тюбиків по 14 г або окремий тюбик потрібного смаку.'
   ],
   'cmd-source-6d56f8fb416a81c4': [
     'ORIJEN Regional Red para perros combina ternera, jabalí, bisonte, cordero y cerdo. Según el fabricante, el 85 % de sus ingredientes es de origen animal y la receta no contiene cereales.',
@@ -105,6 +105,8 @@ const detailCopy = {
   'С грушей': ['Con pera', 'З грушею'],
   'Ассорти вкусов лосося и курицы': ['Surtido de sabores a salmón y pollo', 'Асорті зі смаками лосося та курки'],
   '20 тюбиков по 14 г': ['20 tubos de 14 g', '20 тюбиків по 14 г'],
+  'Два рецепта: лосось и лосось с курицей': ['Dos recetas: salmón y salmón con pollo', 'Два рецепти: лосось і лосось із куркою'],
+  'Короб 20 × 14 г или отдельный тюбик 14 г': ['Caja de 20 × 14 g o un tubo individual de 14 g', 'Коробка 20 × 14 г або окремий тюбик 14 г'],
   'Кремовая текстура': ['Textura cremosa', 'Кремова текстура'],
   'Говядина, дикий кабан, бизон, ягнёнок и свинина': ['Ternera, jabalí, bisonte, cordero y cerdo', 'Яловичина, дикий кабан, бізон, ягня та свинина'],
   '85% ингредиентов животного происхождения по данным производителя': ['85 % de ingredientes de origen animal según el fabricante', '85 % інгредієнтів тваринного походження за даними виробника']

@@ -11,6 +11,8 @@ export const editorialFingerprint = copy => createHash('sha256').update(JSON.str
   ukDetails: copy.ukDetails
 })).digest('hex');
 
+export const variantImagePath = variant => variant.variant_image_path || variant.image_path;
+
 // SEO readiness and the owner's current work queue are separate questions.
 // A closed, unbuyable page can correctly remain on the site without becoming
 // an editorial task. The owner deferred the non-stock HeyboPet models for SEO.
@@ -24,9 +26,6 @@ export const seoWorkScope = row => {
   }
   if (row.id === 'cmd-source-4c1d8462a78eb6de') {
     return { workScope: 'отложено', scopeReason: 'ACANA Pacifica удержана отдельно до уточнения точного SKU' };
-  }
-  if (row.id === 'cmd-source-694e05cdc1b2582c') {
-    return { workScope: 'проверяем сейчас', scopeReason: 'Покупка доступна, но описание коробки не подходит отдельным тюбикам' };
   }
   if (row.status === 'ошибка') {
     return { workScope: 'отложено', scopeReason: 'Есть конкретный блокер к открытию; редакционный проход сейчас не нужен' };
@@ -54,7 +53,7 @@ export const seoVerdict = ({ product, variants, copy, translations, review, tech
     if (!variant.price_accepted || !(variant.priceCents > 0)) {
       failures.push(`${variant.variant_id}: нет принятой розничной цены`);
     }
-    if (!variant.image_path) failures.push(`${variant.variant_id}: нет основного фото`);
+    if (!variantImagePath(variant)) failures.push(`${variant.variant_id}: нет основного фото`);
   }
   if (!product.path?.startsWith('/producto/')) failures.push('Нет постоянного URL товара');
   if (technical?.length) failures.push(...technical.map(issue => `Опубликованная страница: ${issue}`));
@@ -107,7 +106,7 @@ export const seoVerdict = ({ product, variants, copy, translations, review, tech
     if (!review.imageIdentityVerified || !/^https:\/\//u.test(review.imageEvidenceUrl || '')) {
       needsReview.push('Нет записи визуальной сверки фото с точным товаром и ссылкой на образец');
     } else if (!catalogUnavailable && variants.some(variant =>
-      review.imagePaths?.[variant.variant_id] !== variant.image_path)) {
+      review.imagePaths?.[variant.variant_id] !== variantImagePath(variant))) {
       needsReview.push('Основное фото изменилось после визуальной сверки');
     }
     if (review.note) evidence.push(review.note);

@@ -10,10 +10,6 @@ const editorial = new Set(Object.keys(catalogEditorialContent));
 const stock = new Set(Object.keys(stockSeoCopy));
 const wave2 = new Set(Object.keys(seoWave2Copy));
 const atelier = new Set(catsAtelierProducts.map(product => product.id));
-// Editorial record covers the 20-tube box, but this family also sells loose tubes.
-const knownCopyMismatches = new Map([
-  ['cmd-source-694e05cdc1b2582c', 'seo-copy-describes-box-but-family-also-sells-loose-tubes']
-]);
 const catalogNames = new Map(products.map(product => [product.id, product.name]));
 const families = seoProducts.map(product => ({
   id: product.id,
@@ -73,7 +69,7 @@ if (process.argv.includes('--live') || catalogFileIndex !== -1) {
     // independently determine whether its public page can be indexed.
     const sourceWarnings = variants.filter(variant => !variant.source_orderable && !variant.pickupAvailable)
       .map(variant => variant.variant_id);
-    const copyIssue = knownCopyMismatches.get(item.id) || null;
+    const copyIssue = null;
     const textNeedsReview = copyIssue || !['three-language-editorial', 'three-language-wave2'].includes(item.copyEvidence);
     const gate = !variants.length ? 'missing-live-variants'
       : blockers.length ? 'commercial-review'

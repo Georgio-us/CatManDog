@@ -878,6 +878,21 @@ export async function importCatalog(db, items = products) {
         }
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [wave7Migration]);
       }
+      const churuMixedFormatsCopy = 'churu_mixed_formats_copy_2026_11_25';
+      const churuMixedFormatsCopyDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [churuMixedFormatsCopy]);
+      if (!churuMixedFormatsCopyDone.rows.length) {
+        const productId = 'cmd-source-694e05cdc1b2582c';
+        const copy = catalogEditorialContent[productId];
+        const previousDescription = 'Churu Variedades Salmón y Pollo - набор кремовых лакомств для кошек со вкусами лосося и курицы. В коробке 20 тюбиков по 14 г, которые можно давать отдельно или добавлять к корму.';
+        await client.query(`UPDATE catalog_products SET description=$2,details=$3::jsonb
+          WHERE id=$1 AND description=$4`,
+        [productId, copy.description, JSON.stringify(copy.details), previousDescription]);
+        await client.query(`UPDATE catalog_variants SET description=$2,details=$3::jsonb,updated_at=now()
+          WHERE product_id=$1 AND description=$4`,
+        [productId, copy.description, JSON.stringify(copy.details), previousDescription]);
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [churuMixedFormatsCopy]);
+      }
       const leonardoImageAltMigration = 'leonardo_recipe_image_alt_2026_11_25';
       const leonardoImageAltDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
         [leonardoImageAltMigration]);

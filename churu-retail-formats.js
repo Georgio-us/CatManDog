@@ -98,9 +98,9 @@ export function applyChuruRetailFormats(products) {
   const sourceItemId = 'albet-churu-2026-11-03:949577';
   const base = { name: 'Churu - лосось и курица', brand: 'Churu', category: 'Лакомства',
     pet: 'cat', isReal: true, tag: 'Кремовые лакомства', line: 'Churu · 20 × 14 г',
-    description: 'Кремовые лакомства Churu со вкусами лосося и лосося с курицей',
-    details: ['В коробе 10 тюбиков с лососем и 10 тюбиков с лососем и курицей',
-      'Используйте по инструкции на упаковке производителя'],
+    description: 'Churu Variedades Salmón y Pollo - кремовое лакомство для кошек с двумя рецептами: лосось и лосось с курицей. Можно выбрать короб из 20 тюбиков по 14 г или отдельный тюбик нужного вкуса.',
+    details: ['Два рецепта: лосось и лосось с курицей',
+      'Короб 20 × 14 г или отдельный тюбик 14 г', 'Кремовая текстура'],
     image: { src: image, alt: 'Churu - лосось и курица, короб 20 тюбиков' },
     supplier: { name: 'Albet', sku: '949577', url: 'https://www.albet.es/churu-cat-variedades-salmon-pollo-snack-cremoso-20x14g' },
     availabilityStatus: 'source_on_demand' };

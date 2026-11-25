@@ -21,9 +21,6 @@ if (!args.includes('--live') && !catalogPath) {
 const reviews = JSON.parse(await readFile(new URL('../seo-review-records.json', import.meta.url), 'utf8'));
 const atelierEvidence = JSON.parse(await readFile(new URL('../atelier-seo-evidence.json', import.meta.url), 'utf8'));
 const atelierProducts = new Map(catsAtelierProducts.map(product => [product.id, product]));
-const issues = new Map([
-  ['cmd-source-694e05cdc1b2582c', 'SEO-текст описывает коробку 20 тюбиков, а семья продаёт также отдельные тюбики']
-]);
 const fetchWithRetry = async (url, options = {}) => {
   let lastError;
   for (let attempt = 0; attempt < 3; attempt++) {
@@ -164,7 +161,7 @@ const rows = products.map(product => {
     review: atelierReview || reviews[product.id], technical,
     liveChecked: Boolean(check && !check.unavailable && !sitemapUnavailable && !catalogUnavailable),
     liveUnavailable: check?.unavailable || sitemapUnavailable || catalogUnavailable,
-    catalogUnavailable, sitemapUnavailable, knownIssue: atelierIssue || issues.get(product.id), catalogIsLive: !catalogPath,
+    catalogUnavailable, sitemapUnavailable, knownIssue: atelierIssue, catalogIsLive: !catalogPath,
     priorCopy: stockSeoCopy[product.id] ? 'Предметный испанский SEO-текст: stock-seo-copy.js, проверка 22 ноября 2026'
       : seoWave2Copy[product.id] ? 'Предметный испанский SEO-текст: seo-wave2-copy.js, предыдущая проверка'
         : null });

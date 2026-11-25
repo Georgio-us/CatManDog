@@ -115,6 +115,20 @@
     "imageIdentityVerified": false,
     "note": "Рецептура и продаваемая единица сверены с производителем в SEO wave 7; визуальная идентичность фото отдельно не подтверждена"
   },
+  "cmd-source-694e05cdc1b2582c": {
+    "productId": "cmd-source-694e05cdc1b2582c",
+    "reviewedAt": "2026-11-25",
+    "sourceUrl": "https://inabafoods-europe.com/product/salmon-churu-20p-salmon-chicken-variety/",
+    "saleUnit": "20 x 14 g box or one 14 g tube, selected by variant",
+    "variantIds": [
+      "cmd-source-sku-9c96bc24c8863222",
+      "cmd-source-694e05cdc1b2582c-salmon-stick",
+      "cmd-source-694e05cdc1b2582c-salmon-chicken-stick"
+    ],
+    "editorialSha256": "598f3625b887d36f978a7289949f2489dec7a3e2d34ff07f84ae1908b1e8d959",
+    "imageIdentityVerified": false,
+    "note": "Производитель подтверждает смешанный короб 20 x 14 г с рецептами Salmon и Salmon with Chicken. Отдельный тюбик - наша единица продажи из открытого короба; его точный студийный кадр с упаковкой производителя ещё не сопоставлен визуально"
+  },
   "tc-b5a74b28d5": {
     "productId": "tc-b5a74b28d5",
     "reviewedAt": "2026-11-25",

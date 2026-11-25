@@ -45,12 +45,21 @@ test('SEO verdict identifies confirmed defects without calling unavailable evide
   assert.doesNotMatch(catalogDown.reasons.join(' '), /нет вариантов/i);
 });
 
+test('SEO photo audit checks the selected variant image rather than the shared product image', () => {
+  const selected = { ...variant, image_path: '/box.webp', variant_image_path: '/tube.webp' };
+  const selectedReview = { ...review, imagePaths: { [variant.variant_id]: '/tube.webp' } };
+  assert.equal(seoVerdict({ ...input, variants: [selected], review: selectedReview }).status, 'прошло');
+  const stale = seoVerdict({ ...input, variants: [selected], review });
+  assert.equal(stale.status, 'проверить');
+  assert.match(stale.reasons.join(' '), /фото изменилось/);
+});
+
 test('SEO work queue separates deferred brands from orderable candidates and HeyboPet decisions', () => {
   const closed = { indexable: false, status: 'проверить' };
   assert.equal(seoWorkScope({ ...closed, id: 'hills-ster' }).workScope, 'отложено');
   assert.equal(seoWorkScope({ ...closed, id: 'halloween-bandana' }).workScope, 'отложено');
   assert.equal(seoWorkScope({ ...closed, id: 'heybopet-feeder' }).workScope, 'отложено');
   assert.equal(seoWorkScope({ ...closed, id: 'cats-atelier-sh-m-da100' }).workScope, 'проверяем сейчас');
-  assert.equal(seoWorkScope({ ...closed, id: 'cmd-source-694e05cdc1b2582c', status: 'ошибка' }).workScope, 'проверяем сейчас');
+  assert.equal(seoWorkScope({ ...closed, id: 'cmd-source-694e05cdc1b2582c' }).workScope, 'проверяем сейчас');
   assert.equal(seoWorkScope({ ...closed, id: 'leonardo-granula-start', status: 'ошибка' }).workScope, 'отложено');
 });
