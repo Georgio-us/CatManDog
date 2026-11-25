@@ -1,6 +1,7 @@
 import { hasVariants, resolveVariant, storefrontPrice, canBuy } from './variants.js?v=sale-price-policy-20261109';
 import { customerFacts, orderedVariants } from './product-content.js?v=catalog-sku-audit-20261110';
 import { catalogEditorialChuruCat } from './catalog-editorial-churu-cat.js';
+import { seoWave2Copy, seoWave2VisibleCopy } from './seo-wave2-copy.js';
 import { productGallery } from './product-gallery.js?v=atelier-supplier-main-20261125';
 import { atelierHasOptions, atelierOptionsMarkup } from './atelier-configuration.js?v=atelier-click-colors-20261121';
 import { atelierDescriptionMarkup } from './atelier-description.js';
@@ -74,7 +75,11 @@ export function accessoryDetail(product, helpers) {
   const displayPrice = price === null ? 'Цена уточняется' : money(price);
   const editorial = catalogEditorialChuruCat[product.id];
   const useEditorial = editorial && product.description === editorial.description;
-  const displayDescription = useEditorial ? product.description : p.description;
+  const wave2 = seoWave2Copy[product.id];
+  const displayDescription = wave2
+    ? language === 'es' ? wave2.description
+      : seoWave2VisibleCopy[product.id]?.[language] || p.description
+    : useEditorial ? product.description : p.description;
   const displayDetails = useEditorial
     ? [...new Set([...(p.details || []), ...(product.details || [])])] : p.details;
   const variants = hasVariants(product) && product.variants.length > 1;

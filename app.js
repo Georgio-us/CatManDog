@@ -1,7 +1,7 @@
 import { createUsefulUI } from './useful.js?v=yagu-toys-20261116';
 import { createAccountUI } from './account.js?v=delivery-regions-20261122';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
-import { accessoryDetail, customerDetails } from './accessory-ui.js?v=atelier-supplier-main-20261125';
+import { accessoryDetail, customerDetails } from './accessory-ui.js?v=seo-wave2-visible-20261125';
 import { atelierDescriptionMarkup } from './atelier-description.js';
 import { deliveryPage } from './delivery-page.js?v=delivery-regions-20261122';
 import { productDeliveryKind, deliveryTiming } from './delivery-timing.js?v=delivery-regions-20261122';
