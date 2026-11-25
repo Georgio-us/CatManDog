@@ -50,10 +50,11 @@ await Promise.all(Array.from({ length: 6 }, async () => {
       if (text(html, /<link rel="canonical" href="([^"]*)"/u) !== url) problems.push('canonical');
       if (!sitemap.includes(`<loc>${url}</loc>`)) problems.push('sitemap');
       if (!title || !description || !h1 || /[А-Яа-яЁёІіЇїЄєҐґ]/u.test(`${title} ${description} ${h1}`)) problems.push('spanish-metadata');
-      if (!/<script type="application\/ld\+json">/u.test(html)) problems.push('structured-data');
+      // Offer JSON-LD is intentionally limited to physical-stock Merchant variants.
       if (!imageResponse?.ok || !imageResponse.headers.get('content-type')?.startsWith('image/')) problems.push('main-image');
       if (!variants.length || variants.some(variant => !variant.availableForCart || !variant.price_accepted || !(variant.priceCents > 0))) problems.push('retail-purchase');
       rows.push({ id: product.id, url, title, description, h1, variants: variants.length, problems,
+        offerMarkup: /<script type="application\/ld\+json">/u.test(html),
         sourceWarnings: variants.filter(variant => !variant.source_orderable && !variant.pickupAvailable).map(variant => variant.variant_id) });
     } catch (error) {
       rows.push({ id: product.id, url, problems: [String(error)] });
@@ -74,6 +75,7 @@ for (const key of ['title', 'description', 'h1']) {
 const report = {
   origin, checked: rows.length, variants: rows.reduce((sum, row) => sum + (row.variants || 0), 0),
   failures: rows.filter(row => row.problems.length),
+  offerMarkupFamilies: rows.filter(row => row.offerMarkup).length,
   sourceWarningFamilies: rows.filter(row => row.sourceWarnings?.length).length
 };
 console.log(JSON.stringify(report, null, 2));

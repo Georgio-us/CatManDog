@@ -67,7 +67,7 @@ test('the first published product remains indexable', async () => {
   assert.equal(seoProductForPath(path)?.id, 'rc-sterilised');
   assert.match(html, /<h1>Royal Canin Sterilised 37<\/h1>/u);
   assert.match(html, /<link rel="canonical" href="https:\/\/catmandog\.es\/producto\/royal-canin-sterilised-37">/u);
-  assert.match(html, /<meta name="description" content="Pienso completo para gatos esterilizados/u);
+  assert.match(html, /<meta name="description" content="Pienso seco Royal Canin Sterilised 37 para gatos esterilizados/u);
   assert.match(html, /<img src="https:\/\/img\.catmandog\.es\/assets\/food\/editorial\/rc-sterilised-v1\.webp"/u);
   assert.doesNotMatch(html, /<meta name="robots" content="noindex/u);
   assert.equal(await seoDocument('/producto/unknown'), null);

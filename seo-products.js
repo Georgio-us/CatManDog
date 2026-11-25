@@ -97,7 +97,7 @@ const releasedCategoryById = new Map(Object.entries(releasedByCategory)
 const editorialOverrides = {
   'rc-sterilised': {
     title: 'Royal Canin Sterilised 37 - pienso seco para gatos',
-    description: 'Pienso completo para gatos esterilizados adultos de 1 a 7 años. Compara los formatos de Royal Canin Sterilised 37 en CatManDog.'
+    description: 'Pienso seco Royal Canin Sterilised 37 para gatos esterilizados de 1 a 7 años. Su contenido moderado de grasa y su equilibrio de minerales se adaptan a esta etapa; disponible en varias bolsas.'
   }
 };
 
