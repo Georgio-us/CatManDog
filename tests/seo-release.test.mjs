@@ -20,6 +20,7 @@ import { catalogEditorialOpenAudit } from '../catalog-editorial-open-audit.js';
 import { catalogEditorialRoyalCaninNext } from '../catalog-editorial-royal-canin-next.js';
 import { catalogEditorialRoyalCaninWave3 } from '../catalog-editorial-royal-canin-wave3.js';
 import { catalogEditorialLeonardoWave4 } from '../catalog-editorial-leonardo-wave4.js';
+import { catalogEditorialLeonardoWave5 } from '../catalog-editorial-leonardo-wave5.js';
 import { catalogEditorialLeonardoCorrections } from '../catalog-editorial-leonardo-corrections.js';
 import { editorialEs, editorialUk } from '../locales/editorial-translations.js';
 import { accessoryDetail } from '../accessory-ui.js';
@@ -109,7 +110,7 @@ test('database-only ACANA Pacifica has a stable product URL without premature in
 
 test('the verified product release has unique Spanish source content and crawlable category links', async () => {
   const released = seoProducts.filter(product => product.indexable);
-  assert.equal(released.length, 212);
+  assert.equal(released.length, 226);
   const descriptions = new Set();
   const titles = new Set();
   for (const product of released) {
@@ -135,11 +136,11 @@ test('released editorial products serve the same verified Spanish copy as the st
     ...catalogEditorialRoyalCanin, ...catalogEditorialLeonardo, ...catalogEditorialHeld,
     ...catalogEditorialChuruDog, ...catalogEditorialAcanaWet, ...catalogEditorialChuruCat,
     ...catalogEditorialNext, ...catalogEditorialOpenAudit, ...catalogEditorialRoyalCaninNext,
-    ...catalogEditorialRoyalCaninWave3, ...catalogEditorialLeonardoWave4,
+    ...catalogEditorialRoyalCaninWave3, ...catalogEditorialLeonardoWave4, ...catalogEditorialLeonardoWave5,
     ...catalogEditorialLeonardoCorrections };
   const releasedEditorial = Object.entries(editorial)
     .filter(([id]) => seoProducts.some(product => product.id === id && product.indexable));
-  assert.equal(releasedEditorial.length, 129);
+  assert.equal(releasedEditorial.length, 143);
   for (const [id, copy] of releasedEditorial) {
     const path = productHref(id);
     const html = await seoDocument(path);
@@ -174,6 +175,29 @@ test('the three corrected Leonardo recipes match source names and redirect old U
     assert.equal(await serveSeo({ method: 'GET', url: legacy[id] }, response, legacy[id]), true);
     assert.equal(status, 301, id);
     assert.equal(headers.Location, seo.path, id);
+  }
+});
+
+test('new Leonardo recipe names and old paths resolve to the verified product', async () => {
+  const legacy = {
+    'leonardo-wet-senior-chicken': '/producto/leonardo-finest-selection-senior-pure-chicken',
+    'leonardo-wet-quality-poultry': '/producto/leonardo-quality-selection-poultry'
+  };
+  for (const [id, oldPath] of Object.entries(legacy)) {
+    const copy = catalogEditorialLeonardoWave5[id];
+    const product = catalogProducts.find(item => item.id === id);
+    const seo = seoProductForPath(productHref(id));
+    assert.equal(product.name, copy.name);
+    assert.equal(editorialEs[product.name], copy.esName);
+    assert.equal(editorialUk[product.name], copy.ukName);
+    assert.equal(product.description, copy.description);
+    assert.equal(seo.indexable, true);
+    let status;
+    let headers;
+    const response = { writeHead(code, values) { status = code; headers = values; }, end() {} };
+    assert.equal(await serveSeo({ method: 'GET', url: oldPath }, response, oldPath), true);
+    assert.equal(status, 301);
+    assert.equal(headers.Location, seo.path);
   }
 });
 
