@@ -19,6 +19,15 @@ test('first Telegram placement has separate short links for site and Instagram',
   assert.equal(campaignLink('/go/unknown'), null);
 });
 
+test('women chat has its own campaign identifier and counters', () => {
+  const market = campaignLink('/go/tg-vlc-01-w1-site');
+  const womenSite = campaignLink('/go/tg-vlc-02-w1-site');
+  const womenInstagram = campaignLink('/go/tg-vlc-02-w1-instagram');
+  assert.notEqual(market.id, womenSite.id);
+  assert.equal(womenSite.id, womenInstagram.id);
+  assert.match(womenSite.url, /utm_campaign=tg-vlc-02-w1/);
+});
+
 test('human opens are counted by destination, preview bots and HEAD requests are not', async () => {
   const writes = [];
   const db = { async query(sql, params) { writes.push(params); return { rows: [] }; } };

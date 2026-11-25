@@ -1,6 +1,6 @@
-const campaign = 'tg-vlc-01-w1';
+const campaigns = ['tg-vlc-01-w1', 'tg-vlc-02-w1'];
 
-const destinations = new Map([
+const destinations = new Map(campaigns.flatMap(campaign => [
   [`/go/${campaign}-site`, {
     id: campaign, destination: 'site',
     url: `/?utm_source=telegram&utm_medium=paid_social&utm_campaign=${campaign}`
@@ -9,7 +9,7 @@ const destinations = new Map([
     id: campaign, destination: 'instagram',
     url: 'https://www.instagram.com/catmandog.es/'
   }]
-]);
+]));
 
 export function campaignLink(pathname) {
   return destinations.get(pathname) || null;
