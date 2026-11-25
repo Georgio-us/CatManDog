@@ -531,7 +531,7 @@ function homeCatalogProducts(){
   if(homePrice) list = list.filter(p => matchesHomePrice(p,homePrice));
   if(homeFeature) list = list.filter(p => matchesHomeFeature(p,homeGroup,homeFeature));
   const order = homeShelfOrder();
-  return order?prioritizeHomeShelf(homePet,list,order):list;
+  return keepUnavailableLast(order?prioritizeHomeShelf(homePet,list,order):list);
 }
 function homeFacet(label,key,value,options){
   return `<label class="home-facet"><span>${label}</span><select data-home-facet="${key}" aria-label="${label}"><option value="">${key==='brand'?'Все бренды':key==='price'?'Любая цена':'Все варианты'}</option>${options.map(option=>`<option value="${escape(option.value)}" ${option.value===value?'selected':''}>${escape(option.label)}</option>`).join('')}</select><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></label>`;
