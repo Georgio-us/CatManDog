@@ -31,7 +31,7 @@ import { seoPickForPath } from './seo-picks.js';
 import { analyticsItem, announceCommerce } from './analytics-events.js?v=delivery-status-3';
 import { installAnalytics } from './analytics-consent.js?v=internal-browser-20261117';
 import { createCartActivity } from './cart-activity.js?v=internal-browser-20261117';
-import { searchCatalog, foodCategoryForQuery, matchesFoodCategory } from './catalog-search.js?v=food-category-search-20261125';
+import { searchCatalog, foodCategoryForQuery, matchesFoodCategory } from './catalog-search.js?v=food-synonyms-20261125';
 import { keepUnavailableLast } from './catalog-stock-sort.js?v=unavailable-last-20261119';
 import { rememberProductOrigin, productOrigin, requestProductReturn,
   takeProductReturnScroll } from './product-return.js';

@@ -40,6 +40,7 @@ test('related products are explicitly marked and exclude unavailable options', (
 
 test('generic food searches resolve to the corresponding catalog category', () => {
   assert.equal(foodCategoryForQuery('корм'), 'all');
+  assert.equal(foodCategoryForQuery('мокрый корм'), 'wet');
   assert.equal(foodCategoryForQuery('Сухой  корм'), 'dry');
   assert.equal(foodCategoryForQuery('Comida húmeda'), 'wet');
   assert.equal(foodCategoryForQuery('вологий корм'), 'wet');
