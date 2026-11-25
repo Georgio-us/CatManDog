@@ -9,7 +9,7 @@ import { atelierHasOptions, atelierDefaults, atelierSelection, atelierOptionsMar
 import { productGallery } from './product-gallery.js?v=atelier-all-spec-galleries-20261120';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=delivery-regions-20261122';
 import { recommendForProduct } from './recommendations.js?v=atelier-related-20261121';
-import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet, homeCatOrder, homeCatFeaturedVariant, prioritizeHomeCats, interleaveHomeGroups } from './home-catalog.js?v=home-cat-rounds';
+import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet, homeCatOrder, homeDogOrder, homeFeaturedVariant, prioritizeHomeShelf } from './home-catalog.js?v=home-dog-24';
 import { categories, products, catalogProducts, articles } from './data.js?v=royal-canin-order-20261125';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=yagu-toys-20261116';
 import { createCheckoutUI } from './checkout-ui.js?v=delivery-regions-20261122';
@@ -500,19 +500,20 @@ function favoritePage(){
 }
 function service(){return `<section class="service" aria-label="Наш подход"><div class="service-item">${icon('leaf')}<div><h3>Выбрано с заботой</h3><p>Продуманные вещи для маленьких и больших ежедневных ритуалов</p></div></div><div class="service-item">${icon('truck')}<div><h3>Доставка по Валенсии и материковой Испании</h3><p>По Валенсии - 24-48 часов, по материку - 2-4 рабочих дня для обычных товаров</p></div></div><div class="service-item">${icon('heart')}<div><h3>Всегда рядом</h3><p>Помогаем разобраться, выбрать и сделать жизнь вместе лучше</p></div></div></section>`;}
 const categoryKey = p => ['Лотки', 'Лотки и гигиена'].includes(p.category) ? 'Наполнитель' : p.category;
-function isHomeCatShelf(){
-  return homePet==='cat'&&!homeGroup&&!homeBrand&&!homePrice&&!homeFeature;
+function homeShelfOrder(){
+  if(homeGroup||homeBrand||homePrice||homeFeature)return null;
+  return homePet==='cat'?homeCatOrder:homeDogOrder;
 }
 function homePageSize(){
-  return isHomeCatShelf()?homeCatOrder.size:8;
+  return homeShelfOrder()?.size??8;
 }
 function homeCatalogProducts(){
   let list = catalogProducts.filter(p => matchesPet(p,homePet) && (!homeGroup || homeGroupForProduct(p) === homeGroup));
   if(homeBrand) list = list.filter(p => p.brand === homeBrand);
   if(homePrice) list = list.filter(p => matchesHomePrice(p,homePrice));
   if(homeFeature) list = list.filter(p => matchesHomeFeature(p,homeGroup,homeFeature));
-  if(homeGroup) return list;
-  return isHomeCatShelf()?prioritizeHomeCats(list):interleaveHomeGroups(homePet,list);
+  const order = homeShelfOrder();
+  return order?prioritizeHomeShelf(homePet,list,order):list;
 }
 function homeFacet(label,key,value,options){
   return `<label class="home-facet"><span>${label}</span><select data-home-facet="${key}" aria-label="${label}"><option value="">${key==='brand'?'Все бренды':key==='price'?'Любая цена':'Все варианты'}</option>${options.map(option=>`<option value="${escape(option.value)}" ${option.value===value?'selected':''}>${escape(option.label)}</option>`).join('')}</select><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></label>`;
@@ -532,6 +533,7 @@ function homeCatalogUrl(){
 function homeCatalog(){
   const list = homeCatalogProducts();
   const shown = list.slice(0,homeVisible);
+  const order = homeShelfOrder();
   const groups = homeGroupsForPet(homePet,catalogProducts);
   const groupProducts = homeGroup ? catalogProducts.filter(p=>matchesPet(p,homePet)&&homeGroupForProduct(p)===homeGroup) : [];
   const brands = [...new Set(groupProducts.map(p=>p.brand).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ru'));
@@ -547,7 +549,7 @@ function homeCatalog(){
   ${groups.length?`<div class="home-catalog-filters" role="group" aria-label="Категории для ${homePet==='cat'?'кошек':'собак'}">${groups.map(group=>`<button class="home-category ${homeGroup===group.id?'active':''}" data-home-group="${escape(group.id)}" aria-pressed="${homeGroup===group.id}">${escape(group.label)}</button>`).join('')}</div>`:''}
   ${homeGroup&&hasFacets?`<div class="home-catalog-facets" role="group" aria-label="Фильтры категории">${brands.length>1?homeFacet('Бренд','brand',homeBrand,brands.map(brand=>({value:brand,label:brand}))):''}${prices.length?homeFacet('Цена','price',homePrice,prices.map(price=>({value:String(price),label:`До ${money(price)}`}))):''}${features.length?homeFacet('Особенности','feature',homeFeature,features.map(feature=>({value:feature.id,label:feature.label}))):''}${homeBrand||homePrice||homeFeature?'<button class="home-facet-reset" data-home-clear>Сбросить фильтры</button>':''}</div>`:''}
   <p class="home-catalog-count" role="status">Показано ${shown.length} из ${list.length}</p>
-  <div class="product-grid" id="selection-grid">${shown.length?shown.map(product=>card(product,null,isHomeCatShelf()?homeCatFeaturedVariant(product):undefined)).join(''):`<div class="home-catalog-empty"><p>${homePet==='dog'&&!catalogProducts.some(p=>matchesPet(p,'dog'))?'Для собак ничего не нашлось':homeGroup?'В этой категории пока ничего не нашлось':'Пока здесь нет товаров'}</p><button class="text-link" ${emptyAction}>${emptyLabel}</button></div>`}</div>
+  <div class="product-grid" id="selection-grid">${shown.length?shown.map(product=>card(product,null,order?homeFeaturedVariant(product,order):undefined)).join(''):`<div class="home-catalog-empty"><p>${homePet==='dog'&&!catalogProducts.some(p=>matchesPet(p,'dog'))?'Для собак ничего не нашлось':homeGroup?'В этой категории пока ничего не нашлось':'Пока здесь нет товаров'}</p><button class="text-link" ${emptyAction}>${emptyLabel}</button></div>`}</div>
   ${shown.length<list.length?'<div class="home-catalog-more"><button class="button button-secondary" data-home-more>Посмотреть ещё</button></div>':''}`;
 }
 function refreshHomeCatalog(attribute,value){

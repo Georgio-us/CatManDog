@@ -28,17 +28,49 @@ export const homeCatOrder = new Map([
   ['yagu-7515812', 'yagu-7515812-catalog-pack']
 ]);
 
-export function homeCatFeaturedVariant(product) {
-  const id = homeCatOrder.get(product.id);
+export const homeDogOrder = new Map([
+  ['cmd-source-f025a9dbc9d479c7', 'cmd-source-sku-056ca5c0a341fff1'],
+  ['yagu-7570678-studio', null],
+  ['yagu-7515987-studio', null],
+  ['yagu-gulliver-pana-green', 'yagu-1128082'],
+
+  ['dog-orijen-original', 'dog-orijen-original-6-'],
+  ['yagu-7516214-studio', null],
+  ['yagu-duvo-cotton-bone-xs', 'yagu-7516254-studio'],
+  ['yagu-7510074-studio', null],
+
+  ['cmd-source-11acbc9ed4d69f1c', 'cmd-source-sku-f5abb44131a44a05'],
+  ['churu-dog-chicken', 'churu-dog-chicken-reference-pack'],
+  ['yagu-7571307-studio', null],
+  ['dog-mp-sensibowl-slomo', null],
+
+  ['royal-canin-chihuahua-adult', 'royal-canin-chihuahua-adult-3kg'],
+  ['yagu-7570675-studio', null],
+  ['dog-yagu-harness-blue', null],
+  ['dog-yagu-donut-turquoise', null],
+
+  ['dog-orijen-six-fish', 'dog-orijen-six-fish-6-'],
+  ['churu-dog-salmon-bites', null],
+  ['yagu-7571313-studio', null],
+  ['yagu-1126845-studio', null],
+
+  ['cmd-source-39c2d5db76be47f7', 'cmd-source-sku-e8da119abc72f104'],
+  ['yagu-7570677-studio', null],
+  ['dog-duvo-huggi-rabbit', null],
+  ['yagu-1126841-studio', null]
+]);
+
+export function homeFeaturedVariant(product, order) {
+  const id = order.get(product.id);
   return id ? snapshots(product).find(sku => sku.id === id && canBuy(sku)) : undefined;
 }
 
-export function prioritizeHomeCats(products) {
+export function prioritizeHomeShelf(pet, products, order) {
   const byId = new Map(products.map(product => [product.id, product]));
   const featured = [];
-  for (const [id, variantId] of homeCatOrder) {
+  for (const [id, variantId] of order) {
     const product = byId.get(id);
-    if (!product || !(variantId ? homeCatFeaturedVariant(product) : snapshots(product).some(canBuy))) continue;
+    if (!product || !(variantId ? homeFeaturedVariant(product, order) : snapshots(product).some(canBuy))) continue;
     featured.push(product);
     byId.delete(id);
   }
@@ -48,7 +80,7 @@ export function prioritizeHomeCats(products) {
     const shelf = snapshots(product).some(canBuy) ? available : unavailable;
     shelf.push(product);
   }
-  return [...featured, ...interleaveHomeGroups('cat', available), ...unavailable];
+  return [...featured, ...interleaveHomeGroups(pet, available), ...unavailable];
 }
 
 const definitions = [
