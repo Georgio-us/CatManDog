@@ -104,7 +104,6 @@ const detailCopy = {
 };
 
 const pairs = [
-  ['ORIJEN Regional Red для собак', ['ORIJEN Regional Red para perros', 'ORIJEN Regional Red для собак']],
   ['Royal Canin Kitten - желе', ['Royal Canin Kitten - en gelatina', 'Royal Canin Kitten - у желе']],
   ['Royal Canin Kitten в желе 85 г', ['Royal Canin Kitten en gelatina 85 g', 'Royal Canin Kitten у желе 85 г']],
   ['Для взрослых сфинксов', ['Para gatos Sphynx adultos', 'Для дорослих сфінксів']],

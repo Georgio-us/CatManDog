@@ -750,16 +750,6 @@ export async function importCatalog(db, items = products) {
         }
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [openAuditMigration]);
       }
-      const regionalRedNameMigration = 'regional_red_dog_distinct_name_2026_11_25';
-      const regionalRedNameDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
-        [regionalRedNameMigration]);
-      if (!regionalRedNameDone.rows.length) {
-        await client.query(`UPDATE catalog_products SET name='ORIJEN Regional Red для собак'
-          WHERE id='cmd-source-6d56f8fb416a81c4' AND name ILIKE 'orijen regional red'`);
-        await client.query(`UPDATE catalog_variants SET name='ORIJEN Regional Red для собак',updated_at=now()
-          WHERE product_id='cmd-source-6d56f8fb416a81c4' AND name ILIKE 'orijen regional red'`);
-        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [regionalRedNameMigration]);
-      }
       const heldCopyMigration = 'verified_legacy_recipe_copy_2026_11_12';
       const heldCopyDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
         [heldCopyMigration]);

@@ -5,7 +5,6 @@ import { catsAtelierUk } from './cats-atelier.js';
 
 // Ukrainian product names. Brand and registered line names remain unchanged.
 export const ukProductNames = {
-  'ORIJEN Regional Red для собак': 'ORIJEN Regional Red для собак',
   'Yommy Tofu - комкующийся наполнитель 6 л': 'Yommy Tofu - грудкувальний наповнювач 6 л',
   'Uniko Tofu Cat Litter - комкующийся наполнитель': 'Uniko Tofu Cat Litter - грудкувальний наповнювач',
   'Sanicat Clumping - комкующийся наполнитель без отдушки 8 л': 'Sanicat Clumping - грудкувальний наповнювач без ароматизаторів 8 л',
