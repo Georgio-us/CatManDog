@@ -10,9 +10,9 @@ import { accessoryDetail } from '../accessory-ui.js';
 
 const escapeHtml = value => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;');
 
-test('the 30 verified recipes are indexable with distinct copy in three languages', async () => {
+test('the verified recipes are indexable with distinct copy in three languages', async () => {
   const entries = Object.entries(catalogEditorialNext);
-  assert.equal(entries.length, 30);
+  assert.equal(entries.length, 31);
   const descriptions = [new Set(), new Set(), new Set()];
   const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
   let variantCount = 0;
@@ -62,7 +62,7 @@ test('the 30 verified recipes are indexable with distinct copy in three language
     assert.doesNotMatch(html.match(/<main id="app">([\s\S]*?)<\/main>/u)?.[1] || '',
       /[А-Яа-яЁё]/u, `${id}: Russian in Spanish HTML`);
   }
-  assert.equal(variantCount, 54);
+  assert.equal(variantCount, 57);
 });
 
 test('Spanish product detail uses kg instead of a Cyrillic unit', () => {

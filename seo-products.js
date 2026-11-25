@@ -31,7 +31,7 @@ const releasedByCategory = {
     'leonardo-adult-duck', 'leonardo-maxi', 'leonardo-kitten-gf',
     'leonardo-fresh-beef', 'leonardo-fresh-duck', 'leonardo-fresh-salmon',
     'rc-urinary', 'rc-light', 'leonardo-senior', 'leonardo-senior-gf',
-    'leonardo-complete', 'rc-persian', 'leonardo-fish', 'leonardo-lamb'
+    'leonardo-complete', 'rc-persian', 'rc-persian-kitten', 'leonardo-fish', 'leonardo-lamb'
   ],
   '/catalogo/gatos/comida-humeda': [
     'rc-wet', 'leonardo-chicken', 'leonardo-turkey',

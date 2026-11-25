@@ -7,6 +7,7 @@ const copy = (source, previousDescription, description, esDescription, ukDescrip
 });
 
 export const catalogEditorialNextNames = {
+  'Royal Canin Persian Kitten': ['Royal Canin Persian Kitten', 'Royal Canin Persian Kitten'],
   'Royal Canin Sensory Feel - соус': ['Royal Canin Sensory Feel - en salsa', 'Royal Canin Sensory Feel - у соусі'],
   'Royal Canin Sensory Smell - соус': ['Royal Canin Sensory Smell - en salsa', 'Royal Canin Sensory Smell - у соусі'],
   'Royal Canin Sensory Taste - соус': ['Royal Canin Sensory Taste - en salsa', 'Royal Canin Sensory Taste - у соусі'],
@@ -19,6 +20,16 @@ export const catalogEditorialNextNames = {
 };
 
 export const catalogEditorialNext = {
+  'rc-persian-kitten': copy(
+    'https://www.royalcanin.com/es/cats/products/retail-products/persian-kitten-2554',
+    'Полнорационный сухой корм Royal Canin Persian Kitten',
+    'Royal Canin Persian Kitten - полнорационный сухой корм для персидских котят до 12 месяцев. Небольшие прямоугольные гранулы приспособлены к форме челюсти котёнка. Легкоусвояемые белки, клетчатка и пребиотики помогают поддерживать пищеварение в период роста. Рецептура рассчитана на особенности развивающейся пищеварительной системы персидских котят.',
+    'Royal Canin Persian Kitten es un pienso completo para gatitos persas de hasta 12 meses. La croqueta pequeña y rectangular está adaptada a la forma de su mandíbula. Las proteínas digestibles, la fibra y los prebióticos ayudan a mantener la salud digestiva durante el crecimiento. La receta responde a las particularidades de su sistema digestivo en desarrollo.',
+    'Royal Canin Persian Kitten - повнораціонний сухий корм для перських кошенят віком до 12 місяців. Невеликі прямокутні гранули пристосовані до форми щелепи кошеняти. Легкозасвоювані білки, клітковина й пребіотики допомагають підтримувати травлення під час росту. Рецептура враховує особливості травної системи перських кошенят, що розвивається.',
+    ['Для персидских котят до 12 месяцев', 'Мелкие прямоугольные гранулы', 'Легкоусвояемые белки, клетчатка и пребиотики'],
+    ['Para gatitos persas de hasta 12 meses', 'Croquetas pequeñas y rectangulares', 'Proteínas digestibles, fibra y prebióticos'],
+    ['Для перських кошенят віком до 12 місяців', 'Невеликі прямокутні гранули', 'Легкозасвоювані білки, клітковина й пребіотики']
+  ),
   'rc-urinary': copy(
     'https://www.royalcanin.com/es/cats/products/retail-products/urinary-care-1800',
     'Полнорационный сухой корм Royal Canin Urinary Care',

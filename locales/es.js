@@ -876,6 +876,7 @@ export const es = {
   'Senior без злаков': 'Senior sin cereales',
   'Для мейн-кунов': 'Para Maine Coon',
   'Для персидских': 'Para gatos persas',
+  'Для персидских котят': 'Para gatitos persas',
   'Для британских': 'Para British Shorthair',
   'Лосось': 'Salmón',
   'Желе': 'Gelatina',
