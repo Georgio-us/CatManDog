@@ -1,6 +1,6 @@
 const campaigns = ['tg-vlc-01-w1', 'tg-vlc-02-w1'];
 
-const destinations = new Map(campaigns.flatMap(campaign => [
+const destinations = new Map([...campaigns.flatMap(campaign => [
   [`/go/${campaign}-site`, {
     id: campaign, destination: 'site',
     url: `/?utm_source=telegram&utm_medium=paid_social&utm_campaign=${campaign}`
@@ -9,7 +9,16 @@ const destinations = new Map(campaigns.flatMap(campaign => [
     id: campaign, destination: 'instagram',
     url: 'https://www.instagram.com/catmandog.es/'
   }]
-]));
+]),
+  ['/go/tiktok-profile-site', {
+    id: 'tiktok-profile', destination: 'site',
+    url: '/?utm_source=tiktok&utm_medium=organic_social&utm_campaign=tiktok-profile'
+  }],
+  ['/go/tiktok-profile-instagram', {
+    id: 'tiktok-profile', destination: 'instagram',
+    url: 'https://www.instagram.com/catmandog.es/'
+  }]
+]);
 
 export function campaignLink(pathname) {
   return destinations.get(pathname) || null;

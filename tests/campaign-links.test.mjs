@@ -19,6 +19,18 @@ test('first Telegram placement has separate short links for site and Instagram',
   assert.equal(campaignLink('/go/unknown'), null);
 });
 
+test('TikTok profile has separate tracked links for site and Instagram', () => {
+  const site = campaignLink('/go/tiktok-profile-site');
+  const instagram = campaignLink('/go/tiktok-profile-instagram');
+  assert.equal(site.id, 'tiktok-profile');
+  assert.equal(instagram.id, 'tiktok-profile');
+  assert.equal(site.destination, 'site');
+  assert.equal(instagram.destination, 'instagram');
+  assert.equal(site.url,
+    '/?utm_source=tiktok&utm_medium=organic_social&utm_campaign=tiktok-profile');
+  assert.equal(instagram.url, 'https://www.instagram.com/catmandog.es/');
+});
+
 test('women chat has its own campaign identifier and counters', () => {
   const market = campaignLink('/go/tg-vlc-01-w1-site');
   const womenSite = campaignLink('/go/tg-vlc-02-w1-site');
