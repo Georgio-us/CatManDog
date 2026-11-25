@@ -9,7 +9,7 @@ import { atelierHasOptions, atelierDefaults, atelierSelection, atelierOptionsMar
 import { productGallery } from './product-gallery.js?v=atelier-all-spec-galleries-20261120';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=delivery-regions-20261122';
 import { recommendForProduct } from './recommendations.js?v=atelier-related-20261121';
-import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet } from './home-catalog.js?v=delivery-status-3';
+import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet, homeCatOrder, homeCatFeaturedVariant, prioritizeHomeCats } from './home-catalog.js?v=home-cat-24';
 import { categories, products, catalogProducts, articles } from './data.js?v=royal-canin-order-20261125';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=yagu-toys-20261116';
 import { createCheckoutUI } from './checkout-ui.js?v=delivery-regions-20261122';
@@ -102,7 +102,7 @@ let catalogUnavailable = false;
 let catalogLoading = ['http:', 'https:'].includes(location.protocol);
 const cartActivity = createCartActivity(() => catalogLoading ? [] : cart, () => activityStage());
 const displayedMinPrice = p => catalogPrice(p).min;
-let homePet='cat', homeGroup='', homeBrand='', homePrice='', homeFeature='', homeVisible=8, selectedSize='', detailQuantity=1, detailOptions={}, priceLimit=catalogPriceMax, journalCategory='Все материалы';
+let homePet='cat', homeGroup='', homeBrand='', homePrice='', homeFeature='', homeVisible=homePageSize(), selectedSize='', detailQuantity=1, detailOptions={}, priceLimit=catalogPriceMax, journalCategory='Все материалы';
 let selectedVariantId=null;
 let availabilityRequestState = null;
 let giftState=normalizeGift();
@@ -314,14 +314,16 @@ function crumbs(title){
   const navigationLabel = { ru: 'Путь по каталогу', es: 'Ruta del catálogo', uk: 'Шлях каталогом' }[locale()] || 'Путь по каталогу';
   return `<nav class="product-navigation" aria-label="${navigationLabel}"><div class="breadcrumbs"><a href="/#/">Главная</a>${sourceCrumb}<span>/</span><span>${escape(title)}</span></div><a class="product-back-link" href="${escape(destination)}" data-product-return>${icon('arrow')}<span>${escape(back)}</span></a></nav>`;
 }
-function card(p,pickupSku=null){
+function card(p,pickupSku=null,featuredSku=null){
   // Array.map passes its index as the second argument; only a real SKU enables pickup mode.
   const pickup=Boolean(pickupSku && typeof pickupSku === 'object' && pickupSku.id);
   if (!pickup) pickupSku = null;
-  const family=!pickup&&hasVariants(p)&&p.variants.length>1;
-  const pricing=pickup?{amount:storefrontPrice(pickupSku),min:storefrontPrice(pickupSku),max:storefrontPrice(pickupSku)}:catalogPrice(p);
-  const sku=pickupSku||resolveVariant(p);
-  const sourcingStates=snapshots(p).map(variant=>variant.saleStatus || variant.serverSourcingAvailability).filter(Boolean);
+  const exactSku=pickupSku||featuredSku;
+  const family=!exactSku&&hasVariants(p)&&p.variants.length>1;
+  const exactPrice=exactSku?storefrontPrice(exactSku):null;
+  const pricing=exactSku?{amount:exactPrice,min:exactPrice,max:exactPrice}:catalogPrice(p);
+  const sku=exactSku||resolveVariant(p);
+  const sourcingStates=(featuredSku?[featuredSku]:snapshots(p)).map(variant=>variant.saleStatus || variant.serverSourcingAvailability).filter(Boolean);
   const copy={ru:{stock:'В наличии',available:'Доступно к заказу',supplier:'Под заказ',mixed:'Доступно и под заказ',unavailable:'Недоступно'},es:{stock:'Disponible',available:'Disponible para pedir',supplier:'Por encargo',mixed:'Disponible y por encargo',unavailable:'No disponible'},uk:{stock:'У наявності',available:'Доступно для замовлення',supplier:'Під замовлення',mixed:'Доступно та під замовлення',unavailable:'Недоступно'}}[locale()]||{stock:'В наличии',available:'Доступно к заказу',supplier:'Под заказ',mixed:'Доступно и под заказ',unavailable:'Недоступно'};
   const status=sourcingStates.includes('available')&&(sourcingStates.includes('preorder')||sourcingStates.includes('source_on_demand'))?'mixed':sourcingStates.includes('available')?'available':sourcingStates.includes('preorder')?'supplier':sourcingStates.includes('on_hand')&&sourcingStates.includes('source_on_demand')?'mixed':sourcingStates.includes('on_hand')?'stock':sourcingStates.includes('source_on_demand')?'supplier':sourcingStates.length?'unavailable':null;
   const availabilityTag=pickup?'':status?`<span class="product-availability-tag product-availability-${status}">${escape(copy[status])}</span>`:'';
@@ -332,12 +334,12 @@ function card(p,pickupSku=null){
     ? ({ Фасовка:'Цена зависит от фасовки', Упаковка:'Цена зависит от упаковки', Размер:'Цена зависит от размера', Цвет:'Цена зависит от цвета' }[p.optionLabel] || 'Цена зависит от варианта')
     : 'Цена с IVA';
   const displayPrice=pricing.amount===null?'Цена уточняется':pricing.min!==pricing.max?`${money(pricing.min)} - ${money(pricing.max)}`:`${p.gift==='personal'?'от ':''}${money(pricing.amount)}`;
-  const href=pickup?`${productHref(p.id)}?variant=${encodeURIComponent(sku.id)}&pickup=1`:productHref(p.id);
-  const tag=pickup?(sku.tag?.trim()||p.tag?.trim()):p.tag?.trim();
-  const action=pickup&&configure
+  const href=exactSku?`${productHref(p.id)}?variant=${encodeURIComponent(sku.id)}${pickup?'&pickup=1':''}`:productHref(p.id);
+  const tag=exactSku?(sku.tag?.trim()||p.tag?.trim()):p.tag?.trim();
+  const action=exactSku&&configure
     ? `<a class="product-card-action" href="${escape(href)}" aria-label="${actionLabel}: ${escape(p.name)} ${escape(sku.label||'')}">${actionLabel}${icon('arrow')}</a>`
-    : `<button class="product-card-action" ${pickup?`data-pickup-add="${escape(sku.id)}" data-product-id="${escape(p.id)}"`: `${configure?'data-configure':'data-add'}="${escape(p.id)}"`} aria-label="${actionLabel}: ${escape(p.name)}${pickup&&sku.label?` ${escape(sku.label)}`:''}">${buttonLabel}${icon(configure?'arrow':'bag')}</button>`;
-  return `<article class="product-card ${p.isReal||pickup?'real-product-card':''}"><a class="product-card-open" href="${escape(href)}" data-product-id="${escape(p.id)}" aria-label="Открыть товар: ${escape(p.name)}${pickup&&sku.label?` ${escape(sku.label)}`:''}"></a><div class="product-media">${imageBlock(pickup?(sku.image||p.image):p.image)}${tag?`<span class="product-tag">${escape(tag)}</span>`:''}${availabilityTag}<button class="icon-button favorite ${favorites.includes(p.id)?'selected':''}" data-favorite="${escape(p.id)}" aria-label="${favorites.includes(p.id)?'Убрать из избранного':'В избранное'}: ${escape(p.name)}" aria-pressed="${favorites.includes(p.id)}">${icon('heart')}</button></div><div class="product-info"><small>${escape(p.brand||'CatManDog')}${pickup&&sku.label?` · ${escape(sku.label)}`:p.weight?` · ${escape(p.weight)}`:''}${family?` · ${variantCount(p.variants.length)}`:''}</small><div class="product-title"><h3>${escape(p.name)} <span class="product-open-cue">${icon('arrow')}</span></h3></div><span class="retail-label" ${caption?'':'aria-hidden="true"'}>${caption}</span><div class="product-price"><div class="product-price-values"><span>${displayPrice}</span>${!pickup&&!pricing.demo&&!family&&p.old?`<span class="old-price">${money(p.old)}</span>`:''}</div>${action}</div></div></article>`;
+    : `<button class="product-card-action" ${pickup?`data-pickup-add="${escape(sku.id)}" data-product-id="${escape(p.id)}"`:featuredSku?`data-add-variant="${escape(sku.id)}" data-product-id="${escape(p.id)}"`: `${configure?'data-configure':'data-add'}="${escape(p.id)}"`} aria-label="${actionLabel}: ${escape(p.name)}${exactSku&&sku.label?` ${escape(sku.label)}`:''}">${buttonLabel}${icon(configure?'arrow':'bag')}</button>`;
+  return `<article class="product-card ${p.isReal||pickup?'real-product-card':''}"><a class="product-card-open" href="${escape(href)}" data-product-id="${escape(p.id)}" aria-label="Открыть товар: ${escape(p.name)}${exactSku&&sku.label?` ${escape(sku.label)}`:''}"></a><div class="product-media">${imageBlock(exactSku?(sku.image||p.image):p.image)}${tag?`<span class="product-tag">${escape(tag)}</span>`:''}${availabilityTag}<button class="icon-button favorite ${favorites.includes(p.id)?'selected':''}" data-favorite="${escape(p.id)}" aria-label="${favorites.includes(p.id)?'Убрать из избранного':'В избранное'}: ${escape(p.name)}" aria-pressed="${favorites.includes(p.id)}">${icon('heart')}</button></div><div class="product-info"><small>${escape(p.brand||'CatManDog')}${exactSku&&sku.label?` · ${escape(sku.label)}`:p.weight?` · ${escape(p.weight)}`:''}${family?` · ${variantCount(p.variants.length)}`:''}</small><div class="product-title"><h3>${escape(p.name)} <span class="product-open-cue">${icon('arrow')}</span></h3></div><span class="retail-label" ${caption?'':'aria-hidden="true"'}>${caption}</span><div class="product-price"><div class="product-price-values"><span>${displayPrice}</span>${!exactSku&&!pricing.demo&&!family&&p.old?`<span class="old-price">${money(p.old)}</span>`:''}</div>${action}</div></div></article>`;
 }
 // Hand-curated pickup shelf. Keep exact SKU IDs here; filters retain this order.
 // New stock that has not been placed by the owner follows the curated cards.
@@ -498,6 +500,12 @@ function favoritePage(){
 }
 function service(){return `<section class="service" aria-label="Наш подход"><div class="service-item">${icon('leaf')}<div><h3>Выбрано с заботой</h3><p>Продуманные вещи для маленьких и больших ежедневных ритуалов</p></div></div><div class="service-item">${icon('truck')}<div><h3>Доставка по Валенсии и материковой Испании</h3><p>По Валенсии - 24-48 часов, по материку - 2-4 рабочих дня для обычных товаров</p></div></div><div class="service-item">${icon('heart')}<div><h3>Всегда рядом</h3><p>Помогаем разобраться, выбрать и сделать жизнь вместе лучше</p></div></div></section>`;}
 const categoryKey = p => ['Лотки', 'Лотки и гигиена'].includes(p.category) ? 'Наполнитель' : p.category;
+function isHomeCatShelf(){
+  return homePet==='cat'&&!homeGroup&&!homeBrand&&!homePrice&&!homeFeature;
+}
+function homePageSize(){
+  return isHomeCatShelf()?homeCatOrder.size:8;
+}
 function homeCatalogProducts(){
   let list = catalogProducts.filter(p => matchesPet(p,homePet) && (!homeGroup || homeGroupForProduct(p) === homeGroup));
   if(homeBrand) list = list.filter(p => p.brand === homeBrand);
@@ -508,7 +516,7 @@ function homeCatalogProducts(){
   const groups = homeGroupsForPet(homePet,list).map(group => list.filter(p => homeGroupForProduct(p) === group.id));
   const ordered = [];
   for(let i=0; groups.some(group => group[i]); i++) groups.forEach(group => {if(group[i]) ordered.push(group[i]);});
-  return ordered;
+  return isHomeCatShelf()?prioritizeHomeCats(ordered):ordered;
 }
 function homeFacet(label,key,value,options){
   return `<label class="home-facet"><span>${label}</span><select data-home-facet="${key}" aria-label="${label}"><option value="">${key==='brand'?'Все бренды':key==='price'?'Любая цена':'Все варианты'}</option>${options.map(option=>`<option value="${escape(option.value)}" ${option.value===value?'selected':''}>${escape(option.label)}</option>`).join('')}</select><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></label>`;
@@ -543,7 +551,7 @@ function homeCatalog(){
   ${groups.length?`<div class="home-catalog-filters" role="group" aria-label="Категории для ${homePet==='cat'?'кошек':'собак'}">${groups.map(group=>`<button class="home-category ${homeGroup===group.id?'active':''}" data-home-group="${escape(group.id)}" aria-pressed="${homeGroup===group.id}">${escape(group.label)}</button>`).join('')}</div>`:''}
   ${homeGroup&&hasFacets?`<div class="home-catalog-facets" role="group" aria-label="Фильтры категории">${brands.length>1?homeFacet('Бренд','brand',homeBrand,brands.map(brand=>({value:brand,label:brand}))):''}${prices.length?homeFacet('Цена','price',homePrice,prices.map(price=>({value:String(price),label:`До ${money(price)}`}))):''}${features.length?homeFacet('Особенности','feature',homeFeature,features.map(feature=>({value:feature.id,label:feature.label}))):''}${homeBrand||homePrice||homeFeature?'<button class="home-facet-reset" data-home-clear>Сбросить фильтры</button>':''}</div>`:''}
   <p class="home-catalog-count" role="status">Показано ${shown.length} из ${list.length}</p>
-  <div class="product-grid" id="selection-grid">${shown.length?shown.map(product=>card(product)).join(''):`<div class="home-catalog-empty"><p>${homePet==='dog'&&!catalogProducts.some(p=>matchesPet(p,'dog'))?'Для собак ничего не нашлось':homeGroup?'В этой категории пока ничего не нашлось':'Пока здесь нет товаров'}</p><button class="text-link" ${emptyAction}>${emptyLabel}</button></div>`}</div>
+  <div class="product-grid" id="selection-grid">${shown.length?shown.map(product=>card(product,null,isHomeCatShelf()?homeCatFeaturedVariant(product):undefined)).join(''):`<div class="home-catalog-empty"><p>${homePet==='dog'&&!catalogProducts.some(p=>matchesPet(p,'dog'))?'Для собак ничего не нашлось':homeGroup?'В этой категории пока ничего не нашлось':'Пока здесь нет товаров'}</p><button class="text-link" ${emptyAction}>${emptyLabel}</button></div>`}</div>
   ${shown.length<list.length?'<div class="home-catalog-more"><button class="button button-secondary" data-home-more>Посмотреть ещё</button></div>':''}`;
 }
 function refreshHomeCatalog(attribute,value){
@@ -561,14 +569,14 @@ app.addEventListener('click',event=>{
   if(!button || !button.closest('#home-catalog'))return;
   if(button.hasAttribute('data-home-pet')){
     homePet=button.dataset.homePet;
-    homeGroup='';homeBrand='';homePrice='';homeFeature='';homeVisible=8;
+    homeGroup='';homeBrand='';homePrice='';homeFeature='';homeVisible=homePageSize();
     refreshHomeCatalog('data-home-pet',homePet);
   }else if(button.hasAttribute('data-home-group')){
     homeGroup=homeGroup===button.dataset.homeGroup?'':button.dataset.homeGroup;
-    homeBrand='';homePrice='';homeFeature='';homeVisible=8;
+    homeBrand='';homePrice='';homeFeature='';homeVisible=homePageSize();
     refreshHomeCatalog('data-home-group',button.dataset.homeGroup);
   }else if(button.hasAttribute('data-home-clear')){
-    homeBrand='';homePrice='';homeFeature='';homeVisible=8;
+    homeBrand='';homePrice='';homeFeature='';homeVisible=homePageSize();
     refreshHomeCatalog('data-home-group',homeGroup);
   }
 });
@@ -578,7 +586,7 @@ app.addEventListener('change',event=>{
   if(facet==='brand')homeBrand=event.target.value;
   if(facet==='price')homePrice=event.target.value;
   if(facet==='feature')homeFeature=event.target.value;
-  homeVisible=8;
+  homeVisible=homePageSize();
   refreshHomeCatalog('data-home-facet',facet);
 });
 function homeUseful(){

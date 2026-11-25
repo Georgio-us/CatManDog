@@ -1,5 +1,50 @@
 import { canBuy, confirmedPrice, snapshots } from './variants.js?v=delivery-status-3';
 
+// Manual order for the unfiltered cat shelf on the homepage.
+export const homeCatOrder = new Map([
+  ['tc-4e50c58957', null],
+  ['yagu-7515988', null],
+  ['rc-sterilised', null],
+  ['cat-litter-yommy-tofu-lavanda-6l', 'cat-litter-yommy-tofu-verde-6l-pack'],
+  ['royalcanin-93e8aeca', null],
+  ['heybopet-hb-pwfs-s30s', 'heybopet-hb-pwfs-s30s-white'],
+  ['acana-first-feast', null],
+  ['yagu-7517019', null],
+  ['orijen-original', null],
+  ['heybopet-pwf-filters-3', null],
+  ['leonardo-wet-pure-chicken', null],
+  ['yagu-donut-neutral', 'yagu-1127352'],
+  ['yagu-2170001', null],
+  ['rc-kitten-regular', null],
+  ['yagu-7515817', null],
+  ['tc-0707caf730', null],
+  ['leonardo-light', null],
+  ['yagu-9235038', null],
+  ['yagu-7514697-studio', null],
+  ['yagu-7514629', null],
+  ['rc-wet', null],
+  ['yagu-donut-pana', 'yagu-1128036'],
+  ['cats-atelier-sh-w-f60-g', null],
+  ['yagu-7515812', 'yagu-7515812-catalog-pack']
+]);
+
+export function homeCatFeaturedVariant(product) {
+  const id = homeCatOrder.get(product.id);
+  return id ? snapshots(product).find(sku => sku.id === id && canBuy(sku)) : undefined;
+}
+
+export function prioritizeHomeCats(products) {
+  const byId = new Map(products.map(product => [product.id, product]));
+  const featured = [];
+  for (const [id, variantId] of homeCatOrder) {
+    const product = byId.get(id);
+    if (!product || !(variantId ? homeCatFeaturedVariant(product) : snapshots(product).some(canBuy))) continue;
+    featured.push(product);
+    byId.delete(id);
+  }
+  return [...featured, ...byId.values()];
+}
+
 const definitions = [
   ['dry-food', 'Сухой корм'],
   ['wet-food', 'Влажный корм'],
