@@ -11,11 +11,11 @@ export const launchHeyboPetProducts = [{
   isReal: true,
   model: 'HB-PWFS-S30S',
   manufacturerSku: 'HB-PWFS-S30S',
-  image: `${base}heybopet-hb-pwfs-s30s-black.webp`,
+  image: `${base}heybopet-hb-pwfs-s30s-white.webp`,
   description: 'Аккумуляторный фонтан с резервуаром из нержавеющей стали и датчиком движения',
   details: ['Объём 3 л', 'Аккумулятор 4000 мА·ч', 'Режим по датчику движения, по таймеру или непрерывный'],
   optionLabel: 'Цвет',
-  defaultVariantId: 'heybopet-hb-pwfs-s30s-black',
+  defaultVariantId: 'heybopet-hb-pwfs-s30s-white',
   variants: [
     {
       id: 'heybopet-hb-pwfs-s30s-black',

@@ -1,4 +1,5 @@
 import { snapshots } from './variants.js';
+import { deferredHeyboPetFamilies } from './heybopet-merchandising.js';
 
 export function canSourceProduct(product) {
   return snapshots(product).some(variant =>
@@ -14,11 +15,15 @@ export function canSourceProduct(product) {
         variant.availabilityStatus === 'source_on_demand')));
 }
 
-// Preserve the incoming order of purchasable products, including future manual ordering.
-// Availability only moves unavailable cards after the last purchasable card.
+// Preserve the incoming order within each group, including future manual ordering.
+// Orderable HeyboPet models without our own stock remain buyable but follow the
+// other orderable products. Unavailable products stay last.
 export function keepUnavailableLast(products) {
-  const available = products.filter(canSourceProduct);
+  const available = products.filter(product => canSourceProduct(product) &&
+    !deferredHeyboPetFamilies.has(product.id));
+  const heyboOnDemand = products.filter(product => canSourceProduct(product) &&
+    deferredHeyboPetFamilies.has(product.id));
   const unavailable = products.filter(product => !canSourceProduct(product));
-  products.splice(0, products.length, ...available, ...unavailable);
+  products.splice(0, products.length, ...available, ...heyboOnDemand, ...unavailable);
   return products;
 }

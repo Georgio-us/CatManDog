@@ -32,7 +32,7 @@ import { analyticsItem, announceCommerce } from './analytics-events.js?v=deliver
 import { installAnalytics } from './analytics-consent.js?v=internal-browser-20261117';
 import { createCartActivity } from './cart-activity.js?v=internal-browser-20261117';
 import { searchCatalog, foodCategoryForQuery, matchesFoodCategory } from './catalog-search.js?v=food-synonyms-20261125';
-import { keepUnavailableLast } from './catalog-stock-sort.js?v=unavailable-last-20261119';
+import { keepUnavailableLast } from './catalog-stock-sort.js?v=heybo-stock-order-20261125';
 import { rememberProductOrigin, productOrigin, requestProductReturn,
   takeProductReturnScroll } from './product-return.js';
 
@@ -324,7 +324,9 @@ function card(p,pickupSku=null,featuredSku=null){
   const exactPrice=exactSku?storefrontPrice(exactSku):null;
   const pricing=exactSku?{amount:exactPrice,min:exactPrice,max:exactPrice}:catalogPrice(p);
   const sku=exactSku||resolveVariant(p);
-  const sourcingStates=(featuredSku?[featuredSku]:snapshots(p)).map(variant=>variant.saleStatus || variant.serverSourcingAvailability).filter(Boolean);
+  const sourcingStates=(featuredSku?[featuredSku]:snapshots(p)).map(variant=>p.id.startsWith('heybopet-')
+    ? (canBuy(variant) ? (productDeliveryKind(p,variant)==='heybo' ? 'source_on_demand' : 'on_hand') : 'unavailable')
+    : variant.saleStatus || variant.serverSourcingAvailability).filter(Boolean);
   const copy={ru:{stock:'В наличии',available:'Доступно к заказу',supplier:'Под заказ',mixed:'Доступно и под заказ',unavailable:'Недоступно'},es:{stock:'Disponible',available:'Disponible para pedir',supplier:'Por encargo',mixed:'Disponible y por encargo',unavailable:'No disponible'},uk:{stock:'У наявності',available:'Доступно для замовлення',supplier:'Під замовлення',mixed:'Доступно та під замовлення',unavailable:'Недоступно'}}[locale()]||{stock:'В наличии',available:'Доступно к заказу',supplier:'Под заказ',mixed:'Доступно и под заказ',unavailable:'Недоступно'};
   const status=sourcingStates.includes('available')&&(sourcingStates.includes('preorder')||sourcingStates.includes('source_on_demand'))?'mixed':sourcingStates.includes('available')?'available':sourcingStates.includes('preorder')?'supplier':sourcingStates.includes('on_hand')&&sourcingStates.includes('source_on_demand')?'mixed':sourcingStates.includes('on_hand')?'stock':sourcingStates.includes('source_on_demand')?'supplier':sourcingStates.length?'unavailable':null;
   const availabilityTag=pickup?'':status?`<span class="product-availability-tag product-availability-${status}">${escape(copy[status])}</span>`:'';

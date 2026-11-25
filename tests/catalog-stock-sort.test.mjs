@@ -56,3 +56,21 @@ test('after customer price sorting only availability boundary changes', () => {
   assert.deepEqual(keepUnavailableLast(cards).map(item => item.id),
     ['mid-available', 'expensive-available', 'cheap-unavailable']);
 });
+
+test('on-demand HeyboPet follows stocked and other orderable goods without losing checkout', () => {
+  const cards = [
+    card('heybopet-feeder', [{ saleStatus: 'available', serverAvailableForCart: true,
+      serverSourceOrderable: true, serverSourcingAvailability: 'source_on_demand' }]),
+    card('heybopet-hb-pwfs-s30s', [{ saleStatus: 'available', serverAvailableForCart: true,
+      serverSourcingAvailability: 'on_hand' }]),
+    card('heybopet-open-litter-box', [{ saleStatus: 'unavailable' }]),
+    card('supplier-food', [{ saleStatus: 'available' }]),
+    card('heybopet-app-fountain', [{ saleStatus: 'available', serverAvailableForCart: true,
+      serverSourceOrderable: true, serverSourcingAvailability: 'source_on_demand' }])
+  ];
+  assert.equal(canSourceProduct(cards[0]), true);
+  assert.deepEqual(keepUnavailableLast(cards).map(item => item.id), [
+    'heybopet-hb-pwfs-s30s', 'supplier-food', 'heybopet-feeder',
+    'heybopet-app-fountain', 'heybopet-open-litter-box'
+  ]);
+});

@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { deferredHeyboPetFamilies } from '../heybopet-merchandising.js';
 
 export const editorialFingerprint = copy => createHash('sha256').update(JSON.stringify({
   source: copy.source,
@@ -12,7 +13,7 @@ export const editorialFingerprint = copy => createHash('sha256').update(JSON.str
 
 // SEO readiness and the owner's current work queue are separate questions.
 // A closed, unbuyable page can correctly remain on the site without becoming
-// an editorial task. Model-specific HeyboPet approval is not inferred from price.
+// an editorial task. The owner deferred the non-stock HeyboPet models for SEO.
 export const seoWorkScope = row => {
   if (row.indexable) return { workScope: 'поддержка', scopeReason: 'Страница уже открыта' };
   if (/^(hills-|advance-)/u.test(row.id)) {
@@ -27,8 +28,8 @@ export const seoWorkScope = row => {
   if (row.id === 'cmd-source-694e05cdc1b2582c') {
     return { workScope: 'проверяем сейчас', scopeReason: 'Покупка доступна, но описание коробки не подходит отдельным тюбикам' };
   }
-  if (row.id.startsWith('heybopet-') && row.status !== 'ошибка') {
-    return { workScope: 'нужно решение', scopeReason: 'Доступность под заказ есть; одобрение этой модели HeyboPet для SEO не зафиксировано' };
+  if (deferredHeyboPetFamilies.has(row.id)) {
+    return { workScope: 'отложено', scopeReason: 'HeyboPet доступен под заказ без обещания быстрой доставки; владелец отложил SEO этих моделей' };
   }
   if (row.status === 'ошибка') {
     return { workScope: 'отложено', scopeReason: 'Есть конкретный блокер к открытию; редакционный проход сейчас не нужен' };

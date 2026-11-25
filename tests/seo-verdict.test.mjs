@@ -49,7 +49,7 @@ test('SEO work queue separates deferred brands from orderable candidates and Hey
   const closed = { indexable: false, status: 'проверить' };
   assert.equal(seoWorkScope({ ...closed, id: 'hills-ster' }).workScope, 'отложено');
   assert.equal(seoWorkScope({ ...closed, id: 'halloween-bandana' }).workScope, 'отложено');
-  assert.equal(seoWorkScope({ ...closed, id: 'heybopet-feeder' }).workScope, 'нужно решение');
+  assert.equal(seoWorkScope({ ...closed, id: 'heybopet-feeder' }).workScope, 'отложено');
   assert.equal(seoWorkScope({ ...closed, id: 'cats-atelier-sh-m-da100' }).workScope, 'проверяем сейчас');
   assert.equal(seoWorkScope({ ...closed, id: 'cmd-source-694e05cdc1b2582c', status: 'ошибка' }).workScope, 'проверяем сейчас');
   assert.equal(seoWorkScope({ ...closed, id: 'leonardo-granula-start', status: 'ошибка' }).workScope, 'отложено');
