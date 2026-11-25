@@ -4411,14 +4411,14 @@ details .text-link {
   padding: 0 9px;
   gap: 5px;
   border-radius: 99px;
-  background: #f0f4e5;
+  background: var(--lime);
   color: var(--ink);
   font-size: 13px;
   font-weight: 600;
 }
 .header-actions #search-toggle:hover,
-.hero-search-controls .button:hover { background: #e7eed6; }
-.hero-search-controls .button { background: #f0f4e5; color: var(--ink); font-weight: 600; }
+.hero-search-controls .button:hover { background: #c8e64f; }
+.hero-search-controls .button { background: var(--lime); color: var(--ink); font-weight: 600; }
 .header-actions #search-toggle:focus-visible,
 .hero-search-controls .button:focus-visible { outline: 1px solid #78865d; outline-offset: -1px; }
 
