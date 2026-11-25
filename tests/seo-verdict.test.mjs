@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { editorialFingerprint, seoVerdict } from '../scripts/seo-verdict.mjs';
+import { editorialFingerprint, seoVerdict, seoWorkScope } from '../scripts/seo-verdict.mjs';
 
 const product = { id: 'sku-1', path: '/producto/sku-1', indexable: true };
 const copy = { source: 'https://maker.example/item', description: 'Проверенный товар для кошек',
@@ -43,4 +43,14 @@ test('SEO verdict identifies confirmed defects without calling unavailable evide
     liveChecked: false });
   assert.equal(catalogDown.status, 'проверить');
   assert.doesNotMatch(catalogDown.reasons.join(' '), /нет вариантов/i);
+});
+
+test('SEO work queue separates deferred brands from orderable candidates and HeyboPet decisions', () => {
+  const closed = { indexable: false, status: 'проверить' };
+  assert.equal(seoWorkScope({ ...closed, id: 'hills-ster' }).workScope, 'отложено');
+  assert.equal(seoWorkScope({ ...closed, id: 'halloween-bandana' }).workScope, 'отложено');
+  assert.equal(seoWorkScope({ ...closed, id: 'heybopet-feeder' }).workScope, 'нужно решение');
+  assert.equal(seoWorkScope({ ...closed, id: 'cats-atelier-sh-m-da100' }).workScope, 'проверяем сейчас');
+  assert.equal(seoWorkScope({ ...closed, id: 'cmd-source-694e05cdc1b2582c', status: 'ошибка' }).workScope, 'проверяем сейчас');
+  assert.equal(seoWorkScope({ ...closed, id: 'leonardo-granula-start', status: 'ошибка' }).workScope, 'отложено');
 });

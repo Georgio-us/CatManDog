@@ -4,7 +4,7 @@ import { editorialEs, editorialUk } from '../locales/editorial-translations.js';
 import { seoProducts } from '../seo-products.js';
 import { stockSeoCopy } from '../stock-seo-copy.js';
 import { seoWave2Copy } from '../seo-wave2-copy.js';
-import { seoVerdict } from './seo-verdict.mjs';
+import { seoVerdict, seoWorkScope } from './seo-verdict.mjs';
 
 const args = process.argv.slice(2);
 const valueAfter = option => args.includes(option) ? args[args.indexOf(option) + 1] : undefined;
@@ -121,7 +121,7 @@ const rows = products.map(product => {
   const technical = [...(check?.problems || [])];
   const url = `${origin}${product.path}`;
   if (!product.indexable && sitemap?.includes(`<loc>${url}</loc>`)) technical.push('закрытый URL попал в sitemap');
-  return seoVerdict({ product, variants: variantsByProduct.get(product.id) || [], copy,
+  const verdict = seoVerdict({ product, variants: variantsByProduct.get(product.id) || [], copy,
     translations: copy ? { es: editorialEs[copy.description], uk: editorialUk[copy.description],
       details: copy.details?.map(detail => ({ es: editorialEs[detail], uk: editorialUk[detail] })) } : null,
     review: reviews[product.id], technical,
@@ -131,19 +131,24 @@ const rows = products.map(product => {
     priorCopy: stockSeoCopy[product.id] ? 'Предметный испанский SEO-текст: stock-seo-copy.js, проверка 22 ноября 2026'
       : seoWave2Copy[product.id] ? 'Предметный испанский SEO-текст: seo-wave2-copy.js, предыдущая проверка'
         : null });
+  return { ...verdict, ...seoWorkScope(verdict) };
 });
 const count = status => rows.filter(row => row.status === status).length;
 const report = { checkedAt: new Date().toISOString(), mode: args.includes('--live') ? 'live' : 'catalog-file',
   origin, totals: { families: rows.length, passed: count('прошло'), errors: count('ошибка'),
-    review: count('проверить') }, rows };
+    review: count('проверить'), workNow: rows.filter(row => row.workScope === 'проверяем сейчас').length,
+    deferred: rows.filter(row => row.workScope === 'отложено').length,
+    needsDecision: rows.filter(row => row.workScope === 'нужно решение').length }, rows };
 if (outputPath) await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`);
 if (args.includes('--json')) console.log(JSON.stringify(report, null, 2));
 else {
   console.log(`Проверено ${rows.length}: прошло ${report.totals.passed}, ошибка ${report.totals.errors}, проверить ${report.totals.review}`);
+  console.log(`Из закрытых: проверяем сейчас ${report.totals.workNow}, отложено ${report.totals.deferred}, нужно решение ${report.totals.needsDecision}`);
   const shown = targetId || args.includes('--all') ? rows
     : rows.filter(row => row.indexable && row.status === 'ошибка');
   for (const row of shown) {
     console.log(`${row.status.toUpperCase()} ${row.id} ${row.path}`);
+    console.log(`  Очередь: ${row.workScope} - ${row.scopeReason}`);
     for (const reason of row.reasons) console.log(`  - ${reason}`);
     if (targetId) for (const item of row.evidence) console.log(`  Основание: ${item}`);
   }

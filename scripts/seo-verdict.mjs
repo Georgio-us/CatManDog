@@ -10,6 +10,32 @@ export const editorialFingerprint = copy => createHash('sha256').update(JSON.str
   ukDetails: copy.ukDetails
 })).digest('hex');
 
+// SEO readiness and the owner's current work queue are separate questions.
+// A closed, unbuyable page can correctly remain on the site without becoming
+// an editorial task. Model-specific HeyboPet approval is not inferred from price.
+export const seoWorkScope = row => {
+  if (row.indexable) return { workScope: 'поддержка', scopeReason: 'Страница уже открыта' };
+  if (/^(hills-|advance-)/u.test(row.id)) {
+    return { workScope: 'отложено', scopeReason: 'Владелец отложил Hill’s и Advance до работы с этими брендами' };
+  }
+  if (['halloween-bandana', 'birthday-bandana'].includes(row.id)) {
+    return { workScope: 'отложено', scopeReason: 'Владелец исключил банданы из текущей SEO-проверки' };
+  }
+  if (row.id === 'cmd-source-4c1d8462a78eb6de') {
+    return { workScope: 'отложено', scopeReason: 'ACANA Pacifica удержана отдельно до уточнения точного SKU' };
+  }
+  if (row.id === 'cmd-source-694e05cdc1b2582c') {
+    return { workScope: 'проверяем сейчас', scopeReason: 'Покупка доступна, но описание коробки не подходит отдельным тюбикам' };
+  }
+  if (row.id.startsWith('heybopet-') && row.status !== 'ошибка') {
+    return { workScope: 'нужно решение', scopeReason: 'Доступность под заказ есть; одобрение этой модели HeyboPet для SEO не зафиксировано' };
+  }
+  if (row.status === 'ошибка') {
+    return { workScope: 'отложено', scopeReason: 'Есть конкретный блокер к открытию; редакционный проход сейчас не нужен' };
+  }
+  return { workScope: 'проверяем сейчас', scopeReason: 'Закрытая страница без текущего коммерческого блокера' };
+};
+
 // A missing review record is unknown, not an error. A recorded contradiction is
 // an error, even when the public page is technically crawlable.
 export const seoVerdict = ({ product, variants, copy, translations, review, technical, liveChecked,
