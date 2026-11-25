@@ -28,11 +28,11 @@ export const seoWorkScope = row => {
   if (row.id === 'cmd-source-694e05cdc1b2582c') {
     return { workScope: 'проверяем сейчас', scopeReason: 'Покупка доступна, но описание коробки не подходит отдельным тюбикам' };
   }
-  if (deferredHeyboPetFamilies.has(row.id)) {
-    return { workScope: 'отложено', scopeReason: 'HeyboPet доступен под заказ без обещания быстрой доставки; владелец отложил SEO этих моделей' };
-  }
   if (row.status === 'ошибка') {
     return { workScope: 'отложено', scopeReason: 'Есть конкретный блокер к открытию; редакционный проход сейчас не нужен' };
+  }
+  if (deferredHeyboPetFamilies.has(row.id)) {
+    return { workScope: 'отложено', scopeReason: 'HeyboPet доступен под заказ без обещания быстрой доставки; владелец отложил SEO этих моделей' };
   }
   return { workScope: 'проверяем сейчас', scopeReason: 'Закрытая страница без текущего коммерческого блокера' };
 };

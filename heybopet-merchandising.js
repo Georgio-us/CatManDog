@@ -10,5 +10,6 @@ export const deferredHeyboPetFamilies = new Set([
   'heybopet-hair-removal-litter-box',
   'heybopet-protective-liner',
   'heybopet-drying-cabinet',
-  'heybopet-fresh-food-cooker'
+  'heybopet-fresh-food-cooker',
+  'heybopet-open-litter-box'
 ]);

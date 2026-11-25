@@ -139,6 +139,13 @@ export function applyServerCatalog(products, catalogProducts, entries) {
       else if (product.displayPriority > 0 || !variants.some(variant => variant.id === product.defaultVariantId))
         product.defaultVariantId = variants[0].id;
     }
+    if (product.id === 'heybopet-hb-pwfs-s30s') {
+      const stockedWhite = variants.find(variant => variant.id === 'heybopet-hb-pwfs-s30s-white');
+      if (stockedWhite?.image) {
+        product.defaultVariantId = stockedWhite.id;
+        product.image = stockedWhite.image;
+      }
+    }
     next.push(product);
   }
   const order = new Map(products.map((product, index) => [product.id, index]));

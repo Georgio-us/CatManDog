@@ -1,5 +1,7 @@
 import { snapshots } from './variants.js';
-import { deferredHeyboPetFamilies } from './heybopet-merchandising.js';
+
+const heyboWithoutOwnStock = product => product.id?.startsWith('heybopet-') &&
+  !snapshots(product).some(variant => variant.pickupAvailable === true);
 
 export function canSourceProduct(product) {
   return snapshots(product).some(variant =>
@@ -20,9 +22,9 @@ export function canSourceProduct(product) {
 // other orderable products. Unavailable products stay last.
 export function keepUnavailableLast(products) {
   const available = products.filter(product => canSourceProduct(product) &&
-    !deferredHeyboPetFamilies.has(product.id));
+    !heyboWithoutOwnStock(product));
   const heyboOnDemand = products.filter(product => canSourceProduct(product) &&
-    deferredHeyboPetFamilies.has(product.id));
+    heyboWithoutOwnStock(product));
   const unavailable = products.filter(product => !canSourceProduct(product));
   products.splice(0, products.length, ...available, ...heyboOnDemand, ...unavailable);
   return products;

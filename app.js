@@ -16,7 +16,7 @@ import { createCheckoutUI } from './checkout-ui.js?v=delivery-regions-20261122';
 import { normalizeRecurringDraft, recurringChoiceFromCart, renderRecurringCart, recurringKey } from './recurring-cart.js?v=recurring-next-date-20261121';
 import { availabilityRequestPage } from './availability-request-ui.js?v=yagu-toys-20261116';
 import { orderVariantId } from './order-progress.js';
-import { applyServerCatalog } from './server-prices.js?v=atelier-supplier-main-20261125';
+import { applyServerCatalog } from './server-prices.js?v=heybo-white-main-20261125';
 import { pickupBasketPage, pickupCheckoutPage, pickupConfirmationPage, pickupCopy } from './pickup-flow.js?v=pickup-shared-ui-20261121';
 
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
@@ -32,7 +32,7 @@ import { analyticsItem, announceCommerce } from './analytics-events.js?v=deliver
 import { installAnalytics } from './analytics-consent.js?v=internal-browser-20261117';
 import { createCartActivity } from './cart-activity.js?v=internal-browser-20261117';
 import { searchCatalog, foodCategoryForQuery, matchesFoodCategory } from './catalog-search.js?v=food-synonyms-20261125';
-import { keepUnavailableLast } from './catalog-stock-sort.js?v=heybo-stock-order-20261125';
+import { keepUnavailableLast } from './catalog-stock-sort.js?v=heybo-stock-order3-20261125';
 import { rememberProductOrigin, productOrigin, requestProductReturn,
   takeProductReturnScroll } from './product-return.js';
 

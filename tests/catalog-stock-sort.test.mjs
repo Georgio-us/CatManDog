@@ -62,7 +62,7 @@ test('on-demand HeyboPet follows stocked and other orderable goods without losin
     card('heybopet-feeder', [{ saleStatus: 'available', serverAvailableForCart: true,
       serverSourceOrderable: true, serverSourcingAvailability: 'source_on_demand' }]),
     card('heybopet-hb-pwfs-s30s', [{ saleStatus: 'available', serverAvailableForCart: true,
-      serverSourcingAvailability: 'on_hand' }]),
+      serverSourcingAvailability: 'on_hand', pickupAvailable: true }]),
     card('heybopet-open-litter-box', [{ saleStatus: 'unavailable' }]),
     card('supplier-food', [{ saleStatus: 'available' }]),
     card('heybopet-app-fountain', [{ saleStatus: 'available', serverAvailableForCart: true,
@@ -73,4 +73,13 @@ test('on-demand HeyboPet follows stocked and other orderable goods without losin
     'heybopet-hb-pwfs-s30s', 'supplier-food', 'heybopet-feeder',
     'heybopet-app-fountain', 'heybopet-open-litter-box'
   ]);
+});
+
+test('a HeyboPet fountain moves down after its last physical unit is gone', () => {
+  const fountain = card('heybopet-hb-pwfs-s30s', [{ saleStatus: 'available',
+    serverAvailableForCart: true, pickupAvailable: false,
+    serverSourcingAvailability: 'source_on_demand' }]);
+  const food = card('food', [{ saleStatus: 'available' }]);
+  assert.deepEqual(keepUnavailableLast([fountain, food]).map(item => item.id),
+    ['food', 'heybopet-hb-pwfs-s30s']);
 });

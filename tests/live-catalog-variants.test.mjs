@@ -5,6 +5,27 @@ import { orderedVariants } from '../product-content.js';
 import { normalizeCart, cartSku, storefrontPrice, canBuy } from '../variants.js';
 import { accessoryDetail } from '../accessory-ui.js';
 import { availabilityRequestPage } from '../availability-request-ui.js';
+import { launchHeyboPetProducts } from '../launch-heybopet-products.js';
+
+test('received white fountain stays the family image and default after the live catalog merge', () => {
+  const fountain = structuredClone(launchHeyboPetProducts[0]);
+  const whiteImage = fountain.variants[1].image;
+  const products = [fountain];
+  const visible = [fountain];
+  const common = { product_id: fountain.id, name: fountain.name, brand: fountain.brand,
+    category: fountain.category, pet: fountain.pet, image_path: fountain.variants[0].image,
+    description: fountain.description, details: fountain.details, saleStatus: 'available',
+    source_orderable: true, availableForCart: true, price_accepted: true, priceCents: 5490 };
+  applyServerCatalog(products, visible, [
+    { ...common, variant_id: 'heybopet-hb-pwfs-s30s-white', label: 'Белый',
+      availability: 'on_hand', variant_image_path: whiteImage, pickupAvailable: true },
+    { ...common, variant_id: 'heybopet-hb-pwfs-s30s-black', label: 'Чёрный',
+      availability: 'source_on_demand', variant_image_path: null, pickupAvailable: false }
+  ]);
+  assert.equal(products[0].defaultVariantId, 'heybopet-hb-pwfs-s30s-white');
+  assert.equal(products[0].image.src, whiteImage);
+  assert.equal(canBuy(products[0].variants[1]), true);
+});
 
 test('server catalog gives newly imported food a sorted selector and exact basket price', () => {
   const products = [];
