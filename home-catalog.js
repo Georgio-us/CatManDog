@@ -65,7 +65,7 @@ export function homeFeaturedVariant(product, order) {
   return id ? snapshots(product).find(sku => sku.id === id && canBuy(sku)) : undefined;
 }
 
-export function prioritizeHomeShelf(pet, products, order) {
+function shelfSections(pet, products, order) {
   const byId = new Map(products.map(product => [product.id, product]));
   const featured = [];
   for (const [id, variantId] of order) {
@@ -80,7 +80,47 @@ export function prioritizeHomeShelf(pet, products, order) {
     const shelf = snapshots(product).some(canBuy) ? available : unavailable;
     shelf.push(product);
   }
-  return [...featured, ...interleaveHomeGroups(pet, available), ...unavailable];
+  return { featured, available: interleaveHomeGroups(pet, available), unavailable };
+}
+
+export function prioritizeHomeShelf(pet, products, order) {
+  const { featured, available, unavailable } = shelfSections(pet, products, order);
+  return [...featured, ...available, ...unavailable];
+}
+
+function alternateCatalogRows(cats, dogs) {
+  const rows = [];
+  for (let offset = 0; offset < Math.max(cats.length, dogs.length); offset += 3) {
+    rows.push(...cats.slice(offset, offset + 3), ...dogs.slice(offset, offset + 3));
+  }
+  return rows;
+}
+
+export function prioritizePetCatalog(products, pet) {
+  if (pet === 'cat') return prioritizeHomeShelf(pet, products, homeCatOrder);
+  if (pet === 'dog') return prioritizeHomeShelf(pet, products, homeDogOrder);
+
+  const cats = [];
+  const dogs = [];
+  const other = [];
+  for (const product of products) {
+    if (product.pet === 'dog' || (product.pet === 'both' && homeDogOrder.has(product.id) && !homeCatOrder.has(product.id))) {
+      dogs.push(product);
+    } else if (matchesPet(product, 'cat')) {
+      cats.push(product);
+    } else {
+      other.push(product);
+    }
+  }
+  const catShelf = shelfSections('cat', cats, homeCatOrder);
+  const dogShelf = shelfSections('dog', dogs, homeDogOrder);
+  return [
+    ...alternateCatalogRows(catShelf.featured, dogShelf.featured),
+    ...alternateCatalogRows(catShelf.available, dogShelf.available),
+    ...other.filter(product => snapshots(product).some(canBuy)),
+    ...alternateCatalogRows(catShelf.unavailable, dogShelf.unavailable),
+    ...other.filter(product => !snapshots(product).some(canBuy))
+  ];
 }
 
 const definitions = [
