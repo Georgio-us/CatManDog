@@ -335,6 +335,9 @@ ALTER TABLE orders ADD COLUMN IF NOT EXISTS delivery_tax_rate_bps integer
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS stripe_checkout_session_id text UNIQUE;
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS stripe_checkout_url text;
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS stripe_payment_intent_id text;
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS stripe_fee_cents integer CHECK (stripe_fee_cents >= 0);
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS stripe_fee_transaction_id text;
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS stripe_fee_checked_at timestamptz;
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS payment_expires_at timestamptz;
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS buyer_phone text;
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS locale text NOT NULL DEFAULT 'ru'
@@ -492,6 +495,10 @@ CREATE TABLE IF NOT EXISTS external_sales (
   note text NOT NULL DEFAULT '',
   created_at timestamptz NOT NULL DEFAULT now()
 );
+ALTER TABLE external_sales ADD COLUMN IF NOT EXISTS date_basis text NOT NULL DEFAULT 'sale'
+  CHECK (date_basis IN ('sale','confirmation'));
+ALTER TABLE external_sales ADD COLUMN IF NOT EXISTS extra_received_cents integer NOT NULL DEFAULT 0
+  CHECK (extra_received_cents >= 0);
 CREATE TABLE IF NOT EXISTS external_sale_items (
   sale_id uuid NOT NULL REFERENCES external_sales(id) ON DELETE CASCADE,
   variant_id text NOT NULL REFERENCES catalog_variants(id),
@@ -503,6 +510,50 @@ CREATE TABLE IF NOT EXISTS external_sale_items (
 );
 CREATE INDEX IF NOT EXISTS external_sales_sale_date_idx
   ON external_sales(sale_date DESC,created_at DESC);
+
+-- Packaging consumed for an actual hand-off. Costs retain four decimal places
+-- in EUR so the whole hand-off is rounded only once for the dashboard.
+CREATE TABLE IF NOT EXISTS sale_packaging_items (
+  id uuid PRIMARY KEY,
+  order_id uuid REFERENCES orders(id) ON DELETE CASCADE,
+  external_sale_id uuid REFERENCES external_sales(id) ON DELETE CASCADE,
+  material_code text NOT NULL,
+  material_name text NOT NULL,
+  quantity integer NOT NULL CHECK (quantity > 0),
+  unit_cost_1e4 integer NOT NULL CHECK (unit_cost_1e4 >= 0),
+  source_document text NOT NULL DEFAULT '',
+  created_at timestamptz NOT NULL DEFAULT now(),
+  CHECK ((order_id IS NULL) <> (external_sale_id IS NULL)),
+  UNIQUE (order_id, material_code),
+  UNIQUE (external_sale_id, material_code)
+);
+CREATE INDEX IF NOT EXISTS sale_packaging_order_idx ON sale_packaging_items(order_id);
+CREATE INDEX IF NOT EXISTS sale_packaging_external_idx ON sale_packaging_items(external_sale_id);
+
+CREATE TABLE IF NOT EXISTS order_gift_items (
+  id uuid PRIMARY KEY,
+  order_id uuid NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+  gift_code text NOT NULL,
+  description text NOT NULL,
+  cost_cents integer NOT NULL CHECK (cost_cents >= 0),
+  expense_reference text NOT NULL DEFAULT '',
+  UNIQUE (order_id, gift_code)
+);
+
+CREATE TABLE IF NOT EXISTS sale_cash_expenses (
+  id uuid PRIMARY KEY,
+  order_id uuid REFERENCES orders(id) ON DELETE CASCADE,
+  external_sale_id uuid REFERENCES external_sales(id) ON DELETE CASCADE,
+  kind text NOT NULL CHECK (kind IN ('delivery','other')),
+  description text NOT NULL,
+  amount_cents integer NOT NULL CHECK (amount_cents > 0),
+  incurred_on date,
+  idempotency_key text NOT NULL UNIQUE,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  CHECK ((order_id IS NULL) <> (external_sale_id IS NULL))
+);
+CREATE INDEX IF NOT EXISTS sale_cash_expenses_order_idx ON sale_cash_expenses(order_id);
+CREATE INDEX IF NOT EXISTS sale_cash_expenses_external_idx ON sale_cash_expenses(external_sale_id);
 
 CREATE TABLE IF NOT EXISTS owner_expenses (
   id uuid PRIMARY KEY,

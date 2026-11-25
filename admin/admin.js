@@ -203,6 +203,7 @@ function orderCard(order) {
 function externalSaleCard(sale) {
   const day = String(sale.saleDate || '').slice(0, 10).split('-').reverse().join('.');
   const channel = { privatbank_ua:'Украинская карта · PrivatBank',
+    uah_card_transfer:'Перевод гривны на карту',
     bank_transfer:'Банковский перевод', cash:'Наличные' }[sale.paymentChannel] || sale.paymentChannel;
   return `<article class="admin-card order-card"><div class="admin-variant-top"><div>
     <h2>${escape(sale.customerNote || sale.reference)} · продажа вне сайта</h2>
@@ -210,8 +211,8 @@ function externalSaleCard(sale) {
     </div><strong>${euros(sale.grossCents)}</strong></div>
     <ul class="admin-items">${sale.items.map(item => `<li><strong>${escape(item.name)}</strong> · ${item.quantity} шт × ${euros(item.unitPriceCents)}
       <br><span class="admin-muted">Закупка этой строки: ${euros(item.purchaseCostCents)} · SKU ${escape(item.variantId)} · склад списан</span></li>`).join('')}</ul>
-    <p>Получено: ${euros(sale.grossCents)} · Закупка паучей: ${euros(sale.productCostCents)} · Подарок: ${euros(sale.giftCostCents)} · Разница: <strong>${euros(sale.marginCents)}</strong></p>
-    <p class="admin-muted">Документ: ${sale.documentationStatus === 'recorded' ? 'оформлен' : 'ожидает оформления'} · Подарочный Churu учтён отдельно от продаваемого склада. Склад по этой продаже повторно не списывать.</p></article>`;
+    <p>Получено: ${euros(sale.grossCents)}${sale.extraReceivedCents ? ` · Сверх стоимости товаров: ${euros(sale.extraReceivedCents)}` : ''} · Закупка товаров: ${euros(sale.productCostCents)} · Подарки: ${euros(sale.giftCostCents)} · Упаковка: ${euros(sale.packagingCostCents)} · Разница: <strong>${euros(sale.marginCents)}</strong></p>
+    <p class="admin-muted">Документ: ${sale.documentationStatus === 'recorded' ? 'оформлен' : 'ожидает оформления'} · ${escape(sale.note || '')} Склад по этой продаже повторно не списывать.</p></article>`;
 }
 function renderOrders(orders, externalSales = []) {
   const real = orders.filter(order => !order.is_test);
@@ -1262,15 +1263,57 @@ async function loadFinancePreview(button) {
       <p class="admin-muted">${missing.length ? `Для будущего оформления нужно заполнить: ${escape(missing.join(', '))}` : 'Расчёт заполнен, выпуск фактуры пока не подключён'}</p>`;
   } catch (error) { host.textContent = error.message; }
 }
-function renderOverview(data, recurringDue = []) {
+const salePaymentLabel = channel => ({ Stripe: 'Stripe', cash: 'Наличные',
+  privatbank_ua: 'PrivatBank', uah_card_transfer: 'Перевод гривны на карту',
+  bank_transfer: 'Банковский перевод' })[channel] || channel || 'Не указан';
+function renderOverview(data, recurringDue = [], salesDashboard = { totals: {}, sales: [] }) {
   const { catalog, orders, requests, topPaidSkus, purchases, coverage = [], customers = {} } = data;
   const realRecurringDue = recurringDue.filter(plan => !plan.isTest).length;
-  $('admin-content').innerHTML = `<section><h2>Заказы и покупатели</h2><div class="audit-overview overview-grid">
-    <div><strong>${orders.open_orders}</strong><span>Заказов в работе</span></div>
-    <div><strong>${euros(orders.paid_total_30d)}</strong><span>Оплачено за 30 дней · ${orders.paid_orders_30d} ${countNoun(orders.paid_orders_30d,'заказ','заказа','заказов')}</span></div>
-    <div><strong>${requests.new_requests}</strong><span>Новых обращений</span></div>
-    <div><strong>${customers.registered ?? 0}</strong><span>Аккаунтов покупателей</span></div>
-  </div></section><section class="admin-card"><h2>Работа магазина</h2>
+  const { totals = {}, sales = [], personalExpenses = [] } = salesDashboard;
+  const margin = totals.cashResultCents !== null && totals.receivedCents > 0
+    ? `${Math.round(totals.cashResultCents / totals.receivedCents * 1000) / 10}%` : 'Не рассчитана';
+  $('admin-content').innerHTML = `<section class="sales-home"><div class="sales-home-heading"><div><h2>Продажи магазина</h2>
+    <p class="admin-muted">Все оплаченные покупки через сайт и вне сайта, без тестов</p></div>
+    <button type="button" data-go-tab="orders">Открыть продажи</button></div>
+    <div class="audit-overview overview-grid sales-home-metrics">
+      <div><strong>${totals.purchases ?? 0}</strong><span>Покупки всего · ${totals.sitePurchases ?? 0} на сайте, ${totals.externalPurchases ?? 0} вне сайта</span></div>
+      <div><strong>${euros(totals.receivedCents || 0)}</strong><span>Получено от покупателей</span></div>
+      <div><strong>${totals.cashResultCents === null ? 'Уточняется' : euros(totals.cashResultCents)}</strong><span>Результат после известных затрат</span></div>
+      <div><strong>${margin}</strong><span>Маржа от полученной суммы</span></div>
+    </div>
+    <p class="admin-muted sales-home-caveat">Учтены только фактические денежные затраты. Если комиссия Stripe ещё не получена, итог пока не рассчитан. IVA отдельно сейчас не выделяем. Записаны имена ${totals.knownBuyers ?? 0} покупателей${totals.unknownBuyerPurchases ? `; у ${totals.unknownBuyerPurchases} ${countNoun(totals.unknownBuyerPurchases,'покупки','покупок','покупок')} имя не уточнено` : ''}</p>
+    <section class="sales-home-breakdown"><h3>Как получился результат</h3><div class="sales-home-breakdown-grid">
+      <div><span>Получено от покупателей</span><strong>${euros(totals.receivedCents || 0)}</strong></div>
+      <div><span>В том числе за доставку</span><strong>${euros(totals.deliveryRevenueCents || 0)}</strong></div>
+      <div><span>Закупка проданных товаров</span><strong>${totals.productCostCents === null ? 'Уточняется' : euros(totals.productCostCents)}</strong></div>
+      <div><span>Фактически выданная упаковка</span><strong>${euros(totals.packagingCostCents || 0)}</strong></div>
+      <div><span>Подарки покупателям</span><strong>${euros(totals.giftCostCents || 0)}</strong></div>
+      <div><span>Фактически оплаченная доставка</span><strong>${euros(totals.deliveryCostCents || 0)}</strong></div>
+      <div><span>Другие записанные расходы</span><strong>${euros(totals.otherCostCents || 0)}</strong></div>
+      <div><span>Комиссия Stripe</span><strong>${totals.stripeFeeCents === null ? 'Уточняется' : euros(totals.stripeFeeCents)}</strong></div>
+      <div><span>Применённые скидки</span><strong>${euros(totals.discountCents || 0)}</strong></div>
+      <div><span>До комиссии Stripe</span><strong>${totals.calculatedSpreadCents === null ? 'Уточняется' : euros(totals.calculatedSpreadCents)}</strong></div>
+    </div><p class="admin-muted">Скидки уже уменьшают полученную сумму и не вычитаются второй раз. Расход на доставку без заявленной оплаты или чека равен 0 €</p></section>
+    <section class="sales-home-personal"><h3>Личный расход владельца · вне результата продаж</h3><strong>${euros(totals.personalExpenseCents || 0)}</strong><ul>${personalExpenses.map(item => `<li>${escape(item.name)} · ${item.quantity} шт · ${euros(item.costCents)}</li>`).join('') || '<li>Личных расходов в реестре пока нет</li>'}</ul></section>
+    ${totals.fulfillmentToConfirm ? `<div class="sales-home-alert"><strong>${totals.fulfillmentToConfirm} ${countNoun(totals.fulfillmentToConfirm,'заказ','заказа','заказов')} в системе не отмечено завершённым</strong><span>Если заказ уже передан покупателю, откройте «Продажи» и сохраните статус «Доставлен» или «Выдан»</span></div>` : ''}
+    ${totals.missingPaymentChannel ? `<div class="sales-home-alert"><strong>У ${totals.missingPaymentChannel} продажи не записан способ оплаты</strong><span>Сумма получена; канал платежа ещё нужно уточнить</span></div>` : ''}
+    ${totals.externalDocumentsPending ? `<p class="admin-muted">По ${totals.externalDocumentsPending} ${countNoun(totals.externalDocumentsPending,'продаже','продажам','продажам')} вне сайта документ пока не отмечен оформленным</p>` : ''}
+    <h3>Покупки</h3><div class="sales-home-list">${sales.length ? sales.map(sale => `<details class="admin-card sales-home-sale"><summary class="sales-home-sale-head"><span><strong>${escape(sale.customer)}</strong><small>${sale.kind === 'site' ? `${escape(sale.reference)} · ` : ''}${escape(shortDate(sale.date))}${sale.dateBasis === 'confirmation' ? ' · дата сообщения' : ''} · ${sale.kind === 'site' ? 'Сайт' : 'Вне сайта'} · ${escape(salePaymentLabel(sale.paymentChannel))}</small></span><span><strong>${euros(sale.grossCents)}</strong>${disclosureIcon}</span></summary>
+      <div class="sales-home-sale-body">${sale.kind === 'external' ? `<p class="admin-muted">Запись: ${escape(sale.reference)}</p>` : ''}<div class="sales-home-products">${sale.items.map(item => `<div class="sales-home-product">${item.imagePath ? `<img src="${escape(item.imagePath)}" alt="" loading="lazy">` : '<span class="sales-home-no-image"></span>'}<span><strong>${escape(item.name)}</strong><small>${escape(item.variant || '')} · ${item.quantity} шт × ${euros(item.unitPriceCents)}</small></span></div>`).join('')}</div>
+      <div class="sales-home-sale-costs"><div><span>Получено</span><strong>${euros(sale.grossCents)}</strong></div>${sale.extraReceivedCents ? `<div><span>Сверх стоимости товаров</span><strong>${euros(sale.extraReceivedCents)}</strong></div>` : ''}
+      ${sale.discountCents ? `<div><span>Скидка уже учтена в оплате</span><strong>${euros(sale.discountCents)}</strong></div>` : ''}
+      ${sale.deliveryRevenueCents ? `<div><span>Получено за доставку</span><strong>${euros(sale.deliveryRevenueCents)}</strong></div>` : ''}
+      <div><span>Закупка товаров</span><strong>${sale.productCostCents === null ? 'Уточняется' : euros(sale.productCostCents)}</strong></div><div><span>Упаковка</span><strong>${euros(sale.packagingCostCents)}</strong></div><div><span>Подарки</span><strong>${euros(sale.giftCostCents)}</strong></div>
+      ${sale.deliveryCostCents ? `<div><span>Оплаченная доставка</span><strong>${euros(sale.deliveryCostCents)}</strong></div>` : ''}${sale.otherCostCents ? `<div><span>Другие расходы</span><strong>${euros(sale.otherCostCents)}</strong></div>` : ''}
+      ${sale.kind === 'site' ? `<div><span>Комиссия Stripe</span><strong>${sale.stripeFeeCents === null ? 'Уточняется' : euros(sale.stripeFeeCents)}</strong></div>` : ''}
+      <div class="sales-home-sale-result"><span>Результат после известных затрат</span><strong>${sale.spreadCents === null || sale.stripeFeeCents === null ? 'Уточняется' : euros(sale.spreadCents - sale.stripeFeeCents)}</strong></div></div>
+      ${sale.packagingItems.length ? `<p class="sales-home-extras"><strong>Упаковка:</strong> ${sale.packagingItems.map(item => `${escape(item.name)} × ${item.quantity}`).join(' · ')}</p>` : ''}
+      ${sale.giftItems.length ? `<p class="sales-home-extras"><strong>Подарки:</strong> ${sale.giftItems.map(item => `${escape(item.name)} × ${item.quantity}`).join(' · ')}</p>` : ''}
+      ${sale.cashExpenses.length ? `<p class="sales-home-extras"><strong>Дополнительные расходы:</strong> ${sale.cashExpenses.map(item => `${escape(item.name)} · ${euros(item.amountCents)}`).join(' · ')}</p>` : ''}
+      <details class="sales-home-add-cost"><summary>Добавить фактически оплаченный расход</summary><form data-sale-expense="${escape(sale.kind)}" data-sale-id="${escape(sale.id)}"><label>Что оплачено<input name="description" required maxlength="140" placeholder="Например, такси до клиента"></label><label>Категория<select name="kind"><option value="delivery">Доставка</option><option value="other">Другое</option></select></label><label>Сумма, €<input name="amountEuros" type="number" min="0.01" max="10000" step="0.01" required></label><button type="submit">Записать расход</button></form></details>
+      ${sale.kind === 'site' && sale.status !== 'delivered' ? '<p class="admin-muted">Передача покупателю в системе не отмечена</p>' : ''}
+      </div></details>`).join('') : '<p class="admin-card">Оплаченных покупок пока нет</p>'}</div></section>
+    <details class="admin-card sales-home-secondary"><summary>Операционные разделы и каталог${disclosureIcon}</summary><section><h2>Работа магазина</h2>
     <div class="overview-actions"><button type="button" data-go-tab="orders">Заказы</button>
     <button type="button" data-go-tab="replenishment">Что нужно получить</button>
     <button type="button" data-go-tab="requests">Обращения</button>
@@ -1293,18 +1336,19 @@ function renderOverview(data, recurringDue = []) {
       <div class="coverage-list">${coverage.map(item => `<button type="button" data-coverage-category="${escape(item.category)}" data-coverage-pet="${escape(item.pet)}"><strong>${escape(item.pet === 'cat' ? 'Кошки' : item.pet === 'dog' ? 'Собаки' : 'Оба')} · ${escape(item.category)}</strong>
         <span>${item.products} товаров · ${item.variants} SKU</span>
         <small>${item.unconfirmed_prices} цен проверить · ${item.missing_suppliers} без закреплённого поставщика</small></button>`).join('') || '<p class="admin-muted">Действующих товаров пока нет</p>'}</div></section>
-    <section class="admin-card"><h2>Проданные товары</h2>
+    <section class="admin-card"><h2>Проданные товары сайта</h2>
       ${topPaidSkus.length ? `<ol class="overview-top">${topPaidSkus.map(item => `<li>${escape(item.name)}
         <span>${escape(item.variant_id)} · ${item.quantity} шт</span></li>`).join('')}</ol>` :
-        '<p class="admin-muted">Оплаченных заказов пока нет</p>'}</section>`;
+        '<p class="admin-muted">Оплаченных заказов сайта пока нет</p>'}</section></details>`;
 }
 async function load() {
   message('Загружаю данные');
   try {
     if (tab === 'overview') {
-      const [overview, recurring] = await Promise.all([
-        api('/api/admin/overview'), api('/api/admin/recurring-orders')]);
-      renderOverview(overview, recurring.orders);
+      const [overview, recurring, salesDashboard] = await Promise.all([
+        api('/api/admin/overview'), api('/api/admin/recurring-orders'),
+        api('/api/admin/sales-dashboard')]);
+      renderOverview(overview, recurring.orders, salesDashboard);
       message('Сводка магазина');
       return;
     }
@@ -2058,6 +2102,17 @@ $('admin-content').addEventListener('submit', async event => {
   if (submitButton) submitButton.disabled = true;
   try {
     let formResultMessage = '';
+    if (form.dataset.saleExpense) {
+      await api('/api/admin/sales-expenses', 'POST', {
+        saleKind: form.dataset.saleExpense, saleId: form.dataset.saleId,
+        kind: values.get('kind'), description: values.get('description'),
+        amountCents: eurosInputCents(values.get('amountEuros')),
+        idempotencyKey: crypto.randomUUID()
+      });
+      await load();
+      message('Фактический расход записан');
+      return;
+    }
     if (form.id === 'delivery-upload') {
       const documentFile = await deliveryFilePayload(values.get('document'));
       const proofFile = await deliveryFilePayload(values.get('proof')?.size ? values.get('proof') : null);

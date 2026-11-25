@@ -19,6 +19,7 @@ import { catalogEditorialChuruCat } from '../catalog-editorial-churu-cat.js';
 import { catalogEditorialNext } from '../catalog-editorial-next.js';
 import { publishYaguToys } from './yagu-toy-publication.js';
 import { catsAtelierLegacyCopy } from '../cats-atelier-products.js';
+import { seedInitialSalesLedger } from './initial-sales-ledger.js';
 
 const cents = value => Number.isFinite(value) && value > 0 ? Math.round(value * 100) : null;
 const imagePath = image => typeof image === 'string' ? image : image?.src || null;
@@ -1011,6 +1012,7 @@ export async function importCatalog(db, items = products) {
         }
       }
     }
+    if (items === products) await seedInitialSalesLedger(client);
     await client.query('COMMIT');
     return rows.length;
   } catch (error) {

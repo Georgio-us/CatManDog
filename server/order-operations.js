@@ -62,6 +62,7 @@ export function summarizeOrder(order, items, demandByVariant = new Map()) {
     const stockPosition = physical + (typeof entry === 'number' ? -entry : entry?.adjustment || 0);
     const taxLine = taxByVariant.get(item.variant_id);
     return { name: item.name, variantId: item.variant_id, variantLabel: item.variant_label,
+      imagePath: item.variant_image || item.product_image || '',
       qty: item.quantity, unitPriceCents: item.unit_price_cents, sourceMode: item.source_mode,
       taxRateBps: item.tax_rate_bps, taxCents: taxLine?.taxCents ?? null,
       purchaseCostCents: cost.cents, purchaseCostGrossCents: cost.grossCents,
@@ -78,6 +79,13 @@ export function summarizeOrder(order, items, demandByVariant = new Map()) {
   return { ...order, items: lines, merchandiseGrossCents, purchaseTotalCents,
     merchandiseSpreadCents: purchaseTotalCents === null ? null :
       merchandiseGrossCents - purchaseTotalCents,
+    packagingCostCents: Math.round(Number(order.packaging_cost_1e4 || 0) / 100),
+    packagingItems: order.packaging_items || [],
+    giftCostCents: Number(order.gift_cost_cents || 0),
+    giftItems: order.gift_items || [],
+    deliveryCostCents: Number(order.delivery_cost_cents || 0),
+    otherCostCents: Number(order.other_cost_cents || 0),
+    cashExpenses: order.cash_expenses || [],
     taxTotalCents: tax?.taxTotalCents ?? null, taxComplete: tax?.taxComplete ?? false,
     deliveryTaxRateBps: order.delivery_tax_rate_bps,
     deliveryTaxCents: tax?.delivery.taxCents ?? null,
@@ -90,6 +98,24 @@ export async function loadAdminOrders(db) {
     o.delivery_address,o.delivery_preference,o.status,o.payment_status,o.stock_state,
     o.subtotal_cents,o.discount_cents,o.delivery_cents,o.delivery_tax_rate_bps,
     o.total_cents,o.created_at,o.is_test,o.confirmation_sent_at,o.confirmation_error,
+    o.stripe_fee_cents,o.stripe_fee_transaction_id,
+    coalesce((SELECT sum(p.quantity*p.unit_cost_1e4) FROM sale_packaging_items p
+      WHERE p.order_id=o.id),0)::integer AS packaging_cost_1e4,
+    coalesce((SELECT json_agg(json_build_object('name',p.material_name,
+      'quantity',p.quantity) ORDER BY p.material_code) FROM sale_packaging_items p
+      WHERE p.order_id=o.id),'[]'::json) AS packaging_items,
+    coalesce((SELECT sum(g.cost_cents) FROM order_gift_items g
+      WHERE g.order_id=o.id),0)::integer AS gift_cost_cents,
+    coalesce((SELECT json_agg(json_build_object('name',g.description,'quantity',1)
+      ORDER BY g.gift_code) FROM order_gift_items g WHERE g.order_id=o.id),
+      '[]'::json) AS gift_items,
+    coalesce((SELECT sum(e.amount_cents) FROM sale_cash_expenses e
+      WHERE e.order_id=o.id AND e.kind='delivery'),0)::integer AS delivery_cost_cents,
+    coalesce((SELECT sum(e.amount_cents) FROM sale_cash_expenses e
+      WHERE e.order_id=o.id AND e.kind='other'),0)::integer AS other_cost_cents,
+    coalesce((SELECT json_agg(json_build_object('kind',e.kind,'name',e.description,
+      'amountCents',e.amount_cents) ORDER BY e.created_at) FROM sale_cash_expenses e
+      WHERE e.order_id=o.id),'[]'::json) AS cash_expenses,
     (SELECT max(e.created_at) FROM order_events e
       WHERE e.order_id=o.id AND e.type='payment_paid') AS paid_at
     FROM orders o ORDER BY o.created_at DESC LIMIT 100`);
@@ -99,6 +125,7 @@ export async function loadAdminOrders(db) {
     db.query(`SELECT i.order_id,i.variant_id,i.name,i.variant_label,i.quantity,
       i.unit_price_cents,i.source_mode,i.tax_rate_bps,
       v.stock_quantity,v.reserved_quantity,v.purchase_price_cents,
+      v.image_path AS variant_image,p.image_path AS product_image,
       verified.quantity AS verified_quantity,
       verified.total_cost_cents AS verified_total_cost_cents,
       verified.document_ref AS verified_document_ref,
@@ -110,6 +137,7 @@ export async function loadAdminOrders(db) {
       catalog.supplier_name AS catalog_supplier
       FROM order_items i
       LEFT JOIN catalog_variants v ON v.id=i.variant_id
+      LEFT JOIN catalog_products p ON p.id=v.product_id
       LEFT JOIN verified_purchase_costs verified ON verified.variant_id=i.variant_id
       LEFT JOIN supplier_offers so ON so.variant_id=i.variant_id AND so.preferred=true
       LEFT JOIN suppliers s ON s.id=so.supplier_id

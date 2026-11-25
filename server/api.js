@@ -16,6 +16,7 @@ import { currentStaff, currentVisitStaff, createStaffSession, staffCookie, clear
   revokeStaffSession, bootstrapOwner } from './staff.js';
 import { financePreview } from './finance.js';
 import { listExternalSales } from './external-sales.js';
+import { loadSalesDashboard } from './sales-dashboard.js';
 import { loadAdminOrders, loadStockCommitments, loadOpenOrderDemand,
   loadCommercialPositionAdjustments } from './order-operations.js';
 import { backupConfiguration, listBackups } from './backup.js';
@@ -1442,6 +1443,42 @@ async function adminRoute(db, req, res, path) {
     return json(res, 200, { catalog: catalog.rows[0], orders: orders.rows[0],
       requests: requests.rows[0], topPaidSkus: top.rows, purchases: purchases.rows[0],
       coverage: coverage.rows, customers: customers.rows[0], coupon: coupon.rows[0] || null });
+  }
+  if (path === '/api/admin/sales-dashboard' && req.method === 'GET')
+    return json(res, 200, await loadSalesDashboard(db));
+  if (path === '/api/admin/sales-expenses' && req.method === 'POST') {
+    if (!fullAdmin) bad('Доступ закрыт', 403);
+    const body = await readJson(req);
+    const kind = body.kind;
+    const saleKind = body.saleKind;
+    const saleId = body.saleId;
+    const description = cap(body.description, 140);
+    const amount = Number(body.amountCents);
+    if (!['delivery','other'].includes(kind) ||
+        !['site','external'].includes(saleKind) || !validUuid(saleId) ||
+        description.length < 2 || !Number.isInteger(amount) || amount < 1 || amount > 1000000 ||
+        !validUuid(body.idempotencyKey)) bad('Проверьте данные расхода');
+    const client = await db.connect();
+    try {
+      await client.query('BEGIN');
+      const ownerTable = saleKind === 'site' ? 'orders' : 'external_sales';
+      const found = await client.query(`SELECT id FROM ${ownerTable} WHERE id=$1 AND
+        payment_status='paid'${saleKind === 'site' ? ' AND is_test=false' : ''} FOR UPDATE`, [saleId]);
+      if (!found.rows.length) bad('Оплаченная покупка не найдена', 404);
+      const result = await client.query(`INSERT INTO sale_cash_expenses
+        (id,order_id,external_sale_id,kind,description,amount_cents,idempotency_key)
+        VALUES($1,$2,$3,$4,$5,$6,$7) ON CONFLICT (idempotency_key) DO NOTHING
+        RETURNING id`, [randomUUID(), saleKind === 'site' ? saleId : null,
+        saleKind === 'external' ? saleId : null, kind, description, amount,
+        body.idempotencyKey]);
+      if (result.rowCount) await client.query(`INSERT INTO admin_audit_events
+        (id,staff_id,action,target_id,details)
+        VALUES($1,$2,'sale_cash_expense_recorded',$3,$4)`, [randomUUID(), operator.id,
+        saleId, { kind, description, amountCents: amount }]);
+      await client.query('COMMIT');
+      return json(res, 201, { ok: true, alreadyRecorded: !result.rowCount });
+    } catch (error) { await client.query('ROLLBACK'); throw error; }
+    finally { client.release(); }
   }
   if (path === '/api/admin/sku-audit' && req.method === 'GET') {
     const { rows } = await db.query(`SELECT v.id AS variant_id,v.product_id,p.name,p.brand,p.category,p.pet,
