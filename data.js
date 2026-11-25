@@ -24,7 +24,7 @@ import { confirmedDemandProducts } from './confirmed-demand-products.js';
 import { catsAtelierProducts } from './cats-atelier-products.js?v=atelier-supplier-main-20261125';
 import { newLitterProducts } from './new-litter-products.js?v=litter-studio-20261121';
 import { withSelectedAcanaOrijenFormats } from './acana-orijen-selected-formats.js';
-import { catalogEditorialContent } from './catalog-editorial-content.js?v=royal-canin-wave3-20261125';
+import { catalogEditorialContent } from './catalog-editorial-content.js?v=leonardo-wave4-20261125';
 
 const foodProducts = [...expandPriorityFood(expandRoyalCaninFood(originalFoodProducts)), royalCaninPersianKitten, ...royalCaninNewProducts, ...ownatProducts];
 

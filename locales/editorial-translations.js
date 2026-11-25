@@ -1,7 +1,8 @@
-import { catalogEditorialContent } from '../catalog-editorial-content.js?v=royal-canin-wave3-20261125';
+import { catalogEditorialContent } from '../catalog-editorial-content.js?v=leonardo-wave4-20261125';
 import { catalogEditorialOpenAudit } from '../catalog-editorial-open-audit.js';
 import { catalogEditorialRoyalCaninNext } from '../catalog-editorial-royal-canin-next.js';
 import { catalogEditorialRoyalCaninWave3 } from '../catalog-editorial-royal-canin-wave3.js';
+import { catalogEditorialLeonardoWave4 } from '../catalog-editorial-leonardo-wave4.js';
 import { catalogEditorialNextNames } from '../catalog-editorial-next.js';
 
 // Translations of verified catalog copy. Match the server's exact source text so
@@ -149,6 +150,8 @@ const pairs = [
   ...Object.values(catalogEditorialRoyalCaninNext).map(copy => [copy.previousDescription,
     [copy.esDescription, copy.ukDescription]]),
   ...Object.values(catalogEditorialRoyalCaninWave3).map(copy => [copy.previousDescription,
+    [copy.esDescription, copy.ukDescription]]),
+  ...Object.values(catalogEditorialLeonardoWave4).map(copy => [copy.previousDescription,
     [copy.esDescription, copy.ukDescription]]),
   ...Object.entries(descriptionByProduct).map(([id, values]) => [catalogEditorialContent[id].description, values]),
   ...Object.entries(detailCopy),

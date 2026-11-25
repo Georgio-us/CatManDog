@@ -48,6 +48,8 @@ const releasedByCategory = {
     'leonardo-complete', 'rc-persian', 'rc-persian-kitten', 'rc-sphynx-adult', 'leonardo-fish', 'leonardo-lamb'
   ],
   '/catalogo/gatos/comida-humeda': [
+    'leonardo-wet-salmon', 'leonardo-wet-herring', 'leonardo-wet-lamb',
+    'leonardo-wet-venison', 'leonardo-wet-poultry-egg', 'leonardo-wet-pure-beef',
     'royalcanin-1fdaaee6', 'royalcanin-78dac31b', 'royalcanin-11fd4a79',
     'royalcanin-b348c5c6', 'royalcanin-04439e9c', 'royalcanin-92ee61fb',
     'royalcanin-5536b29b', 'royalcanin-a78036ba', 'royalcanin-c23304f8',
