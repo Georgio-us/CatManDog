@@ -22,6 +22,7 @@ import { catalogEditorialRoyalCaninWave3 } from '../catalog-editorial-royal-cani
 import { catalogEditorialLeonardoWave4 } from '../catalog-editorial-leonardo-wave4.js';
 import { catalogEditorialLeonardoWave5 } from '../catalog-editorial-leonardo-wave5.js';
 import { catalogEditorialWave6 } from '../catalog-editorial-wave6.js';
+import { catalogEditorialWave7 } from '../catalog-editorial-wave7.js';
 import { catalogEditorialLeonardoCorrections } from '../catalog-editorial-leonardo-corrections.js';
 import { editorialEs, editorialUk } from '../locales/editorial-translations.js';
 import { accessoryDetail } from '../accessory-ui.js';
@@ -111,7 +112,7 @@ test('database-only ACANA Pacifica has a stable product URL without premature in
 
 test('the verified product release has unique Spanish source content and crawlable category links', async () => {
   const released = seoProducts.filter(product => product.indexable);
-  assert.equal(released.length, 237);
+  assert.equal(released.length, 247);
   const descriptions = new Set();
   const titles = new Set();
   for (const product of released) {
@@ -138,11 +139,11 @@ test('released editorial products serve the same verified Spanish copy as the st
     ...catalogEditorialChuruDog, ...catalogEditorialAcanaWet, ...catalogEditorialChuruCat,
     ...catalogEditorialNext, ...catalogEditorialOpenAudit, ...catalogEditorialRoyalCaninNext,
     ...catalogEditorialRoyalCaninWave3, ...catalogEditorialLeonardoWave4, ...catalogEditorialLeonardoWave5,
-    ...catalogEditorialWave6,
+    ...catalogEditorialWave6, ...catalogEditorialWave7,
     ...catalogEditorialLeonardoCorrections };
   const releasedEditorial = Object.entries(editorial)
     .filter(([id]) => seoProducts.some(product => product.id === id && product.indexable));
-  assert.equal(releasedEditorial.length, 154);
+  assert.equal(releasedEditorial.length, 164);
   for (const [id, copy] of releasedEditorial) {
     const path = productHref(id);
     const html = await seoDocument(path);

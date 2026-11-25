@@ -26,7 +26,8 @@ const releasedByCategory = {
     'yagu-9235121', 'yagu-9235036',
     'yagu-9235123', 'yagu-9235071',
     'yagu-9235038', 'yagu-9235044',
-    'yagu-7552371'
+    'yagu-7552371', 'yagu-2170001', 'yagu-2170004',
+    'tc-5477267745', 'tc-b5a74b28d5'
   ],
   '/catalogo/gatos/pienso-seco': [
     'rc-sterilised-senior', 'rc-maine-coon', 'rc-british',
@@ -87,7 +88,9 @@ const releasedByCategory = {
     'tc-0ed7b07305', 'tc-4b391892b7', 'tc-57f941fe4f',
     'tc-185b159101', 'tc-5da4b0e874', 'tc-0206d66a70',
     'tc-4e50c58957', 'tc-0707caf730', 'tc-768abf17c2',
-    'tc-dc3d6d94c2', 'tc-713f42fb9a'
+    'tc-dc3d6d94c2', 'tc-713f42fb9a',
+    'tc-82b5e1f561', 'tc-c4fc3a3e21', 'tc-719843e78f',
+    'tc-06a4db0143', 'tc-1877f4a340', 'tc-b121011ccc'
   ],
   '/catalogo/perros/pienso-seco': [
     'cmd-source-f025a9dbc9d479c7', 'cmd-source-39c2d5db76be47f7',

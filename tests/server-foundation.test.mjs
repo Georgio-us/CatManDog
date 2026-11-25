@@ -14,10 +14,10 @@ import { catalogEditorialNext } from '../catalog-editorial-next.js';
 
 test('verified editorial copy is distinct and translated for each curated product', () => {
   const entries = Object.entries(catalogEditorialContent);
-  assert.equal(entries.length, 169);
+  assert.equal(entries.length, 179);
   assert.equal(new Set(entries.map(([,copy]) => copy.description)).size, entries.length);
   for (const [id, copy] of entries) {
-    assert.ok(id.startsWith('cmd-source-') || id.startsWith('leonardo-') || id.startsWith('acana-') || id.startsWith('orijen-') || id.startsWith('dog-') || id.startsWith('rc-') || id.startsWith('churu-dog-') || id.startsWith('tc-') || id.startsWith('royalcanin-'));
+    assert.ok(id.startsWith('cmd-source-') || id.startsWith('leonardo-') || id.startsWith('acana-') || id.startsWith('orijen-') || id.startsWith('dog-') || id.startsWith('rc-') || id.startsWith('churu-dog-') || id.startsWith('tc-') || id.startsWith('royalcanin-') || id.startsWith('yagu-'));
     assert.ok(copy.source.startsWith('https://'));
     assert.ok(copy.description.length > 100);
     assert.ok(copy.details.length >= 3);

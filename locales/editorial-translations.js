@@ -5,6 +5,7 @@ import { catalogEditorialRoyalCaninWave3 } from '../catalog-editorial-royal-cani
 import { catalogEditorialLeonardoWave4 } from '../catalog-editorial-leonardo-wave4.js';
 import { catalogEditorialLeonardoWave5 } from '../catalog-editorial-leonardo-wave5.js';
 import { catalogEditorialWave6 } from '../catalog-editorial-wave6.js';
+import { catalogEditorialWave7 } from '../catalog-editorial-wave7.js';
 import { catalogEditorialLeonardoCorrections } from '../catalog-editorial-leonardo-corrections.js';
 import { catalogEditorialNextNames } from '../catalog-editorial-next.js';
 
@@ -163,6 +164,10 @@ const pairs = [
   ...Object.values(catalogEditorialWave6).map(copy => [copy.previousDescription,
     [copy.esDescription, copy.ukDescription]]),
   ...Object.values(catalogEditorialWave6).map(copy => [copy.name || copy.previousName,
+    [copy.esName, copy.ukName]]),
+  ...Object.values(catalogEditorialWave7).map(copy => [copy.previousDescription,
+    [copy.esDescription, copy.ukDescription]]),
+  ...Object.values(catalogEditorialWave7).map(copy => [copy.previousName,
     [copy.esName, copy.ukName]]),
   ...Object.values(catalogEditorialLeonardoCorrections).map(copy => [copy.name,
     [copy.esName, copy.ukName]]),
