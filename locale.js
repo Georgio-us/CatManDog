@@ -3,7 +3,7 @@ import { esProductText } from './locales/product-es.js?v=litter-photos-20261121'
 import { esDetails } from './locales/details-es.js?v=litter-photos-20261121';
 import { uk, ukPatterns } from './locales/uk.js?v=store-search-20261125';
 import { ukExtra } from './locales/uk-extra.js?v=delivery-regions-20261122';
-import { ukProductNames } from './locales/uk-product-names.js?v=litter-photos-20261121';
+import { ukProductNames } from './locales/uk-product-names.js?v=royal-canin-20261125';
 import { ukProductCopy } from './locales/uk-product-copy.js?v=litter-photos-20261121';
 import { ukDetails } from './locales/uk-details.js?v=litter-photos-20261121';
 import { churuFormatsEs, churuFormatsUk } from './locales/churu-formats.js';

@@ -1,4 +1,4 @@
-import { seoProductSlugs } from './seo-product-slugs.js?v=merchant-stock-20261122';
+import { seoProductSlugs } from './seo-product-slugs.js?v=royal-canin-20261125';
 import { stockSeoCopy } from './stock-seo-copy.js';
 
 // Each released family passed the current catalog, price, source, copy and image audit.
