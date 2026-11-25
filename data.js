@@ -435,9 +435,12 @@ export const products = applyChuruRetailFormats(applyProvisionalPrices(applyReta
   const copy = catalogEditorialContent[product.id];
   const tag = !product.tag && merchandisingTags[product.id];
   const taggedProduct = tag ? { ...product, tag } : product;
-  if (!copy || product.description !== copy.previousDescription) return taggedProduct;
+  const namedProduct = product.id === 'cmd-source-6d56f8fb416a81c4' &&
+    /^orijen regional red$/iu.test(product.name)
+    ? { ...taggedProduct, name: 'ORIJEN Regional Red для собак' } : taggedProduct;
+  if (!copy || product.description !== copy.previousDescription) return namedProduct;
   return {
-    ...taggedProduct, description: copy.description, details: copy.details,
+    ...namedProduct, description: copy.description, details: copy.details,
     ...(product.variants ? { variants: product.variants.map(variant => variant.description === copy.previousDescription
       ? { ...variant, description: copy.description, details: copy.details }
       : variant) } : {})

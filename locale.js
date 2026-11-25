@@ -15,7 +15,7 @@ import { yaguExpansionEs, yaguExpansionUk } from './locales/yagu-expansion.js?v=
 import { yaguToyExpansionEs, yaguToyExpansionUk } from './locales/yagu-toy-expansion.js';
 import { yaguBasketEs, yaguBasketUk } from './locales/yagu-basket.js?v=language-routes-20261120';
 import { yaguChewTestEs, yaguChewTestUk } from './locales/yagu-chew-test.js?v=20261113';
-import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=open-seo-audit-20261125';
+import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=open-seo-audit-name-20261125';
 import { shellTranslations } from './shell-translations.js?v=language-routes-20261120';
 import { checkoutLaunchEs, checkoutLaunchUk } from './locales/checkout-launch.js?v=language-routes-3-20261120';
 import { recurringEs, recurringUk, recurringPatternsEs, recurringPatternsUk } from './locales/recurring.js';

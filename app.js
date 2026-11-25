@@ -10,7 +10,7 @@ import { productGallery } from './product-gallery.js?v=atelier-supplier-main-202
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=delivery-regions-20261122';
 import { recommendForProduct } from './recommendations.js?v=atelier-related-20261121';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet, homeCatOrder, homeDogOrder, homeFeaturedVariant, prioritizeHomeShelf, prioritizePetCatalog, prioritizeCatalogCategory } from './home-catalog.js?v=category-shelves';
-import { categories, products, catalogProducts, articles } from './data.js?v=open-seo-audit-20261125';
+import { categories, products, catalogProducts, articles } from './data.js?v=open-seo-audit-name-20261125';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=yagu-toys-20261116';
 import { createCheckoutUI } from './checkout-ui.js?v=delivery-regions-20261122';
 import { normalizeRecurringDraft, recurringChoiceFromCart, renderRecurringCart, recurringKey } from './recurring-cart.js?v=recurring-next-date-20261121';
@@ -22,7 +22,7 @@ import { pickupBasketPage, pickupCheckoutPage, pickupConfirmationPage, pickupCop
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
 import { homeShortcuts, homeShortcutLanding } from './home-shortcuts.js?v=selection-shelves';
 import { handleCatPickClick } from './cat-picks.js?v=picks-seo-20261112';
-import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from './locale.js?v=open-seo-audit-20261125';
+import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from './locale.js?v=open-seo-audit-name-20261125';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';

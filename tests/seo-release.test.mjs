@@ -18,6 +18,16 @@ import { catalogEditorialChuruCat } from '../catalog-editorial-churu-cat.js';
 import { catalogEditorialNext } from '../catalog-editorial-next.js';
 import { catalogEditorialOpenAudit } from '../catalog-editorial-open-audit.js';
 import { accessoryDetail } from '../accessory-ui.js';
+import { editorialEs, editorialUk } from '../locales/editorial-translations.js';
+
+test('cat and dog Regional Red keep distinct names in the hydrated catalog', () => {
+  const dog = catalogProducts.find(product => product.id === 'cmd-source-6d56f8fb416a81c4');
+  const cat = catalogProducts.find(product => product.id === 'orijen-regional-red');
+  assert.equal(dog.name, 'ORIJEN Regional Red для собак');
+  assert.notEqual(dog.name, cat.name);
+  assert.equal(editorialEs[dog.name], 'ORIJEN Regional Red para perros');
+  assert.equal(editorialUk[dog.name], 'ORIJEN Regional Red для собак');
+});
 
 test('the sitemap contains only released public pages with Spanish editorial content', async () => {
   const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
