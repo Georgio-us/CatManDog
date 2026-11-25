@@ -13,7 +13,8 @@ export const editorialFingerprint = copy => createHash('sha256').update(JSON.str
 // A missing review record is unknown, not an error. A recorded contradiction is
 // an error, even when the public page is technically crawlable.
 export const seoVerdict = ({ product, variants, copy, translations, review, technical, liveChecked,
-  knownIssue, liveUnavailable, catalogUnavailable, sitemapUnavailable, catalogIsLive = true }) => {
+  knownIssue, liveUnavailable, catalogUnavailable, sitemapUnavailable, priorCopy,
+  catalogIsLive = true }) => {
   const failures = [];
   const needsReview = [];
   const evidence = [];
@@ -31,8 +32,12 @@ export const seoVerdict = ({ product, variants, copy, translations, review, tech
   if (!product.path?.startsWith('/producto/')) failures.push('Нет постоянного URL товара');
   if (technical?.length) failures.push(...technical.map(issue => `Опубликованная страница: ${issue}`));
   if (!copy) {
-    needsReview.push('В реестре нет подтверждения предметного текста и первичного источника');
+    if (priorCopy) {
+      evidence.push(priorCopy);
+      needsReview.push('Осталось сверить полный текст RU/ES/UK с точным первичным источником');
+    } else needsReview.push('Пока не найдено предметной редакционной записи с первичным источником');
   } else {
+    evidence.push(`Редакционный источник: ${copy.source}`);
     if (!/^https:\/\//u.test(copy.source || '')) needsReview.push('Не записан первичный источник');
     if (!Array.isArray(copy.details) || copy.details.length < 3 || !translations?.es
       || !translations?.uk || translations.details?.length !== copy.details.length
@@ -49,9 +54,14 @@ export const seoVerdict = ({ product, variants, copy, translations, review, tech
       (translations.es !== copy.esDescription || translations.uk !== copy.ukDescription)) {
       failures.push('Переводы в интерфейсе не совпадают с проверенным текстом');
     }
+    if (!needsReview.some(reason => reason.includes('текст RU/ES/UK'))
+      && !failures.some(reason => reason.includes('Описание в опубликованном каталоге')
+        || reason.includes('Переводы в интерфейсе'))) {
+      evidence.push('Предметные тексты RU/ES/UK есть в коде и согласованы с опубликованным каталогом');
+    }
   }
   if (!review) {
-    needsReview.push('Нет явной записи предметной проверки SKU, упаковки, текста и фото');
+    needsReview.push('Нет отдельной записи сверки продаваемой единицы и точного фото с образцом');
   } else {
     if (review.productId !== product.id) failures.push('Запись проверки привязана к другому товару');
     if (!review.reviewedAt || !review.sourceUrl || !review.saleUnit) {

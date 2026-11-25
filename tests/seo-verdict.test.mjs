@@ -21,7 +21,8 @@ test('SEO verdict passes only with live technical and explicit product evidence'
   assert.equal(seoVerdict(input).status, 'прошло');
   const missing = seoVerdict({ ...input, review: undefined });
   assert.equal(missing.status, 'проверить');
-  assert.match(missing.reasons.join(' '), /Нет явной записи/);
+  assert.match(missing.reasons.join(' '), /продаваемой единицы и точного фото/);
+  assert.match(missing.evidence.join(' '), /Редакционный источник/);
   const stale = seoVerdict({ ...input, review: { ...review, editorialSha256: 'old' } });
   assert.equal(stale.status, 'проверить');
   assert.match(stale.reasons.join(' '), /Текст изменился/);

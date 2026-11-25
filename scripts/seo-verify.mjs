@@ -2,6 +2,8 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { catalogEditorialContent } from '../catalog-editorial-content.js';
 import { editorialEs, editorialUk } from '../locales/editorial-translations.js';
 import { seoProducts } from '../seo-products.js';
+import { stockSeoCopy } from '../stock-seo-copy.js';
+import { seoWave2Copy } from '../seo-wave2-copy.js';
 import { seoVerdict } from './seo-verdict.mjs';
 
 const args = process.argv.slice(2);
@@ -125,7 +127,10 @@ const rows = products.map(product => {
     review: reviews[product.id], technical,
     liveChecked: Boolean(check && !check.unavailable && !sitemapUnavailable && !catalogUnavailable),
     liveUnavailable: check?.unavailable || sitemapUnavailable || catalogUnavailable,
-    catalogUnavailable, sitemapUnavailable, knownIssue: issues.get(product.id), catalogIsLive: !catalogPath });
+    catalogUnavailable, sitemapUnavailable, knownIssue: issues.get(product.id), catalogIsLive: !catalogPath,
+    priorCopy: stockSeoCopy[product.id] ? 'Предметный испанский SEO-текст: stock-seo-copy.js, проверка 22 ноября 2026'
+      : seoWave2Copy[product.id] ? 'Предметный испанский SEO-текст: seo-wave2-copy.js, предыдущая проверка'
+        : null });
 });
 const count = status => rows.filter(row => row.status === status).length;
 const report = { checkedAt: new Date().toISOString(), mode: args.includes('--live') ? 'live' : 'catalog-file',
