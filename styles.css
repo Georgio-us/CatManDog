@@ -447,7 +447,9 @@ button:hover:not(:disabled) {
   left: 0;
   z-index: 40;
   width: 188px;
-  padding: 5px;
+  display: grid;
+  gap: 4px;
+  padding: 8px;
   border: 1px solid var(--line);
   border-radius: 16px;
   background: #fff;
@@ -465,7 +467,7 @@ button:hover:not(:disabled) {
   min-height: 40px;
   padding: 0 11px;
   border: 0;
-  border-radius: 11px;
+  border-radius: 8px;
   background: transparent;
   color: var(--ink);
   font: inherit;
@@ -474,15 +476,14 @@ button:hover:not(:disabled) {
   cursor: pointer;
 }
 
-.language-options button span { color: #777970; font-size: 11px; font-weight: 700; }
-.language-options button:hover,
-.language-options button[aria-pressed="true"] { background: #f2f4e5; }
-.language-options button[aria-pressed="true"] { font-weight: 700; }
+.language-options button span { color: #777970; font-size: 11px; font-weight: 500; }
+.language-options button:hover { background: #f6f7f1; }
+.language-options button[aria-pressed="true"] { background: #eef2e3; font-weight: 600; }
 
 .language-trigger:focus-visible,
 .language-options button:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 3px;
+  outline: 1px solid #78865d;
+  outline-offset: -1px;
 }
 
 .bag {
@@ -4262,8 +4263,8 @@ details .text-link {
 }
 
 .search-combo-field:focus-within {
-  border-color: var(--ink);
-  box-shadow: 0 0 0 2px #d8f36a80;
+  border-color: #78865d;
+  box-shadow: 0 0 0 1px #dfe7d2;
 }
 
 .search-combo-field svg {
@@ -4410,14 +4411,16 @@ details .text-link {
   padding: 0 9px;
   gap: 5px;
   border-radius: 99px;
-  background: var(--lime);
+  background: #f0f4e5;
   color: var(--ink);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .header-actions #search-toggle:hover,
-.hero-search-controls .button:hover { background: #c8e64f; }
-.hero-search-controls .button { background: var(--lime); color: var(--ink); }
+.hero-search-controls .button:hover { background: #e7eed6; }
+.hero-search-controls .button { background: #f0f4e5; color: var(--ink); font-weight: 600; }
+.header-actions #search-toggle:focus-visible,
+.hero-search-controls .button:focus-visible { outline: 1px solid #78865d; outline-offset: -1px; }
 
 #favorites-link { position: relative; }
 #favorites-link.has-favorites svg {
@@ -4442,7 +4445,7 @@ details .text-link {
   width: min(100%, 430px);
   margin: 12px 0;
 }
-.hero-search label { display: block; margin-bottom: 6px; font-weight: 700; }
+.hero-search label { display: block; margin-bottom: 6px; font-weight: 600; }
 .hero-search-controls { display: flex; gap: 6px; }
 .hero-search-controls input {
   flex: 1;
@@ -4454,6 +4457,11 @@ details .text-link {
   color: var(--ink);
   font: inherit;
   font-size: 16px;
+}
+.hero-search-controls input:focus {
+  border-color: #78865d;
+  outline: 1px solid #dfe7d2;
+  outline-offset: 0;
 }
 .search-suggestion.search-product {
   grid-template-columns: 48px minmax(0, 1fr) auto;
