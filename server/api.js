@@ -2051,6 +2051,10 @@ async function adminRoute(db, req, res, path) {
       return json(res, 200, { sent: Boolean(rows[0].confirmation_sent_at), error: rows[0].confirmation_error });
     } finally { client.release(); }
   }
+  if (path === '/api/admin/service-requests/count' && req.method === 'GET') {
+    const { rows } = await db.query("SELECT count(*)::integer AS new_requests FROM service_requests WHERE status='new'");
+    return json(res, 200, { count: rows[0].new_requests });
+  }
   if (path === '/api/admin/service-requests' && req.method === 'GET') {
     const params = new URL(req.url, 'http://localhost').searchParams;
     const page = Math.max(0, Math.min(10000, Number.parseInt(params.get('page') || '0', 10) || 0));

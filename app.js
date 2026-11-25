@@ -213,7 +213,7 @@ const checkout = createCheckoutUI({
   }
 });
 function persist(){try{localStorage.setItem('catmandog-cart',JSON.stringify(cart));localStorage.setItem('catmandog-favorites',JSON.stringify(favorites));}catch{}updateHeader();cartActivity.sync(activityStage());}
-function activityStage(){const path=route().path;return path==='/checkout/preview'?'review':path==='/checkout'?'checkout':'cart';}
+function activityStage(){const path=route().path;return path==='/checkout/preview'?'review':path==='/checkout'?'checkout':path==='/cart'?'cart_opened':'cart';}
 function hideToast(){document.querySelector('#toast').classList.remove('visible');lastCartAddition=null;}
 function notify(text,{cartAction=false}={}){
   const el=document.querySelector('#toast');

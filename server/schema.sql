@@ -716,12 +716,18 @@ CREATE TABLE IF NOT EXISTS observed_carts (
   id uuid PRIMARY KEY,
   items jsonb NOT NULL DEFAULT '[]'::jsonb,
   current_stage text NOT NULL DEFAULT 'cart'
-    CHECK (current_stage IN ('cart','checkout','review','payment')),
+    CHECK (current_stage IN ('cart','cart_opened','checkout','review','payment')),
   furthest_stage text NOT NULL DEFAULT 'cart'
-    CHECK (furthest_stage IN ('cart','checkout','review','payment')),
+    CHECK (furthest_stage IN ('cart','cart_opened','checkout','review','payment')),
   created_at timestamptz NOT NULL DEFAULT now(),
   updated_at timestamptz NOT NULL DEFAULT now()
 );
+ALTER TABLE observed_carts DROP CONSTRAINT IF EXISTS observed_carts_current_stage_check;
+ALTER TABLE observed_carts ADD CONSTRAINT observed_carts_current_stage_check
+  CHECK (current_stage IN ('cart','cart_opened','checkout','review','payment'));
+ALTER TABLE observed_carts DROP CONSTRAINT IF EXISTS observed_carts_furthest_stage_check;
+ALTER TABLE observed_carts ADD CONSTRAINT observed_carts_furthest_stage_check
+  CHECK (furthest_stage IN ('cart','cart_opened','checkout','review','payment'));
 CREATE INDEX IF NOT EXISTS observed_carts_updated_idx ON observed_carts(updated_at DESC);
 
 CREATE TABLE IF NOT EXISTS site_visitors (

@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { products as siteProducts } from '../data.js';
 
-const stages = ['cart', 'checkout', 'review', 'payment'];
+const stages = ['cart', 'cart_opened', 'checkout', 'review', 'payment'];
 export const validCartId = value =>
   /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i.test(String(value || ''));
 

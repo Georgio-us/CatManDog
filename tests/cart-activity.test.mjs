@@ -16,6 +16,7 @@ test('cart activity accepts distinct variants and records adds, quantity changes
   const next = [{ productId: 'food', variantId: 'food-400g', qty: 1 }];
   assert.deepEqual(cartChanges(first.items, next).map(item => item.delta), [-1, -1]);
   assert.equal(cartInput({ cartId, stage: 'checkout', items: [] }).stage, 'checkout');
+  assert.equal(cartInput({ cartId, stage: 'cart_opened', items: [] }).stage, 'cart_opened');
   assert.throws(() => cartInput({ cartId, stage: 'cart', items: [
     { productId: 'food', variantId: 'food-400g', qty: 0 }
   ] }), /Некорректный товар/);

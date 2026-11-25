@@ -90,6 +90,18 @@ async function api(path, method = 'GET', body, accessKey = '') {
   return result;
 }
 function message(value) { $('admin-message').textContent = value; }
+function showRequestCount(count) {
+  const badge = $('request-nav-count');
+  if (!badge) return;
+  badge.hidden = !count;
+  badge.textContent = count ? String(count) : '';
+  badge.parentElement?.setAttribute('aria-label', count ? `Обращения: ${count} новых` : 'Обращения');
+}
+async function refreshRequestCount() {
+  if (!activeRole) return;
+  try { showRequestCount((await api('/api/admin/service-requests/count')).count); }
+  catch { /* Список обращений остаётся доступен */ }
+}
 function openPanel(role) {
   $('admin-analytics-status').textContent = markInternalBrowser()
     ? 'Этот браузер исключён из статистики посетителей и корзин'
@@ -102,6 +114,7 @@ function openPanel(role) {
   document.querySelectorAll('[data-full-admin]').forEach(element => { element.hidden = role !== 'admin'; });
   if (role !== 'admin') tab = 'requests';
   document.querySelectorAll('[data-tab]').forEach(item => item.setAttribute('aria-pressed', String(item.dataset.tab === tab)));
+  void refreshRequestCount();
   load();
 }
 async function googleCredential(response) {
@@ -243,7 +256,8 @@ function renderRecurringOrders(orders) {
       <p class="admin-muted">Проверьте доступность, текущую цену и доставку, затем свяжитесь с покупателем. Оплата только после его согласия</p>
       <button type="button" data-recurring-reviewed="${escape(order.id)}">Проверка проведена</button></article>`).join('') : '<p class="admin-card">Планов для проверки пока нет</p>'}`;
 }
-const cartStageLabel = { cart: 'Корзина', checkout: 'Контакты и доставка',
+const cartStageLabel = { cart: 'Просмотр сайта · открытие корзины не подтверждено',
+  cart_opened: 'Открыл корзину', checkout: 'Контакты и доставка',
   review: 'Проверка заказа', payment: 'Переход к оплате' };
 const cartTime = value => new Date(value).toLocaleString('ru-RU', {
   timeZone: 'Europe/Madrid', day: '2-digit', month: '2-digit', year: 'numeric',
@@ -260,8 +274,8 @@ function observedCartCard(cart) {
     <div class="admin-variant-top"><div><h2>Сеанс ${escape(cart.id.slice(0, 8))}</h2>
       <p class="admin-muted">${escape(status)}</p></div>
       <strong>${escape(cartTime(cart.updated_at))}</strong></div>
-    <div class="admin-grid">${cart.has_paid_order ? `<div><strong>Результат</strong>Оплачен</div>` : `<div><strong>Текущий этап</strong>${escape(cartStageLabel[cart.current_stage] || cart.current_stage)}</div>
-      <div><strong>Дошёл до</strong>${escape(cartStageLabel[cart.furthest_stage] || cart.furthest_stage)}</div>`}
+    <div class="admin-grid">${cart.has_paid_order ? `<div><strong>Результат</strong>Оплачен</div>` : `<div><strong>Последнее действие</strong>${escape(cartStageLabel[cart.current_stage] || cart.current_stage)}</div>
+      <div><strong>Самый поздний этап</strong>${escape(cartStageLabel[cart.furthest_stage] || cart.furthest_stage)}</div>`}
       <div><strong>Первое наблюдение</strong>${escape(cartTime(cart.created_at))}</div>
       ${cart.order_number ? `<div><strong>Заказ</strong>${escape(cart.order_number)}</div>` : ''}</div>
     ${cart.has_paid_order ? `<h3>Купили</h3><ul class="admin-items">${purchasedItems.map(item => `<li>${escape(item.name)}${item.variant_label ? ` · ${escape(item.variant_label)}` : ''} · ${Number(item.quantity)} шт</li>`).join('') || '<li>Позиции заказа не найдены</li>'}</ul>` : ''}
@@ -272,10 +286,10 @@ function observedCartCard(cart) {
 function renderObservedCarts(carts) {
   const active = carts.filter(cart => !cart.has_paid_order);
   const paid = carts.filter(cart => cart.has_paid_order);
-  $('admin-content').innerHTML = `<section class="observed-carts-head"><h2>Корзины без заказа</h2>
+  $('admin-content').innerHTML = `<section class="observed-carts-head"><h2>Действия до покупки</h2>
     <button type="button" data-carts-refresh>Обновить</button></section>
-    <p class="admin-muted">Показаны последние 100 сеансов с согласием на аналитику. До заказа имя и контакты не собираются. Данные хранятся 30 дней</p>
-    ${active.length ? active.map(observedCartCard).join('') : '<p class="admin-card">Незавершённых корзин сейчас нет</p>'}
+    <p class="admin-muted">Показаны последние 100 сеансов с согласием на аналитику. Старые записи с этапом «Просмотр сайта» не подтверждают открытие корзины. История показывает только добавление товаров и этапы оформления. До заказа имя и контакты не собираются. Данные хранятся 30 дней</p>
+    ${active.length ? active.map(observedCartCard).join('') : '<p class="admin-card">Действий до покупки сейчас нет</p>'}
     ${paid.length ? `<details class="admin-card admin-paid-carts"><summary>Оплаченные корзины · ${paid.length}${disclosureIcon}</summary>${paid.map(observedCartCard).join('')}</details>` : ''}`;
 }
 function renderCartEvents(events) {
@@ -296,13 +310,13 @@ function variantCard(variant) {
     <span class="admin-muted">${escape(variant.label)} · ${escape(variant.variant_id)}</span></div>
     <span>${price ? euros(price) : 'Без цены'}</span></div>
     <p class="admin-muted">Фактическая стоимость партии: ${verified ? `${euros(verified.total_cost_cents)} за ${verified.quantity} шт · ${escape(verified.document_ref)}` : 'Не связана с SKU'}${verified?.nominal_cost_cents === 1 ? ' · бонус: условная закупочная цена 0,01 €' : ''}</p>
-    <div class="stock-balance"><strong class="${position < 0 ? 'stock-shortage' : ''}">${position < 0 ? `Нужно приобрести ${-position} шт` : `Свободно после оплат ${position} шт`}</strong>
-      <span>Внесено в складской учёт: ${variant.stock_quantity ?? 0} шт · Оплачено, ещё не выдано: ${activePaid ? `−${activePaid}` : '0'} шт</span></div>
-    <details data-stock-id="${escape(variant.variant_id)}"><summary>Учесть поступление и посмотреть движения</summary><div class="stock-content">Загружаю</div></details>
-    <details class="stock-settings"><summary>Настройки SKU</summary><form data-variant-id="${escape(variant.variant_id)}"><label>Цена продажи, €<input type="number" name="priceEuros" min="0.01" step="0.01" value="${variant.price_override_cents === null || variant.price_override_cents === undefined ? '' : (variant.price_override_cents / 100).toFixed(2)}" placeholder="Исходная: ${variant.source_price_cents === null || variant.source_price_cents === undefined ? '-' : (variant.source_price_cents / 100).toFixed(2)}"></label>
+    <div class="stock-balance"><strong class="${position < 0 ? 'stock-shortage' : ''}">${position < 0 ? `Купить для заказов: ${-position} шт` : `Можно продать со склада: ${position} шт`}</strong>
+      <span>Физически есть: ${variant.stock_quantity ?? 0} шт · Оплачено, ещё не выдано: ${activePaid} шт</span></div>
+    <details data-stock-id="${escape(variant.variant_id)}"><summary>Поступление и история склада</summary><div class="stock-content">Загружаю</div></details>
+    <details class="stock-settings"><summary>Настройки SKU · для агентов</summary><form data-variant-id="${escape(variant.variant_id)}"><label>Цена продажи, €<input type="number" name="priceEuros" min="0.01" step="0.01" value="${variant.price_override_cents === null || variant.price_override_cents === undefined ? '' : (variant.price_override_cents / 100).toFixed(2)}" placeholder="Исходная: ${variant.source_price_cents === null || variant.source_price_cents === undefined ? '-' : (variant.source_price_cents / 100).toFixed(2)}"></label>
     <label>Закупочная цена, €<input type="number" name="purchasePriceEuros" min="0" step="0.01" value="${variant.purchase_price_cents === null || variant.purchase_price_cents === undefined ? '' : (variant.purchase_price_cents / 100).toFixed(2)}"></label>
-    <label>Доступность<select name="availability">${['source_on_demand','on_hand','unavailable'].map(mode =>
-      `<option value="${mode}" ${mode === variant.availability ? 'selected' : ''}>${({source_on_demand:'Покупаем под заказ',on_hand:'У нас на складе',unavailable:'Недоступен'})[mode]}</option>`).join('')}</select></label>
+    <label>Способ учёта<select name="availability">${['source_on_demand','on_hand','unavailable'].map(mode =>
+      `<option value="${mode}" ${mode === variant.availability ? 'selected' : ''}>${({source_on_demand:'Закупаем после заказа',on_hand:'Учитываем на своём складе',unavailable:'Недоступен'})[mode]}</option>`).join('')}</select></label>
     <label>Фактически на складе<input type="number" name="stockQuantity" min="0" value="${variant.stock_quantity ?? ''}"></label>
     <label>Порог закупки, шт<input type="number" name="reorderPoint" min="0" max="99998" required value="${variant.reorder_point ?? 2}"></label>
     <label>Целевой запас, шт<input type="number" name="targetStock" min="1" max="99999" required value="${variant.target_stock ?? 6}"></label>
@@ -455,7 +469,6 @@ function renderVariantList() {
   const needle = variantSearch.toLocaleLowerCase('ru');
   const matching = variantRows.filter(item => {
     if (!`${item.name} ${item.brand} ${item.label} ${item.variant_id}`.toLocaleLowerCase('ru').includes(needle)) return false;
-    if (needle) return true;
     return stockView === 'all' || stockView === 'shortage' && item.stock_position < 0 ||
       stockView === 'on_hand' && (item.stock_quantity ?? 0) > 0;
   });
@@ -465,8 +478,8 @@ function renderVariantList() {
 function renderVariants() {
   const physicallyListed = variantRows.filter(item => (item.stock_quantity ?? 0) > 0).length;
   const shortages = variantRows.filter(item => item.stock_position < 0).length;
-  $('admin-content').innerHTML = `<section class="admin-card"><h2>Склад</h2><p class="admin-muted">Свободно - после оплаченных заказов. Число внесённых единиц зависит от сверки поставок и коробок</p>
-    <div class="stock-filters" role="group" aria-label="Показать товары"><button type="button" data-stock-view="on_hand" aria-pressed="${stockView === 'on_hand'}">Учтено на складе · ${physicallyListed}</button><button type="button" data-stock-view="shortage" aria-pressed="${stockView === 'shortage'}">Нужно приобрести · ${shortages}</button><button type="button" data-stock-view="all" aria-pressed="${stockView === 'all'}">Все SKU</button></div></section>
+  $('admin-content').innerHTML = `<section class="admin-card"><h2>Склад</h2><p class="admin-muted">Физически есть - сколько единиц у нас сейчас. Можно продать со склада - остаток после уже оплаченных заказов. Товар без остатка остаётся доступным к заказу, если его продажа разрешена</p>
+    <div class="stock-filters" role="group" aria-label="Показать товары"><button type="button" data-stock-view="on_hand" aria-pressed="${stockView === 'on_hand'}">Физически есть · ${physicallyListed}</button><button type="button" data-stock-view="shortage" aria-pressed="${stockView === 'shortage'}">Купить для заказов · ${shortages}</button><button type="button" data-stock-view="all" aria-pressed="${stockView === 'all'}">Все SKU</button></div></section>
     <details class="admin-card"><summary>Загрузить подтверждённую стоимость партии</summary><p class="admin-muted">Суммы с IVA, recargo, доставкой и комиссией записываются отдельно от тарифа. Количество на складе не меняется. Перед записью проверяется точное количество каждого SKU</p><form data-verified-purchase-costs><label>Файл JSON со строками партии<input name="costFile" type="file" accept="application/json,.json"></label><label>Или вставьте JSON<textarea name="items" rows="5" placeholder='[{"variantId":"...","documentRef":"...","quantity":1,"totalCostCents":1000}]'></textarea></label><button type="submit">Сохранить стоимость</button></form></details>
     <div class="audit-toolbar"><label>Найти товар<input id="admin-variant-search" value="${escape(variantSearch)}" placeholder="Название, бренд или артикул"></label><span id="admin-variant-count"></span></div><div id="admin-variant-list"></div>`;
   renderVariantList();
@@ -486,19 +499,19 @@ function customerCard(customer) {
 async function loadCustomers() {
   const serial = ++customerLoadSerial;
   if (!$('customer-list')) $('admin-content').innerHTML = `<div class="audit-toolbar customer-toolbar">
-    <label>Найти покупателя<input id="customer-search" value="${escape(customerSearch)}" placeholder="Имя, email или телефон" autocomplete="off"></label>
+    <label>Найти аккаунт<input id="customer-search" value="${escape(customerSearch)}" placeholder="Имя, email или телефон" autocomplete="off"></label>
     <span id="customer-count"></span></div><div id="customer-list"></div><div id="customer-pages" class="customer-pages"></div>`;
   $('customer-count').textContent = 'Загружаю';
   const params = new URLSearchParams({ q: customerSearch, page: String(customerPage) });
   const data = await api(`/api/admin/customers?${params}`);
   if (serial !== customerLoadSerial || tab !== 'customers') return;
   $('customer-list').innerHTML = data.customers.length ? data.customers.map(customerCard).join('')
-    : '<p class="admin-muted">Покупатели не найдены</p>';
+    : '<p class="admin-muted">Аккаунты не найдены</p>';
   $('customer-count').textContent = `Показано: ${data.customers.length}`;
   $('customer-pages').innerHTML = `<button type="button" data-customer-page="${customerPage - 1}" ${customerPage === 0 ? 'disabled' : ''}>Назад</button>
     <span>Страница ${customerPage + 1}</span>
     <button type="button" data-customer-page="${customerPage + 1}" ${data.hasMore ? '' : 'disabled'}>Дальше</button>`;
-  message('Покупатели и их заказы');
+  message('Зарегистрированные аккаунты · наличие аккаунта не означает покупку');
 }
 async function loadCustomerDetail(details) {
   const host = details.querySelector('.customer-detail');
@@ -915,13 +928,13 @@ function renderBrands() {
   renderBrandRows();
 }
 function renderReplenishment(variants, customerDemand = []) {
-  $('admin-content').innerHTML = `<section class="admin-card"><h2>Товары к закупке</h2>
-    <p class="admin-muted">Здесь отдельно показаны оплаченные клиентские заказы, которые нужно комплектовать, и пополнение своего склада. Заказ поставщику автоматически не отправляется</p></section>
-    <section class="admin-card"><h2>Нужно получить для заказов</h2>
+  $('admin-content').innerHTML = `<section class="admin-card"><h2>Нужно для оплаченных заказов</h2>
+    <p class="admin-muted">Здесь показаны только товары, которых не хватает для уже оплаченных заказов. Закупка у поставщика не оформляется автоматически</p></section>
+    <section class="admin-card"><h2>Что купить для заказов</h2>
       ${customerDemand.length ? `<ul class="admin-items">${customerDemand.map(row => `<li><strong>${escape(row.name || row.variant_id)} · ${escape(row.label || '')}</strong>
-        - ${row.quantity} шт в открытых заказах · ${escape(row.order_numbers)} · Физически ${row.physical_stock} шт · Нужно покрыть ${-row.stock_position} шт · Позиция ${row.stock_position} шт</li>`).join('')}</ul>` : '<p>Нет дефицита по оплаченным заказам</p>'}</section>
-    <section class="admin-card"><h2>Пополнение своего склада</h2>
-      <p class="admin-muted">Количество рассчитано до целевого запаса и минимальной партии поставщика</p></section>
+        - Купить ${-row.stock_position} шт · ${escape(row.order_numbers)} · Сейчас физически ${row.physical_stock} шт</li>`).join('')}</ul>` : '<p>Ничего докупать для оплаченных заказов сейчас не нужно</p>'}</section>
+    <details class="admin-card replenishment-optional"><summary>Необязательное пополнение склада · ${variants.length} SKU${disclosureIcon}</summary>
+      <p class="admin-muted">Это автоматические предложения до целевого остатка, а не клиентские заказы. Решение о закупке принимаете вы</p>
     ${variants.length ? `<div class="replenishment-list">${variants.map(row => `<article class="admin-card replenishment-row">
       <div><h2>${escape(row.name)}</h2><p class="admin-muted">${escape(row.brand || '')} · ${escape(row.label)} · ${escape(row.variant_id)}</p></div>
       <div><strong>${row.available_quantity} доступно</strong><small>На складе ${row.stock_quantity ?? 0} · Резерв ${row.reserved_quantity} · Порог ${row.reorder_point}</small>
@@ -930,7 +943,7 @@ function renderReplenishment(variants, customerDemand = []) {
       <div class="replenishment-actions"><button type="button" data-audit-variant="${escape(row.variant_id)}">Открыть SKU</button>
         ${row.suggested_quantity > 0 && row.supplier_id && row.cost_cents !== null ? `<button type="button" data-plan-variant="${escape(row.variant_id)}"
           data-plan-supplier="${escape(row.supplier_id)}" data-plan-quantity="${row.suggested_quantity}">В заявку</button>` : ''}</div>
-    </article>`).join('')}</div>` : '<p class="admin-card">Сейчас нет товаров с малым остатком</p>'}`;
+    </article>`).join('')}</div>` : '<p>Предложений по пополнению сейчас нет</p>'}</details>`;
 }
 function purchaseStatusLabel(status) {
   return ({ draft:'Черновик',ordered:'Заказано',partially_received:'Частично получено',
@@ -1267,7 +1280,6 @@ const salePaymentLabel = channel => ({ Stripe: 'Stripe', cash: 'Наличные
   privatbank_ua: 'PrivatBank', uah_card_transfer: 'Перевод гривны на карту',
   bank_transfer: 'Банковский перевод' })[channel] || channel || 'Не указан';
 function renderOverview(data, recurringDue = [], salesDashboard = { totals: {}, sales: [] }) {
-  const { catalog, orders, requests, topPaidSkus, purchases, coverage = [], customers = {} } = data;
   const realRecurringDue = recurringDue.filter(plan => !plan.isTest).length;
   const { totals = {}, sales = [], personalExpenses = [] } = salesDashboard;
   const margin = totals.cashResultCents !== null && totals.receivedCents > 0
@@ -1313,33 +1325,7 @@ function renderOverview(data, recurringDue = [], salesDashboard = { totals: {}, 
       <details class="sales-home-add-cost"><summary>Добавить фактически оплаченный расход</summary><form data-sale-expense="${escape(sale.kind)}" data-sale-id="${escape(sale.id)}"><label>Что оплачено<input name="description" required maxlength="140" placeholder="Например, такси до клиента"></label><label>Категория<select name="kind"><option value="delivery">Доставка</option><option value="other">Другое</option></select></label><label>Сумма, €<input name="amountEuros" type="number" min="0.01" max="10000" step="0.01" required></label><button type="submit">Записать расход</button></form></details>
       ${sale.kind === 'site' && sale.status !== 'delivered' ? '<p class="admin-muted">Передача покупателю в системе не отмечена</p>' : ''}
       </div></details>`).join('') : '<p class="admin-card">Оплаченных покупок пока нет</p>'}</div></section>
-    <details class="admin-card sales-home-secondary"><summary>Операционные разделы и каталог${disclosureIcon}</summary><section><h2>Работа магазина</h2>
-    <div class="overview-actions"><button type="button" data-go-tab="orders">Заказы</button>
-    <button type="button" data-go-tab="replenishment">Что нужно получить</button>
-    <button type="button" data-go-tab="requests">Обращения</button>
-    <button type="button" data-go-tab="customers">Покупатели</button>
-    <button type="button" data-go-tab="finance">Финансы</button></div></section>
-    <section class="admin-card"><h2>Повторные покупки к проверке</h2><p class="admin-muted">${realRecurringDue ? `${realRecurringDue} ${countNoun(realRecurringDue,'план','плана','планов')} скоро потребуют проверки товаров, цены и доставки` : 'Сейчас реальных планов для проверки нет'}</p><button type="button" data-go-tab="recurring">Открыть регулярные заказы</button></section>
-    <details class="admin-card admin-operations-review"><summary>Ревизия каталога · ${catalog.total} SKU${disclosureIcon}</summary>
-    <p class="admin-muted">Прайс или бренд в исходных данных и закреплённый поставщик для закупки - разные связи. Показатели ниже помогают проверить данные каталога, но сами по себе не означают запрет продажи</p>
-    <div class="audit-overview overview-grid">
-      <div><strong>${catalog.unconfirmed_prices}</strong><span>Цен проверить</span></div>
-      <div><strong>${catalog.missing_costs}</strong><span>Без закупочной цены</span></div>
-      <div><strong>${catalog.missing_tax_rates}</strong><span>Без ставки IVA</span></div>
-      <div><strong>${catalog.missing_suppliers}</strong><span>Без закреплённого поставщика</span></div>
-      <div><strong>${catalog.low_stock}</strong><span>Мало товара на складе</span></div>
-      <div><strong>${purchases.open_purchase_orders}</strong><span>Заявок поставщикам в работе</span></div>
-    </div><div class="overview-actions"><button type="button" data-go-tab="audit">Ревизия SKU</button>
-      <button type="button" data-go-tab="products">Продукция</button>
-      <button type="button" data-go-tab="purchases">Закупки</button></div></details>
-    <section class="admin-card"><h2>Ассортимент по категориям</h2>
-      <div class="coverage-list">${coverage.map(item => `<button type="button" data-coverage-category="${escape(item.category)}" data-coverage-pet="${escape(item.pet)}"><strong>${escape(item.pet === 'cat' ? 'Кошки' : item.pet === 'dog' ? 'Собаки' : 'Оба')} · ${escape(item.category)}</strong>
-        <span>${item.products} товаров · ${item.variants} SKU</span>
-        <small>${item.unconfirmed_prices} цен проверить · ${item.missing_suppliers} без закреплённого поставщика</small></button>`).join('') || '<p class="admin-muted">Действующих товаров пока нет</p>'}</div></section>
-    <section class="admin-card"><h2>Проданные товары сайта</h2>
-      ${topPaidSkus.length ? `<ol class="overview-top">${topPaidSkus.map(item => `<li>${escape(item.name)}
-        <span>${escape(item.variant_id)} · ${item.quantity} шт</span></li>`).join('')}</ol>` :
-        '<p class="admin-muted">Оплаченных заказов сайта пока нет</p>'}</section></details>`;
+    ${realRecurringDue ? `<div class="sales-home-alert"><strong>Регулярные заказы к проверке: ${realRecurringDue}</strong><button type="button" data-go-tab="recurring">Открыть</button></div>` : ''}`;
 }
 async function load() {
   message('Загружаю данные');
@@ -1349,13 +1335,14 @@ async function load() {
         api('/api/admin/overview'), api('/api/admin/recurring-orders'),
         api('/api/admin/sales-dashboard')]);
       renderOverview(overview, recurring.orders, salesDashboard);
+      showRequestCount(overview.requests?.new_requests || 0);
       message('Сводка магазина');
       return;
     }
     if (tab === 'carts') {
       const carts = (await api('/api/admin/carts')).carts;
       renderObservedCarts(carts);
-      message(`Посетителей с согласием: ${carts.length}`);
+      message(`Сеансов с согласием: ${carts.length}`);
       return;
     }
     if (tab === 'audit') {
@@ -1412,7 +1399,7 @@ async function load() {
     if (tab === 'replenishment') {
       const { variants, customerDemand } = await api('/api/admin/replenishment');
       renderReplenishment(variants, customerDemand);
-      message(`К получению для заказов: ${customerDemand.length} SKU · Пополнение: ${variants.length}`);
+      message(`Нужно для оплаченных заказов: ${customerDemand.length} SKU`);
       return;
     }
     if (tab === 'purchases') {
@@ -1448,7 +1435,7 @@ async function load() {
       variantRows = result.variants;
       suppliers = supplierData.suppliers;
       renderVariants();
-      message(`На складе: ${variantRows.filter(item => (item.stock_quantity ?? 0) > 0).length} SKU · Дефицит: ${variantRows.filter(item => item.stock_position < 0).length} SKU`);
+      message(`Физически есть: ${variantRows.filter(item => (item.stock_quantity ?? 0) > 0).length} SKU · Купить для заказов: ${variantRows.filter(item => item.stock_position < 0).length} SKU`);
       return;
     }
     const [result, external] = await Promise.all([
@@ -1467,6 +1454,7 @@ $('admin-lock').addEventListener('click', async () => {
 });
 setupLogin();
 setInterval(() => {
+  if (activeRole && !document.hidden) void refreshRequestCount();
   if (tab === 'overview' && activeRole === 'admin' && !document.hidden) { void load(); return; }
   if (tab === 'carts' && activeRole === 'admin' && !document.hidden &&
       !document.querySelector('.observed-cart-history:not([hidden])')) void load();
@@ -2262,6 +2250,8 @@ $('admin-content').addEventListener('submit', async event => {
       priceConfirmed: values.has('priceConfirmed')
     });
     await load();
+    if (form.dataset.requestId || form.dataset.replyId || form.dataset.urgentOffer)
+      void refreshRequestCount();
     if (form.dataset.salePrice) {
       const selected = [...document.querySelectorAll('[data-catalog-sku]')]
         .find(item => item.dataset.catalogSku === form.dataset.salePrice);
