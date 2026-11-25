@@ -12,7 +12,7 @@ const families = seoProducts.map(product => ({
   indexable: product.indexable,
   copyEvidence: editorial.has(product.id) ? 'three-language-editorial'
     : stock.has(product.id) ? 'specific-spanish-seo'
-      : wave2.has(product.id) ? 'wave2-specific-spanish-seo'
+      : wave2.has(product.id) ? 'three-language-wave2'
         : 'needs-copy-audit'
 }));
 
@@ -23,7 +23,7 @@ const result = {
     noindex: families.filter(item => !item.indexable).length,
     threeLanguageEditorial: families.filter(item => item.copyEvidence === 'three-language-editorial').length,
     specificSpanishSeo: families.filter(item => item.copyEvidence === 'specific-spanish-seo').length,
-    wave2SpecificSpanishSeo: families.filter(item => item.copyEvidence === 'wave2-specific-spanish-seo').length,
+    threeLanguageWave2: families.filter(item => item.copyEvidence === 'three-language-wave2').length,
     needsCopyAudit: families.filter(item => item.copyEvidence === 'needs-copy-audit').length
   }
 };
