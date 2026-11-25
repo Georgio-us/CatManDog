@@ -65,17 +65,21 @@ if (process.argv.includes('--live') || catalogFileIndex !== -1) {
       const reasons = [];
       if (!variant.availableForCart) reasons.push('not-orderable');
       if (!variant.price_accepted || !(variant.priceCents > 0)) reasons.push('retail-price-not-accepted');
-      if (!variant.source_orderable && !variant.pickupAvailable) reasons.push('no-orderable-source-or-physical-stock');
       if (!variant.image_path) reasons.push('no-main-image');
       return reasons.map(reason => ({ variantId: variant.variant_id, reason }));
     });
+    // Supplier sourcing and the physical pickup stock are operational facts. An
+    // orderable, priced item may be acquired after purchase; these flags do not
+    // independently determine whether its public page can be indexed.
+    const sourceWarnings = variants.filter(variant => !variant.source_orderable && !variant.pickupAvailable)
+      .map(variant => variant.variant_id);
     const copyIssue = knownCopyMismatches.get(item.id) || null;
     const textNeedsReview = copyIssue || !['three-language-editorial', 'three-language-wave2'].includes(item.copyEvidence);
     const gate = !variants.length ? 'missing-live-variants'
       : blockers.length ? 'commercial-review'
         : textNeedsReview ? 'three-language-copy-review'
           : 'passes-recorded-gates';
-    return { ...item, name: item.name === item.id ? variants[0]?.name || item.name : item.name, gate, blockers, copyIssue };
+    return { ...item, name: item.name === item.id ? variants[0]?.name || item.name : item.name, gate, blockers, sourceWarnings, copyIssue };
   });
   const summarize = indexable => Object.fromEntries(
     ['missing-live-variants', 'commercial-review', 'three-language-copy-review', 'passes-recorded-gates']
@@ -92,6 +96,8 @@ if (process.argv.includes('--live') || catalogFileIndex !== -1) {
       && (row.source_orderable || row.pickupAvailable) && row.price_accepted && row.priceCents > 0 && row.image_path)),
     noindexReasons: summarize(false),
     indexableAudit: summarize(true),
+    indexableSourceWarningFamilies: assessed.filter(item => item.indexable && item.sourceWarnings.length).length,
+    noindexSourceWarningFamilies: assessed.filter(item => !item.indexable && item.sourceWarnings.length).length,
     noindexReadyIds: assessed.filter(item => !item.indexable && item.gate === 'passes-recorded-gates').map(item => item.id)
   };
   if (process.argv.includes('--details')) result.families = assessed;

@@ -1,11 +1,11 @@
 import { es, esPatterns } from './locales/es.js?v=store-search-20261125';
 import { esProductText } from './locales/product-es.js?v=litter-photos-20261121';
-import { esDetails } from './locales/details-es.js?v=litter-photos-20261121';
+import { esDetails } from './locales/details-es.js?v=open-seo-audit-20261125';
 import { uk, ukPatterns } from './locales/uk.js?v=store-search-20261125';
 import { ukExtra } from './locales/uk-extra.js?v=delivery-regions-20261122';
-import { ukProductNames } from './locales/uk-product-names.js?v=royal-canin-20261125';
+import { ukProductNames } from './locales/uk-product-names.js?v=open-seo-audit-20261125';
 import { ukProductCopy } from './locales/uk-product-copy.js?v=litter-photos-20261121';
-import { ukDetails } from './locales/uk-details.js?v=litter-photos-20261121';
+import { ukDetails } from './locales/uk-details.js?v=open-seo-audit-20261125';
 import { churuFormatsEs, churuFormatsUk } from './locales/churu-formats.js';
 import { churuDogEs, churuDogUk } from './locales/churu-dog.js';
 import { seoCategoryForPath } from './seo-categories.js';
@@ -15,7 +15,7 @@ import { yaguExpansionEs, yaguExpansionUk } from './locales/yagu-expansion.js?v=
 import { yaguToyExpansionEs, yaguToyExpansionUk } from './locales/yagu-toy-expansion.js';
 import { yaguBasketEs, yaguBasketUk } from './locales/yagu-basket.js?v=language-routes-20261120';
 import { yaguChewTestEs, yaguChewTestUk } from './locales/yagu-chew-test.js?v=20261113';
-import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=royal-canin-order-20261125';
+import { editorialEs, editorialUk } from './locales/editorial-translations.js?v=open-seo-audit-20261125';
 import { shellTranslations } from './shell-translations.js?v=language-routes-20261120';
 import { checkoutLaunchEs, checkoutLaunchUk } from './locales/checkout-launch.js?v=language-routes-3-20261120';
 import { recurringEs, recurringUk, recurringPatternsEs, recurringPatternsUk } from './locales/recurring.js';

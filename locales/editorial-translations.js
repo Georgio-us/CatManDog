@@ -1,4 +1,5 @@
-import { catalogEditorialContent } from '../catalog-editorial-content.js';
+import { catalogEditorialContent } from '../catalog-editorial-content.js?v=open-seo-audit-20261125';
+import { catalogEditorialOpenAudit } from '../catalog-editorial-open-audit.js';
 import { catalogEditorialNextNames } from '../catalog-editorial-next.js';
 
 // Translations of verified catalog copy. Match the server's exact source text so
@@ -126,6 +127,8 @@ const pairs = [
     [copy.description, [copy.esDescription, copy.ukDescription]],
     ...copy.details.map((detail, index) => [detail, [copy.esDetails[index], copy.ukDetails[index]]])
   ]),
+  ...Object.values(catalogEditorialOpenAudit).map(copy => [copy.previousDescription,
+    [copy.esDescription, copy.ukDescription]]),
   ...Object.entries(descriptionByProduct).map(([id, values]) => [catalogEditorialContent[id].description, values]),
   ...Object.entries(detailCopy),
   ['Беззерновой сухой корм с птицей для взрослых кошек Амарант заменяет злаки в повседневной рецептуре', [

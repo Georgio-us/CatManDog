@@ -139,7 +139,7 @@ export const ukProductNames = {
   "Royal Canin Kitten Sterilised - желе": "Royal Canin Kitten Sterilised - желе",
   "Royal Canin Kitten - желе": "Royal Canin Kitten - у желе",
   "Royal Canin Kitten - паштет": "Royal Canin Kitten - паштет",
-  "Royal Canin Kitten - соус": "Royal Canin Kitten - соус",
+  "Royal Canin Kitten - соус": "Royal Canin Kitten - у соусі",
   "Royal Canin Maine Coon Adult - соус": "Royal Canin Maine Coon Adult - соус",
   "Royal Canin Mature Consult Balance - паштет": "Royal Canin Mature Consult Balance - паштет",
   "Hill’s Science Plan Sterilised Young Adult Salmon - в соусе": "Hill’s Science Plan Sterilised Young Adult Salmon - у соусі",

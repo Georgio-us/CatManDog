@@ -16,6 +16,7 @@ import { catalogEditorialChuruDog } from '../catalog-editorial-churu-dog.js';
 import { catalogEditorialAcanaWet } from '../catalog-editorial-acana-wet.js';
 import { catalogEditorialChuruCat } from '../catalog-editorial-churu-cat.js';
 import { catalogEditorialNext } from '../catalog-editorial-next.js';
+import { catalogEditorialOpenAudit } from '../catalog-editorial-open-audit.js';
 import { accessoryDetail } from '../accessory-ui.js';
 
 test('the sitemap contains only released public pages with Spanish editorial content', async () => {
@@ -105,12 +106,15 @@ test('the verified product release has unique Spanish source content and crawlab
   const released = seoProducts.filter(product => product.indexable);
   assert.equal(released.length, 183);
   const descriptions = new Set();
+  const titles = new Set();
   for (const product of released) {
     if (!catalogProducts.some(item => item.id === product.id)) continue;
     const html = await seoDocument(product.path);
     const title = html.match(/<h1>([^<]+)<\/h1>/u)?.[1];
     const description = html.match(/<meta name="description" content="([^"]+)">/u)?.[1];
     assert.ok(title && description, product.path);
+    assert.equal(titles.has(title.toLocaleLowerCase('es')), false, product.path);
+    titles.add(title.toLocaleLowerCase('es'));
     assert.doesNotMatch(title + description, /[А-Яа-яЁё]/u, product.path);
     assert.match(html, /<img src="[^"]+" alt="[^"]+" width="640" height="640">/u, product.path);
     assert.doesNotMatch(html, /<meta name="robots" content="noindex/u, product.path);
@@ -125,10 +129,10 @@ test('released editorial products serve the same verified Spanish copy as the st
   const editorial = { ...catalogEditorialCats, ...catalogEditorialDogs,
     ...catalogEditorialRoyalCanin, ...catalogEditorialLeonardo, ...catalogEditorialHeld,
     ...catalogEditorialChuruDog, ...catalogEditorialAcanaWet, ...catalogEditorialChuruCat,
-    ...catalogEditorialNext };
+    ...catalogEditorialNext, ...catalogEditorialOpenAudit };
   const releasedEditorial = Object.entries(editorial)
     .filter(([id]) => seoProducts.some(product => product.id === id && product.indexable));
-  assert.equal(releasedEditorial.length, 97);
+  assert.equal(releasedEditorial.length, 100);
   for (const [id, copy] of releasedEditorial) {
     const path = productHref(id);
     const html = await seoDocument(path);

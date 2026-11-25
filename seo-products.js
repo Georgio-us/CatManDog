@@ -1,8 +1,8 @@
 import { seoProductSlugs } from './seo-product-slugs.js?v=acana-pacifica-route-20261125';
-import { stockSeoCopy } from './stock-seo-copy.js';
+import { stockSeoCopy } from './stock-seo-copy.js?v=open-seo-audit-20261125';
 import { seoWave2Copy } from './seo-wave2-copy.js';
 
-// Each released family passed the current catalog, price, source, copy and image audit.
+// Explicit SEO release list. The live catalog and page checks are audited separately.
 // Keep this list explicit: a newly imported product must not become indexable by accident.
 const releasedByCategory = {
   '/catalogo': [

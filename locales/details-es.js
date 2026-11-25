@@ -293,5 +293,9 @@ export const esDetails = {
   'Подарочная упаковка и открытка включены; оформление набора пока недоступно': 'Envoltorio de regalo y tarjeta incluidos; el pedido del set aún no está disponible',
   'Выбор из трёх игрушек и трёх видов лакомств': 'Elige entre tres juguetes y tres tipos de premios',
   'Бандана Birthday Star - по желанию': 'Bandana Birthday Star opcional',
+  '75% ингредиентов животного происхождения по упаковке поставщика': '75 % de ingredientes de origen animal según el envase del proveedor',
+  '12 закрытых пачек по 4 тюбика': '12 paquetes cerrados de 4 tubos',
+  'Аккумулятор 4000 мА·ч': 'Batería de 4000 mAh',
+  'Режим по датчику движения, по таймеру или непрерывный': 'Modo con sensor de movimiento, temporizador o funcionamiento continuo',
   'Подарочная коробка и открытка - 5,60 €; итог зависит от выбранного состава': 'Caja regalo y tarjeta: 5,60 €. El total depende del contenido elegido',
 };
