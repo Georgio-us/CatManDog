@@ -1,10 +1,13 @@
 import { readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { catalogEditorialContent } from '../catalog-editorial-content.js';
+import { catsAtelierProducts } from '../cats-atelier-products.js';
+import { atelierDescription } from '../atelier-description.js';
 import { editorialEs, editorialUk } from '../locales/editorial-translations.js';
 import { seoProducts } from '../seo-products.js';
 import { stockSeoCopy } from '../stock-seo-copy.js';
 import { seoWave2Copy } from '../seo-wave2-copy.js';
-import { seoVerdict, seoWorkScope } from './seo-verdict.mjs';
+import { editorialFingerprint, seoVerdict, seoWorkScope } from './seo-verdict.mjs';
 
 const args = process.argv.slice(2);
 const valueAfter = option => args.includes(option) ? args[args.indexOf(option) + 1] : undefined;
@@ -16,6 +19,8 @@ if (!args.includes('--live') && !catalogPath) {
   throw new Error('Укажи --live для текущего сайта или --catalog-file <снимок> для офлайн-проверки');
 }
 const reviews = JSON.parse(await readFile(new URL('../seo-review-records.json', import.meta.url), 'utf8'));
+const atelierEvidence = JSON.parse(await readFile(new URL('../atelier-seo-evidence.json', import.meta.url), 'utf8'));
+const atelierProducts = new Map(catsAtelierProducts.map(product => [product.id, product]));
 const issues = new Map([
   ['cmd-source-694e05cdc1b2582c', 'SEO-текст описывает коробку 20 тюбиков, а семья продаёт также отдельные тюбики']
 ]);
@@ -116,18 +121,50 @@ if (args.includes('--live')) {
 const products = targetId ? seoProducts.filter(product => product.id === targetId) : seoProducts;
 if (targetId && !products.length) throw new Error(`Неизвестный ID товара: ${targetId}`);
 const rows = products.map(product => {
-  const copy = catalogEditorialContent[product.id];
+  const atelierProduct = atelierProducts.get(product.id);
+  const atelierRecord = atelierEvidence.records[product.id];
+  const atelierText = atelierProduct && Object.fromEntries(['ru', 'es', 'uk']
+    .map(language => [language, atelierDescription(atelierProduct, language)]));
+  const atelierCopy = atelierText && {
+    source: 'https://catsatelier.com/en/', description: atelierText.ru.summary,
+    details: [atelierText.ru.summary, ...atelierText.ru.paragraphs],
+    esDescription: atelierText.es.summary,
+    esDetails: [atelierText.es.summary, ...atelierText.es.paragraphs],
+    ukDescription: atelierText.uk.summary,
+    ukDetails: [atelierText.uk.summary, ...atelierText.uk.paragraphs]
+  };
+  const copy = atelierCopy || catalogEditorialContent[product.id];
   const check = checks.get(product.id);
   const technical = [...(check?.problems || [])];
+  const atelierCopyHash = atelierText && createHash('sha256')
+    .update(JSON.stringify(atelierText)).digest('hex');
+  const atelierIssue = atelierProduct && (!atelierRecord
+    ? 'Нет предметной записи Cat’s Atelier'
+    : atelierRecord.sku !== atelierProduct.manufacturerSku || atelierRecord.ean !== atelierProduct.ean
+      ? 'Артикул или EAN отличаются от проверенного источника'
+      : atelierRecord.publishedImageUrl !== atelierProduct.image?.src
+        ? 'Основное фото изменилось после проверки поставщика' : null);
+  const atelierReview = atelierRecord && atelierCopy && {
+    productId: product.id, reviewedAt: atelierRecord.reviewedAt,
+    sourceUrl: atelierCopy.source, saleUnit: atelierRecord.saleUnit,
+    variantIds: [product.id],
+    editorialSha256: atelierCopyHash === atelierRecord.copySha256
+      ? editorialFingerprint(atelierCopy) : atelierRecord.copySha256,
+    imageIdentityVerified: true, imageEvidenceUrl: atelierRecord.sourceImageUrl,
+    imagePaths: { [product.id]: atelierRecord.publishedImageUrl },
+    note: `Источник текста - официальная выгрузка Cat’s Atelier от 18.11.2026, SHA-256 ${atelierEvidence.sourceCsvSha256}`
+  };
   const url = `${origin}${product.path}`;
   if (!product.indexable && sitemap?.includes(`<loc>${url}</loc>`)) technical.push('закрытый URL попал в sitemap');
   const verdict = seoVerdict({ product, variants: variantsByProduct.get(product.id) || [], copy,
-    translations: copy ? { es: editorialEs[copy.description], uk: editorialUk[copy.description],
-      details: copy.details?.map(detail => ({ es: editorialEs[detail], uk: editorialUk[detail] })) } : null,
-    review: reviews[product.id], technical,
+    translations: atelierCopy ? { es: atelierCopy.esDescription, uk: atelierCopy.ukDescription,
+      details: atelierCopy.details.map((_, index) => ({ es: atelierCopy.esDetails[index], uk: atelierCopy.ukDetails[index] })) }
+      : copy ? { es: editorialEs[copy.description], uk: editorialUk[copy.description],
+        details: copy.details?.map(detail => ({ es: editorialEs[detail], uk: editorialUk[detail] })) } : null,
+    review: atelierReview || reviews[product.id], technical,
     liveChecked: Boolean(check && !check.unavailable && !sitemapUnavailable && !catalogUnavailable),
     liveUnavailable: check?.unavailable || sitemapUnavailable || catalogUnavailable,
-    catalogUnavailable, sitemapUnavailable, knownIssue: issues.get(product.id), catalogIsLive: !catalogPath,
+    catalogUnavailable, sitemapUnavailable, knownIssue: atelierIssue || issues.get(product.id), catalogIsLive: !catalogPath,
     priorCopy: stockSeoCopy[product.id] ? 'Предметный испанский SEO-текст: stock-seo-copy.js, проверка 22 ноября 2026'
       : seoWave2Copy[product.id] ? 'Предметный испанский SEO-текст: seo-wave2-copy.js, предыдущая проверка'
         : null });

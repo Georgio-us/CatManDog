@@ -15,5 +15,7 @@ test('all Cat’s Atelier server pages render Spanish search text before indexat
     assert.ok(title && description && heading, `${product.id}: missing search text`);
     assert.doesNotMatch(`${title} ${description} ${heading}`, /[А-Яа-яЁёІіЇїЄєҐґ]/u,
       `${product.id}: non-Spanish text in server metadata`);
+    assert.match(html, /<section aria-label="Detalles del producto">/u,
+      `${product.id}: missing full product copy in server response`);
   }
 });

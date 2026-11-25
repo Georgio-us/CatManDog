@@ -27,7 +27,20 @@ const releasedByCategory = {
     'yagu-9235123', 'yagu-9235071',
     'yagu-9235038', 'yagu-9235044',
     'yagu-7552371', 'yagu-2170001', 'yagu-2170004',
-    'tc-5477267745', 'tc-b5a74b28d5'
+    'tc-5477267745', 'tc-b5a74b28d5',
+    'cats-atelier-sh-m-da100', 'cats-atelier-sh-w-a60',
+    'cats-atelier-st-mb-f', 'cats-atelier-sh-m-w95-sl',
+    'cats-atelier-sh-m-w75-sl', 'cats-atelier-sh-m-w75-ur',
+    'cats-atelier-sh-m-w95-ur', 'cats-atelier-sh-f-60',
+    'cats-atelier-sh-w-f75', 'cats-atelier-sh-w-f75-g',
+    'cats-atelier-sh-w-f60-g', 'cats-atelier-sh-m-a60',
+    'cats-atelier-sh-m-a75', 'cats-atelier-sh-m-a75-g',
+    'cats-atelier-sh-m-w75-sr', 'cats-atelier-sh-m-w95-ul',
+    'cats-atelier-sh-m-w75-ul', 'cats-atelier-sh-w-w95-ul',
+    'cats-atelier-sh-w-w95-ur', 'cats-atelier-sh-w-a60-g',
+    'cats-atelier-sh-m-a60-g', 'cats-atelier-sh-m-w95-sp',
+    'cats-atelier-st-wb-f', 'cats-atelier-rd-st',
+    'cats-atelier-sh-m-a95'
   ],
   '/catalogo/gatos/pienso-seco': [
     'rc-sterilised-senior', 'rc-maine-coon', 'rc-british',

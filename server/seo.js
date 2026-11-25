@@ -6,6 +6,7 @@ import { esProductText } from '../locales/product-es.js';
 import { esDetails } from '../locales/details-es.js';
 import { editorialEs } from '../locales/editorial-translations.js';
 import { catsAtelierEs } from '../locales/cats-atelier.js';
+import { atelierDescription } from '../atelier-description.js';
 import { churuDogEs } from '../locales/churu-dog.js';
 import { yaguExpansionEs } from '../locales/yagu-expansion.js';
 import { yaguToyExpansionEs } from '../locales/yagu-toy-expansion.js';
@@ -109,6 +110,7 @@ async function pageData(pathname, rows = [], selectedVariantId = null) {
     const formats = (product.variants?.length ? orderedVariants(product).map(variant => variant.label) : product.sizes || [])
       .map(label => escapeHtml(label.replace(/ кг$/u, ' kg').replace(/ г$/u, ' g')));
     const description = productDescription(product, publishedProduct);
+    const atelierCopy = atelierDescription(product, 'es');
     const selected = stockRows.find(row => row.variant_id ===
       (selectedVariantId || defaultVariantId(product, stockRows)));
     const image = productImage(product, selected);
@@ -121,7 +123,7 @@ async function pageData(pathname, rows = [], selectedVariantId = null) {
     return {
       title: `${publishedProduct.title || name} | CatManDog`, description,
       robots: publishedProduct.indexable ? null : 'noindex,follow',
-      content: `<div class="page"><article class="editorial-article"><header class="editorial-header"><p class="editorial-kicker">${escapeHtml(product.brand || product.category || '')}</p><h1>${escapeHtml(name)}</h1><p class="editorial-deck">${escapeHtml(description)}</p></header><div class="editorial-body">${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(name)}" width="640" height="640">` : ''}${facts.length ? `<h2>Sobre el producto</h2><ul>${facts.map(fact => `<li>${escapeHtml(fact)}</li>`).join('')}</ul>` : ''}${formats.length ? `<h2>Formatos disponibles</h2><p>${formats.join(', ')}</p>` : ''}<a class="text-link" href="${publishedProduct.categoryPath}">${escapeHtml(categoryLabel)}</a></div></article></div>`
+      content: `<div class="page"><article class="editorial-article"><header class="editorial-header"><p class="editorial-kicker">${escapeHtml(product.brand || product.category || '')}</p><h1>${escapeHtml(name)}</h1><p class="editorial-deck">${escapeHtml(description)}</p></header><div class="editorial-body">${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(name)}" width="640" height="640">` : ''}${atelierCopy ? `<section aria-label="Detalles del producto">${atelierCopy.paragraphs.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('')}</section>` : ''}${facts.length ? `<h2>Sobre el producto</h2><ul>${facts.map(fact => `<li>${escapeHtml(fact)}</li>`).join('')}</ul>` : ''}${formats.length ? `<h2>Formatos disponibles</h2><p>${formats.join(', ')}</p>` : ''}<a class="text-link" href="${publishedProduct.categoryPath}">${escapeHtml(categoryLabel)}</a></div></article></div>`
     };
   }
   const pick = seoPickForPath(pathname);

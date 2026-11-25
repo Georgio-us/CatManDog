@@ -1,0 +1,358 @@
+{
+  "source": "Official Cat’s Atelier English product CSV downloaded from Retail Partnership Programme on 2026-11-18",
+  "sourceCsvSha256": "94be95e7df669a3da5c83bd3752dd6de566aaac2b2e7e006ebbf3c70f56dc764",
+  "imageReview": "39 SKU matched by article to supplier originals and published R2 images on 2026-11-25",
+  "records": {
+    "cats-atelier-sh-m-da100": {
+      "sku": "SH-M-DA100",
+      "ean": "5906546701102",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/34/cat-shelf-the-double-arch-haven-100-cm-sh-m-da100.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/c08db660fb9e9e7cec4b.jpg",
+      "copySha256": "868d1a18dff4c6d4065ce9784f6e50c4eb7292ecf837f4aaba991cc39d6d9620",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-w-a60": {
+      "sku": "SH-W-A60",
+      "ean": "5906546701027",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/63/cat-wall-shelf-curvaceous-comfort-60-cm-sh-w-a60.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/04de60ed83f056b981fd.jpg",
+      "copySha256": "53798598fd83cbf047bb95eddb37d50de245ad944d3bcd44acd5fefc2c5c5344",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-st-mb-f": {
+      "sku": "ST-MB-F",
+      "ean": "5906546701270",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/81/flat-cat-wall-step-st-f1021.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/bb38c8e8c362892249d5.jpg",
+      "copySha256": "9373dc87a42ad3b3c2642f723cfd8208b8448aeb62c9901f540780529ddad6ea",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-co-m-60": {
+      "sku": "CO-M-60",
+      "ean": "5906546701584",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/105/extra-mattress-cover-for-metal-base-shelf.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/f9b1db41b687ca5fc6ba.jpg",
+      "copySha256": "b21b111013099eba5c067db1188d159b8e9506894bede825def033b1d52b735d",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-m-w95-sl": {
+      "sku": "SH-M-W95-SL",
+      "ean": "5906546701072",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/142/metal-base-cat-wall-shelf-wave-95-cm-symmetrical-left-sh-m-w95-sl.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/2e88b7b0fed718ac7a34.jpg",
+      "copySha256": "fb8d9e4023b0a8fb0dcc2587cac17d32e0df54080757270f8b924b308f98e21a",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-m-w75-sl": {
+      "sku": "SH-M-W75-SL",
+      "ean": "5906546701232",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/149/cat-wall-shelf-playful-curve-left-75-cm-sh-m-w75sl.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/7e0c932ab1d8e3e4a89d.jpg",
+      "copySha256": "48c5efad7335e5f60aa3e63931f0b9e09ce00095c99f80e038d553591978e327",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-m-w75-ur": {
+      "sku": "SH-M-W75-UR",
+      "ean": "5906546701294",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/197/cat-shelf-the-playful-curve-right-75-cm-sh-m-w75ur.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/e90b1032c37e2de3fff6.jpg",
+      "copySha256": "adc862a60aa00e2409cec814bf75091b1ebcc5e55e719eae8cc20ae90174c873",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-m-w95-ur": {
+      "sku": "SH-M-W95-UR",
+      "ean": "5906546701010",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/214/metal-base-cat-wall-shelf-wave-95-cm-unsymmetrical-right-sh-m-w95-ur.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/b356e834d772c7fe6abc.jpg",
+      "copySha256": "9808a7e515a17cb6e93515a7b3c90e94f0b265ed0e3c3175816e8977b494105e",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-f-60": {
+      "sku": "SH-F-60",
+      "ean": "5906546701089",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/253/cat-shelf-the-cozy-nook-60-cm-sh-f60.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/1cb733083413d50ea894.jpg",
+      "copySha256": "1b7ea493213ebc79785874904a93792c39ef3b5f087b366b4cf2ec10eae9000a",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-w-f75": {
+      "sku": "SH-W-F75",
+      "ean": "5906546701621",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/267/cat-shelf-the-cozy-nook-75-cm-sh-f75g.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/d52c9f0c26eb74ab32b8.jpg",
+      "copySha256": "732126eb627319a78981e459c353f36e2dfcf5edc14c9c4d9820e89ce9e44068",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-w-f75-g": {
+      "sku": "SH-W-F75-G",
+      "ean": "5906546701454",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/282/cat-window-shelf-the-sunny-spot-75-cm-sh-w-f75-g.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/43e74943e1136151ee12.jpg",
+      "copySha256": "25935a5d22c9130410195094ed654941bfce39cf5ec520764e6e9623214b5045",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-w-f60-g": {
+      "sku": "SH-W-F60-G",
+      "ean": "5906546701447",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/292/cat-window-shelf-the-sunny-spot-75-cm-sh-f75g.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/43e74943e1136151ee12.jpg",
+      "copySha256": "155b6944d5707f702d2defd07a693ff4e2418f72b23c26e6d6a188d070025fab",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-m-a60": {
+      "sku": "SH-M-A60",
+      "ean": "5906546701003",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/300/cat-shelf-the-arcing-haven-60-cm-sh-m-60.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/513eedb70fa945f7750b.jpg",
+      "copySha256": "9d241063b21b554c01676c0986330b5b4497d191baca45423022c09f3c4283fa",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-m-a75": {
+      "sku": "SH-M-A75",
+      "ean": "5906546701416",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/319/cat-shelf-the-arcing-haven-75-cm-sh-m-a75-g.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/cf0bda25e0c4d7993a21.jpg",
+      "copySha256": "53aae44cc415950528b1765e201371810696f654b02a1679695a06de7fd65c16",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-m-a75-g": {
+      "sku": "SH-M-A75-G",
+      "ean": "5906546701393",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/379/cat-window-shelf-the-arcing-view-60-cm-sh-m-a60.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/9ae39a601d67e1518124.jpg",
+      "copySha256": "86eeee97cd70e1a810f8b24ae3cf931729139cb132f9a395f17f8d61fe3bc4bc",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-m-w75-sr": {
+      "sku": "SH-M-W75-SR",
+      "ean": "5906546701171",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/516/metal-base-cat-wall-shelf-wave-75-cm-symmetrical-right-sh-m-w75sr.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/729ee48b5c9c5315d7c7.jpg",
+      "copySha256": "a493e24033b0cc08526fde617c235d4d336654845c9162a5dfdc0060267cd40d",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-m-w95-ul": {
+      "sku": "SH-M-W95-UL",
+      "ean": "5906546701126",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/400/metal-base-cat-wall-shelf-wave-95-cm-unsymmetrical-left-sh-m-w95-ul.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/c644f47d59202e13812d.png",
+      "copySha256": "e74515e248fd4f1d011ee97fc28e2d0e0ad3426757caf7f8a0b87228cc0d2411",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-m-w75-ul": {
+      "sku": "SH-M-W75-UL",
+      "ean": "5906546701034",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/416/metal-base-cat-wall-shelf-wave-75-cm-unsymmetrical-left-sh-m-w75ul.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/bb2cfcb0486aa1160f62.jpg",
+      "copySha256": "96cac4d4811f1baf6725fe68841b10d901af572010e612c39ed6948238dd86c6",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-co-w-a60": {
+      "sku": "CO-W-A60",
+      "ean": "5906546701515",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/439/extra-mattress-cover-for-wood-base-shelf-60cm.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/f9b1db41b687ca5fc6ba.jpg",
+      "copySha256": "6113971c8b7c39b1167c76339faaddcff4d0a5996bfb7dc59ad78222b37d75b1",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-co-w-95": {
+      "sku": "CO-W-95",
+      "ean": "5906546701508",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/443/copy-of-extra-mattress-cover-for-wood-base-shelf-95cm.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/f9b1db41b687ca5fc6ba.jpg",
+      "copySha256": "6f5df34ce48d1b5852f48b50afbb874e457a3011902fd80055217618e1661f7a",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-co-m-75": {
+      "sku": "CO-M-75",
+      "ean": "5906546701591",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/446/extra-mattress-cover-for-metal-base-shelf-75cm.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/f9b1db41b687ca5fc6ba.jpg",
+      "copySha256": "8658369663290bef34403815a7fecfa1031365dd7572e06fbc9b9dd5b3ec8f60",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-co-m-95": {
+      "sku": "CO-M-95",
+      "ean": "5906546701614",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/449/extra-mattress-cover-for-metal-base-shelf-95cm.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/f9b1db41b687ca5fc6ba.jpg",
+      "copySha256": "99190dd5af5f99971f8694f129ca53d14998362efc09f7d73fa7ffa72ad8df95",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-co-m-100": {
+      "sku": "CO-M-100",
+      "ean": "5906546701607",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/452/extra-mattress-cover-for-metal-base-shelf-100cm.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/f9b1db41b687ca5fc6ba.jpg",
+      "copySha256": "e32d5ff7d50f491307c0152b233e73f97712f68f54f2013bdc0e948447d317fc",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-ma-w-60": {
+      "sku": "MA-W-60",
+      "ean": "5906546701539",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/455/extra-complete-mattress-for-wood-base-shelf.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/37b72cca8fb9f4b43ee3.jpg",
+      "copySha256": "95f4d1b92ebb6f1ecc5f0e6ea4d3062ed64031b34e13b35453c87de7e45cd57e",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-ma-w-95": {
+      "sku": "MA-W-95",
+      "ean": "5906546701522",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/458/extra-complete-mattress-for-wood-base-shelf.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/37b72cca8fb9f4b43ee3.jpg",
+      "copySha256": "27e555b2c6c14ad9b8c1d60b367c6300159d6e74375f07ff36f97e246315b8bd",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-ma-m-60": {
+      "sku": "MA-M-60",
+      "ean": "5906546701577",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/461/extra-complete-mattress-for-metal-base-shelf-60cm.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/37b72cca8fb9f4b43ee3.jpg",
+      "copySha256": "fafcf8315607a15d6be71d2a99fe6d231e21991dbc6a57d698acc39272b8c11f",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-ma-m-75": {
+      "sku": "MA-M-75",
+      "ean": "5906546701560",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/464/extra-complete-mattress-for-metal-base-shelf-75cm.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/37b72cca8fb9f4b43ee3.jpg",
+      "copySha256": "eb4f804ed997e56b9bc10f61fa9627f13f15682105bc6f6ef7dfb58f07f5d1eb",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-ma-m-95": {
+      "sku": "MA-M-95",
+      "ean": "5906546701553",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/467/extra-complete-mattress-for-metal-base-shelf-95cm.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/37b72cca8fb9f4b43ee3.jpg",
+      "copySha256": "24ddacad1ac933478c89c30e5bcd15332056269e380ddc571a22db14b37a78d1",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-ma-m-100": {
+      "sku": "MA-M-100",
+      "ean": "5906546701546",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/470/extra-complete-mattress-for-metal-base-shelf-100cm.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/37b72cca8fb9f4b43ee3.jpg",
+      "copySha256": "1bf4f0407c2c72f821f0dcd0d4404a06441ac64e67acd8623fe11a6699b446a9",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-w-w95-ul": {
+      "sku": "SH-W-W95-UL",
+      "ean": "5906546701485",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/477/polka-scienna-dla-kota-wiszaca-fala-95-cm-nl-sh-w-w95l.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/a3b4613b72a498da0476.jpg",
+      "copySha256": "7450b517a828a8ecceb8c5928706e99cb3967930ce48fd1933855b8fc426e0cc",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-w-w95-ur": {
+      "sku": "SH-W-W95-UR",
+      "ean": "5906546701478",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/485/wood-base-cat-wall-shelf-wave-95-cm-unsymmetrical-right.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/73da56a0db9797188625.jpg",
+      "copySha256": "cad39424c6ba26bdf9331ab58fcca403a577010dbfd8bcd5344c905a99a0f978",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-w-a60-g": {
+      "sku": "SH-W-A60-G",
+      "ean": "5906546701096",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/579/cat-window-hammock-bed-swing-the-arcing-view-60cm-sh-w-a60-g.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/3fe2741adf3e28467523.png",
+      "copySha256": "e9ca0a3da5393c135acbe8f02124b04c3dc1c2c598e7461092ad32b7f436c7b6",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-m-a60-g": {
+      "sku": "SH-M-A60-G",
+      "ean": "5906546701195",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/524/copy-of-cat-window-shelf-the-arcing-view-60-cm-sh-m-a60g.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/9ae39a601d67e1518124.jpg",
+      "copySha256": "3fc0b2c21b892542c14024f03397e174b20e48ad8e893a92c66b610cc20765e2",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-m-w95-sp": {
+      "sku": "SH-M-W95-SP",
+      "ean": "5906546701126",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/553/metal-base-cat-wall-shelf-wave-95-cm-symmetrical-right-sh-m-w95-sr.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/4089857aa26a17c85e13.jpg",
+      "copySha256": "6ebb1bd16069f22de62e317d55dca6c45733d10eb41f896ff901af88afe27538",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-st-wb-f": {
+      "sku": "ST-WB-F",
+      "ean": "5906546701058",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/577/copy-of-flat-cat-wall-step-st-w-f.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/faffea5b01c8655074bb.jpg",
+      "copySha256": "1c43364cb9b70b1bccd03aafcd61ba12cfce23df1980098b8e9c3da460245033",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-rd-st": {
+      "sku": "RD-ST",
+      "ean": "5906546701119",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/598/round-wall-mounted-cat-step.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/cbcfc7a86a23d704f659.jpg",
+      "copySha256": "b18f94220d6414737235ea5fc4803ff30218c356efe8fba8dce6de2aa2dc5c42",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-co-w-f60": {
+      "sku": "CO-W-F60",
+      "ean": "5906546701119",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/601/extra-mattress-cover-for-wood-base-flat-shelf-60-cm-co-w-f60.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/f9b1db41b687ca5fc6ba.jpg",
+      "copySha256": "e9db0e423fbfd419021720575a67abfe9c45e158d6bcd8dd97d0eb04c168a8f8",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-co-w-f75": {
+      "sku": "CO-W-F75",
+      "ean": "5906546701133",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/604/extra-mattress-cover-for-wood-base-shelf-75-cm-co-w-f75.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/f9b1db41b687ca5fc6ba.jpg",
+      "copySha256": "e1eee109f9b345bdeeb6f88bcc917aeea5d968bad1227bd71c9ba64a2e84a532",
+      "reviewedAt": "2026-11-25"
+    },
+    "cats-atelier-sh-m-a95": {
+      "sku": "SH-M-A95",
+      "ean": "5906546701423",
+      "saleUnit": "1 шт",
+      "sourceImageUrl": "https://catsatelier.com/605/cat-wall-shelf-hanging-arch-95-cm-sh-m-a95.jpg",
+      "publishedImageUrl": "https://img.catmandog.es/assets/cats-atelier/supplier-main-2026-11-25/09f12c8d3ad3134be831.jpg",
+      "copySha256": "c9b57dd3e47e7223c0f9ffa4e0327ee2654ee330137bbd3b16c9fc087d5734e8",
+      "reviewedAt": "2026-11-25"
+    }
+  }
+}
