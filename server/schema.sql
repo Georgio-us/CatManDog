@@ -499,6 +499,7 @@ ALTER TABLE external_sales ADD COLUMN IF NOT EXISTS date_basis text NOT NULL DEF
   CHECK (date_basis IN ('sale','confirmation'));
 ALTER TABLE external_sales ADD COLUMN IF NOT EXISTS extra_received_cents integer NOT NULL DEFAULT 0
   CHECK (extra_received_cents >= 0);
+ALTER TABLE external_sales ADD COLUMN IF NOT EXISTS gift_description text;
 CREATE TABLE IF NOT EXISTS external_sale_items (
   sale_id uuid NOT NULL REFERENCES external_sales(id) ON DELETE CASCADE,
   variant_id text NOT NULL REFERENCES catalog_variants(id),

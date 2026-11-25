@@ -51,7 +51,8 @@ export function buildSalesDashboard(orders, externalSales, totals, personalExpen
       paymentChannel: sale.paymentChannel,
       dateBasis: sale.dateBasis || 'sale',
       packagingItems: sale.packagingItems || [],
-      giftItems: sale.giftCostCents ? [{ name: 'Подарок к покупке', quantity: 1 }] : [],
+      giftItems: sale.giftCostCents ? [{
+        name: sale.giftDescription || 'Подарок не указан', quantity: 1 }] : [],
       items: (sale.items || []).map(item => ({ name: item.name, variant: '',
         quantity: item.quantity, unitPriceCents: item.unitPriceCents,
         imagePath: item.imagePath || '' }))

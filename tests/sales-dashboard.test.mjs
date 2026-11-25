@@ -13,10 +13,12 @@ test('dashboard combines four paid purchases and subtracts packaging and gifts o
     total_cents: 99999, items: [] }];
   const external = [
     { id: 'neighbor', paymentStatus: 'paid', grossCents: 2800,
-      productCostCents: 2279, giftCostCents: 46, packagingCostCents: 198,
+      productCostCents: 2279, giftCostCents: 46,
+      giftDescription: 'Отдельный тюбик Churu', packagingCostCents: 198,
       marginCents: 277, customerNote: 'Соседка', items: [] },
     { id: 'uniko', paymentStatus: 'paid', grossCents: 1100,
-      productCostCents: 568, giftCostCents: 46, packagingCostCents: 142,
+      productCostCents: 568, giftCostCents: 46,
+      giftDescription: 'Отдельный тюбик Churu', packagingCostCents: 142,
       marginCents: 344, customerNote: 'Лолита', items: [] },
     { id: 'duvo', paymentStatus: 'paid', grossCents: 1500,
       productCostCents: 938, giftCostCents: 0, packagingCostCents: 137,
@@ -34,6 +36,9 @@ test('dashboard combines four paid purchases and subtracts packaging and gifts o
   assert.equal(result.totals.fulfillmentToConfirm, 1);
   assert.equal(result.totals.unknownBuyerPurchases, 1);
   assert.equal(result.sales.length, 4);
+  assert.deepEqual(result.sales.filter(sale => ['neighbor','uniko'].includes(sale.id))
+    .map(sale => sale.giftItems[0].name),
+  ['Отдельный тюбик Churu','Отдельный тюбик Churu']);
 });
 
 test('dashboard does not invent an aggregate margin when costs or sales are missing', () => {

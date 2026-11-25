@@ -211,7 +211,7 @@ function externalSaleCard(sale) {
     </div><strong>${euros(sale.grossCents)}</strong></div>
     <ul class="admin-items">${sale.items.map(item => `<li><strong>${escape(item.name)}</strong> · ${item.quantity} шт × ${euros(item.unitPriceCents)}
       <br><span class="admin-muted">Закупка этой строки: ${euros(item.purchaseCostCents)} · SKU ${escape(item.variantId)} · склад списан</span></li>`).join('')}</ul>
-    <p>Получено: ${euros(sale.grossCents)}${sale.extraReceivedCents ? ` · Сверх стоимости товаров: ${euros(sale.extraReceivedCents)}` : ''} · Закупка товаров: ${euros(sale.productCostCents)} · Подарки: ${euros(sale.giftCostCents)} · Упаковка: ${euros(sale.packagingCostCents)} · Разница: <strong>${euros(sale.marginCents)}</strong></p>
+    <p>Получено: ${euros(sale.grossCents)}${sale.extraReceivedCents ? ` · Сверх стоимости товаров: ${euros(sale.extraReceivedCents)}` : ''} · Закупка товаров: ${euros(sale.productCostCents)} · Подарки: ${euros(sale.giftCostCents)}${sale.giftCostCents ? ` (${escape(sale.giftDescription || 'подарок не указан')})` : ''} · Упаковка: ${euros(sale.packagingCostCents)} · Разница: <strong>${euros(sale.marginCents)}</strong></p>
     <p class="admin-muted">Документ: ${sale.documentationStatus === 'recorded' ? 'оформлен' : 'ожидает оформления'} · ${escape(sale.note || '')} Склад по этой продаже повторно не списывать.</p></article>`;
 }
 function renderOrders(orders, externalSales = []) {

@@ -171,6 +171,10 @@ async function recordVerifiedAntonStripeFee(client, orderId) {
 }
 
 export async function seedInitialSalesLedger(client) {
+  await client.query(`UPDATE external_sales SET gift_description='Отдельный тюбик Churu'
+    WHERE reference IN ('neighbor-pouches-2026-11-21',
+      'lolita-uniko-tofu-6l-2026-11') AND gift_cost_cents=46
+      AND gift_description IS NULL`);
   const neighbor = await client.query(`SELECT id FROM external_sales
     WHERE reference='neighbor-pouches-2026-11-21'`);
   if (neighbor.rows.length) await addPackaging(client, { saleId: neighbor.rows[0].id },
@@ -195,8 +199,12 @@ export async function seedInitialSalesLedger(client) {
   }
   await isolatedReconciliation(client, 'anton_handoff', () => closeDeliveredAntonOrder(client));
   const unikoId = await isolatedReconciliation(client, 'uniko_sale', () => seedUniko(client));
-  if (unikoId) await addPackaging(client, { saleId: unikoId },
-    { black_bag: 1, sticker: 1, welcome_card: 1, paper_coupon: 1 });
+  if (unikoId) {
+    await client.query(`UPDATE external_sales SET gift_description='Отдельный тюбик Churu'
+      WHERE id=$1 AND gift_cost_cents=46 AND gift_description IS NULL`, [unikoId]);
+    await addPackaging(client, { saleId: unikoId },
+      { black_bag: 1, sticker: 1, welcome_card: 1, paper_coupon: 1 });
+  }
   const duvoId = await isolatedReconciliation(client, 'duvo_sale', () => seedDuvoSale(client));
   if (duvoId) await addPackaging(client, { saleId: duvoId },
     { green_bag: 1, sticker: 1, welcome_card: 1, paper_coupon: 1 });
