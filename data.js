@@ -17,7 +17,7 @@ import { yaguBasketProducts } from './yagu-basket-products.js?v=20261113';
 import { yaguChewTestProducts } from './yagu-chew-test-products.js?v=20261113';
 import { ownatProducts } from './ownat-products.js?v=r2-media-1';
 import { dogProducts } from './dog-products.js?v=r2-media-1';
-import { launchHeyboPetProducts } from './launch-heybopet-products.js';
+import { launchHeyboPetProducts } from './launch-heybopet-products.js?v=white-default-20261125';
 import { applyChuruRetailFormats } from './churu-retail-formats.js';
 import { churuDogProducts } from './churu-dog-products.js';
 import { confirmedDemandProducts } from './confirmed-demand-products.js';
