@@ -4,6 +4,7 @@ import { applyProvisionalPrices } from './provisional-prices.js';
 import { foodProducts as originalFoodProducts } from './food-products.js?v=product-content-20261110';
 import { expandRoyalCaninFood } from './royal-canin-products.js?v=r2-media-1';
 import { royalCaninPersianKitten } from './royal-canin-persian-kitten.js';
+import { royalCaninNewProducts } from './royal-canin-new-products.js';
 import { expandPriorityFood } from './priority-food-products.js?v=customer-product-detail-1';
 import { heybopetProducts } from './heybopet-products.js?v=r2-media-1';
 import { treatsCareProducts } from './treats-care-products.js?v=r2-media-1';
@@ -25,7 +26,7 @@ import { newLitterProducts } from './new-litter-products.js?v=litter-studio-2026
 import { withSelectedAcanaOrijenFormats } from './acana-orijen-selected-formats.js';
 import { catalogEditorialContent } from './catalog-editorial-content.js';
 
-const foodProducts = [...expandPriorityFood(expandRoyalCaninFood(originalFoodProducts)), royalCaninPersianKitten, ...ownatProducts];
+const foodProducts = [...expandPriorityFood(expandRoyalCaninFood(originalFoodProducts)), royalCaninPersianKitten, ...royalCaninNewProducts, ...ownatProducts];
 
 export const categories = ["Корм", "Лакомства", "Наполнитель", "Игрушки и аксессуары", "Миски и поилки", "Переноски", "Окна и балконы", "Уход", "Подарочные наборы"];
 

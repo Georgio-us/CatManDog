@@ -31,7 +31,7 @@ const releasedByCategory = {
     'leonardo-adult-duck', 'leonardo-maxi', 'leonardo-kitten-gf',
     'leonardo-fresh-beef', 'leonardo-fresh-duck', 'leonardo-fresh-salmon',
     'rc-urinary', 'rc-light', 'leonardo-senior', 'leonardo-senior-gf',
-    'leonardo-complete', 'rc-persian', 'rc-persian-kitten', 'leonardo-fish', 'leonardo-lamb'
+    'leonardo-complete', 'rc-persian', 'rc-persian-kitten', 'rc-sphynx-adult', 'leonardo-fish', 'leonardo-lamb'
   ],
   '/catalogo/gatos/comida-humeda': [
     'rc-wet', 'leonardo-chicken', 'leonardo-turkey',
@@ -46,7 +46,7 @@ const releasedByCategory = {
     'royalcanin-659556dc', 'royalcanin-a510d4e9',
     'royalcanin-f2600773', 'royalcanin-d861a238',
     'royalcanin-6168e429', 'royalcanin-e34b38d7',
-    'royalcanin-9f8011d7', 'royalcanin-7f8c2e4e'
+    'royalcanin-9f8011d7', 'royalcanin-7f8c2e4e', 'rc-kitten-jelly'
   ],
   '/catalogo/gatos/premios': [
     'tc-4e50c58957', 'tc-0707caf730', 'tc-768abf17c2',

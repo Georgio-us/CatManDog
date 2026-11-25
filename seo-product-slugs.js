@@ -80,6 +80,8 @@ export const seoProductSlugs = Object.freeze({
   "advance-wet-deli-tuna": "advance-delicatessen-tuna-v-souse",
   "rc-persian": "royal-canin-persian-adult",
   "rc-persian-kitten": "royal-canin-persian-kitten",
+  "rc-sphynx-adult": "royal-canin-sphynx-adult",
+  "rc-kitten-jelly": "royal-canin-kitten-zhele",
   "leonardo-fish": "leonardo-adult-fish",
   "hills-light": "hill-s-science-plan-light-adult-chicken",
   "advance-wet-deli-turkey": "advance-delicatessen-turkey-v-souse",

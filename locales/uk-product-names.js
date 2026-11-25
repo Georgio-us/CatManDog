@@ -137,6 +137,7 @@ export const ukProductNames = {
   "Hill’s Science Plan Sterilised Young Adult Trout - в соусе": "Hill’s Science Plan Sterilised Young Adult Trout - у соусі",
   "Royal Canin Hair & Skin - желе": "Royal Canin Hair & Skin - желе",
   "Royal Canin Kitten Sterilised - желе": "Royal Canin Kitten Sterilised - желе",
+  "Royal Canin Kitten - желе": "Royal Canin Kitten - у желе",
   "Royal Canin Kitten - паштет": "Royal Canin Kitten - паштет",
   "Royal Canin Kitten - соус": "Royal Canin Kitten - соус",
   "Royal Canin Maine Coon Adult - соус": "Royal Canin Maine Coon Adult - соус",

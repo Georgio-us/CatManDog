@@ -103,6 +103,24 @@ const detailCopy = {
 };
 
 const pairs = [
+  ['Royal Canin Kitten - желе', ['Royal Canin Kitten - en gelatina', 'Royal Canin Kitten - у желе']],
+  ['Royal Canin Kitten в желе 85 г', ['Royal Canin Kitten en gelatina 85 g', 'Royal Canin Kitten у желе 85 г']],
+  ['Для взрослых сфинксов', ['Para gatos Sphynx adultos', 'Для дорослих сфінксів']],
+  ['Для котят', ['Para gatitos', 'Для кошенят']],
+  ['Royal Canin Sphynx Adult - полнорационный сухой корм для сфинксов старше 12 месяцев. У породы повышенная потребность в энергии для поддержания температуры тела, поэтому рецептура содержит 23 % жира. Треугольные гранулы адаптированы к челюсти сфинкса, а жирные кислоты омега-3 и омега-6 помогают поддерживать состояние кожи.', [
+    'Royal Canin Sphynx Adult es un pienso completo para gatos Sphynx mayores de 12 meses. Esta raza necesita más energía para mantener su temperatura corporal, por lo que la receta contiene un 23 % de grasa. Las croquetas triangulares se adaptan a su mandíbula y los ácidos grasos omega-3 y omega-6 ayudan a mantener la salud de la piel.',
+    'Royal Canin Sphynx Adult - повнораціонний сухий корм для сфінксів віком понад 12 місяців. Цій породі потрібно більше енергії для підтримання температури тіла, тому рецептура містить 23 % жиру. Трикутні гранули адаптовані до щелепи сфінкса, а жирні кислоти омега-3 та омега-6 допомагають підтримувати стан шкіри.'
+  ]],
+  ['Для сфинксов старше 12 месяцев', ['Para gatos Sphynx mayores de 12 meses', 'Для сфінксів віком понад 12 місяців']],
+  ['Гранулы адаптированы к форме челюсти', ['Croquetas adaptadas a la forma de la mandíbula', 'Гранули адаптовані до форми щелепи']],
+  ['Высокая энергетическая ценность', ['Alto aporte energético', 'Висока енергетична цінність']],
+  ['Royal Canin Kitten в желе - полнорационный влажный корм для котят от 4 до 12 месяцев. Размер и текстура кусочков подходят растущим котятам. В рецептуре есть витамины C и E, DHA, пребиотики MOS и легкоусвояемые белки; корм можно сочетать с сухим рационом Royal Canin Kitten.', [
+    'Royal Canin Kitten en gelatina es un alimento húmedo completo para gatitos de 4 a 12 meses. El tamaño y la textura de los trocitos se adaptan a los gatitos en crecimiento. La receta contiene vitaminas C y E, DHA, prebióticos MOS y proteínas de alta digestibilidad; puede combinarse con el pienso Royal Canin Kitten.',
+    'Royal Canin Kitten у желе - повнораціонний вологий корм для кошенят віком від 4 до 12 місяців. Розмір і текстура шматочків підходять кошенятам у період росту. Рецептура містить вітаміни C та E, DHA, пребіотики MOS і легкозасвоювані білки; корм можна поєднувати із сухим раціоном Royal Canin Kitten.'
+  ]],
+  ['Для котят от 4 до 12 месяцев', ['Para gatitos de 4 a 12 meses', 'Для кошенят віком від 4 до 12 місяців']],
+  ['Кусочки в желе', ['Trocitos en gelatina', 'Шматочки в желе']],
+  ['Один пауч 85 г', ['Un sobre de 85 g', 'Один пауч 85 г']],
   ...Object.entries(catalogEditorialNextNames),
   ...Object.values(catalogEditorialContent).filter(copy => copy.esDescription && copy.ukDescription).flatMap(copy => [
     [copy.description, [copy.esDescription, copy.ukDescription]],

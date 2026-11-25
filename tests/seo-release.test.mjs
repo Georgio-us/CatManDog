@@ -95,7 +95,7 @@ test('every public product has a distinct permanent URL while unreleased pages s
 
 test('the verified product release has unique Spanish source content and crawlable category links', async () => {
   const released = seoProducts.filter(product => product.indexable);
-  assert.equal(released.length, 158);
+  assert.equal(released.length, 160);
   const descriptions = new Set();
   for (const product of released) {
     if (!catalogProducts.some(item => item.id === product.id)) continue;

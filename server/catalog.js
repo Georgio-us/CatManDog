@@ -829,6 +829,21 @@ export async function importCatalog(db, items = products) {
         }
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [persianKittenMigration]);
       }
+      const royalCaninOrderMigration = 'royal_canin_order_prices_2026_11_25';
+      const royalCaninOrderDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [royalCaninOrderMigration]);
+      if (!royalCaninOrderDone.rowCount) {
+        for (const [id, priceCents] of [
+          ['rc-sphynx-adult-2kg', 3299],
+          ['rc-kitten-jelly-85g', 149]
+        ]) {
+          await client.query(`UPDATE catalog_variants SET
+            price_override_cents=$2,price_confirmed=true,
+            sale_status='available',availability='source_on_demand',
+            updated_at=now() WHERE id=$1`, [id, priceCents]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [royalCaninOrderMigration]);
+      }
       // The owner set a retail price for this model; its two color variants remain
       // unavailable for checkout until Tina confirms which colors she can supply.
       await client.query(`UPDATE catalog_variants SET price_override_cents=5490,
