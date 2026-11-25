@@ -747,6 +747,15 @@ CREATE TABLE IF NOT EXISTS site_visit_events (
 );
 CREATE INDEX IF NOT EXISTS site_visit_events_created_idx ON site_visit_events(created_at DESC);
 
+CREATE TABLE IF NOT EXISTS campaign_link_clicks (
+  id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  campaign_id text NOT NULL,
+  destination text NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS campaign_link_clicks_campaign_idx
+  ON campaign_link_clicks(campaign_id, destination, created_at DESC);
+
 CREATE TABLE IF NOT EXISTS observed_cart_events (
   id uuid PRIMARY KEY,
   cart_id uuid NOT NULL REFERENCES observed_carts(id) ON DELETE CASCADE,

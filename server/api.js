@@ -36,6 +36,7 @@ import { churuRepackOptions } from '../churu-retail-formats.js';
 import { salePriceDecision } from './sale-price-policy.js';
 import { sendTelegramVisitAlert, telegramReady } from './telegram.js';
 import { recordSiteVisit, deleteSiteVisitor } from './visit-analytics.js';
+import { listCampaignClicks } from './campaign-links.js';
 import { isStaging } from './environment.js';
 import { saveObservedCart, deleteObservedCart, listObservedCarts,
   observedCartEvents, validCartId } from './cart-activity.js';
@@ -691,6 +692,8 @@ async function adminRoute(db, req, res, path) {
       name: operator?.name || customer?.name || '', email: operator?.email || customer?.email },
     fullAdmin ? { 'Set-Cookie': staffVisitCookie(staffToken(req), secure(req)) } : {});
   if (!fullAdmin && !path.startsWith('/api/admin/service-requests')) bad('Доступ закрыт', 403);
+  if (path === '/api/admin/campaign-links' && req.method === 'GET')
+    return json(res, 200, { links: await listCampaignClicks(db) });
   if (path === '/api/admin/supplier-deliveries' && req.method === 'GET')
     return json(res, 200, { deliveries: await listSupplierReceipts(db) });
   if (path === '/api/admin/supplier-deliveries/preview' && req.method === 'POST') {

@@ -3,6 +3,7 @@ import { createDatabase, initializeDatabase } from './db.js';
 import { handleApi } from './api.js';
 import { serveStatic } from './http.js';
 import { serveSeo, serveMerchantFeed } from './seo.js';
+import { serveCampaignLink } from './campaign-links.js';
 import { startBackupScheduler } from './backup.js';
 import { startTelegramOrderAlerts } from './telegram.js';
 import { startObservedCartCleanup } from './cart-activity.js';
@@ -29,6 +30,7 @@ const server = createServer(async (req, res) => {
       return res.end('Тестовая среда CatManDog: требуется вход');
     }
     if (url.pathname.startsWith('/api/')) return await handleApi(initialized ? db : null, req, res, url.pathname);
+    if (await serveCampaignLink(initialized ? db : null, req, res, url.pathname)) return;
     if (await serveMerchantFeed(req, res, url.pathname, initialized ? db : null)) return;
     if (await serveSeo(req, res, url.pathname, initialized ? db : null)) return;
     if (process.env.R2_MEDIA_REDIRECT_ENABLED !== 'false' && url.pathname.startsWith('/assets/')) {
