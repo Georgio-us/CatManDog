@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { stripePaymentFee } from '../server/stripe-fees.js';
+import { stripePaymentFee, stripeSessionIntent } from '../server/stripe-fees.js';
 
 test('Stripe fee is read from the matching charge balance transaction', async () => {
   const previous = process.env.STRIPE_SECRET_KEY;
@@ -23,6 +23,22 @@ test('Stripe fee is read from the matching charge balance transaction', async ()
       { feeCents: 105, transactionId: 'txn_123' });
     assert.equal(paths.length, 3);
     assert.equal(await stripePaymentFee('pi_123', 4000, fetcher), null);
+  } finally {
+    if (previous === undefined) delete process.env.STRIPE_SECRET_KEY;
+    else process.env.STRIPE_SECRET_KEY = previous;
+  }
+});
+
+test('older paid Checkout Session supplies a missing payment intent safely', async () => {
+  const previous = process.env.STRIPE_SECRET_KEY;
+  process.env.STRIPE_SECRET_KEY = 'sk_test_example';
+  const fetcher = async () => ({ ok: true, json: async () => ({
+    id: 'cs_test_123', payment_status: 'paid', currency: 'eur',
+    amount_total: 3735, payment_intent: 'pi_123'
+  }) });
+  try {
+    assert.equal(await stripeSessionIntent('cs_test_123', 3735, fetcher), 'pi_123');
+    assert.equal(await stripeSessionIntent('cs_test_123', 4000, fetcher), null);
   } finally {
     if (previous === undefined) delete process.env.STRIPE_SECRET_KEY;
     else process.env.STRIPE_SECRET_KEY = previous;
