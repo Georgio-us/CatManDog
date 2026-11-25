@@ -706,6 +706,9 @@ ON CONFLICT(code) DO UPDATE SET kind='paper_shared',percent_off=10,free_delivery
   active=true,max_uses=40,expires_at=NULL
 WHERE promo_codes.kind='paper_shared' AND promo_codes.percent_off=10
   AND promo_codes.free_delivery=false AND promo_codes.max_uses=100 AND promo_codes.active=true;
+INSERT INTO promo_codes(code,kind,percent_off,free_delivery,active,max_uses,used_count,expires_at)
+VALUES('VALENCIA10','paper_shared',10,false,true,50,0,NULL)
+ON CONFLICT(code) DO NOTHING;
 
 CREATE TABLE IF NOT EXISTS customer_promos (
   customer_id uuid NOT NULL REFERENCES customers(id) ON DELETE CASCADE,
