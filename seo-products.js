@@ -74,6 +74,9 @@ const releasedByCategory = {
     'leonardo-wet-superior-horse', 'leonardo-wet-superior-lamb',
     'leonardo-wet-superior-duck', 'leonardo-wet-superior-turkey',
     'leonardo-wet-superior-chicken', 'leonardo-wet-superior-beef',
+    'leonardo-wet-pulled-beef', 'leonardo-wet-pulled-chicken',
+    'leonardo-wet-pulled-duck', 'leonardo-wet-pulled-lamb',
+    'leonardo-wet-pulled-turkey',
     'leonardo-wet-pure-turkey', 'royalcanin-8d039848',
     'royalcanin-659556dc', 'royalcanin-a510d4e9',
     'royalcanin-f2600773', 'royalcanin-d861a238',
@@ -81,6 +84,8 @@ const releasedByCategory = {
     'royalcanin-9f8011d7', 'royalcanin-7f8c2e4e', 'rc-kitten-jelly'
   ],
   '/catalogo/gatos/premios': [
+    'tc-0ed7b07305', 'tc-4b391892b7', 'tc-57f941fe4f',
+    'tc-185b159101', 'tc-5da4b0e874', 'tc-0206d66a70',
     'tc-4e50c58957', 'tc-0707caf730', 'tc-768abf17c2',
     'tc-dc3d6d94c2', 'tc-713f42fb9a'
   ],

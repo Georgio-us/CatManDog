@@ -22,6 +22,7 @@ import { catalogEditorialRoyalCaninNext } from '../catalog-editorial-royal-canin
 import { catalogEditorialRoyalCaninWave3 } from '../catalog-editorial-royal-canin-wave3.js';
 import { catalogEditorialLeonardoWave4 } from '../catalog-editorial-leonardo-wave4.js';
 import { catalogEditorialLeonardoWave5 } from '../catalog-editorial-leonardo-wave5.js';
+import { catalogEditorialWave6 } from '../catalog-editorial-wave6.js';
 import { catalogEditorialLeonardoCorrections } from '../catalog-editorial-leonardo-corrections.js';
 import { publishYaguToys } from './yagu-toy-publication.js';
 import { catsAtelierLegacyCopy, catsAtelierProducts } from '../cats-atelier-products.js';
@@ -837,6 +838,42 @@ export async function importCatalog(db, items = products) {
           }
         }
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [leonardoWave5Migration]);
+      }
+      const wave6Migration = 'verified_leonardo_inaba_copy_2026_11_25';
+      const wave6Done = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [wave6Migration]);
+      if (!wave6Done.rows.length) {
+        for (const [productId, copy] of Object.entries(catalogEditorialWave6)) {
+          const changed = copy.name
+            ? await client.query(`UPDATE catalog_products SET name=$2,description=$3,
+                details=$4::jsonb,source=source||jsonb_build_object('name',$2::text,'description',$3::text)
+                WHERE id=$1 AND name=$5 AND description=$6 RETURNING id`,
+              [productId, copy.name, copy.description, JSON.stringify(copy.details),
+                copy.previousName, copy.previousDescription])
+            : await client.query(`UPDATE catalog_products SET description=$2,details=$3::jsonb
+                WHERE id=$1 AND description=$4 RETURNING id`,
+              [productId, copy.description, JSON.stringify(copy.details), copy.previousDescription]);
+          if (changed.rowCount) {
+            await client.query(`UPDATE catalog_variants SET description=$2,details=$3::jsonb,updated_at=now()
+              WHERE product_id=$1 AND description=$4`,
+            [productId, copy.description, JSON.stringify(copy.details), copy.previousDescription]);
+          }
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [wave6Migration]);
+      }
+      const leonardoImageAltMigration = 'leonardo_recipe_image_alt_2026_11_25';
+      const leonardoImageAltDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [leonardoImageAltMigration]);
+      if (!leonardoImageAltDone.rows.length) {
+        const corrected = { ...catalogEditorialLeonardoWave5, ...catalogEditorialWave6 };
+        for (const [productId, copy] of Object.entries(corrected)) {
+          if (!copy.name) continue;
+          await client.query(`UPDATE catalog_products
+              SET source=jsonb_set(source,'{image,alt}',to_jsonb($3::text),true)
+              WHERE id=$1 AND name=$2 AND source #>> '{image,alt}'=$4`,
+          [productId, copy.name, copy.name, copy.previousName]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [leonardoImageAltMigration]);
       }
       const heldCopyMigration = 'verified_legacy_recipe_copy_2026_11_12';
       const heldCopyDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',

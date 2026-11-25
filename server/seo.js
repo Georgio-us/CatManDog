@@ -223,6 +223,11 @@ export async function seoDocument(pathname, db = null, selectedVariantId = null)
 export async function serveSeo(req, res, pathname, db = null) {
   if (req.method !== 'GET' && req.method !== 'HEAD') return false;
   const correctedLeonardoPaths = {
+    '/producto/leonardo-pulled-beef-beef': '/producto/leonardo-beef-extra-pulled-beef',
+    '/producto/leonardo-pulled-beef-chicken': '/producto/leonardo-chicken-extra-pulled-beef',
+    '/producto/leonardo-pulled-beef-duck': '/producto/leonardo-duck-extra-pulled-beef',
+    '/producto/leonardo-pulled-beef-lamb': '/producto/leonardo-lamb-extra-pulled-beef',
+    '/producto/leonardo-pulled-beef-turkey': '/producto/leonardo-turkey-extra-pulled-beef',
     '/producto/leonardo-finest-selection-senior-pure-chicken': '/producto/leonardo-finest-selection-senior-chicken-pure',
     '/producto/leonardo-quality-selection-poultry': '/producto/leonardo-quality-selection-poultry-pure',
     '/producto/leonardo-finest-selection-senior-pure-beef': '/producto/leonardo-finest-selection-senior-veal-pure',

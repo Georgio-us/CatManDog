@@ -21,6 +21,7 @@ import { catalogEditorialRoyalCaninNext } from '../catalog-editorial-royal-canin
 import { catalogEditorialRoyalCaninWave3 } from '../catalog-editorial-royal-canin-wave3.js';
 import { catalogEditorialLeonardoWave4 } from '../catalog-editorial-leonardo-wave4.js';
 import { catalogEditorialLeonardoWave5 } from '../catalog-editorial-leonardo-wave5.js';
+import { catalogEditorialWave6 } from '../catalog-editorial-wave6.js';
 import { catalogEditorialLeonardoCorrections } from '../catalog-editorial-leonardo-corrections.js';
 import { editorialEs, editorialUk } from '../locales/editorial-translations.js';
 import { accessoryDetail } from '../accessory-ui.js';
@@ -110,7 +111,7 @@ test('database-only ACANA Pacifica has a stable product URL without premature in
 
 test('the verified product release has unique Spanish source content and crawlable category links', async () => {
   const released = seoProducts.filter(product => product.indexable);
-  assert.equal(released.length, 226);
+  assert.equal(released.length, 237);
   const descriptions = new Set();
   const titles = new Set();
   for (const product of released) {
@@ -137,10 +138,11 @@ test('released editorial products serve the same verified Spanish copy as the st
     ...catalogEditorialChuruDog, ...catalogEditorialAcanaWet, ...catalogEditorialChuruCat,
     ...catalogEditorialNext, ...catalogEditorialOpenAudit, ...catalogEditorialRoyalCaninNext,
     ...catalogEditorialRoyalCaninWave3, ...catalogEditorialLeonardoWave4, ...catalogEditorialLeonardoWave5,
+    ...catalogEditorialWave6,
     ...catalogEditorialLeonardoCorrections };
   const releasedEditorial = Object.entries(editorial)
     .filter(([id]) => seoProducts.some(product => product.id === id && product.indexable));
-  assert.equal(releasedEditorial.length, 143);
+  assert.equal(releasedEditorial.length, 154);
   for (const [id, copy] of releasedEditorial) {
     const path = productHref(id);
     const html = await seoDocument(path);
@@ -188,6 +190,7 @@ test('new Leonardo recipe names and old paths resolve to the verified product', 
     const product = catalogProducts.find(item => item.id === id);
     const seo = seoProductForPath(productHref(id));
     assert.equal(product.name, copy.name);
+    assert.equal(product.image.alt, copy.name);
     assert.equal(editorialEs[product.name], copy.esName);
     assert.equal(editorialUk[product.name], copy.ukName);
     assert.equal(product.description, copy.description);
@@ -198,6 +201,33 @@ test('new Leonardo recipe names and old paths resolve to the verified product', 
     assert.equal(await serveSeo({ method: 'GET', url: oldPath }, response, oldPath), true);
     assert.equal(status, 301);
     assert.equal(headers.Location, seo.path);
+  }
+});
+
+test('Pulled Beef recipes have distinct names and redirect the five old paths', async () => {
+  const legacy = {
+    'leonardo-wet-pulled-beef': '/producto/leonardo-pulled-beef-beef',
+    'leonardo-wet-pulled-chicken': '/producto/leonardo-pulled-beef-chicken',
+    'leonardo-wet-pulled-duck': '/producto/leonardo-pulled-beef-duck',
+    'leonardo-wet-pulled-lamb': '/producto/leonardo-pulled-beef-lamb',
+    'leonardo-wet-pulled-turkey': '/producto/leonardo-pulled-beef-turkey'
+  };
+  for (const [id, oldPath] of Object.entries(legacy)) {
+    const copy = catalogEditorialWave6[id];
+    const product = catalogProducts.find(item => item.id === id);
+    const seo = seoProductForPath(productHref(id));
+    assert.equal(product.name, copy.name, id);
+    assert.equal(product.image.alt, copy.name, id);
+    assert.equal(editorialEs[product.name], copy.esName, id);
+    assert.equal(editorialUk[product.name], copy.ukName, id);
+    assert.equal(product.description, copy.description, id);
+    assert.equal(seo.indexable, true, id);
+    let status;
+    let headers;
+    const response = { writeHead(code, values) { status = code; headers = values; }, end() {} };
+    assert.equal(await serveSeo({ method: 'GET', url: oldPath }, response, oldPath), true);
+    assert.equal(status, 301, id);
+    assert.equal(headers.Location, seo.path, id);
   }
 });
 

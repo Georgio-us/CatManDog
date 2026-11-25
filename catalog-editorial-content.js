@@ -14,6 +14,7 @@ import { catalogEditorialRoyalCaninNext } from './catalog-editorial-royal-canin-
 import { catalogEditorialRoyalCaninWave3 } from './catalog-editorial-royal-canin-wave3.js';
 import { catalogEditorialLeonardoWave4 } from './catalog-editorial-leonardo-wave4.js';
 import { catalogEditorialLeonardoWave5 } from './catalog-editorial-leonardo-wave5.js';
+import { catalogEditorialWave6 } from './catalog-editorial-wave6.js';
 import { catalogEditorialLeonardoCorrections } from './catalog-editorial-leonardo-corrections.js';
 
 export const catalogEditorialContent = {
@@ -31,6 +32,7 @@ export const catalogEditorialContent = {
   ...catalogEditorialRoyalCaninWave3,
   ...catalogEditorialLeonardoWave4,
   ...catalogEditorialLeonardoWave5,
+  ...catalogEditorialWave6,
   ...catalogEditorialLeonardoCorrections,
   'leonardo-poultry': {
     source: 'https://www.leonardo-catfood.com/leonardo-adult-gf-poultry-1.8-kg',

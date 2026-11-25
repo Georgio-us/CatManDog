@@ -9670,7 +9670,7 @@ const recipes = [
       "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-04d3623d.jpg",
       "presentation": "editorial",
       "generated": true,
-      "alt": "Leonardo Finest Selection Senior Pure Chicken"
+      "alt": "Leonardo Finest Selection Senior Chicken Pure"
     },
     "imageSource": {
       "name": "Leonardo",
@@ -9962,7 +9962,7 @@ const recipes = [
     "id": "leonardo-wet-pulled-beef",
     "existingId": null,
     "researchRecipeId": "leonardo-bcfaec2c",
-    "name": "Leonardo Pulled Beef Beef",
+    "name": "Leonardo Beef + extra Pulled Beef",
     "brand": "Leonardo",
     "category": "Корм",
     "pet": "cat",
@@ -9990,7 +9990,7 @@ const recipes = [
       "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-bcfaec2c.jpg",
       "presentation": "editorial",
       "generated": true,
-      "alt": "Leonardo Pulled Beef Beef"
+      "alt": "Leonardo Beef + extra Pulled Beef"
     },
     "imageSource": {
       "name": "Leonardo",
@@ -10026,7 +10026,7 @@ const recipes = [
     "id": "leonardo-wet-pulled-chicken",
     "existingId": null,
     "researchRecipeId": "leonardo-244fbf75",
-    "name": "Leonardo Pulled Beef Chicken",
+    "name": "Leonardo Chicken + extra Pulled Beef",
     "brand": "Leonardo",
     "category": "Корм",
     "pet": "cat",
@@ -10054,7 +10054,7 @@ const recipes = [
       "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch5/leonardo-244fbf75.jpg",
       "presentation": "editorial",
       "generated": true,
-      "alt": "Leonardo Pulled Beef Chicken"
+      "alt": "Leonardo Chicken + extra Pulled Beef"
     },
     "imageSource": {
       "name": "Leonardo",
@@ -11102,7 +11102,7 @@ const recipes = [
     "id": "leonardo-wet-pulled-duck",
     "existingId": null,
     "researchRecipeId": "leonardo-e1551323",
-    "name": "Leonardo Pulled Beef Duck",
+    "name": "Leonardo Duck + extra Pulled Beef",
     "brand": "Leonardo",
     "category": "Корм",
     "pet": "cat",
@@ -11130,7 +11130,7 @@ const recipes = [
       "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-e1551323.jpg",
       "presentation": "editorial",
       "generated": true,
-      "alt": "Leonardo Pulled Beef Duck"
+      "alt": "Leonardo Duck + extra Pulled Beef"
     },
     "imageSource": {
       "name": "Leonardo",
@@ -11166,7 +11166,7 @@ const recipes = [
     "id": "leonardo-wet-pulled-lamb",
     "existingId": null,
     "researchRecipeId": "leonardo-707b57a4",
-    "name": "Leonardo Pulled Beef Lamb",
+    "name": "Leonardo Lamb + extra Pulled Beef",
     "brand": "Leonardo",
     "category": "Корм",
     "pet": "cat",
@@ -11194,7 +11194,7 @@ const recipes = [
       "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-707b57a4.jpg",
       "presentation": "editorial",
       "generated": true,
-      "alt": "Leonardo Pulled Beef Lamb"
+      "alt": "Leonardo Lamb + extra Pulled Beef"
     },
     "imageSource": {
       "name": "Leonardo",
@@ -11230,7 +11230,7 @@ const recipes = [
     "id": "leonardo-wet-pulled-turkey",
     "existingId": null,
     "researchRecipeId": "leonardo-1fe1a310",
-    "name": "Leonardo Pulled Beef Turkey",
+    "name": "Leonardo Turkey + extra Pulled Beef",
     "brand": "Leonardo",
     "category": "Корм",
     "pet": "cat",
@@ -11258,7 +11258,7 @@ const recipes = [
       "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-1fe1a310.jpg",
       "presentation": "editorial",
       "generated": true,
-      "alt": "Leonardo Pulled Beef Turkey"
+      "alt": "Leonardo Turkey + extra Pulled Beef"
     },
     "imageSource": {
       "name": "Leonardo",
@@ -11420,7 +11420,7 @@ const recipes = [
       "originalSrc": "https://img.catmandog.es/assets/food/references/priority-batch6/leonardo-e950030e.jpg",
       "presentation": "editorial",
       "generated": true,
-      "alt": "Leonardo Quality Selection Poultry"
+      "alt": "Leonardo Quality Selection Poultry Pure"
     },
     "imageSource": {
       "name": "Leonardo",
