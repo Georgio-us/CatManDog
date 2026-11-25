@@ -152,6 +152,24 @@ async function closeDeliveredAntonOrder(client) {
     [randomUUID(), order.id]);
 }
 
+async function recordVerifiedAntonStripeFee(client, orderId) {
+  // The live Stripe payment breakdown shows EUR 37.35 charged, EUR 0.81 in
+  // processing fees and EUR 36.54 net. The PaymentIntent metadata matches this order.
+  const paymentIntentId = 'pi_3Ub3s1FHvDnlkvf61NDJrKRX';
+  const { rows } = await client.query(`UPDATE orders SET stripe_fee_cents=81,
+    stripe_payment_intent_id=coalesce(stripe_payment_intent_id,$2),
+    stripe_fee_checked_at=now() WHERE id=$1 AND id='ca67dce9-2601-4e79-a25c-fc9d9bd62dc8'
+    AND number='CMD-10004' AND payment_status='paid' AND is_test=false
+    AND total_cents=3735 AND stripe_fee_cents IS NULL
+    AND (stripe_payment_intent_id IS NULL OR stripe_payment_intent_id=$2)
+    RETURNING id`, [orderId, paymentIntentId]);
+  if (!rows.length) return;
+  await client.query(`INSERT INTO order_events(id,order_id,type,actor,note)
+    VALUES($1,$2,'stripe_fee_verified','stripe-dashboard-reconciliation',
+      'Stripe PaymentIntent pi_3Ub3s1FHvDnlkvf61NDJrKRX: charged EUR 37.35, processing fee EUR 0.81, net EUR 36.54; verified in live dashboard 25.11.2026')`,
+    [randomUUID(), orderId]);
+}
+
 export async function seedInitialSalesLedger(client) {
   const neighbor = await client.query(`SELECT id FROM external_sales
     WHERE reference='neighbor-pouches-2026-11-21'`);
@@ -161,6 +179,8 @@ export async function seedInitialSalesLedger(client) {
     AND payment_status='paid' AND is_test=false`);
   if (anton.rows.length === 1) {
     const orderId = anton.rows[0].id;
+    await isolatedReconciliation(client, 'anton_stripe_fee', () =>
+      recordVerifiedAntonStripeFee(client, orderId));
     await addPackaging(client, { orderId },
       { black_bag: 1, green_bag: 1, sticker: 2, welcome_card: 1, paper_coupon: 1 });
     for (const [code, description, cost, expenseRef] of [
