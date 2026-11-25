@@ -5,6 +5,7 @@ import { homeShortcutProducts } from '../home-shortcuts.js';
 import { esProductText } from '../locales/product-es.js';
 import { esDetails } from '../locales/details-es.js';
 import { editorialEs } from '../locales/editorial-translations.js';
+import { catsAtelierEs } from '../locales/cats-atelier.js';
 import { churuDogEs } from '../locales/churu-dog.js';
 import { yaguExpansionEs } from '../locales/yagu-expansion.js';
 import { yaguToyExpansionEs } from '../locales/yagu-toy-expansion.js';
@@ -75,9 +76,9 @@ function spanishShell(template) {
 const categoryLinks = seoCategories.filter(category => category.indexable).map(category =>
   `<a class="article-card" href="${category.path}"><h2>${escapeHtml(category.title)}</h2><p>${escapeHtml(category.intro)}</p></a>`).join('');
 const productDescription = (product, publishedProduct) => publishedProduct.description ||
-  editorialEs[product.description] || churuDogEs[product.description] || esProductText[product.description] ||
+  catsAtelierEs[product.description] || editorialEs[product.description] || churuDogEs[product.description] || esProductText[product.description] ||
   yaguToyExpansionEs[product.description] || yaguChewTestEs[product.description] || yaguBasketEs[product.description] || yaguExpansionEs[product.description] || product.name;
-const productName = product => editorialEs[product.name] || churuDogEs[product.name] || yaguToyExpansionEs[product.name] || yaguChewTestEs[product.name] || yaguBasketEs[product.name] || yaguExpansionEs[product.name] || esProductText[product.name] || product.name;
+const productName = product => catsAtelierEs[product.name] || editorialEs[product.name] || churuDogEs[product.name] || yaguToyExpansionEs[product.name] || yaguChewTestEs[product.name] || yaguBasketEs[product.name] || yaguExpansionEs[product.name] || esProductText[product.name] || product.name;
 const productLinks = categoryPath => seoProducts
   .filter(item => item.indexable && item.categoryPath === categoryPath)
   .map(item => {
@@ -111,7 +112,7 @@ async function pageData(pathname, rows = [], selectedVariantId = null) {
     const selected = stockRows.find(row => row.variant_id ===
       (selectedVariantId || defaultVariantId(product, stockRows)));
     const image = productImage(product, selected);
-    const facts = customerFacts(product.details).map(detail => editorialEs[detail] || esDetails[detail] || yaguToyExpansionEs[detail] || yaguChewTestEs[detail] || yaguBasketEs[detail] || yaguExpansionEs[detail] ||
+    const facts = customerFacts(product.details).map(detail => catsAtelierEs[detail] || editorialEs[detail] || esDetails[detail] || yaguToyExpansionEs[detail] || yaguChewTestEs[detail] || yaguBasketEs[detail] || yaguExpansionEs[detail] ||
       (!/[А-Яа-яЁё]/u.test(detail) ? detail : null)).filter(Boolean);
     const name = publishedProduct.name || productName(product);
     const categoryLabel = publishedProduct.indexable
