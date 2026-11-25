@@ -42,7 +42,13 @@ export function prioritizeHomeCats(products) {
     featured.push(product);
     byId.delete(id);
   }
-  return [...featured, ...byId.values()];
+  const available = [];
+  const unavailable = [];
+  for (const product of byId.values()) {
+    const shelf = snapshots(product).some(canBuy) ? available : unavailable;
+    shelf.push(product);
+  }
+  return [...featured, ...interleaveHomeGroups('cat', available), ...unavailable];
 }
 
 const definitions = [
@@ -88,6 +94,19 @@ export function homeGroupForProduct(product) {
     case 'Подарочные наборы': return 'gifts';
     default: return `category:${product.category}`;
   }
+}
+
+export function interleaveHomeGroups(pet, products) {
+  const groups = homeGroupsForPet(pet, products).map(group =>
+    products.filter(product => homeGroupForProduct(product) === group.id)
+  );
+  const ordered = [];
+  for (let i = 0; groups.some(group => group[i]); i++) {
+    for (const group of groups) {
+      if (group[i]) ordered.push(group[i]);
+    }
+  }
+  return ordered;
 }
 
 export function homeGroupsForPet(pet, products) {

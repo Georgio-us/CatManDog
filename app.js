@@ -9,7 +9,7 @@ import { atelierHasOptions, atelierDefaults, atelierSelection, atelierOptionsMar
 import { productGallery } from './product-gallery.js?v=atelier-all-spec-galleries-20261120';
 import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=delivery-regions-20261122';
 import { recommendForProduct } from './recommendations.js?v=atelier-related-20261121';
-import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet, homeCatOrder, homeCatFeaturedVariant, prioritizeHomeCats } from './home-catalog.js?v=home-cat-24';
+import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet, homeCatOrder, homeCatFeaturedVariant, prioritizeHomeCats, interleaveHomeGroups } from './home-catalog.js?v=home-cat-rounds';
 import { categories, products, catalogProducts, articles } from './data.js?v=royal-canin-order-20261125';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=yagu-toys-20261116';
 import { createCheckoutUI } from './checkout-ui.js?v=delivery-regions-20261122';
@@ -512,11 +512,7 @@ function homeCatalogProducts(){
   if(homePrice) list = list.filter(p => matchesHomePrice(p,homePrice));
   if(homeFeature) list = list.filter(p => matchesHomeFeature(p,homeGroup,homeFeature));
   if(homeGroup) return list;
-  // Show a few products from each group while no category is selected
-  const groups = homeGroupsForPet(homePet,list).map(group => list.filter(p => homeGroupForProduct(p) === group.id));
-  const ordered = [];
-  for(let i=0; groups.some(group => group[i]); i++) groups.forEach(group => {if(group[i]) ordered.push(group[i]);});
-  return isHomeCatShelf()?prioritizeHomeCats(ordered):ordered;
+  return isHomeCatShelf()?prioritizeHomeCats(list):interleaveHomeGroups(homePet,list);
 }
 function homeFacet(label,key,value,options){
   return `<label class="home-facet"><span>${label}</span><select data-home-facet="${key}" aria-label="${label}"><option value="">${key==='brand'?'Все бренды':key==='price'?'Любая цена':'Все варианты'}</option>${options.map(option=>`<option value="${escape(option.value)}" ${option.value===value?'selected':''}>${escape(option.label)}</option>`).join('')}</select><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></label>`;
