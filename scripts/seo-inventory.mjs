@@ -1,4 +1,5 @@
 import { catalogEditorialContent } from '../catalog-editorial-content.js';
+import { products } from '../data.js';
 import { seoProducts } from '../seo-products.js';
 import { stockSeoCopy } from '../stock-seo-copy.js';
 import { seoWave2Copy } from '../seo-wave2-copy.js';
@@ -6,8 +7,10 @@ import { seoWave2Copy } from '../seo-wave2-copy.js';
 const editorial = new Set(Object.keys(catalogEditorialContent));
 const stock = new Set(Object.keys(stockSeoCopy));
 const wave2 = new Set(Object.keys(seoWave2Copy));
+const catalogNames = new Map(products.map(product => [product.id, product.name]));
 const families = seoProducts.map(product => ({
   id: product.id,
+  name: product.name || catalogNames.get(product.id) || product.id,
   path: product.path,
   indexable: product.indexable,
   copyEvidence: editorial.has(product.id) ? 'three-language-editorial'
@@ -24,7 +27,9 @@ const result = {
     threeLanguageEditorial: families.filter(item => item.copyEvidence === 'three-language-editorial').length,
     specificSpanishSeo: families.filter(item => item.copyEvidence === 'specific-spanish-seo').length,
     threeLanguageWave2: families.filter(item => item.copyEvidence === 'three-language-wave2').length,
-    needsCopyAudit: families.filter(item => item.copyEvidence === 'needs-copy-audit').length
+    needsCopyAudit: families.filter(item => item.copyEvidence === 'needs-copy-audit').length,
+    indexableNeedsCopyAudit: families.filter(item => item.indexable && item.copyEvidence === 'needs-copy-audit').length,
+    noindexNeedsCopyAudit: families.filter(item => !item.indexable && item.copyEvidence === 'needs-copy-audit').length
   }
 };
 
