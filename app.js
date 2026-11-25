@@ -31,7 +31,7 @@ import { seoPickForPath } from './seo-picks.js';
 import { analyticsItem, announceCommerce } from './analytics-events.js?v=delivery-status-3';
 import { installAnalytics } from './analytics-consent.js?v=internal-browser-20261117';
 import { createCartActivity } from './cart-activity.js?v=internal-browser-20261117';
-import { searchCatalog } from './catalog-search.js?v=store-search-20261125';
+import { searchCatalog, foodCategoryForQuery, matchesFoodCategory } from './catalog-search.js?v=food-category-search-20261125';
 import { keepUnavailableLast } from './catalog-stock-sort.js?v=unavailable-last-20261119';
 import { rememberProductOrigin, productOrigin, requestProductReturn,
   takeProductReturnScroll } from './product-return.js';
@@ -606,7 +606,8 @@ function catalogSelection(params){
 function catalog(){const {params}=route();const landing=!location.hash?seoCategoryForPath(location.pathname):null;const list=filteredProducts(params);const title=landing?.title||homeGroups.find(group=>group.id===params.get('group'))?.label||categoryLabel(params.get('category'))||(params.get('pet')==='cat'?'Для кошек':params.get('pet')==='dog'?'Для собак':'Всё для хорошей жизни');const shownPriceLimit=params.get('maxPrice')?Number(params.get('maxPrice')):priceLimit;const homeSelection=catalogSelection(params);return `<div class="page">${crumbs('Каталог')}<h1 class="page-title">${escape(title)}</h1><p class="lead">${landing?.intro ? escape(landing.intro) : (params.get('category')==='Корм'?(params.get('pet')==='dog'?'Корм для собак - от повседневных рационов до особенных потребностей':'Корм для кошек - от ежедневного рациона до особенных потребностей'):params.get('category')==='Лакомства'?'Кремовые лакомства, снеки и топперы для кошек':params.get('category')==='Игрушки и аксессуары'?'Игрушки, когтеточки, коврики и другие вещи для игры и занятий':params.get('category')==='Миски и поилки'?'Свежая вода каждый день - фонтаны, сменные фильтры и любимые миски':params.get('category')==='Окна и балконы'?'Сетки, крепления и места для отдыха - для его маленького мира у окна':'От любимого корма до новой игрушки Нужные вещи, выбранные с заботой')}</p><div class="catalog-toolbar"><div class="pet-tabs">${[['','Все питомцы'],['cat','Для кошек'],['dog','Для собак']].map(([value,label])=>`<button class="pill ${(params.get('pet')||'')===value?'active':''}" data-pet="${value}">${label}</button>`).join('')}</div><form class="catalog-search search-combo" data-search-form="catalog" role="search"><label class="visually-hidden" for="catalog-search">Поиск по каталогу</label><div class="search-combo-field">${icon('search')}<input id="catalog-search" data-search-input type="search" value="${escape(params.get('q')||'')}" placeholder="Название товара или бренд" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="catalog-search-suggestions" aria-expanded="false"></div><div class="search-suggestions" id="catalog-search-suggestions" hidden></div></form><select id="sort" aria-label="Сортировка товаров"><option value="popular">По умолчанию</option><option value="low" ${params.get('sort')==='low'?'selected':''}>Сначала дешевле</option><option value="high" ${params.get('sort')==='high'?'selected':''}>Сначала дороже</option><option value="name" ${params.get('sort')==='name'?'selected':''}>По названию</option></select></div><div class="catalog-layout"><aside class="filters" aria-label="Фильтры товаров"><h3>Категории</h3>${['Все товары',...categories].map((c,i)=>`<button class="filter-category ${(!params.get('category')&&!params.get('group')&&i===0)||params.get('category')===c?'active':''}" data-category="${i?c:''}">${categoryLabel(c)}</button>`).join('')}<div class="filter-price"><h3>Цена</h3><label for="price-range">До <span id="price-label">${money(shownPriceLimit)}</span></label><input id="price-range" type="range" min="1" max="${catalogPriceMax}" value="${shownPriceLimit}" step="1"><button class="text-link" style="background:none" data-reset>Сбросить фильтры</button></div></aside><div>${params.get('category')==='Корм'?foodFilters(params):''}${homeSelection}<p class="results-count" id="results-count">${itemCount(list.length)}${params.get('q')?` · Поиск: «${escape(params.get('q'))}»`:''}</p><div class="product-grid" id="catalog-grid">${list.length?list.map(product=>card(product)).join(''):searchEmpty(params)|| (params.get('pet')==='dog'?empty('Пока ничего не нашлось','Попробуйте другую категорию или измените запрос','Сбросить фильтры','#/catalog?pet=dog'):params.get('category')&&categories.includes(params.get('category'))&&!catalogProducts.some(p=>categoryKey(p)===params.get('category'))?empty('В этой категории нет товаров','Посмотрите другие товары для вашего питомца','Открыть каталог','#/catalog'):empty('Пока ничего не нашлось','Попробуйте другую категорию или измените запрос','Сбросить фильтры','#/catalog'))}</div></div></div></div>`;}
 function findStoreProducts(list, query, alternatives=false){
   if(!query.trim())return [];
-  return searchCatalog(list.map(product=>({
+  const foodType=foodCategoryForQuery(query);
+  const entries=(foodType?list.filter(product=>matchesFoodCategory(product,foodType)):list).map(product=>({
     product,
     title: translate(product.name),
     brand: product.brand,
@@ -616,7 +617,12 @@ function findStoreProducts(list, query, alternatives=false){
       label: [sku.label, sku.weight, ...(sku.sizes||[]), sku.manufacturerSku, sku.model].filter(Boolean).join(' '),
       available: canBuy(sku)
     }))
-  })),query,{alternatives});
+  }));
+  if(foodType)return entries.flatMap(entry=>{
+    const variant=entry.variants.find(item=>item.available)||entry.variants[0];
+    return variant?[{entry,variant}]:[];
+  }).sort((a,b)=>Number(b.variant.available)-Number(a.variant.available));
+  return searchCatalog(entries,query,{alternatives});
 }
 function searchResultLink({entry,variant}){
   const {product}=entry;
@@ -625,7 +631,18 @@ function searchResultLink({entry,variant}){
   const price=storefrontPrice(sku);
   return `<a class="search-suggestion search-product" href="${escape(href)}">${imageBlock(sku.image||product.image,'search-product-image',true)}<div class="search-product-copy"><strong>${escape(entry.title)}</strong><small>${escape(translate(sku.label||sku.weight||product.brand||''))}</small><small>${escape(translate(variant.available?'Доступно к заказу':'Недоступно'))}</small></div><strong>${price===null?escape(translate('Цена уточняется')):money(price)}</strong></a>`;
 }
+function foodCategoryHref(foodType){
+  const params=new URLSearchParams({category:'Корм'});
+  if(foodType!=='all')params.set('foodType',foodType);
+  return `/catalogo?${params}`;
+}
+function foodCategoryLabel(foodType){
+  const labels={ru:['Корм','Сухой корм','Влажный корм'],es:['Alimentación','Pienso seco','Comida húmeda'],uk:['Корм','Сухий корм','Вологий корм']};
+  return (labels[locale()]||labels.ru)[foodType==='dry'?1:foodType==='wet'?2:0];
+}
 function allSearchResults(query){
+  const foodType=foodCategoryForQuery(query);
+  if(foodType)return foodCategoryHref(foodType);
   return `/catalogo?q=${encodeURIComponent(query.trim())}`;
 }
 function searchEmpty(params){
@@ -643,7 +660,10 @@ function searchSuggestions(form){
   const query=input.value.trim();
   const suggestions=query.length>=2?findStoreProducts(catalogProducts,query,true).slice(0,6):[];
   const alternative=suggestions[0]?.alternative;
-  panel.innerHTML=query.length>=2?`${alternative||!suggestions.length?`<p class="search-panel-note" role="status">${escape(translate(alternative?'Похожие товары':'Пока ничего не нашлось'))}</p>`:''}${suggestions.map(searchResultLink).join('')}<a class="search-suggestion search-all" href="${allSearchResults(query)}">${escape(translate('Все результаты'))} ${icon('arrow')}</a>`:'';
+  const foodType=foodCategoryForQuery(query);
+  const category=foodType?`<a class="search-suggestion search-all search-category" href="${foodCategoryHref(foodType)}"><span>${escape(({ru:'Категория',es:'Categoría',uk:'Категорія'})[locale()]||'Категория')} · ${escape(foodCategoryLabel(foodType))}</span>${icon('arrow')}</a>`:'';
+
+  panel.innerHTML=query.length>=2?`${alternative||!suggestions.length?`<p class="search-panel-note" role="status">${escape(translate(alternative?'Похожие товары':'Пока ничего не нашлось'))}</p>`:''}${category}${suggestions.map(searchResultLink).join('')}<a class="search-suggestion search-all" href="${allSearchResults(query)}">${escape(translate('Все результаты'))} ${icon('arrow')}</a>`:'';
   panel.hidden=!panel.innerHTML;
   input.setAttribute('aria-expanded',String(!panel.hidden));
 }

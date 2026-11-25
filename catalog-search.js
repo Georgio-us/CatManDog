@@ -2,6 +2,20 @@ export function normalizeSearch(value) {
   return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase().trim();
 }
 
+const foodQueries = new Map([
+  ['корм', 'all'], ['корма', 'all'], ['alimentacion', 'all'], ['comida', 'all'],
+  ['сухой корм', 'dry'], ['сухий корм', 'dry'], ['сухий корм для тварин', 'dry'], ['pienso seco', 'dry'], ['comida seca', 'dry'], ['alimento seco', 'dry'], ['pienso', 'dry'],
+  ['влажный корм', 'wet'], ['вологий корм', 'wet'], ['comida humeda', 'wet'], ['alimento humedo', 'wet'],
+].map(([query, type]) => [normalizeSearch(query), type]));
+
+export function foodCategoryForQuery(value) {
+  return foodQueries.get(normalizeSearch(value).replace(/\s+/g, ' ')) || null;
+}
+
+export function matchesFoodCategory(product, foodType) {
+  return product.category === 'Корм' && (foodType === 'all' || product.foodType === foodType);
+}
+
 const units = { кг: 'kg', г: 'g', л: 'l', мл: 'ml' };
 
 function tokens(value) {

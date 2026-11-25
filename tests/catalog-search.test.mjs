@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { searchCatalog } from '../catalog-search.js';
+import { searchCatalog, foodCategoryForQuery, matchesFoodCategory } from '../catalog-search.js';
 
 const royalCanin = {
   title: 'Royal Canin Sterilised 37',
@@ -36,4 +36,15 @@ test('related products are explicitly marked and exclude unavailable options', (
   assert.equal(hit.entry, royalCanin);
   assert.equal(hit.alternative, true);
   assert.deepEqual(searchCatalog(entries, 'xyz', { alternatives: true }), []);
+});
+
+test('generic food searches resolve to the corresponding catalog category', () => {
+  assert.equal(foodCategoryForQuery('корм'), 'all');
+  assert.equal(foodCategoryForQuery('Сухой  корм'), 'dry');
+  assert.equal(foodCategoryForQuery('Comida húmeda'), 'wet');
+  assert.equal(foodCategoryForQuery('вологий корм'), 'wet');
+  assert.equal(foodCategoryForQuery('Leonardo сухой корм'), null);
+  assert.equal(matchesFoodCategory({ category: 'Корм', foodType: 'dry' }, 'dry'), true);
+  assert.equal(matchesFoodCategory({ category: 'Корм', foodType: 'wet' }, 'dry'), false);
+  assert.equal(matchesFoodCategory({ category: 'Аксессуары' }, 'all'), false);
 });
