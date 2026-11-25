@@ -1712,11 +1712,15 @@ button:hover:not(:disabled) {
   position: relative;
   min-height: 530px;
   border-radius: var(--radius);
-  overflow: hidden;
   background: #edede9;
   display: flex;
   align-items: center;
 }
+
+.hero:has(.hero-search .search-suggestions:not([hidden])) { z-index: 2; }
+
+.hero>img,
+.hero:after { border-radius: inherit; }
 
 .hero>img {
   position: absolute;
