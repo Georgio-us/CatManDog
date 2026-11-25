@@ -3330,11 +3330,14 @@ details .text-link {
   }
 
   .filters {
+    margin-bottom: 18px;
+  }
+
+  .catalog-category-list {
     display: flex;
     gap: 5px;
     overflow-x: auto;
     padding: 14px 0;
-    margin-bottom: 22px;
   }
 
   .filters h3 {
@@ -3342,7 +3345,22 @@ details .text-link {
   }
 
   .filter-price {
-    display: none;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 4px 12px;
+    margin-top: 0;
+    padding-top: 8px;
+  }
+
+  .filter-price input {
+    min-width: 0;
+    margin: 0;
+  }
+
+  .filter-price button {
+    grid-column: 1 / -1;
+    justify-self: start;
   }
 
   .filter-category {
@@ -4211,7 +4229,7 @@ details .text-link {
 }
 
 @media (max-width: 760px) {
-  .filters {
+  .catalog-category-list {
     padding-right: 28px;
     scroll-snap-type: x proximity;
     -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 28px), transparent 100%);
