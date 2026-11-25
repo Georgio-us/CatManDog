@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { editorialFingerprint, seoVerdict, seoWorkScope } from '../scripts/seo-verdict.mjs';
+import { catalogEditorialContent } from '../catalog-editorial-content.js';
+import { readFileSync } from 'node:fs';
 
 const product = { id: 'sku-1', path: '/producto/sku-1', indexable: true };
 const copy = { source: 'https://maker.example/item', description: 'Проверенный товар для кошек',
@@ -52,6 +54,12 @@ test('SEO photo audit checks the selected variant image rather than the shared p
   const stale = seoVerdict({ ...input, variants: [selected], review });
   assert.equal(stale.status, 'проверить');
   assert.match(stale.reasons.join(' '), /фото изменилось/);
+});
+
+test('Churu editorial evidence is tied to the current copy', () => {
+  const records = JSON.parse(readFileSync(new URL('../seo-review-records.json', import.meta.url), 'utf8'));
+  const id = 'cmd-source-694e05cdc1b2582c';
+  assert.equal(records[id].editorialSha256, editorialFingerprint(catalogEditorialContent[id]));
 });
 
 test('SEO work queue separates deferred brands from orderable candidates and HeyboPet decisions', () => {
