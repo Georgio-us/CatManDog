@@ -20,25 +20,28 @@ test('gallery renders a primary image and selectable, localized secondary images
   assert.match(html, /data-gallery-caption="Gancho"/);
 });
 
-test('Flat 75 cm page keeps the studio cover and seven supplier specification photos', () => {
+test('Flat 75 cm page starts with the supplier original, then the studio photo and seven specifications', () => {
   const shelf = catsAtelierProducts.find(item => item.id === atelierShelfId);
-  assert.match(shelf.image.src, /SH-W-F75-G-studio-v6\.webp$/);
-  assert.equal(shelf.gallery.length, 7);
-  assert.deepEqual(shelf.gallery.map(image => Number(image.originalSrc.match(/\/(\d+)-thickbox_default\//)?.[1])),
+  assert.match(shelf.image.src, /supplier-main-2026-11-25/);
+  assert.match(shelf.gallery[0].src, /SH-W-F75-G-studio-v6\.webp$/);
+  assert.equal(shelf.gallery.length, 8);
+  assert.deepEqual(shelf.gallery.slice(1).map(image => Number(image.originalSrc.match(/\/(\d+)-thickbox_default\//)?.[1])),
     [557, 286, 287, 288, 290, 291, 645]);
   const html = productGallery(shelf, imageBlock, value => value, 'es');
-  assert.match(html, /data-gallery-index="7"/);
+  assert.match(html, /data-gallery-index="8"/);
   assert.match(html, /data-gallery-reference="true"/);
   assert.match(html, /data-gallery-caption="Paleta del tejido DOT"/);
 });
 
-test('all Cat’s Atelier models retain a studio cover and localized supplier detail gallery', () => {
+test('all Cat’s Atelier models show their supplier original first and studio photo second', () => {
   assert.equal(catsAtelierProducts.length, 39);
   for (const item of catsAtelierProducts) {
     assert.match(item.image.src, /^https:\/\/img\.catmandog\.es\/assets\/cats-atelier\//);
-    assert.ok(item.gallery?.length >= 1, `No detail photos: ${item.manufacturerSku}`);
+    assert.equal(item.image.presentation, 'supplier');
+    assert.equal(item.gallery[0].presentation, 'editorial');
+    assert.ok(item.gallery?.length >= 2, `No detail photos: ${item.manufacturerSku}`);
     const seen = new Set();
-    for (const image of item.gallery) {
+    for (const image of item.gallery.slice(1)) {
       assert.match(image.src, /^https:\/\/img\.catmandog\.es\/assets\/cats-atelier\//);
       assert.match(image.originalSrc, /^https:\/\/catsatelier\.com\/\d+-thickbox_default\//);
       assert.ok(!seen.has(image.originalSrc), `Duplicate photo: ${item.manufacturerSku}`);

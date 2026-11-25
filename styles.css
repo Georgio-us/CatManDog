@@ -1417,6 +1417,12 @@ button:hover:not(:disabled) {
   background: #d9d9d9;
 }
 
+.supplier-product-image {
+  --product-image-padding: 0px;
+  --product-image-fit: contain;
+  background: #f5f4f2;
+}
+
 .retail-note {
   font-size: 12px;
   line-height: 1.7;

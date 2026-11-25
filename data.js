@@ -21,7 +21,7 @@ import { launchHeyboPetProducts } from './launch-heybopet-products.js';
 import { applyChuruRetailFormats } from './churu-retail-formats.js';
 import { churuDogProducts } from './churu-dog-products.js';
 import { confirmedDemandProducts } from './confirmed-demand-products.js';
-import { catsAtelierProducts } from './cats-atelier-products.js?v=atelier-long-copy-20261121';
+import { catsAtelierProducts } from './cats-atelier-products.js?v=atelier-supplier-main-20261125';
 import { newLitterProducts } from './new-litter-products.js?v=litter-studio-20261121';
 import { withSelectedAcanaOrijenFormats } from './acana-orijen-selected-formats.js';
 import { catalogEditorialContent } from './catalog-editorial-content.js';

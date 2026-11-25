@@ -1,6 +1,6 @@
 import { hasVariants } from './variants.js?v=sale-price-policy-20261109';
 import { orderedVariants } from './product-content.js?v=catalog-sku-audit-20261110';
-import { catsAtelierLegacyCopy } from './cats-atelier-products.js?v=atelier-long-copy-2-20261121';
+import { catsAtelierLegacyCopy } from './cats-atelier-products.js?v=atelier-supplier-main-20261125';
 
 const catalogTags = {
   'cmd-source-39c2d5db76be47f7': 'Мелкие породы',
@@ -13,9 +13,10 @@ function catalogImage(path, previousImages, alt) {
     catch { return null; }
   };
   const previous = previousImages.find(image => image?.src && imagePath(image.src) === imagePath(path));
-  const studioAsset = /\/(?:assets\/(?:launch-studio-[^/]+|cats-atelier|[^/]+\/editorial)|media\/(?:launch-studio|churu-formats)-[^/]+|media\/yagu)\//u.test(path);
+  const supplierAsset = path.includes('/assets/cats-atelier/supplier-main-2026-11-25/');
+  const studioAsset = !supplierAsset && /\/(?:assets\/(?:launch-studio-[^/]+|cats-atelier|[^/]+\/editorial)|media\/(?:launch-studio|churu-formats)-[^/]+|media\/yagu)\//u.test(path);
   return { ...(previous || {}), src: path, alt,
-    presentation: studioAsset ? 'editorial' : previous?.presentation };
+    presentation: supplierAsset ? 'supplier' : studioAsset ? 'editorial' : previous?.presentation };
 }
 
 export function applyServerPrices(products, entries) {

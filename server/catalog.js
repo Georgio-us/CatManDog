@@ -18,7 +18,7 @@ import { catalogEditorialAcanaWet } from '../catalog-editorial-acana-wet.js';
 import { catalogEditorialChuruCat } from '../catalog-editorial-churu-cat.js';
 import { catalogEditorialNext } from '../catalog-editorial-next.js';
 import { publishYaguToys } from './yagu-toy-publication.js';
-import { catsAtelierLegacyCopy } from '../cats-atelier-products.js';
+import { catsAtelierLegacyCopy, catsAtelierProducts } from '../cats-atelier-products.js';
 import { seedInitialSalesLedger } from './initial-sales-ledger.js';
 
 const cents = value => Number.isFinite(value) && value > 0 ? Math.round(value * 100) : null;
@@ -122,6 +122,28 @@ export async function importCatalog(db, items = products) {
         await client.query(`UPDATE catalog_variants SET source_price_cents=$2
           WHERE id=$1 AND source_price_cents IS NULL AND price_override_cents IS NULL
             AND price_confirmed=false`, [variant.id, variant.sourcePriceCents]);
+      }
+    }
+    if (items === products) {
+      const supplierPhotoMigration = 'atelier_supplier_main_images_2026_11_25';
+      const applied = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [supplierPhotoMigration]);
+      if (!applied.rows.length) {
+        for (const card of catsAtelierProducts) {
+          const previous = card.gallery[0].src;
+          const current = card.image.src;
+          const source = JSON.stringify({ image: card.image, gallery: card.gallery });
+          const changed = await client.query(`UPDATE catalog_products SET image_path=$2,
+            source=CASE WHEN source->'image'->>'src'=$3
+              THEN source || $4::jsonb ELSE source END
+            WHERE id=$1 AND image_path=$3`, [card.id, current, previous, source]);
+          if (changed.rowCount) await client.query(`UPDATE catalog_variants SET
+            image_path=CASE WHEN image_path=$3 THEN $2 ELSE image_path END,
+            source=CASE WHEN source->'image'->>'src'=$3
+              THEN source || $4::jsonb ELSE source END,updated_at=now()
+            WHERE product_id=$1 AND (image_path=$3 OR source->'image'->>'src'=$3)`,
+          [card.id, current, previous, source]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [supplierPhotoMigration]);
       }
     }
     if (items === products) {

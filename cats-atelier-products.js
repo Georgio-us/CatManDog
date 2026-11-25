@@ -1,4 +1,5 @@
 import { atelierDescription } from './atelier-description.js';
+import { atelierSupplierMain } from './atelier-supplier-main.js';
 
 // Cat’s Atelier assortment from supplier export dated 2026-11-18.
 // Retail prices mirror supplier public prices; purchase costs remain unknown.
@@ -4225,9 +4226,20 @@ export const catsAtelierProducts = [
       : product.name
   );
   const corrected = { ...product, name };
+  const supplierImage = atelierSupplierMain.get(product.manufacturerSku);
+  if (!supplierImage) throw new Error(`Missing Cat's Atelier supplier image: ${product.manufacturerSku}`);
   return {
     ...corrected,
-    image: { ...product.image, alt: name, presentation: 'editorial' },
+    image: {
+      src: supplierImage, originalSrc: product.image.originalSrc, alt: name,
+      reference: true, presentation: 'supplier'
+    },
+    gallery: [
+      { ...product.image, alt: name, presentation: 'editorial', caption: {
+        ru: 'Студийное фото CatManDog', es: 'Foto de estudio CatManDog', uk: 'Студійне фото CatManDog'
+      } },
+      ...(product.gallery || [])
+    ],
     description: atelierDescription(corrected, 'ru').summary
   };
 });

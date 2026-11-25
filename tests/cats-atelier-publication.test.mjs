@@ -15,7 +15,8 @@ test('all 39 Cat’s Atelier SKUs have distinct orderable cards in the requested
   assert.equal(cards.filter(card => card.productType === 'window').length, 5);
   assert.equal(cards.filter(card => card.productType === 'wall').length, 20);
   assert.equal(cards.filter(card => card.productType === 'accessory').length, 14);
-  assert.equal(new Set(cards.map(card => card.image.src)).size, 27);
+  assert.equal(new Set(cards.map(card => card.image.src)).size, 25);
+  assert.equal(new Set(cards.map(card => card.gallery[0].src)).size, 27);
   assert.ok(cards.every(card => card.image.src.startsWith('https://img.catmandog.es/assets/cats-atelier/')));
   assert.ok(rows.every(({ variant }) => variant.sourceOrderable));
   assert.ok(rows.every(({ variant }) => salePriceDecision({
