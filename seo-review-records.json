@@ -126,8 +126,14 @@
       "cmd-source-694e05cdc1b2582c-salmon-chicken-stick"
     ],
     "editorialSha256": "50e1cff1641c220f28b03114989c74e9aee84cea116cb37186ad6ff456326236",
-    "imageIdentityVerified": false,
-    "note": "Производитель подтверждает смешанный короб 20 x 14 г с рецептами Salmon и Salmon with Chicken. Отдельный тюбик - наша единица продажи из открытого короба; его точный студийный кадр с упаковкой производителя ещё не сопоставлен визуально"
+    "imageIdentityVerified": true,
+    "imageEvidenceUrl": "https://inabafoods-europe.com/wp-content/uploads/2026/04/INABA-Churu-Salmon-and-Chicken-Variety-20P-EU137-front-943x1024.webp",
+    "imagePaths": {
+      "cmd-source-sku-9c96bc24c8863222": "https://img.catmandog.es/assets/launch-studio-2026-11-04/churu-salmon-pollo-20x14g.webp",
+      "cmd-source-694e05cdc1b2582c-salmon-stick": "/media/churu-formats-2026-11-05/churu-salmon-stick.webp",
+      "cmd-source-694e05cdc1b2582c-salmon-chicken-stick": "/media/churu-formats-2026-11-05/churu-salmon-chicken-stick.webp"
+    },
+    "note": "Визуально сверены три опубликованных кадра: короб 20 x 14 г с 10 тюбиками Salmon и 10 Salmon with Chicken, отдельный тюбик Salmon с розовой меткой, отдельный Salmon with Chicken с жёлтой меткой. Образцы отдельных рецептов: https://inabafoods-europe.com/product/churu-salmon-recipe/ и https://inabafoods-europe.com/product/churu-salmon-with-chicken-recipe/. Поштучная продажа идёт из того же смешанного короба через учётную перефасовку"
   },
   "tc-b5a74b28d5": {
     "productId": "tc-b5a74b28d5",

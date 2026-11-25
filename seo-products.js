@@ -109,6 +109,7 @@ const releasedByCategory = {
     'tc-185b159101', 'tc-5da4b0e874', 'tc-0206d66a70',
     'tc-4e50c58957', 'tc-0707caf730', 'tc-768abf17c2',
     'tc-dc3d6d94c2', 'tc-713f42fb9a',
+    'cmd-source-694e05cdc1b2582c',
     'tc-82b5e1f561', 'tc-c4fc3a3e21', 'tc-719843e78f',
     'tc-06a4db0143', 'tc-1877f4a340', 'tc-b121011ccc'
   ],

@@ -5,6 +5,7 @@ import { homeShortcutProducts } from '../home-shortcuts.js';
 import { esProductText } from '../locales/product-es.js';
 import { esDetails } from '../locales/details-es.js';
 import { editorialEs } from '../locales/editorial-translations.js';
+import { churuFormatsEs } from '../locales/churu-formats.js';
 import { catsAtelierEs } from '../locales/cats-atelier.js';
 import { atelierDescription } from '../atelier-description.js';
 import { churuDogEs } from '../locales/churu-dog.js';
@@ -38,7 +39,7 @@ const absoluteImage = image => {
 };
 const price = cents => (cents / 100).toFixed(2);
 const variantUrl = (path, id) => `${origin}${path}?variant=${encodeURIComponent(id)}`;
-export const spanishVariantLabel = label => String(label || '')
+export const spanishVariantLabel = label => churuFormatsEs[label] || String(label || '')
   .replace(/Зелёный чай/giu, 'Té verde')
   .replace(/Для небольших животных/giu, 'Para animales pequeños')
   .replace(/Размер\s+([A-Z0-9]+)/giu, 'Talla $1')
@@ -79,7 +80,7 @@ const categoryLinks = seoCategories.filter(category => category.indexable).map(c
 const productDescription = (product, publishedProduct) => publishedProduct.description ||
   catsAtelierEs[product.description] || editorialEs[product.description] || churuDogEs[product.description] || esProductText[product.description] ||
   yaguToyExpansionEs[product.description] || yaguChewTestEs[product.description] || yaguBasketEs[product.description] || yaguExpansionEs[product.description] || product.name;
-const productName = product => catsAtelierEs[product.name] || editorialEs[product.name] || churuDogEs[product.name] || yaguToyExpansionEs[product.name] || yaguChewTestEs[product.name] || yaguBasketEs[product.name] || yaguExpansionEs[product.name] || esProductText[product.name] || product.name;
+const productName = product => catsAtelierEs[product.name] || churuFormatsEs[product.name] || editorialEs[product.name] || churuDogEs[product.name] || yaguToyExpansionEs[product.name] || yaguChewTestEs[product.name] || yaguBasketEs[product.name] || yaguExpansionEs[product.name] || esProductText[product.name] || product.name;
 const productLinks = categoryPath => seoProducts
   .filter(item => item.indexable && item.categoryPath === categoryPath)
   .map(item => {
@@ -108,7 +109,7 @@ async function pageData(pathname, rows = [], selectedVariantId = null) {
       variants: stockRows.map(row => ({ id: row.variant_id, label: row.label })) });
     if (!product) return null;
     const formats = (product.variants?.length ? orderedVariants(product).map(variant => variant.label) : product.sizes || [])
-      .map(label => escapeHtml(label.replace(/ кг$/u, ' kg').replace(/ г$/u, ' g')));
+      .map(label => escapeHtml(spanishVariantLabel(label)));
     const description = productDescription(product, publishedProduct);
     const atelierCopy = atelierDescription(product, 'es');
     const selected = stockRows.find(row => row.variant_id ===
