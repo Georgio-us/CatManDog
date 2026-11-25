@@ -1,5 +1,6 @@
-import { catalogEditorialContent } from '../catalog-editorial-content.js?v=open-seo-audit-20261125';
+import { catalogEditorialContent } from '../catalog-editorial-content.js?v=royal-canin-next-20261125';
 import { catalogEditorialOpenAudit } from '../catalog-editorial-open-audit.js';
+import { catalogEditorialRoyalCaninNext } from '../catalog-editorial-royal-canin-next.js';
 import { catalogEditorialNextNames } from '../catalog-editorial-next.js';
 
 // Translations of verified catalog copy. Match the server's exact source text so
@@ -104,6 +105,13 @@ const detailCopy = {
 };
 
 const pairs = [
+  ['Royal Canin Persian Adult - паштет', ['Royal Canin Persian Adult - paté', 'Royal Canin Persian Adult - паштет']],
+  ['Royal Canin Ageing 11+ - соус', ['Royal Canin Ageing 11+ en salsa', 'Royal Canin Ageing 11+ у соусі']],
+  ['Royal Canin Digestive Care - соус', ['Royal Canin Digestive Care en salsa', 'Royal Canin Digestive Care у соусі']],
+  ['Royal Canin Hair & Skin - соус', ['Royal Canin Hair & Skin Care en salsa', 'Royal Canin Hair & Skin Care у соусі']],
+  ['Royal Canin Hairball Care - соус', ['Royal Canin Hairball Care en salsa', 'Royal Canin Hairball Care у соусі']],
+  ['Royal Canin Indoor Sterilised - желе', ['Royal Canin Indoor Sterilised en gelatina', 'Royal Canin Indoor Sterilised у желе']],
+  ['Royal Canin Indoor Sterilised - соус', ['Royal Canin Indoor Sterilised en salsa', 'Royal Canin Indoor Sterilised у соусі']],
   ['Royal Canin Kitten - желе', ['Royal Canin Kitten - en gelatina', 'Royal Canin Kitten - у желе']],
   ['Royal Canin Kitten в желе 85 г', ['Royal Canin Kitten en gelatina 85 g', 'Royal Canin Kitten у желе 85 г']],
   ['Для взрослых сфинксов', ['Para gatos Sphynx adultos', 'Для дорослих сфінксів']],
@@ -128,6 +136,8 @@ const pairs = [
     ...copy.details.map((detail, index) => [detail, [copy.esDetails[index], copy.ukDetails[index]]])
   ]),
   ...Object.values(catalogEditorialOpenAudit).map(copy => [copy.previousDescription,
+    [copy.esDescription, copy.ukDescription]]),
+  ...Object.values(catalogEditorialRoyalCaninNext).map(copy => [copy.previousDescription,
     [copy.esDescription, copy.ukDescription]]),
   ...Object.entries(descriptionByProduct).map(([id, values]) => [catalogEditorialContent[id].description, values]),
   ...Object.entries(detailCopy),

@@ -29,6 +29,7 @@ const releasedByCategory = {
     'yagu-7552371'
   ],
   '/catalogo/gatos/pienso-seco': [
+    'rc-sterilised-senior', 'rc-maine-coon', 'rc-british',
     'rc-sterilised', 'leonardo-poultry', 'acana-grasslands', 'orijen-original',
     'rc-kitten', 'leonardo-salmon', 'rc-digestive', 'ownat-classic-kitten',
     'ownat-classic-daily-care', 'ownat-classic-fish', 'ownat-classic-light',
@@ -47,6 +48,9 @@ const releasedByCategory = {
     'leonardo-complete', 'rc-persian', 'rc-persian-kitten', 'rc-sphynx-adult', 'leonardo-fish', 'leonardo-lamb'
   ],
   '/catalogo/gatos/comida-humeda': [
+    'royalcanin-676d439a', 'royalcanin-96e21d56', 'royalcanin-99cd69dd',
+    'royalcanin-5dbd7826', 'royalcanin-0a55a9ec',
+    'royalcanin-a85257e1', 'royalcanin-77b93f1a',
     'rc-wet', 'leonardo-chicken', 'leonardo-turkey',
     'leonardo-wet-pure-chicken', 'royalcanin-93e8aeca',
     'acana-wet-beef', 'acana-wet-chicken', 'acana-wet-kitten',

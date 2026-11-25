@@ -18,6 +18,7 @@ import { catalogEditorialAcanaWet } from '../catalog-editorial-acana-wet.js';
 import { catalogEditorialChuruCat } from '../catalog-editorial-churu-cat.js';
 import { catalogEditorialNext } from '../catalog-editorial-next.js';
 import { catalogEditorialOpenAudit } from '../catalog-editorial-open-audit.js';
+import { catalogEditorialRoyalCaninNext } from '../catalog-editorial-royal-canin-next.js';
 import { publishYaguToys } from './yagu-toy-publication.js';
 import { catsAtelierLegacyCopy, catsAtelierProducts } from '../cats-atelier-products.js';
 import { seedInitialSalesLedger } from './initial-sales-ledger.js';
@@ -749,6 +750,20 @@ export async function importCatalog(db, items = products) {
           [productId, copy.description, JSON.stringify(copy.details), copy.previousDescription]);
         }
         await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [openAuditMigration]);
+      }
+      const royalCaninNextMigration = 'royal_canin_next_copy_2026_11_25';
+      const royalCaninNextDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
+        [royalCaninNextMigration]);
+      if (!royalCaninNextDone.rows.length) {
+        for (const [productId, copy] of Object.entries(catalogEditorialRoyalCaninNext)) {
+          await client.query(`UPDATE catalog_products SET description=$2,details=$3::jsonb
+            WHERE id=$1 AND description=$4`,
+          [productId, copy.description, JSON.stringify(copy.details), copy.previousDescription]);
+          await client.query(`UPDATE catalog_variants SET description=$2,details=$3::jsonb,updated_at=now()
+            WHERE product_id=$1 AND description=$4`,
+          [productId, copy.description, JSON.stringify(copy.details), copy.previousDescription]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [royalCaninNextMigration]);
       }
       const heldCopyMigration = 'verified_legacy_recipe_copy_2026_11_12';
       const heldCopyDone = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1',
