@@ -1,4 +1,5 @@
 import { catalogEditorialContent } from '../catalog-editorial-content.js?v=leonardo-wave4-20261125';
+import { royalCaninLabradorTranslations } from '../royal-canin-labrador-products.js';
 import { catalogEditorialOpenAudit } from '../catalog-editorial-open-audit.js';
 import { catalogEditorialRoyalCaninNext } from '../catalog-editorial-royal-canin-next.js';
 import { catalogEditorialRoyalCaninWave3 } from '../catalog-editorial-royal-canin-wave3.js';
@@ -147,6 +148,7 @@ const pairs = [
   ['Кусочки в желе', ['Trocitos en gelatina', 'Шматочки в желе']],
   ['Один пауч 85 г', ['Un sobre de 85 g', 'Один пауч 85 г']],
   ...Object.entries(catalogEditorialNextNames),
+  ...royalCaninLabradorTranslations,
   ...Object.values(catalogEditorialContent).filter(copy => copy.esDescription && copy.ukDescription).flatMap(copy => [
     [copy.description, [copy.esDescription, copy.ukDescription]],
     ...copy.details.map((detail, index) => [detail, [copy.esDetails[index], copy.ukDetails[index]]])

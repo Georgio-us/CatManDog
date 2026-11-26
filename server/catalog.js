@@ -133,6 +133,23 @@ export async function importCatalog(db, items = products) {
       }
     }
     if (items === products) {
+      const migration = 'labrador_owner_retail_prices_2026_11_26';
+      const done = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [migration]);
+      if (!done.rows.length) {
+        for (const [id, priceCents] of [
+          ['rc-labrador-puppy-3kg', 2979], ['rc-labrador-puppy-12kg', 7749],
+          ['rc-labrador-adult-3kg', 2809], ['rc-labrador-adult-12kg', 6899],
+          ['rc-labrador-sterilised-12kg', 6899], ['rc-labrador-adult5-12kg', 8999],
+          ['rc-labrador-adult-wet-140g', 178]
+        ]) {
+          await client.query(`UPDATE catalog_variants SET price_confirmed=true,updated_at=now()
+            WHERE id=$1 AND source_price_cents=$2 AND price_override_cents IS NULL
+              AND price_confirmed=false`, [id, priceCents]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [migration]);
+      }
+    }
+    if (items === products) {
       const supplierPhotoMigration = 'atelier_supplier_main_images_2026_11_25';
       const applied = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [supplierPhotoMigration]);
       if (!applied.rows.length) {

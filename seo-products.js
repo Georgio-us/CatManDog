@@ -1,4 +1,4 @@
-import { seoProductSlugs } from './seo-product-slugs.js?v=acana-pacifica-route-20261125';
+import { seoProductSlugs } from './seo-product-slugs.js?v=labrador-products-20261126';
 import { stockSeoCopy } from './stock-seo-copy.js?v=open-seo-audit-20261125';
 import { seoWave2Copy } from './seo-wave2-copy.js';
 
@@ -6,6 +6,7 @@ import { seoWave2Copy } from './seo-wave2-copy.js';
 // Keep this list explicit: a newly imported product must not become indexable by accident.
 const releasedByCategory = {
   '/catalogo': [
+    'rc-labrador-adult-wet-140g',
     'yagu-7510074-studio', 'yagu-7510082-studio', 'yagu-7514697-studio',
     'yagu-7514626', 'yagu-7514629', 'yagu-7570678-studio',
     'yagu-7570675-studio', 'yagu-7515817', 'yagu-7514696-studio',
@@ -114,6 +115,9 @@ const releasedByCategory = {
     'tc-06a4db0143', 'tc-1877f4a340', 'tc-b121011ccc'
   ],
   '/catalogo/perros/pienso-seco': [
+    'rc-labrador-puppy-3kg', 'rc-labrador-puppy-12kg',
+    'rc-labrador-adult-3kg', 'rc-labrador-adult-12kg',
+    'rc-labrador-sterilised-12kg', 'rc-labrador-adult5-12kg',
     'cmd-source-f025a9dbc9d479c7', 'cmd-source-39c2d5db76be47f7',
     'cmd-source-5d1bd37fc7a7c699', 'cmd-source-c26796839ace4c6e',
     'cmd-source-3b6cbf7e0c31efab', 'cmd-source-0f4a3ef9889b8ff3',

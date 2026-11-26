@@ -5,6 +5,13 @@ import { catsAtelierUk } from './cats-atelier.js';
 
 // Ukrainian product names. Brand and registered line names remain unchanged.
 export const ukProductNames = {
+  'Royal Canin Labrador Retriever Puppy 3 кг': 'Royal Canin Labrador Retriever Puppy 3 кг',
+  'Royal Canin Labrador Retriever Puppy 12 кг': 'Royal Canin Labrador Retriever Puppy 12 кг',
+  'Royal Canin Labrador Retriever Adult 3 кг': 'Royal Canin Labrador Retriever Adult 3 кг',
+  'Royal Canin Labrador Retriever Adult 12 кг': 'Royal Canin Labrador Retriever Adult 12 кг',
+  'Royal Canin Labrador Retriever Sterilised 12 кг': 'Royal Canin Labrador Retriever Sterilised 12 кг',
+  'Royal Canin Labrador Retriever Adult 5+ 12 кг': 'Royal Canin Labrador Retriever Adult 5+ 12 кг',
+  'Royal Canin Labrador Retriever Adult в соусе 140 г': 'Royal Canin Labrador Retriever Adult у соусі 140 г',
   'Yommy Tofu - комкующийся наполнитель 6 л': 'Yommy Tofu - грудкувальний наповнювач 6 л',
   'Uniko Tofu Cat Litter - комкующийся наполнитель': 'Uniko Tofu Cat Litter - грудкувальний наповнювач',
   'Sanicat Clumping - комкующийся наполнитель без отдушки 8 л': 'Sanicat Clumping - грудкувальний наповнювач без ароматизаторів 8 л',
