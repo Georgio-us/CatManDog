@@ -4,6 +4,7 @@ import { retiredProductIds } from '../catalog-policy.js';
 import { snapshots, confirmedPrice, canBuy } from '../variants.js';
 import { yaguRetailBenchmarks } from '../yagu-retail-benchmarks.js';
 import { supplierSourcingByVariant } from './sourcing-status.js';
+import { directSupplierSource } from './direct-supplier-sources.js';
 import { launchSelectedImageMap } from '../launch-selected-image-map.js';
 import { selectedAcanaOrijenFormats } from '../acana-orijen-selected-formats.js';
 import { salePriceDecision } from './sale-price-policy.js';
@@ -1267,10 +1268,11 @@ export async function catalogSnapshot(db) {
     supplierSourcingByVariant(db)]);
   return rows.map(({ price_source, ...row }) => {
     const supplier = supplierStates.get(row.variant_id);
+    const directSource = directSupplierSource(row.variant_id, price_source);
     const price = salePriceDecision({ ...row, price_source });
     const sourcingAvailability = ['unavailable', 'pending'].includes(row.availability)
       ? 'unavailable' : row.availability === 'on_hand' && row.stock_quantity > 0
-      ? 'on_hand' : supplier ? 'source_on_demand' : 'unavailable';
+      ? 'on_hand' : supplier || directSource ? 'source_on_demand' : 'unavailable';
     return {
       ...row, sale_price_cents: price.priceCents, price_accepted: price.accepted,
       price_basis: price.basis, price_review: price.review,
@@ -1279,7 +1281,8 @@ export async function catalogSnapshot(db) {
         Number(row.stock_quantity) - Number(row.reserved_quantity || 0) -
         Number(row.committed_quantity || 0) > 0,
       selected_supplier_units: supplier?.selectedUnits || 0,
-      supplier_source_count: supplier?.sourceCount || 0,
+      supplier_source_count: supplier?.sourceCount || (directSource ? 1 : 0),
+      direct_supplier_verified_at: directSource?.checkedAt || null,
       orderable: row.sale_status !== 'unavailable' && price.accepted
     };
   });
