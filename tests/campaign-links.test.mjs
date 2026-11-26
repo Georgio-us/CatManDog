@@ -31,13 +31,13 @@ test('TikTok profile has separate tracked links for site and Instagram', () => {
   assert.equal(instagram.url, 'https://www.instagram.com/catmandog.es/');
 });
 
-test('women chat has its own campaign identifier and counters', () => {
-  const market = campaignLink('/go/tg-vlc-01-w1-site');
-  const womenSite = campaignLink('/go/tg-vlc-02-w1-site');
-  const womenInstagram = campaignLink('/go/tg-vlc-02-w1-instagram');
-  assert.notEqual(market.id, womenSite.id);
-  assert.equal(womenSite.id, womenInstagram.id);
-  assert.match(womenSite.url, /utm_campaign=tg-vlc-02-w1/);
+test('second short-link pair has a distinct campaign identifier', () => {
+  const firstSite = campaignLink('/go/tg-vlc-01-w1-site');
+  const secondSite = campaignLink('/go/tg-vlc-02-w1-site');
+  const secondInstagram = campaignLink('/go/tg-vlc-02-w1-instagram');
+  assert.notEqual(firstSite.id, secondSite.id);
+  assert.equal(secondSite.id, secondInstagram.id);
+  assert.match(secondSite.url, /utm_campaign=tg-vlc-02-w1/);
 });
 
 test('human opens are counted by destination, preview bots and HEAD requests are not', async () => {

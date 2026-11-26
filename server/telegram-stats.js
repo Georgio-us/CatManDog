@@ -70,11 +70,11 @@ export async function linksStatsText(db) {
     return `${label}: ${count(row?.today)} сегодня · ${count(row?.total)} всего`;
   };
   return `🔗 Ссылки Telegram (клики по редиректу)\n` +
-    `01 · Женский чат\n${line('tg-vlc-01-w1','site','Сайт')}\n${line('tg-vlc-01-w1','instagram','Instagram')}\n` +
+    `Метка 01 · tg-vlc-01-w1\n${line('tg-vlc-01-w1','site','Сайт')}\n${line('tg-vlc-01-w1','instagram','Instagram')}\n` +
     `Визиты с согласием: ${count(siteVisits.get('tg-vlc-01-w1')?.today)} сегодня\n` +
-    `02 · Барахолка\n${line('tg-vlc-02-w1','site','Сайт')}\n${line('tg-vlc-02-w1','instagram','Instagram')}\n` +
+    `Метка 02 · tg-vlc-02-w1\n${line('tg-vlc-02-w1','site','Сайт')}\n${line('tg-vlc-02-w1','instagram','Instagram')}\n` +
     `Визиты с согласием: ${count(siteVisits.get('tg-vlc-02-w1')?.today)} сегодня\n` +
-    `Клики не равны уникальным посетителям или покупкам`;
+    `Метка показывает URL, а не подтверждённый чат публикации. Клики не равны уникальным посетителям или покупкам`;
 }
 
 export async function telegramCommandText(db, command) {

@@ -87,12 +87,11 @@ export function visitAlertText({ page, source, campaignId, visitorNumber, visitC
   const telegram = Number.isSafeInteger(telegram_today) ? telegram_today : null;
   const search = Number.isSafeInteger(search_today) ? search_today : null;
   const direct = Number.isSafeInteger(direct_today) ? direct_today : null;
-  const campaign = { 'tg-vlc-01-w1': '01 · Женский чат',
-    'tg-vlc-02-w1': '02 · Барахолка' }[campaignId];
+  const campaign = ['tg-vlc-01-w1', 'tg-vlc-02-w1'].includes(campaignId) ? campaignId : null;
   return `${count === 1 ? '👋 Новый посетитель' : '🔁 Повторный визит'}${number ? ` №${number}` : ''}\n` +
     (count ? `Это ${count}-й визит с этого браузера\n` : '') +
     `📍 Источник: ${safeSource}\n` +
-    (source === 'telegram' && campaign ? `🔗 Ссылка: ${campaign}\n` : '') +
+    (source === 'telegram' && campaign ? `🔗 Метка ссылки: ${campaign}\n` : '') +
     `📄 Первая страница: ${safePage}\n` +
     (dailyVisits !== null && dailyVisitors !== null
       ? `📊 Сегодня: ${dailyVisits} визитов · ${dailyVisitors} браузеров\n` : '') +

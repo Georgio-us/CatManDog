@@ -38,7 +38,8 @@ test('bot commands show visit, sales and link counts only to the configured chat
   assert.match(sent[0], /Поиск: 3/);
   assert.match(sent[0], /За всё время: визитов 124/);
   assert.match(sent[1], /Всего: 4 · 91,35 €/);
-  assert.match(sent[2], /Женский чат\nСайт: 5 сегодня/);
+  assert.match(sent[2], /Метка 01 · tg-vlc-01-w1\nСайт: 5 сегодня/);
+  assert.doesNotMatch(sent[2], /Женский чат|Барахолка/);
   assert.match(sent[2], /Визиты с согласием: 3 сегодня/);
   assert.match(sent[3], /Посещения сегодня/);
   assert.match(sent[4], /\/visits/);

@@ -65,7 +65,8 @@ test('visit alert shows new and repeat browser counts without leaking private UR
   const telegram = visitAlertText({ source: 'telegram', campaignId: 'tg-vlc-02-w1',
     visits_today: 4, visitors_today: 3, search_today: 1, telegram_today: 2, direct_today: 1 });
   assert.match(telegram, /Источник: Telegram/);
-  assert.match(telegram, /Ссылка: 02 · Барахолка/);
+  assert.match(telegram, /Метка ссылки: tg-vlc-02-w1/);
+  assert.doesNotMatch(telegram, /Женский чат|Барахолка/);
   assert.match(telegram, /Из поиска сегодня: 1/);
   const cookie = staffVisitCookie('a'.repeat(64), true);
   assert.match(cookie, /Path=\/api\/telemetry/);
