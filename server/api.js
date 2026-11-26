@@ -2445,6 +2445,7 @@ export async function handleApi(db, req, res, pathname) {
         ...entry }) => ({ ...entry,
         priceCents: entry.price_accepted ? sale_price_cents : null,
         referencePriceCents: entry.price_accepted ? null : source_price_cents,
+        sourceLinkVerified: Number(supplier_source_count) > 0 || Boolean(entry.direct_supplier_verified_at),
         pickupAvailable: pickup_available,
         sourcingAvailability: sourcing_availability,
         saleStatus: entry.sale_status,

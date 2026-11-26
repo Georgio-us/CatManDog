@@ -8,7 +8,9 @@ export function sourceLinkProblems(row, directSource = null) {
   if (row.pickupAvailable) return problems;
   if (row.availability !== 'source_on_demand') problems.push(`статус ${row.availability || 'не указан'} вместо source_on_demand`);
   if (row.sourcingAvailability !== 'source_on_demand') problems.push(`источник ${row.sourcingAvailability || 'не указан'} вместо source_on_demand`);
-  if (!(Number(row.supplier_source_count) > 0)) problems.push('нет подтверждённой связи с источником');
+  if (row.sourceLinkVerified !== true) {
+    problems.push('нет подтверждённой связи с источником');
+  }
   if (directSource && row.direct_supplier_verified_at !== directSource.checkedAt) {
     problems.push('дата B2B-проверки отсутствует или не совпадает');
   }
