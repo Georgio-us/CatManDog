@@ -2,6 +2,15 @@ const dayStart = "(date_trunc('day', now() AT TIME ZONE 'Europe/Madrid') AT TIME
 
 const count = value => Number(value) || 0;
 const euros = cents => `${(count(cents) / 100).toFixed(2).replace('.', ',')} €`;
+const campaignNames = new Map([
+  ['tg-vlc-01-w1', 'Барахолка'],
+  ['tg-vlc-02-w1', 'Женский чат']
+]);
+
+export function telegramCampaignLabel(campaignId) {
+  const name = campaignNames.get(campaignId);
+  return name ? `${name} · ${campaignId}` : null;
+}
 
 export async function visitStatsText(db) {
   const { rows } = await db.query(`SELECT
@@ -70,11 +79,11 @@ export async function linksStatsText(db) {
     return `${label}: ${count(row?.today)} сегодня · ${count(row?.total)} всего`;
   };
   return `🔗 Ссылки Telegram (клики по редиректу)\n` +
-    `Метка 01 · tg-vlc-01-w1\n${line('tg-vlc-01-w1','site','Сайт')}\n${line('tg-vlc-01-w1','instagram','Instagram')}\n` +
+    `${telegramCampaignLabel('tg-vlc-01-w1')}\n${line('tg-vlc-01-w1','site','Сайт')}\n${line('tg-vlc-01-w1','instagram','Instagram')}\n` +
     `Визиты с согласием: ${count(siteVisits.get('tg-vlc-01-w1')?.today)} сегодня\n` +
-    `Метка 02 · tg-vlc-02-w1\n${line('tg-vlc-02-w1','site','Сайт')}\n${line('tg-vlc-02-w1','instagram','Instagram')}\n` +
+    `${telegramCampaignLabel('tg-vlc-02-w1')}\n${line('tg-vlc-02-w1','site','Сайт')}\n${line('tg-vlc-02-w1','instagram','Instagram')}\n` +
     `Визиты с согласием: ${count(siteVisits.get('tg-vlc-02-w1')?.today)} сегодня\n` +
-    `Метка показывает URL, а не подтверждённый чат публикации. Клики не равны уникальным посетителям или покупкам`;
+    `Клики не равны уникальным посетителям или покупкам`;
 }
 
 export async function telegramCommandText(db, command) {
