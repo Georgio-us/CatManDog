@@ -146,5 +146,117 @@
     "editorialSha256": "ff491f7cf39337e2d0171858a704f1550a85b4d202777ba386c5ed0dc602f81e",
     "imageIdentityVerified": false,
     "note": "Рецептура и продаваемая единица сверены с производителем в SEO wave 7; визуальная идентичность фото отдельно не подтверждена"
+  },
+  "rc-labrador-puppy-3kg": {
+    "productId": "rc-labrador-puppy-3kg",
+    "reviewedAt": "2026-11-26",
+    "sourceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/labrador-retriever-puppy-2491",
+    "saleUnit": "3 kg",
+    "variantIds": [
+      "rc-labrador-puppy-3kg"
+    ],
+    "editorialSha256": "fe524ea600e3dd941354b0c5e267037b177d9c8d16dd71a1e4dae930b356d1c7",
+    "imageIdentityVerified": true,
+    "imageEvidenceUrl": "https://marspetcareaprimocdn.petcare.global/3949e2d3-9dbe-4dbd-ada7-b3770145f1b7/3949e2d3-9dbe-4dbd-ada7-b3770145f1b7_DownloadAsJpg.jpg",
+    "imagePaths": {
+      "rc-labrador-puppy-3kg": "https://img.catmandog.es/assets/food/editorial/rc-labrador-puppy-studio-v1.webp"
+    },
+    "note": "Royal Canin B2B 2491400, EAN 3182550725507; визуальная сверка с официальным кадром и живой R2; розничная цена принята владельцем"
+  },
+  "rc-labrador-puppy-12kg": {
+    "productId": "rc-labrador-puppy-12kg",
+    "reviewedAt": "2026-11-26",
+    "sourceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/labrador-retriever-puppy-2491",
+    "saleUnit": "12 kg",
+    "variantIds": [
+      "rc-labrador-puppy-12kg"
+    ],
+    "editorialSha256": "0aaa3de083eb2fb653e2c73781d40e9760e8b26c151c66442c2692dbc051a3d5",
+    "imageIdentityVerified": true,
+    "imageEvidenceUrl": "https://marspetcareaprimocdn.petcare.global/3949e2d3-9dbe-4dbd-ada7-b3770145f1b7/3949e2d3-9dbe-4dbd-ada7-b3770145f1b7_DownloadAsJpg.jpg",
+    "imagePaths": {
+      "rc-labrador-puppy-12kg": "https://img.catmandog.es/assets/food/editorial/rc-labrador-puppy-studio-v1.webp"
+    },
+    "note": "Royal Canin B2B 2491800, EAN 3182550725514; визуальная сверка с официальным кадром и живой R2; розничная цена принята владельцем"
+  },
+  "rc-labrador-adult-3kg": {
+    "productId": "rc-labrador-adult-3kg",
+    "reviewedAt": "2026-11-26",
+    "sourceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/labrador-retriever-adult-2487",
+    "saleUnit": "3 kg",
+    "variantIds": [
+      "rc-labrador-adult-3kg"
+    ],
+    "editorialSha256": "8dae8ea17a08588361f9ea40ac678ae8b45086435e8c8c3252644e1fe31d0897",
+    "imageIdentityVerified": true,
+    "imageEvidenceUrl": "https://marspetcareaprimocdn.petcare.global/e783d726-615c-4295-a40c-b24900075f0c/e783d726-615c-4295-a40c-b24900075f0c_DownloadAsJpg.jpg",
+    "imagePaths": {
+      "rc-labrador-adult-3kg": "https://img.catmandog.es/assets/food/editorial/rc-labrador-adult-studio-v1.webp"
+    },
+    "note": "Royal Canin B2B 2487400, EAN 3182550715614; визуальная сверка с официальным кадром и живой R2; розничная цена принята владельцем"
+  },
+  "rc-labrador-adult-12kg": {
+    "productId": "rc-labrador-adult-12kg",
+    "reviewedAt": "2026-11-26",
+    "sourceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/labrador-retriever-adult-2487",
+    "saleUnit": "12 kg",
+    "variantIds": [
+      "rc-labrador-adult-12kg"
+    ],
+    "editorialSha256": "96698afb5632af7cd28bbb8453b2f0ed340ed86572eb2e9eb8b533321ace9077",
+    "imageIdentityVerified": true,
+    "imageEvidenceUrl": "https://marspetcareaprimocdn.petcare.global/e783d726-615c-4295-a40c-b24900075f0c/e783d726-615c-4295-a40c-b24900075f0c_DownloadAsJpg.jpg",
+    "imagePaths": {
+      "rc-labrador-adult-12kg": "https://img.catmandog.es/assets/food/editorial/rc-labrador-adult-studio-v1.webp"
+    },
+    "note": "Royal Canin B2B 2487800, EAN 3182550715645; визуальная сверка с официальным кадром и живой R2; розничная цена принята владельцем"
+  },
+  "rc-labrador-sterilised-12kg": {
+    "productId": "rc-labrador-sterilised-12kg",
+    "reviewedAt": "2026-11-26",
+    "sourceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/labrador-retriever-sterilised-3996",
+    "saleUnit": "12 kg",
+    "variantIds": [
+      "rc-labrador-sterilised-12kg"
+    ],
+    "editorialSha256": "9ea4c2b1ca3e4f1982fffedbe3403cfd2c7658388440459cd6d9bb9492e9d448",
+    "imageIdentityVerified": true,
+    "imageEvidenceUrl": "https://marspetcareaprimocdn.petcare.global/ef1405e3-f3af-473c-b43e-b1ef001cab9f/ef1405e3-f3af-473c-b43e-b1ef001cab9f_DownloadAsJpg.jpg",
+    "imagePaths": {
+      "rc-labrador-sterilised-12kg": "https://img.catmandog.es/assets/food/editorial/rc-labrador-sterilised-studio-v1.webp"
+    },
+    "note": "Royal Canin B2B 3996800, EAN 3182550787581; визуальная сверка с официальным кадром и живой R2; розничная цена принята владельцем"
+  },
+  "rc-labrador-adult5-12kg": {
+    "productId": "rc-labrador-adult5-12kg",
+    "reviewedAt": "2026-11-26",
+    "sourceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/labrador-retriever-5%2B-1339",
+    "saleUnit": "12 kg",
+    "variantIds": [
+      "rc-labrador-adult5-12kg"
+    ],
+    "editorialSha256": "fd4acb6dd68b929eff290186b61d0f5ec7ec0d4da815a4ba4322cdf8f7a001aa",
+    "imageIdentityVerified": true,
+    "imageEvidenceUrl": "https://marspetcareaprimocdn.petcare.global/68710604-3884-4d9b-a193-b2490007ed0a/68710604-3884-4d9b-a193-b2490007ed0a_DownloadAsJpg.jpg",
+    "imagePaths": {
+      "rc-labrador-adult5-12kg": "https://img.catmandog.es/assets/food/editorial/rc-labrador-adult5-studio-v1.webp"
+    },
+    "note": "Royal Canin B2B 1339800, EAN 3182550908412; визуальная сверка с официальным кадром и живой R2; розничная цена принята владельцем"
+  },
+  "rc-labrador-adult-wet-140g": {
+    "productId": "rc-labrador-adult-wet-140g",
+    "reviewedAt": "2026-11-26",
+    "sourceUrl": "https://www.royalcanin.com/es/dogs/products/retail-products/labrador-retriever-1259",
+    "saleUnit": "140 g",
+    "variantIds": [
+      "rc-labrador-adult-wet-140g"
+    ],
+    "editorialSha256": "98800ac6a4a87861c984df4b2238db073e2b9d82b0bc9a5bdbe51f0f0d5c4608",
+    "imageIdentityVerified": true,
+    "imageEvidenceUrl": "https://marspetcareaprimocdn.petcare.global/74f37a47-342d-4238-b0a1-b2490007ecf4/74f37a47-342d-4238-b0a1-b2490007ecf4_DownloadAsJpg.jpg",
+    "imagePaths": {
+      "rc-labrador-adult-wet-140g": "https://img.catmandog.es/assets/food/editorial/rc-labrador-wet-studio-v1.webp"
+    },
+    "note": "Royal Canin B2B 1259000, в B2B короб 10 x 140 g; в розницу один пауч 140 g, EAN не заявлен; визуальная сверка с официальным кадром и живой R2; розничная цена принята владельцем"
   }
 }

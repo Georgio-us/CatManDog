@@ -141,6 +141,18 @@ export const royalCaninLabradorProducts = formats.map(format => {
   };
 });
 
+// Reviewed product copy stays alongside the exact SKU definition so the SEO
+// evidence cannot silently drift from the text shown in the catalog.
+export const royalCaninLabradorEditorial = Object.fromEntries(formats.map(format => [format.id, {
+  source: families[format.family].source,
+  description: format.description,
+  details: format.details,
+  esDescription: format.es,
+  esDetails: format.esDetails,
+  ukDescription: format.uk,
+  ukDetails: format.ukDetails
+}]));
+
 export const royalCaninLabradorTranslations = formats.flatMap(format => [
   [format.name, [format.name.replace(' кг', ' kg').replace('в соусе', 'en salsa').replace('140 г', '140 g'),
     format.name.replace('в соусе', 'у соусі')]],

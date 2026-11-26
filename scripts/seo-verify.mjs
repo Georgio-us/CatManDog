@@ -8,6 +8,8 @@ import { seoProducts } from '../seo-products.js';
 import { stockSeoCopy } from '../stock-seo-copy.js';
 import { seoWave2Copy } from '../seo-wave2-copy.js';
 import { editorialFingerprint, seoVerdict, seoWorkScope } from './seo-verdict.mjs';
+import { directSupplierSources } from '../server/direct-supplier-sources.js';
+import { sourceLinkProblems } from './verify-source-links.mjs';
 
 const args = process.argv.slice(2);
 const valueAfter = option => args.includes(option) ? args[args.indexOf(option) + 1] : undefined;
@@ -133,6 +135,14 @@ const rows = products.map(product => {
   const copy = atelierCopy || catalogEditorialContent[product.id];
   const check = checks.get(product.id);
   const technical = [...(check?.problems || [])];
+  // A verified direct B2B SKU is part of the same publication verdict. Do not
+  // report a fully checked page when its live purchasing route has drifted.
+  for (const variant of variantsByProduct.get(product.id) || []) {
+    if (directSupplierSources[variant.variant_id]) {
+      technical.push(...sourceLinkProblems(variant, directSupplierSources[variant.variant_id])
+        .map(problem => `${variant.variant_id}: ${problem}`));
+    }
+  }
   const atelierCopyHash = atelierText && createHash('sha256')
     .update(JSON.stringify(atelierText)).digest('hex');
   const atelierIssue = atelierProduct && (!atelierRecord

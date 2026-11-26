@@ -17,6 +17,7 @@ import { catalogEditorialLeonardoWave5 } from './catalog-editorial-leonardo-wave
 import { catalogEditorialWave6 } from './catalog-editorial-wave6.js';
 import { catalogEditorialWave7 } from './catalog-editorial-wave7.js';
 import { catalogEditorialLeonardoCorrections } from './catalog-editorial-leonardo-corrections.js';
+import { royalCaninLabradorEditorial } from './royal-canin-labrador-products.js';
 
 export const catalogEditorialContent = {
   ...catalogEditorialCats,
@@ -36,6 +37,7 @@ export const catalogEditorialContent = {
   ...catalogEditorialWave6,
   ...catalogEditorialWave7,
   ...catalogEditorialLeonardoCorrections,
+  ...royalCaninLabradorEditorial,
   'leonardo-poultry': {
     source: 'https://www.leonardo-catfood.com/leonardo-adult-gf-poultry-1.8-kg',
     description: 'LEONARDO Adult GF Poultry - беззерновой сухой корм для взрослых кошек. В составе 30% свежего мяса птицы, 22% белка птицы и 15% амаранта. Амарант - растение, семена которого в этой рецептуре используют вместо злаков.',
