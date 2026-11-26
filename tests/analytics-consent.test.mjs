@@ -53,6 +53,8 @@ test('analytics page locations omit searches and private routes', () => {
   assert.equal(visitSource('https://catmandog.es/catalogo', location.origin), 'internal');
   assert.equal(visitSource('', location.origin), 'direct');
   assert.equal(visitPlatform('?utm_source=instagram&utm_campaign=launch', ''), 'instagram');
+  assert.equal(visitPlatform('?utm_source=telegram&utm_campaign=tg-vlc-01-w1', ''), 'telegram');
+  assert.equal(visitPlatform('', 'https://t.me/example'), 'telegram');
   assert.equal(visitPlatform('', 'https://l.instagram.com/'), 'instagram');
   assert.equal(visitPlatform('', ''), null);
   assert.equal(consentCopy('es').reject, 'Rechazar');

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { orderAlertText, visitAlertText, sendTelegramOrderAlert, telegramReady,
-  startTelegramOrderAlerts } from '../server/telegram.js';
+  startTelegramOrderAlerts, pollTelegramCommands } from '../server/telegram.js';
 import { currentVisitStaff, staffVisitCookie } from '../server/staff.js';
 import { handleApi } from '../server/api.js';
 
@@ -62,6 +62,11 @@ test('visit alert shows new and repeat browser counts without leaking private UR
   assert.match(unknown, /🔁 Повторный визит №12/);
   assert.doesNotMatch(unknown, /private@example.com|private.example.com/);
   assert.match(visitAlertText({ source: 'constructor' }), /Источник: неизвестен/);
+  const telegram = visitAlertText({ source: 'telegram', campaignId: 'tg-vlc-02-w1',
+    visits_today: 4, visitors_today: 3, search_today: 1, telegram_today: 2, direct_today: 1 });
+  assert.match(telegram, /Источник: Telegram/);
+  assert.match(telegram, /Ссылка: 02 · Барахолка/);
+  assert.match(telegram, /Из поиска сегодня: 1/);
   const cookie = staffVisitCookie('a'.repeat(64), true);
   assert.match(cookie, /Path=\/api\/telemetry/);
   const db = { async query() { return { rows: [{ role: 'owner' }] }; } };

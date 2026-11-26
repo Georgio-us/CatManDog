@@ -45,7 +45,8 @@ export function visitPlatform(search, referrer) {
     const name = String(value || '').toLowerCase();
     if (['instagram', 'ig', 'l.instagram.com'].includes(name)) return 'instagram';
     if (['facebook', 'fb', 'm.facebook.com'].includes(name)) return 'facebook';
-    if (['tiktok', 'youtube', 'pinterest'].includes(name)) return name;
+    if (['tiktok', 'youtube', 'pinterest', 'telegram', 'tg'].includes(name))
+      return name === 'tg' ? 'telegram' : name;
     return null;
   };
   try {
@@ -54,6 +55,7 @@ export function visitPlatform(search, referrer) {
     const host = new URL(referrer).hostname.toLowerCase();
     if (/(^|\.)instagram\.com$/.test(host)) return 'instagram';
     if (/(^|\.)(facebook\.com|fb\.com)$/.test(host)) return 'facebook';
+    if (/(^|\.)(t\.me|telegram\.org)$/.test(host)) return 'telegram';
     for (const name of ['tiktok', 'youtube', 'pinterest'])
       if (host === `${name}.com` || host.endsWith(`.${name}.com`)) return name;
   } catch { /* Referrer can be empty or unavailable */ }
@@ -111,6 +113,9 @@ export function installAnalytics(language) {
     (window.location.hash.includes('?') ? `?${window.location.hash.split('?').slice(1).join('?')}` : '');
   const entryPlatform = visitPlatform(entryCampaign, document.referrer);
   const entrySource = entryPlatform ? 'social' : visitSource(document.referrer, window.location.origin);
+  const campaignId = new URLSearchParams(entryCampaign).get('utm_campaign');
+  const entryCampaignId = /^(tg-vlc-0[12]-w1)$/.test(campaignId || '') && entryPlatform === 'telegram'
+    ? campaignId : null;
 
   function enable() {
     if (enabled) return;
@@ -167,7 +172,7 @@ export function installAnalytics(language) {
         catch { /* Session storage may be unavailable */ }
         const publicUrl = new URL(entryPage || page);
         const visit = { page: `${publicUrl.pathname}${publicUrl.hash}`,
-          source: entrySource, platform: entryPlatform,
+          source: entrySource, platform: entryPlatform, campaignId: entryCampaignId,
           cartId: anonymousCartId(), visitId: visitSessionId() };
         void window.fetch('/api/telemetry/visit', { method: 'POST', credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(visit) }).catch(() => {});

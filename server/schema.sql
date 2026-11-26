@@ -748,7 +748,10 @@ CREATE TABLE IF NOT EXISTS site_visit_events (
   source text NOT NULL,
   created_at timestamptz NOT NULL DEFAULT now()
 );
+ALTER TABLE site_visit_events ADD COLUMN IF NOT EXISTS campaign_id text;
 CREATE INDEX IF NOT EXISTS site_visit_events_created_idx ON site_visit_events(created_at DESC);
+CREATE INDEX IF NOT EXISTS site_visit_events_campaign_idx
+  ON site_visit_events(campaign_id, created_at DESC);
 
 CREATE TABLE IF NOT EXISTS campaign_link_clicks (
   id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -758,6 +761,11 @@ CREATE TABLE IF NOT EXISTS campaign_link_clicks (
 );
 CREATE INDEX IF NOT EXISTS campaign_link_clicks_campaign_idx
   ON campaign_link_clicks(campaign_id, destination, created_at DESC);
+
+CREATE TABLE IF NOT EXISTS telegram_bot_state (
+  name text PRIMARY KEY,
+  value bigint NOT NULL
+);
 
 CREATE TABLE IF NOT EXISTS observed_cart_events (
   id uuid PRIMARY KEY,

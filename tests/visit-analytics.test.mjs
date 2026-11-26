@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { visitAttribution, recordSiteVisit, deleteSiteVisitor } from '../server/visit-analytics.js';
+import { visitAttribution, visitCampaign, recordSiteVisit, deleteSiteVisitor } from '../server/visit-analytics.js';
 
 const cartId = '641c5edb-152a-4788-9053-e880270a023e';
 const visitId = '241c5edb-152a-4788-9053-e880270a023e';
@@ -9,6 +9,9 @@ test('visit attribution accepts known social sources and ignores arbitrary text'
   assert.equal(visitAttribution({ source: 'social', platform: 'instagram' }), 'instagram');
   assert.equal(visitAttribution({ source: 'search', platform: 'javascript:alert(1)' }), 'search');
   assert.equal(visitAttribution({ source: 'constructor' }), 'unknown');
+  assert.equal(visitAttribution({ source: 'social', platform: 'telegram' }), 'telegram');
+  assert.equal(visitCampaign({ platform: 'telegram', campaignId: 'tg-vlc-01-w1' }), 'tg-vlc-01-w1');
+  assert.equal(visitCampaign({ platform: 'instagram', campaignId: 'tg-vlc-01-w1' }), null);
 });
 
 test('visit recording returns stable browser ordinal, daily totals and ignores a repeated session', async () => {
@@ -25,7 +28,7 @@ test('visit recording returns stable browser ordinal, daily totals and ignores a
   }, release() {} };
   const db = { async connect() { return client; } };
   const result = await recordSiteVisit(db, { cartId, visitId, platform: 'instagram', source: 'social' });
-  assert.deepEqual(result, { source: 'instagram', visitorNumber: 42, visitCount: 2,
+  assert.deepEqual(result, { source: 'instagram', campaignId: null, visitorNumber: 42, visitCount: 2,
     visits_today: 9, visitors_today: 5, instagram_today: 3 });
   assert.equal(statements.some(({ sql, args }) => sql.includes('INSERT INTO site_visit_events') &&
     args[2] === 'instagram'), true);

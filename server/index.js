@@ -5,7 +5,7 @@ import { serveStatic } from './http.js';
 import { serveSeo, serveMerchantFeed } from './seo.js';
 import { serveCampaignLink } from './campaign-links.js';
 import { startBackupScheduler } from './backup.js';
-import { startTelegramOrderAlerts } from './telegram.js';
+import { startTelegramOrderAlerts, startTelegramCommands } from './telegram.js';
 import { startObservedCartCleanup } from './cart-activity.js';
 import { isStaging, requiresDatabaseAtStartup, stagingAuthorized, validateStagingEnvironment } from './environment.js';
 
@@ -52,5 +52,6 @@ const server = createServer(async (req, res) => {
 server.listen(port, '0.0.0.0', () => console.info(`CatManDog listening on ${port}`));
 const stopBackups = startBackupScheduler(initialized ? db : null);
 const stopTelegramAlerts = startTelegramOrderAlerts(initialized && !isStaging() ? db : null);
+const stopTelegramCommands = startTelegramCommands(initialized && !isStaging() ? db : null);
 const stopCartCleanup = startObservedCartCleanup(initialized ? db : null);
-process.on('SIGTERM', () => { stopBackups(); stopTelegramAlerts(); stopCartCleanup(); server.close(() => db?.end()); });
+process.on('SIGTERM', () => { stopBackups(); stopTelegramAlerts(); stopTelegramCommands(); stopCartCleanup(); server.close(() => db?.end()); });
