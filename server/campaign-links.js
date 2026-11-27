@@ -1,9 +1,14 @@
-const campaigns = ['tg-vlc-01-w1', 'tg-vlc-02-w1'];
+const campaigns = [
+  ['tg-vlc-01-w1', 'paid_social'],
+  ['tg-vlc-02-w1', 'paid_social'],
+  ['tg-vlc-03-w1', 'organic_social'],
+  ['tg-vlc-04-w1', 'organic_social']
+];
 
-const destinations = new Map([...campaigns.flatMap(campaign => [
+const destinations = new Map([...campaigns.flatMap(([campaign, medium]) => [
   [`/go/${campaign}-site`, {
     id: campaign, destination: 'site',
-    url: `/?utm_source=telegram&utm_medium=paid_social&utm_campaign=${campaign}`
+    url: `/?utm_source=telegram&utm_medium=${medium}&utm_campaign=${campaign}`
   }],
   [`/go/${campaign}-instagram`, {
     id: campaign, destination: 'instagram',

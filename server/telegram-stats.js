@@ -4,7 +4,9 @@ const count = value => Number(value) || 0;
 const euros = cents => `${(count(cents) / 100).toFixed(2).replace('.', ',')} €`;
 const campaignNames = new Map([
   ['tg-vlc-01-w1', 'Барахолка'],
-  ['tg-vlc-02-w1', 'Женский чат']
+  ['tg-vlc-02-w1', 'Женский чат'],
+  ['tg-vlc-03-w1', 'Украинцы на Suïssa'],
+  ['tg-vlc-04-w1', 'Валенсия Форум']
 ]);
 
 export function telegramCampaignLabel(campaignId) {
@@ -65,11 +67,11 @@ export async function linksStatsText(db) {
     db.query(`SELECT campaign_id,destination,
     count(*)::integer AS total,
     count(*) FILTER (WHERE created_at >= ${dayStart})::integer AS today
-    FROM campaign_link_clicks WHERE campaign_id IN ('tg-vlc-01-w1','tg-vlc-02-w1')
+    FROM campaign_link_clicks WHERE campaign_id IN ('tg-vlc-01-w1','tg-vlc-02-w1','tg-vlc-03-w1','tg-vlc-04-w1')
     GROUP BY campaign_id,destination`),
     db.query(`SELECT campaign_id,count(*)::integer AS total,
       count(*) FILTER (WHERE created_at >= ${dayStart})::integer AS today
-      FROM site_visit_events WHERE campaign_id IN ('tg-vlc-01-w1','tg-vlc-02-w1')
+      FROM site_visit_events WHERE campaign_id IN ('tg-vlc-01-w1','tg-vlc-02-w1','tg-vlc-03-w1','tg-vlc-04-w1')
       GROUP BY campaign_id`)
   ]);
   const values = new Map(rows.map(row => [`${row.campaign_id}:${row.destination}`, row]));
@@ -78,17 +80,17 @@ export async function linksStatsText(db) {
     const row = values.get(`${campaign}:${destination}`);
     return `${label}: ${count(row?.today)} сегодня · ${count(row?.total)} всего`;
   };
+  const campaigns = ['tg-vlc-01-w1', 'tg-vlc-02-w1', 'tg-vlc-03-w1', 'tg-vlc-04-w1'];
   return `🔗 Ссылки Telegram (клики по редиректу)\n` +
-    `${telegramCampaignLabel('tg-vlc-01-w1')}\n${line('tg-vlc-01-w1','site','Сайт')}\n${line('tg-vlc-01-w1','instagram','Instagram')}\n` +
-    `Визиты с согласием: ${count(siteVisits.get('tg-vlc-01-w1')?.today)} сегодня\n` +
-    `${telegramCampaignLabel('tg-vlc-02-w1')}\n${line('tg-vlc-02-w1','site','Сайт')}\n${line('tg-vlc-02-w1','instagram','Instagram')}\n` +
-    `Визиты с согласием: ${count(siteVisits.get('tg-vlc-02-w1')?.today)} сегодня\n` +
-    `Клики не равны уникальным посетителям или покупкам`;
+    campaigns.map(id => `${telegramCampaignLabel(id)}\n${line(id,'site','Сайт')}\n` +
+      `${line(id,'instagram','Instagram')}\n` +
+      `Визиты с согласием: ${count(siteVisits.get(id)?.today)} сегодня`).join('\n') +
+    `\nКлики не равны уникальным посетителям или покупкам`;
 }
 
 export async function telegramCommandText(db, command) {
   if (command === '/help' || command === '/start')
-    return `Команды CatManDog\n/visits - визиты и источники сегодня\n/sales - оплаченные продажи\n/links - клики по четырём ссылкам Telegram\n/stats - краткая сводка`;
+    return `Команды CatManDog\n/visits - визиты и источники сегодня\n/sales - оплаченные продажи\n/links - клики по ссылкам Telegram\n/stats - краткая сводка`;
   if (command === '/visits') return visitStatsText(db);
   if (command === '/sales') return salesStatsText(db);
   if (command === '/links') return linksStatsText(db);

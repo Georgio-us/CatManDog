@@ -40,6 +40,25 @@ test('second short-link pair has a distinct campaign identifier', () => {
   assert.match(secondSite.url, /utm_campaign=tg-vlc-02-w1/);
 });
 
+test('Suïssa and forum links track distinct unpaid placements and destinations', async () => {
+  const writes = [];
+  const db = { async query(_sql, params) { writes.push(params); return { rows: [] }; } };
+  for (const [id, name] of [['tg-vlc-03-w1', 'Suïssa'], ['tg-vlc-04-w1', 'forum']]) {
+    const site = campaignLink(`/go/${id}-site`);
+    const instagram = campaignLink(`/go/${id}-instagram`);
+    assert.equal(site.id, id, name);
+    assert.equal(instagram.id, id, name);
+    assert.equal(site.url,
+      `/?utm_source=telegram&utm_medium=organic_social&utm_campaign=${id}`);
+    assert.equal(instagram.url, 'https://www.instagram.com/catmandog.es/');
+    const result = response();
+    await serveCampaignLink(db, { method: 'GET', headers: { 'user-agent': 'Safari' } },
+      result, `/go/${id}-site`);
+    assert.equal(result.status, 302);
+  }
+  assert.deepEqual(writes, [['tg-vlc-03-w1', 'site'], ['tg-vlc-04-w1', 'site']]);
+});
+
 test('human opens are counted by destination, preview bots and HEAD requests are not', async () => {
   const writes = [];
   const db = { async query(sql, params) { writes.push(params); return { rows: [] }; } };

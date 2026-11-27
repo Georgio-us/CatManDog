@@ -11,6 +11,8 @@ test('visit attribution accepts known social sources and ignores arbitrary text'
   assert.equal(visitAttribution({ source: 'constructor' }), 'unknown');
   assert.equal(visitAttribution({ source: 'social', platform: 'telegram' }), 'telegram');
   assert.equal(visitCampaign({ platform: 'telegram', campaignId: 'tg-vlc-01-w1' }), 'tg-vlc-01-w1');
+  assert.equal(visitCampaign({ platform: 'telegram', campaignId: 'tg-vlc-03-w1' }), 'tg-vlc-03-w1');
+  assert.equal(visitCampaign({ platform: 'telegram', campaignId: 'tg-vlc-04-w1' }), 'tg-vlc-04-w1');
   assert.equal(visitCampaign({ platform: 'instagram', campaignId: 'tg-vlc-01-w1' }), null);
 });
 

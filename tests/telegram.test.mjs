@@ -69,6 +69,10 @@ test('visit alert shows new and repeat browser counts without leaking private UR
   assert.doesNotMatch(telegram, /Барахолка/);
   assert.match(visitAlertText({ source: 'telegram', campaignId: 'tg-vlc-01-w1' }),
     /Ссылка: Барахолка · tg-vlc-01-w1/);
+  assert.match(visitAlertText({ source: 'telegram', campaignId: 'tg-vlc-03-w1' }),
+    /Ссылка: Украинцы на Suïssa · tg-vlc-03-w1/);
+  assert.match(visitAlertText({ source: 'telegram', campaignId: 'tg-vlc-04-w1' }),
+    /Ссылка: Валенсия Форум · tg-vlc-04-w1/);
   assert.match(telegram, /Из поиска сегодня: 1/);
   const cookie = staffVisitCookie('a'.repeat(64), true);
   assert.match(cookie, /Path=\/api\/telemetry/);

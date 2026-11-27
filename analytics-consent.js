@@ -129,7 +129,7 @@ export function installAnalytics(language) {
   const entryPlatform = visitPlatform(entryCampaign, document.referrer);
   const entrySource = entryPlatform ? 'social' : visitSource(document.referrer, window.location.origin);
   const campaignId = new URLSearchParams(entryCampaign).get('utm_campaign');
-  const entryCampaignId = /^(tg-vlc-0[12]-w1)$/.test(campaignId || '') && entryPlatform === 'telegram'
+  const entryCampaignId = /^(tg-vlc-0[1-4]-w1)$/.test(campaignId || '') && entryPlatform === 'telegram'
     ? campaignId : null;
 
   function enable() {
