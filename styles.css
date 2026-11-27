@@ -4485,25 +4485,14 @@ details .text-link {
 .hero-search {
   position: relative;
   width: min(100%, 430px);
-  margin: 12px 0;
+  margin: 12px 0 0;
 }
-.hero-search label { display: block; margin-bottom: 6px; font-weight: 600; }
-.hero-search-controls { display: flex; gap: 6px; }
-.hero-search-controls input {
-  flex: 1;
-  min-width: 0;
-  padding: 0 12px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: white;
-  color: var(--ink);
-  font: inherit;
+.hero-search .search-combo-field {
+  min-height: 52px;
+  border-radius: 14px;
+}
+.hero-search .search-combo-field input {
   font-size: 16px;
-}
-.hero-search-controls input:focus {
-  border-color: #78865d;
-  outline: 1px solid #dfe7d2;
-  outline-offset: 0;
 }
 .search-suggestion.search-product {
   grid-template-columns: 48px minmax(0, 1fr) auto;
@@ -4555,4 +4544,66 @@ details .text-link {
   .header-actions .language-trigger { width: 47px; }
   .header-actions .icon-button { width: 24px; }
   .header-actions #search-toggle { padding-inline: 5px; font-size: 11px; }
+}
+
+/* Keep the home hero controls clear of the animals on narrow screens. */
+.home-catalog { scroll-margin-top: 110px; }
+
+@media (max-width: 760px) {
+  .header { gap: 8px; padding-inline: 12px; }
+  .header > .brand { width: clamp(92px, 27vw, 120px); }
+  .header-actions { gap: clamp(3px, 1vw, 7px); }
+  .header-actions #search-toggle { width: 36px; padding: 0; }
+  .header-actions #search-toggle span { display: none; }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 0;
+    margin-inline: 12px;
+    background: #f6f5f2;
+  }
+  .hero:after { display: none; }
+  .hero-copy { display: contents; }
+  .hero h1 {
+    order: -4;
+    width: auto;
+    padding: 30px 24px 0;
+    font-size: clamp(34px, 9vw, 48px);
+    letter-spacing: -.04em;
+  }
+  .hero-copy>p {
+    order: -3;
+    max-width: none;
+    margin: 14px 24px 0;
+    font-size: clamp(14px, 3.7vw, 16px);
+    line-height: 1.5;
+  }
+  .hero-search {
+    order: -2;
+    width: calc(100% - 48px);
+    margin: 20px 24px 0;
+  }
+  .hero-catalog-cta {
+    order: -1;
+    align-self: center;
+    min-width: 180px;
+    min-height: 46px;
+    margin: 16px auto 22px;
+  }
+  .hero>img {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: clamp(270px, 82vw, 480px);
+    object-position: center 45%;
+    border-radius: 0 0 16px 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .header { padding-inline: 8px; }
+  .header > .brand { width: 92px; }
+  .header-actions #search-toggle { width: 30px; }
 }
