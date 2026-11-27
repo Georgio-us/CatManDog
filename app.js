@@ -315,7 +315,7 @@ function crumbs(title){
   const navigationLabel = { ru: 'Путь по каталогу', es: 'Ruta del catálogo', uk: 'Шлях каталогом' }[locale()] || 'Путь по каталогу';
   return `<nav class="product-navigation" aria-label="${navigationLabel}"><div class="breadcrumbs"><a href="/#/">Главная</a>${sourceCrumb}<span>/</span><span>${escape(title)}</span></div><a class="product-back-link" href="${escape(destination)}" data-product-return>${icon('arrow')}<span>${escape(back)}</span></a></nav>`;
 }
-function card(p,pickupSku=null,featuredSku=null){
+function card(p,pickupSku=null,featuredSku=null,addIcon='bag'){
   // Array.map passes its index as the second argument; only a real SKU enables pickup mode.
   const pickup=Boolean(pickupSku && typeof pickupSku === 'object' && pickupSku.id);
   if (!pickup) pickupSku = null;
@@ -341,7 +341,7 @@ function card(p,pickupSku=null,featuredSku=null){
   const tag=exactSku?(sku.tag?.trim()||p.tag?.trim()):p.tag?.trim();
   const action=exactSku&&configure
     ? `<a class="product-card-action" href="${escape(href)}" aria-label="${actionLabel}: ${escape(p.name)} ${escape(sku.label||'')}">${actionLabel}${icon('arrow')}</a>`
-    : `<button class="product-card-action" ${pickup?`data-pickup-add="${escape(sku.id)}" data-product-id="${escape(p.id)}"`:featuredSku?`data-add-variant="${escape(sku.id)}" data-product-id="${escape(p.id)}"`: `${configure?'data-configure':'data-add'}="${escape(p.id)}"`} aria-label="${actionLabel}: ${escape(p.name)}${exactSku&&sku.label?` ${escape(sku.label)}`:''}">${buttonLabel}${icon(configure?'arrow':'bag')}</button>`;
+    : `<button class="product-card-action" ${pickup?`data-pickup-add="${escape(sku.id)}" data-product-id="${escape(p.id)}"`:featuredSku?`data-add-variant="${escape(sku.id)}" data-product-id="${escape(p.id)}"`: `${configure?'data-configure':'data-add'}="${escape(p.id)}"`} aria-label="${actionLabel}: ${escape(p.name)}${exactSku&&sku.label?` ${escape(sku.label)}`:''}">${buttonLabel}${icon(configure?'arrow':addIcon)}</button>`;
   return `<article class="product-card ${p.isReal||pickup?'real-product-card':''}"><a class="product-card-open" href="${escape(href)}" data-product-id="${escape(p.id)}" aria-label="Открыть товар: ${escape(p.name)}${exactSku&&sku.label?` ${escape(sku.label)}`:''}"></a><div class="product-media">${imageBlock(exactSku?(sku.image||p.image):p.image)}${tag?`<span class="product-tag">${escape(tag)}</span>`:''}${availabilityTag}<button class="icon-button favorite ${favorites.includes(p.id)?'selected':''}" data-favorite="${escape(p.id)}" aria-label="${favorites.includes(p.id)?'Убрать из избранного':'В избранное'}: ${escape(p.name)}" aria-pressed="${favorites.includes(p.id)}">${icon('heart')}</button></div><div class="product-info"><small>${escape(p.brand||'CatManDog')}${exactSku&&sku.label?` · ${escape(sku.label)}`:p.weight?` · ${escape(p.weight)}`:''}${family?` · ${variantCount(p.variants.length)}`:''}</small><div class="product-title"><h3>${escape(p.name)} <span class="product-open-cue">${icon('arrow')}</span></h3></div><span class="retail-label" ${caption?'':'aria-hidden="true"'}>${caption}</span><div class="product-price"><div class="product-price-values"><span>${displayPrice}</span>${!exactSku&&!pricing.demo&&!family&&p.old?`<span class="old-price">${money(p.old)}</span>`:''}</div>${action}</div></div></article>`;
 }
 // Hand-curated pickup shelf. Keep exact SKU IDs here; filters retain this order.
@@ -620,7 +620,8 @@ function homeUseful(){
 }
 const quickBasketPreview = ['localhost', '127.0.0.1'].includes(location.hostname)
   && new URLSearchParams(location.search).get('preview') === 'quick-basket';
-const quickBasketGroups = ['dry-food', 'wet-food', 'treats', 'litter'];
+const quickBasketGroupIcons = { 'dry-food':'bag', 'wet-food':'leaf', treats:'heart', litter:'paw' };
+const quickBasketGroups = Object.keys(quickBasketGroupIcons);
 const quickBasketCopy = {
   ru: ['Соберите корзину на каждый день', 'Что покупаете регулярно?', 'Найти товар или бренд', 'В корзину', 'По этому запросу ничего не нашлось', 'Категории товаров'],
   es: ['Prepara tu cesta para el día a día', '¿Qué compras habitualmente?', 'Buscar producto o marca', 'Ir a la cesta', 'No hemos encontrado productos', 'Categorías de productos'],
@@ -644,8 +645,20 @@ function quickBasketCards(){
     : prioritizeHomeShelf(quickBasketPet,eligible,order)
       .map(product=>[product,homeFeaturedVariant(product,order)
         || (canBuy(resolveVariant(product)) ? resolveVariant(product) : snapshots(product).find(canBuy))]);
-  return matches.length ? matches.slice(0,4).map(([product,sku])=>card(product,null,hasVariants(product)?sku:undefined)).join('')
+  return matches.length ? matches.slice(0,4).map(([product,sku])=>{
+      const variantId=hasVariants(product)?sku.id:'';
+      return `<div class="quick-basket-item" data-quick-product="${escape(product.id)}" data-quick-variant="${escape(variantId)}">
+        ${card(product,null,variantId?sku:undefined,'plus')}
+        <span class="quick-basket-quantity">${quickBasketQuantity(product.id,variantId)}</span>
+      </div>`;
+    }).join('')
     : `<p role="status">${escape(quickCopy()[4])}</p>`;
+}
+
+function quickBasketQuantity(productId,variantId){
+  const quantity=cart.filter(item=>(item.productId||item.id)===productId&&(item.variantId||'')===variantId)
+    .reduce((sum,item)=>sum+item.qty,0);
+  return quantity ? `${icon('check')} <span>${itemCount(quantity)}</span>` : '';
 }
 
 function quickBasketSummary(){
@@ -662,7 +675,7 @@ function quickBasketControls(){
   return `<p id="quick-basket-group-label">${escape(quickCopy()[1])}</p>
     <div class="tabs quick-basket-tabs" role="group" aria-labelledby="quick-basket-group-label">${groups.map(group=>{
       const label=homeGroups.find(item=>item.id===group).label;
-      return `<button type="button" class="tab ${quickBasketGroup===group?'active':''}" data-quick-basket-group="${group}" aria-pressed="${quickBasketGroup===group}">${escape(label)}</button>`;
+      return `<button type="button" class="tab ${quickBasketGroup===group?'active':''}" data-quick-basket-group="${group}" aria-pressed="${quickBasketGroup===group}">${icon(quickBasketGroupIcons[group])}<span>${escape(label)}</span></button>`;
     }).join('')}</div>
     <label class="visually-hidden" for="quick-basket-search">${escape(quickCopy()[2])}</label>
     <div class="search-combo-field">${icon('search')}<input type="search" id="quick-basket-search" placeholder="${escape(quickCopy()[2])}" value="${escape(quickBasketQuery)}"></div>
@@ -673,8 +686,13 @@ function quickBasket(){
   return `<section class="section quick-basket" aria-labelledby="quick-basket-title">
     <div class="pet-panel quick-basket-panel">
       <h2 id="quick-basket-title">${escape(quickCopy()[0])}</h2>
-      <div class="tabs quick-basket-tabs" role="group" aria-label="${escape(translate('Для кого товары'))}">
-        ${[['cat','Для кошек'],['dog','Для собак']].map(([pet,label])=>`<button type="button" class="tab ${quickBasketPet===pet?'active':''}" data-quick-basket-pet="${pet}" aria-pressed="${quickBasketPet===pet}">${label}</button>`).join('')}
+      <div class="quick-basket-pets" role="group" aria-label="${escape(translate('Для кого товары'))}">
+        ${[['cat','Для кошек','cat'],['dog','Для собак','paw']].map(([pet,label,symbol])=>`
+          <button type="button" class="tab quick-basket-pet ${quickBasketPet===pet?'active':''}" data-quick-basket-pet="${pet}" aria-pressed="${quickBasketPet===pet}">
+            <img src="/media/home-shortcuts/${pet}-editorial-v1.webp" alt="" width="96" height="72" loading="lazy">
+            <span>${icon(symbol)} <span>${label}</span></span>
+            <span class="quick-basket-pet-cue" aria-hidden="true">${icon('arrow')}${icon('check')}</span>
+          </button>`).join('')}
       </div>
       <div class="quick-basket-controls" data-quick-basket-controls>${quickBasketControls()}</div>
       <div class="quick-basket-summary" data-quick-basket-summary aria-live="polite">${quickBasketPet?quickBasketSummary():''}</div>
@@ -684,7 +702,12 @@ function quickBasket(){
 
 function refreshQuickBasketSummary(){
   const summary = app.querySelector('[data-quick-basket-summary]');
-  if(summary && quickBasketPet) summary.innerHTML = quickBasketSummary();
+  if(!summary || !quickBasketPet) return;
+  summary.innerHTML = quickBasketSummary();
+  for(const item of app.querySelectorAll('.quick-basket-item')){
+    const badge=item.querySelector('.quick-basket-quantity');
+    badge.innerHTML=quickBasketQuantity(item.dataset.quickProduct,item.dataset.quickVariant);
+  }
 }
 
 app.addEventListener('click',event=>{
