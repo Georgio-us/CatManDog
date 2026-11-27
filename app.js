@@ -212,7 +212,7 @@ const checkout = createCheckoutUI({
     return `${variant?.name || parent?.name || item.name || 'Товар'}${item.size ? ' · ' + item.size : ''}`;
   }
 });
-function persist(){try{localStorage.setItem('catmandog-cart',JSON.stringify(cart));localStorage.setItem('catmandog-favorites',JSON.stringify(favorites));}catch{}updateHeader();cartActivity.sync(activityStage());}
+function persist(){refreshQuickBasketSummary();try{localStorage.setItem('catmandog-cart',JSON.stringify(cart));localStorage.setItem('catmandog-favorites',JSON.stringify(favorites));}catch{}updateHeader();cartActivity.sync(activityStage());}
 function activityStage(){const path=route().path;return path==='/checkout/preview'?'review':path==='/checkout'?'checkout':path==='/cart'?'cart_opened':'cart';}
 function hideToast(){document.querySelector('#toast').classList.remove('visible');lastCartAddition=null;}
 function notify(text,{cartAction=false}={}){
@@ -618,7 +618,106 @@ function homeUseful(){
   ];
   return `<section class="section use-home" aria-labelledby="use-home-title"><div class="section-head use-home-head"><div><h2 id="use-home-title">Полезное для жизни вместе</h2><p>Найти помощь рядом, собраться в дорогу и сохранить важное для питомца</p></div><a class="text-link" href="#/useful">Открыть инструменты ${icon('arrow')}</a></div><div class="use-home-items">${items.map(item=>`<a class="use-home-item" href="${item.href}"><span class="use-home-circle"><svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${symbols[item.key]}</svg></span><span class="use-home-copy"><strong>${item.title}</strong><span class="use-home-description">${item.description}</span></span><span class="use-home-open" aria-hidden="true">${icon('arrow')}</span></a>`).join('')}</div></section>`;
 }
-function home(){return `<section class="hero"><img src="https://img.catmandog.es/assets/hero-happy.png" alt="Золотистый ретривер и серая кошка на диване" fetchpriority="high"><div class="hero-copy"><h1>Хорошая<br>жизнь<br>С хвостиком</h1><p>Всё, что нужно для счастливой жизни кошек, собак и их людей</p><form class="hero-search search-combo" data-search-form="hero" role="search"><label class="visually-hidden" for="hero-search">Поиск товаров</label><div class="search-combo-field">${icon('search')}<input id="hero-search" data-search-input type="search" placeholder="Найти товар или бренд" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="hero-search-suggestions" aria-expanded="false"></div><div class="search-suggestions" id="hero-search-suggestions" hidden></div></form><a class="button hero-catalog-cta" href="#home-catalog">В каталог</a><span class="hero-note">С заботой о каждом хвосте</span></div></section><section class="section"><div class="section-head"><h2>Их любимые вещи</h2><a class="text-link" href="#/catalog">Весь каталог</a></div><div class="categories">${categories.filter(c=>c!=='Подарочные наборы').map((c,i)=>`<a class="category" href="#/catalog?category=${encodeURIComponent(c)}"><div class="category-image" style="${categoryImageStyle(c)}"></div><span>${categoryLabel(c)}</span></a>`).join('')}</div></section>${homeShortcuts(catalogProducts,icon,escape,locale())}<section class="section home-catalog" id="home-catalog" aria-labelledby="home-catalog-title">${homeCatalog()}</section>${service()}<section class="section journal-section"><div class="section-head journal-section-head"><div><span class="eyebrow">Идеи для жизни вместе</span><h2>Журнал о питомцах</h2><p class="journal-intro">Про уютный дом, игры и поездки с питомцем</p></div><a class="text-link" href="${journalHref()}">Весь журнал</a></div><div class="journal-grid">${displayArticles.map(articleCard).join('')}</div></section>${homeUseful()}<section class="brand-story"><h2>Они делают нашу жизнь лучше<br>А мы - их</h2><div><p>CatManDog - про жизнь вместе Про утренние прогулки, тёплые носы и вещи, которые помогают заботиться каждый день</p><a class="text-link" href="#/about">Ближе познакомиться</a></div></section>`;}
+const quickBasketPreview = ['localhost', '127.0.0.1'].includes(location.hostname)
+  && new URLSearchParams(location.search).get('preview') === 'quick-basket';
+const quickBasketGroups = ['dry-food', 'wet-food', 'treats', 'litter'];
+const quickBasketCopy = {
+  ru: ['Соберите корзину на каждый день', 'Что покупаете регулярно?', 'Найти товар или бренд', 'В корзину', 'По этому запросу ничего не нашлось', 'Категории товаров'],
+  es: ['Prepara tu cesta para el día a día', '¿Qué compras habitualmente?', 'Buscar producto o marca', 'Ir a la cesta', 'No hemos encontrado productos', 'Categorías de productos'],
+  uk: ['Зберіть кошик на щодень', 'Що купуєте регулярно?', 'Знайти товар або бренд', 'До кошика', 'За цим запитом нічого не знайдено', 'Категорії товарів']
+};
+let quickBasketPet = '';
+let quickBasketGroup = '';
+let quickBasketQuery = '';
+const quickCopy = () => quickBasketCopy[locale()] || quickBasketCopy.ru;
+
+function quickBasketCards(){
+  if(!quickBasketGroup && !quickBasketQuery.trim()) return '';
+  const eligible = catalogProducts.filter(product => matchesPet(product,quickBasketPet)
+    && quickBasketGroups.includes(homeGroupForProduct(product))
+    && (!quickBasketGroup || homeGroupForProduct(product)===quickBasketGroup)
+    && snapshots(product).some(canBuy));
+  const order = quickBasketPet==='cat' ? homeCatOrder : homeDogOrder;
+  const matches = quickBasketQuery.trim()
+    ? findStoreProducts(eligible,quickBasketQuery).filter(({variant})=>variant.available)
+      .map(({entry,variant})=>[entry.product,variant.sku])
+    : prioritizeHomeShelf(quickBasketPet,eligible,order)
+      .map(product=>[product,homeFeaturedVariant(product,order)
+        || (canBuy(resolveVariant(product)) ? resolveVariant(product) : snapshots(product).find(canBuy))]);
+  return matches.length ? matches.slice(0,4).map(([product,sku])=>card(product,null,hasVariants(product)?sku:undefined)).join('')
+    : `<p role="status">${escape(quickCopy()[4])}</p>`;
+}
+
+function quickBasketSummary(){
+  const available = cart.filter(item=>Number.isFinite(cartUnitPrice(item)));
+  if(!available.length) return '';
+  const total = available.reduce((sum,item)=>sum+Math.round(cartUnitPrice(item)*100)*item.qty,0);
+  const count = available.reduce((sum,item)=>sum+item.qty,0);
+  return `<a class="button" href="#/cart">${escape(quickCopy()[3])} · ${itemCount(count)} · ${money(total/100)} ${icon('arrow')}</a>`;
+}
+
+function quickBasketControls(){
+  if(!quickBasketPet) return '';
+  const groups = quickBasketGroups.filter(group=>group!=='litter'||quickBasketPet==='cat');
+  return `<p id="quick-basket-group-label">${escape(quickCopy()[1])}</p>
+    <div class="tabs quick-basket-tabs" role="group" aria-labelledby="quick-basket-group-label">${groups.map(group=>{
+      const label=homeGroups.find(item=>item.id===group).label;
+      return `<button type="button" class="tab ${quickBasketGroup===group?'active':''}" data-quick-basket-group="${group}" aria-pressed="${quickBasketGroup===group}">${escape(label)}</button>`;
+    }).join('')}</div>
+    <label class="visually-hidden" for="quick-basket-search">${escape(quickCopy()[2])}</label>
+    <div class="search-combo-field">${icon('search')}<input type="search" id="quick-basket-search" placeholder="${escape(quickCopy()[2])}" value="${escape(quickBasketQuery)}"></div>
+    <div class="product-grid quick-basket-products" data-quick-basket-results>${quickBasketCards()}</div>`;
+}
+
+function quickBasket(){
+  return `<section class="section quick-basket" aria-labelledby="quick-basket-title">
+    <div class="pet-panel quick-basket-panel">
+      <h2 id="quick-basket-title">${escape(quickCopy()[0])}</h2>
+      <div class="tabs quick-basket-tabs" role="group" aria-label="${escape(translate('Для кого товары'))}">
+        ${[['cat','Для кошек'],['dog','Для собак']].map(([pet,label])=>`<button type="button" class="tab ${quickBasketPet===pet?'active':''}" data-quick-basket-pet="${pet}" aria-pressed="${quickBasketPet===pet}">${label}</button>`).join('')}
+      </div>
+      <div class="quick-basket-controls" data-quick-basket-controls>${quickBasketControls()}</div>
+      <div class="quick-basket-summary" data-quick-basket-summary aria-live="polite">${quickBasketPet?quickBasketSummary():''}</div>
+    </div>
+  </section>`;
+}
+
+function refreshQuickBasketSummary(){
+  const summary = app.querySelector('[data-quick-basket-summary]');
+  if(summary && quickBasketPet) summary.innerHTML = quickBasketSummary();
+}
+
+app.addEventListener('click',event=>{
+  const button=event.target.closest('[data-quick-basket-pet],[data-quick-basket-group]');
+  if(!button) return;
+  const pet=button.dataset.quickBasketPet;
+  if(pet){
+    if(quickBasketPet!==pet){
+      quickBasketPet=pet;
+      quickBasketGroup='';
+      quickBasketQuery='';
+    }
+    app.querySelector('[data-quick-basket-controls]').innerHTML=quickBasketControls();
+    refreshQuickBasketSummary();
+  }else{
+    const group=button.dataset.quickBasketGroup;
+    quickBasketGroup=quickBasketGroup===group?'':group;
+    app.querySelector('[data-quick-basket-results]').innerHTML=quickBasketCards();
+  }
+  for(const sibling of button.parentElement.querySelectorAll('button')){
+    const active=(pet?sibling.dataset.quickBasketPet===quickBasketPet:sibling.dataset.quickBasketGroup===quickBasketGroup);
+    sibling.classList.toggle('active',active);
+    sibling.setAttribute('aria-pressed',String(active));
+  }
+});
+
+app.addEventListener('input',event=>{
+  if(event.target.id!=='quick-basket-search') return;
+  quickBasketQuery=event.target.value;
+  app.querySelector('[data-quick-basket-results]').innerHTML=quickBasketCards();
+});
+
+function home(){return `<section class="hero"><img src="https://img.catmandog.es/assets/hero-happy.png" alt="Золотистый ретривер и серая кошка на диване" fetchpriority="high"><div class="hero-copy"><h1>Хорошая<br>жизнь<br>С хвостиком</h1><p>Всё, что нужно для счастливой жизни кошек, собак и их людей</p><form class="hero-search search-combo" data-search-form="hero" role="search"><label class="visually-hidden" for="hero-search">Поиск товаров</label><div class="search-combo-field">${icon('search')}<input id="hero-search" data-search-input type="search" placeholder="Найти товар или бренд" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="hero-search-suggestions" aria-expanded="false"></div><div class="search-suggestions" id="hero-search-suggestions" hidden></div></form><a class="button hero-catalog-cta" href="#home-catalog">В каталог</a><span class="hero-note">С заботой о каждом хвосте</span></div></section>${quickBasketPreview?quickBasket():''}<section class="section"><div class="section-head"><h2>${quickBasketPreview?escape(quickCopy()[5]):'Их любимые вещи'}</h2><a class="text-link" href="#/catalog">Весь каталог</a></div><div class="categories">${categories.filter(c=>c!=='Подарочные наборы').map((c,i)=>`<a class="category" href="#/catalog?category=${encodeURIComponent(c)}"><div class="category-image" style="${categoryImageStyle(c)}"></div><span>${categoryLabel(c)}</span></a>`).join('')}</div></section>${homeShortcuts(catalogProducts,icon,escape,locale())}<section class="section home-catalog" id="home-catalog" aria-labelledby="home-catalog-title">${homeCatalog()}</section>${service()}<section class="section journal-section"><div class="section-head journal-section-head"><div><span class="eyebrow">Идеи для жизни вместе</span><h2>Журнал о питомцах</h2><p class="journal-intro">Про уютный дом, игры и поездки с питомцем</p></div><a class="text-link" href="${journalHref()}">Весь журнал</a></div><div class="journal-grid">${displayArticles.map(articleCard).join('')}</div></section>${homeUseful()}<section class="brand-story"><h2>Они делают нашу жизнь лучше<br>А мы - их</h2><div><p>CatManDog - про жизнь вместе Про утренние прогулки, тёплые носы и вещи, которые помогают заботиться каждый день</p><a class="text-link" href="#/about">Ближе познакомиться</a></div></section>`;}
 function foodFilters(params){return `<div class="food-filters"><div class="food-types" aria-label="Тип корма">${[['','Весь корм'],['dry','Сухой'],['wet','Влажный']].map(([value,label])=>`<button class="pill ${(params.get('foodType')||'')===value?'active':''}" data-food-type="${value}" aria-pressed="${(params.get('foodType')||'')===value}">${label}</button>`).join('')}</div><label class="food-brand">Бренд <select id="food-brand"><option value="">Все бренды</option>${[...new Set(catalogProducts.filter(p=>p.isReal&&p.category==='Корм').map(p=>p.brand))].sort((a,b)=>a.localeCompare(b)).map(brand=>`<option value="${escape(brand)}" ${params.get('brand')===brand?'selected':''}>${escape(brand)}</option>`).join('')}</select></label></div>`;}
 function filteredProducts(params,matchedVariants){let list=catalogProducts.filter(p=>(!params.get('pet')||p.pet===params.get('pet')||p.pet==='both')&&(!params.get('category')||categoryKey(p)===params.get('category'))&&(params.get('maxPrice')||displayedMinPrice(p)===null||displayedMinPrice(p)<=priceLimit));if(params.get('group'))list=list.filter(p=>homeGroupForProduct(p)===params.get('group'));if(params.get('group')&&params.get('brand'))list=list.filter(p=>p.brand===params.get('brand'));if(params.get('group')&&params.get('feature'))list=list.filter(p=>matchesHomeFeature(p,params.get('group'),params.get('feature')));if(params.get('maxPrice'))list=list.filter(p=>matchesHomePrice(p,params.get('maxPrice')));if(params.get('category')==='Корм')list=list.filter(p=>(!params.get('foodType')||p.foodType===params.get('foodType'))&&(!params.get('brand')||p.brand===params.get('brand')));const q=params.get('q')||'';const pet=params.get('pet');const sort=params.get('sort');if(!q&&(!sort||sort==='popular')){const category=params.get('category');const group=params.get('group');list=!category&&!group?prioritizePetCatalog(list,pet):prioritizeCatalogCategory(list,category,group);}if(q)list=findStoreProducts(list,q).map(({entry,variant})=>{
   const {product}=entry;

@@ -4606,3 +4606,40 @@ details .text-link {
   .header > .brand { width: 92px; }
   .header-actions #search-toggle { width: 30px; }
 }
+
+.quick-basket-panel,
+.quick-basket-controls {
+  display: grid;
+  gap: 12px;
+}
+
+.quick-basket-panel > h2,
+.quick-basket-controls > p {
+  margin: 0;
+}
+
+.quick-basket-controls:empty,
+.quick-basket-products:empty,
+.quick-basket-summary:empty {
+  display: none;
+}
+
+.quick-basket-tabs {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.quick-basket-products {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.quick-basket-summary {
+  display: flex;
+  justify-content: flex-start;
+}
+
+@media (max-width: 760px) {
+  .quick-basket-products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
