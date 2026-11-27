@@ -4624,11 +4624,6 @@ details .text-link {
   display: none;
 }
 
-.quick-basket-tabs {
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
-
 .quick-basket-products {
   grid-template-columns: none;
   grid-auto-flow: column;
@@ -4695,14 +4690,16 @@ details .text-link {
   }
 }
 
-.quick-basket-panel {
+.quick-basket .quick-basket-panel {
+  padding: clamp(14px, 4vw, 24px);
   background: color-mix(in srgb, var(--lime) 15%, white);
 }
 
-.quick-basket-pets {
+.quick-basket-pets,
+.quick-basket-tabs {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 8px;
 }
 
 .quick-basket-pets .quick-basket-pet {
@@ -4774,7 +4771,15 @@ details .text-link {
 
 
 .quick-basket-tabs .tab {
-  min-height: 44px;
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 6px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 8px clamp(8px, 2.4vw, 16px);
+  text-align: start;
+  font-size: clamp(13px, 3.4vw, 15px);
+  line-height: 1.2;
   border: 1px solid var(--line);
   background: white;
   color: var(--ink);
@@ -4784,12 +4789,14 @@ details .text-link {
   border-color: var(--ink);
 }
 .quick-basket-tabs svg {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
 }
 .quick-basket-pets .quick-basket-pet {
   min-height: 48px;
-  padding-inline: 12px;
+  gap: 6px;
+  padding-inline: clamp(8px, 2.4vw, 16px);
+  font-size: clamp(13px, 3.4vw, 15px);
 }
 .quick-basket-item {
   scroll-snap-align: start;
