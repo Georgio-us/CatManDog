@@ -1,8 +1,26 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { consentCopy, installAnalytics, publicPageLocation, visitSource,
+import { consentCopy, installAnalytics, publicPageLocation, takeVisitSession, VISIT_IDLE_MS, visitSource,
   visitPlatform } from '../analytics-consent.js';
 import { INTERNAL_BROWSER_KEY, isInternalBrowser, markInternalBrowser } from '../analytics-audience.js';
+
+test('one browser keeps a visit across tabs and pages, but a return after 15 minutes is new', () => {
+  const values = new Map();
+  const storage = { getItem: key => values.get(key) ?? null,
+    setItem: (key, value) => values.set(key, value) };
+  let sequence = 0;
+  const createId = () => `241c5edb-152a-4788-9053-e880270a023${++sequence}`;
+  const first = takeVisitSession(storage, 1000, createId, 'tg-vlc-01-w1');
+  const catalog = takeVisitSession(storage, 1100, createId);
+  const anotherTab = takeVisitSession(storage, 2000, createId);
+  assert.equal(first.isNew, true);
+  assert.deepEqual(catalog, { id: first.id, isNew: false });
+  assert.deepEqual(anotherTab, { id: first.id, isNew: false });
+  const returnVisit = takeVisitSession(storage, 2000 + 15 * 60 * 1000, createId);
+  assert.equal(returnVisit.isNew, true);
+  assert.notEqual(returnVisit.id, first.id);
+  assert.equal(VISIT_IDLE_MS < 15 * 60 * 1000, true);
+});
 
 test('staff browser marker persists without storing an identity', () => {
   const values = new Map();

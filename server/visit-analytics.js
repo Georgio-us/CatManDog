@@ -23,6 +23,13 @@ export async function recordSiteVisit(db, body) {
     const duplicate = await client.query('SELECT 1 FROM site_visit_events WHERE visit_id=$1', [body.visitId]);
     if (duplicate.rows.length) { await client.query('COMMIT'); return null; }
     const source = visitAttribution(body);
+    // A Telegram in-app browser can reload an internal page with fresh tab storage.
+    // Do not call rapid internal navigation a new visit, even when its visit_id changed.
+    if (source === 'internal') {
+      const recent = await client.query(`SELECT 1 FROM site_visit_events
+        WHERE cart_id=$1 AND created_at >= now() - interval '10 minutes' LIMIT 1`, [body.cartId]);
+      if (recent.rows.length) { await client.query('COMMIT'); return null; }
+    }
     const campaignId = visitCampaign(body);
     const visitor = await client.query(`INSERT INTO site_visitors(cart_id) VALUES($1)
       ON CONFLICT(cart_id) DO UPDATE SET visit_count=site_visitors.visit_count+1,last_seen_at=now()

@@ -4,10 +4,25 @@ const CONSENT_KEY = 'catmandog-analytics-consent-v1';
 const MEASUREMENT_ID = 'G-CTTBQ7PJP9';
 const COMMERCE_EVENTS = new Set(['view_item_list', 'select_item', 'view_item', 'add_to_cart', 'remove_from_cart',
   'view_cart', 'begin_checkout', 'add_shipping_info', 'add_payment_info', 'purchase']);
-const VISIT_ALERT_KEY = 'catmandog-visit-alerted';
-const VISIT_SESSION_KEY = 'catmandog-visit-session-v1';
+const VISIT_SESSION_KEY = 'catmandog-visit-session-v2';
+export const VISIT_IDLE_MS = 10 * 60 * 1000;
 const CART_ID_KEY = 'catmandog-observed-cart-v1';
 const validCartId = value => /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i.test(value || '');
+
+export function takeVisitSession(storage, now, createId, campaignId = null) {
+  let previous = null;
+  try { previous = JSON.parse(storage.getItem(VISIT_SESSION_KEY) || 'null'); }
+  catch { /* Missing or malformed storage starts a fresh visit */ }
+  const elapsed = now - Number(previous?.lastSeen);
+  const active = validCartId(previous?.id) && Number.isFinite(elapsed) &&
+    elapsed >= 0 && elapsed < VISIT_IDLE_MS;
+  const newCampaign = campaignId && previous?.campaignId && campaignId !== previous.campaignId;
+  const isNew = !active || !!newCampaign;
+  const id = isNew ? createId() : previous.id;
+  storage.setItem(VISIT_SESSION_KEY, JSON.stringify({ id, lastSeen: now,
+    campaignId: isNew ? campaignId : (campaignId || previous?.campaignId || null) }));
+  return { id, isNew };
+}
 
 export function publicPageLocation(location) {
   const path = location.pathname;
@@ -106,7 +121,7 @@ export function installAnalytics(language) {
   try { choice = localStorage.getItem(CONSENT_KEY); } catch { choice = null; }
   let enabled = false;
   let lastPage = null;
-  let visitAlerted = false;
+  let entryContextUsed = false;
   // Keep the entry context before the visitor browses to another route or accepts analytics.
   const entryPage = publicPageLocation(window.location);
   const entryCampaign = window.location.search ||
@@ -146,39 +161,43 @@ export function installAnalytics(language) {
     } catch { return null; }
   }
 
-  function visitSessionId() {
-    try {
-      let id = sessionStorage.getItem(VISIT_SESSION_KEY);
-      if (!validCartId(id)) {
-        id = crypto.randomUUID();
-        sessionStorage.setItem(VISIT_SESSION_KEY, id);
-      }
-      return id;
-    } catch { return crypto.randomUUID(); }
+  function visitSession(campaignId) {
+    for (const name of ['localStorage', 'sessionStorage']) {
+      try { return takeVisitSession(globalThis[name], Date.now(), () => crypto.randomUUID(), campaignId); }
+      catch { /* Try the other available storage */ }
+    }
+    return { id: crypto.randomUUID(), isNew: true };
+  }
+
+  function reportVisit(page) {
+    const isEntry = !entryContextUsed;
+    entryContextUsed = true;
+    const session = visitSession(isEntry ? entryCampaignId : null);
+    if (!session.isNew || typeof window.fetch !== 'function') return;
+    const publicUrl = new URL(isEntry ? (entryPage || page) : page);
+    const visit = { page: `${publicUrl.pathname}${publicUrl.hash}`,
+      source: isEntry ? entrySource : 'direct',
+      platform: isEntry ? entryPlatform : null,
+      campaignId: isEntry ? entryCampaignId : null,
+      cartId: anonymousCartId(), visitId: session.id };
+    void window.fetch('/api/telemetry/visit', { method: 'POST', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(visit) }).catch(() => {});
   }
 
   function pageView() {
     if (!enabled) return;
     const page = publicPageLocation(window.location);
-    if (!page || page === lastPage) return;
+    if (!page) return;
+    reportVisit(page);
+    if (page === lastPage) return;
     lastPage = page;
     window.gtag('event', 'page_view', { page_location: page, page_title: 'CatManDog' });
-    if (!visitAlerted && typeof window.fetch === 'function') {
-      try { visitAlerted = sessionStorage.getItem(VISIT_ALERT_KEY) === '1'; }
-      catch { /* Session storage may be unavailable */ }
-      if (!visitAlerted) {
-        visitAlerted = true;
-        try { sessionStorage.setItem(VISIT_ALERT_KEY, '1'); }
-        catch { /* Session storage may be unavailable */ }
-        const publicUrl = new URL(entryPage || page);
-        const visit = { page: `${publicUrl.pathname}${publicUrl.hash}`,
-          source: entrySource, platform: entryPlatform, campaignId: entryCampaignId,
-          cartId: anonymousCartId(), visitId: visitSessionId() };
-        void window.fetch('/api/telemetry/visit', { method: 'POST', credentials: 'same-origin',
-          headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(visit) }).catch(() => {});
-      }
-    }
   }
+
+  window.addEventListener('pageshow', pageView);
+  document.addEventListener?.('visibilitychange', () => {
+    if (document.visibilityState === 'visible') pageView();
+  });
 
   panel.hidden = choice === 'accepted' || choice === 'rejected';
   if (choice === 'accepted') enable();
@@ -196,7 +215,11 @@ export function installAnalytics(language) {
     let previousId = null;
     try { previousId = localStorage.getItem(CART_ID_KEY); } catch {}
     choice = 'rejected';
+    const wasEnabled = enabled;
+    enabled = false;
     try { localStorage.setItem(CONSENT_KEY, choice); } catch { /* No persistent storage */ }
+    try { localStorage.removeItem?.(VISIT_SESSION_KEY); } catch {}
+    try { sessionStorage.removeItem?.(VISIT_SESSION_KEY); } catch {}
     panel.hidden = true;
     const pending = [];
     if (validCartId(previousId)) pending.push(window.fetch('/api/telemetry/visit', {
@@ -207,7 +230,7 @@ export function installAnalytics(language) {
       window.dispatchEvent(new CustomEvent('catmandog:analytics-consent', {
         detail: { accepted: false, waitUntil: promise => pending.push(promise) }
       }));
-    if (enabled) {
+    if (wasEnabled) {
       for (const cookie of document.cookie.split(';')) {
         const name = cookie.trim().split('=')[0];
         if (!/^_ga(?:_|$)/.test(name)) continue;

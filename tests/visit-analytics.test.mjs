@@ -37,6 +37,28 @@ test('visit recording returns stable browser ordinal, daily totals and ignores a
   assert.equal(statements.filter(({ sql }) => sql.includes('INSERT INTO site_visit_events')).length, 1);
 });
 
+test('rapid internal catalog reloads do not create visits, but a later return does', async () => {
+  let recent = true;
+  let count = 1;
+  const inserted = [];
+  const client = { async query(sql, args) {
+    if (sql.includes('WHERE visit_id=$1')) return { rows: [] };
+    if (sql.includes("interval '10 minutes'")) return { rows: recent ? [{ '?column?': 1 }] : [] };
+    if (sql.includes('INSERT INTO site_visitors')) return { rows: [{ visitor_number: '127', visit_count: ++count }] };
+    if (sql.includes('INSERT INTO site_visit_events')) inserted.push(args);
+    if (sql.includes('AS visits_today')) return { rows: [{ visits_today: count, visitors_today: 1 }] };
+    return { rows: [] };
+  }, release() {} };
+  const db = { async connect() { return client; } };
+  const internal = { cartId, visitId, source: 'internal' };
+  assert.equal(await recordSiteVisit(db, internal), null);
+  assert.equal(inserted.length, 0);
+  recent = false;
+  const returned = await recordSiteVisit(db, internal);
+  assert.equal(returned.visitCount, 2);
+  assert.equal(inserted.length, 1);
+});
+
 test('withdrawing analytics deletes the browser and its visit history', async () => {
   const db = { async query(sql, args) {
     assert.match(sql, /DELETE FROM site_visitors/);
