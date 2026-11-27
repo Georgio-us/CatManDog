@@ -18,11 +18,14 @@ export function matchesFoodCategory(product, foodType) {
 
 const units = { кг: 'kg', г: 'g', л: 'l', мл: 'ml' };
 
+const brandAliases = new Map([['леонардо', 'leonardo']]);
+
 function tokens(value) {
-  return normalizeSearch(value)
+  const words = normalizeSearch(value)
     .replace(/(\d)[,.](\d)/g, '$1.$2')
     .replace(/(\d+(?:\.\d+)?)\s*(kg|ml|кг|мл|g|l|г|л)(?!\p{L})/gu, (_, amount, unit) => amount + (units[unit] || unit))
     .match(/\d+(?:\.\d+)?(?:kg|ml|g|l)?|\p{L}+/gu) || [];
+  return words.map(word => brandAliases.get(word) ?? word);
 }
 
 function nearWord(a, b) {
