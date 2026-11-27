@@ -608,7 +608,7 @@ export const es = {
   'С хвостиком': 'con mascotas',
   'Всё, что нужно для счастливой жизни кошек, собак и их людей': 'Todo para una vida feliz con gatos, perros y sus personas',
   'Найти своё': 'Descubre lo que buscas',
-  'Их любимые вещи': 'Sus cosas favoritas',
+  'Категории товаров': 'Categorías de productos',
   'Весь каталог': 'Todo el catálogo',
   'Идеи для жизни вместе': 'Ideas para vivir juntos',
   'Про уютный дом, игры и поездки с питомцем': 'Sobre hogares acogedores, juegos y viajes con tu mascota',

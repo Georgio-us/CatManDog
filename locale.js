@@ -1,7 +1,7 @@
-import { es, esPatterns } from './locales/es.js?v=store-search-20261125';
+import { es, esPatterns } from './locales/es.js?v=home-mobile-contrast-20261127';
 import { esProductText } from './locales/product-es.js?v=litter-photos-20261121';
 import { esDetails } from './locales/details-es.js?v=open-seo-audit-20261125';
-import { uk, ukPatterns } from './locales/uk.js?v=store-search-20261125';
+import { uk, ukPatterns } from './locales/uk.js?v=home-mobile-contrast-20261127';
 import { ukExtra } from './locales/uk-extra.js?v=delivery-regions-20261122';
 import { ukProductNames } from './locales/uk-product-names.js?v=open-seo-audit-20261125';
 import { ukProductCopy } from './locales/uk-product-copy.js?v=litter-photos-20261121';
