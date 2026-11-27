@@ -49,7 +49,7 @@ export function renderRecurringCart({ cart, products, draft, signedIn, accountsA
   const cadenceLabel = weeks => language === 'es' ? `Cada ${weeks} semanas`
     : language === 'uk' ? `Кожні ${weeks} ${weeks === 6 ? 'тижнів' : 'тижні'}`
       : `Каждые ${weeks} ${weeks === 6 ? 'недель' : 'недели'}`;
-  if (!signedIn) return `<section class="rc-flow-panel recurring-cart-card"><span class="recurring-step-label">${copy.step}</span><h2>${heading}</h2><p>${description}</p><p>${copy.guest}</p><a class="text-link" href="#/account/login?return=cart">${copy.login} ${icon('arrow')}</a></section>`;
+  if (!signedIn) return `<section class="rc-flow-panel recurring-cart-card"><span class="recurring-step-label">${copy.step}</span>${current.enabled && current.items.length ? `<label class="recurring-main-toggle"><input type="checkbox" checked disabled><span><strong>${heading}</strong><small>${description}</small></span></label>` : `<h2>${heading}</h2><p>${description}</p>`}<p>${copy.guest}</p><a class="text-link" href="#/account/login?return=cart">${copy.login} ${icon('arrow')}</a></section>`;
   return `<section class="rc-flow-panel recurring-cart-card"><span class="recurring-step-label">${copy.step}</span><label class="recurring-main-toggle"><input type="checkbox" data-recurring-enable ${current.enabled ? 'checked' : ''}><span><strong>${heading}</strong><small>${description}</small></span></label>${current.enabled ? `<fieldset class="recurring-cart-items"><legend>${copy.legend}</legend>${cart.map(item => {
     const sku = cartSku(item, products);
     const product = products.find(entry => entry.id === (item.productId || item.id));

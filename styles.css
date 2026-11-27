@@ -4630,7 +4630,11 @@ details .text-link {
 }
 
 .quick-basket-products {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(200px, 24%);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
 }
 
 .quick-basket-summary {
@@ -4703,7 +4707,7 @@ details .text-link {
 
 .quick-basket-pets .quick-basket-pet {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 10px;
   width: 100%;
@@ -4721,14 +4725,6 @@ details .text-link {
 .quick-basket-pets .quick-basket-pet.active {
   background: var(--lime);
   border-color: var(--ink);
-}
-
-.quick-basket-pet img {
-  width: clamp(46px, 8vw, 96px);
-  height: auto;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: calc(var(--radius) / 2);
 }
 
 .quick-basket-pet > span,
@@ -4776,19 +4772,48 @@ details .text-link {
   pointer-events: none;
 }
 
-@media (max-width: 480px) {
-  .quick-basket-pets .quick-basket-pet {
-    grid-template-columns: 1fr auto;
-    gap: 6px;
-  }
 
-  .quick-basket-pet img {
-    grid-column: 1 / -1;
-    width: 100%;
-    aspect-ratio: 2 / 1;
-  }
+.quick-basket-tabs .tab {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--ink);
+}
+.quick-basket-tabs .tab.active {
+  background: var(--lime);
+  border-color: var(--ink);
+}
+.quick-basket-tabs svg {
+  width: 22px;
+  height: 22px;
+}
+.quick-basket-pets .quick-basket-pet {
+  min-height: 48px;
+  padding-inline: 12px;
+}
+.quick-basket-item {
+  scroll-snap-align: start;
+}
+.quick-basket-format {
+  display: grid;
+  gap: 4px;
+  margin-block: 6px;
+  font-size: 13px;
+}
+.quick-basket-format select {
+  max-width: 100%;
+  min-width: 0;
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) / 2);
+  background: white;
+  color: var(--ink);
+  font: inherit;
+}
 
-  .quick-basket-pet > span:first-of-type > svg {
-    display: none;
-  }
+.quick-basket-panel,
+.quick-basket-controls,
+.quick-basket-results {
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
 }

@@ -315,7 +315,7 @@ function crumbs(title){
   const navigationLabel = { ru: 'Путь по каталогу', es: 'Ruta del catálogo', uk: 'Шлях каталогом' }[locale()] || 'Путь по каталогу';
   return `<nav class="product-navigation" aria-label="${navigationLabel}"><div class="breadcrumbs"><a href="/#/">Главная</a>${sourceCrumb}<span>/</span><span>${escape(title)}</span></div><a class="product-back-link" href="${escape(destination)}" data-product-return>${icon('arrow')}<span>${escape(back)}</span></a></nav>`;
 }
-function card(p,pickupSku=null,featuredSku=null,addIcon='bag'){
+function card(p,pickupSku=null,featuredSku=null,addIcon='bag',variantSelect=''){
   // Array.map passes its index as the second argument; only a real SKU enables pickup mode.
   const pickup=Boolean(pickupSku && typeof pickupSku === 'object' && pickupSku.id);
   if (!pickup) pickupSku = null;
@@ -342,7 +342,7 @@ function card(p,pickupSku=null,featuredSku=null,addIcon='bag'){
   const action=exactSku&&configure
     ? `<a class="product-card-action" href="${escape(href)}" aria-label="${actionLabel}: ${escape(p.name)} ${escape(sku.label||'')}">${actionLabel}${icon('arrow')}</a>`
     : `<button class="product-card-action" ${pickup?`data-pickup-add="${escape(sku.id)}" data-product-id="${escape(p.id)}"`:featuredSku?`data-add-variant="${escape(sku.id)}" data-product-id="${escape(p.id)}"`: `${configure?'data-configure':'data-add'}="${escape(p.id)}"`} aria-label="${actionLabel}: ${escape(p.name)}${exactSku&&sku.label?` ${escape(sku.label)}`:''}">${buttonLabel}${icon(configure?'arrow':addIcon)}</button>`;
-  return `<article class="product-card ${p.isReal||pickup?'real-product-card':''}"><a class="product-card-open" href="${escape(href)}" data-product-id="${escape(p.id)}" aria-label="Открыть товар: ${escape(p.name)}${exactSku&&sku.label?` ${escape(sku.label)}`:''}"></a><div class="product-media">${imageBlock(exactSku?(sku.image||p.image):p.image)}${tag?`<span class="product-tag">${escape(tag)}</span>`:''}${availabilityTag}<button class="icon-button favorite ${favorites.includes(p.id)?'selected':''}" data-favorite="${escape(p.id)}" aria-label="${favorites.includes(p.id)?'Убрать из избранного':'В избранное'}: ${escape(p.name)}" aria-pressed="${favorites.includes(p.id)}">${icon('heart')}</button></div><div class="product-info"><small>${escape(p.brand||'CatManDog')}${exactSku&&sku.label?` · ${escape(sku.label)}`:p.weight?` · ${escape(p.weight)}`:''}${family?` · ${variantCount(p.variants.length)}`:''}</small><div class="product-title"><h3>${escape(p.name)} <span class="product-open-cue">${icon('arrow')}</span></h3></div><span class="retail-label" ${caption?'':'aria-hidden="true"'}>${caption}</span><div class="product-price"><div class="product-price-values"><span>${displayPrice}</span>${!exactSku&&!pricing.demo&&!family&&p.old?`<span class="old-price">${money(p.old)}</span>`:''}</div>${action}</div></div></article>`;
+  return `<article class="product-card ${p.isReal||pickup?'real-product-card':''}"><a class="product-card-open" href="${escape(href)}" data-product-id="${escape(p.id)}" aria-label="Открыть товар: ${escape(p.name)}${exactSku&&sku.label?` ${escape(sku.label)}`:''}"></a><div class="product-media">${imageBlock(exactSku?(sku.image||p.image):p.image)}${tag?`<span class="product-tag">${escape(tag)}</span>`:''}${availabilityTag}<button class="icon-button favorite ${favorites.includes(p.id)?'selected':''}" data-favorite="${escape(p.id)}" aria-label="${favorites.includes(p.id)?'Убрать из избранного':'В избранное'}: ${escape(p.name)}" aria-pressed="${favorites.includes(p.id)}">${icon('heart')}</button></div><div class="product-info"><small>${escape(p.brand||'CatManDog')}${exactSku&&sku.label?` · ${escape(sku.label)}`:p.weight?` · ${escape(p.weight)}`:''}${family?` · ${variantCount(p.variants.length)}`:''}</small><div class="product-title"><h3>${escape(p.name)} <span class="product-open-cue">${icon('arrow')}</span></h3></div><span class="retail-label" ${caption?'':'aria-hidden="true"'}>${caption}</span>${variantSelect}<div class="product-price"><div class="product-price-values"><span>${displayPrice}</span>${!exactSku&&!pricing.demo&&!family&&p.old?`<span class="old-price">${money(p.old)}</span>`:''}</div>${action}</div></div></article>`;
 }
 // Hand-curated pickup shelf. Keep exact SKU IDs here; filters retain this order.
 // New stock that has not been placed by the owner follows the curated cards.
@@ -628,9 +628,9 @@ const quickBasketCopy = {
   uk: ['Зберіть кошик на щодень', 'Що купуєте регулярно?', 'Знайти товар або бренд', 'До кошика', 'За цим запитом нічого не знайдено', 'Категорії товарів']
 };
 const quickBasketResultsCopy = {
-  ru: { count: (shown,total)=>`Показано ${shown} из ${total} доступных`, all:'Смотреть все', swipe:'Листайте, чтобы увидеть больше' },
-  es: { count: (shown,total)=>`Se muestran ${shown} de ${total} disponibles`, all:'Ver todos', swipe:'Desliza para ver más' },
-  uk: { count: (shown,total)=>`Показано ${shown} з ${total} доступних`, all:'Переглянути всі', swipe:'Гортайте, щоб побачити більше' }
+  ru: { all:'Смотреть все', swipe:'Листайте, чтобы увидеть больше' },
+  es: { all:'Ver todos', swipe:'Desliza para ver más' },
+  uk: { all:'Переглянути всі', swipe:'Гортайте, щоб побачити більше' }
 };
 let quickBasketPet = '';
 let quickBasketGroup = '';
@@ -651,26 +651,56 @@ function quickBasketCards(){
       .map(product=>[product,homeFeaturedVariant(product,order)
         || (canBuy(resolveVariant(product)) ? resolveVariant(product) : snapshots(product).find(canBuy))]);
   if(!matches.length) return `<p role="status">${escape(quickCopy()[4])}</p>`;
-  const shown=matches.slice(0,4);
+  const shown=matches;
   const labels=quickBasketResultsCopy[locale()]||quickBasketResultsCopy.ru;
   const params=new URLSearchParams({pet:quickBasketPet});
   if(quickBasketGroup) params.set('group',quickBasketGroup);
   if(quickBasketQuery.trim()) params.set('q',quickBasketQuery.trim());
   return `<div class="quick-basket-results-head">
-      <span id="quick-basket-results-count" role="status">${escape(labels.count(shown.length,matches.length))}</span>
-      ${matches.length>shown.length?`<a class="text-link" href="${escape(location.pathname+location.search)}#/catalog?${escape(params.toString())}">${escape(labels.all)} ${icon('arrow')}</a>`:''}
+      <span id="quick-basket-results-count" role="status">${escape(itemCount(shown.length))}</span>
+      ${quickBasketGroup?`<a class="text-link" href="${escape(location.pathname+location.search)}#/catalog?${escape(params.toString())}">${escape(labels.all)} ${icon('arrow')}</a>`:''}
     </div>
     ${shown.length>1?`<p class="quick-basket-swipe">${escape(labels.swipe)}</p>`:''}
     <div class="product-grid quick-basket-products" data-card-count="${shown.length}" role="region" aria-labelledby="quick-basket-results-count" tabindex="0">
-      ${shown.map(([product,sku])=>{
-        const variantId=hasVariants(product)?sku.id:'';
-        return `<div class="quick-basket-item" data-quick-product="${escape(product.id)}" data-quick-variant="${escape(variantId)}">
-          ${card(product,null,variantId?sku:undefined,'plus')}
-          <span class="quick-basket-quantity">${quickBasketQuantity(product.id,variantId)}</span>
-        </div>`;
-      }).join('')}
+      ${shown.map(([product,sku])=>`<div class="quick-basket-item" data-quick-product="${escape(product.id)}" data-quick-variant="${escape(hasVariants(product)?sku.id:'')}">${quickBasketItem(product,sku)}</div>`).join('')}
     </div>`;
 }
+
+function quickBasketItem(product,sku){
+  const variantId=hasVariants(product)?sku.id:'';
+  const options=snapshots(product).filter(canBuy);
+  const label={es:'Formato',ru:'Фасовка',uk:'Фасування'}[locale()];
+  const selector=options.length>1?`<label class="quick-basket-format"><span>${label}</span><select data-quick-format>${options.map(option=>
+    `<option value="${escape(option.id)}" ${option.id===sku.id?'selected':''}>${escape(translate(option.label||option.weight||label))} · ${money(storefrontPrice(option))}</option>`
+  ).join('')}</select></label>`:'';
+  return `${card(product,null,variantId?sku:undefined,'plus',selector)}
+    <span class="quick-basket-quantity">${quickBasketQuantity(product.id,variantId)}</span>`;
+}
+
+app.addEventListener('change',event=>{
+  if(!event.target.matches('[data-quick-format]'))return;
+  const item=event.target.closest('.quick-basket-item');
+  const product=catalogProducts.find(product=>product.id===item.dataset.quickProduct);
+  const sku=resolveVariant(product,event.target.value);
+  if(!canBuy(sku))return;
+  item.dataset.quickVariant=sku.id;
+  item.innerHTML=quickBasketItem(product,sku);
+  item.querySelector('[data-quick-format]').focus({preventScroll:true});
+});
+
+app.addEventListener('click',event=>{
+  const button=event.target.closest('.quick-basket-item button:is([data-add],[data-add-variant])');
+  if(!button)return;
+  event.stopImmediatePropagation();
+  const {quickProduct,quickVariant}=button.closest('.quick-basket-item').dataset;
+  add(quickProduct,null,1,undefined,quickVariant||undefined);
+  const key=recurringKey({productId:quickProduct,variantId:quickVariant});
+  if(!cart.some(item=>recurringKey(item)===key))return;
+  recurringDraft=normalizeRecurringDraft(recurringDraft,cart);
+  recurringDraft.enabled=true;
+  recurringDraft.items=[...new Set([...recurringDraft.items,key])];
+  saveRecurringDraft();
+});
 
 function quickBasketQuantity(productId,variantId){
   const quantity=cart.filter(item=>(item.productId||item.id)===productId&&(item.variantId||'')===variantId)
@@ -706,7 +736,6 @@ function quickBasket(){
       <div class="quick-basket-pets" role="group" aria-label="${escape(translate('Для кого товары'))}">
         ${[['cat','Для кошек','cat'],['dog','Для собак','paw']].map(([pet,label,symbol])=>`
           <button type="button" class="tab quick-basket-pet ${quickBasketPet===pet?'active':''}" data-quick-basket-pet="${pet}" aria-pressed="${quickBasketPet===pet}">
-            <img src="/media/home-shortcuts/${pet}-editorial-v1.webp" alt="" width="96" height="72" loading="lazy">
             <span>${icon(symbol)} <span>${label}</span></span>
             <span class="quick-basket-pet-cue" aria-hidden="true">${icon('arrow')}${icon('check')}</span>
           </button>`).join('')}
