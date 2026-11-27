@@ -2,7 +2,8 @@ const campaigns = [
   ['tg-vlc-01-w1', 'paid_social'],
   ['tg-vlc-02-w1', 'paid_social'],
   ['tg-vlc-03-w1', 'organic_social'],
-  ['tg-vlc-04-w1', 'organic_social']
+  ['tg-vlc-04-w1', 'organic_social'],
+  ['tg-es-01-w1', 'organic_social']
 ];
 
 const destinations = new Map([...campaigns.flatMap(([campaign, medium]) => [

@@ -73,6 +73,8 @@ test('visit alert shows new and repeat browser counts without leaking private UR
     /Ссылка: Украинцы на Suïssa · tg-vlc-03-w1/);
   assert.match(visitAlertText({ source: 'telegram', campaignId: 'tg-vlc-04-w1' }),
     /Ссылка: Валенсия Форум · tg-vlc-04-w1/);
+  assert.match(visitAlertText({ source: 'telegram', campaignId: 'tg-es-01-w1' }),
+    /Ссылка: Українці в Іспанії \| Міста · tg-es-01-w1/);
   assert.match(telegram, /Из поиска сегодня: 1/);
   const cookie = staffVisitCookie('a'.repeat(64), true);
   assert.match(cookie, /Path=\/api\/telemetry/);

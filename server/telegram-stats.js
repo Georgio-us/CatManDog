@@ -6,7 +6,8 @@ const campaignNames = new Map([
   ['tg-vlc-01-w1', 'Барахолка'],
   ['tg-vlc-02-w1', 'Женский чат'],
   ['tg-vlc-03-w1', 'Украинцы на Suïssa'],
-  ['tg-vlc-04-w1', 'Валенсия Форум']
+  ['tg-vlc-04-w1', 'Валенсия Форум'],
+  ['tg-es-01-w1', 'Українці в Іспанії | Міста']
 ]);
 
 export function telegramCampaignLabel(campaignId) {
@@ -67,11 +68,11 @@ export async function linksStatsText(db) {
     db.query(`SELECT campaign_id,destination,
     count(*)::integer AS total,
     count(*) FILTER (WHERE created_at >= ${dayStart})::integer AS today
-    FROM campaign_link_clicks WHERE campaign_id IN ('tg-vlc-01-w1','tg-vlc-02-w1','tg-vlc-03-w1','tg-vlc-04-w1')
+    FROM campaign_link_clicks WHERE campaign_id IN ('tg-vlc-01-w1','tg-vlc-02-w1','tg-vlc-03-w1','tg-vlc-04-w1','tg-es-01-w1')
     GROUP BY campaign_id,destination`),
     db.query(`SELECT campaign_id,count(*)::integer AS total,
       count(*) FILTER (WHERE created_at >= ${dayStart})::integer AS today
-      FROM site_visit_events WHERE campaign_id IN ('tg-vlc-01-w1','tg-vlc-02-w1','tg-vlc-03-w1','tg-vlc-04-w1')
+      FROM site_visit_events WHERE campaign_id IN ('tg-vlc-01-w1','tg-vlc-02-w1','tg-vlc-03-w1','tg-vlc-04-w1','tg-es-01-w1')
       GROUP BY campaign_id`)
   ]);
   const values = new Map(rows.map(row => [`${row.campaign_id}:${row.destination}`, row]));
@@ -80,7 +81,7 @@ export async function linksStatsText(db) {
     const row = values.get(`${campaign}:${destination}`);
     return `${label}: ${count(row?.today)} сегодня · ${count(row?.total)} всего`;
   };
-  const campaigns = ['tg-vlc-01-w1', 'tg-vlc-02-w1', 'tg-vlc-03-w1', 'tg-vlc-04-w1'];
+  const campaigns = ['tg-vlc-01-w1', 'tg-vlc-02-w1', 'tg-vlc-03-w1', 'tg-vlc-04-w1', 'tg-es-01-w1'];
   return `🔗 Ссылки Telegram (клики по редиректу)\n` +
     campaigns.map(id => `${telegramCampaignLabel(id)}\n${line(id,'site','Сайт')}\n` +
       `${line(id,'instagram','Instagram')}\n` +

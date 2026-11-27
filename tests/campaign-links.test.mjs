@@ -59,6 +59,16 @@ test('Suïssa and forum links track distinct unpaid placements and destinations'
   assert.deepEqual(writes, [['tg-vlc-03-w1', 'site'], ['tg-vlc-04-w1', 'site']]);
 });
 
+test('Spain-wide Ukrainian group has its own tracked site and Instagram links', () => {
+  const site = campaignLink('/go/tg-es-01-w1-site');
+  const instagram = campaignLink('/go/tg-es-01-w1-instagram');
+  assert.equal(site.id, 'tg-es-01-w1');
+  assert.equal(instagram.id, 'tg-es-01-w1');
+  assert.equal(site.url,
+    '/?utm_source=telegram&utm_medium=organic_social&utm_campaign=tg-es-01-w1');
+  assert.equal(instagram.url, 'https://www.instagram.com/catmandog.es/');
+});
+
 test('human opens are counted by destination, preview bots and HEAD requests are not', async () => {
   const writes = [];
   const db = { async query(sql, params) { writes.push(params); return { rows: [] }; } };

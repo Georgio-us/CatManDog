@@ -9,7 +9,7 @@ export function visitAttribution(body) {
 }
 
 export function visitCampaign(body) {
-  return body?.platform === 'telegram' && /^(tg-vlc-0[1-4]-w1)$/.test(body?.campaignId || '')
+  return body?.platform === 'telegram' && /^(?:tg-vlc-0[1-4]|tg-es-01)-w1$/.test(body?.campaignId || '')
     ? body.campaignId : null;
 }
 
