@@ -627,6 +627,11 @@ const quickBasketCopy = {
   es: ['Prepara tu cesta para el día a día', '¿Qué compras habitualmente?', 'Buscar producto o marca', 'Ir a la cesta', 'No hemos encontrado productos', 'Categorías de productos'],
   uk: ['Зберіть кошик на щодень', 'Що купуєте регулярно?', 'Знайти товар або бренд', 'До кошика', 'За цим запитом нічого не знайдено', 'Категорії товарів']
 };
+const quickBasketResultsCopy = {
+  ru: { count: (shown,total)=>`Показано ${shown} из ${total} доступных`, all:'Смотреть все', swipe:'Листайте, чтобы увидеть больше' },
+  es: { count: (shown,total)=>`Se muestran ${shown} de ${total} disponibles`, all:'Ver todos', swipe:'Desliza para ver más' },
+  uk: { count: (shown,total)=>`Показано ${shown} з ${total} доступних`, all:'Переглянути всі', swipe:'Гортайте, щоб побачити більше' }
+};
 let quickBasketPet = '';
 let quickBasketGroup = '';
 let quickBasketQuery = '';
@@ -645,14 +650,26 @@ function quickBasketCards(){
     : prioritizeHomeShelf(quickBasketPet,eligible,order)
       .map(product=>[product,homeFeaturedVariant(product,order)
         || (canBuy(resolveVariant(product)) ? resolveVariant(product) : snapshots(product).find(canBuy))]);
-  return matches.length ? matches.slice(0,4).map(([product,sku])=>{
-      const variantId=hasVariants(product)?sku.id:'';
-      return `<div class="quick-basket-item" data-quick-product="${escape(product.id)}" data-quick-variant="${escape(variantId)}">
-        ${card(product,null,variantId?sku:undefined,'plus')}
-        <span class="quick-basket-quantity">${quickBasketQuantity(product.id,variantId)}</span>
-      </div>`;
-    }).join('')
-    : `<p role="status">${escape(quickCopy()[4])}</p>`;
+  if(!matches.length) return `<p role="status">${escape(quickCopy()[4])}</p>`;
+  const shown=matches.slice(0,4);
+  const labels=quickBasketResultsCopy[locale()]||quickBasketResultsCopy.ru;
+  const params=new URLSearchParams({pet:quickBasketPet});
+  if(quickBasketGroup) params.set('group',quickBasketGroup);
+  if(quickBasketQuery.trim()) params.set('q',quickBasketQuery.trim());
+  return `<div class="quick-basket-results-head">
+      <span id="quick-basket-results-count" role="status">${escape(labels.count(shown.length,matches.length))}</span>
+      ${matches.length>shown.length?`<a class="text-link" href="${escape(location.pathname+location.search)}#/catalog?${escape(params.toString())}">${escape(labels.all)} ${icon('arrow')}</a>`:''}
+    </div>
+    ${shown.length>1?`<p class="quick-basket-swipe">${escape(labels.swipe)}</p>`:''}
+    <div class="product-grid quick-basket-products" data-card-count="${shown.length}" role="region" aria-labelledby="quick-basket-results-count" tabindex="0">
+      ${shown.map(([product,sku])=>{
+        const variantId=hasVariants(product)?sku.id:'';
+        return `<div class="quick-basket-item" data-quick-product="${escape(product.id)}" data-quick-variant="${escape(variantId)}">
+          ${card(product,null,variantId?sku:undefined,'plus')}
+          <span class="quick-basket-quantity">${quickBasketQuantity(product.id,variantId)}</span>
+        </div>`;
+      }).join('')}
+    </div>`;
 }
 
 function quickBasketQuantity(productId,variantId){
@@ -666,7 +683,7 @@ function quickBasketSummary(){
   if(!available.length) return '';
   const total = available.reduce((sum,item)=>sum+Math.round(cartUnitPrice(item)*100)*item.qty,0);
   const count = available.reduce((sum,item)=>sum+item.qty,0);
-  return `<a class="button" href="#/cart">${escape(quickCopy()[3])} · ${itemCount(count)} · ${money(total/100)} ${icon('arrow')}</a>`;
+  return `<a class="button" href="${escape(location.pathname+location.search)}#/cart">${escape(quickCopy()[3])} · ${itemCount(count)} · ${money(total/100)} ${icon('arrow')}</a>`;
 }
 
 function quickBasketControls(){
@@ -679,7 +696,7 @@ function quickBasketControls(){
     }).join('')}</div>
     <label class="visually-hidden" for="quick-basket-search">${escape(quickCopy()[2])}</label>
     <div class="search-combo-field">${icon('search')}<input type="search" id="quick-basket-search" placeholder="${escape(quickCopy()[2])}" value="${escape(quickBasketQuery)}"></div>
-    <div class="product-grid quick-basket-products" data-quick-basket-results>${quickBasketCards()}</div>`;
+    <div class="quick-basket-results" data-quick-basket-results>${quickBasketCards()}</div>`;
 }
 
 function quickBasket(){
