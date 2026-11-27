@@ -4725,24 +4725,21 @@ details .text-link {
 }
 
 .quick-basket-pet > span,
-.quick-basket-tabs button,
-.quick-basket-quantity {
+.quick-basket-tabs button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
 
 .quick-basket-pet svg,
-.quick-basket-tabs svg,
-.quick-basket-quantity svg {
+.quick-basket-tabs svg {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
 }
 
 .quick-basket-pet-cue svg:last-child,
-.quick-basket-pet.active .quick-basket-pet-cue svg:first-child,
-.quick-basket-quantity:empty {
+.quick-basket-pet.active .quick-basket-pet-cue svg:first-child {
   display: none;
 }
 
@@ -4755,20 +4752,6 @@ details .text-link {
   position: relative;
   min-width: 0;
 }
-
-.quick-basket-quantity {
-  position: absolute;
-  z-index: 2;
-  top: 10px;
-  left: 10px;
-  padding: 4px 8px;
-  border-radius: 99px;
-  background: var(--lime);
-  color: var(--ink);
-  font-size: 12px;
-  pointer-events: none;
-}
-
 
 .quick-basket-tabs .tab {
   display: grid;

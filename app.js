@@ -7,7 +7,7 @@ import { deliveryPage } from './delivery-page.js?v=delivery-regions-20261122';
 import { productDeliveryKind, deliveryTiming } from './delivery-timing.js?v=delivery-regions-20261122';
 import { atelierHasOptions, atelierDefaults, atelierSelection, atelierOptionsMarkup } from './atelier-configuration.js?v=atelier-click-colors-20261121';
 import { productGallery } from './product-gallery.js?v=atelier-supplier-main-20261125';
-import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=delivery-regions-20261122';
+import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=quick-basket-return';
 import { recommendForProduct } from './recommendations.js?v=atelier-related-20261121';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet, homeCatOrder, homeDogOrder, homeFeaturedVariant, prioritizeHomeShelf, prioritizePetCatalog, prioritizeCatalogCategory } from './home-catalog.js?v=category-shelves';
 import { categories, products, catalogProducts, articles } from './data.js?v=labrador-products-20261126';
@@ -632,9 +632,48 @@ const quickBasketResultsCopy = {
   es: { all:'Ver todos', swipe:'Desliza para ver más' },
   uk: { all:'Переглянути всі', swipe:'Гортайте, щоб побачити більше' }
 };
-let quickBasketPet = '';
-let quickBasketGroup = '';
-let quickBasketQuery = '';
+const quickBasketStorageKey = 'catmandog-quick-basket-preview';
+const savedQuickBasket = (() => {
+  if(!quickBasketPreview)return {};
+  try { return JSON.parse(sessionStorage.getItem(quickBasketStorageKey)) || {}; }
+  catch { return {}; }
+})();
+let quickBasketPet = savedQuickBasket.pet || '';
+let quickBasketGroup = savedQuickBasket.group || '';
+let quickBasketQuery = savedQuickBasket.query || '';
+const quickBasketFormats = new Map(savedQuickBasket.formats || []);
+let quickBasketScroll = savedQuickBasket.scroll || null;
+let restoreQuickBasketOnRender = Boolean(quickBasketScroll);
+
+function saveQuickBasket(){
+  const block=app.querySelector('.quick-basket');
+  if(!block)return;
+  quickBasketScroll={page:scrollY, rail:block.querySelector('.quick-basket-products')?.scrollLeft||0};
+  try {
+    sessionStorage.setItem(quickBasketStorageKey,JSON.stringify({
+      pet:quickBasketPet,group:quickBasketGroup,query:quickBasketQuery,formats:[...quickBasketFormats],scroll:quickBasketScroll
+    }));
+  } catch {}
+}
+
+function restoreQuickBasket(){
+  if(!restoreQuickBasketOnRender || !app.querySelector('.quick-basket'))return;
+  restoreQuickBasketOnRender=false;
+  const {page,rail}=quickBasketScroll;
+  requestAnimationFrame(()=>{
+    const strip=app.querySelector('.quick-basket-products');
+    if(strip)strip.scrollLeft=rail;
+    window.scrollTo(0,page);
+  });
+}
+
+if(quickBasketPreview){
+  window.addEventListener('pagehide',saveQuickBasket);
+  document.addEventListener('click',event=>{
+    if(event.target.closest('a[href]'))saveQuickBasket();
+  },true);
+}
+
 const quickCopy = () => quickBasketCopy[locale()] || quickBasketCopy.ru;
 
 function quickBasketCards(){
@@ -662,7 +701,12 @@ function quickBasketCards(){
     </div>
     ${shown.length>1?`<p class="quick-basket-swipe">${escape(labels.swipe)}</p>`:''}
     <div class="product-grid quick-basket-products" data-card-count="${shown.length}" role="region" aria-labelledby="quick-basket-results-count" tabindex="0">
-      ${shown.map(([product,sku])=>`<div class="quick-basket-item" data-quick-product="${escape(product.id)}" data-quick-variant="${escape(hasVariants(product)?sku.id:'')}">${quickBasketItem(product,sku)}</div>`).join('')}
+      ${shown.map(([product,matchedSku])=>{
+        const rememberedId=quickBasketFormats.get(JSON.stringify([product.id,quickBasketQuery.trim()]));
+        const remembered=rememberedId?resolveVariant(product,rememberedId):null;
+        const sku=canBuy(remembered)?remembered:matchedSku;
+        return `<div class="quick-basket-item" data-quick-product="${escape(product.id)}">${quickBasketItem(product,sku)}</div>`;
+      }).join('')}
     </div>`;
 }
 
@@ -673,8 +717,7 @@ function quickBasketItem(product,sku){
   const selector=options.length>1?`<label class="quick-basket-format"><span>${label}</span><select data-quick-format>${options.map(option=>
     `<option value="${escape(option.id)}" ${option.id===sku.id?'selected':''}>${escape(translate(option.label||option.weight||label))} · ${money(storefrontPrice(option))}</option>`
   ).join('')}</select></label>`:'';
-  return `${card(product,null,variantId?sku:undefined,'plus',selector)}
-    <span class="quick-basket-quantity">${quickBasketQuantity(product.id,variantId)}</span>`;
+  return card(product,null,variantId?sku:undefined,'plus',selector);
 }
 
 app.addEventListener('change',event=>{
@@ -683,16 +726,18 @@ app.addEventListener('change',event=>{
   const product=catalogProducts.find(product=>product.id===item.dataset.quickProduct);
   const sku=resolveVariant(product,event.target.value);
   if(!canBuy(sku))return;
-  item.dataset.quickVariant=sku.id;
+  quickBasketFormats.set(JSON.stringify([product.id,quickBasketQuery.trim()]),sku.id);
   item.innerHTML=quickBasketItem(product,sku);
   item.querySelector('[data-quick-format]').focus({preventScroll:true});
+  saveQuickBasket();
 });
 
 app.addEventListener('click',event=>{
   const button=event.target.closest('.quick-basket-item button:is([data-add],[data-add-variant])');
   if(!button)return;
   event.stopImmediatePropagation();
-  const {quickProduct,quickVariant}=button.closest('.quick-basket-item').dataset;
+  const quickProduct=button.closest('.quick-basket-item').dataset.quickProduct;
+  const quickVariant=button.dataset.addVariant;
   add(quickProduct,null,1,undefined,quickVariant||undefined);
   const key=recurringKey({productId:quickProduct,variantId:quickVariant});
   if(!cart.some(item=>recurringKey(item)===key))return;
@@ -701,12 +746,6 @@ app.addEventListener('click',event=>{
   recurringDraft.items=[...new Set([...recurringDraft.items,key])];
   saveRecurringDraft();
 });
-
-function quickBasketQuantity(productId,variantId){
-  const quantity=cart.filter(item=>(item.productId||item.id)===productId&&(item.variantId||'')===variantId)
-    .reduce((sum,item)=>sum+item.qty,0);
-  return quantity ? `${icon('check')} <span>${itemCount(quantity)}</span>` : '';
-}
 
 function quickBasketSummary(){
   const available = cart.filter(item=>Number.isFinite(cartUnitPrice(item)));
@@ -750,10 +789,7 @@ function refreshQuickBasketSummary(){
   const summary = app.querySelector('[data-quick-basket-summary]');
   if(!summary || !quickBasketPet) return;
   summary.innerHTML = quickBasketSummary();
-  for(const item of app.querySelectorAll('.quick-basket-item')){
-    const badge=item.querySelector('.quick-basket-quantity');
-    badge.innerHTML=quickBasketQuantity(item.dataset.quickProduct,item.dataset.quickVariant);
-  }
+
 }
 
 app.addEventListener('click',event=>{
@@ -778,12 +814,14 @@ app.addEventListener('click',event=>{
     sibling.classList.toggle('active',active);
     sibling.setAttribute('aria-pressed',String(active));
   }
+  saveQuickBasket();
 });
 
 app.addEventListener('input',event=>{
   if(event.target.id!=='quick-basket-search') return;
   quickBasketQuery=event.target.value;
   app.querySelector('[data-quick-basket-results]').innerHTML=quickBasketCards();
+  saveQuickBasket();
 });
 
 function home(){return `<section class="hero"><img src="https://img.catmandog.es/assets/hero-happy.png" alt="Золотистый ретривер и серая кошка на диване" fetchpriority="high"><div class="hero-copy"><h1>Хорошая<br>жизнь<br>С хвостиком</h1><p>Всё, что нужно для счастливой жизни кошек, собак и их людей</p><form class="hero-search search-combo" data-search-form="hero" role="search"><label class="visually-hidden" for="hero-search">Поиск товаров</label><div class="search-combo-field">${icon('search')}<input id="hero-search" data-search-input type="search" placeholder="Найти товар или бренд" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="hero-search-suggestions" aria-expanded="false"></div><div class="search-suggestions" id="hero-search-suggestions" hidden></div></form><a class="button hero-catalog-cta" href="#home-catalog">В каталог</a><span class="hero-note">С заботой о каждом хвосте</span></div></section>${quickBasketPreview?quickBasket():''}<section class="section"><div class="section-head"><h2>${quickBasketPreview?escape(quickCopy()[5]):'Их любимые вещи'}</h2><a class="text-link" href="#/catalog">Весь каталог</a></div><div class="categories">${categories.filter(c=>c!=='Подарочные наборы').map((c,i)=>`<a class="category" href="#/catalog?category=${encodeURIComponent(c)}"><div class="category-image" style="${categoryImageStyle(c)}"></div><span>${categoryLabel(c)}</span></a>`).join('')}</div></section>${homeShortcuts(catalogProducts,icon,escape,locale())}<section class="section home-catalog" id="home-catalog" aria-labelledby="home-catalog-title">${homeCatalog()}</section>${service()}<section class="section journal-section"><div class="section-head journal-section-head"><div><span class="eyebrow">Идеи для жизни вместе</span><h2>Журнал о питомцах</h2><p class="journal-intro">Про уютный дом, игры и поездки с питомцем</p></div><a class="text-link" href="${journalHref()}">Весь журнал</a></div><div class="journal-grid">${displayArticles.map(articleCard).join('')}</div></section>${homeUseful()}<section class="brand-story"><h2>Они делают нашу жизнь лучше<br>А мы - их</h2><div><p>CatManDog - про жизнь вместе Про утренние прогулки, тёплые носы и вещи, которые помогают заботиться каждый день</p><a class="text-link" href="#/about">Ближе познакомиться</a></div></section>`;}
@@ -893,6 +931,7 @@ function detail(id,preserveSelection=false){const p=products.find(p=>p.id===id)|
 function cartPage() {
   return renderLiveBasket({ cart, products, promo: checkoutPromo(), grouping: CUSTOMER_SPLIT_CHECKOUT_ENABLED ? basketGrouping : 'together',
     allowSplit: CUSTOMER_SPLIT_CHECKOUT_ENABLED, language: locale(),
+    continueHref: quickBasketPreview&&quickBasketPet ? location.pathname+location.search+'#/' : undefined,
     recurringHtml: renderRecurringCart({ cart, products, draft: recurringDraft,
       signedIn: account.isSignedIn(), accountsAvailable: account.recurringAvailable(),
       language: locale(), escape, icon, imageBlock, money }),
@@ -922,7 +961,7 @@ function restoreProductReturnScroll(){
   const y = takeProductReturnScroll(location.pathname + location.search + location.hash);
   if (y !== null) requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, y)));
 }
-function render(){if(catalogLoading){app.innerHTML=`<div class="page" role="status">${{ru:'Загружаем каталог',uk:'Завантажуємо каталог',es:'Cargando catálogo'}[locale()] || 'Загружаем каталог'}</div>`;return;}const {path}=route();let html;if(path==='/pet'||path==='/join'||path.startsWith('/account')||path==='/coupon')html=account.page(path,route().params);else if(path.startsWith('/useful'))html=useful.page(path,route().params);else if(path==='/')html=home();else if(path==='/catalog')html=catalog();else if(path==='/pickup')html=pickupPage();else if(path==='/pickup-cart')html=pickupBasketPage({cart:pickupCart,products,language:locale(),money,escape,icon,imageBlock,promo:checkoutPromo(),cancelled:route().params.has('payment')});else if(path==='/pickup-checkout')html=pickupCheckoutPage({cart:pickupCart,products,language:locale(),money,escape,icon,imageBlock,promo:checkoutPromo(),contact:pickupContact,error:pickupError,busy:pickupBusy});else if(path==='/pickup-confirmation')html=pickupConfirmationPage({language:locale(),state:pickupPayment,icon});else if(path==='/gifts')html=giftLanding(giftHelpers);else if(path==='/active-home')html=activeHomeLanding(giftHelpers);else if(path.startsWith('/picks/'))html=homeShortcutLanding(catalogProducts,path.split('/')[2],{...giftHelpers,language:locale()})||notFound();else if(path.startsWith('/product/'))html=detail(path.split('/')[2]);else if(path==='/availability-request')html=availabilityPage();else if(path==='/cart')html=cartPage();else if(path==='/checkout')html=checkout.page();else if(path==='/checkout/preview')html=checkout.previewPage();else if(path==='/checkout/confirmation')html=checkout.resultPage('accepted',route().params);else if(path==='/checkout/payment-error')html=checkout.resultPage('failed',route().params);else if(path==='/checkout/status')html=checkout.resultPage('status',route().params);else if(path==='/support')html=checkout.servicePage('support',route().params);else if(path==='/returns')html=checkout.servicePage('return',route().params);else if(path==='/favorites')html=favoritePage();else if(path==='/journal')html=journal();else if(path.startsWith('/journal/'))html=article(path.split('/')[2]);else if(path==='/about')html=about();else if(path.startsWith('/info/'))html=info(path.split('/')[2]);else html=notFound();app.innerHTML=html;if(path==='/availability-request')app.querySelector('.availability-request-dialog')?.focus({preventScroll:true});document.title=`${(path.startsWith('/account') && account.store.activePet() ? 'Кабинет ' + account.store.activePet().name : null) || ({'/useful':'Полезное','/useful/clinics':'Ветклиники Валенсии','/useful/travel':'В дорогу вместе','/account':'Кабинет с хвостиком','/coupon':'Купон на 10%','/join':'Знакомство с питомцем','/pet':'Профиль питомца','/':'Хорошая жизнь с хвостиком','/catalog':'Каталог','/pickup':'Доступно к самовывозу','/pickup-cart':'Корзина самовывоза','/pickup-checkout':'Оформление самовывоза','/pickup-confirmation':'Заказ самовывоза','/gifts':'Подарочные наборы','/active-home':'Дом для активного кота','/picks/cat':'Подборка для кошек','/picks/dog':'Подборка для собак','/cart':'Корзина','/checkout':'Оформление заказа','/checkout/preview':'Проверка заказа','/checkout/confirmation':'Подтверждение заказа','/checkout/payment-error':'Ошибка оплаты','/checkout/status':'Статус заказа','/support':'Помощь с заказом','/returns':'Возврат','/availability-request':'Сообщить о поступлении','/journal':'Журнал','/favorites':'Избранное','/about':'О нас'})[path]||'Для хорошей жизни'} · CatManDog`;if(path.startsWith('/journal/'))document.title=`${displayArticles.find(item=>item.id===path.split('/')[2])?.title||translate('Журнал')} · CatManDog`;if(path.startsWith('/product/')){const id=path.split('/')[2];const product=products.find(item=>item.id===id||item.variants?.some(variant=>variant.id===id));if(product)document.title=`${product.name} · CatManDog`;}document.title = locale()==='ru' ? document.title : translate(document.title.split(' · CatManDog')[0])+' · CatManDog';if(path==='/pickup')document.title=`${{es:'Disponible para recogida',ru:'Доступно к самовывозу',uk:'Доступно для самовивозу'}[locale()]||'Доступно к самовывозу'} · CatManDog`;if(path==='/pickup-cart'||path==='/pickup-checkout')document.title=`${(pickupCopy[locale()]||pickupCopy.es)[path==='/pickup-cart'?'cart':'checkout']} · CatManDog`;const categoryPage=!location.hash?seoCategoryForPath(location.pathname):null;if(categoryPage)document.title=`${categoryPage.title} · CatManDog`;const productPage=!location.hash?seoProductForPath(location.pathname):null;if(productPage?.title && locale()==="es")document.title=`${productPage.title} · CatManDog`;const pickPage=!location.hash?seoPickForPath(location.pathname):null;if(pickPage)document.title=`${pickPage.title} · CatManDog`;document.querySelector('nav').classList.remove('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded','false');const currentNavHrefs={'/catalog':['/catalogo','/#/catalog','#/catalog'],'/pickup':['/recogida','#/pickup'],'/picks/cat':['/selecciones/gatos','#/picks/cat'],'/picks/dog':['/selecciones/perros','#/picks/dog'],'/journal':['/revista','#/journal']}[path]||[location.hash];document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',currentNavHrefs.includes(a.getAttribute('href'))?'page':'false'));updateHeader();account.afterRender();announceView();analytics.pageView();restoreProductReturnScroll();}
+function render(){if(catalogLoading){app.innerHTML=`<div class="page" role="status">${{ru:'Загружаем каталог',uk:'Завантажуємо каталог',es:'Cargando catálogo'}[locale()] || 'Загружаем каталог'}</div>`;return;}const {path}=route();let html;if(path==='/pet'||path==='/join'||path.startsWith('/account')||path==='/coupon')html=account.page(path,route().params);else if(path.startsWith('/useful'))html=useful.page(path,route().params);else if(path==='/')html=home();else if(path==='/catalog')html=catalog();else if(path==='/pickup')html=pickupPage();else if(path==='/pickup-cart')html=pickupBasketPage({cart:pickupCart,products,language:locale(),money,escape,icon,imageBlock,promo:checkoutPromo(),cancelled:route().params.has('payment')});else if(path==='/pickup-checkout')html=pickupCheckoutPage({cart:pickupCart,products,language:locale(),money,escape,icon,imageBlock,promo:checkoutPromo(),contact:pickupContact,error:pickupError,busy:pickupBusy});else if(path==='/pickup-confirmation')html=pickupConfirmationPage({language:locale(),state:pickupPayment,icon});else if(path==='/gifts')html=giftLanding(giftHelpers);else if(path==='/active-home')html=activeHomeLanding(giftHelpers);else if(path.startsWith('/picks/'))html=homeShortcutLanding(catalogProducts,path.split('/')[2],{...giftHelpers,language:locale()})||notFound();else if(path.startsWith('/product/'))html=detail(path.split('/')[2]);else if(path==='/availability-request')html=availabilityPage();else if(path==='/cart')html=cartPage();else if(path==='/checkout')html=checkout.page();else if(path==='/checkout/preview')html=checkout.previewPage();else if(path==='/checkout/confirmation')html=checkout.resultPage('accepted',route().params);else if(path==='/checkout/payment-error')html=checkout.resultPage('failed',route().params);else if(path==='/checkout/status')html=checkout.resultPage('status',route().params);else if(path==='/support')html=checkout.servicePage('support',route().params);else if(path==='/returns')html=checkout.servicePage('return',route().params);else if(path==='/favorites')html=favoritePage();else if(path==='/journal')html=journal();else if(path.startsWith('/journal/'))html=article(path.split('/')[2]);else if(path==='/about')html=about();else if(path.startsWith('/info/'))html=info(path.split('/')[2]);else html=notFound();app.innerHTML=html;if(path==='/availability-request')app.querySelector('.availability-request-dialog')?.focus({preventScroll:true});document.title=`${(path.startsWith('/account') && account.store.activePet() ? 'Кабинет ' + account.store.activePet().name : null) || ({'/useful':'Полезное','/useful/clinics':'Ветклиники Валенсии','/useful/travel':'В дорогу вместе','/account':'Кабинет с хвостиком','/coupon':'Купон на 10%','/join':'Знакомство с питомцем','/pet':'Профиль питомца','/':'Хорошая жизнь с хвостиком','/catalog':'Каталог','/pickup':'Доступно к самовывозу','/pickup-cart':'Корзина самовывоза','/pickup-checkout':'Оформление самовывоза','/pickup-confirmation':'Заказ самовывоза','/gifts':'Подарочные наборы','/active-home':'Дом для активного кота','/picks/cat':'Подборка для кошек','/picks/dog':'Подборка для собак','/cart':'Корзина','/checkout':'Оформление заказа','/checkout/preview':'Проверка заказа','/checkout/confirmation':'Подтверждение заказа','/checkout/payment-error':'Ошибка оплаты','/checkout/status':'Статус заказа','/support':'Помощь с заказом','/returns':'Возврат','/availability-request':'Сообщить о поступлении','/journal':'Журнал','/favorites':'Избранное','/about':'О нас'})[path]||'Для хорошей жизни'} · CatManDog`;if(path.startsWith('/journal/'))document.title=`${displayArticles.find(item=>item.id===path.split('/')[2])?.title||translate('Журнал')} · CatManDog`;if(path.startsWith('/product/')){const id=path.split('/')[2];const product=products.find(item=>item.id===id||item.variants?.some(variant=>variant.id===id));if(product)document.title=`${product.name} · CatManDog`;}document.title = locale()==='ru' ? document.title : translate(document.title.split(' · CatManDog')[0])+' · CatManDog';if(path==='/pickup')document.title=`${{es:'Disponible para recogida',ru:'Доступно к самовывозу',uk:'Доступно для самовивозу'}[locale()]||'Доступно к самовывозу'} · CatManDog`;if(path==='/pickup-cart'||path==='/pickup-checkout')document.title=`${(pickupCopy[locale()]||pickupCopy.es)[path==='/pickup-cart'?'cart':'checkout']} · CatManDog`;const categoryPage=!location.hash?seoCategoryForPath(location.pathname):null;if(categoryPage)document.title=`${categoryPage.title} · CatManDog`;const productPage=!location.hash?seoProductForPath(location.pathname):null;if(productPage?.title && locale()==="es")document.title=`${productPage.title} · CatManDog`;const pickPage=!location.hash?seoPickForPath(location.pathname):null;if(pickPage)document.title=`${pickPage.title} · CatManDog`;document.querySelector('nav').classList.remove('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded','false');const currentNavHrefs={'/catalog':['/catalogo','/#/catalog','#/catalog'],'/pickup':['/recogida','#/pickup'],'/picks/cat':['/selecciones/gatos','#/picks/cat'],'/picks/dog':['/selecciones/perros','#/picks/dog'],'/journal':['/revista','#/journal']}[path]||[location.hash];document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',currentNavHrefs.includes(a.getAttribute('href'))?'page':'false'));updateHeader();account.afterRender();announceView();analytics.pageView();restoreProductReturnScroll();restoreQuickBasket();}
 function setParam(key,value){const {params}=route();if(key==='category'||key==='pet'){['foodType','brand','group','feature','maxPrice'].forEach(name=>params.delete(name));}value?params.set(key,value):params.delete(key);location.hash=`/catalog${params.size?'?'+params.toString():''}`;}
 function add(id,size,qty=1,config,variantId){
   const p=products.find(p=>p.id===id);if(!p)return;
@@ -976,7 +1015,7 @@ document.addEventListener('click',event=>{const link=event.target.closest('.hero
 document.addEventListener('click',event=>{const choice=event.target.closest('.search-suggestion');if(choice){closeSearchSuggestions(choice.closest('[data-search-form]'));document.querySelector('#search-form').hidden=true;}else if(!event.target.closest('[data-search-form], #search-toggle'))document.querySelectorAll('[data-search-form]').forEach(closeSearchSuggestions);});
 document.querySelector('#mobile-toggle').addEventListener('click',()=>{const open=document.querySelector('nav').classList.toggle('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded',String(open));});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){if(route().path==='/availability-request'){const variantId=route().params.get('variant');const product=products.find(item=>snapshots(item).some(variant=>variant.id===variantId));if(product){location.assign(`${productHref(product.id)}?variant=${encodeURIComponent(variantId)}`);return;}}account.escapeChoices();document.querySelector('#search-form').hidden=true;document.querySelectorAll('[data-search-form]').forEach(closeSearchSuggestions);document.querySelector('nav').classList.remove('open');document.querySelector('#mobile-toggle').setAttribute('aria-expanded','false');}});
-window.addEventListener('hashchange',()=>{if(route().path==='/pickup-confirmation'){pickupPayment=null;void checkPickupPayment();}if((seoProductForPath(location.pathname)||seoPickForPath(location.pathname))&&location.hash){location.replace('/'+location.hash);return;}document.querySelector('#search-form').hidden=true;render();account.handleLink();window.scrollTo(0,0);});
+window.addEventListener('hashchange',()=>{if(quickBasketPreview&&route().path==='/'&&quickBasketScroll)restoreQuickBasketOnRender=true;if(route().path==='/pickup-confirmation'){pickupPayment=null;void checkPickupPayment();}if((seoProductForPath(location.pathname)||seoPickForPath(location.pathname))&&location.hash){location.replace('/'+location.hash);return;}document.querySelector('#search-form').hidden=true;render();account.handleLink();window.scrollTo(0,0);});
 const localizedEntry = !location.hash && localizedSeoRoute(location.pathname, location.search);
 if (localizedEntry) location.replace(localizedEntry);
 else render();
