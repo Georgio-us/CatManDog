@@ -1765,23 +1765,17 @@ button:hover:not(:disabled) {
   margin: 25px 0 27px;
 }
 
-.hero-catalog-cta {
-  flex-direction: column;
-  gap: 2px;
-  min-width: 148px;
-  background: var(--ink);
-  color: #fff;
-  max-width: 100%;
-  margin-top: 10px;
-  min-height: 48px;
-  text-decoration: none;
-  box-shadow: 0 6px 18px #1d211522;
-}
-
 .button.hero-catalog-cta {
-  padding: 8px 24px;
-  font-size: 16px;
+  gap: 8px;
+  max-width: 100%;
+  min-height: 44px;
+  margin-top: 10px;
+  padding: 10px 18px;
+  background: var(--lime);
+  color: var(--ink);
+  font-size: 15px;
   line-height: 1.25;
+  text-decoration: none;
 }
 
 .hero-catalog-cta .hero-catalog-arrow { width: 18px; height: 18px; }
@@ -4626,7 +4620,7 @@ details .text-link {
     line-height: 1.35;
     overflow-wrap: anywhere;
   }
-  .hero-catalog-cta {
+  .button.hero-catalog-cta {
     align-self: center;
     margin: var(--hero-photo-space) 0 0;
   }
