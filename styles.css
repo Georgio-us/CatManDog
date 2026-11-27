@@ -1765,6 +1765,20 @@ button:hover:not(:disabled) {
   margin: 25px 0 27px;
 }
 
+.hero-catalog-cta {
+  min-width: 170px;
+  max-width: 100%;
+  margin-top: 10px;
+  min-height: 48px;
+  text-decoration: none;
+  box-shadow: 0 6px 18px #1d211522;
+}
+
+.hero-catalog-cta:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
 .hero-note {
   display: block;
   margin-top: 40px;
