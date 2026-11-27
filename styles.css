@@ -4632,3 +4632,215 @@ details .text-link {
   .header-actions #search-toggle { width: 30px; }
   .home-categories .categories { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+.quick-basket-panel,
+.quick-basket-controls {
+  display: grid;
+  gap: 12px;
+}
+
+.quick-basket-panel > h2,
+.quick-basket-controls > p {
+  margin: 0;
+}
+
+.quick-basket-controls:empty,
+.quick-basket-results:empty,
+.quick-basket-summary:empty {
+  display: none;
+}
+
+.quick-basket-products {
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(200px, 24%);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+}
+
+.quick-basket-summary {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.quick-basket-results-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.quick-basket-results-head a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--ink);
+}
+
+.quick-basket-results-head svg {
+  width: 14px;
+  height: 14px;
+}
+
+.quick-basket-swipe {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .quick-basket-products {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 61%;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding: 2px 2px 8px;
+  }
+
+  .quick-basket-products[data-card-count="1"] {
+    grid-auto-columns: minmax(0, 1fr);
+  }
+
+  .quick-basket-item {
+    scroll-snap-align: start;
+  }
+
+  .quick-basket-swipe {
+    display: block;
+    margin: 0 0 6px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+}
+
+.quick-basket .quick-basket-panel {
+  padding: clamp(14px, 4vw, 24px);
+  background: color-mix(in srgb, var(--lime) 15%, white);
+}
+
+.quick-basket-pets,
+.quick-basket-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.quick-basket-pets .quick-basket-pet {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: white;
+  text-align: start;
+}
+
+.quick-basket-pets .quick-basket-pet:hover {
+  border-color: var(--ink);
+}
+
+.quick-basket-pets .quick-basket-pet.active {
+  background: var(--lime);
+  border-color: var(--ink);
+}
+
+.quick-basket-pet > span,
+.quick-basket-tabs button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quick-basket-pet svg,
+.quick-basket-tabs svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.quick-basket-pet-cue svg:last-child,
+.quick-basket-pet.active .quick-basket-pet-cue svg:first-child {
+  display: none;
+}
+
+.quick-basket-pet.active .quick-basket-pet-cue svg:last-child {
+  display: block;
+}
+
+.quick-basket-item {
+  display: grid;
+  position: relative;
+  min-width: 0;
+}
+
+.quick-basket-tabs .tab {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 6px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 8px clamp(8px, 2.4vw, 16px);
+  text-align: start;
+  font-size: clamp(13px, 3.4vw, 15px);
+  line-height: 1.2;
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--ink);
+}
+.quick-basket-tabs .tab.active {
+  background: var(--lime);
+  border-color: var(--ink);
+}
+.quick-basket-tabs svg {
+  width: 20px;
+  height: 20px;
+}
+.quick-basket-pets .quick-basket-pet {
+  min-height: 48px;
+  gap: 6px;
+  padding-inline: clamp(8px, 2.4vw, 16px);
+  font-size: clamp(13px, 3.4vw, 15px);
+}
+.quick-basket-item {
+  scroll-snap-align: start;
+}
+.quick-basket-item .product-info {
+  grid-template-rows: 1.6em calc(var(--card-title-lines) * var(--card-title-line)) 1.5em 58px var(--card-price-height);
+}
+
+.quick-basket-item .product-price {
+  grid-row: 5;
+}
+
+.quick-basket-format {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 4px;
+  align-content: end;
+  font-size: 13px;
+  line-height: 1.3;
+}
+.quick-basket-format select {
+  max-width: 100%;
+  min-width: 0;
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) / 2);
+  background: white;
+  color: var(--ink);
+  font: inherit;
+}
+
+.quick-basket-panel,
+.quick-basket-controls,
+.quick-basket-results {
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
