@@ -1,5 +1,5 @@
 import { hasVariants, resolveVariant, storefrontPrice, canBuy } from './variants.js?v=sale-price-policy-20261109';
-import { customerFacts, orderedVariants } from './product-content.js?v=catalog-sku-audit-20261110';
+import { customerFacts, orderedVariants } from './product-content.js?v=pack-weight-20261128';
 import { catalogEditorialChuruCat } from './catalog-editorial-churu-cat.js';
 import { seoWave2Copy, seoWave2VisibleCopy } from './seo-wave2-copy.js?v=seo-wave2-visible-20261125';
 import { productGallery } from './product-gallery.js?v=atelier-supplier-main-20261125';

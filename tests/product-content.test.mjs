@@ -4,8 +4,8 @@ import { catalogProducts } from '../data.js';
 import { customerFacts, orderedVariants } from '../product-content.js';
 import { seoDocument } from '../server/seo.js';
 
-test('all food package selectors run from the smallest weight to the largest', () => {
-  for (const product of catalogProducts.filter(item => item.category === 'Корм' && item.variants?.length > 1)) {
+test('all selectors with known package weights run from the smallest weight to the largest', () => {
+  for (const product of catalogProducts.filter(item => item.variants?.length > 1 && item.variants.every(variant => variant.packageWeightKg > 0))) {
     const weights = orderedVariants(product).map(variant => variant.packageWeightKg);
     assert.deepEqual(weights, [...weights].sort((a, b) => a - b), product.id);
   }
@@ -30,4 +30,10 @@ test('the released Leonardo server page uses product facts and ordered formats',
   assert.match(html, /300 g, 1,8 kg, 7,5 kg/u);
   assert.doesNotMatch(html, /Consulta los formatos y detalles/u);
   assert.doesNotMatch(html, /<meta name="robots" content="noindex/u);
+});
+
+test('mixed gram and kilogram labels sort numerically when weight metadata is missing', () => {
+  const variants = ['10 кг', '2 kg', '400 г', '4 kg'].map(label => ({ label }));
+  assert.deepEqual(orderedVariants({ variants }).map(({ label }) => label), ['400 г', '2 kg', '4 kg', '10 кг']);
+  assert.deepEqual(variants.map(({ label }) => label), ['10 кг', '2 kg', '400 г', '4 kg']);
 });

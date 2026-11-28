@@ -1,7 +1,8 @@
+import { orderedVariants } from './product-content.js?v=pack-weight-20261128';
 import { createUsefulUI } from './useful.js?v=yagu-toys-20261116';
 import { createAccountUI } from './account.js?v=delivery-regions-20261122';
 import { hasVariants, snapshots, resolveVariant, confirmedPrice, storefrontPrice, canBuy, catalogPrice, normalizeCart, cartSku, sameCartSku } from './variants.js?v=sale-price-policy-20261109';
-import { accessoryDetail, customerDetails } from './accessory-ui.js?v=seo-wave2-visible-fix-20261125';
+import { accessoryDetail, customerDetails } from './accessory-ui.js?v=pack-weight-20261128';
 import { atelierDescriptionMarkup } from './atelier-description.js';
 import { deliveryPage } from './delivery-page.js?v=delivery-regions-20261122';
 import { productDeliveryKind, deliveryTiming } from './delivery-timing.js?v=delivery-regions-20261122';
@@ -707,7 +708,7 @@ function quickBasketCards(){
 
 function quickBasketItem(product,sku){
   const variantId=hasVariants(product)?sku.id:'';
-  const options=snapshots(product).filter(canBuy);
+  const options=(hasVariants(product)?orderedVariants(product):[product]).filter(canBuy);
   const label={es:'Formato',ru:'Фасовка',uk:'Фасування'}[locale()];
   const optionText=option=>escape(translate(option.label||option.weight||label))+' · '+money(storefrontPrice(option));
   const selector=options.length>1?`<details class="quick-basket-format">
