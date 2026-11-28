@@ -4846,6 +4846,9 @@ details .text-link {
 
 .quick-basket-format {
   position: relative;
+  padding: 0;
+  margin: 0;
+  border: 0;
   z-index: 2;
   align-self: end;
   min-width: 0;
