@@ -1,4 +1,5 @@
 import { acanaStudioImage, acanaStudioImages } from './acana-variant-images.js';
+import { orijenPackImages, orijenPackImageUrl } from './orijen-pack-images.js';
 import { applyCatalogPolicy } from './catalog-policy.js';
 import { applyRetailUpdates } from './retail-updates.js?v=retail-coverage-1';
 import { applyProvisionalPrices } from './provisional-prices.js';
@@ -436,11 +437,19 @@ const merchandisingTags = {
 export const products = applyChuruRetailFormats(applyProvisionalPrices(applyRetailUpdates(applyCatalogPolicy(withSelectedAcanaOrijenFormats([...foodProducts, ...dogProducts, ...confirmedDemandProducts, ...churuDogProducts, ...expandYaguCare(treatsCareProducts), ...expandYaguColourVariants(yaguProducts), ...yaguStorefrontProducts, ...yaguExpansionProducts, ...yaguDogActivityProducts, ...yaguToyExpansionProducts, ...yaguBasketProducts, ...yaguChewTestProducts, ...catalogHeybopetProducts, ...launchHeyboPetProducts, ...catsAtelierProducts, ...newLitterProducts, ...demoProducts.map(p => ["Игрушки", "Миски и поилки"].includes(p.category) ? { ...p, catalogHidden: true } : p)])).map(mergeCategory)))).map(product => {
   const copy = catalogEditorialContent[product.id];
   const tag = !product.tag && merchandisingTags[product.id];
-  const taggedProduct = tag ? { ...product, tag } : product;
+  const variants = product.brand?.toLowerCase() === 'orijen' && product.variants
+    ? product.variants.map(variant => orijenPackImages.has(variant.id)
+      ? { ...variant, image: { src: orijenPackImageUrl(variant.id),
+        alt: `${product.name} ${variant.label}`, presentation: 'editorial' } }
+      : variant)
+    : product.variants;
+  const taggedProduct = tag || variants !== product.variants
+    ? { ...product, ...(tag ? { tag } : {}), ...(variants ? { variants } : {}) }
+    : product;
   if (!copy || product.description !== copy.previousDescription) return taggedProduct;
   return {
     ...taggedProduct, description: copy.description, details: copy.details,
-    ...(product.variants ? { variants: product.variants.map(variant => variant.description === copy.previousDescription
+    ...(variants ? { variants: variants.map(variant => variant.description === copy.previousDescription
       ? { ...variant, description: copy.description, details: copy.details }
       : variant) } : {})
   };

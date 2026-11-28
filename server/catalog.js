@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { products } from '../data.js';
 import { acanaStudioImage, acanaStudioImages } from '../acana-variant-images.js';
+import { orijenPackImages, orijenPackImageUrl } from '../orijen-pack-images.js';
 import { retiredProductIds } from '../catalog-policy.js';
 import { snapshots, confirmedPrice, canBuy } from '../variants.js';
 import { yaguRetailBenchmarks } from '../yagu-retail-benchmarks.js';
@@ -1270,6 +1271,16 @@ export async function importCatalog(db, items = products) {
     }
     if (items === products) {
       await publishAcanaStudioImages(client);
+      const migration = 'orijen_per_pack_images_2026_11_28';
+      const done = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [migration]);
+      if (!done.rowCount) {
+        for (const [variantId, [productId, previousImage]] of orijenPackImages) {
+          await client.query(`UPDATE catalog_variants SET image_path=$3,updated_at=now()
+            WHERE id=$1 AND product_id=$2 AND image_path IS NOT DISTINCT FROM $4::text`,
+          [variantId, productId, orijenPackImageUrl(variantId), previousImage]);
+        }
+        await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [migration]);
+      }
       await seedInitialSalesLedger(client);
     }
     await client.query('COMMIT');

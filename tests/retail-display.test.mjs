@@ -86,7 +86,11 @@ test('revised Adrián basket has exact formats, separate costs and studio images
     assert.equal(found.supplier.sku, item.article);
     assert.equal(found.supplierTariffExVat, item.tariff);
     assert.equal(found.price, item.retail);
-    assert.match(found.image.src, /^\/media\/acana-orijen-selected-2026-11-09\//);
+    if (item.id.includes('orijen')) {
+      assert.equal(found.image.src, `https://img.catmandog.es/assets/orijen-studio-2026-11-28/editorial/${item.id}-studio-v2.webp`);
+    } else {
+      assert.equal(found.image.src, `/media/acana-orijen-selected-2026-11-09/${item.image}`);
+    }
     assert.equal(found.availabilityStatus, 'source_on_demand');
     assert.equal(found.saleStatus, 'available');
   }
