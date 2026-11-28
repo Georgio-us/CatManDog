@@ -4633,18 +4633,11 @@ details .text-link {
   .home-categories .categories { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-.quick-basket-panel,
-.quick-basket-controls {
+.quick-basket-panel {
   display: grid;
   gap: 12px;
 }
 
-.quick-basket-panel > h2,
-.quick-basket-controls > p {
-  margin: 0;
-}
-
-.quick-basket-controls:empty,
 .quick-basket-results:empty,
 .quick-basket-summary:empty {
   display: none;
@@ -4895,7 +4888,6 @@ details .text-link {
 }
 
 .quick-basket-panel,
-.quick-basket-controls,
 .quick-basket-results {
   min-width: 0;
   grid-template-columns: minmax(0, 1fr);
@@ -4920,5 +4912,100 @@ details .text-link {
 
   .hero-search {
     margin-top: 0;
+  }
+}
+
+
+.quick-basket-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.quick-basket-heading h2 {
+  margin: 0;
+}
+
+.quick-basket-heading button {
+  flex-shrink: 0;
+}
+
+.quick-basket-categories {
+  display: grid;
+  gap: 8px;
+}
+
+.quick-basket-categories p {
+  margin: 0;
+}
+
+.quick-basket-arrows {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .quick-basket .quick-basket-panel {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+    column-gap: clamp(18px, 4vw, 48px);
+    max-width: 1120px;
+    margin-inline: auto;
+  }
+
+  .quick-basket-heading,
+  .quick-basket-results {
+    grid-column: 1 / -1;
+  }
+
+  .quick-basket-pets,
+  .quick-basket-categories {
+    grid-column: 1;
+    width: min(100%, 430px);
+  }
+
+  .quick-basket-search {
+    grid-area: 2 / 2;
+  }
+
+  .quick-basket-summary {
+    grid-area: 3 / 2;
+    justify-content: flex-start;
+  }
+
+  .quick-basket-panel:not(.is-expanded) .quick-basket-summary {
+    grid-row: 2;
+  }
+
+  .quick-basket .quick-basket-products {
+    gap: 16px;
+    grid-auto-columns: calc((100% - 48px) / 4);
+    scroll-snap-type: x mandatory;
+  }
+
+  .quick-basket .quick-basket-item {
+    scroll-snap-align: start;
+  }
+
+  .quick-basket-results-head {
+    align-items: center;
+  }
+
+  .quick-basket-results-head a {
+    margin-inline-start: auto;
+  }
+
+  .quick-basket-arrows {
+    display: flex;
+    gap: 6px;
+  }
+
+  .quick-basket-arrows button:first-child svg {
+    transform: rotate(180deg);
+  }
+
+  .quick-basket-arrows button:disabled {
+    opacity: .4;
+    cursor: default;
   }
 }

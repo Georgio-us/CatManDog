@@ -627,9 +627,9 @@ const quickBasketCopy = {
   uk: ['Зберіть кошик на щодень', 'Що купуєте регулярно?', 'Знайти товар або бренд', 'До кошика', 'За цим запитом нічого не знайдено', 'Категорії товарів']
 };
 const quickBasketResultsCopy = {
-  ru: { all:'Смотреть все', swipe:'Листайте, чтобы увидеть больше' },
-  es: { all:'Ver todos', swipe:'Desliza para ver más' },
-  uk: { all:'Переглянути всі', swipe:'Гортайте, щоб побачити більше' }
+  ru: { all:'Смотреть все', swipe:'Листайте, чтобы увидеть больше', collapse:'Свернуть', previous:'Предыдущие товары', next:'Следующие товары' },
+  es: { all:'Ver todos', swipe:'Desliza para ver más', collapse:'Plegar', previous:'Productos anteriores', next:'Productos siguientes' },
+  uk: { all:'Переглянути всі', swipe:'Гортайте, щоб побачити більше', collapse:'Згорнути', previous:'Попередні товари', next:'Наступні товари' }
 };
 const quickBasketStorageKey = 'catmandog-quick-basket';
 const savedQuickBasket = (() => {
@@ -694,6 +694,10 @@ function quickBasketCards(){
   return `<div class="quick-basket-results-head">
       <span id="quick-basket-results-count" role="status">${escape(itemCount(shown.length))}</span>
       ${quickBasketGroup?`<a class="text-link" href="${escape(location.pathname+location.search)}#/catalog?${escape(params.toString())}">${escape(labels.all)} ${icon('arrow')}</a>`:''}
+      ${shown.length>4?`<div class="quick-basket-arrows">
+        <button type="button" class="icon-button" data-quick-basket-step="-1" aria-label="${labels.previous}" disabled>${icon('arrow')}</button>
+        <button type="button" class="icon-button" data-quick-basket-step="1" aria-label="${labels.next}">${icon('arrow')}</button>
+      </div>`:''}
     </div>
     ${shown.length>1?`<p class="quick-basket-swipe">${escape(labels.swipe)}</p>`:''}
     <div class="product-grid quick-basket-products" data-card-count="${shown.length}" role="region" aria-labelledby="quick-basket-results-count" tabindex="0">
@@ -790,20 +794,22 @@ function quickBasketSummary(){
 function quickBasketControls(){
   if(!quickBasketPet) return '';
   const groups = quickBasketGroups.filter(group=>group!=='litter'||quickBasketPet==='cat');
-  return `<p id="quick-basket-group-label">${escape(quickCopy()[1])}</p>
+  return `<div class="quick-basket-categories"><p id="quick-basket-group-label">${escape(quickCopy()[1])}</p>
     <div class="tabs quick-basket-tabs" role="group" aria-labelledby="quick-basket-group-label">${groups.map(group=>{
       const label=homeGroups.find(item=>item.id===group).label;
       return `<button type="button" class="tab ${quickBasketGroup===group?'active':''}" data-quick-basket-group="${group}" aria-pressed="${quickBasketGroup===group}">${icon(quickBasketGroupIcons[group])}<span>${escape(label)}</span></button>`;
-    }).join('')}</div>
-    <label class="visually-hidden" for="quick-basket-search">${escape(quickCopy()[2])}</label>
-    <div class="search-combo-field">${icon('search')}<input type="search" id="quick-basket-search" placeholder="${escape(quickCopy()[2])}" value="${escape(quickBasketQuery)}"></div>
+    }).join('')}</div></div>
+    <div class="search-combo-field quick-basket-search"><label class="visually-hidden" for="quick-basket-search">${escape(quickCopy()[2])}</label>${icon('search')}<input type="search" id="quick-basket-search" placeholder="${escape(quickCopy()[2])}" value="${escape(quickBasketQuery)}"></div>
     <div class="quick-basket-results" data-quick-basket-results>${quickBasketCards()}</div>`;
 }
 
 function quickBasket(){
   return `<section class="section quick-basket" aria-labelledby="quick-basket-title">
-    <div class="pet-panel quick-basket-panel">
-      <h2 id="quick-basket-title">${escape(quickCopy()[0])}</h2>
+    <div class="pet-panel quick-basket-panel ${quickBasketPet?'is-expanded':''}">
+      <div class="quick-basket-heading">
+        <h2 id="quick-basket-title">${escape(quickCopy()[0])}</h2>
+        ${quickBasketPet?`<button type="button" class="tab" data-quick-basket-collapse>${(quickBasketResultsCopy[locale()]||quickBasketResultsCopy.ru).collapse}</button>`:''}
+      </div>
       <div class="quick-basket-pets" role="group" aria-label="${escape(translate('Для кого товары'))}">
         ${[['cat','Для кошек','cat'],['dog','Для собак','paw']].map(([pet,label,symbol])=>`
           <button type="button" class="tab quick-basket-pet ${quickBasketPet===pet?'active':''}" data-quick-basket-pet="${pet}" aria-pressed="${quickBasketPet===pet}">
@@ -811,43 +817,64 @@ function quickBasket(){
             <span class="quick-basket-pet-cue" aria-hidden="true">${icon('arrow')}${icon('check')}</span>
           </button>`).join('')}
       </div>
-      <div class="quick-basket-controls" data-quick-basket-controls>${quickBasketControls()}</div>
-      <div class="quick-basket-summary" data-quick-basket-summary aria-live="polite">${quickBasketPet?quickBasketSummary():''}</div>
+      ${quickBasketControls()}
+      <div class="quick-basket-summary" data-quick-basket-summary aria-live="polite">${quickBasketSummary()}</div>
     </div>
   </section>`;
 }
 
 function refreshQuickBasketSummary(){
   const summary = app.querySelector('[data-quick-basket-summary]');
-  if(!summary || !quickBasketPet) return;
+  if(!summary) return;
   summary.innerHTML = quickBasketSummary();
 
 }
 
 app.addEventListener('click',event=>{
-  const button=event.target.closest('[data-quick-basket-pet],[data-quick-basket-group]');
+  const button=event.target.closest('[data-quick-basket-pet],[data-quick-basket-group],[data-quick-basket-collapse],[data-quick-basket-step]');
   if(!button) return;
-  const pet=button.dataset.quickBasketPet;
-  if(pet){
-    if(quickBasketPet!==pet){
-      quickBasketPet=pet;
-      quickBasketGroup='';
-      quickBasketQuery='';
-    }
-    app.querySelector('[data-quick-basket-controls]').innerHTML=quickBasketControls();
-    refreshQuickBasketSummary();
-  }else{
-    const group=button.dataset.quickBasketGroup;
+  if(button.dataset.quickBasketStep){
+    const rail=button.closest('[data-quick-basket-results]').querySelector('.quick-basket-products');
+    const cards=rail.children;
+    const step=cards[1].offsetLeft-cards[0].offsetLeft;
+    rail.scrollBy({left:Number(button.dataset.quickBasketStep)*step,behavior:'instant'});
+    return;
+  }
+  const group=button.dataset.quickBasketGroup;
+  if(group){
     quickBasketGroup=quickBasketGroup===group?'':group;
     app.querySelector('[data-quick-basket-results]').innerHTML=quickBasketCards();
-  }
-  for(const sibling of button.parentElement.querySelectorAll('button')){
-    const active=(pet?sibling.dataset.quickBasketPet===quickBasketPet:sibling.dataset.quickBasketGroup===quickBasketGroup);
-    sibling.classList.toggle('active',active);
-    sibling.setAttribute('aria-pressed',String(active));
+    for(const sibling of button.parentElement.querySelectorAll('button')){
+      const active=sibling.dataset.quickBasketGroup===quickBasketGroup;
+      sibling.classList.toggle('active',active);
+      sibling.setAttribute('aria-pressed',String(active));
+    }
+  }else{
+    const pet=button.dataset.quickBasketPet||'';
+    if(pet===quickBasketPet)return;
+    const focusPet=pet||quickBasketPet;
+    quickBasketPet=pet;
+    quickBasketGroup='';
+    quickBasketQuery='';
+    const block=button.closest('.quick-basket');
+    block.outerHTML=quickBasket();
+    const focus=app.querySelector(`[data-quick-basket-pet="${focusPet}"]`);
+    focus.focus({preventScroll:true});
+    if(!pet&&focus.getBoundingClientRect().top<0)focus.scrollIntoView({block:'nearest'});
   }
   saveQuickBasket();
 });
+
+app.addEventListener('scroll',event=>{
+  const rail=event.target;
+  if(!rail.matches('.quick-basket-products'))return;
+  const results=rail.closest('[data-quick-basket-results]');
+  const previous=results.querySelector('[data-quick-basket-step="-1"]');
+  const next=results.querySelector('[data-quick-basket-step="1"]');
+  if(!previous||!next)return;
+  previous.disabled=rail.scrollLeft<=1;
+  next.disabled=rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-1;
+},true);
 
 app.addEventListener('input',event=>{
   if(event.target.id!=='quick-basket-search') return;
