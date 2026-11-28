@@ -1,7 +1,6 @@
 import { canBuy, snapshots } from './variants.js';
 import { catPickLanding } from './cat-picks.js?v=mobile-cards-20261115';
 import { dogPickLanding } from './dog-picks.js?v=mobile-cards-20261115';
-import { pickHref } from './seo-picks.js';
 
 // Editorial order follows the planned first assortment, not inferred sales popularity.
 export const homeShortcutIds = {
@@ -98,39 +97,57 @@ export function homeShortcutProducts(products, pet) {
       snapshots(product).some(canBuy));
 }
 
-export function homeShortcuts(products, icon, escape, language = 'ru') {
-  const cards = {
-    ru: [
-      { pet: 'cat', title: 'Наш выбор для кошек', description: 'Корм, лакомства, поилки и игры для кошек', brands: 'Leonardo · Churu · Royal Canin · ACANA · HeyboPet' },
-      { pet: 'dog', title: 'Наш выбор для собак', description: 'Корм, жевательные лакомства и вещи для игр', brands: 'ACANA · ORIJEN · Royal Canin · Duvo+' }
-    ],
-    es: [
-      { pet: 'cat', title: 'Nuestra selección para gatos', description: 'Pienso, premios, fuentes y juegos para gatos', brands: 'Leonardo · Churu · Royal Canin · ACANA · HeyboPet' },
-      { pet: 'dog', title: 'Nuestra selección para perros', description: 'Pienso, premios para masticar y juguetes para perros', brands: 'ACANA · ORIJEN · Royal Canin · Duvo+' }
-    ],
-    uk: [
-      { pet: 'cat', title: 'Наш вибір для котів', description: 'Корм, ласощі, поїлки та ігри для котів', brands: 'Leonardo · Churu · Royal Canin · ACANA · HeyboPet' },
-      { pet: 'dog', title: 'Наш вибір для собак', description: 'Корм, жувальні ласощі та речі для гри', brands: 'ACANA · ORIJEN · Royal Canin · Duvo+' }
-    ]
-  }[language] || [];
-  const label = { ru: 'Подборка CatManDog', es: 'Selección CatManDog', uk: 'Добірка CatManDog' }[language];
-  const action = { ru: 'Посмотреть товары', es: 'Ver productos', uk: 'Переглянути товари' }[language];
-  const landmark = { ru: 'Подборки товаров', es: 'Selecciones de productos', uk: 'Добірки товарів' }[language];
-  const images = {
-    cat: { src: '/media/home-shortcuts/cat-editorial-v1.webp', alt: { ru: 'Кошка играет дома', es: 'Un gato juega en casa', uk: 'Кіт грається вдома' } },
-    dog: { src: '/media/home-shortcuts/dog-editorial-v1.webp', alt: { ru: 'Собака отдыхает дома', es: 'Un perro descansa en casa', uk: 'Собака відпочиває вдома' } }
-  };
-  return `<section class="editorial-promos home-shortcuts" aria-label="${landmark}">
-    ${cards.map(({ pet, title, description, brands }) => {
-      const image = images[pet];
-      return `<a class="editorial-promo shortcut-${pet}" href="${language === 'es' ? pickHref(pet) : `#/picks/${pet}`}">
-        <img class="shortcut-image" src="${image.src}" alt="${image.alt[language]}" loading="lazy">
-        <div class="promo-copy"><span class="direction-label">${label}</span><h2>${title}</h2>
-          <p>${description}</p><span class="shortcut-brands">${brands}</span>
-          <span class="promo-link">${action} ${icon('arrow')}</span>
-        </div>
-      </a>`;
-    }).join('')}
+const homePromotionCopy = {
+  ru: {
+    label: 'Подарки и идеи для дома',
+    comingSoon: 'Скоро',
+    giftTitle: 'Новогодний домик для кота',
+    giftDescription: 'Пачка Churu, маленькая игрушка и два пауча влажного корма',
+    atelierTitle: 'Больше места для прыжков',
+    atelierDescription: 'Полки, ступеньки и мостики для стен и балкона, чтобы кот мог лазать, прыгать и отдыхать наверху',
+    atelierAction: 'Смотреть Cat’s Atelier',
+  },
+  es: {
+    label: 'Regalos e ideas para casa',
+    comingSoon: 'Próximamente',
+    giftTitle: 'Casita navideña para tu gato',
+    giftDescription: 'Un paquete de Churu, un juguete pequeño y dos sobres de comida húmeda',
+    atelierTitle: 'Más espacio para saltar',
+    atelierDescription: 'Baldas, escalones y puentes para paredes y balcones, para que tu gato trepe, salte y descanse en las alturas',
+    atelierAction: 'Ver Cat’s Atelier',
+  },
+  uk: {
+    label: 'Подарунки та ідеї для дому',
+    comingSoon: 'Незабаром',
+    giftTitle: 'Новорічний будиночок для кота',
+    giftDescription: 'Пачка Churu, маленька іграшка та два паучі вологого корму',
+    atelierTitle: 'Більше місця для стрибків',
+    atelierDescription: 'Полиці, сходинки та містки для стін і балкона, щоб кіт міг лазити, стрибати й відпочивати нагорі',
+    atelierAction: 'Переглянути Cat’s Atelier',
+  },
+};
+
+export function homePromotions(icon, language) {
+  const copy = homePromotionCopy[language] ?? homePromotionCopy.ru;
+  const atelierHref = '/catalogo?q=' + encodeURIComponent('Cat’s Atelier');
+
+  return `<section class="editorial-promos home-shortcuts" aria-label="${copy.label}">
+    <article class="editorial-promo promo-holiday">
+      <div class="promo-copy">
+        <span class="direction-label">${copy.comingSoon}</span>
+        <h2>${copy.giftTitle}</h2>
+        <p>${copy.giftDescription}</p>
+      </div>
+    </article>
+    <a class="editorial-promo promo-atelier" href="${atelierHref}">
+      <img class="shortcut-image" src="https://img.catmandog.es/assets/cats-atelier/SH-M-DA100-studio-v2.webp" alt="" loading="lazy">
+      <div class="promo-copy">
+        <span class="direction-label">Cat’s Atelier</span>
+        <h2>${copy.atelierTitle}</h2>
+        <p>${copy.atelierDescription}</p>
+        <span class="promo-link">${copy.atelierAction} ${icon('arrow')}</span>
+      </div>
+    </a>
   </section>`;
 }
 

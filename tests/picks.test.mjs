@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { catalogProducts } from '../data.js';
-import { homeShortcuts, homeShortcutLanding, homeShortcutProducts } from '../home-shortcuts.js';
+import { homePromotions, homeShortcutLanding, homeShortcutProducts } from '../home-shortcuts.js';
 
 const helpers = {
   crumbs: () => '', card: product => `<article data-product="${product.id}"></article>`,
@@ -15,13 +15,6 @@ test('selections show real available catalog products in each language', () => {
     assert.ok(products.every(product => product.pet === pet));
     if (pet === 'dog') assert.equal(products.length, 40);
   }
-  const spanishHome = homeShortcuts(catalogProducts, helpers.icon, helpers.escape, 'es');
-  assert.match(spanishHome, /href="\/selecciones\/gatos"/u);
-  assert.match(spanishHome, /href="\/selecciones\/perros"/u);
-  assert.match(spanishHome, /Nuestra selección para gatos/u);
-  const ukrainianHome = homeShortcuts(catalogProducts, helpers.icon, helpers.escape, 'uk');
-  assert.match(ukrainianHome, /Наш вибір для котів/u);
-  assert.match(ukrainianHome, /href="#\/picks\/dog"/u);
   for (const [language, title, href] of [
     ['ru', 'Подборка для собак', '#/picks/cat'],
     ['es', 'Selección para perros', '/selecciones/gatos'],
@@ -34,5 +27,18 @@ test('selections show real available catalog products in each language', () => {
     assert.match(html, /cat-pick-pairs-grid/u);
     assert.match(html, /cat-pick-filters/u);
     assert.match(html, /cat-pick-more/u);
+  }
+});
+
+test('homepage promotions show the holiday teaser and lead to Cat’s Atelier', () => {
+  for (const [language, title] of [
+    ['ru', 'Новогодний домик для кота'],
+    ['es', 'Casita navideña para tu gato'],
+    ['uk', 'Новорічний будиночок для кота'],
+  ]) {
+    const html = homePromotions(helpers.icon, language);
+    assert.ok(html.includes(title));
+    assert.match(html, /href="\/catalogo\?q=Cat%E2%80%99s%20Atelier"/u);
+    assert.doesNotMatch(html, /href="[^"]*(?:selecciones|picks|gift)/u);
   }
 });
