@@ -28,22 +28,29 @@ export async function sendOrderConfirmation(order, items, fetcher = fetch) {
   const labels = language === 'es'
     ? { subject: 'Confirmación de pedido', paid: 'Pago confirmado', intro: 'Hemos recibido el pago de tu pedido',
       delivery: 'Entrega', subtotal: 'Productos', discount: 'Descuento', address: 'Dirección',
-      preference: 'Entrega solicitada', total: 'Total con IVA', contact: 'Confirmaremos los detalles de la entrega contigo',
+      preference: 'Entrega solicitada', total: 'Total', contact: 'Confirmaremos los detalles de la entrega contigo',
       terms: 'Condiciones de compra y devoluciones', seller: 'Vendedor', orders: 'Ver mis pedidos' }
     : language === 'uk'
       ? { subject: 'Підтвердження замовлення', paid: 'Оплату підтверджено', intro: 'Ми отримали оплату за ваше замовлення',
         delivery: 'Доставка', subtotal: 'Товари', discount: 'Знижка', address: 'Адреса',
-        preference: 'Побажання щодо доставки', total: 'Разом з IVA', contact: 'Ми зв’яжемося з вами, щоб підтвердити деталі доставки',
+        preference: 'Побажання щодо доставки', total: 'Разом', contact: 'Ми зв’яжемося з вами, щоб підтвердити деталі доставки',
         terms: 'Умови купівлі та повернення', seller: 'Продавець', orders: 'Мої замовлення' }
       : { subject: 'Подтверждение заказа', paid: 'Оплата подтверждена', intro: 'Мы получили оплату за ваш заказ',
         delivery: 'Доставка', subtotal: 'Товары', discount: 'Скидка', address: 'Адрес',
-        preference: 'Пожелание по доставке', total: 'Итого с IVA', contact: 'Мы свяжемся с вами, чтобы подтвердить детали доставки',
+        preference: 'Пожелание по доставке', total: 'Итого', contact: 'Мы свяжемся с вами, чтобы подтвердить детали доставки',
         terms: 'Условия покупки и возврата', seller: 'Продавец', orders: 'Мои заказы' };
   const termsPage = language === 'es' ? 'purchase-terms-es.html'
     : language === 'uk' ? 'purchase-terms-uk.html' : 'purchase-terms.html';
   const lines = items.map(item => `${item.name} - ${item.variant_label} × ${item.quantity}: ${euros(item.unit_price_cents * item.quantity)}`);
   const address = order.delivery_address || {};
   const pickup = order.delivery_preference?.mode === 'pickup';
+  if (!pickup && /^(35|38|51|52)/.test(String(address.postcode || ''))) {
+    labels.contact += language === 'es'
+      ? '. Los impuestos locales y los gastos de aduana, si se aplican, los paga el destinatario por separado al recibir el pedido'
+      : language === 'uk'
+        ? '. Місцеві податки та митні збори, якщо їх нарахують, одержувач сплачує окремо під час вручення'
+        : '. Местные налоги и таможенные сборы, если их начислят, получатель оплачивает отдельно при вручении';
+  }
   if (pickup) {
     labels.delivery = language === 'es' ? 'Recogida' : language === 'uk' ? 'Самовивіз' : 'Самовывоз';
     labels.address = labels.delivery;

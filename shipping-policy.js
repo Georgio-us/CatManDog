@@ -55,6 +55,10 @@ export function isSupportedSpanishPostcode(value) {
   return province >= 1 && province <= 52;
 }
 
+export function isOutsideSpanishIvaTerritory(value) {
+  return isSupportedSpanishPostcode(value) && /^(35|38|51|52)/.test(String(value).trim());
+}
+
 export function nationalDeliveryFeeCents(productsCents, freeDelivery = false) {
   if (!Number.isInteger(productsCents) || productsCents < 0)
     throw new Error('Некорректная стоимость товаров');

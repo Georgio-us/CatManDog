@@ -3,6 +3,7 @@ import { catalogSnapshot } from './catalog.js';
 import { priceQuote, validateAddress, validateDelivery } from './pricing.js';
 import { verifyDeliveryAddress } from './address-validation.js';
 import { nationalShippingQuote } from './national-shipping.js';
+import { isOutsideSpanishIvaTerritory } from '../shipping-policy.js';
 import { json, readJson, sameOrigin } from './http.js';
 import { normalizedEmail, validEmail, hashPassword, verifyPassword, currentCustomer,
   createSession, cookieToken, tokenDigest, sessionCookie, clearSessionCookie, isAdmin } from './auth.js';
@@ -314,7 +315,11 @@ async function createOrder(db, payload, customer, manual = null) {
           ? { estimateBusinessDays:[4,6] } : {}), reserved:false }
       : { mode: 'scheduled', date: delivery.date, time: delivery.time, reserved: Boolean(manual) };
     const billingProfile = await client.query('SELECT delivery_tax_rate_bps FROM billing_profile WHERE id=true');
-    const deliveryTaxRate = pickup ? null : billingProfile.rows[0]?.delivery_tax_rate_bps ?? null;
+    // Canarias, Ceuta and Melilla are outside the Spanish IVA territory.
+    // Keep the customer gross price, but do not snapshot Spanish IVA on these shipments.
+    const outsideIvaTerritory = !pickup && isOutsideSpanishIvaTerritory(cleanAddress.postcode);
+    const deliveryTaxRate = pickup ? null : outsideIvaTerritory ? 0 :
+      billingProfile.rows[0]?.delivery_tax_rate_bps ?? null;
     const inserted = await client.query(`INSERT INTO orders(id,number,customer_id,customer_name,email,buyer_phone,phone,whatsapp_opt_in,
       delivery_address,delivery_preference,subtotal_cents,discount_cents,delivery_cents,delivery_tax_rate_bps,total_cents,
       promo_code,idempotency_key,stock_state,locale,cart_session_id,is_test,recurring_intent) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,'reserved',$18,$19,$20,$21)
@@ -340,7 +345,8 @@ async function createOrder(db, payload, customer, manual = null) {
         unit_price_cents,source_mode,tax_rate_bps) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
       [randomUUID(), orderId, item.productId, item.variantId, item.name, item.variantLabel,
         item.qty, item.unitPriceCents, item.sourceMode,
-        variants.rows.find(row => row.variant_id === item.variantId)?.tax_rate_bps ?? null]);
+        outsideIvaTerritory ? 0 :
+          variants.rows.find(row => row.variant_id === item.variantId)?.tax_rate_bps ?? null]);
       if (item.sourceMode === 'on_hand') {
         const changed = await client.query(`UPDATE catalog_variants
           SET reserved_quantity=reserved_quantity+$1,updated_at=now() WHERE id=$2

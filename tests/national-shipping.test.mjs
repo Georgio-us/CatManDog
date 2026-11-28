@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { cartParcel, nationalShippingQuote, pricedShippingOptions, skuWeightKg } from '../server/national-shipping.js';
 import { validateCheckout } from '../checkout-model.js';
 import { validateAddress, validateDelivery, priceQuote } from '../server/pricing.js';
-import { isMainlandPostcode, isSupportedSpanishPostcode, nationalDeliveryFeeCents } from '../shipping-policy.js';
+import { isMainlandPostcode, isOutsideSpanishIvaTerritory, isSupportedSpanishPostcode,
+  nationalDeliveryFeeCents } from '../shipping-policy.js';
 
 test('mainland delivery uses fixed customer bands after discounts', () => {
   assert.equal(nationalDeliveryFeeCents(2399), 999);
@@ -19,6 +20,13 @@ test('mainland delivery uses fixed customer bands after discounts', () => {
     assert.equal(isSupportedSpanishPostcode(postcode), true);
   for (const postcode of ['99001', '1234'])
     assert.equal(isSupportedSpanishPostcode(postcode), false);
+});
+
+test('Canarias, Ceuta and Melilla are outside the Spanish IVA territory', () => {
+  for (const postcode of ['35001', '38001', '51001', '52001'])
+    assert.equal(isOutsideSpanishIvaTerritory(postcode), true);
+  for (const postcode of ['07001', '28001', '46001', '99001'])
+    assert.equal(isOutsideSpanishIvaTerritory(postcode), false);
 });
 
 test('national parcel sums exact SKU pack weights and quotes the next half-kilogram tier', () => {
