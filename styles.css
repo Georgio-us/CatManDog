@@ -4837,25 +4837,15 @@ details .text-link {
   scroll-snap-align: start;
 }
 .quick-basket-item .product-info {
-  grid-template-rows: 1.6em calc(var(--card-title-lines) * var(--card-title-line)) 44px auto;
+  grid-template-rows: 1.6em calc(var(--card-title-lines) * var(--card-title-line)) 1.5em 58px var(--card-price-height);
 }
 
 .quick-basket-item .product-price {
-  grid-row: 4;
-  grid-template-rows: auto 36px;
-  align-items: center;
-  min-height: 0;
-}
-
-.quick-basket-item .product-price .retail-label {
-  font-weight: 400;
+  grid-row: 5;
 }
 
 .quick-basket-format {
   position: relative;
-  padding: 0;
-  margin: 0;
-  border: 0;
   z-index: 2;
   align-self: end;
   min-width: 0;
@@ -5059,33 +5049,5 @@ details .text-link {
   .quick-basket-arrows button:disabled {
     opacity: .4;
     cursor: default;
-  }
-}
-
-
-.quick-basket-switch {
-  display: none;
-}
-
-@media (max-width: 760px) {
-  .quick-basket-results {
-    scroll-margin-top: 120px;
-  }
-
-  .quick-basket-results:has(.quick-basket-products) + .quick-basket-switch {
-    display: block;
-  }
-
-  .quick-basket-switch .tab {
-    min-height: 44px;
-  }
-
-  .quick-basket-item .product-card .product-image {
-    aspect-ratio: 1.25;
-  }
-
-  .quick-basket-item .product-info {
-    padding-top: 10px;
-    row-gap: 5px;
   }
 }
