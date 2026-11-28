@@ -51,8 +51,8 @@ export function isSupportedSpanishPostcode(value) {
   const postcode = String(value || '').trim();
   if (!/^\d{5}$/.test(postcode)) return false;
   const province = Number(postcode.slice(0, 2));
-  // 51 and 52 are Ceuta and Melilla, which are outside our delivery area.
-  return province >= 1 && province <= 50;
+  // 51 and 52 are Ceuta and Melilla; all Spanish provinces are served.
+  return province >= 1 && province <= 52;
 }
 
 export function nationalDeliveryFeeCents(productsCents, freeDelivery = false) {

@@ -15,9 +15,9 @@ test('mainland delivery uses fixed customer bands after discounts', () => {
   assert.equal(isMainlandPostcode('28001'), true);
   for (const postcode of ['07001', '35001', '38001', '51001', '52001'])
     assert.equal(isMainlandPostcode(postcode), false);
-  for (const postcode of ['28001', '07001', '35001', '38001'])
+  for (const postcode of ['28001', '07001', '35001', '38001', '51001', '52001'])
     assert.equal(isSupportedSpanishPostcode(postcode), true);
-  for (const postcode of ['51001', '52001', '99001', '1234'])
+  for (const postcode of ['99001', '1234'])
     assert.equal(isSupportedSpanishPostcode(postcode), false);
 });
 
@@ -112,17 +112,13 @@ test('fixed mainland delivery stays available without a measured parcel or Sendc
   }
 });
 
-test('island delivery uses the same customer tariff and excludes Ceuta and Melilla', async () => {
+test('all Spanish destinations use the same national customer tariff', async () => {
   const lines = [{ productId:'bowl', variantId:'bowl-1', qty:1 }];
   const variants = [{ product_id:'bowl', variant_id:'bowl-1', category:'Миски и поилки', label:'Одна миска' }];
-  for (const postalCode of ['07001', '35001', '38001']) {
+  for (const postalCode of ['07001', '35001', '38001', '51001', '52001']) {
     const quote = await nationalShippingQuote({ postalCode, productsCents:4900, lines, variants });
     assert.equal(quote.available, true);
     assert.equal(quote.deliveryCents, 399);
-  }
-  for (const postalCode of ['51001', '52001']) {
-    const quote = await nationalShippingQuote({ postalCode, productsCents:4900, lines, variants });
-    assert.deepEqual(quote, { available:false, reason:'unsupported_postcode' });
   }
 });
 
@@ -132,14 +128,15 @@ test('national address and customer price stay distinct from Valencia rules', ()
   assert.equal(validateDelivery({ mode: 'national' }), null);
   assert.equal(validateCheckout({ name:'A', email:'a@b.es', phone:'123456789', deliveryRegion:'national',
     city:'Madrid', postcode:'28001', street:'Mayor', building:'1' }), null);
-  for (const [city, postcode] of [['Palma', '07001'], ['Las Palmas', '35001'], ['Santa Cruz', '38001']]) {
+  for (const [city, postcode] of [['Palma', '07001'], ['Las Palmas', '35001'],
+    ['Santa Cruz', '38001'], ['Ceuta', '51001'], ['Melilla', '52001']]) {
     const address = { city, postcode, street:'Mayor', building:'1' };
     assert.equal(validateAddress(address, 'national'), null);
     assert.equal(validateCheckout({ name:'A', email:'a@b.es', phone:'123456789',
       deliveryRegion:'national', ...address }), null);
   }
-  assert.match(validateAddress({ city:'Ceuta', postcode:'51001', street:'Mayor', building:'1' }, 'national'),
-    /Сеуты/);
+  assert.match(validateAddress({ city:'Ceuta', postcode:'99001', street:'Mayor', building:'1' }, 'national'),
+    /индекс/);
   const lines = [{ productId:'rc', variantId:'rc-2kg', qty:1 }];
   const variants = [{ product_id:'rc', variant_id:'rc-2kg', label:'2 кг',
     source_price_cents:2909, price_confirmed:true, sale_status:'available', name:'Royal Canin' }];

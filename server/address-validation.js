@@ -52,7 +52,7 @@ export async function verifyDeliveryAddress(address, mode, fetchImpl = fetch) {
   const house = building.match(/^(\d+)\s*([a-z])?$/i);
   if (!/^\d{5}$/.test(postcode) || !city || !street || !house)
     throw error('Проверьте город, улицу, номер дома и почтовый индекс');
-  if (!isSupportedSpanishPostcode(postcode)) throw error('Сейчас доставляем по Испании, кроме Сеуты и Мелильи');
+  if (!isSupportedSpanishPostcode(postcode)) throw error('Укажите корректный почтовый индекс Испании');
   // The owner has confirmed this exact building; CartoCiudad currently returns no portal for it.
   if (isFreeLocalDeliveryAddress(address))
     return { city: 'València', postcode: '46024', local: true };

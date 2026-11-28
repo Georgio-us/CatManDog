@@ -33,7 +33,7 @@ test('real basket uses server availability and defers delivery cost until the ad
   const one = renderLiveBasket({ ...helpers, cart, grouping: 'together' });
   assert.doesNotMatch(one, /Один заказ - одна доставка|Два заказа/);
   assert.match(one, /Валенсия: 24-48 часов/);
-  assert.match(one, /материк: 2-4 дня · острова: 2-10 рабочих дней/);
+  assert.match(one, /материк: 2-4 дня · острова, Сеута и Мелилья: 2-10 рабочих дней/);
   assert.match(one, /После выбора адреса/);
   assert.match(one, /Испании - от 99 €/);
   assert.doesNotMatch(one, /45\.39 €/);

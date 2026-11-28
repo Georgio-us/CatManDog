@@ -14,7 +14,7 @@ export function validateAddress(address, deliveryMode = 'slot') {
     if (!String(address.city || '').trim()) return 'Укажите город доставки';
     if (!/^\d{5}$/.test(String(address.postcode || ''))) return 'Укажите почтовый индекс Испании';
     if (!isSupportedSpanishPostcode(address.postcode))
-      return 'Сейчас отправляем заказы по Испании, кроме Сеуты и Мелильи';
+      return 'Укажите корректный почтовый индекс Испании';
   } else {
     if (!String(address.city || '').trim()) return 'Укажите город доставки';
     if (!/^46\d{3}$/.test(String(address.postcode || '')))

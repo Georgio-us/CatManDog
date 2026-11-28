@@ -1,7 +1,7 @@
 import { checkoutTotals } from './checkout-model.js';
 import { cartSku, storefrontPrice, canBuy } from './variants.js?v=sale-price-policy-20261109';
 import { productHref } from './seo-products.js?v=yagu-toys-20261116';
-import { cartDeliveryKind, deliveryTiming } from './delivery-timing.js?v=delivery-regions-20261122';
+import { cartDeliveryKind, deliveryTiming } from './delivery-timing.js?v=all-spain-20261128';
 
 export function fulfillmentState(sku) {
   if (sku?.saleStatus) return sku.saleStatus === 'available' ? 'stock' :
