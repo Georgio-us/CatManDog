@@ -622,9 +622,9 @@ function homeUseful(){
 const quickBasketGroupIcons = { 'dry-food':'bag', 'wet-food':'leaf', treats:'heart', litter:'paw' };
 const quickBasketGroups = Object.keys(quickBasketGroupIcons);
 const quickBasketCopy = {
-  ru: ['Соберите корзину на каждый день', 'Что покупаете регулярно?', 'Найти товар или бренд', 'В корзину', 'По этому запросу ничего не нашлось', 'Категории товаров'],
-  es: ['Prepara tu cesta para el día a día', '¿Qué compras habitualmente?', 'Buscar producto o marca', 'Ir a la cesta', 'No hemos encontrado productos', 'Categorías de productos'],
-  uk: ['Зберіть кошик на щодень', 'Що купуєте регулярно?', 'Знайти товар або бренд', 'До кошика', 'За цим запитом нічого не знайдено', 'Категорії товарів']
+  ru: ['Соберите регулярный заказ', 'Что покупаете регулярно?', 'Найти товар или бренд', 'В корзину', 'По этому запросу ничего не нашлось', 'Категории товаров', 'Выберите корм, лакомства и другие привычные товары. В корзине укажите, как часто повторять заказ.'],
+  es: ['Prepara tu pedido recurrente', '¿Qué compras habitualmente?', 'Buscar producto o marca', 'Ir a la cesta', 'No hemos encontrado productos', 'Categorías de productos', 'Elige el pienso, los premios y los productos que compras siempre. En la cesta podrás elegir cada cuánto repetir el pedido.'],
+  uk: ['Зберіть регулярне замовлення', 'Що купуєте регулярно?', 'Знайти товар або бренд', 'До кошика', 'За цим запитом нічого не знайдено', 'Категорії товарів', 'Виберіть корм, ласощі та інші звичні товари. У кошику вкажіть, як часто повторювати замовлення.']
 };
 const quickBasketResultsCopy = {
   ru: { all:'Смотреть все', swipe:'Листайте, чтобы увидеть больше', collapse:'Свернуть', previous:'Предыдущие товары', next:'Следующие товары' },
@@ -821,12 +821,13 @@ function quickBasketControls(){
 }
 
 function quickBasket(){
-  return `<section class="section quick-basket" aria-labelledby="quick-basket-title">
+  return `<section class="section quick-basket" aria-labelledby="quick-basket-title" aria-describedby="quick-basket-description">
     <div class="pet-panel quick-basket-panel ${quickBasketPet?'is-expanded':''}">
       <div class="quick-basket-heading">
         <h2 id="quick-basket-title">${escape(quickCopy()[0])}</h2>
         ${quickBasketPet?`<button type="button" class="tab" data-quick-basket-collapse>${(quickBasketResultsCopy[locale()]||quickBasketResultsCopy.ru).collapse}</button>`:''}
       </div>
+      <p class="quick-basket-description" id="quick-basket-description">${escape(quickCopy()[6])}</p>
       <div class="quick-basket-pets" role="group" aria-label="${escape(translate('Для кого товары'))}">
         ${[['cat','Для кошек','cat'],['dog','Для собак','paw']].map(([pet,label,symbol])=>`
           <button type="button" class="tab quick-basket-pet ${quickBasketPet===pet?'active':''}" data-quick-basket-pet="${pet}" aria-pressed="${quickBasketPet===pet}">

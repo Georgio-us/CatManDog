@@ -4952,6 +4952,16 @@ details .text-link {
   margin: 0;
 }
 
+.quick-basket-description {
+  max-width: 46ch;
+  margin: 0;
+  justify-self: center;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+  text-align: center;
+}
+
 .quick-basket-heading button {
   flex-shrink: 0;
 }
