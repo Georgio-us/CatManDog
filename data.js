@@ -1,3 +1,4 @@
+import { acanaStudioImage, acanaStudioImages } from './acana-variant-images.js';
 import { applyCatalogPolicy } from './catalog-policy.js';
 import { applyRetailUpdates } from './retail-updates.js?v=retail-coverage-1';
 import { applyProvisionalPrices } from './provisional-prices.js';
@@ -443,6 +444,16 @@ export const products = applyChuruRetailFormats(applyProvisionalPrices(applyReta
       ? { ...variant, description: copy.description, details: copy.details }
       : variant) } : {})
   };
+}).map(product => {
+  const entry = acanaStudioImages[product.id];
+  if (!entry || !product.variants?.length) return product;
+  const imageByVariant = new Map(entry.grams.map(grams => [
+    `${product.id}-${grams}g`, acanaStudioImage(product.id, entry.name, grams)
+  ]));
+  const variants = product.variants.map(variant => imageByVariant.has(variant.id)
+    ? { ...variant, image: imageByVariant.get(variant.id) } : variant);
+  const image = imageByVariant.get(product.defaultVariantId) || product.image;
+  return { ...product, image, variants };
 });
 export const catalogProducts = products.filter(p => !p.catalogHidden);
 

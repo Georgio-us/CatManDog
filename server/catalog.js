@@ -1,5 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { products } from '../data.js';
+import { acanaStudioImage, acanaStudioImages } from '../acana-variant-images.js';
 import { retiredProductIds } from '../catalog-policy.js';
 import { snapshots, confirmedPrice, canBuy } from '../variants.js';
 import { yaguRetailBenchmarks } from '../yagu-retail-benchmarks.js';
@@ -59,6 +60,34 @@ export async function publishSelectedLaunchImages(client) {
     await client.query("INSERT INTO catalog_migrations(name) VALUES('launch_selected_images_2026_11_05')");
   }
   return matchedProducts;
+}
+
+async function publishAcanaStudioImages(client) {
+  const migration = 'acana_exact_studio_images_2026_11_28';
+  const { rows } = await client.query('SELECT 1 FROM catalog_migrations WHERE name=$1', [migration]);
+  if (rows.length) return;
+  let allPresent = true;
+  for (const [productId, entry] of Object.entries(acanaStudioImages)) {
+    for (const grams of entry.grams) {
+      const variantId = `${productId}-${grams}g`;
+      const image = acanaStudioImage(productId, entry.name, grams);
+      const result = await client.query(`UPDATE catalog_variants
+        SET image_path=$3, source=source || jsonb_build_object('image',$4::jsonb), updated_at=now()
+        WHERE id=$1 AND product_id=$2 AND image_path IS NULL`,
+      [variantId, productId, image.src, JSON.stringify(image)]);
+      if (!result.rowCount) {
+        const existing = await client.query('SELECT 1 FROM catalog_variants WHERE id=$1 AND product_id=$2',
+          [variantId, productId]);
+        if (!existing.rowCount) allPresent = false;
+      }
+    }
+    const image = acanaStudioImage(productId, entry.name, 1800);
+    await client.query(`UPDATE catalog_products
+      SET image_path=$2, source=source || jsonb_build_object('image',$3::jsonb)
+      WHERE id=$1 AND image_path=$4`,
+    [productId, image.src, JSON.stringify(image), `https://img.catmandog.es/assets/food/editorial/${productId}-v1.webp`]);
+  }
+  if (allPresent) await client.query('INSERT INTO catalog_migrations(name) VALUES($1)', [migration]);
 }
 
 export function catalogRows(items = products) {
@@ -1239,7 +1268,10 @@ export async function importCatalog(db, items = products) {
         }
       }
     }
-    if (items === products) await seedInitialSalesLedger(client);
+    if (items === products) {
+      await publishAcanaStudioImages(client);
+      await seedInitialSalesLedger(client);
+    }
     await client.query('COMMIT');
     return rows.length;
   } catch (error) {
