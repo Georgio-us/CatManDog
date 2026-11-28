@@ -709,29 +709,64 @@ function quickBasketItem(product,sku){
   const variantId=hasVariants(product)?sku.id:'';
   const options=snapshots(product).filter(canBuy);
   const label={es:'Formato',ru:'Фасовка',uk:'Фасування'}[locale()];
-  const selector=options.length>1?`<label class="quick-basket-format"><span>${label}</span><select data-quick-format>${options.map(option=>
-    `<option value="${escape(option.id)}" ${option.id===sku.id?'selected':''}>${escape(translate(option.label||option.weight||label))} · ${money(storefrontPrice(option))}</option>`
-  ).join('')}</select></label>`:'';
+  const optionText=option=>escape(translate(option.label||option.weight||label))+' · '+money(storefrontPrice(option));
+  const selector=options.length>1?`<details class="quick-basket-format">
+    <summary><span>${label}</span><strong>${optionText(sku)}</strong>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </summary>
+    <div class="quick-basket-format-options" role="group" aria-label="${label}">${options.map(option=>
+      `<button type="button" data-quick-format="${escape(option.id)}" aria-pressed="${option.id===sku.id}">${optionText(option)}</button>`
+    ).join('')}</div>
+  </details>`:'';
   return card(product,null,variantId?sku:undefined,'plus',selector);
 }
 
-app.addEventListener('change',event=>{
-  if(!event.target.matches('[data-quick-format]'))return;
-  const item=event.target.closest('.quick-basket-item');
+function centerQuickBasketCard(item){
+  const rail=item.closest('.quick-basket-products');
+  if(!rail || !matchMedia('(max-width: 760px)').matches)return;
+  const cardRect=item.getBoundingClientRect();
+  const railRect=rail.getBoundingClientRect();
+  rail.scrollLeft+=cardRect.left+cardRect.width/2-railRect.left-railRect.width/2;
+}
+
+document.addEventListener('click',event=>{
+  const menu=event.target.closest('.quick-basket-format');
+  for(const open of app.querySelectorAll('.quick-basket-format[open]')){
+    if(open!==menu)open.open=false;
+  }
+  if(!menu)return;
+  const item=menu.closest('.quick-basket-item');
+  if(event.target.closest('summary')){
+    centerQuickBasketCard(item);
+    return;
+  }
+  const option=event.target.closest('[data-quick-format]');
+  if(!option)return;
   const product=catalogProducts.find(product=>product.id===item.dataset.quickProduct);
-  const sku=resolveVariant(product,event.target.value);
+  const sku=resolveVariant(product,option.dataset.quickFormat);
   if(!canBuy(sku))return;
   quickBasketFormats.set(JSON.stringify([product.id,quickBasketQuery.trim()]),sku.id);
   item.innerHTML=quickBasketItem(product,sku);
-  item.querySelector('[data-quick-format]').focus({preventScroll:true});
+  item.querySelector('summary').focus({preventScroll:true});
+  centerQuickBasketCard(item);
   saveQuickBasket();
+});
+
+app.addEventListener('keydown',event=>{
+  const menu=event.target.closest('.quick-basket-format[open]');
+  if(event.key==='Escape'&&menu){
+    menu.open=false;
+    menu.querySelector('summary').focus({preventScroll:true});
+  }
 });
 
 app.addEventListener('click',event=>{
   const button=event.target.closest('.quick-basket-item button:is([data-add],[data-add-variant])');
   if(!button)return;
   event.stopImmediatePropagation();
-  const quickProduct=button.closest('.quick-basket-item').dataset.quickProduct;
+  const item=button.closest('.quick-basket-item');
+  centerQuickBasketCard(item);
+  const quickProduct=item.dataset.quickProduct;
   const quickVariant=button.dataset.addVariant;
   add(quickProduct,null,1,undefined,quickVariant||undefined);
   const key=recurringKey({productId:quickProduct,variantId:quickVariant});
@@ -747,7 +782,8 @@ function quickBasketSummary(){
   if(!available.length) return '';
   const total = available.reduce((sum,item)=>sum+Math.round(cartUnitPrice(item)*100)*item.qty,0);
   const count = available.reduce((sum,item)=>sum+item.qty,0);
-  return `<a class="button" href="${escape(location.pathname+location.search)}#/cart?from=quick-basket">${escape(quickCopy()[3])} · ${itemCount(count)} · ${money(total/100)} ${icon('arrow')}</a>`;
+  const inCart={es:'En la cesta',ru:'В корзине',uk:'У кошику'}[locale()];
+  return `<a class="button" href="${escape(location.pathname+location.search)}#/cart?from=quick-basket" aria-label="${escape(quickCopy()[3])}">${inCart} · ${itemCount(count)} · ${money(total/100)} ${icon('arrow')}</a>`;
 }
 
 function quickBasketControls(){
