@@ -31,6 +31,9 @@ test('cart keeps only current items in a regular order draft', () => {
   assert.deepEqual(draft.items, ['food|food-1']);
   assert.deepEqual(recurringChoiceFromCart(draft, cart), { cadenceWeeks: 4, nextDate:draft.nextDate,
     items: [{ productId: 'food', variantId: 'food-1', qty: 2 }] });
+  const increasedCart = [{ ...cart[0], qty: 4 }];
+  assert.deepEqual(recurringChoiceFromCart(draft, increasedCart).items,
+    [{ productId: 'food', variantId: 'food-1', qty: 4 }]);
 });
 
 test('regular order product card shows the exact retail SKU, image and retail price', () => {

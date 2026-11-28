@@ -687,6 +687,7 @@ function quickBasketCards(){
         || (canBuy(resolveVariant(product)) ? resolveVariant(product) : snapshots(product).find(canBuy))]);
   if(!matches.length) return `<p role="status">${escape(quickCopy()[4])}</p>`;
   const shown=matches;
+  queueMicrotask(()=>primeQuickBasketImages(app.querySelector('.quick-basket-products')));
   const labels=quickBasketResultsCopy[locale()]||quickBasketResultsCopy.ru;
   const params=new URLSearchParams({pet:quickBasketPet});
   if(quickBasketGroup) params.set('group',quickBasketGroup);
@@ -726,6 +727,21 @@ function quickBasketItem(product,sku){
   return card(product,null,variantId?sku:undefined,'plus',selector);
 }
 
+function primeQuickBasketImages(rail){
+  if(!rail?.firstElementChild)return;
+  const first=rail.firstElementChild;
+  const step=first.nextElementSibling
+    ? first.nextElementSibling.offsetLeft-first.offsetLeft
+    : first.offsetWidth;
+  if(step<=0)return;
+  const start=Math.max(0,Math.floor(rail.scrollLeft/step)-2);
+  const end=Math.min(rail.childElementCount,start+Math.ceil(rail.clientWidth/step)+5);
+  for(let index=start;index<end;index++){
+    const image=rail.children[index].querySelector('img[loading="lazy"]');
+    if(image)image.loading='eager';
+  }
+}
+
 function centerQuickBasketCard(item){
   const rail=item.closest('.quick-basket-products');
   if(!rail || !matchMedia('(max-width: 760px)').matches)return;
@@ -752,6 +768,7 @@ document.addEventListener('click',event=>{
   if(!canBuy(sku))return;
   quickBasketFormats.set(JSON.stringify([product.id,quickBasketQuery.trim()]),sku.id);
   item.innerHTML=quickBasketItem(product,sku);
+  primeQuickBasketImages(item.closest('.quick-basket-products'));
   item.querySelector('summary').focus({preventScroll:true});
   centerQuickBasketCard(item);
   saveQuickBasket();
@@ -868,6 +885,7 @@ app.addEventListener('click',event=>{
 app.addEventListener('scroll',event=>{
   const rail=event.target;
   if(!rail.matches('.quick-basket-products'))return;
+  primeQuickBasketImages(rail);
   const results=rail.closest('[data-quick-basket-results]');
   const previous=results.querySelector('[data-quick-basket-step="-1"]');
   const next=results.querySelector('[data-quick-basket-step="1"]');
