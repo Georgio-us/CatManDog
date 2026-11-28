@@ -8,7 +8,7 @@ import { deliveryPage } from './delivery-page.js?v=all-spain-20261128';
 import { productDeliveryKind, deliveryTiming, importChargesNotice } from './delivery-timing.js?v=all-spain-20261128';
 import { atelierHasOptions, atelierDefaults, atelierSelection, atelierOptionsMarkup } from './atelier-configuration.js?v=atelier-click-colors-20261121';
 import { productGallery } from './product-gallery.js?v=atelier-hidden-studio-20261128';
-import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=quick-basket-return';
+import { basketGroups, fulfillmentState, renderLiveBasket } from './live-basket-ui.js?v=all-spain-20261128';
 import { recommendForProduct } from './recommendations.js?v=atelier-related-20261121';
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet, homeCatOrder, homeDogOrder, homeFeaturedVariant, prioritizeHomeShelf, prioritizePetCatalog, prioritizeCatalogCategory } from './home-catalog.js?v=category-shelves';
 import { categories, products, catalogProducts, articles } from './data.js?v=labrador-products-20261126';
@@ -23,7 +23,7 @@ import { pickupBasketPage, pickupCheckoutPage, pickupConfirmationPage, pickupCop
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
 import { homePromotions, homeShortcutLanding } from './home-shortcuts.js?v=atelier-window-banner-20261128';
 import { handleCatPickClick } from './cat-picks.js?v=picks-seo-20261112';
-import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from './locale.js?v=home-mobile-contrast-20261127';
+import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from './locale.js?v=all-spain-20261128';
 import { articlesEs } from './journal-content-es.js?v=es-1';
 import { articlesUk } from './journal-content-uk.js';
 import { seoCategoryForPath, seoCategoryPath } from './seo-categories.js';

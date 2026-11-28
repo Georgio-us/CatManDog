@@ -1,6 +1,6 @@
 import { checkoutTotals, availableDeliverySlots, FREE_DELIVERY_FROM, DELIVERY_FEE, validateCheckout } from './checkout-model.js?v=all-spain-20261128';
 import { isFreeLocalDeliveryAddress } from './shipping-policy.js?v=free-local-suissa-20261119';
-import { locale, intlLocale, translate } from './locale.js?v=cats-atelier-20261119';
+import { locale, intlLocale, translate } from './locale.js?v=all-spain-20261128';
 import { cartDeliveryKind, deliveryTiming, importChargesNotice } from './delivery-timing.js?v=all-spain-20261128';
 
 const LEGACY_PREORDER_CHECKOUT_ENABLED = false;
