@@ -101,7 +101,7 @@ test('national checkout shows the approved customer delivery bands', () => {
       isReady:() => true, getPromo:() => null, applyPromo:() => {}, render:() => {} });
     ui.change({ name:'deliveryRegion', value:'national', form:{} });
     const html = ui.page();
-    assert.match(html, /Остальная Испания, включая острова/);
+    assert.match(html, /Resto de España, incluidas las islas, Ceuta y Melilla/);
     assert.match(html, /До 49 € - 9,99 €, от 49 € - 3,99 €, от 99 € - бесплатно/);
     assert.doesNotMatch(html, /тариф по весу|условная коробка|без IVA/);
   } finally {
@@ -148,7 +148,7 @@ test('switching from urgent local delivery to national clears the urgent checkou
       isReady: () => true, getPromo: () => null, applyPromo: () => {}, render: () => {} });
     ui.change({ name: 'deliveryRegion', value: 'national', form: {} });
     const html = ui.page();
-    assert.match(html, /Доставка по Испании/);
+    assert.match(html, /Envío a toda España/);
     assert.match(html, /<span>3<\/span>Оплата/);
     assert.doesNotMatch(html, /Оплата только после звонка|На следующем шаге проверьте и отправьте заявку/);
   } finally { globalThis.FormData = originalFormData; }

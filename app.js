@@ -13,7 +13,7 @@ import { recommendForProduct } from './recommendations.js?v=atelier-related-2026
 import { homeGroups, homeGroupsForPet, homeGroupForProduct, homeFeatureOptions, matchesHomeFeature, matchesHomePrice, homePriceOptions, matchesPet, homeCatOrder, homeDogOrder, homeFeaturedVariant, prioritizeHomeShelf, prioritizePetCatalog, prioritizeCatalogCategory } from './home-catalog.js?v=category-shelves';
 import { categories, products, catalogProducts, articles } from './data.js?v=labrador-products-20261126';
 import { normalizeGift, giftOffer, cartUnitPrice as legacyCartUnitPrice, giftOptions, giftSummary, giftDetail, applyGiftPreset, giftLanding } from './gifts.js?v=yagu-toys-20261116';
-import { createCheckoutUI } from './checkout-ui.js?v=all-spain-final-20261128';
+import { createCheckoutUI } from './checkout-ui.js?v=all-spain-copy-20261128';
 import { normalizeRecurringDraft, recurringChoiceFromCart, renderRecurringCart, recurringKey } from './recurring-cart.js?v=quick-basket-20261127';
 import { availabilityRequestPage } from './availability-request-ui.js?v=yagu-toys-20261116';
 import { orderVariantId } from './order-progress.js';
