@@ -103,8 +103,8 @@ const homePromotionCopy = {
     comingSoon: 'Скоро',
     giftTitle: 'Новогодний домик для кота',
     giftDescription: 'Пачка Churu, маленькая игрушка и два пауча влажного корма',
-    atelierTitle: 'Свой этаж для кота',
-    atelierDescription: 'Соберите маршрут по стене, чтобы кот мог исследовать дом, наблюдать за вами сверху и отдыхать на любимой высоте',
+    atelierTitle: 'Любимое место у окна',
+    atelierDescription: 'Полки для окна и балконной рамы без сверления. А если хочется больше высоты, есть настенные маршруты',
     atelierAction: 'Смотреть Cat’s Atelier',
   },
   es: {
@@ -112,8 +112,8 @@ const homePromotionCopy = {
     comingSoon: 'Próximamente',
     giftTitle: 'Casita navideña para tu gato',
     giftDescription: 'Un paquete de Churu, un juguete pequeño y dos sobres de comida húmeda',
-    atelierTitle: 'Un piso propio para tu gato',
-    atelierDescription: 'Crea un recorrido por la pared para que tu gato explore la casa, te observe desde arriba y descanse en su rincón favorito',
+    atelierTitle: 'Su rincón favorito junto a la ventana',
+    atelierDescription: 'Baldas para marcos de ventanas y balcones sin taladrar. También hay recorridos de pared para trepar más alto',
     atelierAction: 'Ver Cat’s Atelier',
   },
   uk: {
@@ -121,8 +121,8 @@ const homePromotionCopy = {
     comingSoon: 'Незабаром',
     giftTitle: 'Новорічний будиночок для кота',
     giftDescription: 'Пачка Churu, маленька іграшка та два паучі вологого корму',
-    atelierTitle: 'Власний поверх для кота',
-    atelierDescription: 'Створіть маршрут уздовж стіни, щоб кіт міг досліджувати дім, спостерігати за вами згори й відпочивати в улюбленому куточку',
+    atelierTitle: 'Улюблене місце біля вікна',
+    atelierDescription: 'Полиці для віконних і балконних рам без свердління. А для тих, хто любить забиратися вище, є настінні маршрути',
     atelierAction: 'Переглянути Cat’s Atelier',
   },
 };
@@ -140,7 +140,7 @@ export function homePromotions(icon, language) {
       </div>
     </article>
     <a class="editorial-promo promo-atelier" href="${atelierHref}">
-      <img class="shortcut-image" src="https://img.catmandog.es/assets/cats-atelier/SH-M-DA100-studio-v2.webp" alt="" loading="lazy">
+      <img class="shortcut-image" src="https://img.catmandog.es/assets/cats-atelier/SH-W-F75-G-studio-v6.webp" alt="" loading="lazy">
       <div class="promo-copy">
         <span class="direction-label">Cat’s Atelier</span>
         <h2>${copy.atelierTitle}</h2>

@@ -21,7 +21,7 @@ import { applyServerCatalog } from './server-prices.js?v=heybo-white-main-202611
 import { pickupBasketPage, pickupCheckoutPage, pickupConfirmationPage, pickupCopy } from './pickup-flow.js?v=pickup-shared-ui-20261121';
 
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
-import { homePromotions, homeShortcutLanding } from './home-shortcuts.js?v=atelier-banner-copy-20261128';
+import { homePromotions, homeShortcutLanding } from './home-shortcuts.js?v=atelier-window-banner-20261128';
 import { handleCatPickClick } from './cat-picks.js?v=picks-seo-20261112';
 import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from './locale.js?v=home-mobile-contrast-20261127';
 import { articlesEs } from './journal-content-es.js?v=es-1';
@@ -925,7 +925,11 @@ function filteredProducts(params,matchedVariants){let list=catalogProducts.filte
     matchedVariants.set(product.id,sku);
   }
   return product;
-});switch(params.get('sort')){case 'low':list.sort((a,b)=>(displayedMinPrice(a)??Infinity)-(displayedMinPrice(b)??Infinity));break;case 'high':list.sort((a,b)=>displayedMinPrice(a)!==null&&displayedMinPrice(b)!==null?displayedMinPrice(b)-displayedMinPrice(a):displayedMinPrice(a)!==null?-1:displayedMinPrice(b)!==null?1:0);break;case 'name':list.sort((a,b)=>translate(a.name).localeCompare(translate(b.name),intlLocale()));}keepUnavailableLast(list);return list;}
+});
+  if ((!sort || sort === 'popular') && q.trim().toLowerCase() === 'cat’s atelier') {
+    list.sort((a, b) => Number(b.productType === 'window') - Number(a.productType === 'window'));
+  }
+  switch(sort){case 'low':list.sort((a,b)=>(displayedMinPrice(a)??Infinity)-(displayedMinPrice(b)??Infinity));break;case 'high':list.sort((a,b)=>displayedMinPrice(a)!==null&&displayedMinPrice(b)!==null?displayedMinPrice(b)-displayedMinPrice(a):displayedMinPrice(a)!==null?-1:displayedMinPrice(b)!==null?1:0);break;case 'name':list.sort((a,b)=>translate(a.name).localeCompare(translate(b.name),intlLocale()));}keepUnavailableLast(list);return list;}
 function catalogResults(params){
   const matchedVariants=new Map();
   const list=filteredProducts(params,matchedVariants);

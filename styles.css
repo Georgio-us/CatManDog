@@ -2299,6 +2299,13 @@ details ul {
   object-position: center;
 }
 
+@media (min-width: 761px) {
+  .home-shortcuts .promo-atelier .shortcut-image {
+    width: 63%;
+    object-position: center 55%;
+  }
+}
+
 .home-shortcuts .promo-copy {
   display: flex;
   flex-direction: column;
