@@ -4410,6 +4410,25 @@ details .text-link {
 }
 
 @media (max-width: 760px) {
+  .editorial-promos.home-shortcuts {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: calc(100% - 32px);
+    gap: 12px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x mandatory;
+  }
+
+  .home-shortcuts .editorial-promo {
+    scroll-snap-align: start;
+    min-width: 0;
+  }
+
+  .home-shortcuts .editorial-promo:focus-visible {
+    outline-offset: -4px;
+  }
+
   .home-shortcuts .editorial-promo,
   .home-shortcuts .editorial-promo:last-child {
     min-height: 0;
@@ -4428,7 +4447,7 @@ details .text-link {
     position: relative;
     display: block;
     width: 100%;
-    height: 190px;
+    height: clamp(136px, 33vw, 175px);
     object-position: center 48%;
   }
   .home-shortcuts .editorial-promo:after {
@@ -4451,7 +4470,6 @@ details .text-link {
   }
   .home-shortcuts .shortcut-image {
     width: 100%;
-    height: 175px;
     top: 0;
   }
   .shortcut-brands {
