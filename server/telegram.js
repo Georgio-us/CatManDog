@@ -24,7 +24,7 @@ function deliverySummary(delivery = {}) {
     return `Желаемая доставка: ${[oneLine(delivery.date, 10), oneLine(delivery.window, 30)].filter(Boolean).join(', ')}`;
   if (delivery.mode === 'scheduled')
     return `${delivery.reserved ? 'Согласованная доставка' : 'Желаемая доставка'}: ${[oneLine(delivery.date, 10), oneLine(delivery.time, 10)].filter(Boolean).join(', ')}`;
-  if (delivery.mode === 'national') return 'Доставка: по материковой Испании, срок уточняется';
+  if (delivery.mode === 'national') return 'Доставка: по Испании, срок уточняется';
   if (delivery.mode === 'preorder') return 'Доставка: срок согласуется';
   if (delivery.mode === 'soon') return 'Желаемая доставка: как можно скорее';
   return 'Доставка: уточняется';

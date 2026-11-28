@@ -1,6 +1,6 @@
 import { deliveryTiming, availableDeliverySlots } from '../checkout-model.js';
 import { LOCAL_DELIVERY_FEE_CENTS, LOCAL_FREE_DELIVERY_FROM_CENTS, isFreeLocalDeliveryAddress,
-  isMainlandPostcode } from '../shipping-policy.js';
+  isSupportedSpanishPostcode } from '../shipping-policy.js';
 import { salePriceDecision } from './sale-price-policy.js';
 import { atelierSelection } from '../atelier-configuration.js';
 
@@ -13,8 +13,8 @@ export function validateAddress(address, deliveryMode = 'slot') {
   if (deliveryMode === 'national') {
     if (!String(address.city || '').trim()) return 'Укажите город доставки';
     if (!/^\d{5}$/.test(String(address.postcode || ''))) return 'Укажите почтовый индекс Испании';
-    if (!isMainlandPostcode(address.postcode))
-      return 'Сейчас отправляем заказы только по материковой Испании';
+    if (!isSupportedSpanishPostcode(address.postcode))
+      return 'Сейчас отправляем заказы по Испании, кроме Сеуты и Мелильи';
   } else {
     if (!String(address.city || '').trim()) return 'Укажите город доставки';
     if (!/^46\d{3}$/.test(String(address.postcode || '')))

@@ -20,25 +20,25 @@ export function cartDeliveryKind(items = []) {
 
 const copy = {
   ru: {
-    standard: 'Валенсия: 24-48 часов · материковая Испания: 2-4 рабочих дня',
+    standard: 'Валенсия: 24-48 часов · материк: 2-4 дня · острова: 2-10 рабочих дней',
     local: 'Доставка по Валенсии за 24-48 часов',
-    national: 'Доставка по материковой Испании за 2-4 рабочих дня',
+    national: 'Доставка по Испании: материк 2-4, острова 2-10 рабочих дней',
     atelier: 'Под заказ: ориентир 4-6 рабочих дней после подтверждения',
     heybo: 'HeyboPet под заказ: срок подтвердим после проверки склада поставщика',
     mixed: 'В заказе есть товары разных поставщиков: общий срок подтвердим после проверки'
   },
   es: {
-    standard: 'València: 24-48 horas · España peninsular: 2-4 días laborables',
+    standard: 'València: 24-48 horas · península: 2-4 días · islas: 2-10 días laborables',
     local: 'Entrega en València en 24-48 horas',
-    national: 'Entrega en la España peninsular en 2-4 días laborables',
+    national: 'Entrega en España: península 2-4 días, islas 2-10 días laborables',
     atelier: 'Por encargo: plazo estimado de 4 a 6 días laborables tras la confirmación',
     heybo: 'HeyboPet por encargo: confirmaremos el plazo tras consultar al proveedor',
     mixed: 'El pedido incluye productos de varios proveedores: confirmaremos el plazo tras comprobarlos'
   },
   uk: {
-    standard: 'Валенсія: 24-48 годин · материкова Іспанія: 2-4 робочі дні',
+    standard: 'Валенсія: 24-48 годин · материк: 2-4 дні · острови: 2-10 робочих днів',
     local: 'Доставка у Валенсії за 24-48 годин',
-    national: 'Доставка материковою Іспанією за 2-4 робочі дні',
+    national: 'Доставка Іспанією: материк 2-4, острови 2-10 робочих днів',
     atelier: 'Під замовлення: орієнтовно 4-6 робочих днів після підтвердження',
     heybo: 'HeyboPet під замовлення: строк підтвердимо після перевірки складу постачальника',
     mixed: 'У замовленні є товари різних постачальників: загальний строк підтвердимо після перевірки'

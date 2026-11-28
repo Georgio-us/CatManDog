@@ -47,6 +47,14 @@ export function isMainlandPostcode(value) {
   return province >= 1 && province <= 50 && ![7, 35, 38].includes(province);
 }
 
+export function isSupportedSpanishPostcode(value) {
+  const postcode = String(value || '').trim();
+  if (!/^\d{5}$/.test(postcode)) return false;
+  const province = Number(postcode.slice(0, 2));
+  // 51 and 52 are Ceuta and Melilla, which are outside our delivery area.
+  return province >= 1 && province <= 50;
+}
+
 export function nationalDeliveryFeeCents(productsCents, freeDelivery = false) {
   if (!Number.isInteger(productsCents) || productsCents < 0)
     throw new Error('Некорректная стоимость товаров');

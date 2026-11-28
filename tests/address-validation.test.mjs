@@ -74,6 +74,21 @@ test('national delivery can use distant verified addresses', async () => {
   assert.equal((await verifyDeliveryAddress(destination, 'national', response([far]))).local, false);
 });
 
+test('island addresses pass verification while Ceuta and Melilla remain excluded', async () => {
+  for (const [city, postcode, provinceCode] of [
+    ['Palma', '07001', '07'], ['Las Palmas de Gran Canaria', '35001', '35'],
+    ['Santa Cruz de Tenerife', '38001', '38']
+  ]) {
+    const destination = { city, postcode, street: 'Mayor', building: '2' };
+    const portal = candidate({ address: 'CALLE MAYOR 2', extension: null,
+      postalCode: postcode, muni: city, poblacion: city, provinceCode });
+    assert.equal((await verifyDeliveryAddress(destination, 'national', response([portal]))).local, false);
+  }
+  for (const postcode of ['51001', '52001'])
+    await assert.rejects(verifyDeliveryAddress({ city:'Ceuta', postcode, street:'Mayor', building:'2' },
+      'national', response([])), /Сеуты и Мелильи/);
+});
+
 test('Paterna and Torrent are not treated as local solely because they are nearby', async () => {
   for (const [city, postcode, lat, lng] of [
     ['Paterna', '46980', 39.502, -0.44],

@@ -1,5 +1,5 @@
 import { LOCAL_FREE_DELIVERY_FROM_CENTS, LOCAL_DELIVERY_FEE_CENTS, isFreeLocalDeliveryAddress,
-  isMainlandPostcode } from './shipping-policy.js?v=free-local-suissa-20261119';
+  isSupportedSpanishPostcode } from './shipping-policy.js?v=island-delivery-20261128';
 
 export const FREE_DELIVERY_FROM = LOCAL_FREE_DELIVERY_FROM_CENTS / 100;
 export const DELIVERY_FEE = LOCAL_DELIVERY_FEE_CENTS / 100;
@@ -68,8 +68,8 @@ export function validateCheckout(values, now = new Date()) {
   if (field('deliveryRegion') !== 'national' && !/^46\d{3}$/.test(field('postcode')))
     return 'Для местной доставки укажите индекс провинции Валенсия';
   if (field('deliveryRegion') === 'national' && !field('city')) return 'Укажите город доставки';
-  if (field('deliveryRegion') === 'national' && !isMainlandPostcode(field('postcode')))
-    return 'Сейчас отправляем заказы только по материковой Испании';
+  if (field('deliveryRegion') === 'national' && !isSupportedSpanishPostcode(field('postcode')))
+    return 'Сейчас отправляем заказы по Испании, кроме Сеуты и Мелильи';
   if (!field('street') || !field('building')) return 'Укажите улицу и номер дома';
   if (field('deliveryRegion') === 'national') return null;
   if (field('deliveryMode') === 'preorder') return null;

@@ -61,7 +61,7 @@ export async function sendOrderConfirmation(order, items, fetcher = fetch) {
     : language === 'uk' ? 'Узгодимо час після оплати' : 'Согласуем время после оплаты')
     : delivery.mode === 'slot' || delivery.mode === 'scheduled'
     ? [delivery.date, delivery.window || delivery.time].filter(Boolean).join(' · ')
-    : delivery.mode === 'preorder' ? (delivery.estimateBusinessDays ? '4-6 business days (estimated)' : 'Delivery date to be confirmed after checking the supplier') : delivery.mode === 'national' ? 'España peninsular' : '';
+    : delivery.mode === 'preorder' ? (delivery.estimateBusinessDays ? '4-6 business days (estimated)' : 'Delivery date to be confirmed after checking the supplier') : delivery.mode === 'national' ? 'España' : '';
   const text = `${labels.intro} ${order.number}\n\n${lines.join('\n')}\n${labels.subtotal}: ${euros(order.subtotal_cents)}\n${labels.discount}: -${euros(order.discount_cents)}\n${labels.delivery}: ${euros(order.delivery_cents)}\n${labels.total}: ${euros(order.total_cents)}\n\n${labels.address}: ${destination}\n${labels.preference}: ${preference}\n${labels.contact}.\n\n${labels.seller}: PUZANOV HEORHII (CatManDog)\nsupport@catmandog.es · +34 665 240 277\n${labels.terms}: https://catmandog.es/${termsPage}\n`;
   const html = renderOrderEmail(order, items, labels, euros, destination, preference, termsPage);
   await sendEmail(order.email, `${labels.subject} ${order.number} - CatManDog`, text, fetcher, html);

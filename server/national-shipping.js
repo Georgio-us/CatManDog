@@ -1,5 +1,5 @@
 import { sendcloudReady, sendcloudShippingOptions } from './sendcloud.js';
-import { nationalDeliveryFeeCents, isMainlandPostcode } from '../shipping-policy.js';
+import { nationalDeliveryFeeCents, isSupportedSpanishPostcode } from '../shipping-policy.js';
 
 // Only a mass explicitly attached to a SKU can be used for a carrier quote.
 // Package and carrier measurements are confirmed when the label is created.
@@ -70,7 +70,7 @@ export function pricedShippingOptions(options) {
 
 export async function nationalShippingQuote({ postalCode, lines, variants, productsCents,
   freeDelivery = false, quoteOptions = sendcloudShippingOptions }) {
-  if (!isMainlandPostcode(postalCode)) return { available: false, reason: 'unsupported_postcode' };
+  if (!isSupportedSpanishPostcode(postalCode)) return { available: false, reason: 'unsupported_postcode' };
   const deliveryCents = nationalDeliveryFeeCents(productsCents, freeDelivery);
   const measured = cartParcel(lines, variants);
   if (!measured.available || !sendcloudReady()) return {

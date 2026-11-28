@@ -33,9 +33,9 @@ test('real basket uses server availability and defers delivery cost until the ad
   const one = renderLiveBasket({ ...helpers, cart, grouping: 'together' });
   assert.doesNotMatch(one, /Один заказ - одна доставка|Два заказа/);
   assert.match(one, /Валенсия: 24-48 часов/);
-  assert.match(one, /материковая Испания: 2-4 рабочих дня/);
+  assert.match(one, /материк: 2-4 дня · острова: 2-10 рабочих дней/);
   assert.match(one, /После выбора адреса/);
-  assert.match(one, /материковой Испании - от 99 €/);
+  assert.match(one, /Испании - от 99 €/);
   assert.doesNotMatch(one, /45\.39 €/);
   const separate = renderLiveBasket({ ...helpers, cart, grouping: 'separate', allowSplit: true });
   assert.match(separate, /data-live-checkout-group="stock"/);
