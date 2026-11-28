@@ -4722,16 +4722,24 @@ details .text-link {
   .quick-basket-products {
     gap: 12px;
     scroll-snap-type: x mandatory;
-    padding: 2px 14% 8px;
-  }
-
-  .quick-basket-products[data-card-count="1"] {
-    padding-inline: 2px;
+    padding: 2px 2px 8px;
   }
 
   .quick-basket-products > .quick-basket-item {
-    flex-basis: 100%;
+    flex-basis: 72%;
     scroll-snap-align: center;
+  }
+
+  .quick-basket-products > .quick-basket-item:first-child {
+    scroll-snap-align: start;
+  }
+
+  .quick-basket-products > .quick-basket-item:last-child:not(:first-child) {
+    margin-inline-end: 14%;
+  }
+
+  .quick-basket-products[data-card-count="1"] > .quick-basket-item {
+    flex-basis: 100%;
   }
 
   .quick-basket-swipe {
@@ -5049,5 +5057,69 @@ details .text-link {
   .quick-basket-arrows button:disabled {
     opacity: .4;
     cursor: default;
+  }
+}
+
+.quick-basket-category-short {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .quick-basket-categories {
+    position: sticky;
+    top: 0;
+    z-index: 9;
+    padding-block: 6px;
+    background: color-mix(in srgb, var(--lime) 15%, white);
+  }
+
+  .quick-basket-categories > p,
+  .quick-basket-tabs .quick-basket-category-full,
+  .quick-basket-tabs svg,
+  .quick-basket-swipe {
+    display: none;
+  }
+
+  .quick-basket-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .quick-basket-tabs .tab {
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: center;
+    width: auto;
+    min-height: 44px;
+    padding-inline: clamp(5px, 2vw, 10px);
+    font-size: clamp(10px, 3.1vw, 13px);
+    white-space: nowrap;
+  }
+
+  .quick-basket-category-short {
+    display: inline;
+  }
+
+  .quick-basket-results:not(:empty) {
+    display: grid;
+    gap: 8px;
+    margin-top: 0;
+  }
+
+  .quick-basket-results-head {
+    display: contents;
+  }
+
+  .quick-basket-results-head > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .quick-basket-results-head > a {
+    display: none;
   }
 }

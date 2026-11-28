@@ -621,6 +621,11 @@ function homeUseful(){
 }
 const quickBasketGroupIcons = { 'dry-food':'bag', 'wet-food':'leaf', treats:'heart', litter:'paw' };
 const quickBasketGroups = Object.keys(quickBasketGroupIcons);
+const quickBasketMobileLabels = {
+  ru: ['Сухой', 'Влажный', 'Лакомства', 'Наполнитель'],
+  es: ['Seco', 'Húmedo', 'Snacks', 'Arena'],
+  uk: ['Сухий', 'Вологий', 'Ласощі', 'Наповнювач']
+};
 const quickBasketCopy = {
   ru: ['Соберите регулярный заказ', 'Что покупаете регулярно?', 'Найти товар или бренд', 'В корзину', 'По этому запросу ничего не нашлось', 'Категории товаров', 'Выберите корм, лакомства и другие привычные товары. В корзине укажите, как часто повторять заказ.'],
   es: ['Prepara tu pedido recurrente', '¿Qué compras habitualmente?', 'Buscar producto o marca', 'Ir a la cesta', 'No hemos encontrado productos', 'Categorías de productos', 'Elige el pienso, los premios y los productos que compras siempre. En la cesta podrás elegir cada cuánto repetir el pedido.'],
@@ -814,7 +819,8 @@ function quickBasketControls(){
   return `<div class="quick-basket-categories"><p id="quick-basket-group-label">${escape(quickCopy()[1])}</p>
     <div class="tabs quick-basket-tabs" role="group" aria-labelledby="quick-basket-group-label">${groups.map(group=>{
       const label=homeGroups.find(item=>item.id===group).label;
-      return `<button type="button" class="tab ${quickBasketGroup===group?'active':''}" data-quick-basket-group="${group}" aria-pressed="${quickBasketGroup===group}">${icon(quickBasketGroupIcons[group])}<span>${escape(label)}</span></button>`;
+      const short=quickBasketMobileLabels[locale()][quickBasketGroups.indexOf(group)];
+      return `<button type="button" aria-label="${escape(translate(label))}" class="tab ${quickBasketGroup===group?'active':''}" data-quick-basket-group="${group}" aria-pressed="${quickBasketGroup===group}">${icon(quickBasketGroupIcons[group])}<span class="quick-basket-category-full">${escape(label)}</span><span class="quick-basket-category-short" aria-hidden="true">${escape(short)}</span></button>`;
     }).join('')}</div></div>
     <div class="search-combo-field quick-basket-search"><label class="visually-hidden" for="quick-basket-search">${escape(quickCopy()[2])}</label>${icon('search')}<input type="search" id="quick-basket-search" placeholder="${escape(quickCopy()[2])}" value="${escape(quickBasketQuery)}"></div>
     <div class="quick-basket-results" data-quick-basket-results>${quickBasketCards()}</div>`;
@@ -861,7 +867,7 @@ app.addEventListener('click',event=>{
   if(group){
     quickBasketGroup=quickBasketGroup===group?'':group;
     app.querySelector('[data-quick-basket-results]').innerHTML=quickBasketCards();
-    for(const sibling of button.parentElement.querySelectorAll('button')){
+    for(const sibling of button.parentElement.querySelectorAll('[data-quick-basket-group]')){
       const active=sibling.dataset.quickBasketGroup===quickBasketGroup;
       sibling.classList.toggle('active',active);
       sibling.setAttribute('aria-pressed',String(active));
