@@ -4964,35 +4964,53 @@ details .text-link {
 
 @media (min-width: 960px) {
   .quick-basket .quick-basket-panel {
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-    align-items: start;
-    column-gap: clamp(18px, 4vw, 48px);
-    max-width: 1120px;
+    max-width: 480px;
     margin-inline: auto;
+    padding: 16px 20px;
   }
 
-  .quick-basket-heading,
-  .quick-basket-results {
-    grid-column: 1 / -1;
+  .quick-basket .quick-basket-panel.is-expanded {
+    max-width: 740px;
+  }
+
+  .quick-basket .quick-basket-panel:has(.quick-basket-products) {
+    max-width: 960px;
+  }
+
+  .quick-basket-heading {
+    position: relative;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .quick-basket-heading:has(button) {
+    padding-inline: 96px;
+  }
+
+  .quick-basket-heading button {
+    position: absolute;
+    inset-inline-end: 0;
   }
 
   .quick-basket-pets,
-  .quick-basket-categories {
-    grid-column: 1;
-    width: min(100%, 430px);
-  }
-
   .quick-basket-search {
-    grid-area: 2 / 2;
+    width: min(100%, 390px);
+    justify-self: center;
   }
 
-  .quick-basket-summary {
-    grid-area: 3 / 2;
-    justify-content: flex-start;
+  .quick-basket-categories {
+    justify-items: center;
   }
 
-  .quick-basket-panel:not(.is-expanded) .quick-basket-summary {
-    grid-row: 2;
+  .quick-basket .quick-basket-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+
+  .quick-basket .quick-basket-tabs .tab {
+    width: auto;
+    white-space: nowrap;
   }
 
   .quick-basket .quick-basket-products {
