@@ -21,7 +21,7 @@ import { applyServerCatalog } from './server-prices.js?v=heybo-white-main-202611
 import { pickupBasketPage, pickupCheckoutPage, pickupConfirmationPage, pickupCopy } from './pickup-flow.js?v=pickup-shared-ui-20261121';
 
 import { activeHomeLanding } from './collections.js?v=yagu-toys-20261116';
-import { homePromotions, homeShortcutLanding } from './home-shortcuts.js?v=home-promotions-20261128';
+import { homePromotions, homeShortcutLanding } from './home-shortcuts.js?v=atelier-banner-copy-20261128';
 import { handleCatPickClick } from './cat-picks.js?v=picks-seo-20261112';
 import { installLocale, intlLocale, locale, localizedSeoRoute, translate } from './locale.js?v=home-mobile-contrast-20261127';
 import { articlesEs } from './journal-content-es.js?v=es-1';

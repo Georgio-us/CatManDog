@@ -103,8 +103,8 @@ const homePromotionCopy = {
     comingSoon: 'Скоро',
     giftTitle: 'Новогодний домик для кота',
     giftDescription: 'Пачка Churu, маленькая игрушка и два пауча влажного корма',
-    atelierTitle: 'Больше места для прыжков',
-    atelierDescription: 'Полки, ступеньки и мостики для стен и балкона, чтобы кот мог лазать, прыгать и отдыхать наверху',
+    atelierTitle: 'Свой этаж для кота',
+    atelierDescription: 'Соберите маршрут по стене, чтобы кот мог исследовать дом, наблюдать за вами сверху и отдыхать на любимой высоте',
     atelierAction: 'Смотреть Cat’s Atelier',
   },
   es: {
@@ -112,8 +112,8 @@ const homePromotionCopy = {
     comingSoon: 'Próximamente',
     giftTitle: 'Casita navideña para tu gato',
     giftDescription: 'Un paquete de Churu, un juguete pequeño y dos sobres de comida húmeda',
-    atelierTitle: 'Más espacio para saltar',
-    atelierDescription: 'Baldas, escalones y puentes para paredes y balcones, para que tu gato trepe, salte y descanse en las alturas',
+    atelierTitle: 'Un piso propio para tu gato',
+    atelierDescription: 'Crea un recorrido por la pared para que tu gato explore la casa, te observe desde arriba y descanse en su rincón favorito',
     atelierAction: 'Ver Cat’s Atelier',
   },
   uk: {
@@ -121,8 +121,8 @@ const homePromotionCopy = {
     comingSoon: 'Незабаром',
     giftTitle: 'Новорічний будиночок для кота',
     giftDescription: 'Пачка Churu, маленька іграшка та два паучі вологого корму',
-    atelierTitle: 'Більше місця для стрибків',
-    atelierDescription: 'Полиці, сходинки та містки для стін і балкона, щоб кіт міг лазити, стрибати й відпочивати нагорі',
+    atelierTitle: 'Власний поверх для кота',
+    atelierDescription: 'Створіть маршрут уздовж стіни, щоб кіт міг досліджувати дім, спостерігати за вами згори й відпочивати в улюбленому куточку',
     atelierAction: 'Переглянути Cat’s Atelier',
   },
 };
