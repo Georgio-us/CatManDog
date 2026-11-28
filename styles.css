@@ -5212,7 +5212,7 @@ details .text-link {
 
   .hero-studio-right {
     inset: 0 0 0 auto;
-    background: url('/assets/hero-studio-white-desktop.webp') right center / cover no-repeat;
+    background: url('/storefront-media/hero-studio-white-desktop.webp') right center / cover no-repeat;
     mask-image: linear-gradient(to left, #000 42%, transparent 56%);
   }
 
