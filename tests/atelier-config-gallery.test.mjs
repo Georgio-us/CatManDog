@@ -20,25 +20,28 @@ test('gallery renders a primary image and selectable, localized secondary images
   assert.match(html, /data-gallery-caption="Gancho"/);
 });
 
-test('Flat 75 cm page starts with the supplier original, then the studio photo and seven specifications', () => {
+test('Flat 75 cm page shows the supplier original and specifications while retaining the hidden studio photo', () => {
   const shelf = catsAtelierProducts.find(item => item.id === atelierShelfId);
   assert.match(shelf.image.src, /supplier-main-2026-11-25/);
   assert.match(shelf.gallery[0].src, /SH-W-F75-G-studio-v6\.webp$/);
+  assert.equal(shelf.gallery[0].hiddenFromGallery, true);
   assert.equal(shelf.gallery.length, 8);
   assert.deepEqual(shelf.gallery.slice(1).map(image => Number(image.originalSrc.match(/\/(\d+)-thickbox_default\//)?.[1])),
     [557, 286, 287, 288, 290, 291, 645]);
   const html = productGallery(shelf, imageBlock, value => value, 'es');
-  assert.match(html, /data-gallery-index="8"/);
+  assert.match(html, /data-gallery-index="7"/);
+  assert.doesNotMatch(html, /SH-W-F75-G-studio-v6/);
   assert.match(html, /data-gallery-reference="true"/);
   assert.match(html, /data-gallery-caption="Paleta del tejido DOT"/);
 });
 
-test('all Cat’s Atelier models show their supplier original first and studio photo second', () => {
+test('all Cat’s Atelier models show only supplier photos and retain studio photos hidden', () => {
   assert.equal(catsAtelierProducts.length, 39);
   for (const item of catsAtelierProducts) {
     assert.match(item.image.src, /^https:\/\/img\.catmandog\.es\/assets\/cats-atelier\//);
     assert.equal(item.image.presentation, 'supplier');
     assert.equal(item.gallery[0].presentation, 'editorial');
+    assert.equal(item.gallery[0].hiddenFromGallery, true);
     assert.ok(item.gallery?.length >= 2, `No detail photos: ${item.manufacturerSku}`);
     const seen = new Set();
     for (const image of item.gallery.slice(1)) {
@@ -52,7 +55,8 @@ test('all Cat’s Atelier models show their supplier original first and studio p
       }
     }
     const html = productGallery(item, imageBlock, value => value, 'uk');
-    assert.match(html, new RegExp(`data-gallery-index="${item.gallery.length}"`));
+    assert.match(html, new RegExp(`data-gallery-index="${item.gallery.length - 1}"`));
+    assert.doesNotMatch(html, new RegExp(item.gallery[0].src.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   }
 });
 

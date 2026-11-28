@@ -1,5 +1,6 @@
 export function productGallery(product, imageBlock, escape, language = 'ru') {
-  const images = [product.image, ...(product.gallery || [])].filter(image => image?.src);
+  const images = [product.image, ...(product.gallery || [])]
+    .filter(image => image?.src && image.hiddenFromGallery !== true);
   if (images.length < 2) return imageBlock(product.image, 'detail-image');
   const label = { ru:'Фотографии товара',es:'Fotos del producto',uk:'Фото товару' }[language] || 'Фотографии товара';
   const caption = image => typeof image.caption === 'object' ? image.caption[language] || image.caption.ru : image.caption || '';

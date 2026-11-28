@@ -4235,7 +4235,7 @@ export const catsAtelierProducts = [
       reference: true, presentation: 'supplier'
     },
     gallery: [
-      { ...product.image, alt: name, presentation: 'editorial', caption: {
+      { ...product.image, alt: name, presentation: 'editorial', hiddenFromGallery: true, caption: {
         ru: 'Студийное фото CatManDog', es: 'Foto de estudio CatManDog', uk: 'Студійне фото CatManDog'
       } },
       ...(product.gallery || [])
